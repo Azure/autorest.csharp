@@ -134,13 +134,46 @@ function createModel(program: Program): any {
         console.error("No API-Version provided.");
         return;
     }
+    
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(program, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
 
-    const apiVersions: string[] = [];
-    apiVersions.push(version);
+    // const apiVersions: string[] = [];
+    // apiVersions.push(version);
+    let apiVersions: Set<string> = new Set<string>();
+    apiVersions.add(version);
+    const apiVersionParam: InputParameter = {
+        Name: "apiVersion",
+        NameInRequest: "api-version",
+        Description: "",
+        Type: {
+            Name: "String",
+            Kind: InputTypeKind.String,
+            IsNullable: false
+        } as InputPrimitiveType,
+        Location: RequestLocation.Query,
+        IsRequired: true,
+        IsApiVersion: true,
+        IsContentType: false,
+        IsEndpoint: false,
+        IsResourceParameter: false,
+        SkipUrlEncoding: false,
+        Explode: false,
+        Kind: InputOperationParameterKind.Client,
+        // DefaultValue:
+        // apiVersions.size === 1
+        //         ? ({
+        //               Type: {
+        //                 Name: "String",
+        //                 Kind: InputTypeKind.String,
+        //                 IsNullable: false
+        //               } as InputPrimitiveType,
+        //               Value: version
+        //           } as InputConstant)
+        //         : undefined
+    };
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
@@ -236,13 +269,29 @@ function createModel(program: Program): any {
                 )
             )
                 op.Parameters.push(acceptParameter);
+            
+            // if (!op.Parameters.some((value) => value.IsApiVersion)) {
+            //     op.Parameters.push(apiVersionParam);
+            // }
+            const apiVersion = op.Parameters.find(value => value.IsApiVersion);
+            if (apiVersion) {
+                apiVersions.add(apiVersion.DefaultValue?.Value);
+                if (apiVersions.size > 1) {
+                    apiVersion.Kind = InputOperationParameterKind.Constant;
+                }
+            } else {
+                op.Parameters.push(apiVersionParam);
+            }
             client.Operations.push(op);
+        }
+        if (apiVersions.size > 1) {
+            apiVersionParam.Kind = InputOperationParameterKind.Constant;
         }
 
         const clientModel = {
             Name: namespace,
             Description: description,
-            ApiVersions: apiVersions,
+            ApiVersions: Array.from(apiVersions.values()),
             Enums: Array.from(enumMap.values()),
             Models: Array.from(modelMap.values()),
             Clients: clients,
@@ -453,7 +502,7 @@ function loadOperation(
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
-            : InputOperationParameterKind.Method;
+            : (isApiVersion ? InputOperationParameterKind.Client : InputOperationParameterKind.Method);
         return {
             Name: param.name,
             NameInRequest: name,
@@ -466,7 +515,7 @@ function loadOperation(
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
-            SkipUrlEncoding: true,
+            SkipUrlEncoding: false, //TODO: retrieve out value from extension
             Explode: false,
             Kind: kind
         } as InputParameter;
@@ -492,7 +541,7 @@ function loadOperation(
             IsResourceParameter: false,
             IsContentType: false,
             IsEndpoint: false,
-            SkipUrlEncoding: true,
+            SkipUrlEncoding: false,
             Explode: false,
             Kind: kind
         } as InputParameter;
