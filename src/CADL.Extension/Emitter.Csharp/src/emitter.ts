@@ -23,10 +23,6 @@ import {
     OperationDetails,
     ServiceAuthentication
 } from "@cadl-lang/rest/http";
-// import {
-//     getLongRunningStates,
-//     getPagedResult
-// } from "@azure-tools/cadl-azure-core"
 import { getExtensions } from "@cadl-lang/openapi";
 import { CodeModel } from "./type/CodeModel.js";
 import { InputClient } from "./type/InputClient.js";
@@ -139,7 +135,7 @@ function createModel(program: Program): any {
     const externalDocs = getExternalDocs(program, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
-    
+
     const apiVersions: Set<string> = new Set<string>();
     apiVersions.add(version);
     const apiVersionParam: InputParameter = {
@@ -221,7 +217,7 @@ function createModel(program: Program): any {
 
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
-            if (!isSupportedOperation(program, operation)) continue;
+            if (!isSupportedOperation(operation)) continue;
             const groupName: string = getOperationGroupName(
                 program,
                 operation.operation
@@ -589,23 +585,14 @@ function loadOperation(
     }
 }
 
-function isLroOperation(program: Program, op: OperationDetails) {
-    // for (const res of op.responses) {
-    //     if (res.responses[0]?.body) {
-    //         if (res.responses[0].body.type as ModelType) {
-    //             const lroMetadata = getLongRunningStates(program, res.responses[0]?.body.type as ModelType);
-    //         }
-    //     }
-    // }
-
+function isLroOperation(op: OperationDetails) {
     return false;
 }
-function isPagingOperation(program: Program, op: OperationDetails) {
-    // const pagingMetadata = getPagedResult(program, op.operation);
+function isPagingOperation(op: OperationDetails) {
     return false;
 }
-function isSupportedOperation(program: Program, op: OperationDetails) {
-    if (isLroOperation(program, op) || isPagingOperation(program, op))
+function isSupportedOperation(op: OperationDetails) {
+    if (isLroOperation(op) || isPagingOperation(op))
         return false;
     return true;
 }
