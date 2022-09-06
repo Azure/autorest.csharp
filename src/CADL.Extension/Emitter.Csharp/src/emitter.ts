@@ -134,15 +134,13 @@ function createModel(program: Program): any {
         console.error("No API-Version provided.");
         return;
     }
-    
+
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(program, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
-
-    // const apiVersions: string[] = [];
-    // apiVersions.push(version);
-    let apiVersions: Set<string> = new Set<string>();
+    
+    const apiVersions: Set<string> = new Set<string>();
     apiVersions.add(version);
     const apiVersionParam: InputParameter = {
         Name: "apiVersion",
@@ -162,17 +160,17 @@ function createModel(program: Program): any {
         SkipUrlEncoding: false,
         Explode: false,
         Kind: InputOperationParameterKind.Client,
-        // DefaultValue:
-        // apiVersions.size === 1
-        //         ? ({
-        //               Type: {
-        //                 Name: "String",
-        //                 Kind: InputTypeKind.String,
-        //                 IsNullable: false
-        //               } as InputPrimitiveType,
-        //               Value: version
-        //           } as InputConstant)
-        //         : undefined
+        DefaultValue:
+            apiVersions.size === 1
+                ? ({
+                      Type: {
+                          Name: "String",
+                          Kind: InputTypeKind.String,
+                          IsNullable: false
+                      } as InputPrimitiveType,
+                      Value: version
+                  } as InputConstant)
+                : undefined
     };
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
@@ -269,23 +267,33 @@ function createModel(program: Program): any {
                 )
             )
                 op.Parameters.push(acceptParameter);
-            
-            // if (!op.Parameters.some((value) => value.IsApiVersion)) {
-            //     op.Parameters.push(apiVersionParam);
-            // }
-            const apiVersion = op.Parameters.find(value => value.IsApiVersion);
-            if (apiVersion) {
-                apiVersions.add(apiVersion.DefaultValue?.Value);
-                if (apiVersions.size > 1) {
-                    apiVersion.Kind = InputOperationParameterKind.Constant;
+            const apiVersionInOperation = op.Parameters.find(
+                (value) => value.IsApiVersion
+            );
+            if (apiVersionInOperation) {
+                if (apiVersionInOperation.DefaultValue?.Value) {
+                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
                 }
-            } else {
-                op.Parameters.push(apiVersionParam);
             }
             client.Operations.push(op);
         }
         if (apiVersions.size > 1) {
             apiVersionParam.Kind = InputOperationParameterKind.Constant;
+        }
+        for (const client of clients) {
+            for (const op of client.Operations) {
+                const apiVersionInOperation = op.Parameters.find(
+                    (value) => value.IsApiVersion
+                );
+                if (apiVersionInOperation) {
+                    if (apiVersions.size > 1) {
+                        apiVersionInOperation.Kind =
+                            InputOperationParameterKind.Constant;
+                    }
+                } else {
+                    op.Parameters.push(apiVersionParam);
+                }
+            }
         }
 
         const clientModel = {
@@ -496,13 +504,17 @@ function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
-        const isApiVersion: boolean = requestLocation === RequestLocation.Query && name.toLocaleLowerCase() === "api-version";
+        const isApiVersion: boolean =
+            requestLocation === RequestLocation.Query &&
+            name.toLocaleLowerCase() === "api-version";
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
-            : (isApiVersion ? InputOperationParameterKind.Client : InputOperationParameterKind.Method);
+            : isApiVersion
+            ? InputOperationParameterKind.Client
+            : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
@@ -585,7 +597,7 @@ function isLroOperation(program: Program, op: OperationDetails) {
     //         }
     //     }
     // }
-    
+
     return false;
 }
 function isPagingOperation(program: Program, op: OperationDetails) {
@@ -593,7 +605,8 @@ function isPagingOperation(program: Program, op: OperationDetails) {
     return false;
 }
 function isSupportedOperation(program: Program, op: OperationDetails) {
-    if (isLroOperation(program, op) || isPagingOperation(program, op)) return false;
+    if (isLroOperation(program, op) || isPagingOperation(program, op))
+        return false;
     return true;
 }
 class ErrorTypeFoundError extends Error {
