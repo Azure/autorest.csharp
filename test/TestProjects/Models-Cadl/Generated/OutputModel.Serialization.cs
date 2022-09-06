@@ -30,9 +30,9 @@ namespace ModelsInCadl
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("requiredRecord");
+            writer.WritePropertyName("requiredModelRecord");
             writer.WriteStartObject();
-            foreach (var item in RequiredRecord)
+            foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteObjectValue(item.Value);
@@ -47,7 +47,7 @@ namespace ModelsInCadl
             int requiredInt = default;
             DerivedModel requiredModel = default;
             IList<CollectionItem> requiredCollection = default;
-            IDictionary<string, RecordItem> requiredRecord = default;
+            IDictionary<string, RecordItem> requiredModelRecord = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"))
@@ -75,18 +75,18 @@ namespace ModelsInCadl
                     requiredCollection = array;
                     continue;
                 }
-                if (property.NameEquals("requiredRecord"))
+                if (property.NameEquals("requiredModelRecord"))
                 {
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
                     }
-                    requiredRecord = dictionary;
+                    requiredModelRecord = dictionary;
                     continue;
                 }
             }
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredCollection, requiredRecord);
+            return new OutputModel(requiredString, requiredInt, requiredModel, requiredCollection, requiredModelRecord);
         }
 
         internal RequestContent ToRequestContent()

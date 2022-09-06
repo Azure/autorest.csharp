@@ -19,35 +19,45 @@ namespace ModelsInCadl
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredModel"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredRecord"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/> or <paramref name="requiredRecord"/> is null. </exception>
-        public InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, RecordItem> requiredRecord)
+        /// <param name="requiredIntCollection"></param>
+        /// <param name="requiredStringCollection"></param>
+        /// <param name="requiredModelCollection"></param>
+        /// <param name="requiredModelRecord"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredIntCollection"/>, <paramref name="requiredStringCollection"/>, <paramref name="requiredModelCollection"/> or <paramref name="requiredModelRecord"/> is null. </exception>
+        public InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IEnumerable<int> requiredIntCollection, IEnumerable<string> requiredStringCollection, IEnumerable<CollectionItem> requiredModelCollection, IDictionary<string, RecordItem> requiredModelRecord)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
-            Argument.AssertNotNull(requiredRecord, nameof(requiredRecord));
+            Argument.AssertNotNull(requiredIntCollection, nameof(requiredIntCollection));
+            Argument.AssertNotNull(requiredStringCollection, nameof(requiredStringCollection));
+            Argument.AssertNotNull(requiredModelCollection, nameof(requiredModelCollection));
+            Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
-            RequiredCollection = requiredCollection.ToList();
-            RequiredRecord = requiredRecord;
+            RequiredIntCollection = requiredIntCollection.ToList();
+            RequiredStringCollection = requiredStringCollection.ToList();
+            RequiredModelCollection = requiredModelCollection.ToList();
+            RequiredModelRecord = requiredModelRecord;
         }
         /// <summary> Initializes a new instance of InputModel. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredModel"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredRecord"></param>
-        internal InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IList<CollectionItem> requiredCollection, IDictionary<string, RecordItem> requiredRecord)
+        /// <param name="requiredIntCollection"></param>
+        /// <param name="requiredStringCollection"></param>
+        /// <param name="requiredModelCollection"></param>
+        /// <param name="requiredModelRecord"></param>
+        internal InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IList<int> requiredIntCollection, IList<string> requiredStringCollection, IList<CollectionItem> requiredModelCollection, IDictionary<string, RecordItem> requiredModelRecord)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
-            RequiredCollection = requiredCollection;
-            RequiredRecord = requiredRecord;
+            RequiredIntCollection = requiredIntCollection;
+            RequiredStringCollection = requiredStringCollection;
+            RequiredModelCollection = requiredModelCollection;
+            RequiredModelRecord = requiredModelRecord;
         }
 
         public string RequiredString { get; set; }
@@ -56,8 +66,12 @@ namespace ModelsInCadl
 
         public BaseModel RequiredModel { get; set; }
 
-        public IList<CollectionItem> RequiredCollection { get; }
+        public IList<int> RequiredIntCollection { get; }
 
-        public IDictionary<string, RecordItem> RequiredRecord { get; }
+        public IList<string> RequiredStringCollection { get; }
+
+        public IList<CollectionItem> RequiredModelCollection { get; }
+
+        public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }
