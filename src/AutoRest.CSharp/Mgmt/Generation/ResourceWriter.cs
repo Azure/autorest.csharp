@@ -24,6 +24,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
+        public static ResourceWriter GetWriter(CodeWriter writer, Resource resource)
+        {
+            if (resource.BaseResource == null)
+                return new ResourceWriter(writer, resource);
+            else
+                return new PolymorphicResourceWriter(writer, resource);
+        }
+
         private Resource This { get; }
 
         public ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
@@ -53,11 +61,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodDocumentation(This.ResourceDataCtor);
                 using (_writer.WriteMethodDeclaration(This.ResourceDataCtor))
                 {
-                    if (This.BaseResource == null)
-                    {
-                        _writer.Line($"HasData = true;");
-                        _writer.Line($"_data = {This.DefaultResource!.ResourceDataParameter.Name};");
-                    }
+                    _writer.Line($"HasData = true;");
+                    _writer.Line($"_data = {This.DefaultResource!.ResourceDataParameter.Name};");
                 }
             }
 
@@ -133,26 +138,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{This.ResourceType}\";");
             _writer.Line();
 
-            // only writes these when there is not a base resource. When there is a base resource, these are moved to the base resource
-            if (This.BaseResource == null)
+            _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
+            _writer.Line($"public virtual bool HasData {{ get; }}");
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Gets the data representing this Feature.");
+            _writer.WriteXmlDocumentationException(typeof(InvalidOperationException), $"Throws if there is no data loaded in the current instance.");
+            using (_writer.Scope($"public virtual {This.ResourceData.Type} Data"))
             {
-                _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
-                _writer.Line($"public virtual bool HasData {{ get; }}");
-                _writer.Line();
-                _writer.WriteXmlDocumentationSummary($"Gets the data representing this Feature.");
-                _writer.WriteXmlDocumentationException(typeof(InvalidOperationException), $"Throws if there is no data loaded in the current instance.");
-                using (_writer.Scope($"public virtual {This.ResourceData.Type} Data"))
+                using (_writer.Scope($"get"))
                 {
-                    using (_writer.Scope($"get"))
-                    {
-                        _writer.Line($"if (!HasData)");
-                        _writer.Line($"throw new {typeof(InvalidOperationException)}(\"The current instance does not have data, you must call Get first.\");");
-                        _writer.Line($"return _data;");
-                    }
+                    _writer.Line($"if (!HasData)");
+                    _writer.Line($"throw new {typeof(InvalidOperationException)}(\"The current instance does not have data, you must call Get first.\");");
+                    _writer.Line($"return _data;");
                 }
-
-                _writer.Line();
             }
+
+            _writer.Line();
 
             WriteStaticValidate($"ResourceType");
         }

@@ -560,6 +560,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     var baseResource = new BaseResource(GetBaseResourceName(resourceDataSchemaName, resourcesWithSameData), resourcesWithSameData);
                     foreach (var resource in resourcesWithSameData)
                         resource.BaseResource = baseResource;
+                    // TODO -- add a new extensible enum for this
                 }
             }
 
@@ -568,8 +569,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private string GetBaseResourceName(string candidateName, IEnumerable<Resource> resources)
         {
+            // TODO -- a configuration to override this name
             var hasResourceWithSameName = resources.Any(r => r.ResourceName == candidateName);
 
+            // TODO -- maybe a better fallback name for the base resource name
             return hasResourceWithSameName ? $"Base{candidateName}" : candidateName;
         }
 

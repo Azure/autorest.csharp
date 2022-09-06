@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class BaseResource : MgmtTypeProvider
     {
+        private const string DataFieldName = "_data";
         /// <summary>
         /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>
         /// </summary>
@@ -66,6 +67,22 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return Enumerable.Empty<MgmtClientOperation>();
         }
+
+        protected override FieldModifiers FieldModifiers => base.FieldModifiers | FieldModifiers.ReadOnly;
+
+        protected override IEnumerable<FieldDeclaration>? GetAdditionalFields()
+        {
+            yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
+        }
+
+        public MethodSignature StaticFactoryMethod => new MethodSignature(
+            Name: "GetResource",
+            Summary: null,
+            Description: null,
+            Modifiers: MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static,
+            ReturnType: Type,
+            ReturnDescription: null,
+            Parameters: new[] { ArmClientParameter, ResourceDataParameter });
 
         public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);
     }

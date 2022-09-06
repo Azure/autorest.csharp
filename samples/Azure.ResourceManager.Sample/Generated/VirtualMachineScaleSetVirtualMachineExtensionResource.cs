@@ -46,8 +46,6 @@ namespace Azure.ResourceManager.Sample
         /// <param name="data"> The resource that is the target of operations. </param>
         internal VirtualMachineScaleSetVirtualMachineExtensionResource(ArmClient client, VirtualMachineExtensionData data) : base(client, data)
         {
-            HasData = true;
-            _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/> class. </summary>
@@ -62,6 +60,8 @@ namespace Azure.ResourceManager.Sample
 			ValidateResourceId(Id);
 #endif
         }
+
+        protected override string Type => "VirtualMachineScaleSetVirtualMachineExtensionResource";
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions";

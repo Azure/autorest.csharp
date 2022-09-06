@@ -14,6 +14,14 @@ namespace Azure.ResourceManager.Sample
     /// <summary> TODO. </summary>
     public partial class BaseVirtualMachineExtensionResource : ArmResource
     {
+        internal static BaseVirtualMachineExtensionResource GetResource(ArmClient client, VirtualMachineExtensionData data)
+        {
+            // this is only placeholder
+            return new BaseVirtualMachineExtensionResource(client, data);
+        }
+
+        private readonly VirtualMachineExtensionData _data;
+
         /// <summary> Initializes a new instance of the <see cref="BaseVirtualMachineExtensionResource"/> class for mocking. </summary>
         protected BaseVirtualMachineExtensionResource()
         {
@@ -34,6 +42,8 @@ namespace Azure.ResourceManager.Sample
         internal BaseVirtualMachineExtensionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
+
+        protected virtual string Type => "Base";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

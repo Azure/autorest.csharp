@@ -2,8 +2,11 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -14,6 +17,36 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public BaseResourceWriter(CodeWriter writer, BaseResource baseResource) : base(writer, baseResource)
         {
             This = baseResource;
+        }
+
+        private readonly Parameter _resourceIdParameter = new Parameter(
+            Name: "id",
+            Description: null,
+            Type: typeof(ResourceIdentifier),
+            DefaultValue: null,
+            Validation: ValidationType.AssertNotNull,
+            Initializer: null);
+
+        protected override void WriteStaticMethods()
+        {
+            base.WriteStaticMethods();
+
+            // writes the static resource factory
+            var signature = This.StaticFactoryMethod;
+            using (_writer.WriteMethodDeclaration(signature))
+            {
+                // TODO -- this is only placeholder
+                _writer.Line($"// this is only placeholder");
+                _writer.Append($"return new {This.Type}(");
+                foreach (var parameter in signature.Parameters)
+                {
+                    _writer.AppendRaw(parameter.Name).AppendRaw(",");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.LineRaw(");");
+            }
+
+            _writer.Line();
         }
 
         protected override void WriteCtors()
@@ -55,6 +88,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteProperties()
         {
+            // write the private discriminator of this base resource
+            // TODO -- change this to the actual extensible enum
+            _writer.Line($"protected virtual string Type => \"Base\";");
+            _writer.Line();
+            // write the HasData and Data property
             _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
             _writer.Line($"public virtual bool HasData {{ get; }}");
             _writer.Line();
