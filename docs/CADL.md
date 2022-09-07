@@ -13,7 +13,7 @@
 
 ## CADL Pipeline Overview
 
-C# code generation CADL pipeline consists of two major components: CADL compiler that inputs API specification and outputs cadl.json using [CADL C# Emitter](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/CADL.Extension/Emitter.Csharp), and autorest.csharp (a.k.a [generator](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp)) that inputs cadl.json and outputs C# files that contain cloud service clients and models. cadl.json doesn't have explicit specification. Instead, it is assumed that types defined in [TS](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/CADL.Extension/Emitter.Csharp/src/type) and in [C#](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp/Common/Input) match each other.
+C# code generation CADL pipeline consists of two major components: CADL compiler that inputs API specification and outputs cadl.json using [CADL C# Emitter](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/CADL.Extension/Emitter.Csharp), and autorest.csharp (a.k.a [generator](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp)) that inputs cadl.json and outputs C# files that contain cloud service clients and models. cadl.json doesn't have explicit specification. Instead, it is assumed that InputModel types defined in [TS](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/CADL.Extension/Emitter.Csharp/src/type) and in [C#](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp/Common/Input) match each other. 
 
 ## Unification of CADL and Swagger pipelines
 
