@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
                     WriteGetOriginalFromTagResource(isAsync, "[key] = value");
-                    WriteTaggableCommonMethod(isAsync);
+                    WriteTaggableCommonMethod(clientOperation, isAsync);
                 }
                 using (_writer.Scope($"else"))
                 {
@@ -140,7 +140,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line($"GetTagResource().{CreateMethodName("Delete", isAsync)}({typeof(WaitUntil)}.Completed, cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
                     WriteGetOriginalFromTagResource(isAsync, ".ReplaceWith(tags)");
-                    WriteTaggableCommonMethod(isAsync);
+                    WriteTaggableCommonMethod(clientOperation, isAsync);
                 }
                 using (_writer.Scope($"else"))
                 {
@@ -157,7 +157,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
                     WriteGetOriginalFromTagResource(isAsync, ".Remove(key)");
-                    WriteTaggableCommonMethod(isAsync);
+                    WriteTaggableCommonMethod(clientOperation, isAsync);
                 }
                 using (_writer.Scope($"else"))
                 {
@@ -265,17 +265,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteTaggableCommonMethod(bool isAsync)
+        private void WriteTaggableCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             _writer.Line($"{GetAwait(isAsync)} GetTagResource().{CreateMethodName("CreateOrUpdate", isAsync)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
-            MgmtClientOperation clientOperation = This.GetOperation!;
+            MgmtClientOperation getOperation = This.GetOperation!;
+            var needFactoryMethod = NeedFactoryMethod(clientOperation);
             // we need to write multiple branches for a normal method
-            if (clientOperation.OperationMappings.Count == 1)
+            if (getOperation.OperationMappings.Count == 1)
             {
                 // if we only have one branch, we would not need those if-else statements
-                var branch = clientOperation.OperationMappings.Keys.First();
-                WriteTaggableCommonMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], isAsync);
+                var branch = getOperation.OperationMappings.Keys.First();
+                WriteTaggableCommonMethodBranch(getOperation.OperationMappings[branch], getOperation.ParameterMappings[branch], isAsync, needFactoryMethod);
             }
             else
             {
@@ -284,7 +285,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync)
+        private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync, bool needFactoryMethod)
         {
             var originalResponse = new CodeWriterDeclaration("originalResponse");
             _writer
@@ -299,8 +300,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, operation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
             }
 
-            // TODO - here we need to replace this constructor with the static factory method
-            _writer.Line($"return {typeof(Response)}.FromValue(new {operation.ReturnType.UnWrapResponse()}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
+            var resource = MgmtContext.Library.CsharpTypeToResource[operation.ReturnType.UnWrapResponse()];
+            _writer.Line($"return {typeof(Response)}.FromValue({GetNewResourceInstanceExpression(resource, needFactoryMethod)}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
         }
     }
 }

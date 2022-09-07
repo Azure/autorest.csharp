@@ -11,9 +11,9 @@ using Azure;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
-    internal record MgmtCommonOperation : IReadOnlyList<MgmtClientOperation>
+    internal record MgmtCommonOperation
     {
-        private IReadOnlyList<MgmtClientOperation> _implementations;
+        private HashSet<MgmtClientOperation> _implementations;
 
         public IReadOnlyList<Parameter> MethodParameters { get; }
 
@@ -23,10 +23,23 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public MgmtCommonOperation(string name, CSharpType returnType, IReadOnlyList<MgmtClientOperation> implementations)
         {
-            _implementations = implementations;
+            _implementations = new(implementations);
             MethodParameters = implementations.First().MethodParameters;
             ReturnType = returnType;
             Name = name;
+        }
+
+        public bool Contains(MgmtClientOperation operation) => _implementations.Contains(operation);
+
+        public bool Contains(MgmtRestOperation operation)
+        {
+            foreach (var op in _implementations)
+            {
+                if (op.Contains(operation))
+                    return true;
+            }
+
+            return false;
         }
 
         private MethodSignature? _methodSignature;
@@ -59,13 +72,5 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             return "placeholder";
         }
-
-        public MgmtClientOperation this[int index] => _implementations[index];
-
-        public int Count => _implementations.Count;
-
-        public IEnumerator<MgmtClientOperation> GetEnumerator() => _implementations.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => _implementations.GetEnumerator();
     }
 }
