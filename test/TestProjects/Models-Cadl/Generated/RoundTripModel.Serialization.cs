@@ -23,6 +23,10 @@ namespace ModelsInCadl
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredModel");
             writer.WriteObjectValue(RequiredModel);
+            writer.WritePropertyName("requiredFixedStringEnum");
+            writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
+            writer.WritePropertyName("requiredExtensibleEnum");
+            writer.WriteObjectValue(RequiredExtensibleEnum);
             writer.WritePropertyName("requiredCollection");
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)
@@ -30,9 +34,25 @@ namespace ModelsInCadl
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("requiredRecord");
+            writer.WritePropertyName("requiredIntRecord");
             writer.WriteStartObject();
-            foreach (var item in RequiredRecord)
+            foreach (var item in RequiredIntRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("requiredStringRecord");
+            writer.WriteStartObject();
+            foreach (var item in RequiredStringRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("requiredModelRecord");
+            writer.WriteStartObject();
+            foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteObjectValue(item.Value);
@@ -46,8 +66,12 @@ namespace ModelsInCadl
             string requiredString = default;
             int requiredInt = default;
             BaseModelWithDiscriminator requiredModel = default;
+            FixedStringEnum requiredFixedStringEnum = default;
+            object requiredExtensibleEnum = default;
             IList<CollectionItem> requiredCollection = default;
-            IDictionary<string, RecordItem> requiredRecord = default;
+            IDictionary<string, int> requiredIntRecord = default;
+            IDictionary<string, string> requiredStringRecord = default;
+            IDictionary<string, RecordItem> requiredModelRecord = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"))
@@ -65,6 +89,16 @@ namespace ModelsInCadl
                     requiredModel = BaseModelWithDiscriminator.DeserializeBaseModelWithDiscriminator(property.Value);
                     continue;
                 }
+                if (property.NameEquals("requiredFixedStringEnum"))
+                {
+                    requiredFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
+                    continue;
+                }
+                if (property.NameEquals("requiredExtensibleEnum"))
+                {
+                    requiredExtensibleEnum = property.Value.GetObject();
+                    continue;
+                }
                 if (property.NameEquals("requiredCollection"))
                 {
                     List<CollectionItem> array = new List<CollectionItem>();
@@ -75,18 +109,38 @@ namespace ModelsInCadl
                     requiredCollection = array;
                     continue;
                 }
-                if (property.NameEquals("requiredRecord"))
+                if (property.NameEquals("requiredIntRecord"))
+                {
+                    Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetInt32());
+                    }
+                    requiredIntRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("requiredStringRecord"))
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    requiredStringRecord = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("requiredModelRecord"))
                 {
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
                     }
-                    requiredRecord = dictionary;
+                    requiredModelRecord = dictionary;
                     continue;
                 }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredModel, requiredCollection, requiredRecord);
+            return new RoundTripModel(requiredString, requiredInt, requiredModel, requiredFixedStringEnum, requiredExtensibleEnum, requiredCollection, requiredIntRecord, requiredStringRecord, requiredModelRecord);
         }
 
         internal RequestContent ToRequestContent()

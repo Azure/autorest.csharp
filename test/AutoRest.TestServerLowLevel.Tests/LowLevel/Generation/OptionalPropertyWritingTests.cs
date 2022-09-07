@@ -443,7 +443,9 @@ return content;
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Cadl.TestServer.ModelCollectionProperties.Models;
 
 namespace Cadl.TestServer.OptionalProperties.Models
@@ -454,10 +456,10 @@ public partial class OutputModel
 /// <summary> Initializes a new instance of OutputModel. </summary>
 internal OutputModel()
 {
-OptionalStringList = Array.Empty<string>();
-OptionalIntList = Array.Empty<int>();
-OptionalModelCollection = Array.Empty<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>();
-OptionalModelDictionary = new ReadOnlyDictionary<string, global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>(new Dictionary<string, global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>(0));
+OptionalStringList = global::System.Array.Empty<string>();
+OptionalIntList = global::System.Array.Empty<int>();
+OptionalModelCollection = global::System.Array.Empty<global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>();
+OptionalModelDictionary = new global::System.Collections.ObjectModel.ReadOnlyDictionary<string, global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>(new global::System.Collections.Generic.Dictionary<string, global::Cadl.TestServer.ModelCollectionProperties.Models.SimpleModel>(0));
 }
 /// <summary> Initializes a new instance of OutputModel. </summary>
 /// <param name=""optionalString""> Optional string, illustrating an optional reference type property. </param>

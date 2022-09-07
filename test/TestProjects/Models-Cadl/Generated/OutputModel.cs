@@ -20,34 +20,34 @@ namespace ModelsInCadl
         /// <param name="requiredInt"></param>
         /// <param name="requiredModel"></param>
         /// <param name="requiredCollection"></param>
-        /// <param name="requiredRecord"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/> or <paramref name="requiredRecord"/> is null. </exception>
-        public OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, RecordItem> requiredRecord)
+        /// <param name="requiredModelRecord"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/> or <paramref name="requiredModelRecord"/> is null. </exception>
+        public OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, RecordItem> requiredModelRecord)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
-            Argument.AssertNotNull(requiredRecord, nameof(requiredRecord));
+            Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
             RequiredCollection = requiredCollection.ToList();
-            RequiredRecord = requiredRecord;
+            RequiredModelRecord = requiredModelRecord;
         }
         /// <summary> Initializes a new instance of OutputModel. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredModel"></param>
         /// <param name="requiredCollection"></param>
-        /// <param name="requiredRecord"></param>
-        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IList<CollectionItem> requiredCollection, IDictionary<string, RecordItem> requiredRecord)
+        /// <param name="requiredModelRecord"></param>
+        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IList<CollectionItem> requiredCollection, IDictionary<string, RecordItem> requiredModelRecord)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
             RequiredCollection = requiredCollection;
-            RequiredRecord = requiredRecord;
+            RequiredModelRecord = requiredModelRecord;
         }
 
         public string RequiredString { get; set; }
@@ -58,6 +58,6 @@ namespace ModelsInCadl
 
         public IList<CollectionItem> RequiredCollection { get; }
 
-        public IDictionary<string, RecordItem> RequiredRecord { get; }
+        public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }

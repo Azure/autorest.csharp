@@ -65,7 +65,9 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Cadl.TestServer.ReadonlyProperties.Models
 {
@@ -75,14 +77,14 @@ public partial class RoundTripModel
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
 public RoundTripModel()
 {
-RequiredReadonlyStringList = Array.Empty<string>();
-RequiredReadonlyIntList = Array.Empty<int>();
-OptionalReadonlyStringList = Array.Empty<string>();
-OptionalReadonlyIntList = Array.Empty<int>();
-RequiredReadonlyStringDictionary = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(0));
-RequiredReadonlyIntDictionary = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>(0));
-OptionalReadonlyStringDictionary = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(0));
-OptionalReadonlyIntDictionary = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>(0));
+RequiredReadonlyStringList = global::System.Array.Empty<string>();
+RequiredReadonlyIntList = global::System.Array.Empty<int>();
+OptionalReadonlyStringList = global::System.Array.Empty<string>();
+OptionalReadonlyIntList = global::System.Array.Empty<int>();
+RequiredReadonlyStringDictionary = new global::System.Collections.ObjectModel.ReadOnlyDictionary<string, string>(new global::System.Collections.Generic.Dictionary<string, string>(0));
+RequiredReadonlyIntDictionary = new global::System.Collections.ObjectModel.ReadOnlyDictionary<string, int>(new global::System.Collections.Generic.Dictionary<string, int>(0));
+OptionalReadonlyStringDictionary = new global::System.Collections.ObjectModel.ReadOnlyDictionary<string, string>(new global::System.Collections.Generic.Dictionary<string, string>(0));
+OptionalReadonlyIntDictionary = new global::System.Collections.ObjectModel.ReadOnlyDictionary<string, int>(new global::System.Collections.Generic.Dictionary<string, int>(0));
 }
 /// <summary> Initializes a new instance of RoundTripModel. </summary>
 /// <param name=""requiredReadonlyString""> Required string, illustrating a readonly reference type property. </param>
@@ -345,7 +347,9 @@ return DeserializeRoundTripModel(document.RootElement);
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Cadl.TestServer.ReadonlyProperties.Models
 {
@@ -355,14 +359,14 @@ public partial class OutputModel
 /// <summary> Initializes a new instance of OutputModel. </summary>
 internal OutputModel()
 {
-RequiredReadonlyStringList = Array.Empty<string>();
-RequiredReadonlyIntList = Array.Empty<int>();
-OptionalReadonlyStringList = Array.Empty<string>();
-OptionalReadonlyIntList = Array.Empty<int>();
-RequiredReadonlyStringDictionary = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(0));
-RequiredReadonlyIntDictionary = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>(0));
-OptionalReadonlyStringDictionary = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(0));
-OptionalReadonlyIntDictionary = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>(0));
+RequiredReadonlyStringList = global::System.Array.Empty<string>();
+RequiredReadonlyIntList = global::System.Array.Empty<int>();
+OptionalReadonlyStringList = global::System.Array.Empty<string>();
+OptionalReadonlyIntList = global::System.Array.Empty<int>();
+RequiredReadonlyStringDictionary = new global::System.Collections.ObjectModel.ReadOnlyDictionary<string, string>(new global::System.Collections.Generic.Dictionary<string, string>(0));
+RequiredReadonlyIntDictionary = new global::System.Collections.ObjectModel.ReadOnlyDictionary<string, int>(new global::System.Collections.Generic.Dictionary<string, int>(0));
+OptionalReadonlyStringDictionary = new global::System.Collections.ObjectModel.ReadOnlyDictionary<string, string>(new global::System.Collections.Generic.Dictionary<string, string>(0));
+OptionalReadonlyIntDictionary = new global::System.Collections.ObjectModel.ReadOnlyDictionary<string, int>(new global::System.Collections.Generic.Dictionary<string, int>(0));
 }
 /// <summary> Initializes a new instance of OutputModel. </summary>
 /// <param name=""requiredReadonlyString""> Required string, illustrating a readonly reference type property. </param>
