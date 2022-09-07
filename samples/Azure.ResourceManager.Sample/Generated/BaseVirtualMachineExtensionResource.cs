@@ -6,8 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -59,5 +64,29 @@ namespace Azure.ResourceManager.Sample
                 return _data;
             }
         }
+
+        protected abstract async Task<Response<BaseVirtualMachineExtensionResource>> GetCoreAsync(string expand = null, CancellationToken cancellationToken = default);
+
+        protected abstract Response<BaseVirtualMachineExtensionResource> GetCore(string expand = null, CancellationToken cancellationToken = default);
+
+        protected abstract async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default);
+
+        protected abstract ArmOperation DeleteCore(WaitUntil waitUntil, CancellationToken cancellationToken = default);
+
+        protected abstract async Task<ArmOperation<BaseVirtualMachineExtensionResource>> UpdateCoreAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
+
+        protected abstract ArmOperation<BaseVirtualMachineExtensionResource> UpdateCore(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
+
+        protected abstract async Task<Response<BaseVirtualMachineExtensionResource>> AddTagCoreAsync(string key, string value, CancellationToken cancellationToken = default);
+
+        protected abstract Response<BaseVirtualMachineExtensionResource> AddTagCore(string key, string value, CancellationToken cancellationToken = default);
+
+        protected abstract async Task<Response<BaseVirtualMachineExtensionResource>> SetTagsCoreAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
+
+        protected abstract Response<BaseVirtualMachineExtensionResource> SetTagsCore(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
+
+        protected abstract async Task<Response<BaseVirtualMachineExtensionResource>> RemoveTagCoreAsync(string key, CancellationToken cancellationToken = default);
+
+        protected abstract Response<BaseVirtualMachineExtensionResource> RemoveTagCore(string key, CancellationToken cancellationToken = default);
     }
 }

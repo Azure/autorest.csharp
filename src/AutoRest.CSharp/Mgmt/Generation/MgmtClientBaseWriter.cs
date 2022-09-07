@@ -81,12 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             WriteChildResourceEntries();
 
-            // Write other orphan operations with the parent of ResourceGroup
-            foreach (var clientOperation in This.AllOperations)
-            {
-                WriteMethod(clientOperation, true);
-                WriteMethod(clientOperation, false);
-            }
+            WriteOperations();
 
             if (This.EnumerableInterfaces.Any())
                 WriteEnumerables();
@@ -95,6 +90,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WritePrivateHelpers() { }
         protected virtual void WriteProperties() { }
         protected virtual void WriteStaticMethods() { }
+
+        protected virtual void WriteOperations()
+        {
+            foreach (var clientOperation in This.AllOperations)
+            {
+                WriteMethod(clientOperation, true);
+                WriteMethod(clientOperation, false);
+            }
+        }
 
         protected void WriteClassDeclaration()
         {

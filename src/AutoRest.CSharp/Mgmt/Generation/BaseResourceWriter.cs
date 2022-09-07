@@ -111,5 +111,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line();
         }
+
+        protected override void WriteOperations()
+        {
+            foreach (var method in This.CommonMethodSignatures)
+            {
+                _writer.WriteAbstractMethodDeclaration(method.WithAsync(true));
+                _writer.Line();
+                _writer.WriteAbstractMethodDeclaration(method.WithAsync(false));
+                _writer.Line();
+            }
+        }
     }
 }

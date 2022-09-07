@@ -9,6 +9,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -28,9 +29,68 @@ namespace AutoRest.CSharp.Mgmt.Output
             ResourceData = derivedResources.First().ResourceData;
         }
 
+        private IEnumerable<MethodSignature>? _commonMethodSignatures;
+        public IEnumerable<MethodSignature> CommonMethodSignatures => _commonMethodSignatures ??= EnsureCommonOperations();
+
+        private IEnumerable<MethodSignature> EnsureCommonOperations()
+        {
+            var count = DerivedResources.Count();
+            var commonMethods = new Dictionary<MethodKey, List<MgmtClientOperation>>();
+            // add all the client operations on our derived resources into one dictionary to find if any of them are sharing the same signature
+            foreach (var resource in DerivedResources)
+            {
+                foreach (var clientOperation in resource.AllOperations)
+                {
+                    // we need to do some escape on the ReturnType here - because they might be the resource, or ArmOperation<Resource>
+                    // when this happens, they will never be the same
+                    var key = new MethodKey(clientOperation.Name, clientOperation.MethodParameters.Select(parameter => parameter.Type).ToArray(), EscapeReturnType(clientOperation.ReturnType, resource));
+                    commonMethods.AddInList(key, clientOperation);
+                }
+            }
+
+            foreach ((var key, var operations) in commonMethods)
+            {
+                if (operations.Count != count)
+                    continue;
+
+                yield return new MethodSignature(
+                    Name: $"{key.Name}Core",
+                    Summary: null,
+                    Description: null,
+                    Modifiers: MethodSignatureModifiers.Protected,
+                    ReturnType: key.ReturnType,
+                    ReturnDescription: null,
+                    Parameters: operations.First().MethodParameters);
+            }
+        }
+
+        /// <summary>
+        /// This method escapes the return type when it is the type of this resource, or it is a generic type and its type arguments has the type of this resource
+        /// This method escapes the type or the type argument to the type of this base resource instead.
+        /// This is used when finding the common methods, the method with different return types will never be counted as a common method.
+        /// To combine the method like "Get" method here, we need to escape its return type to the base resource type so that they would have the same return type and be considered as a overload of each other
+        /// </summary>
+        /// <param name="returnType"></param>
+        /// <param name="resource"></param>
+        /// <returns></returns>
+        private CSharpType EscapeReturnType(CSharpType returnType, Resource resource)
+        {
+            // if the return type is wrapped by the resource, we change it to the BaseResource
+            if (returnType.Equals(resource.Type))
+                return Type;
+
+            if (returnType.IsGenericType && returnType.IsFrameworkType)
+            {
+                var arguments = returnType.Arguments.Select(typeArgument => typeArgument.Equals(resource.Type) ? Type : typeArgument).ToArray();
+                return new CSharpType(returnType.FrameworkType, arguments);
+            }
+
+            return returnType;
+        }
+
         protected override bool IsAbstract => true;
 
-        public IEnumerable<Resource> DerivedResources { get; private set; }
+        public IEnumerable<Resource> DerivedResources { get; }
 
         public override CSharpType? BaseType => typeof(ArmResource);
 
