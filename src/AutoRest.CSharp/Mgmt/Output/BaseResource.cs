@@ -29,10 +29,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             ResourceData = derivedResources.First().ResourceData;
         }
 
-        private IEnumerable<MethodSignature>? _commonMethodSignatures;
-        public IEnumerable<MethodSignature> CommonMethodSignatures => _commonMethodSignatures ??= EnsureCommonOperations();
+        private IEnumerable<MgmtCommonOperation>? _commonOperations;
+        public IEnumerable<MgmtCommonOperation> CommonOperations => _commonOperations ??= EnsureCommonOperations();
 
-        private IEnumerable<MethodSignature> EnsureCommonOperations()
+        private IEnumerable<MgmtCommonOperation> EnsureCommonOperations()
         {
             var count = DerivedResources.Count();
             var commonMethods = new Dictionary<MethodKey, List<MgmtClientOperation>>();
@@ -53,14 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 if (operations.Count != count)
                     continue;
 
-                yield return new MethodSignature(
-                    Name: $"{key.Name}Core",
-                    Summary: null,
-                    Description: null,
-                    Modifiers: MethodSignatureModifiers.Protected,
-                    ReturnType: key.ReturnType,
-                    ReturnDescription: null,
-                    Parameters: operations.First().MethodParameters);
+                yield return new MgmtCommonOperation(key.Name, key.ReturnType, operations);
             }
         }
 

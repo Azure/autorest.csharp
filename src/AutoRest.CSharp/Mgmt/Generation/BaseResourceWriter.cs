@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -114,13 +115,32 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteOperations()
         {
-            foreach (var method in This.CommonMethodSignatures)
+            foreach (var method in This.CommonOperations)
             {
-                _writer.WriteAbstractMethodDeclaration(method.WithAsync(true));
-                _writer.Line();
-                _writer.WriteAbstractMethodDeclaration(method.WithAsync(false));
-                _writer.Line();
+                WriteCommonOperation(method, true);
+                WriteCommonOperation(method, false);
             }
+        }
+
+        private void WriteCommonOperation(MgmtCommonOperation commonOperation, bool isAsync)
+        {
+            var coreSignature = commonOperation.CoreMethodSignature.WithAsync(isAsync);
+            _writer.WriteAbstractMethodDeclaration(coreSignature);
+            _writer.Line();
+
+            var signature = commonOperation.MethodSignature;
+            using (WriteCommonMethodWithoutValidation(signature, null, isAsync, enableAttributes: true, attributes: new[] { new ForwardsClientCallsAttribute() }))
+            {
+                _writer.Append($"return {coreSignature.Name}(");
+                foreach (var parameter in signature.Parameters)
+                {
+                    _writer.AppendRaw(parameter.Name).AppendRaw(",");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.LineRaw(");");
+            }
+
+            _writer.Line();
         }
     }
 }

@@ -15,9 +15,9 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public string Name { get; }
         public IReadOnlyList<CSharpType> Parameters { get; }
-        public CSharpType? ReturnType { get; }
+        public CSharpType ReturnType { get; }
 
-        public MethodKey(string name, IReadOnlyList<CSharpType> parameters, CSharpType? returnType)
+        public MethodKey(string name, IReadOnlyList<CSharpType> parameters, CSharpType returnType)
         {
             Name = name;
             Parameters = parameters;
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return Name == other.Name
                 && Parameters.SequenceEqual(other.Parameters)
-                && object.Equals(ReturnType, other.ReturnType);
+                && ReturnType.Equals(other.ReturnType);
         }
     }
 }
