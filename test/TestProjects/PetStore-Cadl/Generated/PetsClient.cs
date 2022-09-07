@@ -490,6 +490,304 @@ namespace CadlPetStore
             }
         }
 
+        /// <param name="kind"> The PetKind to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Pet>> GetPetByKindValueAsync(PetKind kind, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.GetPetByKindValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await GetPetByKindAsync(kind.ToString(), context).ConfigureAwait(false);
+                return Response.FromValue(Pet.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="kind"> The PetKind to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Pet> GetPetByKindValue(PetKind kind, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.GetPetByKindValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = GetPetByKind(kind.ToString(), context);
+                return Response.FromValue(Pet.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="kind"> The PetKind to use. Allowed values: &quot;dog&quot; | &quot;cat&quot;. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPetByKindAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new PetsClient(endpoint);
+        /// 
+        /// Response response = await client.GetPetByKindAsync("<kind>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Optional.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> GetPetByKindAsync(string kind, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(kind, nameof(kind));
+
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.GetPetByKind");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetPetByKindRequest(kind, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="kind"> The PetKind to use. Allowed values: &quot;dog&quot; | &quot;cat&quot;. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPetByKind with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new PetsClient(endpoint);
+        /// 
+        /// Response response = client.GetPetByKind("<kind>");
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Optional.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response GetPetByKind(string kind, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(kind, nameof(kind));
+
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.GetPetByKind");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetPetByKindRequest(kind, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="start"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Pet>> GetFirstPetValueAsync(int? start = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.GetFirstPetValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await GetFirstPetAsync(start, context).ConfigureAwait(false);
+                return Response.FromValue(Pet.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="start"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Pet> GetFirstPetValue(int? start = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.GetFirstPetValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = GetFirstPet(start, context);
+                return Response.FromValue(Pet.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="start"> The Int32 to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetFirstPetAsync and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new PetsClient(endpoint);
+        /// 
+        /// Response response = await client.GetFirstPetAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
+        /// ]]></code>
+        /// This sample shows how to call GetFirstPetAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new PetsClient(endpoint);
+        /// 
+        /// Response response = await client.GetFirstPetAsync(1234);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Optional.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> GetFirstPetAsync(int? start = null, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.GetFirstPet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFirstPetRequest(start, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="start"> The Int32 to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetFirstPet and parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new PetsClient(endpoint);
+        /// 
+        /// Response response = client.GetFirstPet();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
+        /// ]]></code>
+        /// This sample shows how to call GetFirstPet with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var endpoint = new Uri("<https://my-service.azure.com>");
+        /// var client = new PetsClient(endpoint);
+        /// 
+        /// Response response = client.GetFirstPet(1234);
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("tag").ToString());
+        /// Console.WriteLine(result.GetProperty("age").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Pet</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        ///   tag: string, # Optional.
+        ///   age: number, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response GetFirstPet(int? start = null, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("PetsClient.GetFirstPet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFirstPetRequest(start, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateDeleteRequest(int petId, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -532,6 +830,39 @@ namespace CadlPetStore
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateGetPetByKindRequest(string kind, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            message.BufferResponse = false;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/pets/", false);
+            uri.AppendPath(kind, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            return message;
+        }
+
+        internal HttpMessage CreateGetFirstPetRequest(int? start, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            message.BufferResponse = false;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/pets", false);
+            if (start != null)
+            {
+                uri.AppendQuery("start", start.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
             return message;
         }
 
