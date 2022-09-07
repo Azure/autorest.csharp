@@ -156,17 +156,14 @@ function createModel(program: Program): any {
         SkipUrlEncoding: false,
         Explode: false,
         Kind: InputOperationParameterKind.Client,
-        DefaultValue:
-            apiVersions.size === 1
-                ? ({
-                      Type: {
-                          Name: "String",
-                          Kind: InputTypeKind.String,
-                          IsNullable: false
-                      } as InputPrimitiveType,
-                      Value: version
-                  } as InputConstant)
-                : undefined
+        DefaultValue: {
+            Type: {
+                Name: "String",
+                Kind: InputTypeKind.String,
+                IsNullable: false
+            } as InputPrimitiveType,
+            Value: version
+        } as InputConstant
     };
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
@@ -285,6 +282,10 @@ function createModel(program: Program): any {
                     if (apiVersions.size > 1) {
                         apiVersionInOperation.Kind =
                             InputOperationParameterKind.Constant;
+                    }
+                    if (!apiVersionInOperation.DefaultValue) {
+                        apiVersionInOperation.DefaultValue =
+                            apiVersionParam.DefaultValue;
                     }
                 } else {
                     op.Parameters.push(apiVersionParam);
@@ -592,8 +593,7 @@ function isPagingOperation(op: OperationDetails) {
     return false;
 }
 function isSupportedOperation(op: OperationDetails) {
-    if (isLroOperation(op) || isPagingOperation(op))
-        return false;
+    if (isLroOperation(op) || isPagingOperation(op)) return false;
     return true;
 }
 class ErrorTypeFoundError extends Error {
