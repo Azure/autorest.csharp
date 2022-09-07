@@ -11,7 +11,7 @@ flowchart TB
       C21(C# specific\noverrides) --> C20
     end
     C30[/cadl.json/]:::input --> C40
-    C01 --> C61
+    C01 --> C50 & C61 & C90
     subgraph G3 [ ]
       C41[/Source input model/]:::input --> C50
       C40(Input model):::data --> C50
@@ -32,7 +32,7 @@ flowchart TB
       S60(Modified\nCodeModel):::data --> S70
       S70((CodeModelConverter)) --> C40
     end
-    S02 --> C61
+    S02 --> C50 & C61 & C90
     S30[/CodeModel.yaml/]:::input --> S40
 
     classDef input fill:#cfa;
