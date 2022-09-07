@@ -497,7 +497,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected Dictionary<string, WriteMethodDelegate> _customMethods = new Dictionary<string, WriteMethodDelegate>();
-        private WriteMethodDelegate GetMethodDelegate(MgmtClientOperation clientOperation)
+        protected WriteMethodDelegate GetMethodDelegate(MgmtClientOperation clientOperation)
         {
             if (clientOperation.IsLongRunningOperation && clientOperation.IsPagingOperation)
                 throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");

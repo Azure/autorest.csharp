@@ -131,7 +131,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var signature = commonOperation.MethodSignature;
             using (WriteCommonMethodWithoutValidation(signature, null, isAsync, enableAttributes: true, attributes: new[] { new ForwardsClientCallsAttribute() }))
             {
-                _writer.Append($"return {coreSignature.Name}(");
+                _writer.AppendRaw("return ")
+                    .AppendRawIf("await ", isAsync)
+                    .Append($"{coreSignature.Name}(");
                 foreach (var parameter in signature.Parameters)
                 {
                     _writer.AppendRaw(parameter.Name).AppendRaw(",");

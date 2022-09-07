@@ -346,6 +346,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, operation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
             }
 
+            // TODO - here we need to replace this constructor with the static factory method
             _writer.Line($"return {typeof(Response)}.FromValue(new {operation.ReturnType.UnWrapResponse()}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
         }
     }

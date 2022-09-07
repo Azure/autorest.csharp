@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        protected abstract async Task<Response<BaseVirtualMachineExtensionResource>> GetCoreAsync(string expand = null, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> GetCoreAsync(string expand = null, CancellationToken cancellationToken = default);
 
         /// <summary> placeholder. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Sample
         [ForwardsClientCalls]
         public async Task<Response<BaseVirtualMachineExtensionResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetCoreAsync(expand, cancellationToken);
+            return await GetCoreAsync(expand, cancellationToken);
         }
 
         protected abstract Response<BaseVirtualMachineExtensionResource> GetCore(string expand = null, CancellationToken cancellationToken = default);
@@ -87,7 +87,7 @@ namespace Azure.ResourceManager.Sample
             return GetCore(expand, cancellationToken);
         }
 
-        protected abstract async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default);
+        protected abstract Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default);
 
         /// <summary> placeholder. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
         [ForwardsClientCalls]
         public async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            return DeleteCoreAsync(waitUntil, cancellationToken);
+            return await DeleteCoreAsync(waitUntil, cancellationToken);
         }
 
         protected abstract ArmOperation DeleteCore(WaitUntil waitUntil, CancellationToken cancellationToken = default);
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample
             return DeleteCore(waitUntil, cancellationToken);
         }
 
-        protected abstract async Task<ArmOperation<BaseVirtualMachineExtensionResource>> UpdateCoreAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
+        protected abstract Task<ArmOperation<BaseVirtualMachineExtensionResource>> UpdateCoreAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
 
         /// <summary> placeholder. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Sample
         [ForwardsClientCalls]
         public async Task<ArmOperation<BaseVirtualMachineExtensionResource>> UpdateAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
-            return UpdateCoreAsync(waitUntil, extensionParameters, cancellationToken);
+            return await UpdateCoreAsync(waitUntil, extensionParameters, cancellationToken);
         }
 
         protected abstract ArmOperation<BaseVirtualMachineExtensionResource> UpdateCore(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
@@ -135,7 +135,7 @@ namespace Azure.ResourceManager.Sample
             return UpdateCore(waitUntil, extensionParameters, cancellationToken);
         }
 
-        protected abstract async Task<Response<BaseVirtualMachineExtensionResource>> AddTagCoreAsync(string key, string value, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> AddTagCoreAsync(string key, string value, CancellationToken cancellationToken = default);
 
         /// <summary> placeholder. </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -145,7 +145,7 @@ namespace Azure.ResourceManager.Sample
         [ForwardsClientCalls]
         public async Task<Response<BaseVirtualMachineExtensionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            return AddTagCoreAsync(key, value, cancellationToken);
+            return await AddTagCoreAsync(key, value, cancellationToken);
         }
 
         protected abstract Response<BaseVirtualMachineExtensionResource> AddTagCore(string key, string value, CancellationToken cancellationToken = default);
@@ -161,7 +161,7 @@ namespace Azure.ResourceManager.Sample
             return AddTagCore(key, value, cancellationToken);
         }
 
-        protected abstract async Task<Response<BaseVirtualMachineExtensionResource>> SetTagsCoreAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> SetTagsCoreAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
 
         /// <summary> placeholder. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -170,7 +170,7 @@ namespace Azure.ResourceManager.Sample
         [ForwardsClientCalls]
         public async Task<Response<BaseVirtualMachineExtensionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            return SetTagsCoreAsync(tags, cancellationToken);
+            return await SetTagsCoreAsync(tags, cancellationToken);
         }
 
         protected abstract Response<BaseVirtualMachineExtensionResource> SetTagsCore(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
@@ -185,7 +185,7 @@ namespace Azure.ResourceManager.Sample
             return SetTagsCore(tags, cancellationToken);
         }
 
-        protected abstract async Task<Response<BaseVirtualMachineExtensionResource>> RemoveTagCoreAsync(string key, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> RemoveTagCoreAsync(string key, CancellationToken cancellationToken = default);
 
         /// <summary> placeholder. </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -194,7 +194,7 @@ namespace Azure.ResourceManager.Sample
         [ForwardsClientCalls]
         public async Task<Response<BaseVirtualMachineExtensionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            return RemoveTagCoreAsync(key, cancellationToken);
+            return await RemoveTagCoreAsync(key, cancellationToken);
         }
 
         protected abstract Response<BaseVirtualMachineExtensionResource> RemoveTagCore(string key, CancellationToken cancellationToken = default);
