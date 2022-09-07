@@ -23,7 +23,7 @@ namespace MgmtExpandResourceTypes
     /// from an instance of <see cref="ArmClient" /> using the GetRecordSetPtrResource method.
     /// Otherwise you can get one from its parent resource <see cref="ZoneResource" /> using the GetRecordSetPtr method.
     /// </summary>
-    public partial class RecordSetPtrResource : ArmResource
+    public partial class RecordSetPtrResource : RecordSetResource
     {
         /// <summary> Generate the resource identifier of a <see cref="RecordSetPtrResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string zoneName, string relativeRecordSetName)
@@ -34,7 +34,6 @@ namespace MgmtExpandResourceTypes
 
         private readonly ClientDiagnostics _recordSetPtrRecordSetsClientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetPtrRecordSetsRestClient;
-        private readonly RecordSetData _data;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetPtrResource"/> class for mocking. </summary>
         protected RecordSetPtrResource()
@@ -44,10 +43,8 @@ namespace MgmtExpandResourceTypes
         /// <summary> Initializes a new instance of the <see cref = "RecordSetPtrResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal RecordSetPtrResource(ArmClient client, RecordSetData data) : this(client, data.Id)
+        internal RecordSetPtrResource(ArmClient client, RecordSetData data) : base(client, data)
         {
-            HasData = true;
-            _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetPtrResource"/> class. </summary>
@@ -63,23 +60,10 @@ namespace MgmtExpandResourceTypes
 #endif
         }
 
+        protected override string Type => "RecordSetPtrResource";
+
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones/PTR";
-
-        /// <summary> Gets whether or not the current instance has data. </summary>
-        public virtual bool HasData { get; }
-
-        /// <summary> Gets the data representing this Feature. </summary>
-        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual RecordSetData Data
-        {
-            get
-            {
-                if (!HasData)
-                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
-                return _data;
-            }
-        }
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {

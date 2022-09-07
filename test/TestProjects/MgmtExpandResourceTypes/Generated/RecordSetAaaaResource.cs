@@ -23,7 +23,7 @@ namespace MgmtExpandResourceTypes
     /// from an instance of <see cref="ArmClient" /> using the GetRecordSetAaaaResource method.
     /// Otherwise you can get one from its parent resource <see cref="ZoneResource" /> using the GetRecordSetAaaa method.
     /// </summary>
-    public partial class RecordSetAaaaResource : ArmResource
+    public partial class RecordSetAaaaResource : RecordSetResource
     {
         /// <summary> Generate the resource identifier of a <see cref="RecordSetAaaaResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string zoneName, string relativeRecordSetName)
@@ -34,7 +34,6 @@ namespace MgmtExpandResourceTypes
 
         private readonly ClientDiagnostics _recordSetAaaaRecordSetsClientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetAaaaRecordSetsRestClient;
-        private readonly RecordSetData _data;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetAaaaResource"/> class for mocking. </summary>
         protected RecordSetAaaaResource()
@@ -44,10 +43,8 @@ namespace MgmtExpandResourceTypes
         /// <summary> Initializes a new instance of the <see cref = "RecordSetAaaaResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal RecordSetAaaaResource(ArmClient client, RecordSetData data) : this(client, data.Id)
+        internal RecordSetAaaaResource(ArmClient client, RecordSetData data) : base(client, data)
         {
-            HasData = true;
-            _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetAaaaResource"/> class. </summary>
@@ -63,23 +60,10 @@ namespace MgmtExpandResourceTypes
 #endif
         }
 
+        protected override string Type => "RecordSetAaaaResource";
+
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones/AAAA";
-
-        /// <summary> Gets whether or not the current instance has data. </summary>
-        public virtual bool HasData { get; }
-
-        /// <summary> Gets the data representing this Feature. </summary>
-        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual RecordSetData Data
-        {
-            get
-            {
-                if (!HasData)
-                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
-                return _data;
-            }
-        }
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {

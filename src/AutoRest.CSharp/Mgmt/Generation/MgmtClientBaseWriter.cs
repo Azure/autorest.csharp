@@ -652,36 +652,73 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 .Append($"return {typeof(Page)}.FromValues(response.Value")
                 .AppendIf($".{pagingMethod.ItemName}", !pagingMethod.ItemName.IsNullOrEmpty());
 
-
-            Resource? resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(itemType));
-            // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
-            if (resource is null)
-                resource = operation.Resource is not null && operation.Resource.Type.Equals(itemType)
-                    ? operation.Resource
-                    : This.DefaultResource;
-            if (resource is not null && resource.Type.Equals(itemType))
+            var resourceWrapperExpression = GetResourceWrapperExpression(itemType, operation, parameterMappings);
+            if (resourceWrapperExpression != null)
             {
-                _writer.UseNamespace(typeof(Enumerable).Namespace!);
+                _writer.Append(resourceWrapperExpression);
+            }
 
+            _writer.Line($", {continuationTokenText}, {response}.GetRawResponse());");
+        }
+
+        private CodeWriterDelegate? GetResourceWrapperExpression(CSharpType itemType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings)
+        {
+            // first we try if this itemType is base resource, if so, we should return the Static Factory in that base resource type
+            var baseResource = MgmtContext.Library.BaseResources.FirstOrDefault(br => br.Type.Equals(itemType));
+            if (baseResource != null)
+            {
+                return GetResourceWrapperExpression(baseResource);
+            }
+            else
+            {
+                // if this is not a base resource, we try if this could be wrapped into a resource
+                var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Equals(itemType));
+                if (resource is null)
+                    resource = operation.Resource is not null && operation.Resource.Type.Equals(itemType)
+                        ? operation.Resource
+                        : This.DefaultResource;
+
+                if (resource is not null && resource.Type.Equals(itemType))
+                {
+                    return GetResourceWrapperExpression(resource, operation.RequestPath, parameterMappings);
+                }
+            }
+
+            return null;
+        }
+
+        private CodeWriterDelegate GetResourceWrapperExpression(BaseResource baseResource)
+        {
+            return writer =>
+            {
+                writer.UseNamespace(typeof(Enumerable).Namespace!);
                 var value = new CodeWriterDeclaration("value");
-                _writer.Append($@".Select({value:D} => ");
+                writer.Append($".Select({value:D} => {baseResource.Type}.GetResource({ArmClientReference}, {value}))");
+            };
+        }
+
+        private CodeWriterDelegate GetResourceWrapperExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings)
+        {
+            return writer =>
+            {
+                writer.UseNamespace(typeof(Enumerable).Namespace!);
+                var value = new CodeWriterDeclaration("value");
+                writer.Append($".Select({value:D} => ");
                 if (resource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    using (_writer.Scope())
+                    using (writer.Scope())
                     {
-                        _writer
-                            .Line($"{value}.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{value}")};")
-                            .Line($"return new {itemType}({ArmClientReference}, {value});");
+                        writer
+                            .Line($"{value}.Id = {CreateResourceIdentifierExpression(resource, requestPath, parameterMappings, $"{value}")};")
+                            .Line($"return new {resource.Type}({ArmClientReference}, {value});");
                     }
                 }
                 else
                 {
-                    _writer.Append($"new {itemType}({ArmClientReference}, {value})");
+                    writer.Append($"new {resource.Type}({ArmClientReference}, {value})");
                 }
-                _writer.AppendRaw(")");
-            }
-
-            _writer.Line($", {continuationTokenText}, {response}.GetRawResponse());");
+                writer.AppendRaw(")");
+            };
         }
 
         protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)
