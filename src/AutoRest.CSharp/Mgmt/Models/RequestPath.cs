@@ -25,17 +25,19 @@ namespace AutoRest.CSharp.Mgmt.Models
         private const string _providerPath = "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}";
         private const string _featurePath = "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features";
 
-        private const string ManagementGroupScopePrefix = "/providers/Microsoft.Management/managementGroups";
-        private const string ResourceGroupScopePrefix = "/subscriptions/{subscriptionId}/resourceGroups";
-        private const string SubscriptionScopePrefix = "/subscriptions";
-        private const string TenantScopePrefix = "/tenants";
+        internal const string ManagementGroupScopePrefix = "/providers/Microsoft.Management/managementGroups";
+        internal const string ResourceGroupScopePrefix = "/subscriptions/{subscriptionId}/resourceGroups";
+        internal const string SubscriptionScopePrefix = "/subscriptions";
+        internal const string TenantScopePrefix = "/tenants";
 
-        public static readonly IReadOnlyList<RequestPath> KnownParentResourcePaths = new[]
+        public static readonly IReadOnlyList<RequestPath> KnownParentResourcePaths;
+
+        static RequestPath()
         {
-            ResourceGroup,
-            Subscription,
-            ManagementGroup
-        };
+            KnownParentResourcePaths = new[] {
+                ResourceGroup, Subscription, ManagementGroup
+            };
+        }
 
         /// <summary>
         /// This is a placeholder of request path for "any" resources in other RPs
@@ -211,28 +213,28 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (_scopePathCache.TryGetValue(this, out var result))
                 return result;
 
-            result = CalculateScopePath(this);
+            result = CalculateScopePath();
             _scopePathCache.TryAdd(this, result);
             return result;
         }
 
-        private static RequestPath CalculateScopePath(RequestPath requestPath)
+        private RequestPath CalculateScopePath()
         {
-            var indexOfProvider = requestPath.ToList().LastIndexOf(Segment.Providers);
+            var indexOfProvider = _segments.ToList().LastIndexOf(Segment.Providers);
             // if there is no providers segment, myself should be a scope request path. Just return myself
             if (indexOfProvider >= 0)
             {
-                if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith(RequestPath.ManagementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                if (indexOfProvider == 0 && SerializedPath.StartsWith(RequestPath.ManagementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                     return RequestPath.ManagementGroup;
-                return new RequestPath(requestPath.Take(indexOfProvider));
+                return new RequestPath(_segments.Take(indexOfProvider));
             }
-            if (requestPath.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+            if (SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                 return RequestPath.ResourceGroup;
-            if (requestPath.SerializedPath.StartsWith(RequestPath.SubscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+            if (SerializedPath.StartsWith(RequestPath.SubscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                 return RequestPath.Subscription;
-            if (requestPath.SerializedPath.Equals(RequestPath.TenantScopePrefix))
+            if (SerializedPath.Equals(RequestPath.TenantScopePrefix))
                 return RequestPath.Tenant;
-            return requestPath;
+            return this;
         }
 
         /// <summary>
