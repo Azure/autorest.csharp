@@ -270,7 +270,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"{GetAwait(isAsync)} GetTagResource().{CreateMethodName("CreateOrUpdate", isAsync)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
             MgmtClientOperation getOperation = This.GetOperation!;
-            var needFactoryMethod = NeedFactoryMethod(clientOperation);
+            var needFactoryMethod = ShouldUseFactoryMethod(clientOperation);
             // we need to write multiple branches for a normal method
             if (getOperation.OperationMappings.Count == 1)
             {
