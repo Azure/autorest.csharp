@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -131,11 +132,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (TypeFactory.IsReadOnlyList(propertyType))
                 {
-                    return $"Array.Empty<{propertyType.Arguments[0]}>()";
+                    return $"{typeof(Array)}.Empty<{propertyType.Arguments[0]}>()";
                 }
                 if (TypeFactory.IsReadOnlyDictionary(propertyType))
                 {
-                    return $"new ReadOnlyDictionary<{propertyType.Arguments[0]}, {propertyType.Arguments[1]}>(new Dictionary<{propertyType.Arguments[0]}, {propertyType.Arguments[1]}>(0))";
+                    return $"new {new CSharpType(typeof(ReadOnlyDictionary<,>), propertyType.Arguments)}(new {new CSharpType(typeof(Dictionary<,>), propertyType.Arguments)}(0))";
                 }
                 if (!isRequired)
                 {

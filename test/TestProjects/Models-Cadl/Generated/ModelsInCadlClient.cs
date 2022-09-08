@@ -85,20 +85,26 @@ namespace GeneratedModels
         ///     requiredString = "<requiredString>",
         ///     requiredInt = 1234,
         ///     requiredModel = new {},
-        ///     requiredCollection = new[] {
+        ///     requiredIntCollection = new[] {
+        ///         1234
+        ///     },
+        ///     requiredStringCollection = new[] {
+        ///         "<String>"
+        ///     },
+        ///     requiredModelCollection = new[] {
         ///         new {
-        ///             requiredRecord = new {
+        ///             requiredModelRecord = new {
         ///                 key = new {
         ///                     requiredCollection = new[] {},
         ///                 },
         ///             },
         ///         }
         ///     },
-        ///     requiredRecord = new {
+        ///     requiredModelRecord = new {
         ///         key = new {
         ///             requiredCollection = new[] {
         ///                 new {
-        ///                     requiredRecord = new {},
+        ///                     requiredModelRecord = new {},
         ///                 }
         ///             },
         ///         },
@@ -110,6 +116,9 @@ namespace GeneratedModels
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("requiredString").ToString());
         /// Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -123,12 +132,10 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
-        ///   requiredCollection: [
-        ///     {
-        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
-        ///     }
-        ///   ], # Required.
-        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///   requiredIntCollection: [number], # Required.
+        ///   requiredStringCollection: [string], # Required.
+        ///   requiredModelCollection: [CollectionItem], # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -140,12 +147,17 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   requiredExtensibleEnum: {
+        ///   }, # Required.
         ///   requiredCollection: [
         ///     {
-        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///       requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         ///     }
         ///   ], # Required.
-        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///   requiredIntRecord: Dictionary&lt;string, number&gt;, # Required.
+        ///   requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -183,20 +195,26 @@ namespace GeneratedModels
         ///     requiredString = "<requiredString>",
         ///     requiredInt = 1234,
         ///     requiredModel = new {},
-        ///     requiredCollection = new[] {
+        ///     requiredIntCollection = new[] {
+        ///         1234
+        ///     },
+        ///     requiredStringCollection = new[] {
+        ///         "<String>"
+        ///     },
+        ///     requiredModelCollection = new[] {
         ///         new {
-        ///             requiredRecord = new {
+        ///             requiredModelRecord = new {
         ///                 key = new {
         ///                     requiredCollection = new[] {},
         ///                 },
         ///             },
         ///         }
         ///     },
-        ///     requiredRecord = new {
+        ///     requiredModelRecord = new {
         ///         key = new {
         ///             requiredCollection = new[] {
         ///                 new {
-        ///                     requiredRecord = new {},
+        ///                     requiredModelRecord = new {},
         ///                 }
         ///             },
         ///         },
@@ -208,6 +226,9 @@ namespace GeneratedModels
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("requiredString").ToString());
         /// Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -221,12 +242,10 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
-        ///   requiredCollection: [
-        ///     {
-        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
-        ///     }
-        ///   ], # Required.
-        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///   requiredIntCollection: [number], # Required.
+        ///   requiredStringCollection: [string], # Required.
+        ///   requiredModelCollection: [CollectionItem], # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -238,12 +257,17 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   requiredExtensibleEnum: {
+        ///   }, # Required.
         ///   requiredCollection: [
         ///     {
-        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///       requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         ///     }
         ///   ], # Required.
-        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///   requiredIntRecord: Dictionary&lt;string, number&gt;, # Required.
+        ///   requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -257,6 +281,782 @@ namespace GeneratedModels
             try
             {
                 using HttpMessage message = CreateInputToRoundTripRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Input to RoundTripPrimitive. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<RoundTripPrimitiveModel>> InputToRoundTripPrimitiveAsync(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await InputToRoundTripPrimitiveAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTripPrimitive. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<RoundTripPrimitiveModel> InputToRoundTripPrimitive(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = InputToRoundTripPrimitive(input.ToRequestContent(), context);
+            return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTripPrimitive. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call InputToRoundTripPrimitiveAsync with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var client = new ModelsInCadlClient();
+        /// 
+        /// var data = new {
+        ///     requiredString = "<requiredString>",
+        ///     requiredInt = 1234,
+        ///     requiredModel = new {},
+        ///     requiredIntCollection = new[] {
+        ///         1234
+        ///     },
+        ///     requiredStringCollection = new[] {
+        ///         "<String>"
+        ///     },
+        ///     requiredModelCollection = new[] {
+        ///         new {
+        ///             requiredModelRecord = new {
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
+        ///             },
+        ///         }
+        ///     },
+        ///     requiredModelRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredModelRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
+        /// };
+        /// 
+        /// Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("requiredString").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredInt64").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredFloat").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredDouble").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>InputModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required.
+        ///   requiredInt: number, # Required.
+        ///   requiredModel: {
+        ///   }, # Required.
+        ///   requiredIntCollection: [number], # Required.
+        ///   requiredStringCollection: [string], # Required.
+        ///   requiredModelCollection: [CollectionItem], # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>RoundTripPrimitiveModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required.
+        ///   requiredInt: number, # Required.
+        ///   requiredInt64: number, # Required.
+        ///   requiredSafeInt: number, # Required.
+        ///   requiredFloat: number, # Required.
+        ///   requiredDouble: number, # Required.
+        ///   requiredBoolean: boolean, # Required.
+        ///   requiredDateTimeOffset: string (date &amp; time), # Required.
+        ///   requiredTimeSpan: string (duration ISO 8601 Format), # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> InputToRoundTripPrimitiveAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.InputToRoundTripPrimitive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInputToRoundTripPrimitiveRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Input to RoundTripPrimitive. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call InputToRoundTripPrimitive with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var client = new ModelsInCadlClient();
+        /// 
+        /// var data = new {
+        ///     requiredString = "<requiredString>",
+        ///     requiredInt = 1234,
+        ///     requiredModel = new {},
+        ///     requiredIntCollection = new[] {
+        ///         1234
+        ///     },
+        ///     requiredStringCollection = new[] {
+        ///         "<String>"
+        ///     },
+        ///     requiredModelCollection = new[] {
+        ///         new {
+        ///             requiredModelRecord = new {
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
+        ///             },
+        ///         }
+        ///     },
+        ///     requiredModelRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredModelRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
+        /// };
+        /// 
+        /// Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("requiredString").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredInt64").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredFloat").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredDouble").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>InputModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required.
+        ///   requiredInt: number, # Required.
+        ///   requiredModel: {
+        ///   }, # Required.
+        ///   requiredIntCollection: [number], # Required.
+        ///   requiredStringCollection: [string], # Required.
+        ///   requiredModelCollection: [CollectionItem], # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>RoundTripPrimitiveModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required.
+        ///   requiredInt: number, # Required.
+        ///   requiredInt64: number, # Required.
+        ///   requiredSafeInt: number, # Required.
+        ///   requiredFloat: number, # Required.
+        ///   requiredDouble: number, # Required.
+        ///   requiredBoolean: boolean, # Required.
+        ///   requiredDateTimeOffset: string (date &amp; time), # Required.
+        ///   requiredTimeSpan: string (duration ISO 8601 Format), # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response InputToRoundTripPrimitive(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.InputToRoundTripPrimitive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInputToRoundTripPrimitiveRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Input to RoundTripOptional. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await InputToRoundTripOptionalAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTripOptional. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = InputToRoundTripOptional(input.ToRequestContent(), context);
+            return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTripOptional. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call InputToRoundTripOptionalAsync with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var client = new ModelsInCadlClient();
+        /// 
+        /// var data = new {
+        ///     requiredString = "<requiredString>",
+        ///     requiredInt = 1234,
+        ///     requiredModel = new {},
+        ///     requiredIntCollection = new[] {
+        ///         1234
+        ///     },
+        ///     requiredStringCollection = new[] {
+        ///         "<String>"
+        ///     },
+        ///     requiredModelCollection = new[] {
+        ///         new {
+        ///             requiredModelRecord = new {
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
+        ///             },
+        ///         }
+        ///     },
+        ///     requiredModelRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredModelRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
+        /// };
+        /// 
+        /// Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("optionalString").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalInt").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>InputModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required.
+        ///   requiredInt: number, # Required.
+        ///   requiredModel: {
+        ///   }, # Required.
+        ///   requiredIntCollection: [number], # Required.
+        ///   requiredStringCollection: [string], # Required.
+        ///   requiredModelCollection: [CollectionItem], # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>RoundTripOptionalModel</c>:
+        /// <code>{
+        ///   optionalString: string, # Optional.
+        ///   optionalInt: number, # Optional.
+        ///   optionalStringList: [string], # Optional.
+        ///   optionalIntList: [number], # Optional.
+        ///   optionalModelCollection: [CollectionItem], # Required.
+        ///   optionalModel: {
+        ///     requiredCollection: [CollectionItem], # Required.
+        ///   }, # Optional.
+        ///   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   optionalExtensibleEnum: {
+        ///   }, # Required.
+        ///   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional.
+        ///   optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional.
+        ///   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> InputToRoundTripOptionalAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.InputToRoundTripOptional");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInputToRoundTripOptionalRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Input to RoundTripOptional. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call InputToRoundTripOptional with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var client = new ModelsInCadlClient();
+        /// 
+        /// var data = new {
+        ///     requiredString = "<requiredString>",
+        ///     requiredInt = 1234,
+        ///     requiredModel = new {},
+        ///     requiredIntCollection = new[] {
+        ///         1234
+        ///     },
+        ///     requiredStringCollection = new[] {
+        ///         "<String>"
+        ///     },
+        ///     requiredModelCollection = new[] {
+        ///         new {
+        ///             requiredModelRecord = new {
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
+        ///             },
+        ///         }
+        ///     },
+        ///     requiredModelRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredModelRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
+        /// };
+        /// 
+        /// Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("optionalString").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalInt").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>InputModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required.
+        ///   requiredInt: number, # Required.
+        ///   requiredModel: {
+        ///   }, # Required.
+        ///   requiredIntCollection: [number], # Required.
+        ///   requiredStringCollection: [string], # Required.
+        ///   requiredModelCollection: [CollectionItem], # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>RoundTripOptionalModel</c>:
+        /// <code>{
+        ///   optionalString: string, # Optional.
+        ///   optionalInt: number, # Optional.
+        ///   optionalStringList: [string], # Optional.
+        ///   optionalIntList: [number], # Optional.
+        ///   optionalModelCollection: [CollectionItem], # Required.
+        ///   optionalModel: {
+        ///     requiredCollection: [CollectionItem], # Required.
+        ///   }, # Optional.
+        ///   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   optionalExtensibleEnum: {
+        ///   }, # Required.
+        ///   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional.
+        ///   optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional.
+        ///   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response InputToRoundTripOptional(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.InputToRoundTripOptional");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInputToRoundTripOptionalRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Input to RoundTripReadOnly. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<RoundTripReadOnlyModel>> InputToRoundTripReadOnlyAsync(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await InputToRoundTripReadOnlyAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTripReadOnly. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<RoundTripReadOnlyModel> InputToRoundTripReadOnly(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = InputToRoundTripReadOnly(input.ToRequestContent(), context);
+            return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTripReadOnly. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call InputToRoundTripReadOnlyAsync with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var client = new ModelsInCadlClient();
+        /// 
+        /// var data = new {
+        ///     requiredString = "<requiredString>",
+        ///     requiredInt = 1234,
+        ///     requiredModel = new {},
+        ///     requiredIntCollection = new[] {
+        ///         1234
+        ///     },
+        ///     requiredStringCollection = new[] {
+        ///         "<String>"
+        ///     },
+        ///     requiredModelCollection = new[] {
+        ///         new {
+        ///             requiredModelRecord = new {
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
+        ///             },
+        ///         }
+        ///     },
+        ///     requiredModelRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredModelRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
+        /// };
+        /// 
+        /// Response response = await client.InputToRoundTripReadOnlyAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>InputModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required.
+        ///   requiredInt: number, # Required.
+        ///   requiredModel: {
+        ///   }, # Required.
+        ///   requiredIntCollection: [number], # Required.
+        ///   requiredStringCollection: [string], # Required.
+        ///   requiredModelCollection: [CollectionItem], # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>RoundTripReadOnlyModel</c>:
+        /// <code>{
+        ///   requiredReadonlyString: string, # Required.
+        ///   requiredReadonlyInt: number, # Required.
+        ///   optionalReadonlyString: string, # Optional.
+        ///   optionalReadonlyInt: number, # Optional.
+        ///   requiredReadonlyModel: {
+        ///     requiredCollection: [CollectionItem], # Required.
+        ///   }, # Required.
+        ///   optionalReadonlyModel: DerivedModel, # Optional.
+        ///   requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   requiredReadonlyExtensibleEnum: {
+        ///   }, # Required.
+        ///   optionalReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   optionalReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   requiredReadonlyStringList: [string], # Required.
+        ///   requiredReadonlyIntList: [number], # Required.
+        ///   requiredReadOnlyModelCollection: [CollectionItem], # Required.
+        ///   requiredReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required.
+        ///   requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
+        ///   requiredReadOnlyModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///   optionalReadonlyStringList: [string], # Optional.
+        ///   optionalReadonlyIntList: [number], # Optional.
+        ///   optionalReadOnlyModelCollection: [CollectionItem], # Optional.
+        ///   optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required.
+        ///   optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required.
+        ///   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> InputToRoundTripReadOnlyAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.InputToRoundTripReadOnly");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInputToRoundTripReadOnlyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Input to RoundTripReadOnly. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call InputToRoundTripReadOnly with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var client = new ModelsInCadlClient();
+        /// 
+        /// var data = new {
+        ///     requiredString = "<requiredString>",
+        ///     requiredInt = 1234,
+        ///     requiredModel = new {},
+        ///     requiredIntCollection = new[] {
+        ///         1234
+        ///     },
+        ///     requiredStringCollection = new[] {
+        ///         "<String>"
+        ///     },
+        ///     requiredModelCollection = new[] {
+        ///         new {
+        ///             requiredModelRecord = new {
+        ///                 key = new {
+        ///                     requiredCollection = new[] {},
+        ///                 },
+        ///             },
+        ///         }
+        ///     },
+        ///     requiredModelRecord = new {
+        ///         key = new {
+        ///             requiredCollection = new[] {
+        ///                 new {
+        ///                     requiredModelRecord = new {},
+        ///                 }
+        ///             },
+        ///         },
+        ///     },
+        /// };
+        /// 
+        /// Response response = client.InputToRoundTripReadOnly(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>InputModel</c>:
+        /// <code>{
+        ///   requiredString: string, # Required.
+        ///   requiredInt: number, # Required.
+        ///   requiredModel: {
+        ///   }, # Required.
+        ///   requiredIntCollection: [number], # Required.
+        ///   requiredStringCollection: [string], # Required.
+        ///   requiredModelCollection: [CollectionItem], # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>RoundTripReadOnlyModel</c>:
+        /// <code>{
+        ///   requiredReadonlyString: string, # Required.
+        ///   requiredReadonlyInt: number, # Required.
+        ///   optionalReadonlyString: string, # Optional.
+        ///   optionalReadonlyInt: number, # Optional.
+        ///   requiredReadonlyModel: {
+        ///     requiredCollection: [CollectionItem], # Required.
+        ///   }, # Required.
+        ///   optionalReadonlyModel: DerivedModel, # Optional.
+        ///   requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   requiredReadonlyExtensibleEnum: {
+        ///   }, # Required.
+        ///   optionalReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   optionalReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   requiredReadonlyStringList: [string], # Required.
+        ///   requiredReadonlyIntList: [number], # Required.
+        ///   requiredReadOnlyModelCollection: [CollectionItem], # Required.
+        ///   requiredReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required.
+        ///   requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
+        ///   requiredReadOnlyModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///   optionalReadonlyStringList: [string], # Optional.
+        ///   optionalReadonlyIntList: [number], # Optional.
+        ///   optionalReadOnlyModelCollection: [CollectionItem], # Optional.
+        ///   optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required.
+        ///   optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required.
+        ///   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response InputToRoundTripReadOnly(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.InputToRoundTripReadOnly");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInputToRoundTripReadOnlyRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -307,20 +1107,28 @@ namespace GeneratedModels
         ///     requiredString = "<requiredString>",
         ///     requiredInt = 1234,
         ///     requiredModel = new {},
+        ///     requiredFixedStringEnum = "1",
+        ///     requiredExtensibleEnum = new {},
         ///     requiredCollection = new[] {
         ///         new {
-        ///             requiredRecord = new {
+        ///             requiredModelRecord = new {
         ///                 key = new {
         ///                     requiredCollection = new[] {},
         ///                 },
         ///             },
         ///         }
         ///     },
-        ///     requiredRecord = new {
+        ///     requiredIntRecord = new {
+        ///         key = 1234,
+        ///     },
+        ///     requiredStringRecord = new {
+        ///         key = "<String>",
+        ///     },
+        ///     requiredModelRecord = new {
         ///         key = new {
         ///             requiredCollection = new[] {
         ///                 new {
-        ///                     requiredRecord = new {},
+        ///                     requiredModelRecord = new {},
         ///                 }
         ///             },
         ///         },
@@ -345,12 +1153,17 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   requiredExtensibleEnum: {
+        ///   }, # Required.
         ///   requiredCollection: [
         ///     {
-        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///       requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         ///     }
         ///   ], # Required.
-        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///   requiredIntRecord: Dictionary&lt;string, number&gt;, # Required.
+        ///   requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -363,12 +1176,12 @@ namespace GeneratedModels
         ///   requiredModel: {
         ///     requiredCollection: [
         ///       {
-        ///         requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///         requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         ///       }
         ///     ], # Required.
         ///   }, # Required.
         ///   requiredCollection: [CollectionItem], # Required.
-        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -406,20 +1219,28 @@ namespace GeneratedModels
         ///     requiredString = "<requiredString>",
         ///     requiredInt = 1234,
         ///     requiredModel = new {},
+        ///     requiredFixedStringEnum = "1",
+        ///     requiredExtensibleEnum = new {},
         ///     requiredCollection = new[] {
         ///         new {
-        ///             requiredRecord = new {
+        ///             requiredModelRecord = new {
         ///                 key = new {
         ///                     requiredCollection = new[] {},
         ///                 },
         ///             },
         ///         }
         ///     },
-        ///     requiredRecord = new {
+        ///     requiredIntRecord = new {
+        ///         key = 1234,
+        ///     },
+        ///     requiredStringRecord = new {
+        ///         key = "<String>",
+        ///     },
+        ///     requiredModelRecord = new {
         ///         key = new {
         ///             requiredCollection = new[] {
         ///                 new {
-        ///                     requiredRecord = new {},
+        ///                     requiredModelRecord = new {},
         ///                 }
         ///             },
         ///         },
@@ -444,12 +1265,17 @@ namespace GeneratedModels
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
         ///   }, # Required.
+        ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+        ///   requiredExtensibleEnum: {
+        ///   }, # Required.
         ///   requiredCollection: [
         ///     {
-        ///       requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///       requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         ///     }
         ///   ], # Required.
-        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///   requiredIntRecord: Dictionary&lt;string, number&gt;, # Required.
+        ///   requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -462,12 +1288,12 @@ namespace GeneratedModels
         ///   requiredModel: {
         ///     requiredCollection: [
         ///       {
-        ///         requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///         requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         ///       }
         ///     ], # Required.
         ///   }, # Required.
         ///   requiredCollection: [CollectionItem], # Required.
-        ///   requiredRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        ///   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -620,6 +1446,48 @@ namespace GeneratedModels
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/inputToRoundTrip", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateInputToRoundTripPrimitiveRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            message.BufferResponse = false;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/inputToRoundTripPrimitive", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateInputToRoundTripOptionalRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            message.BufferResponse = false;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/inputToRoundTripOptional", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateInputToRoundTripReadOnlyRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            message.BufferResponse = false;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/inputToRoundTripReadOnly", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Content = content;
