@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodDocumentation(This.ArmClientCtor);
                 using (_writer.WriteMethodDeclaration(This.ArmClientCtor))
                 {
-                    // TODO -- this will need something else if we want to put all the implementations in the base resource
+                    // we do not need to implement anything here since the XXXCore in the base resource will be abstract
                 }
             }
             _writer.Line();
@@ -92,6 +92,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             // write the private discriminator of this base resource
             // TODO -- change this to the actual extensible enum
+            _writer.LineRaw("// TODO -- change it to the real extensible enum discriminator");
             _writer.Line($"protected virtual string Type => \"Base\";");
             _writer.Line();
             // write the HasData and Data property

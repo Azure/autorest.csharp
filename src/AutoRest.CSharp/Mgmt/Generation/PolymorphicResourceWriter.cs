@@ -72,6 +72,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override void WriteProperties()
         {
             // TODO -- use the actual extensible enum
+            _writer.LineRaw("// TODO -- change it to the real extensible enum discriminator");
             _writer.Line($"protected override string Type => \"{This.Type.Name}\";");
             _writer.Line();
 

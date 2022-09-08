@@ -48,6 +48,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
+        // TODO -- change it to the real extensible enum discriminator
         protected virtual string Type => "Base";
 
         /// <summary> Gets whether or not the current instance has data. </summary>

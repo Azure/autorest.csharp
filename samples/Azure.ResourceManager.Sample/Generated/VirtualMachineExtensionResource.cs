@@ -61,6 +61,7 @@ namespace Azure.ResourceManager.Sample
 #endif
         }
 
+        // TODO -- change it to the real extensible enum discriminator
         protected override string Type => "VirtualMachineExtensionResource";
 
         /// <summary> Gets the resource type for the operations. </summary>
