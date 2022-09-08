@@ -166,17 +166,28 @@ export function mapCadlIntrinsicModelToCsharpModel(
  * If type is an anonymous model, tries to find a named model that has the same
  * set of properties when non-schema properties are excluded.
  */
-function getEffectiveSchemaType(program: Program, type: Type): Type {
+export function getEffectiveSchemaType(program: Program, type: Type): Type {
+    let target = type;
     if (type.kind === "Model" && !type.name) {
         const effective = program.checker.getEffectiveModelType(
             type,
             isSchemaProperty
         );
         if (effective.name) {
-            return effective;
+            target = effective;
         }
     }
-    return type;
+
+    /* handle azure template model. */
+    if (target.kind === "Model" && target.templateArguments) {
+        for (const arg of target.templateArguments) {
+            if (arg.kind === "Model") {
+                return getEffectiveSchemaType(program, arg) as ModelType;
+            }
+        }
+    }
+
+    return target;
 
     /**
      * A "schema property" here is a property that is emitted to OpenAPI schema.

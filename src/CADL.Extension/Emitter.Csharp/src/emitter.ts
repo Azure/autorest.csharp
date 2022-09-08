@@ -40,7 +40,11 @@ import {
 } from "./type/InputType.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
-import { getDefaultValue, getInputType } from "./lib/model.js";
+import {
+    getDefaultValue,
+    getEffectiveSchemaType,
+    getInputType
+} from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
 import {
@@ -436,11 +440,18 @@ function loadOperation(
         parameters.push(loadOperationParameter(program, p));
     }
 
-    const bodyType = cadlParameters.bodyType;
-    const bodyParam = cadlParameters.bodyParameter;
-
-    if (bodyType && bodyParam) {
-        parameters.push(loadBodyParameter(program, bodyParam));
+    if (cadlParameters.bodyParameter) {
+        parameters.push(
+            loadBodyParameter(program, cadlParameters.bodyParameter)
+        );
+    } else if (cadlParameters.bodyType) {
+        const effectiveBodyType = getEffectiveSchemaType(
+            program,
+            cadlParameters.bodyType
+        );
+        if (effectiveBodyType.kind === "Model") {
+            parameters.push(loadBodyParameter(program, effectiveBodyType));
+        }
     }
 
     const responses: OperationResponse[] = [];
@@ -532,20 +543,20 @@ function loadOperation(
 
     function loadBodyParameter(
         program: Program,
-        body: ModelTypeProperty
+        body: ModelTypeProperty | ModelType
     ): InputParameter {
-        const { type, name, model: cadlType } = body;
+        const type = body.kind === "Model" ? body : body.type;
         const inputType: InputType = getInputType(program, type, models, enums);
         const requestLocation = RequestLocation.Body;
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: name,
-            NameInRequest: name,
+            Name: body.name,
+            NameInRequest: body.name,
             Description: getDoc(program, body),
             Type: inputType,
             Location: requestLocation,
-            IsRequired: !body.optional,
+            IsRequired: body.kind === "Model" ? true : !body.optional,
             IsApiVersion: false,
             IsResourceParameter: false,
             IsContentType: false,
@@ -565,10 +576,11 @@ function loadOperation(
         }
         const status: number[] = [];
         status.push(Number(response.statusCode));
+        //TODO: what to do if more than 1 response?
         const body = response.responses[0]?.body;
         let type: InputType | undefined = undefined;
         if (body?.type) {
-            const cadlType = body.type;
+            const cadlType = getEffectiveSchemaType(program, body.type);
             const inputType: InputType = getInputType(
                 program,
                 cadlType,
