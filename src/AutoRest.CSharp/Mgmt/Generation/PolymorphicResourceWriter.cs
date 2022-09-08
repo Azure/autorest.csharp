@@ -5,10 +5,12 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -91,8 +93,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (commonOperation == null)
             {
                 base.WriteMethod(clientOperation, isAsync);
-                return;
             }
+            else
+            {
+                // this method writes two methods
+                // first is the override of the abstract Core method
+                // the other is the non-virtual actual method which calls the Core method and wrap the result again
+                WritePolymorphicMethod(clientOperation, commonOperation, isAsync);
+            }
+        }
+
+        private void WritePolymorphicMethod(MgmtClientOperation clientOperation, MgmtCommonOperation commonOperation, bool isAsync)
+        {
             // write the implementation into the Core method instead
             var writeBody = GetMethodDelegate(clientOperation);
             var coreSignature = commonOperation.CoreMethodSignature with
@@ -114,8 +126,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var returnsDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
             using (WriteCommonMethodWithoutValidation(signature, returnsDescription, isAsync, enableAttributes: true, attributes: new[] { new ForwardsClientCallsAttribute() }))
             {
-                // TODO -- this need tweak: we need to unwrap this Response<T> and wrap it again after cast it to its real type
-                _writer.AppendRaw("return ")
+                var value = new CodeWriterDeclaration("value");
+                _writer.Append($"var {value:D} = ")
                     .AppendRawIf("await ", isAsync)
                     .Append($"{CreateMethodName(coreSignature.Name, isAsync)}(");
                 foreach (var parameter in coreSignature.Parameters)
@@ -124,6 +136,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 _writer.RemoveTrailingComma();
                 _writer.LineRaw(");");
+
+                if (commonOperation.ReturnType.Equals(clientOperation.ReturnType))
+                {
+                    _writer.Line($"return {value};");
+                }
+                else
+                {
+                    // unwrap the result and wrap it again
+                    if (clientOperation.IsLongRunningOperation)
+                    {
+                        _writer.Line($"TODO");
+                    }
+                    else if (clientOperation.IsPagingOperation)
+                    {
+                        _writer.Line($"TODO");
+                    }
+                    else
+                    {
+                        _writer.Line($"return {typeof(Response)}.FromValue(({clientOperation.ReturnType.UnWrapResponse()}){value}.Value, {value}.GetRawResponse());");
+                    }
+                }
             }
 
             _writer.Line();
