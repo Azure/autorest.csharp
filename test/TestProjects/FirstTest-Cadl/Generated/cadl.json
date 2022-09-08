@@ -427,19 +427,76 @@
      ],
      "BufferResponse": false,
      "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "48",
+     "Name": "anonymousBody",
+     "Description": "body parameter without body decorator",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "49",
+       "Name": "Thing",
+       "NameInRequest": "Thing",
+       "Type": {
+        "$ref": "10"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$ref": "44"
+      },
+      {
+       "$ref": "32"
+      },
+      {
+       "$ref": "35"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "50",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/anonymousBody",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "48"
+    "$id": "51"
    }
   },
   {
-   "$id": "49",
+   "$id": "52",
    "Name": "Demo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "50",
+     "$id": "53",
      "Name": "sayHi",
      "Description": "Return hi",
      "Parameters": [
@@ -447,11 +504,11 @@
        "$ref": "26"
       },
       {
-       "$id": "51",
+       "$id": "54",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "52",
+        "$id": "55",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -467,11 +524,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "53",
+       "$id": "56",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "54",
+        "$id": "57",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -487,11 +544,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "55",
+       "$id": "58",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "56",
+        "$id": "59",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -515,7 +572,7 @@
      ],
      "Responses": [
       {
-       "$id": "57",
+       "$id": "60",
        "StatusCodes": [
         200
        ],
@@ -533,15 +590,15 @@
     }
    ],
    "Protocol": {
-    "$id": "58"
+    "$id": "61"
    }
   },
   {
-   "$id": "59",
+   "$id": "62",
    "Name": "Demo2",
    "Operations": [
     {
-     "$id": "60",
+     "$id": "63",
      "Name": "helloAgain",
      "Description": "Return hi again",
      "Parameters": [
@@ -549,11 +606,11 @@
        "$ref": "26"
       },
       {
-       "$id": "61",
+       "$id": "64",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "62",
+        "$id": "65",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -569,20 +626,20 @@
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "66",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "64",
+        "$id": "67",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "65",
+        "$id": "68",
         "Type": {
-         "$ref": "64"
+         "$ref": "67"
         },
         "Value": "text/plain"
        },
@@ -596,11 +653,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "66",
+       "$id": "69",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "67",
+        "$id": "70",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -616,7 +673,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "68",
+       "$id": "71",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -641,7 +698,7 @@
      ],
      "Responses": [
       {
-       "$id": "69",
+       "$id": "72",
        "StatusCodes": [
         200
        ],
@@ -662,7 +719,7 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "70",
+     "$id": "73",
      "Name": "noContentType",
      "Description": "Return hi again",
      "Parameters": [
@@ -670,11 +727,11 @@
        "$ref": "26"
       },
       {
-       "$id": "71",
+       "$id": "74",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "72",
+        "$id": "75",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -690,11 +747,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "73",
+       "$id": "76",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "74",
+        "$id": "77",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -710,7 +767,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "75",
+       "$id": "78",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -738,7 +795,7 @@
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "79",
        "StatusCodes": [
         200
        ],
@@ -758,7 +815,7 @@
      "BufferResponse": false
     },
     {
-     "$id": "77",
+     "$id": "80",
      "Name": "helloDemo2",
      "Description": "Return hi in demo2",
      "Parameters": [
@@ -774,7 +831,7 @@
      ],
      "Responses": [
       {
-       "$id": "78",
+       "$id": "81",
        "StatusCodes": [
         200
        ],
@@ -793,18 +850,18 @@
     }
    ],
    "Protocol": {
-    "$id": "79"
+    "$id": "82"
    }
   }
  ],
  "Auth": {
-  "$id": "80",
+  "$id": "83",
   "ApiKey": {
-   "$id": "81",
+   "$id": "84",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "82",
+   "$id": "85",
    "Scopes": [
     "https://api.example.com/.default"
    ]

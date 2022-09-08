@@ -441,6 +441,152 @@ namespace CadlFirstTest
             }
         }
 
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="thing"> The Thing to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(thing, nameof(thing));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await AnonymousBodyAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="thing"> The Thing to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(thing, nameof(thing));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = AnonymousBody(thing.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call AnonymousBodyAsync with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
+        /// 
+        /// var data = new {
+        ///     name = "<name>",
+        /// };
+        /// 
+        /// Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.AnonymousBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateAnonymousBodyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call AnonymousBody with required request content and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new CadlFirstTestClient(credential);
+        /// 
+        /// var data = new {
+        ///     name = "<name>",
+        /// };
+        /// 
+        /// Response response = client.AnonymousBody(RequestContent.Create(data));
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Thing</c>:
+        /// <code>{
+        ///   name: string, # Required.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response AnonymousBody(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.AnonymousBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateAnonymousBodyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateTopActionRequest(string action, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -481,6 +627,23 @@ namespace CadlFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/patch", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateAnonymousBodyRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            message.BufferResponse = false;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/anonymousBody", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
