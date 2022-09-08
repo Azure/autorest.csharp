@@ -73,3 +73,7 @@ op topAction(@path @format("date") action: string): Thing;
 @get
 op topAction2(): Thing;
 
+@route("/anonymousBody")
+@doc("body parameter without body decorator")
+@post
+op anonymousBody( ...Thing ): Thing;

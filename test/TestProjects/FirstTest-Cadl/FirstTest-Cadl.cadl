@@ -105,3 +105,9 @@ op topAction2(): Thing;
 @patch
 @OpenAPI.extension("x-ms-convenient-api", true)
 op patchAction(@body body: Thing): Thing;
+
+@route("/anonymousBody")
+@doc("body parameter without body decorator")
+@post
+@OpenAPI.extension("x-ms-convenient-api", true)
+op anonymousBody( ...Thing ): Thing;

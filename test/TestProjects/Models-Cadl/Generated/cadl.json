@@ -1480,14 +1480,45 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "191",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "192",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "193",
+        "Type": {
+         "$id": "194",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "0.1.0"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "191",
+       "$id": "195",
        "StatusCodes": [
         200
        ],
@@ -1505,12 +1536,12 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "192",
+     "$id": "196",
      "Name": "inputToRoundTripPrimitive",
      "Description": "Input to RoundTripPrimitive",
      "Parameters": [
       {
-       "$id": "193",
+       "$id": "197",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1522,14 +1553,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "191"
       }
      ],
      "Responses": [
       {
-       "$id": "194",
+       "$id": "198",
        "StatusCodes": [
         200
        ],
@@ -1547,12 +1581,12 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "195",
+     "$id": "199",
      "Name": "inputToRoundTripOptional",
      "Description": "Input to RoundTripOptional",
      "Parameters": [
       {
-       "$id": "196",
+       "$id": "200",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1564,14 +1598,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "191"
       }
      ],
      "Responses": [
       {
-       "$id": "197",
+       "$id": "201",
        "StatusCodes": [
         200
        ],
@@ -1589,12 +1626,12 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "198",
+     "$id": "202",
      "Name": "inputToRoundTripReadOnly",
      "Description": "Input to RoundTripReadOnly",
      "Parameters": [
       {
-       "$id": "199",
+       "$id": "203",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1606,14 +1643,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "191"
       }
      ],
      "Responses": [
       {
-       "$id": "200",
+       "$id": "204",
        "StatusCodes": [
         200
        ],
@@ -1631,12 +1671,12 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "201",
+     "$id": "205",
      "Name": "roundTripToOutput",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
-       "$id": "202",
+       "$id": "206",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1648,14 +1688,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "191"
       }
      ],
      "Responses": [
       {
-       "$id": "203",
+       "$id": "207",
        "StatusCodes": [
         200
        ],
@@ -1673,13 +1716,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "204",
+     "$id": "208",
      "Name": "selfReference",
      "Description": "Returns model that has property of its own type",
-     "Parameters": [],
+     "Parameters": [
+      {
+       "$ref": "191"
+      }
+     ],
      "Responses": [
       {
-       "$id": "205",
+       "$id": "209",
        "StatusCodes": [
         200
        ],
@@ -1698,7 +1745,7 @@
     }
    ],
    "Protocol": {
-    "$id": "206"
+    "$id": "210"
    }
   }
  ]
