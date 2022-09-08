@@ -11,24 +11,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ScopeDetection
     {
-        public const string Subscriptions = "subscriptions";
-        public const string ResourceGroups = "resourceGroups";
-        public const string Tenant = "tenant";
-        public const string ManagementGroups = "managementGroups";
-        public const string Any = "*";
+        private const string Subscriptions = "subscriptions";
+        private const string ResourceGroups = "resourceGroups";
+        private const string Tenant = "tenant";
+        private const string ManagementGroups = "managementGroups";
+        private const string Any = "*";
 
-        private static ConcurrentDictionary<RequestPath, RequestPath> _scopePathCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?>();
-
-        public static RequestPath GetScopePath(this RequestPath requestPath)
-        {
-            if (_scopePathCache.TryGetValue(requestPath, out var result))
-                return result;
-
-            result = CalculateScopePath(requestPath);
-            _scopePathCache.TryAdd(requestPath, result);
-            return result;
-        }
 
         /// <summary>
         /// Returns true if this request path is a parameterized scope, like the "/{scope}" in "/{scope}/providers/M.C/virtualMachines/{vmName}"
@@ -48,25 +37,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // now the first segment is a reference
             // we ensure this parameter enables x-ms-skip-url-encoding, aka Escape is false
             return first.SkipUrlEncoding;
-        }
-
-        private static RequestPath CalculateScopePath(RequestPath requestPath)
-        {
-            var indexOfProvider = requestPath.ToList().LastIndexOf(Segment.Providers);
-            // if there is no providers segment, myself should be a scope request path. Just return myself
-            if (indexOfProvider >= 0)
-            {
-                if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith(RequestPath.ManagementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
-                    return RequestPath.ManagementGroup;
-                return new RequestPath(requestPath.Take(indexOfProvider));
-            }
-            if (requestPath.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
-                return RequestPath.ResourceGroup;
-            if (requestPath.SerializedPath.StartsWith(RequestPath.SubscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
-                return RequestPath.Subscription;
-            if (requestPath.SerializedPath.Equals(RequestPath.TenantScopePrefix))
-                return RequestPath.Tenant;
-            return requestPath;
         }
 
         public static ResourceTypeSegment[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath)

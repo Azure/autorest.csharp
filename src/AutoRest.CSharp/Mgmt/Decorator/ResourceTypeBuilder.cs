@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         static ResourceTypeBuilder()
         {
+            // TODO -- centralize this
             _requestPathToResourceTypeCache.TryAdd(RequestPath.Subscription, ResourceTypeSegment.Subscription);
             _requestPathToResourceTypeCache.TryAdd(RequestPath.ResourceGroup, ResourceTypeSegment.ResourceGroup);
             _requestPathToResourceTypeCache.TryAdd(RequestPath.Tenant, ResourceTypeSegment.Tenant);

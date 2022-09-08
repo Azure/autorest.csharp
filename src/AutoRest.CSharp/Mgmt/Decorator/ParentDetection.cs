@@ -55,6 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 return parent.AsIEnumerable();
             }
+            // TODO -- need to add some new entries or refactor
             // if we cannot find a resource as its parent, its parent must be one of the Extensions
             if (parentRequestPath.Equals(RequestPath.ManagementGroup))
                 return MgmtContext.Library.ManagementGroupExtensions.AsIEnumerable();
@@ -175,7 +176,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // We will never want this
             var scope = requestPath.GetScopePath();
             var candidates = MgmtContext.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath())
-                .Concat(new List<RequestPath> { RequestPath.ResourceGroup, RequestPath.Subscription, RequestPath.ManagementGroup }) // When generating management group in management.json, the path is /providers/Microsoft.Management/managementGroups/{groupId} while RequestPath.ManagementGroup is /providers/Microsoft.Management/managementGroups/{managementGroupId}. We pick the first one.
+                .Concat(RequestPath.KnownParentResourcePaths)
                 .Where(r => r.IsAncestorOf(requestPath)).OrderByDescending(r => r.Count);
             if (candidates.Any())
             {
