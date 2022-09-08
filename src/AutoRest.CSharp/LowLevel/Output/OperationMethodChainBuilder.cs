@@ -82,13 +82,36 @@ namespace AutoRest.CSharp.Output.Models
             var returnTypeChain = BuildReturnTypes();
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Protocol, null, protocolMethodParameters);
-            var convenienceMethod = Operation.GenerateConvenienceMethod ? BuildConvenienceMethod(returnTypeChain) : null;
+            var convenienceMethod = ShouldConvenienceMethodGenerated(returnTypeChain) ? BuildConvenienceMethod(returnTypeChain) : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
             return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
+        }
+
+        private bool ShouldConvenienceMethodGenerated(ReturnTypeChain returnTypeChain)
+        {
+            return Operation.GenerateConvenienceMethod
+                && (_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).ToList().Exists(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
+                || !returnTypeChain.Convenience.Equals(returnTypeChain.Protocol));
+        }
+
+        private bool IsParameterTypeSame(Parameter? first, Parameter? second)
+        {
+            if ((first == null && second != null)
+                || (first != null && second == null))
+            {
+                return true;
+            }
+
+            if (first == null && second == null)
+            {
+                return true;
+            }
+
+            return first!.Type.Equals(second!.Type);
         }
 
         private ReturnTypeChain BuildReturnTypes()
@@ -143,7 +166,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private ConvenienceMethod BuildConvenienceMethod(ReturnTypeChain returnTypeChain)
         {
-            string name = _protocolBodyParameter == null
+            string name = !_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).ToList().Exists(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
                 ? _restClientMethod.Name.IsLastWordSingular()
                     ? $"{_restClientMethod.Name}Value"
                     : $"{_restClientMethod.Name.LastWordToSingular()}Values"

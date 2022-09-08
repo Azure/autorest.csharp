@@ -57,6 +57,16 @@ model PetId {
   petId: int32;
 }
 
+@doc("Extensible enum Values for pet kind")
+enum PetKindValues {
+    Dog: "dog",
+    Cat: "cat"
+}
+
+@doc("Extensible enum for pet kind")
+@knownValues(PetKindValues)
+model PetKind is string {}
+
 @doc("Manage your pets. You can delete or get the Pet from pet store.")
 @summary("Manage your pets.")
 @route("/pets")
@@ -76,4 +86,7 @@ namespace Pets {
 
   @OpenAPI.extension("x-ms-convenient-api", true)
   @post op create(@body pet: Pet): Pet | Error;
+
+  @OpenAPI.extension("x-ms-convenient-api", true)
+  @get op getPetByKind(@path kind: PetKind): Pet | Error;
 }
