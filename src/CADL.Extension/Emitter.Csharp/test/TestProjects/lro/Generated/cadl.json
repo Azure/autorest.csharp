@@ -8,19 +8,19 @@
  "Models": [
   {
    "$id": "2",
-   "Name": "ResourceOkResponse",
-   "Namespace": "Foundations",
+   "Name": "Pet",
+   "Namespace": "LroOperation",
    "IsNullable": false,
    "Properties": [
     {
      "$id": "3",
-     "Name": "statusCode",
-     "SerializedName": "statusCode",
+     "Name": "name",
+     "SerializedName": "name",
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "Number",
-      "Kind": "Int32",
+      "Name": "string",
+      "Kind": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -29,8 +29,8 @@
     },
     {
      "$id": "5",
-     "Name": "name",
-     "SerializedName": "name",
+     "Name": "tag",
+     "SerializedName": "tag",
      "Description": "",
      "Type": {
       "$id": "6",
@@ -38,136 +38,20 @@
       "Kind": "String",
       "IsNullable": false
      },
-     "IsRequired": true,
+     "IsRequired": false,
      "IsReadOnly": false,
      "IsDiscriminator": false
     },
     {
      "$id": "7",
-     "Name": "tag",
-     "SerializedName": "tag",
+     "Name": "age",
+     "SerializedName": "age",
      "Description": "",
      "Type": {
       "$id": "8",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "9",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "",
-     "Type": {
-      "$id": "10",
       "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "11",
-     "Name": "operationLocation",
-     "SerializedName": "operationLocation",
-     "Description": "",
-     "Type": {
-      "$id": "12",
-      "Name": "ResourceLocation",
-      "Namespace": "Rest",
-      "Description": "The location of an instance of OperationStatus",
-      "IsNullable": false,
-      "Properties": []
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$ref": "12"
-  },
-  {
-   "$id": "13",
-   "Name": "ResourceCreatedResponse",
-   "Namespace": "Foundations",
-   "Description": "A  resource was successfully created.",
-   "IsNullable": false,
-   "Properties": [
-    {
-     "$id": "14",
-     "Name": "statusCode",
-     "SerializedName": "statusCode",
-     "Description": "",
-     "Type": {
-      "$id": "15",
-      "Name": "Number",
-      "Kind": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "16",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
-      "$id": "17",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "18",
-     "Name": "tag",
-     "SerializedName": "tag",
-     "Description": "",
-     "Type": {
-      "$id": "19",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "20",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "",
-     "Type": {
-      "$id": "21",
-      "Name": "Int32",
-      "Kind": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "22",
-     "Name": "operationLocation",
-     "SerializedName": "operationLocation",
-     "Description": "",
-     "Type": {
-      "$ref": "12"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -178,20 +62,20 @@
  ],
  "Clients": [
   {
-   "$id": "23",
+   "$id": "9",
    "Name": "Projects",
    "Operations": [
     {
-     "$id": "24",
+     "$id": "10",
      "Name": "createOrUpdate",
      "Description": "Creates a new pet or updates an existing one.",
      "Parameters": [
       {
-       "$id": "25",
+       "$id": "11",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Type": {
-        "$id": "26",
+        "$id": "12",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -207,20 +91,20 @@
        "Kind": "Client"
       },
       {
-       "$id": "27",
+       "$id": "13",
        "Name": "content-type",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "28",
+        "$id": "14",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "15",
         "Type": {
-         "$ref": "28"
+         "$ref": "14"
         },
         "Value": "application/merge-patch+json"
        },
@@ -234,17 +118,27 @@
        "Kind": "Constant"
       },
       {
-       "$id": "30",
+       "$id": "16",
        "Name": "api-version",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "31",
+        "$id": "17",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
+       "DefaultValue": {
+        "$id": "18",
+        "Type": {
+         "$id": "19",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-05-15-preview"
+       },
        "IsRequired": true,
        "IsApiVersion": true,
        "IsResourceParameter": false,
@@ -253,11 +147,28 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
+      },
+      {
+       "$id": "20",
+       "Name": "Pet",
+       "NameInRequest": "Pet",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
       }
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "21",
        "StatusCodes": [
         200
        ],
@@ -267,12 +178,12 @@
        "BodyMediaType": "Json"
       },
       {
-       "$id": "33",
+       "$id": "22",
        "StatusCodes": [
         201
        ],
        "BodyType": {
-        "$ref": "13"
+        "$ref": "2"
        },
        "BodyMediaType": "Json"
       }
@@ -289,7 +200,7 @@
     }
    ],
    "Protocol": {
-    "$id": "34"
+    "$id": "23"
    }
   }
  ]

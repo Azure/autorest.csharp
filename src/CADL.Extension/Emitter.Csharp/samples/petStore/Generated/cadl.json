@@ -62,71 +62,19 @@
   },
   {
    "$id": "9",
-   "Name": "ToyListResults",
+   "Name": "Toy",
    "Namespace": "PetStore",
    "IsNullable": false,
    "Properties": [
     {
      "$id": "10",
-     "Name": "items",
-     "SerializedName": "items",
+     "Name": "id",
+     "SerializedName": "id",
      "Description": "",
      "Type": {
       "$id": "11",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "12",
-       "Name": "Toy",
-       "Namespace": "PetStore",
-       "IsNullable": false,
-       "Properties": [
-        {
-         "$id": "13",
-         "Name": "id",
-         "SerializedName": "id",
-         "Description": "",
-         "Type": {
-          "$id": "14",
-          "Name": "Int64",
-          "Kind": "Int64",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
-        },
-        {
-         "$id": "15",
-         "Name": "petId",
-         "SerializedName": "petId",
-         "Description": "",
-         "Type": {
-          "$id": "16",
-          "Name": "Int64",
-          "Kind": "Int64",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
-        },
-        {
-         "$id": "17",
-         "Name": "name",
-         "SerializedName": "name",
-         "Description": "",
-         "Type": {
-          "$id": "18",
-          "Name": "string",
-          "Kind": "String",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
-        }
-       ]
-      },
+      "Name": "Int64",
+      "Kind": "Int64",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -134,44 +82,56 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "19",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
+     "$id": "12",
+     "Name": "petId",
+     "SerializedName": "petId",
      "Description": "",
      "Type": {
-      "$id": "20",
+      "$id": "13",
+      "Name": "Int64",
+      "Kind": "Int64",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "14",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "15",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
      },
-     "IsRequired": false,
+     "IsRequired": true,
      "IsReadOnly": false,
      "IsDiscriminator": false
     }
    ]
-  },
-  {
-   "$ref": "12"
   }
  ],
  "Clients": [
   {
-   "$id": "21",
+   "$id": "16",
    "Name": "Pets",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
-     "$id": "22",
+     "$id": "17",
      "Name": "delete",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
       {
-       "$id": "23",
+       "$id": "18",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
        "Type": {
-        "$id": "24",
+        "$id": "19",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -187,12 +147,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "25",
+       "$id": "20",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "26",
+        "$id": "21",
         "Name": "Int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -208,12 +168,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "27",
+       "$id": "22",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "28",
+        "$id": "23",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -228,9 +188,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "24",
         "Type": {
-         "$id": "30",
+         "$id": "25",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -241,7 +201,7 @@
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "26",
        "StatusCodes": [
         200
        ],
@@ -256,20 +216,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "32",
+     "$id": "27",
      "Name": "read",
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "18"
       },
       {
-       "$id": "33",
+       "$id": "28",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "34",
+        "$id": "29",
         "Name": "Int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -285,12 +245,12 @@
        "Kind": "Method"
       },
       {
-       "$ref": "27"
+       "$ref": "22"
       }
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "30",
        "StatusCodes": [
         200
        ],
@@ -300,7 +260,7 @@
        "BodyMediaType": "Json"
       },
       {
-       "$id": "36",
+       "$id": "31",
        "StatusCodes": [
         304
        ],
@@ -318,14 +278,14 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "37",
+     "$id": "32",
      "Name": "create",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "18"
       },
       {
-       "$id": "38",
+       "$id": "33",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -342,12 +302,12 @@
        "Kind": "Method"
       },
       {
-       "$ref": "27"
+       "$ref": "22"
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "34",
        "StatusCodes": [
         200
        ],
@@ -366,26 +326,26 @@
     }
    ],
    "Protocol": {
-    "$id": "40"
+    "$id": "35"
    }
   },
   {
-   "$id": "41",
+   "$id": "36",
    "Name": "ListPetToysResponse",
    "Operations": [
     {
-     "$id": "42",
+     "$id": "37",
      "Name": "list",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "18"
       },
       {
-       "$id": "43",
+       "$id": "38",
        "Name": "petId",
        "NameInRequest": "petId",
        "Type": {
-        "$id": "44",
+        "$id": "39",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -401,11 +361,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "45",
+       "$id": "40",
        "Name": "nameFilter",
        "NameInRequest": "nameFilter",
        "Type": {
-        "$id": "46",
+        "$id": "41",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -421,12 +381,12 @@
        "Kind": "Method"
       },
       {
-       "$ref": "27"
+       "$ref": "22"
       }
      ],
      "Responses": [
       {
-       "$id": "47",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
@@ -445,7 +405,7 @@
     }
    ],
    "Protocol": {
-    "$id": "48"
+    "$id": "43"
    }
   }
  ]
