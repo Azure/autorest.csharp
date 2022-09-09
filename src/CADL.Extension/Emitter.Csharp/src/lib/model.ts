@@ -299,7 +299,7 @@ export function getInputType(
         m: ModelType,
         e: EnumType
     ): InputEnumType {
-        let extensibleEnum = enums.get(e.name);
+        let extensibleEnum = enums.get(m.name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
             if (!innerEnum) {
