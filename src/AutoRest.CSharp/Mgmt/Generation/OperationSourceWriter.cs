@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer = new CodeWriter();
             _opSource = opSource;
-            _isReturningResource = MgmtContext.Library.CsharpTypeToResource.ContainsKey(_opSource.ReturnType);
+            _isReturningResource = MgmtContext.Library.CSharpTypeToResource.ContainsKey(_opSource.ReturnType);
             if (_opSource.Resource is not null && Configuration.MgmtConfiguration.OperationIdMappings.TryGetValue(_opSource.Resource.ResourceName, out var mappings))
                 _operationIdMappings = mappings;
         }

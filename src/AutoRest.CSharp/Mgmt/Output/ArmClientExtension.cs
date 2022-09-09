@@ -11,9 +11,9 @@ using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ArmClientExtensions : MgmtExtensions
+    internal class ArmClientExtension : MgmtExtension
     {
-        public ArmClientExtensions(IEnumerable<Operation> allOperations)
+        public ArmClientExtension(IEnumerable<Operation> allOperations)
             : base(allOperations, typeof(ArmClient), RequestPath.Tenant)
         {
         }

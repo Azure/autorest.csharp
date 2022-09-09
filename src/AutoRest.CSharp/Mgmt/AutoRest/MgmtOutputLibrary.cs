@@ -365,65 +365,51 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return restClientMethods;
         }
 
-        public ArmClientExtensions ArmClientExtensions => EnsureArmClientExtensions();
+        private ArmClientExtension? _armClientExtension;
+        public ArmClientExtension ArmClientExtension => _armClientExtension ??= new ArmClientExtension(GetChildOperations(RequestPath.Tenant));
 
-        private MgmtExtensions? _armResourceExtensions;
-        public MgmtExtensions ArmResourceExtensions => _armResourceExtensions ??= EnsureExtensions(typeof(ArmResource), RequestPath.Any);
+        private MgmtExtension? _armResourceExtensions;
+        public MgmtExtension ArmResourceExtensions => _armResourceExtensions ??= GetExtension(typeof(ArmResource), RequestPath.Any);
 
-        private IEnumerable<MgmtExtensions>? _otherExtensions;
-        public IEnumerable<MgmtExtensions> OtherExtensions => _otherExtensions ??= EnsureExtensions().Values;
+        private IEnumerable<MgmtExtension>? _otherExtensions;
+        public IEnumerable<MgmtExtension> OtherExtensions => _otherExtensions ??= EnsureExtensions().Values;
 
-        private MgmtExtensions? _tenantExtensions;
-        private MgmtExtensions? _managementGroupExtensions;
-        private MgmtExtensions? _subscriptionExtensions;
-        private MgmtExtensions? _resourceGroupsExtensions;
-        public MgmtExtensions TenantExtensions => _tenantExtensions ??= EnsureExtensions(typeof(TenantResource), RequestPath.Tenant);
-        public MgmtExtensions SubscriptionExtensions => _subscriptionExtensions ??= EnsureExtensions(typeof(SubscriptionResource), RequestPath.Subscription);
-        public MgmtExtensions ResourceGroupExtensions => _resourceGroupsExtensions ??= EnsureExtensions(typeof(ResourceGroupResource), RequestPath.ResourceGroup);
-        public MgmtExtensions ManagementGroupExtensions => _managementGroupExtensions ??= EnsureExtensions(typeof(ManagementGroupResource), RequestPath.ManagementGroup);
+        private MgmtExtensionWrapper? _extensionsWrapper;
+        public MgmtExtensionWrapper ExtensionWrapper => _extensionsWrapper ??= EnsureExtensionsWrapper();
 
-        private MgmtExtensionsWrapper? _extensionsWrapper;
-        public MgmtExtensionsWrapper ExtensionWrapper => _extensionsWrapper ??= EnsureExtensionsWrapper();
-
-        private MgmtExtensionsWrapper EnsureExtensionsWrapper()
+        private MgmtExtensionWrapper EnsureExtensionsWrapper()
         {
-            var standaloneExtensions = new List<MgmtExtensions>();
+            var standaloneExtensions = new List<MgmtExtension>();
             foreach (var info in MgmtFacts.StandaloneExtensibleResources)
             {
-                standaloneExtensions.Add(EnsureExtensions()[info]);
+                standaloneExtensions.Add(EnsureExtensions()[info.RequestPath.GetResourceType()]);
             }
             standaloneExtensions.Add(ArmResourceExtensions);
             if (!IsArmCore)
-                standaloneExtensions.Add(ArmClientExtensions);
-            return new MgmtExtensionsWrapper(standaloneExtensions);
+                standaloneExtensions.Add(ArmClientExtension);
+            return new MgmtExtensionWrapper(standaloneExtensions);
         }
 
-        private Dictionary<MgmtFacts.ExtensibleResourceDetail, MgmtExtensions> EnsureExtensions()
+        private Dictionary<ResourceTypeSegment, MgmtExtension> EnsureExtensions()
         {
-            var result = new Dictionary<MgmtFacts.ExtensibleResourceDetail, MgmtExtensions>();
+            var result = new Dictionary<ResourceTypeSegment, MgmtExtension>();
             foreach (var info in MgmtFacts.KnownExtensibleResources)
             {
-                result.Add(info, EnsureExtensions(info.Type, info.RequestPath));
+                result.Add(info.RequestPath.GetResourceType(), GetExtension(info.Type, info.RequestPath));
             }
 
             return result;
         }
 
-        private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
+        public MgmtExtension GetExtension(ResourceTypeSegment resourceType) => EnsureExtensions()[resourceType];
+
+        public bool TryGetExtension(ResourceTypeSegment resourceType, [MaybeNullWhen(false)] out MgmtExtension extension) => EnsureExtensions().TryGetValue(resourceType, out extension);
+
+        private MgmtExtension GetExtension(Type armCoreType, RequestPath contextualPath)
         {
             bool shouldGenerateChildren = !Configuration.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
             var operations = shouldGenerateChildren ? GetChildOperations(contextualPath) : Enumerable.Empty<Operation>();
-            return new MgmtExtensions(operations, armCoreType, contextualPath);
-        }
-
-        private ArmClientExtensions? _armClientExtensions;
-        private ArmClientExtensions EnsureArmClientExtensions()
-        {
-            if (_armClientExtensions != null)
-                return _armClientExtensions;
-
-            _armClientExtensions = new ArmClientExtensions(GetChildOperations(RequestPath.Tenant));
-            return _armClientExtensions;
+            return new MgmtExtension(operations, armCoreType, contextualPath);
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;
@@ -436,7 +422,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<Resource> ArmResources => _armResources ??= RequestPathToResources.Values.Select(bag => bag.Resource).Distinct();
 
         private Dictionary<CSharpType, Resource>? _csharpTypeToResource;
-        public Dictionary<CSharpType, Resource> CsharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
+        public Dictionary<CSharpType, Resource> CSharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
 
         private IEnumerable<ResourceCollection>? _resourceCollections;
         public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= RequestPathToResources.Values.Select(bag => bag.ResourceCollection).WhereNotNull().Distinct();

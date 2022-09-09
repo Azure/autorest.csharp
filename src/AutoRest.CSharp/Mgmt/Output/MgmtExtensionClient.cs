@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class MgmtExtensionClient : MgmtTypeProvider
     {
         private string _defaultName;
-        public MgmtExtensionClient(MgmtExtensions publicExtension)
+        public MgmtExtensionClient(MgmtExtension publicExtension)
             : base(publicExtension.ResourceName)
         {
             Extension = publicExtension;
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultName => _defaultName;
 
-        public MgmtExtensions Extension { get; }
+        public MgmtExtension Extension { get; }
 
         public bool IsEmpty => Extension.IsEmpty;
 

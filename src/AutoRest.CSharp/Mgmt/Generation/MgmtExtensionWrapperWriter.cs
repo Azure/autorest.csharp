@@ -12,8 +12,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtExtensionWrapperWriter : MgmtClientBaseWriter
     {
-        private MgmtExtensionsWrapper _wrapper;
-        public MgmtExtensionWrapperWriter(MgmtExtensionsWrapper extensionsWrapper) : base(new CodeWriter(), extensionsWrapper)
+        private MgmtExtensionWrapper _wrapper;
+        public MgmtExtensionWrapperWriter(MgmtExtensionWrapper extensionsWrapper) : base(new CodeWriter(), extensionsWrapper)
         {
             _wrapper = extensionsWrapper;
         }
@@ -26,8 +26,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     continue;
                 var extensionWriter = extension switch
                 {
-                    ArmClientExtensions armClientExtensions => new ArmClientExtensionsWriter(_writer, armClientExtensions),
-                    _ when extension.ArmCoreType == typeof(ArmResource) => new ArmResourceExtensionsWriter(_writer, extension),
+                    ArmClientExtension armClientExtensions => new ArmClientExtensionWriter(_writer, armClientExtensions),
+                    _ when extension.ArmCoreType == typeof(ArmResource) => new ArmResourceExtensionWriter(_writer, extension),
                     _ => new MgmtExtensionWriter(_writer, extension)
                 };
                 extensionWriter.WriteImplementations();

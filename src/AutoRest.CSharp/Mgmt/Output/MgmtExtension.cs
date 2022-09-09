@@ -15,11 +15,11 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtExtensions : MgmtTypeProvider
+    internal class MgmtExtension : MgmtTypeProvider
     {
         public IEnumerable<Operation> AllRawOperations { get; }
 
-        public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath)
+        public MgmtExtension(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath)
             : base(armCoreType.Name)
         {
             AllRawOperations = allRawOperations;
@@ -67,6 +67,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultNamespace { get; }
 
         public virtual RequestPath ContextualPath { get; }
+
+        public ResourceTypeSegment ResourceType => ContextualPath.GetResourceType();
 
         public override IEnumerable<Resource> ChildResources { get; }
 

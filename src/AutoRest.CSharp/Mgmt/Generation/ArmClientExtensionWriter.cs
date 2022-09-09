@@ -13,15 +13,15 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class ArmClientExtensionsWriter : MgmtExtensionWriter
+    internal class ArmClientExtensionWriter : MgmtExtensionWriter
     {
-        private MgmtExtensions This { get; }
+        private MgmtExtension This { get; }
 
-        public ArmClientExtensionsWriter(ArmClientExtensions extensions) : this(new CodeWriter(), extensions)
+        public ArmClientExtensionWriter(ArmClientExtension extensions) : this(new CodeWriter(), extensions)
         {
         }
 
-        public ArmClientExtensionsWriter(CodeWriter writer, ArmClientExtensions extensions) : base(writer, extensions)
+        public ArmClientExtensionWriter(CodeWriter writer, ArmClientExtension extensions) : base(writer, extensions)
         {
             This = extensions;
         }

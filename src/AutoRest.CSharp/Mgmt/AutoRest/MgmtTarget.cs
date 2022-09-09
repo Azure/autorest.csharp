@@ -118,9 +118,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // write unknown extensions
             WriteExtensionClient(project, MgmtContext.Library.ArmResourceExtensions.ExtensionClient);
 
-            if (isArmCore && !MgmtContext.Library.ArmClientExtensions.IsEmpty)
+            if (isArmCore && !MgmtContext.Library.ArmClientExtension.IsEmpty)
             {
-                WriteExtensionPiece(project, new ArmClientExtensionsWriter(MgmtContext.Library.ArmClientExtensions));
+                WriteExtensionPiece(project, new ArmClientExtensionWriter(MgmtContext.Library.ArmClientExtension));
             }
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);

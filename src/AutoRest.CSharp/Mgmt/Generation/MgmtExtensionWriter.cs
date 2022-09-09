@@ -16,16 +16,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtExtensionWriter : MgmtClientBaseWriter
     {
-        private MgmtExtensions This { get; }
+        private MgmtExtension This { get; }
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
-        public MgmtExtensionWriter(MgmtExtensions extensions)
+        public MgmtExtensionWriter(MgmtExtension extensions)
             : this(new CodeWriter(), extensions)
         {
             This = extensions;
         }
 
-        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions) : base(writer, extensions)
+        public MgmtExtensionWriter(CodeWriter writer, MgmtExtension extensions) : base(writer, extensions)
         {
             This = extensions;
         }
