@@ -240,7 +240,7 @@
      "Uri": "",
      "Path": "/top/{action}",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "32",
@@ -268,7 +268,7 @@
      "Uri": "",
      "Path": "/top2",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "34",
@@ -313,7 +313,7 @@
      "Uri": "",
      "Path": "/anonymousBody",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
@@ -351,7 +351,7 @@
      "Uri": "",
      "Path": "/hello",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
@@ -405,7 +405,7 @@
      "Uri": "",
      "Path": "/againHi",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "46",
@@ -433,7 +433,7 @@
      "Uri": "",
      "Path": "/demoHi",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {

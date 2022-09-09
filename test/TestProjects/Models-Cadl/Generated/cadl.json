@@ -1533,7 +1533,7 @@
      "Uri": "",
      "Path": "/inputToRoundTrip",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "196",
@@ -1578,7 +1578,7 @@
      "Uri": "",
      "Path": "/inputToRoundTripPrimitive",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "199",
@@ -1623,7 +1623,7 @@
      "Uri": "",
      "Path": "/inputToRoundTripOptional",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "202",
@@ -1668,7 +1668,7 @@
      "Uri": "",
      "Path": "/inputToRoundTripReadOnly",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "205",
@@ -1713,7 +1713,7 @@
      "Uri": "",
      "Path": "/roundTripToOutput",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "208",
@@ -1741,7 +1741,7 @@
      "Uri": "",
      "Path": "/selfReference",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {

@@ -206,7 +206,7 @@
       "image/jpeg"
      ],
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "24",
@@ -283,7 +283,7 @@
       "text/plain"
      ],
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {

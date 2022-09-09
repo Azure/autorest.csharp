@@ -345,7 +345,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/top2",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "42",
@@ -586,7 +587,8 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/hello",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
@@ -812,7 +814,8 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "80",

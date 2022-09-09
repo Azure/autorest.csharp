@@ -102,7 +102,7 @@
      "Uri": "{endpointServiceUrl}",
      "Path": "/endpoint/{action}",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {

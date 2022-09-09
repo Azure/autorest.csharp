@@ -212,10 +212,6 @@ function createModel(program: Program): any {
             }
         }
 
-        const hasNoConvenienceApiDecorators = routes.every(
-            (u) => !getExtensions(program, u.operation).has(convenienceApiKey)
-        );
-
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
             if (!isSupportedOperation(operation)) continue;
@@ -242,8 +238,7 @@ function createModel(program: Program): any {
                 url,
                 endPointParam,
                 modelMap,
-                enumMap,
-                hasNoConvenienceApiDecorators
+                enumMap
             );
             if (
                 contentTypeParameter &&
@@ -420,8 +415,7 @@ function loadOperation(
     uri: string,
     endpoint: InputParameter | undefined = undefined,
     models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>,
-    hasNoConvenienceApiDecorators: boolean
+    enums: Map<string, InputEnumType>
 ): InputOperation {
     const {
         path: fullPath,
@@ -470,10 +464,10 @@ function loadOperation(
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const generateConvenienceMethod =
-        requestMethod !== RequestMethod.PATCH &&
-        (hasNoConvenienceApiDecorators ||
-            getExtensions(program, op).get(convenienceApiKey));
+    const convenienceApiDecorator: boolean =
+        getExtensions(program, op).get(convenienceApiKey) ?? false;
+    const generateConvenienceMethod: boolean =
+        requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
 
     return {
         Name: op.name,

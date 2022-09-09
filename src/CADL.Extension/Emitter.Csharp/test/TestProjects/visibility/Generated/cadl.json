@@ -165,7 +165,7 @@
      "Uri": "{host}",
      "Path": "/visibility",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
