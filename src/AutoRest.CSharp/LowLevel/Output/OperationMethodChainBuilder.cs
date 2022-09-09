@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Output.Models
         private bool ShouldConvenienceMethodGenerated(ReturnTypeChain returnTypeChain)
         {
             return Operation.GenerateConvenienceMethod
-                && (_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).ToList().Exists(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
+                && (_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
                 || !returnTypeChain.Convenience.Equals(returnTypeChain.Protocol));
         }
 
@@ -166,11 +166,12 @@ namespace AutoRest.CSharp.Output.Models
 
         private ConvenienceMethod BuildConvenienceMethod(ReturnTypeChain returnTypeChain)
         {
-            string name = !_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).ToList().Exists(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
-                ? _restClientMethod.Name.IsLastWordSingular()
-                    ? $"{_restClientMethod.Name}Value"
-                    : $"{_restClientMethod.Name.LastWordToSingular()}Values"
-                : _restClientMethod.Name;
+            bool needNameChange = _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));
+            string name = _restClientMethod.Name;
+            if (needNameChange)
+            {
+                name = _restClientMethod.Name.IsLastWordSingular() ? $"{_restClientMethod.Name}Value" : $"{_restClientMethod.Name.LastWordToSingular()}Values";
+            }
 
             var parameters = _orderedParameters.Select(p => p.Convenience).WhereNotNull().ToArray();
             var protocolToConvenience = _orderedParameters
