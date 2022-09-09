@@ -25,12 +25,11 @@ namespace ModelsInCadl
         /// <param name="requiredIntRecord"></param>
         /// <param name="requiredStringRecord"></param>
         /// <param name="requiredModelRecord"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredExtensibleEnum"/>, <paramref name="requiredCollection"/>, <paramref name="requiredIntRecord"/>, <paramref name="requiredStringRecord"/> or <paramref name="requiredModelRecord"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, object requiredExtensibleEnum, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/>, <paramref name="requiredIntRecord"/>, <paramref name="requiredStringRecord"/> or <paramref name="requiredModelRecord"/> is null. </exception>
+        public RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, ExtensibleEnum requiredExtensibleEnum, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
-            Argument.AssertNotNull(requiredExtensibleEnum, nameof(requiredExtensibleEnum));
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
             Argument.AssertNotNull(requiredIntRecord, nameof(requiredIntRecord));
             Argument.AssertNotNull(requiredStringRecord, nameof(requiredStringRecord));
@@ -56,7 +55,7 @@ namespace ModelsInCadl
         /// <param name="requiredIntRecord"></param>
         /// <param name="requiredStringRecord"></param>
         /// <param name="requiredModelRecord"></param>
-        internal RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, object requiredExtensibleEnum, IList<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
+        internal RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -77,7 +76,7 @@ namespace ModelsInCadl
 
         public FixedStringEnum RequiredFixedStringEnum { get; set; }
 
-        public object RequiredExtensibleEnum { get; set; }
+        public ExtensibleEnum RequiredExtensibleEnum { get; set; }
 
         public IList<CollectionItem> RequiredCollection { get; }
 

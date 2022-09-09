@@ -26,7 +26,7 @@ namespace ModelsInCadl
             writer.WritePropertyName("requiredFixedStringEnum");
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredExtensibleEnum");
-            writer.WriteObjectValue(RequiredExtensibleEnum);
+            writer.WriteStringValue(RequiredExtensibleEnum.ToString());
             writer.WritePropertyName("requiredCollection");
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)
@@ -67,7 +67,7 @@ namespace ModelsInCadl
             int requiredInt = default;
             BaseModelWithDiscriminator requiredModel = default;
             FixedStringEnum requiredFixedStringEnum = default;
-            object requiredExtensibleEnum = default;
+            ExtensibleEnum requiredExtensibleEnum = default;
             IList<CollectionItem> requiredCollection = default;
             IDictionary<string, int> requiredIntRecord = default;
             IDictionary<string, string> requiredStringRecord = default;
@@ -96,7 +96,7 @@ namespace ModelsInCadl
                 }
                 if (property.NameEquals("requiredExtensibleEnum"))
                 {
-                    requiredExtensibleEnum = property.Value.GetObject();
+                    requiredExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("requiredCollection"))

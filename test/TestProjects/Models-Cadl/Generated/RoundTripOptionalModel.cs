@@ -19,11 +19,10 @@ namespace ModelsInCadl
         /// <param name="optionalModelCollection"></param>
         /// <param name="optionalFixedStringEnum"></param>
         /// <param name="optionalExtensibleEnum"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="optionalModelCollection"/> or <paramref name="optionalExtensibleEnum"/> is null. </exception>
-        public RoundTripOptionalModel(IEnumerable<CollectionItem> optionalModelCollection, FixedStringEnum optionalFixedStringEnum, object optionalExtensibleEnum)
+        /// <exception cref="ArgumentNullException"> <paramref name="optionalModelCollection"/> is null. </exception>
+        public RoundTripOptionalModel(IEnumerable<CollectionItem> optionalModelCollection, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum)
         {
             Argument.AssertNotNull(optionalModelCollection, nameof(optionalModelCollection));
-            Argument.AssertNotNull(optionalExtensibleEnum, nameof(optionalExtensibleEnum));
 
             OptionalModelCollection = optionalModelCollection.ToList();
             OptionalFixedStringEnum = optionalFixedStringEnum;
@@ -46,7 +45,7 @@ namespace ModelsInCadl
         /// <param name="optionalIntRecord"></param>
         /// <param name="optionalStringRecord"></param>
         /// <param name="optionalModelRecord"></param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum optionalFixedStringEnum, object optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord)
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
@@ -75,7 +74,7 @@ namespace ModelsInCadl
 
         public FixedStringEnum OptionalFixedStringEnum { get; set; }
 
-        public object OptionalExtensibleEnum { get; set; }
+        public ExtensibleEnum OptionalExtensibleEnum { get; set; }
 
         public IDictionary<string, int> OptionalIntRecord { get; }
 

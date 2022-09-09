@@ -89,6 +89,7 @@ namespace GeneratedModels
         /// Console.WriteLine(result.GetProperty("requiredString").ToString());
         /// Console.WriteLine(result.GetProperty("requiredInt").ToString());
         /// Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
         /// Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -120,8 +121,7 @@ namespace GeneratedModels
         ///   requiredModel: {
         ///   }, # Required.
         ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-        ///   requiredExtensibleEnum: {
-        ///   }, # Required.
+        ///   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   requiredCollection: [
         ///     {
         ///       requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
@@ -199,6 +199,7 @@ namespace GeneratedModels
         /// Console.WriteLine(result.GetProperty("requiredString").ToString());
         /// Console.WriteLine(result.GetProperty("requiredInt").ToString());
         /// Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
         /// Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -230,8 +231,7 @@ namespace GeneratedModels
         ///   requiredModel: {
         ///   }, # Required.
         ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-        ///   requiredExtensibleEnum: {
-        ///   }, # Required.
+        ///   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   requiredCollection: [
         ///     {
         ///       requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
@@ -527,6 +527,7 @@ namespace GeneratedModels
         /// Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
         /// Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
         /// Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
         /// Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -562,8 +563,7 @@ namespace GeneratedModels
         ///     requiredCollection: [CollectionItem], # Required.
         ///   }, # Optional.
         ///   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-        ///   optionalExtensibleEnum: {
-        ///   }, # Required.
+        ///   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional.
         ///   optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional.
         ///   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
@@ -638,6 +638,7 @@ namespace GeneratedModels
         /// Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
         /// Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
         /// Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
         /// Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
         /// Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
         /// ]]></code>
@@ -673,8 +674,7 @@ namespace GeneratedModels
         ///     requiredCollection: [CollectionItem], # Required.
         ///   }, # Optional.
         ///   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-        ///   optionalExtensibleEnum: {
-        ///   }, # Required.
+        ///   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional.
         ///   optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional.
         ///   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
@@ -749,6 +749,7 @@ namespace GeneratedModels
         /// Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
         /// Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
         /// Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
         /// Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
         /// Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
         /// Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
@@ -792,8 +793,7 @@ namespace GeneratedModels
         ///   }, # Required.
         ///   optionalReadonlyModel: DerivedModel, # Optional.
         ///   requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-        ///   requiredReadonlyExtensibleEnum: {
-        ///   }, # Required.
+        ///   requiredReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   optionalReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   optionalReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   requiredReadonlyStringList: [string], # Required.
@@ -879,6 +879,7 @@ namespace GeneratedModels
         /// Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
         /// Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
         /// Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
         /// Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
         /// Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
         /// Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
@@ -922,8 +923,7 @@ namespace GeneratedModels
         ///   }, # Required.
         ///   optionalReadonlyModel: DerivedModel, # Optional.
         ///   requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-        ///   requiredReadonlyExtensibleEnum: {
-        ///   }, # Required.
+        ///   requiredReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   optionalReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   optionalReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   requiredReadonlyStringList: [string], # Required.
@@ -976,7 +976,7 @@ namespace GeneratedModels
         ///     requiredInt = 1234,
         ///     requiredModel = new {},
         ///     requiredFixedStringEnum = "1",
-        ///     requiredExtensibleEnum = new {},
+        ///     requiredExtensibleEnum = "1",
         ///     requiredCollection = new[] {
         ///         new {
         ///             requiredModelRecord = new {
@@ -1022,8 +1022,7 @@ namespace GeneratedModels
         ///   requiredModel: {
         ///   }, # Required.
         ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-        ///   requiredExtensibleEnum: {
-        ///   }, # Required.
+        ///   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   requiredCollection: [
         ///     {
         ///       requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
@@ -1088,7 +1087,7 @@ namespace GeneratedModels
         ///     requiredInt = 1234,
         ///     requiredModel = new {},
         ///     requiredFixedStringEnum = "1",
-        ///     requiredExtensibleEnum = new {},
+        ///     requiredExtensibleEnum = "1",
         ///     requiredCollection = new[] {
         ///         new {
         ///             requiredModelRecord = new {
@@ -1134,8 +1133,7 @@ namespace GeneratedModels
         ///   requiredModel: {
         ///   }, # Required.
         ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-        ///   requiredExtensibleEnum: {
-        ///   }, # Required.
+        ///   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   requiredCollection: [
         ///     {
         ///       requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
