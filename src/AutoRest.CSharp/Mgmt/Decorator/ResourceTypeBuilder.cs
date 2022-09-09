@@ -21,6 +21,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             _requestPathToResourceTypeCache.TryAdd(RequestPath.ResourceGroup, ResourceTypeSegment.ResourceGroup);
             _requestPathToResourceTypeCache.TryAdd(RequestPath.Tenant, ResourceTypeSegment.Tenant);
             _requestPathToResourceTypeCache.TryAdd(RequestPath.ManagementGroup, ResourceTypeSegment.ManagementGroup);
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.PolicyAssignment, ResourceTypeSegment.PolicyAssignment);
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.SubscriptionPolicyDefinition, ResourceTypeSegment.PolicyDefinition);
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.ManagementGroupPolicyDefinition, ResourceTypeSegment.PolicyDefinition);
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.SubscriptionPolicySetDefinition, ResourceTypeSegment.PolicySetDefinition);
         }
 
         public static ResourceTypeSegment GetResourceType(this RequestPath requestPath)

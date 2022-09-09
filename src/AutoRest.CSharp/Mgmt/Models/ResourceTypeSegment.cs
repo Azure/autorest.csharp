@@ -54,6 +54,29 @@ namespace AutoRest.CSharp.Mgmt.Models
             new Segment("managementGroups")
         });
 
+        /// <summary>
+        /// The <see cref="ResourceTypeSegment"/> of the policy assignment resource
+        /// </summary>
+        public static readonly ResourceTypeSegment PolicyAssignment = new(new[] {
+            new Segment("Microsoft.Authorization"),
+            new Segment("policyAssignments")
+        });
+
+        /// <summary>
+        /// The <see cref="ResourceTypeSegment"/> of the policy definition resource
+        /// </summary>
+        public static readonly ResourceTypeSegment PolicyDefinition = new(new[] {
+            new Segment("Microsoft.Authorization"),
+            new Segment("policyDefinitions")
+        });
+        /// <summary>
+        /// The <see cref="ResourceTypeSegment"/> of the policy set definition resource
+        /// </summary>
+        public static readonly ResourceTypeSegment PolicySetDefinition = new(new[] {
+            new Segment("Microsoft.Authorization"),
+            new Segment("policySetDefinitions")
+        });
+
         private IReadOnlyList<Segment> _segments;
 
         public static ResourceTypeSegment ParseRequestPath(RequestPath path)

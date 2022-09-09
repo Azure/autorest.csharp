@@ -372,7 +372,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtExtension ArmResourceExtensions => _armResourceExtensions ??= GetExtension(typeof(ArmResource), RequestPath.Any);
 
         private IEnumerable<MgmtExtension>? _otherExtensions;
-        public IEnumerable<MgmtExtension> OtherExtensions => _otherExtensions ??= EnsureExtensions().Values;
+        public IEnumerable<MgmtExtension> OtherExtensions => _otherExtensions ??= EnsureExtensions().Values.SelectMany(v => v);
 
         private MgmtExtensionWrapper? _extensionsWrapper;
         public MgmtExtensionWrapper ExtensionWrapper => _extensionsWrapper ??= EnsureExtensionsWrapper();
@@ -380,9 +380,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private MgmtExtensionWrapper EnsureExtensionsWrapper()
         {
             var standaloneExtensions = new List<MgmtExtension>();
-            foreach (var info in MgmtFacts.StandaloneExtensibleResources)
+            foreach (var resourceType in MgmtFacts.StandaloneExtensibleResourceTypes)
             {
-                standaloneExtensions.Add(EnsureExtensions()[info.RequestPath.GetResourceType()]);
+                foreach (var extension in EnsureExtensions()[resourceType])
+                    standaloneExtensions.Add(extension);
             }
             standaloneExtensions.Add(ArmResourceExtensions);
             if (!IsArmCore)
@@ -390,20 +391,29 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return new MgmtExtensionWrapper(standaloneExtensions);
         }
 
-        private Dictionary<ResourceTypeSegment, MgmtExtension> EnsureExtensions()
+        private Dictionary<ResourceTypeSegment, List<MgmtExtension>> EnsureExtensions()
         {
-            var result = new Dictionary<ResourceTypeSegment, MgmtExtension>();
+            var result = new Dictionary<ResourceTypeSegment, List<MgmtExtension>>();
             foreach (var info in MgmtFacts.KnownExtensibleResources)
             {
-                result.Add(info.RequestPath.GetResourceType(), GetExtension(info.Type, info.RequestPath));
+                result.AddInList(info.RequestPath.GetResourceType(), GetExtension(info.Type, info.RequestPath));
             }
 
             return result;
         }
 
-        public MgmtExtension GetExtension(ResourceTypeSegment resourceType) => EnsureExtensions()[resourceType];
+        public IEnumerable<MgmtExtension> GetExtension(ResourceTypeSegment resourceType) => EnsureExtensions()[resourceType];
 
-        public bool TryGetExtension(ResourceTypeSegment resourceType, [MaybeNullWhen(false)] out MgmtExtension extension) => EnsureExtensions().TryGetValue(resourceType, out extension);
+        public bool TryGetExtension(ResourceTypeSegment resourceType, [MaybeNullWhen(false)] out IEnumerable<MgmtExtension> extension)
+        {
+            if (EnsureExtensions().TryGetValue(resourceType, out var result))
+            {
+                extension = result;
+                return true;
+            }
+            extension = null;
+            return false;
+        }
 
         private MgmtExtension GetExtension(Type armCoreType, RequestPath contextualPath)
         {

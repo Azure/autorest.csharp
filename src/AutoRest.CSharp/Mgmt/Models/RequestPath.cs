@@ -69,6 +69,47 @@ namespace AutoRest.CSharp.Mgmt.Models
             new Segment(new Reference("managementGroupId", typeof(string)), true, false)
         });
 
+        public static readonly RequestPath PolicyAssignment = new(new[]
+        {
+            new Segment(new Reference("scope", typeof(string)), false, true),
+            new Segment("providers"),
+            new Segment("Microsoft.Authorization"),
+            new Segment("policyAssignments"),
+            new Segment(new Reference("policyAssignmentName", typeof(string)), true, false)
+        });
+
+        public static readonly RequestPath SubscriptionPolicyDefinition = new(new[]
+        {
+            new Segment("subscriptions"),
+            new Segment(new Reference("subscriptionId", typeof(string)), true, true),
+            new Segment("providers"),
+            new Segment("Microsoft.Authorization"),
+            new Segment("policyDefinitions"),
+            new Segment(new Reference("policyDefinitionName", typeof(string)), true, false)
+        });
+
+        public static readonly RequestPath ManagementGroupPolicyDefinition = new(new[]
+        {
+            new Segment("providers"),
+            new Segment("Microsoft.Management"),
+            new Segment("managementGroups"),
+            new Segment(new Reference("managementGroupId", typeof(string)), true, false),
+            new Segment("providers"),
+            new Segment("Microsoft.Authorization"),
+            new Segment("policyDefinitions"),
+            new Segment(new Reference("policyDefinitionName", typeof(string)), true, false)
+        });
+
+        public static readonly RequestPath SubscriptionPolicySetDefinition = new(new[]
+        {
+            new Segment("subscriptions"),
+            new Segment(new Reference("subscriptionId", typeof(string)), true, true),
+            new Segment("providers"),
+            new Segment("Microsoft.Authorization"),
+            new Segment("policySetDefinitions"),
+            new Segment(new Reference("policySetDefinitionName", typeof(string)), true, false)
+        });
+
         private readonly IReadOnlyList<Segment> _segments;
 
         public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup)

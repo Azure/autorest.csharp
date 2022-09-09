@@ -57,8 +57,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             // TODO -- need to add some new entries or refactor
             // if we cannot find a resource as its parent, its parent must be one of the Extensions
-            if (!parentRequestPath.Equals(RequestPath.Tenant) && MgmtContext.Library.TryGetExtension(parentRequestPath.GetResourceType(), out var extension))
-                return extension.AsIEnumerable();
+            if (!parentRequestPath.Equals(RequestPath.Tenant) && MgmtContext.Library.TryGetExtension(parentRequestPath.GetResourceType(), out var extensions))
+                return extensions;
 
             // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             var scope = parentRequestPath.GetScopePath();
@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return FindScopeParents(types).Distinct();
             }
             // otherwise we use the tenant as a fallback
-            return MgmtContext.Library.GetExtension(RequestPath.Tenant.GetResourceType()).AsIEnumerable();
+            return MgmtContext.Library.GetExtension(RequestPath.Tenant.GetResourceType());
         }
 
         // TODO -- enhence this to support the new arm-id format
@@ -84,8 +84,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             foreach (var type in parameterizedScopeTypes)
             {
-                if (MgmtContext.Library.TryGetExtension(type, out var extension))
-                    yield return extension;
+                if (MgmtContext.Library.TryGetExtension(type, out var extensions))
+                {
+                    foreach (var extension in extensions)
+                        yield return extension;
+                }
                 else
                     yield return MgmtContext.Library.ArmResourceExtensions; // we return anything unrecognized scope parent resource type as ArmResourceExtensions
             }
