@@ -58,48 +58,6 @@ namespace CadlPetStore
 
         /// <summary> delete. </summary>
         /// <param name="petId"> The id of pet. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Delete a pet. </remarks>
-        public virtual async Task<Response> DeleteValueAsync(int petId, CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("PetsClient.DeleteValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await DeleteAsync(petId, context).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> delete. </summary>
-        /// <param name="petId"> The id of pet. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Delete a pet. </remarks>
-        public virtual Response DeleteValue(int petId, CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("PetsClient.DeleteValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = Delete(petId, context);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> delete. </summary>
-        /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -492,40 +450,20 @@ namespace CadlPetStore
 
         /// <param name="kind"> The PetKind to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Pet>> GetPetByKindValueAsync(PetKind kind, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Pet>> GetPetByKindAsync(PetKind kind, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("PetsClient.GetPetByKindValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetPetByKindAsync(kind.ToString(), context).ConfigureAwait(false);
-                return Response.FromValue(Pet.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetPetByKindAsync(kind.ToString(), context).ConfigureAwait(false);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <param name="kind"> The PetKind to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Pet> GetPetByKindValue(PetKind kind, CancellationToken cancellationToken = default)
+        public virtual Response<Pet> GetPetByKind(PetKind kind, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("PetsClient.GetPetByKindValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetPetByKind(kind.ToString(), context);
-                return Response.FromValue(Pet.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetPetByKind(kind.ToString(), context);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <param name="kind"> The PetKind to use. Allowed values: &quot;dog&quot; | &quot;cat&quot;. </param>
