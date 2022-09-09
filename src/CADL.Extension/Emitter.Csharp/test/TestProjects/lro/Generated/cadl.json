@@ -1,16 +1,15 @@
 {
  "$id": "1",
- "Name": "cadl.testserver.arraybasic",
- "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
+ "Name": "lrooperation",
  "ApiVersions": [
-  "1.0.0"
+  "2022-05-15-preview"
  ],
  "Enums": [],
  "Models": [
   {
    "$id": "2",
    "Name": "Pet",
-   "Namespace": "ArrayBasic",
+   "Namespace": "LroOperation",
    "IsNullable": false,
    "Properties": [
     {
@@ -64,24 +63,21 @@
  "Clients": [
   {
    "$id": "9",
-   "Name": "ArrayBasic",
-   "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
+   "Name": "Projects",
    "Operations": [
     {
      "$id": "10",
-     "Name": "list",
-     "Summary": "Manage your pets.",
-     "Description": "Manage your pets. You can delete or get the Pet from pet store.",
+     "Name": "createOrUpdate",
+     "Description": "Creates a new pet or updates an existing one.",
      "Parameters": [
       {
        "$id": "11",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
+       "Name": "Endpoint",
+       "NameInRequest": "Endpoint",
        "Type": {
         "$id": "12",
-        "Name": "String",
-        "Kind": "String",
+        "Name": "Uri",
+        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -92,30 +88,75 @@
        "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "13",
-        "Type": {
-         "$id": "14",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "Kind": "Client"
       },
       {
-       "$id": "15",
-       "Name": "nextLink",
-       "NameInRequest": "nextLink",
+       "$id": "13",
+       "Name": "content-type",
+       "NameInRequest": "content-type",
        "Type": {
-        "$id": "16",
+        "$id": "14",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "15",
+        "Type": {
+         "$ref": "14"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "16",
+       "Name": "api-version",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "17",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
-       "IsRequired": false,
+       "DefaultValue": {
+        "$id": "18",
+        "Type": {
+         "$id": "19",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-05-15-preview"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "20",
+       "Name": "Pet",
+       "NameInRequest": "Pet",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
@@ -123,37 +164,6 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
-      },
-      {
-       "$id": "17",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "18",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "19",
-        "Type": {
-         "$id": "20",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
@@ -166,18 +176,31 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json"
+      },
+      {
+       "$id": "22",
+       "StatusCodes": [
+        201
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json"
       }
      ],
-     "HttpMethod": "GET",
+     "HttpMethod": "PATCH",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/pets",
+     "Uri": "{Endpoint}/language",
+     "Path": "/authoring/analyze-text",
+     "RequestMediaTypes": [
+      "application/merge-patch+json"
+     ],
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "22"
+    "$id": "23"
    }
   }
  ]

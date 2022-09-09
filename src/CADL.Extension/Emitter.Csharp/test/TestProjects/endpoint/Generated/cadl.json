@@ -52,14 +52,45 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "8",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "9",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "10",
+        "Type": {
+         "$id": "11",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2015-06-18"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "8",
+       "$id": "12",
        "StatusCodes": [
         204
        ],
@@ -75,7 +106,7 @@
     }
    ],
    "Protocol": {
-    "$id": "9"
+    "$id": "13"
    }
   }
  ]

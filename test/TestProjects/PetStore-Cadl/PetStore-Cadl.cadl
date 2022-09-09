@@ -67,6 +67,7 @@ enum PetKindValues {
 @knownValues(PetKindValues)
 model PetKind is string {}
 
+
 @doc("Manage your pets. You can delete or get the Pet from pet store.")
 @summary("Manage your pets.")
 @route("/pets")
@@ -89,4 +90,7 @@ namespace Pets {
 
   @OpenAPI.extension("x-ms-convenient-api", true)
   @get op getPetByKind(@path kind: PetKind): Pet | Error;
+
+  @OpenAPI.extension("x-ms-convenient-api", true)
+  @get op GetFirstPet(@query start?: int32): Pet | Error;
 }
