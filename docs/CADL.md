@@ -10,14 +10,38 @@
 - CodeModel: deserialized object representation of CodeModel.yaml in autorest.csharp
 - cadl.json: generator input in CADL pipeline produced by CADL emitter
 - InputModel: deserialized object representation of cadl.json in autorest.csharp
+- OutputModel: variety of objects and object factories used by code writers to generate C# code
 
 ## CADL Pipeline Overview
 
-C# code generation CADL pipeline consists of two major components: CADL compiler that inputs API specification and outputs cadl.json using [CADL C# Emitter](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/CADL.Extension/Emitter.Csharp), and autorest.csharp (a.k.a [generator](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp)) that inputs cadl.json and outputs C# files that contain cloud service clients and models. cadl.json doesn't have explicit specification. Instead, it is assumed that InputModel types defined in [TS](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/CADL.Extension/Emitter.Csharp/src/type) and in [C#](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp/Common/Input) match each other. 
+C# code generation CADL pipeline consists of two major components: CADL compiler that inputs API specification and outputs cadl.json using [CADL C# Emitter](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/CADL.Extension/Emitter.Csharp), and autorest.csharp (a.k.a [generator](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp)), executed in standalone mode, that inputs cadl.json and outputs C# files that contain cloud service clients and models.
+
+cadl.json is a standard JSON files with circular references support. It doesn't have explicit specification. Instead, it is assumed that InputModel types defined in [TS](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/CADL.Extension/Emitter.Csharp/src/type) and in [C#](https://github.com/Azure/autorest.csharp/tree/feature/v3/src/AutoRest.CSharp/Common/Input) match each other. When new features in generator require InputModel types to be modified or extended, there is no backwards compatibility requirement. Hence, releases of autorest.csharp and CADL C# Emitter must be synchronized so that autorest.csharp can deserialize `cadl.json` produced by emitter without errors.
+
+## InputModel vs OutputModel
+
+#### InputModel requirements
+- Minimalistic design. Only nessesary data is available, data duplication should be avoided (e.g. `InputModelType.DiscriminatorPropertyName` makes `InputModelProperty.IsDiscriminator` unnessesary). 
+- Inaccessible to code writers.  
+- All InputModel objects are init-immutable (instance can't be modified after becoming accessible to external code).
+- All transformations of InputModel should happen before OutputModel constuction begins. 
+- Lazy initializations must be avoided.
+
+#### OutputModel requirements
+- Rich design. Same data can be accessable and represented in multiple ways, depending on the needs of code writers (e.g. `ModelTypeProvider` and `JsonObjectSerialization` represent the same data for different code writers).
+- OutputModel objects can be created conditionaly and on demand. However, on-demand instantiation should be explicit, lazy initialization must be avoided (e.g. `LowLevelClient` has `CreateSerialization()` method rather than `Serialization` property).
+- OutputModel objects can be created conditionaly due to configuration settings or in
+- Only enums can belong to InputModel and OutputModel at the same time. Other objects must be either InputModel or OutputModel.
+
+## CADL C# Emitter
+
+
 
 ## Unification of CADL and Swagger pipelines
 
-In Swagger pipeline, generator input is defined by [CodeModel specification](https://github.com/Azure/autorest/blob/main/packages/libs/codemodel/.resources/all-in-one/json/code-model.json) and is written in YAML. 
+In Swagger pipeline, generator input is defined by [CodeModel specification](https://github.com/Azure/autorest/blob/main/packages/libs/codemodel/.resources/all-in-one/json/code-model.json). CodeModel.yaml itself is written in YAML. CodeModel types are over-complicated yet they aren't good enough to represent some schemas that can be defined in CADL. Customization of CodeModel types is limited.
+
+Unlike Swagger pipeline, CADL pipeline input is minimalistic, controlled by generator capabilites and is fully customizable. Hence, CodeModel is 
 
 ```mermaid
 flowchart TB
