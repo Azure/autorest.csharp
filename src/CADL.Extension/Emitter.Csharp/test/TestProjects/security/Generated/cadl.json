@@ -95,7 +95,7 @@
      "Uri": "{host}",
      "Path": "/security",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {

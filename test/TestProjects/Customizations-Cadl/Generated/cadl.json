@@ -458,7 +458,7 @@
      "Uri": "",
      "Path": "/inputToRoundTrip",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {

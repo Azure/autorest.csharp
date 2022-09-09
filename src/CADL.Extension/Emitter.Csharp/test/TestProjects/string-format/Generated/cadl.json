@@ -82,7 +82,7 @@
      "Uri": "",
      "Path": "/zonedDateTime/{time}",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "11",
@@ -127,7 +127,7 @@
      "Uri": "",
      "Path": "/uri/{uri}",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
