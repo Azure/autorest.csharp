@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // We will never want this
             var scope = requestPath.GetScopePath();
             var candidates = MgmtContext.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath())
-                .Concat(RequestPath.KnownParentResourcePaths)
+                .Concat(MgmtFacts.KnownParentResourcePaths)
                 .Where(r => r.IsAncestorOf(requestPath)).OrderByDescending(r => r.Count);
             if (candidates.Any())
             {
