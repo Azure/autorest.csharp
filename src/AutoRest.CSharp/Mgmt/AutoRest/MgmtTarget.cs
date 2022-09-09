@@ -105,14 +105,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
-            // write extension class
+            // write the public extension class
             if (!isArmCore && !MgmtContext.Library.ExtensionWrapper.IsEmpty)
                 WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
 
-            WriteExtensionClient(project, MgmtContext.Library.ResourceGroupExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.SubscriptionExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.ManagementGroupExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.TenantExtensions.ExtensionClient);
+            // write know extensions
+            foreach (var extension in MgmtContext.Library.OtherExtensions)
+            {
+                WriteExtensionClient(project, extension.ExtensionClient);
+            }
+
+            // write unknown extensions
             WriteExtensionClient(project, MgmtContext.Library.ArmResourceExtensions.ExtensionClient);
 
             if (isArmCore && !MgmtContext.Library.ArmClientExtensions.IsEmpty)
