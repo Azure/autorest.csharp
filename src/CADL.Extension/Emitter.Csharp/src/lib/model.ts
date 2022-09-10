@@ -13,6 +13,7 @@ import {
     isIntrinsic,
     ModelType,
     ModelTypeProperty,
+    NamespaceType,
     NeverType,
     Program,
     Type
@@ -309,7 +310,7 @@ export function getInputType(
             }
             extensibleEnum = {
                 Name: m.name,
-                Namespace: e.namespace?.name,
+                Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
                 Description: getDoc(program, m),
                 EnumValueType: innerEnum.EnumValueType,
@@ -353,7 +354,7 @@ export function getInputType(
 
             enumType = {
                 Name: e.name,
-                Namespace: e.namespace?.name,
+                Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
@@ -400,7 +401,7 @@ export function getInputType(
 
             model = {
                 Name: name,
-                Namespace: m.namespace?.name,
+                Namespace: getFullNamespaceString(m.namespace),
                 Description: getDoc(program, m),
                 IsNullable: false,
                 DiscriminatorPropertyName: getDiscriminator(program, m)
@@ -492,5 +493,19 @@ export function getInputType(
         }
 
         return getInputModelForModel(m);
+    }
+
+    function getFullNamespaceString(namespace: NamespaceType | undefined): string {
+        if (!namespace || !namespace.name) {
+            return "";
+        }
+
+        let namespaceString: string = namespace.name;
+        let current: NamespaceType | undefined = namespace.namespace;
+        while (current && current.name) {
+            namespaceString = `${current.name}.${namespaceString}`;
+            current = current.namespace;
+        }
+        return namespaceString;
     }
 }
