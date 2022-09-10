@@ -45,7 +45,7 @@ namespace ModelsInCadl
             DerivedModel requiredReadonlyModel = default;
             Optional<DerivedModel> optionalReadonlyModel = default;
             FixedStringEnum requiredReadonlyFixedStringEnum = default;
-            object requiredReadonlyExtensibleEnum = default;
+            ExtensibleEnum requiredReadonlyExtensibleEnum = default;
             FixedStringEnum optionalReadonlyFixedStringEnum = default;
             ExtensibleEnum optionalReadonlyExtensibleEnum = default;
             IReadOnlyList<string> requiredReadonlyStringList = default;
@@ -109,7 +109,7 @@ namespace ModelsInCadl
                 }
                 if (property.NameEquals("requiredReadonlyExtensibleEnum"))
                 {
-                    requiredReadonlyExtensibleEnum = property.Value.GetObject();
+                    requiredReadonlyExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("optionalReadonlyFixedStringEnum"))

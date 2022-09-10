@@ -69,7 +69,7 @@ namespace ModelsInCadl
             writer.WritePropertyName("optionalFixedStringEnum");
             writer.WriteStringValue(OptionalFixedStringEnum.ToSerialString());
             writer.WritePropertyName("optionalExtensibleEnum");
-            writer.WriteObjectValue(OptionalExtensibleEnum);
+            writer.WriteStringValue(OptionalExtensibleEnum.ToString());
             if (Optional.IsCollectionDefined(OptionalIntRecord))
             {
                 writer.WritePropertyName("optionalIntRecord");
@@ -115,7 +115,7 @@ namespace ModelsInCadl
             IList<CollectionItem> optionalModelCollection = default;
             Optional<DerivedModel> optionalModel = default;
             FixedStringEnum optionalFixedStringEnum = default;
-            object optionalExtensibleEnum = default;
+            ExtensibleEnum optionalExtensibleEnum = default;
             Optional<IDictionary<string, int>> optionalIntRecord = default;
             Optional<IDictionary<string, string>> optionalStringRecord = default;
             Optional<IDictionary<string, RecordItem>> optionalModelRecord = default;
@@ -193,7 +193,7 @@ namespace ModelsInCadl
                 }
                 if (property.NameEquals("optionalExtensibleEnum"))
                 {
-                    optionalExtensibleEnum = property.Value.GetObject();
+                    optionalExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("optionalIntRecord"))
