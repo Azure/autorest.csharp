@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Dog",
-   "Namespace": "visibility",
+   "Namespace": "Cadl.visibility",
    "IsNullable": false,
    "Properties": [
     {

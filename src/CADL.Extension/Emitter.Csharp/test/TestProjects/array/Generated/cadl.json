@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Pet",
-   "Namespace": "ArrayBasic",
+   "Namespace": "Cadl.TestServer.ArrayBasic",
    "IsNullable": false,
    "Properties": [
     {

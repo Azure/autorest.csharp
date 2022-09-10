@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Thing",
-   "Namespace": "HeadClient",
+   "Namespace": "Cadl.HeadClient",
    "IsNullable": false,
    "Properties": [
     {

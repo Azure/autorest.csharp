@@ -8,7 +8,7 @@
   {
    "$id": "2",
    "Name": "SimpleEnum",
-   "Namespace": "HelloWorld",
+   "Namespace": "Demo.HelloWorld",
    "Description": "Simple enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -34,7 +34,7 @@
   {
    "$id": "6",
    "Name": "ExtensibleEnum",
-   "Namespace": "HelloWorld",
+   "Namespace": "Demo.HelloWorld",
    "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -62,7 +62,7 @@
   {
    "$id": "10",
    "Name": "Thing",
-   "Namespace": "HelloWorld",
+   "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
    "Properties": [
     {
@@ -85,7 +85,7 @@
   {
    "$id": "13",
    "Name": "RoundTripModel",
-   "Namespace": "HelloWorld",
+   "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
    "Properties": [
     {

@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Dog",
-   "Namespace": "MultiInterfaceClient",
+   "Namespace": "Cadl.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
    "Properties": [
@@ -34,7 +34,7 @@
   {
    "$id": "5",
    "Name": "Cat",
-   "Namespace": "MultiInterfaceClient",
+   "Namespace": "Cadl.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
    "Properties": [
