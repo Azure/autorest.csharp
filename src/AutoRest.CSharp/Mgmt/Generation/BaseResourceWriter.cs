@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Models;
@@ -36,16 +37,65 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var signature = This.StaticFactoryMethod;
             using (_writer.WriteMethodDeclaration(signature))
             {
-                // TODO -- this is only placeholder
-                _writer.Line($"// this is only placeholder");
-                var resource = This.DerivedResources.First();
-                _writer.Append($"return new {resource.Type}(");
-                foreach (var parameter in signature.Parameters)
+                foreach (var resource in This.DerivedResources)
                 {
-                    _writer.AppendRaw(parameter.Name).AppendRaw(",");
+                    // the polymorphicOption of these resources should never be null
+                    var option = resource.PolymorphicOption;
+                    Debug.Assert(option != null);
+                    using (_writer.Scope($"if ({option.MethodSignature.Name}(data.Id))"))
+                    {
+                        _writer.Append($"return new {resource.Type}(");
+                        foreach (var parameter in signature.Parameters)
+                        {
+                            _writer.AppendRaw(parameter.Name).AppendRaw(",");
+                        }
+                        _writer.RemoveTrailingComma();
+                        _writer.LineRaw(");");
+                    }
                 }
-                _writer.RemoveTrailingComma();
-                _writer.LineRaw(");");
+
+                // TODO -- we might need to create an internal UnknownResource class to handle this escape path for forward compatibility
+                _writer.LineRaw("// TODO -- should we throw or return an UnknownResource?");
+                _writer.Line($"throw new {typeof(InvalidOperationException)}();");
+            }
+            _writer.Line();
+
+            // writes the assertion of resource types
+            foreach (var resource in This.DerivedResources)
+            {
+                // the polymorphicOption of these resources should never be null
+                var option = resource.PolymorphicOption;
+                Debug.Assert(option != null);
+                using (_writer.WriteMethodDeclaration(option.MethodSignature))
+                {
+                    _writer.LineRaw("// checking the resource type");
+                    using (_writer.Scope($"if (id.ResourceType != {resource.Type.Name}.ResourceType)"))
+                    {
+                        _writer.LineRaw("return false;");
+                    }
+
+                    // TODO -- check scope resource type
+                    if (option.ScopeResourceTypeConstraint != null)
+                    {
+                        _writer.LineRaw("// TODO -- checking the resource scope");
+                        //using (_writer.Scope($"if ({})"))
+                        //{
+                        //}
+                    }
+
+                    // check the name constraint
+                    if (option.ResourceNameConstraint != null)
+                    {
+                        _writer.LineRaw("// checking the resource name");
+                        using (_writer.Scope($"if (id.Name != {option.ResourceNameConstraint.Value.ConstantValue:L})"))
+                        {
+                            _writer.LineRaw("return false;");
+                        }
+                    }
+
+                    _writer.LineRaw("return true;");
+                }
+                _writer.Line();
             }
 
             _writer.Line();
@@ -90,11 +140,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteProperties()
         {
-            // write the private discriminator of this base resource
             // TODO -- change this to the actual extensible enum
-            _writer.LineRaw("// TODO -- change it to the real extensible enum discriminator");
-            _writer.Line($"protected virtual string Type => \"Base\";");
-            _writer.Line();
+            // write the private discriminator of this base resource
+            //_writer.LineRaw("// TODO -- change it to the real extensible enum discriminator");
+            //_writer.Line($"protected virtual string Type => \"Base\";");
+            //_writer.Line();
+
             // write the HasData and Data property
             _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
             _writer.Line($"public virtual bool HasData {{ get; }}");

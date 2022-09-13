@@ -394,7 +394,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 0 => throw new InvalidOperationException($"No resource corresponding to {originalType?.Name} is found"),
                 1 => foundResources.Single().Type,
                 // we have multiple resource matched, return the corresponding base resource here
-                _ => foundResources.First().BaseResource!.Type
+                _ => foundResources.First().PolymorphicOption!.BaseResource.Type
             };
         }
 

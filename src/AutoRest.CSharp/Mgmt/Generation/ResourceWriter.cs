@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         public static ResourceWriter GetWriter(CodeWriter writer, Resource resource)
         {
-            if (resource.BaseResource == null)
+            if (resource.PolymorphicOption == null)
                 return new ResourceWriter(writer, resource);
             else
                 return new PolymorphicResourceWriter(writer, resource);

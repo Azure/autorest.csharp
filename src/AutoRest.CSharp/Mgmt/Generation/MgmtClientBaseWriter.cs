@@ -810,18 +810,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected bool ShouldUseFactoryMethod(MgmtClientOperation clientOperation)
         {
-            if (This is not Resource resource || resource.BaseResource == null)
+            if (This is not Resource resource || resource.PolymorphicOption == null)
                 return false;
 
-            return resource.BaseResource.CommonOperations.Any(operation => operation.Contains(clientOperation));
+            return resource.PolymorphicOption.BaseResource.CommonOperations.Any(operation => operation.Contains(clientOperation));
         }
 
         protected FormattableString GetNewResourceInstanceExpression(Resource resource, bool usedFactoryMethod)
         {
-            if (usedFactoryMethod && resource.BaseResource != null)
+            if (usedFactoryMethod && resource.PolymorphicOption != null)
             {
                 // return the static factory method
-                return $"{resource.BaseResource.Type}.GetResource";
+                return $"{resource.PolymorphicOption.BaseResource.Type}.GetResource";
             }
 
             return $"new {resource.Type}";

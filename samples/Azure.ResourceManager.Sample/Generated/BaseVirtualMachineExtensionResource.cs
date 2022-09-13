@@ -21,8 +21,38 @@ namespace Azure.ResourceManager.Sample
     {
         internal static BaseVirtualMachineExtensionResource GetResource(ArmClient client, VirtualMachineExtensionData data)
         {
-            // this is only placeholder
-            return new VirtualMachineExtensionResource(client, data);
+            if (IsVirtualMachineExtensionResource(data.Id))
+            {
+                return new VirtualMachineExtensionResource(client, data);
+            }
+            if (IsVirtualMachineScaleSetVirtualMachineExtensionResource(data.Id))
+            {
+                return new VirtualMachineScaleSetVirtualMachineExtensionResource(client, data);
+            }
+            // TODO -- should we throw or return an UnknownResource?
+            throw new InvalidOperationException();
+        }
+
+        internal static bool IsVirtualMachineExtensionResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != VirtualMachineExtensionResource.ResourceType)
+            {
+                return false;
+            }
+            // TODO -- checking the resource scope
+            return true;
+        }
+
+        internal static bool IsVirtualMachineScaleSetVirtualMachineExtensionResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != VirtualMachineScaleSetVirtualMachineExtensionResource.ResourceType)
+            {
+                return false;
+            }
+            // TODO -- checking the resource scope
+            return true;
         }
 
         private readonly VirtualMachineExtensionData _data;
@@ -47,9 +77,6 @@ namespace Azure.ResourceManager.Sample
         internal BaseVirtualMachineExtensionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
-
-        // TODO -- change it to the real extensible enum discriminator
-        protected virtual string Type => "Base";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

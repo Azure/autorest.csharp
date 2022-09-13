@@ -61,9 +61,6 @@ namespace Azure.ResourceManager.Sample
 #endif
         }
 
-        // TODO -- change it to the real extensible enum discriminator
-        protected override string Type => "VirtualMachineExtensionResource";
-
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines/extensions";
 
@@ -102,7 +99,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public new async Task<Response<VirtualMachineExtensionResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
+        public new virtual async Task<Response<VirtualMachineExtensionResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             var value = await GetCoreAsync(expand, cancellationToken);
             return Response.FromValue((VirtualMachineExtensionResource)value.Value, value.GetRawResponse());
@@ -137,7 +134,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public new Response<VirtualMachineExtensionResource> Get(string expand = null, CancellationToken cancellationToken = default)
+        public new virtual Response<VirtualMachineExtensionResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             var value = GetCore(expand, cancellationToken);
             return Response.FromValue((VirtualMachineExtensionResource)value.Value, value.GetRawResponse());
@@ -173,7 +170,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public new async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        public new virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             var value = await DeleteCoreAsync(waitUntil, cancellationToken);
             return value;
@@ -209,7 +206,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public new ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        public new virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             var value = DeleteCore(waitUntil, cancellationToken);
             return value;
@@ -249,7 +246,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         [ForwardsClientCalls]
-        public new async Task<ArmOperation<VirtualMachineExtensionResource>> UpdateAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        public new virtual async Task<ArmOperation<VirtualMachineExtensionResource>> UpdateAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
             var value = await UpdateCoreAsync(waitUntil, extensionParameters, cancellationToken);
             TODO
@@ -289,7 +286,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         [ForwardsClientCalls]
-        public new ArmOperation<VirtualMachineExtensionResource> Update(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        public new virtual ArmOperation<VirtualMachineExtensionResource> Update(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
             var value = UpdateCore(waitUntil, extensionParameters, cancellationToken);
             TODO
@@ -345,7 +342,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         [ForwardsClientCalls]
-        public new async Task<Response<VirtualMachineExtensionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public new virtual async Task<Response<VirtualMachineExtensionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             var value0 = await AddTagCoreAsync(key, value, cancellationToken);
             return Response.FromValue((VirtualMachineExtensionResource)value0.Value, value0.GetRawResponse());
@@ -401,7 +398,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         [ForwardsClientCalls]
-        public new Response<VirtualMachineExtensionResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public new virtual Response<VirtualMachineExtensionResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             var value0 = AddTagCore(key, value, cancellationToken);
             return Response.FromValue((VirtualMachineExtensionResource)value0.Value, value0.GetRawResponse());
@@ -452,7 +449,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         [ForwardsClientCalls]
-        public new async Task<Response<VirtualMachineExtensionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public new virtual async Task<Response<VirtualMachineExtensionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             var value = await SetTagsCoreAsync(tags, cancellationToken);
             return Response.FromValue((VirtualMachineExtensionResource)value.Value, value.GetRawResponse());
@@ -503,7 +500,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         [ForwardsClientCalls]
-        public new Response<VirtualMachineExtensionResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public new virtual Response<VirtualMachineExtensionResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             var value = SetTagsCore(tags, cancellationToken);
             return Response.FromValue((VirtualMachineExtensionResource)value.Value, value.GetRawResponse());
@@ -557,7 +554,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         [ForwardsClientCalls]
-        public new async Task<Response<VirtualMachineExtensionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public new virtual async Task<Response<VirtualMachineExtensionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             var value = await RemoveTagCoreAsync(key, cancellationToken);
             return Response.FromValue((VirtualMachineExtensionResource)value.Value, value.GetRawResponse());
@@ -611,7 +608,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         [ForwardsClientCalls]
-        public new Response<VirtualMachineExtensionResource> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public new virtual Response<VirtualMachineExtensionResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             var value = RemoveTagCore(key, cancellationToken);
             return Response.FromValue((VirtualMachineExtensionResource)value.Value, value.GetRawResponse());

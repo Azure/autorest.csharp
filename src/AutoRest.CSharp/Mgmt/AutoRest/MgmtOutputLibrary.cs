@@ -419,7 +419,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<Resource> ArmResources => _armResources ??= RequestPathToResources.Values.Select(bag => bag.Resource).Distinct();
 
         private IEnumerable<BaseResource>? _baseResources;
-        public IEnumerable<BaseResource> BaseResources => _baseResources ??= RequestPathToResources.Values.Select(bag => bag.Resource.BaseResource).WhereNotNull().Distinct();
+        public IEnumerable<BaseResource> BaseResources => _baseResources ??= RequestPathToResources.Values.Select(bag => bag.Resource.PolymorphicOption).WhereNotNull().Select(o => o.BaseResource).Distinct();
 
         private Dictionary<CSharpType, Resource>? _csharpTypeToResource;
         public Dictionary<CSharpType, Resource> CsharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
@@ -559,7 +559,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     var baseResource = new BaseResource(GetBaseResourceName(resourceDataSchemaName, resourcesWithSameData), resourcesWithSameData);
                     foreach (var resource in resourcesWithSameData)
-                        resource.BaseResource = baseResource;
+                        resource.PolymorphicOption = new PolymorphicOption(resource, baseResource);
                     // TODO -- add a new extensible enum for this
                 }
             }

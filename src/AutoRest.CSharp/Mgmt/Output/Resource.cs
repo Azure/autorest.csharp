@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override ConstructorSignature? EnsureResourceDataCtor()
         {
-            return BaseResource == null ?
+            return PolymorphicOption == null ?
                 new ConstructorSignature(
                     Name: Type.Name,
                     null,
@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", $"{ResourceDataParameter.Name:I}" }));
         }
 
-        public override CSharpType? BaseType => BaseResource != null ? BaseResource.Type : typeof(ArmResource);
+        public override CSharpType? BaseType => PolymorphicOption != null ? PolymorphicOption.BaseResource.Type : typeof(ArmResource);
 
         public override Resource? DefaultResource => this;
 
@@ -139,7 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<FieldDeclaration>? GetAdditionalFields()
         {
-            if (BaseResource == null)
+            if (PolymorphicOption == null)
                 yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
 
@@ -230,9 +230,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         /// <summary>
-        /// Finds the corresponding <see cref="BaseResource"/> of this <see cref="Resource"/>
+        /// Finds the correspondng <see cref="PolymorphicOption"/> of this <see cref="Resource"/>
         /// </summary>
-        public BaseResource? BaseResource { get; internal set; }
+        public PolymorphicOption? PolymorphicOption { get; internal set; }
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>

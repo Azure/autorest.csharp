@@ -22,8 +22,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public PolymorphicResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
         {
             This = resource;
-            Debug.Assert(resource.BaseResource != null);
-            BaseResource = resource.BaseResource;
+            Debug.Assert(resource.PolymorphicOption != null);
+            BaseResource = resource.PolymorphicOption.BaseResource;
         }
 
         protected override void WriteCtors()
@@ -73,10 +73,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteProperties()
         {
-            // TODO -- use the actual extensible enum
-            _writer.LineRaw("// TODO -- change it to the real extensible enum discriminator");
-            _writer.Line($"protected override string Type => \"{This.Type.Name}\";");
-            _writer.Line();
+            // TODO -- use the actual extensible enum -- or do we still need that?
+            //_writer.LineRaw("// TODO -- change it to the real extensible enum discriminator");
+            //_writer.Line($"protected override string Type => \"{This.Type.Name}\";");
+            //_writer.Line();
 
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
 
@@ -119,9 +119,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line();
 
+            // TODO -- we need to check if the signature of this method is exactly the same as the Core method.
+            // if this method is exactly the same as the Core method, we just need to redirect - which is the same implementation as the base resource, we do not need to write anything here
+            // if it is not the same - this must be the case of returning a polymorphic resource type (wrapped in either Response, ArmOperation or Pageable as generic parameter)
+            // we should unwrap it and wrap it again then return.
             var signature = clientOperation.MethodSignature with
             {
-                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.New
+                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.New | MethodSignatureModifiers.Virtual // TODO -- add a configuration to control whether we need this virtual keyword
             };
             var returnsDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
             using (WriteCommonMethodWithoutValidation(signature, returnsDescription, isAsync, enableAttributes: true, attributes: new[] { new ForwardsClientCallsAttribute() }))
@@ -150,7 +154,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else if (clientOperation.IsPagingOperation)
                     {
-                        _writer.Line($"TODO");
+                        // in paging operation, we should never have a polymorphic return type case
+                        // in this case, this method should be returning "Pageable<MyselfResource>". This operation should always be on the collection class instead of being written here in the resource class.
+                        // therefore for paging operation, we just return the value variable: it should always have the same type as the return type of this method
+                        _writer.Line($"return {value};");
                     }
                     else
                     {
