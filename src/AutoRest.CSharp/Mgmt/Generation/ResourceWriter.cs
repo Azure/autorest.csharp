@@ -111,8 +111,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteStaticValidate($"ResourceType");
         }
 
-        private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
+        private void WriteAddTagBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool isAsync)
         {
+            var clientOperation = clientOperationWrapper.ClientOperation;
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
@@ -128,8 +129,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
-        private void WriteSetTagsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
+        private void WriteSetTagsBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool isAsync)
         {
+            var clientOperation = clientOperationWrapper.ClientOperation;
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
@@ -150,8 +152,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
-        private void WriteRemoveTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
+        private void WriteRemoveTagBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool isAsync)
         {
+            var clientOperation = clientOperationWrapper.ClientOperation;
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -46,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string? Description => _description ??= Method.Description;
         public IEnumerable<Parameter> Parameters => Method.Parameters;
 
-        public OperationSource? OperationSource { get; }
+        public OperationSource? OperationSource => GetOperationSource();
 
         public LongRunningInterimOperation? InterimOperation { get; }
 
@@ -118,7 +119,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             Resource = GetResourceMatch(restClient, method, requestPath);
             FinalStateVia = operation.IsLongRunning ? operation.LongRunningFinalStateVia : null;
             OriginalReturnType = operation.IsLongRunning ? GetFinalResponse() : Method.ReturnType;
-            OperationSource = GetOperationSource();
             InterimOperation = GetInterimOperation();
         }
 
@@ -140,7 +140,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             Resource = other.Resource;
             FinalStateVia = other.FinalStateVia;
             OriginalReturnType = other.OriginalReturnType;
-            OperationSource = other.OperationSource;
             InterimOperation = other.InterimOperation;
 
             //modify some of the values
@@ -161,13 +160,39 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (IsFakeLongRunningOperation)
                 return null;
 
-            if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
+            OperationSource? operationSource;
+            if (IsCommonOperation(out var baseResource))
             {
-                MgmtContext.Library.CSharpTypeToResource.TryGetValue(MgmtReturnType, out var resourceBeingReturned);
-                operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
-                MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
+                if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(baseResource.Type, out operationSource))
+                {
+                    operationSource = new OperationSource(baseResource.Type, baseResource, FinalResponseSchema!);
+                    MgmtContext.Library.CSharpTypeToOperationSource.Add(baseResource.Type, operationSource);
+                }
+            }
+            else if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out operationSource))
+            {
+                if (MgmtContext.Library.CSharpTypeToResource.TryGetValue(MgmtReturnType, out var resourceBeingReturned))
+                {
+                    operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
+                    MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
+                }
+                else
+                {
+                    operationSource = new OperationSource(MgmtReturnType, null, FinalResponseSchema!);
+                    MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
+                }
             }
             return operationSource;
+        }
+
+        private bool IsCommonOperation([MaybeNullWhen(false)] out BaseResource baseResource)
+        {
+            baseResource = null;
+            if (Resource?.PolymorphicOption == null)
+                return false;
+
+            baseResource = Resource.PolymorphicOption.BaseResource;
+            return baseResource.CommonOperations.Any(co => co.Contains(this));
         }
 
         private LongRunningInterimOperation? GetInterimOperation()

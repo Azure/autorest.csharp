@@ -26,6 +26,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             ResponseSerialization = new SerializationBuilder().Build(KnownMediaType.Json, schema, GetSerializationType(ReturnType, provider));
         }
 
+        public bool IsReturningResource => !ReturnType.IsFrameworkType && (ReturnType.Implementation is Resource || ReturnType.Implementation is BaseResource);
+
         private static ResourceData? GetResourceData(MgmtTypeProvider? provider)
         {
             if (provider is Resource resource)
@@ -45,7 +47,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (provider is Resource resource && resource.Type.Equals(returnType))
                 return resource.ResourceData.Type;
 
-            //if (provider is BaseResource baseResource && )
+            if (provider is BaseResource baseResource && baseResource.Type.Equals(returnType))
+                return baseResource.ResourceData.Type;
 
             return returnType;
         }

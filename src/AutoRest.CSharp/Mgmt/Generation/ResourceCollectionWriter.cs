@@ -54,8 +54,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteStaticValidate(validResourceType);
         }
 
-        private void WriteExistsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
+        private void WriteExistsBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool async)
         {
+            var clientOperation = clientOperationWrapper.ClientOperation;
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(clientOperation.OperationMappings.Values.First())))
             {
                 var operation = clientOperation.OperationMappings.Values.First();
@@ -69,8 +70,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteGetIfExistsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
+        private void WriteGetIfExistsBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool async)
         {
+            var clientOperation = clientOperationWrapper.ClientOperation;
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(clientOperation.OperationMappings.Values.First())))
             {
                 // we need to write multiple branches for a normal method

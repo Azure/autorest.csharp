@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal abstract class MgmtClientBaseWriter : ClientWriter
     {
         protected const string EndpointProperty = "Endpoint";
-        protected delegate void WriteMethodDelegate(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync);
+        protected delegate void WriteMethodDelegate(MgmtClientOperationWrapper clientOperation, Diagnostic diagnostic, bool isAsync);
         private string LibraryArmOperation { get; }
         protected bool IsArmCore { get; }
         protected CodeWriter _writer;
@@ -561,8 +561,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         #region PagingMethod
-        protected virtual void WritePagingMethodBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
+        protected virtual void WritePagingMethodBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool isAsync)
         {
+            var clientOperation = clientOperationWrapper.ClientOperation;
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here
             // TODO -- find a better way to get this type
             string clientDiagFieldName = GetDiagnosticName(clientOperation.OperationMappings.First().Value);
@@ -756,8 +757,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         #endregion
 
         #region NormalMethod
-        protected virtual void WriteNormalMethodBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
+        protected virtual void WriteNormalMethodBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool async)
         {
+            var clientOperation = clientOperationWrapper.ClientOperation;
             // we need to write multiple branches for a normal method
             if (clientOperation.OperationMappings.Count == 1)
             {
@@ -829,9 +831,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         #region LROMethod
-        protected virtual void WriteLROMethodBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
+        protected virtual void WriteLROMethodBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool async)
         {
-            // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
+            var clientOperation = clientOperationWrapper.ClientOperation;
+            var returnType = clientOperationWrapper.ReturnType;
             // TODO -- find a way to properly get the LRO response type here. Temporarily we are using the first one
             // TODO -- we need to write multiple branches for a LRO operation
             var useFactoryMethod = ShouldUseFactoryMethod(clientOperation);
@@ -841,7 +844,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     // if we only have one branch, we would not need those if-else statements
                     var branch = clientOperation.OperationMappings.Keys.First();
-                    WriteLROMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async, useFactoryMethod);
+                    WriteLROMethodBranch(returnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async, useFactoryMethod);
                 }
                 else
                 {
@@ -858,7 +861,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         }
                         using (_writer.Scope($"{keyword} ({This.BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                         {
-                            WriteLROMethodBranch(operation, clientOperation.ParameterMappings[branch], async, useFactoryMethod);
+                            WriteLROMethodBranch(returnType, operation, clientOperation.ParameterMappings[branch], async, useFactoryMethod);
                         }
                         keyword = "else if";
                     }
@@ -874,7 +877,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         var branch = escapeBranches.First();
                         using (_writer.Scope($"else"))
                         {
-                            WriteLROMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async, useFactoryMethod);
+                            WriteLROMethodBranch(returnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async, useFactoryMethod);
                         }
                     }
                     else
@@ -885,17 +888,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async, bool useFactoryMethod)
+        protected virtual void WriteLROMethodBranch(CSharpType returnType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async, bool useFactoryMethod)
         {
             _writer.Append($"var response = {GetAwait(async)} ");
             _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            WriteLROResponse(GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, async, useFactoryMethod);
+            WriteLROResponse(returnType, GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, async, useFactoryMethod);
         }
 
-        protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async, bool useFactoryMethod)
+        protected virtual void WriteLROResponse(CSharpType returnType, string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async, bool useFactoryMethod)
         {
             if (operation.InterimOperation is not null)
             {
@@ -904,9 +907,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             else
             {
                 _writer.Append($"var operation = new {LibraryArmOperation}");
-                if (operation.ReturnType.IsGenericType)
+                if (returnType.IsGenericType)
                 {
-                    _writer.Append($"<{operation.MgmtReturnType}>"); //TODO -- change here to the BaseResource if necessary
+                    _writer.Append($"<{returnType.UnWrapOperation()}>");
                 }
             }
             _writer.Append($"(");
@@ -923,7 +926,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                // TODO -- probably make some magic when we construct this to make sure it knows which resource (the actual or base) to use
                 if (operation.OperationSource is not null)
                 {
                     _writer.Append($"new {operation.OperationSource.TypeName}(");

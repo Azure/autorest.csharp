@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (WriteCommonMethodWithoutValidation(coreSignature, null, isAsync))
             {
                 var diagnostic = new Diagnostic($"{This.Type.Name}.{clientOperation.Name}", Array.Empty<DiagnosticAttribute>());
-                writeBody(clientOperation, diagnostic, isAsync);
+                writeBody(new MgmtClientOperationWrapper(clientOperation, coreSignature.ReturnType!), diagnostic, isAsync);
             }
 
             _writer.Line();
@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // unwrap the result and wrap it again
                     if (clientOperation.IsLongRunningOperation)
                     {
-                        _writer.Line($"TODO");
+                        _writer.Line($"throw new {typeof(InvalidOperationException)}();");
                     }
                     else if (clientOperation.IsPagingOperation)
                     {

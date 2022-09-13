@@ -33,8 +33,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override WriteMethodDelegate GetMethodDelegate(bool isLongRunning, bool isPaging)
             => IsArmCore ? base.GetMethodDelegate(isLongRunning, isPaging) : GetMethodWrapperImpl;
 
-        private void GetMethodWrapperImpl(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
-            => WriteMethodBodyWrapper(clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
+        private void GetMethodWrapperImpl(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool isAsync)
+            => WriteMethodBodyWrapper(clientOperationWrapper.ClientOperation.MethodSignature, isAsync, clientOperationWrapper.ClientOperation.IsPagingOperation);
 
         protected override void WritePrivateHelpers()
         {

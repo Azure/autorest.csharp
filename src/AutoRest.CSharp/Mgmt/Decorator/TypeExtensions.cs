@@ -80,7 +80,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static CSharpType UnWrapResponse(this CSharpType type)
         {
-            return type.Name == "Response" && type.Arguments.Length == 1 ? type.Arguments[0] : type;
+            return type.Name == nameof(Response) && type.Arguments.Length == 1 ? type.Arguments[0] : type;
+        }
+
+        public static CSharpType UnWrapOperation(this CSharpType type)
+        {
+            return type.Name == nameof(ArmOperation) && type.Arguments.Length == 1 ? type.Arguments[0] : type;
         }
 
         public static bool IsResourceDataType(this CSharpType type, [MaybeNullWhen(false)] out ResourceData data)

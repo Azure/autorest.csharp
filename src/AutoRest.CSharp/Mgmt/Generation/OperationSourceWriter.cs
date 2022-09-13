@@ -22,14 +22,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private readonly OperationSource _opSource;
         private readonly CodeWriter _writer;
-        private readonly bool _isReturningResource;
         private readonly IReadOnlyDictionary<string, string>? _operationIdMappings;
 
         public OperationSourceWriter(OperationSource opSource)
         {
             _writer = new CodeWriter();
             _opSource = opSource;
-            _isReturningResource = MgmtContext.Library.CSharpTypeToResource.ContainsKey(_opSource.ReturnType);
             if (_opSource.Resource is not null && Configuration.MgmtConfiguration.OperationIdMappings.TryGetValue(_opSource.Resource.ResourceName, out var mappings))
                 _operationIdMappings = mappings;
         }
@@ -40,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 using (_writer.Scope($"internal class {_opSource.TypeName} : {_opSource.Interface}"))
                 {
-                    if (_isReturningResource)
+                    if (_opSource.IsReturningResource)
                     {
                         _writer.WriteField(_opSource.ArmClientField);
 
@@ -118,7 +116,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public void WriteCreateResult(string responseVariable)
         {
             Action<FormattableString> valueCallback = fs => _writer.Line($"return {fs};");
-            if (_isReturningResource)
+            if (_opSource.IsReturningResource)
             {
                 valueCallback = fs =>
                 {
@@ -129,7 +127,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         _writer.Line($"{data}.Id = {_opSource.ArmClientField.Name}.Id;");
                     }
-                    _writer.Line($"return new {_opSource.Resource!.Type}({_opSource.ArmClientField.Name}, {data});");
+                    _writer.Line($"return {GetNewResourceExpression()}({_opSource.ArmClientField.Name}, {data});");
                 };
             }
 
@@ -144,6 +142,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, true, valueCallback, responseVariable, _opSource.ReturnType);
             }
         }
+
+        private FormattableString GetNewResourceExpression() => _opSource.Resource switch
+        {
+            Resource resource => $"new {resource.Type}",
+            BaseResource baseResource => $"{baseResource.Type}.GetResource",
+            _ => throw new InvalidOperationException("this should never happen")
+        };
 
         public override string ToString()
         {
