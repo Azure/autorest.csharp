@@ -423,7 +423,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<BaseResource> BaseResources => _baseResources ??= RequestPathToResources.Values.Select(bag => bag.Resource.PolymorphicOption).WhereNotNull().Select(o => o.BaseResource).Distinct();
 
         private Dictionary<CSharpType, Resource>? _csharpTypeToResource;
-        public Dictionary<CSharpType, Resource> CsharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
+        public Dictionary<CSharpType, Resource> CSharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
 
         private IEnumerable<ResourceCollection>? _resourceCollections;
         public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= RequestPathToResources.Values.Select(bag => bag.ResourceCollection).WhereNotNull().Distinct();

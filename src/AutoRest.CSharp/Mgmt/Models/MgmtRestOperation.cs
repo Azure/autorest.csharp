@@ -163,7 +163,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
             {
-                MgmtContext.Library.CsharpTypeToResource.TryGetValue(MgmtReturnType, out var resourceBeingReturned);
+                MgmtContext.Library.CSharpTypeToResource.TryGetValue(MgmtReturnType, out var resourceBeingReturned);
                 operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
                 MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
             }

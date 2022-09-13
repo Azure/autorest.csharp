@@ -300,7 +300,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, operation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
             }
 
-            var resource = MgmtContext.Library.CsharpTypeToResource[operation.ReturnType.UnWrapResponse()];
+            var resource = MgmtContext.Library.CSharpTypeToResource[operation.ReturnType.UnWrapResponse()];
             _writer.Line($"return {typeof(Response)}.FromValue({GetNewResourceInstanceExpression(resource, needFactoryMethod)}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
         }
     }

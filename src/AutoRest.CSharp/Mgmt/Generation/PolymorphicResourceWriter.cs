@@ -119,34 +119,30 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line();
 
-            // TODO -- we need to check if the signature of this method is exactly the same as the Core method.
-            // if this method is exactly the same as the Core method, we just need to redirect - which is the same implementation as the base resource, we do not need to write anything here
-            // if it is not the same - this must be the case of returning a polymorphic resource type (wrapped in either Response, ArmOperation or Pageable as generic parameter)
-            // we should unwrap it and wrap it again then return.
+            // TODO -- add a configuration to control whether we need this virtual keyword. And if this configuration is on, we will generate this method with the "new" keyword nevertheless (for backward compat purpose)
             var signature = clientOperation.MethodSignature with
             {
-                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.New | MethodSignatureModifiers.Virtual // TODO -- add a configuration to control whether we need this virtual keyword
+                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.New | MethodSignatureModifiers.Virtual
             };
-            var returnsDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
-            using (WriteCommonMethodWithoutValidation(signature, returnsDescription, isAsync, enableAttributes: true, attributes: new[] { new ForwardsClientCallsAttribute() }))
+            // if this method is exactly the same as the Core method, we just need to redirect - which is the same implementation as the base resource, we do not need to write anything here
+            // we only write this when it is not the same, which is the case of returning a polymorphic resource as a generic parameter (wrapped in either Response, ArmOperation or Pageable)
+            // when this happens we should unwrap it and wrap it again
+            if (!commonOperation.ReturnType.Equals(clientOperation.ReturnType))
             {
-                var value = new CodeWriterDeclaration("value");
-                _writer.Append($"var {value:D} = ")
-                    .AppendRawIf("await ", isAsync)
-                    .Append($"{CreateMethodName(coreSignature.Name, isAsync)}(");
-                foreach (var parameter in coreSignature.Parameters)
+                var returnsDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
+                using (WriteCommonMethodWithoutValidation(signature, returnsDescription, isAsync, enableAttributes: true, attributes: new[] { new ForwardsClientCallsAttribute() }))
                 {
-                    _writer.AppendRaw(parameter.Name).AppendRaw(",");
-                }
-                _writer.RemoveTrailingComma();
-                _writer.LineRaw(");");
+                    var value = new CodeWriterDeclaration("value");
+                    _writer.Append($"var {value:D} = ")
+                        .AppendRawIf("await ", isAsync)
+                        .Append($"{CreateMethodName(coreSignature.Name, isAsync)}(");
+                    foreach (var parameter in coreSignature.Parameters)
+                    {
+                        _writer.AppendRaw(parameter.Name).AppendRaw(",");
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.LineRaw(");");
 
-                if (commonOperation.ReturnType.Equals(clientOperation.ReturnType))
-                {
-                    _writer.Line($"return {value};");
-                }
-                else
-                {
                     // unwrap the result and wrap it again
                     if (clientOperation.IsLongRunningOperation)
                     {

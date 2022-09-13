@@ -906,13 +906,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"var operation = new {LibraryArmOperation}");
                 if (operation.ReturnType.IsGenericType)
                 {
-                    _writer.Append($"<{operation.MgmtReturnType}>");
+                    _writer.Append($"<{operation.MgmtReturnType}>"); //TODO -- change here to the BaseResource if necessary
                 }
             }
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                if (operation.MgmtReturnType is not null && MgmtContext.Library.CsharpTypeToResource.TryGetValue(operation.MgmtReturnType, out var resource))
+                if (operation.MgmtReturnType is not null && MgmtContext.Library.CSharpTypeToResource.TryGetValue(operation.MgmtReturnType, out var resource))
                 {
                     _writer.Append($"{typeof(Response)}.FromValue({GetNewResourceInstanceExpression(resource, useFactoryMethod)}({ArmClientReference}, response), response.GetRawResponse())");
                 }
@@ -923,10 +923,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
+                // TODO -- probably make some magic when we construct this to make sure it knows which resource (the actual or base) to use
                 if (operation.OperationSource is not null)
                 {
                     _writer.Append($"new {operation.OperationSource.TypeName}(");
-                    if (MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
+                    if (MgmtContext.Library.CSharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
                         _writer.Append($"{ArmClientReference}");
                     _writer.Append($"), ");
                 }
