@@ -14,21 +14,46 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class OperationSource
     {
-        public OperationSource(CSharpType returnType, Resource? resource, Schema schema)
+        public OperationSource(CSharpType returnType, MgmtTypeProvider? provider, Schema schema)
         {
             ReturnType = returnType;
-            TypeName = $"{(resource != null ? resource.ResourceName : returnType.Name)}OperationSource";
+            TypeName = $"{(provider != null ? provider.ResourceName : returnType.Name)}OperationSource";
             Interface = new CSharpType(typeof(IOperationSource<>), returnType);
-            Resource = resource;
+            Resource = provider;
+            ResourceData = GetResourceData(provider);
             ArmClientField = new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(ArmClient), "_client");
             ArmClientCtor = new ConstructorSignature(TypeName, null, null, Internal, new[] { MgmtTypeProvider.ArmClientParameter });
-            var serializationType = resource is null ? ReturnType : resource.Type.Equals(returnType) ? resource.ResourceData.Type : ReturnType;
-            ResponseSerialization = new SerializationBuilder().Build(KnownMediaType.Json, schema, serializationType);
+            ResponseSerialization = new SerializationBuilder().Build(KnownMediaType.Json, schema, GetSerializationType(ReturnType, provider));
+        }
+
+        private static ResourceData? GetResourceData(MgmtTypeProvider? provider)
+        {
+            if (provider is Resource resource)
+                return resource.ResourceData;
+
+            if (provider is BaseResource baseResource)
+                return baseResource.ResourceData;
+
+            return null;
+        }
+
+        private static CSharpType GetSerializationType(CSharpType returnType, MgmtTypeProvider? provider)
+        {
+            if (provider == null)
+                return returnType;
+
+            if (provider is Resource resource && resource.Type.Equals(returnType))
+                return resource.ResourceData.Type;
+
+            //if (provider is BaseResource baseResource && )
+
+            return returnType;
         }
 
         public CSharpType ReturnType { get; }
         public CSharpType Interface { get; }
-        public Resource? Resource { get; }
+        public MgmtTypeProvider? Resource { get; }
+        public ResourceData? ResourceData { get; }
         public FieldDeclaration ArmClientField { get; }
         public ConstructorSignature ArmClientCtor { get; }
         public string TypeName { get; }

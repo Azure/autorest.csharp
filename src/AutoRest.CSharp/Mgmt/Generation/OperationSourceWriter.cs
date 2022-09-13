@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -68,7 +69,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     if (_operationIdMappings is not null)
                     {
-                        var resource = _opSource.Resource!;
+                        var resource = _opSource.Resource! as Resource;
+                        if (resource == null)
+                            throw new NotSupportedException($"Temporarily we do not support adding operation id mapping to the polymorphic resources");
                         var resourceType = resource.Type;
                         var dataType = resource.ResourceData.Type;
                         _writer.Line();
@@ -122,11 +125,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var data = new CodeWriterDeclaration("data");
                     FormattableString dataString = _operationIdMappings is null ? (FormattableString)$"var {data:D} = {fs};" : (FormattableString)$"var {data:D} = ScrubId({fs});";
                     _writer.Line(dataString);
-                    if (_opSource.Resource!.ResourceData.ShouldSetResourceIdentifier)
+                    if (_opSource.ResourceData!.ShouldSetResourceIdentifier)
                     {
                         _writer.Line($"{data}.Id = {_opSource.ArmClientField.Name}.Id;");
                     }
-                    _writer.Line($"return new {_opSource.Resource.Type}({_opSource.ArmClientField.Name}, {data});");
+                    _writer.Line($"return new {_opSource.Resource!.Type}({_opSource.ArmClientField.Name}, {data});");
                 };
             }
 
