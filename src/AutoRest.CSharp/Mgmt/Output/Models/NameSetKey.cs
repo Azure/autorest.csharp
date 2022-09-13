@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
-namespace AutoRest.CSharp.Mgmt.Output
+namespace AutoRest.CSharp.Mgmt.Output.Models
 {
     internal readonly struct NameSetKey
     {

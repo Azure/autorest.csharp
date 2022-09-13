@@ -9,7 +9,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 
-namespace AutoRest.CSharp.Mgmt.Output
+namespace AutoRest.CSharp.Mgmt.Output.Models
 {
     internal readonly struct MethodKey
     {

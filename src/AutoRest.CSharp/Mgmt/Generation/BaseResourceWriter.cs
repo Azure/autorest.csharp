@@ -21,14 +21,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             This = baseResource;
         }
 
-        private readonly Parameter _resourceIdParameter = new Parameter(
-            Name: "id",
-            Description: null,
-            Type: typeof(ResourceIdentifier),
-            DefaultValue: null,
-            Validation: ValidationType.AssertNotNull,
-            Initializer: null);
-
         protected override void WriteStaticMethods()
         {
             base.WriteStaticMethods();
@@ -69,7 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (_writer.WriteMethodDeclaration(option.MethodSignature))
                 {
                     _writer.LineRaw("// checking the resource type");
-                    using (_writer.Scope($"if (id.ResourceType != {resource.Type.Name}.ResourceType)"))
+                    using (_writer.Scope($"if ({option.IdParameter.Name}.ResourceType != {resource.Type.Name}.ResourceType)"))
                     {
                         _writer.LineRaw("return false;");
                     }
@@ -77,17 +69,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // TODO -- check scope resource type
                     if (option.ScopeResourceTypeConstraint != null)
                     {
-                        _writer.LineRaw("// TODO -- checking the resource scope");
-                        //using (_writer.Scope($"if ({})"))
-                        //{
-                        //}
+                        _writer.LineRaw("// checking the resource scope");
+                        using (_writer.Scope($"if ({option.ScopeResourceTypeConstraint.ScopePathGetter}.ResourceType != {option.ScopeResourceTypeConstraint.ScopeResourceType.SerializedType:L})"))
+                        {
+                            _writer.LineRaw("return false;");
+                        }
                     }
 
                     // check the name constraint
                     if (option.ResourceNameConstraint != null)
                     {
                         _writer.LineRaw("// checking the resource name");
-                        using (_writer.Scope($"if (id.Name != {option.ResourceNameConstraint.Value.ConstantValue:L})"))
+                        using (_writer.Scope($"if ({option.IdParameter.Name}.Name != {option.ResourceNameConstraint.Value.ConstantValue:L})"))
                         {
                             _writer.LineRaw("return false;");
                         }

@@ -40,7 +40,11 @@ namespace Azure.ResourceManager.Sample
             {
                 return false;
             }
-            // TODO -- checking the resource scope
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
             return true;
         }
 
@@ -51,7 +55,11 @@ namespace Azure.ResourceManager.Sample
             {
                 return false;
             }
-            // TODO -- checking the resource scope
+            // checking the resource scope
+            if (id.Parent.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
             return true;
         }
 
