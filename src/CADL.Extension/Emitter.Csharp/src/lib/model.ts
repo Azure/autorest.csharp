@@ -2,18 +2,19 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
-    EnumMemberType,
-    EnumType,
+    Enum,
+    EnumMember,
     getDoc,
+    getEffectiveModelType,
     getFormat,
     getFriendlyName,
     getIntrinsicModelName,
     getKnownValues,
     getVisibility,
     isIntrinsic,
-    ModelType,
-    ModelTypeProperty,
-    NamespaceType,
+    Model,
+    ModelProperty,
+    Namespace,
     NeverType,
     Program,
     Type
@@ -111,7 +112,7 @@ export function mapCadlTypeToCSharpInputTypeKind(
  */
 export function mapCadlIntrinsicModelToCsharpModel(
     program: Program,
-    cadlType: ModelType
+    cadlType: Model
 ): string | undefined {
     if (!isIntrinsic(program, cadlType)) {
         return undefined;
@@ -170,21 +171,12 @@ export function mapCadlIntrinsicModelToCsharpModel(
 export function getEffectiveSchemaType(program: Program, type: Type): Type {
     let target = type;
     if (type.kind === "Model" && !type.name) {
-        const effective = program.checker.getEffectiveModelType(
+        const effective = getEffectiveModelType(program,
             type,
             isSchemaProperty
         );
         if (effective.name) {
             target = effective;
-        }
-    }
-
-    /* handle azure template model. */
-    if (target.kind === "Model" && target.templateArguments) {
-        for (const arg of target.templateArguments) {
-            if (arg.kind === "Model") {
-                return getEffectiveSchemaType(program, arg) as ModelType;
-            }
         }
     }
 
@@ -196,7 +188,7 @@ export function getEffectiveSchemaType(program: Program, type: Type): Type {
      * Headers, parameters, status codes are not schema properties even they are
      * represented as properties in Cadl.
      */
-    function isSchemaProperty(property: ModelTypeProperty) {
+    function isSchemaProperty(property: ModelProperty) {
         const headerInfo = getHeaderFieldName(program, property);
         const queryInfo = getQueryParamName(program, property);
         const pathInfo = getPathParamName(program, property);
@@ -255,7 +247,7 @@ export function getInputType(
         } as InputType;
     }
 
-    function getInputModelType(m: ModelType): InputType {
+    function getInputModelType(m: Model): InputType {
         const intrinsicName = getIntrinsicModelName(program, m);
         if (intrinsicName && intrinsicName === "string") {
             const values = getKnownValues(program, m);
@@ -297,8 +289,8 @@ export function getInputType(
     }
 
     function getInputModelForExtensibleEnum(
-        m: ModelType,
-        e: EnumType
+        m: Model,
+        e: Enum
     ): InputEnumType {
         let extensibleEnum = enums.get(m.name);
         if (!extensibleEnum) {
@@ -324,31 +316,32 @@ export function getInputType(
     }
 
     function getInputTypeForEnum(
-        e: EnumType,
+        e: Enum,
         addToCollection: boolean = true
     ): InputEnumType {
         let enumType = enums.get(e.name);
         if (!enumType) {
-            if (e.members.length == 0) {
+            if (e.members.size == 0) {
                 throw new Error(
                     `Enum type '${e.name}' doesn't define any values.`
                 );
             }
             const allowValues: InputEnumTypeValue[] = [];
-            const enumValueType = enumMemberType(e.members[0]);
+            const enumValueType = enumMemberType(e.members.entries().next().value);
 
-            for (const option of e.members) {
-                if (enumValueType !== enumMemberType(option)) {
-                    // TODO: add error handler
-                    continue;
+            for (const key of e.members.keys()) {
+                const option = e.members.get(key);
+                if (!option) {
+                    throw Error(`No member value for $key`);
                 }
-
+                if (enumValueType !== enumMemberType(option)) {
+                    throw new Error("The enum member value type is not consistent.");
+                }
                 const member = {
-                    Name: option.name,
-                    Value: option.value ?? option.name,
-                    Description: getDoc(program, option)
+                    Name: key,
+                    Value: option.value ?? option?.name,
+                    Description: getDoc(program, option),
                 } as InputEnumTypeValue;
-
                 allowValues.push(member);
             }
 
@@ -366,7 +359,7 @@ export function getInputType(
         }
         return enumType;
 
-        function enumMemberType(member: EnumMemberType): string {
+        function enumMemberType(member: EnumMember): string {
             if (typeof member.value === "number") {
                 return "Int32";
             }
@@ -391,8 +384,8 @@ export function getInputType(
         } as InputDictionaryType;
     }
 
-    function getInputModelForModel(m: ModelType): InputModelType {
-        m = getEffectiveSchemaType(program, m) as ModelType;
+    function getInputModelForModel(m: Model): InputModelType {
+        m = getEffectiveSchemaType(program, m) as Model;
         const name = getFriendlyName(program, m) ?? m.name;
         let model = models.get(name);
         if (!model) {
@@ -433,7 +426,7 @@ export function getInputType(
     }
 
     function getDiscriminatorValue(
-        m: ModelType,
+        m: Model,
         baseModel?: InputModelType
     ): string | undefined {
         const discriminatorPropertyName = baseModel?.DiscriminatorPropertyName;
@@ -451,11 +444,11 @@ export function getInputType(
     }
 
     function addModelProperties(
-        inputProperties: Map<string, ModelTypeProperty>,
+        inputProperties: Map<string, ModelProperty>,
         outputProperties: InputModelProperty[],
         discriminatorPropertyName?: string
     ): void {
-        inputProperties.forEach((value: ModelTypeProperty, key: string) => {
+        inputProperties.forEach((value: ModelProperty, key: string) => {
             if (value.name !== discriminatorPropertyName) {
                 const vis = getVisibility(program, value);
                 let isReadOnly: boolean = false;
@@ -476,7 +469,7 @@ export function getInputType(
         });
     }
 
-    function getInputModelBaseType(m?: ModelType): InputModelType | undefined {
+    function getInputModelBaseType(m?: Model): InputModelType | undefined {
         if (!m) {
             return undefined;
         }
@@ -495,13 +488,13 @@ export function getInputType(
         return getInputModelForModel(m);
     }
 
-    function getFullNamespaceString(namespace: NamespaceType | undefined): string {
+    function getFullNamespaceString(namespace: Namespace | undefined): string {
         if (!namespace || !namespace.name) {
             return "";
         }
 
         let namespaceString: string = namespace.name;
-        let current: NamespaceType | undefined = namespace.namespace;
+        let current: Namespace | undefined = namespace.namespace;
         while (current && current.name) {
             namespaceString = `${current.name}.${namespaceString}`;
             current = current.namespace;
