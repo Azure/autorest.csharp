@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.Output.Models
             var clientNamePrefix = ClientBuilder.GetClientPrefix(ns.Name, rootNamespaceName);
             var clientNamespace = Configuration.Namespace ?? rootNamespaceName;
             var clientDescription = ns.Description;
-            var operations = ns.Operations;
+            var operations = UpdateOperations(ns.Operations);
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
             var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any();
@@ -131,6 +131,47 @@ namespace AutoRest.CSharp.Output.Models
             clientName = existingType.Name;
             clientNamespace = existingType.ContainingNamespace.ToDisplayString();
             return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters);
+        }
+
+        private static IReadOnlyList<InputOperation> UpdateOperations(IReadOnlyList<InputOperation> originalOperations)
+        {
+            var operations = new List<InputOperation>(originalOperations.Count);
+            foreach (var operation in originalOperations)
+            {
+                if (operation.Paging != null)
+                {
+                    operations.Add(operation with { Parameters = UpdateOperationParameters(operation.Parameters) });
+                }
+                else
+                {
+                    operations.Add(operation);
+                }
+            }
+            return operations;
+        }
+
+        private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
+        {
+            // if there is already "maxCount", we keep "top" as is
+            if (operationParameters.Select(p => p.Name).Any(n => n.Equals("maxCount", StringComparison.OrdinalIgnoreCase)))
+            {
+                return operationParameters;
+            }
+
+            var parameters = new List<InputParameter>(operationParameters.Count);
+            foreach (var parameter in operationParameters)
+            {
+                if (parameter.Name.Equals("top", StringComparison.OrdinalIgnoreCase))
+                {
+                    parameters.Add(parameter with { Name = "maxCount" });
+                }
+                else
+                {
+                    parameters.Add(parameter);
+                }
+            }
+
+            return parameters;
         }
 
         private IReadOnlyList<ClientInfo> SetHierarchy(IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
