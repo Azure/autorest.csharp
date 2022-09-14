@@ -50,6 +50,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         private OperationSource? _operationSourece;
         public OperationSource? OperationSource => _operationSourece ??= GetOperationSource();
 
+        private OperationSource? _coreOperationSource;
+        public OperationSource? CoreOperationSource => _coreOperationSource ??= GetCoreOperationSource();
+
         public LongRunningInterimOperation? InterimOperation { get; }
 
         private Func<bool, FormattableString>? _returnsDescription;
@@ -161,26 +164,33 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (IsFakeLongRunningOperation)
                 return null;
 
-            OperationSource? operationSource;
+            if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
+            {
+                MgmtContext.Library.CSharpTypeToResource.TryGetValue(MgmtReturnType, out var resourceBeingReturned);
+                operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
+                MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
+            }
+            return operationSource;
+        }
+
+        private OperationSource? GetCoreOperationSource()
+        {
+            if (!IsLongRunningOperation)
+                return null;
+
+            if (MgmtReturnType is null)
+                return null;
+
+            if (IsFakeLongRunningOperation)
+                return null;
+
+            OperationSource? operationSource = null;
             if (IsCommonOperation(out var baseResource))
             {
                 if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(baseResource.Type, out operationSource))
                 {
                     operationSource = new OperationSource(baseResource.Type, baseResource, FinalResponseSchema!);
                     MgmtContext.Library.CSharpTypeToOperationSource.Add(baseResource.Type, operationSource);
-                }
-            }
-            else if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out operationSource))
-            {
-                if (MgmtContext.Library.CSharpTypeToResource.TryGetValue(MgmtReturnType, out var resourceBeingReturned))
-                {
-                    operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
-                    MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
-                }
-                else
-                {
-                    operationSource = new OperationSource(MgmtReturnType, null, FinalResponseSchema!);
-                    MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
                 }
             }
             return operationSource;

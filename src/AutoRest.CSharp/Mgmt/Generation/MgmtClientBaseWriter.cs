@@ -926,10 +926,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                if (operation.OperationSource is not null)
+                var operationSource = operation.CoreOperationSource ?? operation.OperationSource;
+                if (operationSource is not null)
                 {
-                    _writer.Append($"new {operation.OperationSource.TypeName}(");
-                    if (MgmtContext.Library.CSharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
+                    _writer.Append($"new {operationSource.TypeName}(");
+                    if (operationSource.IsReturningResource)
                         _writer.Append($"{ArmClientReference}");
                     _writer.Append($"), ");
                 }
