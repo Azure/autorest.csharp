@@ -47,7 +47,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string? Description => _description ??= Method.Description;
         public IEnumerable<Parameter> Parameters => Method.Parameters;
 
-        public OperationSource? OperationSource => GetOperationSource();
+        private OperationSource? _operationSourece;
+        public OperationSource? OperationSource => _operationSourece ??= GetOperationSource();
 
         public LongRunningInterimOperation? InterimOperation { get; }
 

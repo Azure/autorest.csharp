@@ -223,7 +223,11 @@ namespace Azure.ResourceManager.Sample
         public new virtual async Task<ArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource>> UpdateAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
             var value = await UpdateCoreAsync(waitUntil, extensionParameters, cancellationToken);
-            throw new InvalidOperationException();
+            if (waitUntil == WaitUntil.Completed)
+            {
+                return new SampleArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource>(Response.FromValue((VirtualMachineScaleSetVirtualMachineExtensionResource)value.Value, value.GetRawResponse()));
+            }
+            throw new NotSupportedException();
         }
 
         /// <summary> placeholder. </summary>
@@ -265,7 +269,11 @@ namespace Azure.ResourceManager.Sample
         public new virtual ArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource> Update(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
             var value = UpdateCore(waitUntil, extensionParameters, cancellationToken);
-            throw new InvalidOperationException();
+            if (waitUntil == WaitUntil.Completed)
+            {
+                return new SampleArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource>(Response.FromValue((VirtualMachineScaleSetVirtualMachineExtensionResource)value.Value, value.GetRawResponse()));
+            }
+            throw new NotSupportedException();
         }
 
         /// <summary> placeholder. </summary>

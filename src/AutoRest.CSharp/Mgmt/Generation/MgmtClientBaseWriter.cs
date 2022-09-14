@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         protected const string EndpointProperty = "Endpoint";
         protected delegate void WriteMethodDelegate(MgmtClientOperationWrapper clientOperation, Diagnostic diagnostic, bool isAsync);
-        private string LibraryArmOperation { get; }
+        protected string LibraryArmOperation { get; }
         protected bool IsArmCore { get; }
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
