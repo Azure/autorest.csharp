@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -17,11 +18,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class PolymorphicResourceWriter : ResourceWriter
     {
-        private Resource This { get; }
         private BaseResource BaseResource { get; }
         public PolymorphicResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
         {
-            This = resource;
             Debug.Assert(resource.PolymorphicOption != null);
             BaseResource = resource.PolymorphicOption.BaseResource;
         }
@@ -86,20 +85,31 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteStaticValidate($"ResourceType");
         }
 
+        private bool IsCommonOperation(MgmtClientOperation? clientOperation, [MaybeNullWhen(false)] out MgmtCommonOperation commonOperation)
+        {
+            if (clientOperation == null)
+            {
+                commonOperation = null;
+                return false;
+            }
+            // check if this operation is included in one of the common operation
+            commonOperation = BaseResource.CommonOperations.FirstOrDefault(operation => operation.Contains(clientOperation));
+            return commonOperation != null;
+        }
+
         protected override void WriteMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             // check if this operation is included in one of the common operation
-            var commonOperation = BaseResource.CommonOperations.FirstOrDefault(operation => operation.Contains(clientOperation));
-            if (commonOperation == null)
-            {
-                base.WriteMethod(clientOperation, isAsync);
-            }
-            else
+            if (IsCommonOperation(clientOperation, out var commonOperation))
             {
                 // this method writes two methods
                 // first is the override of the abstract Core method
                 // the other is the non-virtual actual method which calls the Core method and wrap the result again
                 WritePolymorphicMethod(clientOperation, commonOperation, isAsync);
+            }
+            else
+            {
+                base.WriteMethod(clientOperation, isAsync);
             }
         }
 
@@ -164,6 +174,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             _writer.Line();
+        }
+
+        protected override string GetUpdateMethodName()
+        {
+            if (IsCommonOperation(This.UpdateOperation, out var commonOperation))
+            {
+                return $"{base.GetUpdateMethodName()}Core";
+            }
+            else
+            {
+                return base.GetUpdateMethodName();
+            }
         }
     }
 }

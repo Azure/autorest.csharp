@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return new PolymorphicResourceWriter(writer, resource);
         }
 
-        private Resource This { get; }
+        protected Resource This { get; }
 
         public ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
         {
@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (This.UpdateOperation is null && This.CreateOperation is null)
                 throw new InvalidOperationException($"Unexpected null update method for resource {This.ResourceName} while its marked as taggable");
             MgmtClientOperation operation = (This.UpdateOperation ?? This.CreateOperation)!;
-            var updateMethodName = This.UpdateOperation is null ? This.IsSingleton ? "CreateOrUpdate" : "Update" : This.UpdateOperation.Name;
+            var updateMethodName = GetUpdateMethodName();
 
             var configureStr = isAsync ? ".ConfigureAwait(false)" : String.Empty;
             var awaitStr = isAsync ? "await " : String.Empty;
@@ -306,5 +306,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var resource = MgmtContext.Library.CSharpTypeToResource[operation.ReturnType.UnWrapResponse()];
             _writer.Line($"return {typeof(Response)}.FromValue({GetNewResourceInstanceExpression(resource, needFactoryMethod)}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
         }
+
+        protected virtual string GetUpdateMethodName() => This.UpdateOperation is null ? This.IsSingleton ? "CreateOrUpdate" : "Update" : This.UpdateOperation.Name;
     }
 }

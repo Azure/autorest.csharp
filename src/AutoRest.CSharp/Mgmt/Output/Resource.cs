@@ -246,10 +246,14 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public ResourceData ResourceData { get; }
 
-        public MgmtClientOperation? CreateOperation => GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
-        public MgmtClientOperation GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
-        public MgmtClientOperation? DeleteOperation => GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
-        public MgmtClientOperation? UpdateOperation => GetOperationWithVerb(HttpMethod.Patch, "Update");
+        private MgmtClientOperation? _createOperation;
+        private MgmtClientOperation? _getOperation;
+        private MgmtClientOperation? _deleteOperation;
+        private MgmtClientOperation? _updateOperation;
+        public MgmtClientOperation? CreateOperation => _createOperation ??= GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
+        public MgmtClientOperation GetOperation => _getOperation ??= GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
+        public MgmtClientOperation? DeleteOperation => _deleteOperation ??= GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
+        public MgmtClientOperation? UpdateOperation => _updateOperation ??= GetOperationWithVerb(HttpMethod.Patch, "Update");
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
