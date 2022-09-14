@@ -39,16 +39,19 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
+        /// <summary>
+        /// Because our serialization only support a limited list of TypeProviders (Resource or BaseResource is not supported), we need to ensure the CSharpType we returned here has an implementation of a valid type provider
+        /// </summary>
+        /// <param name="returnType"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
         private static CSharpType GetSerializationType(CSharpType returnType, MgmtTypeProvider? provider)
         {
-            if (provider == null)
-                return returnType;
-
-            if (provider is Resource resource && resource.Type.Equals(returnType))
-                return resource.ResourceData.Type;
-
-            if (provider is BaseResource baseResource && baseResource.Type.Equals(returnType))
+            if (provider is BaseResource baseResource)
                 return baseResource.ResourceData.Type;
+
+            if (provider is Resource resource)
+                return resource.ResourceData.Type;
 
             return returnType;
         }

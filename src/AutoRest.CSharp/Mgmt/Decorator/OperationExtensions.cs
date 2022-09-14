@@ -226,8 +226,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))
                 return cacheResult;
 
-            var resourceType = operation.GetRequestPath().GetResourceType();
-            var candidates = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType));
+            // we expand the path here to ensure the resource types we are dealing with here are all constants (at least ensure they are constants when we are expecting to find a resource)
+            var requestPaths = operation.GetRequestPath().Expand();
+            var candidates = new List<Resource>();
+            foreach (var path in requestPaths)
+            {
+                var resourceType = path.GetResourceType();
+                candidates.AddRange(MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType)));
+            }
 
             return candidates;
         }
