@@ -87,6 +87,23 @@ function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $deb
     Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
 }
 
+function Invoke-CadlSetup()
+{
+    # build emitter
+    $emitterPath = Join-Path $PSScriptRoot ".." "src" "CADL.Extension" "Emitter.Csharp"
+    $emitterPath = Resolve-Path -Path $emitterPath
+    Push-Location $emitterPath
+
+    Try 
+    {
+        npm run build
+    }
+    Finally 
+    {
+        Pop-Location
+    }
+}
+
 function Get-AutoRestProject()
 {
     $AutoRestPluginProject;

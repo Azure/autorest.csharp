@@ -307,6 +307,11 @@ if ($reset -or $env:TF_BUILD)
     {
         AutoRest-Reset;
     }
+
+    if ($cadlCount -gt 0) 
+    {
+        Invoke-CadlSetup
+    }
 }
 
 if (!$noBuild)
