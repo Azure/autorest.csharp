@@ -230,6 +230,22 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
         }
 
+        private static Resource? GetResourceFromRawPath(string resourcePath)
+        {
+            if (resourcePath == "null")
+                return null;
+
+            var resources = MgmtContext.Library.ArmResources.Where(resource => resource.RequestPath == resourcePath).ToList();
+
+            if (resources.Count == 0)
+                throw new InvalidOperationException($"Cannot find a resource corresponding to path {resourcePath} as configured in the configuration");
+
+            if (resources.Count > 1)
+                throw new InvalidOperationException($"Find multiple resources corresponding to path {resourcePath} as configured in the configuration: {string.Join(", ", resources.Select(r => r.Type.Name))}");
+
+            return resources[0];
+        }
+
         internal enum ResourceMatchType
         {
             Exact,
@@ -243,6 +259,11 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private Resource? GetResourceMatch(MgmtRestClient restClient, RestClientMethod method, RequestPath requestPath)
         {
+            if (Configuration.MgmtConfiguration.OperationToResourceMapping.TryGetValue(OperationId, out var resourcePath))
+            {
+                return GetResourceFromRawPath(resourcePath);
+            }
+
             if (restClient.Resources.Count == 1)
                 return restClient.Resources[0];
 
@@ -263,10 +284,9 @@ namespace AutoRest.CSharp.Mgmt.Models
                 }
             }
 
-            FormattableString errorText = (FormattableString)$"{restClient.Type.Name}.{method.Name}";
             foreach (ResourceMatchType? matchType in Enum.GetValues(typeof(ResourceMatchType)))
             {
-                var resource = GetMatch(matchType!.Value, matches, errorText);
+                var resource = GetMatch(matchType!.Value, matches);
 
                 if (resource is not null)
                     return resource;
@@ -274,21 +294,16 @@ namespace AutoRest.CSharp.Mgmt.Models
             return null;
         }
 
-        private Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, FormattableString error)
+        private Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches)
         {
             if (!matches.TryGetValue(matchType, out var matchTypeMatches))
                 return null;
 
-            var first = matchTypeMatches.First();
             if (matchTypeMatches.Count == 1)
-                return first;
+                return matchTypeMatches.First();
 
-            var parent = first.Parent().First();
-            if (parent is not null && AllMatchesSameParent(matchTypeMatches, parent, out bool areAllSingleton) && areAllSingleton)
-                return parent as Resource;
-
-            //this throw catches anything we do not expect if it ever fires it means our logic is either incomplete or we need a directive to adjust the request paths
-            throw new InvalidOperationException($"Found more than 1 candidate for {error}, results were ({string.Join(',', matchTypeMatches.Select(r => r.Type.Name))})");
+            // TODO -- return null here with a warning since this is configurable
+            return null;
         }
 
         private bool AllMatchesSameParent(HashSet<Resource> matches, MgmtTypeProvider parent, out bool areAllSingleton)
