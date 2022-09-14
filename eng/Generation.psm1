@@ -87,48 +87,6 @@ function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $deb
     Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
 }
 
-function Invoke-CadlSetup()
-{
-    # build emitter
-    $emitterPath = Join-Path $PSScriptRoot ".." "src" "CADL.Extension" "Emitter.Csharp"
-    $emitterPath = Resolve-Path -Path $emitterPath
-    Push-Location $emitterPath
-    Try 
-    {
-        npm ci
-        npm run build
-        npm pack
-    }
-    Finally 
-    {
-        Pop-Location
-    }
-
-    # install cadl and emitter
-    $repoRoot = Join-Path $PSScriptRoot ".."
-    $repoRoot = Resolve-Path $repoRoot
-    Push-Location $repoRoot
-    Try 
-    {
-        npm ci
-        $packages = Get-ChildItem $repoRoot -Filter azure-tools-cadl-csharp-*.tgz -Recurse | Select-Object -ExpandProperty FullName | Resolve-Path -Relative
-        if ($packages) 
-        {
-            $package = $packages;
-            if ($packages.count -gt 1)
-            {
-                $package = $packages[0]
-            }
-            npm install $package
-        }
-        git checkout $repoRoot/package.json
-        git checkout $repoRoot/package-lock.json
-    }
-    Finally 
-    {
-        Pop-Location
-    }
-}
 function Get-AutoRestProject()
 {
     $AutoRestPluginProject;
