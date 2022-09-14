@@ -227,7 +227,8 @@ namespace Azure.ResourceManager.Sample
             {
                 return new SampleArmOperation<VirtualMachineExtensionResource>(Response.FromValue((VirtualMachineExtensionResource)value.Value, value.GetRawResponse()));
             }
-            throw new NotSupportedException();
+            var operation = new SampleArmOperation<VirtualMachineExtensionResource>(new VirtualMachineExtensionOperationSource(Client), _virtualMachineExtensionClientDiagnostics, Pipeline, _virtualMachineExtensionRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters).Request, value.GetRawResponse(), OperationFinalStateVia.Location);
+            return operation;
         }
 
         /// <summary> placeholder. </summary>
@@ -273,7 +274,8 @@ namespace Azure.ResourceManager.Sample
             {
                 return new SampleArmOperation<VirtualMachineExtensionResource>(Response.FromValue((VirtualMachineExtensionResource)value.Value, value.GetRawResponse()));
             }
-            throw new NotSupportedException();
+            var operation = new SampleArmOperation<VirtualMachineExtensionResource>(new VirtualMachineExtensionOperationSource(Client), _virtualMachineExtensionClientDiagnostics, Pipeline, _virtualMachineExtensionRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters).Request, value.GetRawResponse(), OperationFinalStateVia.Location);
+            return operation;
         }
 
         /// <summary> placeholder. </summary>

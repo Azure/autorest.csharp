@@ -227,7 +227,8 @@ namespace Azure.ResourceManager.Sample
             {
                 return new SampleArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource>(Response.FromValue((VirtualMachineScaleSetVirtualMachineExtensionResource)value.Value, value.GetRawResponse()));
             }
-            throw new NotSupportedException();
+            var operation = new SampleArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource>(new VirtualMachineScaleSetVirtualMachineExtensionOperationSource(Client), _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics, Pipeline, _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVMExtensionsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, extensionParameters).Request, value.GetRawResponse(), OperationFinalStateVia.Location);
+            return operation;
         }
 
         /// <summary> placeholder. </summary>
@@ -273,7 +274,8 @@ namespace Azure.ResourceManager.Sample
             {
                 return new SampleArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource>(Response.FromValue((VirtualMachineScaleSetVirtualMachineExtensionResource)value.Value, value.GetRawResponse()));
             }
-            throw new NotSupportedException();
+            var operation = new SampleArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource>(new VirtualMachineScaleSetVirtualMachineExtensionOperationSource(Client), _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics, Pipeline, _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVMExtensionsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, extensionParameters).Request, value.GetRawResponse(), OperationFinalStateVia.Location);
+            return operation;
         }
 
         /// <summary> placeholder. </summary>

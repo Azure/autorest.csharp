@@ -895,10 +895,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            WriteLROResponse(returnType, GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, async, useFactoryMethod);
+            WriteLROResponse(returnType, GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, operation.CoreOperationSource ?? operation.OperationSource, async, useFactoryMethod);
         }
 
-        protected virtual void WriteLROResponse(CSharpType returnType, string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async, bool useFactoryMethod)
+        protected virtual void WriteLROOperationInstantiation(CSharpType returnType, string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, OperationSource? operationSource, bool isAsync, bool useFactoryMethod)
+        {
+
+        }
+
+        protected virtual void WriteLROResponse(CSharpType returnType, string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, OperationSource? operationSource, bool isAsync, bool useFactoryMethod)
         {
             if (operation.InterimOperation is not null)
             {
@@ -926,7 +931,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                var operationSource = operation.CoreOperationSource ?? operation.OperationSource;
                 if (operationSource is not null)
                 {
                     _writer.Append($"new {operationSource.TypeName}(");
@@ -945,7 +949,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     "WaitForCompletionResponse" :
                     "WaitForCompletion";
             _writer.Line($"if (waitUntil == {typeof(WaitUntil)}.Completed)");
-            _writer.Line($"{GetAwait(async)} operation.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"{GetAwait(isAsync)} operation.{CreateMethodName(waitForCompletionMethod, isAsync)}(cancellationToken){GetConfigureAwait(isAsync)};");
             _writer.Line($"return operation;");
         }
         #endregion
