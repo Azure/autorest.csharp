@@ -8,6 +8,7 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    ModelType,
     ModelTypeProperty,
     OperationType,
     Program,
@@ -39,7 +40,11 @@ import {
 } from "./type/InputType.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
-import { getDefaultValue, getInputType } from "./lib/model.js";
+import {
+    getDefaultValue,
+    getEffectiveSchemaType,
+    getInputType
+} from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
 import {
@@ -129,13 +134,41 @@ function createModel(program: Program): any {
         console.error("No API-Version provided.");
         return;
     }
+
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(program, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
 
-    const apiVersions: string[] = [];
-    apiVersions.push(version);
+    const apiVersions: Set<string> = new Set<string>();
+    apiVersions.add(version);
+    const apiVersionParam: InputParameter = {
+        Name: "apiVersion",
+        NameInRequest: "api-version",
+        Description: "",
+        Type: {
+            Name: "String",
+            Kind: InputTypeKind.String,
+            IsNullable: false
+        } as InputPrimitiveType,
+        Location: RequestLocation.Query,
+        IsRequired: true,
+        IsApiVersion: true,
+        IsContentType: false,
+        IsEndpoint: false,
+        IsResourceParameter: false,
+        SkipUrlEncoding: false,
+        Explode: false,
+        Kind: InputOperationParameterKind.Client,
+        DefaultValue: {
+            Type: {
+                Name: "String",
+                Kind: InputTypeKind.String,
+                IsNullable: false
+            } as InputPrimitiveType,
+            Value: version
+        } as InputConstant
+    };
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
@@ -179,10 +212,6 @@ function createModel(program: Program): any {
             }
         }
 
-        const hasNoConvenienceApiDecorators = routes.every(
-            (u) => !getExtensions(program, u.operation).has(convenienceApiKey)
-        );
-
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
             if (!isSupportedOperation(operation)) continue;
@@ -209,8 +238,7 @@ function createModel(program: Program): any {
                 url,
                 endPointParam,
                 modelMap,
-                enumMap,
-                hasNoConvenienceApiDecorators
+                enumMap
             );
             if (
                 contentTypeParameter &&
@@ -231,13 +259,43 @@ function createModel(program: Program): any {
                 )
             )
                 op.Parameters.push(acceptParameter);
+            const apiVersionInOperation = op.Parameters.find(
+                (value) => value.IsApiVersion
+            );
+            if (apiVersionInOperation) {
+                if (apiVersionInOperation.DefaultValue?.Value) {
+                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
+                }
+            }
             client.Operations.push(op);
+        }
+        if (apiVersions.size > 1) {
+            apiVersionParam.Kind = InputOperationParameterKind.Constant;
+        }
+        for (const client of clients) {
+            for (const op of client.Operations) {
+                const apiVersionInOperation = op.Parameters.find(
+                    (value) => value.IsApiVersion
+                );
+                if (apiVersionInOperation) {
+                    if (apiVersions.size > 1) {
+                        apiVersionInOperation.Kind =
+                            InputOperationParameterKind.Constant;
+                    }
+                    if (!apiVersionInOperation.DefaultValue) {
+                        apiVersionInOperation.DefaultValue =
+                            apiVersionParam.DefaultValue;
+                    }
+                } else {
+                    op.Parameters.push(apiVersionParam);
+                }
+            }
         }
 
         const clientModel = {
             Name: namespace,
             Description: description,
-            ApiVersions: apiVersions,
+            ApiVersions: Array.from(apiVersions.values()),
             Enums: Array.from(enumMap.values()),
             Models: Array.from(modelMap.values()),
             Clients: clients,
@@ -357,8 +415,7 @@ function loadOperation(
     uri: string,
     endpoint: InputParameter | undefined = undefined,
     models: Map<string, InputModelType>,
-    enums: Map<string, InputEnumType>,
-    hasNoConvenienceApiDecorators: boolean
+    enums: Map<string, InputEnumType>
 ): InputOperation {
     const {
         path: fullPath,
@@ -377,11 +434,18 @@ function loadOperation(
         parameters.push(loadOperationParameter(program, p));
     }
 
-    const bodyType = cadlParameters.bodyType;
-    const bodyParam = cadlParameters.bodyParameter;
-
-    if (bodyType && bodyParam) {
-        parameters.push(loadBodyParameter(program, bodyParam));
+    if (cadlParameters.bodyParameter) {
+        parameters.push(
+            loadBodyParameter(program, cadlParameters.bodyParameter)
+        );
+    } else if (cadlParameters.bodyType) {
+        const effectiveBodyType = getEffectiveSchemaType(
+            program,
+            cadlParameters.bodyType
+        );
+        if (effectiveBodyType.kind === "Model") {
+            parameters.push(loadBodyParameter(program, effectiveBodyType));
+        }
     }
 
     const responses: OperationResponse[] = [];
@@ -400,10 +464,10 @@ function loadOperation(
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const generateConvenienceMethod =
-        requestMethod !== RequestMethod.PATCH &&
-        (hasNoConvenienceApiDecorators ||
-            getExtensions(program, op).get(convenienceApiKey));
+    const convenienceApiDecorator: boolean =
+        getExtensions(program, op).get(convenienceApiKey) ?? false;
+    const generateConvenienceMethod: boolean =
+        requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
 
     return {
         Name: op.name,
@@ -442,11 +506,16 @@ function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
+        const isApiVersion: boolean =
+            requestLocation === RequestLocation.Query &&
+            name.toLocaleLowerCase() === "api-version";
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
+            : isApiVersion
+            ? InputOperationParameterKind.Client
             : InputOperationParameterKind.Method;
         return {
             Name: param.name,
@@ -456,11 +525,11 @@ function loadOperation(
             Location: requestLocation,
             DefaultValue: defaultValue,
             IsRequired: !param.optional,
-            IsApiVersion: false,
+            IsApiVersion: isApiVersion,
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
-            SkipUrlEncoding: true,
+            SkipUrlEncoding: false, //TODO: retrieve out value from extension
             Explode: false,
             Kind: kind
         } as InputParameter;
@@ -468,25 +537,25 @@ function loadOperation(
 
     function loadBodyParameter(
         program: Program,
-        body: ModelTypeProperty
+        body: ModelTypeProperty | ModelType
     ): InputParameter {
-        const { type, name, model: cadlType } = body;
+        const type = body.kind === "Model" ? body : body.type;
         const inputType: InputType = getInputType(program, type, models, enums);
         const requestLocation = RequestLocation.Body;
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: name,
-            NameInRequest: name,
+            Name: body.name,
+            NameInRequest: body.name,
             Description: getDoc(program, body),
             Type: inputType,
             Location: requestLocation,
-            IsRequired: !body.optional,
+            IsRequired: body.kind === "Model" ? true : !body.optional,
             IsApiVersion: false,
             IsResourceParameter: false,
             IsContentType: false,
             IsEndpoint: false,
-            SkipUrlEncoding: true,
+            SkipUrlEncoding: false,
             Explode: false,
             Kind: kind
         } as InputParameter;
@@ -501,10 +570,11 @@ function loadOperation(
         }
         const status: number[] = [];
         status.push(Number(response.statusCode));
+        //TODO: what to do if more than 1 response?
         const body = response.responses[0]?.body;
         let type: InputType | undefined = undefined;
         if (body?.type) {
-            const cadlType = body.type;
+            const cadlType = getEffectiveSchemaType(program, body.type);
             const inputType: InputType = getInputType(
                 program,
                 cadlType,

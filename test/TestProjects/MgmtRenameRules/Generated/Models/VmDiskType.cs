@@ -10,7 +10,10 @@ using System.ComponentModel;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> VM disk types which are disallowed. </summary>
+    /// <summary>
+    /// VM disk types which are disallowed.
+    /// Serialized Name: VmDiskTypes
+    /// </summary>
     public readonly partial struct VmDiskType : IEquatable<VmDiskType>
     {
         private readonly string _value;
@@ -25,9 +28,15 @@ namespace MgmtRenameRules.Models
         private const string NoneValue = "None";
         private const string UnmanagedValue = "Unmanaged";
 
-        /// <summary> None. </summary>
+        /// <summary>
+        /// None
+        /// Serialized Name: VmDiskTypes.None
+        /// </summary>
         public static VmDiskType None { get; } = new VmDiskType(NoneValue);
-        /// <summary> Unmanaged. </summary>
+        /// <summary>
+        /// Unmanaged
+        /// Serialized Name: VmDiskTypes.Unmanaged
+        /// </summary>
         public static VmDiskType Unmanaged { get; } = new VmDiskType(UnmanagedValue);
         /// <summary> Determines if two <see cref="VmDiskType"/> values are the same. </summary>
         public static bool operator ==(VmDiskType left, VmDiskType right) => left.Equals(right);

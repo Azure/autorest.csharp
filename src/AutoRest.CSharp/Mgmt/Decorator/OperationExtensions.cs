@@ -235,6 +235,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 candidates.AddRange(MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType)));
             }
 
+            // When more than one candidate is found and all the segments in ResourceType is constant, it's possible that some unexpected resources are included.
+            // If this happen, We determine the right candidate by doing a further check on the scope request path.
+            if (candidates.Count() > 1 && resourceType.IsConstant)
+            {
+                return candidates.Where(resource => resource.RequestPath.GetScopePath().Equals(requestPath.GetScopePath()));
+            }
+
             return candidates;
         }
     }

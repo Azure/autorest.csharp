@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Thing",
-   "Namespace": "HeadClient",
+   "Namespace": "Cadl.HeadClient",
    "IsNullable": false,
    "Properties": [
     {
@@ -88,7 +88,7 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
       },
@@ -105,7 +105,7 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
       },
@@ -155,11 +155,42 @@
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "19",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "20",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "21",
+        "Type": {
+         "$id": "22",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "1.0.0"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "23",
        "StatusCodes": [
         204
        ],
@@ -175,30 +206,30 @@
       "image/jpeg"
      ],
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "20",
+     "$id": "24",
      "Name": "opWithContentTypeHead",
      "Parameters": [
       {
        "$ref": "7"
       },
       {
-       "$id": "21",
+       "$id": "25",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "22",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "27",
         "Type": {
-         "$ref": "22"
+         "$ref": "26"
         },
         "Value": "text/plain"
        },
@@ -207,12 +238,12 @@
        "IsResourceParameter": false,
        "IsContentType": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Constant"
       },
       {
-       "$id": "24",
+       "$id": "28",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -224,17 +255,20 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
       },
       {
        "$ref": "16"
+      },
+      {
+       "$ref": "19"
       }
      ],
      "Responses": [
       {
-       "$id": "25",
+       "$id": "29",
        "StatusCodes": [
         204
        ],
@@ -249,11 +283,11 @@
       "text/plain"
      ],
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "26"
+    "$id": "30"
    }
   }
  ]

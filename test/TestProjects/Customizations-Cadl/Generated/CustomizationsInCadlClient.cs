@@ -6,12 +6,10 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using CustomizationsInCadl;
 
 namespace GeneratedModels
 {
@@ -20,6 +18,7 @@ namespace GeneratedModels
     public partial class CustomizationsInCadlClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -40,32 +39,7 @@ namespace GeneratedModels
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-        }
-
-        /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
-        /// <param name="input"> The RootModel to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual async Task<Response<RootModel>> RoundTripAsync(RootModel input, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(input, nameof(input));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RoundTripAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(RootModel.FromResponse(response), response);
-        }
-
-        /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
-        /// <param name="input"> The RootModel to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual Response<RootModel> RoundTrip(RootModel input, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(input, nameof(input));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RoundTrip(input.ToRequestContent(), context);
-            return Response.FromValue(RootModel.FromResponse(response), response);
+            _apiVersion = options.Version;
         }
 
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
@@ -368,20 +342,10 @@ namespace GeneratedModels
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/inputToRoundTrip", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Content = content;
             return message;
-        }
-
-        private static RequestContext DefaultRequestContext = new RequestContext();
-        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

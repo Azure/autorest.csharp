@@ -9,7 +9,10 @@ using System;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Information about the current running state of the overall upgrade. </summary>
+    /// <summary>
+    /// Information about the current running state of the overall upgrade.
+    /// Serialized Name: RollingUpgradeRunningStatus
+    /// </summary>
     public partial class RollingUpgradeRunningStatus
     {
         /// <summary> Initializes a new instance of RollingUpgradeRunningStatus. </summary>
@@ -18,10 +21,22 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of RollingUpgradeRunningStatus. </summary>
-        /// <param name="code"> Code indicating the current status of the upgrade. </param>
-        /// <param name="startOn"> Start time of the upgrade. </param>
-        /// <param name="lastAction"> The last action performed on the rolling upgrade. </param>
-        /// <param name="lastActionOn"> Last action time of the upgrade. </param>
+        /// <param name="code">
+        /// Code indicating the current status of the upgrade.
+        /// Serialized Name: RollingUpgradeRunningStatus.code
+        /// </param>
+        /// <param name="startOn">
+        /// Start time of the upgrade.
+        /// Serialized Name: RollingUpgradeRunningStatus.startTime
+        /// </param>
+        /// <param name="lastAction">
+        /// The last action performed on the rolling upgrade.
+        /// Serialized Name: RollingUpgradeRunningStatus.lastAction
+        /// </param>
+        /// <param name="lastActionOn">
+        /// Last action time of the upgrade.
+        /// Serialized Name: RollingUpgradeRunningStatus.lastActionTime
+        /// </param>
         internal RollingUpgradeRunningStatus(RollingUpgradeStatusCode? code, DateTimeOffset? startOn, RollingUpgradeActionType? lastAction, DateTimeOffset? lastActionOn)
         {
             Code = code;
@@ -30,13 +45,25 @@ namespace MgmtRenameRules.Models
             LastActionOn = lastActionOn;
         }
 
-        /// <summary> Code indicating the current status of the upgrade. </summary>
+        /// <summary>
+        /// Code indicating the current status of the upgrade.
+        /// Serialized Name: RollingUpgradeRunningStatus.code
+        /// </summary>
         public RollingUpgradeStatusCode? Code { get; }
-        /// <summary> Start time of the upgrade. </summary>
+        /// <summary>
+        /// Start time of the upgrade.
+        /// Serialized Name: RollingUpgradeRunningStatus.startTime
+        /// </summary>
         public DateTimeOffset? StartOn { get; }
-        /// <summary> The last action performed on the rolling upgrade. </summary>
+        /// <summary>
+        /// The last action performed on the rolling upgrade.
+        /// Serialized Name: RollingUpgradeRunningStatus.lastAction
+        /// </summary>
         public RollingUpgradeActionType? LastAction { get; }
-        /// <summary> Last action time of the upgrade. </summary>
+        /// <summary>
+        /// Last action time of the upgrade.
+        /// Serialized Name: RollingUpgradeRunningStatus.lastActionTime
+        /// </summary>
         public DateTimeOffset? LastActionOn { get; }
     }
 }

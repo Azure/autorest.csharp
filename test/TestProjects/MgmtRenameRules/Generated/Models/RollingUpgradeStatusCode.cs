@@ -7,16 +7,31 @@
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Code indicating the current status of the upgrade. </summary>
+    /// <summary>
+    /// Code indicating the current status of the upgrade.
+    /// Serialized Name: RollingUpgradeStatusCode
+    /// </summary>
     public enum RollingUpgradeStatusCode
     {
-        /// <summary> RollingForward. </summary>
+        /// <summary>
+        /// RollingForward
+        /// Serialized Name: RollingUpgradeStatusCode.RollingForward
+        /// </summary>
         RollingForward,
-        /// <summary> Cancelled. </summary>
+        /// <summary>
+        /// Cancelled
+        /// Serialized Name: RollingUpgradeStatusCode.Cancelled
+        /// </summary>
         Cancelled,
-        /// <summary> Completed. </summary>
+        /// <summary>
+        /// Completed
+        /// Serialized Name: RollingUpgradeStatusCode.Completed
+        /// </summary>
         Completed,
-        /// <summary> Faulted. </summary>
+        /// <summary>
+        /// Faulted
+        /// Serialized Name: RollingUpgradeStatusCode.Faulted
+        /// </summary>
         Faulted
     }
 }

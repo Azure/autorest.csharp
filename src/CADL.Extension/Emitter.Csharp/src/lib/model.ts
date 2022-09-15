@@ -13,6 +13,7 @@ import {
     isIntrinsic,
     ModelType,
     ModelTypeProperty,
+    NamespaceType,
     NeverType,
     Program,
     Type
@@ -166,17 +167,28 @@ export function mapCadlIntrinsicModelToCsharpModel(
  * If type is an anonymous model, tries to find a named model that has the same
  * set of properties when non-schema properties are excluded.
  */
-function getEffectiveSchemaType(program: Program, type: Type): Type {
+export function getEffectiveSchemaType(program: Program, type: Type): Type {
+    let target = type;
     if (type.kind === "Model" && !type.name) {
         const effective = program.checker.getEffectiveModelType(
             type,
             isSchemaProperty
         );
         if (effective.name) {
-            return effective;
+            target = effective;
         }
     }
-    return type;
+
+    /* handle azure template model. */
+    if (target.kind === "Model" && target.templateArguments) {
+        for (const arg of target.templateArguments) {
+            if (arg.kind === "Model") {
+                return getEffectiveSchemaType(program, arg) as ModelType;
+            }
+        }
+    }
+
+    return target;
 
     /**
      * A "schema property" here is a property that is emitted to OpenAPI schema.
@@ -288,7 +300,7 @@ export function getInputType(
         m: ModelType,
         e: EnumType
     ): InputEnumType {
-        let extensibleEnum = enums.get(e.name);
+        let extensibleEnum = enums.get(m.name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
             if (!innerEnum) {
@@ -298,7 +310,7 @@ export function getInputType(
             }
             extensibleEnum = {
                 Name: m.name,
-                Namespace: e.namespace?.name,
+                Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
                 Description: getDoc(program, m),
                 EnumValueType: innerEnum.EnumValueType,
@@ -342,7 +354,7 @@ export function getInputType(
 
             enumType = {
                 Name: e.name,
-                Namespace: e.namespace?.name,
+                Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
@@ -389,7 +401,7 @@ export function getInputType(
 
             model = {
                 Name: name,
-                Namespace: m.namespace?.name,
+                Namespace: getFullNamespaceString(m.namespace),
                 Description: getDoc(program, m),
                 IsNullable: false,
                 DiscriminatorPropertyName: getDiscriminator(program, m)
@@ -481,5 +493,19 @@ export function getInputType(
         }
 
         return getInputModelForModel(m);
+    }
+
+    function getFullNamespaceString(namespace: NamespaceType | undefined): string {
+        if (!namespace || !namespace.name) {
+            return "";
+        }
+
+        let namespaceString: string = namespace.name;
+        let current: NamespaceType | undefined = namespace.namespace;
+        while (current && current.name) {
+            namespaceString = `${current.name}.${namespaceString}`;
+            current = current.namespace;
+        }
+        return namespaceString;
     }
 }

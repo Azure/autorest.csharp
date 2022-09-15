@@ -15,15 +15,15 @@ namespace ModelsInCadl
     public partial class CollectionItem
     {
         /// <summary> Initializes a new instance of CollectionItem. </summary>
-        /// <param name="requiredRecord"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredRecord"/> is null. </exception>
-        public CollectionItem(IDictionary<string, RecordItem> requiredRecord)
+        /// <param name="requiredModelRecord"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredModelRecord"/> is null. </exception>
+        public CollectionItem(IDictionary<string, RecordItem> requiredModelRecord)
         {
-            Argument.AssertNotNull(requiredRecord, nameof(requiredRecord));
+            Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
 
-            RequiredRecord = requiredRecord;
+            RequiredModelRecord = requiredModelRecord;
         }
 
-        public IDictionary<string, RecordItem> RequiredRecord { get; }
+        public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }

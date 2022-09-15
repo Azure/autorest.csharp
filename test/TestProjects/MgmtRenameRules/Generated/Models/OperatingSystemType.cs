@@ -7,12 +7,21 @@
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> The operating system of the osDiskImage. </summary>
+    /// <summary>
+    /// The operating system of the osDiskImage.
+    /// Serialized Name: OperatingSystemTypes
+    /// </summary>
     public enum OperatingSystemType
     {
-        /// <summary> Windows. </summary>
+        /// <summary>
+        /// Windows
+        /// Serialized Name: OperatingSystemTypes.Windows
+        /// </summary>
         Windows,
-        /// <summary> Linux. </summary>
+        /// <summary>
+        /// Linux
+        /// Serialized Name: OperatingSystemTypes.Linux
+        /// </summary>
         Linux
     }
 }
