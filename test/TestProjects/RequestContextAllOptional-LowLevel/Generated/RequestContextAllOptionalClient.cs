@@ -59,7 +59,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> No RequestBody and ResponseBody. </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="maxCount"> Query parameter top. </param>
+        /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -87,13 +87,13 @@ namespace RequestContextAllOptional_LowLevel
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
-        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? maxCount = null, int skip = 12, string status = "start", RequestContext context = null)
+        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, maxCount, skip, status, context);
+                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace RequestContextAllOptional_LowLevel
 
         /// <summary> No RequestBody and ResponseBody. </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="maxCount"> Query parameter top. </param>
+        /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -133,13 +133,13 @@ namespace RequestContextAllOptional_LowLevel
         /// Console.WriteLine(result.ToString());
         /// ]]></code>
         /// </example>
-        public virtual Response NoRequestBodyResponseBody(int id, int? maxCount = null, int skip = 12, string status = "start", RequestContext context = null)
+        public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, maxCount, skip, status, context);
+                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -493,7 +493,7 @@ namespace RequestContextAllOptional_LowLevel
             }
         }
 
-        internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int? maxCount, int skip, string status, RequestContext context)
+        internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int? top, int skip, string status, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -502,9 +502,9 @@ namespace RequestContextAllOptional_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/test1", false);
             uri.AppendQuery("id", id, true);
-            if (maxCount != null)
+            if (top != null)
             {
-                uri.AppendQuery("$top", maxCount.Value, true);
+                uri.AppendQuery("$top", top.Value, true);
             }
             uri.AppendQuery("skip", skip, true);
             if (status != null)
