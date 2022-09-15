@@ -37,7 +37,9 @@ namespace AutoRest.TestServer.Tests
 
         private static IReadOnlyList<string> GetMethodParameterNames(string methodName)
         {
-            var method = typeof(PaginationParamsClient).GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
+            var clazz = typeof(PaginationParamsClient);
+            TypeAsserts.HasPublicInstanceMethod(clazz, methodName);
+            var method = clazz.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
             return method.GetParameters().Select(p => p.Name).ToList();
         }
     }

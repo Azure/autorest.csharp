@@ -21,6 +21,8 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class DpgOutputLibraryBuilder
     {
+        private const string MaxCountParameterName = "maxCount";
+
         private readonly InputNamespace _rootNamespace;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly string _defaultNamespace;
@@ -36,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public DpgOutputLibrary Build(bool isCadlInput)
         {
-            var inputClients = UpdateListMethodNames();
+            var inputClients = UpdateOperations();
 
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
@@ -84,17 +86,48 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<InputClient> UpdateListMethodNames()
+        private IEnumerable<InputClient> UpdateOperations()
         {
             var defaultName = _rootNamespace.Name.ReplaceLast("Client", "");
             foreach (var client in _rootNamespace.Clients)
             {
                 var clientName = client.Name.IsNullOrEmpty() ? defaultName : client.Name;
-                yield return client with { Operations = client.Operations.Select(op => UpdateMethodName(op, clientName)).ToList() };
+                yield return client with { Operations = client.Operations.Select(op => UpdateOperation(op, clientName)).ToList() };
+            }
+        }
+
+        private static InputOperation UpdateOperation(InputOperation operation, string clientName)
+        {
+            if (operation.Paging != null && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
+            {
+                return operation with { Name = UpdateOperationName(operation, clientName) };
             }
 
-            static InputOperation UpdateMethodName(InputOperation operation, string clientName)
-                => operation with { Name = operation.Name.RenameGetMethod(clientName).RenameListToGet(clientName) };
+            return operation with {
+                Name = UpdateOperationName(operation, clientName),
+                Parameters = UpdateOperationParameters(operation.Parameters)
+            };
+        }
+
+        private static string UpdateOperationName(InputOperation operation, string clientName)
+            => operation.Name.RenameGetMethod(clientName).RenameListToGet(clientName);
+
+        private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
+        {
+            var parameters = new List<InputParameter>(operationParameters.Count);
+            foreach (var parameter in operationParameters)
+            {
+                if (parameter.Name.Equals("top", StringComparison.OrdinalIgnoreCase))
+                {
+                    parameters.Add(parameter with { Name = MaxCountParameterName });
+                }
+                else
+                {
+                    parameters.Add(parameter);
+                }
+            }
+
+            return parameters;
         }
 
         private ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos)
@@ -116,7 +149,7 @@ namespace AutoRest.CSharp.Output.Models
             var clientNamePrefix = ClientBuilder.GetClientPrefix(ns.Name, rootNamespaceName);
             var clientNamespace = Configuration.Namespace ?? rootNamespaceName;
             var clientDescription = ns.Description;
-            var operations = UpdateOperations(ns.Operations);
+            var operations = ns.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
             var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any();
@@ -131,47 +164,6 @@ namespace AutoRest.CSharp.Output.Models
             clientName = existingType.Name;
             clientNamespace = existingType.ContainingNamespace.ToDisplayString();
             return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters);
-        }
-
-        private static IReadOnlyList<InputOperation> UpdateOperations(IReadOnlyList<InputOperation> originalOperations)
-        {
-            var operations = new List<InputOperation>(originalOperations.Count);
-            foreach (var operation in originalOperations)
-            {
-                if (operation.Paging != null)
-                {
-                    operations.Add(operation with { Parameters = UpdateOperationParameters(operation.Parameters) });
-                }
-                else
-                {
-                    operations.Add(operation);
-                }
-            }
-            return operations;
-        }
-
-        private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
-        {
-            // if there is already "maxCount", we keep "top" as is
-            if (operationParameters.Select(p => p.Name).Any(n => n.Equals("maxCount", StringComparison.OrdinalIgnoreCase)))
-            {
-                return operationParameters;
-            }
-
-            var parameters = new List<InputParameter>(operationParameters.Count);
-            foreach (var parameter in operationParameters)
-            {
-                if (parameter.Name.Equals("top", StringComparison.OrdinalIgnoreCase))
-                {
-                    parameters.Add(parameter with { Name = "maxCount" });
-                }
-                else
-                {
-                    parameters.Add(parameter);
-                }
-            }
-
-            return parameters;
         }
 
         private IReadOnlyList<ClientInfo> SetHierarchy(IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
@@ -210,7 +202,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return new[] {topLevelClientInfo};
+            return new[] { topLevelClientInfo };
         }
 
         private static void AssignParents(in ClientInfo clientInfo, IReadOnlyDictionary<string, ClientInfo> clientInfosByName, SourceInputModel sourceInputModel)
@@ -257,7 +249,7 @@ namespace AutoRest.CSharp.Output.Models
                         clientInfo = clientInfo.Parent;
                     }
                     break;
-                case >1:
+                case > 1:
                     var requestParameters = operation.Parameters.ToHashSet();
                     while (clientInfo.Parent != null && !clientInfo.ResourceParameters.IsSubsetOf(requestParameters))
                     {
@@ -308,9 +300,9 @@ namespace AutoRest.CSharp.Output.Models
                     SubClients = subClients
                 };
 
-                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
+                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
 
-                 yield return client;
+                yield return client;
             }
         }
 
