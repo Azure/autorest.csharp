@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -16,8 +19,198 @@ namespace MgmtExpandResourceTypes
     {
         internal static RecordSetResource GetResource(ArmClient client, RecordSetData data)
         {
-            // this is only placeholder
-            return new RecordSetAResource(client, data);
+            if (IsRecordSetAResource(data.Id))
+            {
+                return new RecordSetAResource(client, data);
+            }
+            if (IsRecordSetAaaaResource(data.Id))
+            {
+                return new RecordSetAaaaResource(client, data);
+            }
+            if (IsRecordSetCaaResource(data.Id))
+            {
+                return new RecordSetCaaResource(client, data);
+            }
+            if (IsRecordSetCNameResource(data.Id))
+            {
+                return new RecordSetCNameResource(client, data);
+            }
+            if (IsRecordSetMxResource(data.Id))
+            {
+                return new RecordSetMxResource(client, data);
+            }
+            if (IsRecordSetNsResource(data.Id))
+            {
+                return new RecordSetNsResource(client, data);
+            }
+            if (IsRecordSetPtrResource(data.Id))
+            {
+                return new RecordSetPtrResource(client, data);
+            }
+            if (IsRecordSetSoaResource(data.Id))
+            {
+                return new RecordSetSoaResource(client, data);
+            }
+            if (IsRecordSetSrvResource(data.Id))
+            {
+                return new RecordSetSrvResource(client, data);
+            }
+            if (IsRecordSetTxtResource(data.Id))
+            {
+                return new RecordSetTxtResource(client, data);
+            }
+            // TODO -- should we throw or return an UnknownResource?
+            throw new InvalidOperationException();
+        }
+
+        internal static bool IsRecordSetAResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != RecordSetAResource.ResourceType)
+            {
+                return false;
+            }
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal static bool IsRecordSetAaaaResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != RecordSetAaaaResource.ResourceType)
+            {
+                return false;
+            }
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal static bool IsRecordSetCaaResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != RecordSetCaaResource.ResourceType)
+            {
+                return false;
+            }
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal static bool IsRecordSetCNameResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != RecordSetCNameResource.ResourceType)
+            {
+                return false;
+            }
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal static bool IsRecordSetMxResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != RecordSetMxResource.ResourceType)
+            {
+                return false;
+            }
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal static bool IsRecordSetNsResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != RecordSetNsResource.ResourceType)
+            {
+                return false;
+            }
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal static bool IsRecordSetPtrResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != RecordSetPtrResource.ResourceType)
+            {
+                return false;
+            }
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal static bool IsRecordSetSoaResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != RecordSetSoaResource.ResourceType)
+            {
+                return false;
+            }
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal static bool IsRecordSetSrvResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != RecordSetSrvResource.ResourceType)
+            {
+                return false;
+            }
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal static bool IsRecordSetTxtResource(ResourceIdentifier id)
+        {
+            // checking the resource type
+            if (id.ResourceType != RecordSetTxtResource.ResourceType)
+            {
+                return false;
+            }
+            // checking the resource scope
+            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            {
+                return false;
+            }
+            return true;
         }
 
         private readonly RecordSetData _data;
@@ -43,8 +236,6 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        protected virtual string Type => "Base";
-
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
 
@@ -58,6 +249,98 @@ namespace MgmtExpandResourceTypes
                     throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
                 return _data;
             }
+        }
+
+        /// <summary> The core implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected abstract Task<Response<RecordSetResource>> GetCoreAsync(CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        [ForwardsClientCalls]
+        public async Task<Response<RecordSetResource>> GetAsync(CancellationToken cancellationToken = default)
+        {
+            return await GetCoreAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> The core implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected abstract Response<RecordSetResource> GetCore(CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        [ForwardsClientCalls]
+        public Response<RecordSetResource> Get(CancellationToken cancellationToken = default)
+        {
+            return GetCore(cancellationToken);
+        }
+
+        /// <summary> The core implementation for operation Delete. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected abstract Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation Delete. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        [ForwardsClientCalls]
+        public async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
+        {
+            return await DeleteCoreAsync(waitUntil, ifMatch, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> The core implementation for operation Delete. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected abstract ArmOperation DeleteCore(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation Delete. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        [ForwardsClientCalls]
+        public ArmOperation Delete(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
+        {
+            return DeleteCore(waitUntil, ifMatch, cancellationToken);
+        }
+
+        /// <summary> The core implementation for operation Update. </summary>
+        /// <param name="data"> Parameters supplied to the Update operation. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        protected abstract Task<Response<RecordSetResource>> UpdateCoreAsync(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation Update. </summary>
+        /// <param name="data"> Parameters supplied to the Update operation. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        [ForwardsClientCalls]
+        public async Task<Response<RecordSetResource>> UpdateAsync(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
+        {
+            return await UpdateCoreAsync(data, ifMatch, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> The core implementation for operation Update. </summary>
+        /// <param name="data"> Parameters supplied to the Update operation. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        protected abstract Response<RecordSetResource> UpdateCore(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation Update. </summary>
+        /// <param name="data"> Parameters supplied to the Update operation. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        [ForwardsClientCalls]
+        public Response<RecordSetResource> Update(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
+        {
+            return UpdateCore(data, ifMatch, cancellationToken);
         }
     }
 }

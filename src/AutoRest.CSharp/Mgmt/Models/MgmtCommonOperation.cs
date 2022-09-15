@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(
             Name,
             null,
-            Description,
+            $"The default implementation for operation {Name}",
             MethodSignatureModifiers.Public,
             IsPagingOperation ? new CSharpType(typeof(Pageable<>), ReturnType) : ReturnType,
             null,
@@ -56,21 +56,12 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MethodSignature CoreMethodSignature => _coreMethodSignature ??= new MethodSignature(
             $"{Name}Core",
             null,
-            Description,
+            $"The core implementation for operation {Name}",
             MethodSignatureModifiers.Protected,
             IsPagingOperation ? new CSharpType(typeof(Pageable<>), ReturnType) : ReturnType,
             null,
             MethodParameters);
 
         public bool IsPagingOperation => _implementations.First().IsPagingOperation;
-
-        private string? _description;
-        public string Description => _description ??= BuildDescription();
-
-        // TODO
-        private string BuildDescription()
-        {
-            return "placeholder";
-        }
     }
 }

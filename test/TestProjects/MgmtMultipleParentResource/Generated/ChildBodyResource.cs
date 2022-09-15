@@ -12,31 +12,31 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Sample.Models;
+using MgmtMultipleParentResource.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace MgmtMultipleParentResource
 {
     /// <summary> TODO. </summary>
-    public abstract partial class BaseVirtualMachineExtensionResource : ArmResource
+    public abstract partial class ChildBodyResource : ArmResource
     {
-        internal static BaseVirtualMachineExtensionResource GetResource(ArmClient client, VirtualMachineExtensionData data)
+        internal static ChildBodyResource GetResource(ArmClient client, ChildBodyData data)
         {
-            if (IsVirtualMachineExtensionResource(data.Id))
+            if (IsAnotherParentChildResource(data.Id))
             {
-                return new VirtualMachineExtensionResource(client, data);
+                return new AnotherParentChildResource(client, data);
             }
-            if (IsVirtualMachineScaleSetVirtualMachineExtensionResource(data.Id))
+            if (IsTheParentSubParentChildResource(data.Id))
             {
-                return new VirtualMachineScaleSetVirtualMachineExtensionResource(client, data);
+                return new TheParentSubParentChildResource(client, data);
             }
             // TODO -- should we throw or return an UnknownResource?
             throw new InvalidOperationException();
         }
 
-        internal static bool IsVirtualMachineExtensionResource(ResourceIdentifier id)
+        internal static bool IsAnotherParentChildResource(ResourceIdentifier id)
         {
             // checking the resource type
-            if (id.ResourceType != VirtualMachineExtensionResource.ResourceType)
+            if (id.ResourceType != AnotherParentChildResource.ResourceType)
             {
                 return false;
             }
@@ -48,10 +48,10 @@ namespace Azure.ResourceManager.Sample
             return true;
         }
 
-        internal static bool IsVirtualMachineScaleSetVirtualMachineExtensionResource(ResourceIdentifier id)
+        internal static bool IsTheParentSubParentChildResource(ResourceIdentifier id)
         {
             // checking the resource type
-            if (id.ResourceType != VirtualMachineScaleSetVirtualMachineExtensionResource.ResourceType)
+            if (id.ResourceType != TheParentSubParentChildResource.ResourceType)
             {
                 return false;
             }
@@ -63,26 +63,26 @@ namespace Azure.ResourceManager.Sample
             return true;
         }
 
-        private readonly VirtualMachineExtensionData _data;
+        private readonly ChildBodyData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="BaseVirtualMachineExtensionResource"/> class for mocking. </summary>
-        protected BaseVirtualMachineExtensionResource()
+        /// <summary> Initializes a new instance of the <see cref="ChildBodyResource"/> class for mocking. </summary>
+        protected ChildBodyResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "BaseVirtualMachineExtensionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "ChildBodyResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BaseVirtualMachineExtensionResource(ArmClient client, VirtualMachineExtensionData data) : this(client, data.Id)
+        internal ChildBodyResource(ArmClient client, ChildBodyData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
-        /// <summary> Initializes a new instance of the <see cref="BaseVirtualMachineExtensionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ChildBodyResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal BaseVirtualMachineExtensionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal ChildBodyResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineExtensionData Data
+        public virtual ChildBodyData Data
         {
             get
             {
@@ -104,13 +104,13 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The core implementation for operation Get. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> GetCoreAsync(string expand = null, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<ChildBodyResource>> GetCoreAsync(string expand = null, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation Get. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public async Task<Response<BaseVirtualMachineExtensionResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodyResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             return await GetCoreAsync(expand, cancellationToken).ConfigureAwait(false);
         }
@@ -118,13 +118,13 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The core implementation for operation Get. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        protected abstract Response<BaseVirtualMachineExtensionResource> GetCore(string expand = null, CancellationToken cancellationToken = default);
+        protected abstract Response<ChildBodyResource> GetCore(string expand = null, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation Get. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public Response<BaseVirtualMachineExtensionResource> Get(string expand = null, CancellationToken cancellationToken = default)
+        public Response<ChildBodyResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             return GetCore(expand, cancellationToken);
         }
@@ -159,38 +159,38 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The core implementation for operation Update. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
-        protected abstract Task<ArmOperation<BaseVirtualMachineExtensionResource>> UpdateCoreAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        protected abstract Task<ArmOperation<ChildBodyResource>> UpdateCoreAsync(WaitUntil waitUntil, ChildBodyUpdate childBody, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation Update. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
         [ForwardsClientCalls]
-        public async Task<ArmOperation<BaseVirtualMachineExtensionResource>> UpdateAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        public async Task<ArmOperation<ChildBodyResource>> UpdateAsync(WaitUntil waitUntil, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
-            return await UpdateCoreAsync(waitUntil, extensionParameters, cancellationToken).ConfigureAwait(false);
+            return await UpdateCoreAsync(waitUntil, childBody, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> The core implementation for operation Update. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
-        protected abstract ArmOperation<BaseVirtualMachineExtensionResource> UpdateCore(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        protected abstract ArmOperation<ChildBodyResource> UpdateCore(WaitUntil waitUntil, ChildBodyUpdate childBody, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation Update. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
         [ForwardsClientCalls]
-        public ArmOperation<BaseVirtualMachineExtensionResource> Update(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        public ArmOperation<ChildBodyResource> Update(WaitUntil waitUntil, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
-            return UpdateCore(waitUntil, extensionParameters, cancellationToken);
+            return UpdateCore(waitUntil, childBody, cancellationToken);
         }
 
         /// <summary> The core implementation for operation AddTag. </summary>
@@ -198,7 +198,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> AddTagCoreAsync(string key, string value, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<ChildBodyResource>> AddTagCoreAsync(string key, string value, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation AddTag. </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -206,7 +206,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         [ForwardsClientCalls]
-        public async Task<Response<BaseVirtualMachineExtensionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodyResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             return await AddTagCoreAsync(key, value, cancellationToken).ConfigureAwait(false);
         }
@@ -216,7 +216,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        protected abstract Response<BaseVirtualMachineExtensionResource> AddTagCore(string key, string value, CancellationToken cancellationToken = default);
+        protected abstract Response<ChildBodyResource> AddTagCore(string key, string value, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation AddTag. </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -224,7 +224,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         [ForwardsClientCalls]
-        public Response<BaseVirtualMachineExtensionResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public Response<ChildBodyResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             return AddTagCore(key, value, cancellationToken);
         }
@@ -233,14 +233,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> SetTagsCoreAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<ChildBodyResource>> SetTagsCoreAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation SetTags. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         [ForwardsClientCalls]
-        public async Task<Response<BaseVirtualMachineExtensionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodyResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             return await SetTagsCoreAsync(tags, cancellationToken).ConfigureAwait(false);
         }
@@ -249,14 +249,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        protected abstract Response<BaseVirtualMachineExtensionResource> SetTagsCore(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
+        protected abstract Response<ChildBodyResource> SetTagsCore(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation SetTags. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         [ForwardsClientCalls]
-        public Response<BaseVirtualMachineExtensionResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public Response<ChildBodyResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             return SetTagsCore(tags, cancellationToken);
         }
@@ -265,14 +265,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> RemoveTagCoreAsync(string key, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<ChildBodyResource>> RemoveTagCoreAsync(string key, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation RemoveTag. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         [ForwardsClientCalls]
-        public async Task<Response<BaseVirtualMachineExtensionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodyResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             return await RemoveTagCoreAsync(key, cancellationToken).ConfigureAwait(false);
         }
@@ -281,14 +281,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        protected abstract Response<BaseVirtualMachineExtensionResource> RemoveTagCore(string key, CancellationToken cancellationToken = default);
+        protected abstract Response<ChildBodyResource> RemoveTagCore(string key, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation RemoveTag. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         [ForwardsClientCalls]
-        public Response<BaseVirtualMachineExtensionResource> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public Response<ChildBodyResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             return RemoveTagCore(key, cancellationToken);
         }

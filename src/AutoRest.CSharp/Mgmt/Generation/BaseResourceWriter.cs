@@ -170,6 +170,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteCommonOperation(MgmtCommonOperation commonOperation, bool isAsync)
         {
             var coreSignature = commonOperation.CoreMethodSignature.WithAsync(isAsync);
+            _writer.WriteMethodDocumentation(coreSignature);
             _writer.WriteAbstractMethodDeclaration(coreSignature);
             _writer.Line();
 
@@ -184,7 +185,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.AppendRaw(parameter.Name).AppendRaw(",");
                 }
                 _writer.RemoveTrailingComma();
-                _writer.LineRaw(");");
+                _writer.AppendRaw(")")
+                    .AppendRawIf(".ConfigureAwait(false)", isAsync)
+                    .LineRaw(";");
             }
 
             _writer.Line();

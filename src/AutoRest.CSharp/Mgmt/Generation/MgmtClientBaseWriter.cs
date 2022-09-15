@@ -898,11 +898,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteLROResponse(returnType, GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, operation.CoreOperationSource ?? operation.OperationSource, async, useFactoryMethod);
         }
 
-        protected virtual void WriteLROOperationInstantiation(CSharpType returnType, string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, OperationSource? operationSource, bool isAsync, bool useFactoryMethod)
-        {
-
-        }
-
         protected virtual void WriteLROResponse(CSharpType returnType, string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, OperationSource? operationSource, bool isAsync, bool useFactoryMethod)
         {
             if (operation.InterimOperation is not null)

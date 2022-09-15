@@ -157,7 +157,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         _writer.AppendRaw(parameter.Name).AppendRaw(",");
                     }
                     _writer.RemoveTrailingComma();
-                    _writer.LineRaw(");");
+                    _writer.AppendRaw(")")
+                        .AppendRawIf(".ConfigureAwait(false)", isAsync)
+                        .LineRaw(";");
 
                     // unwrap the result and wrap it again
                     if (clientOperation.IsLongRunningOperation)
@@ -183,50 +185,61 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WritePolymorphicLROResponse(CodeWriterDeclaration value, CSharpType returnType, MgmtClientOperation clientOperation)
         {
-            // if we wait for completion in core, we do not have to wait again, just rewrap the lro object
-            using (_writer.Scope($"if (waitUntil == {typeof(WaitUntil)}.Completed)"))
-            {
-                // in this path, the return type should always be generic, otherwise the return type would be exactly the same and we will not go into this path
-                Debug.Assert(clientOperation.ReturnType.IsGenericType);
-                _writer.Append($"return new {LibraryArmOperation}<{clientOperation.ReturnType.UnWrapOperation()}>(")
-                    .Append($"{typeof(Response)}.FromValue(({clientOperation.ReturnType.UnWrapOperation()}){value}.Value, {value}.GetRawResponse())")
-                .LineRaw(");");
-            }
-
+            // TODO -- we always assume this method only have one branch (for now). Maybe update this in the future so that it could support multiple branches
             Debug.Assert(clientOperation.OperationMappings.Count == 1);
             var branch = clientOperation.OperationMappings.Keys.First();
             var operation = clientOperation.OperationMappings[branch];
             var parameterMapping = clientOperation.ParameterMappings[branch];
             var operationSource = operation.OperationSource;
 
-            if (operation.InterimOperation is not null)
+            // in this path, the return type should always be generic, otherwise the return type would be exactly the same and we will not go into this path
+            Debug.Assert(operation.ReturnType.IsGenericType);
+
+            if (operation.IsFakeLongRunningOperation)
             {
-                _writer.Append($"var operation = new {operation.InterimOperation.TypeName}");
+                _writer.Append($"return new {LibraryArmOperation}<{operation.ReturnType.UnWrapOperation()}>(")
+                    .Append($"{typeof(Response)}.FromValue(({operation.ReturnType.UnWrapOperation()}){value}.Value, {value}.GetRawResponse())")
+                    .LineRaw(");");
             }
             else
             {
-                _writer.Append($"var operation = new {LibraryArmOperation}");
-                if (returnType.IsGenericType)
+                // if we wait for completion in core, we do not have to wait again, just rewrap the lro object
+                using (_writer.Scope($"if (waitUntil == {typeof(WaitUntil)}.Completed)"))
                 {
-                    _writer.Append($"<{returnType.UnWrapOperation()}>");
+                    _writer.Append($"return new {LibraryArmOperation}<{operation.ReturnType.UnWrapOperation()}>(")
+                        .Append($"{typeof(Response)}.FromValue(({operation.ReturnType.UnWrapOperation()}){value}.Value, {value}.GetRawResponse())")
+                        .LineRaw(");");
                 }
-            }
-            _writer.Append($"(");
-            if (operationSource is not null)
-            {
-                _writer.Append($"new {operationSource.TypeName}(");
-                if (operationSource.IsReturningResource)
-                    _writer.Append($"{ArmClientReference}");
-                _writer.Append($"), ");
-            }
 
-            _writer.Append($"{GetDiagnosticName(operation)}, {PipelineProperty}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
-            WriteArguments(_writer, parameterMapping);
-            _writer.RemoveTrailingComma();
-            _writer.Append($").Request, {value}.GetRawResponse(), {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
-            _writer.Line($");");
+                if (operation.InterimOperation is not null)
+                {
+                    _writer.Append($"var operation = new {operation.InterimOperation.TypeName}");
+                }
+                else
+                {
+                    _writer.Append($"var operation = new {LibraryArmOperation}");
+                    if (returnType.IsGenericType)
+                    {
+                        _writer.Append($"<{returnType.UnWrapOperation()}>");
+                    }
+                }
+                _writer.Append($"(");
+                if (operationSource is not null)
+                {
+                    _writer.Append($"new {operationSource.TypeName}(");
+                    if (operationSource.IsReturningResource)
+                        _writer.Append($"{ArmClientReference}");
+                    _writer.Append($"), ");
+                }
 
-            _writer.LineRaw("return operation;");
+                _writer.Append($"{GetDiagnosticName(operation)}, {PipelineProperty}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
+                WriteArguments(_writer, parameterMapping);
+                _writer.RemoveTrailingComma();
+                _writer.Append($").Request, {value}.GetRawResponse(), {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
+                _writer.Line($");");
+
+                _writer.LineRaw("return operation;");
+            }
         }
 
         protected override string GetUpdateMethodName()
