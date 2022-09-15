@@ -232,14 +232,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             foreach (var path in requestPaths)
             {
                 var resourceType = path.GetResourceType();
-                candidates.AddRange(MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType)));
-            }
-
-            // When more than one candidate is found and all the segments in ResourceType is constant, it's possible that some unexpected resources are included.
-            // If this happen, We determine the right candidate by doing a further check on the scope request path.
-            if (candidates.Count() > 1 && resourceType.IsConstant)
-            {
-                return candidates.Where(resource => resource.RequestPath.GetScopePath().Equals(requestPath.GetScopePath()));
+                // we find the resource with the same type of this operation, and under the same scope
+                var resources = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType) && resource.RequestPath.GetScopePath().Equals(path.GetScopePath()));
+                candidates.AddRange(resources);
             }
 
             return candidates;
