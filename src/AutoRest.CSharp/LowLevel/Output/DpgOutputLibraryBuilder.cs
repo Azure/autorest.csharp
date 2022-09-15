@@ -100,13 +100,14 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (operation.Paging != null && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
             {
-                return operation with { Name = UpdateOperationName(operation, clientName) };
+                return operation with
+                {
+                    Name = UpdateOperationName(operation, clientName),
+                    Parameters = UpdateOperationParameters(operation.Parameters)
+                };
             }
 
-            return operation with {
-                Name = UpdateOperationName(operation, clientName),
-                Parameters = UpdateOperationParameters(operation.Parameters)
-            };
+            return operation with { Name = UpdateOperationName(operation, clientName) };
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)
