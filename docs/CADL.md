@@ -60,11 +60,12 @@ flowchart TB
       C01[/Sidecar configuration/]:::input --> C10 & C11 & C21
       C10((CADL Compiler)) --> C20
       C11(Language-agnostic\noverrides) --> C10
-      C20((CADL C# Emitter)) --> C30
+      C20((CADL C# Emitter)) --> C30 & C31
       C21(C# specific\noverrides) --> C20
     end
     C30[/cadl.json/]:::input --> C40
-    C01 --> C50 & C61 & C90
+    C31[/configuration.json/]:::input --> C61
+    C01 --> C50 & C90
     subgraph G3 [ ]
       C41[/Source input model/]:::input --> C50
       C40(Input model):::data --> C50
