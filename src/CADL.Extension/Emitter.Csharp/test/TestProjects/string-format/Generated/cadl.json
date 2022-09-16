@@ -13,17 +13,17 @@
    "Operations": [
     {
      "$id": "3",
-     "Name": "zonedDateTime",
+     "Name": "getZonedDateTime",
      "Description": "Path parameter is string with zonedDateTime format",
      "Parameters": [
       {
        "$id": "4",
-       "Name": "zonedDateTime",
-       "NameInRequest": "zonedDateTime",
+       "Name": "time",
+       "NameInRequest": "time",
        "Type": {
         "$id": "5",
-        "Name": "string",
-        "Kind": "String",
+        "Name": "DateTime",
+        "Kind": "DateTime",
         "IsNullable": false
        },
        "Location": "Path",
@@ -32,51 +32,40 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
-      }
-     ],
-     "Responses": [
+      },
       {
        "$id": "6",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json"
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
-     "Uri": "",
-     "Path": "/zonedDateTime/{zonedDateTime}",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "7",
-     "Name": "uri",
-     "Description": "path paramter is string with uri format",
-     "Parameters": [
-      {
-       "$id": "8",
-       "Name": "uri",
-       "NameInRequest": "uri",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
        "Type": {
-        "$id": "9",
-        "Name": "string",
+        "$id": "7",
+        "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
-       "Location": "Path",
+       "Location": "Query",
        "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
+       "IsApiVersion": true,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "8",
+        "Type": {
+         "$id": "9",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2015-06-18"
+       }
       }
      ],
      "Responses": [
@@ -91,13 +80,58 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
+     "Path": "/zonedDateTime/{time}",
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "11",
+     "Name": "getUri",
+     "Description": "path paramter is string with uri format",
+     "Parameters": [
+      {
+       "$id": "12",
+       "Name": "uri",
+       "NameInRequest": "uri",
+       "Type": {
+        "$id": "13",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$ref": "6"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "14",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
      "Path": "/uri/{uri}",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "11"
+    "$id": "15"
    }
   }
  ]

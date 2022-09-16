@@ -12,11 +12,17 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Describes a virtual machines scale set IP Configuration&apos;s PublicIPAddress configuration. </summary>
+    /// <summary>
+    /// Describes a virtual machines scale set IP Configuration&apos;s PublicIPAddress configuration
+    /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration
+    /// </summary>
     public partial class VirtualMachineScaleSetPublicIPAddressConfiguration
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetPublicIPAddressConfiguration. </summary>
-        /// <param name="name"> The publicIP address configuration name. </param>
+        /// <param name="name">
+        /// The publicIP address configuration name.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public VirtualMachineScaleSetPublicIPAddressConfiguration(string name)
         {
@@ -30,12 +36,30 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetPublicIPAddressConfiguration. </summary>
-        /// <param name="name"> The publicIP address configuration name. </param>
-        /// <param name="idleTimeoutInMinutes"> The idle timeout of the public IP address. </param>
-        /// <param name="dnsSettings"> The dns settings to be applied on the publicIP addresses . </param>
-        /// <param name="ipTags"> The list of IP tags associated with the public IP address. </param>
-        /// <param name="publicIPPrefix"> The PublicIPPrefix from which to allocate publicIP addresses. </param>
-        /// <param name="publicIPAddressVersion"> Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;. </param>
+        /// <param name="name">
+        /// The publicIP address configuration name.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name
+        /// </param>
+        /// <param name="idleTimeoutInMinutes">
+        /// The idle timeout of the public IP address.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.idleTimeoutInMinutes
+        /// </param>
+        /// <param name="dnsSettings">
+        /// The dns settings to be applied on the publicIP addresses .
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.dnsSettings
+        /// </param>
+        /// <param name="ipTags">
+        /// The list of IP tags associated with the public IP address.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.ipTags
+        /// </param>
+        /// <param name="publicIPPrefix">
+        /// The PublicIPPrefix from which to allocate publicIP addresses.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.publicIPPrefix
+        /// </param>
+        /// <param name="publicIPAddressVersion">
+        /// Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.publicIPAddressVersion
+        /// </param>
         internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPTag> ipTags, WritableSubResource publicIPPrefix, IPVersion? publicIPAddressVersion)
         {
             Name = name;
@@ -46,22 +70,40 @@ namespace MgmtRenameRules.Models
             PublicIPAddressVersion = publicIPAddressVersion;
         }
 
-        /// <summary> The publicIP address configuration name. </summary>
+        /// <summary>
+        /// The publicIP address configuration name.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name
+        /// </summary>
         public string Name { get; set; }
-        /// <summary> The idle timeout of the public IP address. </summary>
+        /// <summary>
+        /// The idle timeout of the public IP address.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.idleTimeoutInMinutes
+        /// </summary>
         public int? IdleTimeoutInMinutes { get; set; }
-        /// <summary> The dns settings to be applied on the publicIP addresses . </summary>
+        /// <summary>
+        /// The dns settings to be applied on the publicIP addresses .
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.dnsSettings
+        /// </summary>
         internal VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings DnsSettings { get; set; }
-        /// <summary> The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created. </summary>
+        /// <summary>
+        /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel
+        /// </summary>
         public string DnsDomainNameLabel
         {
             get => DnsSettings is null ? default : DnsSettings.DomainNameLabel;
             set => DnsSettings = new VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(value);
         }
 
-        /// <summary> The list of IP tags associated with the public IP address. </summary>
+        /// <summary>
+        /// The list of IP tags associated with the public IP address.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.ipTags
+        /// </summary>
         public IList<VirtualMachineScaleSetIPTag> IPTags { get; }
-        /// <summary> The PublicIPPrefix from which to allocate publicIP addresses. </summary>
+        /// <summary>
+        /// The PublicIPPrefix from which to allocate publicIP addresses.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.publicIPPrefix
+        /// </summary>
         internal WritableSubResource PublicIPPrefix { get; set; }
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier PublicIPPrefixId
@@ -75,7 +117,10 @@ namespace MgmtRenameRules.Models
             }
         }
 
-        /// <summary> Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;. </summary>
+        /// <summary>
+        /// Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;.
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.publicIPAddressVersion
+        /// </summary>
         public IPVersion? PublicIPAddressVersion { get; set; }
     }
 }

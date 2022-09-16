@@ -19,35 +19,53 @@ namespace ModelsInCadl
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredModel"></param>
+        /// <param name="requiredFixedStringEnum"></param>
+        /// <param name="requiredExtensibleEnum"></param>
         /// <param name="requiredCollection"></param>
-        /// <param name="requiredRecord"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/> or <paramref name="requiredRecord"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, RecordItem> requiredRecord)
+        /// <param name="requiredIntRecord"></param>
+        /// <param name="requiredStringRecord"></param>
+        /// <param name="requiredModelRecord"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/>, <paramref name="requiredIntRecord"/>, <paramref name="requiredStringRecord"/> or <paramref name="requiredModelRecord"/> is null. </exception>
+        public RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, ExtensibleEnum requiredExtensibleEnum, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
-            Argument.AssertNotNull(requiredRecord, nameof(requiredRecord));
+            Argument.AssertNotNull(requiredIntRecord, nameof(requiredIntRecord));
+            Argument.AssertNotNull(requiredStringRecord, nameof(requiredStringRecord));
+            Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
+            RequiredFixedStringEnum = requiredFixedStringEnum;
+            RequiredExtensibleEnum = requiredExtensibleEnum;
             RequiredCollection = requiredCollection.ToList();
-            RequiredRecord = requiredRecord;
+            RequiredIntRecord = requiredIntRecord;
+            RequiredStringRecord = requiredStringRecord;
+            RequiredModelRecord = requiredModelRecord;
         }
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredModel"></param>
+        /// <param name="requiredFixedStringEnum"></param>
+        /// <param name="requiredExtensibleEnum"></param>
         /// <param name="requiredCollection"></param>
-        /// <param name="requiredRecord"></param>
-        internal RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, IList<CollectionItem> requiredCollection, IDictionary<string, RecordItem> requiredRecord)
+        /// <param name="requiredIntRecord"></param>
+        /// <param name="requiredStringRecord"></param>
+        /// <param name="requiredModelRecord"></param>
+        internal RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
+            RequiredFixedStringEnum = requiredFixedStringEnum;
+            RequiredExtensibleEnum = requiredExtensibleEnum;
             RequiredCollection = requiredCollection;
-            RequiredRecord = requiredRecord;
+            RequiredIntRecord = requiredIntRecord;
+            RequiredStringRecord = requiredStringRecord;
+            RequiredModelRecord = requiredModelRecord;
         }
 
         public string RequiredString { get; set; }
@@ -56,8 +74,16 @@ namespace ModelsInCadl
 
         public BaseModelWithDiscriminator RequiredModel { get; set; }
 
+        public FixedStringEnum RequiredFixedStringEnum { get; set; }
+
+        public ExtensibleEnum RequiredExtensibleEnum { get; set; }
+
         public IList<CollectionItem> RequiredCollection { get; }
 
-        public IDictionary<string, RecordItem> RequiredRecord { get; }
+        public IDictionary<string, int> RequiredIntRecord { get; }
+
+        public IDictionary<string, string> RequiredStringRecord { get; }
+
+        public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }

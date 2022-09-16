@@ -9,7 +9,10 @@ using System;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Instance view status. </summary>
+    /// <summary>
+    /// Instance view status.
+    /// Serialized Name: InstanceViewStatus
+    /// </summary>
     public partial class InstanceViewStatus
     {
         /// <summary> Initializes a new instance of InstanceViewStatus. </summary>
@@ -18,11 +21,26 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of InstanceViewStatus. </summary>
-        /// <param name="code"> The status code. </param>
-        /// <param name="level"> The level code. </param>
-        /// <param name="displayStatus"> The short localizable label for the status. </param>
-        /// <param name="message"> The detailed status message, including for alerts and error messages. </param>
-        /// <param name="time"> The time of the status. </param>
+        /// <param name="code">
+        /// The status code.
+        /// Serialized Name: InstanceViewStatus.code
+        /// </param>
+        /// <param name="level">
+        /// The level code.
+        /// Serialized Name: InstanceViewStatus.level
+        /// </param>
+        /// <param name="displayStatus">
+        /// The short localizable label for the status.
+        /// Serialized Name: InstanceViewStatus.displayStatus
+        /// </param>
+        /// <param name="message">
+        /// The detailed status message, including for alerts and error messages.
+        /// Serialized Name: InstanceViewStatus.message
+        /// </param>
+        /// <param name="time">
+        /// The time of the status.
+        /// Serialized Name: InstanceViewStatus.time
+        /// </param>
         internal InstanceViewStatus(string code, StatusLevelType? level, string displayStatus, string message, DateTimeOffset? time)
         {
             Code = code;
@@ -32,15 +50,30 @@ namespace MgmtRenameRules.Models
             Time = time;
         }
 
-        /// <summary> The status code. </summary>
+        /// <summary>
+        /// The status code.
+        /// Serialized Name: InstanceViewStatus.code
+        /// </summary>
         public string Code { get; set; }
-        /// <summary> The level code. </summary>
+        /// <summary>
+        /// The level code.
+        /// Serialized Name: InstanceViewStatus.level
+        /// </summary>
         public StatusLevelType? Level { get; set; }
-        /// <summary> The short localizable label for the status. </summary>
+        /// <summary>
+        /// The short localizable label for the status.
+        /// Serialized Name: InstanceViewStatus.displayStatus
+        /// </summary>
         public string DisplayStatus { get; set; }
-        /// <summary> The detailed status message, including for alerts and error messages. </summary>
+        /// <summary>
+        /// The detailed status message, including for alerts and error messages.
+        /// Serialized Name: InstanceViewStatus.message
+        /// </summary>
         public string Message { get; set; }
-        /// <summary> The time of the status. </summary>
+        /// <summary>
+        /// The time of the status.
+        /// Serialized Name: InstanceViewStatus.time
+        /// </summary>
         public DateTimeOffset? Time { get; set; }
     }
 }

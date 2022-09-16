@@ -23,16 +23,30 @@ namespace ModelsInCadl
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredModel");
             writer.WriteObjectValue(RequiredModel);
-            writer.WritePropertyName("requiredCollection");
+            writer.WritePropertyName("requiredIntCollection");
             writer.WriteStartArray();
-            foreach (var item in RequiredCollection)
+            foreach (var item in RequiredIntCollection)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredStringCollection");
+            writer.WriteStartArray();
+            foreach (var item in RequiredStringCollection)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredModelCollection");
+            writer.WriteStartArray();
+            foreach (var item in RequiredModelCollection)
             {
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("requiredRecord");
+            writer.WritePropertyName("requiredModelRecord");
             writer.WriteStartObject();
-            foreach (var item in RequiredRecord)
+            foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
                 writer.WriteObjectValue(item.Value);
@@ -46,8 +60,10 @@ namespace ModelsInCadl
             string requiredString = default;
             int requiredInt = default;
             BaseModel requiredModel = default;
-            IList<CollectionItem> requiredCollection = default;
-            IDictionary<string, RecordItem> requiredRecord = default;
+            IList<int> requiredIntCollection = default;
+            IList<string> requiredStringCollection = default;
+            IList<CollectionItem> requiredModelCollection = default;
+            IDictionary<string, RecordItem> requiredModelRecord = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"))
@@ -65,28 +81,48 @@ namespace ModelsInCadl
                     requiredModel = BaseModel.DeserializeBaseModel(property.Value);
                     continue;
                 }
-                if (property.NameEquals("requiredCollection"))
+                if (property.NameEquals("requiredIntCollection"))
+                {
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    requiredIntCollection = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredStringCollection"))
+                {
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    requiredStringCollection = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredModelCollection"))
                 {
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         array.Add(CollectionItem.DeserializeCollectionItem(item));
                     }
-                    requiredCollection = array;
+                    requiredModelCollection = array;
                     continue;
                 }
-                if (property.NameEquals("requiredRecord"))
+                if (property.NameEquals("requiredModelRecord"))
                 {
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
                     }
-                    requiredRecord = dictionary;
+                    requiredModelRecord = dictionary;
                     continue;
                 }
             }
-            return new InputModel(requiredString, requiredInt, requiredModel, requiredCollection, requiredRecord);
+            return new InputModel(requiredString, requiredInt, requiredModel, requiredIntCollection, requiredStringCollection, requiredModelCollection, requiredModelRecord);
         }
 
         internal RequestContent ToRequestContent()

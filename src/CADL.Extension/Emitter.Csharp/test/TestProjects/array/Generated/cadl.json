@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Pet",
-   "Namespace": "ArrayBasic",
+   "Namespace": "Cadl.TestServer.ArrayBasic",
    "IsNullable": false,
    "Properties": [
     {
@@ -120,24 +120,50 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "17",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "18",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "19",
+        "Type": {
+         "$id": "20",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "1.0.0"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "17",
+       "$id": "21",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "18",
-        "Name": "Array",
-        "ElementType": {
-         "$ref": "2"
-        },
-        "IsNullable": false
+        "$ref": "2"
        },
        "BodyMediaType": "Json"
       }
@@ -147,11 +173,11 @@
      "Uri": "{host}",
      "Path": "/pets",
      "BufferResponse": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "19"
+    "$id": "22"
    }
   }
  ]

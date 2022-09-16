@@ -39,7 +39,10 @@ format-by-name-rules:
   'contentType': 'content-type'
   '*Uri': 'Uri'
   '*Uris': 'Uri'
-  
+
+mgmt-debug:
+  show-serialized-names: true
+
 rename-mapping:
   SshPublicKey: SshPublicKeyInfo
   SshPublicKeyResource: SshPublicKey
@@ -51,4 +54,5 @@ rename-mapping:
   LogAnalyticsOperationResult.method: requestMethod|request-method
   LogAnalyticsOperationResult.content: -|any
   LogAnalyticsOperationResult.basePath: basePathUri|uri
+  VirtualMachineScaleSetIPConfiguration.properties.ipAddresses: -|ip-address
 ```

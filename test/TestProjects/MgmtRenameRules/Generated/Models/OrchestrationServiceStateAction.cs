@@ -10,7 +10,10 @@ using System.ComponentModel;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> The action to be performed. </summary>
+    /// <summary>
+    /// The action to be performed.
+    /// Serialized Name: OrchestrationServiceStateAction
+    /// </summary>
     public readonly partial struct OrchestrationServiceStateAction : IEquatable<OrchestrationServiceStateAction>
     {
         private readonly string _value;
@@ -25,9 +28,15 @@ namespace MgmtRenameRules.Models
         private const string ResumeValue = "Resume";
         private const string SuspendValue = "Suspend";
 
-        /// <summary> Resume. </summary>
+        /// <summary>
+        /// Resume
+        /// Serialized Name: OrchestrationServiceStateAction.Resume
+        /// </summary>
         public static OrchestrationServiceStateAction Resume { get; } = new OrchestrationServiceStateAction(ResumeValue);
-        /// <summary> Suspend. </summary>
+        /// <summary>
+        /// Suspend
+        /// Serialized Name: OrchestrationServiceStateAction.Suspend
+        /// </summary>
         public static OrchestrationServiceStateAction Suspend { get; } = new OrchestrationServiceStateAction(SuspendValue);
         /// <summary> Determines if two <see cref="OrchestrationServiceStateAction"/> values are the same. </summary>
         public static bool operator ==(OrchestrationServiceStateAction left, OrchestrationServiceStateAction right) => left.Equals(right);
