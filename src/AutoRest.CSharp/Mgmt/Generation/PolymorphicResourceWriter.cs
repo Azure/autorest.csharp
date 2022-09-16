@@ -250,7 +250,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteTaggableCommonMethodResponseFromPutOrPatch(MgmtClientOperationWrapper tagOperationWrapper, MgmtClientOperation updateOperation, FormattableString variableName, bool isAsync)
         {
-            if (IsCommonOperation(tagOperationWrapper.ClientOperation, out var commonOperation))
+            if (IsCommonOperation(tagOperationWrapper.ClientOperation, out var commonOperation) && !commonOperation.ReturnType.Equals(tagOperationWrapper.ReturnType))
             {
                 if (updateOperation.IsLongRunningOperation && updateOperation.ReturnType.Arguments.Length == 0)
                 {
@@ -260,10 +260,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .AppendRaw(".ConfigureAwait(false)")
                         .LineRaw(";");
                 }
-                //else
-                //{
-                //    _writer.Line($"return {typeof(Response)}.FromValue(({returnType.UnWrapOperation()}){variableName}.Value, {variableName}.GetRawResponse());");
-                //}
                 else
                 {
                     _writer.Line($"return {typeof(Response)}.FromValue(({tagOperationWrapper.ReturnType.UnWrapResponse()}){variableName}.Value, {variableName}.GetRawResponse());");
