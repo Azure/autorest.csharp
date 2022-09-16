@@ -51,5 +51,19 @@ namespace MgmtPolymorphicResources
         {
             return GetCachedClient(Client => new AutomationAccountCollection(Client, Id));
         }
+
+        /// <summary> Gets an object representing a ThroughputSettingResource along with the instance operations that can be performed on it in the ResourceGroupResource. </summary>
+        /// <returns> Returns a <see cref="ThroughputSettingResource" /> object. </returns>
+        public virtual ThroughputSettingResource GetThroughputSetting()
+        {
+            return new ThroughputSettingResource(Client, new ResourceIdentifier(Id.ToString() + "/providers/Microsoft.DocumentDB/throughputSettings/default"));
+        }
+
+        /// <summary> Gets a collection of CassandraTableResources in the ResourceGroupResource. </summary>
+        /// <returns> An object representing collection of CassandraTableResources and their operations over a CassandraTableResource. </returns>
+        public virtual CassandraTableCollection GetCassandraTables()
+        {
+            return GetCachedClient(Client => new CassandraTableCollection(Client, Id));
+        }
     }
 }

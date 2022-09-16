@@ -1507,6 +1507,256 @@
                     "nextLinkName": "nextLink"
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default": {
+            "get": {
+                "operationId": "CassandraResources_GetCassandraKeyspaceThroughput",
+                "description": "Gets the RUs per second of the Cassandra Keyspace under an existing Azure Cosmos DB database account with the provided name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The RUs per second of the Cassandra Keyspace was retrieved successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSetting"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CassandraResources_UpdateCassandraKeyspaceThroughput",
+                "description": "Update RUs per second of an Azure Cosmos DB Cassandra Keyspace",
+                "x-ms-long-running-operation": true,
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "updateThroughputParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
+                        },
+                        "description": "The RUs per second of the parameters to provide for the current Cassandra Keyspace."
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The RUs per second of the Cassandra Keyspace update operation will complete asynchronously."
+                    },
+                    "200": {
+                        "description": "The RUs per second of the Cassandra Keyspace update operation was completed successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSetting"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/tables/{tableName}/throughputSettings/default": {
+            "get": {
+                "operationId": "CassandraResources_GetCassandraTableThroughput",
+                "description": "Gets the RUs per second of the Cassandra table under an existing Azure Cosmos DB database account with the provided name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/tableNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The RUs per second of the Cassandra table was retrieved successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSetting"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CassandraResources_UpdateCassandraTableThroughput",
+                "description": "Update RUs per second of an Azure Cosmos DB Cassandra table",
+                "x-ms-long-running-operation": true,
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/tableNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "updateThroughputParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
+                        },
+                        "description": "The RUs per second of the parameters to provide for the current Cassandra table."
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The RUs per second of the Cassandra table update operation will complete asynchronously."
+                    },
+                    "200": {
+                        "description": "The RUs per second of the Cassandra table update operation was completed successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSetting"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/tables": {
+            "get": {
+                "operationId": "CassandraResources_ListCassandraTables",
+                "description": "Lists the Cassandra table under an existing Azure Cosmos DB database account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The Cassandra table properties were retrieved successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/CassandraTableListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/tables/{tableName}": {
+            "get": {
+                "operationId": "CassandraResources_GetCassandraTable",
+                "description": "Gets the Cassandra table under an existing Azure Cosmos DB database account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/tableNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The Cassandra table property was retrieved successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/CassandraTable"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CassandraResources_CreateUpdateCassandraTable",
+                "description": "Create or update an Azure Cosmos DB Cassandra Table",
+                "x-ms-long-running-operation": true,
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/tableNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "createUpdateCassandraTableParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CassandraTableCreateUpdateParameters"
+                        },
+                        "description": "The parameters to provide for the current Cassandra Table."
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The Cassandra Table create or update operation will complete asynchronously."
+                    },
+                    "200": {
+                        "description": "The Cassandra Table create or update operation was completed successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/CassandraTable"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "CassandraResources_DeleteCassandraTable",
+                "description": "Deletes an existing Azure Cosmos DB Cassandra table.",
+                "x-ms-long-running-operation": true,
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/tableNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The Cassandra table delete operation will complete asynchronously."
+                    },
+                    "204": {
+                        "description": "The Cassandra table delete operation was completed successfully."
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -2112,6 +2362,126 @@
                 }
             },
             "description": "The parameters supplied to the update module operation."
+        },
+        "ThroughputSetting": {
+            "description": "An Azure Cosmos DB resource throughput.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "The properties of an Azure Cosmos DB resource throughput",
+                    "$ref": "#/definitions/ThroughputSettingProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
+        },
+        "ThroughputSettingProperties": {
+            "description": "The properties of an Azure Cosmos DB resource throughput",
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "description": "The version of this throughputSettings"
+                }
+            }
+        },
+        "ThroughputSettingsUpdateParameters": {
+            "description": "Parameters to update Cosmos DB resource throughput.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Properties to update Azure Cosmos DB resource throughput.",
+                    "$ref": "#/definitions/ThroughputSettingUpdateProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "required": ["properties"]
+        },
+        "ThroughputSettingUpdateProperties": {
+            "description": "Properties to update Azure Cosmos DB resource throughput.",
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "description": "The version of this throughputSettings"
+                }
+            }
+        },
+        "CassandraTable": {
+            "description": "An Azure Cosmos DB Cassandra table.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "The properties of an Azure Cosmos DB Cassandra table",
+                    "$ref": "#/definitions/CassandraTableProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
+        },
+        "CassandraTableProperties": {
+            "description": "The properties of an Azure Cosmos DB Cassandra table",
+            "type": "object",
+            "properties": {
+                "resource": {
+                    "type": "string",
+                    "description": "The resource binded with this table"
+                }
+            }
+        },
+        "CassandraTableCreateUpdateParameters": {
+            "description": "Parameters to create and update Cosmos DB Cassandra table.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Properties to create and update Azure Cosmos DB Cassandra table.",
+                    "$ref": "#/definitions/CassandraTableCreateUpdateProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "required": ["properties"]
+        },
+        "CassandraTableCreateUpdateProperties": {
+            "description": "Properties to create and update Azure Cosmos DB Cassandra table.",
+            "type": "object",
+            "properties": {
+                "resource": {
+                    "type": "string",
+                    "description": "The standard JSON format of a Cassandra table"
+                }
+            },
+            "required": ["resource"]
+        },
+        "CassandraTableListResult": {
+            "properties": {
+                "value": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CassandraTable"
+                    },
+                    "description": "List of Cassandra tables and their properties."
+                }
+            },
+            "description": "The List operation response, that contains the Cassandra tables and their properties."
         }
     },
     "parameters": {
@@ -2147,6 +2517,14 @@
             "required": true,
             "in": "path",
             "x-ms-parameter-location": "method"
+        },
+        "tableNameParameter": {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "Cosmos DB table name."
         }
     }
 }

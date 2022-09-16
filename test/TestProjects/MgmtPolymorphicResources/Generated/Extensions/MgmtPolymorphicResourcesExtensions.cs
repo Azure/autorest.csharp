@@ -150,6 +150,54 @@ namespace MgmtPolymorphicResources
             return resourceGroupResource.GetAutomationAccounts().Get(automationAccountName, cancellationToken);
         }
 
+        /// <summary> Gets an object representing a ThroughputSettingResource along with the instance operations that can be performed on it in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ThroughputSettingResource" /> object. </returns>
+        public static ThroughputSettingResource GetThroughputSetting(this ResourceGroupResource resourceGroupResource)
+        {
+            return GetExtensionClient(resourceGroupResource).GetThroughputSetting();
+        }
+
+        /// <summary> Gets a collection of CassandraTableResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of CassandraTableResources and their operations over a CassandraTableResource. </returns>
+        public static CassandraTableCollection GetCassandraTables(this ResourceGroupResource resourceGroupResource)
+        {
+            return GetExtensionClient(resourceGroupResource).GetCassandraTables();
+        }
+
+        /// <summary>
+        /// Gets the Cassandra table under an existing Azure Cosmos DB database account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/tables/{tableName}
+        /// Operation Id: CassandraResources_GetCassandraTable
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="tableName"> Cosmos DB table name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tableName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tableName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<CassandraTableResource>> GetCassandraTableAsync(this ResourceGroupResource resourceGroupResource, string tableName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroupResource.GetCassandraTables().GetAsync(tableName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets the Cassandra table under an existing Azure Cosmos DB database account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/tables/{tableName}
+        /// Operation Id: CassandraResources_GetCassandraTable
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="tableName"> Cosmos DB table name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tableName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tableName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static Response<CassandraTableResource> GetCassandraTable(this ResourceGroupResource resourceGroupResource, string tableName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroupResource.GetCassandraTables().Get(tableName, cancellationToken);
+        }
+
         #region VirtualMachineExtensionResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineExtensionResource" /> along with the instance operations that can be performed on it but with no data.
@@ -278,6 +326,63 @@ namespace MgmtPolymorphicResources
             {
                 AutomationAccountResource.ValidateResourceId(id);
                 return new AutomationAccountResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region ThroughputSettingResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ThroughputSettingResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ThroughputSettingResource.CreateResourceIdentifier" /> to create a <see cref="ThroughputSettingResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ThroughputSettingResource" /> object. </returns>
+        public static ThroughputSettingResource GetThroughputSettingResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                ThroughputSettingResource.ValidateResourceId(id);
+                return new ThroughputSettingResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region TableThroughputSettingResource
+        /// <summary>
+        /// Gets an object representing a <see cref="TableThroughputSettingResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TableThroughputSettingResource.CreateResourceIdentifier" /> to create a <see cref="TableThroughputSettingResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="TableThroughputSettingResource" /> object. </returns>
+        public static TableThroughputSettingResource GetTableThroughputSettingResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                TableThroughputSettingResource.ValidateResourceId(id);
+                return new TableThroughputSettingResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region CassandraTableResource
+        /// <summary>
+        /// Gets an object representing a <see cref="CassandraTableResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="CassandraTableResource.CreateResourceIdentifier" /> to create a <see cref="CassandraTableResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="CassandraTableResource" /> object. </returns>
+        public static CassandraTableResource GetCassandraTableResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                CassandraTableResource.ValidateResourceId(id);
+                return new CassandraTableResource(client, id);
             }
             );
         }
