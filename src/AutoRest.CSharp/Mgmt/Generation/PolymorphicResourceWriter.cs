@@ -17,6 +17,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
+using YamlDotNet.Core.Tokens;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -148,7 +149,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var returnsDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
                 using (WriteCommonMethodWithoutValidation(signature, returnsDescription, isAsync, enableAttributes: true, attributes: new[] { new ForwardsClientCallsAttribute() }))
                 {
-                    var value = new CodeWriterDeclaration("value");
+                    var value = new CodeWriterDeclaration("value"); // TODO -- change this to result?
                     _writer.Append($"var {value:D} = ")
                         .AppendRawIf("await ", isAsync)
                         .Append($"{CreateMethodName(coreSignature.Name, isAsync)}(");
@@ -161,29 +162,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .AppendRawIf(".ConfigureAwait(false)", isAsync)
                         .LineRaw(";");
 
-                    // unwrap the result and wrap it again
-                    if (clientOperation.IsLongRunningOperation)
-                    {
-                        WritePolymorphicLROResponse(value, clientOperation.ReturnType, clientOperation);
-                    }
-                    else if (clientOperation.IsPagingOperation)
-                    {
-                        // in paging operation, we should never have a polymorphic return type case
-                        // in this case, this method should be returning "Pageable<MyselfResource>". This operation should always be on the collection class instead of being written here in the resource class.
-                        // therefore for paging operation, we just return the value variable: it should always have the same type as the return type of this method
-                        _writer.Line($"return {value};");
-                    }
-                    else
-                    {
-                        _writer.Line($"return {typeof(Response)}.FromValue(({clientOperation.ReturnType.UnWrapResponse()}){value}.Value, {value}.GetRawResponse());");
-                    }
+                    WritePolymorphicResponse(clientOperation, $"{value}");
                 }
             }
 
             _writer.Line();
         }
 
-        private void WritePolymorphicLROResponse(CodeWriterDeclaration value, CSharpType returnType, MgmtClientOperation clientOperation)
+        private void WritePolymorphicResponse(MgmtClientOperation clientOperation, FormattableString variableName)
+        {
+            // unwrap the result and wrap it again
+            if (clientOperation.IsLongRunningOperation)
+            {
+                WritePolymorphicLROResponse(variableName, clientOperation.ReturnType, clientOperation);
+            }
+            else if (clientOperation.IsPagingOperation)
+            {
+                // in paging operation, we should never have a polymorphic return type case
+                // in this case, this method should be returning "Pageable<MyselfResource>". This operation should always be on the collection class instead of being written here in the resource class.
+                // therefore for paging operation, we just return the value variable: it should always have the same type as the return type of this method
+                _writer.Line($"return {variableName};");
+            }
+            else
+            {
+                _writer.Line($"return {typeof(Response)}.FromValue(({clientOperation.ReturnType.UnWrapResponse()}){variableName}.Value, {variableName}.GetRawResponse());");
+            }
+        }
+
+        private void WritePolymorphicLROResponse(FormattableString variableName, CSharpType returnType, MgmtClientOperation clientOperation)
         {
             // TODO -- we always assume this method only have one branch (for now). Maybe update this in the future so that it could support multiple branches
             Debug.Assert(clientOperation.OperationMappings.Count == 1);
@@ -198,7 +204,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (operation.IsFakeLongRunningOperation)
             {
                 _writer.Append($"return new {LibraryArmOperation}<{operation.ReturnType.UnWrapOperation()}>(")
-                    .Append($"{typeof(Response)}.FromValue(({operation.ReturnType.UnWrapOperation()}){value}.Value, {value}.GetRawResponse())")
+                    .Append($"{typeof(Response)}.FromValue(({operation.ReturnType.UnWrapOperation()}){variableName}.Value, {variableName}.GetRawResponse())")
                     .LineRaw(");");
             }
             else
@@ -207,7 +213,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (_writer.Scope($"if (waitUntil == {typeof(WaitUntil)}.Completed)"))
                 {
                     _writer.Append($"return new {LibraryArmOperation}<{operation.ReturnType.UnWrapOperation()}>(")
-                        .Append($"{typeof(Response)}.FromValue(({operation.ReturnType.UnWrapOperation()}){value}.Value, {value}.GetRawResponse())")
+                        .Append($"{typeof(Response)}.FromValue(({operation.ReturnType.UnWrapOperation()}){variableName}.Value, {variableName}.GetRawResponse())")
                         .LineRaw(");");
                 }
 
@@ -235,10 +241,37 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{GetDiagnosticName(operation)}, {PipelineProperty}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
-                _writer.Append($").Request, {value}.GetRawResponse(), {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
+                _writer.Append($").Request, {variableName}.GetRawResponse(), {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
                 _writer.Line($");");
 
                 _writer.LineRaw("return operation;");
+            }
+        }
+
+        protected override void WriteTaggableCommonMethodResponseFromPutOrPatch(MgmtClientOperationWrapper tagOperationWrapper, MgmtClientOperation updateOperation, FormattableString variableName, bool isAsync)
+        {
+            if (IsCommonOperation(tagOperationWrapper.ClientOperation, out var commonOperation))
+            {
+                if (updateOperation.IsLongRunningOperation && updateOperation.ReturnType.Arguments.Length == 0)
+                {
+                    _writer.AppendRaw("return ")
+                        .AppendRawIf("await ", isAsync)
+                        .Append($"{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken)")
+                        .AppendRaw(".ConfigureAwait(false)")
+                        .LineRaw(";");
+                }
+                //else
+                //{
+                //    _writer.Line($"return {typeof(Response)}.FromValue(({returnType.UnWrapOperation()}){variableName}.Value, {variableName}.GetRawResponse());");
+                //}
+                else
+                {
+                    _writer.Line($"return {typeof(Response)}.FromValue(({tagOperationWrapper.ReturnType.UnWrapResponse()}){variableName}.Value, {variableName}.GetRawResponse());");
+                }
+            }
+            else
+            {
+                base.WriteTaggableCommonMethodResponseFromPutOrPatch(tagOperationWrapper, updateOperation, variableName, isAsync);
             }
         }
 

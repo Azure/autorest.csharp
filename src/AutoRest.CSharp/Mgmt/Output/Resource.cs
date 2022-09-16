@@ -255,6 +255,28 @@ namespace AutoRest.CSharp.Mgmt.Output
         public MgmtClientOperation? DeleteOperation => _deleteOperation ??= GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
         public MgmtClientOperation? UpdateOperation => _updateOperation ??= GetOperationWithVerb(HttpMethod.Patch, "Update");
 
+        private MgmtClientOperation? EnsureUpdateOperation()
+        {
+            var updateOperation = GetOperationWithVerb(HttpMethod.Patch, "Update");
+
+            if (updateOperation != null)
+                return updateOperation;
+
+            if (ResourceCollection?.CreateOperation is not null)
+            {
+                var createOrUpdateOperation = ResourceCollection.CreateOperation.OperationMappings.Values.First();
+                return MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        createOrUpdateOperation,
+                        "Update",
+                        createOrUpdateOperation.MgmtReturnType,
+                        createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
+                        createOrUpdateOperation.RequestPath));
+            }
+
+            return null;
+        }
+
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
             if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operation.OperationId!, out var positions))
@@ -275,24 +297,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 result.Add(GetOperation);
             if (DeleteOperation != null)
                 result.Add(DeleteOperation);
-            if (UpdateOperation is null)
-            {
-                if (ResourceCollection?.CreateOperation is not null)
-                {
-                    var createOrUpdateOperation = ResourceCollection.CreateOperation.OperationMappings.Values.First();
-                    result.Add(MgmtClientOperation.FromOperation(
-                        new MgmtRestOperation(
-                            createOrUpdateOperation,
-                            "Update",
-                            createOrUpdateOperation.MgmtReturnType,
-                            createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
-                            createOrUpdateOperation.RequestPath)));
-                }
-            }
-            else
-            {
+            if (UpdateOperation != null)
                 result.Add(UpdateOperation);
-            }
             if (IsSingleton && CreateOperation != null)
                 result.Add(CreateOperation);
             result.AddRange(ClientOperations);

@@ -18,7 +18,7 @@ schemas: !Schemas
           name: Boolean
           description: When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_102
+    - !BooleanSchema &ref_140
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -27,6 +27,50 @@ schemas: !Schemas
         default:
           name: Boolean
           description: ''
+      protocol: !Protocols {}
+    - !BooleanSchema &ref_13
+      type: boolean
+      language: !Languages 
+        default:
+          name: Boolean
+          description: Gets or sets the isGlobal flag of the module.
+      protocol: !Protocols {}
+    - !BooleanSchema &ref_52
+      type: boolean
+      language: !Languages 
+        default:
+          name: Boolean
+          description: Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet
+      protocol: !Protocols {}
+    - !BooleanSchema &ref_53
+      type: boolean
+      language: !Languages 
+        default:
+          name: Boolean
+          description: Indicates whether requests using non-AAD authentication are blocked
+      protocol: !Protocols {}
+  numbers:
+    - !NumberSchema &ref_15
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      precision: 64
+      language: !Languages 
+        default:
+          name: ModulePropertiesSizeInBytes
+          description: Gets or sets the size in bytes of the module.
+      protocol: !Protocols {}
+    - !NumberSchema &ref_16
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      precision: 32
+      language: !Languages 
+        default:
+          name: ModulePropertiesActivityCount
+          description: Gets or sets the activity count of the module.
       protocol: !Protocols {}
   strings:
     - !StringSchema &ref_0
@@ -46,7 +90,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_19
+    - !StringSchema &ref_34
       type: string
       apiVersions:
         - !ApiVersion 
@@ -56,7 +100,7 @@ schemas: !Schemas
           name: VirtualMachineExtensionPropertiesForceUpdateTag
           description: How the extension handler should be forced to update even if the extension configuration has not changed.
       protocol: !Protocols {}
-    - !StringSchema &ref_20
+    - !StringSchema &ref_35
       type: string
       apiVersions:
         - !ApiVersion 
@@ -66,7 +110,7 @@ schemas: !Schemas
           name: VirtualMachineExtensionPropertiesPublisher
           description: The name of the extension handler publisher.
       protocol: !Protocols {}
-    - !StringSchema &ref_21
+    - !StringSchema &ref_36
       type: string
       apiVersions:
         - !ApiVersion 
@@ -76,7 +120,7 @@ schemas: !Schemas
           name: VirtualMachineExtensionPropertiesProvisioningState
           description: The provisioning state, which only appears in the response.
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_29
       type: string
       apiVersions:
         - !ApiVersion 
@@ -86,7 +130,7 @@ schemas: !Schemas
           name: ResourceId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_15
+    - !StringSchema &ref_30
       type: string
       apiVersions:
         - !ApiVersion 
@@ -96,7 +140,7 @@ schemas: !Schemas
           name: ResourceName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_16
+    - !StringSchema &ref_31
       type: string
       apiVersions:
         - !ApiVersion 
@@ -106,7 +150,7 @@ schemas: !Schemas
           name: ResourceType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_17
+    - !StringSchema &ref_32
       type: string
       apiVersions:
         - !ApiVersion 
@@ -116,7 +160,7 @@ schemas: !Schemas
           name: ResourceLocation
           description: Resource location
       protocol: !Protocols {}
-    - !StringSchema &ref_27
+    - !StringSchema &ref_42
       type: string
       apiVersions:
         - !ApiVersion 
@@ -146,7 +190,7 @@ schemas: !Schemas
           name: VirtualMachineScaleSetPropertiesUniqueId
           description: Specifies the ID which uniquely identifies a Virtual Machine Scale Set.
       protocol: !Protocols {}
-    - !StringSchema &ref_28
+    - !StringSchema &ref_43
       type: string
       apiVersions:
         - !ApiVersion 
@@ -201,7 +245,7 @@ schemas: !Schemas
             Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). <br><br>
             Minimum api-version: 2020-06-01
       protocol: !Protocols {}
-    - !StringSchema &ref_29
+    - !StringSchema &ref_44
       type: string
       apiVersions:
         - !ApiVersion 
@@ -211,8 +255,351 @@ schemas: !Schemas
           name: VirtualMachineListResultNextLink
           description: The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
       protocol: !Protocols {}
+    - !StringSchema &ref_149
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      maxLength: 90
+      minLength: 1
+      pattern: ^[-\w\._]+$
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_14
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModulePropertiesVersion
+          description: Gets or sets the version of the module.
+      protocol: !Protocols {}
+    - !StringSchema &ref_18
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModulePropertiesContentLink
+          description: Gets or sets the contentLink of the module.
+      protocol: !Protocols {}
+    - !StringSchema &ref_12
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModuleEtag
+          description: Gets or sets the etag of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_46
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: PythonPackageCreatePropertiesContentLink
+          description: Gets or sets the module content link.
+      protocol: !Protocols {}
+    - !StringSchema &ref_48
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModuleListResultNextLink
+          description: Gets or sets the next link.
+      protocol: !Protocols {}
+    - !StringSchema &ref_49
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AutomationAccountUpdateParametersName
+          description: Gets or sets the name of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_50
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AutomationAccountUpdateParametersLocation
+          description: Gets or sets the location of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_20
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AutomationAccountPropertiesLastModifiedBy
+          description: Gets or sets the last modified by.
+      protocol: !Protocols {}
+    - !StringSchema &ref_24
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AutomationAccountPropertiesDescription
+          description: Gets or sets the description.
+      protocol: !Protocols {}
+    - !StringSchema &ref_19
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AutomationAccountEtag
+          description: Gets or sets the etag of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_54
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AutomationAccountCreateOrUpdateParametersName
+          description: Gets or sets name of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_55
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AutomationAccountCreateOrUpdateParametersLocation
+          description: Gets or sets the location of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_57
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AutomationAccountListResultNextLink
+          description: Gets or sets the next link.
+      protocol: !Protocols {}
+    - !StringSchema &ref_61
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModuleCreateOrUpdatePropertiesContentLink
+          description: Gets or sets the module content link.
+      protocol: !Protocols {}
+    - !StringSchema &ref_58
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModuleCreateOrUpdateParametersName
+          description: Gets or sets name of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_59
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModuleCreateOrUpdateParametersLocation
+          description: Gets or sets the location of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_65
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModuleUpdatePropertiesContentLink
+          description: Gets or sets the module content link.
+      protocol: !Protocols {}
+    - !StringSchema &ref_62
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModuleUpdateParametersName
+          description: Gets or sets name of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_63
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModuleUpdateParametersLocation
+          description: Gets or sets the location of the resource.
+      protocol: !Protocols {}
+  choices:
+    - !ChoiceSchema &ref_21
+      choices:
+        - !ChoiceValue 
+          value: Ok
+          language:
+            default:
+              name: Ok
+              description: ''
+        - !ChoiceValue 
+          value: Unavailable
+          language:
+            default:
+              name: Unavailable
+              description: ''
+        - !ChoiceValue 
+          value: Suspended
+          language:
+            default:
+              name: Suspended
+              description: ''
+      type: choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: AutomationAccountState
+          description: Gets status of account.
+      protocol: !Protocols {}
+  sealedChoices:
+    - !SealedChoiceSchema &ref_17
+      choices:
+        - !ChoiceValue 
+          value: Created
+          language:
+            default:
+              name: Created
+              description: ''
+        - !ChoiceValue 
+          value: Creating
+          language:
+            default:
+              name: Creating
+              description: ''
+        - !ChoiceValue 
+          value: StartingImportModuleRunbook
+          language:
+            default:
+              name: StartingImportModuleRunbook
+              description: ''
+        - !ChoiceValue 
+          value: RunningImportModuleRunbook
+          language:
+            default:
+              name: RunningImportModuleRunbook
+              description: ''
+        - !ChoiceValue 
+          value: ContentRetrieved
+          language:
+            default:
+              name: ContentRetrieved
+              description: ''
+        - !ChoiceValue 
+          value: ContentDownloaded
+          language:
+            default:
+              name: ContentDownloaded
+              description: ''
+        - !ChoiceValue 
+          value: ContentValidated
+          language:
+            default:
+              name: ContentValidated
+              description: ''
+        - !ChoiceValue 
+          value: ConnectionTypeImported
+          language:
+            default:
+              name: ConnectionTypeImported
+              description: ''
+        - !ChoiceValue 
+          value: ContentStored
+          language:
+            default:
+              name: ContentStored
+              description: ''
+        - !ChoiceValue 
+          value: ModuleDataStored
+          language:
+            default:
+              name: ModuleDataStored
+              description: ''
+        - !ChoiceValue 
+          value: ActivitiesStored
+          language:
+            default:
+              name: ActivitiesStored
+              description: ''
+        - !ChoiceValue 
+          value: ModuleImportRunbookComplete
+          language:
+            default:
+              name: ModuleImportRunbookComplete
+              description: ''
+        - !ChoiceValue 
+          value: Succeeded
+          language:
+            default:
+              name: Succeeded
+              description: ''
+        - !ChoiceValue 
+          value: Failed
+          language:
+            default:
+              name: Failed
+              description: ''
+        - !ChoiceValue 
+          value: Cancelled
+          language:
+            default:
+              name: Cancelled
+              description: ''
+        - !ChoiceValue 
+          value: Updating
+          language:
+            default:
+              name: Updating
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: ModuleProvisioningState
+          description: Gets or sets the provisioning state of the module.
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_33
+    - !ConstantSchema &ref_71
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -222,7 +609,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_37
+    - !ConstantSchema &ref_75
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -232,7 +619,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_38
+    - !ConstantSchema &ref_76
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -242,7 +629,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_106
+    - !ConstantSchema &ref_144
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -256,7 +643,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_18
+    - !DictionarySchema &ref_33
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -264,13 +651,84 @@ schemas: !Schemas
           name: ResourceTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_26
+    - !DictionarySchema &ref_41
       type: dictionary
       elementType: *ref_1
       language: !Languages 
         default:
           name: UpdateResourceTags
           description: Resource tags
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_45
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: PythonPackageCreateParametersTags
+          description: Gets or sets the tags attached to the resource.
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_47
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: PythonPackageUpdateParametersTags
+          description: Gets or sets the tags attached to the resource.
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_51
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: AutomationAccountUpdateParametersTags
+          description: Gets or sets the tags attached to the resource.
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_56
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: AutomationAccountCreateOrUpdateParametersTags
+          description: Gets or sets the tags attached to the resource.
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_60
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: ModuleCreateOrUpdateParametersTags
+          description: Gets or sets the tags attached to the resource.
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_64
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: ModuleUpdateParametersTags
+          description: Gets or sets the tags attached to the resource.
+      protocol: !Protocols {}
+  dateTimes:
+    - !DateTimeSchema &ref_22
+      type: date-time
+      format: date-time
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AutomationAccountPropertiesCreationTime
+          description: Gets the creation time.
+      protocol: !Protocols {}
+    - !DateTimeSchema &ref_23
+      type: date-time
+      format: date-time
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AutomationAccountPropertiesLastModifiedTime
+          description: Gets the last modified time.
       protocol: !Protocols {}
   objects:
     - !ObjectSchema &ref_2
@@ -288,7 +746,7 @@ schemas: !Schemas
             children: !Relations 
               all:
                 - *ref_2
-                - !ObjectSchema &ref_12
+                - !ObjectSchema &ref_25
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -356,7 +814,7 @@ schemas: !Schemas
                       description: Describes a Virtual Machine Scale Set.
                       namespace: ''
                   protocol: !Protocols {}
-                - !ObjectSchema &ref_13
+                - !ObjectSchema &ref_26
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -430,13 +888,201 @@ schemas: !Schemas
                       description: Describes a Virtual Machine.
                       namespace: ''
                   protocol: !Protocols {}
+                - !ObjectSchema &ref_27
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_12
+                      serializedName: etag
+                      language: !Languages 
+                        default:
+                          name: etag
+                          description: Gets or sets the etag of the resource.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_13
+                      flattenedNames:
+                        - properties
+                        - isGlobal
+                      serializedName: isGlobal
+                      language: !Languages 
+                        default:
+                          name: isGlobal
+                          description: Gets or sets the isGlobal flag of the module.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_14
+                      flattenedNames:
+                        - properties
+                        - version
+                      serializedName: version
+                      language: !Languages 
+                        default:
+                          name: version
+                          description: Gets or sets the version of the module.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_15
+                      flattenedNames:
+                        - properties
+                        - sizeInBytes
+                      serializedName: sizeInBytes
+                      language: !Languages 
+                        default:
+                          name: sizeInBytes
+                          description: Gets or sets the size in bytes of the module.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_16
+                      flattenedNames:
+                        - properties
+                        - activityCount
+                      serializedName: activityCount
+                      language: !Languages 
+                        default:
+                          name: activityCount
+                          description: Gets or sets the activity count of the module.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_17
+                      flattenedNames:
+                        - properties
+                        - provisioningState
+                      serializedName: provisioningState
+                      language: !Languages 
+                        default:
+                          name: provisioningState
+                          description: Gets or sets the provisioning state of the module.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_18
+                      flattenedNames:
+                        - properties
+                        - contentLink
+                      serializedName: contentLink
+                      language: !Languages 
+                        default:
+                          name: contentLink
+                          description: Gets or sets the contentLink of the module.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - output
+                    - input
+                  language: !Languages 
+                    default:
+                      name: Module
+                      description: Definition of the module type.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_28
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_19
+                      serializedName: etag
+                      language: !Languages 
+                        default:
+                          name: etag
+                          description: Gets or sets the etag of the resource.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_20
+                      flattenedNames:
+                        - properties
+                        - lastModifiedBy
+                      serializedName: lastModifiedBy
+                      language: !Languages 
+                        default:
+                          name: lastModifiedBy
+                          description: Gets or sets the last modified by.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_21
+                      flattenedNames:
+                        - properties
+                        - state
+                      readOnly: true
+                      serializedName: state
+                      language: !Languages 
+                        default:
+                          name: state
+                          description: Gets status of account.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_22
+                      flattenedNames:
+                        - properties
+                        - creationTime
+                      nullable: false
+                      readOnly: true
+                      serializedName: creationTime
+                      language: !Languages 
+                        default:
+                          name: creationTime
+                          description: Gets the creation time.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_23
+                      flattenedNames:
+                        - properties
+                        - lastModifiedTime
+                      nullable: false
+                      readOnly: true
+                      serializedName: lastModifiedTime
+                      language: !Languages 
+                        default:
+                          name: lastModifiedTime
+                          description: Gets the last modified time.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_24
+                      flattenedNames:
+                        - properties
+                        - description
+                      serializedName: description
+                      language: !Languages 
+                        default:
+                          name: description
+                          description: Gets or sets the description.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - output
+                    - input
+                  language: !Languages 
+                    default:
+                      name: AutomationAccount
+                      description: Definition of the automation account type.
+                      namespace: ''
+                  protocol: !Protocols {}
               immediate:
                 - *ref_2
-                - *ref_12
-                - *ref_13
+                - *ref_25
+                - *ref_26
+                - *ref_27
+                - *ref_28
             properties:
               - !Property 
-                schema: *ref_14
+                schema: *ref_29
                 readOnly: true
                 required: false
                 serializedName: id
@@ -446,7 +1092,7 @@ schemas: !Schemas
                     description: Resource Id
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_15
+                schema: *ref_30
                 readOnly: true
                 required: false
                 serializedName: name
@@ -456,7 +1102,7 @@ schemas: !Schemas
                     description: Resource name
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_16
+                schema: *ref_31
                 readOnly: true
                 required: false
                 serializedName: type
@@ -466,7 +1112,7 @@ schemas: !Schemas
                     description: Resource type
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_17
+                schema: *ref_32
                 required: true
                 serializedName: location
                 language: !Languages 
@@ -475,7 +1121,7 @@ schemas: !Schemas
                     description: Resource location
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_18
+                schema: *ref_33
                 required: false
                 serializedName: tags
                 language: !Languages 
@@ -500,7 +1146,7 @@ schemas: !Schemas
           - *ref_3
       properties:
         - !Property 
-          schema: *ref_19
+          schema: *ref_34
           flattenedNames:
             - properties
             - forceUpdateTag
@@ -511,7 +1157,7 @@ schemas: !Schemas
               description: How the extension handler should be forced to update even if the extension configuration has not changed.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_20
+          schema: *ref_35
           flattenedNames:
             - properties
             - publisher
@@ -522,7 +1168,7 @@ schemas: !Schemas
               description: The name of the extension handler publisher.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_21
+          schema: *ref_36
           flattenedNames:
             - properties
             - provisioningState
@@ -545,31 +1191,31 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_3
-    - !ObjectSchema &ref_22
+    - !ObjectSchema &ref_37
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       parents: !Relations 
         all:
-          - !ObjectSchema &ref_23
+          - !ObjectSchema &ref_38
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             children: !Relations 
               all:
-                - *ref_22
-                - !ObjectSchema &ref_24
+                - *ref_37
+                - !ObjectSchema &ref_39
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
                   parents: !Relations 
                     all:
-                      - *ref_23
+                      - *ref_38
                     immediate:
-                      - *ref_23
+                      - *ref_38
                   properties:
                     - !Property 
                       schema: *ref_5
@@ -592,16 +1238,16 @@ schemas: !Schemas
                       description: Describes a Virtual Machine Scale Set.
                       namespace: ''
                   protocol: !Protocols {}
-                - !ObjectSchema &ref_25
+                - !ObjectSchema &ref_40
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
                   parents: !Relations 
                     all:
-                      - *ref_23
+                      - *ref_38
                     immediate:
-                      - *ref_23
+                      - *ref_38
                   properties:
                     - !Property 
                       schema: *ref_8
@@ -666,12 +1312,12 @@ schemas: !Schemas
                       namespace: ''
                   protocol: !Protocols {}
               immediate:
-                - *ref_22
-                - *ref_24
-                - *ref_25
+                - *ref_37
+                - *ref_39
+                - *ref_40
             properties:
               - !Property 
-                schema: *ref_26
+                schema: *ref_41
                 serializedName: tags
                 language: !Languages 
                   default:
@@ -689,10 +1335,10 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_23
+          - *ref_38
       properties:
         - !Property 
-          schema: *ref_27
+          schema: *ref_42
           flattenedNames:
             - properties
             - publisher
@@ -712,15 +1358,15 @@ schemas: !Schemas
           description: Describes a Virtual Machine Extension.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_23
-    - !ObjectSchema &ref_59
+    - *ref_38
+    - !ObjectSchema &ref_97
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_30
+          schema: !ArraySchema &ref_66
             type: array
             apiVersions:
               - !ApiVersion 
@@ -747,21 +1393,21 @@ schemas: !Schemas
           description: The List Extension operation response
           namespace: ''
       protocol: !Protocols {}
-    - *ref_12
-    - *ref_24
-    - !ObjectSchema &ref_93
+    - *ref_25
+    - *ref_39
+    - !ObjectSchema &ref_131
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_31
+          schema: !ArraySchema &ref_67
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_12
+            elementType: *ref_25
             language: !Languages 
               default:
                 name: VirtualMachineScaleSetListResultValue
@@ -775,7 +1421,7 @@ schemas: !Schemas
               description: The list of virtual machine scale sets.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_28
+          schema: *ref_43
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -793,21 +1439,21 @@ schemas: !Schemas
           description: The List Virtual Machine operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_13
-    - *ref_25
-    - !ObjectSchema &ref_110
+    - *ref_26
+    - *ref_40
+    - !ObjectSchema &ref_148
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_32
+          schema: !ArraySchema &ref_68
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_13
+            elementType: *ref_26
             language: !Languages 
               default:
                 name: VirtualMachineListResultValue
@@ -821,7 +1467,7 @@ schemas: !Schemas
               description: The list of virtual machines.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_29
+          schema: *ref_44
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -839,12 +1485,391 @@ schemas: !Schemas
           description: The List Virtual Machine operation response.
           namespace: ''
       protocol: !Protocols {}
+    - *ref_27
+    - !ObjectSchema &ref_156
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_45
+          required: false
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Gets or sets the tags attached to the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_46
+          flattenedNames:
+            - properties
+            - contentLink
+          required: true
+          serializedName: contentLink
+          language: !Languages 
+            default:
+              name: contentLink
+              description: Gets or sets the module content link.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: PythonPackageCreateParameters
+          description: The parameters supplied to the create or update module operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_162
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_47
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Gets or sets the tags attached to the resource.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: PythonPackageUpdateParameters
+          description: The parameters supplied to the update module operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_170
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_69
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_27
+            language: !Languages 
+              default:
+                name: ModuleListResultValue
+                description: Gets or sets a list of modules.
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: Gets or sets a list of modules.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_48
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: Gets or sets the next link.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: ModuleListResult
+          description: The response model for the list module operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_171
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_49
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: Gets or sets the name of the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_50
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: Gets or sets the location of the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_51
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Gets or sets the tags attached to the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_52
+          flattenedNames:
+            - properties
+            - publicNetworkAccess
+          serializedName: publicNetworkAccess
+          language: !Languages 
+            default:
+              name: publicNetworkAccess
+              description: Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_53
+          flattenedNames:
+            - properties
+            - disableLocalAuth
+          serializedName: disableLocalAuth
+          language: !Languages 
+            default:
+              name: disableLocalAuth
+              description: Indicates whether requests using non-AAD authentication are blocked
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: AutomationAccountUpdateParameters
+          description: The parameters supplied to the update automation account operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_28
+    - !ObjectSchema &ref_176
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_54
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: Gets or sets name of the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_55
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: Gets or sets the location of the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_56
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Gets or sets the tags attached to the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_52
+          flattenedNames:
+            - properties
+            - publicNetworkAccess
+          serializedName: publicNetworkAccess
+          language: !Languages 
+            default:
+              name: publicNetworkAccess
+              description: Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_53
+          flattenedNames:
+            - properties
+            - disableLocalAuth
+          serializedName: disableLocalAuth
+          language: !Languages 
+            default:
+              name: disableLocalAuth
+              description: Indicates whether requests using non-AAD authentication are blocked
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: AutomationAccountCreateOrUpdateParameters
+          description: The parameters supplied to the create or update automation account operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_186
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_70
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_28
+            language: !Languages 
+              default:
+                name: AutomationAccountListResultValue
+                description: Gets or sets list of accounts.
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: Gets or sets list of accounts.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_57
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: Gets or sets the next link.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: AutomationAccountListResult
+          description: The response model for the list account operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_193
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_58
+          required: false
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: Gets or sets name of the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_59
+          required: false
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: Gets or sets the location of the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_60
+          required: false
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Gets or sets the tags attached to the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_61
+          flattenedNames:
+            - properties
+            - contentLink
+          required: true
+          serializedName: contentLink
+          language: !Languages 
+            default:
+              name: contentLink
+              description: Gets or sets the module content link.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: ModuleCreateOrUpdateParameters
+          description: The parameters supplied to the create or update module operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_199
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_62
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: Gets or sets name of the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_63
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: Gets or sets the location of the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_64
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Gets or sets the tags attached to the resource.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_65
+          flattenedNames:
+            - properties
+            - contentLink
+          serializedName: contentLink
+          language: !Languages 
+            default:
+              name: contentLink
+              description: Gets or sets the module content link.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: ModuleUpdateParameters
+          description: The parameters supplied to the update module operation.
+          namespace: ''
+      protocol: !Protocols {}
   arrays:
-    - *ref_30
-    - *ref_31
-    - *ref_32
+    - *ref_66
+    - *ref_67
+    - *ref_68
+    - *ref_69
+    - *ref_70
 globalParameters:
-  - !Parameter &ref_36
+  - !Parameter &ref_74
     schema: *ref_1
     implementation: Client
     required: true
@@ -858,7 +1883,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_34
+  - !Parameter &ref_72
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -874,8 +1899,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_35
-    schema: *ref_33
+  - !Parameter &ref_73
+    schema: *ref_71
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -897,8 +1922,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_41
+          - *ref_72
+          - !Parameter &ref_79
             schema: *ref_1
             implementation: Method
             required: true
@@ -910,7 +1935,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_42
+          - !Parameter &ref_80
             schema: *ref_1
             implementation: Method
             required: true
@@ -922,7 +1947,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_43
+          - !Parameter &ref_81
             schema: *ref_1
             implementation: Method
             required: true
@@ -934,13 +1959,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requestMediaTypes:
-          application/json: !Request &ref_40
+          application/json: !Request &ref_78
             parameters:
               - !Parameter 
-                schema: *ref_37
+                schema: *ref_75
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -952,7 +1977,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_39
+              - !Parameter &ref_77
                 schema: *ref_2
                 implementation: Method
                 required: true
@@ -965,7 +1990,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -978,7 +2003,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_39
+              - *ref_77
             language: !Languages 
               default:
                 name: ''
@@ -992,11 +2017,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_40
+          - *ref_78
         signatureParameters:
-          - *ref_41
-          - *ref_42
-          - *ref_43
+          - *ref_79
+          - *ref_80
+          - *ref_81
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1037,8 +2062,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_46
+          - *ref_72
+          - !Parameter &ref_84
             schema: *ref_1
             implementation: Method
             required: true
@@ -1050,7 +2075,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_47
+          - !Parameter &ref_85
             schema: *ref_1
             implementation: Method
             required: true
@@ -1062,7 +2087,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_48
+          - !Parameter &ref_86
             schema: *ref_1
             implementation: Method
             required: true
@@ -1074,13 +2099,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requestMediaTypes:
-          application/json: !Request &ref_45
+          application/json: !Request &ref_83
             parameters:
               - !Parameter 
-                schema: *ref_37
+                schema: *ref_75
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1092,8 +2117,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_44
-                schema: *ref_22
+              - !Parameter &ref_82
+                schema: *ref_37
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1105,7 +2130,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1118,7 +2143,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_44
+              - *ref_82
             language: !Languages 
               default:
                 name: ''
@@ -1132,11 +2157,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_45
+          - *ref_83
         signatureParameters:
-          - *ref_46
-          - *ref_47
-          - *ref_48
+          - *ref_84
+          - *ref_85
+          - *ref_86
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1164,8 +2189,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_49
+          - *ref_72
+          - !Parameter &ref_87
             schema: *ref_1
             implementation: Method
             required: true
@@ -1177,7 +2202,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_50
+          - !Parameter &ref_88
             schema: *ref_1
             implementation: Method
             required: true
@@ -1189,7 +2214,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_51
+          - !Parameter &ref_89
             schema: *ref_1
             implementation: Method
             required: true
@@ -1201,8 +2226,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             language: !Languages 
@@ -1215,9 +2240,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_49
-          - *ref_50
-          - *ref_51
+          - *ref_87
+          - *ref_88
+          - *ref_89
         responses:
           - !Response 
             language: !Languages 
@@ -1259,8 +2284,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_52
+          - *ref_72
+          - !Parameter &ref_90
             schema: *ref_1
             implementation: Method
             required: true
@@ -1272,7 +2297,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_53
+          - !Parameter &ref_91
             schema: *ref_1
             implementation: Method
             required: true
@@ -1284,7 +2309,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_54
+          - !Parameter &ref_92
             schema: *ref_1
             implementation: Method
             required: true
@@ -1296,7 +2321,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_55
+          - !Parameter &ref_93
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1307,13 +2332,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1336,10 +2361,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_52
-          - *ref_53
-          - *ref_54
-          - *ref_55
+          - *ref_90
+          - *ref_91
+          - *ref_92
+          - *ref_93
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1365,8 +2390,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_56
+          - *ref_72
+          - !Parameter &ref_94
             schema: *ref_1
             implementation: Method
             required: true
@@ -1378,7 +2403,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_57
+          - !Parameter &ref_95
             schema: *ref_1
             implementation: Method
             required: true
@@ -1390,7 +2415,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_58
+          - !Parameter &ref_96
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1401,13 +2426,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1430,12 +2455,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_56
-          - *ref_57
-          - *ref_58
+          - *ref_94
+          - *ref_95
+          - *ref_96
         responses:
           - !SchemaResponse 
-            schema: *ref_59
+            schema: *ref_97
             language: !Languages 
               default:
                 name: ''
@@ -1466,8 +2491,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_62
+          - *ref_72
+          - !Parameter &ref_100
             schema: *ref_1
             implementation: Method
             required: true
@@ -1479,7 +2504,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_63
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             required: true
@@ -1491,7 +2516,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_64
+          - !Parameter &ref_102
             schema: *ref_1
             implementation: Method
             required: true
@@ -1503,13 +2528,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requestMediaTypes:
-          application/json: !Request &ref_61
+          application/json: !Request &ref_99
             parameters:
               - !Parameter 
-                schema: *ref_37
+                schema: *ref_75
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1521,7 +2546,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_60
+              - !Parameter &ref_98
                 schema: *ref_2
                 implementation: Method
                 required: true
@@ -1534,7 +2559,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1547,7 +2572,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_60
+              - *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -1561,11 +2586,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_61
+          - *ref_99
         signatureParameters:
-          - *ref_62
-          - *ref_63
-          - *ref_64
+          - *ref_100
+          - *ref_101
+          - *ref_102
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1606,8 +2631,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_67
+          - *ref_72
+          - !Parameter &ref_105
             schema: *ref_1
             implementation: Method
             required: true
@@ -1619,7 +2644,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_68
+          - !Parameter &ref_106
             schema: *ref_1
             implementation: Method
             required: true
@@ -1631,7 +2656,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_69
+          - !Parameter &ref_107
             schema: *ref_1
             implementation: Method
             required: true
@@ -1643,13 +2668,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requestMediaTypes:
-          application/json: !Request &ref_66
+          application/json: !Request &ref_104
             parameters:
               - !Parameter 
-                schema: *ref_37
+                schema: *ref_75
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1661,8 +2686,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_65
-                schema: *ref_22
+              - !Parameter &ref_103
+                schema: *ref_37
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1674,7 +2699,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1687,7 +2712,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_65
+              - *ref_103
             language: !Languages 
               default:
                 name: ''
@@ -1701,11 +2726,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_66
+          - *ref_104
         signatureParameters:
-          - *ref_67
-          - *ref_68
-          - *ref_69
+          - *ref_105
+          - *ref_106
+          - *ref_107
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1733,8 +2758,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_70
+          - *ref_72
+          - !Parameter &ref_108
             schema: *ref_1
             implementation: Method
             required: true
@@ -1746,7 +2771,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_71
+          - !Parameter &ref_109
             schema: *ref_1
             implementation: Method
             required: true
@@ -1758,7 +2783,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_72
+          - !Parameter &ref_110
             schema: *ref_1
             implementation: Method
             required: true
@@ -1770,8 +2795,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             language: !Languages 
@@ -1784,9 +2809,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_70
-          - *ref_71
-          - *ref_72
+          - *ref_108
+          - *ref_109
+          - *ref_110
         responses:
           - !Response 
             language: !Languages 
@@ -1828,8 +2853,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_73
+          - *ref_72
+          - !Parameter &ref_111
             schema: *ref_1
             implementation: Method
             required: true
@@ -1841,7 +2866,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_74
+          - !Parameter &ref_112
             schema: *ref_1
             implementation: Method
             required: true
@@ -1853,7 +2878,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_75
+          - !Parameter &ref_113
             schema: *ref_1
             implementation: Method
             required: true
@@ -1865,7 +2890,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_76
+          - !Parameter &ref_114
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1876,13 +2901,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1905,10 +2930,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_73
-          - *ref_74
-          - *ref_75
-          - *ref_76
+          - *ref_111
+          - *ref_112
+          - *ref_113
+          - *ref_114
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1934,8 +2959,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_77
+          - *ref_72
+          - !Parameter &ref_115
             schema: *ref_1
             implementation: Method
             required: true
@@ -1947,7 +2972,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_78
+          - !Parameter &ref_116
             schema: *ref_1
             implementation: Method
             required: true
@@ -1959,7 +2984,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_79
+          - !Parameter &ref_117
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1970,13 +2995,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1999,12 +3024,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_77
-          - *ref_78
-          - *ref_79
+          - *ref_115
+          - *ref_116
+          - *ref_117
         responses:
           - !SchemaResponse 
-            schema: *ref_59
+            schema: *ref_97
             language: !Languages 
               default:
                 name: ''
@@ -2035,8 +3060,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_82
+          - *ref_72
+          - !Parameter &ref_120
             schema: *ref_1
             implementation: Method
             required: true
@@ -2048,7 +3073,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_83
+          - !Parameter &ref_121
             schema: *ref_1
             implementation: Method
             required: true
@@ -2060,13 +3085,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requestMediaTypes:
-          application/json: !Request &ref_81
+          application/json: !Request &ref_119
             parameters:
               - !Parameter 
-                schema: *ref_37
+                schema: *ref_75
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2078,8 +3103,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_80
-                schema: *ref_12
+              - !Parameter &ref_118
+                schema: *ref_25
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2091,7 +3116,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2104,7 +3129,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_80
+              - *ref_118
             language: !Languages 
               default:
                 name: ''
@@ -2118,13 +3143,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_81
+          - *ref_119
         signatureParameters:
-          - *ref_82
-          - *ref_83
+          - *ref_120
+          - *ref_121
         responses:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -2137,7 +3162,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -2162,8 +3187,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_86
+          - *ref_72
+          - !Parameter &ref_124
             schema: *ref_1
             implementation: Method
             required: true
@@ -2175,7 +3200,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_87
+          - !Parameter &ref_125
             schema: *ref_1
             implementation: Method
             required: true
@@ -2187,13 +3212,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requestMediaTypes:
-          application/json: !Request &ref_85
+          application/json: !Request &ref_123
             parameters:
               - !Parameter 
-                schema: *ref_37
+                schema: *ref_75
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2205,8 +3230,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_84
-                schema: *ref_24
+              - !Parameter &ref_122
+                schema: *ref_39
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2218,7 +3243,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2231,7 +3256,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_84
+              - *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -2245,13 +3270,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_85
+          - *ref_123
         signatureParameters:
-          - *ref_86
-          - *ref_87
+          - *ref_124
+          - *ref_125
         responses:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -2276,8 +3301,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_88
+          - *ref_72
+          - !Parameter &ref_126
             schema: *ref_1
             implementation: Method
             required: true
@@ -2289,7 +3314,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_89
+          - !Parameter &ref_127
             schema: *ref_1
             implementation: Method
             required: true
@@ -2301,8 +3326,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             language: !Languages 
@@ -2315,8 +3340,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_88
-          - *ref_89
+          - *ref_126
+          - *ref_127
         responses:
           - !Response 
             language: !Languages 
@@ -2358,8 +3383,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_90
+          - *ref_72
+          - !Parameter &ref_128
             schema: *ref_1
             implementation: Method
             required: true
@@ -2371,7 +3396,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_91
+          - !Parameter &ref_129
             schema: *ref_1
             implementation: Method
             required: true
@@ -2383,13 +3408,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2412,11 +3437,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_90
-          - *ref_91
+          - *ref_128
+          - *ref_129
         responses:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -2439,8 +3464,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_92
+          - *ref_72
+          - !Parameter &ref_130
             schema: *ref_1
             implementation: Method
             required: true
@@ -2452,13 +3477,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2481,10 +3506,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_92
+          - *ref_130
         responses:
           - !SchemaResponse 
-            schema: *ref_93
+            schema: *ref_131
             language: !Languages 
               default:
                 name: ''
@@ -2520,8 +3545,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_96
+          - *ref_72
+          - !Parameter &ref_134
             schema: *ref_1
             implementation: Method
             required: true
@@ -2533,7 +3558,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_97
+          - !Parameter &ref_135
             schema: *ref_1
             implementation: Method
             required: true
@@ -2545,13 +3570,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requestMediaTypes:
-          application/json: !Request &ref_95
+          application/json: !Request &ref_133
             parameters:
               - !Parameter 
-                schema: *ref_37
+                schema: *ref_75
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2563,8 +3588,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_94
-                schema: *ref_13
+              - !Parameter &ref_132
+                schema: *ref_26
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2576,7 +3601,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2589,7 +3614,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_94
+              - *ref_132
             language: !Languages 
               default:
                 name: ''
@@ -2603,13 +3628,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_95
+          - *ref_133
         signatureParameters:
-          - *ref_96
-          - *ref_97
+          - *ref_134
+          - *ref_135
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_26
             language: !Languages 
               default:
                 name: ''
@@ -2622,7 +3647,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_26
             language: !Languages 
               default:
                 name: ''
@@ -2647,8 +3672,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_100
+          - *ref_72
+          - !Parameter &ref_138
             schema: *ref_1
             implementation: Method
             required: true
@@ -2660,7 +3685,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_101
+          - !Parameter &ref_139
             schema: *ref_1
             implementation: Method
             required: true
@@ -2672,13 +3697,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requestMediaTypes:
-          application/json: !Request &ref_99
+          application/json: !Request &ref_137
             parameters:
               - !Parameter 
-                schema: *ref_37
+                schema: *ref_75
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2690,8 +3715,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_98
-                schema: *ref_25
+              - !Parameter &ref_136
+                schema: *ref_40
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2703,7 +3728,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2716,7 +3741,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_98
+              - *ref_136
             language: !Languages 
               default:
                 name: ''
@@ -2730,13 +3755,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_99
+          - *ref_137
         signatureParameters:
-          - *ref_100
-          - *ref_101
+          - *ref_138
+          - *ref_139
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_26
             language: !Languages 
               default:
                 name: ''
@@ -2749,7 +3774,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_26
             language: !Languages 
               default:
                 name: ''
@@ -2774,8 +3799,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_103
+          - *ref_72
+          - !Parameter &ref_141
             schema: *ref_1
             implementation: Method
             required: true
@@ -2787,7 +3812,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_104
+          - !Parameter &ref_142
             schema: *ref_1
             implementation: Method
             required: true
@@ -2799,8 +3824,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_105
-            schema: *ref_102
+          - !Parameter &ref_143
+            schema: *ref_140
             implementation: Method
             language: !Languages 
               default:
@@ -2810,8 +3835,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             language: !Languages 
@@ -2824,9 +3849,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_103
-          - *ref_104
-          - *ref_105
+          - *ref_141
+          - *ref_142
+          - *ref_143
         responses:
           - !Response 
             language: !Languages 
@@ -2868,8 +3893,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_107
+          - *ref_72
+          - !Parameter &ref_145
             schema: *ref_1
             implementation: Method
             required: true
@@ -2881,7 +3906,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_108
+          - !Parameter &ref_146
             schema: *ref_1
             implementation: Method
             required: true
@@ -2894,7 +3919,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_106
+            schema: *ref_144
             implementation: Method
             language: !Languages 
               default:
@@ -2904,13 +3929,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2933,11 +3958,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_107
-          - *ref_108
+          - *ref_145
+          - *ref_146
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_26
             language: !Languages 
               default:
                 name: ''
@@ -2960,8 +3985,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_34
-          - !Parameter &ref_109
+          - *ref_72
+          - !Parameter &ref_147
             schema: *ref_1
             implementation: Method
             required: true
@@ -2973,13 +3998,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_35
-          - *ref_36
+          - *ref_73
+          - *ref_74
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_76
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3002,10 +4027,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_109
+          - *ref_147
         responses:
           - !SchemaResponse 
-            schema: *ref_110
+            schema: *ref_148
             language: !Languages 
               default:
                 name: ''
@@ -3030,6 +4055,1528 @@ operationGroups:
     language: !Languages 
       default:
         name: VirtualMachines
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: Python2Package
+    operations:
+      - !Operation 
+        operationId: Python2Package_Delete
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_150
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_151
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_152
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: packageName
+                description: The python package name.
+                serializedName: packageName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python2Packages/{packageName}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_150
+          - *ref_151
+          - *ref_152
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Delete
+            description: Delete the python 2 package by name.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Python2Package_Get
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_153
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_154
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_155
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: packageName
+                description: The python package name.
+                serializedName: packageName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python2Packages/{packageName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_153
+          - *ref_154
+          - *ref_155
+        responses:
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieve the python 2 package identified by package name.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Python2Package_CreateOrUpdate
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_159
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_160
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_161
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: packageName
+                description: The name of python package.
+                serializedName: packageName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requestMediaTypes:
+          application/json: !Request &ref_158
+            parameters:
+              - !Parameter 
+                schema: *ref_75
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_157
+                schema: *ref_156
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: The create or update parameters for python package.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_157
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python2Packages/{packageName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_158
+        signatureParameters:
+          - *ref_159
+          - *ref_160
+          - *ref_161
+        responses:
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: Created
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '201'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Create or Update the python 2 package identified by package name.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Python2Package_Update
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_165
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_166
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_167
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: packageName
+                description: The name of python package.
+                serializedName: packageName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requestMediaTypes:
+          application/json: !Request &ref_164
+            parameters:
+              - !Parameter 
+                schema: *ref_75
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_163
+                schema: *ref_162
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: The update parameters for python package.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_163
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python2Packages/{packageName}
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_164
+        signatureParameters:
+          - *ref_165
+          - *ref_166
+          - *ref_167
+        responses:
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Update
+            description: Update the python 2 package identified by package name.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Python2Package_ListByAutomationAccount
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_168
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_169
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python2Packages
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_168
+          - *ref_169
+        responses:
+          - !SchemaResponse 
+            schema: *ref_170
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListByAutomationAccount
+            description: Retrieve a list of python 2 packages.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Python2Package
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: AutomationAccount
+    operations:
+      - !Operation 
+        operationId: AutomationAccount_Update
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_174
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_175
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requestMediaTypes:
+          application/json: !Request &ref_173
+            parameters:
+              - !Parameter 
+                schema: *ref_75
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_172
+                schema: *ref_171
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters supplied to the update automation account.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_172
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_173
+        signatureParameters:
+          - *ref_174
+          - *ref_175
+        responses:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Update
+            description: Update an automation account.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: AutomationAccount_CreateOrUpdate
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_179
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_180
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requestMediaTypes:
+          application/json: !Request &ref_178
+            parameters:
+              - !Parameter 
+                schema: *ref_75
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_177
+                schema: *ref_176
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters supplied to the create or update automation account.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_177
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_178
+        signatureParameters:
+          - *ref_179
+          - *ref_180
+        responses:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: Created
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '201'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Create or update automation account.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: AutomationAccount_Delete
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_181
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_182
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_181
+          - *ref_182
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No Content
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        language: !Languages 
+          default:
+            name: Delete
+            description: Delete an automation account.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: AutomationAccount_Get
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_183
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_184
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_183
+          - *ref_184
+        responses:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Get information about an Automation Account.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: AutomationAccount_ListByResourceGroup
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_185
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_185
+        responses:
+          - !SchemaResponse 
+            schema: *ref_186
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListByResourceGroup
+            description: Retrieve a list of accounts within a given resource group.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: AutomationAccount
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: Module
+    operations:
+      - !Operation 
+        operationId: Module_Delete
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_187
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_188
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_189
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: moduleName
+                description: The module name.
+                serializedName: moduleName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_187
+          - *ref_188
+          - *ref_189
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Delete
+            description: Delete the module by name.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Module_Get
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_190
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_191
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_192
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: moduleName
+                description: The module name.
+                serializedName: moduleName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_190
+          - *ref_191
+          - *ref_192
+        responses:
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieve the module identified by module name.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Module_CreateOrUpdate
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_196
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_197
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_198
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: moduleName
+                description: The name of module.
+                serializedName: moduleName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requestMediaTypes:
+          application/json: !Request &ref_195
+            parameters:
+              - !Parameter 
+                schema: *ref_75
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_194
+                schema: *ref_193
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: The create or update parameters for module.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_194
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_195
+        signatureParameters:
+          - *ref_196
+          - *ref_197
+          - *ref_198
+        responses:
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: Created
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '201'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Create or Update the module identified by module name.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Module_Update
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_202
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_203
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_204
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: moduleName
+                description: The name of module.
+                serializedName: moduleName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requestMediaTypes:
+          application/json: !Request &ref_201
+            parameters:
+              - !Parameter 
+                schema: *ref_75
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_200
+                schema: *ref_199
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: The update parameters for module.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_200
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_201
+        signatureParameters:
+          - *ref_202
+          - *ref_203
+          - *ref_204
+        responses:
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Update
+            description: Update the module identified by module name.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Module_ListByAutomationAccount
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_72
+          - !Parameter &ref_205
+            schema: *ref_149
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of an Azure Resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_206
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: automationAccountName
+                description: The name of the automation account.
+                serializedName: automationAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_74
+          - *ref_73
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_76
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_205
+          - *ref_206
+        responses:
+          - !SchemaResponse 
+            schema: *ref_170
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListByAutomationAccount
+            description: Retrieve a list of modules.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Module
         description: ''
     protocol: !Protocols {}
 security: !Security 

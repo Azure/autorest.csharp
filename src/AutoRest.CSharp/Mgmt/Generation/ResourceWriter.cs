@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -123,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 using (_writer.Scope($"else"))
                 {
-                    WriteTaggableCommonMethodFromPutOrPatch(isAsync, "[key] = value");
+                    WriteTaggableCommonMethodFromPutOrPatch(clientOperationWrapper, isAsync, "[key] = value");
                 }
             }
             _writer.Line();
@@ -146,7 +147,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 using (_writer.Scope($"else"))
                 {
-                    WriteTaggableCommonMethodFromPutOrPatch(isAsync, ".ReplaceWith(tags)", true);
+                    WriteTaggableCommonMethodFromPutOrPatch(clientOperationWrapper, isAsync, ".ReplaceWith(tags)", true);
                 }
             }
             _writer.Line();
@@ -164,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 using (_writer.Scope($"else"))
                 {
-                    WriteTaggableCommonMethodFromPutOrPatch(isAsync, ".Remove(key)");
+                    WriteTaggableCommonMethodFromPutOrPatch(clientOperationWrapper, isAsync, ".Remove(key)");
                 }
             }
             _writer.Line();
@@ -188,24 +189,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"originalTags.Value.Data.TagValues{setCode};");
         }
 
-        private void WriteTaggableCommonMethodFromPutOrPatch(bool isAsync, string setCode, bool isSetTags = false)
+        private void WriteTaggableCommonMethodFromPutOrPatch(MgmtClientOperationWrapper tagOperationWrapper, bool isAsync, string setCode, bool isSetTags = false)
         {
             if (This.UpdateOperation is null && This.CreateOperation is null)
                 throw new InvalidOperationException($"Unexpected null update method for resource {This.ResourceName} while its marked as taggable");
-            MgmtClientOperation operation = (This.UpdateOperation ?? This.CreateOperation)!;
+            MgmtClientOperation updateOperation = This.UpdateOperation!;
             var updateMethodName = GetUpdateMethodName();
 
             var configureStr = isAsync ? ".ConfigureAwait(false)" : String.Empty;
             var awaitStr = isAsync ? "await " : String.Empty;
             _writer.Line($"var current = ({awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr}).Value.Data;");
 
-            var lroParamStr = operation.IsLongRunningOperation ? "WaitUntil.Completed, " : String.Empty;
+            var lroParamStr = updateOperation.IsLongRunningOperation ? "WaitUntil.Completed, " : String.Empty;
 
-            var parameters = operation.IsLongRunningOperation ? operation.MethodSignature.Parameters.Skip(1) : operation.MethodSignature.Parameters;
+            var parameters = updateOperation.IsLongRunningOperation ? updateOperation.MethodSignature.Parameters.Skip(1) : updateOperation.MethodSignature.Parameters;
             var bodyParamType = parameters.First().Type;
             string bodyParamName = "current";
             //if we are using PATCH always minimize what we pass in the body to what we actually want to change
-            if (!bodyParamType.Equals(This.ResourceData.Type) || operation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
+            if (!bodyParamType.Equals(This.ResourceData.Type) || updateOperation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
             {
                 bodyParamName = "patch";
                 if (bodyParamType.Implementation is ObjectType objectType)
@@ -250,21 +251,31 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             _writer.Line($"{bodyParamName}.Tags{setCode};");
-            _writer.Line($"var result = {awaitStr}{CreateMethodName(updateMethodName, isAsync)}({lroParamStr}{bodyParamName}, cancellationToken: cancellationToken){configureStr};");
-            if (operation.IsLongRunningOperation)
+            var result = new CodeWriterDeclaration("result");
+            _writer.Line($"var {result:D} = {awaitStr}{CreateMethodName(updateMethodName, isAsync)}({lroParamStr}{bodyParamName}, cancellationToken: cancellationToken){configureStr};");
+            WriteTaggableCommonMethodResponseFromPutOrPatch(tagOperationWrapper, updateOperation, $"{result}", isAsync);
+        }
+
+        protected virtual void WriteTaggableCommonMethodResponseFromPutOrPatch(MgmtClientOperationWrapper tagOperationWrapper, MgmtClientOperation updateOperation, FormattableString variableName, bool isAsync)
+        {
+            if (updateOperation.IsLongRunningOperation)
             {
-                if (operation.ReturnType.Arguments.Length == 0)
+                if (updateOperation.ReturnType.Arguments.Length == 0)
                 {
-                    _writer.Line($"return {awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr};");
+                    _writer.AppendRaw("return ")
+                        .AppendRawIf("await ", isAsync)
+                        .Append($"{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken)")
+                        .AppendRaw(".ConfigureAwait(false)")
+                        .LineRaw(";");
                 }
                 else
                 {
-                    _writer.Line($"return Response.FromValue(result.Value, result.GetRawResponse());");
+                    _writer.Line($"return Response.FromValue({variableName}.Value, {variableName}.GetRawResponse());");
                 }
             }
             else
             {
-                _writer.Line($"return result;");
+                _writer.Line($"return {variableName};");
             }
         }
 

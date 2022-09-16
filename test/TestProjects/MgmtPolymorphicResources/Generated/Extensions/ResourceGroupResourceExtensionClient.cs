@@ -44,5 +44,12 @@ namespace MgmtPolymorphicResources
         {
             return GetCachedClient(Client => new VirtualMachineCollection(Client, Id));
         }
+
+        /// <summary> Gets a collection of AutomationAccountResources in the ResourceGroupResource. </summary>
+        /// <returns> An object representing collection of AutomationAccountResources and their operations over a AutomationAccountResource. </returns>
+        public virtual AutomationAccountCollection GetAutomationAccounts()
+        {
+            return GetCachedClient(Client => new AutomationAccountCollection(Client, Id));
+        }
     }
 }

@@ -6,20 +6,12 @@
         "version": "2020-06-01"
     },
     "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
     "security": [
         {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+            "azure_auth": ["user_impersonation"]
         }
     ],
     "securityDefinitions": {
@@ -36,9 +28,7 @@
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}": {
             "put": {
-                "tags": [
-                    "VirtualMachineExtensions"
-                ],
+                "tags": ["VirtualMachineExtensions"],
                 "operationId": "VirtualMachineExtensions_CreateOrUpdate",
                 "description": "The operation to create or update the extension.",
                 "parameters": [
@@ -96,9 +86,7 @@
                 "x-ms-long-running-operation": true
             },
             "patch": {
-                "tags": [
-                    "VirtualMachineExtensions"
-                ],
+                "tags": ["VirtualMachineExtensions"],
                 "operationId": "VirtualMachineExtensions_Update",
                 "description": "The operation to update the extension.",
                 "parameters": [
@@ -150,9 +138,7 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [
-                    "VirtualMachineExtensions"
-                ],
+                "tags": ["VirtualMachineExtensions"],
                 "operationId": "VirtualMachineExtensions_Delete",
                 "description": "The operation to delete the extension.",
                 "parameters": [
@@ -198,9 +184,7 @@
                 "x-ms-long-running-operation": true
             },
             "get": {
-                "tags": [
-                    "VirtualMachineExtensions"
-                ],
+                "tags": ["VirtualMachineExtensions"],
                 "operationId": "VirtualMachineExtensions_Get",
                 "description": "The operation to get the extension.",
                 "parameters": [
@@ -251,9 +235,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions": {
             "get": {
-                "tags": [
-                    "VirtualMachineExtensions"
-                ],
+                "tags": ["VirtualMachineExtensions"],
                 "operationId": "VirtualMachineExtensions_List",
                 "description": "The operation to get all extensions of a Virtual Machine.",
                 "parameters": [
@@ -297,9 +279,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmExtensionName}": {
             "put": {
-                "tags": [
-                    "VirtualMachineScaleSetVMExtensions"
-                ],
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
                 "operationId": "VirtualMachineScaleSetVMExtensions_CreateOrUpdate",
                 "description": "The operation to create or update the VMSS VM extension.",
                 "parameters": [
@@ -357,9 +337,7 @@
                 "x-ms-long-running-operation": true
             },
             "patch": {
-                "tags": [
-                    "VirtualMachineScaleSetVMExtensions"
-                ],
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
                 "operationId": "VirtualMachineScaleSetVMExtensions_Update",
                 "description": "The operation to update the VMSS VM extension.",
                 "parameters": [
@@ -411,9 +389,7 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [
-                    "VirtualMachineScaleSetVMExtensions"
-                ],
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
                 "operationId": "VirtualMachineScaleSetVMExtensions_Delete",
                 "description": "The operation to delete the VMSS VM extension.",
                 "parameters": [
@@ -459,9 +435,7 @@
                 "x-ms-long-running-operation": true
             },
             "get": {
-                "tags": [
-                    "VirtualMachineScaleSetVMExtensions"
-                ],
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
                 "operationId": "VirtualMachineScaleSetVMExtensions_Get",
                 "description": "The operation to get the VMSS VM extension.",
                 "parameters": [
@@ -512,9 +486,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions": {
             "get": {
-                "tags": [
-                    "VirtualMachineScaleSetVMExtensions"
-                ],
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
                 "operationId": "VirtualMachineScaleSetVMExtensions_List",
                 "description": "The operation to get all extensions of an instance in Virtual Machine Scaleset.",
                 "parameters": [
@@ -558,9 +530,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}": {
             "put": {
-                "tags": [
-                    "VirtualMachineScaleSets"
-                ],
+                "tags": ["VirtualMachineScaleSets"],
                 "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
                 "description": "Create or update a VM scale set.",
                 "parameters": [
@@ -611,9 +581,7 @@
                 "x-ms-long-running-operation": true
             },
             "patch": {
-                "tags": [
-                    "VirtualMachineScaleSets"
-                ],
+                "tags": ["VirtualMachineScaleSets"],
                 "operationId": "VirtualMachineScaleSets_Update",
                 "description": "Update a VM scale set.",
                 "parameters": [
@@ -658,9 +626,7 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [
-                    "VirtualMachineScaleSets"
-                ],
+                "tags": ["VirtualMachineScaleSets"],
                 "operationId": "VirtualMachineScaleSets_Delete",
                 "description": "Deletes a VM scale set.",
                 "parameters": [
@@ -699,9 +665,7 @@
                 "x-ms-long-running-operation": true
             },
             "get": {
-                "tags": [
-                    "VirtualMachineScaleSets"
-                ],
+                "tags": ["VirtualMachineScaleSets"],
                 "operationId": "VirtualMachineScaleSets_Get",
                 "description": "Display information about a virtual machine scale set.",
                 "parameters": [
@@ -738,9 +702,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets": {
             "get": {
-                "tags": [
-                    "VirtualMachineScaleSets"
-                ],
+                "tags": ["VirtualMachineScaleSets"],
                 "operationId": "VirtualMachineScaleSets_List",
                 "description": "Gets a list of all VM scale sets under a resource group.",
                 "parameters": [
@@ -773,9 +735,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
             "put": {
-                "tags": [
-                    "VirtualMachines"
-                ],
+                "tags": ["VirtualMachines"],
                 "operationId": "VirtualMachines_CreateOrUpdate",
                 "description": "The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.",
                 "parameters": [
@@ -826,9 +786,7 @@
                 "x-ms-long-running-operation": true
             },
             "patch": {
-                "tags": [
-                    "VirtualMachines"
-                ],
+                "tags": ["VirtualMachines"],
                 "operationId": "VirtualMachines_Update",
                 "description": "The operation to update a virtual machine.",
                 "parameters": [
@@ -879,9 +837,7 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": [
-                    "VirtualMachines"
-                ],
+                "tags": ["VirtualMachines"],
                 "operationId": "VirtualMachines_Delete",
                 "description": "The operation to delete a virtual machine.",
                 "parameters": [
@@ -927,9 +883,7 @@
                 "x-ms-long-running-operation": true
             },
             "get": {
-                "tags": [
-                    "VirtualMachines"
-                ],
+                "tags": ["VirtualMachines"],
                 "operationId": "VirtualMachines_Get",
                 "description": "Retrieves information about the model view or the instance view of a virtual machine.",
                 "parameters": [
@@ -953,9 +907,7 @@
                         "required": false,
                         "type": "string",
                         "description": "The expand expression to apply on the operation.",
-                        "enum": [
-                            "instanceView"
-                        ],
+                        "enum": ["instanceView"],
                         "x-ms-enum": {
                             "name": "InstanceViewTypes",
                             "modelAsString": false
@@ -980,9 +932,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines": {
             "get": {
-                "tags": [
-                    "VirtualMachines"
-                ],
+                "tags": ["VirtualMachines"],
                 "operationId": "VirtualMachines_List",
                 "description": "Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.",
                 "parameters": [
@@ -1005,6 +955,551 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/VirtualMachineListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python2Packages/{packageName}": {
+            "delete": {
+                "tags": ["Python2Package"],
+                "operationId": "Python2Package_Delete",
+                "description": "Delete the python 2 package by name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "packageName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The python package name."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Python2Package"],
+                "operationId": "Python2Package_Get",
+                "description": "Retrieve the python 2 package identified by package name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "packageName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The python package name."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Python2Package"],
+                "operationId": "Python2Package_CreateOrUpdate",
+                "description": "Create or Update the python 2 package identified by package name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "packageName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of python package."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PythonPackageCreateParameters"
+                        },
+                        "description": "The create or update parameters for python package."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Python2Package"],
+                "operationId": "Python2Package_Update",
+                "description": "Update the python 2 package identified by package name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "packageName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of python package."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PythonPackageUpdateParameters"
+                        },
+                        "description": "The update parameters for python package."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python2Packages": {
+            "get": {
+                "tags": ["Python2Package"],
+                "operationId": "Python2Package_ListByAutomationAccount",
+                "description": "Retrieve a list of python 2 packages.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModuleListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}": {
+            "patch": {
+                "tags": ["AutomationAccount"],
+                "operationId": "AutomationAccount_Update",
+                "description": "Update an automation account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccountUpdateParameters"
+                        },
+                        "description": "Parameters supplied to the update automation account."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccount"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["AutomationAccount"],
+                "operationId": "AutomationAccount_CreateOrUpdate",
+                "description": "Create or update automation account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccountCreateOrUpdateParameters"
+                        },
+                        "description": "Parameters supplied to the create or update automation account."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccount"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccount"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["AutomationAccount"],
+                "operationId": "AutomationAccount_Delete",
+                "description": "Delete an automation account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["AutomationAccount"],
+                "operationId": "AutomationAccount_Get",
+                "description": "Get information about an Automation Account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccount"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts": {
+            "get": {
+                "tags": ["AutomationAccount"],
+                "operationId": "AutomationAccount_ListByResourceGroup",
+                "description": "Retrieve a list of accounts within a given resource group.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccountListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}": {
+            "delete": {
+                "tags": ["Module"],
+                "operationId": "Module_Delete",
+                "description": "Delete the module by name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "moduleName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The module name."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Module"],
+                "operationId": "Module_Get",
+                "description": "Retrieve the module identified by module name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "moduleName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The module name."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Module"],
+                "operationId": "Module_CreateOrUpdate",
+                "description": "Create or Update the module identified by module name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "moduleName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of module."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ModuleCreateOrUpdateParameters"
+                        },
+                        "description": "The create or update parameters for module."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Module"],
+                "operationId": "Module_Update",
+                "description": "Update the module identified by module name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "moduleName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of module."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ModuleUpdateParameters"
+                        },
+                        "description": "The update parameters for module."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules": {
+            "get": {
+                "tags": ["Module"],
+                "operationId": "Module_ListByAutomationAccount",
+                "description": "Retrieve a list of modules.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModuleListResult"
                         }
                     }
                 },
@@ -1085,9 +1580,7 @@
                     "description": "Resource tags"
                 }
             },
-            "required": [
-                "location"
-            ],
+            "required": ["location"],
             "x-ms-azure-resource": true
         },
         "UpdateResource": {
@@ -1203,9 +1696,7 @@
                     "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
                 }
             },
-            "required": [
-                "value"
-            ],
+            "required": ["value"],
             "description": "The List Virtual Machine operation response."
         },
         "VirtualMachine": {
@@ -1273,11 +1764,355 @@
                     "description": "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines."
                 }
             },
-            "required": [
-                "value"
-            ],
+            "required": ["value"],
             "description": "The List Virtual Machine operation response."
         },
+        "PythonPackageCreateParameters": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/PythonPackageCreateProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets the module create properties."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "required": ["properties"],
+            "description": "The parameters supplied to the create or update module operation."
+        },
+        "PythonPackageCreateProperties": {
+            "properties": {
+                "contentLink": {
+                    "type": "string",
+                    "description": "Gets or sets the module content link."
+                }
+            },
+            "required": ["contentLink"],
+            "description": "The parameters supplied to the create or update module properties."
+        },
+        "PythonPackageUpdateParameters": {
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "description": "The parameters supplied to the update module operation."
+        },
+        "Module": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ModuleProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets the module properties."
+                },
+                "etag": {
+                    "type": "string",
+                    "description": "Gets or sets the etag of the resource."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Definition of the module type."
+        },
+        "ModuleProperties": {
+            "properties": {
+                "isGlobal": {
+                    "type": "boolean",
+                    "description": "Gets or sets the isGlobal flag of the module."
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Gets or sets the version of the module."
+                },
+                "sizeInBytes": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the size in bytes of the module."
+                },
+                "activityCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the activity count of the module."
+                },
+                "provisioningState": {
+                    "type": "string",
+                    "description": "Gets or sets the provisioning state of the module.",
+                    "enum": [
+                        "Created",
+                        "Creating",
+                        "StartingImportModuleRunbook",
+                        "RunningImportModuleRunbook",
+                        "ContentRetrieved",
+                        "ContentDownloaded",
+                        "ContentValidated",
+                        "ConnectionTypeImported",
+                        "ContentStored",
+                        "ModuleDataStored",
+                        "ActivitiesStored",
+                        "ModuleImportRunbookComplete",
+                        "Succeeded",
+                        "Failed",
+                        "Cancelled",
+                        "Updating"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ModuleProvisioningState",
+                        "modelAsString": false
+                    }
+                },
+                "contentLink": {
+                    "type": "string",
+                    "description": "Gets or sets the contentLink of the module."
+                }
+            },
+            "description": "Definition of the module property type."
+        },
+        "ModuleListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Module"
+                    },
+                    "description": "Gets or sets a list of modules."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Gets or sets the next link."
+                }
+            },
+            "description": "The response model for the list module operation."
+        },
+        "AutomationAccountUpdateParameters": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/AutomationAccountUpdateProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets account update properties."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets the name of the resource."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the location of the resource."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "description": "The parameters supplied to the update automation account operation."
+        },
+        "AutomationAccountUpdateProperties": {
+            "properties": {
+                "publicNetworkAccess": {
+                    "type": "boolean",
+                    "description": "Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet"
+                },
+                "disableLocalAuth": {
+                    "type": "boolean",
+                    "description": "Indicates whether requests using non-AAD authentication are blocked"
+                }
+            },
+            "description": "The parameters supplied to the update account properties."
+        },
+        "AutomationAccount": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/AutomationAccountProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets the automation account properties."
+                },
+                "etag": {
+                    "type": "string",
+                    "description": "Gets or sets the etag of the resource."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Definition of the automation account type."
+        },
+        "AutomationAccountProperties": {
+            "properties": {
+                "lastModifiedBy": {
+                    "type": "string",
+                    "description": "Gets or sets the last modified by."
+                },
+                "state": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets status of account.",
+                    "enum": ["Ok", "Unavailable", "Suspended"],
+                    "x-ms-enum": {
+                        "name": "AutomationAccountState",
+                        "modelAsString": true
+                    }
+                },
+                "creationTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the creation time.",
+                    "x-nullable": false
+                },
+                "lastModifiedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the last modified time.",
+                    "x-nullable": false
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Gets or sets the description."
+                }
+            },
+            "description": "Definition of the account property."
+        },
+        "AutomationAccountCreateOrUpdateParameters": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/AutomationAccountCreateOrUpdateProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets account create or update properties."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets name of the resource."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the location of the resource."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "description": "The parameters supplied to the create or update automation account operation."
+        },
+        "AutomationAccountCreateOrUpdateProperties": {
+            "properties": {
+                "publicNetworkAccess": {
+                    "type": "boolean",
+                    "description": "Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet"
+                },
+                "disableLocalAuth": {
+                    "type": "boolean",
+                    "description": "Indicates whether requests using non-AAD authentication are blocked"
+                }
+            },
+            "description": "The parameters supplied to the create or update account properties."
+        },
+        "AutomationAccountListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutomationAccount"
+                    },
+                    "description": "Gets or sets list of accounts."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Gets or sets the next link."
+                }
+            },
+            "description": "The response model for the list account operation."
+        },
+        "ModuleCreateOrUpdateProperties": {
+            "properties": {
+                "contentLink": {
+                    "type": "string",
+                    "description": "Gets or sets the module content link."
+                }
+            },
+            "required": ["contentLink"],
+            "description": "The parameters supplied to the create or update module properties."
+        },
+        "ModuleCreateOrUpdateParameters": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ModuleCreateOrUpdateProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets the module create properties."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets name of the resource."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the location of the resource."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "required": ["properties"],
+            "description": "The parameters supplied to the create or update module operation."
+        },
+        "ModuleUpdateProperties": {
+            "properties": {
+                "contentLink": {
+                    "type": "string",
+                    "description": "Gets or sets the module content link."
+                }
+            },
+            "description": "The parameters supplied to the update properties."
+        },
+        "ModuleUpdateParameters": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ModuleUpdateProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets the module update properties."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets name of the resource."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the location of the resource."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "description": "The parameters supplied to the update module operation."
+        }
     },
     "parameters": {
         "SubscriptionIdParameter": {
@@ -1293,6 +2128,25 @@
             "required": true,
             "type": "string",
             "description": "Client Api Version."
+        },
+        "ResourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 1,
+            "maxLength": 90,
+            "x-ms-parameter-location": "method",
+            "description": "Name of an Azure Resource group."
+        },
+        "AutomationAccountNameParameter": {
+            "name": "automationAccountName",
+            "description": "The name of the automation account.",
+            "type": "string",
+            "required": true,
+            "in": "path",
+            "x-ms-parameter-location": "method"
         }
     }
 }

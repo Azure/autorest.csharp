@@ -110,6 +110,46 @@ namespace MgmtPolymorphicResources
             return resourceGroupResource.GetVirtualMachines().Get(vmName, expand, cancellationToken);
         }
 
+        /// <summary> Gets a collection of AutomationAccountResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of AutomationAccountResources and their operations over a AutomationAccountResource. </returns>
+        public static AutomationAccountCollection GetAutomationAccounts(this ResourceGroupResource resourceGroupResource)
+        {
+            return GetExtensionClient(resourceGroupResource).GetAutomationAccounts();
+        }
+
+        /// <summary>
+        /// Get information about an Automation Account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}
+        /// Operation Id: AutomationAccount_Get
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="automationAccountName"> The name of the automation account. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="automationAccountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="automationAccountName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<AutomationAccountResource>> GetAutomationAccountAsync(this ResourceGroupResource resourceGroupResource, string automationAccountName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroupResource.GetAutomationAccounts().GetAsync(automationAccountName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get information about an Automation Account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}
+        /// Operation Id: AutomationAccount_Get
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="automationAccountName"> The name of the automation account. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="automationAccountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="automationAccountName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static Response<AutomationAccountResource> GetAutomationAccount(this ResourceGroupResource resourceGroupResource, string automationAccountName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroupResource.GetAutomationAccounts().Get(automationAccountName, cancellationToken);
+        }
+
         #region VirtualMachineExtensionResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineExtensionResource" /> along with the instance operations that can be performed on it but with no data.
@@ -181,6 +221,63 @@ namespace MgmtPolymorphicResources
             {
                 VirtualMachineResource.ValidateResourceId(id);
                 return new VirtualMachineResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region AutomationAccountPython2PackageResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AutomationAccountPython2PackageResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AutomationAccountPython2PackageResource.CreateResourceIdentifier" /> to create an <see cref="AutomationAccountPython2PackageResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AutomationAccountPython2PackageResource" /> object. </returns>
+        public static AutomationAccountPython2PackageResource GetAutomationAccountPython2PackageResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AutomationAccountPython2PackageResource.ValidateResourceId(id);
+                return new AutomationAccountPython2PackageResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region AutomationAccountModuleResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AutomationAccountModuleResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AutomationAccountModuleResource.CreateResourceIdentifier" /> to create an <see cref="AutomationAccountModuleResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AutomationAccountModuleResource" /> object. </returns>
+        public static AutomationAccountModuleResource GetAutomationAccountModuleResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AutomationAccountModuleResource.ValidateResourceId(id);
+                return new AutomationAccountModuleResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region AutomationAccountResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AutomationAccountResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AutomationAccountResource.CreateResourceIdentifier" /> to create an <see cref="AutomationAccountResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AutomationAccountResource" /> object. </returns>
+        public static AutomationAccountResource GetAutomationAccountResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AutomationAccountResource.ValidateResourceId(id);
+                return new AutomationAccountResource(client, id);
             }
             );
         }
