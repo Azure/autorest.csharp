@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             if (This.UpdateOperation is null && This.CreateOperation is null)
                 throw new InvalidOperationException($"Unexpected null update method for resource {This.ResourceName} while its marked as taggable");
-            MgmtClientOperation updateOperation = This.UpdateOperation!;
+            MgmtClientOperation updateOperation = (This.UpdateOperation ?? This.CreateOperation)!;
             var updateMethodName = GetUpdateMethodName();
 
             var configureStr = isAsync ? ".ConfigureAwait(false)" : String.Empty;
@@ -265,7 +265,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.AppendRaw("return ")
                         .AppendRawIf("await ", isAsync)
                         .Append($"{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken)")
-                        .AppendRaw(".ConfigureAwait(false)")
+                        .AppendRawIf(".ConfigureAwait(false)", isAsync)
                         .LineRaw(";");
                 }
                 else

@@ -199,12 +199,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var operationSource = operation.OperationSource;
 
             // in this path, the return type should always be generic, otherwise the return type would be exactly the same and we will not go into this path
-            Debug.Assert(operation.ReturnType.IsGenericType);
+            Debug.Assert(returnType.IsGenericType);
 
             if (operation.IsFakeLongRunningOperation)
             {
-                _writer.Append($"return new {LibraryArmOperation}<{operation.ReturnType.UnWrapOperation()}>(")
-                    .Append($"{typeof(Response)}.FromValue(({operation.ReturnType.UnWrapOperation()}){variableName}.Value, {variableName}.GetRawResponse())")
+                _writer.Append($"return new {LibraryArmOperation}<{returnType.UnWrapOperation()}>(")
+                    .Append($"{typeof(Response)}.FromValue(({returnType.UnWrapOperation()}){variableName}.Value, {variableName}.GetRawResponse())")
                     .LineRaw(");");
             }
             else
@@ -212,8 +212,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // if we wait for completion in core, we do not have to wait again, just rewrap the lro object
                 using (_writer.Scope($"if (waitUntil == {typeof(WaitUntil)}.Completed)"))
                 {
-                    _writer.Append($"return new {LibraryArmOperation}<{operation.ReturnType.UnWrapOperation()}>(")
-                        .Append($"{typeof(Response)}.FromValue(({operation.ReturnType.UnWrapOperation()}){variableName}.Value, {variableName}.GetRawResponse())")
+                    _writer.Append($"return new {LibraryArmOperation}<{returnType.UnWrapOperation()}>(")
+                        .Append($"{typeof(Response)}.FromValue(({returnType.UnWrapOperation()}){variableName}.Value, {variableName}.GetRawResponse())")
                         .LineRaw(");");
                 }
 
