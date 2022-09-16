@@ -321,7 +321,7 @@ export function getInputType(
     ): InputEnumType {
         let enumType = enums.get(e.name);
         if (!enumType) {
-            if (e.members.size == 0) {
+            if (e.members.size === 0) {
                 throw new Error(
                     `Enum type '${e.name}' doesn't define any values.`
                 );
