@@ -164,11 +164,38 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "21",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "22",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "23",
+        "Type": {
+         "$ref": "22"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "24",
        "StatusCodes": [
         200
        ],
@@ -178,7 +205,7 @@
        "BodyMediaType": "Json"
       },
       {
-       "$id": "22",
+       "$id": "25",
        "StatusCodes": [
         201
        ],
@@ -200,7 +227,7 @@
     }
    ],
    "Protocol": {
-    "$id": "23"
+    "$id": "26"
    }
   }
  ]

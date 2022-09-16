@@ -51,11 +51,38 @@
       },
       {
        "$id": "8",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "9",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "10",
+        "Type": {
+         "$ref": "9"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "11",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "9",
+        "$id": "12",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -70,9 +97,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "10",
+        "$id": "13",
         "Type": {
-         "$id": "11",
+         "$id": "14",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -83,7 +110,7 @@
      ],
      "Responses": [
       {
-       "$id": "12",
+       "$id": "15",
        "StatusCodes": [
         200
        ],
@@ -99,18 +126,18 @@
     }
    ],
    "Protocol": {
-    "$id": "13"
+    "$id": "16"
    }
   }
  ],
  "Auth": {
-  "$id": "14",
+  "$id": "17",
   "ApiKey": {
-   "$id": "15",
+   "$id": "18",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "16",
+   "$id": "19",
    "Scopes": [
     "https://api.example.com/.default"
    ]
