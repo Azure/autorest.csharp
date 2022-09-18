@@ -250,7 +250,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteTaggableCommonMethodResponseFromPutOrPatch(MgmtClientOperationWrapper tagOperationWrapper, MgmtClientOperation updateOperation, FormattableString variableName, bool isAsync)
         {
-            if (IsCommonOperation(tagOperationWrapper.ClientOperation, out var commonOperation) && !commonOperation.ReturnType.Equals(tagOperationWrapper.ReturnType))
+            if (IsCommonOperation(tagOperationWrapper.ClientOperation, out var commonOperation) && !commonOperation.ReturnType.Equals(updateOperation.ReturnType))
             {
                 if (updateOperation.IsLongRunningOperation && updateOperation.ReturnType.Arguments.Length == 0)
                 {
