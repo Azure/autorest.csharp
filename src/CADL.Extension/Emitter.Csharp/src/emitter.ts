@@ -8,9 +8,9 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
-    ModelType,
-    ModelTypeProperty,
-    OperationType,
+    Model,
+    ModelProperty,
+    Operation,
     Program,
     resolvePath
 } from "@cadl-lang/compiler";
@@ -55,7 +55,7 @@ import {
 import { InputAuth } from "./type/InputAuth.js";
 import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
 import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
-import { getConsumes, getProduces } from "@cadl-lang/rest";
+import { getConsumes, getProduces, getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
 
@@ -363,7 +363,7 @@ function processServiceAuthentication(
                         if (flow.scopes) {
                             scopes ??= new Set<string>();
                             for (const scope of flow.scopes) {
-                                scopes.add(scope);
+                                scopes.add(scope.value);
                             }
                         }
                     }
@@ -385,7 +385,7 @@ function processServiceAuthentication(
 
 function getOperationGroupName(
     program: Program,
-    operation: OperationType
+    operation: Operation
 ): string {
     const explicitOperationId = getOperationId(program, operation);
     if (explicitOperationId) {
@@ -424,6 +424,7 @@ function loadOperation(
         parameters: cadlParameters
     } = operation;
     console.log(`load operation: ${op.name}, path:${fullPath} `);
+    const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
     const summary = getSummary(program, op);
     const externalDocs = getExternalDocs(program, op);
@@ -439,18 +440,22 @@ function loadOperation(
             loadBodyParameter(program, cadlParameters.bodyParameter)
         );
     } else if (cadlParameters.bodyType) {
-        const effectiveBodyType = getEffectiveSchemaType(
-            program,
-            cadlParameters.bodyType
-        );
-        if (effectiveBodyType.kind === "Model") {
-            parameters.push(loadBodyParameter(program, effectiveBodyType));
+        if (resourceOperation) {
+            parameters.push(loadBodyParameter(program, resourceOperation.resourceType));
+        } else {
+            const effectiveBodyType = getEffectiveSchemaType(
+                program,
+                cadlParameters.bodyType
+            );
+            if (effectiveBodyType.kind === "Model") {
+                parameters.push(loadBodyParameter(program, effectiveBodyType));
+            }
         }
     }
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(program, res);
+        const operationResponse = loadOperationResponse(program, res, resourceOperation);
         if (operationResponse) {
             responses.push(operationResponse);
         }
@@ -537,7 +542,7 @@ function loadOperation(
 
     function loadBodyParameter(
         program: Program,
-        body: ModelTypeProperty | ModelType
+        body: ModelProperty | Model
     ): InputParameter {
         const type = body.kind === "Model" ? body : body.type;
         const inputType: InputType = getInputType(program, type, models, enums);
@@ -563,7 +568,8 @@ function loadOperation(
 
     function loadOperationResponse(
         program: Program,
-        response: HttpOperationResponse
+        response: HttpOperationResponse,
+        resourceOperation?: ResourceOperation
     ): OperationResponse | undefined {
         if (!response.statusCode || response.statusCode === "*") {
             return undefined;
@@ -574,14 +580,18 @@ function loadOperation(
         const body = response.responses[0]?.body;
         let type: InputType | undefined = undefined;
         if (body?.type) {
-            const cadlType = getEffectiveSchemaType(program, body.type);
-            const inputType: InputType = getInputType(
-                program,
-                cadlType,
-                models,
-                enums
-            );
-            type = inputType;
+            if (resourceOperation && resourceOperation.operation !== "list") {
+                type = getInputType(program, resourceOperation.resourceType, models, enums);
+            } else {
+                const cadlType = getEffectiveSchemaType(program, body.type);
+                const inputType: InputType = getInputType(
+                    program,
+                    cadlType,
+                    models,
+                    enums
+                );
+                type = inputType;
+            }
         }
 
         return {

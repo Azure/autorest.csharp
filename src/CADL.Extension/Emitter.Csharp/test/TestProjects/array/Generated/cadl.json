@@ -163,7 +163,12 @@
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$id": "22",
+        "Name": "Array",
+        "ElementType": {
+         "$ref": "2"
+        },
+        "IsNullable": false
        },
        "BodyMediaType": "Json"
       }
@@ -177,7 +182,7 @@
     }
    ],
    "Protocol": {
-    "$id": "22"
+    "$id": "23"
    }
   }
  ]
