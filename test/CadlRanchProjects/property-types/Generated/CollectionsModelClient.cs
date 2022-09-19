@@ -261,6 +261,7 @@ namespace property_types
             uri.AppendPath("/models/properties/types/collections/model", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -274,6 +275,8 @@ namespace property_types
             uri.AppendPath("/models/properties/types/collections/model", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
