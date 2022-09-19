@@ -123,10 +123,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             // write the implementation into the Core method instead
             var writeBody = GetMethodDelegate(clientOperation);
-            var coreSignature = commonOperation.CoreMethodSignature with
-            {
-                Modifiers = MethodSignatureModifiers.Protected | MethodSignatureModifiers.Override
-            };
+            var coreSignature = commonOperation.GetCoreMethodOverrideSignature(clientOperation);
             using (WriteCommonMethodWithoutValidation(coreSignature, null, isAsync))
             {
                 _writer.WriteParametersValidation(coreSignature.Parameters);
@@ -136,11 +133,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line();
 
-            // TODO -- add a configuration to control whether we need this virtual keyword. And if this configuration is on, we will generate this method with the "new" keyword nevertheless (for backward compat purpose)
-            var signature = clientOperation.MethodSignature with
-            {
-                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.New | MethodSignatureModifiers.Virtual
-            };
+            var signature = commonOperation.GetNewMethodSignature(clientOperation);
             // if this method is exactly the same as the Core method, we just need to redirect - which is the same implementation as the base resource, we do not need to write anything here
             // we only write this when it is not the same, which is the case of returning a polymorphic resource as a generic parameter (wrapped in either Response, ArmOperation or Pageable)
             // when this happens we should unwrap it and wrap it again

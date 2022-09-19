@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -51,6 +52,36 @@ namespace AutoRest.CSharp.Mgmt.Models
             IsPagingOperation ? new CSharpType(typeof(Pageable<>), ReturnType) : ReturnType,
             null,
             MethodParameters);
+
+        public MethodSignature GetNewMethodSignature(MgmtClientOperation clientOperation)
+        {
+            Debug.Assert(_implementations.Contains(clientOperation));
+
+            // TODO -- add a configuration to control whether we need this virtual keyword. And if this configuration is on, we will generate this method with the "new" keyword nevertheless (for backward compat purpose)
+            return clientOperation.MethodSignature with
+            {
+                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.New | MethodSignatureModifiers.Virtual
+            };
+        }
+
+        /// <summary>
+        /// When writing the override of the core method, we need to use this method to get its signature because despite all the overriding methods have the compatible signature, they could have different parameter names
+        /// </summary>
+        /// <param name="clientOperation"></param>
+        /// <returns></returns>
+        public MethodSignature GetCoreMethodOverrideSignature(MgmtClientOperation clientOperation)
+        {
+            Debug.Assert(_implementations.Contains(clientOperation));
+
+            return new MethodSignature(
+                $"{Name}Core",
+                null,
+                $"The core implementation for operation {Name}",
+                MethodSignatureModifiers.Protected | MethodSignatureModifiers.Override,
+                IsPagingOperation ? new CSharpType(typeof(Pageable<>), ReturnType) : ReturnType,
+                null,
+                clientOperation.MethodParameters);
+        }
 
         private MethodSignature? _coreMethodSignature;
         public MethodSignature CoreMethodSignature => _coreMethodSignature ??= new MethodSignature(
