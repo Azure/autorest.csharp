@@ -62,71 +62,19 @@
   },
   {
    "$id": "9",
-   "Name": "ToyListResults",
+   "Name": "Toy",
    "Namespace": "PetStore",
    "IsNullable": false,
    "Properties": [
     {
      "$id": "10",
-     "Name": "items",
-     "SerializedName": "items",
+     "Name": "id",
+     "SerializedName": "id",
      "Description": "",
      "Type": {
       "$id": "11",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "12",
-       "Name": "Toy",
-       "Namespace": "PetStore",
-       "IsNullable": false,
-       "Properties": [
-        {
-         "$id": "13",
-         "Name": "id",
-         "SerializedName": "id",
-         "Description": "",
-         "Type": {
-          "$id": "14",
-          "Name": "Int64",
-          "Kind": "Int64",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
-        },
-        {
-         "$id": "15",
-         "Name": "petId",
-         "SerializedName": "petId",
-         "Description": "",
-         "Type": {
-          "$id": "16",
-          "Name": "Int64",
-          "Kind": "Int64",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
-        },
-        {
-         "$id": "17",
-         "Name": "name",
-         "SerializedName": "name",
-         "Description": "",
-         "Type": {
-          "$id": "18",
-          "Name": "string",
-          "Kind": "String",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
-        }
-       ]
-      },
+      "Name": "Int64",
+      "Kind": "Int64",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -134,44 +82,56 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "19",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
+     "$id": "12",
+     "Name": "petId",
+     "SerializedName": "petId",
      "Description": "",
      "Type": {
-      "$id": "20",
+      "$id": "13",
+      "Name": "Int64",
+      "Kind": "Int64",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "14",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "15",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
      },
-     "IsRequired": false,
+     "IsRequired": true,
      "IsReadOnly": false,
      "IsDiscriminator": false
     }
    ]
-  },
-  {
-   "$ref": "12"
   }
  ],
  "Clients": [
   {
-   "$id": "21",
+   "$id": "16",
    "Name": "Pets",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
-     "$id": "22",
+     "$id": "17",
      "Name": "delete",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
       {
-       "$id": "23",
+       "$id": "18",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
        "Type": {
-        "$id": "24",
+        "$id": "19",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -187,12 +147,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "25",
+       "$id": "20",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "26",
+        "$id": "21",
         "Name": "Int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -208,12 +168,39 @@
        "Kind": "Method"
       },
       {
-       "$id": "27",
+       "$id": "22",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "23",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "24",
+        "Type": {
+         "$ref": "23"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "25",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "28",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -228,9 +215,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "27",
         "Type": {
-         "$id": "30",
+         "$id": "28",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -241,7 +228,7 @@
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -256,20 +243,20 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "32",
+     "$id": "30",
      "Name": "read",
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "18"
       },
       {
-       "$id": "33",
+       "$id": "31",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "34",
+        "$id": "32",
         "Name": "Int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -285,12 +272,39 @@
        "Kind": "Method"
       },
       {
-       "$ref": "27"
+       "$id": "33",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "34",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "35",
+        "Type": {
+         "$ref": "34"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "25"
       }
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "36",
        "StatusCodes": [
         200
        ],
@@ -300,7 +314,7 @@
        "BodyMediaType": "Json"
       },
       {
-       "$id": "36",
+       "$id": "37",
        "StatusCodes": [
         304
        ],
@@ -318,14 +332,14 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "37",
+     "$id": "38",
      "Name": "create",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "18"
       },
       {
-       "$id": "38",
+       "$id": "39",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -342,12 +356,66 @@
        "Kind": "Method"
       },
       {
-       "$ref": "27"
+       "$id": "40",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "41",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "42",
+        "Type": {
+         "$ref": "41"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "43",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "44",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "45",
+        "Type": {
+         "$ref": "44"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "25"
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "46",
        "StatusCodes": [
         200
        ],
@@ -361,31 +429,34 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{petStoreUrl}",
      "Path": "/pets",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
      "BufferResponse": false,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "40"
+    "$id": "47"
    }
   },
   {
-   "$id": "41",
+   "$id": "48",
    "Name": "ListPetToysResponse",
    "Operations": [
     {
-     "$id": "42",
+     "$id": "49",
      "Name": "list",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "18"
       },
       {
-       "$id": "43",
+       "$id": "50",
        "Name": "petId",
        "NameInRequest": "petId",
        "Type": {
-        "$id": "44",
+        "$id": "51",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -401,11 +472,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "45",
+       "$id": "52",
        "Name": "nameFilter",
        "NameInRequest": "nameFilter",
        "Type": {
-        "$id": "46",
+        "$id": "53",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -421,12 +492,39 @@
        "Kind": "Method"
       },
       {
-       "$ref": "27"
+       "$id": "54",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "55",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "56",
+        "Type": {
+         "$ref": "55"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "25"
       }
      ],
      "Responses": [
       {
-       "$id": "47",
+       "$id": "57",
        "StatusCodes": [
         200
        ],
@@ -445,7 +543,7 @@
     }
    ],
    "Protocol": {
-    "$id": "48"
+    "$id": "58"
    }
   }
  ]

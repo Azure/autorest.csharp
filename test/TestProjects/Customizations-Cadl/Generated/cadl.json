@@ -411,11 +411,65 @@
       },
       {
        "$id": "51",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "52",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "53",
+        "Type": {
+         "$ref": "52"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "54",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "55",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "56",
+        "Type": {
+         "$ref": "55"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "57",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "52",
+        "$id": "58",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -430,9 +484,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "53",
+        "$id": "59",
         "Type": {
-         "$id": "54",
+         "$id": "60",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -443,7 +497,7 @@
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "61",
        "StatusCodes": [
         200
        ],
@@ -457,12 +511,15 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/inputToRoundTrip",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
      "BufferResponse": false,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "56"
+    "$id": "62"
    }
   }
  ]

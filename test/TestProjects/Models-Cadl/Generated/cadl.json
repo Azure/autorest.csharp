@@ -1417,11 +1417,65 @@
       },
       {
        "$id": "179",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "180",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "181",
+        "Type": {
+         "$ref": "180"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "182",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "183",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "184",
+        "Type": {
+         "$ref": "183"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "185",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "180",
+        "$id": "186",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1436,9 +1490,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "181",
+        "$id": "187",
         "Type": {
-         "$id": "182",
+         "$id": "188",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -1449,7 +1503,7 @@
      ],
      "Responses": [
       {
-       "$id": "183",
+       "$id": "189",
        "StatusCodes": [
         200
        ],
@@ -1463,103 +1517,16 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/inputToRoundTrip",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
-    },
-    {
-     "$id": "184",
-     "Name": "inputToRoundTripPrimitive",
-     "Description": "Input to RoundTripPrimitive",
-     "Parameters": [
-      {
-       "$id": "185",
-       "Name": "input",
-       "NameInRequest": "input",
-       "Type": {
-        "$ref": "11"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$ref": "179"
-      }
+     "RequestMediaTypes": [
+      "application/json"
      ],
-     "Responses": [
-      {
-       "$id": "186",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "64"
-       },
-       "BodyMediaType": "Json"
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
-     "Uri": "",
-     "Path": "/inputToRoundTripPrimitive",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
-    },
-    {
-     "$id": "187",
-     "Name": "inputToRoundTripOptional",
-     "Description": "Input to RoundTripOptional",
-     "Parameters": [
-      {
-       "$id": "188",
-       "Name": "input",
-       "NameInRequest": "input",
-       "Type": {
-        "$ref": "11"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$ref": "179"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "189",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "83"
-       },
-       "BodyMediaType": "Json"
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
-     "Uri": "",
-     "Path": "/inputToRoundTripOptional",
      "BufferResponse": false,
      "GenerateConvenienceMethod": false
     },
     {
      "$id": "190",
-     "Name": "inputToRoundTripReadOnly",
-     "Description": "Input to RoundTripReadOnly",
+     "Name": "inputToRoundTripPrimitive",
+     "Description": "Input to RoundTripPrimitive",
      "Parameters": [
       {
        "$id": "191",
@@ -1579,12 +1546,270 @@
        "Kind": "Method"
       },
       {
-       "$ref": "179"
+       "$id": "192",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "193",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "194",
+        "Type": {
+         "$ref": "193"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "195",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "196",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "197",
+        "Type": {
+         "$ref": "196"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "185"
       }
      ],
      "Responses": [
       {
-       "$id": "192",
+       "$id": "198",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "64"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/inputToRoundTripPrimitive",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "199",
+     "Name": "inputToRoundTripOptional",
+     "Description": "Input to RoundTripOptional",
+     "Parameters": [
+      {
+       "$id": "200",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "11"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "201",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "202",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "203",
+        "Type": {
+         "$ref": "202"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "204",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "205",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "206",
+        "Type": {
+         "$ref": "205"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "185"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "207",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "83"
+       },
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/inputToRoundTripOptional",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "208",
+     "Name": "inputToRoundTripReadOnly",
+     "Description": "Input to RoundTripReadOnly",
+     "Parameters": [
+      {
+       "$id": "209",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "11"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "210",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "211",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "212",
+        "Type": {
+         "$ref": "211"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "213",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "214",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "215",
+        "Type": {
+         "$ref": "214"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "185"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "216",
        "StatusCodes": [
         200
        ],
@@ -1598,16 +1823,19 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/inputToRoundTripReadOnly",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
      "BufferResponse": false,
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "193",
+     "$id": "217",
      "Name": "roundTripToOutput",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
-       "$id": "194",
+       "$id": "218",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1624,12 +1852,66 @@
        "Kind": "Method"
       },
       {
-       "$ref": "179"
+       "$id": "219",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "220",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "221",
+        "Type": {
+         "$ref": "220"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "222",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "223",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "224",
+        "Type": {
+         "$ref": "223"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "185"
       }
      ],
      "Responses": [
       {
-       "$id": "195",
+       "$id": "225",
        "StatusCodes": [
         200
        ],
@@ -1643,21 +1925,51 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/roundTripToOutput",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
      "BufferResponse": false,
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "196",
+     "$id": "226",
      "Name": "selfReference",
      "Description": "Returns model that has property of its own type",
      "Parameters": [
       {
-       "$ref": "179"
+       "$id": "227",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "228",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "229",
+        "Type": {
+         "$ref": "228"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "185"
       }
      ],
      "Responses": [
       {
-       "$id": "197",
+       "$id": "230",
        "StatusCodes": [
         200
        ],
@@ -1676,7 +1988,7 @@
     }
    ],
    "Protocol": {
-    "$id": "198"
+    "$id": "231"
    }
   }
  ]
