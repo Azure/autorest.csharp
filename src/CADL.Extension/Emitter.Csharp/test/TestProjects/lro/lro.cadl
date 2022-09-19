@@ -28,7 +28,9 @@ namespace LroOperation;
 model Endpoint is string;
 
 // Model types
+@resource("Pet")
 model Pet {
+  @key
   name: string;
   tag?: string;
 

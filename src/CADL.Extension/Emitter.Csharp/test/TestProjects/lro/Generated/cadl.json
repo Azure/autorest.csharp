@@ -92,19 +92,39 @@
       },
       {
        "$id": "13",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "14",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "15",
        "Name": "content-type",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "14",
+        "$id": "16",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "15",
+        "$id": "17",
         "Type": {
-         "$ref": "14"
+         "$ref": "16"
         },
         "Value": "application/merge-patch+json"
        },
@@ -118,21 +138,21 @@
        "Kind": "Constant"
       },
       {
-       "$id": "16",
+       "$id": "18",
        "Name": "api-version",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "17",
+        "$id": "19",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "20",
         "Type": {
-         "$id": "19",
+         "$id": "21",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -149,7 +169,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "20",
+       "$id": "22",
        "Name": "Pet",
        "NameInRequest": "Pet",
        "Type": {
@@ -166,11 +186,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "21",
+       "$id": "23",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "22",
+        "$id": "24",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -185,9 +205,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "25",
         "Type": {
-         "$ref": "22"
+         "$ref": "24"
         },
         "Value": "application/json"
        }
@@ -195,7 +215,7 @@
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "26",
        "StatusCodes": [
         200
        ],
@@ -205,7 +225,7 @@
        "BodyMediaType": "Json"
       },
       {
-       "$id": "25",
+       "$id": "27",
        "StatusCodes": [
         201
        ],
@@ -218,7 +238,7 @@
      "HttpMethod": "PATCH",
      "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/language",
-     "Path": "/authoring/analyze-text",
+     "Path": "/authoring/analyze-text/Pet/{name}",
      "RequestMediaTypes": [
       "application/merge-patch+json"
      ],
@@ -227,7 +247,7 @@
     }
    ],
    "Protocol": {
-    "$id": "26"
+    "$id": "28"
    }
   }
  ]
