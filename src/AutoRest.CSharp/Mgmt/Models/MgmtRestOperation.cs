@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
@@ -185,7 +186,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 return null;
 
             OperationSource? operationSource = null;
-            if (IsCommonOperation(out var baseResource))
+            if (IsCommonOperation(out var baseResource) && IsConvertableToBaseResource(baseResource, MgmtReturnType))
             {
                 if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(baseResource.Type, out operationSource))
                 {
@@ -194,6 +195,22 @@ namespace AutoRest.CSharp.Mgmt.Models
                 }
             }
             return operationSource;
+        }
+
+        private bool IsConvertableToBaseResource(BaseResource baseResource, CSharpType type)
+        {
+            if (type.IsFrameworkType)
+                return false;
+
+            if (baseResource.Type.Equals(type))
+                return true;
+
+            if (type.Implementation is Resource resource && resource.PolymorphicOption?.BaseResource == baseResource)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private bool IsCommonOperation([MaybeNullWhen(false)] out BaseResource baseResource)
@@ -222,6 +239,44 @@ namespace AutoRest.CSharp.Mgmt.Models
                 MgmtContext.Library.InterimOperations.Add(interimOperation);
                 return interimOperation;
             }
+            return null;
+        }
+
+        public FormattableString? GetValueConverter(CSharpType methodReturnType, FormattableString clientVariable, FormattableString valueVariable)
+        {
+            var restReturnType = Method.ReturnType;
+            if (methodReturnType.Equals(typeof(Response)) && restReturnType == null)
+                return null;
+
+            Debug.Assert(restReturnType != null);
+            Debug.Assert(methodReturnType != null);
+
+            // check if this operation need a response converter
+            if (methodReturnType.Equals(ReturnType))
+                return null;
+
+            if (InterimOperation != null)
+                return null;
+
+            // check the implementation of those types -- all should be a type provider
+            if (methodReturnType.IsFrameworkType || restReturnType.IsFrameworkType)
+                return null;
+
+            // first check: if the method is returning a Resource and the rest operation is returning a ResourceData
+            if (methodReturnType.Implementation is Resource returnResource && restReturnType.Implementation is ResourceData)
+            {
+                // in this case we should call the constructor of the resource to wrap it into a resource
+                return $"new {returnResource.Type}({clientVariable}, {valueVariable})";
+            }
+
+            // second check: if the method is returning a BaseResource and the rest operation is returning a ResourceData
+            if (methodReturnType.Implementation is BaseResource returnBaseResource && restReturnType.Implementation is ResourceData)
+            {
+                // in this case we should call the static Resource factory in the base resource
+                return $"{returnBaseResource.Type}.GetResource({clientVariable}, {valueVariable})";
+            }
+
+            // otherwise we return null
             return null;
         }
 

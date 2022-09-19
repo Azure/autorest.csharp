@@ -765,7 +765,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 // if we only have one branch, we would not need those if-else statements
                 var branch = clientOperation.OperationMappings.Keys.First();
-                WriteNormalMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], diagnostic, async, ShouldUseFactoryMethod(clientOperation));
+                WriteNormalMethodBranch(clientOperationWrapper.ReturnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], diagnostic, async, ShouldUseFactoryMethod(clientOperation));
             }
             else
             {
@@ -774,7 +774,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteNormalMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, Diagnostic diagnostic, bool async, bool useFactoryMethod)
+        protected virtual void WriteNormalMethodBranch(CSharpType returnType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, Diagnostic diagnostic, bool async, bool useFactoryMethod)
         {
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(operation)))
             {
@@ -785,28 +785,50 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-                Resource? resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(operation.ReturnType.UnWrapResponse()));
-                resource ??= operation.Resource != null && operation.Resource.Type.Equals(operation.ReturnType.UnWrapResponse()) ? operation.Resource : null;
-                if (resource is not null)
+                if (operation.ThrowIfNull)
                 {
-                    if (operation.ThrowIfNull)
-                    {
-                        _writer
-                            .Line($"if ({response}.Value == null)")
-                            .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
-                    }
+                    _writer
+                        .Line($"if ({response}.Value == null)")
+                        .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
+                }
+                var realReturnType = returnType.UnWrapResponse();
+                if (!realReturnType.IsFrameworkType && realReturnType.Implementation is Resource resource && resource.ResourceData.ShouldSetResourceIdentifier)
+                {
+                    _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
+                }
 
-                    if (resource.ResourceData.ShouldSetResourceIdentifier)
-                    {
-                        _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
-                    }
-
-                    _writer.Line($"return {typeof(Response)}.FromValue({GetNewResourceInstanceExpression(resource, useFactoryMethod)}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
+                // the case that we did not need to wrap the result
+                var responseConverter = operation.GetValueConverter(realReturnType, $"{ArmClientReference}", $"{response}.Value");
+                if (responseConverter != null)
+                {
+                    _writer.Line($"return {typeof(Response)}.FromValue({responseConverter}, {response}.GetRawResponse());");
                 }
                 else
                 {
                     _writer.Line($"return {response};");
                 }
+                //Resource? resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(operation.ReturnType.UnWrapResponse()));
+                //resource ??= operation.Resource != null && operation.Resource.Type.Equals(operation.ReturnType.UnWrapResponse()) ? operation.Resource : null;
+                //if (resource is not null)
+                //{
+                //    if (operation.ThrowIfNull)
+                //    {
+                //        _writer
+                //            .Line($"if ({response}.Value == null)")
+                //            .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
+                //    }
+
+                //    if (resource.ResourceData.ShouldSetResourceIdentifier)
+                //    {
+                //        _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
+                //    }
+
+                //    _writer.Line($"return {typeof(Response)}.FromValue({GetNewResourceInstanceExpression(resource, useFactoryMethod)}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
+                //}
+                //else
+                //{
+                //    _writer.Line($"return {response};");
+                //}
             }
         }
         #endregion
