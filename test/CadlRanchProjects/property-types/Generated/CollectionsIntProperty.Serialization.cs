@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Types
+namespace Models.Property.Types
 {
     public partial class CollectionsIntProperty : IUtf8JsonSerializable
     {

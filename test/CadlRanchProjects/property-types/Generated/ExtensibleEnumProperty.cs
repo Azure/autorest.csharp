@@ -5,18 +5,18 @@
 
 #nullable disable
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Model with extensible enum properties. </summary>
     public partial class ExtensibleEnumProperty
     {
         /// <summary> Initializes a new instance of ExtensibleEnumProperty. </summary>
         /// <param name="property"></param>
-        public ExtensibleEnumProperty(InnerEnum property)
+        public ExtensibleEnumProperty(InnerExtensibleEnum property)
         {
             Property = property;
         }
 
-        public InnerEnum Property { get; set; }
+        public InnerExtensibleEnum Property { get; set; }
     }
 }

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Model with enum properties. </summary>
     public partial class EnumProperty

@@ -9,7 +9,7 @@
   {
    "$id": "2",
    "Name": "InnerEnum",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Enum that will be used as a property for model EnumProperty. Non-extensible.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -28,23 +28,40 @@
    ],
    "IsExtensible": false,
    "IsNullable": false
+  },
+  {
+   "$id": "5",
+   "Name": "InnerExtensibleEnum",
+   "Namespace": "Models.Property.Types",
+   "Description": "Extensible enum that will be used as a property for model InnerExtensibleEnum.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$ref": "3"
+    },
+    {
+     "$ref": "4"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false
   }
  ],
  "Models": [
   {
-   "$id": "5",
+   "$id": "6",
    "Name": "BooleanProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with a boolean property",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "6",
+     "$id": "7",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "7",
+      "$id": "8",
       "Name": "bool",
       "Kind": "Boolean",
       "IsNullable": false
@@ -56,19 +73,19 @@
    ]
   },
   {
-   "$id": "8",
+   "$id": "9",
    "Name": "StringProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with a string property",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "9",
+     "$id": "10",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "10",
+      "$id": "11",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -80,19 +97,19 @@
    ]
   },
   {
-   "$id": "11",
+   "$id": "12",
    "Name": "BytesProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with a bytes property",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "12",
+     "$id": "13",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "13",
+      "$id": "14",
       "Name": "Bytes",
       "Kind": "BinaryData",
       "IsNullable": false
@@ -104,19 +121,19 @@
    ]
   },
   {
-   "$id": "14",
+   "$id": "15",
    "Name": "IntProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with a int property",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "15",
+     "$id": "16",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "16",
+      "$id": "17",
       "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -128,19 +145,19 @@
    ]
   },
   {
-   "$id": "17",
+   "$id": "18",
    "Name": "FloatProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with a float property",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "18",
+     "$id": "19",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "19",
+      "$id": "20",
       "Name": "float",
       "Kind": "Float32",
       "IsNullable": false
@@ -152,19 +169,19 @@
    ]
   },
   {
-   "$id": "20",
+   "$id": "21",
    "Name": "DatetimeProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with a datetime property",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "21",
+     "$id": "22",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "22",
+      "$id": "23",
       "Name": "DateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -176,21 +193,21 @@
    ]
   },
   {
-   "$id": "23",
+   "$id": "24",
    "Name": "DurationProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with a duration property",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "24",
+     "$id": "25",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "25",
+      "$id": "26",
       "Name": "TimeSpan",
-      "Kind": "String",
+      "Kind": "DurationISO8601",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -200,14 +217,14 @@
    ]
   },
   {
-   "$id": "26",
+   "$id": "27",
    "Name": "EnumProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with enum properties",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "27",
+     "$id": "28",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
@@ -221,19 +238,19 @@
    ]
   },
   {
-   "$id": "28",
+   "$id": "29",
    "Name": "ExtensibleEnumProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with extensible enum properties",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "29",
+     "$id": "30",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$ref": "2"
+      "$ref": "5"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -242,31 +259,31 @@
    ]
   },
   {
-   "$id": "30",
+   "$id": "31",
    "Name": "ModelProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with model properties",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "31",
+     "$id": "32",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "32",
+      "$id": "33",
       "Name": "InnerModel",
-      "Namespace": "Types",
+      "Namespace": "Models.Property.Types",
       "Description": "Inner model. Will be a property type for ModelWithModelProperties",
       "IsNullable": false,
       "Properties": [
        {
-        "$id": "33",
+        "$id": "34",
         "Name": "property",
         "SerializedName": "property",
         "Description": "",
         "Type": {
-         "$id": "34",
+         "$id": "35",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -284,25 +301,25 @@
    ]
   },
   {
-   "$ref": "32"
+   "$ref": "33"
   },
   {
-   "$id": "35",
+   "$id": "36",
    "Name": "CollectionsStringProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with collection string properties",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "36",
+     "$id": "37",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "37",
+      "$id": "38",
       "Name": "Array",
       "ElementType": {
-       "$id": "38",
+       "$id": "39",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -316,22 +333,22 @@
    ]
   },
   {
-   "$id": "39",
+   "$id": "40",
    "Name": "CollectionsIntProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with collection int properties",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "40",
+     "$id": "41",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "41",
+      "$id": "42",
       "Name": "Array",
       "ElementType": {
-       "$id": "42",
+       "$id": "43",
        "Name": "Int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -345,22 +362,22 @@
    ]
   },
   {
-   "$id": "43",
+   "$id": "44",
    "Name": "CollectionsModelProperty",
-   "Namespace": "Types",
+   "Namespace": "Models.Property.Types",
    "Description": "Model with collection model properties",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "44",
+     "$id": "45",
      "Name": "property",
      "SerializedName": "property",
      "Description": "",
      "Type": {
-      "$id": "45",
+      "$id": "46",
       "Name": "Array",
       "ElementType": {
-       "$ref": "32"
+       "$ref": "33"
       },
       "IsNullable": false
      },
@@ -373,20 +390,20 @@
  ],
  "Clients": [
   {
-   "$id": "46",
+   "$id": "47",
    "Name": "Boolean",
    "Operations": [
     {
-     "$id": "47",
+     "$id": "48",
      "Name": "get",
      "Parameters": [
       {
-       "$id": "48",
+       "$id": "49",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "49",
+        "$id": "50",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -401,25 +418,56 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "51",
         "Type": {
-         "$id": "51",
+         "$id": "52",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
        }
+      },
+      {
+       "$id": "53",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "54",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "55",
+        "Type": {
+         "$id": "56",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "1.0.0"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "52",
+       "$id": "57",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "6"
        },
        "BodyMediaType": "Json"
       }
@@ -428,21 +476,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/boolean",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "53",
+     "$id": "58",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "54",
+       "$id": "59",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "5"
+        "$ref": "6"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -450,14 +499,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "60",
        "StatusCodes": [
         204
        ],
@@ -468,33 +520,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/boolean",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "56"
+    "$id": "61"
    }
   },
   {
-   "$id": "57",
+   "$id": "62",
    "Name": "String",
    "Operations": [
     {
-     "$id": "58",
+     "$id": "63",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "59",
+       "$id": "64",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "8"
+        "$ref": "9"
        },
        "BodyMediaType": "Json"
       }
@@ -503,21 +559,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/string",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "60",
+     "$id": "65",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "61",
+       "$id": "66",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "8"
+        "$ref": "9"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -525,14 +582,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "62",
+       "$id": "67",
        "StatusCodes": [
         204
        ],
@@ -543,33 +603,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/string",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "63"
+    "$id": "68"
    }
   },
   {
-   "$id": "64",
+   "$id": "69",
    "Name": "Bytes",
    "Operations": [
     {
-     "$id": "65",
+     "$id": "70",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "66",
+       "$id": "71",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "12"
        },
        "BodyMediaType": "Json"
       }
@@ -578,21 +642,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/bytes",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "67",
+     "$id": "72",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "68",
+       "$id": "73",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "11"
+        "$ref": "12"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -600,14 +665,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "69",
+       "$id": "74",
        "StatusCodes": [
         204
        ],
@@ -618,33 +686,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/bytes",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "70"
+    "$id": "75"
    }
   },
   {
-   "$id": "71",
+   "$id": "76",
    "Name": "Int",
    "Operations": [
     {
-     "$id": "72",
+     "$id": "77",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "73",
+       "$id": "78",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "14"
+        "$ref": "15"
        },
        "BodyMediaType": "Json"
       }
@@ -653,21 +725,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/int",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "74",
+     "$id": "79",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "75",
+       "$id": "80",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "14"
+        "$ref": "15"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -675,14 +748,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "81",
        "StatusCodes": [
         204
        ],
@@ -693,33 +769,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/int",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "77"
+    "$id": "82"
    }
   },
   {
-   "$id": "78",
+   "$id": "83",
    "Name": "Float",
    "Operations": [
     {
-     "$id": "79",
+     "$id": "84",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "80",
+       "$id": "85",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "17"
+        "$ref": "18"
        },
        "BodyMediaType": "Json"
       }
@@ -728,21 +808,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/float",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "81",
+     "$id": "86",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "82",
+       "$id": "87",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "17"
+        "$ref": "18"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -750,14 +831,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "83",
+       "$id": "88",
        "StatusCodes": [
         204
        ],
@@ -768,33 +852,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/float",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "84"
+    "$id": "89"
    }
   },
   {
-   "$id": "85",
+   "$id": "90",
    "Name": "Datetime",
    "Operations": [
     {
-     "$id": "86",
+     "$id": "91",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "87",
+       "$id": "92",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "20"
+        "$ref": "21"
        },
        "BodyMediaType": "Json"
       }
@@ -803,21 +891,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/datetime",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "88",
+     "$id": "93",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "89",
+       "$id": "94",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "20"
+        "$ref": "21"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -825,14 +914,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "90",
+       "$id": "95",
        "StatusCodes": [
         204
        ],
@@ -843,33 +935,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/datetime",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "91"
+    "$id": "96"
    }
   },
   {
-   "$id": "92",
+   "$id": "97",
    "Name": "Duration",
    "Operations": [
     {
-     "$id": "93",
+     "$id": "98",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "94",
+       "$id": "99",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "23"
+        "$ref": "24"
        },
        "BodyMediaType": "Json"
       }
@@ -878,21 +974,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/duration",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "95",
+     "$id": "100",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "96",
+       "$id": "101",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "23"
+        "$ref": "24"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -900,14 +997,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "97",
+       "$id": "102",
        "StatusCodes": [
         204
        ],
@@ -918,33 +1018,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/duration",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "98"
+    "$id": "103"
    }
   },
   {
-   "$id": "99",
+   "$id": "104",
    "Name": "Enum",
    "Operations": [
     {
-     "$id": "100",
+     "$id": "105",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "101",
+       "$id": "106",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "26"
+        "$ref": "27"
        },
        "BodyMediaType": "Json"
       }
@@ -953,21 +1057,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/enum",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "102",
+     "$id": "107",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "103",
+       "$id": "108",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "26"
+        "$ref": "27"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -975,14 +1080,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "104",
+       "$id": "109",
        "StatusCodes": [
         204
        ],
@@ -993,33 +1101,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/enum",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "105"
+    "$id": "110"
    }
   },
   {
-   "$id": "106",
+   "$id": "111",
    "Name": "ExtensibleEnum",
    "Operations": [
     {
-     "$id": "107",
+     "$id": "112",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "108",
+       "$id": "113",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "28"
+        "$ref": "29"
        },
        "BodyMediaType": "Json"
       }
@@ -1028,21 +1140,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/extensible-enum",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "109",
+     "$id": "114",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "110",
+       "$id": "115",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "28"
+        "$ref": "29"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1050,14 +1163,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "111",
+       "$id": "116",
        "StatusCodes": [
         204
        ],
@@ -1068,33 +1184,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/extensible-enum",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "112"
+    "$id": "117"
    }
   },
   {
-   "$id": "113",
+   "$id": "118",
    "Name": "Model",
    "Operations": [
     {
-     "$id": "114",
+     "$id": "119",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "115",
+       "$id": "120",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "30"
+        "$ref": "31"
        },
        "BodyMediaType": "Json"
       }
@@ -1103,21 +1223,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/model",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "116",
+     "$id": "121",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "117",
+       "$id": "122",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "30"
+        "$ref": "31"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1125,14 +1246,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "118",
+       "$id": "123",
        "StatusCodes": [
         204
        ],
@@ -1143,33 +1267,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/model",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "119"
+    "$id": "124"
    }
   },
   {
-   "$id": "120",
+   "$id": "125",
    "Name": "CollectionsString",
    "Operations": [
     {
-     "$id": "121",
+     "$id": "126",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "122",
+       "$id": "127",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "35"
+        "$ref": "36"
        },
        "BodyMediaType": "Json"
       }
@@ -1178,21 +1306,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/collections/string",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "123",
+     "$id": "128",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "124",
+       "$id": "129",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "35"
+        "$ref": "36"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1200,14 +1329,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "125",
+       "$id": "130",
        "StatusCodes": [
         204
        ],
@@ -1218,33 +1350,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/collections/string",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "126"
+    "$id": "131"
    }
   },
   {
-   "$id": "127",
+   "$id": "132",
    "Name": "CollectionsInt",
    "Operations": [
     {
-     "$id": "128",
+     "$id": "133",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "129",
+       "$id": "134",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "39"
+        "$ref": "40"
        },
        "BodyMediaType": "Json"
       }
@@ -1253,21 +1389,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/collections/int",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "130",
+     "$id": "135",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "131",
+       "$id": "136",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "39"
+        "$ref": "40"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1275,14 +1412,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "132",
+       "$id": "137",
        "StatusCodes": [
         204
        ],
@@ -1293,33 +1433,37 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/collections/int",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "133"
+    "$id": "138"
    }
   },
   {
-   "$id": "134",
+   "$id": "139",
    "Name": "CollectionsModel",
    "Operations": [
     {
-     "$id": "135",
+     "$id": "140",
      "Name": "get",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "136",
+       "$id": "141",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "43"
+        "$ref": "44"
        },
        "BodyMediaType": "Json"
       }
@@ -1328,21 +1472,22 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/collections/model",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "137",
+     "$id": "142",
      "Name": "put",
      "Parameters": [
       {
-       "$ref": "48"
+       "$ref": "49"
       },
       {
-       "$id": "138",
+       "$id": "143",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "43"
+        "$ref": "44"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1350,14 +1495,17 @@
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": true,
+       "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$ref": "53"
       }
      ],
      "Responses": [
       {
-       "$id": "139",
+       "$id": "144",
        "StatusCodes": [
         204
        ],
@@ -1368,11 +1516,12 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models/properties/types/collections/model",
-     "BufferResponse": true
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "140"
+    "$id": "145"
    }
   }
  ]

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty

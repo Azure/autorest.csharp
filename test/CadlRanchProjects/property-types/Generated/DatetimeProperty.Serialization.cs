@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Types
+namespace Models.Property.Types
 {
     public partial class DatetimeProperty : IUtf8JsonSerializable
     {
@@ -18,7 +18,7 @@ namespace Types
         {
             writer.WriteStartObject();
             writer.WritePropertyName("property");
-            writer.WriteStringValue(Property);
+            writer.WriteStringValue(Property, "O");
             writer.WriteEndObject();
         }
 
@@ -29,7 +29,7 @@ namespace Types
             {
                 if (property0.NameEquals("property"))
                 {
-                    property = property0.Value.GetDateTimeOffset();
+                    property = property0.Value.GetDateTimeOffset("O");
                     continue;
                 }
             }

@@ -5,11 +5,12 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Types
+namespace Models.Property.Types
 {
     public partial class DurationProperty : IUtf8JsonSerializable
     {
@@ -17,18 +18,18 @@ namespace Types
         {
             writer.WriteStartObject();
             writer.WritePropertyName("property");
-            writer.WriteStringValue(Property);
+            writer.WriteStringValue(Property, "P");
             writer.WriteEndObject();
         }
 
         internal static DurationProperty DeserializeDurationProperty(JsonElement element)
         {
-            string property = default;
+            TimeSpan property = default;
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"))
                 {
-                    property = property0.Value.GetString();
+                    property = property0.Value.GetTimeSpan("P");
                     continue;
                 }
             }

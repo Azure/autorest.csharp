@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Model with a boolean property. </summary>
     public partial class BooleanProperty

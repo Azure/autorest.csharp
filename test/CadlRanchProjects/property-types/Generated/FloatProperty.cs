@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Model with a float property. </summary>
     public partial class FloatProperty

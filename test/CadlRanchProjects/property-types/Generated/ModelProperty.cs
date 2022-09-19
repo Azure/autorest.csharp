@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Model with model properties. </summary>
     public partial class ModelProperty

@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Inner model. Will be a property type for ModelWithModelProperties. </summary>
     public partial class InnerModel

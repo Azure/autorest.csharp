@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Types
+namespace Models.Property.Types
 {
     public partial class ExtensibleEnumProperty : IUtf8JsonSerializable
     {
@@ -17,18 +17,18 @@ namespace Types
         {
             writer.WriteStartObject();
             writer.WritePropertyName("property");
-            writer.WriteStringValue(Property.ToSerialString());
+            writer.WriteStringValue(Property.ToString());
             writer.WriteEndObject();
         }
 
         internal static ExtensibleEnumProperty DeserializeExtensibleEnumProperty(JsonElement element)
         {
-            InnerEnum property = default;
+            InnerExtensibleEnum property = default;
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"))
                 {
-                    property = property0.Value.GetString().ToInnerEnum();
+                    property = new InnerExtensibleEnum(property0.Value.GetString());
                     continue;
                 }
             }

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Model with a int property. </summary>
     public partial class IntProperty

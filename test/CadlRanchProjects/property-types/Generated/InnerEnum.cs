@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Enum that will be used as a property for model EnumProperty. Non-extensible. </summary>
     public enum InnerEnum

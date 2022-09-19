@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Types
+namespace Models.Property.Types
 {
     internal static partial class InnerEnumExtensions
     {

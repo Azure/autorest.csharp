@@ -6,20 +6,20 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Types;
 
 namespace property_types
 {
+    // Data plane generated client. The Duration service client.
     /// <summary> The Duration service client. </summary>
     public partial class DurationClient
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -44,42 +44,7 @@ namespace property_types
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-        }
-
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DurationProperty>> GetValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DurationClient.GetValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetAsync(context).ConfigureAwait(false);
-                return Response.FromValue(DurationProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DurationProperty> GetValue(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DurationClient.GetValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = Get(context);
-                return Response.FromValue(DurationProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            _apiVersion = options.Version;
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -103,7 +68,7 @@ namespace property_types
         /// 
         /// Schema for <c>DurationProperty</c>:
         /// <code>{
-        ///   property: string, # Required.
+        ///   property: string (duration ISO 8601 Format), # Required.
         /// }
         /// </code>
         /// 
@@ -145,7 +110,7 @@ namespace property_types
         /// 
         /// Schema for <c>DurationProperty</c>:
         /// <code>{
-        ///   property: string, # Required.
+        ///   property: string (duration ISO 8601 Format), # Required.
         /// }
         /// </code>
         /// 
@@ -166,30 +131,6 @@ namespace property_types
             }
         }
 
-        /// <param name="body"> The DurationProperty to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<Response> PutAsync(DurationProperty body, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(body, nameof(body));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return response;
-        }
-
-        /// <param name="body"> The DurationProperty to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual Response Put(DurationProperty body, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(body, nameof(body));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Put(body.ToRequestContent(), context);
-            return response;
-        }
-
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -201,7 +142,7 @@ namespace property_types
         /// var client = new DurationClient();
         /// 
         /// var data = new {
-        ///     property = "<property>",
+        ///     property = PT1H23M45S,
         /// };
         /// 
         /// Response response = await client.PutAsync(RequestContent.Create(data));
@@ -215,7 +156,7 @@ namespace property_types
         /// 
         /// Schema for <c>DurationProperty</c>:
         /// <code>{
-        ///   property: string, # Required.
+        ///   property: string (duration ISO 8601 Format), # Required.
         /// }
         /// </code>
         /// 
@@ -249,7 +190,7 @@ namespace property_types
         /// var client = new DurationClient();
         /// 
         /// var data = new {
-        ///     property = "<property>",
+        ///     property = PT1H23M45S,
         /// };
         /// 
         /// Response response = client.Put(RequestContent.Create(data));
@@ -263,7 +204,7 @@ namespace property_types
         /// 
         /// Schema for <c>DurationProperty</c>:
         /// <code>{
-        ///   property: string, # Required.
+        ///   property: string (duration ISO 8601 Format), # Required.
         /// }
         /// </code>
         /// 
@@ -294,6 +235,7 @@ namespace property_types
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/models/properties/types/duration", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -306,20 +248,10 @@ namespace property_types
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/models/properties/types/duration", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Content = content;
             return message;
-        }
-
-        private static RequestContext DefaultRequestContext = new RequestContext();
-        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

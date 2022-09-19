@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Model with collection model properties. </summary>
     public partial class CollectionsModelProperty

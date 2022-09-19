@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Types
+namespace Models.Property.Types
 {
     /// <summary> Model with a string property. </summary>
     public partial class StringProperty
