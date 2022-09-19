@@ -3,7 +3,7 @@ param($filter)
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 
 $cadlProjectPath = Join-Path $repoRoot "src/CADL.Extension/Emitter.Csharp"
-Push-Location $cadlProjectPath
+Push-Location $repoRoot
 
 # testProjects
 $testEmitterPath = (Join-Path $cadlProjectPath "test/TestProjects")

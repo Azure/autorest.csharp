@@ -128,7 +128,7 @@
         },
         "Value": "application/merge-patch+json"
        },
-       "IsRequired": true,
+       "IsRequired": false,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": true,
@@ -184,11 +184,38 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
+      },
+      {
+       "$id": "23",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "24",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "25",
+        "Type": {
+         "$ref": "24"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "26",
        "StatusCodes": [
         200
        ],
@@ -198,7 +225,7 @@
        "BodyMediaType": "Json"
       },
       {
-       "$id": "24",
+       "$id": "27",
        "StatusCodes": [
         201
        ],
@@ -220,7 +247,7 @@
     }
    ],
    "Protocol": {
-    "$id": "25"
+    "$id": "28"
    }
   }
  ]

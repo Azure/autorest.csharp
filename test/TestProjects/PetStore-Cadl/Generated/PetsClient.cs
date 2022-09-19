@@ -738,6 +738,7 @@ namespace CadlPetStore
             uri.AppendPath(petId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -753,6 +754,7 @@ namespace CadlPetStore
             uri.AppendPath(petId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -767,6 +769,8 @@ namespace CadlPetStore
             uri.AppendPath("/pets", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
@@ -783,6 +787,7 @@ namespace CadlPetStore
             uri.AppendPath(kind, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -801,6 +806,7 @@ namespace CadlPetStore
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
