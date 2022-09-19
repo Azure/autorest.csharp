@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (WriteCommonMethodWithoutValidation(signature, null, isAsync, enableAttributes: true, attributes: new[] { new ForwardsClientCallsAttribute() }))
             {
                 _writer.AppendRaw("return ")
-                    .AppendRawIf("await ", isAsync)
+                    .AppendRawIf("await ", isAsync && !commonOperation.IsPagingOperation)
                     .Append($"{coreSignature.Name}(");
                 foreach (var parameter in signature.Parameters)
                 {
@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 _writer.RemoveTrailingComma();
                 _writer.AppendRaw(")")
-                    .AppendRawIf(".ConfigureAwait(false)", isAsync)
+                    .AppendRawIf(".ConfigureAwait(false)", isAsync && !commonOperation.IsPagingOperation)
                     .LineRaw(";");
             }
 
