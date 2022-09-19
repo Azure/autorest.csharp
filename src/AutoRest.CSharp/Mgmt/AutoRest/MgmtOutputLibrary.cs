@@ -595,14 +595,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            var resourcesWithSameName = ResourceDataSchemaNameToOperationSets[candidateName];
-            var resourcesWithSameType = ResourceOperationSets
+            // find all the expanded request paths of resources that are assiociated with the same resource data model
+            var resourcesWithSameResourceData = ResourceDataSchemaNameToOperationSets[candidateName]
+                .SelectMany(opSet => opSet.GetRequestPath().Expand());
+            // find all the expanded resource types of resources that have the same resource type as this one
+            var resourcesWithSameResourceType = ResourceOperationSets
                 .SelectMany(opSet => opSet.GetRequestPath().Expand())
                 .Where(rqPath => rqPath.GetResourceType().Equals(resourceType));
 
             var isById = requestPath.IsById;
-            int countOfSameResourceDataName = resourcesWithSameName.Count();
-            int countOfSameResourceTypeName = resourcesWithSameType.Count();
+            int countOfSameResourceDataName = resourcesWithSameResourceData.Count();
+            int countOfSameResourceTypeName = resourcesWithSameResourceType.Count();
             if (!isById)
             {
                 // this is a regular resource and the name is unique
@@ -619,7 +622,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 string parentPrefix = GetParentPrefix(requestPath);
                 // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
                 // first we try to add the parent name as prefix
-                if (!DoMultipleResourcesShareMyPrefixes(requestPath, parentPrefix, resourcesWithSameType))
+                if (!DoMultipleResourcesShareMyPrefixes(requestPath, parentPrefix, resourcesWithSameResourceType))
                     return $"{parentPrefix}{name}";
 
                 // if we get here, parent prefix is not enough, we try the resource name if it is a constant
