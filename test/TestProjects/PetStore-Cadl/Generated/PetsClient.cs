@@ -730,7 +730,6 @@ namespace CadlPetStore
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -746,7 +745,6 @@ namespace CadlPetStore
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200304);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -762,7 +760,6 @@ namespace CadlPetStore
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -779,7 +776,6 @@ namespace CadlPetStore
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -795,7 +791,6 @@ namespace CadlPetStore
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);

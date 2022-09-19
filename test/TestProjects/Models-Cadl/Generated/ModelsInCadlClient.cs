@@ -1270,7 +1270,6 @@ namespace GeneratedModels
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/inputToRoundTrip", false);
@@ -1286,7 +1285,6 @@ namespace GeneratedModels
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/inputToRoundTripPrimitive", false);
@@ -1302,7 +1300,6 @@ namespace GeneratedModels
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/inputToRoundTripOptional", false);
@@ -1318,7 +1315,6 @@ namespace GeneratedModels
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/inputToRoundTripReadOnly", false);
@@ -1334,7 +1330,6 @@ namespace GeneratedModels
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/roundTripToOutput", false);
@@ -1350,7 +1345,6 @@ namespace GeneratedModels
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/selfReference", false);

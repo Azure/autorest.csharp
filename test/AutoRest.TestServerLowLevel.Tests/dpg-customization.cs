@@ -171,6 +171,6 @@ namespace AutoRest.TestServer.Tests
             Response result = await pipeline.ProcessMessageAsync(message, null).ConfigureAwait(false);
 
             Assert.AreEqual(200, result.Status);
-        }, new[] {TestServerType.TestServer, TestServerType.CadlRanch});
+        });
     }
 }
