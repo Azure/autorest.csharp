@@ -54,8 +54,8 @@ namespace AutoRest.CSharp.Output.Models.Responses
         public static DataPlaneResponseHeaderGroupType? TryCreate(InputClient inputClient, InputOperation operation, BuildContext<DataPlaneOutputLibrary> context)
         {
             var OperationResponseHeaders = operation.Responses.SelectMany(r => r.Headers)
-                .Where(h => !_knownResponseHeaders.Contains(h.Name, StringComparer.InvariantCultureIgnoreCase))
-                .GroupBy(h => h.Name)
+                .Where(h => !_knownResponseHeaders.Contains(h.NameInResponse, StringComparer.InvariantCultureIgnoreCase))
+                .GroupBy(h => h.NameInResponse)
                 // Take first header definition with any particular name
                 .Select(h => h.First())
                 .ToArray();

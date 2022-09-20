@@ -145,8 +145,8 @@ namespace AutoRest.CSharp.Common.Input
         );
 
         private OperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(
-            Name: header.Extensions?.HeaderCollectionPrefix ?? header.Header,
-            NameInResponse: header.CSharpName(),
+            Name: header.CSharpName(),
+            NameInResponse: header.Extensions?.HeaderCollectionPrefix ?? header.Header,
             Description: header.Language.Default.Description,
             Type: CreateType(header.Schema, header.Extensions?.Format, _modelsCache, true)
         );
