@@ -1,8 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -14,6 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             NextPageMethod = pagingMethod.NextPageMethod;
             NextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             ItemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
+            ItemType = pagingMethod.PagingResponse.ItemType;
         }
 
         public PagingMethodWrapper(RestClientMethod method)
@@ -21,11 +27,18 @@ namespace AutoRest.CSharp.Mgmt.Models
             Method = method;
             NextPageMethod = null;
             NextLinkName = null;
-            var valueProperty = "Value";
-            if (method.ReturnType!.IsFrameworkType && method.ReturnType.FrameworkType == typeof(IReadOnlyList<>))
-                valueProperty = string.Empty;
-            ItemName = valueProperty;
+            if (method.IsListMethod(out var itemType, out var valuePropertyName))
+            {
+                ItemName = valuePropertyName;
+                ItemType = itemType;
+            }
+            else
+            {
+                throw new InvalidOperationException($"Method {method.Name} with path {method.Operation.Path} is not a list method");
+            }
         }
+
+        public CSharpType ItemType { get; }
 
         /// <summary>
         /// This is the underlying <see cref="RestClientMethod"/> of this paging method

@@ -11,11 +11,38 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class MethodExtensions
     {
+        internal static bool IsListMethod(this RestClientMethod method, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out string valuePropertyName)
+        {
+            itemType = null;
+            valuePropertyName = null;
+            var returnType = method.ReturnType;
+            if (returnType == null)
+                return false;
+            if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
+            {
+                if (TypeFactory.IsList(returnType))
+                {
+                    itemType = returnType.Arguments[0];
+                    valuePropertyName = string.Empty;
+                    return true;
+                }
+            }
+            else
+            {
+                string pagingItemName = method.Operation.Paging?.ItemName ?? "value";
+                var schemaObject = (SchemaObjectType)returnType.Implementation;
+                itemType = GetValueProperty(schemaObject, pagingItemName)?.ValueType.Arguments.FirstOrDefault();
+                valuePropertyName = pagingItemName.ToCleanName();
+            }
+            return itemType != null;
+        }
+
         /// <summary>
         /// Return true if this operation is a list method. Also returns the itemType of what this operation is listing of.
         /// This function will return true in the following circumstances:
@@ -28,24 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static bool IsListMethod(this RestClientMethod method, [MaybeNullWhen(false)] out CSharpType itemType)
         {
-            itemType = null;
-            var returnType = method.ReturnType;
-            if (returnType == null)
-                return false;
-            if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
-            {
-                if (TypeFactory.IsList(returnType))
-                {
-                    itemType = returnType.Arguments[0];
-                }
-            }
-            else
-            {
-                string pageingItemName = method.Operation.Paging?.ItemName ?? "value";
-                var schemaObject = (SchemaObjectType)returnType.Implementation;
-                itemType = GetValueProperty(schemaObject, pageingItemName)?.ValueType.Arguments.FirstOrDefault();
-            }
-            return itemType != null;
+            return IsListMethod(method, out itemType, out _);
         }
 
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject, string pageingItemName)

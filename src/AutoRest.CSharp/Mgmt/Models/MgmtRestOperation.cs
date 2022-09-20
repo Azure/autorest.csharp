@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public FormattableString? GetValueConverter(CSharpType methodReturnType, FormattableString clientVariable, FormattableString valueVariable)
         {
-            var restReturnType = Method.ReturnType;
+            var restReturnType = IsPagingOperation ? PagingMethod!.ItemType : Method.ReturnType;
             // when the method returns nothing, when this happens, the methodReturnType should either be Response, or ArmOperation
             if (restReturnType == null && (methodReturnType.Equals(typeof(Response)) || methodReturnType.Equals(typeof(ArmOperation))))
                 return null;
@@ -253,7 +253,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Debug.Assert(methodReturnType != null);
 
             // check if this operation need a response converter
-            if (methodReturnType.Equals(ReturnType))
+            if (methodReturnType.Equals(restReturnType))
                 return null;
 
             if (InterimOperation != null)
