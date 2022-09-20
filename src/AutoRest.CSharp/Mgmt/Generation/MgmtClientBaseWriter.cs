@@ -673,6 +673,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             .Line($"{value}.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{value}")};")
                             .Line($"return new {resource.Type}({ArmClientReference}, {value});");
                     }
+                    _writer.AppendRaw(")");
                 }
                 else
                 {
