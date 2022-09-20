@@ -29,7 +29,7 @@ import { CodeModel } from "./type/CodeModel.js";
 import { InputClient } from "./type/InputClient.js";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
-import { InputOperation } from "./type/InputOperation.js";
+import { InputOperation, Paging } from "./type/InputOperation.js";
 import { RequestMethod, parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
@@ -57,7 +57,12 @@ import {
 import { InputAuth } from "./type/InputAuth.js";
 import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
 import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
-import { getConsumes, getProduces, getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
+import {
+    getConsumes,
+    getProduces,
+    getResourceOperation,
+    ResourceOperation
+} from "@cadl-lang/rest";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
 import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
@@ -218,7 +223,6 @@ function createModel(program: Program): any {
 
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
-            if (!isSupportedOperation(operation)) continue;
             const groupName: string = getOperationGroupName(
                 program,
                 operation.operation
@@ -387,10 +391,7 @@ function processServiceAuthentication(
     return auth;
 }
 
-function getOperationGroupName(
-    program: Program,
-    operation: Operation
-): string {
+function getOperationGroupName(program: Program, operation: Operation): string {
     const explicitOperationId = getOperationId(program, operation);
     if (explicitOperationId) {
         const ids: string[] = explicitOperationId.split("_");
@@ -445,7 +446,9 @@ function loadOperation(
         );
     } else if (cadlParameters.bodyType) {
         if (resourceOperation) {
-            parameters.push(loadBodyParameter(program, resourceOperation.resourceType));
+            parameters.push(
+                loadBodyParameter(program, resourceOperation.resourceType)
+            );
         } else {
             const effectiveBodyType = getEffectiveSchemaType(
                 program,
@@ -457,11 +460,20 @@ function loadOperation(
         }
     }
 
+    let operationPaging: OperationPaging | undefined = undefined;
+
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(program, res, resourceOperation);
+        const { operationResponse, paging } = loadOperationResponse(
+            program,
+            res,
+            resourceOperation
+        );
         if (operationResponse) {
             responses.push(operationResponse);
+        }
+        if (paging) {
+            operationPaging = paging;
         }
     }
 
@@ -478,26 +490,7 @@ function loadOperation(
     const generateConvenienceMethod: boolean =
         requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
 
-    /* handle paging. */
-    let paging: OperationPaging |undefined = undefined;
-    for (const res of operation.responses) {
-        const body = res.responses[0]?.body;
-        if (body?.type) {
-            if (body.type.kind === "Model" && hasDecorator(body?.type, "$pagedResult")) {
-                const itemsProperty = Array.from(body.type.properties.values()).find((it) =>
-                hasDecorator(it, "$items"),
-                );
-                const nextLinkProperty = Array.from(body.type.properties.values()).find((it) =>
-                    hasDecorator(it, "$nextLink"),
-                );
-                paging = {
-                    NextLinkName: nextLinkProperty?.name,
-                    ItemName: itemsProperty?.name
-                }as OperationPaging;
-            }
-        }
-    }
-    /* handle lro */
+    /* TODO: handle lro */
 
     return {
         Name: op.name,
@@ -512,7 +505,7 @@ function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: false,
-        Paging: paging,
+        Paging: operationPaging,
         GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;
 
@@ -596,18 +589,28 @@ function loadOperation(
         program: Program,
         response: HttpOperationResponse,
         resourceOperation?: ResourceOperation
-    ): OperationResponse | undefined {
+    ): { operationResponse?: OperationResponse; paging?: OperationPaging } {
         if (!response.statusCode || response.statusCode === "*") {
-            return undefined;
+            return {
+                operationResponse: undefined,
+                paging: undefined
+            };
         }
         const status: number[] = [];
         status.push(Number(response.statusCode));
         //TODO: what to do if more than 1 response?
         const body = response.responses[0]?.body;
+        let paging: OperationPaging | undefined = undefined;
+
         let type: InputType | undefined = undefined;
         if (body?.type) {
-            if (resourceOperation && (resourceOperation.operation !== "list")) {
-                type = getInputType(program, resourceOperation.resourceType, models, enums);
+            if (resourceOperation && resourceOperation.operation !== "list") {
+                type = getInputType(
+                    program,
+                    resourceOperation.resourceType,
+                    models,
+                    enums
+                );
             } else {
                 const cadlType = getEffectiveSchemaType(program, body.type);
                 const inputType: InputType = getInputType(
@@ -617,6 +620,23 @@ function loadOperation(
                     enums
                 );
                 type = inputType;
+            }
+
+            /* handle paging */
+            if (
+                body.type.kind === "Model" &&
+                hasDecorator(body?.type, "$pagedResult")
+            ) {
+                const itemsProperty = Array.from(
+                    body.type.properties.values()
+                ).find((it) => hasDecorator(it, "$items"));
+                const nextLinkProperty = Array.from(
+                    body.type.properties.values()
+                ).find((it) => hasDecorator(it, "$nextLink"));
+                paging = {
+                    NextLinkName: nextLinkProperty?.name,
+                    ItemName: itemsProperty?.name
+                } as OperationPaging;
             }
         }
 
@@ -629,29 +649,22 @@ function loadOperation(
                     NameInResponse: headers[key].name,
                     Description: getDoc(program, headers[key]) ?? "",
                     Type: getInputType(program, headers[key], models, enums)
-                }as HttpResponseHeader);
+                } as HttpResponseHeader);
             }
         }
 
         return {
-            StatusCodes: status,
-            BodyType: type,
-            BodyMediaType: BodyMediaType.Json,
-            Headers: responseHeaders
-        } as OperationResponse;
+            operationResponse: {
+                StatusCodes: status,
+                BodyType: type,
+                BodyMediaType: BodyMediaType.Json,
+                Headers: responseHeaders
+            } as OperationResponse,
+            paging: paging
+        };
     }
 }
 
-function isLroOperation(op: OperationDetails) {
-    return false;
-}
-function isPagingOperation(op: OperationDetails) {
-    return false;
-}
-function isSupportedOperation(op: OperationDetails) {
-    if (isLroOperation(op) || isPagingOperation(op)) return false;
-    return true;
-}
 class ErrorTypeFoundError extends Error {
     constructor() {
         super("Error type found in evaluated Cadl output");
