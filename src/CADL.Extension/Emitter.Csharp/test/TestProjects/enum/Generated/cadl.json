@@ -221,11 +221,65 @@
       },
       {
        "$id": "30",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "31",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "32",
+        "Type": {
+         "$ref": "31"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "33",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "34",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "35",
+        "Type": {
+         "$ref": "34"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "36",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "31",
+        "$id": "37",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -240,9 +294,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "38",
         "Type": {
-         "$id": "33",
+         "$id": "39",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -253,7 +307,7 @@
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
@@ -265,12 +319,15 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/models",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
      "BufferResponse": false,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "41"
    }
   }
  ]
