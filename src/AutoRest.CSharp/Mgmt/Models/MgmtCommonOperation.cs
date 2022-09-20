@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -76,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new MethodSignature(
                 $"{Name}Core",
                 null,
-                $"The core implementation for operation {Name}",
+                $"The core implementation for operation {Name}\n{clientOperation.Description}",
                 MethodSignatureModifiers.Protected | MethodSignatureModifiers.Override,
                 IsPagingOperation ? new CSharpType(typeof(Pageable<>), ReturnType) : ReturnType,
                 null,
