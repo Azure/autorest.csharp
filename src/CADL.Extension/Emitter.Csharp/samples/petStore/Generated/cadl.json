@@ -245,7 +245,8 @@
        "StatusCodes": [
         200
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "DELETE",
@@ -297,7 +298,8 @@
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       },
       {
        "$id": "36",
@@ -307,7 +309,8 @@
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -354,7 +357,8 @@
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "POST",
@@ -433,7 +437,8 @@
        "BodyType": {
         "$ref": "9"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",

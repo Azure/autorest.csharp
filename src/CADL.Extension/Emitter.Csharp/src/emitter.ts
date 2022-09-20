@@ -641,14 +641,19 @@ function loadOperation(
         }
 
         const headers = response.responses[0]?.headers;
-        let responseHeaders: HttpResponseHeader[] = [];
+        const responseHeaders: HttpResponseHeader[] = [];
         if (headers) {
             for (const key of Object.keys(headers)) {
                 responseHeaders.push({
                     Name: key,
                     NameInResponse: headers[key].name,
                     Description: getDoc(program, headers[key]) ?? "",
-                    Type: getInputType(program, headers[key], models, enums)
+                    Type: getInputType(
+                        program,
+                        headers[key].type,
+                        models,
+                        enums
+                    )
                 } as HttpResponseHeader);
             }
         }

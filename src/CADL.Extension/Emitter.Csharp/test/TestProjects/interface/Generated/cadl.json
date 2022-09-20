@@ -138,7 +138,8 @@
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -186,7 +187,8 @@
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -226,7 +228,8 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -274,7 +277,8 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",

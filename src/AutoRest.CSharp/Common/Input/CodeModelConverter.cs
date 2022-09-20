@@ -141,7 +141,14 @@ namespace AutoRest.CSharp.Common.Input
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
             BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
-            Headers: response.HttpResponse.Headers.ToList()
+            Headers: GetResponseHeaders(response.HttpResponse.Headers)
+        );
+
+        private OperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(
+            Name: header.Extensions?.HeaderCollectionPrefix ?? header.Header,
+            NameInResponse: header.CSharpName(),
+            Description: header.Language.Default.Description,
+            Type: CreateType(header.Schema, header.Extensions?.Format, _modelsCache)
         );
 
         private OperationLongRunning? CreateLongRunning(Operation operation)
@@ -296,6 +303,15 @@ namespace AutoRest.CSharp.Common.Input
             SchemaResponse schemaResponse => CreateType(schemaResponse.Schema, _modelsCache, schemaResponse.IsNullable),
             _ => null
         };
+
+        private List<OperationResponseHeader> GetResponseHeaders(ICollection<HttpResponseHeader>? headers)
+        {
+            if (headers == null)
+            {
+                return new List<OperationResponseHeader>();
+            }
+            return headers.Select(header => CreateResponseHeader(header)).ToList();
+        }
 
         public InputType CreateType(RequestParameter requestParameter)
             => CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);

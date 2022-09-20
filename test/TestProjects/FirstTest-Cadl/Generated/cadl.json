@@ -304,7 +304,8 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -338,7 +339,8 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -416,7 +418,8 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PATCH",
@@ -473,7 +476,8 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "POST",
@@ -580,7 +584,8 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -707,7 +712,8 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -804,7 +810,8 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -841,7 +848,8 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",

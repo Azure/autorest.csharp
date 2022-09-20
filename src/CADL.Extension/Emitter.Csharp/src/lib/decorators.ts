@@ -26,5 +26,7 @@ export function getOperationId(
 export const convenienceApiKey = "x-ms-convenient-api";
 
 export function hasDecorator(type: DecoratedType, name: string): boolean {
-    return type.decorators.find((it) => it.decorator.name === name) !== undefined;
+    return (
+        type.decorators.find((it) => it.decorator.name === name) !== undefined
+    );
 }
