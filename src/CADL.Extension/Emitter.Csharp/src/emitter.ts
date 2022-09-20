@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    DecoratedType,
     getDoc,
     getServiceNamespace,
     getServiceNamespaceString,
@@ -50,7 +51,8 @@ import { resolveServers } from "./lib/cadlServer.js";
 import {
     convenienceApiKey,
     getExternalDocs,
-    getOperationId
+    getOperationId,
+    hasDecorator
 } from "./lib/decorators.js";
 import { InputAuth } from "./type/InputAuth.js";
 import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
@@ -58,6 +60,8 @@ import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
 import { getConsumes, getProduces, getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
+import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
+import { OperationPaging } from "./type/OperationPaging.js";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -474,6 +478,27 @@ function loadOperation(
     const generateConvenienceMethod: boolean =
         requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
 
+    /* handle paging. */
+    let paging: OperationPaging |undefined = undefined;
+    for (const res of operation.responses) {
+        const body = res.responses[0]?.body;
+        if (body?.type) {
+            if (body.type.kind === "Model" && hasDecorator(body?.type, "$pagedResult")) {
+                const itemsProperty = Array.from(body.type.properties.values()).find((it) =>
+                hasDecorator(it, "$items"),
+                );
+                const nextLinkProperty = Array.from(body.type.properties.values()).find((it) =>
+                    hasDecorator(it, "$nextLink"),
+                );
+                paging = {
+                    NextLinkName: nextLinkProperty?.name,
+                    ItemName: itemsProperty?.name
+                }as OperationPaging;
+            }
+        }
+    }
+    /* handle lro */
+
     return {
         Name: op.name,
         Summary: summary,
@@ -487,6 +512,7 @@ function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: false,
+        Paging: paging,
         GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;
 
@@ -580,7 +606,7 @@ function loadOperation(
         const body = response.responses[0]?.body;
         let type: InputType | undefined = undefined;
         if (body?.type) {
-            if (resourceOperation && resourceOperation.operation !== "list") {
+            if (resourceOperation && (resourceOperation.operation !== "list")) {
                 type = getInputType(program, resourceOperation.resourceType, models, enums);
             } else {
                 const cadlType = getEffectiveSchemaType(program, body.type);
@@ -594,10 +620,24 @@ function loadOperation(
             }
         }
 
+        const headers = response.responses[0]?.headers;
+        let responseHeaders: HttpResponseHeader[] = [];
+        if (headers) {
+            for (const key of Object.keys(headers)) {
+                responseHeaders.push({
+                    Name: key,
+                    NameInResponse: headers[key].name,
+                    Description: getDoc(program, headers[key]) ?? "",
+                    Type: getInputType(program, headers[key], models, enums)
+                }as HttpResponseHeader);
+            }
+        }
+
         return {
             StatusCodes: status,
             BodyType: type,
-            BodyMediaType: BodyMediaType.Json
+            BodyMediaType: BodyMediaType.Json,
+            Headers: responseHeaders
         } as OperationResponse;
     }
 }
