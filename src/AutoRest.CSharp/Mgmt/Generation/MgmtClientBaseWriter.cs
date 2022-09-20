@@ -597,7 +597,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"else"))
                     {
-                        _writer.Line($"throw new InvalidOperationException($\"{{{This.BranchIdVariableName}.ResourceType}} is not supported here\");");
+                        _writer.Line($"throw new {typeof(InvalidOperationException)}($\"{{{This.BranchIdVariableName}.ResourceType}} is not supported here\");");
                     }
                 }
                 else if (escapeBranches.Count == 1)
@@ -658,6 +658,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 .Append($"return {typeof(Page)}.FromValues(response.Value")
                 .AppendIf($".{pagingMethod.ItemName}", !pagingMethod.ItemName.IsNullOrEmpty());
 
+            // TODO -- this could be refactored by GetValueConverter method on MgmtRestOperation
             var resourceWrapperExpression = GetResourceWrapperExpression(itemType, operation, parameterMappings);
             if (resourceWrapperExpression != null)
             {
@@ -765,7 +766,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 // if we only have one branch, we would not need those if-else statements
                 var branch = clientOperation.OperationMappings.Keys.First();
-                WriteNormalMethodBranch(clientOperationWrapper.ReturnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], diagnostic, async, ShouldUseFactoryMethod(clientOperation));
+                WriteNormalMethodBranch(clientOperationWrapper.ReturnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], diagnostic, async);
             }
             else
             {
@@ -774,7 +775,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteNormalMethodBranch(CSharpType returnType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, Diagnostic diagnostic, bool async, bool useFactoryMethod)
+        protected virtual void WriteNormalMethodBranch(CSharpType returnType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, Diagnostic diagnostic, bool async)
         {
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(operation)))
             {
@@ -798,48 +799,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
 
                 // the case that we did not need to wrap the result
-                var responseConverter = operation.GetValueConverter(realReturnType, $"{ArmClientReference}", $"{response}.Value");
-                if (responseConverter != null)
+                var valueConverter = operation.GetValueConverter(realReturnType, $"{ArmClientReference}", $"{response}.Value");
+                if (valueConverter != null)
                 {
-                    _writer.Line($"return {typeof(Response)}.FromValue({responseConverter}, {response}.GetRawResponse());");
+                    _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {response}.GetRawResponse());");
                 }
                 else
                 {
                     _writer.Line($"return {response};");
                 }
-                //Resource? resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(operation.ReturnType.UnWrapResponse()));
-                //resource ??= operation.Resource != null && operation.Resource.Type.Equals(operation.ReturnType.UnWrapResponse()) ? operation.Resource : null;
-                //if (resource is not null)
-                //{
-                //    if (operation.ThrowIfNull)
-                //    {
-                //        _writer
-                //            .Line($"if ({response}.Value == null)")
-                //            .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
-                //    }
-
-                //    if (resource.ResourceData.ShouldSetResourceIdentifier)
-                //    {
-                //        _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
-                //    }
-
-                //    _writer.Line($"return {typeof(Response)}.FromValue({GetNewResourceInstanceExpression(resource, useFactoryMethod)}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
-                //}
-                //else
-                //{
-                //    _writer.Line($"return {response};");
-                //}
             }
         }
         #endregion
-
-        protected bool ShouldUseFactoryMethod(MgmtClientOperation clientOperation)
-        {
-            if (This is not Resource resource || resource.PolymorphicOption == null)
-                return false;
-
-            return resource.PolymorphicOption.BaseResource.CommonOperations.Any(operation => operation.Contains(clientOperation));
-        }
 
         protected FormattableString GetNewResourceInstanceExpression(Resource resource, bool usedFactoryMethod)
         {
@@ -859,14 +830,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var returnType = clientOperationWrapper.ReturnType;
             // TODO -- find a way to properly get the LRO response type here. Temporarily we are using the first one
             // TODO -- we need to write multiple branches for a LRO operation
-            var useFactoryMethod = ShouldUseFactoryMethod(clientOperation);
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(clientOperation.OperationMappings.Values.First())))
             {
                 if (clientOperation.OperationMappings.Count == 1)
                 {
                     // if we only have one branch, we would not need those if-else statements
                     var branch = clientOperation.OperationMappings.Keys.First();
-                    WriteLROMethodBranch(returnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async, useFactoryMethod);
+                    WriteLROMethodBranch(returnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async);
                 }
                 else
                 {
@@ -883,7 +853,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         }
                         using (_writer.Scope($"{keyword} ({This.BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                         {
-                            WriteLROMethodBranch(returnType, operation, clientOperation.ParameterMappings[branch], async, useFactoryMethod);
+                            WriteLROMethodBranch(returnType, operation, clientOperation.ParameterMappings[branch], async);
                         }
                         keyword = "else if";
                     }
@@ -899,7 +869,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         var branch = escapeBranches.First();
                         using (_writer.Scope($"else"))
                         {
-                            WriteLROMethodBranch(returnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async, useFactoryMethod);
+                            WriteLROMethodBranch(returnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async);
                         }
                     }
                     else
@@ -910,17 +880,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteLROMethodBranch(CSharpType returnType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async, bool useFactoryMethod)
+        protected virtual void WriteLROMethodBranch(CSharpType returnType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             _writer.Append($"var response = {GetAwait(async)} ");
             _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            WriteLROResponse(returnType, GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, operation.CoreOperationSource ?? operation.OperationSource, async, useFactoryMethod);
+            WriteLROResponse(returnType, GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, operation.CoreOperationSource ?? operation.OperationSource, async);
         }
 
-        protected virtual void WriteLROResponse(CSharpType returnType, string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, OperationSource? operationSource, bool isAsync, bool useFactoryMethod)
+        protected virtual void WriteLROResponse(CSharpType returnType, string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, OperationSource? operationSource, bool isAsync)
         {
             if (operation.InterimOperation is not null)
             {
@@ -937,9 +907,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                if (operation.MgmtReturnType is not null && MgmtContext.Library.CSharpTypeToResource.TryGetValue(operation.MgmtReturnType, out var resource))
+                var valueConverter = operation.GetValueConverter(returnType.UnWrapOperation(), $"{ArmClientReference}", $"response");
+                if (valueConverter != null)
                 {
-                    _writer.Append($"{typeof(Response)}.FromValue({GetNewResourceInstanceExpression(resource, useFactoryMethod)}({ArmClientReference}, response), response.GetRawResponse())");
+                    _writer.Append($"{typeof(Response)}.FromValue({valueConverter}, response.GetRawResponse())");
                 }
                 else
                 {

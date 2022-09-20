@@ -245,7 +245,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         public FormattableString? GetValueConverter(CSharpType methodReturnType, FormattableString clientVariable, FormattableString valueVariable)
         {
             var restReturnType = Method.ReturnType;
-            if (methodReturnType.Equals(typeof(Response)) && restReturnType == null)
+            // when the method returns nothing, when this happens, the methodReturnType should either be Response, or ArmOperation
+            if (restReturnType == null && (methodReturnType.Equals(typeof(Response)) || methodReturnType.Equals(typeof(ArmOperation))))
                 return null;
 
             Debug.Assert(restReturnType != null);

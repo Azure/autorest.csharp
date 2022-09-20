@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -114,13 +115,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteAddTagBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool isAsync)
         {
-            var clientOperation = clientOperationWrapper.ClientOperation;
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
                     WriteGetOriginalFromTagResource(isAsync, "[key] = value");
-                    WriteTaggableCommonMethod(clientOperation, isAsync);
+                    WriteTaggableCommonMethod(clientOperationWrapper, isAsync);
                 }
                 using (_writer.Scope($"else"))
                 {
@@ -132,7 +132,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteSetTagsBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool isAsync)
         {
-            var clientOperation = clientOperationWrapper.ClientOperation;
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
@@ -143,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line($"GetTagResource().{CreateMethodName("Delete", isAsync)}({typeof(WaitUntil)}.Completed, cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
                     WriteGetOriginalFromTagResource(isAsync, ".ReplaceWith(tags)");
-                    WriteTaggableCommonMethod(clientOperation, isAsync);
+                    WriteTaggableCommonMethod(clientOperationWrapper, isAsync);
                 }
                 using (_writer.Scope($"else"))
                 {
@@ -155,13 +154,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteRemoveTagBody(MgmtClientOperationWrapper clientOperationWrapper, Diagnostic diagnostic, bool isAsync)
         {
-            var clientOperation = clientOperationWrapper.ClientOperation;
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
                     WriteGetOriginalFromTagResource(isAsync, ".Remove(key)");
-                    WriteTaggableCommonMethod(clientOperation, isAsync);
+                    WriteTaggableCommonMethod(clientOperationWrapper, isAsync);
                 }
                 using (_writer.Scope($"else"))
                 {
@@ -279,18 +277,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteTaggableCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
+        private void WriteTaggableCommonMethod(MgmtClientOperationWrapper clientOperationWrapper, bool isAsync)
         {
             _writer.Line($"{GetAwait(isAsync)} GetTagResource().{CreateMethodName("CreateOrUpdate", isAsync)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
-            MgmtClientOperation getOperation = This.GetOperation!;
-            var needFactoryMethod = ShouldUseFactoryMethod(clientOperation);
+            MgmtClientOperation getOperation = This.GetOperation;
             // we need to write multiple branches for a normal method
             if (getOperation.OperationMappings.Count == 1)
             {
                 // if we only have one branch, we would not need those if-else statements
                 var branch = getOperation.OperationMappings.Keys.First();
-                WriteTaggableCommonMethodBranch(getOperation.OperationMappings[branch], getOperation.ParameterMappings[branch], isAsync, needFactoryMethod);
+                WriteTaggableCommonMethodBranch(clientOperationWrapper.ReturnType, getOperation.OperationMappings[branch], getOperation.ParameterMappings[branch], isAsync);
             }
             else
             {
@@ -299,7 +296,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync, bool needFactoryMethod)
+        private void WriteTaggableCommonMethodBranch(CSharpType returnType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync)
         {
             var originalResponse = new CodeWriterDeclaration("originalResponse");
             _writer
@@ -314,8 +311,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, operation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
             }
 
-            var resource = MgmtContext.Library.CSharpTypeToResource[operation.ReturnType.UnWrapResponse()];
-            _writer.Line($"return {typeof(Response)}.FromValue({GetNewResourceInstanceExpression(resource, needFactoryMethod)}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
+            var valueConverter = operation.GetValueConverter(returnType.UnWrapResponse(), $"{ArmClientReference}", $"{originalResponse}.Value");
+            if (valueConverter != null)
+            {
+                _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {originalResponse}.GetRawResponse());");
+            }
+            else
+            {
+                _writer.Line($"return {originalResponse};");
+            }
         }
 
         protected virtual string GetUpdateMethodName() => This.UpdateOperation is null ? This.IsSingleton ? "CreateOrUpdate" : "Update" : This.UpdateOperation.Name;
