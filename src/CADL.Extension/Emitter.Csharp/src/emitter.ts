@@ -101,8 +101,8 @@ export async function $onEmit(
         const outPath =
             version.trim().length > 0
                 ? resolvePath(
-                      options.outputFile?.replace(".json", `.${version}.json`)
-                  )
+                    options.outputFile?.replace(".json", `.${version}.json`)
+                )
                 : resolvePath(options.outputFile);
 
         const root = createModel(program);
@@ -185,24 +185,7 @@ function createModel(program: Program): any {
     if (authentication) {
         auth = processServiceAuthentication(authentication);
     }
-    const consumes = getConsumes(program, serviceNamespaceType);
-    let contentTypeParameter = undefined;
-    if (consumes && consumes.length > 0) {
-        contentTypeParameter = createContentTypeOrAcceptParameter(
-            consumes,
-            "contentType",
-            "Content-Type"
-        );
-    }
-    const produces = getProduces(program, serviceNamespaceType);
-    let acceptParameter = undefined;
-    if (produces && produces.length > 0) {
-        acceptParameter = createContentTypeOrAcceptParameter(
-            produces,
-            "Accept",
-            "Accept"
-        );
-    }
+
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
     try {
@@ -248,25 +231,9 @@ function createModel(program: Program): any {
                 modelMap,
                 enumMap
             );
-            if (
-                contentTypeParameter &&
-                op.Parameters.some(
-                    (value) => value.Location === RequestLocation.Body
-                ) &&
-                !op.Parameters.some((value) => value.IsContentType === true)
-            ) {
-                op.Parameters.push(contentTypeParameter);
-                op.RequestMediaTypes = consumes;
-            }
-            if (
-                acceptParameter &&
-                !op.Parameters.some(
-                    (value) =>
-                        value.Location === RequestLocation.Header &&
-                        value.NameInRequest.toLowerCase() === "accept"
-                )
-            )
-                op.Parameters.push(acceptParameter);
+
+            applyDefaultContentTypeAndAcceptParameter(op);
+
             const apiVersionInOperation = op.Parameters.find(
                 (value) => value.IsApiVersion
             );
@@ -319,6 +286,22 @@ function createModel(program: Program): any {
     }
 }
 
+function applyDefaultContentTypeAndAcceptParameter(operation: InputOperation): void {
+    const defaultValue: string = "application/json";
+    if (operation.Parameters.some(value => value.Location === RequestLocation.Body)
+        && !operation.Parameters.some(value => value.IsContentType === true)) {
+        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "contentType", "Content-Type"));
+        operation.RequestMediaTypes = [defaultValue];
+    }
+
+    if (!operation.Parameters.some(
+        value =>
+            value.Location === RequestLocation.Header &&
+            value.NameInRequest.toLowerCase() === "accept")) {
+        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "accept", "Accept"))
+    }
+}
+
 function createContentTypeOrAcceptParameter(
     mediaTypes: string[],
     name: string,
@@ -347,9 +330,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                      Type: inputType,
-                      Value: mediaTypes[0]
-                  } as InputConstant)
+                    Type: inputType,
+                    Value: mediaTypes[0]
+                } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -539,8 +522,8 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVersion
-            ? InputOperationParameterKind.Client
-            : InputOperationParameterKind.Method;
+                ? InputOperationParameterKind.Client
+                : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
