@@ -148,7 +148,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: header.Extensions?.HeaderCollectionPrefix ?? header.Header,
             NameInResponse: header.CSharpName(),
             Description: header.Language.Default.Description,
-            Type: CreateType(header.Schema, header.Extensions?.Format, _modelsCache)
+            Type: CreateType(header.Schema, header.Extensions?.Format, _modelsCache, true)
         );
 
         private OperationLongRunning? CreateLongRunning(Operation operation)
