@@ -169,6 +169,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> generateArmResourceExtensions,
             IReadOnlyList<string> suppressAbstractBaseClass,
             IReadOnlyList<string> preventWrappingReturnType,
+            IReadOnlyList<string> generateVirtualOperations,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
@@ -237,6 +238,7 @@ namespace AutoRest.CSharp.Input
             PrependRPPrefix = schemasToPrependRPPrefix;
             GenerateArmResourceExtensions = generateArmResourceExtensions;
             SuppressAbstractBaseClass = suppressAbstractBaseClass;
+            VirtualOperations = generateVirtualOperations;
             if (preventWrappingReturnType.Any())
             {
                 Console.Error.WriteLine($"WARNING: The configuration 'prevent-wrapping-return-type' is a workaround and will be removed in the future.");
@@ -309,6 +311,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> NoResourceSuffix { get; }
         public IReadOnlyList<string> GenerateArmResourceExtensions { get; }
         public IReadOnlyList<string> SuppressAbstractBaseClass { get; }
+        public IReadOnlyList<string> VirtualOperations { get; }
         public IReadOnlyList<string> PreventWrappingReturnType { get; }
 
         public bool IsArmCore { get; }
@@ -330,6 +333,7 @@ namespace AutoRest.CSharp.Input
                 generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClass: autoRest.GetValue<string[]?>("suppress-abstract-base-class").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 preventWrappingReturnType: autoRest.GetValue<string[]?>("prevent-wrapping-return-type").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                generateVirtualOperations: autoRest.GetValue<string[]?>("generate-virtual-operations").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
@@ -368,6 +372,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(PrependRPPrefix), PrependRPPrefix);
             WriteNonEmptySettings(writer, nameof(GenerateArmResourceExtensions), GenerateArmResourceExtensions);
             WriteNonEmptySettings(writer, nameof(SuppressAbstractBaseClass), SuppressAbstractBaseClass);
+            WriteNonEmptySettings(writer, nameof(VirtualOperations), VirtualOperations);
             WriteNonEmptySettings(writer, nameof(PreventWrappingReturnType), PreventWrappingReturnType);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
@@ -431,6 +436,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
             root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValuesElement);
+            root.TryGetProperty(nameof(VirtualOperations), out var virtualOperationsElement);
 
             var operationGroupToOmit = DeserializeArray(operationGroupsToOmitElement);
             var requestPathIsNonResource = DeserializeArray(requestPathIsNonResourceElement);
@@ -445,6 +451,7 @@ namespace AutoRest.CSharp.Input
             var generateArmResourceExtensions = DeserializeArray(generateArmResourceExtensionsElement);
             var suppressAbstractBaseClass = DeserializeArray(suppressAbstractBaseClassElement);
             var preventWrappingReturnType = DeserializeArray(preventWrappingReturnTypeElement);
+            var virtualOperations = DeserializeArray(virtualOperationsElement);
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -471,6 +478,7 @@ namespace AutoRest.CSharp.Input
                 schemasToPrependRPPrefix: prependRPPrefix,
                 generateArmResourceExtensions: generateArmResourceExtensions,
                 suppressAbstractBaseClass: suppressAbstractBaseClass,
+                generateVirtualOperations: virtualOperations,
                 preventWrappingReturnType: preventWrappingReturnType,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,

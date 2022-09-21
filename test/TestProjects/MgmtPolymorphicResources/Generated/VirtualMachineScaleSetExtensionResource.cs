@@ -110,10 +110,10 @@ namespace MgmtPolymorphicResources
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public new virtual async Task<Response<VirtualMachineScaleSetExtensionResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
+        public new async Task<Response<VirtualMachineScaleSetExtensionResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            var value = await GetCoreAsync(expand, cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((VirtualMachineScaleSetExtensionResource)value.Value, value.GetRawResponse());
+            var result = await GetCoreAsync(expand, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((VirtualMachineScaleSetExtensionResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -150,10 +150,10 @@ namespace MgmtPolymorphicResources
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public new virtual Response<VirtualMachineScaleSetExtensionResource> Get(string expand = null, CancellationToken cancellationToken = default)
+        public new Response<VirtualMachineScaleSetExtensionResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            var value = GetCore(expand, cancellationToken);
-            return Response.FromValue((VirtualMachineScaleSetExtensionResource)value.Value, value.GetRawResponse());
+            var result = GetCore(expand, cancellationToken);
+            return Response.FromValue((VirtualMachineScaleSetExtensionResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -251,14 +251,14 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         [ForwardsClientCalls]
-        public new virtual async Task<ArmOperation<VirtualMachineScaleSetExtensionResource>> UpdateAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        public new async Task<ArmOperation<VirtualMachineScaleSetExtensionResource>> UpdateAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
-            var value = await UpdateCoreAsync(waitUntil, extensionParameters, cancellationToken).ConfigureAwait(false);
+            var result = await UpdateCoreAsync(waitUntil, extensionParameters, cancellationToken).ConfigureAwait(false);
             if (waitUntil == WaitUntil.Completed)
             {
-                return new MgmtPolymorphicResourcesArmOperation<VirtualMachineScaleSetExtensionResource>(Response.FromValue((VirtualMachineScaleSetExtensionResource)value.Value, value.GetRawResponse()));
+                return new MgmtPolymorphicResourcesArmOperation<VirtualMachineScaleSetExtensionResource>(Response.FromValue((VirtualMachineScaleSetExtensionResource)result.Value, result.GetRawResponse()));
             }
-            var operation = new MgmtPolymorphicResourcesArmOperation<VirtualMachineScaleSetExtensionResource>(new VirtualMachineScaleSetExtensionOperationSource(Client), _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters).Request, value.GetRawResponse(), OperationFinalStateVia.Location);
+            var operation = new MgmtPolymorphicResourcesArmOperation<VirtualMachineScaleSetExtensionResource>(new VirtualMachineScaleSetExtensionOperationSource(Client), _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters).Request, result.GetRawResponse(), OperationFinalStateVia.Location);
             return operation;
         }
 
@@ -303,15 +303,107 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         [ForwardsClientCalls]
-        public new virtual ArmOperation<VirtualMachineScaleSetExtensionResource> Update(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        public new ArmOperation<VirtualMachineScaleSetExtensionResource> Update(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
-            var value = UpdateCore(waitUntil, extensionParameters, cancellationToken);
+            var result = UpdateCore(waitUntil, extensionParameters, cancellationToken);
             if (waitUntil == WaitUntil.Completed)
             {
-                return new MgmtPolymorphicResourcesArmOperation<VirtualMachineScaleSetExtensionResource>(Response.FromValue((VirtualMachineScaleSetExtensionResource)value.Value, value.GetRawResponse()));
+                return new MgmtPolymorphicResourcesArmOperation<VirtualMachineScaleSetExtensionResource>(Response.FromValue((VirtualMachineScaleSetExtensionResource)result.Value, result.GetRawResponse()));
             }
-            var operation = new MgmtPolymorphicResourcesArmOperation<VirtualMachineScaleSetExtensionResource>(new VirtualMachineScaleSetExtensionOperationSource(Client), _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters).Request, value.GetRawResponse(), OperationFinalStateVia.Location);
+            var operation = new MgmtPolymorphicResourcesArmOperation<VirtualMachineScaleSetExtensionResource>(new VirtualMachineScaleSetExtensionOperationSource(Client), _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters).Request, result.GetRawResponse(), OperationFinalStateVia.Location);
             return operation;
+        }
+
+        /// <summary>
+        /// The core implementation for operation Validate
+        /// The operation to create or update the VMSS VM extension.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmExtensionName}/validate
+        /// Operation Id: VirtualMachineScaleSetVMExtensions_Validate
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="data"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        protected override async Task<ArmOperation> ValidateCoreAsync(WaitUntil waitUntil, VirtualMachineExtensionData data, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(data, nameof(data));
+
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.ValidateCore");
+            scope.Start();
+            try
+            {
+                var response = await _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsRestClient.ValidateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtPolymorphicResourcesArmOperation(_virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsRestClient.CreateValidateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                if (waitUntil == WaitUntil.Completed)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The operation to create or update the VMSS VM extension.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmExtensionName}/validate
+        /// Operation Id: VirtualMachineScaleSetVMExtensions_Validate
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="data"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        [ForwardsClientCalls]
+        public new virtual async Task<ArmOperation> ValidateAsync(WaitUntil waitUntil, VirtualMachineExtensionData data, CancellationToken cancellationToken = default)
+        {
+            return await base.ValidateAsync(waitUntil, data, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// The core implementation for operation Validate
+        /// The operation to create or update the VMSS VM extension.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmExtensionName}/validate
+        /// Operation Id: VirtualMachineScaleSetVMExtensions_Validate
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="data"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        protected override ArmOperation ValidateCore(WaitUntil waitUntil, VirtualMachineExtensionData data, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(data, nameof(data));
+
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.ValidateCore");
+            scope.Start();
+            try
+            {
+                var response = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsRestClient.Validate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken);
+                var operation = new MgmtPolymorphicResourcesArmOperation(_virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsRestClient.CreateValidateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                if (waitUntil == WaitUntil.Completed)
+                    operation.WaitForCompletionResponse(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The operation to create or update the VMSS VM extension.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmExtensionName}/validate
+        /// Operation Id: VirtualMachineScaleSetVMExtensions_Validate
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="data"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        [ForwardsClientCalls]
+        public new virtual ArmOperation Validate(WaitUntil waitUntil, VirtualMachineExtensionData data, CancellationToken cancellationToken = default)
+        {
+            return base.Validate(waitUntil, data, cancellationToken);
         }
 
         /// <summary>
@@ -371,10 +463,10 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         [ForwardsClientCalls]
-        public new virtual async Task<Response<VirtualMachineScaleSetExtensionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public new async Task<Response<VirtualMachineScaleSetExtensionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            var value0 = await AddTagCoreAsync(key, value, cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((VirtualMachineScaleSetExtensionResource)value0.Value, value0.GetRawResponse());
+            var result = await AddTagCoreAsync(key, value, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((VirtualMachineScaleSetExtensionResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -434,10 +526,10 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         [ForwardsClientCalls]
-        public new virtual Response<VirtualMachineScaleSetExtensionResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public new Response<VirtualMachineScaleSetExtensionResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            var value0 = AddTagCore(key, value, cancellationToken);
-            return Response.FromValue((VirtualMachineScaleSetExtensionResource)value0.Value, value0.GetRawResponse());
+            var result = AddTagCore(key, value, cancellationToken);
+            return Response.FromValue((VirtualMachineScaleSetExtensionResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -491,10 +583,10 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         [ForwardsClientCalls]
-        public new virtual async Task<Response<VirtualMachineScaleSetExtensionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public new async Task<Response<VirtualMachineScaleSetExtensionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            var value = await SetTagsCoreAsync(tags, cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((VirtualMachineScaleSetExtensionResource)value.Value, value.GetRawResponse());
+            var result = await SetTagsCoreAsync(tags, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((VirtualMachineScaleSetExtensionResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -548,10 +640,10 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         [ForwardsClientCalls]
-        public new virtual Response<VirtualMachineScaleSetExtensionResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public new Response<VirtualMachineScaleSetExtensionResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            var value = SetTagsCore(tags, cancellationToken);
-            return Response.FromValue((VirtualMachineScaleSetExtensionResource)value.Value, value.GetRawResponse());
+            var result = SetTagsCore(tags, cancellationToken);
+            return Response.FromValue((VirtualMachineScaleSetExtensionResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -608,10 +700,10 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         [ForwardsClientCalls]
-        public new virtual async Task<Response<VirtualMachineScaleSetExtensionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public new async Task<Response<VirtualMachineScaleSetExtensionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            var value = await RemoveTagCoreAsync(key, cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((VirtualMachineScaleSetExtensionResource)value.Value, value.GetRawResponse());
+            var result = await RemoveTagCoreAsync(key, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((VirtualMachineScaleSetExtensionResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -668,10 +760,10 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         [ForwardsClientCalls]
-        public new virtual Response<VirtualMachineScaleSetExtensionResource> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public new Response<VirtualMachineScaleSetExtensionResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            var value = RemoveTagCore(key, cancellationToken);
-            return Response.FromValue((VirtualMachineScaleSetExtensionResource)value.Value, value.GetRawResponse());
+            var result = RemoveTagCore(key, cancellationToken);
+            return Response.FromValue((VirtualMachineScaleSetExtensionResource)result.Value, result.GetRawResponse());
         }
     }
 }

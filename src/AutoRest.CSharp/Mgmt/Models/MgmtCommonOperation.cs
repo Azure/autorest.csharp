@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
@@ -58,10 +59,14 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             Debug.Assert(_implementations.Contains(clientOperation));
 
-            // TODO -- add a configuration to control whether we need this virtual keyword. And if this configuration is on, we will generate this method with the "new" keyword nevertheless (for backward compat purpose)
+            var modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.New;
+            if (clientOperation.Any(restOperation => Configuration.MgmtConfiguration.VirtualOperations.Contains(restOperation.OperationId)))
+            {
+                modifiers |= MethodSignatureModifiers.Virtual;
+            }
             return clientOperation.MethodSignature with
             {
-                Modifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.New | MethodSignatureModifiers.Virtual
+                Modifiers = modifiers
             };
         }
 

@@ -107,10 +107,10 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public new virtual async Task<Response<RecordSetSrvResource>> GetAsync(CancellationToken cancellationToken = default)
+        public new async Task<Response<RecordSetSrvResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            var value = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((RecordSetSrvResource)value.Value, value.GetRawResponse());
+            var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((RecordSetSrvResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -145,10 +145,10 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public new virtual Response<RecordSetSrvResource> Get(CancellationToken cancellationToken = default)
+        public new Response<RecordSetSrvResource> Get(CancellationToken cancellationToken = default)
         {
-            var value = GetCore(cancellationToken);
-            return Response.FromValue((RecordSetSrvResource)value.Value, value.GetRawResponse());
+            var result = GetCore(cancellationToken);
+            return Response.FromValue((RecordSetSrvResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -245,10 +245,10 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         [ForwardsClientCalls]
-        public new virtual async Task<Response<RecordSetSrvResource>> UpdateAsync(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
+        public new async Task<Response<RecordSetSrvResource>> UpdateAsync(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            var value = await UpdateCoreAsync(data, ifMatch, cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((RecordSetSrvResource)value.Value, value.GetRawResponse());
+            var result = await UpdateCoreAsync(data, ifMatch, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((RecordSetSrvResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -289,10 +289,10 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         [ForwardsClientCalls]
-        public new virtual Response<RecordSetSrvResource> Update(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
+        public new Response<RecordSetSrvResource> Update(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            var value = UpdateCore(data, ifMatch, cancellationToken);
-            return Response.FromValue((RecordSetSrvResource)value.Value, value.GetRawResponse());
+            var result = UpdateCore(data, ifMatch, cancellationToken);
+            return Response.FromValue((RecordSetSrvResource)result.Value, result.GetRawResponse());
         }
     }
 }

@@ -561,7 +561,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     var baseResource = new BaseResource(GetBaseResourceName(resourceDataSchemaName, resourcesWithSameData), resourcesWithSameData);
                     foreach (var resource in resourcesWithSameData)
                         resource.PolymorphicOption = new PolymorphicOption(resource, baseResource);
-                    // TODO -- add a new extensible enum for this
                 }
             }
 

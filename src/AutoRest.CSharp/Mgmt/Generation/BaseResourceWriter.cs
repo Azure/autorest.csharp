@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         _writer.LineRaw("return false;");
                     }
 
-                    // TODO -- check scope resource type
+                    // check scope resource type
                     if (option.ScopeResourceTypeConstraint != null)
                     {
                         _writer.LineRaw("// checking the resource scope");

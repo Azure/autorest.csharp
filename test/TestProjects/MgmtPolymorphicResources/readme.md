@@ -15,4 +15,8 @@ head-as-boolean: false
 
 base-resource-name-mapping:
   VirtualMachineExtension: AbstractVirtualMachineExtension
+
+generate-virtual-operations:
+- Module_Get
+- VirtualMachineScaleSetVMExtensions_Validate
 ```

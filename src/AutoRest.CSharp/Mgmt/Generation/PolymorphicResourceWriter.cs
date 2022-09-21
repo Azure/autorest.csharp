@@ -152,17 +152,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
 
             var signature = commonOperation.GetNewMethodSignature(clientOperation);
-            // if this method is exactly the same as the Core method, we just need to redirect - which is the same implementation as the base resource, we do not need to write anything here
-            // we only write this when it is not the same, which is the case of returning a polymorphic resource as a generic parameter (wrapped in either Response, ArmOperation or Pageable)
-            // when this happens we should unwrap it and wrap it again
+            // first we check if the return type of this method is the same as the core method
+            // if they are not the same, we need to call the core method first, and add the corresponding conversion
             if (!commonOperation.ReturnType.Equals(clientOperation.ReturnType))
             {
                 var returnsDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
                 using (WriteCommonMethodWithoutValidation(signature, returnsDescription, isAsync, enableAttributes: true, attributes: new[] { new ForwardsClientCallsAttribute() }))
                 {
-                    var value = new CodeWriterDeclaration("value"); // TODO -- change this to result?
-                    _writer.Append($"var {value:D} = ")
-                        .AppendRawIf("await ", isAsync)
+                    var result = new CodeWriterDeclaration("result");
+                    _writer.Append($"var {result:D} = ")
+                        .AppendRawIf("await ", isAsync && !clientOperation.IsPagingOperation)
                         .Append($"{CreateMethodName(coreSignature.Name, isAsync)}(");
                     foreach (var parameter in coreSignature.Parameters)
                     {
@@ -170,10 +169,32 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.RemoveTrailingComma();
                     _writer.AppendRaw(")")
-                        .AppendRawIf(".ConfigureAwait(false)", isAsync)
+                        .AppendRawIf(".ConfigureAwait(false)", isAsync && !clientOperation.IsPagingOperation)
                         .LineRaw(";");
 
-                    WritePolymorphicResponse(clientOperation, $"{value}");
+                    WritePolymorphicResponse(clientOperation, $"{result}");
+                }
+            }
+            // if the return type of this method is exactly the same as the core method, we just need to call the core method, which is the same implementation as in the base resource
+            // we do not need to write it again here
+            // therefore here we check if the method has virtual keyword (this should come from configuration)
+            // if it has virtual keyword for backward compatibility, we have to write the method. But for implementation, we just call base
+            else if (signature.Modifiers.HasFlag(MethodSignatureModifiers.Virtual))
+            {
+                var returnsDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
+                using (WriteCommonMethodWithoutValidation(signature, returnsDescription, isAsync, enableAttributes: true, attributes: new[] { new ForwardsClientCallsAttribute() }))
+                {
+                    _writer.Append($"return ")
+                        .AppendRawIf("await ", isAsync && !clientOperation.IsPagingOperation)
+                        .Append($"base.{CreateMethodName(signature.Name, isAsync)}(");
+                    foreach (var parameter in signature.Parameters)
+                    {
+                        _writer.AppendRaw(parameter.Name).AppendRaw(",");
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.AppendRaw(")")
+                        .AppendRawIf(".ConfigureAwait(false)", isAsync && !clientOperation.IsPagingOperation)
+                        .LineRaw(";");
                 }
             }
 

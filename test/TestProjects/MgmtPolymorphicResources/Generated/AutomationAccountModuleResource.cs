@@ -110,8 +110,8 @@ namespace MgmtPolymorphicResources
         [ForwardsClientCalls]
         public new virtual async Task<Response<AutomationAccountModuleResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            var value = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((AutomationAccountModuleResource)value.Value, value.GetRawResponse());
+            var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((AutomationAccountModuleResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -148,8 +148,8 @@ namespace MgmtPolymorphicResources
         [ForwardsClientCalls]
         public new virtual Response<AutomationAccountModuleResource> Get(CancellationToken cancellationToken = default)
         {
-            var value = GetCore(cancellationToken);
-            return Response.FromValue((AutomationAccountModuleResource)value.Value, value.GetRawResponse());
+            var result = GetCore(cancellationToken);
+            return Response.FromValue((AutomationAccountModuleResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -316,8 +316,8 @@ namespace MgmtPolymorphicResources
         [ForwardsClientCalls]
         public new virtual async Task<Response<AutomationAccountModuleResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            var value0 = await AddTagCoreAsync(key, value, cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((AutomationAccountModuleResource)value0.Value, value0.GetRawResponse());
+            var result = await AddTagCoreAsync(key, value, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((AutomationAccountModuleResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -379,8 +379,8 @@ namespace MgmtPolymorphicResources
         [ForwardsClientCalls]
         public new virtual Response<AutomationAccountModuleResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            var value0 = AddTagCore(key, value, cancellationToken);
-            return Response.FromValue((AutomationAccountModuleResource)value0.Value, value0.GetRawResponse());
+            var result = AddTagCore(key, value, cancellationToken);
+            return Response.FromValue((AutomationAccountModuleResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -436,8 +436,8 @@ namespace MgmtPolymorphicResources
         [ForwardsClientCalls]
         public new virtual async Task<Response<AutomationAccountModuleResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            var value = await SetTagsCoreAsync(tags, cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((AutomationAccountModuleResource)value.Value, value.GetRawResponse());
+            var result = await SetTagsCoreAsync(tags, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((AutomationAccountModuleResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -493,8 +493,8 @@ namespace MgmtPolymorphicResources
         [ForwardsClientCalls]
         public new virtual Response<AutomationAccountModuleResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            var value = SetTagsCore(tags, cancellationToken);
-            return Response.FromValue((AutomationAccountModuleResource)value.Value, value.GetRawResponse());
+            var result = SetTagsCore(tags, cancellationToken);
+            return Response.FromValue((AutomationAccountModuleResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -553,8 +553,8 @@ namespace MgmtPolymorphicResources
         [ForwardsClientCalls]
         public new virtual async Task<Response<AutomationAccountModuleResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            var value = await RemoveTagCoreAsync(key, cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((AutomationAccountModuleResource)value.Value, value.GetRawResponse());
+            var result = await RemoveTagCoreAsync(key, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((AutomationAccountModuleResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -613,8 +613,8 @@ namespace MgmtPolymorphicResources
         [ForwardsClientCalls]
         public new virtual Response<AutomationAccountModuleResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            var value = RemoveTagCore(key, cancellationToken);
-            return Response.FromValue((AutomationAccountModuleResource)value.Value, value.GetRawResponse());
+            var result = RemoveTagCore(key, cancellationToken);
+            return Response.FromValue((AutomationAccountModuleResource)result.Value, result.GetRawResponse());
         }
     }
 }
