@@ -29,9 +29,15 @@ namespace Azure.Core
         private string? _lastKnownLocation;
         private string _nextRequestUri;
 
-        public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
+        public static IOperation Create(
+            HttpPipeline pipeline,
+            RequestMethod requestMethod,
+            Uri startRequestUri,
+            Response response,
+            OperationFinalStateVia finalStateVia,
+            string? interimApiVersion = null)
         {
-            string? apiVersionStr = TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null;
+            string? apiVersionStr = interimApiVersion ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
             if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
             {
@@ -47,13 +53,29 @@ namespace Azure.Core
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
-        public static IOperation<T> Create<T>(IOperationSource<T> operationSource, HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
+        public static IOperation<T> Create<T>(
+            IOperationSource<T> operationSource,
+            HttpPipeline pipeline,
+            RequestMethod requestMethod,
+            Uri startRequestUri,
+            Response response,
+            OperationFinalStateVia finalStateVia,
+            string? interimApiVersion = null)
         {
-            var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia);
+            var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia, interimApiVersion);
             return new OperationToOperationOfT<T>(operationSource, operation);
         }
 
-        private NextLinkOperationImplementation(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia, string? apiVersion)
+        private NextLinkOperationImplementation(
+            HttpPipeline pipeline,
+            RequestMethod requestMethod,
+            Uri startRequestUri,
+            string nextRequestUri,
+            HeaderSource headerSource,
+            bool originalResponseHasLocation,
+            string? lastKnownLocation,
+            OperationFinalStateVia finalStateVia,
+            string? apiVersion)
         {
             _requestMethod = requestMethod;
             _headerSource = headerSource;
