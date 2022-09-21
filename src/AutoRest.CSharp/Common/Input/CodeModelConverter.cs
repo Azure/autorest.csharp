@@ -304,11 +304,11 @@ namespace AutoRest.CSharp.Common.Input
             _ => null
         };
 
-        private List<OperationResponseHeader> GetResponseHeaders(ICollection<HttpResponseHeader>? headers)
+        private IReadOnlyList<OperationResponseHeader> GetResponseHeaders(ICollection<HttpResponseHeader>? headers)
         {
             if (headers == null)
             {
-                return new List<OperationResponseHeader>();
+                return Array.Empty<OperationResponseHeader>();
             }
             return headers.Select(header => CreateResponseHeader(header)).ToList();
         }
