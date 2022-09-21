@@ -14,27 +14,27 @@ using Azure.ResourceManager;
 
 namespace MgmtPolymorphicResources
 {
-    internal class BaseVirtualMachineExtensionOperationSource : IOperationSource<BaseVirtualMachineExtensionResource>
+    internal class AbstractVirtualMachineExtensionOperationSource : IOperationSource<AbstractVirtualMachineExtensionResource>
     {
         private readonly ArmClient _client;
 
-        internal BaseVirtualMachineExtensionOperationSource(ArmClient client)
+        internal AbstractVirtualMachineExtensionOperationSource(ArmClient client)
         {
             _client = client;
         }
 
-        BaseVirtualMachineExtensionResource IOperationSource<BaseVirtualMachineExtensionResource>.CreateResult(Response response, CancellationToken cancellationToken)
+        AbstractVirtualMachineExtensionResource IOperationSource<AbstractVirtualMachineExtensionResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
-            return BaseVirtualMachineExtensionResource.GetResource(_client, data);
+            return AbstractVirtualMachineExtensionResource.GetResource(_client, data);
         }
 
-        async ValueTask<BaseVirtualMachineExtensionResource> IOperationSource<BaseVirtualMachineExtensionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<AbstractVirtualMachineExtensionResource> IOperationSource<AbstractVirtualMachineExtensionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
-            return BaseVirtualMachineExtensionResource.GetResource(_client, data);
+            return AbstractVirtualMachineExtensionResource.GetResource(_client, data);
         }
     }
 }

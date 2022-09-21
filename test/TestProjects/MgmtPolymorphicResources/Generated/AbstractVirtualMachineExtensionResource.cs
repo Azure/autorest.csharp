@@ -17,9 +17,9 @@ using MgmtPolymorphicResources.Models;
 namespace MgmtPolymorphicResources
 {
     /// <summary> TODO. </summary>
-    public abstract partial class BaseVirtualMachineExtensionResource : ArmResource
+    public abstract partial class AbstractVirtualMachineExtensionResource : ArmResource
     {
-        internal static BaseVirtualMachineExtensionResource GetResource(ArmClient client, VirtualMachineExtensionData data)
+        internal static AbstractVirtualMachineExtensionResource GetResource(ArmClient client, VirtualMachineExtensionData data)
         {
             if (IsVirtualMachineExtensionResource(data.Id))
             {
@@ -65,24 +65,24 @@ namespace MgmtPolymorphicResources
 
         private readonly VirtualMachineExtensionData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="BaseVirtualMachineExtensionResource"/> class for mocking. </summary>
-        protected BaseVirtualMachineExtensionResource()
+        /// <summary> Initializes a new instance of the <see cref="AbstractVirtualMachineExtensionResource"/> class for mocking. </summary>
+        protected AbstractVirtualMachineExtensionResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "BaseVirtualMachineExtensionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "AbstractVirtualMachineExtensionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BaseVirtualMachineExtensionResource(ArmClient client, VirtualMachineExtensionData data) : this(client, data.Id)
+        internal AbstractVirtualMachineExtensionResource(ArmClient client, VirtualMachineExtensionData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
-        /// <summary> Initializes a new instance of the <see cref="BaseVirtualMachineExtensionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AbstractVirtualMachineExtensionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal BaseVirtualMachineExtensionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal AbstractVirtualMachineExtensionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
@@ -104,13 +104,13 @@ namespace MgmtPolymorphicResources
         /// <summary> The core implementation for operation Get. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> GetCoreAsync(string expand = null, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<AbstractVirtualMachineExtensionResource>> GetCoreAsync(string expand = null, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation Get. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public async Task<Response<BaseVirtualMachineExtensionResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<AbstractVirtualMachineExtensionResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             return await GetCoreAsync(expand, cancellationToken).ConfigureAwait(false);
         }
@@ -118,13 +118,13 @@ namespace MgmtPolymorphicResources
         /// <summary> The core implementation for operation Get. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        protected abstract Response<BaseVirtualMachineExtensionResource> GetCore(string expand = null, CancellationToken cancellationToken = default);
+        protected abstract Response<AbstractVirtualMachineExtensionResource> GetCore(string expand = null, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation Get. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public Response<BaseVirtualMachineExtensionResource> Get(string expand = null, CancellationToken cancellationToken = default)
+        public Response<AbstractVirtualMachineExtensionResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             return GetCore(expand, cancellationToken);
         }
@@ -162,7 +162,7 @@ namespace MgmtPolymorphicResources
         /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
-        protected abstract Task<ArmOperation<BaseVirtualMachineExtensionResource>> UpdateCoreAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
+        protected abstract Task<ArmOperation<AbstractVirtualMachineExtensionResource>> UpdateCoreAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation Update. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -170,7 +170,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         [ForwardsClientCalls]
-        public async Task<ArmOperation<BaseVirtualMachineExtensionResource>> UpdateAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        public async Task<ArmOperation<AbstractVirtualMachineExtensionResource>> UpdateAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
             return await UpdateCoreAsync(waitUntil, extensionParameters, cancellationToken).ConfigureAwait(false);
         }
@@ -180,7 +180,7 @@ namespace MgmtPolymorphicResources
         /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
-        protected abstract ArmOperation<BaseVirtualMachineExtensionResource> UpdateCore(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
+        protected abstract ArmOperation<AbstractVirtualMachineExtensionResource> UpdateCore(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation Update. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -188,7 +188,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         [ForwardsClientCalls]
-        public ArmOperation<BaseVirtualMachineExtensionResource> Update(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        public ArmOperation<AbstractVirtualMachineExtensionResource> Update(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
             return UpdateCore(waitUntil, extensionParameters, cancellationToken);
         }
@@ -198,7 +198,7 @@ namespace MgmtPolymorphicResources
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> AddTagCoreAsync(string key, string value, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<AbstractVirtualMachineExtensionResource>> AddTagCoreAsync(string key, string value, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation AddTag. </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -206,7 +206,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         [ForwardsClientCalls]
-        public async Task<Response<BaseVirtualMachineExtensionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async Task<Response<AbstractVirtualMachineExtensionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             return await AddTagCoreAsync(key, value, cancellationToken).ConfigureAwait(false);
         }
@@ -216,7 +216,7 @@ namespace MgmtPolymorphicResources
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        protected abstract Response<BaseVirtualMachineExtensionResource> AddTagCore(string key, string value, CancellationToken cancellationToken = default);
+        protected abstract Response<AbstractVirtualMachineExtensionResource> AddTagCore(string key, string value, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation AddTag. </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -224,7 +224,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         [ForwardsClientCalls]
-        public Response<BaseVirtualMachineExtensionResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public Response<AbstractVirtualMachineExtensionResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             return AddTagCore(key, value, cancellationToken);
         }
@@ -233,14 +233,14 @@ namespace MgmtPolymorphicResources
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> SetTagsCoreAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<AbstractVirtualMachineExtensionResource>> SetTagsCoreAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation SetTags. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         [ForwardsClientCalls]
-        public async Task<Response<BaseVirtualMachineExtensionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async Task<Response<AbstractVirtualMachineExtensionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             return await SetTagsCoreAsync(tags, cancellationToken).ConfigureAwait(false);
         }
@@ -249,14 +249,14 @@ namespace MgmtPolymorphicResources
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        protected abstract Response<BaseVirtualMachineExtensionResource> SetTagsCore(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
+        protected abstract Response<AbstractVirtualMachineExtensionResource> SetTagsCore(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation SetTags. </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         [ForwardsClientCalls]
-        public Response<BaseVirtualMachineExtensionResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public Response<AbstractVirtualMachineExtensionResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             return SetTagsCore(tags, cancellationToken);
         }
@@ -265,14 +265,14 @@ namespace MgmtPolymorphicResources
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        protected abstract Task<Response<BaseVirtualMachineExtensionResource>> RemoveTagCoreAsync(string key, CancellationToken cancellationToken = default);
+        protected abstract Task<Response<AbstractVirtualMachineExtensionResource>> RemoveTagCoreAsync(string key, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation RemoveTag. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         [ForwardsClientCalls]
-        public async Task<Response<BaseVirtualMachineExtensionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async Task<Response<AbstractVirtualMachineExtensionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             return await RemoveTagCoreAsync(key, cancellationToken).ConfigureAwait(false);
         }
@@ -281,14 +281,14 @@ namespace MgmtPolymorphicResources
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        protected abstract Response<BaseVirtualMachineExtensionResource> RemoveTagCore(string key, CancellationToken cancellationToken = default);
+        protected abstract Response<AbstractVirtualMachineExtensionResource> RemoveTagCore(string key, CancellationToken cancellationToken = default);
 
         /// <summary> The default implementation for operation RemoveTag. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         [ForwardsClientCalls]
-        public Response<BaseVirtualMachineExtensionResource> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public Response<AbstractVirtualMachineExtensionResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             return RemoveTagCore(key, cancellationToken);
         }

@@ -45,6 +45,12 @@ namespace MgmtExpandResourceTypes
         /// <param name="data"> The resource that is the target of operations. </param>
         internal RecordSetMxResource(ArmClient client, RecordSetData data) : base(client, data)
         {
+            _recordSetMxRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string recordSetMxRecordSetsApiVersion);
+            _recordSetMxRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, recordSetMxRecordSetsApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetMxResource"/> class. </summary>
@@ -69,11 +75,16 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> The core implementation for operation Get. </summary>
+        /// <summary>
+        /// The core implementation for operation Get
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<RecordSetResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Get");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.GetCore");
             scope.Start();
             try
             {
@@ -102,11 +113,16 @@ namespace MgmtExpandResourceTypes
             return Response.FromValue((RecordSetMxResource)value.Value, value.GetRawResponse());
         }
 
-        /// <summary> The core implementation for operation Get. </summary>
+        /// <summary>
+        /// The core implementation for operation Get
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<RecordSetResource> GetCore(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Get");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.GetCore");
             scope.Start();
             try
             {
@@ -135,13 +151,18 @@ namespace MgmtExpandResourceTypes
             return Response.FromValue((RecordSetMxResource)value.Value, value.GetRawResponse());
         }
 
-        /// <summary> The core implementation for operation Delete. </summary>
+        /// <summary>
+        /// The core implementation for operation Delete
+        /// Deletes a record set from a DNS zone. This operation cannot be undone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Delete
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Delete");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.DeleteCore");
             scope.Start();
             try
             {
@@ -158,13 +179,18 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        /// <summary> The core implementation for operation Delete. </summary>
+        /// <summary>
+        /// The core implementation for operation Delete
+        /// Deletes a record set from a DNS zone. This operation cannot be undone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Delete
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override ArmOperation DeleteCore(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Delete");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.DeleteCore");
             scope.Start();
             try
             {
@@ -181,7 +207,12 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        /// <summary> The core implementation for operation Update. </summary>
+        /// <summary>
+        /// The core implementation for operation Update
+        /// Updates a record set within a DNS zone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Update
+        /// </summary>
         /// <param name="data"> Parameters supplied to the Update operation. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -190,7 +221,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Update");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.UpdateCore");
             scope.Start();
             try
             {
@@ -220,7 +251,12 @@ namespace MgmtExpandResourceTypes
             return Response.FromValue((RecordSetMxResource)value.Value, value.GetRawResponse());
         }
 
-        /// <summary> The core implementation for operation Update. </summary>
+        /// <summary>
+        /// The core implementation for operation Update
+        /// Updates a record set within a DNS zone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Update
+        /// </summary>
         /// <param name="data"> Parameters supplied to the Update operation. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -229,7 +265,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Update");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.UpdateCore");
             scope.Start();
             try
             {

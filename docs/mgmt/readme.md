@@ -11,6 +11,7 @@
     - [Change Parent of Request Paths](#change-parent-of-request-paths)
     - [Change Singleton Resources](#change-singleton-resources)
     - [Change the Name of Operations](#change-the-name-of-operations)
+    - [Polymorphic Resources](#polymorphic-resources)
     - [List Exception](#list-exception)
     - [Scope Resources](#scope-resources)
     - [SDK Polishing Configurations](#sdk-polishing-configurations)
@@ -597,6 +598,25 @@ public partial class VirtualMachineResource : ArmResource
 +   public virtual async Task<ArmOperation> PowerOnAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
 }
 ```
+
+### Polymorphic resources
+
+In a case that multiple resources are sharing the same resource data, the generator will generate a common base resource for those resources, and those resources are called "polymorphic resources".
+
+The base resource is an abstract class, and the common operations will be defined on the base resource, and the polymorphic resources will override those common operations and have their own implementations correspondingly.
+
+Related with polymorphic resources, we have two configurations: `base-resource-name-mapping` enables you to change the name of the base resource, and `generate-virtual-operations` let you to control which operation you want to add the virtual keyword for backward compatibility.
+```yaml
+base-resource-name-mapping:
+  ResourceDataName: NewBaseResourceNmae
+
+generate-virtual-operations:
+- VirtualMachines_Get
+```
+
+The `base-resource-name-mapping` is using the name of shared resource data as key, the new name for this base resource as values.
+
+The `generate-virtual-operations` is an array of operation ids which you want to add virtual keyword to.
 
 ### List exception
 

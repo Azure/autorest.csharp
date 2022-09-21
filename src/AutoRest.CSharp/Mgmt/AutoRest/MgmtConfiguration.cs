@@ -191,7 +191,8 @@ namespace AutoRest.CSharp.Input
             JsonElement? operationIdMappings = default,
             JsonElement? updateRequiredCopy = default,
             JsonElement? patchInitializerCustomization = default,
-            JsonElement? operationToResource = default)
+            JsonElement? operationToResource = default,
+            JsonElement? baseResourceNameMapping = default)
         {
             RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
             RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
@@ -250,6 +251,7 @@ namespace AutoRest.CSharp.Input
             UpdateRequiredCopy = DeserializeDictionary<string, string>(updateRequiredCopy);
             PatchInitializerCustomization = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(patchInitializerCustomization);
             OperationToResourceMapping = DeserializeDictionary<string, string>(operationToResource);
+            this.BaseResourceNameMapping = DeserializeDictionary<string, string>(baseResourceNameMapping);
         }
 
         private static bool DeserializeBoolean(JsonElement? jsonElement, bool defaultValue = false)
@@ -299,6 +301,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepPluralResourceData { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
         public IReadOnlyDictionary<string, string> OperationToResourceMapping { get; }
+        public IReadOnlyDictionary<string, string> BaseResourceNameMapping { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
         public IReadOnlyDictionary<string, string> UpdateRequiredCopy {get;}
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> PatchInitializerCustomization { get; }
@@ -349,7 +352,8 @@ namespace AutoRest.CSharp.Input
                 operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult(),
                 updateRequiredCopy: autoRest.GetValue<JsonElement?>("update-required-copy").GetAwaiter().GetResult(),
                 patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult(),
-                operationToResource: autoRest.GetValue<JsonElement?>("operation-to-resource").GetAwaiter().GetResult());
+                operationToResource: autoRest.GetValue<JsonElement?>("operation-to-resource").GetAwaiter().GetResult(),
+                baseResourceNameMapping: autoRest.GetValue<JsonElement?>("base-resource-name-mapping").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -396,6 +400,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(UpdateRequiredCopy), UpdateRequiredCopy);
             WriteNonEmptySettings(writer, nameof(PatchInitializerCustomization), PatchInitializerCustomization);
             WriteNonEmptySettings(writer, nameof(OperationToResourceMapping), OperationToResourceMapping);
+            WriteNonEmptySettings(writer, nameof(BaseResourceNameMapping), BaseResourceNameMapping);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -451,6 +456,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(UpdateRequiredCopy), out var updateRequiredCopy);
             root.TryGetProperty(nameof(PatchInitializerCustomization), out var patchInitializerCustomization);
             root.TryGetProperty(nameof(OperationToResourceMapping), out var operationToResourceMapping);
+            root.TryGetProperty(nameof(BaseResourceNameMapping), out var baseResourceNames);
 
             return new MgmtConfiguration(
                 operationGroupsToOmit: operationGroupToOmit,
@@ -488,7 +494,8 @@ namespace AutoRest.CSharp.Input
                 operationIdMappings: operationIdMappings,
                 updateRequiredCopy: updateRequiredCopy,
                 patchInitializerCustomization: patchInitializerCustomization,
-                operationToResource: operationToResourceMapping);
+                operationToResource: operationToResourceMapping,
+                baseResourceNameMapping: baseResourceNames);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)

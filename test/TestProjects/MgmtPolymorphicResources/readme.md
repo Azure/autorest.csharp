@@ -12,4 +12,7 @@ namespace: MgmtPolymorphicResources
 model-namespace: false
 public-clients: false
 head-as-boolean: false
+
+base-resource-name-mapping:
+  VirtualMachineExtension: AbstractVirtualMachineExtension
 ```

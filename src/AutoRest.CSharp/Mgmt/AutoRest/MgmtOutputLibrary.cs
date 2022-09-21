@@ -570,7 +570,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private string GetBaseResourceName(string candidateName, IEnumerable<Resource> resources)
         {
-            // TODO -- a configuration to override this name
+            if (Configuration.MgmtConfiguration.BaseResourceNameMapping.TryGetValue(candidateName, out var baseResourceName))
+            {
+                return baseResourceName;
+            }
+
             var hasResourceWithSameName = resources.Any(r => r.ResourceName == candidateName);
 
             // TODO -- maybe a better fallback name for the base resource name

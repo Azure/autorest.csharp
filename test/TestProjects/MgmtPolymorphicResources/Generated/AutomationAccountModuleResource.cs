@@ -46,6 +46,12 @@ namespace MgmtPolymorphicResources
         /// <param name="data"> The resource that is the target of operations. </param>
         internal AutomationAccountModuleResource(ArmClient client, ModuleData data) : base(client, data)
         {
+            _automationAccountModuleModuleClientDiagnostics = new ClientDiagnostics("MgmtPolymorphicResources", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string automationAccountModuleModuleApiVersion);
+            _automationAccountModuleModuleRestClient = new ModuleRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, automationAccountModuleModuleApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="AutomationAccountModuleResource"/> class. </summary>
@@ -79,7 +85,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<ModuleResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.Get");
+            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.GetCore");
             scope.Start();
             try
             {
@@ -117,7 +123,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<ModuleResource> GetCore(CancellationToken cancellationToken = default)
         {
-            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.Get");
+            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.GetCore");
             scope.Start();
             try
             {
@@ -156,7 +162,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.Delete");
+            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.DeleteCore");
             scope.Start();
             try
             {
@@ -183,7 +189,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override ArmOperation DeleteCore(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.Delete");
+            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.DeleteCore");
             scope.Start();
             try
             {
@@ -266,7 +272,7 @@ namespace MgmtPolymorphicResources
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.AddTag");
+            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.AddTagCore");
             scope.Start();
             try
             {
@@ -329,7 +335,7 @@ namespace MgmtPolymorphicResources
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.AddTag");
+            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.AddTagCore");
             scope.Start();
             try
             {
@@ -390,7 +396,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.SetTags");
+            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.SetTagsCore");
             scope.Start();
             try
             {
@@ -447,7 +453,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.SetTags");
+            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.SetTagsCore");
             scope.Start();
             try
             {
@@ -504,7 +510,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.RemoveTag");
+            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.RemoveTagCore");
             scope.Start();
             try
             {
@@ -564,7 +570,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.RemoveTag");
+            using var scope = _automationAccountModuleModuleClientDiagnostics.CreateScope("AutomationAccountModuleResource.RemoveTagCore");
             scope.Start();
             try
             {
