@@ -208,7 +208,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -297,7 +297,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -401,7 +401,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -475,7 +475,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{kind}",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -552,7 +552,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{petStoreUrl}",
      "Path": "/pets",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": true
     }
    ],

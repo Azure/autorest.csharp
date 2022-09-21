@@ -353,7 +353,7 @@ function processServiceAuthentication(
                     break;
                 default:
                     throw new Error("Not supported authentication.");
-            }
+    }
         }
     }
 
@@ -469,7 +469,7 @@ function loadOperation(
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
-        BufferResponse: false,
+        BufferResponse: true,
         GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;
 

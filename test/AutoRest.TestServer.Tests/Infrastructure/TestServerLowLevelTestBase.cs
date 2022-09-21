@@ -44,6 +44,39 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             return Test(GetScenarioName(), test, ignoreScenario);
         }
 
+        public async Task Test(Func<Uri, Task> test, TestServerType[] types)
+        {
+            if (types.Contains(TestServerType.CadlRanch))
+            {
+                var server = CadlRanchServerSession.Start();
+
+                try
+                {
+                    await test(server.Host);
+                }
+                catch (Exception ex)
+                {
+                    try
+                    {
+                        await server.DisposeAsync();
+                    }
+                    catch (Exception disposeException)
+                    {
+                        throw new AggregateException(ex, disposeException);
+                    }
+
+                    throw;
+                }
+
+                await server.DisposeAsync();
+            }
+
+            if (types.Contains(TestServerType.TestServer))
+            {
+                await Test(test);
+            }
+        }
+
         private async Task Test(string scenario, Func<Uri, Task> test, bool ignoreScenario = false)
         {
             var scenarioParameter = ignoreScenario ? new string[0] : new[] {scenario};

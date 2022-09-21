@@ -50,8 +50,12 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $debug="")
+function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fast="", $debug="")
 {
+    if (!(Test-Path $baseOutput)) {
+        New-Item $baseOutput -ItemType Directory
+    }
+
     $baseOutput = Resolve-Path -Path $baseOutput
     $baseOutput = $baseOutput -replace "\\", "/"
     $outputPath = Join-Path $baseOutput "Generated"
@@ -71,8 +75,8 @@ function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $deb
         Push-Location $repoRootPath
         Try
         {
-            # node node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path $outputPath "$baseOutput\$projectName.cadl" --emit @azure-tools/cadl-csharp
-            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $baseOutput/$projectName.cadl --emit @azure-tools/cadl-csharp"
+            $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
+            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $cadlFileName --emit @azure-tools/cadl-csharp"
             Invoke $emitCommand    
         }
         Finally 
@@ -80,7 +84,7 @@ function Invoke-Cadl($baseOutput, $projectName, $sharedSource="", $fast="", $deb
             Pop-Location
         }        
     }
-    
+
     $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
     $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
     Invoke $command
