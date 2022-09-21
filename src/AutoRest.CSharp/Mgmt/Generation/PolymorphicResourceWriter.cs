@@ -50,6 +50,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodDocumentation(This.ResourceDataCtor);
                 using (_writer.WriteMethodDeclaration(This.ResourceDataCtor))
                 {
+                    // for usual resources, this constructor will do the following:
+                    // 1. call this(Client, data.Id)
+                    // 2. set data
+                    // but for the polymorphic resources, we cannot do this in this procedure because the Data and HasData property are defined in base resource, and they are not settable here
+                    // to set them, we can only call the base constructor
+                    // but doing this, we lose the ability to call this(Client, data.Id) because we are calling base(Client, data) to set the Data and HasData property
+                    // therefore the only option we have here is to duplicate the logic in this(Client, data.Id)
+                    foreach (var param in This.ExtraConstructorParameters)
+                    {
+                        _writer.Line($"_{param.Name} = {param.Name};");
+                    }
+
+                    foreach (var set in This.UniqueSets)
+                    {
+                        WriteRestClientConstructorPair(set.RestClient, set.Resource);
+                    }
+                    if (This.CanValidateResourceType)
+                        WriteDebugValidate();
                 }
             }
 
@@ -127,7 +145,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (WriteCommonMethodWithoutValidation(coreSignature, null, isAsync))
             {
                 _writer.WriteParametersValidation(coreSignature.Parameters);
-                var diagnostic = new Diagnostic($"{This.Type.Name}.{clientOperation.Name}", Array.Empty<DiagnosticAttribute>());
+                var diagnostic = new Diagnostic($"{This.Type.Name}.{coreSignature.Name}", Array.Empty<DiagnosticAttribute>());
                 writeBody(new MgmtClientOperationWrapper(clientOperation, coreSignature.ReturnType!), diagnostic, isAsync);
             }
 
