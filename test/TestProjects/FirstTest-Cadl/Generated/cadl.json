@@ -312,7 +312,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/top/{action}",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -371,7 +371,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/top2",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -477,7 +477,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -583,7 +583,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": true
     }
    ],
@@ -712,7 +712,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/hello",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -867,7 +867,7 @@
      "RequestMediaTypes": [
       "text/plain"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1013,7 +1013,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1072,7 +1072,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/demoHi",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],

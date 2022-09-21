@@ -27,7 +27,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20220329.1
+      ref: refs/tags/azure-sdk-build-tools_20220920.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -101,6 +101,8 @@ stages:
               failOnStderr: false
               displayName: 'Publish to GitHub, npm and coverage report'
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - publish: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage/cadl-ranch-coverage-csharp.json
+            artifact: CoverageReport
       - template: smoke-test.yml
         parameters:
           name: SmokeTest_A_C

@@ -1521,7 +1521,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1624,7 +1624,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1727,7 +1727,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1830,7 +1830,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1933,7 +1933,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1989,7 +1989,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/selfReference",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],

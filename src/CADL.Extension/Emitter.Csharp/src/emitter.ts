@@ -487,7 +487,7 @@ function loadOperation(
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
-        BufferResponse: false,
+        BufferResponse: true,
         Paging: operationPaging,
         GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;

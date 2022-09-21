@@ -152,6 +152,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath-LowLevel\\Generated"
     },
+    "cadl-property-types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\property-types\\Generated"
+    },
     "CognitiveSearch": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\Generated"
@@ -439,6 +443,10 @@
     "Pagination-Cadl": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination-Cadl\\Generated"
+    },
+    "PaginationParams-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PaginationParams-LowLevel\\Generated"
     },
     "paging": {
       "commandName": "Project",
