@@ -3,19 +3,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV1 : TestServerBase
     {
-        public TestServerV1(): base(GetBaseDirectory(), $"--port 0 --coverageDirectory {GetArtifactsDirectory()}")
+        public TestServerV1(): base(GetBaseDirectory(), $"--port 0 --coverageDirectory {GetCoverageDirectory()}")
         {
         }
 

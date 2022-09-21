@@ -24,8 +24,6 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             var processStartInfo = new ProcessStartInfo("node", $"{startup} {processArguments}")
             {
-                // Use random port
-                Environment = { ["PORT"] = "0" },
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             };
@@ -55,7 +53,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             }
         }
 
-        protected static string GetArtifactsDirectory()
+        protected static string GetCoverageDirectory()
         {
             return Path.Combine(_buildProperties.Value.ArtifactsDirectory, "coverage");
         }
