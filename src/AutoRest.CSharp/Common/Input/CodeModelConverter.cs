@@ -360,6 +360,7 @@ namespace AutoRest.CSharp.Common.Input
             Namespace: schema.Extensions?.Namespace,
             Accessibility: schema.Extensions?.Accessibility,
             Description: schema.CreateDescription(),
+            Usage: InputModelTypeUsage.RoundTrip,
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
             AllowedValues: choices.Select(CreateEnumValue).ToList(),
             IsExtensible: isExtensible

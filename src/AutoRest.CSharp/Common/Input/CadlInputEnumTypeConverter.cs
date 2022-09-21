@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.Common.Input
             string? ns = null;
             string? accessibility = null;
             string? description = null;
+            InputModelTypeUsage? usage = null;
             bool isExtendable = false;
             InputPrimitiveType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? allowedValues = null;
@@ -39,6 +40,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputEnumType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
+                    || reader.TryReadWithConverter(nameof(InputModelType.Usage), options, ref usage)
                     || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
                     || reader.TryReadPrimitiveType(nameof(InputEnumType.EnumValueType), ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.AllowedValues), options, ref allowedValues);
@@ -57,7 +59,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("Enum must have at least one value");
             }
 
-            var enumType = new InputEnumType(name, ns, accessibility, description, valueType ?? InputPrimitiveType.Int32, allowedValues, isExtendable);
+            var enumType = new InputEnumType(name, ns, accessibility, description, usage ?? InputModelTypeUsage.None, valueType ?? InputPrimitiveType.Int32, allowedValues, isExtendable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);

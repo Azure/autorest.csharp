@@ -43,7 +43,8 @@ import { OperationResponse } from "./type/OperationResponse.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
-    getInputType
+    getInputType,
+    getUsages
 } from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
@@ -58,6 +59,7 @@ import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
 import { getConsumes, getProduces, getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
+import { Usage } from "./type/Usage.js";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -183,6 +185,7 @@ function createModel(program: Program): any {
         const [routes] = getAllRoutes(program);
         console.log("routes:" + routes.length);
         const clients: InputClient[] = [];
+        const convenienceOperations: Operation[] = [];
         //create endpoint parameter from servers
         let endPointParam = undefined;
         let url: string = "";
@@ -235,6 +238,7 @@ function createModel(program: Program): any {
                 }
             }
             client.Operations.push(op);
+            if (op.GenerateConvenienceMethod) convenienceOperations.push(operation.operation);
         }
         if (apiVersions.size > 1) {
             apiVersionParam.Kind = InputOperationParameterKind.Constant;
@@ -259,6 +263,33 @@ function createModel(program: Program): any {
             }
         }
 
+        const usages = getUsages(program, convenienceOperations);
+        setUsage(usages, modelMap);
+        setUsage(usages, enumMap);
+        // for (let [name, m] of modelMap) {
+        //     if (usages.inputs.includes(name)) {
+        //         m.Usage = Usage.Input;
+        //     } else if (usages.outputs.includes(name)) {
+        //         m.Usage = Usage.Output;
+        //     } else if (usages.roundTrips.includes(name)) {
+        //         m.Usage = Usage.RoundTrips;
+        //     } else {
+        //         m.Usage = Usage.None;
+        //     }
+        // }
+
+        // for (let [name, e] of enumMap) {
+        //     if (usages.inputs.includes(name)) {
+        //         e.Usage = Usage.Input;
+        //     } else if (usages.outputs.includes(name)) {
+        //         e.Usage = Usage.Output;
+        //     } else if (usages.roundTrips.includes(name)) {
+        //         e.Usage = Usage.RoundTrips;
+        //     } else {
+        //         e.Usage = Usage.None;
+        //     }
+        // }
+
         const clientModel = {
             Name: namespace,
             Description: description,
@@ -277,6 +308,21 @@ function createModel(program: Program): any {
         }
     }
 }
+
+function setUsage(usages:{inputs: string[]; outputs: string[]; roundTrips: string[]}, models:Map<string, InputModelType|InputEnumType>) {
+    for (let [name, m] of models) {
+        if (usages.inputs.includes(name)) {
+            m.Usage = Usage.Input;
+        } else if (usages.outputs.includes(name)) {
+            m.Usage = Usage.Output;
+        } else if (usages.roundTrips.includes(name)) {
+            m.Usage = Usage.RoundTrip;
+        } else {
+            m.Usage = Usage.None;
+        }
+    }
+}
+
 
 function applyDefaultContentTypeAndAcceptParameter(operation: InputOperation): void {
     const defaultValue: string = "application/json";

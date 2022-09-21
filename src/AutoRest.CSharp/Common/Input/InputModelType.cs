@@ -33,6 +33,7 @@ namespace AutoRest.CSharp.Common.Input
         }
     }
 
+    /*
     internal enum InputModelTypeUsage
     {
         None = 0,
@@ -40,4 +41,5 @@ namespace AutoRest.CSharp.Common.Input
         Output = 2,
         RoundTrip = Input | Output
     }
+    */
 }

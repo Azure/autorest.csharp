@@ -232,4 +232,12 @@ namespace AutoRest.CSharp.Common.Input
         Time,
         Uri,
     }
+
+    internal enum InputModelTypeUsage
+    {
+        None = 0,
+        Input = 1,
+        Output = 2,
+        RoundTrip = Input | Output
+    }
 }

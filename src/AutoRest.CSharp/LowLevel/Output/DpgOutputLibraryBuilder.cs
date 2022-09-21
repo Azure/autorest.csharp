@@ -67,7 +67,10 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var inputEnum in _rootNamespace.Enums)
             {
-                dictionary.Add(inputEnum, new EnumType(inputEnum, _defaultNamespace, "public", typeFactory, _sourceInputModel));
+                if (inputEnum.Usage != InputModelTypeUsage.None)
+                {
+                    dictionary.Add(inputEnum, new EnumType(inputEnum, _defaultNamespace, "public", typeFactory, _sourceInputModel));
+                }
             }
         }
 
@@ -75,7 +78,10 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var model in _rootNamespace.Models)
             {
-                models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel));
+                if (model.Usage != InputModelTypeUsage.None)
+                {
+                    models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel));
+                }
             }
 
             foreach (var (inputModel, modelTypeProvider) in models)
