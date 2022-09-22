@@ -44,12 +44,7 @@ namespace Azure.Core
                 return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
             }
 
-            var (originalResponseHasLocation, lastKnownLocation) = headerSource == HeaderSource.Location
-                ? (true, nextRequestUri)
-                : response.Headers.TryGetValue("Location", out var locationUri)
-                    ? (true, locationUri)
-                    : (false, null);
-
+            var originalResponseHasLocation = response.Headers.TryGetValue("Location", out var lastKnownLocation);
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
@@ -100,7 +95,7 @@ namespace Azure.Core
 
             if (hasCompleted)
             {
-                string? finalUri = GetFinalUri();
+                string? finalUri = GetFinalUri(response);
                 var finalResponse = finalUri != null
                     ? await GetResponseAsync(async, finalUri, cancellationToken).ConfigureAwait(false)
                     : response;
@@ -215,7 +210,7 @@ namespace Azure.Core
         /// <summary>
         /// This function is used to get the final request uri after the lro has completed.
         /// </summary>
-        private string? GetFinalUri()
+        private string? GetFinalUri(Response response)
         {
             // Set final uri as null if the response header doesn't contain "Operation-Location" or "Azure-AsyncOperation".
             if (_headerSource is not (HeaderSource.OperationLocation or HeaderSource.AzureAsyncOperation))
@@ -223,26 +218,48 @@ namespace Azure.Core
                 return null;
             }
 
-            // Set final uri as null if original request is a delete method.
-            if (_requestMethod == RequestMethod.Delete)
+            if (_finalStateVia == OperationFinalStateVia.AzureAsyncOperation && _requestMethod == RequestMethod.Post)
             {
                 return null;
             }
 
-            // Set final uri as original request's uri if one of these requirements are met:
-            // 1.Original request is a put method;
-            // 2.Original request is a management plane patch method. For data plane patch method, the final uri will be determinned by the original response header and "_finalStateVia";
-            // 3.Original response header contains "Location" and FinalStateVia is configured to OriginalUri.
-            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
+            // If body contains resourceLocation, use it
+            if (response.ContentStream?.Length > 0)
+            {
+                try
+                {
+                    using JsonDocument document = JsonDocument.Parse(response.ContentStream);
+                    var root = document.RootElement;
+                    if (root.TryGetProperty("resourceLocation", out var resourceLocation))
+                    {
+                        return resourceLocation.GetRequiredString();
+                    }
+                }
+                finally
+                {
+                    // It is required to reset the position of the content after reading as this response may be used for deserialization.
+                    response.ContentStream.Position = 0;
+                }
+            }
+
+            // If initial request is PUT or PATCH, return initial request Uri
+            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch)
             {
                 return _startRequestUri.AbsoluteUri;
             }
 
-            // Set final uri as last known location header if original response header contains "Location" and FinalStateVia is configured to Location.
-            if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.Location)
+            // If response for initial request contains header "Location" and FinalStateVia is configured to OriginalUri, return initial request Uri
+            if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
+            {
+                return _startRequestUri.AbsoluteUri;
+            }
+
+            // If response for initial request contains header "Location", return last known location
+            if (_originalResponseHasLocation && _requestMethod == RequestMethod.Post)
             {
                 return _lastKnownLocation;
             }
+
             return null;
         }
 
