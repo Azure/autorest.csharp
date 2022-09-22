@@ -62,6 +62,9 @@ import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
 import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
 import { OperationPaging } from "./type/OperationPaging.js";
+import { OperationLongRunning } from "./type/OperationLongRunning.js";
+import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
+import { getOperationLink } from "@azure-tools/cadl-azure-core";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -199,8 +202,13 @@ function createModel(program: Program): any {
             }
         }
 
+        const lroMonitorOperations = getAllLroMonitorOperations(routes, program);
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
+
+            // do not generate LRO monitor operation
+            if (lroMonitorOperations.has(operation.operation)) continue;
+
             const groupName: string = getOperationGroupName(
                 program,
                 operation.operation
@@ -278,6 +286,17 @@ function createModel(program: Program): any {
         } else {
             throw err;
         }
+    }
+
+    function getAllLroMonitorOperations(routes: OperationDetails[], program: Program): Set<Operation> {
+        const lroMonitorOperations = new Set<Operation>();
+        for (const operation of routes) {
+            let operationLink = getOperationLink(program, operation.operation, "polling");
+            if (operationLink !== undefined) {
+                lroMonitorOperations.add(operationLink.linkedOperation);
+            }
+        }
+        return lroMonitorOperations;
     }
 }
 
@@ -505,6 +524,7 @@ function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
+        LongRunning: loadOperationLongRunning(program, operation, resourceOperation),
         Paging: paging,
         GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;
@@ -644,6 +664,30 @@ function loadOperation(
             Headers: responseHeaders
         } as OperationResponse;
     }
+
+    function loadOperationLongRunning(program: Program, op: OperationDetails, resourceOperation?: ResourceOperation): OperationLongRunning | undefined {
+        if (!isLroOperation(program, op.operation)) return undefined;
+
+        let finalResponse = loadLongRunningFinalResponse(program, op, resourceOperation);
+        if (finalResponse === undefined) return undefined;
+
+        return {
+            FinalStateVia: OperationFinalStateVia.Location, // data plane only supports `location`
+            FinalResponse: finalResponse,
+        } as OperationLongRunning;
+    }
+
+    function loadLongRunningFinalResponse(program: Program, op: OperationDetails, resourceOperation?: ResourceOperation): OperationResponse | undefined {
+        for (const response of op.responses) {
+            if (response.statusCode == "200" || response.statusCode == "204")
+                return loadOperationResponse(program, response, resourceOperation);
+        }
+        return loadOperationResponse(program, op.responses[0], resourceOperation);
+    }
+
+    function isLroOperation(program: Program, op: Operation) {
+        return getOperationLink(program, op, "polling") !== undefined;
+    }
 }
 
 class ErrorTypeFoundError extends Error {
@@ -651,3 +695,4 @@ class ErrorTypeFoundError extends Error {
         super("Error type found in evaluated Cadl output");
     }
 }
+
