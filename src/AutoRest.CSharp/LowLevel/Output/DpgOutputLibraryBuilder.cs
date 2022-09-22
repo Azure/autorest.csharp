@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
         private static InputOperation UpdateOperation(InputOperation operation, string clientName, IDictionary<InputOperation, InputOperation> operationsMap)
         {
             InputOperation updatedOperation;
-            if (operation.Paging != null && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
+            if (operation.Paging != null && !Configuration.DisablePaginationTopRenaming && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
             {
                 updatedOperation = operation with
                 {
