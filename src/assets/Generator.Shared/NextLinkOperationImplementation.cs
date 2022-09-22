@@ -35,9 +35,9 @@ namespace Azure.Core
             Uri startRequestUri,
             Response response,
             OperationFinalStateVia finalStateVia,
-            string? interimApiVersion = null)
+            string? apiVersionOverride = null)
         {
-            string? apiVersionStr = interimApiVersion ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
+            string? apiVersionStr = apiVersionOverride ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
             if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
             {
@@ -60,9 +60,9 @@ namespace Azure.Core
             Uri startRequestUri,
             Response response,
             OperationFinalStateVia finalStateVia,
-            string? interimApiVersion = null)
+            string? apiVersionOverride = null)
         {
-            var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia, interimApiVersion);
+            var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia, apiVersionOverride);
             return new OperationToOperationOfT<T>(operationSource, operation);
         }
 
