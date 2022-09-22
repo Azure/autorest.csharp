@@ -272,7 +272,7 @@
      "RequestMediaTypes": [
       "application/merge-patch+json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],

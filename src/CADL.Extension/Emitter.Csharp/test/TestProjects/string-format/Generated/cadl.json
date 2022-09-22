@@ -109,7 +109,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/zonedDateTime/{time}",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -182,7 +182,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/uri/{uri}",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],

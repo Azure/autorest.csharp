@@ -213,7 +213,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{pagnationUri}",
      "Path": "/app/transactions",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "Paging": {
       "$id": "26",
       "NextLinkName": "nextLink",

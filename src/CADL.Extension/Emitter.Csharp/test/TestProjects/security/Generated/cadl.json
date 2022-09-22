@@ -122,7 +122,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/security",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],

@@ -212,7 +212,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -314,7 +314,7 @@
      "RequestMediaTypes": [
       "text/plain"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],

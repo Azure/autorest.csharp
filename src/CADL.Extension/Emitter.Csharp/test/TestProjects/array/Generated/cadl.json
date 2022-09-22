@@ -205,7 +205,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/pets",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],
