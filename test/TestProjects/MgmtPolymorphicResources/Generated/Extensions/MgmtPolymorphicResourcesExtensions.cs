@@ -19,6 +19,41 @@ namespace MgmtPolymorphicResources
     /// <summary> A class to add extension methods to MgmtPolymorphicResources. </summary>
     public static partial class MgmtPolymorphicResourcesExtensions
     {
+        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
+        {
+            return subscriptionResource.GetCachedClient((client) =>
+            {
+                return new SubscriptionResourceExtensionClient(client, subscriptionResource.Id);
+            }
+            );
+        }
+
+        /// <summary>
+        /// List all guest configuration assignments for a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments
+        /// Operation Id: GuestConfigurationAssignments_SubscriptionList
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="VirtualMachineGuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<VirtualMachineGuestConfigurationAssignmentResource> SubscriptionListGuestConfigurationAssignmentsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        {
+            return GetExtensionClient(subscriptionResource).SubscriptionListGuestConfigurationAssignmentsAsync(cancellationToken);
+        }
+
+        /// <summary>
+        /// List all guest configuration assignments for a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments
+        /// Operation Id: GuestConfigurationAssignments_SubscriptionList
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="VirtualMachineGuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<VirtualMachineGuestConfigurationAssignmentResource> SubscriptionListGuestConfigurationAssignments(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        {
+            return GetExtensionClient(subscriptionResource).SubscriptionListGuestConfigurationAssignments(cancellationToken);
+        }
+
         private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
@@ -383,6 +418,44 @@ namespace MgmtPolymorphicResources
             {
                 CassandraTableResource.ValidateResourceId(id);
                 return new CassandraTableResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineGuestConfigurationAssignmentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineGuestConfigurationAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineGuestConfigurationAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineGuestConfigurationAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineGuestConfigurationAssignmentResource" /> object. </returns>
+        public static VirtualMachineGuestConfigurationAssignmentResource GetVirtualMachineGuestConfigurationAssignmentResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineGuestConfigurationAssignmentResource.ValidateResourceId(id);
+                return new VirtualMachineGuestConfigurationAssignmentResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineScaleSetGuestConfigurationAssignmentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetGuestConfigurationAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetGuestConfigurationAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetGuestConfigurationAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetGuestConfigurationAssignmentResource" /> object. </returns>
+        public static VirtualMachineScaleSetGuestConfigurationAssignmentResource GetVirtualMachineScaleSetGuestConfigurationAssignmentResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineScaleSetGuestConfigurationAssignmentResource.ValidateResourceId(id);
+                return new VirtualMachineScaleSetGuestConfigurationAssignmentResource(client, id);
             }
             );
         }

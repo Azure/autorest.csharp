@@ -1865,6 +1865,290 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}": {
+            "put": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignments_CreateOrUpdate",
+                "description": "Creates an association between a VM and guest configuration",
+                "parameters": [
+                    {
+                        "name": "guestConfigurationAssignmentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "Name of the guest configuration assignment."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        },
+                        "description": "Parameters supplied to the create or update guest configuration assignment."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VmNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created. The guest configuration assignment for the VM was created successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        }
+                    },
+                    "200": {
+                        "description": "OK. The guest configuration assignment for the VM was updated successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignments_Get",
+                "description": "Get information about a guest configuration assignment",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "name": "guestConfigurationAssignmentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The guest configuration assignment name."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VmNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The guest configuration assignment was returned successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        }
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            },
+            "delete": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignments_Delete",
+                "description": "Delete a guest configuration assignment",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "name": "guestConfigurationAssignmentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "Name of the guest configuration assignment"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VmNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+            "get": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignments_List",
+                "description": "List all guest configuration assignments for a virtual machine.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VmNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignmentList"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}": {
+            "get": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignmentsVMSS_Get",
+                "description": "Get information about a guest configuration assignment for VMSS",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VMSSNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The guest configuration assignment name."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The guest configuration assignment was returned successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignmentsVMSS_Delete",
+                "description": "Delete a guest configuration assignment for VMSS",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VMSSNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The guest configuration assignment name."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        }
+                    },
+                    "204": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+            "get": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignmentsVMSS_List",
+                "description": "List all guest configuration assignments for VMSS.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VMSSNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignmentList"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+            "get": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignments_SubscriptionList",
+                "description": "List all guest configuration assignments for a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignmentList"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
         }
     },
     "definitions": {
@@ -2590,6 +2874,60 @@
                 }
             },
             "description": "The List operation response, that contains the Cassandra tables and their properties."
+        },
+        "GuestConfigurationAssignment": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": false,
+                    "$ref": "#/definitions/GuestConfigurationAssignmentProperties",
+                    "description": "Properties of the Guest configuration assignment."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Guest configuration assignment is an association between a machine and guest configuration."
+        },
+        "GuestConfigurationAssignmentProperties": {
+            "properties": {
+                "targetResourceId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "VM resource Id.",
+                    "x-nullable": true
+                },
+                "complianceStatus": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
+                    "x-ms-enum": {
+                        "name": "complianceStatus",
+                        "modelAsString": true
+                    },
+                    "enum": ["Compliant", "NonCompliant", "Pending"]
+                },
+                "resourceType": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Type of the resource - VMSS / VM",
+                    "x-nullable": true
+                }
+            },
+            "description": "Guest configuration assignment properties."
+        },
+        "GuestConfigurationAssignmentList": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GuestConfigurationAssignment"
+                    },
+                    "description": "Result of the list guest configuration assignment operation."
+                }
+            },
+            "description": "The response of the list guest configuration assignment operation."
         }
     },
     "parameters": {
@@ -2633,6 +2971,22 @@
             "type": "string",
             "x-ms-parameter-location": "method",
             "description": "Cosmos DB table name."
+        },
+        "VmNameParameter": {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine.",
+            "x-ms-parameter-location": "method"
+        },
+        "VMSSNameParameter": {
+            "name": "vmssName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set.",
+            "x-ms-parameter-location": "method"
         }
     }
 }

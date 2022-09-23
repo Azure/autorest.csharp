@@ -128,6 +128,43 @@ namespace MgmtPolymorphicResources
             return GetVirtualMachineScaleSetExtensions().Get(vmExtensionName, expand, cancellationToken);
         }
 
+        /// <summary> Gets a collection of VirtualMachineScaleSetGuestConfigurationAssignmentResources in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetGuestConfigurationAssignmentResources and their operations over a VirtualMachineScaleSetGuestConfigurationAssignmentResource. </returns>
+        public virtual VirtualMachineScaleSetGuestConfigurationAssignmentCollection GetVirtualMachineScaleSetGuestConfigurationAssignments()
+        {
+            return GetCachedClient(Client => new VirtualMachineScaleSetGuestConfigurationAssignmentCollection(Client, Id));
+        }
+
+        /// <summary>
+        /// Get information about a guest configuration assignment for VMSS
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}
+        /// Operation Id: GuestConfigurationAssignmentsVMSS_Get
+        /// </summary>
+        /// <param name="name"> The guest configuration assignment name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        [ForwardsClientCalls]
+        public virtual async Task<Response<VirtualMachineScaleSetGuestConfigurationAssignmentResource>> GetVirtualMachineScaleSetGuestConfigurationAssignmentAsync(string name, CancellationToken cancellationToken = default)
+        {
+            return await GetVirtualMachineScaleSetGuestConfigurationAssignments().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get information about a guest configuration assignment for VMSS
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}
+        /// Operation Id: GuestConfigurationAssignmentsVMSS_Get
+        /// </summary>
+        /// <param name="name"> The guest configuration assignment name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        [ForwardsClientCalls]
+        public virtual Response<VirtualMachineScaleSetGuestConfigurationAssignmentResource> GetVirtualMachineScaleSetGuestConfigurationAssignment(string name, CancellationToken cancellationToken = default)
+        {
+            return GetVirtualMachineScaleSetGuestConfigurationAssignments().Get(name, cancellationToken);
+        }
+
         /// <summary>
         /// Display information about a virtual machine scale set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
