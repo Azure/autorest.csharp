@@ -141,8 +141,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (methodBase is MethodSignature)
                 writer
-                    .AppendRawIf("new ", methodBase.Modifiers.HasFlag(New))
                     .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
+                    .AppendRawIf("new ", methodBase.Modifiers.HasFlag(New))
                     .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
                     .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
                     .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async) && !isAbstract); // abstract methods cannot have async modifier
