@@ -223,11 +223,12 @@ namespace Azure.Core
             }
 
             // If body contains resourceLocation, use it
-            if (response.ContentStream?.Length > 0)
+            var contentStream = response.ContentStream;
+            if (contentStream is {CanSeek: true, Length: > 0})
             {
                 try
                 {
-                    using JsonDocument document = JsonDocument.Parse(response.ContentStream);
+                    using JsonDocument document = JsonDocument.Parse(contentStream);
                     var root = document.RootElement;
                     if (root.TryGetProperty("resourceLocation", out var resourceLocation))
                     {
@@ -237,7 +238,7 @@ namespace Azure.Core
                 finally
                 {
                     // It is required to reset the position of the content after reading as this response may be used for deserialization.
-                    response.ContentStream.Position = 0;
+                    contentStream.Position = 0;
                 }
             }
 
