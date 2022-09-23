@@ -45,6 +45,12 @@ namespace MgmtExtensionResource
         /// <param name="data"> The resource that is the target of operations. </param>
         internal BuiltInPolicyDefinitionResource(ArmClient client, PolicyDefinitionData data) : base(client, data)
         {
+            _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);
+            _builtInPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, builtInPolicyDefinitionPolicyDefinitionsApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="BuiltInPolicyDefinitionResource"/> class. </summary>
@@ -69,7 +75,12 @@ namespace MgmtExtensionResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> The core implementation for operation Get. </summary>
+        /// <summary>
+        /// The core implementation for operation Get
+        /// This operation retrieves the built-in policy definition with the given name.
+        /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_GetBuiltIn
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<PolicyDefinitionResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
@@ -96,13 +107,18 @@ namespace MgmtExtensionResource
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public new virtual async Task<Response<BuiltInPolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
+        public new async Task<Response<BuiltInPolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            var value = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
-            return Response.FromValue((BuiltInPolicyDefinitionResource)value.Value, value.GetRawResponse());
+            var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((BuiltInPolicyDefinitionResource)result.Value, result.GetRawResponse());
         }
 
-        /// <summary> The core implementation for operation Get. </summary>
+        /// <summary>
+        /// The core implementation for operation Get
+        /// This operation retrieves the built-in policy definition with the given name.
+        /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_GetBuiltIn
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<PolicyDefinitionResource> GetCore(CancellationToken cancellationToken = default)
         {
@@ -129,10 +145,10 @@ namespace MgmtExtensionResource
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         [ForwardsClientCalls]
-        public new virtual Response<BuiltInPolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
+        public new Response<BuiltInPolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
         {
-            var value = GetCore(cancellationToken);
-            return Response.FromValue((BuiltInPolicyDefinitionResource)value.Value, value.GetRawResponse());
+            var result = GetCore(cancellationToken);
+            return Response.FromValue((BuiltInPolicyDefinitionResource)result.Value, result.GetRawResponse());
         }
     }
 }

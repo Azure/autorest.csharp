@@ -26,10 +26,45 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public MgmtCommonOperation(string name, CSharpType returnType, IReadOnlyList<MgmtClientOperation> implementations)
         {
+            ValidateMgmtCommonOperation(implementations);
+
             _implementations = new(implementations);
             MethodParameters = implementations.First().MethodParameters;
             ReturnType = returnType;
             Name = name;
+        }
+
+        private static void ValidateMgmtCommonOperation(IReadOnlyList<MgmtClientOperation> implementations)
+        {
+            if (!Configuration.MgmtConfiguration.IsStrictCommonOperationEnabled)
+                return;
+
+            // validate if they all have the same count of the parameters
+            var countSet = new HashSet<string>();
+            foreach (var operation in implementations)
+            {
+                // here we only include the optional parameters
+                var optionalParameterList = operation.MethodParameters.Where(parameter => parameter.IsOptionalInSignature).Select(parameter => $"{parameter.Type.Namespace}.{parameter.Type.Name}");
+                countSet.Add(string.Join(", ", optionalParameterList));
+            }
+            if (countSet.Count != 1)
+            {
+                var operationIds = implementations.SelectMany(operation => operation).Select(restOperation => restOperation.OperationId);
+                throw new InvalidOperationException($"Common operation from {string.Join(", ", operationIds)} has inconsistent optional parameters. The optional parameter lists are {string.Join("; ", countSet)}");
+            }
+
+            // validate if these implementation operations all have the same parameter names
+            var nameSet = new HashSet<string>();
+            foreach (var operation in implementations)
+            {
+                var parameterNameList = operation.MethodParameters.Select(parameter => parameter.Name);
+                nameSet.Add(string.Join(", ", parameterNameList));
+            }
+            if (nameSet.Count != 1)
+            {
+                var operationIds = implementations.SelectMany(operation => operation).Select(restOperation => restOperation.OperationId);
+                throw new InvalidOperationException($"Common operation from {string.Join(", ", operationIds)} has inconsistent parameter names. The parameter lists are {string.Join("; ", nameSet)}");
+            }
         }
 
         public bool Contains(MgmtClientOperation operation) => _implementations.Contains(operation);

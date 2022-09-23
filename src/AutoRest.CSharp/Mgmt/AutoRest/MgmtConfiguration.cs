@@ -310,7 +310,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string> OperationToResourceMapping { get; }
         public IReadOnlyDictionary<string, string> BaseResourceNameMapping { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
-        public IReadOnlyDictionary<string, string> UpdateRequiredCopy {get;}
+        public IReadOnlyDictionary<string, string> UpdateRequiredCopy { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> PatchInitializerCustomization { get; }
 
         public IReadOnlyList<string> NoResourceSuffix { get; }
@@ -401,7 +401,9 @@ namespace AutoRest.CSharp.Input
             MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
-            writer.WriteBoolean(nameof(IsStrictCommonOperationEnabled), IsStrictCommonOperationEnabled);
+            // only write to the configuration file when this is false which is not the default value
+            if (!IsStrictCommonOperationEnabled)
+                writer.WriteBoolean(nameof(IsStrictCommonOperationEnabled), IsStrictCommonOperationEnabled);
 
             if (!DoesResourceModelRequireType)
                 writer.WriteBoolean(nameof(DoesResourceModelRequireType), DoesResourceModelRequireType);

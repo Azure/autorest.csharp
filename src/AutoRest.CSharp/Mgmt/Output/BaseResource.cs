@@ -44,7 +44,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     // we need to do some escape on the ReturnType here - because they might be the resource, or ArmOperation<Resource>
                     // when this happens, they will never be the same
-                    var key = new MethodKey(clientOperation.Name, clientOperation.MethodParameters.Select(parameter => parameter.Type).ToArray(), EscapeReturnType(clientOperation.ReturnType, resource));
+                    // we only take the required parameters into account
+                    var key = new MethodKey(clientOperation.Name, clientOperation.MethodParameters.Where(parameter => !parameter.IsOptionalInSignature).Select(parameter => parameter.Type).ToArray(), EscapeReturnType(clientOperation.ReturnType, resource));
                     commonMethods.AddInList(key, clientOperation);
                 }
             }
