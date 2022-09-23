@@ -184,14 +184,14 @@ function createModel(program: Program): any {
         console.log("routes:" + routes.length);
         const clients: InputClient[] = [];
         //create endpoint parameter from servers
-        let endPointParam = undefined;
+        let endPointParam : InputParameter[] | undefined = undefined;
         let url: string = "";
         if (servers !== undefined) {
             const cadlServers = resolveServers(program, servers);
             if (cadlServers.length > 0) {
                 /* choose the first server as endpoint. */
                 url = cadlServers[0].url;
-                endPointParam = cadlServers[0].parameters[0];
+                endPointParam = cadlServers[0].parameters;
             }
         }
 
@@ -396,7 +396,7 @@ function loadOperation(
     program: Program,
     operation: OperationDetails,
     uri: string,
-    endpoint: InputParameter | undefined = undefined,
+    endpoint: InputParameter[] | undefined = undefined,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
@@ -413,7 +413,11 @@ function loadOperation(
     const externalDocs = getExternalDocs(program, op);
 
     const parameters: InputParameter[] = [];
-    if (endpoint) parameters.push(endpoint);
+    if (endpoint) {
+        for(const para of endpoint) {
+            parameters.push(para);
+        }
+    }
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
     }
