@@ -182,19 +182,23 @@ export function getEffectiveSchemaType(program: Program, type: Type): Type {
 
     return target;
 
-    /**
-     * A "schema property" here is a property that is emitted to OpenAPI schema.
-     *
-     * Headers, parameters, status codes are not schema properties even they are
-     * represented as properties in Cadl.
-     */
     function isSchemaProperty(property: ModelProperty) {
-        const headerInfo = getHeaderFieldName(program, property);
-        const queryInfo = getQueryParamName(program, property);
-        const pathInfo = getPathParamName(program, property);
-        const statusCodeinfo = isStatusCode(program, property);
-        return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
+        return isSchemaPropertyOnProgram(program, property);
     }
+}
+
+/**
+ * A "schema property" here is a property that is emitted to OpenAPI schema.
+ *
+ * Headers, parameters, status codes are not schema properties even they are
+ * represented as properties in Cadl.
+ */
+function isSchemaPropertyOnProgram(program: Program, property: ModelProperty) {
+    const headerInfo = getHeaderFieldName(program, property);
+    const queryInfo = getQueryParamName(program, property);
+    const pathInfo = getPathParamName(program, property);
+    const statusCodeinfo = isStatusCode(program, property);
+    return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
 }
 
 export function getDefaultValue(type: Type): any {
@@ -449,7 +453,7 @@ export function getInputType(
         discriminatorPropertyName?: string
     ): void {
         inputProperties.forEach((value: ModelProperty, key: string) => {
-            if (value.name !== discriminatorPropertyName) {
+            if (value.name !== discriminatorPropertyName && isSchemaPropertyOnProgram(program, value)) {
                 const vis = getVisibility(program, value);
                 let isReadOnly: boolean = false;
                 if (vis && vis.includes("read") && vis.length === 1) {

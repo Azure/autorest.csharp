@@ -239,6 +239,7 @@ if (!($Exclude -contains "Samples"))
 # Cadl projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 $cadlRanchProjectNames =
+    'api-key',
     'property-types'
 
 if (!($Exclude -contains "CadlRanchProjects"))

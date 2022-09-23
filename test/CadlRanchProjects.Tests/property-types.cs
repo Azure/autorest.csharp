@@ -92,7 +92,6 @@ namespace CadlRanchProjects.Tests
         }, new[] { TestServerType.CadlRanch });
 
         [Test]
-        [Ignore("Depend on https://github.com/Azure/cadl-ranch/pull/106")]
         public Task Models_Property_Types_Datetime_put() => Test(async (host) =>
         {
             Response response = await new DatetimeClient(host, null).PutAsync(new DatetimeProperty(DateTimeOffset.Parse("2022-08-26T18:38:00Z")).ToRequestContent());
