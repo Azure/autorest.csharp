@@ -1,7 +1,6 @@
 #Requires -Version 7.0
 
 $ErrorActionPreference = 'Stop'
-Set-StrictMode -Version 1
 
 param($filter)
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
