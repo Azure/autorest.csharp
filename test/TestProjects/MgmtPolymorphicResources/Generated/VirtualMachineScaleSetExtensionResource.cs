@@ -86,7 +86,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<AbstractVirtualMachineExtensionResource>> GetCoreAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.GetCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.Get");
             scope.Start();
             try
             {
@@ -126,7 +126,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<AbstractVirtualMachineExtensionResource> GetCore(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.GetCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.Get");
             scope.Start();
             try
             {
@@ -166,7 +166,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.DeleteCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.Delete");
             scope.Start();
             try
             {
@@ -193,7 +193,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override ArmOperation DeleteCore(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.DeleteCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.Delete");
             scope.Start();
             try
             {
@@ -224,7 +224,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(extensionParameters, nameof(extensionParameters));
 
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.UpdateCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.Update");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(extensionParameters, nameof(extensionParameters));
 
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.UpdateCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.Update");
             scope.Start();
             try
             {
@@ -328,7 +328,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.ValidateCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.Validate");
             scope.Start();
             try
             {
@@ -374,7 +374,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.ValidateCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.Validate");
             scope.Start();
             try
             {
@@ -421,7 +421,7 @@ namespace MgmtPolymorphicResources
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.AddTagCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.AddTag");
             scope.Start();
             try
             {
@@ -484,7 +484,7 @@ namespace MgmtPolymorphicResources
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.AddTagCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.AddTag");
             scope.Start();
             try
             {
@@ -545,7 +545,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.SetTagsCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.SetTags");
             scope.Start();
             try
             {
@@ -602,7 +602,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.SetTagsCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.SetTags");
             scope.Start();
             try
             {
@@ -659,7 +659,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.RemoveTagCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.RemoveTag");
             scope.Start();
             try
             {
@@ -719,7 +719,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.RemoveTagCore");
+            using var scope = _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionResource.RemoveTag");
             scope.Start();
             try
             {

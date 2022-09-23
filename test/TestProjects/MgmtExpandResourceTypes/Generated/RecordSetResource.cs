@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtExpandResourceTypes
 {
@@ -59,11 +60,10 @@ namespace MgmtExpandResourceTypes
             {
                 return new RecordSetTxtResource(client, data);
             }
-            // TODO -- should we throw or return an UnknownResource?
-            throw new InvalidOperationException();
+            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: RecordSetAResource, RecordSetAaaaResource, RecordSetCaaResource, RecordSetCNameResource, RecordSetMxResource, RecordSetNsResource, RecordSetPtrResource, RecordSetSoaResource, RecordSetSrvResource or RecordSetTxtResource");
         }
 
-        internal static bool IsRecordSetAResource(ResourceIdentifier id)
+        private static bool IsRecordSetAResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != RecordSetAResource.ResourceType)
@@ -71,14 +71,14 @@ namespace MgmtExpandResourceTypes
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsRecordSetAaaaResource(ResourceIdentifier id)
+        private static bool IsRecordSetAaaaResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != RecordSetAaaaResource.ResourceType)
@@ -86,14 +86,14 @@ namespace MgmtExpandResourceTypes
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsRecordSetCaaResource(ResourceIdentifier id)
+        private static bool IsRecordSetCaaResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != RecordSetCaaResource.ResourceType)
@@ -101,14 +101,14 @@ namespace MgmtExpandResourceTypes
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsRecordSetCNameResource(ResourceIdentifier id)
+        private static bool IsRecordSetCNameResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != RecordSetCNameResource.ResourceType)
@@ -116,14 +116,14 @@ namespace MgmtExpandResourceTypes
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsRecordSetMxResource(ResourceIdentifier id)
+        private static bool IsRecordSetMxResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != RecordSetMxResource.ResourceType)
@@ -131,14 +131,14 @@ namespace MgmtExpandResourceTypes
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsRecordSetNsResource(ResourceIdentifier id)
+        private static bool IsRecordSetNsResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != RecordSetNsResource.ResourceType)
@@ -146,14 +146,14 @@ namespace MgmtExpandResourceTypes
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsRecordSetPtrResource(ResourceIdentifier id)
+        private static bool IsRecordSetPtrResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != RecordSetPtrResource.ResourceType)
@@ -161,14 +161,14 @@ namespace MgmtExpandResourceTypes
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsRecordSetSoaResource(ResourceIdentifier id)
+        private static bool IsRecordSetSoaResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != RecordSetSoaResource.ResourceType)
@@ -176,14 +176,14 @@ namespace MgmtExpandResourceTypes
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsRecordSetSrvResource(ResourceIdentifier id)
+        private static bool IsRecordSetSrvResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != RecordSetSrvResource.ResourceType)
@@ -191,14 +191,14 @@ namespace MgmtExpandResourceTypes
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsRecordSetTxtResource(ResourceIdentifier id)
+        private static bool IsRecordSetTxtResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != RecordSetTxtResource.ResourceType)
@@ -206,7 +206,7 @@ namespace MgmtExpandResourceTypes
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }

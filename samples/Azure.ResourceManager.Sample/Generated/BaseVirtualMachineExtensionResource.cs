@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
@@ -29,11 +30,10 @@ namespace Azure.ResourceManager.Sample
             {
                 return new VirtualMachineScaleSetVirtualMachineExtensionResource(client, data);
             }
-            // TODO -- should we throw or return an UnknownResource?
-            throw new InvalidOperationException();
+            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: VirtualMachineExtensionResource or VirtualMachineScaleSetVirtualMachineExtensionResource");
         }
 
-        internal static bool IsVirtualMachineExtensionResource(ResourceIdentifier id)
+        private static bool IsVirtualMachineExtensionResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != VirtualMachineExtensionResource.ResourceType)
@@ -41,14 +41,14 @@ namespace Azure.ResourceManager.Sample
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsVirtualMachineScaleSetVirtualMachineExtensionResource(ResourceIdentifier id)
+        private static bool IsVirtualMachineScaleSetVirtualMachineExtensionResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != VirtualMachineScaleSetVirtualMachineExtensionResource.ResourceType)
@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }

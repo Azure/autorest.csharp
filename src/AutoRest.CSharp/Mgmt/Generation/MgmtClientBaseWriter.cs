@@ -464,7 +464,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected FormattableString GetResourceTypeExpression(ResourceTypeSegment resourceType)
+        protected FormattableString? GetBuiltinResourceTypeExpression(ResourceTypeSegment resourceType)
         {
             if (resourceType == ResourceTypeSegment.ResourceGroup)
                 return $"{typeof(ResourceGroupResource)}.ResourceType";
@@ -474,6 +474,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return $"{typeof(TenantResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.ManagementGroup)
                 return $"{typeof(ManagementGroupResource)}.ResourceType";
+
+            return null;
+        }
+
+        protected FormattableString GetResourceTypeExpression(ResourceTypeSegment resourceType)
+        {
+            var builtinExpression = GetBuiltinResourceTypeExpression(resourceType);
+            if (builtinExpression != null)
+                return builtinExpression;
 
             if (!resourceType.IsConstant)
                 throw new NotImplementedException($"ResourceType that contains variables are not supported yet");

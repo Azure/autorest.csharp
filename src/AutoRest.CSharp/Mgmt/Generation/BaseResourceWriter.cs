@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
@@ -46,9 +48,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                 }
 
-                // TODO -- we might need to create an internal UnknownResource class to handle this escape path for forward compatibility
-                _writer.LineRaw("// TODO -- should we throw or return an UnknownResource?");
-                _writer.Line($"throw new {typeof(InvalidOperationException)}();");
+                // throws when it matches nothing
+                var resourceNames = This.DerivedResources.Select(resource => (FormattableString)$"{resource.Type.Name}").ToList();
+                var resourceNameList = resourceNames.Join(", ", " or ");
+                _writer.Line($"throw new {typeof(InvalidOperationException)}($\"The resource identifier {{data.Id}} cannot be recognized as one of the following resource candidates: {resourceNameList}\");");
             }
             _writer.Line();
 
@@ -70,7 +73,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (option.ScopeResourceTypeConstraint != null)
                     {
                         _writer.LineRaw("// checking the resource scope");
-                        using (_writer.Scope($"if ({option.ScopeResourceTypeConstraint.ScopePathGetter}.ResourceType != {option.ScopeResourceTypeConstraint.ScopeResourceType.SerializedType:L})"))
+                        var scopeResourceType = option.ScopeResourceTypeConstraint.ScopeResourceType;
+                        using (_writer.Scope($"if ({option.ScopeResourceTypeConstraint.ScopePathGetter}.ResourceType != {GetBuiltinResourceTypeExpression(scopeResourceType) ?? $"{scopeResourceType.SerializedType:L}"})"))
                         {
                             _writer.LineRaw("return false;");
                         }

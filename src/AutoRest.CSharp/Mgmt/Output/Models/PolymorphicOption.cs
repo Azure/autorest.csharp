@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             Name: $"Is{Resource.Type.Name}",
             Summary: null,
             Description: null,
-            Modifiers: MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static,
+            Modifiers: MethodSignatureModifiers.Private | MethodSignatureModifiers.Static,
             ReturnType: typeof(bool),
             ReturnDescription: null,
             Parameters: new[] { IdParameter });

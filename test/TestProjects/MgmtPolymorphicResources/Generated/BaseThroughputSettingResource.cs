@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using MgmtPolymorphicResources.Models;
 
 namespace MgmtPolymorphicResources
@@ -29,11 +30,10 @@ namespace MgmtPolymorphicResources
             {
                 return new TableThroughputSettingResource(client, data);
             }
-            // TODO -- should we throw or return an UnknownResource?
-            throw new InvalidOperationException();
+            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: ThroughputSettingResource or TableThroughputSettingResource");
         }
 
-        internal static bool IsThroughputSettingResource(ResourceIdentifier id)
+        private static bool IsThroughputSettingResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != ThroughputSettingResource.ResourceType)
@@ -41,7 +41,7 @@ namespace MgmtPolymorphicResources
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }
@@ -53,7 +53,7 @@ namespace MgmtPolymorphicResources
             return true;
         }
 
-        internal static bool IsTableThroughputSettingResource(ResourceIdentifier id)
+        private static bool IsTableThroughputSettingResource(ResourceIdentifier id)
         {
             // checking the resource type
             if (id.ResourceType != TableThroughputSettingResource.ResourceType)
@@ -61,7 +61,7 @@ namespace MgmtPolymorphicResources
                 return false;
             }
             // checking the resource scope
-            if (id.Parent.Parent.ResourceType != "Microsoft.Resources/resourceGroups")
+            if (id.Parent.Parent.ResourceType != ResourceGroupResource.ResourceType)
             {
                 return false;
             }

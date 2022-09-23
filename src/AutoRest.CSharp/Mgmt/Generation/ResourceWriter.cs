@@ -3,17 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;

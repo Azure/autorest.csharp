@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<BaseVirtualMachineExtensionResource>> GetCoreAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.GetCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.Get");
             scope.Start();
             try
             {
@@ -126,7 +126,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<BaseVirtualMachineExtensionResource> GetCore(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.GetCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.Get");
             scope.Start();
             try
             {
@@ -166,7 +166,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.DeleteCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.Delete");
             scope.Start();
             try
             {
@@ -193,7 +193,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override ArmOperation DeleteCore(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.DeleteCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.Delete");
             scope.Start();
             try
             {
@@ -224,7 +224,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(extensionParameters, nameof(extensionParameters));
 
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.UpdateCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.Update");
             scope.Start();
             try
             {
@@ -276,7 +276,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(extensionParameters, nameof(extensionParameters));
 
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.UpdateCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.Update");
             scope.Start();
             try
             {
@@ -329,7 +329,7 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.AddTagCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.AddTag");
             scope.Start();
             try
             {
@@ -393,7 +393,7 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.AddTagCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.AddTag");
             scope.Start();
             try
             {
@@ -455,7 +455,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.SetTagsCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.SetTags");
             scope.Start();
             try
             {
@@ -513,7 +513,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.SetTagsCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.SetTags");
             scope.Start();
             try
             {
@@ -571,7 +571,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.RemoveTagCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.RemoveTag");
             scope.Start();
             try
             {
@@ -632,7 +632,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.RemoveTagCore");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionResource.RemoveTag");
             scope.Start();
             try
             {
