@@ -29,13 +29,7 @@ namespace Azure.Core
         private string? _lastKnownLocation;
         private string _nextRequestUri;
 
-        public static IOperation Create(
-            HttpPipeline pipeline,
-            RequestMethod requestMethod,
-            Uri startRequestUri,
-            Response response,
-            OperationFinalStateVia finalStateVia,
-            string? apiVersionOverride = null)
+        public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia, string? apiVersionOverride = null)
         {
             string? apiVersionStr = apiVersionOverride ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
@@ -48,14 +42,7 @@ namespace Azure.Core
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
-        public static IOperation<T> Create<T>(
-            IOperationSource<T> operationSource,
-            HttpPipeline pipeline,
-            RequestMethod requestMethod,
-            Uri startRequestUri,
-            Response response,
-            OperationFinalStateVia finalStateVia,
-            string? apiVersionOverride = null)
+        public static IOperation<T> Create<T>(IOperationSource<T> operationSource, HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia, string? apiVersionOverride = null)
         {
             var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia, apiVersionOverride);
             return new OperationToOperationOfT<T>(operationSource, operation);
@@ -212,13 +199,25 @@ namespace Azure.Core
         /// </summary>
         private string? GetFinalUri(Response response)
         {
-            // Set final uri as null if the response header doesn't contain "Operation-Location" or "Azure-AsyncOperation".
+            // Set final uri as null if the response for initial request doesn't contain header "Operation-Location" or "Azure-AsyncOperation".
             if (_headerSource is not (HeaderSource.OperationLocation or HeaderSource.AzureAsyncOperation))
             {
                 return null;
             }
 
-            if (_finalStateVia == OperationFinalStateVia.AzureAsyncOperation && _requestMethod == RequestMethod.Post)
+            // Handle final-state-via options: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation-options
+            switch (_finalStateVia)
+            {
+                case OperationFinalStateVia.Location when _originalResponseHasLocation:
+                    return _lastKnownLocation;
+                case OperationFinalStateVia.OperationLocation or OperationFinalStateVia.AzureAsyncOperation:
+                    return null;
+                case OperationFinalStateVia.OriginalUri:
+                    return _startRequestUri.AbsoluteUri;
+            }
+
+            // Set final uri as null if initial request is a delete method.
+            if (_requestMethod == RequestMethod.Delete)
             {
                 return null;
             }
@@ -248,14 +247,8 @@ namespace Azure.Core
                 return _startRequestUri.AbsoluteUri;
             }
 
-            // If response for initial request contains header "Location" and FinalStateVia is configured to OriginalUri, return initial request Uri
-            if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
-            {
-                return _startRequestUri.AbsoluteUri;
-            }
-
             // If response for initial request contains header "Location", return last known location
-            if (_originalResponseHasLocation && _requestMethod == RequestMethod.Post)
+            if (_originalResponseHasLocation)
             {
                 return _lastKnownLocation;
             }

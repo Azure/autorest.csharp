@@ -8,6 +8,7 @@ using System.Linq;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Microsoft.CodeAnalysis;
 using YamlDotNet.Serialization;
 
 #pragma warning disable SA1649
@@ -30,7 +31,8 @@ namespace AutoRest.CSharp.Input
                     "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
                     "location" => OperationFinalStateVia.Location,
                     "original-uri" => OperationFinalStateVia.OriginalUri,
-                    null => OperationFinalStateVia.Location,
+                    "operation-location" => OperationFinalStateVia.OperationLocation,
+                    null => OperationFinalStateVia.NotSpecified,
                     _ => throw new ArgumentException($"Unknown final-state-via value: {finalStateVia}"),
                 };
             }

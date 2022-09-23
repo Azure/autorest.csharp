@@ -7,8 +7,10 @@ namespace Azure.Core
 {
     internal enum OperationFinalStateVia
     {
+        NotSpecified,
         AzureAsyncOperation,
         Location,
-        OriginalUri
+        OriginalUri,
+        OperationLocation
     }
 }
