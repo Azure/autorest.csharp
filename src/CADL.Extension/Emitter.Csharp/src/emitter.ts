@@ -431,6 +431,12 @@ function loadOperation(
                 cadlParameters.bodyType
             );
             if (effectiveBodyType.kind === "Model") {
+                /* handle anonymous body model. */
+                if (effectiveBodyType.name === "") {
+                    let name = `${op.name}Properties`;
+                    name = name[0].toUpperCase() + name.slice(1);
+                    effectiveBodyType.name = name;
+                }
                 parameters.push(loadBodyParameter(program, effectiveBodyType));
             }
         }
@@ -533,8 +539,8 @@ function loadOperation(
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: body.name,
-            NameInRequest: body.name,
+            Name: body.name !== "" ? body.name : "body",
+            NameInRequest: body.name !== "" ? body.name : "body",
             Description: getDoc(program, body),
             Type: inputType,
             Location: requestLocation,

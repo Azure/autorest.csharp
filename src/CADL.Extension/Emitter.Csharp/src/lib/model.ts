@@ -10,6 +10,7 @@ import {
     getFriendlyName,
     getIntrinsicModelName,
     getKnownValues,
+    getServiceNamespace,
     getVisibility,
     isIntrinsic,
     Model,
@@ -300,9 +301,10 @@ export function getInputType(
                     `Extensible enum type '${e.name}' has no values defined.`
                 );
             }
+            
             extensibleEnum = {
                 Name: m.name,
-                Namespace: getFullNamespaceString(e.namespace),
+                Namespace: getFullNamespaceString(getNamespaceForModelAndEnum(e)),
                 Accessibility: undefined, //TODO: need to add accessibility
                 Description: getDoc(program, m),
                 EnumValueType: innerEnum.EnumValueType,
@@ -347,7 +349,7 @@ export function getInputType(
 
             enumType = {
                 Name: e.name,
-                Namespace: getFullNamespaceString(e.namespace),
+                Namespace: getFullNamespaceString(getNamespaceForModelAndEnum(e)),
                 Accessibility: undefined, //TODO: need to add accessibility
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
@@ -394,7 +396,7 @@ export function getInputType(
 
             model = {
                 Name: name,
-                Namespace: getFullNamespaceString(m.namespace),
+                Namespace: getFullNamespaceString(getNamespaceForModelAndEnum(m)),
                 Description: getDoc(program, m),
                 IsNullable: false,
                 DiscriminatorPropertyName: getDiscriminator(program, m)
@@ -488,6 +490,17 @@ export function getInputType(
         return getInputModelForModel(m);
     }
 
+    function getNamespaceForModelAndEnum(type: Enum | Model): Namespace | undefined {
+        let namespace = type.namespace;
+        if (!namespace || !namespace.name) {
+            namespace = program.checker.getGlobalNamespaceType();
+            if (!namespace || !namespace.name) {
+                namespace = getServiceNamespace(program);
+            }
+        }
+
+        return namespace;
+    }
     function getFullNamespaceString(namespace: Namespace | undefined): string {
         if (!namespace || !namespace.name) {
             return "";
