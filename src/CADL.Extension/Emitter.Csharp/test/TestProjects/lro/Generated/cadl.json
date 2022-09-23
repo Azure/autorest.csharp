@@ -128,7 +128,7 @@
         },
         "Value": "application/merge-patch+json"
        },
-       "IsRequired": false,
+       "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": true,
@@ -242,7 +242,7 @@
      "RequestMediaTypes": [
       "application/merge-patch+json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],

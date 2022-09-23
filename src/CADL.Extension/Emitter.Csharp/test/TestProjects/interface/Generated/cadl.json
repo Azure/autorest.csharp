@@ -172,7 +172,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/dogs",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -277,7 +277,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -344,7 +344,7 @@
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/cats",
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -449,7 +449,7 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],
