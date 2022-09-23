@@ -1,8 +1,7 @@
 #Requires -Version 7.0
+param($filter)
 
 $ErrorActionPreference = 'Stop'
-
-param($filter)
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 
 $cadlProjectPath = Join-Path $repoRoot "src/CADL.Extension/Emitter.Csharp"
