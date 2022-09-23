@@ -9,6 +9,7 @@ using Azure;
 using NUnit.Framework;
 using property_types;
 using Models.Property.Types;
+using System.Collections.Generic;
 
 namespace CadlRanchProjects.Tests
 {
@@ -195,6 +196,22 @@ namespace CadlRanchProjects.Tests
         public Task Models_Property_Types_CollectionsModel_put() => Test(async (host) =>
         {
             Response response = await new CollectionsModelClient(host, null).PutAsync(new CollectionsModelProperty(new[] { new InnerModel("hello"), new InnerModel("world") }).ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_DictionaryString_get() => Test(async (host) =>
+        {
+            Response response = await new DictionaryStringClient(host, null).GetAsync();
+            var result = DictionaryStringProperty.FromResponse(response);
+            Assert.AreEqual("hello", result.Property["k1"]);
+            Assert.AreEqual("world", result.Property["k2"]);
+        }, new[] { TestServerType.CadlRanch });
+
+        [Test]
+        public Task Models_Property_Types_DictionaryString_put() => Test(async (host) =>
+        {
+            Response response = await new DictionaryStringClient(host, null).PutAsync(new DictionaryStringProperty(new Dictionary<string, string> { ["k1"] = "hello", ["k2"] = "world" }).ToRequestContent());
             Assert.AreEqual(204, response.Status);
         }, new[] { TestServerType.CadlRanch });
     }
