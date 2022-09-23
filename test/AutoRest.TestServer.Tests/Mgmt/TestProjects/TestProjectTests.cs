@@ -24,6 +24,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         private string _projectName;
         private string? _subFolder;
+        protected HashSet<Type> TagResourceExceptions { get; } = new HashSet<Type>();
 
         public TestProjectTests() : this("")
         {
@@ -191,7 +192,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     continue;
                 }
                 VerifyMethodReturnType(resource, resource, "Get");
-                if (typeof(TrackedResourceData).IsAssignableFrom(resourceData))
+                if (IsTaggable(resourceData, resource))
                 {
                     VerifyMethodReturnType(resource, resource, "AddTag");
                     VerifyMethodReturnType(resource, resource, "SetTags");
@@ -393,7 +394,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (resourceData == null || !IsInheritFromTrackedResource(resourceData))
+                if (resourceData == null || !IsTaggable(resourceData, type))
                 {
                     continue;
                 }
@@ -406,6 +407,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 TypeAsserts.HasParameter(method, "value", typeof(string));
                 TypeAsserts.HasParameter(method, "cancellationToken", typeof(CancellationToken));
             }
+        }
+
+        private bool IsTaggable(Type resourceData, Type resource)
+        {
+            return !TagResourceExceptions.Contains(resource) && IsInheritFromTrackedResource(resourceData);
         }
 
         [Test]
@@ -424,7 +430,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (resourceData == null || !IsInheritFromTrackedResource(resourceData))
+                if (resourceData == null || !IsTaggable(resourceData, type))
                 {
                     continue;
                 }
@@ -445,7 +451,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (resourceData == null || !IsInheritFromTrackedResource(resourceData))
+                if (resourceData == null || !IsTaggable(resourceData, type))
                 {
                     continue;
                 }

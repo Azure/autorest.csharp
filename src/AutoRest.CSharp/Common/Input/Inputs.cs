@@ -9,12 +9,25 @@ using Azure.Core;
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputNamespace(string Name, string Description, IReadOnlyList<string> ApiVersions, IReadOnlyList<InputModelType> Models, IReadOnlyList<InputClient> Clients, InputAuth Auth)
+    internal record InputNamespace(string Name, string Description, IReadOnlyList<string> ApiVersions, IReadOnlyList<InputEnumType> Enums, IReadOnlyList<InputModelType> Models, IReadOnlyList<InputClient> Clients, InputAuth Auth)
     {
-        public InputNamespace() : this(Name: string.Empty, Description: string.Empty, ApiVersions: new List<string>(), Models: new List<InputModelType>(), Clients: new List<InputClient>(), Auth: new InputAuth()) {}
+        public InputNamespace() : this(Name: string.Empty, Description: string.Empty, ApiVersions: Array.Empty<string>(), Enums: Array.Empty<InputEnumType>(), Models: Array.Empty<InputModelType>(), Clients: Array.Empty<InputClient>(), Auth: new InputAuth()) {}
     }
 
-    internal record InputAuth();
+    internal record InputAuth(InputApiKeyAuth? ApiKey, InputOAuth2Auth? OAuth2)
+    {
+        public InputAuth() : this(null, null) {}
+    }
+
+    internal record InputApiKeyAuth(string Name)
+    {
+        public InputApiKeyAuth() : this(string.Empty) { }
+    }
+
+    internal record InputOAuth2Auth(IReadOnlyCollection<string> Scopes)
+    {
+        public InputOAuth2Auth() : this(Array.Empty<string>()) {}
+    }
 
     internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations)
     {
@@ -26,7 +39,7 @@ namespace AutoRest.CSharp.Common.Input
             init => _key = value;
         }
 
-        public InputClient() : this(string.Empty, string.Empty, new List<InputOperation>()) { }
+        public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>()) { }
     }
 
     internal record InputOperation(
@@ -44,24 +57,26 @@ namespace AutoRest.CSharp.Common.Input
         IReadOnlyList<string>? RequestMediaTypes,
         bool BufferResponse,
         OperationLongRunning? LongRunning,
-        OperationPaging? Paging)
+        OperationPaging? Paging,
+        bool GenerateConvenienceMethod)
     {
         public InputOperation() : this(
             Name: string.Empty,
             Summary: null,
             Description: string.Empty,
             Accessibility: null,
-            Parameters: new List<InputParameter>(),
-            Responses: new List<OperationResponse>(),
+            Parameters: Array.Empty<InputParameter>(),
+            Responses: Array.Empty<OperationResponse>(),
             HttpMethod: RequestMethod.Get,
             RequestBodyMediaType: BodyMediaType.None,
             Uri: string.Empty,
             Path: string.Empty,
             ExternalDocsUrl: null,
-            RequestMediaTypes: new List<string>(),
+            RequestMediaTypes: Array.Empty<string>(),
             BufferResponse: false,
             LongRunning: null,
-            Paging: null)
+            Paging: null,
+            GenerateConvenienceMethod: false)
         { }
     }
 
@@ -109,7 +124,7 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<HttpResponseHeader> Headers)
     {
-        public OperationResponse() : this(StatusCodes: new List<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: new List<HttpResponseHeader>()) { }
+        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<HttpResponseHeader>()) { }
     }
 
     internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse);
@@ -125,9 +140,11 @@ namespace AutoRest.CSharp.Common.Input
     internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable = false) : InputType(Kind.ToString(), IsNullable)
     {
         public static InputPrimitiveType AzureLocation { get; }      = new(InputTypeKind.AzureLocation);
+        public static InputPrimitiveType BinaryData { get; }         = new(InputTypeKind.BinaryData);
         public static InputPrimitiveType Boolean { get; }            = new(InputTypeKind.Boolean);
         public static InputPrimitiveType Bytes { get; }              = new(InputTypeKind.Bytes);
         public static InputPrimitiveType BytesBase64Url { get; }     = new(InputTypeKind.BytesBase64Url);
+        public static InputPrimitiveType ContentType { get; }        = new(InputTypeKind.ContentType);
         public static InputPrimitiveType Date { get; }               = new(InputTypeKind.Date);
         public static InputPrimitiveType DateTime { get; }           = new(InputTypeKind.DateTime);
         public static InputPrimitiveType DateTimeISO8601 { get; }    = new(InputTypeKind.DateTimeISO8601);
@@ -143,6 +160,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType Int32 { get; }              = new(InputTypeKind.Int32);
         public static InputPrimitiveType Int64 { get; }              = new(InputTypeKind.Int64);
         public static InputPrimitiveType Object { get; }             = new(InputTypeKind.Object);
+        public static InputPrimitiveType RequestMethod { get; }      = new(InputTypeKind.RequestMethod);
         public static InputPrimitiveType ResourceIdentifier { get; } = new(InputTypeKind.ResourceIdentifier);
         public static InputPrimitiveType ResourceType { get; }       = new(InputTypeKind.ResourceType);
         public static InputPrimitiveType Stream { get; }             = new(InputTypeKind.Stream);
@@ -153,42 +171,13 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsNumber => Kind is InputTypeKind.Int32 or InputTypeKind.Int64 or InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128;
     }
 
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue) : InputType(Name)
-    {
-        public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
-
-        public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
-
-        public IReadOnlyList<InputModelType> GetAllDerivedModels()
-        {
-            var list = new List<InputModelType>(DerivedModels);
-            for (var i = 0; i < list.Count; i++)
-            {
-                list.AddRange(list[i].DerivedModels);
-            }
-
-            return list;
-        }
-
-        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
-        {
-            while (model != null)
-            {
-                yield return model;
-                model = model.BaseModel;
-            }
-        }
-    }
-
-    internal record InputEnumType(string Name, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtensible, bool IsNullable = false) : InputType(Name, IsNullable) { }
-
     internal record InputListType(string Name, InputType ElementType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
     internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator) { }
 
-    internal record InputConstant(object? Value, InputType Type);
+    internal record InputConstant(object Value, InputType Type);
 
     internal record InputEnumTypeValue(string Name, string Value, string? Description);
 
@@ -216,8 +205,10 @@ namespace AutoRest.CSharp.Common.Input
     {
         AzureLocation,
         Boolean,
+        BinaryData,
         Bytes,
         BytesBase64Url,
+        ContentType,
         Date,
         DateTime,
         DateTimeISO8601,
@@ -233,6 +224,7 @@ namespace AutoRest.CSharp.Common.Input
         Int32,
         Int64,
         Object,
+        RequestMethod,
         ResourceIdentifier,
         ResourceType,
         Stream,

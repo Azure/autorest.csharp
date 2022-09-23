@@ -1,31 +1,31 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
-    internal class JsonPropertySerialization
+    internal class JsonPropertySerialization : PropertySerialization
     {
-        public JsonPropertySerialization(string name, bool isRequired, bool isReadOnly, ObjectTypeProperty? property, JsonSerialization valueSerialization)
+        public JsonPropertySerialization(string parameterName, string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, JsonSerialization valueSerialization, bool isRequired, bool isReadOnly, bool optionalViaNullability)
+            : base(propertyName, serializedName, propertyType, valueType, isRequired, isReadOnly)
         {
-            Name = name;
-            IsRequired = isRequired;
-            IsReadOnly = isReadOnly;
-            Property = property;
+            ParameterName = parameterName;
+            OptionalViaNullability = optionalViaNullability;
             ValueSerialization = valueSerialization;
-
-            if (valueSerialization is JsonObjectSerialization && property != null)
-            {
-                throw new ArgumentException("Property shouldn't be set when value serialization is an object", nameof(property));
-            }
         }
 
-        public string Name { get; }
-        public bool IsRequired { get; }
-        public bool IsReadOnly { get; }
-        public ObjectTypeProperty? Property { get; }
-        public JsonSerialization ValueSerialization { get; }
+        public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)
+            : base(serializedName, serializedName, typeof(object), null, false, false)
+        {
+            ParameterName = string.Empty;
+            PropertySerializations = propertySerializations;
+        }
+
+        public string ParameterName { get;  }
+        public bool OptionalViaNullability { get; }
+        public JsonSerialization? ValueSerialization { get; }
+        public JsonPropertySerialization[]? PropertySerializations { get; }
     }
 }

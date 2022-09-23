@@ -116,7 +116,14 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var candidate = resourceTypeSegments[index];
                     var value = ResourceType[candidate.index];
-                    result.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
+                    try
+                    {
+                        result.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        throw new InvalidOperationException($"Expected enum type for the parameter '{segment.ReferenceName}' in method '{method.Operation.Path}'");
+                    }
                 }
             }
             return result;
@@ -206,14 +213,16 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var an = clientPrefix.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
-            var parent = ResourceName.Equals("Tenant", StringComparison.Ordinal) ? null : Resource.Parent().First();
+            var parents = Resource.Parent();
+            var parentTypes = parents.Select(parent => parent is MgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();
+            var parentDescription = CreateParentDescription(parentTypes);
 
             lines.Add($"A class representing a collection of <see cref=\"{Resource.Type}\" /> and their operations.");
-            if (parent is not null)
+            // only append the following information when the parent of me is not myself, aka TenantResource
+            if (parentDescription != null && !parents.Contains(Resource))
             {
-                var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
-                lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the collection will belong to the same instance of <see cref=\"{parentType}\" />.");
-                lines.Add($"To get {an} <see cref=\"{Type}\" /> instance call the Get{ResourceName.LastWordToPlural()} method from an instance of <see cref=\"{parentType}\" />.");
+                lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the collection will belong to the same instance of {parentDescription}.");
+                lines.Add($"To get {an} <see cref=\"{Type}\" /> instance call the Get{ResourceName.LastWordToPlural()} method from an instance of {parentDescription}.");
             }
 
             return FormattableStringHelpers.Join(lines, "\r\n");

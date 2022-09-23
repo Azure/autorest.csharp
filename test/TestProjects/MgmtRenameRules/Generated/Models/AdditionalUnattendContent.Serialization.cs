@@ -30,15 +30,10 @@ namespace MgmtRenameRules.Models
                 writer.WritePropertyName("settingName");
                 writer.WriteStringValue(SettingName.Value.ToSerialString());
             }
-            if (Optional.IsDefined(ContentType))
+            if (Optional.IsDefined(BackupFrequency))
             {
-                writer.WritePropertyName("contentType");
-                writer.WriteStringValue(ContentType.Value.ToString());
-            }
-            if (Optional.IsDefined(Content))
-            {
-                writer.WritePropertyName("content");
-                writer.WriteStringValue(Content);
+                writer.WritePropertyName("backupFrequency");
+                writer.WriteNumberValue(BackupFrequency.Value);
             }
             writer.WriteEndObject();
         }
@@ -48,8 +43,7 @@ namespace MgmtRenameRules.Models
             Optional<PassName> passName = default;
             Optional<ComponentName> componentName = default;
             Optional<SettingName> settingName = default;
-            Optional<ContentType> contentType = default;
-            Optional<string> content = default;
+            Optional<int> backupFrequency = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"))
@@ -82,23 +76,18 @@ namespace MgmtRenameRules.Models
                     settingName = property.Value.GetString().ToSettingName();
                     continue;
                 }
-                if (property.NameEquals("contentType"))
+                if (property.NameEquals("backupFrequency"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    contentType = new ContentType(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("content"))
-                {
-                    content = property.Value.GetString();
+                    backupFrequency = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), Optional.ToNullable(contentType), content.Value);
+            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), Optional.ToNullable(backupFrequency));
         }
     }
 }

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 
@@ -10,29 +11,45 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class DpgOutputLibrary : OutputLibrary
     {
-        private readonly TypeFactory _typeFactory;
-        public IReadOnlyList<ModelTypeProvider> Models { get; }
+        private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
+        private readonly IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
+        private readonly bool _isCadlInput;
+
+        public TypeFactory TypeFactory { get; }
+        public IEnumerable<EnumType> Enums => _enums.Values;
+        public IEnumerable<ModelTypeProvider> Models => _models.Values;
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
 
-        public DpgOutputLibrary(Func<TypeFactory, IReadOnlyList<ModelTypeProvider>> modelsFactory, Func<TypeFactory, IReadOnlyList<LowLevelClient>> restClientsFactory, ClientOptionsTypeProvider clientOptions)
+        public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
         {
-            _typeFactory = new TypeFactory(this);
-            Models = modelsFactory(_typeFactory);
-            RestClients = restClientsFactory(_typeFactory);
+            TypeFactory = new TypeFactory(this);
+            _enums = enums;
+            _models = models;
+            _isCadlInput = isCadlInput;
+            RestClients = restClients;
             ClientOptions = clientOptions;
         }
 
-        public override CSharpType FindTypeForSchema(Schema schema)
-            => schema.Type switch
+        public override CSharpType ResolveEnum(InputEnumType enumType)
+        {
+            if (!_isCadlInput)
             {
-                AllSchemaTypes.Choice => _typeFactory.CreateType(((ChoiceSchema)schema).ChoiceType, false),
-                AllSchemaTypes.SealedChoice => _typeFactory.CreateType(((SealedChoiceSchema)schema).ChoiceType, false),
-                // This is technically invalid behavior, we are hitting this in generating responses we throw away.
-                // https://github.com/Azure/autorest.csharp/issues/1108
-                // throw new InvalidOperationException($"FindTypeForSchema of invalid schema {schema.Name} in LowLevelOutputLibrary");
-                _ => new CSharpType(typeof(object))
-            };
+                return TypeFactory.CreateType(enumType.EnumValueType);
+            }
+
+            if (_enums.TryGetValue(enumType, out var typeProvider))
+            {
+                return typeProvider.Type;
+            }
+
+            throw new InvalidOperationException($"No {nameof(EnumType)} has been created for `{enumType.Name}` {nameof(InputEnumType)}.");
+        }
+
+        public override CSharpType ResolveModel(InputModelType model)
+            => _models.TryGetValue(model, out var modelFactory) ? modelFactory.Type : new CSharpType(typeof(object), model.IsNullable);
+
+        public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 
         public override CSharpType? FindTypeByName(string originalName) => null;
     }

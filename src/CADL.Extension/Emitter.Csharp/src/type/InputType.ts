@@ -1,38 +1,43 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { InputTypeKind } from "./InputTypeKind";
-import { InputTypeSerializationFormat } from "./InputTypeSerializationFormat.js";
-import { InputTypeValue } from "./InputTypeValue";
+import { InputEnumTypeValue } from "./InputEnumTypeValue.js";
+import { InputModelProperty } from "./InputModelProperty.js";
+import { InputTypeKind } from "./InputTypeKind.js";
 
-export interface IInputType {
+export interface InputType {
     Name: string;
-    Kind: string;
     IsNullable: boolean;
-    SerializationFormat: InputTypeSerializationFormat;
-    ValuesType?: InputType | undefined;
-    AllowedValues?: InputTypeValue[] | undefined;
 }
-export class InputType implements IInputType {
-    public constructor(
-        name: string,
-        kind: InputTypeKind,
-        isNullable: boolean,
-        format: InputTypeSerializationFormat = InputTypeSerializationFormat.Default,
-        valuesType: InputType | undefined = undefined,
-        allowValues: InputTypeValue[] | undefined = undefined
-    ) {
-        this.Name = name;
-        this.Kind = kind;
-        this.IsNullable = isNullable;
-        this.SerializationFormat = format;
-        this.ValuesType = valuesType;
-        this.AllowedValues = allowValues;
-    }
-    Name: string;
+
+export interface InputPrimitiveType extends InputType {
     Kind: InputTypeKind;
-    IsNullable: boolean;
-    SerializationFormat: InputTypeSerializationFormat;
-    ValuesType?: InputType | undefined;
-    AllowedValues?: InputTypeValue[] | undefined;
+}
+
+export interface InputModelType extends InputType {
+    Namespace?: string;
+    Accessibility?: string;
+    Description: string;
+    Properties: InputModelProperty[];
+    BaseModel?: InputModelType;
+    DiscriminatorPropertyName?: string;
+    DiscriminatorValue?: string;
+}
+
+export interface InputEnumType extends InputType {
+    Namespace?: string;
+    Accessibility?: string;
+    Description: string;
+    EnumValueType: string;
+    AllowedValues: InputEnumTypeValue[];
+    IsExtensible: boolean;
+}
+
+export interface InputListType extends InputType {
+    ElementType: InputType;
+}
+
+export interface InputDictionaryType extends InputType {
+    KeyType: InputType;
+    ValueType: InputType;
 }

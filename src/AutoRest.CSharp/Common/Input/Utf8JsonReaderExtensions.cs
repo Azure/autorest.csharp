@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("$id should be the first defined property");
             }
 
-            isFirstProperty = true;
+            isFirstProperty = false;
 
             reader.Read();
             value = reader.GetString() ?? throw new JsonException();
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             reader.Read();
-            value = CadlInputTypeConverter.CreatePrimitiveType(ref reader) ?? throw new JsonException();
+            value = CadlInputTypeConverter.CreatePrimitiveType(reader.GetString(), false) ?? throw new JsonException();
             reader.Read();
             return true;
         }
@@ -138,10 +138,59 @@ namespace AutoRest.CSharp.Common.Input
             reader.Read();
             if (reader.TokenType != JsonTokenType.EndObject)
             {
-                throw new JsonException();
+                throw new JsonException("$ref should be the only property");
             }
 
             return result;
+        }
+
+        public static void SkipProperty(this ref Utf8JsonReader reader)
+        {
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                throw new JsonException();
+            }
+
+            reader.Read();
+            reader.SkipValue();
+        }
+
+        private static void SkipValue(this ref Utf8JsonReader reader)
+        {
+            switch (reader.TokenType)
+            {
+                case JsonTokenType.StartObject:
+                    reader.Read();
+                    while (reader.TokenType != JsonTokenType.EndObject)
+                    {
+                        reader.SkipProperty();
+                    }
+                    reader.Read();
+                    break;
+                case JsonTokenType.StartArray:
+                    reader.Read();
+                    while (reader.TokenType != JsonTokenType.EndArray)
+                    {
+                        reader.SkipValue();
+                    }
+                    reader.Read();
+                    break;
+                case JsonTokenType.String:
+                case JsonTokenType.Number:
+                case JsonTokenType.True:
+                case JsonTokenType.False:
+                case JsonTokenType.Null:
+                    reader.Read();
+                    break;
+                case JsonTokenType.Comment:
+                case JsonTokenType.None:
+                case JsonTokenType.EndObject:
+                case JsonTokenType.EndArray:
+                case JsonTokenType.PropertyName:
+                    throw new InvalidOperationException("Unexpected token type");
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

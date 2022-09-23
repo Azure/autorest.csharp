@@ -33,6 +33,8 @@ namespace AutoRest.CSharp.Common.Input
 
             string? ns = null;
             string? accessibility = null;
+            string? description = null;
+            InputModelTypeUsage? usage = null;
             InputModelType? baseModel = null;
             InputModelType? model = null;
             while (reader.TokenType != JsonTokenType.EndObject)
@@ -41,6 +43,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputType.Name), ref name)
                     || reader.TryReadString(nameof(InputModelType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputModelType.Accessibility), ref accessibility)
+                    || reader.TryReadString(nameof(InputModelType.Description), ref description)
+                    || reader.TryReadWithConverter(nameof(InputModelType.Usage), options, ref usage)
                     || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
 
                 if (isKnownProperty)
@@ -50,7 +54,7 @@ namespace AutoRest.CSharp.Common.Input
 
                 if (reader.GetString() == nameof(InputModelType.Properties))
                 {
-                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, baseModel, properties, resolver);
+                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, description, usage, baseModel, properties, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
@@ -60,18 +64,17 @@ namespace AutoRest.CSharp.Common.Input
                 }
                 else
                 {
-                    JsonSerializer.Deserialize<object>(ref reader, options);
-                    reader.Read();
+                    reader.SkipProperty();
                 }
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, baseModel, properties, resolver);
+            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, description, usage, baseModel, properties, resolver);
         }
 
-        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, InputModelType? baseModel, List<InputModelProperty> properties, ReferenceResolver resolver)
+        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? description, InputModelTypeUsage? usage, InputModelType? baseModel, List<InputModelProperty> properties, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
-            var model = new InputModelType(name, ns, accessibility, properties, baseModel, new List<InputModelType>(), null);
+            var model = new InputModelType(name, ns, accessibility, description, usage ?? InputModelTypeUsage.RoundTrip, properties, baseModel, new List<InputModelType>(), null);
             if (id != null)
             {
                 resolver.AddReference(id, model);

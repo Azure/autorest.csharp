@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using MgmtRenameRules;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
     public class MgmtRenameRulesTests : TestProjectTests
     {
-        public MgmtRenameRulesTests() : base("MgmtRenameRules")
-        { }
+        public MgmtRenameRulesTests()
+            : base("MgmtRenameRules")
+        {
+            TagResourceExceptions.Add(typeof(VirtualMachineScaleSetRollingUpgradeResource));
+        }
 
         [TestCase(true, "AutomaticOSUpgradePolicy")]
         [TestCase(false, "AutomaticOsUpgradePolicy")]

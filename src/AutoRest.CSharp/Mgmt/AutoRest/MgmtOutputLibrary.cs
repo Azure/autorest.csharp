@@ -129,6 +129,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
+        public ICollection<LongRunningInterimOperation> InterimOperations { get; } = new List<LongRunningInterimOperation>();
+
         private IEnumerable<Schema> UpdateBodyParameters()
         {
             Dictionary<Schema, int> usageCounts = new Dictionary<Schema, int>();
@@ -352,7 +354,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
                         continue;
-                    restClientMethods.Add(operation, restClientMethod);
+                    if (!restClientMethods.TryAdd(operation, restClientMethod))
+                    {
+                        throw new Exception($"An rest method '{operation.OperationId}' has already been added");
+                    }
                 }
             }
 
@@ -385,20 +390,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 new MgmtExtensionsWrapper(new[] { TenantExtensions, SubscriptionExtensions, ResourceGroupExtensions, ManagementGroupExtensions, ArmResourceExtensions, ArmClientExtensions });
             return _extensionsWrapper;
         }
-
-        private MgmtExtensionClient? _tenantExtensionClient;
-        private MgmtExtensionClient? _managementGroupExtensionClient;
-        private MgmtExtensionClient? _subscriptionExtensionClient;
-        private MgmtExtensionClient? _resourceGroupExtensionClient;
-        private MgmtExtensionClient? _armResourceExtensionClient;
-        public MgmtExtensionClient SubscriptionExtensionsClient => _subscriptionExtensionClient ??= EnsureExtensionsClient(SubscriptionExtensions);
-        public MgmtExtensionClient ResourceGroupExtensionsClient => _resourceGroupExtensionClient ??= EnsureExtensionsClient(ResourceGroupExtensions);
-        public MgmtExtensionClient TenantExtensionsClient => _tenantExtensionClient ??= EnsureExtensionsClient(TenantExtensions);
-        public MgmtExtensionClient ManagementGroupExtensionsClient => _managementGroupExtensionClient ??= EnsureExtensionsClient(ManagementGroupExtensions);
-        public MgmtExtensionClient ArmResourceExtensionsClient => _armResourceExtensionClient ??= EnsureExtensionsClient(ArmResourceExtensions);
-
-        private MgmtExtensionClient EnsureExtensionsClient(MgmtExtensions publicExtension) =>
-            new MgmtExtensionClient(publicExtension);
 
         private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
         {
@@ -763,6 +754,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             return rawRequestPathToResourceData;
         }
+
+        public override CSharpType ResolveEnum(InputEnumType enumType) => throw new NotImplementedException($"{nameof(ResolveEnum)} is not implemented for MPG yet.");
+        public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for MPG yet.");
 
         public override CSharpType FindTypeForSchema(Schema schema)
         {

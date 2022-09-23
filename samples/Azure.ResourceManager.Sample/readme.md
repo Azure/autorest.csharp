@@ -37,7 +37,18 @@ rename-mapping:
   VirtualMachineScaleSetExtension.properties.type: ExtensionType # the properties inside is required because this is a flattened property
   HyperVGenerationType: HyperVGeneration
   HyperVGenerationTypes: HyperVGeneration
+  ImageListResult.value: Images
 
 mgmt-debug:
   show-serialized-names: true
+
+update-required-copy:
+  VirtualMachineExtension: Publisher
+
+directive:
+  - from: sample.json
+    where: $.paths
+    transform: >
+      $['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus'].get['x-ms-pageable']['itemName'] = 'VmssSkus';
+
 ```

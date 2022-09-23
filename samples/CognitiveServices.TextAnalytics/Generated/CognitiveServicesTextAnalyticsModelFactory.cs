@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -76,9 +77,19 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DocumentError. </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="error"/> is null. </exception>
         /// <returns> A new <see cref="Models.DocumentError"/> instance for mocking. </returns>
         public static DocumentError DocumentError(string id = null, TextAnalyticsError error = null)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (error == null)
+            {
+                throw new ArgumentNullException(nameof(error));
+            }
+
             return new DocumentError(id, error);
         }
 
@@ -169,9 +180,15 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="offset"> Start position (in Unicode characters) for the entity match text. </param>
         /// <param name="length"> Length (in Unicode characters) for the entity match text. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         /// <returns> A new <see cref="Models.Match"/> instance for mocking. </returns>
         public static Match Match(double confidenceScore = default, string text = null, int offset = default, int length = default)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
             return new Match(confidenceScore, text, offset, length);
         }
 
@@ -234,9 +251,19 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
         /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
         /// <param name="confidenceScore"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="iso6391Name"/> is null. </exception>
         /// <returns> A new <see cref="Models.DetectedLanguage"/> instance for mocking. </returns>
         public static DetectedLanguage DetectedLanguage(string name = null, string iso6391Name = null, double confidenceScore = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (iso6391Name == null)
+            {
+                throw new ArgumentNullException(nameof(iso6391Name));
+            }
+
             return new DetectedLanguage(name, iso6391Name, confidenceScore);
         }
 
@@ -286,9 +313,19 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
         /// <param name="offset"> The sentence offset from the start of the document. </param>
         /// <param name="length"> The length of the sentence by Unicode standard. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="confidenceScores"/> is null. </exception>
         /// <returns> A new <see cref="Models.SentenceSentiment"/> instance for mocking. </returns>
         public static SentenceSentiment SentenceSentiment(string text = null, SentenceSentimentValue sentiment = default, SentimentConfidenceScorePerLabel confidenceScores = null, int offset = default, int length = default)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (confidenceScores == null)
+            {
+                throw new ArgumentNullException(nameof(confidenceScores));
+            }
+
             return new SentenceSentiment(text, sentiment, confidenceScores, offset, length);
         }
     }

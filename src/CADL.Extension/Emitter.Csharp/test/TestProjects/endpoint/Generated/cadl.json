@@ -4,6 +4,8 @@
  "ApiVersions": [
   "2015-06-18"
  ],
+ "Enums": [],
+ "Models": [],
  "Clients": [
   {
    "$id": "2",
@@ -22,8 +24,7 @@
         "$id": "5",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -37,15 +38,61 @@
       },
       {
        "$id": "6",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "",
+       "Name": "action",
+       "NameInRequest": "action",
        "Type": {
         "$id": "7",
         "Name": "string",
         "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "8",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "9",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "10",
+        "Type": {
+         "$ref": "9"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "11",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "12",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
        },
        "Location": "Query",
        "IsRequired": true,
@@ -55,33 +102,22 @@
        "IsResourceParameter": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "8",
-       "Name": "action",
-       "NameInRequest": "action",
-       "Type": {
-        "$id": "9",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": true,
-       "Explode": false,
-       "Kind": "Method"
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "13",
+        "Type": {
+         "$id": "14",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2015-06-18"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "10",
+       "$id": "15",
        "StatusCodes": [
         204
        ],
@@ -90,17 +126,15 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{endpointServiceUrl}/",
+     "Uri": "{endpointServiceUrl}",
      "Path": "/endpoint/{action}",
-     "BufferResponse": false
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "11"
+    "$id": "16"
    }
   }
- ],
- "Auth": {
-  "$id": "12"
- }
+ ]
 }

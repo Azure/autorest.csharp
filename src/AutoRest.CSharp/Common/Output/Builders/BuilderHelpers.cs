@@ -2,15 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -111,19 +107,19 @@ namespace AutoRest.CSharp.Output.Builders
         public static string CSharpName(this HttpResponseHeader header) =>
             header.Language!.Default.Name.ToCleanName();
 
-        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null, bool existingTypeOverrides = false)
+        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null, bool existingTypeOverrides = false, bool isAbstract = false)
         {
             if (existingType != null)
             {
                 return new TypeDeclarationOptions(existingType.Name,
                     existingType.ContainingNamespace.ToDisplayString(),
                     SyntaxFacts.GetText(existingType.DeclaredAccessibility),
-                    existingType.IsAbstract,
+                    existingType.IsAbstract || isAbstract,
                     existingTypeOverrides
                 );
             }
 
-            return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, false, false);
+            return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, isAbstract, false);
         }
 
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)
@@ -132,8 +128,9 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 var newType = existingMember switch
                 {
+                    IFieldSymbol { Type: INamedTypeSymbol { EnumUnderlyingType: { } } } => defaultType, // Special case for enums
+                    IFieldSymbol fieldSymbol => typeFactory.CreateType(fieldSymbol.Type),
                     IPropertySymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
-                    IFieldSymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
                     _ => defaultType
                 };
 
@@ -181,7 +178,7 @@ namespace AutoRest.CSharp.Output.Builders
             return newType.WithNullable(defaultType.IsNullable);
         }
 
-        public static string CreateDescription(Schema schema)
+        public static string CreateDescription(this Schema schema)
         {
             return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
                 $"The {schema.Name}." :
@@ -201,23 +198,18 @@ namespace AutoRest.CSharp.Output.Builders
             return name;
         }
 
-        public static readonly List<string> DiscriminatorDescFixedPart = new List<string> { "Please note ",
-            " is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.",
-            "The available derived classes include " };
-
-        public static string CreateExtraDescriptionWithDiscriminator(MgmtObjectType objectType)
+        public static FormattableString CreateDefaultPropertyDescription(this ObjectTypeProperty property, string? overrideName = null)
         {
-            if (objectType.Discriminator?.HasDescendants == true)
+            var nameToUse = overrideName ?? property.Declaration.Name;
+            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
+            if (property.IsReadOnly)
             {
-                List<FormattableString> childrenList = new List<FormattableString>();
-                foreach (var implementation in objectType.Discriminator.Implementations)
-                {
-                    childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
-                }
-                return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{objectType.Type.Name}\"/>{DiscriminatorDescFixedPart[1]}" +
-                    $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
+                return $"Gets the {splitDeclarationName}";
             }
-            return string.Empty;
+            else
+            {
+                return $"Gets or sets the {splitDeclarationName}";
+            }
         }
     }
 }

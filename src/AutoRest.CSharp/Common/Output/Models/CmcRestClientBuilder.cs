@@ -109,8 +109,50 @@ namespace AutoRest.CSharp.Output.Models
                 responseHeaderModel,
                 operation.Extensions?.BufferResponse ?? true,
                 accessibility: accessibility,
-                new InputOperation()
+                CreateInputOperation(operation)
             );
+        }
+
+        // TODO:
+        // This is a temporary function that pass some properties from 'Operation' to 'InputOperation'.
+        // Will be removed and re-use the `CodeModelConverter` once merged 2 builders together.
+        private InputOperation CreateInputOperation(Operation operation)
+        {
+            foreach (var serviceRequest in operation.Requests)
+            {
+                if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
+                {
+                    continue;
+                }
+                return new InputOperation(
+                    Name: operation.Language.Default.Name,
+                    Summary: operation.Language.Default.Summary,
+                    Description: operation.Language.Default.Description,
+                    Accessibility: operation.Accessibility,
+                    Parameters: new List<InputParameter>(),
+                    Responses: new List<OperationResponse>(),
+                    HttpMethod: httpRequest.Method.ToCoreRequestMethod(),
+                    RequestBodyMediaType: BodyMediaType.None,
+                    Uri: httpRequest.Uri,
+                    Path: httpRequest.Path,
+                    ExternalDocsUrl: operation.ExternalDocs?.Url,
+                    RequestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
+                    BufferResponse: operation.Extensions?.BufferResponse ?? true,
+                    LongRunning: null,
+                    Paging: CreateOperationPaging(operation),
+                    false);
+            }
+            return new InputOperation();
+        }
+
+        private OperationPaging? CreateOperationPaging(Operation operation)
+        {
+            var paging = operation.Language.Default.Paging;
+            if (paging == null)
+            {
+                return null;
+            }
+            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName);
         }
 
         private Dictionary<RequestParameter, Parameter> GetOperationAllParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)

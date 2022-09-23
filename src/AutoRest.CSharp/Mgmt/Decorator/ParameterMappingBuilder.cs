@@ -200,7 +200,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (!type.IsFrameworkType)
             {
-                if (type.Implementation is EnumType enumType && !enumType.IsExtendable)
+                if (type.Implementation is EnumType enumType && !enumType.IsExtensible)
                 {
                     return $"{rawExpression}.To{enumType.Declaration.Name}()";
                 }
@@ -213,6 +213,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 type.FrameworkType == typeof(Azure.Core.ResourceIdentifier) ||
                 type.FrameworkType == typeof(Azure.Core.ResourceType) ||
                 type.FrameworkType == typeof(Azure.Core.ContentType) ||
+                type.FrameworkType == typeof(Azure.Core.RequestMethod) ||
                 type.FrameworkType == typeof(Azure.Core.AzureLocation))
             {
                 return $"new {type.FrameworkType}({rawExpression})";

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Security;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
@@ -24,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CachedDictionary<InputClient, DataPlaneClient> _clients;
         private CachedDictionary<InputOperation, LongRunningOperation> _operations;
         private CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType> _headerModels;
+        private CachedDictionary<InputEnumType, EnumType> _enums;
         private CachedDictionary<Schema, TypeProvider> _models;
         private BuildContext<DataPlaneOutputLibrary> _context;
         public CachedDictionary<string, List<string>> _protocolMethodsDictionary;
@@ -38,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _context = context;
             _sourceInputModel = context.SourceInputModel;
-            _input = new CodeModelConverter().CreateNamespace(codeModel);
+            _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
 
             _defaultNamespace = Configuration.Namespace ?? _input.Name;
             _libraryName = Configuration.LibraryName ?? _input.Name;
@@ -47,11 +49,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             _clients = new CachedDictionary<InputClient, DataPlaneClient>(EnsureClients);
             _operations = new CachedDictionary<InputOperation, LongRunningOperation>(EnsureLongRunningOperations);
             _headerModels = new CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
+            _enums = new CachedDictionary<InputEnumType, EnumType>(BuildEnums);
             _models = new CachedDictionary<Schema, TypeProvider>(() => BuildModels(codeModel));
             _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(_input, Models, _sourceInputModel));
             _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
 
             ClientOptions = CreateClientOptions();
+            Authentication = _input.Auth;
         }
 
         private ClientOptionsTypeProvider? CreateClientOptions()
@@ -62,16 +66,20 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var clientPrefix = ClientBuilder.GetClientPrefix(_libraryName, _input.Name);
-            return new ClientOptionsTypeProvider(_input.ApiVersions, $"{clientPrefix}ClientOptions", _defaultNamespace, $"Client options for {clientPrefix}Client.", _sourceInputModel);
+            return new ClientOptionsTypeProvider(_sourceInputModel?.GetServiceVersionOverrides() ?? _input.ApiVersions, $"{clientPrefix}ClientOptions", _defaultNamespace, $"Client options for {clientPrefix}Client.", _sourceInputModel);
         }
 
         public ModelFactoryTypeProvider? ModelFactory => _modelFactory.Value;
         public ClientOptionsTypeProvider? ClientOptions { get; }
+        public InputAuth Authentication { get; }
         public IEnumerable<DataPlaneClient> Clients => _clients.Values;
         public IEnumerable<LongRunningOperation> LongRunningOperations => _operations.Values;
         public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Values;
         public IEnumerable<TypeProvider> Models => _models.Values;
         public IDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary;
+
+        public override CSharpType ResolveEnum(InputEnumType enumType) => _enums[enumType].Type;
+        public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for HLC yet.");
 
         public override CSharpType FindTypeForSchema(Schema schema) => _models[schema].Type;
 
@@ -85,6 +93,25 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
             return null;
+        }
+
+        private Dictionary<InputEnumType, EnumType> BuildEnums()
+        {
+            var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
+            foreach (var (schema, typeProvider) in _models)
+            {
+                switch (schema)
+                {
+                    case SealedChoiceSchema sealedChoiceSchema:
+                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema, sealedChoiceSchema.ChoiceType, sealedChoiceSchema.Choices, false), (EnumType)typeProvider);
+                        break;
+                    case ChoiceSchema choiceSchema:
+                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true), (EnumType)typeProvider);
+                        break;
+                }
+            }
+
+            return dictionary;
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels(CodeModel codeModel)

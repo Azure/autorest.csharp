@@ -3,128 +3,52 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
-    internal class MockTestCase
+    internal class MockTestCase : OperationExample
     {
-        private ExampleModel _example;
-        public string OperationId { get; }
-        public string Name => _example.Name;
-        public MgmtClientOperation ClientOperation { get; }
-        private MgmtRestOperation? _restOperation;
-        public MgmtRestOperation RestOperation => _restOperation ??= GetRestOperationFromOperationId();
-        public RequestPath RequestPath => RestOperation.RequestPath;
-        /// <summary>
-        /// All the parameters defined in this test case
-        /// We do not need to distiguish between ClientParameters and MethodParameters because we usually change that in code model transformation
-        /// </summary>
-        public IEnumerable<ExampleParameter> AllParameters => _example.AllParameters;
-        private IEnumerable<ExampleParameter>? _pathParameters;
-        public IEnumerable<ExampleParameter> PathParameters => _pathParameters ??= AllParameters.Where(p => p.Parameter.In == HttpParameterIn.Path);
-
-        public MgmtTypeProvider Carrier { get ; }
-
-        public MockTestCase(string operationId, MgmtTypeProvider provider, MgmtClientOperation clientOperation, ExampleModel example)
+        public MockTestCase(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, ExampleModel example) : base(operationId, carrier, operation, example)
         {
-            OperationId = operationId;
-            Carrier = provider;
-            _example = example;
-            ClientOperation = clientOperation;
         }
 
-        public MethodSignature GetMethodSignature(bool hasSuffix)
-        {
-            var methodName = ClientOperation.Name;
-            if (hasSuffix)
-                methodName += $"_{_example.Name.ToCleanName()}";
-            return new MethodSignature(
-                Name: methodName,
+        protected virtual string GetMethodName(bool hasSuffix)
+            => hasSuffix ? $"{Operation.Name}_{Name.ToCleanName()}" : Operation.Name;
+
+        public MethodSignature GetMethodSignature(bool hasSuffix) => new MethodSignature(
+                Name: GetMethodName(hasSuffix),
                 Description: null,
                 Summary: null,
                 Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Async,
                 ReturnType: typeof(Task),
                 ReturnDescription: null,
                 Parameters: Array.Empty<Parameter>());
-        }
 
-        private MgmtRestOperation GetRestOperationFromOperationId()
+        private MgmtTypeProvider? _parent;
+        public MgmtTypeProvider? Parent => _parent ??= GetParent();
+
+        private MgmtTypeProvider? GetParent()
         {
-            foreach (var operation in ClientOperation)
-            {
-                if (operation.OperationId == OperationId)
-                    return operation;
-            }
-
-            throw new InvalidOperationException($"Cannot find operationId {OperationId} in example {_example.Name}");
-        }
-
-        /// <summary>
-        /// Returns the values to construct a resource identifier for the input request path
-        /// This method does not validate the parenting relationship between the request path passing in and the request path inside this test case
-        /// The passing in request path should always be a parent of the request path in this test case
-        /// </summary>
-        /// <param name="requestPath"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
-        public IEnumerable<FormattableString> ComposeResourceIdentifierParameterValues(RequestPath requestPath)
-        {
-            // we first take the same amount of segments from my own request path, in case there is a case that the parameter names between different paths are different
-            var piecesFromMyOwn = RequestPath.Take(requestPath.Count);
-            // there should be a contract that we will never have two parameters with the same name in one path
-            foreach (var referenceSegment in piecesFromMyOwn.Where(segment => segment.IsReference))
-            {
-                // find a path parameter in our path parameters for one with same name
-                var serializedName = GetParameterSerializedName(referenceSegment.ReferenceName);
-                var parameter = FindPathExampleParameterBySerializedName(serializedName);
-                // considering here is the path parameter, therefore it should always be a simple type, string, int or enum
-                var rawValue = parameter.ExampleValue.RawValue;
-                if (rawValue == null)
-                    throw new InvalidOperationException($"The value of required path parameter {serializedName} in example {_example.Name} is not specified");
-                // replace the value of subscription id to avoid the sdk complain about the values not being a guid
-                if (serializedName == "subscriptionId")
-                    rawValue = ReplaceValueForSubscriptionId((string)rawValue);
-
-                yield return $"\"{rawValue}\"";
-            }
-        }
-
-        private readonly static Regex _regexForGuid = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
-        private const string _fallbackSubscriptionId = "00000000-0000-0000-0000-000000000000";
-
-        private string ReplaceValueForSubscriptionId(string rawValue)
-        {
-            if (_regexForGuid.IsMatch(rawValue))
-                return rawValue;
-
-            return _fallbackSubscriptionId;
-        }
-
-        private ExampleParameter? FindExampleParameterBySerializedName(IEnumerable<ExampleParameter> parameters, string name)
-            => parameters.FirstOrDefault(p => GetRequestParameterName(p.Parameter) == name);
-
-        private ExampleParameter FindPathExampleParameterBySerializedName(string serializedName)
-        {
-            var parameter = FindExampleParameterBySerializedName(PathParameters, serializedName);
-
-            // we throw exceptions here because path parameter cannot be optional, therefore if we do not find a parameter in the example, there must be an issue in the example
-            if (parameter == null)
-                throw new InvalidOperationException($"Cannot find a parameter in test case {_example.Name} with the name of {serializedName}");
-
-            return parameter;
+            if (Carrier is not Resource resource)
+                return null;
+            var parents = resource.Parent();
+            // TODO -- find a way to determine which parent to use. Only for prototype, here we use the first
+            // Only when this resource is a "scope resource", we could have multiple parents
+            // We could use the value of the scope variable, get the resource type from it to know which resource we should use as a parent here
+            return parents.First();
         }
 
         private static string GetRequestParameterName(RequestParameter requestParameter)
@@ -136,38 +60,11 @@ namespace AutoRest.CSharp.MgmtTest.Models
         private Dictionary<string, ExampleParameterValue>? _parameterValueMapping;
         public Dictionary<string, ExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
 
-        private Dictionary<string, string> EnsureParameterSerializedNames()
-        {
-            if (_parameterNameToSerializedNameMapping != null)
-                return _parameterNameToSerializedNameMapping;
-
-            _parameterNameToSerializedNameMapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            var operation = _example.Operation;
-            var serviceRequest = operation.GetServiceRequest()!;
-
-            var allRequestParameters = operation.Parameters.Concat(serviceRequest.Parameters);
-
-            foreach (var requestParameter in allRequestParameters)
-            {
-                var serializedName = GetRequestParameterName(requestParameter);
-                _parameterNameToSerializedNameMapping.Add(requestParameter.Language.Default.Name, serializedName);
-            }
-
-            return _parameterNameToSerializedNameMapping;
-        }
-
-        private Dictionary<string, string>? _parameterNameToSerializedNameMapping;
-
-        private string GetParameterSerializedName(string name)
-        {
-            return EnsureParameterSerializedNames()[name];
-        }
-
         private IEnumerable<Parameter> GetAllPossibleParameters()
         {
             // skip the first parameter if this method is an extension method, since that will be the extension resource
-            var methodParameters = ClientOperation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
-                ClientOperation.MethodParameters.Skip(1) : ClientOperation.MethodParameters;
+            var methodParameters = Operation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
+                Operation.MethodParameters.Skip(1) : Operation.MethodParameters;
 
             return Carrier.ExtraConstructorParameters.Concat(methodParameters);
         }
@@ -186,12 +83,12 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 {
                     // we did not find the corresponding parameter in the examples, see if this is a required parameter
                     if (parameter.DefaultValue == null)
-                        throw new InvalidOperationException($"Cannot find an example value for required parameter `{parameter.Name}` in example {_example.Name}");
+                        throw new InvalidOperationException($"Cannot find an example value for required parameter `{parameter.Name}` in example {Name}");
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
                 else
                 {
-                    result.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue, null));
+                    result.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue));
                 }
             }
 
@@ -202,7 +99,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         {
             if (parameter == KnownParameters.WaitForCompletion)
             {
-                result.Add(parameter.Name, new ExampleParameterValue(parameter, null, $"{typeof(WaitUntil)}.Completed"));
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, $"{typeof(WaitUntil)}.Completed"));
                 return true;
             }
             if (parameter == KnownParameters.CancellationTokenParameter)
@@ -212,6 +109,38 @@ namespace AutoRest.CSharp.MgmtTest.Models
             }
 
             return false;
+        }
+
+        public bool IsConvenientOperation => Operation.IsConvenientOperation;
+
+        public bool IsLro => Operation.IsLongRunningOperation;
+
+        public bool IsPageable => Operation.IsPagingOperation;
+
+        protected override ExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, ExampleValue value)
+        {
+            if (serializedName == "subscriptionId")
+            {
+                return new ExampleValue()
+                {
+                    Language = value.Language,
+                    Schema = value.Schema,
+                    RawValue = ReplaceValueForSubscriptionId((string)value.RawValue!)
+                };
+            }
+
+            return value;
+        }
+
+        private readonly static Regex _regexForGuid = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
+        private const string _fallbackSubscriptionId = "00000000-0000-0000-0000-000000000000";
+
+        private string ReplaceValueForSubscriptionId(string rawValue)
+        {
+            if (_regexForGuid.IsMatch(rawValue))
+                return rawValue;
+
+            return _fallbackSubscriptionId;
         }
     }
 }

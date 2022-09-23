@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { Program, Type } from "@cadl-lang/compiler";
+import { Operation, Program, Type } from "@cadl-lang/compiler";
 import { ExternalDocs } from "../type/ExternalDocs.js";
 
 const externalDocsKey = Symbol("externalDocs");
@@ -11,3 +11,16 @@ export function getExternalDocs(
 ): ExternalDocs | undefined {
     return program.stateMap(externalDocsKey).get(entity);
 }
+
+const operationIdsKey = Symbol("operationIds");
+/**
+ * @returns operationId set via the @operationId decorator or `undefined`
+ */
+export function getOperationId(
+    program: Program,
+    entity: Operation
+): string | undefined {
+    return program.stateMap(operationIdsKey).get(entity);
+}
+
+export const convenienceApiKey = "x-ms-convenient-api";

@@ -2,9 +2,11 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using static System.Reflection.BindingFlags;
 
 namespace AutoRest.TestServer.Tests
@@ -71,21 +73,44 @@ namespace AutoRest.TestServer.Tests
 
         public static void HasPublicInstanceMethod(Type type, string methodName, Parameter[] parameters)
         {
-            var methodInfo = type.GetMethod(methodName, Instance | Public);
+            MethodHasParameters(HasPublicInstanceMethod(type, methodName), parameters);
+        }
+
+        public static void HasInternalInstanceMethod(Type type, string methodName, Parameter[] parameters)
+        {
+            var parameterTypes = parameters.Select(p => p.Type).ToList();
+
+            var methodInfo = type
+                .GetMethods(Instance | Public | NonPublic)
+                .Where(m => m.Name == methodName)
+                .FirstOrDefault(t => t.GetParameters().Select(p => p.ParameterType).SequenceEqual(parameterTypes));
+
             if (methodInfo == null)
             {
-                Assert.Fail($"Type \"{type}\" doesn't have a public method {methodName}.");
+                Assert.Fail($"Type \"{type}\" doesn't have a internal method {methodName}.");
             }
 
+            if (!methodInfo.IsAssembly)
+            {
+                Assert.Fail($"Type \"{type}\" has method {methodName}, but it is not internal.");
+            }
+
+            MethodHasParameters(methodInfo, parameters);
+        }
+
+        private static void MethodHasParameters(MethodInfo methodInfo, Parameter[] parameters)
+        {
+            var type = methodInfo.DeclaringType;
+            var methodName = methodInfo.Name;
             var existingParameters = methodInfo.GetParameters();
             if (existingParameters.Length != parameters.Length)
             {
                 Assert.Fail($"Method \"{type}.{methodName}\" is expected to have {parameters.Length} parameters, but it has {existingParameters.Length} parameters.");
             }
 
-            for (var i = 0; i < methodInfo.GetParameters().Length; i++)
+            for (var i = 0; i < existingParameters.Length; i++)
             {
-                var existingParameter = methodInfo.GetParameters()[i];
+                var existingParameter = existingParameters[i];
                 var expectedParameter = parameters[i];
                 if (expectedParameter.Type != existingParameter.ParameterType)
                 {
@@ -111,15 +136,20 @@ namespace AutoRest.TestServer.Tests
                 }
                 else if (existingParameter.HasDefaultValue)
                 {
-                    Assert.Fail($"Method \"{type}.{methodName}\" is expected to have no default value for parameter {expectedParameter.Name} at position {i}, but it has default value \"{existingParameter.DefaultValue}\".");
+                    Assert.Fail(
+                        $"Method \"{type}.{methodName}\" is expected to have no default value for parameter {expectedParameter.Name} at position {i}, but it has default value \"{existingParameter.DefaultValue}\".");
                 }
             }
         }
 
-        public static MethodInfo HasPublicInstanceMethod(Type type, string name)
+        public static MethodInfo HasPublicInstanceMethod(Type type, string methodName)
         {
-            var methodInfo = type.GetMethod(name, Instance | Public);
-            Assert.NotNull(methodInfo);
+            var methodInfo = type.GetMethod(methodName, Instance | Public);
+            if (methodInfo == null)
+            {
+                Assert.Fail($"Type \"{type}\" doesn't have a public method {methodName}.");
+            }
+
             return methodInfo;
         }
 

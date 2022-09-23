@@ -7,16 +7,31 @@
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> The Last Maintenance Operation Result Code. </summary>
+    /// <summary>
+    /// The Last Maintenance Operation Result Code.
+    /// Serialized Name: MaintenanceOperationResultCodeTypes
+    /// </summary>
     public enum MaintenanceOperationResultCodeType
     {
-        /// <summary> None. </summary>
+        /// <summary>
+        /// None
+        /// Serialized Name: MaintenanceOperationResultCodeTypes.None
+        /// </summary>
         None,
-        /// <summary> RetryLater. </summary>
+        /// <summary>
+        /// RetryLater
+        /// Serialized Name: MaintenanceOperationResultCodeTypes.RetryLater
+        /// </summary>
         RetryLater,
-        /// <summary> MaintenanceAborted. </summary>
+        /// <summary>
+        /// MaintenanceAborted
+        /// Serialized Name: MaintenanceOperationResultCodeTypes.MaintenanceAborted
+        /// </summary>
         MaintenanceAborted,
-        /// <summary> MaintenanceCompleted. </summary>
+        /// <summary>
+        /// MaintenanceCompleted
+        /// Serialized Name: MaintenanceOperationResultCodeTypes.MaintenanceCompleted
+        /// </summary>
         MaintenanceCompleted
     }
 }

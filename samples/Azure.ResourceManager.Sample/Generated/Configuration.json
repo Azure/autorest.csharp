@@ -32,9 +32,13 @@
     "VirtualMachineExtensionUpdate.properties.type": "ExtensionType",
     "VirtualMachineScaleSetExtension.properties.type": "ExtensionType",
     "HyperVGenerationType": "HyperVGeneration",
-    "HyperVGenerationTypes": "HyperVGeneration"
+    "HyperVGenerationTypes": "HyperVGeneration",
+    "ImageListResult.value": "Images"
   },
   "MgmtDebug": {
     "ShowSerializedNames": true
+  },
+  "UpdateRequiredCopy": {
+    "VirtualMachineExtension": "Publisher"
   }
 }

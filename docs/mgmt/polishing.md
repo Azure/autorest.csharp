@@ -1,12 +1,16 @@
 # Management SDK polishing configurations
 
-- [Rename Rules](#rename-rules)
-- [Change Format by Name Rules](#change-format-by-name-rules)
-- [Rename Mapping](#rename-mapping)
-    - [Rename a Type](#rename-a-type)
-    - [Rename a Property in a Class](#rename-a-property-in-a-class)
-    - [Rename an Enumeration Value in an Enumeration Type](#rename-an-enumeration-value-in-an-enumeration-type)
-- [Irregular Plural Words](#irregular-plural-words)
+- [Management SDK polishing configurations](#management-sdk-polishing-configurations)
+  - [Rename rules](#rename-rules)
+  - [Change format by name rules](#change-format-by-name-rules)
+  - [Rename mapping](#rename-mapping)
+    - [Rename a type](#rename-a-type)
+    - [Rename a property in a class](#rename-a-property-in-a-class)
+    - [Change the format of a property](#change-the-format-of-a-property)
+    - [Rename an enumeration value in an enumeration type](#rename-an-enumeration-value-in-an-enumeration-type)
+  - [Irregular Plural Words](#irregular-plural-words)
+  - [Keep Plural Enums](#keep-plural-enums)
+  - [Suppress Abstract Base Class](#suppress-abstract-base-class)
 
 ## Rename rules
 
@@ -98,6 +102,8 @@ To rename an element in the generated SDK, like a type name, a property name, yo
 
 But this configuration provides a simpler syntax for you to change the name of a type or a property.
 
+This configuration also allows you to assign a custom type format if it is a property. For valid format values, please refer to the [change format by name rules](#change-format-by-name-rules) section.
+
 ### Rename a type
 
 To rename a type (models and enumerations included), you could just use this syntax:
@@ -183,6 +189,33 @@ public partial class Model
 }
 ```
 
+### Change the format of a property
+
+To assign a new format to a property, you could use this syntax:
+```yaml
+rename-mapping:
+  Model.oldProperty: NewProperty|resource-type
+```
+This will rename this property to its new name, and change its format to `resource-type`:
+```diff
+public partial class Model
+{
+    /* other things inside the class */
+
+-    public string OldProperty { get; set; }
++    public ResourceType? NewProperty { get; set; }
+
+    /* other things inside the class */
+}
+```
+
+If only the type of this property needs change, you could omit its new name, like
+```yaml
+rename-mapping:
+  Model.oldProperty: -|resource-type
+```
+Please note that the dash and slash `-|` here are mandatory as a placeholder for the property name. The generator uses this symbol to separate the part for property name and its format.
+
 ### Rename an enumeration value in an enumeration type
 
 The generator regards the enumeration values as static properties, therefore you could use basically the same syntax as renaming a property to rename an enumeration value:
@@ -203,3 +236,21 @@ irregular-plural-words:
   redis: redis
 ```
 This configuration adds a new irregular word into the dictionary that the plural form of `redis` is still `redis`.
+
+## Keep Plural Enums
+
+According to the [.NET Framework Design Guidelines](https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces#naming-enumerations), we will use a singular type name for an enumeration unless its values are bit fields. This is also implemented with the help of [Humanizer](https://humanizr.net/) and sometimes the result might be strange. For example, `ContainerRegistryOS` will become `ContainerRegistryO`, which doesn't make sense and will lose its true meaning. In such cases, you can use `keep-plural-enums` configuration to suppress this conversion.
+
+```yaml
+keep-plural-enums:
+  ContainerRegistryOS
+```
+
+## Suppress Abstract Base Class
+
+The generator will add an `abstract` modifier to the base class when its has a discriminator. This could help the user understand that it is the derived classes that really work as the base class isn't allowed to be instantiated. However, we also provide the configuration to suppress this feature, you can use `suppress-abstract-base-class` with the corresponding class name to remove the `abstract` modifier. In particular, it should be noted that there is difference between the original model name in swagger and the name in the final generated SDK and this configuration requires the finalized model name in SDK.
+
+```yaml
+suppress-abstract-base-class:
+  DeliveryRuleAction
+```

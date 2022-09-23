@@ -3,11 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Security.Cryptography;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input
@@ -31,19 +30,19 @@ namespace AutoRest.CSharp.Common.Input
             _inputOperationToOperationMap = new Dictionary<InputOperation, Operation>();
         }
 
-        public IReadOnlyDictionary<InputOperation, Operation> InputOperationToOperationMap => _inputOperationToOperationMap;
-
-        public InputNamespace CreateNamespace(CodeModel codeModel)
+        public InputNamespace CreateNamespace(CodeModel codeModel, SchemaUsageProvider schemaUsages)
         {
-            var models = CreateModels(codeModel.Schemas.Objects);
+            var enums = CreateEnums(codeModel.Schemas.Choices, codeModel.Schemas.SealedChoices);
+            var models = CreateModels(codeModel.Schemas.Objects, schemaUsages);
             var clients = CreateClients(codeModel.OperationGroups);
 
             return new(Name: codeModel.Language.Default.Name,
                 Description: codeModel.Language.Default.Description,
                 Clients: clients,
                 Models: models,
+                Enums: enums,
                 ApiVersions: GetApiVersions(codeModel),
-                Auth: new CodeModelSecurity(Schemes: codeModel.Security.Schemes.OfType<SecurityScheme>().ToList()));
+                Auth: GetAuth(codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
 
         public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
@@ -71,7 +70,7 @@ namespace AutoRest.CSharp.Common.Input
                     }
 
                     serviceRequests.Add(serviceRequest);
-                    CacheResult(serviceRequest, _operationsCache, () => CreateOperation(serviceRequest, operation, httpRequest));
+                    _operationsCache.CreateAndCacheResult(serviceRequest, () => CreateOperation(serviceRequest, operation, httpRequest));
 
                     if (operation.RequestMediaTypes != null && !Configuration.Generation1ConvenienceClient)
                     {
@@ -100,7 +99,8 @@ namespace AutoRest.CSharp.Common.Input
                 RequestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
                 BufferResponse: operation.Extensions?.BufferResponse ?? true,
                 LongRunning: CreateLongRunning(operation),
-                Paging: CreateOperationPaging(operation));
+                Paging: CreateOperationPaging(operation),
+                GenerateConvenienceMethod: false);
 
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             foreach (var parameter in requestParameters)
             {
-                CacheResult(parameter, _parametersCache, () => CreateOperationParameter(parameter));
+                _parametersCache.CreateAndCacheResult(parameter, () => CreateOperationParameter(parameter));
             }
 
             return requestParameters.Select(rp => _parametersCache[rp]()).ToList();
@@ -174,11 +174,17 @@ namespace AutoRest.CSharp.Common.Input
             return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName) { NextLinkOperationRef = nextLinkOperationRef };
         }
 
-        private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas)
+        private IReadOnlyList<InputEnumType> CreateEnums(IEnumerable<ChoiceSchema> schemasChoices, IEnumerable<SealedChoiceSchema> schemasSealedChoices)
+            => schemasChoices.Select(c => CreateType(c, null, null))
+                .Concat(schemasSealedChoices.Select(c => CreateType(c, null, null)))
+                .OfType<InputEnumType>()
+                .ToList();
+
+        private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas, SchemaUsageProvider schemaUsages)
         {
             foreach (var schema in schemas)
             {
-                GetOrCreateModel(schema);
+                GetOrCreateModel(schema, schemaUsages);
             }
 
             foreach (var (schema, properties) in _modelPropertiesCache)
@@ -198,7 +204,7 @@ namespace AutoRest.CSharp.Common.Input
             return schemas.Select(s => _modelsCache[s]).ToList();
         }
 
-        private InputModelType GetOrCreateModel(ObjectSchema schema)
+        private InputModelType GetOrCreateModel(ObjectSchema schema, SchemaUsageProvider schemaUsages)
         {
             if (_modelsCache.TryGetValue(schema, out var model))
             {
@@ -211,9 +217,17 @@ namespace AutoRest.CSharp.Common.Input
                 Name: schema.Language.Default.Name,
                 Namespace: schema.Extensions?.Namespace,
                 Accessibility: schema.Extensions?.Accessibility,
+                Description: schema.CreateDescription(),
+                Usage: (schemaUsages.GetUsage(schema) & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
+                {
+                    SchemaTypeUsage.Input => InputModelTypeUsage.Input,
+                    SchemaTypeUsage.Output => InputModelTypeUsage.Output,
+                    SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
+                    _ => InputModelTypeUsage.None
+                },
                 Properties: properties,
                 BaseModel: schema.Parents?.Immediate.FirstOrDefault() is ObjectSchema parent
-                    ? GetOrCreateModel(parent)
+                    ? GetOrCreateModel(parent, schemaUsages)
                     : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue
@@ -230,7 +244,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: property.Language.Default.Name,
             SerializedName: property.SerializedName,
             Description: property.Language.Default.Description,
-            Type: CreateType(property.Schema, property.IsNullable),
+            Type: CreateType(property.Schema, _modelsCache, property.IsNullable),
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false
@@ -279,20 +293,20 @@ namespace AutoRest.CSharp.Common.Input
         {
             { HttpResponse.KnownMediaType: KnownMediaType.Text } => InputPrimitiveType.String,
             BinaryResponse => InputPrimitiveType.Stream,
-            SchemaResponse schemaResponse => CreateType(schemaResponse.Schema, schemaResponse.IsNullable),
+            SchemaResponse schemaResponse => CreateType(schemaResponse.Schema, _modelsCache, schemaResponse.IsNullable),
             _ => null
         };
 
         public InputType CreateType(RequestParameter requestParameter)
-            => CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, requestParameter.IsNullable || !requestParameter.IsRequired);
+            => CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
 
-        private InputType CreateType(Schema schema, bool isNullable)
-            => CreateType(schema, schema.Extensions?.Format, isNullable);
+        private static InputType CreateType(Schema schema, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+            => CreateType(schema, schema.Extensions?.Format, modelsCache, isNullable);
 
-        private InputType CreateType(Schema schema, string? format, bool isNullable)
-            => CreateType(schema, format) with {IsNullable = isNullable};
+        private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+            => CreateType(schema, format, modelsCache) with {IsNullable = isNullable};
 
-        private InputType CreateType(Schema schema, string? format) => schema switch
+        private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {
             BinarySchema => InputPrimitiveType.Stream,
 
@@ -318,10 +332,12 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId            => InputPrimitiveType.ResourceIdentifier,
             { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation    => InputPrimitiveType.AzureLocation,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ContentType      => InputPrimitiveType.ContentType,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ETag             => InputPrimitiveType.ETag,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType     => InputPrimitiveType.ResourceType,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.RequestMethod    => InputPrimitiveType.RequestMethod,
 
-            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format),
+            ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format, modelsCache),
 
             CredentialSchema                 => InputPrimitiveType.String,
             { Type: AllSchemaTypes.String }  => InputPrimitiveType.String,
@@ -329,17 +345,25 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Uuid }    => InputPrimitiveType.Guid,
             { Type: AllSchemaTypes.Uri }     => InputPrimitiveType.Uri,
 
-            ArraySchema array               when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, array.NullableItems ?? false)),
-            DictionarySchema dictionary     when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
-            ChoiceSchema choiceSchema       when IsDPG => CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType, choiceSchema.Extensions?.Format), choiceSchema.Choices, true),
-            SealedChoiceSchema choiceSchema when IsDPG => CreateEnumType(choiceSchema.Name, CreateType(choiceSchema.ChoiceType, choiceSchema.Extensions?.Format), choiceSchema.Choices, false),
-            ObjectSchema objectSchema       when IsDPG => _modelsCache[objectSchema],
+            ChoiceSchema choiceSchema       => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
+            SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
+
+            ArraySchema array               when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
+            DictionarySchema dictionary     when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
+            ObjectSchema objectSchema       when IsDPG && modelsCache != null => modelsCache[objectSchema],
 
             _ => new CodeModelType(schema)
         };
 
-        private static InputEnumType CreateEnumType(string name, InputType choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible)
-            => new(Name: name, EnumValueType: (InputPrimitiveType)choiceType, AllowedValues: choices.Select(CreateEnumValue).ToList(), IsExtensible: isExtensible);
+        public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(
+            Name: schema.Name,
+            Namespace: schema.Extensions?.Namespace,
+            Accessibility: schema.Extensions?.Accessibility,
+            Description: schema.CreateDescription(),
+            EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
+            AllowedValues: choices.Select(CreateEnumValue).ToList(),
+            IsExtensible: isExtensible
+        );
 
         private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(
             Name: choiceValue.Language.Default.Name,
@@ -363,28 +387,15 @@ namespace AutoRest.CSharp.Common.Input
         {
             if (parameter.ClientDefaultValue != null)
             {
-                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, parameter.IsNullable));
+                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, _modelsCache, parameter.IsNullable));
             }
 
             if (parameter.Schema is ConstantSchema constantSchema)
             {
-                return new InputConstant(Value: constantSchema.Value.Value, Type: CreateType(constantSchema.ValueType, constantSchema.Value.Value == null));
+                return new InputConstant(Value: constantSchema.Value.Value, Type: CreateType(constantSchema.ValueType, _modelsCache, constantSchema.Value.Value == null));
             }
 
             return null;
-        }
-
-        private static Func<TResult> CacheResult<TSource, TResult>(TSource source, IDictionary<TSource, Func<TResult>> cache, Func<TResult> create) where TSource : notnull
-        {
-            if (cache.TryGetValue(source, out var createCache))
-            {
-                return createCache;
-            }
-
-            TResult? value = default;
-            createCache = () => value ??= create();
-            cache[source] = createCache;
-            return createCache;
         }
 
         public static IReadOnlyList<string> GetApiVersions(CodeModel codeModel)
@@ -394,5 +405,96 @@ namespace AutoRest.CSharp.Common.Input
                 .Distinct()
                 .OrderBy(v => v)
                 .ToList();
+
+        private static InputAuth GetAuth(IEnumerable<SecurityScheme> securitySchemes)
+        {
+            InputApiKeyAuth? apiKey = null;
+            InputOAuth2Auth? oAuth2 = null;
+
+            foreach (var scheme in securitySchemes.Distinct(SecuritySchemesComparer.Instance))
+            {
+                switch (scheme)
+                {
+                    case AzureKeySecurityScheme:
+                        throw new NotSupportedException($"{typeof(AzureKeySecurityScheme)} is not supported. Use {typeof(KeySecurityScheme)} instead");
+                    case AADTokenSecurityScheme:
+                        throw new NotSupportedException($"{typeof(AADTokenSecurityScheme)} is not supported. Use {typeof(OAuth2SecurityScheme)} instead");
+                    case KeySecurityScheme when apiKey is not null:
+                        // Tolerate second KeySecurityScheme to support TranslatorText: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/stable/v3.0/TranslatorText.json#L14
+                        // See https://github.com/Azure/autorest.csharp/issues/2637
+                        //throw new NotSupportedException($"Only one {typeof(KeySecurityScheme)} is supported. Remove excess");
+                        break;
+                    case OAuth2SecurityScheme when oAuth2 is not null:
+                        throw new NotSupportedException($"Only one {typeof(OAuth2SecurityScheme)} is not supported. Remove excess");
+                    case KeySecurityScheme apiKeyScheme:
+                        apiKey = new InputApiKeyAuth(apiKeyScheme.Name);
+                        break;
+                    case OAuth2SecurityScheme oAuth2Scheme:
+                        oAuth2 = new InputOAuth2Auth(oAuth2Scheme.Scopes.ToList());
+                        break;
+                }
+            }
+
+            return new InputAuth(apiKey, oAuth2);
+        }
+
+        private class SecuritySchemesComparer : IEqualityComparer<SecurityScheme>
+        {
+            public static IEqualityComparer<SecurityScheme> Instance { get; } = new SecuritySchemesComparer();
+
+            private SecuritySchemesComparer() { }
+
+            public bool Equals(SecurityScheme? x, SecurityScheme? y)
+            {
+                if (ReferenceEquals(x, y))
+                {
+                    return true;
+                }
+
+                if (ReferenceEquals(x, null))
+                {
+                    return false;
+                }
+
+                if (ReferenceEquals(y, null))
+                {
+                    return false;
+                }
+
+                if (x.GetType() != y.GetType())
+                {
+                    return false;
+                }
+
+                return (x, y) switch
+                {
+                    (KeySecurityScheme apiKeyX, KeySecurityScheme apiKeyY)
+                        => apiKeyX.Type == apiKeyY.Type && apiKeyX.Name == apiKeyY.Name,
+                    (OAuth2SecurityScheme oAuth2X, OAuth2SecurityScheme oAuth2Y)
+                        => oAuth2X.Type == oAuth2Y.Type && oAuth2X.Scopes.SequenceEqual(oAuth2Y.Scopes, StringComparer.Ordinal),
+                    _ => x.Type == y.Type
+                };
+            }
+
+            public int GetHashCode(SecurityScheme obj) =>
+                obj switch
+                {
+                    AzureKeySecurityScheme azure => HashCode.Combine(azure.Type, azure.HeaderName),
+                    AADTokenSecurityScheme aad => GetAADTokenSecurityHashCode(aad),
+                    _ => HashCode.Combine(obj.Type)
+                };
+
+            private static int GetAADTokenSecurityHashCode(AADTokenSecurityScheme aad)
+            {
+                var hashCode = new HashCode();
+                hashCode.Add(aad.Type);
+                foreach (var value in aad.Scopes)
+                {
+                    hashCode.Add(value);
+                }
+                return hashCode.ToHashCode();
+            }
+        }
+
     }
 }

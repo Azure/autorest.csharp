@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -16,6 +17,7 @@ namespace AutoRest.CSharp.Common.Input
         private const string DictionaryValueType = nameof(InputDictionaryType.ValueType);
         private const string EnumValueType = nameof(InputEnumType.EnumValueType);
         private const string EnumAllowedValues = nameof(InputEnumType.AllowedValues);
+        private const string IsNullableField = nameof(InputType.IsNullable);
 
         private readonly CadlReferenceHandler _referenceHandler;
 
@@ -28,7 +30,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             if (reader.TokenType == JsonTokenType.String)
             {
-                return CreatePrimitiveType(ref reader);
+                return CreatePrimitiveType(reader.GetString(), false);
             }
 
             return reader.ReadReferenceAndResolve<InputType>(_referenceHandler.CurrentResolver) ?? CreateObject(ref reader, options);
@@ -45,7 +47,8 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = true;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isIdOrName = reader.TryReadReferenceId(ref isFirstProperty, ref id) || reader.TryReadString(nameof(InputModelProperty.Name), ref name);
+                var isIdOrName = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                    || reader.TryReadString(nameof(InputModelProperty.Name), ref name);
 
                 if (isIdOrName)
                 {
@@ -61,7 +64,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType CreateDerivedType(ref Utf8JsonReader reader, string? propertyName, string? name, string? id, JsonSerializerOptions options) => propertyName switch
         {
-            PrimitiveTypeKind   => ReadPrimitiveType(ref reader),
+            PrimitiveTypeKind   => ReadPrimitiveType(ref reader, id, _referenceHandler.CurrentResolver),
             ListElementType     => CadlInputListTypeConverter.CreateListType(ref reader, id, name, options),
             DictionaryKeyType   => CadlInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
             DictionaryValueType => CadlInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
@@ -71,20 +74,39 @@ namespace AutoRest.CSharp.Common.Input
             _                   => CadlInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver)
         };
 
-        public static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader)
+        public static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id, ReferenceResolver resolver)
         {
-            reader.Read();
-            var type = CreatePrimitiveType(ref reader);
-            reader.Read();
-            return type;
+            var isFirstProperty = id == null;
+            var isNullable = false;
+            string? inputTypeKindString = null;
+            while (reader.TokenType != JsonTokenType.EndObject)
+            {
+                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                    || reader.TryReadBoolean(nameof(InputType.IsNullable), ref isNullable)
+                    || reader.TryReadString(nameof(InputPrimitiveType.Kind), ref inputTypeKindString);
+
+                if (!isKnownProperty)
+                {
+                    reader.SkipProperty();
+                }
+            }
+
+            var primitiveType = CreatePrimitiveType(inputTypeKindString, isNullable);
+            if (id != null)
+            {
+                resolver.AddReference(id, primitiveType);
+            }
+
+            return primitiveType;
+
         }
 
-        public static InputPrimitiveType CreatePrimitiveType(ref Utf8JsonReader reader)
+        public static InputPrimitiveType CreatePrimitiveType(string? inputTypeKindString, bool isNullable)
         {
-            var stringValue = reader.GetString();
-            return Enum.TryParse<InputTypeKind>(stringValue, ignoreCase: true, out var kind)
+            Argument.AssertNotNull(inputTypeKindString, nameof(inputTypeKindString));
+            return Enum.TryParse<InputTypeKind>(inputTypeKindString, ignoreCase: true, out var kind)
                 ? new InputPrimitiveType(kind)
-                : throw new InvalidOperationException($"{stringValue} type is unknown.");
+                : throw new InvalidOperationException($"{inputTypeKindString} type is unknown.");
         }
     }
 }

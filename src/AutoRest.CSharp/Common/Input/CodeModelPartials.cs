@@ -35,6 +35,20 @@ namespace AutoRest.CSharp.Input
             }
         }
 
+        // This is a new extension introduced by generator to control whether interim state returns are supported in lro.
+        public bool IsInterimLongRunningStateEnabled
+        {
+            get
+            {
+                var isInterimStatusEnabled = Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("enable-interim-state");
+                return isInterimStatusEnabled switch
+                {
+                    "true" => true,
+                    _ => false,
+                };
+            }
+        }
+
         public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse
@@ -140,6 +154,21 @@ namespace AutoRest.CSharp.Input
             }
         }
         private string? format;
+
+        public bool SkipInitCtor
+        {
+            get
+            {
+                if (!skipInitCtor.HasValue)
+                    skipInitCtor = TryGetValue("x-ms-skip-init-ctor", out var value) && Convert.ToBoolean(value);
+                return skipInitCtor.Value;
+            }
+            set
+            {
+                skipInitCtor = value;
+            }
+        }
+        private bool? skipInitCtor;
     }
 
     internal partial class RecordOfStringAndRequest : System.Collections.Generic.Dictionary<string, ServiceRequest>
@@ -156,6 +185,7 @@ namespace AutoRest.CSharp.Input
         public const string Object = "object";
         public const string IPAddress = "ip-address";
         public const string ContentType = "content-type";
+        public const string RequestMethod = "request-method";
     }
 
     internal partial class ServiceResponse

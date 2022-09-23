@@ -69,12 +69,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 // we already verified that the scope is parameterized, therefore we assert the type can never be null
                 var types = resourceOperationSet.GetRequestPath().GetParameterizedScopeResourceTypes()!;
-                return FindScopeParents(types);
+                return FindScopeParents(types).Distinct();
             }
             // otherwise we use the tenant as a fallback
             return MgmtContext.Library.TenantExtensions.AsIEnumerable();
         }
 
+        // TODO -- enhence this to support the new arm-id format
         private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceTypeSegment[] parameterizedScopeTypes)
         {
             if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Any))
@@ -82,16 +83,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 yield return MgmtContext.Library.ArmResourceExtensions;
                 yield break;
             }
-            // try all the possible extensions one by one
-            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.ManagementGroup))
-                yield return MgmtContext.Library.ManagementGroupExtensions;
-            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.ResourceGroup))
-                yield return MgmtContext.Library.ResourceGroupExtensions;
-            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Subscription))
-                yield return MgmtContext.Library.SubscriptionExtensions;
-            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Tenant))
-                yield return MgmtContext.Library.TenantExtensions;
-            // tenant is not quite a concrete resource, therefore we do not include it here
+
+            foreach (var type in parameterizedScopeTypes)
+            {
+                if (type == ResourceTypeSegment.ManagementGroup)
+                    yield return MgmtContext.Library.ManagementGroupExtensions;
+                else if (type == ResourceTypeSegment.ResourceGroup)
+                    yield return MgmtContext.Library.ResourceGroupExtensions;
+                else if (type == ResourceTypeSegment.Subscription)
+                    yield return MgmtContext.Library.SubscriptionExtensions;
+                else if (type == ResourceTypeSegment.Tenant)
+                    yield return MgmtContext.Library.TenantExtensions;
+                else
+                    yield return MgmtContext.Library.ArmResourceExtensions; // we return anything unrecognized scope parent resource type as ArmResourceExtensions
+            }
         }
 
         public static RequestPath ParentRequestPath(this OperationSet operationSet)

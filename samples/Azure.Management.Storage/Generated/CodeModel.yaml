@@ -25496,6 +25496,7 @@ operationGroups:
                     status: InProgress
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
+            enable-interim-state: true
             final-state-via: location
         language: !Languages 
           default:

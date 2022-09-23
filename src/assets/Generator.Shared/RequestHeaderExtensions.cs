@@ -56,6 +56,11 @@ namespace Azure.Core
             headers.Add(name, TypeFormatters.ToString(value, format));
         }
 
+        public static void Add(this RequestHeaders headers, string name, BinaryData value, string format)
+        {
+            headers.Add(name, TypeFormatters.ToString(value.ToArray(), format));
+        }
+
         public static void Add(this RequestHeaders headers, string prefix, IDictionary<string, string> headersToAdd)
         {
             foreach (var header in headersToAdd)
@@ -66,7 +71,7 @@ namespace Azure.Core
 
         public static void Add(this RequestHeaders headers, string name, ETag value)
         {
-            headers.Add(name, value.ToString());
+            headers.Add(name, value.ToString("H"));
         }
 
         public static void Add(this RequestHeaders headers, MatchConditions conditions)

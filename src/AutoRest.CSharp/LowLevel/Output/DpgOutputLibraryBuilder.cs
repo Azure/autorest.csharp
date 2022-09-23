@@ -4,8 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
@@ -18,6 +21,8 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class DpgOutputLibraryBuilder
     {
+        private const string MaxCountParameterName = "maxCount";
+
         private readonly InputNamespace _rootNamespace;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly string _defaultNamespace;
@@ -31,43 +36,110 @@ namespace AutoRest.CSharp.Output.Models
             _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
         }
 
-        public DpgOutputLibrary Build(bool cadlInput)
+        public DpgOutputLibrary Build(bool isCadlInput)
         {
-            var inputClients = UpdateListMethodNames();
+            var inputClients = UpdateOperations();
 
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
                 .ToDictionary(ci => ci.Name);
 
             var topLevelClientInfos = SetHierarchy(clientInfosByName);
-
             var clientOptions = CreateClientOptions(topLevelClientInfos);
+
             SetRequestsToClients(clientInfosByName.Values);
 
+            var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
+            var models = new Dictionary<InputModelType, ModelTypeProvider>();
+            var clients = new List<LowLevelClient>();
 
-            IReadOnlyList<ModelTypeProvider> ModelsFactory(TypeFactory typeFactory)
-                => _rootNamespace.Models.Select(m => new ModelTypeProvider(m, typeFactory, _defaultNamespace, _sourceInputModel)).ToList();
+            var library = new DpgOutputLibrary(enums, models, clients, clientOptions, isCadlInput);
 
-            IReadOnlyList<LowLevelClient> RestClientsFactory(TypeFactory typeFactory)
+            if (isCadlInput)
             {
-                var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
-                return EnumerateAllClients(topLevelClients);
+                CreateEnums(enums, library.TypeFactory);
+                CreateModels(models, library.TypeFactory);
             }
+            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
 
-            return new DpgOutputLibrary(cadlInput ? ModelsFactory : t => Array.Empty<ModelTypeProvider>(), RestClientsFactory, clientOptions);
+            return library;
         }
 
-        private IEnumerable<InputClient> UpdateListMethodNames()
+        private void CreateEnums(IDictionary<InputEnumType, EnumType> dictionary, TypeFactory typeFactory)
+        {
+            foreach (var inputEnum in _rootNamespace.Enums)
+            {
+                dictionary.Add(inputEnum, new EnumType(inputEnum, _defaultNamespace, "public", typeFactory, _sourceInputModel));
+            }
+        }
+
+        private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
+        {
+            foreach (var model in _rootNamespace.Models)
+            {
+                models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel));
+            }
+
+            foreach (var (inputModel, modelTypeProvider) in models)
+            {
+                modelTypeProvider.FinishInitialization(inputModel, typeFactory, _sourceInputModel);
+            }
+        }
+
+        private IEnumerable<InputClient> UpdateOperations()
         {
             var defaultName = _rootNamespace.Name.ReplaceLast("Client", "");
+            // this map of old/new InputOperation is to update the lazy initialization of `Paging.NextLinkOperation`
+            var operationsMap = new Dictionary<InputOperation, InputOperation>();
             foreach (var client in _rootNamespace.Clients)
             {
                 var clientName = client.Name.IsNullOrEmpty() ? defaultName : client.Name;
-                yield return client with { Operations = client.Operations.Select(op => UpdateMethodName(op, clientName)).ToList() };
+                yield return client with { Operations = client.Operations.Select(op => UpdateOperation(op, clientName, operationsMap)).ToList() };
+            }
+        }
+
+        private static InputOperation UpdateOperation(InputOperation operation, string clientName, IDictionary<InputOperation, InputOperation> operationsMap)
+        {
+            InputOperation updatedOperation;
+            if (operation.Paging != null && !Configuration.DisablePaginationTopRenaming && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
+            {
+                updatedOperation = operation with
+                {
+                    Name = UpdateOperationName(operation, clientName),
+                    Parameters = UpdateOperationParameters(operation.Parameters),
+                    // to update the lazy initialization of `Paging.NextLinkOperation`
+                    Paging = operation.Paging with { NextLinkOperationRef = operation.Paging.NextLinkOperation != null ? () => operationsMap[operation.Paging.NextLinkOperation] : null }
+                };
+            }
+            else
+            {
+                updatedOperation = operation with { Name = UpdateOperationName(operation, clientName) };
+            }
+            operationsMap.Add(operation, updatedOperation);
+
+            return updatedOperation;
+
+        }
+
+        private static string UpdateOperationName(InputOperation operation, string clientName)
+            => operation.Name.RenameGetMethod(clientName).RenameListToGet(clientName);
+
+        private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
+        {
+            var parameters = new List<InputParameter>(operationParameters.Count);
+            foreach (var parameter in operationParameters)
+            {
+                if (parameter.Name.Equals("top", StringComparison.OrdinalIgnoreCase))
+                {
+                    parameters.Add(parameter with { Name = MaxCountParameterName });
+                }
+                else
+                {
+                    parameters.Add(parameter);
+                }
             }
 
-            static InputOperation UpdateMethodName(InputOperation operation, string clientName)
-                => operation with { Name = operation.Name.RenameGetMethod(clientName).RenameListToGet(clientName) };
+            return parameters;
         }
 
         private ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos)
@@ -81,22 +153,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? (FormattableString)$"Client options for {clientName}."
                 : $"Client options for {_libraryName} library clients.";
 
-            return new ClientOptionsTypeProvider(_rootNamespace.ApiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
-        }
-
-        /// <summary>
-        /// Simple implementation of breadth first traversal
-        /// </summary>
-        /// <param name="topLevelClients"></param>
-        /// <returns>All clients</returns>
-        private static IReadOnlyList<LowLevelClient> EnumerateAllClients(IEnumerable<LowLevelClient> topLevelClients)
-        {
-            var allClients = new List<LowLevelClient>(topLevelClients);
-            for (int i = 0; i < allClients.Count; i++)
-            {
-                allClients.AddRange(allClients[i].SubClients);
-            }
-            return allClients;
+            return new ClientOptionsTypeProvider(_sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
         }
 
         private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
@@ -157,7 +214,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return new[] {topLevelClientInfo};
+            return new[] { topLevelClientInfo };
         }
 
         private static void AssignParents(in ClientInfo clientInfo, IReadOnlyDictionary<string, ClientInfo> clientInfosByName, SourceInputModel sourceInputModel)
@@ -204,7 +261,7 @@ namespace AutoRest.CSharp.Output.Models
                         clientInfo = clientInfo.Parent;
                     }
                     break;
-                case >1:
+                case > 1:
                     var requestParameters = operation.Parameters.ToHashSet();
                     while (clientInfo.Parent != null && !clientInfo.ResourceParameters.IsSubsetOf(requestParameters))
                     {
@@ -217,12 +274,24 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
+        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
+        {
+            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
+
+            // Simple implementation of breadth first traversal
+            allClients.AddRange(topLevelClients);
+            for (int i = 0; i < allClients.Count; i++)
+            {
+                allClients.AddRange(allClients[i].SubClients);
+            }
+        }
+
         private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
         {
             foreach (var clientInfo in clientInfos)
             {
                 var description = string.IsNullOrWhiteSpace(clientInfo.Description)
-                    ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} service client."
+                    ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} {(parentClient == null ? "service client" : "sub-client")}."
                     : BuilderHelpers.EscapeXmlDescription(clientInfo.Description);
 
                 var subClients = new List<LowLevelClient>();
@@ -234,17 +303,18 @@ namespace AutoRest.CSharp.Output.Models
                     _libraryName,
                     parentClient,
                     clientInfo.Requests,
-                    new RestClientBuilder(clientInfo.ClientParameters, typeFactory),
+                    clientInfo.ClientParameters,
                     _rootNamespace.Auth,
                     _sourceInputModel,
-                    clientOptions)
+                    clientOptions,
+                    typeFactory)
                 {
                     SubClients = subClients
                 };
 
-                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
+                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
 
-                 yield return client;
+                yield return client;
             }
         }
 

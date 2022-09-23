@@ -10,6 +10,7 @@ $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 
 $swaggerDefinitions = @{};
 $swaggerTestDefinitions = @{};
+$cadlDefinitions = @{};
 
 # Test server test configuration
 $autoRestPluginProject = (Get-AutoRestProject)
@@ -17,6 +18,7 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
+$cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http' 
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -34,11 +36,29 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     }
 }
 
+function Add-Cadl([string]$name, [string]$output, [string]$mainFile="") {
+    $cadlDefinitions[$name] = @{
+        'projectName'=$name;
+        'output'=$output;
+        'mainFile'=$mainFile
+    }
+}
+
 function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [string]$testServerDirectory, [string]$additionalArgs="") {
     $projectDirectory = Join-Path $testServerDirectory $testName
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $inputReadme = Join-Path $projectDirectory "readme.md"
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
+}
+
+function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
+    $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
+    $cadlFolders = Get-ChildItem -Path $cadlRanchFilePath -Depth 2 -Directory $testName
+    if ($cadlFolders) {
+        $cadlFolder = $cadlFolders[0]
+        $cadlMain = Join-Path $cadlFolder "main.cadl"
+        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain
+    }
 }
 
 $testNames =
@@ -149,7 +169,11 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
         Add-Swagger-Test $testName $directory $testArguments
     }
     else {
-        Add-Swagger $testName $directory $testArguments
+        if ($testName.EndsWith("Cadl")) {
+            Add-Cadl $testName $directory
+        } else {
+            Add-Swagger $testName $directory $testArguments
+        }
     }
 }
 
@@ -171,17 +195,21 @@ if (!($Exclude -contains "TestProjects"))
             Add-Directory $testName $testsFolder $TRUE
             continue
         }
-        if (Test-Path $readmeConfigurationPath)
-        {
-            $testArguments = "--require=$readmeConfigurationPath"
-        }
-        else
-        {
-            $inputFile = Join-Path $directory "$testName.json"
-            $testArguments ="--require=$configurationPath --input-file=$inputFile --generation1-convenience-client"
-        }
+        if ($testName.EndsWith("Cadl")) {
+            Add-Cadl $testName $directory
+        } else {
+            if (Test-Path $readmeConfigurationPath)
+            {
+                $testArguments = "--require=$readmeConfigurationPath"
+            }
+            else
+            {
+                $inputFile = Join-Path $directory "$testName.json"
+                $testArguments ="--require=$configurationPath --input-file=$inputFile --generation1-convenience-client"
+            }
 
-        Add-Swagger $testName $directory $testArguments
+            Add-Swagger $testName $directory $testArguments
+        }
     }
 }
 
@@ -205,6 +233,19 @@ if (!($Exclude -contains "Samples"))
         $projectDirectory = Join-Path $repoRoot 'samples' $projectName
         $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
         Add-Swagger $projectName $projectDirectory "--require=$sampleConfigurationPath"
+    }
+}
+
+# Cadl projects
+$cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
+$cadlRanchProjectNames =
+    'property-types'
+
+if (!($Exclude -contains "CadlRanchProjects"))
+{
+    foreach ($testName in $cadlRanchProjectNames)
+    {
+        Add-CadlRanch-Cadl $testName "cadl-" $cadlRanchProjectDirectory
     }
 }
 
@@ -245,6 +286,9 @@ $swaggerDefinitions.Keys | ForEach-Object {
 $swaggerTestDefinitions.Keys | ForEach-Object {
     $testProjectEntries["$_.Tests"] = $swaggerTestDefinitions[$_];
 }
+$cadlDefinitions.Keys | ForEach-Object {
+    $testProjectEntries[$_] = $cadlDefinitions[$_];
+}
 
 foreach ($key in Sort-FileSafe ($testProjectEntries.Keys))
 {
@@ -264,17 +308,7 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys))
 
 $settings | ConvertTo-Json | Out-File $launchSettings
 
-if ($reset -or $env:TF_BUILD)
-{
-    AutoRest-Reset;
-}
-
-if (!$noBuild)
-{
-    Invoke "dotnet build $autoRestPluginProject"
-}
-
-$keys = $swaggerDefinitions.Keys | Sort-Object;
+$keys = $testProjectEntries.Keys | Sort-Object;
 if (![string]::IsNullOrWhiteSpace($filter))
 { 
     Write-Host "Using filter: $filter"
@@ -289,9 +323,32 @@ if (![string]::IsNullOrWhiteSpace($filter))
     }
 }
 
+if ($reset -or $env:TF_BUILD)
+{
+    $cadlCount = ([string]::IsNullOrWhiteSpace($filter) ? $cadlDefinitions : $cadlDefinitions.Keys.Where({$_ -match $filter})).Count
+    $swaggerCount = $keys.Count - $cadlCount
+    if ($swaggerCount -gt 0) 
+    {
+        AutoRest-Reset;
+    }
+
+    if ($cadlCount -gt 0) 
+    {
+        Invoke-CadlSetup
+    }
+}
+
+if (!$noBuild)
+{
+    Invoke "dotnet build $autoRestPluginProject"
+}
+
+
 $keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
-    Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-    Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:debug;
+    if ($_.output -ne $null) {
+        Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
+        Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:debug;
+    }
 } -ThrottleLimit $parallel
 
 $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
@@ -301,3 +358,9 @@ $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
     }
 } -ThrottleLimit $parallel
 
+$keys | %{ $cadlDefinitions[$_] } | ForEach-Object -Parallel {
+    if ($_.output -ne $null) {
+        Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
+        Invoke-Cadl $_.output $_.projectName $_.mainFile $using:sharedSource $using:fast $using:debug;
+    }
+} -ThrottleLimit $parallel

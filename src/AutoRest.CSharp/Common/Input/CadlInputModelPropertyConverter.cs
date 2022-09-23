@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private static InputModelProperty ReadInputModelProperty(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
-            var isFirstProperty = false;
+            var isFirstProperty = true;
             string? serializedName = null;
             string? description = null;
             InputType? propertyType = null;
@@ -43,13 +43,10 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsRequired), ref isRequired)
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsDiscriminator), ref isDiscriminator);
 
-                if (isKnownProperty)
+                if (!isKnownProperty)
                 {
-                    continue;
+                    reader.SkipProperty();
                 }
-
-                JsonSerializer.Deserialize<object>(ref reader, options);
-                reader.Read();
             }
 
             name = name ?? throw new JsonException($"{nameof(InputModelProperty)} must have a name.");

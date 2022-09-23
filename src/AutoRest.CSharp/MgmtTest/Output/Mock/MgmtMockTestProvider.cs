@@ -16,25 +16,22 @@ using Azure.ResourceManager.TestFramework;
 
 namespace AutoRest.CSharp.MgmtTest.Output.Mock
 {
-    internal class MgmtMockTestProvider<T> : TypeProvider where T : MgmtTypeProvider
+    internal class MgmtMockTestProvider<T> : MgmtTestProvider where T : MgmtTypeProvider
     {
         protected Parameter IsAsyncParameter => new(Name: "isAsync", Description: null, Type: typeof(bool), DefaultValue: null, ValidationType.None, null);
 
         public T Target { get; }
-        public MgmtMockTestProvider(T provider, IEnumerable<MockTestCase> testCases) : base(MgmtContext.Context)
+        public MgmtMockTestProvider(T provider, IEnumerable<MockTestCase> testCases) : base()
         {
             Target = provider;
             MockTestCases = testCases;
         }
 
         public IEnumerable<MockTestCase> MockTestCases { get; }
-        public string Accessibility => DefaultAccessibility;
-        protected override string DefaultAccessibility => "public";
-        public virtual FormattableString Description => $"Test for {Target.Type.Name}";
-        public string Namespace => DefaultNamespace;
+        public override FormattableString Description => $"Test for {Target.Type.Name}";
         protected override string DefaultName => $"{Target.Type.Name}MockTests";
         protected override string DefaultNamespace => $"{Target.Type.Namespace}.Tests.Mock";
-        public virtual CSharpType? BaseType => typeof(MockTestBase);
+        public override CSharpType? BaseType => typeof(MockTestBase);
 
         private ConstructorSignature? _ctor;
         public ConstructorSignature? Ctor => _ctor ??= EnsureCtor();

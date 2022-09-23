@@ -4,6 +4,8 @@
  "ApiVersions": [
   "2015-06-18"
  ],
+ "Enums": [],
+ "Models": [],
  "Clients": [
   {
    "$id": "2",
@@ -11,20 +13,66 @@
    "Operations": [
     {
      "$id": "3",
-     "Name": "stringFormat",
-     "Description": "Path parameter is string with format",
+     "Name": "getZonedDateTime",
+     "Description": "Path parameter is string with zonedDateTime format",
      "Parameters": [
       {
        "$id": "4",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "",
+       "Name": "time",
+       "NameInRequest": "time",
        "Type": {
         "$id": "5",
-        "Name": "string",
+        "Name": "DateTime",
+        "Kind": "DateTime",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "6",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "7",
+        "Name": "String",
         "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "8",
+        "Type": {
+         "$ref": "7"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "9",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "10",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
        },
        "Location": "Query",
        "IsRequired": true,
@@ -34,33 +82,22 @@
        "IsResourceParameter": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "6",
-       "Name": "action",
-       "NameInRequest": "action",
-       "Type": {
-        "$id": "7",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false,
-        "SerializationFormat": 0
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": true,
-       "Explode": false,
-       "Kind": "Method"
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "11",
+        "Type": {
+         "$id": "12",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2015-06-18"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "8",
+       "$id": "13",
        "StatusCodes": [
         204
        ],
@@ -70,16 +107,86 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
-     "Path": "/stringFormat/{action}",
-     "BufferResponse": false
+     "Path": "/zonedDateTime/{time}",
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "14",
+     "Name": "getUri",
+     "Description": "path paramter is string with uri format",
+     "Parameters": [
+      {
+       "$id": "15",
+       "Name": "uri",
+       "NameInRequest": "uri",
+       "Type": {
+        "$id": "16",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "17",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "18",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "19",
+        "Type": {
+         "$ref": "18"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "9"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "20",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/uri/{uri}",
+     "BufferResponse": false,
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "9"
+    "$id": "21"
    }
   }
- ],
- "Auth": {
-  "$id": "10"
- }
+ ]
 }

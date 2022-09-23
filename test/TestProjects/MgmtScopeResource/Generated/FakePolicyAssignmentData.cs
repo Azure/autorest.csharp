@@ -30,7 +30,7 @@ namespace MgmtScopeResource
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> The location of the policy assignment. Only required when utilizing managed identity. </param>
-        /// <param name="identity"> The managed identity associated with the policy assignment. </param>
+        /// <param name="identity"> The managed identity associated with the policy assignment. Current supported identity types: None, SystemAssigned. </param>
         /// <param name="displayName"> The display name of the policy assignment. </param>
         /// <param name="policyDefinitionId"> The ID of the policy definition or policy set definition being assigned. </param>
         /// <param name="scope"> The scope for the policy assignment. </param>
@@ -40,7 +40,7 @@ namespace MgmtScopeResource
         /// <param name="metadata"> The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs. </param>
         /// <param name="enforcementMode"> The policy assignment enforcement mode. Possible values are Default and DoNotEnforce. </param>
         /// <param name="nonComplianceMessages"> The messages that describe why a resource is non-compliant with the policy. </param>
-        internal FakePolicyAssignmentData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, SystemAssignedServiceIdentity identity, string displayName, string policyDefinitionId, string scope, IList<string> notScopes, IDictionary<string, ParameterValuesValue> parameters, string description, BinaryData metadata, EnforcementMode? enforcementMode, IList<NonComplianceMessage> nonComplianceMessages) : base(id, name, resourceType, systemData)
+        internal FakePolicyAssignmentData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, ManagedServiceIdentity identity, string displayName, string policyDefinitionId, string scope, IList<string> notScopes, IDictionary<string, ParameterValuesValue> parameters, string description, BinaryData metadata, EnforcementMode? enforcementMode, IList<NonComplianceMessage> nonComplianceMessages) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Identity = identity;
@@ -57,8 +57,8 @@ namespace MgmtScopeResource
 
         /// <summary> The location of the policy assignment. Only required when utilizing managed identity. </summary>
         public string Location { get; set; }
-        /// <summary> The managed identity associated with the policy assignment. </summary>
-        public SystemAssignedServiceIdentity Identity { get; set; }
+        /// <summary> The managed identity associated with the policy assignment. Current supported identity types: None, SystemAssigned. </summary>
+        public ManagedServiceIdentity Identity { get; set; }
         /// <summary> The display name of the policy assignment. </summary>
         public string DisplayName { get; set; }
         /// <summary> The ID of the policy definition or policy set definition being assigned. </summary>
@@ -71,7 +71,36 @@ namespace MgmtScopeResource
         public IDictionary<string, ParameterValuesValue> Parameters { get; }
         /// <summary> This message will be part of response in case of policy violation. </summary>
         public string Description { get; set; }
-        /// <summary> The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs. </summary>
+        /// <summary>
+        /// The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs.
+        /// <para>
+        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
         public BinaryData Metadata { get; set; }
         /// <summary> The policy assignment enforcement mode. Possible values are Default and DoNotEnforce. </summary>
         public EnforcementMode? EnforcementMode { get; set; }

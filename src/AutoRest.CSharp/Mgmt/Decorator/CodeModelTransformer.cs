@@ -18,8 +18,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             PartialResourceResolver.Update();
             SubscriptionIdUpdater.Update();
             ConstantSchemaTransformer.TransformToChoice();
-            SchemaRenamer.ApplyRenameMapping();
-            SchemaRenamer.UpdateAcronyms();
+            SchemaNameAndFormatUpdater.ApplyRenameMapping();
+            SchemaNameAndFormatUpdater.UpdateAcronyms();
             UrlToUri.UpdateSuffix();
             FrameworkTypeUpdater.ValidateAndUpdate();
             SchemaFormatByNameTransformer.Update();

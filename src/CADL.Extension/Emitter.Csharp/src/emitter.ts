@@ -8,33 +8,56 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    Model,
+    ModelProperty,
+    Operation,
     Program,
     resolvePath
 } from "@cadl-lang/compiler";
 import {
     getAllRoutes,
+    getAuthentication,
     getServers,
     HttpOperationParameter,
     HttpOperationResponse,
-    OperationDetails
+    OperationDetails,
+    ServiceAuthentication
 } from "@cadl-lang/rest/http";
-import { CodeModel } from "./type/CodeModel";
-import { InputClient } from "./type/InputClient";
-import { dump } from "js-yaml";
+import { getExtensions } from "@cadl-lang/openapi";
+import { CodeModel } from "./type/CodeModel.js";
+import { InputClient } from "./type/InputClient.js";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import { InputOperation } from "./type/InputOperation.js";
-import { parseHttpRequestMethod } from "./type/RequestMethod.js";
+import { RequestMethod, parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
-import { InputType } from "./type/InputType.js";
-import { InputTypeKind } from "./type/InputTypeKind.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType,
+    InputType
+} from "./type/InputType.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
-import { getInputType } from "./lib/model.js";
+import {
+    getDefaultValue,
+    getEffectiveSchemaType,
+    getInputType
+} from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
-import { getExternalDocs } from "./lib/decorators.js";
+import {
+    convenienceApiKey,
+    getExternalDocs,
+    getOperationId
+} from "./lib/decorators.js";
+import { InputAuth } from "./type/InputAuth.js";
+import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
+import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
+import { getConsumes, getProduces, getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
+import { InputTypeKind } from "./type/InputTypeKind.js";
+import { InputConstant } from "./type/InputConstant.js";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -69,8 +92,8 @@ export async function $onEmit(
         const outPath =
             version.trim().length > 0
                 ? resolvePath(
-                      options.outputFile?.replace(".json", `.${version}.json`)
-                  )
+                    options.outputFile?.replace(".json", `.${version}.json`)
+                )
                 : resolvePath(options.outputFile);
 
         const root = createModel(program);
@@ -82,10 +105,6 @@ export async function $onEmit(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
             );
-            const yamlOutPath = resolvePath(
-                options.outputFile?.replace(".json", `.yaml`)
-            );
-            await program.host.writeFile(yamlOutPath, dump(root));
         }
     }
 }
@@ -115,55 +134,82 @@ function createModel(program: Program): any {
         console.error("No API-Version provided.");
         return;
     }
+
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(program, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
 
-    const apiVersions: string[] = [];
-    apiVersions.push(version);
+    const apiVersions: Set<string> = new Set<string>();
+    apiVersions.add(version);
+    const apiVersionParam: InputParameter = {
+        Name: "apiVersion",
+        NameInRequest: "api-version",
+        Description: "",
+        Type: {
+            Name: "String",
+            Kind: InputTypeKind.String,
+            IsNullable: false
+        } as InputPrimitiveType,
+        Location: RequestLocation.Query,
+        IsRequired: true,
+        IsApiVersion: true,
+        IsContentType: false,
+        IsEndpoint: false,
+        IsResourceParameter: false,
+        SkipUrlEncoding: false,
+        Explode: false,
+        Kind: InputOperationParameterKind.Client,
+        DefaultValue: {
+            Type: {
+                Name: "String",
+                Kind: InputTypeKind.String,
+                IsNullable: false
+            } as InputPrimitiveType,
+            Value: version
+        } as InputConstant
+    };
     const namespace =
         getServiceNamespaceString(program)?.toLowerCase() || "client";
+    const authentication = getAuthentication(program, serviceNamespaceType);
+    let auth = undefined;
+    if (authentication) {
+        auth = processServiceAuthentication(authentication);
+    }
+
+    const modelMap = new Map<string, InputModelType>();
+    const enumMap = new Map<string, InputEnumType>();
     try {
         const [routes] = getAllRoutes(program);
         console.log("routes:" + routes.length);
         const clients: InputClient[] = [];
-
         //create endpoint parameter from servers
         let endPointParam = undefined;
+        let url: string = "";
         if (servers !== undefined) {
-            const calServers = resolveServers(program, servers);
-            if (calServers.length > 0) {
+            const cadlServers = resolveServers(program, servers);
+            if (cadlServers.length > 0) {
                 /* choose the first server as endpoint. */
-                endPointParam = calServers[0].parameters[0];
+                url = cadlServers[0].url;
+                endPointParam = cadlServers[0].parameters[0];
             }
         }
 
-        const apiVersionParam: InputParameter = {
-            Name: "apiVersion",
-            NameInRequest: "apiVersion",
-            Description: "",
-            Type: new InputType("string", InputTypeKind.String, false),
-            Location: RequestLocation.Query,
-            IsRequired: true,
-            IsApiVersion: true,
-            IsContentType: false,
-            IsEndpoint: false,
-            IsResourceParameter: false,
-            SkipUrlEncoding: false,
-            Explode: false,
-            Kind: InputOperationParameterKind.Client
-        };
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
-            const groupName: string = operation.groupName;
+            if (!isSupportedOperation(operation)) continue;
+            const groupName: string = getOperationGroupName(
+                program,
+                operation.operation
+            );
             let client = getClient(clients, groupName);
             if (!client) {
                 const container = operation.container;
-                const clientDes = getDoc(program, container);
+                const clientDesc = getDoc(program, container);
                 const clientSummary = getSummary(program, container);
                 client = {
                     Name: groupName,
+                    Description: clientDesc,
                     Operations: [],
                     Protocol: {}
                 } as InputClient;
@@ -172,18 +218,55 @@ function createModel(program: Program): any {
             const op: InputOperation = loadOperation(
                 program,
                 operation,
+                url,
                 endPointParam,
-                apiVersionParam
+                modelMap,
+                enumMap
             );
+
+            applyDefaultContentTypeAndAcceptParameter(op);
+
+            const apiVersionInOperation = op.Parameters.find(
+                (value) => value.IsApiVersion
+            );
+            if (apiVersionInOperation) {
+                if (apiVersionInOperation.DefaultValue?.Value) {
+                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
+                }
+            }
             client.Operations.push(op);
+        }
+        if (apiVersions.size > 1) {
+            apiVersionParam.Kind = InputOperationParameterKind.Constant;
+        }
+        for (const client of clients) {
+            for (const op of client.Operations) {
+                const apiVersionInOperation = op.Parameters.find(
+                    (value) => value.IsApiVersion
+                );
+                if (apiVersionInOperation) {
+                    if (apiVersions.size > 1) {
+                        apiVersionInOperation.Kind =
+                            InputOperationParameterKind.Constant;
+                    }
+                    if (!apiVersionInOperation.DefaultValue) {
+                        apiVersionInOperation.DefaultValue =
+                            apiVersionParam.DefaultValue;
+                    }
+                } else {
+                    op.Parameters.push(apiVersionParam);
+                }
+            }
         }
 
         const clientModel = {
             Name: namespace,
             Description: description,
-            ApiVersions: apiVersions,
+            ApiVersions: Array.from(apiVersions.values()),
+            Enums: Array.from(enumMap.values()),
+            Models: Array.from(modelMap.values()),
             Clients: clients,
-            Auth: {}
+            Auth: auth
         } as CodeModel;
         return clientModel;
     } catch (err) {
@@ -195,61 +278,127 @@ function createModel(program: Program): any {
     }
 }
 
-function loadOperationParameter(
-    program: Program,
-    parameter: HttpOperationParameter
+function applyDefaultContentTypeAndAcceptParameter(operation: InputOperation): void {
+    const defaultValue: string = "application/json";
+    if (operation.Parameters.some(value => value.Location === RequestLocation.Body)
+        && !operation.Parameters.some(value => value.IsContentType === true)) {
+        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "contentType", "Content-Type"));
+        operation.RequestMediaTypes = [defaultValue];
+    }
+
+    if (!operation.Parameters.some(
+        value =>
+            value.Location === RequestLocation.Header &&
+            value.NameInRequest.toLowerCase() === "accept")) {
+        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "accept", "Accept"))
+    }
+}
+
+function createContentTypeOrAcceptParameter(
+    mediaTypes: string[],
+    name: string,
+    nameInRequest: string
 ): InputParameter {
-    const { type: location, name, param } = parameter;
-    const cadlType = param.type;
-    const inputType: InputType = getInputType(program, cadlType);
-    const requestLocation = requestLocationMap[location];
-    const kind: InputOperationParameterKind =
-        InputOperationParameterKind.Method;
+    const isContentType: boolean =
+        nameInRequest.toLowerCase() === "content-type";
+    const inputType: InputType = {
+        Name: "String",
+        Kind: InputTypeKind.String,
+        IsNullable: false
+    } as InputPrimitiveType;
     return {
         Name: name,
-        NameInRequest: name,
-        Description: getDoc(program, param),
+        NameInRequest: nameInRequest,
         Type: inputType,
-        Location: requestLocation,
-        IsRequired: !param.optional,
+        Location: RequestLocation.Header,
         IsApiVersion: false,
         IsResourceParameter: false,
-        IsContentType: false,
+        IsContentType: isContentType,
+        IsRequired: true,
         IsEndpoint: false,
-        SkipUrlEncoding: true,
+        SkipUrlEncoding: false,
         Explode: false,
-        Kind: kind
+        Kind: InputOperationParameterKind.Constant,
+        DefaultValue:
+            mediaTypes.length === 1
+                ? ({
+                    Type: inputType,
+                    Value: mediaTypes[0]
+                } as InputConstant)
+                : undefined
     } as InputParameter;
 }
 
-function loadOperationResponse(
-    program: Program,
-    response: HttpOperationResponse
-): OperationResponse | undefined {
-    if (!response.statusCode || response.statusCode === "*") {
-        return undefined;
+function processServiceAuthentication(
+    authentication: ServiceAuthentication
+): InputAuth {
+    const auth = {} as InputAuth;
+    let scopes: Set<string> | undefined;
+
+    for (const option of authentication.options) {
+        for (const schema of option.schemes) {
+            switch (schema.type) {
+                case "apiKey":
+                    auth.ApiKey = { Name: schema.name } as InputApiKeyAuth;
+                    break;
+                case "oauth2":
+                    for (const flow of schema.flows) {
+                        if (flow.scopes) {
+                            scopes ??= new Set<string>();
+                            for (const scope of flow.scopes) {
+                                scopes.add(scope.value);
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    throw new Error("Not supported authentication.");
     }
-    const status: number[] = [];
-    status.push(Number(response.statusCode));
-    const body = response.responses[0]?.body;
-    let type: InputType | undefined = undefined;
-    if (body?.type) {
-        const cadlType = body.type;
-        const inputType: InputType = getInputType(program, cadlType);
-        type = inputType;
+        }
     }
 
-    return {
-        StatusCodes: status,
-        BodyType: type,
-        BodyMediaType: BodyMediaType.Json
-    } as OperationResponse;
+    if (scopes) {
+        auth.OAuth2 = {
+            Scopes: Array.from(scopes.values())
+        } as InputOAuth2Auth;
+    }
+
+    return auth;
 }
+
+function getOperationGroupName(
+    program: Program,
+    operation: Operation
+): string {
+    const explicitOperationId = getOperationId(program, operation);
+    if (explicitOperationId) {
+        const ids: string[] = explicitOperationId.split("_");
+        if (ids.length > 1) {
+            return ids.slice(0, -2).join("_");
+        }
+    }
+
+    if (operation.interface) {
+        return operation.interface.name;
+    }
+    let namespace = operation.namespace;
+    if (!namespace) {
+        namespace =
+            program.checker.getGlobalNamespaceType() ??
+            getServiceNamespace(program);
+    }
+
+    if (namespace) return namespace.name;
+    else return "";
+}
+
 function loadOperation(
     program: Program,
     operation: OperationDetails,
+    uri: string,
     endpoint: InputParameter | undefined = undefined,
-    apiVersion: InputParameter | undefined = undefined
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
 ): InputOperation {
     const {
         path: fullPath,
@@ -258,25 +407,55 @@ function loadOperation(
         parameters: cadlParameters
     } = operation;
     console.log(`load operation: ${op.name}, path:${fullPath} `);
+    const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
     const summary = getSummary(program, op);
     const externalDocs = getExternalDocs(program, op);
 
     const parameters: InputParameter[] = [];
-    if (endpoint !== undefined) parameters.push(endpoint);
-    if (apiVersion !== undefined) parameters.push(apiVersion);
-
+    if (endpoint) parameters.push(endpoint);
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
     }
 
+    if (cadlParameters.bodyParameter) {
+        parameters.push(
+            loadBodyParameter(program, cadlParameters.bodyParameter)
+        );
+    } else if (cadlParameters.bodyType) {
+        if (resourceOperation) {
+            parameters.push(loadBodyParameter(program, resourceOperation.resourceType));
+        } else {
+            const effectiveBodyType = getEffectiveSchemaType(
+                program,
+                cadlParameters.bodyType
+            );
+            if (effectiveBodyType.kind === "Model") {
+                parameters.push(loadBodyParameter(program, effectiveBodyType));
+            }
+        }
+    }
+
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(program, res);
-        if (operationResponse !== undefined) {
+        const operationResponse = loadOperationResponse(program, res, resourceOperation);
+        if (operationResponse) {
             responses.push(operationResponse);
         }
     }
+
+    const mediaTypes: string[] = [];
+    const contentTypeParameter = parameters.find(
+        (value) => value.IsContentType
+    );
+    if (contentTypeParameter) {
+        mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
+    }
+    const requestMethod = parseHttpRequestMethod(verb);
+    const convenienceApiDecorator: boolean =
+        getExtensions(program, op).get(convenienceApiKey) ?? false;
+    const generateConvenienceMethod: boolean =
+        requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
 
     return {
         Name: op.name,
@@ -284,18 +463,138 @@ function loadOperation(
         Description: desc,
         Parameters: parameters,
         Responses: responses,
-        HttpMethod: parseHttpRequestMethod(verb),
+        HttpMethod: requestMethod,
         RequestBodyMediaType: BodyMediaType.Json,
-        Uri:
-            endpoint !== undefined && endpoint.Name !== ""
-                ? `{${endpoint.Name}}/`
-                : "",
+        Uri: uri,
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,
-        BufferResponse: false
+        RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
+        BufferResponse: true,
+        GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;
+
+    function loadOperationParameter(
+        program: Program,
+        parameter: HttpOperationParameter
+    ): InputParameter {
+        const { type: location, name, param } = parameter;
+        const cadlType = param.type;
+        const inputType: InputType = getInputType(
+            program,
+            cadlType,
+            models,
+            enums
+        );
+        let defaultValue = undefined;
+        const value = getDefaultValue(cadlType);
+        if (value) {
+            defaultValue = {
+                Type: inputType,
+                Value: value
+            } as InputConstant;
+        }
+        const requestLocation = requestLocationMap[location];
+        const isApiVersion: boolean =
+            requestLocation === RequestLocation.Query &&
+            name.toLocaleLowerCase() === "api-version";
+        const isContentType: boolean =
+            requestLocation === RequestLocation.Header &&
+            name.toLowerCase() === "content-type";
+        const kind: InputOperationParameterKind = isContentType
+            ? InputOperationParameterKind.Constant
+            : isApiVersion
+                ? InputOperationParameterKind.Client
+                : InputOperationParameterKind.Method;
+        return {
+            Name: param.name,
+            NameInRequest: name,
+            Description: getDoc(program, param),
+            Type: inputType,
+            Location: requestLocation,
+            DefaultValue: defaultValue,
+            IsRequired: !param.optional,
+            IsApiVersion: isApiVersion,
+            IsResourceParameter: false,
+            IsContentType: isContentType,
+            IsEndpoint: false,
+            SkipUrlEncoding: false, //TODO: retrieve out value from extension
+            Explode: false,
+            Kind: kind
+        } as InputParameter;
+    }
+
+    function loadBodyParameter(
+        program: Program,
+        body: ModelProperty | Model
+    ): InputParameter {
+        const type = body.kind === "Model" ? body : body.type;
+        const inputType: InputType = getInputType(program, type, models, enums);
+        const requestLocation = RequestLocation.Body;
+        const kind: InputOperationParameterKind =
+            InputOperationParameterKind.Method;
+        return {
+            Name: body.name,
+            NameInRequest: body.name,
+            Description: getDoc(program, body),
+            Type: inputType,
+            Location: requestLocation,
+            IsRequired: body.kind === "Model" ? true : !body.optional,
+            IsApiVersion: false,
+            IsResourceParameter: false,
+            IsContentType: false,
+            IsEndpoint: false,
+            SkipUrlEncoding: false,
+            Explode: false,
+            Kind: kind
+        } as InputParameter;
+    }
+
+    function loadOperationResponse(
+        program: Program,
+        response: HttpOperationResponse,
+        resourceOperation?: ResourceOperation
+    ): OperationResponse | undefined {
+        if (!response.statusCode || response.statusCode === "*") {
+            return undefined;
+        }
+        const status: number[] = [];
+        status.push(Number(response.statusCode));
+        //TODO: what to do if more than 1 response?
+        const body = response.responses[0]?.body;
+        let type: InputType | undefined = undefined;
+        if (body?.type) {
+            if (resourceOperation && resourceOperation.operation !== "list") {
+                type = getInputType(program, resourceOperation.resourceType, models, enums);
+            } else {
+                const cadlType = getEffectiveSchemaType(program, body.type);
+                const inputType: InputType = getInputType(
+                    program,
+                    cadlType,
+                    models,
+                    enums
+                );
+                type = inputType;
+            }
+        }
+
+        return {
+            StatusCodes: status,
+            BodyType: type,
+            BodyMediaType: BodyMediaType.Json
+        } as OperationResponse;
+    }
 }
 
+function isLroOperation(op: OperationDetails) {
+    return false;
+}
+function isPagingOperation(op: OperationDetails) {
+    return false;
+}
+function isSupportedOperation(op: OperationDetails) {
+    if (isLroOperation(op) || isPagingOperation(op)) return false;
+    return true;
+}
 class ErrorTypeFoundError extends Error {
     constructor() {
         super("Error type found in evaluated Cadl output");

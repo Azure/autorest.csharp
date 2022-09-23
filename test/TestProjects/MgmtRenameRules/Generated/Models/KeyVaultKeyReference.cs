@@ -11,12 +11,21 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Describes a reference to Key Vault Key. </summary>
+    /// <summary>
+    /// Describes a reference to Key Vault Key
+    /// Serialized Name: KeyVaultKeyReference
+    /// </summary>
     public partial class KeyVaultKeyReference
     {
         /// <summary> Initializes a new instance of KeyVaultKeyReference. </summary>
-        /// <param name="keyUri"> The URL referencing a key encryption key in Key Vault. </param>
-        /// <param name="sourceVault"> The relative URL of the Key Vault containing the key. </param>
+        /// <param name="keyUri">
+        /// The URL referencing a key encryption key in Key Vault.
+        /// Serialized Name: KeyVaultKeyReference.keyUrl
+        /// </param>
+        /// <param name="sourceVault">
+        /// The relative URL of the Key Vault containing the key.
+        /// Serialized Name: KeyVaultKeyReference.sourceVault
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="keyUri"/> or <paramref name="sourceVault"/> is null. </exception>
         public KeyVaultKeyReference(Uri keyUri, WritableSubResource sourceVault)
         {
@@ -33,9 +42,15 @@ namespace MgmtRenameRules.Models
             SourceVault = sourceVault;
         }
 
-        /// <summary> The URL referencing a key encryption key in Key Vault. </summary>
+        /// <summary>
+        /// The URL referencing a key encryption key in Key Vault.
+        /// Serialized Name: KeyVaultKeyReference.keyUrl
+        /// </summary>
         public Uri KeyUri { get; set; }
-        /// <summary> The relative URL of the Key Vault containing the key. </summary>
+        /// <summary>
+        /// The relative URL of the Key Vault containing the key.
+        /// Serialized Name: KeyVaultKeyReference.sourceVault
+        /// </summary>
         internal WritableSubResource SourceVault { get; set; }
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier SourceVaultId

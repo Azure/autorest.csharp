@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             _writer.Line($"// Example: {testCase.Name}");
 
             _writer.Line();
-            var extensionResourceName = WriteGetExtension(This.Target, testCase);
+            var extensionResourceName = WriteGetExtension(This.Target, testCase, GetArmClientExpression);
 
             WriteTestOperation(extensionResourceName, testCase);
         }

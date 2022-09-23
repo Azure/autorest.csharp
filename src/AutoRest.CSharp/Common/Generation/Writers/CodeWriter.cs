@@ -36,18 +36,56 @@ namespace AutoRest.CSharp.Generation.Writers
             _scopes.Push(new CodeWriterScope(this, "", false));
         }
 
-        public CodeWriterScope Scope(FormattableString line, string start = "{", string end = "}", bool newLine = true)
+        public CodeWriterScope Scope(FormattableString line, string start = "{", string end = "}", bool newLine = true, CodeWriterScopeDeclarations? scopeDeclarations = null)
         {
+            ValidateDeclarations(scopeDeclarations);
             CodeWriterScope codeWriterScope = new CodeWriterScope(this, end, newLine);
             _scopes.Push(codeWriterScope);
             Line(line);
             LineRaw(start);
+            AddDeclarationsToScope(scopeDeclarations);
             return codeWriterScope;
         }
 
         public CodeWriterScope Scope()
         {
             return ScopeRaw();
+        }
+
+        private void ValidateDeclarations(CodeWriterScopeDeclarations? scopeDeclarations)
+        {
+            if (scopeDeclarations == null)
+            {
+                return;
+            }
+
+            foreach (var declarationName in scopeDeclarations.Names)
+            {
+                if (!IsAvailable(declarationName))
+                {
+                    throw new InvalidOperationException($"Variable with name '{declarationName}' is declared already.");
+                }
+            }
+        }
+
+        private void AddDeclarationsToScope(CodeWriterScopeDeclarations? scopeDeclarations)
+        {
+            if (scopeDeclarations == null)
+            {
+                return;
+            }
+
+            var currentScope = _scopes.Peek();
+
+            foreach (var declarationName in scopeDeclarations.Names)
+            {
+                foreach (var scope in _scopes)
+                {
+                    scope.AllDefinedIdentifiers.Add(declarationName);
+                }
+
+                currentScope.Identifiers.Add(declarationName);
+            }
         }
 
         private CodeWriterScope ScopeRaw(string start = "{", string end = "}", bool newLine = true)

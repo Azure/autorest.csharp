@@ -5,11 +5,12 @@
 
 #nullable disable
 
-using Azure.Core;
-
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Describes an available virtual machine scale set sku. </summary>
+    /// <summary>
+    /// Describes an available virtual machine scale set sku.
+    /// Serialized Name: VirtualMachineScaleSetSku
+    /// </summary>
     public partial class VirtualMachineScaleSetSku
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetSku. </summary>
@@ -18,21 +19,39 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetSku. </summary>
-        /// <param name="resourceType"> The type of resource the sku applies to. </param>
-        /// <param name="sku"> The Sku. </param>
-        /// <param name="capacity"> Specifies the number of virtual machines in the scale set. </param>
-        internal VirtualMachineScaleSetSku(ResourceType? resourceType, MgmtRenameRulesSku sku, VirtualMachineScaleSetSkuCapacity capacity)
+        /// <param name="resourceType">
+        /// The type of resource the sku applies to.
+        /// Serialized Name: VirtualMachineScaleSetSku.resourceType
+        /// </param>
+        /// <param name="sku">
+        /// The Sku.
+        /// Serialized Name: VirtualMachineScaleSetSku.sku
+        /// </param>
+        /// <param name="capacity">
+        /// Specifies the number of virtual machines in the scale set.
+        /// Serialized Name: VirtualMachineScaleSetSku.capacity
+        /// </param>
+        internal VirtualMachineScaleSetSku(string resourceType, MgmtRenameRulesSku sku, VirtualMachineScaleSetSkuCapacity capacity)
         {
             ResourceType = resourceType;
             Sku = sku;
             Capacity = capacity;
         }
 
-        /// <summary> The type of resource the sku applies to. </summary>
-        public ResourceType? ResourceType { get; }
-        /// <summary> The Sku. </summary>
+        /// <summary>
+        /// The type of resource the sku applies to.
+        /// Serialized Name: VirtualMachineScaleSetSku.resourceType
+        /// </summary>
+        public string ResourceType { get; }
+        /// <summary>
+        /// The Sku.
+        /// Serialized Name: VirtualMachineScaleSetSku.sku
+        /// </summary>
         public MgmtRenameRulesSku Sku { get; }
-        /// <summary> Specifies the number of virtual machines in the scale set. </summary>
+        /// <summary>
+        /// Specifies the number of virtual machines in the scale set.
+        /// Serialized Name: VirtualMachineScaleSetSku.capacity
+        /// </summary>
         public VirtualMachineScaleSetSkuCapacity Capacity { get; }
     }
 }
