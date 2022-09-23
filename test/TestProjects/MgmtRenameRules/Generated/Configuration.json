@@ -47,7 +47,13 @@
     "LogAnalyticsOperationResult.basePath": "basePathUri|uri",
     "VirtualMachineScaleSetIPConfiguration.properties.ipAddresses": "-|ip-address"
   },
+  "ParameterRenameMapping": {
+    "Images_CreateOrUpdate": {
+      "imageName": "name"
+    }
+  },
   "MgmtDebug": {
     "ShowSerializedNames": true
-  }
+  },
+  "IsStrictCommonOperationEnabled": true
 }
