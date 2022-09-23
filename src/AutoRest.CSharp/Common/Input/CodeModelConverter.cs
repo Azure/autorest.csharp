@@ -329,6 +329,9 @@ namespace AutoRest.CSharp.Common.Input
             NumberSchema { Type: AllSchemaTypes.Integer, Precision: 64 } => InputPrimitiveType.Int64,
             NumberSchema { Type: AllSchemaTypes.Integer }                => InputPrimitiveType.Int32,
 
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => InputPrimitiveType.DateTimeISO8601,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeRFC1123 => InputPrimitiveType.DateTimeRFC1123,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeUnix => InputPrimitiveType.DateTimeUnix,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId            => InputPrimitiveType.ResourceIdentifier,
             { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation    => InputPrimitiveType.AzureLocation,

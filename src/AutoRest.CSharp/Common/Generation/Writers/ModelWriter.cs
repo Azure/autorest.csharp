@@ -288,9 +288,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
-            FormattableString binaryDataExtraDescription = property.Declaration.Type.IsFrameworkType &&
-                property.Declaration.Type.FrameworkType == typeof(BinaryData) ?
-                CreateBinaryDataExtraDescription() : $"";
+            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type);
             if (!string.IsNullOrWhiteSpace(property.Description))
             {
                 return $"{property.Description}{binaryDataExtraDescription}";
@@ -298,11 +296,35 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{property.CreateDefaultPropertyDescription(overrideName)}{binaryDataExtraDescription}";
         }
 
-        private FormattableString CreateBinaryDataExtraDescription()
+        private FormattableString CreateBinaryDataExtraDescription(CSharpType type)
+        {
+            if (type.IsFrameworkType)
+            {
+                if (type.FrameworkType == typeof(BinaryData))
+                {
+                    return ConstructBinaryDataDescription("this property");
+                }
+                if (TypeFactory.IsList(type) &&
+                    type.Arguments[0].IsFrameworkType &&
+                    type.Arguments[0].FrameworkType == typeof(BinaryData))
+                {
+                    return ConstructBinaryDataDescription("the element of this property");
+                }
+                if (TypeFactory.IsDictionary(type) &&
+                    type.Arguments[1].IsFrameworkType &&
+                    type.Arguments[1].FrameworkType == typeof(BinaryData))
+                {
+                    return ConstructBinaryDataDescription("the value of this property");
+                }
+            }
+            return $"";
+        }
+
+        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc)
         {
             return $@"
 <para>
-To assign an object to this property use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
+To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
 </para>
 <para>
 To assign an already formated json string to this property use <see cref=""{typeof(BinaryData)}.FromString(string)""/>.
