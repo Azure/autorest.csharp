@@ -12,4 +12,5 @@ namespace: Azure.AI.DocumentTranslation
 data-plane: true
 security: AzureKey
 security-header-name: Ocp-Apim-Subscription-Key
+disable-pagination-top-renaming: true
 ```

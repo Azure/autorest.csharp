@@ -176,6 +176,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.Generation1ConvenienceClient),
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
+                ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
                 ReadStringOption(root, Configuration.Options.ProjectFolder)!,
                 protocolMethods,
                 MgmtConfiguration.LoadConfiguration(root)
