@@ -166,6 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     requestPath,
                     contextualPath,
                     operationName,
+                    this,
                     isLongRunning,
                     throwIfNull);
                 result.Add(restOperation);
@@ -271,7 +272,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "Update",
                         createOrUpdateOperation.MgmtReturnType,
                         createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
-                        createOrUpdateOperation.RequestPath));
+                        createOrUpdateOperation.RequestPath,
+                        this));
             }
 
             return null;
@@ -311,6 +313,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "AddTag",
                         getOperation.MgmtReturnType,
                         "Add a tag to the current resource.",
+                        this,
                         TagKeyParameter,
                         TagValueParameter), isConvenientOperation: true));
 
@@ -320,6 +323,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "SetTags",
                         getOperation.MgmtReturnType,
                         "Replace the tags on the resource with the given set.",
+                        this,
                         TagSetParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
@@ -328,6 +332,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "RemoveTag",
                         getOperation.MgmtReturnType,
                         "Removes a tag by key from the resource.",
+                        this,
                         TagKeyParameter), isConvenientOperation: true));
             }
             return result;
@@ -384,7 +389,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     operation,
                     requestPath,
                     contextualPath,
-                    methodName);
+                    methodName,
+                    this);
 
                 if (result.TryGetValue(key, out var list))
                 {

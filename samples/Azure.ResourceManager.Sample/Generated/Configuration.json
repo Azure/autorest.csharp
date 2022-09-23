@@ -38,6 +38,7 @@
   "MgmtDebug": {
     "ShowSerializedNames": true
   },
+  "IsStrictCommonOperationEnabled": true,
   "UpdateRequiredCopy": {
     "VirtualMachineExtension": "Publisher"
   }

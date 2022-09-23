@@ -22,20 +22,13 @@ namespace AutoRest.CSharp.Mgmt.Models
             ItemType = pagingMethod.PagingResponse.ItemType;
         }
 
-        public PagingMethodWrapper(RestClientMethod method)
+        public PagingMethodWrapper(RestClientMethod method, CSharpType itemType, string valuePropertyName)
         {
             Method = method;
             NextPageMethod = null;
             NextLinkName = null;
-            if (method.IsListMethod(out var itemType, out var valuePropertyName))
-            {
-                ItemName = valuePropertyName;
-                ItemType = itemType;
-            }
-            else
-            {
-                throw new InvalidOperationException($"Method {method.Name} with path {method.Operation.Path} is not a list method");
-            }
+            ItemName = valuePropertyName;
+            ItemType = itemType;
         }
 
         public CSharpType ItemType { get; }

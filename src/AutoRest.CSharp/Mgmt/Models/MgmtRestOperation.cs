@@ -59,8 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private Func<bool, FormattableString>? _returnsDescription;
         public Func<bool, FormattableString>? ReturnsDescription => IsPagingOperation ? _returnsDescription ??= EnsureReturnsDescription() : null;
 
-        private PagingMethodWrapper? _pagingMethodWrapper;
-        public PagingMethodWrapper? PagingMethod => _pagingMethodWrapper ??= EnsurePagingMethodWrapper();
+        public PagingMethodWrapper? PagingMethod { get; }
 
         private CSharpType? _mgmtReturnType;
         public CSharpType? MgmtReturnType => _mgmtReturnType ??= GetMgmtReturnType(OriginalReturnType);
@@ -73,8 +72,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MethodSignatureModifiers Accessibility => Method.Accessibility;
         public bool IsPagingOperation => Operation.Language.Default.Paging != null || IsListOperation;
 
-        private bool? _isListOperation;
-        private bool IsListOperation => _isListOperation ??= MgmtContext.Library.GetRestClientMethod(Operation).IsListMethod(out var _);
+        private bool IsListOperation => PagingMethod != null;
+
         public CSharpType? OriginalReturnType { get; }
 
         /// <summary>
@@ -96,6 +95,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Resource? Resource { get; }
 
+        public MgmtTypeProvider Owner { get; }
+
         public bool ThrowIfNull { get; }
 
         public bool IsLongRunningOperation => _isLongRunning.HasValue ? _isLongRunning.Value : Operation.IsLongRunning;
@@ -108,7 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Schema? FinalResponseSchema => Operation.IsLongRunning ? Operation.LongRunningFinalResponse.ResponseSchema : null;
 
-        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false)
+        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string methodName, MgmtTypeProvider owner, bool? isLongRunning = null, bool throwIfNull = false)
         {
             var method = MgmtContext.Library.GetRestClientMethod(operation);
             var restClient = MgmtContext.Library.GetRestClient(operation);
@@ -117,28 +118,31 @@ namespace AutoRest.CSharp.Mgmt.Models
             ThrowIfNull = throwIfNull;
             Operation = operation;
             Method = method;
+            PagingMethod = GetPagingMethodWrapper(method);
             RestClient = restClient;
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
+            Owner = owner;
             Resource = GetResourceMatch(restClient, method, requestPath);
             FinalStateVia = operation.IsLongRunning ? operation.LongRunningFinalStateVia : null;
             OriginalReturnType = operation.IsLongRunning ? GetFinalResponse() : Method.ReturnType;
             InterimOperation = GetInterimOperation();
         }
 
-        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, params Parameter[] overrideParameters)
-            : this(other, nameOverride, overrideReturnType, overrideDescription, other.ContextualPath, overrideParameters)
+        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, MgmtTypeProvider overrideOwner, params Parameter[] overrideParameters)
+            : this(other, nameOverride, overrideReturnType, overrideDescription, other.ContextualPath, overrideOwner, overrideParameters)
         {
         }
 
-        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, RequestPath contextualPath, params Parameter[] overrideParameters)
+        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, RequestPath contextualPath, MgmtTypeProvider overrideOwner, params Parameter[] overrideParameters)
         {
             //copy values from other method
             _isLongRunning = other.IsLongRunningOperation;
             ThrowIfNull = other.ThrowIfNull;
             Operation = other.Operation;
             Method = other.Method;
+            PagingMethod = other.PagingMethod;
             RestClient = other.RestClient;
             RequestPath = other.RequestPath;
             ContextualPath = contextualPath;
@@ -148,6 +152,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             InterimOperation = other.InterimOperation;
 
             //modify some of the values
+            Owner = overrideOwner;
             Name = nameOverride;
             _mgmtReturnType = overrideReturnType;
             _description = overrideDescription;
@@ -486,8 +491,8 @@ namespace AutoRest.CSharp.Mgmt.Models
                 originalType = pagingMethod.PagingResponse.ItemType;
             }
 
-            //try for list method
-            originalType = GetListMethodItemType() ?? originalType;
+            // if this is a list method, we replace the original return type with its item type
+            originalType = PagingMethod?.ItemType ?? originalType;
 
             if (Configuration.MgmtConfiguration.PreventWrappingReturnType.Contains(OperationId))
                 return originalType;
@@ -495,8 +500,13 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (!IsResourceDataType(originalType, out var data))
                 return originalType;
 
-            if (Resource is not null && Resource.ResourceData.Type.Equals(originalType))
+            // if the operation has a valid resource bonded, and it is not a list operation, we return the resource as a wrapper of the resource data
+            if (!IsListOperation && Resource is not null && Resource.ResourceData.Type.Equals(originalType))
                 return Resource.Type;
+
+            // if the operation is a list operation and its owner is a resource collection, and it is returning the same resource data, we wrap it into the corresponding resource
+            if (IsListOperation && Owner is ResourceCollection collection && collection.ResourceData.Type.Equals(originalType))
+                return collection.Resource.Type;
 
             var foundResources = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceData.Type.Equals(originalType)).ToList();
             return foundResources.Count switch
@@ -530,19 +540,15 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
         }
 
-        private CSharpType? GetListMethodItemType()
+        private static PagingMethodWrapper? GetPagingMethodWrapper(RestClientMethod method)
         {
-            if (Method.ReturnType is null)
-                return null;
+            if (MgmtContext.Library.PagingMethods.TryGetValue(method, out var pagingMethod))
+                return new PagingMethodWrapper(pagingMethod);
 
-            var restClientMethod = MgmtContext.Library.GetRestClientMethod(Operation);
-            return restClientMethod.IsListMethod(out var item) ? item : null;
-        }
+            if (method.IsListMethod(out var itemType, out var valuePropertyName))
+                return new PagingMethodWrapper(method, itemType, valuePropertyName);
 
-        private PagingMethodWrapper EnsurePagingMethodWrapper()
-        {
-            MgmtContext.Library.PagingMethods.TryGetValue(Method, out var pagingMethod);
-            return pagingMethod is null ? new PagingMethodWrapper(Method) : new PagingMethodWrapper(pagingMethod);
+            return null;
         }
 
         private Func<bool, FormattableString> EnsureReturnsDescription()
