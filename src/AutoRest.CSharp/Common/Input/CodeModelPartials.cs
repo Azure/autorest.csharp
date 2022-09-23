@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using YamlDotNet.Serialization;
@@ -179,6 +180,9 @@ namespace AutoRest.CSharp.Input
     {
         public const string ArmId = "arm-id";
         public const string AzureLocation = "azure-location";
+        public const string DateTime = "date-time";
+        public const string DateTimeRFC1123 = "date-time-rfc1123";
+        public const string DateTimeUnix = "date-time-unix";
         public const string DurationConstant = "duration-constant";
         public const string ETag = "etag";
         public const string ResourceType = "resource-type";
