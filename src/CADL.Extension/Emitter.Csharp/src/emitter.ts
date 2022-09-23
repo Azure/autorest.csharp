@@ -443,20 +443,15 @@ function loadOperation(
         }
     }
 
-    let operationPaging: OperationPaging | undefined = undefined;
-
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const { operationResponse, paging } = loadOperationResponse(
+        const operationResponse = loadOperationResponse(
             program,
             res,
             resourceOperation
         );
         if (operationResponse) {
             responses.push(operationResponse);
-        }
-        if (paging) {
-            operationPaging = paging;
         }
     }
 
@@ -473,6 +468,29 @@ function loadOperation(
     const generateConvenienceMethod: boolean =
         requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
 
+    /* handle lro */
+    /* handle paging. */
+    let paging: OperationPaging | undefined = undefined;
+    for (const res of operation.responses) {
+        const body = res.responses[0]?.body;
+        if (body?.type) {
+            if (
+                body.type.kind === "Model" &&
+                hasDecorator(body?.type, "$pagedResult")
+            ) {
+                const itemsProperty = Array.from(
+                    body.type.properties.values()
+                ).find((it) => hasDecorator(it, "$items"));
+                const nextLinkProperty = Array.from(
+                    body.type.properties.values()
+                ).find((it) => hasDecorator(it, "$nextLink"));
+                paging = {
+                    NextLinkName: nextLinkProperty?.name,
+                    ItemName: itemsProperty?.name
+                } as OperationPaging;
+            }
+        }
+    }
     /* TODO: handle lro */
 
     return {
@@ -488,7 +506,7 @@ function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
-        Paging: operationPaging,
+        Paging: paging,
         GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;
 
@@ -572,18 +590,14 @@ function loadOperation(
         program: Program,
         response: HttpOperationResponse,
         resourceOperation?: ResourceOperation
-    ): { operationResponse?: OperationResponse; paging?: OperationPaging } {
+    ): OperationResponse | undefined {
         if (!response.statusCode || response.statusCode === "*") {
-            return {
-                operationResponse: undefined,
-                paging: undefined
-            };
+            return undefined;
         }
         const status: number[] = [];
         status.push(Number(response.statusCode));
         //TODO: what to do if more than 1 response?
         const body = response.responses[0]?.body;
-        let paging: OperationPaging | undefined = undefined;
 
         let type: InputType | undefined = undefined;
         if (body?.type) {
@@ -603,23 +617,6 @@ function loadOperation(
                     enums
                 );
                 type = inputType;
-            }
-
-            /* handle paging */
-            if (
-                body.type.kind === "Model" &&
-                hasDecorator(body?.type, "$pagedResult")
-            ) {
-                const itemsProperty = Array.from(
-                    body.type.properties.values()
-                ).find((it) => hasDecorator(it, "$items"));
-                const nextLinkProperty = Array.from(
-                    body.type.properties.values()
-                ).find((it) => hasDecorator(it, "$nextLink"));
-                paging = {
-                    NextLinkName: nextLinkProperty?.name,
-                    ItemName: itemsProperty?.name
-                } as OperationPaging;
             }
         }
 
@@ -642,14 +639,11 @@ function loadOperation(
         }
 
         return {
-            operationResponse: {
-                StatusCodes: status,
-                BodyType: type,
-                BodyMediaType: BodyMediaType.Json,
-                Headers: responseHeaders
-            } as OperationResponse,
-            paging: paging
-        };
+            StatusCodes: status,
+            BodyType: type,
+            BodyMediaType: BodyMediaType.Json,
+            Headers: responseHeaders
+        } as OperationResponse;
     }
 }
 
