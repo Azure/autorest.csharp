@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -15,7 +16,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
-using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -129,6 +129,49 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line();
         }
 
+        private static CodeWriter WriteMethodModifiers(this CodeWriter writer, MethodSignatureBase methodBase, bool isAbstract)
+        {
+            writer
+                .AppendRawIf("public ", methodBase.Modifiers.HasFlag(Public))
+                .AppendRawIf("internal ", methodBase.Modifiers.HasFlag(Internal))
+                .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
+                .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
+
+            writer.AppendRawIf("abstract ", isAbstract);
+
+            if (methodBase is MethodSignature)
+                writer
+                    .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
+                    .AppendRawIf("new ", methodBase.Modifiers.HasFlag(New))
+                    .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
+                    .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async) && !isAbstract); // abstract methods cannot have async modifier
+
+            return writer;
+        }
+
+        public static CodeWriter WriteAbstractMethodDeclaration(this CodeWriter writer, MethodSignature method)
+        {
+            writer.WriteMethodModifiers(method, true);
+
+            if (method.ReturnType != null)
+                writer.Append($"{method.ReturnType} ");
+            else
+                writer.AppendRaw("void ");
+
+            writer.Append($"{method.Name}(");
+
+            foreach (var parameter in method.Parameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+
+            writer.RemoveTrailingComma();
+            writer.LineRaw(");");
+
+            return writer;
+        }
+
         public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)
@@ -136,20 +179,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"#pragma warning disable {disabledWarning}");
             }
 
-            writer
-                .AppendRawIf("public ", methodBase.Modifiers.HasFlag(Public))
-                .AppendRawIf("internal ", methodBase.Modifiers.HasFlag(Internal))
-                .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
-                .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
-
+            writer.WriteMethodModifiers(methodBase, false);
 
             if (methodBase is MethodSignature method)
             {
-                writer
-                    .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
-                    .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
-                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
-
                 if (method.ReturnType != null)
                 {
                     writer.Append($"{method.ReturnType} ");
@@ -172,7 +205,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.RemoveTrailingComma();
-            writer.Append($")");
+            writer.AppendRaw(")");
 
             if (methodBase is ConstructorSignature { Initializer: { } } constructor)
             {
