@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
@@ -204,6 +205,45 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 throw new InvalidOperationException($"Final response for {RestClient.OperationGroup.Key}.{Method.Name} was not found it was of type {finalSchema.Name}", ex);
             }
+        }
+
+        public FormattableString? GetValueConverter(FormattableString clientVariable, FormattableString valueVariable)
+        {
+            var restReturnType = IsPagingOperation ? PagingMethod!.ItemType : Method.ReturnType;
+            // when the method returns nothing, when this happens, the methodReturnType should either be Response, or ArmOperation
+            if (restReturnType == null && MgmtReturnType == null)
+                return null;
+
+            Debug.Assert(restReturnType != null);
+            Debug.Assert(MgmtReturnType != null);
+
+            // check if this operation need a response converter
+            if (MgmtReturnType.Equals(restReturnType))
+                return null;
+
+            if (InterimOperation != null)
+                return null;
+
+            // check the implementation of those types -- all should be a type provider
+            if (MgmtReturnType.IsFrameworkType || restReturnType.IsFrameworkType)
+                return null;
+
+            // first check: if the method is returning a BaseResource and the rest operation is returning a ResourceData
+            if (MgmtReturnType.Implementation is BaseResource returnBaseResource && restReturnType.Implementation is ResourceData)
+            {
+                // in this case we should call the static Resource factory in the base resource
+                return $"{returnBaseResource.Type}.GetResource({clientVariable}, {valueVariable})";
+            }
+
+            // second check: if the method is returning a Resource and the rest operation is returning a ResourceData
+            if (MgmtReturnType.Implementation is Resource returnResource && restReturnType.Implementation is ResourceData)
+            {
+                // in this case we should call the constructor of the resource to wrap it into a resource
+                return $"new {returnResource.Type}({clientVariable}, {valueVariable})";
+            }
+
+            // otherwise we return null
+            return null;
         }
 
         internal enum ResourceMatchType

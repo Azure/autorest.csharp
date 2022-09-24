@@ -677,33 +677,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 .Append($"return {typeof(Page)}.FromValues(response.Value")
                 .AppendIf($".{pagingMethod.ItemName}", !pagingMethod.ItemName.IsNullOrEmpty());
 
-
-            Resource? resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(itemType));
-            // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
-            if (resource is null)
-                resource = operation.Resource is not null && operation.Resource.Type.Equals(itemType)
-                    ? operation.Resource
-                    : This.DefaultResource;
-            if (resource is not null && resource.Type.Equals(itemType))
+            // itemType is the type of the real operation
+            var value = new CodeWriterDeclaration("value");
+            var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{value}");
+            if (valueConverter != null)
             {
                 _writer.UseNamespace(typeof(Enumerable).Namespace!);
-
-                var value = new CodeWriterDeclaration("value");
-                _writer.Append($@".Select({value:D} => ");
-                if (resource.ResourceData.ShouldSetResourceIdentifier)
+                _writer.Append($".Select({value:D} => ");
+                if (!itemType.IsFrameworkType && itemType.Implementation is Resource resource && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
                     using (_writer.Scope())
                     {
                         _writer
                             .Line($"{value}.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{value}")};")
-                            .Line($"return new {itemType}({ArmClientReference}, {value});");
+                            .Line($"return new {resource.Type}({ArmClientReference}, {value});");
                     }
+                    _writer.AppendRaw(")");
                 }
                 else
                 {
-                    _writer.Append($"new {itemType}({ArmClientReference}, {value})");
+                    _writer.Append($"{valueConverter})");
                 }
-                _writer.AppendRaw(")");
             }
 
             _writer.Line($", {continuationTokenText}, {response}.GetRawResponse());");
@@ -766,23 +760,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-                Resource? resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(operation.ReturnType.UnWrapResponse()));
-                resource ??= operation.Resource != null && operation.Resource.Type.Equals(operation.ReturnType.UnWrapResponse()) ? operation.Resource : null;
-                if (resource is not null)
+                if (operation.ThrowIfNull)
                 {
-                    if (operation.ThrowIfNull)
-                    {
-                        _writer
-                            .Line($"if ({response}.Value == null)")
-                            .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
-                    }
+                    _writer
+                        .Line($"if ({response}.Value == null)")
+                        .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
+                }
+                var realReturnType = operation.ReturnType.UnWrapResponse();
+                if (!realReturnType.IsFrameworkType && realReturnType.Implementation is Resource resource && resource.ResourceData.ShouldSetResourceIdentifier)
+                {
+                    _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
+                }
 
-                    if (resource.ResourceData.ShouldSetResourceIdentifier)
-                    {
-                        _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
-                    }
-
-                    _writer.Line($"return {typeof(Response)}.FromValue(new {resource.Type}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
+                // the case that we did not need to wrap the result
+                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{response}.Value");
+                if (valueConverter != null)
+                {
+                    _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {response}.GetRawResponse());");
                 }
                 else
                 {
@@ -858,7 +852,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteLROResponse(GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, async);
         }
 
-        protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool isAsync)
         {
             if (operation.InterimOperation is not null)
             {
@@ -875,9 +869,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                if (operation.MgmtReturnType is not null && MgmtContext.Library.CSharpTypeToResource.ContainsKey(operation.MgmtReturnType))
+                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"response");
+                if (valueConverter != null)
                 {
-                    _writer.Append($"{typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, response), response.GetRawResponse())");
+                    _writer.Append($"{typeof(Response)}.FromValue({valueConverter}, response.GetRawResponse())");
                 }
                 else
                 {
@@ -904,7 +899,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     "WaitForCompletionResponse" :
                     "WaitForCompletion";
             _writer.Line($"if (waitUntil == {typeof(WaitUntil)}.Completed)");
-            _writer.Line($"{GetAwait(async)} operation.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"{GetAwait(isAsync)} operation.{CreateMethodName(waitForCompletionMethod, isAsync)}(cancellationToken){GetConfigureAwait(isAsync)};");
             _writer.Line($"return operation;");
         }
         #endregion
