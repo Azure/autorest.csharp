@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -20,16 +19,66 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         public static void ApplyRenameMapping()
         {
-            var renameTargets = new List<RenameAndReformatTarget>();
-            foreach ((var key, var value) in Configuration.MgmtConfiguration.RenameMapping)
-            {
-                renameTargets.Add(new RenameAndReformatTarget(key, value));
-            }
-
+            var renameTargets = GetRenameAndReformatTargets().ToList();
             // apply them one by one
             foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 ApplyRenameTargets(schema, renameTargets);
+            }
+
+            var parameterRenameTargets = new Dictionary<string, IReadOnlyDictionary<string, RenameAndReformatTarget>>();
+            foreach ((var operationId, var values) in Configuration.MgmtConfiguration.ParameterRenameMapping)
+            {
+                parameterRenameTargets.Add(operationId, GetParameterRenameTargets(values));
+            }
+
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    if (parameterRenameTargets.TryGetValue(operation.OperationId ?? string.Empty, out var parameterTargets))
+                    {
+                        ApplyRenameTargets(operation, parameterTargets);
+                    }
+                }
+            }
+        }
+
+        private static IEnumerable<RenameAndReformatTarget> GetRenameAndReformatTargets()
+        {
+            foreach ((var key, var value) in Configuration.MgmtConfiguration.RenameMapping)
+            {
+                yield return new RenameAndReformatTarget(key, value);
+            }
+        }
+
+        private static IReadOnlyDictionary<string, RenameAndReformatTarget> GetParameterRenameTargets(IReadOnlyDictionary<string, string> rawMapping)
+        {
+            var result = new Dictionary<string, RenameAndReformatTarget>();
+            foreach ((var key, var value) in rawMapping)
+            {
+                result.Add(key, new RenameAndReformatTarget(key, value));
+            }
+
+            return result;
+        }
+
+        private static void ApplyRenameTargets(Operation operation, IReadOnlyDictionary<string, RenameAndReformatTarget> renameTargets)
+        {
+            // temporarily we only support change name of the parameter
+            foreach (var parameter in operation.Parameters)
+            {
+                ApplyRenameTarget(parameter, renameTargets);
+            }
+        }
+
+        private static void ApplyRenameTarget(RequestParameter parameter, IReadOnlyDictionary<string, RenameAndReformatTarget> renameTargets)
+        {
+            if (renameTargets.TryGetValue(parameter.GetOriginalName(), out var target))
+            {
+                // apply the rename
+                parameter.Language.Default.SerializedName ??= parameter.Language.Default.Name;
+                parameter.Language.Default.Name = target.NewName;
             }
         }
 

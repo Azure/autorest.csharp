@@ -104,5 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         internal static string GetOriginalName(this Schema schema) => schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
+
+        internal static string GetOriginalName(this RequestParameter parameter) => parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name;
     }
 }
