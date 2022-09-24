@@ -263,7 +263,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    _writer.Line($"return Response.FromValue({variableName}.Value, {variableName}.GetRawResponse());");
+                    _writer.Line($"return {typeof(Response)}.FromValue({variableName}.Value, {variableName}.GetRawResponse());");
                 }
             }
             else

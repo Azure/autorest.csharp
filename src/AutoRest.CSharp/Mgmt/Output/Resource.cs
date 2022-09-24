@@ -251,10 +251,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         private MgmtClientOperation? _getOperation;
         private MgmtClientOperation? _deleteOperation;
         private MgmtClientOperation? _updateOperation;
-        public MgmtClientOperation? CreateOperation => _createOperation ??= GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
-        public MgmtClientOperation GetOperation => _getOperation ??= GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
-        public MgmtClientOperation? DeleteOperation => _deleteOperation ??= GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
-        public MgmtClientOperation? UpdateOperation => _updateOperation ??= EnsureUpdateOperation();
+        public virtual MgmtClientOperation? CreateOperation => _createOperation ??= GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
+        public virtual MgmtClientOperation GetOperation => _getOperation ??= GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
+        public virtual MgmtClientOperation? DeleteOperation => _deleteOperation ??= GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
+        public virtual MgmtClientOperation? UpdateOperation => _updateOperation ??= EnsureUpdateOperation();
 
         private MgmtClientOperation? EnsureUpdateOperation()
         {

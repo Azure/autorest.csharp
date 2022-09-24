@@ -321,8 +321,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         internal enum ResourceMatchType
         {
             Exact,
-            ParentList,
-            AncestorList,
+            ParentList, // it is OK to keep the resource
+            AncestorList, // maybe we need to change to base
             ChildList,
             Context,
             CheckName,
@@ -374,8 +374,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (matchTypeMatches.Count == 1)
                 return matchTypeMatches.First();
 
-            // TODO -- return null here with a warning since this is configurable
-            return null;
+            throw new InvalidOperationException();
         }
 
         private bool AllMatchesSameParent(HashSet<Resource> matches, MgmtTypeProvider parent, out bool areAllSingleton)
@@ -477,7 +476,6 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             if (InterimOperation is not null)
                 return InterimOperation.InterimType;
-
 
             return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(false);
         }
