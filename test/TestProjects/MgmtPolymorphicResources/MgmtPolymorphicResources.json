@@ -1,0 +1,2992 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "ComputeManagementClient",
+        "description": "The Compute Management Client.",
+        "version": "2020-06-01"
+    },
+    "host": "management.azure.com",
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "security": [
+        {
+            "azure_auth": ["user_impersonation"]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}": {
+            "put": {
+                "tags": ["VirtualMachineExtensions"],
+                "operationId": "VirtualMachineExtensions_CreateOrUpdate",
+                "description": "The operation to create or update the extension.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine where the extension should be created or updated."
+                    },
+                    {
+                        "name": "vmExtensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine extension."
+                    },
+                    {
+                        "name": "extensionParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        },
+                        "description": "Parameters supplied to the Create Virtual Machine Extension operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": ["VirtualMachineExtensions"],
+                "operationId": "VirtualMachineExtensions_Update",
+                "description": "The operation to update the extension.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine where the extension should be updated."
+                    },
+                    {
+                        "name": "vmExtensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine extension."
+                    },
+                    {
+                        "name": "extensionParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtensionUpdate"
+                        },
+                        "description": "Parameters supplied to the Update Virtual Machine Extension operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": ["VirtualMachineExtensions"],
+                "operationId": "VirtualMachineExtensions_Delete",
+                "description": "The operation to delete the extension.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine where the extension should be deleted."
+                    },
+                    {
+                        "name": "vmExtensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine extension."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "get": {
+                "tags": ["VirtualMachineExtensions"],
+                "operationId": "VirtualMachineExtensions_Get",
+                "description": "The operation to get the extension.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine containing the extension."
+                    },
+                    {
+                        "name": "vmExtensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine extension."
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The expand expression to apply on the operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions": {
+            "get": {
+                "tags": ["VirtualMachineExtensions"],
+                "operationId": "VirtualMachineExtensions_List",
+                "description": "The operation to get all extensions of a Virtual Machine.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine containing the extension."
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The expand expression to apply on the operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtensionsListResult"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}/validate": {
+            "post": {
+                "tags": ["VirtualMachineExtensions"],
+                "operationId": "VirtualMachineExtensions_Validate",
+                "description": "The operation to create or update the extension.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine where the extension should be created or updated."
+                    },
+                    {
+                        "name": "vmExtensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine extension."
+                    },
+                    {
+                        "name": "extensionParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        },
+                        "description": "Parameters supplied to the Create Virtual Machine Extension operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "201": {
+                        "description": "Created"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmExtensionName}": {
+            "put": {
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
+                "operationId": "VirtualMachineScaleSetVMExtensions_CreateOrUpdate",
+                "description": "The operation to create or update the VMSS VM extension.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "name": "vmExtensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine extension."
+                    },
+                    {
+                        "name": "extensionParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        },
+                        "description": "Parameters supplied to the Create Virtual Machine Extension operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
+                "operationId": "VirtualMachineScaleSetVMExtensions_Update",
+                "description": "The operation to update the VMSS VM extension.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "name": "vmExtensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine extension."
+                    },
+                    {
+                        "name": "extensionParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtensionUpdate"
+                        },
+                        "description": "Parameters supplied to the Update Virtual Machine Extension operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
+                "operationId": "VirtualMachineScaleSetVMExtensions_Delete",
+                "description": "The operation to delete the VMSS VM extension.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "name": "vmExtensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine extension."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "get": {
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
+                "operationId": "VirtualMachineScaleSetVMExtensions_Get",
+                "description": "The operation to get the VMSS VM extension.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "name": "vmExtensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine extension."
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The expand expression to apply on the operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions": {
+            "get": {
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
+                "operationId": "VirtualMachineScaleSetVMExtensions_List",
+                "description": "The operation to get all extensions of an instance in Virtual Machine Scaleset.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The expand expression to apply on the operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtensionsListResult"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmExtensionName}/validate": {
+            "post": {
+                "tags": ["VirtualMachineScaleSetVMExtensions"],
+                "operationId": "VirtualMachineScaleSetVMExtensions_Validate",
+                "description": "The operation to create or update the VMSS VM extension.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "name": "vmExtensionName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine extension."
+                    },
+                    {
+                        "name": "extensionParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineExtension"
+                        },
+                        "description": "Parameters supplied to the Create Virtual Machine Extension operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "201": {
+                        "description": "Created"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}": {
+            "put": {
+                "tags": ["VirtualMachineScaleSets"],
+                "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
+                "description": "Create or update a VM scale set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set to create or update."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSet"
+                        },
+                        "description": "The scale set object."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSet"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSet"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": ["VirtualMachineScaleSets"],
+                "operationId": "VirtualMachineScaleSets_Update",
+                "description": "Update a VM scale set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set to create or update."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSetUpdate"
+                        },
+                        "description": "The scale set object."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSet"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": ["VirtualMachineScaleSets"],
+                "operationId": "VirtualMachineScaleSets_Delete",
+                "description": "Deletes a VM scale set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "get": {
+                "tags": ["VirtualMachineScaleSets"],
+                "operationId": "VirtualMachineScaleSets_Get",
+                "description": "Display information about a virtual machine scale set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSet"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets": {
+            "get": {
+                "tags": ["VirtualMachineScaleSets"],
+                "operationId": "VirtualMachineScaleSets_List",
+                "description": "Gets a list of all VM scale sets under a resource group.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSetListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
+            "put": {
+                "tags": ["VirtualMachines"],
+                "operationId": "VirtualMachines_CreateOrUpdate",
+                "description": "The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachine"
+                        },
+                        "description": "Parameters supplied to the Create Virtual Machine operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachine"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachine"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": ["VirtualMachines"],
+                "operationId": "VirtualMachines_Update",
+                "description": "The operation to update a virtual machine.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineUpdate"
+                        },
+                        "description": "Parameters supplied to the Update Virtual Machine operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachine"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachine"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": ["VirtualMachines"],
+                "operationId": "VirtualMachines_Delete",
+                "description": "The operation to delete a virtual machine.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine."
+                    },
+                    {
+                        "name": "forceDeletion",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "description": "Optional parameter to force delete virtual machines."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "get": {
+                "tags": ["VirtualMachines"],
+                "operationId": "VirtualMachines_Get",
+                "description": "Retrieves information about the model view or the instance view of a virtual machine.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the virtual machine."
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The expand expression to apply on the operation.",
+                        "enum": ["instanceView"],
+                        "x-ms-enum": {
+                            "name": "InstanceViewTypes",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachine"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines": {
+            "get": {
+                "tags": ["VirtualMachines"],
+                "operationId": "VirtualMachines_List",
+                "description": "Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python2Packages/{packageName}": {
+            "delete": {
+                "tags": ["Python2Package"],
+                "operationId": "Python2Package_Delete",
+                "description": "Delete the python 2 package by name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "packageName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The python package name."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Python2Package"],
+                "operationId": "Python2Package_Get",
+                "description": "Retrieve the python 2 package identified by package name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "packageName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The python package name."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Python2Package"],
+                "operationId": "Python2Package_CreateOrUpdate",
+                "description": "Create or Update the python 2 package identified by package name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "packageName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of python package."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PythonPackageCreateParameters"
+                        },
+                        "description": "The create or update parameters for python package."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Python2Package"],
+                "operationId": "Python2Package_Update",
+                "description": "Update the python 2 package identified by package name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "packageName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of python package."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PythonPackageUpdateParameters"
+                        },
+                        "description": "The update parameters for python package."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python2Packages": {
+            "get": {
+                "tags": ["Python2Package"],
+                "operationId": "Python2Package_ListByAutomationAccount",
+                "description": "Retrieve a list of python 2 packages.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModuleListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}": {
+            "patch": {
+                "tags": ["AutomationAccount"],
+                "operationId": "AutomationAccount_Update",
+                "description": "Update an automation account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccountUpdateParameters"
+                        },
+                        "description": "Parameters supplied to the update automation account."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccount"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["AutomationAccount"],
+                "operationId": "AutomationAccount_CreateOrUpdate",
+                "description": "Create or update automation account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccountCreateOrUpdateParameters"
+                        },
+                        "description": "Parameters supplied to the create or update automation account."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccount"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccount"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["AutomationAccount"],
+                "operationId": "AutomationAccount_Delete",
+                "description": "Delete an automation account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["AutomationAccount"],
+                "operationId": "AutomationAccount_Get",
+                "description": "Get information about an Automation Account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccount"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts": {
+            "get": {
+                "tags": ["AutomationAccount"],
+                "operationId": "AutomationAccount_ListByResourceGroup",
+                "description": "Retrieve a list of accounts within a given resource group.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AutomationAccountListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules/{moduleName}": {
+            "delete": {
+                "tags": ["Module"],
+                "operationId": "Module_Delete",
+                "description": "Delete the module by name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "moduleName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The module name."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Module"],
+                "operationId": "Module_Get",
+                "description": "Retrieve the module identified by module name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "moduleName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The module name."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Module"],
+                "operationId": "Module_CreateOrUpdate",
+                "description": "Create or Update the module identified by module name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "moduleName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of module."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ModuleCreateOrUpdateParameters"
+                        },
+                        "description": "The create or update parameters for module."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Module"],
+                "operationId": "Module_Update",
+                "description": "Update the module identified by module name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "name": "moduleName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of module."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ModuleUpdateParameters"
+                        },
+                        "description": "The update parameters for module."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Module"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/modules": {
+            "get": {
+                "tags": ["Module"],
+                "operationId": "Module_ListByAutomationAccount",
+                "description": "Retrieve a list of modules.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/AutomationAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModuleListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default": {
+            "get": {
+                "operationId": "CassandraResources_GetCassandraKeyspaceThroughput",
+                "description": "Gets the RUs per second of the Cassandra Keyspace under an existing Azure Cosmos DB database account with the provided name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The RUs per second of the Cassandra Keyspace was retrieved successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSetting"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CassandraResources_UpdateCassandraKeyspaceThroughput",
+                "description": "Update RUs per second of an Azure Cosmos DB Cassandra Keyspace",
+                "x-ms-long-running-operation": true,
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "updateThroughputParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
+                        },
+                        "description": "The RUs per second of the parameters to provide for the current Cassandra Keyspace."
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The RUs per second of the Cassandra Keyspace update operation will complete asynchronously."
+                    },
+                    "200": {
+                        "description": "The RUs per second of the Cassandra Keyspace update operation was completed successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSetting"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/tables/{tableName}/throughputSettings/default": {
+            "get": {
+                "operationId": "CassandraResources_GetCassandraTableThroughput",
+                "description": "Gets the RUs per second of the Cassandra table under an existing Azure Cosmos DB database account with the provided name.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/tableNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The RUs per second of the Cassandra table was retrieved successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSetting"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CassandraResources_UpdateCassandraTableThroughput",
+                "description": "Update RUs per second of an Azure Cosmos DB Cassandra table",
+                "x-ms-long-running-operation": true,
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/tableNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "updateThroughputParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
+                        },
+                        "description": "The RUs per second of the parameters to provide for the current Cassandra table."
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The RUs per second of the Cassandra table update operation will complete asynchronously."
+                    },
+                    "200": {
+                        "description": "The RUs per second of the Cassandra table update operation was completed successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/ThroughputSetting"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/tables": {
+            "get": {
+                "operationId": "CassandraResources_ListCassandraTables",
+                "description": "Lists the Cassandra table under an existing Azure Cosmos DB database account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The Cassandra table properties were retrieved successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/CassandraTableListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/tables/{tableName}": {
+            "get": {
+                "operationId": "CassandraResources_GetCassandraTable",
+                "description": "Gets the Cassandra table under an existing Azure Cosmos DB database account.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/tableNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The Cassandra table property was retrieved successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/CassandraTable"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CassandraResources_CreateUpdateCassandraTable",
+                "description": "Create or update an Azure Cosmos DB Cassandra Table",
+                "x-ms-long-running-operation": true,
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/tableNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "createUpdateCassandraTableParameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CassandraTableCreateUpdateParameters"
+                        },
+                        "description": "The parameters to provide for the current Cassandra Table."
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The Cassandra Table create or update operation will complete asynchronously."
+                    },
+                    "200": {
+                        "description": "The Cassandra Table create or update operation was completed successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/CassandraTable"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "CassandraResources_DeleteCassandraTable",
+                "description": "Deletes an existing Azure Cosmos DB Cassandra table.",
+                "x-ms-long-running-operation": true,
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/tableNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The Cassandra table delete operation will complete asynchronously."
+                    },
+                    "204": {
+                        "description": "The Cassandra table delete operation was completed successfully."
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}": {
+            "put": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignments_CreateOrUpdate",
+                "description": "Creates an association between a VM and guest configuration",
+                "parameters": [
+                    {
+                        "name": "guestConfigurationAssignmentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "Name of the guest configuration assignment."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        },
+                        "description": "Parameters supplied to the create or update guest configuration assignment."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VmNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created. The guest configuration assignment for the VM was created successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        }
+                    },
+                    "200": {
+                        "description": "OK. The guest configuration assignment for the VM was updated successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignments_Get",
+                "description": "Get information about a guest configuration assignment",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "name": "guestConfigurationAssignmentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The guest configuration assignment name."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VmNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The guest configuration assignment was returned successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        }
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            },
+            "delete": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignments_Delete",
+                "description": "Delete a guest configuration assignment",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "name": "guestConfigurationAssignmentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "Name of the guest configuration assignment"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VmNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+            "get": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignments_List",
+                "description": "List all guest configuration assignments for a virtual machine.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VmNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignmentList"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}": {
+            "get": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignmentsVMSS_Get",
+                "description": "Get information about a guest configuration assignment for VMSS",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VMSSNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The guest configuration assignment name."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The guest configuration assignment was returned successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignmentsVMSS_Delete",
+                "description": "Delete a guest configuration assignment for VMSS",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VMSSNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The guest configuration assignment name."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignment"
+                        }
+                    },
+                    "204": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+            "get": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignmentsVMSS_List",
+                "description": "List all guest configuration assignments for VMSS.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/VMSSNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignmentList"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
+            "get": {
+                "tags": ["GuestConfigurationAssignments"],
+                "operationId": "GuestConfigurationAssignments_SubscriptionList",
+                "description": "List all guest configuration assignments for a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GuestConfigurationAssignmentList"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                }
+            }
+        }
+    },
+    "definitions": {
+        "VirtualMachineExtension": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/VirtualMachineExtensionProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Describes a Virtual Machine Extension."
+        },
+        "VirtualMachineExtensionUpdate": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/VirtualMachineExtensionUpdateProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/UpdateResource"
+                }
+            ],
+            "description": "Describes a Virtual Machine Extension."
+        },
+        "VirtualMachineExtensionsListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VirtualMachineExtension"
+                    },
+                    "description": "The list of extensions"
+                }
+            },
+            "description": "The List Extension operation response"
+        },
+        "Resource": {
+            "description": "The Resource model definition.",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Resource location"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "required": ["location"],
+            "x-ms-azure-resource": true
+        },
+        "UpdateResource": {
+            "description": "The Update Resource model definition.",
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            }
+        },
+        "VirtualMachineExtensionProperties": {
+            "properties": {
+                "forceUpdateTag": {
+                    "type": "string",
+                    "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
+                },
+                "publisher": {
+                    "type": "string",
+                    "description": "The name of the extension handler publisher."
+                },
+                "provisioningState": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The provisioning state, which only appears in the response."
+                }
+            },
+            "description": "Describes the properties of a Virtual Machine Extension."
+        },
+        "VirtualMachineExtensionUpdateProperties": {
+            "properties": {
+                "publisher": {
+                    "type": "string",
+                    "description": "The name of the extension handler publisher."
+                }
+            },
+            "description": "Describes the properties of a Virtual Machine Extension."
+        },
+        "VirtualMachineScaleSet": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/VirtualMachineScaleSetProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Describes a Virtual Machine Scale Set."
+        },
+        "VirtualMachineScaleSetUpdate": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/VirtualMachineScaleSetUpdateProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/UpdateResource"
+                }
+            ],
+            "description": "Describes a Virtual Machine Scale Set."
+        },
+        "VirtualMachineScaleSetProperties": {
+            "properties": {
+                "provisioningState": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The provisioning state, which only appears in the response."
+                },
+                "overprovision": {
+                    "type": "boolean",
+                    "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
+                },
+                "doNotRunExtensionsOnOverprovisionedVMs": {
+                    "type": "boolean",
+                    "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
+                },
+                "uniqueId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Specifies the ID which uniquely identifies a Virtual Machine Scale Set."
+                }
+            },
+            "description": "Describes the properties of a Virtual Machine Scale Set."
+        },
+        "VirtualMachineScaleSetUpdateProperties": {
+            "properties": {
+                "overprovision": {
+                    "type": "boolean",
+                    "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
+                }
+            },
+            "description": "Describes the properties of a Virtual Machine Scale Set."
+        },
+        "VirtualMachineScaleSetListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VirtualMachineScaleSet"
+                    },
+                    "description": "The list of virtual machine scale sets."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
+                }
+            },
+            "required": ["value"],
+            "description": "The List Virtual Machine operation response."
+        },
+        "VirtualMachine": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/VirtualMachineProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Describes a Virtual Machine."
+        },
+        "VirtualMachineUpdate": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/VirtualMachineProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/UpdateResource"
+                }
+            ],
+            "description": "Describes a Virtual Machine Update."
+        },
+        "VirtualMachineProperties": {
+            "properties": {
+                "provisioningState": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The provisioning state, which only appears in the response."
+                },
+                "licenseType": {
+                    "type": "string",
+                    "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
+                },
+                "vmId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands."
+                },
+                "extensionsTimeBudget": {
+                    "type": "string",
+                    "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). <br><br> Minimum api-version: 2020-06-01"
+                }
+            },
+            "description": "Describes the properties of a Virtual Machine."
+        },
+        "VirtualMachineListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VirtualMachine"
+                    },
+                    "description": "The list of virtual machines."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines."
+                }
+            },
+            "required": ["value"],
+            "description": "The List Virtual Machine operation response."
+        },
+        "PythonPackageCreateParameters": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/PythonPackageCreateProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets the module create properties."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "required": ["properties"],
+            "description": "The parameters supplied to the create or update module operation."
+        },
+        "PythonPackageCreateProperties": {
+            "properties": {
+                "contentLink": {
+                    "type": "string",
+                    "description": "Gets or sets the module content link."
+                }
+            },
+            "required": ["contentLink"],
+            "description": "The parameters supplied to the create or update module properties."
+        },
+        "PythonPackageUpdateParameters": {
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "description": "The parameters supplied to the update module operation."
+        },
+        "Module": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ModuleProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets the module properties."
+                },
+                "etag": {
+                    "type": "string",
+                    "description": "Gets or sets the etag of the resource."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Definition of the module type."
+        },
+        "ModuleProperties": {
+            "properties": {
+                "isGlobal": {
+                    "type": "boolean",
+                    "description": "Gets or sets the isGlobal flag of the module."
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Gets or sets the version of the module."
+                },
+                "sizeInBytes": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the size in bytes of the module."
+                },
+                "activityCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Gets or sets the activity count of the module."
+                },
+                "provisioningState": {
+                    "type": "string",
+                    "description": "Gets or sets the provisioning state of the module.",
+                    "enum": [
+                        "Created",
+                        "Creating",
+                        "StartingImportModuleRunbook",
+                        "RunningImportModuleRunbook",
+                        "ContentRetrieved",
+                        "ContentDownloaded",
+                        "ContentValidated",
+                        "ConnectionTypeImported",
+                        "ContentStored",
+                        "ModuleDataStored",
+                        "ActivitiesStored",
+                        "ModuleImportRunbookComplete",
+                        "Succeeded",
+                        "Failed",
+                        "Cancelled",
+                        "Updating"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ModuleProvisioningState",
+                        "modelAsString": false
+                    }
+                },
+                "contentLink": {
+                    "type": "string",
+                    "description": "Gets or sets the contentLink of the module."
+                }
+            },
+            "description": "Definition of the module property type."
+        },
+        "ModuleListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Module"
+                    },
+                    "description": "Gets or sets a list of modules."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Gets or sets the next link."
+                }
+            },
+            "description": "The response model for the list module operation."
+        },
+        "AutomationAccountUpdateParameters": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/AutomationAccountUpdateProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets account update properties."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets the name of the resource."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the location of the resource."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "description": "The parameters supplied to the update automation account operation."
+        },
+        "AutomationAccountUpdateProperties": {
+            "properties": {
+                "publicNetworkAccess": {
+                    "type": "boolean",
+                    "description": "Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet"
+                },
+                "disableLocalAuth": {
+                    "type": "boolean",
+                    "description": "Indicates whether requests using non-AAD authentication are blocked"
+                }
+            },
+            "description": "The parameters supplied to the update account properties."
+        },
+        "AutomationAccount": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/AutomationAccountProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets the automation account properties."
+                },
+                "etag": {
+                    "type": "string",
+                    "description": "Gets or sets the etag of the resource."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Definition of the automation account type."
+        },
+        "AutomationAccountProperties": {
+            "properties": {
+                "lastModifiedBy": {
+                    "type": "string",
+                    "description": "Gets or sets the last modified by."
+                },
+                "state": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Gets status of account.",
+                    "enum": ["Ok", "Unavailable", "Suspended"],
+                    "x-ms-enum": {
+                        "name": "AutomationAccountState",
+                        "modelAsString": true
+                    }
+                },
+                "creationTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the creation time.",
+                    "x-nullable": false
+                },
+                "lastModifiedTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true,
+                    "description": "Gets the last modified time.",
+                    "x-nullable": false
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Gets or sets the description."
+                }
+            },
+            "description": "Definition of the account property."
+        },
+        "AutomationAccountCreateOrUpdateParameters": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/AutomationAccountCreateOrUpdateProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets account create or update properties."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets name of the resource."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the location of the resource."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "description": "The parameters supplied to the create or update automation account operation."
+        },
+        "AutomationAccountCreateOrUpdateProperties": {
+            "properties": {
+                "publicNetworkAccess": {
+                    "type": "boolean",
+                    "description": "Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet"
+                },
+                "disableLocalAuth": {
+                    "type": "boolean",
+                    "description": "Indicates whether requests using non-AAD authentication are blocked"
+                }
+            },
+            "description": "The parameters supplied to the create or update account properties."
+        },
+        "AutomationAccountListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AutomationAccount"
+                    },
+                    "description": "Gets or sets list of accounts."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Gets or sets the next link."
+                }
+            },
+            "description": "The response model for the list account operation."
+        },
+        "ModuleCreateOrUpdateProperties": {
+            "properties": {
+                "contentLink": {
+                    "type": "string",
+                    "description": "Gets or sets the module content link."
+                }
+            },
+            "required": ["contentLink"],
+            "description": "The parameters supplied to the create or update module properties."
+        },
+        "ModuleCreateOrUpdateParameters": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ModuleCreateOrUpdateProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets the module create properties."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets name of the resource."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the location of the resource."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "required": ["properties"],
+            "description": "The parameters supplied to the create or update module operation."
+        },
+        "ModuleUpdateProperties": {
+            "properties": {
+                "contentLink": {
+                    "type": "string",
+                    "description": "Gets or sets the module content link."
+                }
+            },
+            "description": "The parameters supplied to the update properties."
+        },
+        "ModuleUpdateParameters": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ModuleUpdateProperties",
+                    "x-ms-client-flatten": true,
+                    "description": "Gets or sets the module update properties."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Gets or sets name of the resource."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Gets or sets the location of the resource."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Gets or sets the tags attached to the resource."
+                }
+            },
+            "description": "The parameters supplied to the update module operation."
+        },
+        "ThroughputSetting": {
+            "description": "An Azure Cosmos DB resource throughput.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "The properties of an Azure Cosmos DB resource throughput",
+                    "$ref": "#/definitions/ThroughputSettingProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
+        },
+        "ThroughputSettingProperties": {
+            "description": "The properties of an Azure Cosmos DB resource throughput",
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "description": "The version of this throughputSettings"
+                }
+            }
+        },
+        "ThroughputSettingsUpdateParameters": {
+            "description": "Parameters to update Cosmos DB resource throughput.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Properties to update Azure Cosmos DB resource throughput.",
+                    "$ref": "#/definitions/ThroughputSettingUpdateProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "required": ["properties"]
+        },
+        "ThroughputSettingUpdateProperties": {
+            "description": "Properties to update Azure Cosmos DB resource throughput.",
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "description": "The version of this throughputSettings"
+                }
+            }
+        },
+        "CassandraTable": {
+            "description": "An Azure Cosmos DB Cassandra table.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "The properties of an Azure Cosmos DB Cassandra table",
+                    "$ref": "#/definitions/CassandraTableProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
+        },
+        "CassandraTableProperties": {
+            "description": "The properties of an Azure Cosmos DB Cassandra table",
+            "type": "object",
+            "properties": {
+                "resource": {
+                    "type": "string",
+                    "description": "The resource binded with this table"
+                }
+            }
+        },
+        "CassandraTableCreateUpdateParameters": {
+            "description": "Parameters to create and update Cosmos DB Cassandra table.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Properties to create and update Azure Cosmos DB Cassandra table.",
+                    "$ref": "#/definitions/CassandraTableCreateUpdateProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "required": ["properties"]
+        },
+        "CassandraTableCreateUpdateProperties": {
+            "description": "Properties to create and update Azure Cosmos DB Cassandra table.",
+            "type": "object",
+            "properties": {
+                "resource": {
+                    "type": "string",
+                    "description": "The standard JSON format of a Cassandra table"
+                }
+            },
+            "required": ["resource"]
+        },
+        "CassandraTableListResult": {
+            "properties": {
+                "value": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CassandraTable"
+                    },
+                    "description": "List of Cassandra tables and their properties."
+                }
+            },
+            "description": "The List operation response, that contains the Cassandra tables and their properties."
+        },
+        "GuestConfigurationAssignment": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": false,
+                    "$ref": "#/definitions/GuestConfigurationAssignmentProperties",
+                    "description": "Properties of the Guest configuration assignment."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Guest configuration assignment is an association between a machine and guest configuration."
+        },
+        "GuestConfigurationAssignmentProperties": {
+            "properties": {
+                "targetResourceId": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "VM resource Id.",
+                    "x-nullable": true
+                },
+                "complianceStatus": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
+                    "x-ms-enum": {
+                        "name": "complianceStatus",
+                        "modelAsString": true
+                    },
+                    "enum": ["Compliant", "NonCompliant", "Pending"]
+                },
+                "resourceType": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Type of the resource - VMSS / VM",
+                    "x-nullable": true
+                }
+            },
+            "description": "Guest configuration assignment properties."
+        },
+        "GuestConfigurationAssignmentList": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GuestConfigurationAssignment"
+                    },
+                    "description": "Result of the list guest configuration assignment operation."
+                }
+            },
+            "description": "The response of the list guest configuration assignment operation."
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        },
+        "ResourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 1,
+            "maxLength": 90,
+            "x-ms-parameter-location": "method",
+            "description": "Name of an Azure Resource group."
+        },
+        "AutomationAccountNameParameter": {
+            "name": "automationAccountName",
+            "description": "The name of the automation account.",
+            "type": "string",
+            "required": true,
+            "in": "path",
+            "x-ms-parameter-location": "method"
+        },
+        "tableNameParameter": {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "Cosmos DB table name."
+        },
+        "VmNameParameter": {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine.",
+            "x-ms-parameter-location": "method"
+        },
+        "VMSSNameParameter": {
+            "name": "vmssName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set.",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}
