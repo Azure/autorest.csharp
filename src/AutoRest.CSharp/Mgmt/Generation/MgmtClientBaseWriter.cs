@@ -99,14 +99,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteClassDeclaration()
         {
             _writer.WriteXmlDocumentationSummary(This.Description);
-            _writer.Append($"{This.Accessibility}");
-            if (This.IsStatic)
-                _writer.Append($" static");
-            _writer.Append($" partial class {This.Type.Name}");
-            if (This.GetImplementsList().Any())
+            _writer.AppendRaw(This.Accessibility)
+                .AppendRawIf(" static", This.IsStatic)
+                .AppendRawIf(" abstract", This.Declaration.IsAbstract)
+                .Append($" partial class {This.Type.Name}");
+            if (This.GetImplements().Any())
             {
                 _writer.Append($" : ");
-                foreach (var type in This.GetImplementsList())
+                foreach (var type in This.GetImplements())
                 {
                     _writer.Append($"{type:D},");
                 }
@@ -134,8 +134,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodDocumentation(This.ResourceDataCtor);
                 using (_writer.WriteMethodDeclaration(This.ResourceDataCtor))
                 {
-                    _writer.Line($"HasData = true;");
-                    _writer.Line($"_data = {This.DefaultResource!.ResourceDataParameter.Name};");
+                    if (This.CanSetResourceData)
+                    {
+                        _writer.Line($"HasData = true;");
+                        _writer.Line($"_data = {This.DefaultResource!.ResourceDataParameter.Name};");
+                    }
+                    else
+                    {
+                        // when we are in the resource data constructor but cannot set the resource data, we are forwarding the resource data setting to my base class
+                        // when this happens, we cannot call the other constructor to set the rest clients
+                        // therefore we have to explicitly set them here
+                        foreach (var param in This.ExtraConstructorParameters)
+                        {
+                            _writer.Line($"_{param.Name} = {param.Name};");
+                        }
+
+                        if (This.CanSetRestClients)
+                        {
+                            WriteRestClientConstructor();
+                        }
+                        if (This.CanValidateResourceType)
+                            WriteDebugValidate();
+                    }
                 }
             }
 
@@ -146,17 +166,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodDocumentation(This.ArmClientCtor);
                 using (_writer.WriteMethodDeclaration(This.ArmClientCtor))
                 {
-                    if (This is MgmtExtensionClient)
-                        return;
-
                     foreach (var param in This.ExtraConstructorParameters)
                     {
                         _writer.Line($"_{param.Name} = {param.Name};");
                     }
 
-                    foreach (var set in This.UniqueSets)
+                    if (This.CanSetRestClients)
                     {
-                        WriteRestClientConstructorPair(set.RestClient, set.Resource);
+                        WriteRestClientConstructor();
                     }
                     if (This.CanValidateResourceType)
                         WriteDebugValidate();
@@ -204,7 +221,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteRestClientConstructorPair(MgmtRestClient restClient, Resource? resource)
+        private void WriteRestClientConstructor()
+        {
+            foreach (var set in This.UniqueSets)
+            {
+                WriteRestClientConstructorPair(set.RestClient, set.Resource);
+            }
+        }
+
+        private void WriteRestClientConstructorPair(MgmtRestClient restClient, Resource? resource)
         {
             string? resourceName = resource?.Type.Name;
             FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceName)}", DiagnosticsProperty);
@@ -686,7 +711,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)
         {
-            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature();
+            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature;
             var cache = new List<ParameterMapping>(parameterMappings);
 
             var parameterInvocations = new List<FormattableString>();
@@ -850,7 +875,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                if (operation.MgmtReturnType is not null && MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType))
+                if (operation.MgmtReturnType is not null && MgmtContext.Library.CSharpTypeToResource.ContainsKey(operation.MgmtReturnType))
                 {
                     _writer.Append($"{typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, response), response.GetRawResponse())");
                 }
@@ -864,7 +889,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (operation.OperationSource is not null)
                 {
                     _writer.Append($"new {operation.OperationSource.TypeName}(");
-                    if (MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
+                    if (MgmtContext.Library.CSharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
                         _writer.Append($"{ArmClientReference}");
                     _writer.Append($"), ");
                 }

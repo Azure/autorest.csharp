@@ -38,6 +38,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource)
         {
+            if (resource is BaseResource)
+                return Enumerable.Empty<MgmtTypeProvider>();
+
             return resource.OperationSet.GetParent();
         }
 

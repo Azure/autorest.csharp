@@ -46,6 +46,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual bool CanValidateResourceType => true;
 
+        public virtual bool CanSetResourceData => true;
+
+        public virtual bool CanSetRestClients => true;
+
         public virtual string BranchIdVariableName => "Id";
 
         public string Namespace => DefaultNamespace;
@@ -58,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return Array.Empty<CSharpType>();
         }
 
-        public IEnumerable<CSharpType> GetImplementsList()
+        public IEnumerable<CSharpType> GetImplements()
         {
             if (BaseType is not null)
                 yield return BaseType;

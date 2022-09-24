@@ -20,6 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal class OperationSet : IReadOnlyCollection<Operation>, IEquatable<OperationSet>
     {
+        private static OperationSet? _nullOperationSet;
+        public static OperationSet Null => _nullOperationSet ??= new OperationSet("");
         /// <summary>
         /// The raw request path of string of the operations in this <see cref="OperationSet"/>
         /// </summary>
@@ -104,10 +106,12 @@ namespace AutoRest.CSharp.Mgmt.Models
         private RequestPath GetNonHintRequestPath()
         {
             var operation = FindBestOperation();
+            if (operation == null)
+                return Models.RequestPath.Null; // this is for the null operation set
             return Models.RequestPath.FromOperation(operation, MgmtContext.Library.GetOperationGroup(operation));
         }
 
-        private Operation FindBestOperation()
+        private Operation? FindBestOperation()
         {
             // first we try GET operation
             var getOperation = FindOperation(HttpMethod.Get);
@@ -119,7 +123,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 return putOperation;
 
             // if no PUT or GET, we just return the first one
-            return Operations.First();
+            return Operations.FirstOrDefault();
         }
 
         public Operation? FindOperation(HttpMethod method)

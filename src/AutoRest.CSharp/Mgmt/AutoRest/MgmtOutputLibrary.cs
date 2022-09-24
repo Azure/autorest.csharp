@@ -14,6 +14,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Output.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -416,10 +417,22 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<MgmtRestClient> RestClients => _restClients ??= RawRequestPathToRestClient.Values.SelectMany(v => v).Distinct();
 
         private IEnumerable<Resource>? _armResources;
-        public IEnumerable<Resource> ArmResources => _armResources ??= RequestPathToResources.Values.Select(bag => bag.Resource).Distinct();
+        public IEnumerable<Resource> ArmResources => _armResources ??= EnsureArmResources().Distinct();
+
+        private IEnumerable<Resource> EnsureArmResources()
+        {
+            foreach (var bag in RequestPathToResources.Values)
+            {
+                yield return bag.Resource;
+
+                // also include the base resources since they are special resources
+                if (bag.Resource.PolymorphicOption != null)
+                    yield return bag.Resource.PolymorphicOption.BaseResource;
+            }
+        }
 
         private Dictionary<CSharpType, Resource>? _csharpTypeToResource;
-        public Dictionary<CSharpType, Resource> CsharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
+        public Dictionary<CSharpType, Resource> CSharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
 
         private IEnumerable<ResourceCollection>? _resourceCollections;
         public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= RequestPathToResources.Values.Select(bag => bag.ResourceCollection).WhereNotNull().Distinct();
@@ -530,6 +543,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach ((var resourceDataSchemaName, var operationSets) in ResourceDataSchemaNameToOperationSets)
             {
+                var resourcesWithSameData = new List<Resource>();
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach ((var operationSet, var operations) in resourceOperationsList)
                 {
@@ -544,14 +558,34 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         var resourceType = resourcePath.GetResourceType();
                         var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, resourcePath), resourceType, resourceData);
                         var collection = isSingleton ? null : new ResourceCollection(operationSet, operations, resource);
-                        resource.ResourceCollection = collection;
 
-                        requestPathToResources.Add(resourcePath, new ResourceObjectAssociation(resourceType, resourceData, resource, collection));
+                        requestPathToResources.Add(resourcePath, ResourceObjectAssociation.CreateAssociation(resourceType, resourceData, resource, collection));
+                        resourcesWithSameData.Add(resource);
                     }
+                }
+
+                if (resourcesWithSameData.Count > 1)
+                {
+                    var baseResource = new BaseResource(GetBaseResourceName(resourceDataSchemaName, resourcesWithSameData), resourcesWithSameData);
+                    foreach (var resource in resourcesWithSameData)
+                        resource.PolymorphicOption = new PolymorphicOption(resource, baseResource);
                 }
             }
 
             return requestPathToResources;
+        }
+
+        private string GetBaseResourceName(string candidateName, IEnumerable<Resource> resources)
+        {
+            if (Configuration.MgmtConfiguration.BaseResourceNameMapping.TryGetValue(candidateName, out var baseResourceName))
+            {
+                return baseResourceName;
+            }
+
+            var hasResourceWithSameName = resources.Any(r => r.ResourceName == candidateName);
+
+            // TODO -- maybe a better fallback name for the base resource name
+            return hasResourceWithSameName ? $"Base{candidateName}" : candidateName;
         }
 
         private string? GetDefaultNameFromConfiguration(OperationSet operationSet, ResourceTypeSegment resourceType)
@@ -572,14 +606,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            var resourcesWithSameName = ResourceDataSchemaNameToOperationSets[candidateName];
-            var resourcesWithSameType = ResourceOperationSets
+            // find all the expanded request paths of resources that are assiociated with the same resource data model
+            var resourcesWithSameResourceData = ResourceDataSchemaNameToOperationSets[candidateName]
+                .SelectMany(opSet => opSet.GetRequestPath().Expand()).ToList();
+            // find all the expanded resource types of resources that have the same resource type as this one
+            var resourcesWithSameResourceType = ResourceOperationSets
                 .SelectMany(opSet => opSet.GetRequestPath().Expand())
-                .Where(rqPath => rqPath.GetResourceType().Equals(resourceType));
+                .Where(rqPath => rqPath.GetResourceType().Equals(resourceType)).ToList();
 
             var isById = requestPath.IsById;
-            int countOfSameResourceDataName = resourcesWithSameName.Count();
-            int countOfSameResourceTypeName = resourcesWithSameType.Count();
+            int countOfSameResourceDataName = resourcesWithSameResourceData.Count;
+            int countOfSameResourceTypeName = resourcesWithSameResourceType.Count;
             if (!isById)
             {
                 // this is a regular resource and the name is unique
@@ -596,7 +633,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 string parentPrefix = GetParentPrefix(requestPath);
                 // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
                 // first we try to add the parent name as prefix
-                if (!DoMultipleResourcesShareMyPrefixes(requestPath, parentPrefix, resourcesWithSameType))
+                if (!DoMultipleResourcesShareMyPrefixes(requestPath, parentPrefix, resourcesWithSameResourceType))
                     return $"{parentPrefix}{name}";
 
                 // if we get here, parent prefix is not enough, we try the resource name if it is a constant

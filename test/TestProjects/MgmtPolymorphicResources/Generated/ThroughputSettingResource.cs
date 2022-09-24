@@ -25,7 +25,7 @@ namespace MgmtPolymorphicResources
     /// from an instance of <see cref="ArmClient" /> using the GetThroughputSettingResource method.
     /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetThroughputSetting method.
     /// </summary>
-    public partial class ThroughputSettingResource : ArmResource
+    public partial class ThroughputSettingResource : BaseThroughputSettingResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ThroughputSettingResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName)
@@ -36,7 +36,6 @@ namespace MgmtPolymorphicResources
 
         private readonly ClientDiagnostics _throughputSettingCassandraResourcesClientDiagnostics;
         private readonly CassandraResourcesRestOperations _throughputSettingCassandraResourcesRestClient;
-        private readonly ThroughputSettingData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ThroughputSettingResource"/> class for mocking. </summary>
         protected ThroughputSettingResource()
@@ -46,10 +45,14 @@ namespace MgmtPolymorphicResources
         /// <summary> Initializes a new instance of the <see cref = "ThroughputSettingResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ThroughputSettingResource(ArmClient client, ThroughputSettingData data) : this(client, data.Id)
+        internal ThroughputSettingResource(ArmClient client, ThroughputSettingData data) : base(client, data)
         {
-            HasData = true;
-            _data = data;
+            _throughputSettingCassandraResourcesClientDiagnostics = new ClientDiagnostics("MgmtPolymorphicResources", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string throughputSettingCassandraResourcesApiVersion);
+            _throughputSettingCassandraResourcesRestClient = new CassandraResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, throughputSettingCassandraResourcesApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="ThroughputSettingResource"/> class. </summary>
@@ -67,21 +70,6 @@ namespace MgmtPolymorphicResources
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.DocumentDB/throughputSettings";
-
-        /// <summary> Gets whether or not the current instance has data. </summary>
-        public virtual bool HasData { get; }
-
-        /// <summary> Gets the data representing this Feature. </summary>
-        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ThroughputSettingData Data
-        {
-            get
-            {
-                if (!HasData)
-                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
-                return _data;
-            }
-        }
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {

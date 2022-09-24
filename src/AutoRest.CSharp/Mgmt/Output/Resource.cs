@@ -11,6 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -71,11 +72,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         /// <summary>
         /// </summary>
+        /// <param name="operationSet">The operation set that this resource is assiociated with</param>
         /// <param name="operations">The map that contains all possible operations in this resource and its corresponding resource collection class (if any)</param>
         /// <param name="resourceName">The name of the corresponding resource data model</param>
         /// <param name="resourceType">The type of this resource instance represents</param>
         /// <param name="resourceData">The corresponding resource data model</param>
-        /// <param name="context">The build context of this resource instance</param>
         /// <param name="position">The position of operations of this class. <see cref="Position"/> for more information</param>
         protected internal Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position)
             : base(resourceName)
@@ -110,18 +111,28 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override ConstructorSignature? EnsureResourceDataCtor()
         {
-            return new ConstructorSignature(
-                Name: Type.Name,
-                null,
-                Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
-                Modifiers: Internal,
-                Parameters: new[] { ArmClientParameter, ResourceDataParameter },
-                Initializer: new(
-                    IsBase: false,
-                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+            return PolymorphicOption == null ?
+                new ConstructorSignature(
+                    Name: Type.Name,
+                    null,
+                    Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
+                    Modifiers: Internal,
+                    Parameters: new[] { ArmClientParameter, ResourceDataParameter },
+                    Initializer: new(
+                        IsBase: false,
+                        Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}", ResourceData) })) :
+                new ConstructorSignature(
+                    Name: Type.Name,
+                    null,
+                    Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
+                    Modifiers: Internal,
+                    Parameters: new[] { ArmClientParameter, ResourceDataParameter },
+                    Initializer: new(
+                        IsBase: true,
+                        Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", $"{ResourceDataParameter.Name:I}" }));
         }
 
-        public override CSharpType? BaseType => typeof(ArmResource);
+        public override CSharpType? BaseType => PolymorphicOption == null ? typeof(ArmResource) : PolymorphicOption.BaseResource.Type;
 
         public override Resource? DefaultResource => this;
 
@@ -129,7 +140,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<FieldDeclaration>? GetAdditionalFields()
         {
-            yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
+            if (PolymorphicOption == null)
+                yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
 
         public Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
@@ -167,7 +179,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         // name after `{ResourceName}Resource`, unless the `ResourceName` already ends with `Resource`
         protected override string DefaultName => Configuration.MgmtConfiguration.NoResourceSuffix.Contains(ResourceName) ? ResourceName : ResourceName.AddResourceSuffixToResourceName();
 
-        public override FormattableString Description => CreateDescription(ResourceName);
+        public override FormattableString Description => CreateDescription();
 
         public bool IsSingleton => SingletonResourceIdSuffix != null;
 
@@ -229,10 +241,44 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public ResourceData ResourceData { get; }
 
-        public MgmtClientOperation? CreateOperation => GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
-        public MgmtClientOperation GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
-        public MgmtClientOperation? DeleteOperation => GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
-        public MgmtClientOperation? UpdateOperation => GetOperationWithVerb(HttpMethod.Patch, "Update");
+        /// <summary>
+        /// Finds the correspondng <see cref="PolymorphicOption"/> of this <see cref="Resource"/>
+        /// </summary>
+        public PolymorphicOption? PolymorphicOption { get; internal set; }
+
+        // the resource data is only settable when this resource is not polymorphic. If this is polymorphic, the setting of resource data is done in its corresponding base resource class
+        public override bool CanSetResourceData => PolymorphicOption == null;
+
+        private MgmtClientOperation? _createOperation;
+        private MgmtClientOperation? _getOperation;
+        private MgmtClientOperation? _deleteOperation;
+        private MgmtClientOperation? _updateOperation;
+        public virtual MgmtClientOperation? CreateOperation => _createOperation ??= GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
+        public virtual MgmtClientOperation GetOperation => _getOperation ??= GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
+        public virtual MgmtClientOperation? DeleteOperation => _deleteOperation ??= GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
+        public virtual MgmtClientOperation? UpdateOperation => _updateOperation ??= EnsureUpdateOperation();
+
+        private MgmtClientOperation? EnsureUpdateOperation()
+        {
+            var updateOperation = GetOperationWithVerb(HttpMethod.Patch, "Update");
+
+            if (updateOperation != null)
+                return updateOperation;
+
+            if (ResourceCollection?.CreateOperation is not null)
+            {
+                var createOrUpdateOperation = ResourceCollection.CreateOperation.OperationMappings.Values.First();
+                return MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        createOrUpdateOperation,
+                        "Update",
+                        createOrUpdateOperation.MgmtReturnType,
+                        createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
+                        createOrUpdateOperation.RequestPath));
+            }
+
+            return null;
+        }
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
@@ -414,9 +460,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public ResourceTypeSegment ResourceType { get; }
 
-        protected virtual FormattableString CreateDescription(string clientPrefix)
+        protected virtual FormattableString CreateDescription()
         {
-            var an = clientPrefix.StartsWithVowel() ? "an" : "a";
+            var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
             var parents = this.Parent();
             var parentTypes = parents.Select(parent => parent is MgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();
@@ -452,25 +498,24 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new Parameter(segment.Reference.Name, null, ctype, null, ValidationType.AssertNotNull, null);
         }
 
+        private MethodSignature? _createResourceIdentifierMethodSignature;
         /// <summary>
         /// Returns the different method signature for different base path of this resource
         /// </summary>
         /// <returns></returns>
-        public MethodSignature CreateResourceIdentifierMethodSignature()
-        {
-            return new MethodSignature(
-                    Name: "CreateResourceIdentifier",
-                    null,
-                    Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
-                    Modifiers: Public | Static,
-                    ReturnType: typeof(ResourceIdentifier),
-                    ReturnDescription: null,
-                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
-        }
+        public MethodSignature CreateResourceIdentifierMethodSignature
+            => _createResourceIdentifierMethodSignature ??= new MethodSignature(
+                Name: "CreateResourceIdentifier",
+                null,
+                Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
+                Modifiers: Public | Static,
+                ReturnType: typeof(ResourceIdentifier),
+                ReturnDescription: null,
+                Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
 
-        public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
+        public static FormattableString ResourceDataIdExpression(FormattableString dataExpression, ResourceData data)
         {
-            var typeOfId = ResourceData.TypeOfId;
+            var typeOfId = data.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
                 return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";

@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 var codeWriter = new CodeWriter();
-                new ResourceWriter(codeWriter, resource).Write();
+                ResourceWriter.GetWriter(codeWriter, resource).Write();
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
             }

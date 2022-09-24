@@ -24,7 +24,7 @@ namespace MgmtPolymorphicResources
     /// from an instance of <see cref="ArmClient" /> using the GetAutomationAccountPython2PackageResource method.
     /// Otherwise you can get one from its parent resource <see cref="AutomationAccountResource" /> using the GetAutomationAccountPython2Package method.
     /// </summary>
-    public partial class AutomationAccountPython2PackageResource : ArmResource
+    public partial class AutomationAccountPython2PackageResource : ModuleResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AutomationAccountPython2PackageResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string automationAccountName, string packageName)
@@ -35,7 +35,6 @@ namespace MgmtPolymorphicResources
 
         private readonly ClientDiagnostics _automationAccountPython2PackagePython2PackageClientDiagnostics;
         private readonly Python2PackageRestOperations _automationAccountPython2PackagePython2PackageRestClient;
-        private readonly ModuleData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AutomationAccountPython2PackageResource"/> class for mocking. </summary>
         protected AutomationAccountPython2PackageResource()
@@ -45,10 +44,14 @@ namespace MgmtPolymorphicResources
         /// <summary> Initializes a new instance of the <see cref = "AutomationAccountPython2PackageResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AutomationAccountPython2PackageResource(ArmClient client, ModuleData data) : this(client, data.Id)
+        internal AutomationAccountPython2PackageResource(ArmClient client, ModuleData data) : base(client, data)
         {
-            HasData = true;
-            _data = data;
+            _automationAccountPython2PackagePython2PackageClientDiagnostics = new ClientDiagnostics("MgmtPolymorphicResources", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string automationAccountPython2PackagePython2PackageApiVersion);
+            _automationAccountPython2PackagePython2PackageRestClient = new Python2PackageRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, automationAccountPython2PackagePython2PackageApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="AutomationAccountPython2PackageResource"/> class. </summary>
@@ -66,21 +69,6 @@ namespace MgmtPolymorphicResources
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Automation/automationAccounts/python2Packages";
-
-        /// <summary> Gets whether or not the current instance has data. </summary>
-        public virtual bool HasData { get; }
-
-        /// <summary> Gets the data representing this Feature. </summary>
-        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ModuleData Data
-        {
-            get
-            {
-                if (!HasData)
-                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
-                return _data;
-            }
-        }
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {

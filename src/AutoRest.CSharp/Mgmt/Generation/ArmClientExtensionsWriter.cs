@@ -30,6 +30,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
+                // we do not write base resources here because it is not a real resource
+                if (resource is BaseResource)
+                    continue;
+
                 _writer.Line($"#region {resource.Type.Name}");
                 WriteGetResourceFromIdMethod(resource);
                 _writer.LineRaw("#endregion");

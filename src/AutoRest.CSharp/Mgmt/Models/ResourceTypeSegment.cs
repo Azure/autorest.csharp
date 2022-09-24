@@ -20,6 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Models
     {
         public static readonly ResourceTypeSegment Scope = new(Array.Empty<Segment>());
 
+        public static readonly ResourceTypeSegment Null = new(new[] { new Segment("") });
+
         public static readonly ResourceTypeSegment Any = new(new[] { new Segment("*") });
 
         /// <summary>

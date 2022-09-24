@@ -209,9 +209,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         // name after `{ResourceName}Collection`
         protected override string DefaultName => ResourceName + _suffixValue;
 
-        protected override FormattableString CreateDescription(string clientPrefix)
+        protected override FormattableString CreateDescription()
         {
-            var an = clientPrefix.StartsWithVowel() ? "an" : "a";
+            var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
             var parents = Resource.Parent();
             var parentTypes = parents.Select(parent => parent is MgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();

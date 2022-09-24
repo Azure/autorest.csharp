@@ -24,7 +24,7 @@ namespace MgmtPolymorphicResources
     /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineScaleSetExtensionResource method.
     /// Otherwise you can get one from its parent resource <see cref="VirtualMachineScaleSetResource" /> using the GetVirtualMachineScaleSetExtension method.
     /// </summary>
-    public partial class VirtualMachineScaleSetExtensionResource : ArmResource
+    public partial class VirtualMachineScaleSetExtensionResource : AbstractVirtualMachineExtensionResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachineScaleSetExtensionResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmExtensionName)
@@ -35,7 +35,6 @@ namespace MgmtPolymorphicResources
 
         private readonly ClientDiagnostics _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics;
         private readonly VirtualMachineScaleSetVMExtensionsRestOperations _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsRestClient;
-        private readonly VirtualMachineExtensionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetExtensionResource"/> class for mocking. </summary>
         protected VirtualMachineScaleSetExtensionResource()
@@ -45,10 +44,14 @@ namespace MgmtPolymorphicResources
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetExtensionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetExtensionResource(ArmClient client, VirtualMachineExtensionData data) : this(client, data.Id)
+        internal VirtualMachineScaleSetExtensionResource(ArmClient client, VirtualMachineExtensionData data) : base(client, data)
         {
-            HasData = true;
-            _data = data;
+            _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics = new ClientDiagnostics("MgmtPolymorphicResources", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsApiVersion);
+            _virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsRestClient = new VirtualMachineScaleSetVMExtensionsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, virtualMachineScaleSetExtensionVirtualMachineScaleSetVMExtensionsApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetExtensionResource"/> class. </summary>
@@ -66,21 +69,6 @@ namespace MgmtPolymorphicResources
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets/extensions";
-
-        /// <summary> Gets whether or not the current instance has data. </summary>
-        public virtual bool HasData { get; }
-
-        /// <summary> Gets the data representing this Feature. </summary>
-        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineExtensionData Data
-        {
-            get
-            {
-                if (!HasData)
-                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
-                return _data;
-            }
-        }
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {

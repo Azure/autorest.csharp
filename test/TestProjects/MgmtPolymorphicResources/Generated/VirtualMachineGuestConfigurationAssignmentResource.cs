@@ -23,7 +23,7 @@ namespace MgmtPolymorphicResources
     /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineGuestConfigurationAssignmentResource method.
     /// Otherwise you can get one from its parent resource <see cref="VirtualMachineResource" /> using the GetVirtualMachineGuestConfigurationAssignment method.
     /// </summary>
-    public partial class VirtualMachineGuestConfigurationAssignmentResource : ArmResource
+    public partial class VirtualMachineGuestConfigurationAssignmentResource : GuestConfigurationAssignmentResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachineGuestConfigurationAssignmentResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string vmName, string guestConfigurationAssignmentName)
@@ -34,7 +34,6 @@ namespace MgmtPolymorphicResources
 
         private readonly ClientDiagnostics _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics;
         private readonly GuestConfigurationAssignmentsRestOperations _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient;
-        private readonly GuestConfigurationAssignmentData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineGuestConfigurationAssignmentResource"/> class for mocking. </summary>
         protected VirtualMachineGuestConfigurationAssignmentResource()
@@ -44,10 +43,14 @@ namespace MgmtPolymorphicResources
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineGuestConfigurationAssignmentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineGuestConfigurationAssignmentResource(ArmClient client, GuestConfigurationAssignmentData data) : this(client, data.Id)
+        internal VirtualMachineGuestConfigurationAssignmentResource(ArmClient client, GuestConfigurationAssignmentData data) : base(client, data)
         {
-            HasData = true;
-            _data = data;
+            _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics = new ClientDiagnostics("MgmtPolymorphicResources", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsApiVersion);
+            _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient = new GuestConfigurationAssignmentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineGuestConfigurationAssignmentResource"/> class. </summary>
@@ -65,21 +68,6 @@ namespace MgmtPolymorphicResources
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.GuestConfiguration/guestConfigurationAssignments";
-
-        /// <summary> Gets whether or not the current instance has data. </summary>
-        public virtual bool HasData { get; }
-
-        /// <summary> Gets the data representing this Feature. </summary>
-        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual GuestConfigurationAssignmentData Data
-        {
-            get
-            {
-                if (!HasData)
-                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
-                return _data;
-            }
-        }
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {

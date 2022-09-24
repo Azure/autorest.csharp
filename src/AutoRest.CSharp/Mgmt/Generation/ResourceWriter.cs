@@ -11,6 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -23,9 +24,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
+        public static ResourceWriter GetWriter(CodeWriter writer, Resource resource) => resource switch
+        {
+            BaseResource baseResource => new BaseResourceWriter(writer, baseResource),
+            _ => new ResourceWriter(writer, resource),
+        };
+
         private Resource This { get; }
 
-        public ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
+        protected internal ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
         {
             This = resource;
             _customMethods.Add(nameof(WriteAddTagBody), WriteAddTagBody);
@@ -41,8 +48,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateResourceIdentifierMethods()
         {
+            var method = This.CreateResourceIdentifierMethodSignature;
             var requestPath = This.RequestPath;
-            var method = This.CreateResourceIdentifierMethodSignature();
             _writer.WriteXmlDocumentationSummary($"{method.Description}");
             using (_writer.WriteMethodDeclaration(method))
             {
@@ -77,27 +84,36 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteProperties()
         {
-            _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
-
-            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{This.ResourceType}\";");
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
-            _writer.Line($"public virtual bool HasData {{ get; }}");
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets the data representing this Feature.");
-            _writer.WriteXmlDocumentationException(typeof(InvalidOperationException), $"Throws if there is no data loaded in the current instance.");
-            using (_writer.Scope($"public virtual {This.ResourceData.Type} Data"))
+            if (This.CanValidateResourceType)
             {
-                using (_writer.Scope($"get"))
+                _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
+                _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{This.ResourceType}\";");
+                _writer.Line();
+            }
+
+            if (This.CanSetResourceData)
+            {
+                _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
+                _writer.Line($"public virtual bool HasData {{ get; }}");
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Gets the data representing this Feature.");
+                _writer.WriteXmlDocumentationException(typeof(InvalidOperationException), $"Throws if there is no data loaded in the current instance.");
+                using (_writer.Scope($"public virtual {This.ResourceData.Type} Data"))
                 {
-                    _writer.Line($"if (!HasData)");
-                    _writer.Line($"throw new {typeof(InvalidOperationException)}(\"The current instance does not have data, you must call Get first.\");");
-                    _writer.Line($"return _data;");
+                    using (_writer.Scope($"get"))
+                    {
+                        _writer.Line($"if (!HasData)");
+                        _writer.Line($"throw new {typeof(InvalidOperationException)}(\"The current instance does not have data, you must call Get first.\");");
+                        _writer.Line($"return _data;");
+                    }
                 }
             }
 
-            _writer.Line();
-            WriteStaticValidate($"ResourceType");
+            if (This.CanValidateResourceType)
+            {
+                _writer.Line();
+                WriteStaticValidate($"ResourceType");
+            }
         }
 
         private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)

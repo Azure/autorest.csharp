@@ -23,11 +23,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// <summary>
     /// Code writer for resource collection.
     /// A resource collection should have 3 operations:
-    /// 1. CreateOrUpdate (4 variants)
+    /// 1. CreateOrUpdate (2 variants)
     /// 2. Get (2 variants)
-    /// 3. List (4 variants)
-    /// and the following builder methods:
-    /// 1. Construct
+    /// 3. List (2 variants)
     /// </summary>
     internal class ResourceCollectionWriter : MgmtClientBaseWriter
     {

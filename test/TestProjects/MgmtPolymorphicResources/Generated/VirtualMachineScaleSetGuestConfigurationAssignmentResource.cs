@@ -22,7 +22,7 @@ namespace MgmtPolymorphicResources
     /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineScaleSetGuestConfigurationAssignmentResource method.
     /// Otherwise you can get one from its parent resource <see cref="VirtualMachineScaleSetResource" /> using the GetVirtualMachineScaleSetGuestConfigurationAssignment method.
     /// </summary>
-    public partial class VirtualMachineScaleSetGuestConfigurationAssignmentResource : ArmResource
+    public partial class VirtualMachineScaleSetGuestConfigurationAssignmentResource : GuestConfigurationAssignmentResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachineScaleSetGuestConfigurationAssignmentResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string vmssName, string name)
@@ -33,7 +33,6 @@ namespace MgmtPolymorphicResources
 
         private readonly ClientDiagnostics _virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSClientDiagnostics;
         private readonly GuestConfigurationAssignmentsVmssRestOperations _virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSRestClient;
-        private readonly GuestConfigurationAssignmentData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetGuestConfigurationAssignmentResource"/> class for mocking. </summary>
         protected VirtualMachineScaleSetGuestConfigurationAssignmentResource()
@@ -43,10 +42,14 @@ namespace MgmtPolymorphicResources
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetGuestConfigurationAssignmentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetGuestConfigurationAssignmentResource(ArmClient client, GuestConfigurationAssignmentData data) : this(client, data.Id)
+        internal VirtualMachineScaleSetGuestConfigurationAssignmentResource(ArmClient client, GuestConfigurationAssignmentData data) : base(client, data)
         {
-            HasData = true;
-            _data = data;
+            _virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSClientDiagnostics = new ClientDiagnostics("MgmtPolymorphicResources", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSApiVersion);
+            _virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSRestClient = new GuestConfigurationAssignmentsVmssRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetGuestConfigurationAssignmentResource"/> class. </summary>
@@ -64,21 +67,6 @@ namespace MgmtPolymorphicResources
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.GuestConfiguration/guestConfigurationAssignments";
-
-        /// <summary> Gets whether or not the current instance has data. </summary>
-        public virtual bool HasData { get; }
-
-        /// <summary> Gets the data representing this Feature. </summary>
-        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual GuestConfigurationAssignmentData Data
-        {
-            get
-            {
-                if (!HasData)
-                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
-                return _data;
-            }
-        }
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {

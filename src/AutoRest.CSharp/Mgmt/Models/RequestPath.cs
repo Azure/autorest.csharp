@@ -29,6 +29,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         internal const string SubscriptionScopePrefix = "/subscriptions";
         internal const string TenantScopePrefix = "/tenants";
 
+        public static readonly RequestPath Null = new(new[] { new Segment("") });
+
         /// <summary>
         /// This is a placeholder of request path for "any" resources in other RPs
         /// </summary>

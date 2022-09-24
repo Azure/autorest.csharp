@@ -8,5 +8,12 @@
   ],
   "azure-arm": true,
   "public-clients": true,
-  "skip-csproj-packagereference": true
+  "skip-csproj-packagereference": true,
+  "VirtualOperations": [
+    "Module_Get",
+    "VirtualMachineScaleSetVMExtensions_Validate"
+  ],
+  "BaseResourceNameMapping": {
+    "VirtualMachineExtension": "AbstractVirtualMachineExtension"
+  }
 }

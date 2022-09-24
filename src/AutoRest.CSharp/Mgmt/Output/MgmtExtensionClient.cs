@@ -62,6 +62,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override CSharpType? BaseType => typeof(ArmResource);
 
+        public override bool CanValidateResourceType => false;
+
+        public override bool CanSetResourceData => false;
+
+        public override bool CanSetRestClients => false;
+
         protected override string DefaultName => _defaultName;
 
         public MgmtExtensions Extension { get; }
