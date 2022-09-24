@@ -94,10 +94,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (type.IsFrameworkType)
                 return false;
 
-            if (MgmtContext.Library.TryGetTypeProvider(type.Name, out var provider))
+            if (type.Implementation is ResourceData implementation)
             {
-                data = provider as ResourceData;
-                return data != null;
+                data = (ResourceData)implementation;
+                return true;
             }
             return false;
         }

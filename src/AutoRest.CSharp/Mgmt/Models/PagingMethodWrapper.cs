@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Mgmt.Models
@@ -14,18 +14,19 @@ namespace AutoRest.CSharp.Mgmt.Models
             NextPageMethod = pagingMethod.NextPageMethod;
             NextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             ItemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
+            ItemType = pagingMethod.PagingResponse.ItemType;
         }
 
-        public PagingMethodWrapper(RestClientMethod method)
+        public PagingMethodWrapper(RestClientMethod method, CSharpType itemType, string valuePropertyName)
         {
             Method = method;
             NextPageMethod = null;
             NextLinkName = null;
-            var valueProperty = "Value";
-            if (method.ReturnType!.IsFrameworkType && method.ReturnType.FrameworkType == typeof(IReadOnlyList<>))
-                valueProperty = string.Empty;
-            ItemName = valueProperty;
+            ItemName = valuePropertyName;
+            ItemType = itemType;
         }
+
+        public CSharpType ItemType { get; }
 
         /// <summary>
         /// This is the underlying <see cref="RestClientMethod"/> of this paging method
