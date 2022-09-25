@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -93,6 +96,28 @@ namespace MgmtPolymorphicResources
                     throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
                 return _data;
             }
+        }
+
+        /// <summary> The core implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected abstract Task<Response<GuestConfigurationAssignmentResource>> GetCoreAsync(CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<GuestConfigurationAssignmentResource>> GetAsync(CancellationToken cancellationToken = default)
+        {
+            return await GetCoreAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> The core implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected abstract Response<GuestConfigurationAssignmentResource> GetCore(CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<GuestConfigurationAssignmentResource> Get(CancellationToken cancellationToken = default)
+        {
+            return GetCore(cancellationToken);
         }
     }
 }

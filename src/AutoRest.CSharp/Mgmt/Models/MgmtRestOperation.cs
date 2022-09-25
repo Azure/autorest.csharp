@@ -123,12 +123,12 @@ namespace AutoRest.CSharp.Mgmt.Models
             InterimOperation = GetInterimOperation();
         }
 
-        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, params Parameter[] overrideParameters)
+        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string? overrideDescription, params Parameter[] overrideParameters)
             : this(other, nameOverride, overrideReturnType, overrideDescription, other.ContextualPath, overrideParameters)
         {
         }
 
-        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, RequestPath contextualPath, params Parameter[] overrideParameters)
+        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string? overrideDescription, RequestPath contextualPath, params Parameter[] overrideParameters)
         {
             //copy values from other method
             _isLongRunning = other.IsLongRunningOperation;

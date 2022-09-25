@@ -436,17 +436,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return operation.IsResourceCollectionOperation(out var resourceOperationSet) && resourceOperationSet == operationSet;
         }
 
-        protected override IEnumerable<MgmtRestClient> EnsureRestClients()
-        {
-            var childRestClients = ClientOperations.SelectMany(clientOperation => clientOperation.Select(restOperation => restOperation.RestClient)).Distinct();
-            var resourceRestClients = OperationSet.Select(operation => MgmtContext.Library.GetRestClient(operation)).Distinct();
-
-            return resourceRestClients.Concat(childRestClients).Distinct();
-        }
-
-        private MgmtRestClient? _myRestClient;
-        public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.FirstOrDefault(client => client.Resources.Any(resource => resource.ResourceName == ResourceName)) ?? RestClients.First();
-
         public ResourceTypeSegment ResourceType { get; }
 
         protected virtual FormattableString CreateDescription()

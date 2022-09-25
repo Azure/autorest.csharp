@@ -24,10 +24,19 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
-        public static MgmtClientOperation FromOperations(MgmtTypeProvider carrier, IEnumerable<MgmtClientOperation> operations)
+        public static MgmtClientOperation Override(MgmtClientOperation clientOperation, string overrideName, CSharpType? overrideReturnType, string? overrideDescription = null, MgmtTypeProvider? overrideOwner = null)
         {
-            // TODO -- validate if they could be combined together
-            return new MgmtClientOperation(carrier, operations.SelectMany(operation => operation).ToArray(), null);
+            overrideOwner ??= clientOperation.Carrier;
+            var newOperation =  MgmtClientOperation.FromOperations(overrideOwner, clientOperation.Select(operation => new MgmtRestOperation(
+                other: operation,
+                nameOverride: overrideName,
+                overrideReturnType: overrideReturnType,
+                overrideDescription: overrideDescription ?? operation.Description,
+                operation.OverrideParameters)))!;
+
+            newOperation._description = overrideDescription;
+
+            return newOperation;
         }
 
         public static MgmtClientOperation? FromOperations(MgmtTypeProvider carrier, IEnumerable<MgmtRestOperation> operations)
@@ -123,8 +132,6 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         // TODO -- we need a better way to get the name of this
         public string Name => _operations.First().Name;
-
-        public string? RawDescription => _operations.First().Description;
 
         private string? _description;
         public string Description => _description ??= BuildDescription();

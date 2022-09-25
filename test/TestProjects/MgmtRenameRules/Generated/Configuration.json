@@ -54,6 +54,5 @@
   },
   "MgmtDebug": {
     "ShowSerializedNames": true
-  },
-  "IsStrictCommonOperationEnabled": true
+  }
 }

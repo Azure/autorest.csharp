@@ -80,16 +80,16 @@ namespace MgmtPolymorphicResources
         /// Operation Id: GuestConfigurationAssignmentsVMSS_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<VirtualMachineScaleSetGuestConfigurationAssignmentResource>> GetAsync(CancellationToken cancellationToken = default)
+        protected override async Task<Response<GuestConfigurationAssignmentResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSClientDiagnostics.CreateScope("VirtualMachineScaleSetGuestConfigurationAssignmentResource.Get");
+            using var scope = _virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSClientDiagnostics.CreateScope("VirtualMachineScaleSetGuestConfigurationAssignmentResource.GetCore");
             scope.Start();
             try
             {
                 var response = await _virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSetGuestConfigurationAssignmentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(GetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -104,22 +104,46 @@ namespace MgmtPolymorphicResources
         /// Operation Id: GuestConfigurationAssignmentsVMSS_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<VirtualMachineScaleSetGuestConfigurationAssignmentResource> Get(CancellationToken cancellationToken = default)
+        public new async Task<Response<VirtualMachineScaleSetGuestConfigurationAssignmentResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSClientDiagnostics.CreateScope("VirtualMachineScaleSetGuestConfigurationAssignmentResource.Get");
+            var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((VirtualMachineScaleSetGuestConfigurationAssignmentResource)result.Value, result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// Get information about a guest configuration assignment for VMSS
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}
+        /// Operation Id: GuestConfigurationAssignmentsVMSS_Get
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected override Response<GuestConfigurationAssignmentResource> GetCore(CancellationToken cancellationToken = default)
+        {
+            using var scope = _virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSClientDiagnostics.CreateScope("VirtualMachineScaleSetGuestConfigurationAssignmentResource.GetCore");
             scope.Start();
             try
             {
                 var response = _virtualMachineScaleSetGuestConfigurationAssignmentGuestConfigurationAssignmentsVMSSRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSetGuestConfigurationAssignmentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(GetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Get information about a guest configuration assignment for VMSS
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}
+        /// Operation Id: GuestConfigurationAssignmentsVMSS_Get
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public new Response<VirtualMachineScaleSetGuestConfigurationAssignmentResource> Get(CancellationToken cancellationToken = default)
+        {
+            var result = GetCore(cancellationToken);
+            return Response.FromValue((VirtualMachineScaleSetGuestConfigurationAssignmentResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>

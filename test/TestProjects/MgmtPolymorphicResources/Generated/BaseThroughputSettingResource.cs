@@ -6,9 +6,14 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtPolymorphicResources.Models;
 
 namespace MgmtPolymorphicResources
 {
@@ -104,6 +109,174 @@ namespace MgmtPolymorphicResources
                     throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
                 return _data;
             }
+        }
+
+        /// <summary> The core implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected abstract Task<Response<BaseThroughputSettingResource>> GetCoreAsync(CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<BaseThroughputSettingResource>> GetAsync(CancellationToken cancellationToken = default)
+        {
+            return await GetCoreAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> The core implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected abstract Response<BaseThroughputSettingResource> GetCore(CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation Get. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<BaseThroughputSettingResource> Get(CancellationToken cancellationToken = default)
+        {
+            return GetCore(cancellationToken);
+        }
+
+        /// <summary> The core implementation for operation CreateOrUpdate. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="updateThroughputParameters"> The RUs per second of the parameters to provide for the current Cassandra Keyspace. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="updateThroughputParameters"/> is null. </exception>
+        protected abstract Task<ArmOperation<BaseThroughputSettingResource>> CreateOrUpdateCoreAsync(WaitUntil waitUntil, ThroughputSettingsUpdateParameters updateThroughputParameters, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation CreateOrUpdate. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="updateThroughputParameters"> The RUs per second of the parameters to provide for the current Cassandra Keyspace. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="updateThroughputParameters"/> is null. </exception>
+        public async Task<ArmOperation<BaseThroughputSettingResource>> CreateOrUpdateAsync(WaitUntil waitUntil, ThroughputSettingsUpdateParameters updateThroughputParameters, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(updateThroughputParameters, nameof(updateThroughputParameters));
+
+            return await CreateOrUpdateCoreAsync(waitUntil, updateThroughputParameters, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> The core implementation for operation CreateOrUpdate. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="updateThroughputParameters"> The RUs per second of the parameters to provide for the current Cassandra Keyspace. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="updateThroughputParameters"/> is null. </exception>
+        protected abstract ArmOperation<BaseThroughputSettingResource> CreateOrUpdateCore(WaitUntil waitUntil, ThroughputSettingsUpdateParameters updateThroughputParameters, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation CreateOrUpdate. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="updateThroughputParameters"> The RUs per second of the parameters to provide for the current Cassandra Keyspace. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="updateThroughputParameters"/> is null. </exception>
+        public ArmOperation<BaseThroughputSettingResource> CreateOrUpdate(WaitUntil waitUntil, ThroughputSettingsUpdateParameters updateThroughputParameters, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(updateThroughputParameters, nameof(updateThroughputParameters));
+
+            return CreateOrUpdateCore(waitUntil, updateThroughputParameters, cancellationToken);
+        }
+
+        /// <summary> The core implementation for operation AddTag. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
+        protected abstract Task<Response<BaseThroughputSettingResource>> AddTagCoreAsync(string key, string value, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation AddTag. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
+        public async Task<Response<BaseThroughputSettingResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
+
+            return await AddTagCoreAsync(key, value, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> The core implementation for operation AddTag. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
+        protected abstract Response<BaseThroughputSettingResource> AddTagCore(string key, string value, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation AddTag. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
+        public Response<BaseThroughputSettingResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
+
+            return AddTagCore(key, value, cancellationToken);
+        }
+
+        /// <summary> The core implementation for operation SetTags. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
+        protected abstract Task<Response<BaseThroughputSettingResource>> SetTagsCoreAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation SetTags. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
+        public async Task<Response<BaseThroughputSettingResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(tags, nameof(tags));
+
+            return await SetTagsCoreAsync(tags, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> The core implementation for operation SetTags. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
+        protected abstract Response<BaseThroughputSettingResource> SetTagsCore(IDictionary<string, string> tags, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation SetTags. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
+        public Response<BaseThroughputSettingResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(tags, nameof(tags));
+
+            return SetTagsCore(tags, cancellationToken);
+        }
+
+        /// <summary> The core implementation for operation RemoveTag. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
+        protected abstract Task<Response<BaseThroughputSettingResource>> RemoveTagCoreAsync(string key, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation RemoveTag. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
+        public async Task<Response<BaseThroughputSettingResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(key, nameof(key));
+
+            return await RemoveTagCoreAsync(key, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> The core implementation for operation RemoveTag. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
+        protected abstract Response<BaseThroughputSettingResource> RemoveTagCore(string key, CancellationToken cancellationToken = default);
+
+        /// <summary> The default implementation for operation RemoveTag. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
+        public Response<BaseThroughputSettingResource> RemoveTag(string key, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(key, nameof(key));
+
+            return RemoveTagCore(key, cancellationToken);
         }
     }
 }

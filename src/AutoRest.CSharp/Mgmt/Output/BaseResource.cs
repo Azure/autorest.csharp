@@ -37,6 +37,14 @@ internal class BaseResource : Resource
         return $"This is the base client representation of the following resources {FormattableStringHelpers.Join(resourceList, ", ", " or ")}.";
     }
 
+    protected override HashSet<NameSetKey> EnsureUniqueSets()
+    {
+        // return an empty set because the base resource will not have any implementations
+        // but since the operations in the base resource are constructed from the derived resources,
+        // if we do not force this to be empty, unused rest client will still be created
+        return new HashSet<NameSetKey>();
+    }
+
     // base resource does not have children
     public override IEnumerable<Resource> ChildResources => Enumerable.Empty<Resource>();
 
@@ -48,29 +56,10 @@ internal class BaseResource : Resource
 
     private MgmtClientOperation EnsureGetOperation()
     {
-        // we should always have the common Get
-        var clientOperations = new List<MgmtClientOperation>();
-        foreach (var resource in DerivedResources)
-        {
-            var overrideGetOperation = OverrideClientOperation(
-                resource.GetOperation,
-                resource.GetOperation.Name,
-                Type,
-                $"The default implementation for operation {resource.GetOperation.Name}");
-            clientOperations.Add(overrideGetOperation);
-        }
+        // we take the get operation of the first derived resource to represent the get operation in the base
+        var originalGetOperation = DerivedResources.First().GetOperation;
 
-        return MgmtClientOperation.FromOperations(this, clientOperations);
-    }
-
-    private static MgmtClientOperation OverrideClientOperation(MgmtClientOperation clientOperation, string overrideName, CSharpType? overrideReturnType, string overrideDescription)
-    {
-        return MgmtClientOperation.FromOperations(clientOperation.Carrier, clientOperation.Select(operation => new MgmtRestOperation(
-            other: operation,
-            nameOverride: overrideName,
-            overrideReturnType: overrideReturnType,
-            overrideDescription: overrideDescription,
-            operation.OverrideParameters)).ToArray())!;
+        return MgmtClientOperation.Override(originalGetOperation, originalGetOperation.Name, Type, $"The default implementation for operation {originalGetOperation.Name}", this);
     }
 
     protected override IEnumerable<MgmtClientOperation> EnsureAllOperations() => ClientOperations;
@@ -117,8 +106,9 @@ internal class BaseResource : Resource
         _baseCommonOperations = new Dictionary<MethodKey, MgmtClientOperation>();
         foreach ((var key, var list) in EnsureOperationCategorizationDictionary())
         {
-            var clientOperations = list.Select(pair => OverrideClientOperation(pair.Operation, key.Name, key.ReturnType, $"The default implementation for operation {key.Name}"));
-            _baseCommonOperations.Add(key, MgmtClientOperation.FromOperations(this, clientOperations));
+            // here we only use the first client operation to represent the base operation (since we never write an implementation of this method, it is fine
+            var baseOperation = MgmtClientOperation.Override(list.First().Operation, key.Name, key.ReturnType, $"The default implementation for operation {key.Name}", this);
+            _baseCommonOperations.Add(key, baseOperation);
         }
         return _baseCommonOperations;
     }
@@ -141,8 +131,7 @@ internal class BaseResource : Resource
             {
                 var baseOperation = baseOperationDict[key];
                 // construct a core method here
-                var overrideDescription = operation.RawDescription != null ? $"The actual implementation of {operation.Name}\n{operation.RawDescription}" : $"The actual implementation of {operation.Name}";
-                var coreOperation = OverrideClientOperation(operation, $"{baseOperation.Name}Core", baseOperation.MgmtReturnType, overrideDescription);
+                var coreOperation = MgmtClientOperation.Override(operation, $"{baseOperation.Name}Core", baseOperation.MgmtReturnType);
                 result.AddInList(resource, new MgmtCommonOperation(operation, coreOperation));
             }
         }

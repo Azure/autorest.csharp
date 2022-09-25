@@ -81,16 +81,16 @@ namespace MgmtPolymorphicResources
         /// Operation Id: GuestConfigurationAssignments_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<VirtualMachineGuestConfigurationAssignmentResource>> GetAsync(CancellationToken cancellationToken = default)
+        protected override async Task<Response<GuestConfigurationAssignmentResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics.CreateScope("VirtualMachineGuestConfigurationAssignmentResource.Get");
+            using var scope = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics.CreateScope("VirtualMachineGuestConfigurationAssignmentResource.GetCore");
             scope.Start();
             try
             {
                 var response = await _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(GetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -105,22 +105,46 @@ namespace MgmtPolymorphicResources
         /// Operation Id: GuestConfigurationAssignments_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<VirtualMachineGuestConfigurationAssignmentResource> Get(CancellationToken cancellationToken = default)
+        public new async Task<Response<VirtualMachineGuestConfigurationAssignmentResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics.CreateScope("VirtualMachineGuestConfigurationAssignmentResource.Get");
+            var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((VirtualMachineGuestConfigurationAssignmentResource)result.Value, result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// Get information about a guest configuration assignment
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}
+        /// Operation Id: GuestConfigurationAssignments_Get
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected override Response<GuestConfigurationAssignmentResource> GetCore(CancellationToken cancellationToken = default)
+        {
+            using var scope = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics.CreateScope("VirtualMachineGuestConfigurationAssignmentResource.GetCore");
             scope.Start();
             try
             {
                 var response = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(GetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Get information about a guest configuration assignment
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}
+        /// Operation Id: GuestConfigurationAssignments_Get
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public new Response<VirtualMachineGuestConfigurationAssignmentResource> Get(CancellationToken cancellationToken = default)
+        {
+            var result = GetCore(cancellationToken);
+            return Response.FromValue((VirtualMachineGuestConfigurationAssignmentResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -259,11 +283,11 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues[key] = value;
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetCoreAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     current.Tags[key] = value;
                     var result = await UpdateAsync(WaitUntil.Completed, current, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Response.FromValue(result.Value, result.GetRawResponse());
@@ -300,11 +324,11 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues[key] = value;
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = GetCore(cancellationToken: cancellationToken).Value.Data;
                     current.Tags[key] = value;
                     var result = Update(WaitUntil.Completed, current, cancellationToken: cancellationToken);
                     return Response.FromValue(result.Value, result.GetRawResponse());
@@ -340,11 +364,11 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.ReplaceWith(tags);
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetCoreAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     current.Tags.ReplaceWith(tags);
                     var result = await UpdateAsync(WaitUntil.Completed, current, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Response.FromValue(result.Value, result.GetRawResponse());
@@ -380,11 +404,11 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.ReplaceWith(tags);
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = GetCore(cancellationToken: cancellationToken).Value.Data;
                     current.Tags.ReplaceWith(tags);
                     var result = Update(WaitUntil.Completed, current, cancellationToken: cancellationToken);
                     return Response.FromValue(result.Value, result.GetRawResponse());
@@ -419,11 +443,11 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.Remove(key);
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetCoreAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     current.Tags.Remove(key);
                     var result = await UpdateAsync(WaitUntil.Completed, current, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Response.FromValue(result.Value, result.GetRawResponse());
@@ -458,11 +482,11 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.Remove(key);
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = GetCore(cancellationToken: cancellationToken).Value.Data;
                     current.Tags.Remove(key);
                     var result = Update(WaitUntil.Completed, current, cancellationToken: cancellationToken);
                     return Response.FromValue(result.Value, result.GetRawResponse());

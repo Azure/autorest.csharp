@@ -76,7 +76,6 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// The core implementation for operation Get
         /// This operation retrieves the built-in policy definition with the given name.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetBuiltIn
@@ -84,7 +83,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<PolicyDefinitionResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionResource.Get");
+            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionResource.GetCore");
             scope.Start();
             try
             {
@@ -106,7 +105,6 @@ namespace MgmtExtensionResource
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        [ForwardsClientCalls]
         public new async Task<Response<BuiltInPolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
@@ -114,7 +112,6 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// The core implementation for operation Get
         /// This operation retrieves the built-in policy definition with the given name.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetBuiltIn
@@ -122,7 +119,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<PolicyDefinitionResource> GetCore(CancellationToken cancellationToken = default)
         {
-            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionResource.Get");
+            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionResource.GetCore");
             scope.Start();
             try
             {
@@ -144,7 +141,6 @@ namespace MgmtExtensionResource
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        [ForwardsClientCalls]
         public new Response<BuiltInPolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
         {
             var result = GetCore(cancellationToken);

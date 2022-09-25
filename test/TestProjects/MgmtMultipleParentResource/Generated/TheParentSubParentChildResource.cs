@@ -77,7 +77,6 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary>
-        /// The core implementation for operation Get
         /// The operation to get the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Get
@@ -86,7 +85,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<ChildBodyResource>> GetCoreAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.Get");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.GetCore");
             scope.Start();
             try
             {
@@ -109,7 +108,6 @@ namespace MgmtMultipleParentResource
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        [ForwardsClientCalls]
         public new async Task<Response<TheParentSubParentChildResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             var result = await GetCoreAsync(expand, cancellationToken).ConfigureAwait(false);
@@ -117,7 +115,6 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary>
-        /// The core implementation for operation Get
         /// The operation to get the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Get
@@ -126,7 +123,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<ChildBodyResource> GetCore(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.Get");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.GetCore");
             scope.Start();
             try
             {
@@ -149,7 +146,6 @@ namespace MgmtMultipleParentResource
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        [ForwardsClientCalls]
         public new Response<TheParentSubParentChildResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             var result = GetCore(expand, cancellationToken);
@@ -157,7 +153,6 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary>
-        /// The core implementation for operation Delete
         /// The operation to delete the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Delete
@@ -166,7 +161,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.Delete");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.DeleteCore");
             scope.Start();
             try
             {
@@ -184,7 +179,18 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary>
-        /// The core implementation for operation Delete
+        /// The operation to delete the VMSS VM run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
+        /// Operation Id: Children_Delete
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public new async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        {
+            return await base.DeleteAsync(waitUntil, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// The operation to delete the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Delete
@@ -193,7 +199,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override ArmOperation DeleteCore(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.Delete");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.DeleteCore");
             scope.Start();
             try
             {
@@ -211,7 +217,18 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary>
-        /// The core implementation for operation Update
+        /// The operation to delete the VMSS VM run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
+        /// Operation Id: Children_Delete
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public new ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        {
+            return base.Delete(waitUntil, cancellationToken);
+        }
+
+        /// <summary>
         /// The operation to update the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Update
@@ -224,7 +241,7 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(childBody, nameof(childBody));
 
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.Update");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.UpdateCore");
             scope.Start();
             try
             {
@@ -250,9 +267,10 @@ namespace MgmtMultipleParentResource
         /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
-        [ForwardsClientCalls]
         public new async Task<ArmOperation<TheParentSubParentChildResource>> UpdateAsync(WaitUntil waitUntil, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(childBody, nameof(childBody));
+
             var result = await UpdateCoreAsync(waitUntil, childBody, cancellationToken).ConfigureAwait(false);
             if (waitUntil == WaitUntil.Completed)
             {
@@ -263,7 +281,6 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary>
-        /// The core implementation for operation Update
         /// The operation to update the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Update
@@ -276,7 +293,7 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(childBody, nameof(childBody));
 
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.Update");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.UpdateCore");
             scope.Start();
             try
             {
@@ -302,9 +319,10 @@ namespace MgmtMultipleParentResource
         /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
-        [ForwardsClientCalls]
         public new ArmOperation<TheParentSubParentChildResource> Update(WaitUntil waitUntil, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(childBody, nameof(childBody));
+
             var result = UpdateCore(waitUntil, childBody, cancellationToken);
             if (waitUntil == WaitUntil.Completed)
             {
@@ -315,7 +333,6 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary>
-        /// The core implementation for operation AddTag
         /// Add a tag to the current resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Get
@@ -329,7 +346,7 @@ namespace MgmtMultipleParentResource
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.AddTag");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.AddTagCore");
             scope.Start();
             try
             {
@@ -343,7 +360,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetCoreAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new ChildBodyUpdate();
                     foreach (var tag in current.Tags)
                     {
@@ -370,15 +387,16 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        [ForwardsClientCalls]
         public new async Task<Response<TheParentSubParentChildResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
+
             var result = await AddTagCoreAsync(key, value, cancellationToken).ConfigureAwait(false);
             return Response.FromValue((TheParentSubParentChildResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
-        /// The core implementation for operation AddTag
         /// Add a tag to the current resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Get
@@ -392,7 +410,7 @@ namespace MgmtMultipleParentResource
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.AddTag");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.AddTagCore");
             scope.Start();
             try
             {
@@ -406,7 +424,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = GetCore(cancellationToken: cancellationToken).Value.Data;
                     var patch = new ChildBodyUpdate();
                     foreach (var tag in current.Tags)
                     {
@@ -433,15 +451,16 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        [ForwardsClientCalls]
         public new Response<TheParentSubParentChildResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
+
             var result = AddTagCore(key, value, cancellationToken);
             return Response.FromValue((TheParentSubParentChildResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
-        /// The core implementation for operation SetTags
         /// Replace the tags on the resource with the given set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Get
@@ -453,7 +472,7 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.SetTags");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.SetTagsCore");
             scope.Start();
             try
             {
@@ -468,7 +487,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetCoreAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new ChildBodyUpdate();
                     patch.Tags.ReplaceWith(tags);
                     var result = await UpdateCoreAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -490,15 +509,15 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        [ForwardsClientCalls]
         public new async Task<Response<TheParentSubParentChildResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(tags, nameof(tags));
+
             var result = await SetTagsCoreAsync(tags, cancellationToken).ConfigureAwait(false);
             return Response.FromValue((TheParentSubParentChildResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
-        /// The core implementation for operation SetTags
         /// Replace the tags on the resource with the given set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Get
@@ -510,7 +529,7 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.SetTags");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.SetTagsCore");
             scope.Start();
             try
             {
@@ -525,7 +544,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = GetCore(cancellationToken: cancellationToken).Value.Data;
                     var patch = new ChildBodyUpdate();
                     patch.Tags.ReplaceWith(tags);
                     var result = UpdateCore(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
@@ -547,15 +566,15 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        [ForwardsClientCalls]
         public new Response<TheParentSubParentChildResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(tags, nameof(tags));
+
             var result = SetTagsCore(tags, cancellationToken);
             return Response.FromValue((TheParentSubParentChildResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
-        /// The core implementation for operation RemoveTag
         /// Removes a tag by key from the resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Get
@@ -567,7 +586,7 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.RemoveTag");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.RemoveTagCore");
             scope.Start();
             try
             {
@@ -581,7 +600,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetCoreAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new ChildBodyUpdate();
                     foreach (var tag in current.Tags)
                     {
@@ -607,15 +626,15 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        [ForwardsClientCalls]
         public new async Task<Response<TheParentSubParentChildResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(key, nameof(key));
+
             var result = await RemoveTagCoreAsync(key, cancellationToken).ConfigureAwait(false);
             return Response.FromValue((TheParentSubParentChildResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
-        /// The core implementation for operation RemoveTag
         /// Removes a tag by key from the resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
         /// Operation Id: Children_Get
@@ -627,7 +646,7 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.RemoveTag");
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildResource.RemoveTagCore");
             scope.Start();
             try
             {
@@ -641,7 +660,7 @@ namespace MgmtMultipleParentResource
                 }
                 else
                 {
-                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = GetCore(cancellationToken: cancellationToken).Value.Data;
                     var patch = new ChildBodyUpdate();
                     foreach (var tag in current.Tags)
                     {
@@ -667,9 +686,10 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        [ForwardsClientCalls]
         public new Response<TheParentSubParentChildResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(key, nameof(key));
+
             var result = RemoveTagCore(key, cancellationToken);
             return Response.FromValue((TheParentSubParentChildResource)result.Value, result.GetRawResponse());
         }

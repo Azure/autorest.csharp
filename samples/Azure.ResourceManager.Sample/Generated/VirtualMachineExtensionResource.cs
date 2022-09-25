@@ -77,7 +77,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of Get
         /// The operation to get the extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Get
@@ -116,7 +115,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of Get
         /// The operation to get the extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Get
@@ -155,7 +153,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of Delete
         /// The operation to delete the extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Delete
@@ -194,7 +191,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of Delete
         /// The operation to delete the extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Delete
@@ -233,7 +229,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of Update
         /// The operation to update the extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Update
@@ -286,7 +281,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of Update
         /// The operation to update the extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Update
@@ -339,7 +333,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of AddTag
         /// Add a tag to the current resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Get
@@ -405,7 +398,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of AddTag
         /// Add a tag to the current resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Get
@@ -471,7 +463,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of SetTags
         /// Replace the tags on the resource with the given set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Get
@@ -530,7 +521,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of SetTags
         /// Replace the tags on the resource with the given set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Get
@@ -589,7 +579,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of RemoveTag
         /// Removes a tag by key from the resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Get
@@ -651,7 +640,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// The actual implementation of RemoveTag
         /// Removes a tag by key from the resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
         /// Operation Id: VirtualMachineExtensions_Get

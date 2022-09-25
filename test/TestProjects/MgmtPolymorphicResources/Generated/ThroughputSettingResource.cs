@@ -83,16 +83,16 @@ namespace MgmtPolymorphicResources
         /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ThroughputSettingResource>> GetAsync(CancellationToken cancellationToken = default)
+        protected override async Task<Response<BaseThroughputSettingResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.Get");
+            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.GetCore");
             scope.Start();
             try
             {
                 var response = await _throughputSettingCassandraResourcesRestClient.GetCassandraKeyspaceThroughputAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ThroughputSettingResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(GetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -107,22 +107,46 @@ namespace MgmtPolymorphicResources
         /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ThroughputSettingResource> Get(CancellationToken cancellationToken = default)
+        public new async Task<Response<ThroughputSettingResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.Get");
+            var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((ThroughputSettingResource)result.Value, result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// Gets the RUs per second of the Cassandra Keyspace under an existing Azure Cosmos DB database account with the provided name.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
+        /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected override Response<BaseThroughputSettingResource> GetCore(CancellationToken cancellationToken = default)
+        {
+            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.GetCore");
             scope.Start();
             try
             {
                 var response = _throughputSettingCassandraResourcesRestClient.GetCassandraKeyspaceThroughput(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ThroughputSettingResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(GetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Gets the RUs per second of the Cassandra Keyspace under an existing Azure Cosmos DB database account with the provided name.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
+        /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public new Response<ThroughputSettingResource> Get(CancellationToken cancellationToken = default)
+        {
+            var result = GetCore(cancellationToken);
+            return Response.FromValue((ThroughputSettingResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -134,16 +158,16 @@ namespace MgmtPolymorphicResources
         /// <param name="updateThroughputParameters"> The RUs per second of the parameters to provide for the current Cassandra Keyspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="updateThroughputParameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<ThroughputSettingResource>> CreateOrUpdateAsync(WaitUntil waitUntil, ThroughputSettingsUpdateParameters updateThroughputParameters, CancellationToken cancellationToken = default)
+        protected override async Task<ArmOperation<BaseThroughputSettingResource>> CreateOrUpdateCoreAsync(WaitUntil waitUntil, ThroughputSettingsUpdateParameters updateThroughputParameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(updateThroughputParameters, nameof(updateThroughputParameters));
 
-            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.CreateOrUpdate");
+            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.CreateOrUpdateCore");
             scope.Start();
             try
             {
                 var response = await _throughputSettingCassandraResourcesRestClient.UpdateCassandraKeyspaceThroughputAsync(Id.SubscriptionId, Id.ResourceGroupName, updateThroughputParameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPolymorphicResourcesArmOperation<ThroughputSettingResource>(new ThroughputSettingOperationSource(Client), _throughputSettingCassandraResourcesClientDiagnostics, Pipeline, _throughputSettingCassandraResourcesRestClient.CreateUpdateCassandraKeyspaceThroughputRequest(Id.SubscriptionId, Id.ResourceGroupName, updateThroughputParameters).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtPolymorphicResourcesArmOperation<BaseThroughputSettingResource>(new BaseThroughputSettingOperationSource(Client), _throughputSettingCassandraResourcesClientDiagnostics, Pipeline, _throughputSettingCassandraResourcesRestClient.CreateUpdateCassandraKeyspaceThroughputRequest(Id.SubscriptionId, Id.ResourceGroupName, updateThroughputParameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -164,16 +188,38 @@ namespace MgmtPolymorphicResources
         /// <param name="updateThroughputParameters"> The RUs per second of the parameters to provide for the current Cassandra Keyspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="updateThroughputParameters"/> is null. </exception>
-        public virtual ArmOperation<ThroughputSettingResource> CreateOrUpdate(WaitUntil waitUntil, ThroughputSettingsUpdateParameters updateThroughputParameters, CancellationToken cancellationToken = default)
+        public new async Task<ArmOperation<ThroughputSettingResource>> CreateOrUpdateAsync(WaitUntil waitUntil, ThroughputSettingsUpdateParameters updateThroughputParameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(updateThroughputParameters, nameof(updateThroughputParameters));
 
-            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.CreateOrUpdate");
+            var result = await CreateOrUpdateCoreAsync(waitUntil, updateThroughputParameters, cancellationToken).ConfigureAwait(false);
+            if (waitUntil == WaitUntil.Completed)
+            {
+                return new MgmtPolymorphicResourcesArmOperation<ThroughputSettingResource>(Response.FromValue((ThroughputSettingResource)result.Value, result.GetRawResponse()));
+            }
+            var operation = new MgmtPolymorphicResourcesArmOperation<ThroughputSettingResource>(new ThroughputSettingOperationSource(Client), _throughputSettingCassandraResourcesClientDiagnostics, Pipeline, _throughputSettingCassandraResourcesRestClient.CreateUpdateCassandraKeyspaceThroughputRequest(Id.SubscriptionId, Id.ResourceGroupName, updateThroughputParameters).Request, result.GetRawResponse(), OperationFinalStateVia.Location);
+            return operation;
+        }
+
+        /// <summary>
+        /// Update RUs per second of an Azure Cosmos DB Cassandra Keyspace
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
+        /// Operation Id: CassandraResources_UpdateCassandraKeyspaceThroughput
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="updateThroughputParameters"> The RUs per second of the parameters to provide for the current Cassandra Keyspace. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="updateThroughputParameters"/> is null. </exception>
+        protected override ArmOperation<BaseThroughputSettingResource> CreateOrUpdateCore(WaitUntil waitUntil, ThroughputSettingsUpdateParameters updateThroughputParameters, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(updateThroughputParameters, nameof(updateThroughputParameters));
+
+            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.CreateOrUpdateCore");
             scope.Start();
             try
             {
                 var response = _throughputSettingCassandraResourcesRestClient.UpdateCassandraKeyspaceThroughput(Id.SubscriptionId, Id.ResourceGroupName, updateThroughputParameters, cancellationToken);
-                var operation = new MgmtPolymorphicResourcesArmOperation<ThroughputSettingResource>(new ThroughputSettingOperationSource(Client), _throughputSettingCassandraResourcesClientDiagnostics, Pipeline, _throughputSettingCassandraResourcesRestClient.CreateUpdateCassandraKeyspaceThroughputRequest(Id.SubscriptionId, Id.ResourceGroupName, updateThroughputParameters).Request, response, OperationFinalStateVia.Location);
+                var operation = new MgmtPolymorphicResourcesArmOperation<BaseThroughputSettingResource>(new BaseThroughputSettingOperationSource(Client), _throughputSettingCassandraResourcesClientDiagnostics, Pipeline, _throughputSettingCassandraResourcesRestClient.CreateUpdateCassandraKeyspaceThroughputRequest(Id.SubscriptionId, Id.ResourceGroupName, updateThroughputParameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -186,6 +232,28 @@ namespace MgmtPolymorphicResources
         }
 
         /// <summary>
+        /// Update RUs per second of an Azure Cosmos DB Cassandra Keyspace
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
+        /// Operation Id: CassandraResources_UpdateCassandraKeyspaceThroughput
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="updateThroughputParameters"> The RUs per second of the parameters to provide for the current Cassandra Keyspace. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="updateThroughputParameters"/> is null. </exception>
+        public new ArmOperation<ThroughputSettingResource> CreateOrUpdate(WaitUntil waitUntil, ThroughputSettingsUpdateParameters updateThroughputParameters, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(updateThroughputParameters, nameof(updateThroughputParameters));
+
+            var result = CreateOrUpdateCore(waitUntil, updateThroughputParameters, cancellationToken);
+            if (waitUntil == WaitUntil.Completed)
+            {
+                return new MgmtPolymorphicResourcesArmOperation<ThroughputSettingResource>(Response.FromValue((ThroughputSettingResource)result.Value, result.GetRawResponse()));
+            }
+            var operation = new MgmtPolymorphicResourcesArmOperation<ThroughputSettingResource>(new ThroughputSettingOperationSource(Client), _throughputSettingCassandraResourcesClientDiagnostics, Pipeline, _throughputSettingCassandraResourcesRestClient.CreateUpdateCassandraKeyspaceThroughputRequest(Id.SubscriptionId, Id.ResourceGroupName, updateThroughputParameters).Request, result.GetRawResponse(), OperationFinalStateVia.Location);
+            return operation;
+        }
+
+        /// <summary>
         /// Add a tag to the current resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
         /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
@@ -194,12 +262,12 @@ namespace MgmtPolymorphicResources
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public virtual async Task<Response<ThroughputSettingResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        protected override async Task<Response<BaseThroughputSettingResource>> AddTagCoreAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.AddTag");
+            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.AddTagCore");
             scope.Start();
             try
             {
@@ -209,18 +277,18 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues[key] = value;
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _throughputSettingCassandraResourcesRestClient.GetCassandraKeyspaceThroughputAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new ThroughputSettingResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetCoreAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new ThroughputSettingsUpdateParameters(current.Location);
                     foreach (var tag in current.Tags)
                     {
                         patch.Tags.Add(tag);
                     }
                     patch.Tags[key] = value;
-                    var result = await CreateOrUpdateAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var result = await CreateOrUpdateCoreAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Response.FromValue(result.Value, result.GetRawResponse());
                 }
             }
@@ -240,12 +308,30 @@ namespace MgmtPolymorphicResources
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public virtual Response<ThroughputSettingResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public new async Task<Response<ThroughputSettingResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.AddTag");
+            var result = await AddTagCoreAsync(key, value, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((ThroughputSettingResource)result.Value, result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// Add a tag to the current resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
+        /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
+        /// </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
+        protected override Response<BaseThroughputSettingResource> AddTagCore(string key, string value, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
+
+            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.AddTagCore");
             scope.Start();
             try
             {
@@ -255,18 +341,18 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues[key] = value;
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _throughputSettingCassandraResourcesRestClient.GetCassandraKeyspaceThroughput(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(new ThroughputSettingResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = GetCore(cancellationToken: cancellationToken).Value.Data;
                     var patch = new ThroughputSettingsUpdateParameters(current.Location);
                     foreach (var tag in current.Tags)
                     {
                         patch.Tags.Add(tag);
                     }
                     patch.Tags[key] = value;
-                    var result = CreateOrUpdate(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
+                    var result = CreateOrUpdateCore(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
                     return Response.FromValue(result.Value, result.GetRawResponse());
                 }
             }
@@ -275,6 +361,24 @@ namespace MgmtPolymorphicResources
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Add a tag to the current resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
+        /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
+        /// </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
+        public new Response<ThroughputSettingResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
+
+            var result = AddTagCore(key, value, cancellationToken);
+            return Response.FromValue((ThroughputSettingResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -285,11 +389,11 @@ namespace MgmtPolymorphicResources
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public virtual async Task<Response<ThroughputSettingResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        protected override async Task<Response<BaseThroughputSettingResource>> SetTagsCoreAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.SetTags");
+            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.SetTagsCore");
             scope.Start();
             try
             {
@@ -300,14 +404,14 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.ReplaceWith(tags);
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _throughputSettingCassandraResourcesRestClient.GetCassandraKeyspaceThroughputAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new ThroughputSettingResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetCoreAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new ThroughputSettingsUpdateParameters(current.Location);
                     patch.Tags.ReplaceWith(tags);
-                    var result = await CreateOrUpdateAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var result = await CreateOrUpdateCoreAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Response.FromValue(result.Value, result.GetRawResponse());
                 }
             }
@@ -326,11 +430,27 @@ namespace MgmtPolymorphicResources
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public virtual Response<ThroughputSettingResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public new async Task<Response<ThroughputSettingResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.SetTags");
+            var result = await SetTagsCoreAsync(tags, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((ThroughputSettingResource)result.Value, result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// Replace the tags on the resource with the given set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
+        /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
+        /// </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
+        protected override Response<BaseThroughputSettingResource> SetTagsCore(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(tags, nameof(tags));
+
+            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.SetTagsCore");
             scope.Start();
             try
             {
@@ -341,14 +461,14 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.ReplaceWith(tags);
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _throughputSettingCassandraResourcesRestClient.GetCassandraKeyspaceThroughput(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(new ThroughputSettingResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = GetCore(cancellationToken: cancellationToken).Value.Data;
                     var patch = new ThroughputSettingsUpdateParameters(current.Location);
                     patch.Tags.ReplaceWith(tags);
-                    var result = CreateOrUpdate(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
+                    var result = CreateOrUpdateCore(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
                     return Response.FromValue(result.Value, result.GetRawResponse());
                 }
             }
@@ -360,6 +480,22 @@ namespace MgmtPolymorphicResources
         }
 
         /// <summary>
+        /// Replace the tags on the resource with the given set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
+        /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
+        /// </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
+        public new Response<ThroughputSettingResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(tags, nameof(tags));
+
+            var result = SetTagsCore(tags, cancellationToken);
+            return Response.FromValue((ThroughputSettingResource)result.Value, result.GetRawResponse());
+        }
+
+        /// <summary>
         /// Removes a tag by key from the resource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
         /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
@@ -367,11 +503,11 @@ namespace MgmtPolymorphicResources
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public virtual async Task<Response<ThroughputSettingResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        protected override async Task<Response<BaseThroughputSettingResource>> RemoveTagCoreAsync(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.RemoveTag");
+            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.RemoveTagCore");
             scope.Start();
             try
             {
@@ -381,18 +517,18 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.Remove(key);
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _throughputSettingCassandraResourcesRestClient.GetCassandraKeyspaceThroughputAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new ThroughputSettingResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var current = (await GetCoreAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
                     var patch = new ThroughputSettingsUpdateParameters(current.Location);
                     foreach (var tag in current.Tags)
                     {
                         patch.Tags.Add(tag);
                     }
                     patch.Tags.Remove(key);
-                    var result = await CreateOrUpdateAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var result = await CreateOrUpdateCoreAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Response.FromValue(result.Value, result.GetRawResponse());
                 }
             }
@@ -411,11 +547,27 @@ namespace MgmtPolymorphicResources
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public virtual Response<ThroughputSettingResource> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public new async Task<Response<ThroughputSettingResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.RemoveTag");
+            var result = await RemoveTagCoreAsync(key, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((ThroughputSettingResource)result.Value, result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// Removes a tag by key from the resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
+        /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
+        /// </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
+        protected override Response<BaseThroughputSettingResource> RemoveTagCore(string key, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(key, nameof(key));
+
+            using var scope = _throughputSettingCassandraResourcesClientDiagnostics.CreateScope("ThroughputSettingResource.RemoveTagCore");
             scope.Start();
             try
             {
@@ -425,18 +577,18 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.Remove(key);
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _throughputSettingCassandraResourcesRestClient.GetCassandraKeyspaceThroughput(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
-                    return Response.FromValue(new ThroughputSettingResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
-                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var current = GetCore(cancellationToken: cancellationToken).Value.Data;
                     var patch = new ThroughputSettingsUpdateParameters(current.Location);
                     foreach (var tag in current.Tags)
                     {
                         patch.Tags.Add(tag);
                     }
                     patch.Tags.Remove(key);
-                    var result = CreateOrUpdate(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
+                    var result = CreateOrUpdateCore(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
                     return Response.FromValue(result.Value, result.GetRawResponse());
                 }
             }
@@ -445,6 +597,22 @@ namespace MgmtPolymorphicResources
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Removes a tag by key from the resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputSettings/default
+        /// Operation Id: CassandraResources_GetCassandraKeyspaceThroughput
+        /// </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
+        public new Response<ThroughputSettingResource> RemoveTag(string key, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(key, nameof(key));
+
+            var result = RemoveTagCore(key, cancellationToken);
+            return Response.FromValue((ThroughputSettingResource)result.Value, result.GetRawResponse());
         }
     }
 }

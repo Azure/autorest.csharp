@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return $"{operation.MgmtCSharpName(!resourceName.IsNullOrEmpty())}{resourceName}";
         }
 
-        private HashSet<NameSetKey> EnsureUniqueSets()
+        protected virtual HashSet<NameSetKey> EnsureUniqueSets()
         {
             HashSet<NameSetKey> uniqueSets = new HashSet<NameSetKey>();
             foreach (var operation in AllOperations)
@@ -274,14 +274,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 uniqueSets.Add(key);
             }
             return uniqueSets;
-        }
-
-        private IEnumerable<MgmtRestClient>? _restClients;
-        public IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients();
-
-        protected virtual IEnumerable<MgmtRestClient> EnsureRestClients()
-        {
-            return ClientOperations.SelectMany(operation => operation.Select(restOperation => restOperation.RestClient)).Distinct();
         }
     }
 }

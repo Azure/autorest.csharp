@@ -76,7 +76,6 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// The core implementation for operation Get
         /// This operation retrieves the policy definition in the given management group with the given name.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetAtManagementGroup
@@ -84,7 +83,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<PolicyDefinitionResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.Get");
+            using var scope = _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.GetCore");
             scope.Start();
             try
             {
@@ -106,7 +105,6 @@ namespace MgmtExtensionResource
         /// Operation Id: PolicyDefinitions_GetAtManagementGroup
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        [ForwardsClientCalls]
         public new async Task<Response<ManagementGroupPolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
@@ -114,7 +112,6 @@ namespace MgmtExtensionResource
         }
 
         /// <summary>
-        /// The core implementation for operation Get
         /// This operation retrieves the policy definition in the given management group with the given name.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
         /// Operation Id: PolicyDefinitions_GetAtManagementGroup
@@ -122,7 +119,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<PolicyDefinitionResource> GetCore(CancellationToken cancellationToken = default)
         {
-            using var scope = _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.Get");
+            using var scope = _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.GetCore");
             scope.Start();
             try
             {
@@ -144,7 +141,6 @@ namespace MgmtExtensionResource
         /// Operation Id: PolicyDefinitions_GetAtManagementGroup
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        [ForwardsClientCalls]
         public new Response<ManagementGroupPolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
         {
             var result = GetCore(cancellationToken);

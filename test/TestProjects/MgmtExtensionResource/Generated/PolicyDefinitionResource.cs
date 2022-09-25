@@ -16,7 +16,7 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionResource
 {
-    /// <summary> TODO. </summary>
+    /// <summary> This is the base client representation of the following resources <see cref="SubscriptionPolicyDefinitionResource" />, <see cref="BuiltInPolicyDefinitionResource" /> or <see cref="ManagementGroupPolicyDefinitionResource" />. </summary>
     public abstract partial class PolicyDefinitionResource : ArmResource
     {
         internal static PolicyDefinitionResource GetResource(ArmClient client, PolicyDefinitionData data)
@@ -125,7 +125,6 @@ namespace MgmtExtensionResource
 
         /// <summary> The default implementation for operation Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        [ForwardsClientCalls]
         public async Task<Response<PolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             return await GetCoreAsync(cancellationToken).ConfigureAwait(false);
@@ -137,7 +136,6 @@ namespace MgmtExtensionResource
 
         /// <summary> The default implementation for operation Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        [ForwardsClientCalls]
         public Response<PolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
         {
             return GetCore(cancellationToken);

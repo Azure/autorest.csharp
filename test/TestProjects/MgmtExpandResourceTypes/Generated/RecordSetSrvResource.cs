@@ -81,16 +81,16 @@ namespace MgmtExpandResourceTypes
         /// Operation Id: RecordSets_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<RecordSetSrvResource>> GetAsync(CancellationToken cancellationToken = default)
+        protected override async Task<Response<RecordSetResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.Get");
+            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.GetCore");
             scope.Start();
             try
             {
                 var response = await _recordSetSrvRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SRV".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetSrvResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(GetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -105,22 +105,46 @@ namespace MgmtExpandResourceTypes
         /// Operation Id: RecordSets_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<RecordSetSrvResource> Get(CancellationToken cancellationToken = default)
+        public new async Task<Response<RecordSetSrvResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.Get");
+            var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((RecordSetSrvResource)result.Value, result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected override Response<RecordSetResource> GetCore(CancellationToken cancellationToken = default)
+        {
+            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.GetCore");
             scope.Start();
             try
             {
                 var response = _recordSetSrvRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SRV".ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetSrvResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(GetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public new Response<RecordSetSrvResource> Get(CancellationToken cancellationToken = default)
+        {
+            var result = GetCore(cancellationToken);
+            return Response.FromValue((RecordSetSrvResource)result.Value, result.GetRawResponse());
         }
 
         /// <summary>
@@ -131,9 +155,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
+        protected override async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.Delete");
+            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.DeleteCore");
             scope.Start();
             try
             {
@@ -158,9 +182,22 @@ namespace MgmtExpandResourceTypes
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Delete(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
+        public new async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.Delete");
+            return await base.DeleteAsync(waitUntil, ifMatch, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Deletes a record set from a DNS zone. This operation cannot be undone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Delete
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        protected override ArmOperation DeleteCore(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.DeleteCore");
             scope.Start();
             try
             {
@@ -178,6 +215,19 @@ namespace MgmtExpandResourceTypes
         }
 
         /// <summary>
+        /// Deletes a record set from a DNS zone. This operation cannot be undone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Delete
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public new ArmOperation Delete(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
+        {
+            return base.Delete(waitUntil, ifMatch, cancellationToken);
+        }
+
+        /// <summary>
         /// Updates a record set within a DNS zone.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
         /// Operation Id: RecordSets_Update
@@ -186,16 +236,16 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public virtual async Task<Response<RecordSetSrvResource>> UpdateAsync(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
+        protected override async Task<Response<RecordSetResource>> UpdateCoreAsync(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.Update");
+            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.UpdateCore");
             scope.Start();
             try
             {
                 var response = await _recordSetSrvRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SRV".ToRecordType(), Id.Name, data, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetSrvResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(GetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -213,22 +263,56 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public virtual Response<RecordSetSrvResource> Update(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
+        public new async Task<Response<RecordSetSrvResource>> UpdateAsync(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.Update");
+            var result = await UpdateCoreAsync(data, ifMatch, cancellationToken).ConfigureAwait(false);
+            return Response.FromValue((RecordSetSrvResource)result.Value, result.GetRawResponse());
+        }
+
+        /// <summary>
+        /// Updates a record set within a DNS zone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Update
+        /// </summary>
+        /// <param name="data"> Parameters supplied to the Update operation. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        protected override Response<RecordSetResource> UpdateCore(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(data, nameof(data));
+
+            using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvResource.UpdateCore");
             scope.Start();
             try
             {
                 var response = _recordSetSrvRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SRV".ToRecordType(), Id.Name, data, ifMatch, cancellationToken);
-                return Response.FromValue(new RecordSetSrvResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(GetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Updates a record set within a DNS zone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Update
+        /// </summary>
+        /// <param name="data"> Parameters supplied to the Update operation. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public new Response<RecordSetSrvResource> Update(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(data, nameof(data));
+
+            var result = UpdateCore(data, ifMatch, cancellationToken);
+            return Response.FromValue((RecordSetSrvResource)result.Value, result.GetRawResponse());
         }
     }
 }
