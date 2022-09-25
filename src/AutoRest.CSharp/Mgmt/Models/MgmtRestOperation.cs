@@ -207,36 +207,36 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
         }
 
-        public FormattableString? GetValueConverter(FormattableString clientVariable, FormattableString valueVariable)
+        public FormattableString? GetValueConverter(CSharpType? returnType, FormattableString clientVariable, FormattableString valueVariable)
         {
             var restReturnType = IsPagingOperation ? PagingMethod!.ItemType : Method.ReturnType;
             // when the method returns nothing, when this happens, the methodReturnType should either be Response, or ArmOperation
-            if (restReturnType == null && MgmtReturnType == null)
+            if (restReturnType == null && returnType == null)
                 return null;
 
             Debug.Assert(restReturnType != null);
-            Debug.Assert(MgmtReturnType != null);
+            Debug.Assert(returnType != null);
 
             // check if this operation need a response converter
-            if (MgmtReturnType.Equals(restReturnType))
+            if (returnType.Equals(restReturnType))
                 return null;
 
             if (InterimOperation != null)
                 return null;
 
             // check the implementation of those types -- all should be a type provider
-            if (MgmtReturnType.IsFrameworkType || restReturnType.IsFrameworkType)
+            if (returnType.IsFrameworkType || restReturnType.IsFrameworkType)
                 return null;
 
             // first check: if the method is returning a BaseResource and the rest operation is returning a ResourceData
-            if (MgmtReturnType.Implementation is BaseResource returnBaseResource && restReturnType.Implementation is ResourceData)
+            if (returnType.Implementation is BaseResource returnBaseResource && restReturnType.Implementation is ResourceData)
             {
                 // in this case we should call the static Resource factory in the base resource
                 return $"{returnBaseResource.Type}.GetResource({clientVariable}, {valueVariable})";
             }
 
             // second check: if the method is returning a Resource and the rest operation is returning a ResourceData
-            if (MgmtReturnType.Implementation is Resource returnResource && restReturnType.Implementation is ResourceData)
+            if (returnType.Implementation is Resource returnResource && restReturnType.Implementation is ResourceData)
             {
                 // in this case we should call the constructor of the resource to wrap it into a resource
                 return $"new {returnResource.Type}({clientVariable}, {valueVariable})";
@@ -245,6 +245,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             // otherwise we return null
             return null;
         }
+
+        public FormattableString? GetValueConverter(FormattableString clientVariable, FormattableString valueVariable)
+            => GetValueConverter(MgmtReturnType, clientVariable, valueVariable);
 
         internal enum ResourceMatchType
         {

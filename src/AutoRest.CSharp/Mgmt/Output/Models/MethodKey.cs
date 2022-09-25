@@ -22,7 +22,12 @@ internal readonly struct MethodKey
         Name = name;
         Parameters = parameters;
         ReturnType = returnType;
+
+        _serializedString = $"{name}({string.Join(", ", parameters.Select(t => t.Name))}): {returnType?.Name ?? "void"}";
     }
+
+    private readonly string _serializedString;
+    public override string ToString() => _serializedString;
 
     public override int GetHashCode()
         => HashCode.Combine(Name, ((System.Collections.IStructuralEquatable)Parameters).GetHashCode(EqualityComparer<CSharpType>.Default), ReturnType);

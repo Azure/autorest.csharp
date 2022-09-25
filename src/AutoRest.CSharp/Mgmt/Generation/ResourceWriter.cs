@@ -207,6 +207,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"return {typeof(Response)}.FromValue(({clientOperation.MgmtReturnType}){variableName}.Value, {variableName}.GetRawResponse());");
             }
         }
+
         private void WritePolymorphicLROResponse(FormattableString variableName, MgmtClientOperation clientOperation)
         {
             if (clientOperation.OperationMappings.Count == 1)
@@ -273,11 +274,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
                     WriteGetOriginalFromTagResource(isAsync, "[key] = value");
-                    WriteTaggableCommonMethod(isAsync);
+                    WriteTaggableCommonMethod(clientOperation, isAsync);
                 }
                 using (_writer.Scope($"else"))
                 {
-                    WriteTaggableCommonMethodFromPutOrPatch(isAsync, "[key] = value");
+                    WriteTaggableCommonMethodFromPutOrPatch(clientOperation, isAsync, "[key] = value");
                 }
             }
             _writer.Line();
@@ -295,11 +296,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line($"GetTagResource().{CreateMethodName("Delete", isAsync)}({typeof(WaitUntil)}.Completed, cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
                     WriteGetOriginalFromTagResource(isAsync, ".ReplaceWith(tags)");
-                    WriteTaggableCommonMethod(isAsync);
+                    WriteTaggableCommonMethod(clientOperation, isAsync);
                 }
                 using (_writer.Scope($"else"))
                 {
-                    WriteTaggableCommonMethodFromPutOrPatch(isAsync, ".ReplaceWith(tags)", true);
+                    WriteTaggableCommonMethodFromPutOrPatch(clientOperation, isAsync, ".ReplaceWith(tags)", true);
                 }
             }
             _writer.Line();
@@ -312,11 +313,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
                     WriteGetOriginalFromTagResource(isAsync, ".Remove(key)");
-                    WriteTaggableCommonMethod(isAsync);
+                    WriteTaggableCommonMethod(clientOperation, isAsync);
                 }
                 using (_writer.Scope($"else"))
                 {
-                    WriteTaggableCommonMethodFromPutOrPatch(isAsync, ".Remove(key)");
+                    WriteTaggableCommonMethodFromPutOrPatch(clientOperation, isAsync, ".Remove(key)");
                 }
             }
             _writer.Line();
@@ -340,7 +341,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"originalTags.Value.Data.TagValues{setCode};");
         }
 
-        private void WriteTaggableCommonMethodFromPutOrPatch(bool isAsync, string setCode, bool isSetTags = false)
+        private void WriteTaggableCommonMethodFromPutOrPatch(MgmtClientOperation tagOperation, bool isAsync, string setCode, bool isSetTags = false)
         {
             if (This.UpdateOperation is null && This.CreateOperation is null)
                 throw new InvalidOperationException($"Unexpected null update method for resource {This.ResourceName} while its marked as taggable");
@@ -414,24 +415,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line($"{bodyParamName}.Tags{setCode};");
             _writer.Line($"var result = {awaitStr}{CreateMethodName(updateMethodName, isAsync)}({lroParamStr}{bodyParamName}, cancellationToken: cancellationToken){configureStr};");
-            if (updateOperation.IsLongRunningOperation)
+            if (tagOperation.ReturnType.Equals(updateOperation.ReturnType))
             {
-                if (updateOperation.ReturnType.Arguments.Length == 0)
+                _writer.Line($"return result;");
+            }
+            else
+            {
+                if (updateOperation.IsLongRunningOperation && updateOperation.MgmtReturnType == null)
                 {
                     _writer.Line($"return {awaitStr}{CreateMethodName(getOperation.Name, isAsync)}(cancellationToken: cancellationToken){configureStr};");
                 }
                 else
                 {
-                    _writer.Line($"return Response.FromValue(result.Value, result.GetRawResponse());");
+                    _writer.Line($"return {typeof(Response)}.FromValue(({tagOperation.MgmtReturnType})result.Value, result.GetRawResponse());");
                 }
-            }
-            else
-            {
-                _writer.Line($"return result;");
             }
         }
 
-        private void WriteTaggableCommonMethod(bool isAsync)
+        private void WriteTaggableCommonMethod(MgmtClientOperation tagOperation, bool isAsync)
         {
             _writer.Line($"{GetAwait(isAsync)} GetTagResource().{CreateMethodName("CreateOrUpdate", isAsync)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
@@ -445,7 +446,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 // if we only have one branch, we would not need those if-else statements
                 var branch = getOperation.OperationMappings.Keys.First();
-                WriteTaggableCommonMethodBranch(getOperation.OperationMappings[branch], getOperation.ParameterMappings[branch], isAsync);
+                WriteTaggableCommonMethodBranch(tagOperation, getOperation.OperationMappings[branch], getOperation.ParameterMappings[branch], isAsync);
             }
             else
             {
@@ -454,22 +455,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync)
+        private void WriteTaggableCommonMethodBranch(MgmtClientOperation tagOperation, MgmtRestOperation getOperation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync)
         {
             var originalResponse = new CodeWriterDeclaration("originalResponse");
             _writer
                 .Append($"var {originalResponse:D} = {GetAwait(isAsync)} ")
-                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, isAsync)}(");
+                .Append($"{GetRestClientName(getOperation)}.{CreateMethodName(getOperation.Method.Name, isAsync)}(");
 
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
-                _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, operation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
+                _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, getOperation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
             }
 
-            var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value");
+            var valueConverter = getOperation.GetValueConverter(tagOperation.MgmtReturnType, $"{ArmClientReference}", $"{originalResponse}.Value");
             if (valueConverter != null)
             {
                 _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {originalResponse}.GetRawResponse());");

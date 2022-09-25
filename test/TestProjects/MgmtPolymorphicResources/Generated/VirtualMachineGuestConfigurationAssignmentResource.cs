@@ -283,7 +283,7 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues[key] = value;
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -324,7 +324,7 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues[key] = value;
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -364,7 +364,7 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.ReplaceWith(tags);
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -404,7 +404,7 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.ReplaceWith(tags);
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -443,7 +443,7 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.Remove(key);
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -482,7 +482,7 @@ namespace MgmtPolymorphicResources
                     originalTags.Value.Data.TagValues.Remove(key);
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                    return Response.FromValue(GetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new VirtualMachineGuestConfigurationAssignmentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
                 }
                 else
                 {
