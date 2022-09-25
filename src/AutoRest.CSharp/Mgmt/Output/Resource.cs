@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
@@ -171,7 +172,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 result.Add(restOperation);
             }
 
-            return MgmtClientOperation.FromOperations(result);
+            return MgmtClientOperation.FromOperations(this, result);
         }
 
         public virtual Resource GetResource() => this;
@@ -269,6 +270,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 var createOrUpdateOperation = ResourceCollection.CreateOperation.OperationMappings.Values.First();
                 return MgmtClientOperation.FromOperation(
+                    this,
                     new MgmtRestOperation(
                         createOrUpdateOperation,
                         "Update",
@@ -300,24 +302,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 result.Add(GetOperation);
             if (DeleteOperation != null)
                 result.Add(DeleteOperation);
-            if (UpdateOperation is null)
-            {
-                if (ResourceCollection?.CreateOperation is not null)
-                {
-                    var createOrUpdateOperation = ResourceCollection.CreateOperation.OperationMappings.Values.First();
-                    result.Add(MgmtClientOperation.FromOperation(
-                        new MgmtRestOperation(
-                            createOrUpdateOperation,
-                            "Update",
-                            createOrUpdateOperation.MgmtReturnType,
-                            createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
-                            createOrUpdateOperation.RequestPath)));
-                }
-            }
-            else
-            {
+            if (UpdateOperation != null)
                 result.Add(UpdateOperation);
-            }
             if (IsSingleton && CreateOperation != null)
                 result.Add(CreateOperation);
             result.AddRange(ClientOperations);
@@ -325,6 +311,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 var getOperation = GetOperation.OperationMappings.Values.First();
                 result.Add(MgmtClientOperation.FromOperation(
+                    this,
                     new MgmtRestOperation(
                         getOperation,
                         "AddTag",
@@ -334,6 +321,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         TagValueParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
+                    this,
                     new MgmtRestOperation(
                         getOperation,
                         "SetTags",
@@ -342,6 +330,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         TagSetParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
+                    this,
                     new MgmtRestOperation(
                         getOperation,
                         "RemoveTag",
@@ -419,7 +408,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             // TODO -- what if the response type is not the same? Also we need to verify they have the same parameters before we could union those together
             _clientOperationMap = result.Where(pair => pair.Value.Count > 0).ToDictionary(
                 pair => pair.Key,
-                pair => MgmtClientOperation.FromOperations(pair.Value)!); // We first filtered the ones with at least one operation, therefore this will never be null
+                pair => MgmtClientOperation.FromOperations(this, pair.Value)!); // We first filtered the ones with at least one operation, therefore this will never be null
             return _clientOperationMap;
         }
 
@@ -525,6 +514,24 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
                 return $"{dataExpression}.Id";
             }
+        }
+
+        private Dictionary<MgmtClientOperation, MgmtClientOperation>? _commonOperations;
+        /// <summary>
+        /// This dictionary stores the common operations on this resource.
+        /// If this resource is not a polymorphic resource (when PolymorphicOption == null), this dictionary is empty
+        /// This dictionary maps from the original <see cref="MgmtClientOperation"/> to the core implementation which is also a <see cref="MgmtClientOperation"/> with slightly different operation name (added Core suffix), same parameter list, escaped return types
+        /// </summary>
+        public IReadOnlyDictionary<MgmtClientOperation, MgmtClientOperation> CommonOperations => _commonOperations ??= EnsureCommonOperations();
+
+        private Dictionary<MgmtClientOperation, MgmtClientOperation> EnsureCommonOperations()
+        {
+            if (PolymorphicOption == null)
+                return new();
+
+            var operations = PolymorphicOption.BaseResource.CommonOperationMap[this];
+
+            return operations.ToDictionary(item => item.ClientOperation, item => item.CoreOperation);
         }
 
         public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, ValidationType.None, null);

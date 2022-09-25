@@ -6,6 +6,9 @@ using System.Linq;
 using System;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -15,6 +18,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected internal BaseResourceWriter(CodeWriter writer, BaseResource baseResource) : base(writer, baseResource)
         {
             This = baseResource;
+        }
+
+        protected override void InitializeCustomMethodWriters()
+        {
+            foreach (var operation in This.AllOperations)
+            {
+                _customMethods.Add($"Write{operation.Name}Body", WriteBaseMethodBody);
+            }
         }
 
         protected override void WriteStaticMethods()
@@ -88,6 +99,41 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             _writer.Line();
+        }
+
+        protected override void WriteMethod(MgmtClientOperation clientOperation, bool isAsync)
+        {
+            // create core method
+            var coreSignature = clientOperation.MethodSignature with
+            {
+                Name = $"{clientOperation.Name}Core",
+                Modifiers = MethodSignatureModifiers.Protected,
+                Description = $"The core implementation for operation {clientOperation.Name}"
+            };
+            coreSignature = coreSignature.WithAsync(isAsync);
+            _writer.WriteMethodDocumentation(coreSignature);
+            _writer.WriteAbstractMethodDeclaration(coreSignature);
+            _writer.Line();
+
+            base.WriteMethod(clientOperation, isAsync);
+            _writer.Line();
+        }
+
+        private void WriteBaseMethodBody(MgmtClientOperation operation, Diagnostic diagnostic, bool isAsync)
+        {
+            // call its corresponding core method directly here
+            var coreMethodName = $"{operation.Name}Core";
+            _writer.AppendRaw("return ")
+                    .AppendRawIf("await ", isAsync && !operation.IsPagingOperation)
+                    .Append($"{CreateMethodName(coreMethodName, isAsync)}(");
+            foreach (var parameter in operation.MethodParameters)
+            {
+                _writer.AppendRaw(parameter.Name).AppendRaw(",");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.AppendRaw(")")
+                .AppendRawIf(".ConfigureAwait(false)", isAsync && !operation.IsPagingOperation)
+                .LineRaw(";");
         }
     }
 }

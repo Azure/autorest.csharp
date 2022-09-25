@@ -142,7 +142,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             Resource = other.Resource;
             FinalStateVia = other.FinalStateVia;
             OriginalReturnType = other.OriginalReturnType;
-            OperationSource = other.OperationSource;
             InterimOperation = other.InterimOperation;
 
             //modify some of the values
@@ -150,6 +149,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             _mgmtReturnType = overrideReturnType;
             _description = overrideDescription;
             OverrideParameters = overrideParameters;
+            OperationSource = GetOperationSource();
         }
 
         private OperationSource? GetOperationSource()
@@ -406,7 +406,6 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             if (InterimOperation is not null)
                 return InterimOperation.InterimType;
-
 
             return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(false);
         }

@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         protected const string EndpointProperty = "Endpoint";
         protected delegate void WriteMethodDelegate(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync);
-        private string LibraryArmOperation { get; }
+        protected string LibraryArmOperation { get; }
         protected bool IsArmCore { get; }
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
@@ -57,6 +57,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public virtual void Write()
         {
+            InitializeCustomMethodWriters();
+
             using (_writer.Namespace(This.Namespace))
             {
                 WriteClassDeclaration();
@@ -81,20 +83,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             WriteChildResourceEntries();
 
-            // Write other orphan operations with the parent of ResourceGroup
-            foreach (var clientOperation in This.AllOperations)
-            {
-                WriteMethod(clientOperation, true);
-                WriteMethod(clientOperation, false);
-            }
+            WriteOperations();
 
             if (This.EnumerableInterfaces.Any())
                 WriteEnumerables();
         }
 
+        protected virtual void InitializeCustomMethodWriters() { }
         protected virtual void WritePrivateHelpers() { }
         protected virtual void WriteProperties() { }
         protected virtual void WriteStaticMethods() { }
+
+        protected virtual void WriteOperations()
+        {
+            foreach (var clientOperation in This.AllOperations)
+            {
+                WriteMethod(clientOperation, true);
+                WriteMethod(clientOperation, false);
+            }
+        }
 
         protected void WriteClassDeclaration()
         {

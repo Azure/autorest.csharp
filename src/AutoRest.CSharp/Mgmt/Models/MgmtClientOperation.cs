@@ -5,21 +5,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -32,17 +24,31 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
-        private const string IdVariableName = "Id";
-        private readonly Parameter? _extensionParameter;
-        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
+        public static MgmtClientOperation FromOperations(MgmtTypeProvider carrier, IEnumerable<MgmtClientOperation> operations)
         {
-            if (operations.Count > 0)
+            // TODO -- validate if they could be combined together
+            return new MgmtClientOperation(carrier, operations.SelectMany(operation => operation).ToArray(), null);
+        }
+
+        public static MgmtClientOperation? FromOperations(MgmtTypeProvider carrier, IEnumerable<MgmtRestOperation> operations)
+        {
+            if (operations.Any())
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), null);
+                return new MgmtClientOperation(carrier, operations.OrderBy(operation => operation.Name).ToArray(), null);
             }
 
             return null;
         }
+
+        public static MgmtClientOperation FromOperation(MgmtTypeProvider carrier, MgmtRestOperation operation, Parameter? extensionParameter = null, bool isConvenientOperation = false)
+        {
+            return new MgmtClientOperation(carrier, new List<MgmtRestOperation> { operation }, extensionParameter, isConvenientOperation);
+        }
+
+        private const string IdVariableName = "Id";
+        private readonly Parameter? _extensionParameter;
+
+        public MgmtTypeProvider Carrier { get; }
 
         public Func<bool, FormattableString>? ReturnsDescription => _operations.First().ReturnsDescription;
 
@@ -55,15 +61,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null, bool isConvenientOperation = false)
-        {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter, isConvenientOperation);
-        }
-
         private readonly IReadOnlyList<MgmtRestOperation> _operations;
 
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter, bool isConvenientOperation = false)
+        private MgmtClientOperation(MgmtTypeProvider carrier, IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter, bool isConvenientOperation = false)
         {
+            Carrier = carrier;
             _operations = operations;
             _extensionParameter = extensionParameter;
             IsConvenientOperation = isConvenientOperation;
@@ -73,24 +75,57 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public MgmtRestOperation this[int index] => _operations[index];
 
+        // TODO -- add carrier property to MgmtClientOperation so that we could query whether this operation is a common or not and determine whether the signature should have abstract or virtual or new keyword
         private MethodSignature? _methodSignature;
-        public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(
-            Name,
-            null,
-            Description,
-            Accessibility == Public
-                ? _extensionParameter != null
-                    ? Public | Static | Extension
-                    : Public | Virtual
-                : Accessibility,
-            IsPagingOperation
-                ? new CSharpType(typeof(Pageable<>), ReturnType)
-                : ReturnType, null, MethodParameters.ToArray());
+        public MethodSignature MethodSignature => _methodSignature ??= EnsureMethodSignature();
+
+        private MethodSignature EnsureMethodSignature()
+        {
+            return new MethodSignature(
+                Name,
+                null,
+                Description,
+                GetModifiers(),
+                IsPagingOperation
+                    ? new CSharpType(typeof(Pageable<>), ReturnType)
+                    : ReturnType, null, MethodParameters.ToArray());
+        }
+
+        private MethodSignatureModifiers GetModifiers()
+        {
+            if (Accessibility != MethodSignatureModifiers.Public)
+                return Accessibility;
+            if (_extensionParameter != null)
+                return MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension;
+
+            var defaultModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual;
+            // check if this is a common operation on base resource
+            if (Carrier is BaseResource)
+                return MethodSignatureModifiers.Public;
+
+            // if this is a common operation on a resource, we should have different modifiers
+            if (Carrier is Resource resource && Carrier is not ResourceCollection)
+            {
+                if (resource.CommonOperations.ContainsKey(this))
+                {
+                    // this is a common operation
+                    // TODO -- read the configurations here to see if we want to add virtual
+                    return MethodSignatureModifiers.Public | MethodSignatureModifiers.New;
+                }
+                if (resource.CommonOperations.Values.Contains(this))
+                {
+                    // this is an override of core method
+                    return MethodSignatureModifiers.Protected | MethodSignatureModifiers.Override;
+                }
+            }
+            return defaultModifiers;
+        }
 
         // TODO -- we need a better way to get the name of this
         public string Name => _operations.First().Name;
 
-        // TODO -- we need a better way to get the description of this
+        public string? RawDescription => _operations.First().Description;
+
         private string? _description;
         public string Description => _description ??= BuildDescription();
 
@@ -105,6 +140,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         // TODO -- we need a better way to get this
         public IEnumerable<Parameter> Parameters => _operations.First().Parameters;
+
+        public CSharpType? MgmtReturnType => _operations.First().MgmtReturnType;
 
         public CSharpType ReturnType => _operations.First().ReturnType;
 
