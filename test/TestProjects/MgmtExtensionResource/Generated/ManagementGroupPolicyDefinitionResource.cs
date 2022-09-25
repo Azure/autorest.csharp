@@ -105,6 +105,7 @@ namespace MgmtExtensionResource
         /// Operation Id: PolicyDefinitions_GetAtManagementGroup
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        [ForwardsClientCalls]
         public new async Task<Response<ManagementGroupPolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
@@ -141,6 +142,7 @@ namespace MgmtExtensionResource
         /// Operation Id: PolicyDefinitions_GetAtManagementGroup
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        [ForwardsClientCalls]
         public new Response<ManagementGroupPolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
         {
             var result = GetCore(cancellationToken);

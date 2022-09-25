@@ -11,6 +11,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
+using Azure.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Models
@@ -58,6 +59,20 @@ namespace AutoRest.CSharp.Mgmt.Models
         private readonly Parameter? _extensionParameter;
 
         public MgmtTypeProvider Carrier { get; }
+
+        private IEnumerable<Attribute>? _attributes;
+        public IEnumerable<Attribute>? Attributes => _attributes ??= EnsureAttributes();
+
+        private IEnumerable<Attribute>? EnsureAttributes()
+        {
+            if (Carrier is Resource resource && resource.CommonOperations.ContainsKey(this))
+            {
+                // if this is a common operation
+                return new[] { new ForwardsClientCallsAttribute() };
+            }
+
+            return null;
+        }
 
         public Func<bool, FormattableString>? ReturnsDescription => _operations.First().ReturnsDescription;
 

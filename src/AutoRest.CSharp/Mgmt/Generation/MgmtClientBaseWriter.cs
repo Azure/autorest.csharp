@@ -322,7 +322,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             };
 
             _writer.Line();
-            using (WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, true, new List<Attribute> { new ForwardsClientCallsAttribute() }))
+            using (WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, new List<Attribute> { new ForwardsClientCallsAttribute() }))
             {
                 WriteResourceEntry(resourceCollection, isAsync);
             }
@@ -551,19 +551,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             var returnDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
-            return WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync);
+            return WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync, clientOperation.Attributes);
         }
 
-        protected IDisposable WriteCommonMethod(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
+        protected IDisposable WriteCommonMethod(MethodSignature signature, FormattableString? returnDescription, bool isAsync, IEnumerable<Attribute>? attributes = null)
         {
-            var scope = WriteCommonMethodWithoutValidation(signature, returnDescription, isAsync);
+            var scope = WriteCommonMethodWithoutValidation(signature, returnDescription, isAsync, attributes);
             if (This.Accessibility == "public")
                 _writer.WriteParametersValidation(signature.Parameters);
 
             return scope;
         }
 
-        protected IDisposable WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
+        protected IDisposable WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, IEnumerable<Attribute>? attributes = default)
         {
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);
@@ -577,7 +577,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (returnDesc is not null)
                 _writer.WriteXmlDocumentationReturns(returnDesc);
 
-            if (enableAttributes && attributes is not null)
+            if (attributes is not null)
             {
                 foreach (var attribute in attributes)
                 {

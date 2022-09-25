@@ -104,6 +104,7 @@ namespace MgmtPolymorphicResources
         /// Operation Id: GuestConfigurationAssignmentsVMSS_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        [ForwardsClientCalls]
         public new async Task<Response<VirtualMachineScaleSetGuestConfigurationAssignmentResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             var result = await GetCoreAsync(cancellationToken).ConfigureAwait(false);
@@ -140,6 +141,7 @@ namespace MgmtPolymorphicResources
         /// Operation Id: GuestConfigurationAssignmentsVMSS_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        [ForwardsClientCalls]
         public new Response<VirtualMachineScaleSetGuestConfigurationAssignmentResource> Get(CancellationToken cancellationToken = default)
         {
             var result = GetCore(cancellationToken);

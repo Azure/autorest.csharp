@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             };
 
             _writer.Line();
-            using (WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, true, new List<Attribute> { new ForwardsClientCallsAttribute() }))
+            using (WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, new List<Attribute> { new ForwardsClientCallsAttribute() }))
             {
                 WriteResourceEntry(resourceCollection, isAsync);
             }
