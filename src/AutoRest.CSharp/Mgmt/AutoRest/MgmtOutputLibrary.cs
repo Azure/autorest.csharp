@@ -578,9 +578,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private string GetBaseResourceName(string candidateName, IEnumerable<Resource> resources)
         {
             if (Configuration.MgmtConfiguration.BaseResourceNameMapping.TryGetValue(candidateName, out var baseResourceName))
-            {
                 return baseResourceName;
-            }
 
             var hasResourceWithSameName = resources.Any(r => r.ResourceName == candidateName);
 
