@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
@@ -28,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public static MgmtClientOperation Override(MgmtClientOperation clientOperation, string overrideName, CSharpType? overrideReturnType, string? overrideDescription = null, MgmtTypeProvider? overrideOwner = null)
         {
             overrideOwner ??= clientOperation.Carrier;
-            var newOperation =  MgmtClientOperation.FromOperations(overrideOwner, clientOperation.Select(operation => new MgmtRestOperation(
+            var newOperation = MgmtClientOperation.FromOperations(overrideOwner, clientOperation.Select(operation => new MgmtRestOperation(
                 other: operation,
                 nameOverride: overrideName,
                 overrideReturnType: overrideReturnType,
@@ -101,11 +102,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         // TODO -- add carrier property to MgmtClientOperation so that we could query whether this operation is a common or not and determine whether the signature should have abstract or virtual or new keyword
         private MethodSignature? _methodSignature;
-        public MethodSignature MethodSignature => _methodSignature ??= EnsureMethodSignature();
-
-        private MethodSignature EnsureMethodSignature()
-        {
-            return new MethodSignature(
+        public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(
                 Name,
                 null,
                 Description,
@@ -113,7 +110,6 @@ namespace AutoRest.CSharp.Mgmt.Models
                 IsPagingOperation
                     ? new CSharpType(typeof(Pageable<>), ReturnType)
                     : ReturnType, null, MethodParameters.ToArray());
-        }
 
         private MethodSignatureModifiers GetModifiers()
         {
@@ -133,8 +129,12 @@ namespace AutoRest.CSharp.Mgmt.Models
                 if (resource.CommonOperations.ContainsKey(this))
                 {
                     // this is a common operation
-                    // TODO -- read the configurations here to see if we want to add virtual
-                    return MethodSignatureModifiers.Public | MethodSignatureModifiers.New;
+                    var commonOperationModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.New;
+                    if (_operations.Any(operation => Configuration.MgmtConfiguration.VirtualOperations.Contains(operation.OperationId)))
+                    {
+                        commonOperationModifiers |= MethodSignatureModifiers.Virtual;
+                    }
+                    return commonOperationModifiers;
                 }
                 if (resource.CommonOperations.Values.Contains(this))
                 {

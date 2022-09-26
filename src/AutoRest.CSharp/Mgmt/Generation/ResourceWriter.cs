@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -42,7 +43,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var operation in This.CommonOperations.Keys)
             {
-                // TODO -- determine whether we need to write this method here
                 _customMethods.Add($"Write{operation.Name}Body", WriteRedirectMethodBody);
             }
 
@@ -140,8 +140,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // first we write the core method with the implementation
                 base.WriteMethod(coreOperation, isAsync);
                 _writer.Line();
-                base.WriteMethod(clientOperation, isAsync);
-                _writer.Line();
+
+                // determine whether we need to write this method here
+                if (!clientOperation.ReturnType.Equals(coreOperation.ReturnType) || clientOperation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Virtual))
+                {
+                    base.WriteMethod(clientOperation, isAsync);
+                    _writer.Line();
+                }
             }
             else
             {
