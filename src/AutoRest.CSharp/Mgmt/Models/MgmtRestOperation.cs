@@ -262,22 +262,30 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private Resource? GetResourceMatch(MgmtRestClient restClient, RestClientMethod method, RequestPath requestPath)
         {
-            if (restClient.Resources.Count == 1)
+            // if the rest client only contains one resource, and that resource is not polymorphic, we return that
+            if (restClient.Resources.Count == 1 && restClient.Resources[0].PolymorphicOption == null)
                 return restClient.Resources[0];
 
             Dictionary<ResourceMatchType, HashSet<Resource>> matches = new Dictionary<ResourceMatchType, HashSet<Resource>>();
             foreach (var resource in restClient.Resources)
             {
                 var match = GetMatchType(Operation.GetHttpMethod(), resource.RequestPath, requestPath, method.IsListMethod(out var _));
+                if (match == ResourceMatchType.None)
+                    continue;
                 if (match == ResourceMatchType.Exact)
                     return resource;
-                if (match != ResourceMatchType.None)
+                if (!matches.TryGetValue(match, out var result))
                 {
-                    if (!matches.TryGetValue(match, out var result))
-                    {
-                        result = new HashSet<Resource>();
-                        matches.Add(match, result);
-                    }
+                    result = new HashSet<Resource>();
+                    matches.Add(match, result);
+                }
+                // if it is ancestor list, we need to check if the matched resource has a base resource, if so we return the base resource instead
+                if (match == ResourceMatchType.AncestorList && resource.PolymorphicOption != null)
+                {
+                    result.Add(resource.PolymorphicOption.BaseResource);
+                }
+                else
+                {
                     result.Add(resource);
                 }
             }
@@ -432,7 +440,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 0 => throw new InvalidOperationException($"No resource corresponding to {originalType?.Name} is found"),
                 1 => foundResources.Single().Type,
-                _ => originalType // we have multiple resource matched, we can only return the original type without wrapping it
+                // we have multiple resource matched, return the corresponding base resource here (they are guaranteed to be the same)
+                _ => foundResources.First().PolymorphicOption!.BaseResource.Type
             };
         }
 

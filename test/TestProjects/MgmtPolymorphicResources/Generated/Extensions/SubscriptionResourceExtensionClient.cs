@@ -19,8 +19,8 @@ namespace MgmtPolymorphicResources
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
     internal partial class SubscriptionResourceExtensionClient : ArmResource
     {
-        private ClientDiagnostics _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics;
-        private GuestConfigurationAssignmentsRestOperations _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient;
+        private ClientDiagnostics _guestConfigurationAssignmentClientDiagnostics;
+        private GuestConfigurationAssignmentsRestOperations _guestConfigurationAssignmentRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class for mocking. </summary>
         protected SubscriptionResourceExtensionClient()
@@ -34,8 +34,8 @@ namespace MgmtPolymorphicResources
         {
         }
 
-        private ClientDiagnostics VirtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics => _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics ??= new ClientDiagnostics("MgmtPolymorphicResources", VirtualMachineGuestConfigurationAssignmentResource.ResourceType.Namespace, Diagnostics);
-        private GuestConfigurationAssignmentsRestOperations VirtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient => _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient ??= new GuestConfigurationAssignmentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(VirtualMachineGuestConfigurationAssignmentResource.ResourceType));
+        private ClientDiagnostics GuestConfigurationAssignmentClientDiagnostics => _guestConfigurationAssignmentClientDiagnostics ??= new ClientDiagnostics("MgmtPolymorphicResources", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private GuestConfigurationAssignmentsRestOperations GuestConfigurationAssignmentRestClient => _guestConfigurationAssignmentRestClient ??= new GuestConfigurationAssignmentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -49,17 +49,17 @@ namespace MgmtPolymorphicResources
         /// Operation Id: GuestConfigurationAssignments_SubscriptionList
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VirtualMachineGuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineGuestConfigurationAssignmentResource> SubscriptionListGuestConfigurationAssignmentsAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="GuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<GuestConfigurationAssignmentResource> SubscriptionListGuestConfigurationAssignmentsAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<VirtualMachineGuestConfigurationAssignmentResource>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<GuestConfigurationAssignmentResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.SubscriptionListGuestConfigurationAssignments");
+                using var scope = GuestConfigurationAssignmentClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.SubscriptionListGuestConfigurationAssignments");
                 scope.Start();
                 try
                 {
-                    var response = await VirtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.SubscriptionListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineGuestConfigurationAssignmentResource(Client, value)), null, response.GetRawResponse());
+                    var response = await GuestConfigurationAssignmentRestClient.SubscriptionListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => GuestConfigurationAssignmentResource.GetResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -76,17 +76,17 @@ namespace MgmtPolymorphicResources
         /// Operation Id: GuestConfigurationAssignments_SubscriptionList
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VirtualMachineGuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineGuestConfigurationAssignmentResource> SubscriptionListGuestConfigurationAssignments(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="GuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<GuestConfigurationAssignmentResource> SubscriptionListGuestConfigurationAssignments(CancellationToken cancellationToken = default)
         {
-            Page<VirtualMachineGuestConfigurationAssignmentResource> FirstPageFunc(int? pageSizeHint)
+            Page<GuestConfigurationAssignmentResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.SubscriptionListGuestConfigurationAssignments");
+                using var scope = GuestConfigurationAssignmentClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.SubscriptionListGuestConfigurationAssignments");
                 scope.Start();
                 try
                 {
-                    var response = VirtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsRestClient.SubscriptionList(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineGuestConfigurationAssignmentResource(Client, value)), null, response.GetRawResponse());
+                    var response = GuestConfigurationAssignmentRestClient.SubscriptionList(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => GuestConfigurationAssignmentResource.GetResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

@@ -238,18 +238,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteRestClientConstructorPair(MgmtRestClient restClient, Resource? resource)
         {
-            string? resourceName = resource?.Type.Name;
-            FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceName)}", DiagnosticsProperty);
-            string diagFieldName = GetDiagnosticFieldName(restClient, resource);
+            var resourceTypeExpression = ConstructResourceTypeExpression(resource);
+            var ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceTypeExpression)}", DiagnosticsProperty);
+            var diagFieldName = GetDiagnosticFieldName(restClient, resource);
             _writer.Line($"{diagFieldName} = {ctorString};");
             string apiVersionText = string.Empty;
-            if (resource is not null)
+            if (resourceTypeExpression is not null)
             {
                 string apiVersionVariable = GetApiVersionVariableName(restClient, resource);
-                _writer.Line($"TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable});");
+                _writer.Line($"TryGetApiVersion({resourceTypeExpression}, out string {apiVersionVariable});");
                 apiVersionText = $", {apiVersionVariable}";
             }
             _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, apiVersionText)};");
+        }
+
+        protected FormattableString? ConstructResourceTypeExpression(Resource? resource)
+        {
+            if (resource != null && resource is not BaseResource)
+                return $"{resource.Type.Name}.ResourceType";
+            return null;
         }
 
         protected virtual void WriteChildResourceEntries()
@@ -413,17 +420,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
-        protected FormattableString GetProviderNamespaceFromReturnType(string? returnType)
+        protected FormattableString GetProviderNamespaceFromReturnType(FormattableString? resourceTypeExpression)
         {
-            if (returnType is null)
-                return $"ProviderConstants.DefaultProviderNamespace";
-
-            var resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == returnType);
-            if (resource is not null)
-                return $"{returnType}.ResourceType.Namespace";
-
-            if (MgmtContext.Library.TryGetTypeProvider(returnType, out var p) && p is ResourceData data)
-                return $"{returnType.Substring(0, returnType.Length - 4)}.ResourceType.Namespace";
+            if (resourceTypeExpression is not null)
+                return $"{resourceTypeExpression}.Namespace";
 
             return $"ProviderConstants.DefaultProviderNamespace";
         }

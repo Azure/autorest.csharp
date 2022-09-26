@@ -35,8 +35,8 @@ namespace MgmtPolymorphicResources
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VirtualMachineGuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<VirtualMachineGuestConfigurationAssignmentResource> SubscriptionListGuestConfigurationAssignmentsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="GuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<GuestConfigurationAssignmentResource> SubscriptionListGuestConfigurationAssignmentsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscriptionResource).SubscriptionListGuestConfigurationAssignmentsAsync(cancellationToken);
         }
@@ -48,8 +48,8 @@ namespace MgmtPolymorphicResources
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VirtualMachineGuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<VirtualMachineGuestConfigurationAssignmentResource> SubscriptionListGuestConfigurationAssignments(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="GuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<GuestConfigurationAssignmentResource> SubscriptionListGuestConfigurationAssignments(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscriptionResource).SubscriptionListGuestConfigurationAssignments(cancellationToken);
         }
