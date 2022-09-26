@@ -531,7 +531,8 @@
        "BodyType": {
         "$ref": "6"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -629,7 +630,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -698,7 +700,8 @@
        "BodyType": {
         "$ref": "9"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -796,7 +799,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -865,7 +869,8 @@
        "BodyType": {
         "$ref": "12"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -963,7 +968,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -1032,7 +1038,8 @@
        "BodyType": {
         "$ref": "15"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1130,7 +1137,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -1199,7 +1207,8 @@
        "BodyType": {
         "$ref": "18"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1297,7 +1306,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -1366,7 +1376,8 @@
        "BodyType": {
         "$ref": "21"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1464,7 +1475,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -1533,7 +1545,8 @@
        "BodyType": {
         "$ref": "24"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1631,7 +1644,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -1700,7 +1714,8 @@
        "BodyType": {
         "$ref": "27"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1798,7 +1813,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -1867,7 +1883,8 @@
        "BodyType": {
         "$ref": "29"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1965,7 +1982,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -2034,7 +2052,8 @@
        "BodyType": {
         "$ref": "31"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -2132,7 +2151,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -2201,7 +2221,8 @@
        "BodyType": {
         "$ref": "36"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -2299,7 +2320,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -2368,7 +2390,8 @@
        "BodyType": {
         "$ref": "40"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -2466,7 +2489,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -2535,7 +2559,8 @@
        "BodyType": {
         "$ref": "44"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -2633,7 +2658,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",
@@ -2702,7 +2728,8 @@
        "BodyType": {
         "$ref": "47"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -2800,7 +2827,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "PUT",

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    DecoratedType,
     getDoc,
     getServiceNamespace,
     getServiceNamespaceString,
@@ -28,7 +29,7 @@ import { CodeModel } from "./type/CodeModel.js";
 import { InputClient } from "./type/InputClient.js";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
-import { InputOperation } from "./type/InputOperation.js";
+import { InputOperation, Paging } from "./type/InputOperation.js";
 import { RequestMethod, parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
@@ -50,7 +51,8 @@ import { resolveServers } from "./lib/cadlServer.js";
 import {
     convenienceApiKey,
     getExternalDocs,
-    getOperationId
+    getOperationId,
+    hasDecorator
 } from "./lib/decorators.js";
 import { InputAuth } from "./type/InputAuth.js";
 import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
@@ -58,6 +60,8 @@ import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
 import { getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
+import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
+import { OperationPaging } from "./type/OperationPaging.js";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -197,7 +201,6 @@ function createModel(program: Program): any {
 
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
-            if (!isSupportedOperation(operation)) continue;
             const groupName: string = getOperationGroupName(
                 program,
                 operation.operation
@@ -353,7 +356,7 @@ function processServiceAuthentication(
                     break;
                 default:
                     throw new Error("Not supported authentication.");
-    }
+            }
         }
     }
 
@@ -366,10 +369,7 @@ function processServiceAuthentication(
     return auth;
 }
 
-function getOperationGroupName(
-    program: Program,
-    operation: Operation
-): string {
+function getOperationGroupName(program: Program, operation: Operation): string {
     const explicitOperationId = getOperationId(program, operation);
     if (explicitOperationId) {
         const ids: string[] = explicitOperationId.split("_");
@@ -424,7 +424,9 @@ function loadOperation(
         );
     } else if (cadlParameters.bodyType) {
         if (resourceOperation) {
-            parameters.push(loadBodyParameter(program, resourceOperation.resourceType));
+            parameters.push(
+                loadBodyParameter(program, resourceOperation.resourceType)
+            );
         } else {
             const effectiveBodyType = getEffectiveSchemaType(
                 program,
@@ -438,7 +440,11 @@ function loadOperation(
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(program, res, resourceOperation);
+        const operationResponse = loadOperationResponse(
+            program,
+            res,
+            resourceOperation
+        );
         if (operationResponse) {
             responses.push(operationResponse);
         }
@@ -457,6 +463,31 @@ function loadOperation(
     const generateConvenienceMethod: boolean =
         requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
 
+    /* handle lro */
+    /* handle paging. */
+    let paging: OperationPaging | undefined = undefined;
+    for (const res of operation.responses) {
+        const body = res.responses[0]?.body;
+        if (body?.type) {
+            if (
+                body.type.kind === "Model" &&
+                hasDecorator(body?.type, "$pagedResult")
+            ) {
+                const itemsProperty = Array.from(
+                    body.type.properties.values()
+                ).find((it) => hasDecorator(it, "$items"));
+                const nextLinkProperty = Array.from(
+                    body.type.properties.values()
+                ).find((it) => hasDecorator(it, "$nextLink"));
+                paging = {
+                    NextLinkName: nextLinkProperty?.name,
+                    ItemName: itemsProperty?.name
+                } as OperationPaging;
+            }
+        }
+    }
+    /* TODO: handle lro */
+
     return {
         Name: op.name,
         Summary: summary,
@@ -470,6 +501,7 @@ function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
+        Paging: paging,
         GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;
 
@@ -561,10 +593,16 @@ function loadOperation(
         status.push(Number(response.statusCode));
         //TODO: what to do if more than 1 response?
         const body = response.responses[0]?.body;
+
         let type: InputType | undefined = undefined;
         if (body?.type) {
             if (resourceOperation && resourceOperation.operation !== "list") {
-                type = getInputType(program, resourceOperation.resourceType, models, enums);
+                type = getInputType(
+                    program,
+                    resourceOperation.resourceType,
+                    models,
+                    enums
+                );
             } else {
                 const cadlType = getEffectiveSchemaType(program, body.type);
                 const inputType: InputType = getInputType(
@@ -577,24 +615,33 @@ function loadOperation(
             }
         }
 
+        const headers = response.responses[0]?.headers;
+        const responseHeaders: HttpResponseHeader[] = [];
+        if (headers) {
+            for (const key of Object.keys(headers)) {
+                responseHeaders.push({
+                    Name: key,
+                    NameInResponse: headers[key].name,
+                    Description: getDoc(program, headers[key]) ?? "",
+                    Type: getInputType(
+                        program,
+                        headers[key].type,
+                        models,
+                        enums
+                    )
+                } as HttpResponseHeader);
+            }
+        }
+
         return {
             StatusCodes: status,
             BodyType: type,
-            BodyMediaType: BodyMediaType.Json
+            BodyMediaType: BodyMediaType.Json,
+            Headers: responseHeaders
         } as OperationResponse;
     }
 }
 
-function isLroOperation(op: OperationDetails) {
-    return false;
-}
-function isPagingOperation(op: OperationDetails) {
-    return false;
-}
-function isSupportedOperation(op: OperationDetails) {
-    if (isLroOperation(op) || isPagingOperation(op)) return false;
-    return true;
-}
 class ErrorTypeFoundError extends Error {
     constructor() {
         super("Error type found in evaluated Cadl output");

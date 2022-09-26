@@ -16,8 +16,12 @@ import {
     ModelProperty,
     Namespace,
     NeverType,
+    Operation,
     Program,
-    Type
+    resolveUsages,
+    Type,
+    UsageFlags,
+    UsageTracker
 } from "@cadl-lang/compiler";
 import { getDiscriminator } from "@cadl-lang/rest";
 import {
@@ -171,7 +175,8 @@ export function mapCadlIntrinsicModelToCsharpModel(
 export function getEffectiveSchemaType(program: Program, type: Type): Type {
     let target = type;
     if (type.kind === "Model" && !type.name) {
-        const effective = getEffectiveModelType(program,
+        const effective = getEffectiveModelType(
+            program,
             type,
             isSchemaPropertyInternal
         );
@@ -245,10 +250,7 @@ export function getInputType(
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
     } else {
-        return {
-            Name: InputTypeKind.UnKnownKind,
-            IsNullable: false
-        } as InputType;
+        throw new Error("Unsupported type.");
     }
 
     function getInputModelType(m: Model): InputType {
@@ -292,10 +294,7 @@ export function getInputType(
         }
     }
 
-    function getInputModelForExtensibleEnum(
-        m: Model,
-        e: Enum
-    ): InputEnumType {
+    function getInputModelForExtensibleEnum(m: Model, e: Enum): InputEnumType {
         let extensibleEnum = enums.get(m.name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
@@ -331,7 +330,9 @@ export function getInputType(
                 );
             }
             const allowValues: InputEnumTypeValue[] = [];
-            const enumValueType = enumMemberType(e.members.entries().next().value);
+            const enumValueType = enumMemberType(
+                e.members.entries().next().value
+            );
 
             for (const key of e.members.keys()) {
                 const option = e.members.get(key);
@@ -339,12 +340,14 @@ export function getInputType(
                     throw Error(`No member value for $key`);
                 }
                 if (enumValueType !== enumMemberType(option)) {
-                    throw new Error("The enum member value type is not consistent.");
+                    throw new Error(
+                        "The enum member value type is not consistent."
+                    );
                 }
                 const member = {
                     Name: key,
                     Value: option.value ?? option?.name,
-                    Description: getDoc(program, option),
+                    Description: getDoc(program, option)
                 } as InputEnumTypeValue;
                 allowValues.push(member);
             }

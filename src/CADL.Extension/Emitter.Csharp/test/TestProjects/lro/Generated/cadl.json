@@ -58,24 +58,32 @@
      "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$id": "9",
+   "Name": "ResourceLocation",
+   "Namespace": "Cadl.Rest",
+   "Description": "The location of an instance of OperationStatus",
+   "IsNullable": false,
+   "Properties": []
   }
  ],
  "Clients": [
   {
-   "$id": "9",
+   "$id": "10",
    "Name": "Projects",
    "Operations": [
     {
-     "$id": "10",
+     "$id": "11",
      "Name": "createOrUpdate",
      "Description": "Creates a new pet or updates an existing one.",
      "Parameters": [
       {
-       "$id": "11",
+       "$id": "12",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Type": {
-        "$id": "12",
+        "$id": "13",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -91,11 +99,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "13",
+       "$id": "14",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "14",
+        "$id": "15",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -111,20 +119,20 @@
        "Kind": "Method"
       },
       {
-       "$id": "15",
+       "$id": "16",
        "Name": "content-type",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "16",
+        "$id": "17",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "18",
         "Type": {
-         "$ref": "16"
+         "$ref": "17"
         },
         "Value": "application/merge-patch+json"
        },
@@ -138,21 +146,21 @@
        "Kind": "Constant"
       },
       {
-       "$id": "18",
+       "$id": "19",
        "Name": "api-version",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "19",
+        "$id": "20",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "20",
+        "$id": "21",
         "Type": {
-         "$id": "21",
+         "$id": "22",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -169,7 +177,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "22",
+       "$id": "23",
        "Name": "Pet",
        "NameInRequest": "Pet",
        "Type": {
@@ -186,11 +194,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "23",
+       "$id": "24",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "24",
+        "$id": "25",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -205,9 +213,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "25",
+        "$id": "26",
         "Type": {
-         "$ref": "24"
+         "$ref": "25"
         },
         "Value": "application/json"
        }
@@ -215,24 +223,46 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "27",
        "StatusCodes": [
         200
        ],
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "28",
+         "Name": "Operation-Location",
+         "NameInResponse": "operationLocation",
+         "Description": "The location for monitoring the operation state.",
+         "Type": {
+          "$ref": "9"
+         }
+        }
+       ]
       },
       {
-       "$id": "27",
+       "$id": "29",
        "StatusCodes": [
         201
        ],
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "30",
+         "Name": "Operation-Location",
+         "NameInResponse": "operationLocation",
+         "Description": "The location for monitoring the operation state.",
+         "Type": {
+          "$ref": "9"
+         }
+        }
+       ]
       }
      ],
      "HttpMethod": "PATCH",
@@ -247,7 +277,7 @@
     }
    ],
    "Protocol": {
-    "$id": "28"
+    "$id": "31"
    }
   }
  ]

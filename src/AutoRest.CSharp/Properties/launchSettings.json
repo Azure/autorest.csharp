@@ -444,6 +444,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination\\Generated"
     },
+    "Pagination-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination-Cadl\\Generated"
+    },
     "PaginationParams-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PaginationParams-LowLevel\\Generated"
