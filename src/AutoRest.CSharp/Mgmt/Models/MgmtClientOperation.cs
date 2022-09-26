@@ -67,13 +67,18 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private IEnumerable<Attribute>? EnsureAttributes()
         {
-            if (Carrier is Resource resource && resource.CommonOperations.ContainsKey(this))
+            if (ShouldHaveForwardsClientCallAttribute())
             {
                 // if this is a common operation
                 return new[] { new ForwardsClientCallsAttribute() };
             }
 
             return null;
+        }
+
+        private bool ShouldHaveForwardsClientCallAttribute()
+        {
+            return Carrier is BaseResource || (Carrier is Resource resource && resource.CommonOperations.ContainsKey(this));
         }
 
         private string? _diagnosticName;

@@ -125,6 +125,7 @@ namespace MgmtExtensionResource
 
         /// <summary> The default implementation for operation Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        [ForwardsClientCalls]
         public async Task<Response<PolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             return await GetCoreAsync(cancellationToken).ConfigureAwait(false);
@@ -136,6 +137,7 @@ namespace MgmtExtensionResource
 
         /// <summary> The default implementation for operation Get. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        [ForwardsClientCalls]
         public Response<PolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
         {
             return GetCore(cancellationToken);
