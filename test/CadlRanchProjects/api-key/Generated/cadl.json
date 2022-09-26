@@ -138,7 +138,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -193,7 +194,8 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       },
       {
        "$id": "24",
@@ -203,7 +205,8 @@
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
