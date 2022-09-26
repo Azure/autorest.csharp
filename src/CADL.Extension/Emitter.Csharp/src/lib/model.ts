@@ -173,7 +173,7 @@ export function getEffectiveSchemaType(program: Program, type: Type): Type {
     if (type.kind === "Model" && !type.name) {
         const effective = getEffectiveModelType(program,
             type,
-            isSchemaProperty
+            isSchemaPropertyInternal
         );
         if (effective.name) {
             target = effective;
@@ -182,8 +182,8 @@ export function getEffectiveSchemaType(program: Program, type: Type): Type {
 
     return target;
 
-    function isSchemaProperty(property: ModelProperty) {
-        return isSchemaPropertyOnProgram(program, property);
+    function isSchemaPropertyInternal(property: ModelProperty) {
+        return isSchemaProperty(program, property);
     }
 }
 
@@ -193,7 +193,7 @@ export function getEffectiveSchemaType(program: Program, type: Type): Type {
  * Headers, parameters, status codes are not schema properties even they are
  * represented as properties in Cadl.
  */
-function isSchemaPropertyOnProgram(program: Program, property: ModelProperty) {
+function isSchemaProperty(program: Program, property: ModelProperty) {
     const headerInfo = getHeaderFieldName(program, property);
     const queryInfo = getQueryParamName(program, property);
     const pathInfo = getPathParamName(program, property);
@@ -453,7 +453,7 @@ export function getInputType(
         discriminatorPropertyName?: string
     ): void {
         inputProperties.forEach((value: ModelProperty, key: string) => {
-            if (value.name !== discriminatorPropertyName && isSchemaPropertyOnProgram(program, value)) {
+            if (value.name !== discriminatorPropertyName && isSchemaProperty(program, value)) {
                 const vis = getVisibility(program, value);
                 let isReadOnly: boolean = false;
                 if (vis && vis.includes("read") && vis.length === 1) {
