@@ -366,7 +366,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return restClientMethods;
         }
 
-        public ArmClientExtensions ArmClientExtensions => EnsureArmClientExtensions();
+        private ArmClientExtensions? _armClientExtensions;
+        public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= EnsureArmClientExtensions();
 
         private MgmtExtensions? _tenantExtensions;
         private MgmtExtensions? _managementGroupExtensions;
@@ -379,19 +380,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtExtensions ManagementGroupExtensions => _managementGroupExtensions ??= EnsureExtensions(typeof(ManagementGroupResource), RequestPath.ManagementGroup);
         public MgmtExtensions ArmResourceExtensions => _armResourceExtensions ??= EnsureExtensions(typeof(ArmResource), RequestPath.Any);
 
-        public MgmtExtensionsWrapper ExtensionWrapper => EnsureExtensionsWrapper();
-
         private MgmtExtensionsWrapper? _extensionsWrapper;
-        private MgmtExtensionsWrapper EnsureExtensionsWrapper()
-        {
-            if (_extensionsWrapper != null)
-                return _extensionsWrapper;
+        public MgmtExtensionsWrapper ExtensionWrapper => _extensionsWrapper ??= EnsureExtensionsWrapper();
 
-            _extensionsWrapper = IsArmCore ?
+        private MgmtExtensionsWrapper EnsureExtensionsWrapper() => IsArmCore ?
                 new MgmtExtensionsWrapper(new[] { TenantExtensions, ManagementGroupExtensions, ArmResourceExtensions }) :
                 new MgmtExtensionsWrapper(new[] { TenantExtensions, SubscriptionExtensions, ResourceGroupExtensions, ManagementGroupExtensions, ArmResourceExtensions, ArmClientExtensions });
-            return _extensionsWrapper;
-        }
 
         private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
         {
@@ -400,15 +394,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return new MgmtExtensions(operations, armCoreType, contextualPath);
         }
 
-        private ArmClientExtensions? _armClientExtensions;
-        private ArmClientExtensions EnsureArmClientExtensions()
-        {
-            if (_armClientExtensions != null)
-                return _armClientExtensions;
-
-            _armClientExtensions = new ArmClientExtensions(GetChildOperations(RequestPath.Tenant));
-            return _armClientExtensions;
-        }
+        private ArmClientExtensions EnsureArmClientExtensions() => new ArmClientExtensions(GetChildOperations(RequestPath.Tenant));
 
         private IEnumerable<ResourceData>? _resourceDatas;
         public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= RawRequestPathToResourceData.Values.Distinct();
@@ -430,9 +416,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     yield return bag.Resource.PolymorphicOption.BaseResource;
             }
         }
-
-        private Dictionary<CSharpType, Resource>? _csharpTypeToResource;
-        public Dictionary<CSharpType, Resource> CSharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
 
         private IEnumerable<ResourceCollection>? _resourceCollections;
         public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= RequestPathToResources.Values.Select(bag => bag.ResourceCollection).WhereNotNull().Distinct();
@@ -796,15 +779,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _schemaOrNameToModels.TryGetValue(originalName, out TypeProvider? provider);
             provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
-        }
-
-        public bool TryGetTypeProvider(string originalName, [MaybeNullWhen(false)] out TypeProvider provider)
-        {
-            if (_schemaOrNameToModels.TryGetValue(originalName, out provider))
-                return true;
-
-            provider = ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
-            return provider != null;
         }
 
         public IEnumerable<Resource> FindResources(ResourceData resourceData)

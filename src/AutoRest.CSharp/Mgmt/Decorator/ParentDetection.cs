@@ -38,6 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource)
         {
+            // BaseResource does not have a fixed parent, therefore here we just return an empty list
             if (resource is BaseResource)
                 return Enumerable.Empty<MgmtTypeProvider>();
 

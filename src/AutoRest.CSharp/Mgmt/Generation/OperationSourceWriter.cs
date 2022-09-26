@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var data = new CodeWriterDeclaration("data");
                     FormattableString dataString = _operationIdMappings is null ? (FormattableString)$"var {data:D} = {fs};" : (FormattableString)$"var {data:D} = ScrubId({fs});";
                     _writer.Line(dataString);
-                    if (_opSource.ResourceData!.ShouldSetResourceIdentifier)
+                    if (_opSource.Resource!.ResourceData.ShouldSetResourceIdentifier)
                     {
                         _writer.Line($"{data}.Id = {_opSource.ArmClientField.Name}.Id;");
                     }
@@ -139,6 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, true, valueCallback, responseVariable, _opSource.ReturnType);
             }
         }
+
         private FormattableString GetNewResourceExpression() => _opSource.Resource switch
         {
             BaseResource baseResource => $"{baseResource.Type}.GetResource",

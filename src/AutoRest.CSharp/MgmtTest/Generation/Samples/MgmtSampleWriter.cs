@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             {
                 WriteResourceResultHandling(result, resource);
             }
-            else if (result.Type.IsResourceDataType(out var resourceData))
+            else if (result.Type.IsResourceData(out var resourceData))
             {
                 WriteResourceDataResultHandling(result, resourceData);
             }

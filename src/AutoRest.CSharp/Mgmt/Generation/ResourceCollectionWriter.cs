@@ -96,14 +96,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             writer.Line($"if ({response}.Value == null)");
-            writer.Line($"return {typeof(Response)}.FromValue<{operation.ReturnType.UnWrapResponse()}>(null, {response}.GetRawResponse());");
+            writer.Line($"return {typeof(Response)}.FromValue<{operation.MgmtReturnType}>(null, {response}.GetRawResponse());");
 
             if (This.Resource.ResourceData.ShouldSetResourceIdentifier)
             {
                 writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(This.Resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
             }
 
-            writer.Line($"return {typeof(Response)}.FromValue(new {operation.ReturnType.UnWrapResponse()}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
+            writer.Line($"return {typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
         }
     }
 }

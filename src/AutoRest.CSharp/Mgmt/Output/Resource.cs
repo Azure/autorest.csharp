@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -13,15 +12,12 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output.Models;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Azure.ResourceManager;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -103,7 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Output
               Name: Type.Name,
               null,
               Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
-              Modifiers: Internal,
+              Modifiers: MethodSignatureModifiers.Internal,
               Parameters: _armClientCtorParameters,
               Initializer: new(
                   isBase: true,
@@ -112,25 +108,20 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override ConstructorSignature? EnsureResourceDataCtor()
         {
-            return PolymorphicOption == null ?
-                new ConstructorSignature(
+            var initializer = PolymorphicOption == null ?
+                new ConstructorInitializer(
+                    IsBase: false,
+                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}", ResourceData) }) :
+                new ConstructorInitializer(
+                    IsBase: true,
+                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", $"{ResourceDataParameter.Name:I}" });
+            return new ConstructorSignature(
                     Name: Type.Name,
                     null,
                     Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
-                    Modifiers: Internal,
+                    Modifiers: MethodSignatureModifiers.Internal,
                     Parameters: new[] { ArmClientParameter, ResourceDataParameter },
-                    Initializer: new(
-                        IsBase: false,
-                        Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}", ResourceData) })) :
-                new ConstructorSignature(
-                    Name: Type.Name,
-                    null,
-                    Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
-                    Modifiers: Internal,
-                    Parameters: new[] { ArmClientParameter, ResourceDataParameter },
-                    Initializer: new(
-                        IsBase: true,
-                        Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", $"{ResourceDataParameter.Name:I}" }));
+                    Initializer: initializer);
         }
 
         public override CSharpType? BaseType => PolymorphicOption == null ? typeof(ArmResource) : PolymorphicOption.BaseResource.Type;
@@ -486,7 +477,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Name: "CreateResourceIdentifier",
                 null,
                 Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
-                Modifiers: Public | Static,
+                Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Static,
                 ReturnType: typeof(ResourceIdentifier),
                 ReturnDescription: null,
                 Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());

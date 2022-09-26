@@ -69,7 +69,6 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             if (ShouldHaveForwardsClientCallAttribute())
             {
-                // if this is a common operation
                 return new[] { new ForwardsClientCallsAttribute() };
             }
 
@@ -109,7 +108,6 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public MgmtRestOperation this[int index] => _operations[index];
 
-        // TODO -- add carrier property to MgmtClientOperation so that we could query whether this operation is a common or not and determine whether the signature should have abstract or virtual or new keyword
         private MethodSignature? _methodSignature;
         public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(
                 Name,
@@ -117,7 +115,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 Description,
                 GetModifiers(),
                 IsPagingOperation
-                    ? new CSharpType(typeof(Pageable<>), ReturnType)
+                    ? ReturnType.WrapPageable(false)
                     : ReturnType, null, MethodParameters.ToArray());
 
         private MethodSignatureModifiers GetModifiers()

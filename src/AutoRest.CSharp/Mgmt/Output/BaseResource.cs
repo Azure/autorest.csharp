@@ -48,11 +48,10 @@ internal class BaseResource : Resource
     // base resource does not have children
     public override IEnumerable<Resource> ChildResources => Enumerable.Empty<Resource>();
 
-    private MgmtClientOperation? _getOperation;
-    public override MgmtClientOperation GetOperation => _getOperation ??= EnsureGetOperation();
-    public override MgmtClientOperation? CreateOperation => null;
-    public override MgmtClientOperation? DeleteOperation => null;
-    public override MgmtClientOperation? UpdateOperation => null;
+    public override MgmtClientOperation GetOperation => throw new InvalidOperationException("We should not access the Get operation of base resource in this way, please iterate AllOperations instead");
+    public override MgmtClientOperation? CreateOperation => throw new InvalidOperationException("We should not access the Get operation of base resource in this way, please iterate AllOperations instead");
+    public override MgmtClientOperation? DeleteOperation => throw new InvalidOperationException("We should not access the Get operation of base resource in this way, please iterate AllOperations instead");
+    public override MgmtClientOperation? UpdateOperation => throw new InvalidOperationException("We should not access the Get operation of base resource in this way, please iterate AllOperations instead");
 
     private MgmtClientOperation EnsureGetOperation()
     {

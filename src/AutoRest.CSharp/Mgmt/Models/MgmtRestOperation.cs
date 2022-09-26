@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
             {
-                MgmtContext.Library.CSharpTypeToResource.TryGetValue(MgmtReturnType, out var resourceBeingReturned);
+                MgmtReturnType.IsResource(out var resourceBeingReturned);
                 operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
                 MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
             }
@@ -429,13 +429,13 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (Configuration.MgmtConfiguration.PreventWrappingReturnType.Contains(OperationId))
                 return originalType;
 
-            if (originalType == null || !originalType.IsResourceDataType(out _))
+            if (originalType == null || !originalType.IsResourceData(out var data))
                 return originalType;
 
-            if (Resource is not null && Resource.ResourceData.Type.Equals(originalType))
+            if (Resource is not null && Resource.ResourceData == data)
                 return Resource.Type;
 
-            var foundResources = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceData.Type.Equals(originalType)).ToList();
+            var foundResources = MgmtContext.Library.FindResources(data).ToList();
             return foundResources.Count switch
             {
                 0 => throw new InvalidOperationException($"No resource corresponding to {originalType?.Name} is found"),

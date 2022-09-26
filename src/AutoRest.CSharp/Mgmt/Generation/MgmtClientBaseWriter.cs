@@ -563,7 +563,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return scope;
         }
 
-        protected IDisposable WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, IEnumerable<Attribute>? attributes = default)
+        protected IDisposable WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, IEnumerable<Attribute>? attributes = null)
         {
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);
@@ -691,7 +691,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.UseNamespace(typeof(Enumerable).Namespace!);
                 _writer.Append($".Select({value:D} => ");
-                if (!itemType.IsFrameworkType && itemType.Implementation is Resource resource && resource.ResourceData.ShouldSetResourceIdentifier)
+                if (itemType.IsResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
                     using (_writer.Scope())
                     {
@@ -773,8 +773,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .Line($"if ({response}.Value == null)")
                         .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
                 }
-                var realReturnType = operation.ReturnType.UnWrapResponse();
-                if (!realReturnType.IsFrameworkType && realReturnType.Implementation is Resource resource && resource.ResourceData.ShouldSetResourceIdentifier)
+                var realReturnType = operation.MgmtReturnType;
+                if (realReturnType != null && realReturnType.IsResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
                     _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
                 }
@@ -890,10 +890,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (operation.OperationSource is not null)
                 {
-                    _writer.Append($"new {operation.OperationSource.TypeName}(");
-                    if (MgmtContext.Library.CSharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
-                        _writer.Append($"{ArmClientReference}");
-                    _writer.Append($"), ");
+                    _writer.Append($"new {operation.OperationSource.TypeName}(")
+                        .AppendIf($"{ArmClientReference}", operation.MgmtReturnType!.IsResource(out _))
+                        .Append($"), ");
                 }
 
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
