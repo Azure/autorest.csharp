@@ -84,7 +84,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<ModuleResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.GetCore");
+            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.Get");
             scope.Start();
             try
             {
@@ -121,7 +121,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<ModuleResource> GetCore(CancellationToken cancellationToken = default)
         {
-            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.GetCore");
+            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.Get");
             scope.Start();
             try
             {
@@ -159,7 +159,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.DeleteCore");
+            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.Delete");
             scope.Start();
             try
             {
@@ -185,7 +185,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override ArmOperation DeleteCore(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.DeleteCore");
+            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.Delete");
             scope.Start();
             try
             {
@@ -268,7 +268,7 @@ namespace MgmtPolymorphicResources
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.AddTagCore");
+            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.AddTag");
             scope.Start();
             try
             {
@@ -333,7 +333,7 @@ namespace MgmtPolymorphicResources
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.AddTagCore");
+            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.AddTag");
             scope.Start();
             try
             {
@@ -396,7 +396,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.SetTagsCore");
+            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.SetTags");
             scope.Start();
             try
             {
@@ -454,7 +454,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.SetTagsCore");
+            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.SetTags");
             scope.Start();
             try
             {
@@ -512,7 +512,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.RemoveTagCore");
+            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.RemoveTag");
             scope.Start();
             try
             {
@@ -573,7 +573,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.RemoveTagCore");
+            using var scope = _automationAccountPython2PackagePython2PackageClientDiagnostics.CreateScope("AutomationAccountPython2PackageResource.RemoveTag");
             scope.Start();
             try
             {

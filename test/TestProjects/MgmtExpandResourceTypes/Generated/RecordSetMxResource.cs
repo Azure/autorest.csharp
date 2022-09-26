@@ -83,7 +83,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<RecordSetResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.GetCore");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Get");
             scope.Start();
             try
             {
@@ -120,7 +120,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<RecordSetResource> GetCore(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.GetCore");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Get");
             scope.Start();
             try
             {
@@ -159,7 +159,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.DeleteCore");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Delete");
             scope.Start();
             try
             {
@@ -186,7 +186,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override ArmOperation DeleteCore(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.DeleteCore");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Delete");
             scope.Start();
             try
             {
@@ -216,7 +216,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.UpdateCore");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Update");
             scope.Start();
             try
             {
@@ -261,7 +261,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.UpdateCore");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxResource.Update");
             scope.Start();
             try
             {

@@ -59,7 +59,7 @@ internal class BaseResource : Resource
         // we take the get operation of the first derived resource to represent the get operation in the base
         var originalGetOperation = DerivedResources.First().GetOperation;
 
-        return MgmtClientOperation.Override(originalGetOperation, originalGetOperation.Name, Type, $"The default implementation for operation {originalGetOperation.Name}", this);
+        return MgmtClientOperation.Override(originalGetOperation, originalGetOperation.Name, Type, overrideDescription: $"The default implementation for operation {originalGetOperation.Name}", overrideOwner: this);
     }
 
     protected override IEnumerable<MgmtClientOperation> EnsureAllOperations() => ClientOperations;
@@ -107,7 +107,7 @@ internal class BaseResource : Resource
         foreach ((var key, var list) in EnsureOperationCategorizationDictionary())
         {
             // here we only use the first client operation to represent the base operation (since we never write an implementation of this method, it is fine
-            var baseOperation = MgmtClientOperation.Override(list.First().Operation, key.Name, key.ReturnType, $"The default implementation for operation {key.Name}", this);
+            var baseOperation = MgmtClientOperation.Override(list.First().Operation, key.Name, key.ReturnType, overrideDescription: $"The default implementation for operation {key.Name}", overrideOwner: this);
             _baseCommonOperations.Add(key, baseOperation);
         }
         return _baseCommonOperations;
@@ -131,7 +131,7 @@ internal class BaseResource : Resource
             {
                 var baseOperation = baseOperationDict[key];
                 // construct a core method here
-                var coreOperation = MgmtClientOperation.Override(operation, $"{baseOperation.Name}Core", baseOperation.MgmtReturnType);
+                var coreOperation = MgmtClientOperation.Override(operation, $"{baseOperation.Name}Core", baseOperation.MgmtReturnType, overrideDiagnosticName: operation.Name);
                 result.AddInList(resource, new MgmtCommonOperation(operation, coreOperation));
             }
         }

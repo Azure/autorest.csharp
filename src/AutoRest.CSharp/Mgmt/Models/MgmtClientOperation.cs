@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
-        public static MgmtClientOperation Override(MgmtClientOperation clientOperation, string overrideName, CSharpType? overrideReturnType, string? overrideDescription = null, MgmtTypeProvider? overrideOwner = null)
+        public static MgmtClientOperation Override(MgmtClientOperation clientOperation, string overrideName, CSharpType? overrideReturnType, string? overrideDescription = null, string? overrideDiagnosticName = null, MgmtTypeProvider? overrideOwner = null)
         {
             overrideOwner ??= clientOperation.Carrier;
             var newOperation = MgmtClientOperation.FromOperations(overrideOwner, clientOperation.Select(operation => new MgmtRestOperation(
@@ -37,6 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 operation.OverrideParameters)))!;
 
             newOperation._description = overrideDescription;
+            newOperation._diagnosticName = overrideDiagnosticName;
 
             return newOperation;
         }
@@ -74,6 +75,9 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             return null;
         }
+
+        private string? _diagnosticName;
+        public string DiagnosticName => _diagnosticName ??= Name;
 
         public Func<bool, FormattableString>? ReturnsDescription => _operations.First().ReturnsDescription;
 

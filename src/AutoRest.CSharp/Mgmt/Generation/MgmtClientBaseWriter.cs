@@ -519,7 +519,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var writeBody = GetMethodDelegate(clientOperation);
             using (WriteCommonMethod(clientOperation, isAsync))
             {
-                var diagnostic = new Diagnostic($"{This.Type.Name}.{clientOperation.Name}", Array.Empty<DiagnosticAttribute>());
+                var diagnostic = new Diagnostic($"{This.Type.Name}.{clientOperation.DiagnosticName}", Array.Empty<DiagnosticAttribute>());
                 writeBody(clientOperation, diagnostic, isAsync);
             }
         }

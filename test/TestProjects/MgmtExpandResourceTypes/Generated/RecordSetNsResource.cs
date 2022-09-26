@@ -83,7 +83,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<RecordSetResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.GetCore");
+            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.Get");
             scope.Start();
             try
             {
@@ -120,7 +120,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<RecordSetResource> GetCore(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.GetCore");
+            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.Get");
             scope.Start();
             try
             {
@@ -159,7 +159,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<ArmOperation> DeleteCoreAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.DeleteCore");
+            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.Delete");
             scope.Start();
             try
             {
@@ -186,7 +186,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override ArmOperation DeleteCore(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.DeleteCore");
+            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.Delete");
             scope.Start();
             try
             {
@@ -216,7 +216,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.UpdateCore");
+            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.Update");
             scope.Start();
             try
             {
@@ -261,7 +261,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.UpdateCore");
+            using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.Update");
             scope.Start();
             try
             {

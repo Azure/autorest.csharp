@@ -84,7 +84,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<BaseThroughputSettingResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.GetCore");
+            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.Get");
             scope.Start();
             try
             {
@@ -121,7 +121,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<BaseThroughputSettingResource> GetCore(CancellationToken cancellationToken = default)
         {
-            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.GetCore");
+            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.Get");
             scope.Start();
             try
             {
@@ -163,7 +163,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(updateThroughputParameters, nameof(updateThroughputParameters));
 
-            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.CreateOrUpdateCore");
+            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -216,7 +216,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(updateThroughputParameters, nameof(updateThroughputParameters));
 
-            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.CreateOrUpdateCore");
+            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -270,7 +270,7 @@ namespace MgmtPolymorphicResources
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.AddTagCore");
+            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.AddTag");
             scope.Start();
             try
             {
@@ -335,7 +335,7 @@ namespace MgmtPolymorphicResources
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.AddTagCore");
+            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.AddTag");
             scope.Start();
             try
             {
@@ -398,7 +398,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.SetTagsCore");
+            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.SetTags");
             scope.Start();
             try
             {
@@ -456,7 +456,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.SetTagsCore");
+            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.SetTags");
             scope.Start();
             try
             {
@@ -514,7 +514,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.RemoveTagCore");
+            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.RemoveTag");
             scope.Start();
             try
             {
@@ -575,7 +575,7 @@ namespace MgmtPolymorphicResources
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.RemoveTagCore");
+            using var scope = _tableThroughputSettingCassandraResourcesClientDiagnostics.CreateScope("TableThroughputSettingResource.RemoveTag");
             scope.Start();
             try
             {

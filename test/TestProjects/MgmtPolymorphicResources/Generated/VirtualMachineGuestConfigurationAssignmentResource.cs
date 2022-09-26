@@ -83,7 +83,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override async Task<Response<GuestConfigurationAssignmentResource>> GetCoreAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics.CreateScope("VirtualMachineGuestConfigurationAssignmentResource.GetCore");
+            using var scope = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics.CreateScope("VirtualMachineGuestConfigurationAssignmentResource.Get");
             scope.Start();
             try
             {
@@ -120,7 +120,7 @@ namespace MgmtPolymorphicResources
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         protected override Response<GuestConfigurationAssignmentResource> GetCore(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics.CreateScope("VirtualMachineGuestConfigurationAssignmentResource.GetCore");
+            using var scope = _virtualMachineGuestConfigurationAssignmentGuestConfigurationAssignmentsClientDiagnostics.CreateScope("VirtualMachineGuestConfigurationAssignmentResource.Get");
             scope.Start();
             try
             {
