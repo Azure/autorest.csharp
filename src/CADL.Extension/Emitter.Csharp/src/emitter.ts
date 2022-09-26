@@ -57,12 +57,7 @@ import {
 import { InputAuth } from "./type/InputAuth.js";
 import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
 import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
-import {
-    getConsumes,
-    getProduces,
-    getResourceOperation,
-    ResourceOperation
-} from "@cadl-lang/rest";
+import { getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
 import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
