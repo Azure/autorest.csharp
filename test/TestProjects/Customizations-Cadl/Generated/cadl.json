@@ -504,7 +504,8 @@
        "BodyType": {
         "$ref": "14"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",

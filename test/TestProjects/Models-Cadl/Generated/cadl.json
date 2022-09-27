@@ -1510,7 +1510,8 @@
        "BodyType": {
         "$ref": "36"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1612,7 +1613,8 @@
        "BodyType": {
         "$ref": "64"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1714,7 +1716,8 @@
        "BodyType": {
         "$ref": "83"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1816,7 +1819,8 @@
        "BodyType": {
         "$ref": "110"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1918,7 +1922,8 @@
        "BodyType": {
         "$ref": "163"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -1976,7 +1981,8 @@
        "BodyType": {
         "$ref": "174"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
