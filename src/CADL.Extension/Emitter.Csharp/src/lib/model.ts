@@ -264,6 +264,10 @@ export function getInputType(
                     if (values) {
                         return getInputModelForExtensibleEnum(m, values);
                     };
+                // if the model is one of the Cadl Intrinsic type.
+                // it's a base Cadl "primitive" that corresponds directly to an c# data type.
+                // In such cases, we don't want to emit a ref and instead just
+                // emit the base type directly.
                 default:
                     return {
                         Name: m.name,
@@ -290,19 +294,7 @@ export function getInputType(
             }
         }
 
-        if (m.name === intrinsicName) {
-            // if the model is one of the Cadl Intrinsic type.
-            // it's a base Cadl "primitive" that corresponds directly to an c# data type.
-            // In such cases, we don't want to emit a ref and instead just
-            // emit the base type directly.
-            return {
-                Name: mapCadlIntrinsicModelToCsharpModel(program, m) ?? m.name,
-                Kind: mapCadlTypeToCSharpInputTypeKind(program, m),
-                IsNullable: false
-            } as InputPrimitiveType;
-        } else {
-            return getInputModelForModel(m);
-        }
+        return getInputModelForModel(m);
     }
 
     function getInputModelForExtensibleEnum(m: Model, e: Enum): InputEnumType {
