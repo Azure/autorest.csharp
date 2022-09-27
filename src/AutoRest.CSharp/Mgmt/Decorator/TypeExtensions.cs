@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return isAsync ? new CSharpType(typeof(Task<>), response) : response;
         }
 
-        public static bool IsTypeProvider<T>(this CSharpType type, [MaybeNullWhen(false)] out T provider) where T : TypeProvider
+        public static bool TryCast<T>(this CSharpType type, [MaybeNullWhen(false)] out T provider) where T : TypeProvider
         {
             provider = null;
             if (type.IsFrameworkType)
@@ -72,10 +72,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return provider != null;
         }
 
-        public static bool IsResource(this CSharpType type, [MaybeNullWhen(false)] out Resource resource)
-            => type.IsTypeProvider<Resource>(out resource);
+        public static bool TryCastResource(this CSharpType type, [MaybeNullWhen(false)] out Resource resource)
+            => type.TryCast<Resource>(out resource);
 
-        public static bool IsResourceData(this CSharpType type, [MaybeNullWhen(false)] out ResourceData data)
-            => type.IsTypeProvider<ResourceData>(out data);
+        public static bool TryCastResourceData(this CSharpType type, [MaybeNullWhen(false)] out ResourceData data)
+            => type.TryCast<ResourceData>(out data);
     }
 }

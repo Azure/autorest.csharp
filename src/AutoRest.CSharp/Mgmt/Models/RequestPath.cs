@@ -395,7 +395,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public override int GetHashCode() => SerializedPath.GetHashCode();
 
-        public override string? ToString() => SerializedPath;
+        public override string ToString() => SerializedPath;
 
         public static bool operator ==(RequestPath left, RequestPath right)
         {

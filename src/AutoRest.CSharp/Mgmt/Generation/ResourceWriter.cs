@@ -141,6 +141,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 base.WriteMethod(coreOperation, isAsync);
                 _writer.Line();
 
+                // TODO -- move this condition into resource
                 // determine whether we need to write this method here
                 if (!clientOperation.ReturnType.Equals(coreOperation.ReturnType) || clientOperation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Virtual))
                 {

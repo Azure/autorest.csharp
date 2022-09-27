@@ -691,7 +691,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.UseNamespace(typeof(Enumerable).Namespace!);
                 _writer.Append($".Select({value:D} => ");
-                if (itemType.IsResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
+                if (itemType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
                     using (_writer.Scope())
                     {
@@ -774,7 +774,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
                 }
                 var realReturnType = operation.MgmtReturnType;
-                if (realReturnType != null && realReturnType.IsResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
+                if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
                     _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
                 }
@@ -891,7 +891,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (operation.OperationSource is not null)
                 {
                     _writer.Append($"new {operation.OperationSource.TypeName}(")
-                        .AppendIf($"{ArmClientReference}", operation.MgmtReturnType!.IsResource(out _))
+                        .AppendIf($"{ArmClientReference}", operation.MgmtReturnType!.TryCastResource(out _))
                         .Append($"), ");
                 }
 

@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
             {
-                MgmtReturnType.IsResource(out var resourceBeingReturned);
+                MgmtReturnType.TryCastResource(out var resourceBeingReturned);
                 operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
                 MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
             }
@@ -252,12 +252,27 @@ namespace AutoRest.CSharp.Mgmt.Models
         internal enum ResourceMatchType
         {
             Exact,
-            ParentList,
-            AncestorList,
-            ChildList,
-            Context,
+            ParentList, // list of myself from my direct owner - ex. VirtualMachine list on resource group
+            AncestorList, // list of myself from my grand parent (or higher) - ex. VirtualMachine list on subscription
+            ChildList, // list something else on myself - ex. List skus on VirtualMachine (usually listing non-resource) GET
+            Context, // actions or behavior on myself - ex. Start on VirtualMachine POST
             CheckName,
             None
+        }
+
+        private bool DoMySiblingsMatch(BaseResource baseResource, Resource resource, RequestPath requestPath, RestClientMethod method)
+        {
+            foreach (var other in baseResource.DerivedResources)
+            {
+                if (other == resource)
+                    continue;
+
+                var match = GetMatchType(Operation.GetHttpMethod(), other.RequestPath, requestPath, method.IsListMethod(out var _));
+                if (match != ResourceMatchType.None)
+                    return true;
+            }
+
+            return false;
         }
 
         private Resource? GetResourceMatch(MgmtRestClient restClient, RestClientMethod method, RequestPath requestPath)
@@ -280,7 +295,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                     matches.Add(match, result);
                 }
                 // if it is ancestor list, we need to check if the matched resource has a base resource, if so we return the base resource instead
-                if (match == ResourceMatchType.AncestorList && resource.PolymorphicOption != null)
+                if (match == ResourceMatchType.AncestorList && resource.PolymorphicOption != null && DoMySiblingsMatch(resource.PolymorphicOption.BaseResource, resource, requestPath, method)) // && none of my siblings match
                 {
                     result.Add(resource.PolymorphicOption.BaseResource);
                 }
@@ -367,10 +382,12 @@ namespace AutoRest.CSharp.Mgmt.Models
             //catch check name availability where the provider ending matches
             //this one catches a lot so we are narrowing it down to containing "name" dont know all the checknameavailability name types
             if (requestLastSegment.IsConstant &&
-                requestPath.ToString()!.StartsWith("/subscriptions/{{subscriptionId}}", StringComparison.Ordinal) &&
-                requestLastSegment.ToString()!.Contains("name", StringComparison.OrdinalIgnoreCase) &&
+                requestPath.ToString().StartsWith("/subscriptions/{{subscriptionId}}", StringComparison.Ordinal) &&
+                requestLastSegment.ToString().Contains("name", StringComparison.OrdinalIgnoreCase) &&
                 AreEqualBackToProvider(resourcePath, requestPath, 2, 1))
                 return ResourceMatchType.CheckName;
+
+            // TODO -- add something to handle the scope
 
             return ResourceMatchType.None;
         }
@@ -429,7 +446,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (Configuration.MgmtConfiguration.PreventWrappingReturnType.Contains(OperationId))
                 return originalType;
 
-            if (originalType == null || !originalType.IsResourceData(out var data))
+            if (originalType == null || !originalType.TryCastResourceData(out var data))
                 return originalType;
 
             if (Resource is not null && Resource.ResourceData == data)
