@@ -20,7 +20,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },

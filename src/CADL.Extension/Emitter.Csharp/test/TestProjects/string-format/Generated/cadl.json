@@ -22,7 +22,7 @@
        "NameInRequest": "time",
        "Type": {
         "$id": "5",
-        "Name": "DateTime",
+        "Name": "zonedDateTime",
         "Kind": "DateTime",
         "IsNullable": false
        },

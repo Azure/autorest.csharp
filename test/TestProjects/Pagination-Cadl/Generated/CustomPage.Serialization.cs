@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Cadl.Rest;
 using Pagination;
 
 namespace Azure.Core.Foundations
@@ -29,7 +28,7 @@ namespace Azure.Core.Foundations
             if (Optional.IsDefined(NextLink))
             {
                 writer.WritePropertyName("nextLink");
-                writer.WriteObjectValue(NextLink);
+                writer.WriteStringValue(NextLink);
             }
             writer.WriteEndObject();
         }
@@ -37,7 +36,7 @@ namespace Azure.Core.Foundations
         internal static CustomPage DeserializeCustomPage(JsonElement element)
         {
             IList<LedgerEntry> value = default;
-            Optional<ResourceLocation> nextLink = default;
+            Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -52,12 +51,7 @@ namespace Azure.Core.Foundations
                 }
                 if (property.NameEquals("nextLink"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    nextLink = ResourceLocation.DeserializeResourceLocation(property.Value);
+                    nextLink = property.Value.GetString();
                     continue;
                 }
             }
