@@ -101,6 +101,8 @@ stages:
               failOnStderr: false
               displayName: 'Publish to GitHub, npm and coverage report'
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - publish: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage/cadl-ranch-coverage-csharp.json
+            artifact: CoverageReport
       - template: smoke-test.yml
         parameters:
           name: SmokeTest_A_C

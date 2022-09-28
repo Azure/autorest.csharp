@@ -7,24 +7,17 @@ using System.Threading.Tasks;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
 {
-    public class TestServerSession : IAsyncDisposable
+    public class TestServerSession : TestServerSessionBase<TestServerV1>
     {
-        private static readonly object _serverCacheLock = new object();
-        private static TestServerV1 _serverV1Cache;
-
         private readonly string _scenario;
         private readonly bool _allowUnmatched;
         private readonly string[] _expectedCoverage;
 
-        public TestServerV1 Server { get; private set; }
-        public Uri Host => Server.Host;
-
-        private TestServerSession(string scenario, bool allowUnmatched, string[] expectedCoverage)
+        private TestServerSession(string scenario, bool allowUnmatched, string[] expectedCoverage): base()
         {
             _scenario = scenario;
             _allowUnmatched = allowUnmatched;
             _expectedCoverage = expectedCoverage;
-            Server = GetServer();
         }
 
         public static TestServerSession Start(string scenario, bool allowUnmatched = false, params string[] expectedCoverage)
@@ -33,35 +26,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             return server;
         }
 
-        private ref TestServerV1 GetServerCache()
-        {
-            return ref _serverV1Cache;
-        }
-
-        private TestServerV1 CreateServer()
-        {
-            return new TestServerV1();
-        }
-
-        private TestServerV1 GetServer()
-        {
-            TestServerV1 server;
-            lock (_serverCacheLock)
-            {
-                ref var cache = ref GetServerCache();
-                server = cache;
-                cache = null;
-            }
-
-            if (server == null)
-            {
-                server = CreateServer();
-            }
-
-            return server;
-        }
-
-        public ValueTask DisposeAsync() => DisposeAsync(false);
+        public override ValueTask DisposeAsync() => DisposeAsync(false);
 
         public async ValueTask DisposeAsync(bool ignoreChecks)
         {
@@ -96,24 +61,5 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             }
         }
 
-        private void Return()
-        {
-            bool disposeServer = true;
-            lock (_serverCacheLock)
-            {
-                ref var cache = ref GetServerCache();
-                if (cache == null)
-                {
-                    cache = Server;
-                    Server = null;
-                    disposeServer = false;
-                }
-            }
-
-            if (disposeServer)
-            {
-                Server?.Dispose();
-            }
-        }
     }
 }

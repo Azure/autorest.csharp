@@ -21,6 +21,8 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class DpgOutputLibraryBuilder
     {
+        private const string MaxCountParameterName = "maxCount";
+
         private readonly InputNamespace _rootNamespace;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly string _defaultNamespace;
@@ -36,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public DpgOutputLibrary Build(bool isCadlInput)
         {
-            var inputClients = UpdateListMethodNames();
+            var inputClients = UpdateOperations();
 
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
@@ -90,17 +92,60 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<InputClient> UpdateListMethodNames()
+        private IEnumerable<InputClient> UpdateOperations()
         {
             var defaultName = _rootNamespace.Name.ReplaceLast("Client", "");
+            // this map of old/new InputOperation is to update the lazy initialization of `Paging.NextLinkOperation`
+            var operationsMap = new Dictionary<InputOperation, InputOperation>();
             foreach (var client in _rootNamespace.Clients)
             {
                 var clientName = client.Name.IsNullOrEmpty() ? defaultName : client.Name;
-                yield return client with { Operations = client.Operations.Select(op => UpdateMethodName(op, clientName)).ToList() };
+                yield return client with { Operations = client.Operations.Select(op => UpdateOperation(op, clientName, operationsMap)).ToList() };
+            }
+        }
+
+        private static InputOperation UpdateOperation(InputOperation operation, string clientName, IDictionary<InputOperation, InputOperation> operationsMap)
+        {
+            InputOperation updatedOperation;
+            if (operation.Paging != null && !Configuration.DisablePaginationTopRenaming && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
+            {
+                updatedOperation = operation with
+                {
+                    Name = UpdateOperationName(operation, clientName),
+                    Parameters = UpdateOperationParameters(operation.Parameters),
+                    // to update the lazy initialization of `Paging.NextLinkOperation`
+                    Paging = operation.Paging with { NextLinkOperationRef = operation.Paging.NextLinkOperation != null ? () => operationsMap[operation.Paging.NextLinkOperation] : null }
+                };
+            }
+            else
+            {
+                updatedOperation = operation with { Name = UpdateOperationName(operation, clientName) };
+            }
+            operationsMap.Add(operation, updatedOperation);
+
+            return updatedOperation;
+
+        }
+
+        private static string UpdateOperationName(InputOperation operation, string clientName)
+            => operation.Name.RenameGetMethod(clientName).RenameListToGet(clientName);
+
+        private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
+        {
+            var parameters = new List<InputParameter>(operationParameters.Count);
+            foreach (var parameter in operationParameters)
+            {
+                if (parameter.Name.Equals("top", StringComparison.OrdinalIgnoreCase))
+                {
+                    parameters.Add(parameter with { Name = MaxCountParameterName });
+                }
+                else
+                {
+                    parameters.Add(parameter);
+                }
             }
 
-            static InputOperation UpdateMethodName(InputOperation operation, string clientName)
-                => operation with { Name = operation.Name.RenameGetMethod(clientName).RenameListToGet(clientName) };
+            return parameters;
         }
 
         private ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos)
@@ -175,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return new[] {topLevelClientInfo};
+            return new[] { topLevelClientInfo };
         }
 
         private static void AssignParents(in ClientInfo clientInfo, IReadOnlyDictionary<string, ClientInfo> clientInfosByName, SourceInputModel sourceInputModel)
@@ -222,7 +267,7 @@ namespace AutoRest.CSharp.Output.Models
                         clientInfo = clientInfo.Parent;
                     }
                     break;
-                case >1:
+                case > 1:
                     var requestParameters = operation.Parameters.ToHashSet();
                     while (clientInfo.Parent != null && !clientInfo.ResourceParameters.IsSubsetOf(requestParameters))
                     {
@@ -273,9 +318,9 @@ namespace AutoRest.CSharp.Output.Models
                     SubClients = subClients
                 };
 
-                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
+                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
 
-                 yield return client;
+                yield return client;
             }
         }
 

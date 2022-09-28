@@ -141,7 +141,14 @@ namespace AutoRest.CSharp.Common.Input
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
             BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
-            Headers: response.HttpResponse.Headers.ToList()
+            Headers: GetResponseHeaders(response.HttpResponse.Headers)
+        );
+
+        private OperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(
+            Name: header.CSharpName(),
+            NameInResponse: header.Extensions?.HeaderCollectionPrefix ?? header.Header,
+            Description: header.Language.Default.Description,
+            Type: CreateType(header.Schema, header.Extensions?.Format, _modelsCache, true)
         );
 
         private OperationLongRunning? CreateLongRunning(Operation operation)
@@ -297,6 +304,15 @@ namespace AutoRest.CSharp.Common.Input
             _ => null
         };
 
+        private IReadOnlyList<OperationResponseHeader> GetResponseHeaders(ICollection<HttpResponseHeader>? headers)
+        {
+            if (headers == null)
+            {
+                return Array.Empty<OperationResponseHeader>();
+            }
+            return headers.Select(header => CreateResponseHeader(header)).ToList();
+        }
+
         public InputType CreateType(RequestParameter requestParameter)
             => CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
 
@@ -329,6 +345,9 @@ namespace AutoRest.CSharp.Common.Input
             NumberSchema { Type: AllSchemaTypes.Integer, Precision: 64 } => InputPrimitiveType.Int64,
             NumberSchema { Type: AllSchemaTypes.Integer }                => InputPrimitiveType.Int32,
 
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => InputPrimitiveType.DateTimeISO8601,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeRFC1123 => InputPrimitiveType.DateTimeRFC1123,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeUnix => InputPrimitiveType.DateTimeUnix,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId            => InputPrimitiveType.ResourceIdentifier,
             { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation    => InputPrimitiveType.AzureLocation,

@@ -1,5 +1,8 @@
 #Requires -Version 7.0
 
+$ErrorActionPreference = 'Stop'
+Set-StrictMode -Version 1
+
 Write-Host 'Generating test CADL json...'
 & (Join-Path $PSScriptRoot 'CadlGenerate.ps1')
 

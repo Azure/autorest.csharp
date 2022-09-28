@@ -248,6 +248,9 @@ namespace AutoRest.CSharp.Generation.Types
         {
             XMsFormat.ArmId => typeof(ResourceIdentifier),
             XMsFormat.AzureLocation => typeof(AzureLocation),
+            XMsFormat.DateTime => typeof(DateTimeOffset),
+            XMsFormat.DateTimeRFC1123 => typeof(DateTimeOffset),
+            XMsFormat.DateTimeUnix => typeof(DateTimeOffset),
             XMsFormat.DurationConstant => typeof(TimeSpan),
             XMsFormat.ETag => typeof(ETag),
             XMsFormat.ResourceType => typeof(ResourceType),

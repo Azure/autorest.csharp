@@ -18,6 +18,7 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
+$cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http' 
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -35,11 +36,11 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     }
 }
 
-function Add-Cadl([string]$name, [string]$output, [string]$arguments="") {
+function Add-Cadl([string]$name, [string]$output, [string]$mainFile="") {
     $cadlDefinitions[$name] = @{
         'projectName'=$name;
         'output'=$output;
-        'arguments'=$arguments
+        'mainFile'=$mainFile
     }
 }
 
@@ -48,6 +49,16 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $inputReadme = Join-Path $projectDirectory "readme.md"
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
+}
+
+function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
+    $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
+    $cadlFolders = Get-ChildItem -Path $cadlRanchFilePath -Depth 2 -Directory $testName
+    if ($cadlFolders) {
+        $cadlFolder = $cadlFolders[0]
+        $cadlMain = Join-Path $cadlFolder "main.cadl"
+        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain
+    }
 }
 
 $testNames =
@@ -225,6 +236,20 @@ if (!($Exclude -contains "Samples"))
     }
 }
 
+# Cadl projects
+$cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
+$cadlRanchProjectNames =
+    'api-key',
+    'property-types'
+
+if (!($Exclude -contains "CadlRanchProjects"))
+{
+    foreach ($testName in $cadlRanchProjectNames)
+    {
+        Add-CadlRanch-Cadl $testName "cadl-" $cadlRanchProjectDirectory
+    }
+}
+
 # Smoke tests
 if (!($Exclude -contains "SmokeTests"))
 {
@@ -337,6 +362,6 @@ $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
 $keys | %{ $cadlDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-Cadl $_.output $_.projectName $using:sharedSource $using:fast $using:debug;
+        Invoke-Cadl $_.output $_.projectName $_.mainFile $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel

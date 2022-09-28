@@ -85,6 +85,9 @@ namespace AutoRest.CSharp.Output.Builders
 
             _ => schema.Extensions?.Format switch
                 {
+                    XMsFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+                    XMsFormat.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
+                    XMsFormat.DateTimeUnix => SerializationFormat.DateTime_Unix,
                     XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
                     _ => SerializationFormat.Default
                 }

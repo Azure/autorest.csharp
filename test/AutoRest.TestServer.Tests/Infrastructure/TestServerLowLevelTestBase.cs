@@ -2,14 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
