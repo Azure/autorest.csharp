@@ -311,8 +311,7 @@
        "StatusCodes": [
         200
        ],
-       "BodyMediaType": "Json",
-       "Headers": []
+       "BodyMediaType": "Json"
       }
      ],
      "HttpMethod": "POST",

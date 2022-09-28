@@ -259,8 +259,7 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json",
-       "Headers": []
+       "BodyMediaType": "Json"
       }
      ],
      "HttpMethod": "GET",
@@ -315,8 +314,7 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json",
-       "Headers": []
+       "BodyMediaType": "Json"
       }
      ],
      "HttpMethod": "GET",
@@ -415,8 +413,7 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json",
-       "Headers": []
+       "BodyMediaType": "Json"
       }
      ],
      "HttpMethod": "POST",
@@ -484,8 +481,7 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json",
-       "Headers": []
+       "BodyMediaType": "Json"
       }
      ],
      "HttpMethod": "GET",
@@ -593,8 +589,7 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json",
-       "Headers": []
+       "BodyMediaType": "Json"
       }
      ],
      "HttpMethod": "GET",
@@ -652,8 +647,7 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json",
-       "Headers": []
+       "BodyMediaType": "Json"
       }
      ],
      "HttpMethod": "GET",

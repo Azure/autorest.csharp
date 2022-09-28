@@ -197,8 +197,7 @@
         },
         "IsNullable": false
        },
-       "BodyMediaType": "Json",
-       "Headers": []
+       "BodyMediaType": "Json"
       }
      ],
      "HttpMethod": "GET",
