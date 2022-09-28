@@ -424,7 +424,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (httpMethod == HttpMethod.Get)
                 return ResourceMatchType.None;
 
-            var resourceLastSegement = resourcePath[resourcePath.Count - 1];
+            var resourceLastSegement = resourcePath.Last();
             //sometimes for singletons the POST methods show up at the same level
             if (resourcePath.Count == requestPath.Count && requestLastSegment.IsConstant && resourceLastSegement.IsConstant && AreEqualBackToProvider(resourcePath, requestPath, 1, 1))
                 return ResourceMatchType.Context;
