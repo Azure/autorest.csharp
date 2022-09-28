@@ -14,7 +14,17 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
 {
     internal class MgmtRestOperationTests
     {
-        private RequestPath GetFromString(string path) => new RequestPath(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => new Segment(segment, isConstant: !segment.Contains('{'))).ToList());
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            var mgmtConfiguration = new MgmtConfiguration(
+                Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), new MgmtConfiguration.MgmtDebugConfiguration());
+            Configuration.Initialize(".", null, null, Array.Empty<string>(), true, true, true, true, true, true, false, false, false, false, "/..", Array.Empty<string>(), mgmtConfiguration);
+        }
+
+        private RequestPath GetFromString(string path) => new RequestPath(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => new Segment(TrimRawSegment(segment), isConstant: !segment.Contains('{'))).ToList());
+
+        private string TrimRawSegment(string segment) => segment.TrimStart('{').TrimEnd('}');
 
         private void TestPair(ResourceMatchType expected, HttpMethod httpMethod, string resourcePathStr, string requestPathStr, bool isList)
         {
@@ -146,7 +156,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
             "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/providers/Microsoft.Authorization/policyDefinitions")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.AncestorList, HttpMethod.Get, true,
             "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/providers/Microsoft.Authorization/policyDefinitions")]
         public void PolicyDefinitionMultiParent(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)

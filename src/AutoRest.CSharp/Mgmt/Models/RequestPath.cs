@@ -29,6 +29,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         internal const string SubscriptionScopePrefix = "/subscriptions";
         internal const string TenantScopePrefix = "/tenants";
 
+        public static readonly RequestPath Empty = new(Array.Empty<Segment>());
+
         public static readonly RequestPath Null = new(new[] { new Segment("") });
 
         /// <summary>
@@ -92,11 +94,14 @@ namespace AutoRest.CSharp.Mgmt.Models
             throw new ErrorHelpers.ErrorException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
         }
 
+        public int IndexOfLastProviders { get; }
+
         private RequestPath(IReadOnlyList<Segment> segments, string httpPath)
         {
             _segments = segments;
             SerializedPath = httpPath;
             IsExpandable = GetIsExpandable(segments);
+            IndexOfLastProviders = _segments.ToList().LastIndexOf(Segment.Providers);
         }
 
         private static bool GetIsExpandable(IEnumerable<Segment> segments)
@@ -312,6 +317,33 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
 
             return queue.Select(list => new RequestPath(list));
+        }
+
+        private static ISet<ResourceTypeSegment> GetScopeResourceTypes(RequestPath requestPath)
+        {
+            var scope = requestPath.GetScopePath();
+            if (scope.IsParameterizedScope())
+            {
+                return new HashSet<ResourceTypeSegment>(requestPath.GetParameterizedScopeResourceTypes()!);
+            }
+
+            return new HashSet<ResourceTypeSegment> { scope.GetResourceType() };
+        }
+
+        /// <summary>
+        /// Return true if the scope resource types of the first path are a subset of the second path
+        /// </summary>
+        /// <param name="requestPath"></param>
+        /// <param name="resourcePath"></param>
+        /// <returns></returns>
+        public static bool IsScopeCompatible(RequestPath requestPath, RequestPath resourcePath)
+        {
+            // get scope types
+            var requestScopeTypes = GetScopeResourceTypes(requestPath);
+            var resourceScopeTypes = GetScopeResourceTypes(resourcePath);
+            if (resourceScopeTypes.Contains(ResourceTypeSegment.Any))
+                return true;
+            return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
         }
 
         private static void CreateSegments(string path, IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> references, ICollection<Segment> segments, ref int segmentIndex)

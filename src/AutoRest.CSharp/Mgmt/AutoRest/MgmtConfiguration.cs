@@ -520,7 +520,7 @@ namespace AutoRest.CSharp.Input
 
         private static bool IsValidJsonElement(JsonElement? element)
         {
-            return element?.ValueKind != JsonValueKind.Null && element?.ValueKind != JsonValueKind.Undefined;
+            return element != null && element?.ValueKind != JsonValueKind.Null && element?.ValueKind != JsonValueKind.Undefined;
         }
 
         private static void WriteNonEmptySettings(

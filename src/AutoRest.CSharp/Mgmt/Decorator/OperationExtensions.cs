@@ -91,27 +91,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return valueType.EqualsByName(resourceData.Type);
         }
 
-        private static ISet<ResourceTypeSegment> GetScopeResourceTypes(RequestPath requestPath)
-        {
-            var scope = requestPath.GetScopePath();
-            if (scope.IsParameterizedScope())
-            {
-                return new HashSet<ResourceTypeSegment>(requestPath.GetParameterizedScopeResourceTypes()!);
-            }
-
-            return new HashSet<ResourceTypeSegment> { scope.GetResourceType() };
-        }
-
-        private static bool IsScopeCompatible(RequestPath requestPath, RequestPath resourcePath)
-        {
-            // get scope types
-            var requestScopeTypes = GetScopeResourceTypes(requestPath);
-            var resourceScopeTypes = GetScopeResourceTypes(resourcePath);
-            if (resourceScopeTypes.Contains(ResourceTypeSegment.Any))
-                return true;
-            return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
-        }
-
         private static OperationSet? FindOperationSetOfResource(RequestPath requestPath)
         {
             if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(requestPath, out var rawPath))
@@ -125,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // 1. Compare if they have the same scope
                 // 2. Compare if they have the "compatible" remaining path
                 // check if they have compatible scopes
-                if (!IsScopeCompatible(requestPath, resourceRequestPath))
+                if (!RequestPath.IsScopeCompatible(requestPath, resourceRequestPath))
                     continue;
                 // check the remaining path
                 var trimmedRequestPath = requestPath.TrimScope();

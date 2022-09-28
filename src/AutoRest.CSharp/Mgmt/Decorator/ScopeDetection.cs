@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static RequestPath CalculateScopePath(RequestPath requestPath)
         {
-            var indexOfProvider = requestPath.ToList().LastIndexOf(Segment.Providers);
+            var indexOfProvider = requestPath.IndexOfLastProviders;
             // if there is no providers segment, myself should be a scope request path. Just return myself
             if (indexOfProvider >= 0)
             {

@@ -348,24 +348,74 @@ namespace AutoRest.CSharp.Mgmt.Models
             return true;
         }
 
+        /// <summary>
+        /// This method returns true if the first scope <paramref name="operationScope"/> could cover the second scope <paramref name="resourceScope"/>
+        /// AKA operationScope >= resourceScope
+        /// For instance, if operationScope = subscription, resourceScope = resourceGroup, this should return true
+        /// if operationScope = resourceGroup, resourceGroup = subscription, this should return false
+        /// if operationScope = managementGroup, resourceGroup = subscription, this should return false
+        /// </summary>
+        /// <param name="resourceScope"></param>
+        /// <param name="operationScope"></param>
+        /// <returns></returns>
+        private static bool DoesScopeCover(RequestPath operationScope, RequestPath resourceScope)
+        {
+            if (operationScope.Equals(resourceScope))
+                return true;
+            // bigger scope should be shorter
+            if (operationScope.IsAncestorOf(resourceScope))
+                return true;
+
+            // TODO -- handle the parameterized scope cases
+            return false;
+        }
+
+        private static void SeparateScope(RequestPath original, out RequestPath scope, out RequestPath trimmed)
+        {
+            if (original.IndexOfLastProviders >= 0)
+            {
+                scope = original.GetScopePath();
+                trimmed = original.TrimScope();
+            }
+            else
+            {
+                scope = RequestPath.Empty;
+                trimmed = original;
+            }
+        }
+
+        private static ResourceMatchType? GetMatchTypeForList(HttpMethod method, RequestPath resourcePath, RequestPath requestPath, bool isList)
+        {
+            if (!isList)
+                return null;
+            if (method != HttpMethod.Get)
+                return null;
+            var requestLastSegment = requestPath.Last();
+            if (!requestLastSegment.IsConstant)
+                return null;
+            SeparateScope(resourcePath, out var resourceScopePath, out var trimmedResourcePath);
+            SeparateScope(requestPath, out var operationScopePath, out var trimmedOperationPath);
+
+            if (trimmedResourcePath.Count > 0 && trimmedOperationPath.Equals(new RequestPath(trimmedResourcePath.SkipLast(1))) && DoesScopeCover(operationScopePath, resourceScopePath))
+            {
+                return DoesScopeCover(resourceScopePath, operationScopePath) ? ResourceMatchType.ParentList : ResourceMatchType.AncestorList;
+            }
+
+            return null;
+        }
+
         internal static ResourceMatchType GetMatchType(HttpMethod httpMethod, RequestPath resourcePath, RequestPath requestPath, bool isList)
         {
             //check exact match
             if (resourcePath == requestPath)
                 return ResourceMatchType.Exact;
 
-            //check for a list by an ancestor
-            var requestLastSegment = requestPath[requestPath.Count - 1];
-            if (isList &&
-                httpMethod == HttpMethod.Get &&
-                requestPath.Count < resourcePath.Count &&
-                requestLastSegment.IsConstant &&
-                resourcePath[0] == requestPath[0] && //first two items much be the same
-                resourcePath[1] == requestPath[1] &&
-                AreEqualBackToProvider(resourcePath, requestPath, 1, 0))
-            {
-                return AreEqualUpToProvider(resourcePath, requestPath) ? ResourceMatchType.ParentList : ResourceMatchType.AncestorList;
-            }
+            var requestLastSegment = requestPath.Last();
+
+            //check for a list by a parent or an ancestor
+            var listMatch = GetMatchTypeForList(httpMethod, resourcePath, requestPath, isList);
+            if (listMatch != null)
+                return listMatch.Value;
 
             //check for single value methods after the GET path which are typically POST methods
             if (resourcePath.Count == requestPath.Count - 1 && requestLastSegment.IsConstant && AreEqualBackToProvider(resourcePath, requestPath, 0, 1))
@@ -382,12 +432,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             //catch check name availability where the provider ending matches
             //this one catches a lot so we are narrowing it down to containing "name" dont know all the checknameavailability name types
             if (requestLastSegment.IsConstant &&
-                requestPath.ToString().StartsWith("/subscriptions/{{subscriptionId}}", StringComparison.Ordinal) &&
+                RequestPath.Subscription.IsAncestorOf(requestPath) &&
                 requestLastSegment.ToString().Contains("name", StringComparison.OrdinalIgnoreCase) &&
                 AreEqualBackToProvider(resourcePath, requestPath, 2, 1))
                 return ResourceMatchType.CheckName;
-
-            // TODO -- add something to handle the scope
 
             return ResourceMatchType.None;
         }

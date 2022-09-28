@@ -61,15 +61,15 @@ namespace AutoRest.CSharp.Mgmt.Models
         public static ResourceTypeSegment ParseRequestPath(RequestPath path)
         {
             // first try our built-in resources
-            if (path == RequestPath.Subscription)
+            if (path.Equals(RequestPath.Subscription))
                 return ResourceTypeSegment.Subscription;
-            if (path == RequestPath.ResourceGroup)
+            if (path.Equals(RequestPath.ResourceGroup))
                 return ResourceTypeSegment.ResourceGroup;
-            if (path == RequestPath.ManagementGroup)
+            if (path.Equals(RequestPath.ManagementGroup))
                 return ResourceTypeSegment.ManagementGroup;
-            if (path == RequestPath.Tenant)
+            if (path.Equals(RequestPath.Tenant))
                 return ResourceTypeSegment.Tenant;
-            if (path == RequestPath.Any)
+            if (path.Equals(RequestPath.Any))
                 return ResourceTypeSegment.Any;
 
             return Parse(path);
