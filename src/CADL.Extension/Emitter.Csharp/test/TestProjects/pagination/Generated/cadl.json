@@ -205,7 +205,8 @@
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -213,18 +214,23 @@
      "Uri": "{pagnationUri}",
      "Path": "/app/transactions",
      "BufferResponse": true,
+     "Paging": {
+      "$id": "26",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "26"
+    "$id": "27"
    }
   }
  ],
  "Auth": {
-  "$id": "27",
+  "$id": "28",
   "OAuth2": {
-   "$id": "28",
+   "$id": "29",
    "Scopes": [
     "https://pagination.azure.com/.default"
    ]
