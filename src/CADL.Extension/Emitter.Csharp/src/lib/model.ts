@@ -461,7 +461,10 @@ export function getInputType(
         discriminatorPropertyName?: string
     ): void {
         inputProperties.forEach((value: ModelProperty, key: string) => {
-            if (value.name !== discriminatorPropertyName && isSchemaProperty(program, value)) {
+            if (
+                value.name !== discriminatorPropertyName &&
+                isSchemaProperty(program, value)
+            ) {
                 const vis = getVisibility(program, value);
                 let isReadOnly: boolean = false;
                 if (vis && vis.includes("read") && vis.length === 1) {
@@ -529,7 +532,7 @@ export function getUsages(
         return result;
     }
 
-    const operations: Operation[] = ops.map(op => op.operation);
+    const operations: Operation[] = ops.map((op) => op.operation);
     const usages = resolveUsages(operations);
     let usagesMap: Map<string, UsageFlags> = new Map<string, UsageFlags>();
     for (const type of usages.types) {
@@ -539,29 +542,27 @@ export function getUsages(
             const effectiveType = getEffectiveModelType(program, type);
             typeName = effectiveType.name;
         }
-        if (typeName !== "") {
-            let value = usagesMap.get(typeName);
-            if (!value) value = UsageFlags.None;
-            if (usages.isUsedAs(type, UsageFlags.Input)) value = value | UsageFlags.Input;
-            if (usages.isUsedAs(type, UsageFlags.Output)) value = value | UsageFlags.Output;
-            usagesMap.set(typeName, value);
-        }
+        let affectTypes: string[] = [];
+        if (typeName !== "") affectTypes.push(typeName);
         if (type.kind === "Model" && type.templateArguments) {
             for (const arg of type.templateArguments) {
-                if (arg.kind === "Model") {
-                    let argTypeName = "";
-                    if ("name" in arg) argTypeName = arg.name ?? "";
-                    if (argTypeName !== "") {
-                        let value = usagesMap.get(argTypeName);
-                        if (!value) value = UsageFlags.None;
-                        if (usages.isUsedAs(type, UsageFlags.Input)) value = value | UsageFlags.Input;
-                        if (usages.isUsedAs(type, UsageFlags.Output)) value = value | UsageFlags.Output;
-                        usagesMap.set(argTypeName, value);
-                    }
+                if (arg.kind === "Model" && "name" in arg && arg.name !== "") {
+                    affectTypes.push(arg.name);
                 }
             }
         }
+
+        for (const name of affectTypes) {
+            let value = usagesMap.get(name);
+            if (!value) value = UsageFlags.None;
+            if (usages.isUsedAs(type, UsageFlags.Input))
+                value = value | UsageFlags.Input;
+            if (usages.isUsedAs(type, UsageFlags.Output))
+                value = value | UsageFlags.Output;
+            usagesMap.set(name, value);
+        }
     }
+    /* handle resource operation. */
     for (const op of ops) {
         const resourceOperation = getResourceOperation(program, op.operation);
         if (resourceOperation) {
@@ -579,7 +580,6 @@ export function getUsages(
             result.roundTrips.push(key);
         } else if (value === UsageFlags.Input) {
             result.inputs.push(key);
-
         } else if (value === UsageFlags.Output) {
             result.outputs.push(key);
         }
