@@ -518,76 +518,28 @@ export function getUsages(
     program: Program,
     ops?: Operation[]
 ): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
-    let usagesMap: Map<string, UsageFlags> = new Map<string, UsageFlags>();
-
-    const usagesArr: UsageTracker[] = [];
-    if (ops) {
-        for (const op of ops) {
-            usagesArr.push(resolveUsages(op));
-        }
-    } else {
-        usagesArr.push(resolveUsages(program.checker.getGlobalNamespaceType()));
-    }
-
-    for (const usages of usagesArr) {
-        for (const type of usages.types) {
-            let typeName = "";
-            if ("name" in type) typeName = type.name ?? "";
-            if (typeName !== "") {
-                let value = usagesMap.get(typeName);
-                if (!value) value = UsageFlags.None;
-                if (usages.isUsedAs(type, UsageFlags.Input)) value = value | UsageFlags.Input;
-                if (usages.isUsedAs(type, UsageFlags.Output)) value = value | UsageFlags.Output;
-                usagesMap.set(typeName, value);
-            }
-            // if ("name" in type && type.name !== "") {
-            //     const typeName = program.checker.getTypeName(type);
-            //     let value = usagesMap.get(typeName);
-            //     if (!value) value = UsageFlags.None;
-            //     if (usages.isUsedAs(type, UsageFlags.Input)) value = value | UsageFlags.Input;
-            //     if (usages.isUsedAs(type, UsageFlags.Output)) value = value | UsageFlags.Output;
-            //     usagesMap.set(typeName, value);
-            // }
-        }
-    }
+    //const usages = resolveUsages(ops ? ops : program.checker.getGlobalNamespaceType());
     const result: {
         inputs: string[];
         outputs: string[];
         roundTrips: string[];
     } = { inputs: [], outputs: [], roundTrips: [] };
-    for (const [key, value] of usagesMap) {
-        if (value === (UsageFlags.Input | UsageFlags.Output)) {
-            result.roundTrips.push(key);
-        } else if (value === UsageFlags.Input) {
-            result.inputs.push(key);
-
-        } else if (value === UsageFlags.Output) {
-            result.outputs.push(key);
+    if (!ops) {
+        return result;
+    }
+    const usages = resolveUsages(ops);
+    for (const type of usages.types) {
+        let typeName = "";
+        if ("name" in type) typeName = type.name ?? "";
+        if (typeName !== "") {
+            if (usages.isUsedAs(type, UsageFlags.Input) && usages.isUsedAs(type, UsageFlags.Output)) {
+                result.roundTrips.push(typeName);
+            } else if (usages.isUsedAs(type, UsageFlags.Input)) {
+                result.inputs.push(typeName);
+            } else if (usages.isUsedAs(type, UsageFlags.Output)) {
+                result.outputs.push(typeName);
+            }
         }
     }
-    // for (const type of usages.types) {
-    //     if (
-    //         usages.isUsedAs(type, UsageFlags.Input | UsageFlags.Output) &&
-    //         "name" in type &&
-    //         type.name !== ""
-    //     ) {
-    //         result.inputs.push(program.checker.getTypeName(type));
-    //     }
-    //     if (
-    //         usages.isUsedAs(type, UsageFlags.Input) &&
-    //         "name" in type &&
-    //         type.name !== ""
-    //     ) {
-    //         result.inputs.push(program.checker.getTypeName(type));
-    //     }
-    //     if (
-    //         usages.isUsedAs(type, UsageFlags.Output) &&
-    //         "name" in type &&
-    //         type.name !== ""
-    //     ) {
-    //         result.outputs.push(program.checker.getTypeName(type));
-    //     }
-    // }
     return result;
 }
-

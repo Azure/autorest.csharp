@@ -2,16 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
-    DecoratedType,
     getDoc,
     getServiceNamespace,
     getServiceNamespaceString,
     getServiceTitle,
     getServiceVersion,
     getSummary,
-    Model,
-    ModelProperty,
-    Operation,
     Program,
     resolvePath
 } from "@cadl-lang/compiler";
@@ -64,6 +60,11 @@ import { InputConstant } from "./type/InputConstant.js";
 import { Usage } from "./type/Usage.js";
 import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
 import { OperationPaging } from "./type/OperationPaging.js";
+import {
+    Model,
+    ModelProperty,
+    Operation
+} from "@cadl-lang/compiler/dist/core/types.js";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -98,8 +99,8 @@ export async function $onEmit(
         const outPath =
             version.trim().length > 0
                 ? resolvePath(
-                    options.outputFile?.replace(".json", `.${version}.json`)
-                )
+                      options.outputFile?.replace(".json", `.${version}.json`)
+                  )
                 : resolvePath(options.outputFile);
 
         const root = createModel(program);
@@ -191,7 +192,7 @@ function createModel(program: Program): any {
         const clients: InputClient[] = [];
         const convenienceOperations: Operation[] = [];
         //create endpoint parameter from servers
-        let urlParameters : InputParameter[] | undefined = undefined;
+        let urlParameters: InputParameter[] | undefined = undefined;
         let url: string = "";
         if (servers !== undefined) {
             const cadlServers = resolveServers(program, servers);
@@ -241,7 +242,8 @@ function createModel(program: Program): any {
                 }
             }
             client.Operations.push(op);
-            if (op.GenerateConvenienceMethod) convenienceOperations.push(operation.operation);
+            if (op.GenerateConvenienceMethod)
+                convenienceOperations.push(operation.operation);
         }
         if (apiVersions.size > 1) {
             apiVersionParam.Kind = InputOperationParameterKind.Constant;
@@ -312,7 +314,10 @@ function createModel(program: Program): any {
     }
 }
 
-function setUsage(usages:{inputs: string[]; outputs: string[]; roundTrips: string[]}, models:Map<string, InputModelType|InputEnumType>) {
+function setUsage(
+    usages: { inputs: string[]; outputs: string[]; roundTrips: string[] },
+    models: Map<string, InputModelType | InputEnumType>
+) {
     for (let [name, m] of models) {
         if (usages.inputs.includes(name)) {
             m.Usage = Usage.Input;
@@ -326,20 +331,40 @@ function setUsage(usages:{inputs: string[]; outputs: string[]; roundTrips: strin
     }
 }
 
-
-function applyDefaultContentTypeAndAcceptParameter(operation: InputOperation): void {
+function applyDefaultContentTypeAndAcceptParameter(
+    operation: InputOperation
+): void {
     const defaultValue: string = "application/json";
-    if (operation.Parameters.some(value => value.Location === RequestLocation.Body)
-        && !operation.Parameters.some(value => value.IsContentType === true)) {
-        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "contentType", "Content-Type"));
+    if (
+        operation.Parameters.some(
+            (value) => value.Location === RequestLocation.Body
+        ) &&
+        !operation.Parameters.some((value) => value.IsContentType === true)
+    ) {
+        operation.Parameters.push(
+            createContentTypeOrAcceptParameter(
+                [defaultValue],
+                "contentType",
+                "Content-Type"
+            )
+        );
         operation.RequestMediaTypes = [defaultValue];
     }
 
-    if (!operation.Parameters.some(
-        value =>
-            value.Location === RequestLocation.Header &&
-            value.NameInRequest.toLowerCase() === "accept")) {
-        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "accept", "Accept"))
+    if (
+        !operation.Parameters.some(
+            (value) =>
+                value.Location === RequestLocation.Header &&
+                value.NameInRequest.toLowerCase() === "accept"
+        )
+    ) {
+        operation.Parameters.push(
+            createContentTypeOrAcceptParameter(
+                [defaultValue],
+                "accept",
+                "Accept"
+            )
+        );
     }
 }
 
@@ -371,9 +396,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                    Type: inputType,
-                    Value: mediaTypes[0]
-                } as InputConstant)
+                      Type: inputType,
+                      Value: mediaTypes[0]
+                  } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -460,7 +485,7 @@ function loadOperation(
 
     const parameters: InputParameter[] = [];
     if (urlParameters) {
-        for(const param of urlParameters) {
+        for (const param of urlParameters) {
             parameters.push(param);
         }
     }
@@ -585,8 +610,8 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVersion
-                ? InputOperationParameterKind.Client
-                : InputOperationParameterKind.Method;
+            ? InputOperationParameterKind.Client
+            : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
