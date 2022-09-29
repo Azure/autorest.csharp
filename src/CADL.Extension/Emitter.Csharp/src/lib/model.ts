@@ -24,12 +24,13 @@ import {
     UsageTracker,
     TrackableType
 } from "@cadl-lang/compiler";
-import { getDiscriminator } from "@cadl-lang/rest";
+import { getDiscriminator, getResourceOperation } from "@cadl-lang/rest";
 import {
     getHeaderFieldName,
     getPathParamName,
     getQueryParamName,
-    isStatusCode
+    isStatusCode,
+    OperationDetails
 } from "@cadl-lang/rest/http";
 import { toNamespacedPath } from "path";
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
@@ -516,7 +517,7 @@ export function getInputType(
 
 export function getUsages(
     program: Program,
-    ops?: Operation[]
+    ops?: OperationDetails[]
 ): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
     //const usages = resolveUsages(ops ? ops : program.checker.getGlobalNamespaceType());
     const result: {
@@ -527,18 +528,60 @@ export function getUsages(
     if (!ops) {
         return result;
     }
-    const usages = resolveUsages(ops);
+
+    const operations: Operation[] = ops.map(op => op.operation);
+    const usages = resolveUsages(operations);
+    let usagesMap: Map<string, UsageFlags> = new Map<string, UsageFlags>();
     for (const type of usages.types) {
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
+        if (type.kind === "Model") {
+            const effectiveType = getEffectiveModelType(program, type);
+            typeName = effectiveType.name;
+        }
         if (typeName !== "") {
-            if (usages.isUsedAs(type, UsageFlags.Input) && usages.isUsedAs(type, UsageFlags.Output)) {
-                result.roundTrips.push(typeName);
-            } else if (usages.isUsedAs(type, UsageFlags.Input)) {
-                result.inputs.push(typeName);
-            } else if (usages.isUsedAs(type, UsageFlags.Output)) {
-                result.outputs.push(typeName);
+            let value = usagesMap.get(typeName);
+            if (!value) value = UsageFlags.None;
+            if (usages.isUsedAs(type, UsageFlags.Input)) value = value | UsageFlags.Input;
+            if (usages.isUsedAs(type, UsageFlags.Output)) value = value | UsageFlags.Output;
+            usagesMap.set(typeName, value);
+        }
+        if (type.kind === "Model" && type.templateArguments) {
+            for (const arg of type.templateArguments) {
+                if (arg.kind === "Model") {
+                    let argTypeName = "";
+                    if ("name" in arg) argTypeName = arg.name ?? "";
+                    if (argTypeName !== "") {
+                        let value = usagesMap.get(argTypeName);
+                        if (!value) value = UsageFlags.None;
+                        if (usages.isUsedAs(type, UsageFlags.Input)) value = value | UsageFlags.Input;
+                        if (usages.isUsedAs(type, UsageFlags.Output)) value = value | UsageFlags.Output;
+                        usagesMap.set(argTypeName, value);
+                    }
+                }
             }
+        }
+    }
+    for (const op of ops) {
+        const resourceOperation = getResourceOperation(program, op.operation);
+        if (resourceOperation) {
+            if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+                const resourceName = resourceOperation.resourceType.name;
+                let value = usagesMap.get(resourceName);
+                if (!value) value = UsageFlags.Input;
+                else value = value | UsageFlags.Input;
+                usagesMap.set(resourceName, value);
+            }
+        }
+    }
+    for (const [key, value] of usagesMap) {
+        if (value === (UsageFlags.Input | UsageFlags.Output)) {
+            result.roundTrips.push(key);
+        } else if (value === UsageFlags.Input) {
+            result.inputs.push(key);
+
+        } else if (value === UsageFlags.Output) {
+            result.outputs.push(key);
         }
     }
     return result;

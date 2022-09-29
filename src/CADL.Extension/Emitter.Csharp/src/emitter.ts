@@ -190,7 +190,7 @@ function createModel(program: Program): any {
         const [routes] = getAllRoutes(program);
         console.log("routes:" + routes.length);
         const clients: InputClient[] = [];
-        const convenienceOperations: Operation[] = [];
+        const convenienceOperations: OperationDetails[] = [];
         //create endpoint parameter from servers
         let urlParameters: InputParameter[] | undefined = undefined;
         let url: string = "";
@@ -243,7 +243,7 @@ function createModel(program: Program): any {
             }
             client.Operations.push(op);
             if (op.GenerateConvenienceMethod)
-                convenienceOperations.push(operation.operation);
+                convenienceOperations.push(operation);
         }
         if (apiVersions.size > 1) {
             apiVersionParam.Kind = InputOperationParameterKind.Constant;
