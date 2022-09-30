@@ -52,7 +52,13 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             name = name ?? throw new JsonException("Enum must have name");
-            description = description ?? throw new JsonException("Enum must have a description");
+            // TODO: roll back to throw JSON error when there is linter on the upstream to check enum without @doc
+            //description = description ?? throw new JsonException("Enum must have a description");
+            if (description == null)
+            {
+                description = "";
+                System.Console.Error.WriteLine($"[Warn]: Enum '{name}' must have a description");
+            }
 
             if (allowedValues == null || allowedValues.Count == 0)
             {
