@@ -6,10 +6,12 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using ModelsInCadl;
 
 namespace GeneratedModels
 {
@@ -40,6 +42,32 @@ namespace GeneratedModels
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _apiVersion = options.Version;
+        }
+
+        /// <summary> Input to RoundTrip. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<RoundTripModel>> InputToRoundTripAsync(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await InputToRoundTripAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(RoundTripModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTrip. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<RoundTripModel> InputToRoundTrip(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = InputToRoundTrip(input.ToRequestContent(), context);
+            return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
         /// <summary> Input to RoundTrip. </summary>
@@ -263,6 +291,32 @@ namespace GeneratedModels
         }
 
         /// <summary> Input to RoundTripPrimitive. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<RoundTripPrimitiveModel>> InputToRoundTripPrimitiveAsync(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await InputToRoundTripPrimitiveAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTripPrimitive. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<RoundTripPrimitiveModel> InputToRoundTripPrimitive(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = InputToRoundTripPrimitive(input.ToRequestContent(), context);
+            return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTripPrimitive. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -476,6 +530,32 @@ namespace GeneratedModels
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> Input to RoundTripOptional. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await InputToRoundTripOptionalAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTripOptional. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = InputToRoundTripOptional(input.ToRequestContent(), context);
+            return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
         }
 
         /// <summary> Input to RoundTripOptional. </summary>
@@ -698,6 +778,32 @@ namespace GeneratedModels
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> Input to RoundTripReadOnly. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<RoundTripReadOnlyModel>> InputToRoundTripReadOnlyAsync(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await InputToRoundTripReadOnlyAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
+        }
+
+        /// <summary> Input to RoundTripReadOnly. </summary>
+        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<RoundTripReadOnlyModel> InputToRoundTripReadOnly(InputModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = InputToRoundTripReadOnly(input.ToRequestContent(), context);
+            return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
         }
 
         /// <summary> Input to RoundTripReadOnly. </summary>
@@ -961,6 +1067,32 @@ namespace GeneratedModels
         }
 
         /// <summary> RoundTrip to Output. </summary>
+        /// <param name="input"> The RoundTripModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<OutputModel>> RoundTripToOutputAsync(RoundTripModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await RoundTripToOutputAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(OutputModel.FromResponse(response), response);
+        }
+
+        /// <summary> RoundTrip to Output. </summary>
+        /// <param name="input"> The RoundTripModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<OutputModel> RoundTripToOutput(RoundTripModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = RoundTripToOutput(input.ToRequestContent(), context);
+            return Response.FromValue(OutputModel.FromResponse(response), response);
+        }
+
+        /// <summary> RoundTrip to Output. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -1183,6 +1315,44 @@ namespace GeneratedModels
         }
 
         /// <summary> Returns model that has property of its own type. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<ErrorModel>> SelfReferenceValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.SelfReferenceValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await SelfReferenceAsync(context).ConfigureAwait(false);
+                return Response.FromValue(ErrorModel.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns model that has property of its own type. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ErrorModel> SelfReferenceValue(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.SelfReferenceValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = SelfReference(context);
+                return Response.FromValue(ErrorModel.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -1352,6 +1522,17 @@ namespace GeneratedModels
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

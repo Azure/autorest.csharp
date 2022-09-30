@@ -11,19 +11,8 @@ using Azure.Core;
 
 namespace ModelsInCadl
 {
-    public partial class ErrorModel : IUtf8JsonSerializable
+    public partial class ErrorModel
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Optional.IsDefined(InnerError))
-            {
-                writer.WritePropertyName("innerError");
-                writer.WriteObjectValue(InnerError);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static ErrorModel DeserializeErrorModel(JsonElement element)
         {
             Optional<ErrorModel> innerError = default;
@@ -41,13 +30,6 @@ namespace ModelsInCadl
                 }
             }
             return new ErrorModel(innerError);
-        }
-
-        internal RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
 
         internal static ErrorModel FromResponse(Response response)

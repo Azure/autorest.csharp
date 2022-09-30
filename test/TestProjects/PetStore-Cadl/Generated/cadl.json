@@ -25,7 +25,8 @@
     }
    ],
    "IsExtensible": true,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "Input"
   }
  ],
  "Models": [
@@ -34,6 +35,7 @@
    "Name": "Pet",
    "Namespace": "PetStore",
    "IsNullable": false,
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "6",

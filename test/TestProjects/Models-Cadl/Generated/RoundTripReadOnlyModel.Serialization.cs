@@ -12,30 +12,8 @@ using Azure.Core;
 
 namespace ModelsInCadl
 {
-    public partial class RoundTripReadOnlyModel : IUtf8JsonSerializable
+    public partial class RoundTripReadOnlyModel
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("optionalReadOnlyIntRecord");
-            writer.WriteStartObject();
-            foreach (var item in OptionalReadOnlyIntRecord)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteNumberValue(item.Value);
-            }
-            writer.WriteEndObject();
-            writer.WritePropertyName("optionalReadOnlyStringRecord");
-            writer.WriteStartObject();
-            foreach (var item in OptionalReadOnlyStringRecord)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
-            }
-            writer.WriteEndObject();
-            writer.WriteEndObject();
-        }
-
         internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element)
         {
             string requiredReadonlyString = default;
@@ -57,8 +35,8 @@ namespace ModelsInCadl
             Optional<IReadOnlyList<string>> optionalReadonlyStringList = default;
             Optional<IReadOnlyList<int>> optionalReadonlyIntList = default;
             Optional<IReadOnlyList<CollectionItem>> optionalReadOnlyModelCollection = default;
-            IDictionary<string, int> optionalReadOnlyIntRecord = default;
-            IDictionary<string, string> optionalReadOnlyStringRecord = default;
+            IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord = default;
+            IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord = default;
             Optional<IReadOnlyDictionary<string, RecordItem>> optionalModelRecord = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -264,13 +242,6 @@ namespace ModelsInCadl
                 }
             }
             return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelCollection, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelCollection), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord));
-        }
-
-        internal RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
 
         internal static RoundTripReadOnlyModel FromResponse(Response response)

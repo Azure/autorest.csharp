@@ -30,7 +30,8 @@
     }
    ],
    "IsExtensible": false,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "RoundTrip"
   },
   {
    "$id": "6",
@@ -56,7 +57,8 @@
     }
    ],
    "IsExtensible": true,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "RoundTrip"
   }
  ],
  "Models": [
@@ -66,6 +68,7 @@
    "Namespace": "ModelsInCadl",
    "Description": "Base model",
    "IsNullable": false,
+   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -77,6 +80,7 @@
    "BaseModel": {
     "$ref": "10"
    },
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "12",
@@ -174,6 +178,7 @@
        "Namespace": "ModelsInCadl",
        "Description": "Collection item model",
        "IsNullable": false,
+       "Usage": "RoundTrip",
        "Properties": [
         {
          "$id": "26",
@@ -204,6 +209,7 @@
             "BaseModel": {
              "$ref": "10"
             },
+            "Usage": "RoundTrip",
             "Properties": [
              {
               "$id": "31",
@@ -224,6 +230,7 @@
              }
             ]
            },
+           "Usage": "RoundTrip",
            "Properties": []
           },
           "IsNullable": false
@@ -283,6 +290,7 @@
    "BaseModel": {
     "$ref": "10"
    },
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "37",
@@ -329,6 +337,7 @@
       "BaseModel": {
        "$ref": "10"
       },
+      "Usage": "RoundTrip",
       "Properties": []
      },
      "IsRequired": true,
@@ -466,6 +475,7 @@
    "BaseModel": {
     "$ref": "42"
    },
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "59",
@@ -494,6 +504,7 @@
    "BaseModel": {
     "$ref": "42"
    },
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "62",
@@ -521,6 +532,7 @@
    "BaseModel": {
     "$ref": "10"
    },
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "65",
@@ -665,6 +677,7 @@
    "Namespace": "ModelsInCadl",
    "Description": "RoundTrip model with optional properties.",
    "IsNullable": false,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "84",
@@ -872,6 +885,7 @@
    "Namespace": "ModelsInCadl",
    "Description": "Output model with readonly properties.",
    "IsNullable": false,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "111",
@@ -1280,6 +1294,7 @@
    "BaseModel": {
     "$ref": "10"
    },
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "164",
@@ -1371,6 +1386,7 @@
    "Namespace": "ModelsInCadl",
    "Description": "Model that has property of its own type",
    "IsNullable": false,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "175",
@@ -1522,7 +1538,7 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "190",
@@ -1625,7 +1641,7 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "199",
@@ -1728,7 +1744,7 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "208",
@@ -1831,7 +1847,7 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "217",
@@ -1934,7 +1950,7 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "226",
@@ -1990,7 +2006,7 @@
      "Uri": "",
      "Path": "/selfReference",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

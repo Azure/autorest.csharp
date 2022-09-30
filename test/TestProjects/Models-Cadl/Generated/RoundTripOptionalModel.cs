@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Azure.Core;
 
@@ -20,18 +21,18 @@ namespace ModelsInCadl
         /// <param name="optionalFixedStringEnum"></param>
         /// <param name="optionalExtensibleEnum"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="optionalModelCollection"/> is null. </exception>
-        public RoundTripOptionalModel(IEnumerable<CollectionItem> optionalModelCollection, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum)
+        internal RoundTripOptionalModel(IEnumerable<CollectionItem> optionalModelCollection, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum)
         {
             Argument.AssertNotNull(optionalModelCollection, nameof(optionalModelCollection));
 
             OptionalModelCollection = optionalModelCollection.ToList();
             OptionalFixedStringEnum = optionalFixedStringEnum;
             OptionalExtensibleEnum = optionalExtensibleEnum;
-            OptionalStringList = new ChangeTrackingList<string>();
-            OptionalIntList = new ChangeTrackingList<int>();
-            OptionalIntRecord = new ChangeTrackingDictionary<string, int>();
-            OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
-            OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
+            OptionalStringList = Array.Empty<string>();
+            OptionalIntList = Array.Empty<int>();
+            OptionalIntRecord = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>(0));
+            OptionalStringRecord = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(0));
+            OptionalModelRecord = new ReadOnlyDictionary<string, RecordItem>(new Dictionary<string, RecordItem>(0));
         }
         /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
         /// <param name="optionalString"></param>
@@ -45,7 +46,7 @@ namespace ModelsInCadl
         /// <param name="optionalIntRecord"></param>
         /// <param name="optionalStringRecord"></param>
         /// <param name="optionalModelRecord"></param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord)
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IReadOnlyList<string> optionalStringList, IReadOnlyList<int> optionalIntList, IReadOnlyList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum, IReadOnlyDictionary<string, int> optionalIntRecord, IReadOnlyDictionary<string, string> optionalStringRecord, IReadOnlyDictionary<string, RecordItem> optionalModelRecord)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
@@ -60,26 +61,26 @@ namespace ModelsInCadl
             OptionalModelRecord = optionalModelRecord;
         }
 
-        public string OptionalString { get; set; }
+        public string OptionalString { get; }
 
-        public int? OptionalInt { get; set; }
+        public int? OptionalInt { get; }
 
-        public IList<string> OptionalStringList { get; }
+        public IReadOnlyList<string> OptionalStringList { get; }
 
-        public IList<int> OptionalIntList { get; }
+        public IReadOnlyList<int> OptionalIntList { get; }
 
-        public IList<CollectionItem> OptionalModelCollection { get; }
+        public IReadOnlyList<CollectionItem> OptionalModelCollection { get; }
 
-        public DerivedModel OptionalModel { get; set; }
+        public DerivedModel OptionalModel { get; }
 
-        public FixedStringEnum OptionalFixedStringEnum { get; set; }
+        public FixedStringEnum OptionalFixedStringEnum { get; }
 
-        public ExtensibleEnum OptionalExtensibleEnum { get; set; }
+        public ExtensibleEnum OptionalExtensibleEnum { get; }
 
-        public IDictionary<string, int> OptionalIntRecord { get; }
+        public IReadOnlyDictionary<string, int> OptionalIntRecord { get; }
 
-        public IDictionary<string, string> OptionalStringRecord { get; }
+        public IReadOnlyDictionary<string, string> OptionalStringRecord { get; }
 
-        public IDictionary<string, RecordItem> OptionalModelRecord { get; }
+        public IReadOnlyDictionary<string, RecordItem> OptionalModelRecord { get; }
     }
 }
