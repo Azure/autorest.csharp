@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -19,7 +20,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected ObjectType(BuildContext context) : base(context)
         {
         }
+        protected ObjectType(string defaultNamespace, SourceInputModel? sourceInputModel):base(defaultNamespace, sourceInputModel)
+        {
+        }
 
+        public bool IsStruct => ExistingType?.IsValueType == true;
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 

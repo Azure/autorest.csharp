@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -15,6 +16,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeProperty
     {
+        public ObjectTypeProperty(InputModelProperty property, CSharpType type, string accessibility, ObjectType enclosingType)
+            : this(new MemberDeclarationOptions(accessibility, property.Name, type), property.Description, property.IsReadOnly, null)
+        {
+        }
+
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
         {
             Description = description;

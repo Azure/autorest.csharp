@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -20,6 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<ModelTypeProvider> Models => _models.Values;
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
+        public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
 
         public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
         {

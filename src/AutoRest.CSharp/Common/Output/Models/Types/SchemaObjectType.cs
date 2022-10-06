@@ -79,7 +79,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
-        public bool IsStruct => ExistingType?.IsValueType == true;
 
         public JsonObjectSerialization? JsonSerialization => _hasJsonSerialization ? _jsonSerialization ??= _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this) : null;
         public XmlObjectSerialization? XmlSerialization => _hasXmlSerialization ? _xmlSerialization ??= _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;

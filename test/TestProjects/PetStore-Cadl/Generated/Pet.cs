@@ -6,11 +6,10 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace PetStore
 {
-    /// <summary> The Pet. </summary>
+    /// <summary> public. </summary>
     public partial class Pet
     {
         /// <summary> Initializes a new instance of Pet. </summary>
@@ -19,26 +18,25 @@ namespace PetStore
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Pet(string name, int age)
         {
-            Argument.AssertNotNull(name, nameof(name));
-
-            Name = name;
-            Age = age;
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
         }
+
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"></param>
         /// <param name="tag"></param>
         /// <param name="age"></param>
         internal Pet(string name, string tag, int age)
         {
-            Name = name;
-            Tag = tag;
-            Age = age;
         }
 
-        public string Name { get; set; }
-
-        public string Tag { get; set; }
-
-        public int Age { get; set; }
+        /// <summary> Gets or sets the name. </summary>
+        public string name { get; set; }
+        /// <summary> Gets or sets the tag. </summary>
+        public string tag { get; set; }
+        /// <summary> Gets or sets the age. </summary>
+        public int age { get; set; }
     }
 }

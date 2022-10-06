@@ -20,10 +20,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.Scope($"{model.Declaration.Accessibility} partial class {model.Type:D}", scopeDeclarations: scopeDeclarations))
                 {
                     // TODO: add inherits or implements
-                    WritePublicConstructor(writer, model.PublicConstructor, model);
-                    if (model.PublicConstructor != model.SerializationConstructor)
+                    WritePublicConstructor(writer, model.InitializationConstructorSignature, model);
+                    if (model.InitializationConstructorSignature != model.SerializationConstructorSignature)
                     {
-                        WriteSerializationConstructor(writer, model.SerializationConstructor, model);
+                        WriteSerializationConstructor(writer, model.SerializationConstructorSignature, model);
                     }
                     writer.Line();
                     WriteFields(writer, model.Fields);
