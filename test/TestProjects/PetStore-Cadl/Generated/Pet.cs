@@ -9,7 +9,7 @@ using System;
 
 namespace PetStore
 {
-    /// <summary> public. </summary>
+    /// <summary> The Pet. </summary>
     public partial class Pet
     {
         /// <summary> Initializes a new instance of Pet. </summary>
@@ -22,6 +22,9 @@ namespace PetStore
             {
                 throw new ArgumentNullException(nameof(name));
             }
+
+            Name = name;
+            Age = age;
         }
 
         /// <summary> Initializes a new instance of Pet. </summary>
@@ -30,13 +33,16 @@ namespace PetStore
         /// <param name="age"></param>
         internal Pet(string name, string tag, int age)
         {
+            Name = name;
+            Tag = tag;
+            Age = age;
         }
 
         /// <summary> Gets or sets the name. </summary>
-        public string name { get; set; }
+        public string Name { get; set; }
         /// <summary> Gets or sets the tag. </summary>
-        public string tag { get; set; }
+        public string Tag { get; set; }
         /// <summary> Gets or sets the age. </summary>
-        public int age { get; set; }
+        public int Age { get; set; }
     }
 }

@@ -307,7 +307,7 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys))
     }
 }
 
-$settings | ConvertTo-Json | Out-File $launchSettings
+#$settings | ConvertTo-Json | Out-File $launchSettings
 
 $keys = $testProjectEntries.Keys | Sort-Object;
 if (![string]::IsNullOrWhiteSpace($filter))

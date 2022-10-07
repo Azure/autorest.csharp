@@ -73,8 +73,8 @@
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Generated"
     },
     "Azure.ResourceManager.Sample": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Sample\\Generated"
+        "commandName": "Project",
+        "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-Cadl\\Generated"
     },
     "Azure.Storage.Tables": {
       "commandName": "Project",

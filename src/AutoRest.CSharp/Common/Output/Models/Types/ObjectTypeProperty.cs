@@ -17,11 +17,11 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class ObjectTypeProperty
     {
         public ObjectTypeProperty(InputModelProperty property, CSharpType type, string accessibility, ObjectType enclosingType)
-            : this(new MemberDeclarationOptions(accessibility, property.Name, type), property.Description, property.IsReadOnly, null)
+            : this(new MemberDeclarationOptions(accessibility, property.Name.FirstCharToUpperCase(), type), property.Description, property.IsReadOnly, null, isRequired: property.IsRequired)
         {
         }
 
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false, bool? isRequired = null)
         {
             Description = description;
             IsReadOnly = isReadOnly;
@@ -29,8 +29,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             OptionalViaNullability = optionalViaNullability;
             ValueType = valueType ?? declaration.Type;
             Declaration = declaration;
+            IsRequired = isRequired ?? schemaProperty!.IsRequired;
         }
 
+        public bool IsRequired { get; }
         public MemberDeclarationOptions Declaration { get; }
         public string Description { get; }
         public Property? SchemaProperty { get; }

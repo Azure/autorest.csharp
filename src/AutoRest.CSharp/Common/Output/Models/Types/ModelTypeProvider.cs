@@ -44,14 +44,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             _inputModel = inputModel;
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
-            //Description = inputModel.Description ?? $"The {inputModel.Name}.";
             IncludeSerializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
             IncludeDeserializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
         }
 
         protected override string CreateDescription()
         {
-            return _inputModel.Accessibility ?? "public";
+            return _inputModel.Description ?? $"The {_inputModel.Name}.";
         }
 
         public void FinishInitialization(InputModelType inputModelType, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
@@ -124,15 +123,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()
         {
-            return new ObjectTypeConstructor(InitializationConstructorSignature, GetPropertyInitializers());
+            return new ObjectTypeConstructor(InitializationConstructorSignature, GetPropertyInitializers(true));
         }
 
         protected override ObjectTypeConstructor BuildSerializationConstructor()
         {
-            return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers());
+            return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(false));
         }
 
-        private ObjectPropertyInitializer[] GetPropertyInitializers()
+        private ObjectPropertyInitializer[] GetPropertyInitializers(bool checkRequired)
         {
             //List<Parameter> defaultCtorParameters = new List<Parameter>();
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
@@ -156,7 +155,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         BuilderHelpers.ParseConstant(constantSchema.Value.Value, propertyType) :
                         Constant.NewInstanceOf(propertyType);
                 }
-                else if (IsStruct || property.SchemaProperty?.IsRequired == true)
+                else if (IsStruct || !checkRequired || property.IsRequired == true)
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;

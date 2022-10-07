@@ -30,7 +30,6 @@
         "lint:fix": "eslint . --fix --ext .ts",
         "prettier:fix": "prettier --write ./src/**/*.ts",
         "prettier": "prettier --check ./src/**/*.ts"
-
     },
     "files": [
         "dist/**"
