@@ -325,6 +325,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (matchTypeMatches.Count == 1)
                 return first;
 
+            // if we have multiple candidates, and the match is CheckName, we could return null because this check name could check name availibility of multiple resources
+            if (matchType == ResourceMatchType.CheckName)
+                return null;
+
             var parent = first.Parent().First();
             if (parent is not null && AllMatchesSameParent(matchTypeMatches, parent, out bool areAllSingleton) && areAllSingleton)
                 return parent as Resource;
