@@ -87,6 +87,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}",
             "/subscriptions/{subscriptionId}/resourceGroups")]
+        [TestCase(ResourceMatchType.AncestorList, HttpMethod.Get, true,
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")]
         public void ValidateListMatchingSegments(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
             => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
