@@ -94,40 +94,7 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call SayHiAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DemoClient(credential);
-        /// 
-        /// Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DemoClient(credential);
-        /// 
-        /// Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Thing</c>:
-        /// <code>{
-        ///   name: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DemoClient.xml" path="doc/members/member[@name='SayHiAsync(String,String,String,RequestContext)']/*" />
         public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
@@ -155,40 +122,7 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call SayHi with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DemoClient(credential);
-        /// 
-        /// Response response = client.SayHi("<headParameter>", "<queryParameter>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// This sample shows how to call SayHi with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DemoClient(credential);
-        /// 
-        /// Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Thing</c>:
-        /// <code>{
-        ///   name: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DemoClient.xml" path="doc/members/member[@name='SayHi(String,String,String,RequestContext)']/*" />
         public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));

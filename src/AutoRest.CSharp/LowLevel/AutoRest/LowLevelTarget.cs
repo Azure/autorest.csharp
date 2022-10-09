@@ -62,9 +62,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var client in library.RestClients)
             {
                 var codeWriter = new CodeWriter();
-                var lowLevelClientWriter = new LowLevelClientWriter();
-                lowLevelClientWriter.WriteClient(codeWriter, client);
+                var xmlDocWriter = new XmlDocWriter();
+                var lowLevelClientWriter = new LowLevelClientWriter(codeWriter, xmlDocWriter, client);
+                lowLevelClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+                project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", xmlDocWriter.ToString());
             }
 
             var optionsWriter = new CodeWriter();
