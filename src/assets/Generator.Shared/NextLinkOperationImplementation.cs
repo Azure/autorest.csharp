@@ -205,15 +205,18 @@ namespace Azure.Core
                 return null;
             }
 
-            // Handle final-state-via options: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation-options
-            switch (_finalStateVia)
+            if (_requestMethod == RequestMethod.Post)
             {
-                case OperationFinalStateVia.Location when _originalResponseHasLocation:
-                    return _lastKnownLocation;
-                case OperationFinalStateVia.OperationLocation or OperationFinalStateVia.AzureAsyncOperation:
-                    return null;
-                case OperationFinalStateVia.OriginalUri:
-                    return _startRequestUri.AbsoluteUri;
+                // Handle final-state-via options: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation-options
+                switch (_finalStateVia)
+                {
+                    case OperationFinalStateVia.Location when _originalResponseHasLocation:
+                        return _lastKnownLocation;
+                    case OperationFinalStateVia.OperationLocation or OperationFinalStateVia.AzureAsyncOperation:
+                        return null;
+                    case OperationFinalStateVia.OriginalUri:
+                        return _startRequestUri.AbsoluteUri;
+                }
             }
 
             // Set final uri as null if initial request is a delete method.
