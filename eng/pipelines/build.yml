@@ -111,6 +111,7 @@ stages:
               scriptType: "bash"
               scriptLocation: "inlineScript"
               inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName cadlranchcoverage --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: smoke-test.yml
         parameters:
           name: SmokeTest_A_C
