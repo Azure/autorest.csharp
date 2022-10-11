@@ -50,7 +50,7 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -87,7 +87,7 @@
          "Description": "",
          "Type": {
           "$id": "14",
-          "Name": "Int64",
+          "Name": "int64",
           "Kind": "Int64",
           "IsNullable": false
          },
@@ -102,7 +102,7 @@
          "Description": "",
          "Type": {
           "$id": "16",
-          "Name": "Int64",
+          "Name": "int64",
           "Kind": "Int64",
           "IsNullable": false
          },
@@ -193,7 +193,7 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "26",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },
@@ -298,7 +298,7 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "37",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },

@@ -52,49 +52,7 @@ export function mapCadlTypeToCSharpInputTypeKind(
     const kind = cadlType.kind;
     switch (kind) {
         case "Model":
-            const name = cadlType.name;
-            switch (name) {
-                case "bytes":
-                    return InputTypeKind.BinaryData;
-                case "int8":
-                    return InputTypeKind.Int32;
-                case "int16":
-                    return InputTypeKind.Int32;
-                case "int32":
-                    return InputTypeKind.Int32;
-                case "int64":
-                    return InputTypeKind.Int64;
-                case "safeint":
-                    return InputTypeKind.Int64;
-                case "uint8":
-                    return InputTypeKind.Int32;
-                case "uint16":
-                    return InputTypeKind.Int32;
-                case "uint32":
-                    return InputTypeKind.Int32;
-                case "uint64":
-                    return InputTypeKind.Int64;
-                case "float32":
-                    return InputTypeKind.Float32;
-                case "float64":
-                    return InputTypeKind.Float64;
-                case "string":
-                    return InputTypeKind.String;
-                case "boolean":
-                    return InputTypeKind.Boolean;
-                case "plainDate":
-                    return InputTypeKind.DateTime;
-                case "zonedDateTime":
-                    return InputTypeKind.DateTime;
-                case "plainTime":
-                    return InputTypeKind.Time;
-                case "duration":
-                    return InputTypeKind.Duration;
-                case "Map":
-                    return InputTypeKind.Dictionary;
-                default:
-                    return InputTypeKind.Model;
-            }
+            return getCSharpInputTypeKindByIntrinsicModelName(cadlType.name);
         case "ModelProperty":
             return InputTypeKind.Object;
         case "Enum":
@@ -109,6 +67,51 @@ export function mapCadlTypeToCSharpInputTypeKind(
             return InputTypeKind.UnKnownKind;
     }
 }
+
+function getCSharpInputTypeKindByIntrinsicModelName(name: string): InputTypeKind {
+    switch (name) {
+        case "bytes":
+            return InputTypeKind.BinaryData;
+        case "int8":
+            return InputTypeKind.Int32;
+        case "int16":
+            return InputTypeKind.Int32;
+        case "int32":
+            return InputTypeKind.Int32;
+        case "int64":
+            return InputTypeKind.Int64;
+        case "safeint":
+            return InputTypeKind.Int64;
+        case "uint8":
+            return InputTypeKind.Int32;
+        case "uint16":
+            return InputTypeKind.Int32;
+        case "uint32":
+            return InputTypeKind.Int32;
+        case "uint64":
+            return InputTypeKind.Int64;
+        case "float32":
+            return InputTypeKind.Float32;
+        case "float64":
+            return InputTypeKind.Float64;
+        case "string":
+            return InputTypeKind.String;
+        case "boolean":
+            return InputTypeKind.Boolean;
+        case "plainDate":
+            return InputTypeKind.DateTime;
+        case "zonedDateTime":
+            return InputTypeKind.DateTime;
+        case "plainTime":
+            return InputTypeKind.Time;
+        case "duration":
+            return InputTypeKind.Duration;
+        case "Map":
+            return InputTypeKind.Dictionary;
+        default:
+            return InputTypeKind.Model;
+    }
+};
 
 /**
  * Map cadl intrinsic model to c# model name
@@ -167,7 +170,6 @@ export function mapCadlIntrinsicModelToCsharpModel(
             return "UnKnownType";
     }
 }
-
 /**
  * If type is an anonymous model, tries to find a named model that has the same
  * set of properties when non-schema properties are excluded.
@@ -255,10 +257,23 @@ export function getInputType(
 
     function getInputModelType(m: Model): InputType {
         const intrinsicName = getIntrinsicModelName(program, m);
-        if (intrinsicName && intrinsicName === "string") {
-            const values = getKnownValues(program, m);
-            if (values) {
-                return getInputModelForExtensibleEnum(m, values);
+        if (intrinsicName) {
+            switch (intrinsicName) {
+                case "string":
+                    const values = getKnownValues(program, m);
+                    if (values) {
+                        return getInputModelForExtensibleEnum(m, values);
+                    };
+                // if the model is one of the Cadl Intrinsic type.
+                // it's a base Cadl "primitive" that corresponds directly to an c# data type.
+                // In such cases, we don't want to emit a ref and instead just
+                // emit the base type directly.
+                default:
+                    return {
+                        Name: m.name,
+                        Kind: getCSharpInputTypeKindByIntrinsicModelName(intrinsicName),
+                        IsNullable: false
+                    } as InputPrimitiveType;
             }
         }
 
@@ -279,19 +294,7 @@ export function getInputType(
             }
         }
 
-        if (m.name === intrinsicName) {
-            // if the model is one of the Cadl Intrinsic type.
-            // it's a base Cadl "primitive" that corresponds directly to an c# data type.
-            // In such cases, we don't want to emit a ref and instead just
-            // emit the base type directly.
-            return {
-                Name: mapCadlIntrinsicModelToCsharpModel(program, m) ?? m.name,
-                Kind: mapCadlTypeToCSharpInputTypeKind(program, m),
-                IsNullable: false
-            } as InputPrimitiveType;
-        } else {
-            return getInputModelForModel(m);
-        }
+        return getInputModelForModel(m);
     }
 
     function getInputModelForExtensibleEnum(m: Model, e: Enum): InputEnumType {
