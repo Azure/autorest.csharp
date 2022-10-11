@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
-using Cadl.Rest;
 using Pagination;
 
 namespace Azure.Core.Foundations
@@ -29,7 +28,7 @@ namespace Azure.Core.Foundations
         /// <summary> Initializes a new instance of CustomPage. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
-        internal CustomPage(IList<LedgerEntry> value, ResourceLocation nextLink)
+        internal CustomPage(IList<LedgerEntry> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
@@ -37,6 +36,6 @@ namespace Azure.Core.Foundations
 
         public IList<LedgerEntry> Value { get; }
 
-        public ResourceLocation NextLink { get; set; }
+        public string NextLink { get; set; }
     }
 }

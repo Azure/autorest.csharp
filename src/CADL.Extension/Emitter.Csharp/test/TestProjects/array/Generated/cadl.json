@@ -50,7 +50,7 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
