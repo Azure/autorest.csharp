@@ -41,6 +41,11 @@
     <Content Include="build\CodeGeneration.targets" PackagePath="build\Microsoft.Azure.AutoRest.CSharp.targets" />
     <Content Include="build\CodeGeneration.targets" PackagePath="buildMultiTargeting\Microsoft.Azure.AutoRest.CSharp.targets" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="../../node_modules/@azure-tools/cadl-csharp/**/*" PackagePath="tools\cadl-csharp" />
+    <Content Remove="../../node_modules/@azure-tools/cadl-csharp/node_modules/**/*" PackagePath="tools\cadl-csharp" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
