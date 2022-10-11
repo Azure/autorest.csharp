@@ -129,26 +129,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line();
         }
 
-        private static CodeWriter WriteMethodModifiers(this CodeWriter writer, MethodSignatureBase methodBase)
-        {
-            writer
-                .AppendRawIf("public ", methodBase.Modifiers.HasFlag(Public))
-                .AppendRawIf("internal ", methodBase.Modifiers.HasFlag(Internal))
-                .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
-                .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
-
-            if (methodBase is MethodSignature)
-                writer
-                    .AppendRawIf("abstract ", methodBase.Modifiers.HasFlag(Abstract))
-                    .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
-                    .AppendRawIf("new ", methodBase.Modifiers.HasFlag(New))
-                    .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
-                    .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
-                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async)); // abstract methods cannot have async modifier
-
-            return writer;
-        }
-
         public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)
@@ -156,10 +136,22 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"#pragma warning disable {disabledWarning}");
             }
 
-            writer.WriteMethodModifiers(methodBase);
+            writer
+                .AppendRawIf("public ", methodBase.Modifiers.HasFlag(Public))
+                .AppendRawIf("internal ", methodBase.Modifiers.HasFlag(Internal))
+                .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
+                .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
 
             if (methodBase is MethodSignature method)
             {
+
+                writer
+                    .AppendRawIf("abstract ", methodBase.Modifiers.HasFlag(Abstract))
+                    .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
+                    .AppendRawIf("new ", methodBase.Modifiers.HasFlag(New))
+                    .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
+                    .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async)); // abstract methods cannot have async modifier
                 if (method.ReturnType != null)
                 {
                     writer.Append($"{method.ReturnType} ");
