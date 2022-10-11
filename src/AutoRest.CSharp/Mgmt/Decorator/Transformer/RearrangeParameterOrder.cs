@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                             .Where(p => p.In == HttpParameterIn.Path)
                             .OrderBy(
                                 p => httpRequest.Path.IndexOf(
-                                    "{" + p.Language.Default.SerializedName ?? p.Language.Default.Name + "}",
+                                    "{" + p.GetOriginalName() + "}",
                                     StringComparison.InvariantCultureIgnoreCase));
                         operation.Parameters = orderedParams.Concat(operation.Parameters
                                 .Where(p => p.In != HttpParameterIn.Path).ToList())

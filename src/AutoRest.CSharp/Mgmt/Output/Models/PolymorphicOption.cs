@@ -49,8 +49,7 @@ internal class PolymorphicOption
             ResourceNameConstraint = resourceNameSegment;
     }
 
-    private Parameter? _idParameter;
-    public Parameter IdParameter => _idParameter ??= new Parameter(Name: "id", Description: null, Type: typeof(ResourceIdentifier), DefaultValue: null, Validation: ValidationType.AssertNotNull, Initializer: null);
+    public readonly static Parameter IdParameter = new Parameter(Name: "id", Description: null, Type: typeof(ResourceIdentifier), DefaultValue: null, Validation: ValidationType.AssertNotNull, Initializer: null);
 
     private MethodSignature? _methodSignature;
     public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(

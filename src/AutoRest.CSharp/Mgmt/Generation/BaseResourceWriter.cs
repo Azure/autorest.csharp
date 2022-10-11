@@ -1,14 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Diagnostics;
 using System.Linq;
-using System;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Output.Models;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -67,7 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (_writer.WriteMethodDeclaration(option.MethodSignature))
                 {
                     _writer.LineRaw("// checking the resource type");
-                    using (_writer.Scope($"if ({option.IdParameter.Name}.ResourceType != {resource.Type.Name}.ResourceType)"))
+                    using (_writer.Scope($"if ({PolymorphicOption.IdParameter.Name}.ResourceType != {resource.Type.Name}.ResourceType)"))
                     {
                         _writer.LineRaw("return false;");
                     }
@@ -87,7 +88,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (option.ResourceNameConstraint != null)
                     {
                         _writer.LineRaw("// checking the resource name");
-                        using (_writer.Scope($"if ({option.IdParameter.Name}.Name != {option.ResourceNameConstraint.Value.ConstantValue:L})"))
+                        using (_writer.Scope($"if ({PolymorphicOption.IdParameter.Name}.Name != {option.ResourceNameConstraint.Value.ConstantValue:L})"))
                         {
                             _writer.LineRaw("return false;");
                         }
