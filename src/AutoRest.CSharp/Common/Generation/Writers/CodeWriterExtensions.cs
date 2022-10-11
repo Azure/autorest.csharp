@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line();
         }
 
-        private static CodeWriter WriteMethodModifiers(this CodeWriter writer, MethodSignatureBase methodBase, bool isAbstract)
+        private static CodeWriter WriteMethodModifiers(this CodeWriter writer, MethodSignatureBase methodBase)
         {
             writer
                 .AppendRawIf("public ", methodBase.Modifiers.HasFlag(Public))
@@ -137,37 +137,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
                 .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
 
-            writer.AppendRawIf("abstract ", isAbstract);
-
             if (methodBase is MethodSignature)
                 writer
+                    .AppendRawIf("abstract ", methodBase.Modifiers.HasFlag(Abstract))
                     .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
                     .AppendRawIf("new ", methodBase.Modifiers.HasFlag(New))
                     .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
                     .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
-                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async) && !isAbstract); // abstract methods cannot have async modifier
-
-            return writer;
-        }
-
-        public static CodeWriter WriteAbstractMethodDeclaration(this CodeWriter writer, MethodSignature method)
-        {
-            writer.WriteMethodModifiers(method, true);
-
-            if (method.ReturnType != null)
-                writer.Append($"{method.ReturnType} ");
-            else
-                writer.AppendRaw("void ");
-
-            writer.Append($"{method.Name}(");
-
-            foreach (var parameter in method.Parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-
-            writer.RemoveTrailingComma();
-            writer.LineRaw(");");
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async)); // abstract methods cannot have async modifier
 
             return writer;
         }
@@ -179,7 +156,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"#pragma warning disable {disabledWarning}");
             }
 
-            writer.WriteMethodModifiers(methodBase, false);
+            writer.WriteMethodModifiers(methodBase);
 
             if (methodBase is MethodSignature method)
             {
@@ -206,6 +183,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");
+
+            // abstract method does not have method body
+            if (methodBase.Modifiers.HasFlag(Abstract))
+            {
+                return Disposable.Create(() =>
+                {
+                    outerScope.Dispose();
+                    writer.LineRaw(";");
+                });
+            }
 
             if (methodBase is ConstructorSignature { Initializer: { } } constructor)
             {

@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models
                 return this with
                 {
                     Name = Name + "Async",
-                    Modifiers = Modifiers | Async,
+                    Modifiers = Modifiers.HasFlag(Abstract) ? Modifiers : Modifiers | Async,
                     ReturnType = new CSharpType(typeof(IAsyncEnumerable<>), ReturnType.Arguments),
                     Parameters = Parameters.Append(KnownParameters.EnumeratorCancellationTokenParameter).ToArray()
                 };
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
             return this with
             {
                 Name = Name + "Async",
-                Modifiers = Modifiers | Async,
+                Modifiers = Modifiers.HasFlag(Abstract) ? Modifiers : Modifiers | Async,
                 ReturnType = ReturnType != null
                     ? TypeFactory.IsOperationOfPageable(ReturnType)
                         ? new CSharpType(typeof(Task<>), new CSharpType(typeof(Operation<>), new CSharpType(typeof(AsyncPageable<>), ReturnType.Arguments[0].Arguments[0])))

@@ -108,12 +108,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var coreSignature = clientOperation.MethodSignature with
             {
                 Name = $"{clientOperation.Name}Core",
-                Modifiers = MethodSignatureModifiers.Protected,
+                Modifiers = MethodSignatureModifiers.Protected | MethodSignatureModifiers.Abstract,
                 Description = $"The core implementation for operation {clientOperation.Name}"
             };
             coreSignature = coreSignature.WithAsync(isAsync);
             _writer.WriteMethodDocumentation(coreSignature);
-            _writer.WriteAbstractMethodDeclaration(coreSignature);
+            using (_writer.WriteMethodDeclaration(coreSignature))
+            { }
             _writer.Line();
 
             base.WriteMethod(clientOperation, isAsync);
