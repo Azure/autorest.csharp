@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
@@ -222,7 +223,7 @@ namespace Azure.Core
                 return null;
             }
 
-            // If body contains resourceLocation, use it
+            // If body contains resourceLocation, use it: https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#target-resource-location
             var contentStream = response.ContentStream;
             if (contentStream is {CanSeek: true, Length: > 0})
             {
@@ -232,7 +233,11 @@ namespace Azure.Core
                     var root = document.RootElement;
                     if (root.TryGetProperty("resourceLocation", out var resourceLocation))
                     {
-                        return resourceLocation.GetRequiredString();
+                        var resourceLocationValue = resourceLocation.GetString();
+                        if (resourceLocationValue != null)
+                        {
+                            return resourceLocationValue;
+                        }
                     }
                 }
                 finally
