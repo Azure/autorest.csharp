@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(false));
         }
 
-        private ObjectPropertyInitializer[] GetPropertyInitializers(bool checkRequired)
+        private ObjectPropertyInitializer[] GetPropertyInitializers( bool checkRequired)
         {
             //List<Parameter> defaultCtorParameters = new List<Parameter>();
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
@@ -200,6 +200,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value, defaultInitializationValue));
                 }
             }
+
             return defaultCtorInitializers.ToArray();
         }
 
@@ -213,8 +214,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            foreach (var property in _inputModel.Properties)
-                yield return new ObjectTypeProperty(property, _typeFactory.CreateType(property.Type), DefaultAccessibility, this);
+            foreach (var field in Fields)
+                yield return new ObjectTypeProperty(field, this);
+            //foreach (var property in _inputModel.Properties)
+            //    yield return new ObjectTypeProperty(property, _typeFactory.CreateType(property.Type), DefaultAccessibility, this);
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()

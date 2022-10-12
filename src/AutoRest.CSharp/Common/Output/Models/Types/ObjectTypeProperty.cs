@@ -16,8 +16,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeProperty
     {
-        public ObjectTypeProperty(InputModelProperty property, CSharpType type, string accessibility, ObjectType enclosingType)
-            : this(new MemberDeclarationOptions(accessibility, property.Name.FirstCharToUpperCase(), type), property.Description, property.IsReadOnly, null, property.IsRequired)
+        public ObjectTypeProperty(FieldDeclaration field, ObjectType enclosingType)
+            : this(new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type), field.Description?.ToString() ?? String.Empty, (field.Modifiers & FieldModifiers.ReadOnly) > 0, null, field.IsRequired)
         {
         }
 

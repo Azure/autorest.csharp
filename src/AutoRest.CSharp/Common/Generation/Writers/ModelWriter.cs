@@ -396,6 +396,21 @@ Examples:
 
                         writer.Line($";");
                     }
+
+                    //TODO make virtual property with default null on base class
+                    if (schema is ModelTypeProvider modelTypeProvider)
+                    {
+                        foreach (var parameter in constructor.Signature.Parameters)
+                        {
+                            var field = modelTypeProvider.Fields.GetFieldByParameter(parameter);
+                            if (!field.IsField)
+                                continue;
+                            writer
+                                .Append($"{field.Name:I} = {parameter.Name:I}")
+                                .WriteConversion(parameter.Type, field.Type)
+                                .LineRaw(";");
+                        }
+                    }
                 }
 
                 writer.Line();

@@ -53,13 +53,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 modelWriter.WriteModel(codeWriter, model);
                 project.AddGeneratedFile($"{model.Type.Name}.cs", codeWriter.ToString());
 
-                if (model is not EnumType)
-                {
-                    var serializationCodeWriter = new CodeWriter();
-                    var serializationWriter = new SerializationWriter();
-                    serializationWriter.WriteSerialization(serializationCodeWriter, model);
-                    project.AddGeneratedFile($"{model.Type.Name}.Serialization.cs", serializationCodeWriter.ToString());
-                }
+                var serializationCodeWriter = new CodeWriter();
+                var serializationWriter = new SerializationWriter();
+                serializationWriter.WriteSerialization(serializationCodeWriter, model);
+                project.AddGeneratedFile($"{model.Type.Name}.Serialization.cs", serializationCodeWriter.ToString());
             }
 
             foreach (var client in library.RestClients)
