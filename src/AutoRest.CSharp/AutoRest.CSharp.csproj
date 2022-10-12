@@ -43,8 +43,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Content Include="../../node_modules/@azure-tools/cadl-csharp/**/*" PackagePath="tools\cadl-csharp" />
-    <Content Remove="../../node_modules/@azure-tools/cadl-csharp/node_modules/**/*" PackagePath="tools\cadl-csharp" />
+    <Content Include="../../node_modules/@azure-tools/cadl-csharp/dist/bundle.js" PackagePath="tools\cadl-csharp\dist" />
+    <Content Include="../../node_modules/@azure-tools/cadl-csharp/package.json" PackagePath="tools\cadl-csharp" />
   </ItemGroup>
 
   <ItemGroup>
