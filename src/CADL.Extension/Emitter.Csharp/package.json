@@ -20,7 +20,7 @@
     "main": "dist/bundle.js",
     "scripts": {
         "clean": "rimraf ./dist ./temp",
-        "build": "tsc -p . & rollup -c",
+        "build": "tsc -p . && rollup -c",
         "watch": "tsc -p . --watch",
         "lint-cadl-library": "cadl compile . --warn-as-error --import @cadl-lang/library-linter --no-emit",
         "test": "mocha",
