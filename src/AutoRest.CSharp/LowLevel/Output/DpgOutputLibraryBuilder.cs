@@ -79,11 +79,6 @@ namespace AutoRest.CSharp.Output.Models
             {
                 models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory));
             }
-
-            foreach (var (inputModel, modelTypeProvider) in models)
-            {
-                modelTypeProvider.FinishInitialization(inputModel, typeFactory, _sourceInputModel);
-            }
         }
 
         private IEnumerable<InputClient> UpdateOperations()

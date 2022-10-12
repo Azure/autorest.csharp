@@ -4,48 +4,50 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal sealed class ModelTypeProvider : ObjectType
+    internal sealed class ModelTypeProvider : SerializableObjectType
     {
         private ModelTypeProviderFields? _fields;
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
         private InputModelType _inputModel;
         private TypeFactory _typeFactory;
+        private SourceInputModel? _sourceInputModel;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        //public string Description { get; }
-        public bool IncludeSerializer { get; }
-        public bool IncludeDeserializer { get; }
-
-        public ModelTypeProviderFields Fields => _fields ?? throw new InvalidOperationException($"Model '{Declaration.Name}' is not fully initialized");
-        public ConstructorSignature InitializationConstructorSignature => _publicConstructor ?? throw new InvalidOperationException($"Model '{Declaration.Name}' is not fully initialized");
-        public ConstructorSignature SerializationConstructorSignature => _serializationConstructor ?? throw new InvalidOperationException($"Model '{Declaration.Name}' is not fully initialized");
+        public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
+        public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
+        public ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel)
+            : this(inputModel, defaultNamespace, sourceInputModel, null) { }
+
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory)
             : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
         {
-            _typeFactory = typeFactory;
+            _typeFactory = typeFactory!;
             _inputModel = inputModel;
+            _sourceInputModel = sourceInputModel;
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
-            IncludeSerializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
-            IncludeDeserializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
         }
 
         protected override string CreateDescription()
@@ -53,23 +55,22 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _inputModel.Description ?? $"The {_inputModel.Name}.";
         }
 
-        public void FinishInitialization(InputModelType inputModelType, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        private ModelTypeProviderFields EnsureFields()
         {
-            if (_fields is not null)
-            {
-                throw new InvalidOperationException("Model is initialized already");
-            }
-
-            _fields = new ModelTypeProviderFields(inputModelType, typeFactory, sourceInputModel?.CreateForModel(ExistingType));
-            _publicConstructor = CreatePublicConstructor(Declaration.Name, inputModelType.Usage, Fields.PublicConstructorParameters);
-            _serializationConstructor = IncludeDeserializer
-                ? CreateSerializationConstructor(Declaration.Name, Fields.PublicConstructorParameters, Fields.SerializationParameters) ?? _publicConstructor
-                : _publicConstructor;
+            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
         }
 
-        // Serialization uses field and property names that first need to verified for uniqueness
-        // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-        public JsonObjectSerialization CreateSerialization() => new(Type, SerializationConstructorSignature, CreatePropertySerializations().ToArray(), null, null, false, true, true);
+        private ConstructorSignature EnsurePublicConstructorSignature()
+        {
+            return CreatePublicConstructor(Declaration.Name, _inputModel.Usage, Fields.PublicConstructorParameters);
+        }
+
+        private ConstructorSignature EnsureSerializationConstructorSignature()
+        {
+            return IncludeDeserializer
+                ? CreateSerializationConstructor(Declaration.Name, Fields.PublicConstructorParameters, Fields.SerializationParameters) ?? InitializationConstructorSignature
+                : InitializationConstructorSignature;
+        }
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
         {
@@ -221,6 +222,38 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return BuildInitializationConstructor();
             if (IncludeDeserializer)
                 yield return BuildSerializationConstructor();
+        }
+
+        protected override bool EnsureHasJsonSerialization()
+        {
+            return true;
+        }
+
+        protected override bool EnsureHasXmlSerialization()
+        {
+            return false;
+        }
+
+        protected override bool EnsureIncludeSerializer()
+        {
+            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
+        }
+
+        protected override bool EnsureIncludeDeserializer()
+        {
+            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
+        }
+
+        protected override JsonObjectSerialization EnsureJsonSerialization()
+        {
+            // Serialization uses field and property names that first need to verified for uniqueness
+            // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
+            return new(Type, SerializationConstructorSignature, CreatePropertySerializations().ToArray(), null, null, false, true, true);
+        }
+
+        protected override XmlObjectSerialization? EnsureXmlSerialization()
+        {
+            return null;
         }
     }
 }

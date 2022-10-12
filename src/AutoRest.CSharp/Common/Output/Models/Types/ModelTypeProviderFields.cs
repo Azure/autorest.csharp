@@ -80,7 +80,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var fieldModifiers = propertyIsReadOnly ? Public | ReadOnly : Public;
 
-            return new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, fieldName, GetPropertyDefaultValue(fieldType, inputModelProperty.IsRequired), writeAsProperty: true);
+            CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
+            declaration.SetActualName(fieldName);
+            return new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(fieldType, inputModelProperty.IsRequired), true);
         }
 
         private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, bool isRequired, TypeFactory typeFactory)

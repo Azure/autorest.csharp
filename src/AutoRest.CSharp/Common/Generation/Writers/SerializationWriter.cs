@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Linq;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
@@ -24,7 +25,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (schema)
             {
-                case SchemaObjectType objectSchema:
+                case SerializableObjectType objectSchema:
                     WriteObjectSerialization(writer, objectSchema);
                     break;
                 case EnumType {IsExtensible: false} sealedChoiceSchema:
@@ -33,11 +34,8 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteObjectSerialization(CodeWriter writer, SchemaObjectType model)
+        private void WriteObjectSerialization(CodeWriter writer, SerializableObjectType model)
             => WriteObjectSerialization(writer, model.Declaration, model.JsonSerialization, model.XmlSerialization, model.IsStruct, model.IncludeSerializer, model.IncludeDeserializer);
-
-        public static void WriteModelSerialization(CodeWriter writer, ModelTypeProvider model)
-            => WriteObjectSerialization(writer, model.Declaration, model.CreateSerialization(), null, false, model.IncludeSerializer, model.IncludeDeserializer);
 
         private static void WriteObjectSerialization(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization? jsonSerialization, XmlObjectSerialization? xmlSerialization, bool isStruct, bool includeSerializer, bool includeDeserializer)
         {

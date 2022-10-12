@@ -57,7 +57,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         internal void ValidateGeneratedSerializationCodes(ModelTypeProvider model, string expected)
         {
             var codeWriter = new CodeWriter();
-            SerializationWriter.WriteModelSerialization(codeWriter, model);
+            SerializationWriter serializationWriter = new SerializationWriter();
+            serializationWriter.WriteSerialization(codeWriter, model);
             var codes = codeWriter.ToString();
             Assert.AreEqual(expected, codes);
         }
