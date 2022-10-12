@@ -15,6 +15,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -388,24 +389,26 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
         }
 
-        private static ResourceMatchType? GetMatchTypeForList(HttpMethod method, RequestPath resourcePath, RequestPath requestPath, bool isList)
+        private static bool TryGetListMatch(HttpMethod method, RequestPath resourcePath, RequestPath requestPath, bool isList, out ResourceMatchType matchType)
         {
+            matchType = ResourceMatchType.None;
             if (!isList)
-                return null;
+                return false;
             if (method != HttpMethod.Get)
-                return null;
+                return false;
             var requestLastSegment = requestPath.Last();
             if (!requestLastSegment.IsConstant)
-                return null;
+                return false;
             SeparateScope(resourcePath, out var resourceScopePath, out var trimmedResourcePath);
             SeparateScope(requestPath, out var operationScopePath, out var trimmedOperationPath);
 
             if (trimmedResourcePath.Count > 0 && trimmedOperationPath.Equals(new RequestPath(trimmedResourcePath.SkipLast(1))) && DoesScopeCover(operationScopePath, resourceScopePath))
             {
-                return DoesScopeCover(resourceScopePath, operationScopePath) ? ResourceMatchType.ParentList : ResourceMatchType.AncestorList;
+                matchType = DoesScopeCover(resourceScopePath, operationScopePath) ? ResourceMatchType.ParentList : ResourceMatchType.AncestorList;
+                return true;
             }
 
-            return null;
+            return false;
         }
 
         internal static ResourceMatchType GetMatchType(HttpMethod httpMethod, RequestPath resourcePath, RequestPath requestPath, bool isList)
@@ -415,11 +418,9 @@ namespace AutoRest.CSharp.Mgmt.Models
                 return ResourceMatchType.Exact;
 
             var requestLastSegment = requestPath.Last();
-
             //check for a list by a parent or an ancestor
-            var listMatch = GetMatchTypeForList(httpMethod, resourcePath, requestPath, isList);
-            if (listMatch != null)
-                return listMatch.Value;
+            if (TryGetListMatch(httpMethod, resourcePath, requestPath, isList, out var listMatch))
+                return listMatch;
 
             //check for single value methods after the GET path which are typically POST methods
             if (resourcePath.Count == requestPath.Count - 1 && requestLastSegment.IsConstant && AreEqualBackToProvider(resourcePath, requestPath, 0, 1))

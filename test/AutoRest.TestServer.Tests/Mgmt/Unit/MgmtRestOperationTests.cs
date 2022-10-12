@@ -5,8 +5,6 @@ using System;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Utilities;
-using Azure.Core;
 using NUnit.Framework;
 using static AutoRest.CSharp.Mgmt.Models.MgmtRestOperation;
 
