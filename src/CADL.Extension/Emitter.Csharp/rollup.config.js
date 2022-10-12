@@ -8,5 +8,5 @@ export default {
         format: "es",
     },
     plugins: [nodeResolve(), commonjs()],
-    external: ["@cadl-lang/compiler", "@cadl-lang/openapi", "@cadl-lang/rest"]
+    external: ["@cadl-lang/compiler", "@cadl-lang/openapi", "@cadl-lang/rest", "@azure-tools/cadl-azure-core"]
 };
