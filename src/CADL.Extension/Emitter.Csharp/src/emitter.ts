@@ -680,11 +680,11 @@ function loadOperation(
     function loadLongRunningFinalResponse(program: Program, op: OperationDetails, resourceOperation?: ResourceOperation): OperationResponse | undefined {
         let finalResponse: any | undefined;
         for (const response of op.responses) {
-            if (response.statusCode == "200") {
+            if (response.statusCode === "200") {
                 finalResponse = response;
                 break;
             }
-            if (response.statusCode == "204") {
+            if (response.statusCode === "204") {
                 finalResponse = response;
             }
         }
