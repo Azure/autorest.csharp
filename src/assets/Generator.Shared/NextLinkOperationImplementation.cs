@@ -206,6 +206,12 @@ namespace Azure.Core
                 return null;
             }
 
+            // Set final uri as null if initial request is a delete method.
+            if (_requestMethod == RequestMethod.Delete)
+            {
+                return null;
+            }
+
             // Handle final-state-via options: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation-options
             switch (_finalStateVia)
             {
@@ -215,12 +221,6 @@ namespace Azure.Core
                     return null;
                 case OperationFinalStateVia.OriginalUri:
                     return _startRequestUri.AbsoluteUri;
-            }
-
-            // Set final uri as null if initial request is a delete method.
-            if (_requestMethod == RequestMethod.Delete)
-            {
-                return null;
             }
 
             // If body contains resourceLocation, use it: https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#target-resource-location
