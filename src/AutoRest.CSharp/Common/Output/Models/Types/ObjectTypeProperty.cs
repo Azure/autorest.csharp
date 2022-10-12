@@ -17,11 +17,16 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class ObjectTypeProperty
     {
         public ObjectTypeProperty(InputModelProperty property, CSharpType type, string accessibility, ObjectType enclosingType)
-            : this(new MemberDeclarationOptions(accessibility, property.Name.FirstCharToUpperCase(), type), property.Description, property.IsReadOnly, null, isRequired: property.IsRequired)
+            : this(new MemberDeclarationOptions(accessibility, property.Name.FirstCharToUpperCase(), type), property.Description, property.IsReadOnly, null, property.IsRequired)
         {
         }
 
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false, bool? isRequired = null)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
+            :this(declaration, description, isReadOnly, schemaProperty, (schemaProperty is null ? false : schemaProperty.IsRequired), valueType, optionalViaNullability)
+        {
+        }
+
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false)
         {
             Description = description;
             IsReadOnly = isReadOnly;
@@ -29,7 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             OptionalViaNullability = optionalViaNullability;
             ValueType = valueType ?? declaration.Type;
             Declaration = declaration;
-            IsRequired = isRequired ?? schemaProperty!.IsRequired;
+            IsRequired = isRequired;
         }
 
         public bool IsRequired { get; }

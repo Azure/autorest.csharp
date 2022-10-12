@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
             yield return BuildInitializationConstructor();
-            if (IncludeDeserializer)
+            if (SerializationConstructorSignature != InitializationConstructorSignature)
                 yield return BuildSerializationConstructor();
         }
 

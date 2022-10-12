@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         public JsonObjectSerialization? JsonSerialization => HasJsonSerialization ? _jsonSerialization ??= EnsureJsonSerialization() : null;
 
         private XmlObjectSerialization? _xmlSerialization;
-        public XmlObjectSerialization? XmlSerialization => IncludeSerializer ? _xmlSerialization ??= EnsureXmlSerialization() : null;
+        public XmlObjectSerialization? XmlSerialization => HasXmlSerialization ? _xmlSerialization ??= EnsureXmlSerialization() : null;
 
         private bool? _hasJsonSerialization;
         private bool HasJsonSerialization => _hasJsonSerialization ??= EnsureHasJsonSerialization();

@@ -106,8 +106,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             };
 
             var writeAsProperty = existingMember is IPropertySymbol;
+            CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
+            declaration.SetActualName(existingMember.Name);
 
-            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, existingMember.Name, GetPropertyDefaultValue(originalType, isRequired), writeAsProperty: writeAsProperty);
+            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(originalType, isRequired), writeAsProperty);
         }
 
         private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace PetStore
 {
@@ -18,10 +19,7 @@ namespace PetStore
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Pet(string name, int age)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
             Age = age;

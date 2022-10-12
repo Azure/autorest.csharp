@@ -373,7 +373,15 @@ Examples:
                 AddCtorAttribute(writer, schema, constructor);
                 using (writer.WriteMethodDeclaration(constructor.Signature))
                 {
-                    writer.WriteParameterNullChecks(constructor.Signature.Parameters);
+                    //TODO use feature flag fron Configuration
+                    if (schema is ModelTypeProvider)
+                    {
+                        writer.WriteParametersValidation(constructor.Signature.Parameters);
+                    }
+                    else
+                    {
+                        writer.WriteParameterNullChecks(constructor.Signature.Parameters);
+                    }
 
                     foreach (var initializer in constructor.Initializers)
                     {
