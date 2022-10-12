@@ -7,8 +7,10 @@ namespace Azure.Core
 {
     internal enum OperationFinalStateVia
     {
+        LocationOverride,
         AzureAsyncOperation,
         Location,
-        OriginalUri
+        OriginalUri,
+        OperationLocation
     }
 }
