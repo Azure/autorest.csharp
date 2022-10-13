@@ -170,5 +170,30 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             return extraDescription;
         }
+
+        private Stack<ObjectTypeProperty>? _heirarchyStack;
+        public Stack<ObjectTypeProperty> HeirarchyStack
+        {
+            get
+            {
+                if (_heirarchyStack is null)
+                {
+                    _heirarchyStack = new Stack<ObjectTypeProperty>();
+                    _heirarchyStack.Push(this);
+                    BuildHeirarchy(this, new Stack<ObjectTypeProperty>());
+                }
+                return _heirarchyStack;
+            }
+        }
+
+        private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
+        {
+            //if we get back the same property exit early since this means we have a single property type which references itself
+            if (property.IsSinglePropertyObject(out var childProp) && !property.Equals(childProp))
+            {
+                heirarchyStack.Push(childProp);
+                BuildHeirarchy(childProp, heirarchyStack);
+            }
+        }
     }
 }

@@ -81,9 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var property in schema.Properties)
             {
-                Stack<ObjectTypeProperty> hierarchyStack = new Stack<ObjectTypeProperty>();
-                hierarchyStack.Push(property);
-                BuildHierarchy(property, hierarchyStack);
+                Stack<ObjectTypeProperty> hierarchyStack = property.HeirarchyStack;
                 if (Configuration.AzureArm && hierarchyStack.Count > 1)
                 {
                     var innerProperty = hierarchyStack.Pop();
@@ -275,15 +273,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
 
             writer.Line();
-        }
-
-        private void BuildHierarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
-        {
-            if (property.IsSinglePropertyObject(out var childProp))
-            {
-                heirarchyStack.Push(childProp);
-                BuildHierarchy(childProp, heirarchyStack);
-            }
         }
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
