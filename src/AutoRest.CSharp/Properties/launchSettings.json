@@ -156,6 +156,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\api-key\\Generated"
     },
+    "cadl-extensible-enums": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\extensible-enums\\Generated"
+    },
     "cadl-property-optional": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\property-optional\\Generated"
