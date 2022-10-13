@@ -73,7 +73,7 @@ stages:
         - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
           displayName: 'Unit_Test for CADL emitter'
           workingDirectory: $(Build.SourcesDirectory)
-        - script: |
+        - pwsh: |
             $currentVersion = node -p -e "require('./package.json').version"
             $devVersion = "$currentVersion-beta.$(Build.BuildNumber)"
             Write-Host "Setting version to $devVersion"
