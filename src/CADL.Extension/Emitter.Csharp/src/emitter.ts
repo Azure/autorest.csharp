@@ -282,29 +282,6 @@ function createModel(program: Program): any {
         const usages = getUsages(program, convenienceOperations);
         setUsage(usages, modelMap);
         setUsage(usages, enumMap);
-        // for (let [name, m] of modelMap) {
-        //     if (usages.inputs.includes(name)) {
-        //         m.Usage = Usage.Input;
-        //     } else if (usages.outputs.includes(name)) {
-        //         m.Usage = Usage.Output;
-        //     } else if (usages.roundTrips.includes(name)) {
-        //         m.Usage = Usage.RoundTrips;
-        //     } else {
-        //         m.Usage = Usage.None;
-        //     }
-        // }
-
-        // for (let [name, e] of enumMap) {
-        //     if (usages.inputs.includes(name)) {
-        //         e.Usage = Usage.Input;
-        //     } else if (usages.outputs.includes(name)) {
-        //         e.Usage = Usage.Output;
-        //     } else if (usages.roundTrips.includes(name)) {
-        //         e.Usage = Usage.RoundTrips;
-        //     } else {
-        //         e.Usage = Usage.None;
-        //     }
-        // }
 
         const clientModel = {
             Name: namespace,

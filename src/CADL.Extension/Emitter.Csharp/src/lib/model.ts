@@ -530,7 +530,6 @@ export function getUsages(
     program: Program,
     ops?: OperationDetails[]
 ): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
-    //const usages = resolveUsages(ops ? ops : program.checker.getGlobalNamespaceType());
     const result: {
         inputs: string[];
         outputs: string[];
