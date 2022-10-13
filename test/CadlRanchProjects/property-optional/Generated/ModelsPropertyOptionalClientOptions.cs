@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace property_optional
+namespace Property.Optional
 {
     /// <summary> Client options for models.property.optional library clients. </summary>
     public partial class ModelsPropertyOptionalClientOptions : ClientOptions
