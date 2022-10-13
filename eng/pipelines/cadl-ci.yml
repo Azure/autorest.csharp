@@ -70,15 +70,22 @@ stages:
             command: custom
             customCommand: run build
             workingDir: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
+        - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
+          displayName: 'Unit_Test for CADL emitter'
+          workingDirectory: $(Build.SourcesDirectory)
+        - script: |
+            $currentVersion = node -p -e "require('./package.json').version"
+            $devVersion = "$currentVersion-beta.$(Build.BuildNumber)"
+            Write-Host "Setting version to $devVersion"
+            npm version --no-git-tag-version $devVersion | Out-Null;
+          displayName: 'Set Emitter version'
+          workingDirectory: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
         - task: Npm@1
           displayName: 'Pack CADL Csharp emitter'
           inputs:
             command: custom
             customCommand: pack
             workingDir: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
-        - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
-          displayName: 'Unit_Test for CADL emitter'
-          workingDirectory: $(Build.SourcesDirectory)
         - script: |
             mkdir -p $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)/packages
             cp azure-tools-cadl-csharp-*.tgz $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)/packages/
