@@ -81,8 +81,8 @@ stages:
           displayName: 'Set Emitter version'
           workingDirectory: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
         - script: |
-            depedencyVersion = "$(node -p -e "require('./package.json').version")-beta.$(Build.BuildNumber)"
-            sed -i 's#"dependencies": {#"dependencies": {\n"@autorest/csharp": "$(depedencyVersion)",#' package.json
+            depedencyVersion="$(node -p -e "require('./package.json').version")-beta.$(Build.BuildNumber)"
+            sed -i "s#\"dependencies\": {#\"dependencies\": {\n        \"@autorest/csharp\": \"$depedencyVersion\",#" package.json
           displayName: 'Set Emitter Dependency'
           workingDirectory: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
         - task: Npm@1
