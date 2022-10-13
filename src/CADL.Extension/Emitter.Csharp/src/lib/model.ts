@@ -72,7 +72,9 @@ export function mapCadlTypeToCSharpInputTypeKind(
     }
 }
 
-function getCSharpInputTypeKindByIntrinsicModelName(name: string): InputTypeKind {
+function getCSharpInputTypeKindByIntrinsicModelName(
+    name: string
+): InputTypeKind {
     switch (name) {
         case "bytes":
             return InputTypeKind.BinaryData;
@@ -115,7 +117,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(name: string): InputTypeKind
         default:
             return InputTypeKind.Model;
     }
-};
+}
 
 /**
  * Map cadl intrinsic model to c# model name
@@ -267,7 +269,7 @@ export function getInputType(
                     const values = getKnownValues(program, m);
                     if (values) {
                         return getInputModelForExtensibleEnum(m, values);
-                    };
+                    }
                 // if the model is one of the Cadl Intrinsic type.
                 // it's a base Cadl "primitive" that corresponds directly to an c# data type.
                 // In such cases, we don't want to emit a ref and instead just
@@ -275,7 +277,9 @@ export function getInputType(
                 default:
                     return {
                         Name: m.name,
-                        Kind: getCSharpInputTypeKindByIntrinsicModelName(intrinsicName),
+                        Kind: getCSharpInputTypeKindByIntrinsicModelName(
+                            intrinsicName
+                        ),
                         IsNullable: false
                     } as InputPrimitiveType;
             }
