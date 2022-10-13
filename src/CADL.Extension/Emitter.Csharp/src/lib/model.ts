@@ -22,9 +22,10 @@ import {
     Type,
     UsageFlags,
     UsageTracker,
-    TrackableType
+    TrackableType,
+    getDiscriminator
 } from "@cadl-lang/compiler";
-import { getDiscriminator, getResourceOperation } from "@cadl-lang/rest";
+import { getResourceOperation } from "@cadl-lang/rest";
 import {
     getHeaderFieldName,
     getPathParamName,

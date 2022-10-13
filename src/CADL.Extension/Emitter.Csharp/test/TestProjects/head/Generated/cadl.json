@@ -12,6 +12,7 @@
    "Name": "Thing",
    "Namespace": "Cadl.HeadClient",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "3",

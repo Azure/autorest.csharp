@@ -35,29 +35,15 @@ namespace CadlFirstTest
             RequiredDictionary = requiredDictionary;
             RequiredModel = requiredModel;
         }
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredDictionary"></param>
-        /// <param name="requiredModel"></param>
-        internal RoundTripModel(string requiredString, int requiredInt, IList<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary, Thing requiredModel)
-        {
-            RequiredString = requiredString;
-            RequiredInt = requiredInt;
-            RequiredCollection = requiredCollection;
-            RequiredDictionary = requiredDictionary;
-            RequiredModel = requiredModel;
-        }
 
-        public string RequiredString { get; set; }
+        public string RequiredString { get; }
 
-        public int RequiredInt { get; set; }
+        public int RequiredInt { get; }
 
         public IList<SimpleEnum> RequiredCollection { get; }
 
         public IDictionary<string, ExtensibleEnum> RequiredDictionary { get; }
 
-        public Thing RequiredModel { get; set; }
+        public Thing RequiredModel { get; }
     }
 }

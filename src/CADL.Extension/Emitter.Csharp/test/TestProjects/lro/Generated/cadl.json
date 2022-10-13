@@ -11,6 +11,7 @@
    "Name": "Pet",
    "Namespace": "LroOperation",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "3",
@@ -114,6 +115,7 @@
        "$id": "15",
        "Name": "content-type",
        "NameInRequest": "content-type",
+       "Description": "This request has a JSON Merge Patch body.",
        "Type": {
         "$id": "16",
         "Name": "String",
