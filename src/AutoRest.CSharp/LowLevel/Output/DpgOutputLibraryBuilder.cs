@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var model in _rootNamespace.Models)
             {
-                models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel));
+                models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory));
             }
 
             foreach (var (inputModel, modelTypeProvider) in models)

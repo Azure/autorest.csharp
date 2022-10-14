@@ -396,6 +396,7 @@ export function getInputType(
         const name = getFriendlyName(program, m) ?? m.name;
         let model = models.get(name);
         if (!model) {
+            const discriminator = getDiscriminator(program, m);
             const baseModel = getInputModelBaseType(m.baseModel);
             const properties: InputModelProperty[] = [];
 
@@ -413,6 +414,22 @@ export function getInputType(
 
             models.set(name, model);
 
+            if(discriminator) {
+                const discriminatorProp = {
+                    Name: discriminator.propertyName,
+                    SerializedName: discriminator.propertyName,
+                    Description: "",
+                    Type: {
+                        Name: "String",
+                        Kind: InputTypeKind.String,
+                        IsNullable: false
+                    } as InputPrimitiveType,
+                    IsRequired: true,
+                    IsReadOnly: false,
+                    IsDiscriminator: true
+                };
+                properties.push(discriminatorProp);
+            }
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(
                 m.properties,
@@ -456,7 +473,7 @@ export function getInputType(
         discriminatorPropertyName?: string
     ): void {
         inputProperties.forEach((value: ModelProperty, key: string) => {
-            if (value.name !== discriminatorPropertyName && isSchemaProperty(program, value)) {
+            if (isSchemaProperty(program, value)) {
                 const vis = getVisibility(program, value);
                 let isReadOnly: boolean = false;
                 if (vis && vis.includes("read") && vis.length === 1) {
@@ -469,7 +486,7 @@ export function getInputType(
                     Type: getInputType(program, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
-                    IsDiscriminator: false
+                    IsDiscriminator: value.name !== discriminatorPropertyName ? false: true
                 };
                 outputProperties.push(inputProp);
             }

@@ -26,12 +26,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         public string Description { get; }
         public bool IncludeSerializer { get; }
         public bool IncludeDeserializer { get; }
+        public CSharpType? InheritsType { get; }
 
         public ModelTypeProviderFields Fields => _fields ?? throw new InvalidOperationException($"Model '{Declaration.Name}' is not fully initialized");
         public ConstructorSignature PublicConstructor => _publicConstructor ?? throw new InvalidOperationException($"Model '{Declaration.Name}' is not fully initialized");
         public ConstructorSignature SerializationConstructor => _serializationConstructor ?? throw new InvalidOperationException($"Model '{Declaration.Name}' is not fully initialized");
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory)
             : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
         {
             DefaultName = inputModel.Name;
@@ -39,6 +40,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             Description = inputModel.Description ?? $"The {inputModel.Name}.";
             IncludeSerializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
             IncludeDeserializer = inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
+            if (inputModel.BaseModel != null)
+            {
+                InheritsType = typeFactory.CreateType(inputModel.BaseModel);
+            }
         }
 
         public void FinishInitialization(InputModelType inputModelType, TypeFactory typeFactory, SourceInputModel? sourceInputModel)

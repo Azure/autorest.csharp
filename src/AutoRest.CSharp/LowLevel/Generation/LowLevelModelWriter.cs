@@ -3,6 +3,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -17,7 +19,24 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationSummary($"{model.Description}");
                 // TODO: do we have a case to generate struct?
                 var scopeDeclarations = new CodeWriterScopeDeclarations(model.Fields.Select(f => f.Declaration));
-                using (writer.Scope($"{model.Declaration.Accessibility} partial class {model.Type:D}", scopeDeclarations: scopeDeclarations))
+                List<CSharpType> implementsTypes = new List<CSharpType>();
+                if (model.InheritsType != null)
+                {
+                    implementsTypes.Add(model.InheritsType);
+                }
+                writer.Append($"{model.Declaration.Accessibility} partial class {model.Type:D}");
+
+                if (implementsTypes.Any())
+                {
+                    writer.AppendRaw(" : ");
+                    foreach (var type in implementsTypes)
+                    {
+                        writer.Append($"{type} ,");
+                    }
+                    writer.RemoveTrailingComma();
+                }
+
+                using (writer.Scope($"", scopeDeclarations: scopeDeclarations))
                 {
                     // TODO: add inherits or implements
                     WritePublicConstructor(writer, model.PublicConstructor, model);
