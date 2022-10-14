@@ -19,7 +19,7 @@ namespace Azure.Core.Foundations
         /// <summary> Initializes a new instance of CustomPage. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public CustomPage(IEnumerable<LedgerEntry> value)
+        internal CustomPage(IEnumerable<LedgerEntry> value)
         {
             Argument.AssertNotNull(value, nameof(value));
 
@@ -28,14 +28,14 @@ namespace Azure.Core.Foundations
         /// <summary> Initializes a new instance of CustomPage. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
-        internal CustomPage(IList<LedgerEntry> value, string nextLink)
+        internal CustomPage(IReadOnlyList<LedgerEntry> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
-        public IList<LedgerEntry> Value { get; }
+        public IReadOnlyList<LedgerEntry> Value { get; }
 
-        public string NextLink { get; set; }
+        public string NextLink { get; }
     }
 }
