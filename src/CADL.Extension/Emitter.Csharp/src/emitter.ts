@@ -118,13 +118,13 @@ export async function $onEmit(
             exec(`dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath}`, (error, stdout, stderr) => {
                 if (error) {
                     console.log(`error: ${error.message}`);
-                    return;
                 }
-                if (stderr) {
+                else if (stderr) {
                     console.log(`stderr: ${stderr}`);
-                    return;
                 }
-                console.log(`stdout: ${stdout}`);
+                else if (stdout) {
+                    console.log(`stdout: ${stdout}`);
+                }
             });
         }
     }
