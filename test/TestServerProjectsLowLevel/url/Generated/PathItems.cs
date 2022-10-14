@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace url_LowLevel
 {
-    // Data plane generated client. The PathItems service client.
-    /// <summary> The PathItems service client. </summary>
+    // Data plane generated sub-client. The PathItems sub-client.
+    /// <summary> The PathItems sub-client. </summary>
     public partial class PathItems
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -66,7 +66,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetAllWithValuesAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>");
         /// Console.WriteLine(response.Status);
@@ -74,7 +74,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetAllWithValuesAsync with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
         /// Console.WriteLine(response.Status);
@@ -113,7 +113,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetAllWithValues with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = client.GetAllWithValues("<pathItemStringPath>", "<localStringPath>");
         /// Console.WriteLine(response.Status);
@@ -121,7 +121,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetAllWithValues with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = client.GetAllWithValues("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
         /// Console.WriteLine(response.Status);
@@ -160,7 +160,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetGlobalQueryNullAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
         /// Console.WriteLine(response.Status);
@@ -168,7 +168,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetGlobalQueryNullAsync with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
         /// Console.WriteLine(response.Status);
@@ -207,7 +207,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetGlobalQueryNull with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = client.GetGlobalQueryNull("<pathItemStringPath>", "<localStringPath>");
         /// Console.WriteLine(response.Status);
@@ -215,7 +215,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetGlobalQueryNull with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = client.GetGlobalQueryNull("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
         /// Console.WriteLine(response.Status);
@@ -254,7 +254,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetGlobalAndLocalQueryNullAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
         /// Console.WriteLine(response.Status);
@@ -262,7 +262,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetGlobalAndLocalQueryNullAsync with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
         /// Console.WriteLine(response.Status);
@@ -301,7 +301,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetGlobalAndLocalQueryNull with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = client.GetGlobalAndLocalQueryNull("<pathItemStringPath>", "<localStringPath>");
         /// Console.WriteLine(response.Status);
@@ -309,7 +309,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetGlobalAndLocalQueryNull with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = client.GetGlobalAndLocalQueryNull("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
         /// Console.WriteLine(response.Status);
@@ -348,7 +348,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetLocalPathItemQueryNullAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
         /// Console.WriteLine(response.Status);
@@ -356,7 +356,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetLocalPathItemQueryNullAsync with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
         /// Console.WriteLine(response.Status);
@@ -395,7 +395,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetLocalPathItemQueryNull with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = client.GetLocalPathItemQueryNull("<pathItemStringPath>", "<localStringPath>");
         /// Console.WriteLine(response.Status);
@@ -403,7 +403,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetLocalPathItemQueryNull with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathItemsClient("<globalStringPath>", "<globalStringQuery>");
         /// 
         /// Response response = client.GetLocalPathItemQueryNull("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
         /// Console.WriteLine(response.Status);

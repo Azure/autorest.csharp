@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace lro_LowLevel
 {
-    // Data plane generated client. The LrosaDs service client.
-    /// <summary> The LrosaDs service client. </summary>
+    // Data plane generated sub-client. The LrosaDs sub-client.
+    /// <summary> The LrosaDs sub-client. </summary>
     public partial class LrosaDs
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -56,7 +56,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry400Async with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -69,7 +69,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry400Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -137,7 +137,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNonRetry400Request(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -156,7 +156,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry400 with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -169,7 +169,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry400 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -237,7 +237,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNonRetry400Request(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -256,7 +256,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry201Creating400Async with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -269,7 +269,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry201Creating400Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -337,7 +337,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNonRetry201Creating400Request(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry201Creating400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -356,7 +356,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry201Creating400 with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -369,7 +369,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry201Creating400 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -437,7 +437,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNonRetry201Creating400Request(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry201Creating400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -456,7 +456,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry201Creating400InvalidJsonAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -469,7 +469,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry201Creating400InvalidJsonAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -537,7 +537,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -556,7 +556,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry201Creating400InvalidJson with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -569,7 +569,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutNonRetry201Creating400InvalidJson with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -637,7 +637,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -656,7 +656,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetry400Async with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -669,7 +669,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetry400Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -737,7 +737,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -756,7 +756,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetry400 with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -769,7 +769,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetry400 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -837,7 +837,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -855,7 +855,7 @@ namespace lro_LowLevel
         /// This sample shows how to call DeleteNonRetry400Async with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = await client.DeleteNonRetry400Async(WaitUntil.Completed);
         /// 
@@ -870,7 +870,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteNonRetry400Request(context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -888,7 +888,7 @@ namespace lro_LowLevel
         /// This sample shows how to call DeleteNonRetry400 with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = client.DeleteNonRetry400(WaitUntil.Completed);
         /// 
@@ -903,7 +903,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteNonRetry400Request(context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -921,7 +921,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Delete202NonRetry400Async with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = await client.Delete202NonRetry400Async(WaitUntil.Completed);
         /// 
@@ -936,7 +936,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202NonRetry400Request(context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete202NonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete202NonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -954,7 +954,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Delete202NonRetry400 with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = client.Delete202NonRetry400(WaitUntil.Completed);
         /// 
@@ -969,7 +969,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202NonRetry400Request(context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete202NonRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete202NonRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -987,7 +987,7 @@ namespace lro_LowLevel
         /// This sample shows how to call DeleteAsyncRelativeRetry400Async with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = await client.DeleteAsyncRelativeRetry400Async(WaitUntil.Completed);
         /// 
@@ -1002,7 +1002,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request(context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1020,7 +1020,7 @@ namespace lro_LowLevel
         /// This sample shows how to call DeleteAsyncRelativeRetry400 with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = client.DeleteAsyncRelativeRetry400(WaitUntil.Completed);
         /// 
@@ -1035,7 +1035,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request(context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1054,7 +1054,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostNonRetry400Async with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1066,7 +1066,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostNonRetry400Async with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1111,7 +1111,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostNonRetry400Request(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PostNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1130,7 +1130,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostNonRetry400 with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1142,7 +1142,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostNonRetry400 with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1187,7 +1187,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostNonRetry400Request(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.PostNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1206,7 +1206,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202NonRetry400Async with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1218,7 +1218,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202NonRetry400Async with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1263,7 +1263,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202NonRetry400Request(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202NonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202NonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1282,7 +1282,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202NonRetry400 with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1294,7 +1294,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202NonRetry400 with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1339,7 +1339,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202NonRetry400Request(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202NonRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202NonRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1358,7 +1358,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetry400Async with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1370,7 +1370,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetry400Async with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1415,7 +1415,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1434,7 +1434,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetry400 with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1446,7 +1446,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetry400 with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1491,7 +1491,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1510,7 +1510,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutError201NoProvisioningStatePayloadAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1523,7 +1523,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutError201NoProvisioningStatePayloadAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1591,7 +1591,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1610,7 +1610,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutError201NoProvisioningStatePayload with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1623,7 +1623,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutError201NoProvisioningStatePayload with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1691,7 +1691,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1710,7 +1710,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1723,7 +1723,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1791,7 +1791,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1810,7 +1810,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryNoStatus with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1823,7 +1823,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryNoStatus with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1891,7 +1891,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1910,7 +1910,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusPayloadAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -1923,7 +1923,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusPayloadAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -1991,7 +1991,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2010,7 +2010,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusPayload with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -2023,7 +2023,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryNoStatusPayload with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -2091,7 +2091,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -2109,7 +2109,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Delete204SucceededAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
         /// 
@@ -2124,7 +2124,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete204SucceededRequest(context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete204Succeeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete204Succeeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2142,7 +2142,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Delete204Succeeded with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = client.Delete204Succeeded(WaitUntil.Completed);
         /// 
@@ -2157,7 +2157,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete204SucceededRequest(context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete204Succeeded", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete204Succeeded", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -2175,7 +2175,7 @@ namespace lro_LowLevel
         /// This sample shows how to call DeleteAsyncRelativeRetryNoStatusAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = await client.DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed);
         /// 
@@ -2190,7 +2190,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest(context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2208,7 +2208,7 @@ namespace lro_LowLevel
         /// This sample shows how to call DeleteAsyncRelativeRetryNoStatus with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = client.DeleteAsyncRelativeRetryNoStatus(WaitUntil.Completed);
         /// 
@@ -2223,7 +2223,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest(context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -2242,7 +2242,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202NoLocationAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -2254,7 +2254,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202NoLocationAsync with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -2299,7 +2299,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202NoLocationRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202NoLocation", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202NoLocation", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2318,7 +2318,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202NoLocation with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -2330,7 +2330,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202NoLocation with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -2375,7 +2375,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202NoLocationRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202NoLocation", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202NoLocation", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -2394,7 +2394,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryNoPayloadAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -2406,7 +2406,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryNoPayloadAsync with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -2451,7 +2451,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2470,7 +2470,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryNoPayload with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -2482,7 +2482,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryNoPayload with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -2527,7 +2527,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -2546,7 +2546,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Put200InvalidJsonAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -2559,7 +2559,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Put200InvalidJsonAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -2627,7 +2627,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200InvalidJsonRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Put200InvalidJson", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Put200InvalidJson", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2646,7 +2646,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Put200InvalidJson with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -2659,7 +2659,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Put200InvalidJson with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -2727,7 +2727,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200InvalidJsonRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Put200InvalidJson", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.Put200InvalidJson", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -2746,7 +2746,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryInvalidHeaderAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -2759,7 +2759,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryInvalidHeaderAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -2827,7 +2827,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2846,7 +2846,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryInvalidHeader with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -2859,7 +2859,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryInvalidHeader with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -2927,7 +2927,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -2946,7 +2946,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryInvalidJsonPollingAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -2959,7 +2959,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryInvalidJsonPollingAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -3027,7 +3027,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3046,7 +3046,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryInvalidJsonPolling with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -3059,7 +3059,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRelativeRetryInvalidJsonPolling with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -3127,7 +3127,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -3145,7 +3145,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Delete202RetryInvalidHeaderAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = await client.Delete202RetryInvalidHeaderAsync(WaitUntil.Completed);
         /// 
@@ -3160,7 +3160,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest(context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3178,7 +3178,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Delete202RetryInvalidHeader with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = client.Delete202RetryInvalidHeader(WaitUntil.Completed);
         /// 
@@ -3193,7 +3193,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest(context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -3211,7 +3211,7 @@ namespace lro_LowLevel
         /// This sample shows how to call DeleteAsyncRelativeRetryInvalidHeaderAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = await client.DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed);
         /// 
@@ -3226,7 +3226,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3244,7 +3244,7 @@ namespace lro_LowLevel
         /// This sample shows how to call DeleteAsyncRelativeRetryInvalidHeader with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = client.DeleteAsyncRelativeRetryInvalidHeader(WaitUntil.Completed);
         /// 
@@ -3259,7 +3259,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -3277,7 +3277,7 @@ namespace lro_LowLevel
         /// This sample shows how to call DeleteAsyncRelativeRetryInvalidJsonPollingAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = await client.DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed);
         /// 
@@ -3292,7 +3292,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3310,7 +3310,7 @@ namespace lro_LowLevel
         /// This sample shows how to call DeleteAsyncRelativeRetryInvalidJsonPolling with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var operation = client.DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed);
         /// 
@@ -3325,7 +3325,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -3344,7 +3344,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202RetryInvalidHeaderAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -3356,7 +3356,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202RetryInvalidHeaderAsync with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -3401,7 +3401,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3420,7 +3420,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202RetryInvalidHeader with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -3432,7 +3432,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202RetryInvalidHeader with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -3477,7 +3477,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -3496,7 +3496,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryInvalidHeaderAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -3508,7 +3508,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryInvalidHeaderAsync with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -3553,7 +3553,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3572,7 +3572,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryInvalidHeader with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -3584,7 +3584,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryInvalidHeader with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -3629,7 +3629,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -3648,7 +3648,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryInvalidJsonPollingAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -3660,7 +3660,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryInvalidJsonPollingAsync with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -3705,7 +3705,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3724,7 +3724,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryInvalidJsonPolling with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {};
         /// 
@@ -3736,7 +3736,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRelativeRetryInvalidJsonPolling with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LrosaDsClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLrosaDsClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -3781,7 +3781,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {

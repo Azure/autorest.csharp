@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace body_string_LowLevel
 {
-    // Data plane generated client. The Enum service client.
-    /// <summary> The Enum service client. </summary>
+    // Data plane generated sub-client. The Enum sub-client.
+    /// <summary> The Enum sub-client. </summary>
     public partial class Enum
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -54,7 +54,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetNotExpandableAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// Response response = await client.GetNotExpandableAsync();
         /// 
@@ -86,7 +86,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetNotExpandable and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// Response response = client.GetNotExpandable();
         /// 
@@ -120,7 +120,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutNotExpandableAsync with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// var data = "red color";
         /// 
@@ -156,7 +156,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutNotExpandable with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// var data = "red color";
         /// 
@@ -190,7 +190,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetReferencedAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// Response response = await client.GetReferencedAsync();
         /// 
@@ -222,7 +222,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetReferenced and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// Response response = client.GetReferenced();
         /// 
@@ -256,7 +256,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutReferencedAsync with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// var data = "red color";
         /// 
@@ -292,7 +292,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutReferenced with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// var data = "red color";
         /// 
@@ -326,7 +326,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetReferencedConstantAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// Response response = await client.GetReferencedConstantAsync();
         /// 
@@ -372,7 +372,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetReferencedConstant and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// Response response = client.GetReferencedConstant();
         /// 
@@ -420,7 +420,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutReferencedConstantAsync with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// var data = new {
         ///     ColorConstant = "<ColorConstant>",
@@ -432,7 +432,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutReferencedConstantAsync with all request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// var data = new {
         ///     ColorConstant = "<ColorConstant>",
@@ -484,7 +484,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutReferencedConstant with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// var data = new {
         ///     ColorConstant = "<ColorConstant>",
@@ -496,7 +496,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutReferencedConstant with all request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new EnumClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetEnumClient();
         /// 
         /// var data = new {
         ///     ColorConstant = "<ColorConstant>",

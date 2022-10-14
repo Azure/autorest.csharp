@@ -13,9 +13,9 @@ using Azure.Core.Pipeline;
 
 namespace property_types
 {
-    // Data plane generated client. The Int service client.
-    /// <summary> The Int service client. </summary>
-    public partial class IntClient
+    // Data plane generated sub-client. The DictionaryString sub-client.
+    /// <summary> The DictionaryString sub-client. </summary>
+    public partial class DictionaryString
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -27,24 +27,22 @@ namespace property_types
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of IntClient. </summary>
-        public IntClient() : this(new Uri("http://localhost:3000"), new ModelsPropertyTypesClientOptions())
+        /// <summary> Initializes a new instance of DictionaryString for mocking. </summary>
+        protected DictionaryString()
         {
         }
 
-        /// <summary> Initializes a new instance of IntClient. </summary>
+        /// <summary> Initializes a new instance of DictionaryString. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public IntClient(Uri endpoint, ModelsPropertyTypesClientOptions options)
+        /// <param name="apiVersion"> The String to use. </param>
+        internal DictionaryString(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new ModelsPropertyTypesClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = options.Version;
+            _apiVersion = apiVersion;
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -53,12 +51,12 @@ namespace property_types
         /// <example>
         /// This sample shows how to call GetAsync and parse the result.
         /// <code><![CDATA[
-        /// var client = new IntClient();
+        /// var client = new ModelsPropertyTypesClient().GetDictionaryStringClient(<1.0.0>);
         /// 
         /// Response response = await client.GetAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("property").ToString());
+        /// Console.WriteLine(result.GetProperty("property").GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -66,16 +64,16 @@ namespace property_types
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>IntProperty</c>:
+        /// Schema for <c>DictionaryStringProperty</c>:
         /// <code>{
-        ///   property: number, # Required.
+        ///   property: Dictionary&lt;string, string&gt;, # Required.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("IntClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("DictionaryString.Get");
             scope.Start();
             try
             {
@@ -95,12 +93,12 @@ namespace property_types
         /// <example>
         /// This sample shows how to call Get and parse the result.
         /// <code><![CDATA[
-        /// var client = new IntClient();
+        /// var client = new ModelsPropertyTypesClient().GetDictionaryStringClient(<1.0.0>);
         /// 
         /// Response response = client.Get();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("property").ToString());
+        /// Console.WriteLine(result.GetProperty("property").GetProperty("<test>").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -108,16 +106,16 @@ namespace property_types
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>IntProperty</c>:
+        /// Schema for <c>DictionaryStringProperty</c>:
         /// <code>{
-        ///   property: number, # Required.
+        ///   property: Dictionary&lt;string, string&gt;, # Required.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Response Get(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("IntClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("DictionaryString.Get");
             scope.Start();
             try
             {
@@ -139,10 +137,12 @@ namespace property_types
         /// <example>
         /// This sample shows how to call PutAsync with required request content.
         /// <code><![CDATA[
-        /// var client = new IntClient();
+        /// var client = new ModelsPropertyTypesClient().GetDictionaryStringClient(<1.0.0>);
         /// 
         /// var data = new {
-        ///     property = 1234,
+        ///     property = new {
+        ///         key = "<String>",
+        ///     },
         /// };
         /// 
         /// Response response = await client.PutAsync(RequestContent.Create(data));
@@ -154,9 +154,9 @@ namespace property_types
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>IntProperty</c>:
+        /// Schema for <c>DictionaryStringProperty</c>:
         /// <code>{
-        ///   property: number, # Required.
+        ///   property: Dictionary&lt;string, string&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -165,7 +165,7 @@ namespace property_types
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("IntClient.Put");
+            using var scope = ClientDiagnostics.CreateScope("DictionaryString.Put");
             scope.Start();
             try
             {
@@ -187,10 +187,12 @@ namespace property_types
         /// <example>
         /// This sample shows how to call Put with required request content.
         /// <code><![CDATA[
-        /// var client = new IntClient();
+        /// var client = new ModelsPropertyTypesClient().GetDictionaryStringClient(<1.0.0>);
         /// 
         /// var data = new {
-        ///     property = 1234,
+        ///     property = new {
+        ///         key = "<String>",
+        ///     },
         /// };
         /// 
         /// Response response = client.Put(RequestContent.Create(data));
@@ -202,9 +204,9 @@ namespace property_types
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>IntProperty</c>:
+        /// Schema for <c>DictionaryStringProperty</c>:
         /// <code>{
-        ///   property: number, # Required.
+        ///   property: Dictionary&lt;string, string&gt;, # Required.
         /// }
         /// </code>
         /// 
@@ -213,7 +215,7 @@ namespace property_types
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("IntClient.Put");
+            using var scope = ClientDiagnostics.CreateScope("DictionaryString.Put");
             scope.Start();
             try
             {
@@ -234,7 +236,7 @@ namespace property_types
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/properties/types/int", false);
+            uri.AppendPath("/models/properties/types/dictionary/string", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -248,7 +250,7 @@ namespace property_types
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/properties/types/int", false);
+            uri.AppendPath("/models/properties/types/dictionary/string", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

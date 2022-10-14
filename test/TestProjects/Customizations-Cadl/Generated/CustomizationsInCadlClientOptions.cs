@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace GeneratedModels
 {
-    /// <summary> Client options for CustomizationsInCadlClient. </summary>
+    /// <summary> Client options for CustomizationsInCadl. </summary>
     public partial class CustomizationsInCadlClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;

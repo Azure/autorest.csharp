@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace custom_baseUrl_LowLevel
 {
-    /// <summary> Client options for PathsClient. </summary>
+    /// <summary> Client options for Paths. </summary>
     public partial class PathsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

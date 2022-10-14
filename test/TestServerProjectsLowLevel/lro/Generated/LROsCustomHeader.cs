@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace lro_LowLevel
 {
-    // Data plane generated client. The LROsCustomHeader service client.
-    /// <summary> The LROsCustomHeader service client. </summary>
+    // Data plane generated sub-client. The LROsCustomHeader sub-client.
+    /// <summary> The LROsCustomHeader sub-client. </summary>
     public partial class LROsCustomHeader
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -56,7 +56,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRetrySucceededAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {};
         /// 
@@ -69,7 +69,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRetrySucceededAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -137,7 +137,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LROsCustomHeaderClient.PutAsyncRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LROsCustomHeader.PutAsyncRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -156,7 +156,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRetrySucceeded with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {};
         /// 
@@ -169,7 +169,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PutAsyncRetrySucceeded with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -237,7 +237,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LROsCustomHeaderClient.PutAsyncRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LROsCustomHeader.PutAsyncRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -256,7 +256,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Put201CreatingSucceeded200Async with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {};
         /// 
@@ -269,7 +269,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Put201CreatingSucceeded200Async with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -337,7 +337,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201CreatingSucceeded200Request(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LROsCustomHeaderClient.Put201CreatingSucceeded200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LROsCustomHeader.Put201CreatingSucceeded200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -356,7 +356,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Put201CreatingSucceeded200 with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {};
         /// 
@@ -369,7 +369,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Put201CreatingSucceeded200 with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -437,7 +437,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201CreatingSucceeded200Request(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LROsCustomHeaderClient.Put201CreatingSucceeded200", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LROsCustomHeader.Put201CreatingSucceeded200", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -456,7 +456,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202Retry200Async with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {};
         /// 
@@ -468,7 +468,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202Retry200Async with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -513,7 +513,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202Retry200Request(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LROsCustomHeaderClient.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LROsCustomHeader.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -532,7 +532,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202Retry200 with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {};
         /// 
@@ -544,7 +544,7 @@ namespace lro_LowLevel
         /// This sample shows how to call Post202Retry200 with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -589,7 +589,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202Retry200Request(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LROsCustomHeaderClient.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LROsCustomHeader.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -608,7 +608,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRetrySucceededAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {};
         /// 
@@ -620,7 +620,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRetrySucceededAsync with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -665,7 +665,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LROsCustomHeaderClient.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LROsCustomHeader.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -684,7 +684,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRetrySucceeded with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {};
         /// 
@@ -696,7 +696,7 @@ namespace lro_LowLevel
         /// This sample shows how to call PostAsyncRetrySucceeded with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new LROsCustomHeaderClient(credential);
+        /// var client = new AutoRestLongRunningOperationTestServiceClient(credential).GetLROsCustomHeaderClient();
         /// 
         /// var data = new {
         ///     properties = new {
@@ -741,7 +741,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LROsCustomHeaderClient.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LROsCustomHeader.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {

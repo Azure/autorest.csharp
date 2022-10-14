@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace api_key
 {
-    /// <summary> Client options for ApiKeyClient. </summary>
+    /// <summary> Client options for ApiKey. </summary>
     public partial class ApiKeyClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

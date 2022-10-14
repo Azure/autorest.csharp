@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace CadlPagination
 {
-    /// <summary> Client options for PaginationClient. </summary>
+    /// <summary> Client options for Pagination. </summary>
     public partial class PaginationClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2022_05_13;

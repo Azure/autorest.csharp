@@ -295,9 +295,9 @@ namespace AutoRest.CSharp.Output.Models
                     : BuilderHelpers.EscapeXmlDescription(clientInfo.Description);
 
                 var subClients = new List<LowLevelClient>();
-
+                var clientSuffix = ClientBuilder.GetClientSuffix();
                 var client = new LowLevelClient(
-                    clientInfo.Name,
+                    (parentClient != null || clientInfo.Name.EndsWith(clientSuffix))? clientInfo.Name : clientInfo.Name + clientSuffix,
                     clientInfo.Namespace,
                     description,
                     _libraryName,

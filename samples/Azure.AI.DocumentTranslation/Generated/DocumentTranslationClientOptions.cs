@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.AI.DocumentTranslation
 {
-    /// <summary> Client options for DocumentTranslationClient. </summary>
+    /// <summary> Client options for DocumentTranslation. </summary>
     public partial class DocumentTranslationClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_Preview_1;

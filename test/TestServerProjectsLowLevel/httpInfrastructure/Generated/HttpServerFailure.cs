@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The HttpServerFailure service client.
-    /// <summary> The HttpServerFailure service client. </summary>
+    // Data plane generated sub-client. The HttpServerFailure sub-client.
+    /// <summary> The HttpServerFailure sub-client. </summary>
     public partial class HttpServerFailure
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -54,7 +54,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head501Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpServerFailureClient();
         /// 
         /// Response response = await client.Head501Async();
         /// Console.WriteLine(response.Status);
@@ -84,7 +84,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head501.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpServerFailureClient();
         /// 
         /// Response response = client.Head501();
         /// Console.WriteLine(response.Status);
@@ -114,7 +114,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get501Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpServerFailureClient();
         /// 
         /// Response response = await client.Get501Async();
         /// Console.WriteLine(response.Status);
@@ -144,7 +144,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get501.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpServerFailureClient();
         /// 
         /// Response response = client.Get501();
         /// Console.WriteLine(response.Status);
@@ -175,7 +175,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post505Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpServerFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -208,7 +208,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post505 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpServerFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -241,7 +241,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete505Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpServerFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -274,7 +274,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete505 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpServerFailureClient();
         /// 
         /// var data = true;
         /// 

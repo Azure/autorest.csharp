@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The HttpRedirects service client.
-    /// <summary> The HttpRedirects service client. </summary>
+    // Data plane generated sub-client. The HttpRedirects sub-client.
+    /// <summary> The HttpRedirects sub-client. </summary>
     public partial class HttpRedirects
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -54,7 +54,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head300Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = await client.Head300Async();
         /// Console.WriteLine(response.Status);
@@ -84,7 +84,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head300.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = client.Head300();
         /// Console.WriteLine(response.Status);
@@ -114,7 +114,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get300Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = await client.Get300Async();
         /// Console.WriteLine(response.Status);
@@ -144,7 +144,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get300.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = client.Get300();
         /// Console.WriteLine(response.Status);
@@ -174,7 +174,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head301Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = await client.Head301Async();
         /// Console.WriteLine(response.Status);
@@ -204,7 +204,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head301.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = client.Head301();
         /// Console.WriteLine(response.Status);
@@ -234,7 +234,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get301Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = await client.Get301Async();
         /// Console.WriteLine(response.Status);
@@ -264,7 +264,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get301.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = client.Get301();
         /// Console.WriteLine(response.Status);
@@ -295,7 +295,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put301Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -328,7 +328,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put301 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -360,7 +360,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head302Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = await client.Head302Async();
         /// Console.WriteLine(response.Status);
@@ -390,7 +390,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head302.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = client.Head302();
         /// Console.WriteLine(response.Status);
@@ -420,7 +420,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get302Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = await client.Get302Async();
         /// Console.WriteLine(response.Status);
@@ -450,7 +450,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get302.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = client.Get302();
         /// Console.WriteLine(response.Status);
@@ -481,7 +481,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch302Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -514,7 +514,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch302 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -547,7 +547,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post303Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -580,7 +580,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post303 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -612,7 +612,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head307Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = await client.Head307Async();
         /// Console.WriteLine(response.Status);
@@ -642,7 +642,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head307.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = client.Head307();
         /// Console.WriteLine(response.Status);
@@ -672,7 +672,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get307Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = await client.Get307Async();
         /// Console.WriteLine(response.Status);
@@ -702,7 +702,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get307.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = client.Get307();
         /// Console.WriteLine(response.Status);
@@ -732,7 +732,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options307Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = await client.Options307Async();
         /// Console.WriteLine(response.Status);
@@ -762,7 +762,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options307.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// Response response = client.Options307();
         /// Console.WriteLine(response.Status);
@@ -793,7 +793,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put307Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -826,7 +826,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put307 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -859,7 +859,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch307Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -892,7 +892,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch307 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -925,7 +925,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post307Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -958,7 +958,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post307 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -991,7 +991,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete307Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 
@@ -1024,7 +1024,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete307 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRedirectsClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRedirectsClient();
         /// 
         /// var data = true;
         /// 

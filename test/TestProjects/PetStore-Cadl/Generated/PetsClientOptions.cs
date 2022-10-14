@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace CadlPetStore
 {
-    /// <summary> Client options for PetsClient. </summary>
+    /// <summary> Client options for Pets. </summary>
     public partial class PetsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2021_03_25;

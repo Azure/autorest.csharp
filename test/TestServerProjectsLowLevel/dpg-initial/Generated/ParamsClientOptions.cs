@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace dpg_initial_LowLevel
 {
-    /// <summary> Client options for ParamsClient. </summary>
+    /// <summary> Client options for Params. </summary>
     public partial class ParamsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

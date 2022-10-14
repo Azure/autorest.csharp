@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace body_file_LowLevel
 {
-    /// <summary> Client options for FilesClient. </summary>
+    /// <summary> Client options for Files. </summary>
     public partial class FilesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace body_string_LowLevel
 {
-    // Data plane generated client. The String service client.
-    /// <summary> The String service client. </summary>
+    // Data plane generated sub-client. The String sub-client.
+    /// <summary> The String sub-client. </summary>
     public partial class String
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -54,7 +54,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetNullAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = await client.GetNullAsync();
         /// 
@@ -86,7 +86,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetNull and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = client.GetNull();
         /// 
@@ -119,7 +119,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutNullAsync with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -152,7 +152,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutNull with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -184,7 +184,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetEmptyAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = await client.GetEmptyAsync();
         /// 
@@ -216,7 +216,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetEmpty and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = client.GetEmpty();
         /// 
@@ -250,7 +250,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutEmptyAsync with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -286,7 +286,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutEmpty with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -320,7 +320,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetMbcsAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = await client.GetMbcsAsync();
         /// 
@@ -352,7 +352,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetMbcs and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = client.GetMbcs();
         /// 
@@ -386,7 +386,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutMbcsAsync with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -422,7 +422,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutMbcs with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -456,7 +456,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetWhitespaceAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = await client.GetWhitespaceAsync();
         /// 
@@ -488,7 +488,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetWhitespace and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = client.GetWhitespace();
         /// 
@@ -522,7 +522,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutWhitespaceAsync with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -558,7 +558,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutWhitespace with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -592,7 +592,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetNotProvidedAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = await client.GetNotProvidedAsync();
         /// 
@@ -624,7 +624,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetNotProvided and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = client.GetNotProvided();
         /// 
@@ -656,7 +656,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetBase64EncodedAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = await client.GetBase64EncodedAsync();
         /// 
@@ -688,7 +688,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetBase64Encoded and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = client.GetBase64Encoded();
         /// 
@@ -720,7 +720,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetBase64UrlEncodedAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = await client.GetBase64UrlEncodedAsync();
         /// 
@@ -752,7 +752,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetBase64UrlEncoded and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = client.GetBase64UrlEncoded();
         /// 
@@ -786,7 +786,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutBase64UrlEncodedAsync with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// var data = new {};
         /// 
@@ -822,7 +822,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call PutBase64UrlEncoded with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// var data = new {};
         /// 
@@ -856,7 +856,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetNullBase64UrlEncodedAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = await client.GetNullBase64UrlEncodedAsync();
         /// 
@@ -888,7 +888,7 @@ namespace body_string_LowLevel
         /// This sample shows how to call GetNullBase64UrlEncoded and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new StringClient(credential);
+        /// var client = new AutoRestSwaggerBATServiceClient(credential).GetStringClient();
         /// 
         /// Response response = client.GetNullBase64UrlEncoded();
         /// 

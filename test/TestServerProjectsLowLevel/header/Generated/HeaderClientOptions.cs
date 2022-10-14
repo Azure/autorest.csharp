@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace header_LowLevel
 {
-    /// <summary> Client options for HeaderClient. </summary>
+    /// <summary> Client options for Header. </summary>
     public partial class HeaderClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

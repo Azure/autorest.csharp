@@ -14,8 +14,8 @@ using Azure.Core.Pipeline;
 
 namespace url_LowLevel
 {
-    // Data plane generated client. The Paths service client.
-    /// <summary> The Paths service client. </summary>
+    // Data plane generated sub-client. The Paths sub-client.
+    /// <summary> The Paths sub-client. </summary>
     public partial class Paths
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -55,7 +55,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetBooleanTrueAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.GetBooleanTrueAsync();
         /// Console.WriteLine(response.Status);
@@ -85,7 +85,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetBooleanTrue.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.GetBooleanTrue();
         /// Console.WriteLine(response.Status);
@@ -115,7 +115,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetBooleanFalseAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.GetBooleanFalseAsync();
         /// Console.WriteLine(response.Status);
@@ -145,7 +145,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetBooleanFalse.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.GetBooleanFalse();
         /// Console.WriteLine(response.Status);
@@ -175,7 +175,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetIntOneMillionAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.GetIntOneMillionAsync();
         /// Console.WriteLine(response.Status);
@@ -205,7 +205,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetIntOneMillion.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.GetIntOneMillion();
         /// Console.WriteLine(response.Status);
@@ -235,7 +235,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetIntNegativeOneMillionAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.GetIntNegativeOneMillionAsync();
         /// Console.WriteLine(response.Status);
@@ -265,7 +265,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetIntNegativeOneMillion.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.GetIntNegativeOneMillion();
         /// Console.WriteLine(response.Status);
@@ -295,7 +295,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetTenBillionAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.GetTenBillionAsync();
         /// Console.WriteLine(response.Status);
@@ -325,7 +325,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetTenBillion.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.GetTenBillion();
         /// Console.WriteLine(response.Status);
@@ -355,7 +355,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetNegativeTenBillionAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.GetNegativeTenBillionAsync();
         /// Console.WriteLine(response.Status);
@@ -385,7 +385,7 @@ namespace url_LowLevel
         /// This sample shows how to call GetNegativeTenBillion.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.GetNegativeTenBillion();
         /// Console.WriteLine(response.Status);
@@ -415,7 +415,7 @@ namespace url_LowLevel
         /// This sample shows how to call FloatScientificPositiveAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.FloatScientificPositiveAsync();
         /// Console.WriteLine(response.Status);
@@ -445,7 +445,7 @@ namespace url_LowLevel
         /// This sample shows how to call FloatScientificPositive.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.FloatScientificPositive();
         /// Console.WriteLine(response.Status);
@@ -475,7 +475,7 @@ namespace url_LowLevel
         /// This sample shows how to call FloatScientificNegativeAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.FloatScientificNegativeAsync();
         /// Console.WriteLine(response.Status);
@@ -505,7 +505,7 @@ namespace url_LowLevel
         /// This sample shows how to call FloatScientificNegative.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.FloatScientificNegative();
         /// Console.WriteLine(response.Status);
@@ -535,7 +535,7 @@ namespace url_LowLevel
         /// This sample shows how to call DoubleDecimalPositiveAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.DoubleDecimalPositiveAsync();
         /// Console.WriteLine(response.Status);
@@ -565,7 +565,7 @@ namespace url_LowLevel
         /// This sample shows how to call DoubleDecimalPositive.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.DoubleDecimalPositive();
         /// Console.WriteLine(response.Status);
@@ -595,7 +595,7 @@ namespace url_LowLevel
         /// This sample shows how to call DoubleDecimalNegativeAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.DoubleDecimalNegativeAsync();
         /// Console.WriteLine(response.Status);
@@ -625,7 +625,7 @@ namespace url_LowLevel
         /// This sample shows how to call DoubleDecimalNegative.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.DoubleDecimalNegative();
         /// Console.WriteLine(response.Status);
@@ -655,7 +655,7 @@ namespace url_LowLevel
         /// This sample shows how to call StringUnicodeAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.StringUnicodeAsync();
         /// Console.WriteLine(response.Status);
@@ -685,7 +685,7 @@ namespace url_LowLevel
         /// This sample shows how to call StringUnicode.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.StringUnicode();
         /// Console.WriteLine(response.Status);
@@ -715,7 +715,7 @@ namespace url_LowLevel
         /// This sample shows how to call StringUrlEncodedAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.StringUrlEncodedAsync();
         /// Console.WriteLine(response.Status);
@@ -745,7 +745,7 @@ namespace url_LowLevel
         /// This sample shows how to call StringUrlEncoded.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.StringUrlEncoded();
         /// Console.WriteLine(response.Status);
@@ -775,7 +775,7 @@ namespace url_LowLevel
         /// This sample shows how to call StringUrlNonEncodedAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.StringUrlNonEncodedAsync();
         /// Console.WriteLine(response.Status);
@@ -806,7 +806,7 @@ namespace url_LowLevel
         /// This sample shows how to call StringUrlNonEncoded.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.StringUrlNonEncoded();
         /// Console.WriteLine(response.Status);
@@ -837,7 +837,7 @@ namespace url_LowLevel
         /// This sample shows how to call StringEmptyAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.StringEmptyAsync();
         /// Console.WriteLine(response.Status);
@@ -867,7 +867,7 @@ namespace url_LowLevel
         /// This sample shows how to call StringEmpty.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.StringEmpty();
         /// Console.WriteLine(response.Status);
@@ -900,7 +900,7 @@ namespace url_LowLevel
         /// This sample shows how to call StringNullAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.StringNullAsync("<stringPath>");
         /// Console.WriteLine(response.Status);
@@ -935,7 +935,7 @@ namespace url_LowLevel
         /// This sample shows how to call StringNull with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.StringNull("<stringPath>");
         /// Console.WriteLine(response.Status);
@@ -970,7 +970,7 @@ namespace url_LowLevel
         /// This sample shows how to call EnumValidAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.EnumValidAsync("<enumPath>");
         /// Console.WriteLine(response.Status);
@@ -1005,7 +1005,7 @@ namespace url_LowLevel
         /// This sample shows how to call EnumValid with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.EnumValid("<enumPath>");
         /// Console.WriteLine(response.Status);
@@ -1040,7 +1040,7 @@ namespace url_LowLevel
         /// This sample shows how to call EnumNullAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.EnumNullAsync("<enumPath>");
         /// Console.WriteLine(response.Status);
@@ -1075,7 +1075,7 @@ namespace url_LowLevel
         /// This sample shows how to call EnumNull with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.EnumNull("<enumPath>");
         /// Console.WriteLine(response.Status);
@@ -1109,7 +1109,7 @@ namespace url_LowLevel
         /// This sample shows how to call ByteMultiByteAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.ByteMultiByteAsync(null);
         /// Console.WriteLine(response.Status);
@@ -1143,7 +1143,7 @@ namespace url_LowLevel
         /// This sample shows how to call ByteMultiByte with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.ByteMultiByte(null);
         /// Console.WriteLine(response.Status);
@@ -1175,7 +1175,7 @@ namespace url_LowLevel
         /// This sample shows how to call ByteEmptyAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.ByteEmptyAsync();
         /// Console.WriteLine(response.Status);
@@ -1205,7 +1205,7 @@ namespace url_LowLevel
         /// This sample shows how to call ByteEmpty.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.ByteEmpty();
         /// Console.WriteLine(response.Status);
@@ -1237,7 +1237,7 @@ namespace url_LowLevel
         /// This sample shows how to call ByteNullAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.ByteNullAsync(null);
         /// Console.WriteLine(response.Status);
@@ -1271,7 +1271,7 @@ namespace url_LowLevel
         /// This sample shows how to call ByteNull with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.ByteNull(null);
         /// Console.WriteLine(response.Status);
@@ -1303,7 +1303,7 @@ namespace url_LowLevel
         /// This sample shows how to call DateValidAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.DateValidAsync();
         /// Console.WriteLine(response.Status);
@@ -1333,7 +1333,7 @@ namespace url_LowLevel
         /// This sample shows how to call DateValid.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.DateValid();
         /// Console.WriteLine(response.Status);
@@ -1364,7 +1364,7 @@ namespace url_LowLevel
         /// This sample shows how to call DateNullAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.DateNullAsync(DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1395,7 +1395,7 @@ namespace url_LowLevel
         /// This sample shows how to call DateNull with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.DateNull(DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1425,7 +1425,7 @@ namespace url_LowLevel
         /// This sample shows how to call DateTimeValidAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.DateTimeValidAsync();
         /// Console.WriteLine(response.Status);
@@ -1455,7 +1455,7 @@ namespace url_LowLevel
         /// This sample shows how to call DateTimeValid.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.DateTimeValid();
         /// Console.WriteLine(response.Status);
@@ -1486,7 +1486,7 @@ namespace url_LowLevel
         /// This sample shows how to call DateTimeNullAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1517,7 +1517,7 @@ namespace url_LowLevel
         /// This sample shows how to call DateTimeNull with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.DateTimeNull(DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1549,7 +1549,7 @@ namespace url_LowLevel
         /// This sample shows how to call Base64UrlAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.Base64UrlAsync(null);
         /// Console.WriteLine(response.Status);
@@ -1583,7 +1583,7 @@ namespace url_LowLevel
         /// This sample shows how to call Base64Url with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.Base64Url(null);
         /// Console.WriteLine(response.Status);
@@ -1617,7 +1617,7 @@ namespace url_LowLevel
         /// This sample shows how to call ArrayCsvInPathAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.ArrayCsvInPathAsync(new String[]{"<arrayPath>"});
         /// Console.WriteLine(response.Status);
@@ -1651,7 +1651,7 @@ namespace url_LowLevel
         /// This sample shows how to call ArrayCsvInPath with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.ArrayCsvInPath(new String[]{"<arrayPath>"});
         /// Console.WriteLine(response.Status);
@@ -1684,7 +1684,7 @@ namespace url_LowLevel
         /// This sample shows how to call UnixTimeUrlAsync with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = await client.UnixTimeUrlAsync(DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);
@@ -1715,7 +1715,7 @@ namespace url_LowLevel
         /// This sample shows how to call UnixTimeUrl with required parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
+        /// var client = new AutoRestUrlTestServiceClient(credential).GetPathsClient();
         /// 
         /// Response response = client.UnixTimeUrl(DateTimeOffset.UtcNow);
         /// Console.WriteLine(response.Status);

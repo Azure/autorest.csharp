@@ -13,9 +13,9 @@ using Azure.Core.Pipeline;
 
 namespace CadlFirstTest
 {
-    // Data plane generated client. The Demo2 service client.
-    /// <summary> The Demo2 service client. </summary>
-    public partial class Demo2Client
+    // Data plane generated sub-client. The Demo2 sub-client.
+    /// <summary> The Demo2 sub-client. </summary>
+    public partial class Demo2
     {
         private const string AuthorizationHeader = "x-ms-api-key";
         private readonly AzureKeyCredential _keyCredential;
@@ -31,59 +31,26 @@ namespace CadlFirstTest
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Demo2Client for mocking. </summary>
-        protected Demo2Client()
+        /// <summary> Initializes a new instance of Demo2 for mocking. </summary>
+        protected Demo2()
         {
         }
 
-        /// <summary> Initializes a new instance of Demo2Client. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public Demo2Client(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlfirsttestClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of Demo2Client. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public Demo2Client(TokenCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlfirsttestClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of Demo2Client. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <summary> Initializes a new instance of Demo2. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
+        /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> Endpoint Service. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public Demo2Client(AzureKeyCredential credential, Uri endpoint, CadlfirsttestClientOptions options)
+        /// <param name="apiVersion"> The String to use. </param>
+        internal Demo2(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint, string apiVersion)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new CadlfirsttestClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _keyCredential = keyCredential;
+            _tokenCredential = tokenCredential;
             _endpoint = endpoint;
-            _apiVersion = options.Version;
-        }
-
-        /// <summary> Initializes a new instance of Demo2Client. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> Endpoint Service. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public Demo2Client(TokenCredential credential, Uri endpoint, CadlfirsttestClientOptions options)
-        {
-            Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new CadlfirsttestClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
-            _endpoint = endpoint;
-            _apiVersion = options.Version;
+            _apiVersion = apiVersion;
         }
 
         /// <summary> Return hi again. </summary>
@@ -99,7 +66,7 @@ namespace CadlFirstTest
         /// This sample shows how to call HelloAgainAsync with required parameters and request content and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new Demo2Client(credential);
+        /// var client = new CadlfirsttestClient(credential).GetDemo2Client(<0.1.0>);
         /// 
         /// var data = new {
         ///     requiredString = "<requiredString>",
@@ -153,7 +120,7 @@ namespace CadlFirstTest
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloAgain");
+            using var scope = ClientDiagnostics.CreateScope("Demo2.HelloAgain");
             scope.Start();
             try
             {
@@ -180,7 +147,7 @@ namespace CadlFirstTest
         /// This sample shows how to call HelloAgain with required parameters and request content and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new Demo2Client(credential);
+        /// var client = new CadlfirsttestClient(credential).GetDemo2Client(<0.1.0>);
         /// 
         /// var data = new {
         ///     requiredString = "<requiredString>",
@@ -234,7 +201,7 @@ namespace CadlFirstTest
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloAgain");
+            using var scope = ClientDiagnostics.CreateScope("Demo2.HelloAgain");
             scope.Start();
             try
             {
@@ -261,7 +228,7 @@ namespace CadlFirstTest
         /// This sample shows how to call NoContentTypeAsync with required parameters and request content and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new Demo2Client(credential);
+        /// var client = new CadlfirsttestClient(credential).GetDemo2Client(<0.1.0>);
         /// 
         /// var data = new {
         ///     requiredString = "<requiredString>",
@@ -315,7 +282,7 @@ namespace CadlFirstTest
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.NoContentType");
+            using var scope = ClientDiagnostics.CreateScope("Demo2.NoContentType");
             scope.Start();
             try
             {
@@ -342,7 +309,7 @@ namespace CadlFirstTest
         /// This sample shows how to call NoContentType with required parameters and request content and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new Demo2Client(credential);
+        /// var client = new CadlfirsttestClient(credential).GetDemo2Client(<0.1.0>);
         /// 
         /// var data = new {
         ///     requiredString = "<requiredString>",
@@ -396,7 +363,7 @@ namespace CadlFirstTest
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.NoContentType");
+            using var scope = ClientDiagnostics.CreateScope("Demo2.NoContentType");
             scope.Start();
             try
             {
@@ -418,7 +385,7 @@ namespace CadlFirstTest
         /// This sample shows how to call HelloDemo2Async and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new Demo2Client(credential);
+        /// var client = new CadlfirsttestClient(credential).GetDemo2Client(<0.1.0>);
         /// 
         /// Response response = await client.HelloDemo2Async();
         /// 
@@ -440,7 +407,7 @@ namespace CadlFirstTest
         /// </remarks>
         public virtual async Task<Response> HelloDemo2Async(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2");
+            using var scope = ClientDiagnostics.CreateScope("Demo2.HelloDemo2");
             scope.Start();
             try
             {
@@ -462,7 +429,7 @@ namespace CadlFirstTest
         /// This sample shows how to call HelloDemo2 and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new Demo2Client(credential);
+        /// var client = new CadlfirsttestClient(credential).GetDemo2Client(<0.1.0>);
         /// 
         /// Response response = client.HelloDemo2();
         /// 
@@ -484,7 +451,7 @@ namespace CadlFirstTest
         /// </remarks>
         public virtual Response HelloDemo2(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Demo2Client.HelloDemo2");
+            using var scope = ClientDiagnostics.CreateScope("Demo2.HelloDemo2");
             scope.Start();
             try
             {

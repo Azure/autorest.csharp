@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace url_multi_collectionFormat_LowLevel
 {
-    /// <summary> Client options for QueriesClient. </summary>
+    /// <summary> Client options for Queries. </summary>
     public partial class QueriesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

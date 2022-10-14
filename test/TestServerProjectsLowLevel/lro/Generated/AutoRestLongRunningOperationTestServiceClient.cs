@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace lro_LowLevel
 {
+    // Data plane generated client. The AutoRestLongRunningOperationTestService service client.
     /// <summary> The AutoRestLongRunningOperationTestService service client. </summary>
     public partial class AutoRestLongRunningOperationTestServiceClient
     {

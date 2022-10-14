@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The HttpSuccess service client.
-    /// <summary> The HttpSuccess service client. </summary>
+    // Data plane generated sub-client. The HttpSuccess sub-client.
+    /// <summary> The HttpSuccess sub-client. </summary>
     public partial class HttpSuccess
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -54,7 +54,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head200Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// Response response = await client.Head200Async();
         /// Console.WriteLine(response.Status);
@@ -84,7 +84,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head200.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// Response response = client.Head200();
         /// Console.WriteLine(response.Status);
@@ -114,7 +114,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Async and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// Response response = await client.Get200Async();
         /// 
@@ -146,7 +146,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200 and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// Response response = client.Get200();
         /// 
@@ -178,7 +178,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options200Async and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// Response response = await client.Options200Async();
         /// 
@@ -210,7 +210,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options200 and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// Response response = client.Options200();
         /// 
@@ -243,7 +243,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put200Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -276,7 +276,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put200 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -309,7 +309,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch200Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -342,7 +342,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch200 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -375,7 +375,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post200Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -408,7 +408,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post200 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -441,7 +441,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete200Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -474,7 +474,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete200 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -507,7 +507,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put201Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -540,7 +540,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put201 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -573,7 +573,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post201Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -606,7 +606,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post201 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -639,7 +639,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put202Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -672,7 +672,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put202 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -705,7 +705,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch202Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -738,7 +738,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch202 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -771,7 +771,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post202Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -804,7 +804,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post202 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -837,7 +837,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete202Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -870,7 +870,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete202 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -902,7 +902,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head204Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// Response response = await client.Head204Async();
         /// Console.WriteLine(response.Status);
@@ -932,7 +932,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head204.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// Response response = client.Head204();
         /// Console.WriteLine(response.Status);
@@ -963,7 +963,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put204Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -996,7 +996,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put204 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -1029,7 +1029,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch204Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -1062,7 +1062,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch204 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -1095,7 +1095,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post204Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -1128,7 +1128,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post204 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -1161,7 +1161,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete204Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -1194,7 +1194,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete204 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// var data = true;
         /// 
@@ -1226,7 +1226,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head404Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// Response response = await client.Head404Async();
         /// Console.WriteLine(response.Status);
@@ -1256,7 +1256,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head404.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpSuccessClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpSuccessClient();
         /// 
         /// Response response = client.Head404();
         /// Console.WriteLine(response.Status);

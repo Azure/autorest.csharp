@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace paging_LowLevel
 {
-    /// <summary> Client options for PagingClient. </summary>
+    /// <summary> Client options for Paging. </summary>
     public partial class PagingClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

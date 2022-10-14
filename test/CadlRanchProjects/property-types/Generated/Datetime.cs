@@ -13,9 +13,9 @@ using Azure.Core.Pipeline;
 
 namespace property_types
 {
-    // Data plane generated client. The CollectionsString service client.
-    /// <summary> The CollectionsString service client. </summary>
-    public partial class CollectionsStringClient
+    // Data plane generated sub-client. The Datetime sub-client.
+    /// <summary> The Datetime sub-client. </summary>
+    public partial class Datetime
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -27,24 +27,22 @@ namespace property_types
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of CollectionsStringClient. </summary>
-        public CollectionsStringClient() : this(new Uri("http://localhost:3000"), new ModelsPropertyTypesClientOptions())
+        /// <summary> Initializes a new instance of Datetime for mocking. </summary>
+        protected Datetime()
         {
         }
 
-        /// <summary> Initializes a new instance of CollectionsStringClient. </summary>
+        /// <summary> Initializes a new instance of Datetime. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public CollectionsStringClient(Uri endpoint, ModelsPropertyTypesClientOptions options)
+        /// <param name="apiVersion"> The String to use. </param>
+        internal Datetime(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new ModelsPropertyTypesClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = options.Version;
+            _apiVersion = apiVersion;
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -53,12 +51,12 @@ namespace property_types
         /// <example>
         /// This sample shows how to call GetAsync and parse the result.
         /// <code><![CDATA[
-        /// var client = new CollectionsStringClient();
+        /// var client = new ModelsPropertyTypesClient().GetDatetimeClient(<1.0.0>);
         /// 
         /// Response response = await client.GetAsync();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("property")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("property").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -66,16 +64,16 @@ namespace property_types
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>CollectionsStringProperty</c>:
+        /// Schema for <c>DatetimeProperty</c>:
         /// <code>{
-        ///   property: [string], # Required.
+        ///   property: string (date &amp; time), # Required.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CollectionsStringClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("Datetime.Get");
             scope.Start();
             try
             {
@@ -95,12 +93,12 @@ namespace property_types
         /// <example>
         /// This sample shows how to call Get and parse the result.
         /// <code><![CDATA[
-        /// var client = new CollectionsStringClient();
+        /// var client = new ModelsPropertyTypesClient().GetDatetimeClient(<1.0.0>);
         /// 
         /// Response response = client.Get();
         /// 
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("property")[0].ToString());
+        /// Console.WriteLine(result.GetProperty("property").ToString());
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -108,16 +106,16 @@ namespace property_types
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>CollectionsStringProperty</c>:
+        /// Schema for <c>DatetimeProperty</c>:
         /// <code>{
-        ///   property: [string], # Required.
+        ///   property: string (date &amp; time), # Required.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Response Get(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CollectionsStringClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("Datetime.Get");
             scope.Start();
             try
             {
@@ -139,12 +137,10 @@ namespace property_types
         /// <example>
         /// This sample shows how to call PutAsync with required request content.
         /// <code><![CDATA[
-        /// var client = new CollectionsStringClient();
+        /// var client = new ModelsPropertyTypesClient().GetDatetimeClient(<1.0.0>);
         /// 
         /// var data = new {
-        ///     property = new[] {
-        ///         "<String>"
-        ///     },
+        ///     property = "2022-05-10T14:57:31.2311892-04:00",
         /// };
         /// 
         /// Response response = await client.PutAsync(RequestContent.Create(data));
@@ -156,9 +152,9 @@ namespace property_types
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>CollectionsStringProperty</c>:
+        /// Schema for <c>DatetimeProperty</c>:
         /// <code>{
-        ///   property: [string], # Required.
+        ///   property: string (date &amp; time), # Required.
         /// }
         /// </code>
         /// 
@@ -167,7 +163,7 @@ namespace property_types
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CollectionsStringClient.Put");
+            using var scope = ClientDiagnostics.CreateScope("Datetime.Put");
             scope.Start();
             try
             {
@@ -189,12 +185,10 @@ namespace property_types
         /// <example>
         /// This sample shows how to call Put with required request content.
         /// <code><![CDATA[
-        /// var client = new CollectionsStringClient();
+        /// var client = new ModelsPropertyTypesClient().GetDatetimeClient(<1.0.0>);
         /// 
         /// var data = new {
-        ///     property = new[] {
-        ///         "<String>"
-        ///     },
+        ///     property = "2022-05-10T14:57:31.2311892-04:00",
         /// };
         /// 
         /// Response response = client.Put(RequestContent.Create(data));
@@ -206,9 +200,9 @@ namespace property_types
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>CollectionsStringProperty</c>:
+        /// Schema for <c>DatetimeProperty</c>:
         /// <code>{
-        ///   property: [string], # Required.
+        ///   property: string (date &amp; time), # Required.
         /// }
         /// </code>
         /// 
@@ -217,7 +211,7 @@ namespace property_types
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CollectionsStringClient.Put");
+            using var scope = ClientDiagnostics.CreateScope("Datetime.Put");
             scope.Start();
             try
             {
@@ -238,7 +232,7 @@ namespace property_types
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/properties/types/collections/string", false);
+            uri.AppendPath("/models/properties/types/datetime", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -252,7 +246,7 @@ namespace property_types
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/properties/types/collections/string", false);
+            uri.AppendPath("/models/properties/types/datetime", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace CollapseRequestCondition_LowLevel
 {
-    // Data plane generated client. The NonCollapse service client.
-    /// <summary> The NonCollapse service client. </summary>
+    // Data plane generated sub-client. The NonCollapse sub-client.
+    /// <summary> The NonCollapse sub-client. </summary>
     public partial class NonCollapse
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -55,7 +55,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call IfMatchPutAsync with required parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new NonCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetNonCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -65,7 +65,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call IfMatchPutAsync with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new NonCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetNonCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -98,7 +98,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call IfMatchPut with required parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new NonCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetNonCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -108,7 +108,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call IfMatchPut with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new NonCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetNonCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -141,7 +141,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call IfNoneMatchPutAsync with required parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new NonCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetNonCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -151,7 +151,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call IfNoneMatchPutAsync with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new NonCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetNonCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -184,7 +184,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call IfNoneMatchPut with required parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new NonCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetNonCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -194,7 +194,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call IfNoneMatchPut with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new NonCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetNonCollapseClient();
         /// 
         /// var data = "<String>";
         /// 

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace property_types
 {
-    /// <summary> Client options for models.property.types library clients. </summary>
+    /// <summary> Client options for ModelsPropertyTypesClient. </summary>
     public partial class ModelsPropertyTypesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

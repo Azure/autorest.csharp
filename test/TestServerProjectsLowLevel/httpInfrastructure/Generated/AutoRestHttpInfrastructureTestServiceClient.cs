@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
+    // Data plane generated client. The AutoRestHttpInfrastructureTestService service client.
     /// <summary> The AutoRestHttpInfrastructureTestService service client. </summary>
     public partial class AutoRestHttpInfrastructureTestServiceClient
     {

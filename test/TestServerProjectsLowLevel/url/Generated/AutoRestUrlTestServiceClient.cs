@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace url_LowLevel
 {
+    // Data plane generated client. The AutoRestUrlTestService service client.
     /// <summary> The AutoRestUrlTestService service client. </summary>
     public partial class AutoRestUrlTestServiceClient
     {

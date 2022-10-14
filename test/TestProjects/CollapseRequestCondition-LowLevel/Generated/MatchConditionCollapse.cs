@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace CollapseRequestCondition_LowLevel
 {
-    // Data plane generated client. The MatchConditionCollapse service client.
-    /// <summary> The MatchConditionCollapse service client. </summary>
+    // Data plane generated sub-client. The MatchConditionCollapse sub-client.
+    /// <summary> The MatchConditionCollapse sub-client. </summary>
     public partial class MatchConditionCollapse
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -55,7 +55,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapseGetWithHeadAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// Response response = await client.CollapseGetWithHeadAsync();
         /// Console.WriteLine(response.Status);
@@ -63,7 +63,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapseGetWithHeadAsync with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// Response response = await client.CollapseGetWithHeadAsync("<otherHeader>", new MatchConditions { IfMatch = "<YOUR_ETAG>" });
         /// Console.WriteLine(response.Status);
@@ -94,7 +94,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapseGetWithHead.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// Response response = client.CollapseGetWithHead();
         /// Console.WriteLine(response.Status);
@@ -102,7 +102,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapseGetWithHead with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// Response response = client.CollapseGetWithHead("<otherHeader>", new MatchConditions { IfMatch = "<YOUR_ETAG>" });
         /// Console.WriteLine(response.Status);
@@ -133,7 +133,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapsePutAsync with required parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -143,7 +143,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapsePutAsync with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -176,7 +176,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapsePut with required parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -186,7 +186,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapsePut with all parameters and request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// var data = "<String>";
         /// 
@@ -218,7 +218,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapseGetAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// Response response = await client.CollapseGetAsync();
         /// Console.WriteLine(response.Status);
@@ -226,7 +226,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapseGetAsync with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// Response response = await client.CollapseGetAsync(new MatchConditions { IfMatch = "<YOUR_ETAG>" });
         /// Console.WriteLine(response.Status);
@@ -256,7 +256,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapseGet.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// Response response = client.CollapseGet();
         /// Console.WriteLine(response.Status);
@@ -264,7 +264,7 @@ namespace CollapseRequestCondition_LowLevel
         /// This sample shows how to call CollapseGet with all parameters.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MatchConditionCollapseClient(credential);
+        /// var client = new CollapseRequestConditionsClient(credential).GetMatchConditionCollapseClient();
         /// 
         /// Response response = client.CollapseGet(new MatchConditions { IfMatch = "<YOUR_ETAG>" });
         /// Console.WriteLine(response.Status);

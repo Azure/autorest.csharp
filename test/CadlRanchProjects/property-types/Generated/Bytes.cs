@@ -13,9 +13,9 @@ using Azure.Core.Pipeline;
 
 namespace property_types
 {
-    // Data plane generated client. The Duration service client.
-    /// <summary> The Duration service client. </summary>
-    public partial class DurationClient
+    // Data plane generated sub-client. The Bytes sub-client.
+    /// <summary> The Bytes sub-client. </summary>
+    public partial class Bytes
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -27,24 +27,22 @@ namespace property_types
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of DurationClient. </summary>
-        public DurationClient() : this(new Uri("http://localhost:3000"), new ModelsPropertyTypesClientOptions())
+        /// <summary> Initializes a new instance of Bytes for mocking. </summary>
+        protected Bytes()
         {
         }
 
-        /// <summary> Initializes a new instance of DurationClient. </summary>
+        /// <summary> Initializes a new instance of Bytes. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public DurationClient(Uri endpoint, ModelsPropertyTypesClientOptions options)
+        /// <param name="apiVersion"> The String to use. </param>
+        internal Bytes(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new ModelsPropertyTypesClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = options.Version;
+            _apiVersion = apiVersion;
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -53,7 +51,7 @@ namespace property_types
         /// <example>
         /// This sample shows how to call GetAsync and parse the result.
         /// <code><![CDATA[
-        /// var client = new DurationClient();
+        /// var client = new ModelsPropertyTypesClient().GetBytesClient(<1.0.0>);
         /// 
         /// Response response = await client.GetAsync();
         /// 
@@ -66,16 +64,16 @@ namespace property_types
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>DurationProperty</c>:
+        /// Schema for <c>BytesProperty</c>:
         /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Required.
+        ///   property: BinaryData, # Required.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual async Task<Response> GetAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("DurationClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("Bytes.Get");
             scope.Start();
             try
             {
@@ -95,7 +93,7 @@ namespace property_types
         /// <example>
         /// This sample shows how to call Get and parse the result.
         /// <code><![CDATA[
-        /// var client = new DurationClient();
+        /// var client = new ModelsPropertyTypesClient().GetBytesClient(<1.0.0>);
         /// 
         /// Response response = client.Get();
         /// 
@@ -108,16 +106,16 @@ namespace property_types
         /// 
         /// Response Body:
         /// 
-        /// Schema for <c>DurationProperty</c>:
+        /// Schema for <c>BytesProperty</c>:
         /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Required.
+        ///   property: BinaryData, # Required.
         /// }
         /// </code>
         /// 
         /// </remarks>
         public virtual Response Get(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("DurationClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("Bytes.Get");
             scope.Start();
             try
             {
@@ -139,10 +137,10 @@ namespace property_types
         /// <example>
         /// This sample shows how to call PutAsync with required request content.
         /// <code><![CDATA[
-        /// var client = new DurationClient();
+        /// var client = new ModelsPropertyTypesClient().GetBytesClient(<1.0.0>);
         /// 
         /// var data = new {
-        ///     property = PT1H23M45S,
+        ///     property = new {},
         /// };
         /// 
         /// Response response = await client.PutAsync(RequestContent.Create(data));
@@ -154,9 +152,9 @@ namespace property_types
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>DurationProperty</c>:
+        /// Schema for <c>BytesProperty</c>:
         /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Required.
+        ///   property: BinaryData, # Required.
         /// }
         /// </code>
         /// 
@@ -165,7 +163,7 @@ namespace property_types
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("DurationClient.Put");
+            using var scope = ClientDiagnostics.CreateScope("Bytes.Put");
             scope.Start();
             try
             {
@@ -187,10 +185,10 @@ namespace property_types
         /// <example>
         /// This sample shows how to call Put with required request content.
         /// <code><![CDATA[
-        /// var client = new DurationClient();
+        /// var client = new ModelsPropertyTypesClient().GetBytesClient(<1.0.0>);
         /// 
         /// var data = new {
-        ///     property = PT1H23M45S,
+        ///     property = new {},
         /// };
         /// 
         /// Response response = client.Put(RequestContent.Create(data));
@@ -202,9 +200,9 @@ namespace property_types
         /// 
         /// Request Body:
         /// 
-        /// Schema for <c>DurationProperty</c>:
+        /// Schema for <c>BytesProperty</c>:
         /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Required.
+        ///   property: BinaryData, # Required.
         /// }
         /// </code>
         /// 
@@ -213,7 +211,7 @@ namespace property_types
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("DurationClient.Put");
+            using var scope = ClientDiagnostics.CreateScope("Bytes.Put");
             scope.Start();
             try
             {
@@ -234,7 +232,7 @@ namespace property_types
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/properties/types/duration", false);
+            uri.AppendPath("/models/properties/types/bytes", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -248,7 +246,7 @@ namespace property_types
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/properties/types/duration", false);
+            uri.AppendPath("/models/properties/types/bytes", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

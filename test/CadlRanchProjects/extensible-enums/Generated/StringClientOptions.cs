@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace extensible_enums
 {
-    /// <summary> Client options for StringClient. </summary>
+    /// <summary> Client options for String. </summary>
     public partial class StringClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

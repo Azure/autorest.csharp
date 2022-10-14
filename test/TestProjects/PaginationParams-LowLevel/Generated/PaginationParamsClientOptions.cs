@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace PaginationParams_LowLevel
 {
-    /// <summary> Client options for PaginationParamsClient. </summary>
+    /// <summary> Client options for PaginationParams. </summary>
     public partial class PaginationParamsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2020_06_01;

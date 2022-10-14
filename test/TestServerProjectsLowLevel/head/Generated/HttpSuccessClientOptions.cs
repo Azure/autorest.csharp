@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace head_LowLevel
 {
-    /// <summary> Client options for HttpSuccessClient. </summary>
+    /// <summary> Client options for HttpSuccess. </summary>
     public partial class HttpSuccessClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

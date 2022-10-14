@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace CollapseRequestCondition_LowLevel
 {
+    // Data plane generated client. The CollapseRequestConditions service client.
     /// <summary> The CollapseRequestConditions service client. </summary>
     public partial class CollapseRequestConditionsClient
     {

@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The HttpFailure service client.
-    /// <summary> The HttpFailure service client. </summary>
+    // Data plane generated sub-client. The HttpFailure sub-client.
+    /// <summary> The HttpFailure sub-client. </summary>
     public partial class HttpFailure
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -54,7 +54,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetEmptyErrorAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpFailureClient();
         /// 
         /// Response response = await client.GetEmptyErrorAsync();
         /// 
@@ -86,7 +86,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetEmptyError and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpFailureClient();
         /// 
         /// Response response = client.GetEmptyError();
         /// 
@@ -118,7 +118,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetNoModelErrorAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpFailureClient();
         /// 
         /// Response response = await client.GetNoModelErrorAsync();
         /// 
@@ -150,7 +150,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetNoModelError and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpFailureClient();
         /// 
         /// Response response = client.GetNoModelError();
         /// 
@@ -182,7 +182,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetNoModelEmptyAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpFailureClient();
         /// 
         /// Response response = await client.GetNoModelEmptyAsync();
         /// 
@@ -214,7 +214,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetNoModelEmpty and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpFailureClient();
         /// 
         /// Response response = client.GetNoModelEmpty();
         /// 

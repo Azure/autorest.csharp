@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The HttpRetry service client.
-    /// <summary> The HttpRetry service client. </summary>
+    // Data plane generated sub-client. The HttpRetry sub-client.
+    /// <summary> The HttpRetry sub-client. </summary>
     public partial class HttpRetry
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -54,7 +54,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head408Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// Response response = await client.Head408Async();
         /// Console.WriteLine(response.Status);
@@ -84,7 +84,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head408.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// Response response = client.Head408();
         /// Console.WriteLine(response.Status);
@@ -115,7 +115,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put500Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -148,7 +148,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put500 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -181,7 +181,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch500Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -214,7 +214,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch500 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -246,7 +246,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get502Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// Response response = await client.Get502Async();
         /// Console.WriteLine(response.Status);
@@ -276,7 +276,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get502.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// Response response = client.Get502();
         /// Console.WriteLine(response.Status);
@@ -306,7 +306,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options502Async and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// Response response = await client.Options502Async();
         /// 
@@ -338,7 +338,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options502 and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// Response response = client.Options502();
         /// 
@@ -371,7 +371,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post503Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -404,7 +404,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post503 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -437,7 +437,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete503Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -470,7 +470,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete503 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -503,7 +503,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put504Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -536,7 +536,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put504 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -569,7 +569,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch504Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 
@@ -602,7 +602,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch504 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpRetryClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpRetryClient();
         /// 
         /// var data = true;
         /// 

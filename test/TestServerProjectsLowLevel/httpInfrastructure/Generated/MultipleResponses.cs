@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The MultipleResponses service client.
-    /// <summary> The MultipleResponses service client. </summary>
+    // Data plane generated sub-client. The MultipleResponses sub-client.
+    /// <summary> The MultipleResponses sub-client. </summary>
     public partial class MultipleResponses
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -54,7 +54,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model204NoModelDefaultError200ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200Model204NoModelDefaultError200ValidAsync();
         /// 
@@ -100,7 +100,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model204NoModelDefaultError200Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200Model204NoModelDefaultError200Valid();
         /// 
@@ -146,7 +146,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model204NoModelDefaultError204ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200Model204NoModelDefaultError204ValidAsync();
         /// 
@@ -192,7 +192,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model204NoModelDefaultError204Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200Model204NoModelDefaultError204Valid();
         /// 
@@ -238,7 +238,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model204NoModelDefaultError201InvalidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync();
         /// 
@@ -284,7 +284,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model204NoModelDefaultError201Invalid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200Model204NoModelDefaultError201Invalid();
         /// 
@@ -330,7 +330,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model204NoModelDefaultError202NoneAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200Model204NoModelDefaultError202NoneAsync();
         /// 
@@ -376,7 +376,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model204NoModelDefaultError202None and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200Model204NoModelDefaultError202None();
         /// 
@@ -422,7 +422,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model204NoModelDefaultError400ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200Model204NoModelDefaultError400ValidAsync();
         /// 
@@ -468,7 +468,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model204NoModelDefaultError400Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200Model204NoModelDefaultError400Valid();
         /// 
@@ -514,7 +514,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model201ModelDefaultError200ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200Model201ModelDefaultError200ValidAsync();
         /// 
@@ -560,7 +560,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model201ModelDefaultError200Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200Model201ModelDefaultError200Valid();
         /// 
@@ -606,7 +606,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model201ModelDefaultError201ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200Model201ModelDefaultError201ValidAsync();
         /// 
@@ -652,7 +652,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model201ModelDefaultError201Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200Model201ModelDefaultError201Valid();
         /// 
@@ -698,7 +698,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model201ModelDefaultError400ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200Model201ModelDefaultError400ValidAsync();
         /// 
@@ -744,7 +744,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200Model201ModelDefaultError400Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200Model201ModelDefaultError400Valid();
         /// 
@@ -790,7 +790,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError200ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
         /// 
@@ -836,7 +836,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError200Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid();
         /// 
@@ -882,7 +882,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError201ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
         /// 
@@ -928,7 +928,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError201Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid();
         /// 
@@ -974,7 +974,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError404ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
         /// 
@@ -1020,7 +1020,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError404Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid();
         /// 
@@ -1066,7 +1066,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError400ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
         /// 
@@ -1112,7 +1112,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA201ModelC404ModelDDefaultError400Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid();
         /// 
@@ -1158,7 +1158,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultError202NoneAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get202None204NoneDefaultError202NoneAsync();
         /// Console.WriteLine(response.Status);
@@ -1188,7 +1188,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultError202None.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get202None204NoneDefaultError202None();
         /// Console.WriteLine(response.Status);
@@ -1218,7 +1218,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultError204NoneAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get202None204NoneDefaultError204NoneAsync();
         /// Console.WriteLine(response.Status);
@@ -1248,7 +1248,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultError204None.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get202None204NoneDefaultError204None();
         /// Console.WriteLine(response.Status);
@@ -1278,7 +1278,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultError400ValidAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get202None204NoneDefaultError400ValidAsync();
         /// Console.WriteLine(response.Status);
@@ -1308,7 +1308,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultError400Valid.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get202None204NoneDefaultError400Valid();
         /// Console.WriteLine(response.Status);
@@ -1338,7 +1338,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultNone202InvalidAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
         /// Console.WriteLine(response.Status);
@@ -1368,7 +1368,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultNone202Invalid.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get202None204NoneDefaultNone202Invalid();
         /// Console.WriteLine(response.Status);
@@ -1398,7 +1398,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultNone204NoneAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
         /// Console.WriteLine(response.Status);
@@ -1428,7 +1428,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultNone204None.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get202None204NoneDefaultNone204None();
         /// Console.WriteLine(response.Status);
@@ -1458,7 +1458,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultNone400NoneAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
         /// Console.WriteLine(response.Status);
@@ -1488,7 +1488,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultNone400None.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get202None204NoneDefaultNone400None();
         /// Console.WriteLine(response.Status);
@@ -1518,7 +1518,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultNone400InvalidAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
         /// Console.WriteLine(response.Status);
@@ -1548,7 +1548,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get202None204NoneDefaultNone400Invalid.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get202None204NoneDefaultNone400Invalid();
         /// Console.WriteLine(response.Status);
@@ -1578,7 +1578,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultModelA200ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.GetDefaultModelA200ValidAsync();
         /// 
@@ -1624,7 +1624,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultModelA200Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.GetDefaultModelA200Valid();
         /// 
@@ -1670,7 +1670,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultModelA200NoneAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.GetDefaultModelA200NoneAsync();
         /// 
@@ -1716,7 +1716,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultModelA200None and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.GetDefaultModelA200None();
         /// 
@@ -1762,7 +1762,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultModelA400ValidAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.GetDefaultModelA400ValidAsync();
         /// Console.WriteLine(response.Status);
@@ -1792,7 +1792,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultModelA400Valid.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.GetDefaultModelA400Valid();
         /// Console.WriteLine(response.Status);
@@ -1822,7 +1822,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultModelA400NoneAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.GetDefaultModelA400NoneAsync();
         /// Console.WriteLine(response.Status);
@@ -1852,7 +1852,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultModelA400None.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.GetDefaultModelA400None();
         /// Console.WriteLine(response.Status);
@@ -1882,7 +1882,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultNone200InvalidAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.GetDefaultNone200InvalidAsync();
         /// Console.WriteLine(response.Status);
@@ -1912,7 +1912,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultNone200Invalid.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.GetDefaultNone200Invalid();
         /// Console.WriteLine(response.Status);
@@ -1942,7 +1942,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultNone200NoneAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.GetDefaultNone200NoneAsync();
         /// Console.WriteLine(response.Status);
@@ -1972,7 +1972,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultNone200None.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.GetDefaultNone200None();
         /// Console.WriteLine(response.Status);
@@ -2002,7 +2002,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultNone400InvalidAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.GetDefaultNone400InvalidAsync();
         /// Console.WriteLine(response.Status);
@@ -2032,7 +2032,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultNone400Invalid.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.GetDefaultNone400Invalid();
         /// Console.WriteLine(response.Status);
@@ -2062,7 +2062,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultNone400NoneAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.GetDefaultNone400NoneAsync();
         /// Console.WriteLine(response.Status);
@@ -2092,7 +2092,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call GetDefaultNone400None.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.GetDefaultNone400None();
         /// Console.WriteLine(response.Status);
@@ -2122,7 +2122,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA200NoneAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA200NoneAsync();
         /// 
@@ -2168,7 +2168,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA200None and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA200None();
         /// 
@@ -2214,7 +2214,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA200ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA200ValidAsync();
         /// 
@@ -2260,7 +2260,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA200Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA200Valid();
         /// 
@@ -2306,7 +2306,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA200InvalidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA200InvalidAsync();
         /// 
@@ -2352,7 +2352,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA200Invalid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA200Invalid();
         /// 
@@ -2398,7 +2398,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA400NoneAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA400NoneAsync();
         /// 
@@ -2444,7 +2444,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA400None and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA400None();
         /// 
@@ -2490,7 +2490,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA400ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA400ValidAsync();
         /// 
@@ -2536,7 +2536,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA400Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA400Valid();
         /// 
@@ -2582,7 +2582,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA400InvalidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA400InvalidAsync();
         /// 
@@ -2628,7 +2628,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA400Invalid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA400Invalid();
         /// 
@@ -2674,7 +2674,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA202ValidAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = await client.Get200ModelA202ValidAsync();
         /// 
@@ -2720,7 +2720,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get200ModelA202Valid and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new MultipleResponsesClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetMultipleResponsesClient();
         /// 
         /// Response response = client.Get200ModelA202Valid();
         /// 

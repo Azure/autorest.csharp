@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The HttpClientFailure service client.
-    /// <summary> The HttpClientFailure service client. </summary>
+    // Data plane generated sub-client. The HttpClientFailure sub-client.
+    /// <summary> The HttpClientFailure sub-client. </summary>
     public partial class HttpClientFailure
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -54,7 +54,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head400Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Head400Async();
         /// Console.WriteLine(response.Status);
@@ -84,7 +84,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head400.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Head400();
         /// Console.WriteLine(response.Status);
@@ -114,7 +114,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get400Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Get400Async();
         /// Console.WriteLine(response.Status);
@@ -144,7 +144,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get400.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Get400();
         /// Console.WriteLine(response.Status);
@@ -174,7 +174,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options400Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Options400Async();
         /// Console.WriteLine(response.Status);
@@ -204,7 +204,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options400.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Options400();
         /// Console.WriteLine(response.Status);
@@ -235,7 +235,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put400Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -268,7 +268,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put400 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -301,7 +301,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch400Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -334,7 +334,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch400 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -367,7 +367,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post400Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -400,7 +400,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post400 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -433,7 +433,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete400Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -466,7 +466,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete400 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -498,7 +498,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head401Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Head401Async();
         /// Console.WriteLine(response.Status);
@@ -528,7 +528,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head401.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Head401();
         /// Console.WriteLine(response.Status);
@@ -558,7 +558,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get402Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Get402Async();
         /// Console.WriteLine(response.Status);
@@ -588,7 +588,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get402.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Get402();
         /// Console.WriteLine(response.Status);
@@ -618,7 +618,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options403Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Options403Async();
         /// Console.WriteLine(response.Status);
@@ -648,7 +648,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options403.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Options403();
         /// Console.WriteLine(response.Status);
@@ -678,7 +678,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get403Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Get403Async();
         /// Console.WriteLine(response.Status);
@@ -708,7 +708,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get403.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Get403();
         /// Console.WriteLine(response.Status);
@@ -739,7 +739,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put404Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -772,7 +772,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put404 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -805,7 +805,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch405Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -838,7 +838,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch405 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -871,7 +871,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post406Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -904,7 +904,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post406 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -937,7 +937,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete407Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -970,7 +970,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete407 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1003,7 +1003,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put409Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1036,7 +1036,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put409 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1068,7 +1068,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head410Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Head410Async();
         /// Console.WriteLine(response.Status);
@@ -1098,7 +1098,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head410.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Head410();
         /// Console.WriteLine(response.Status);
@@ -1128,7 +1128,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get411Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Get411Async();
         /// Console.WriteLine(response.Status);
@@ -1158,7 +1158,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get411.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Get411();
         /// Console.WriteLine(response.Status);
@@ -1188,7 +1188,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options412Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Options412Async();
         /// Console.WriteLine(response.Status);
@@ -1218,7 +1218,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Options412.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Options412();
         /// Console.WriteLine(response.Status);
@@ -1248,7 +1248,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get412Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Get412Async();
         /// Console.WriteLine(response.Status);
@@ -1278,7 +1278,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get412.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Get412();
         /// Console.WriteLine(response.Status);
@@ -1309,7 +1309,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put413Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1342,7 +1342,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Put413 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1375,7 +1375,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch414Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1408,7 +1408,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Patch414 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1441,7 +1441,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post415Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1474,7 +1474,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Post415 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1506,7 +1506,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get416Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Get416Async();
         /// Console.WriteLine(response.Status);
@@ -1536,7 +1536,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Get416.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Get416();
         /// Console.WriteLine(response.Status);
@@ -1567,7 +1567,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete417Async with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1600,7 +1600,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Delete417 with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// var data = true;
         /// 
@@ -1632,7 +1632,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head429Async.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = await client.Head429Async();
         /// Console.WriteLine(response.Status);
@@ -1662,7 +1662,7 @@ namespace httpInfrastructure_LowLevel
         /// This sample shows how to call Head429.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpClientFailureClient(credential);
+        /// var client = new AutoRestHttpInfrastructureTestServiceClient(credential).GetHttpClientFailureClient();
         /// 
         /// Response response = client.Head429();
         /// Console.WriteLine(response.Status);

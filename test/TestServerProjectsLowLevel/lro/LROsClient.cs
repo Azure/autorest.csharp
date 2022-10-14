@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 namespace lro_LowLevel
 {
     /// <summary> The LROs service client. </summary>
-    public partial class LROsClient
+    public partial class LROs
     {
         /// <summary> Add the convenience method for testing. </summary>
         ///  When protocol method returns a response without content, it will return Operation. The convienience method is to verify no break occurs in asyncronous convienience methods.

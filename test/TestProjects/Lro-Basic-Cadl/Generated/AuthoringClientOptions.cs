@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace LroBasicCadl
 {
-    /// <summary> Client options for AuthoringClient. </summary>
+    /// <summary> Client options for Authoring. </summary>
     public partial class AuthoringClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2022_05_15_Preview;

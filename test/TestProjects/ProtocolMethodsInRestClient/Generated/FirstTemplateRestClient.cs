@@ -120,7 +120,7 @@ namespace ProtocolMethodsInRestClient
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("FirstTemplate.Create");
+            using var scope = ClientDiagnostics.CreateScope("FirstTemplateClient.Create");
             scope.Start();
             try
             {
@@ -141,7 +141,7 @@ namespace ProtocolMethodsInRestClient
         /// <returns> The response returned from the service. </returns>
         public virtual Response Create(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("FirstTemplate.Create");
+            using var scope = ClientDiagnostics.CreateScope("FirstTemplateClient.Create");
             scope.Start();
             try
             {
@@ -305,7 +305,7 @@ namespace ProtocolMethodsInRestClient
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
-            using var scope = ClientDiagnostics.CreateScope("FirstTemplate.Get");
+            using var scope = ClientDiagnostics.CreateScope("FirstTemplateClient.Get");
             scope.Start();
             try
             {
@@ -330,7 +330,7 @@ namespace ProtocolMethodsInRestClient
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
-            using var scope = ClientDiagnostics.CreateScope("FirstTemplate.Get");
+            using var scope = ClientDiagnostics.CreateScope("FirstTemplateClient.Get");
             scope.Start();
             try
             {

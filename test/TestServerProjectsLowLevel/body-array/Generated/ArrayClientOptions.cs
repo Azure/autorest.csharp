@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace body_array_LowLevel
 {
-    /// <summary> Client options for ArrayClient. </summary>
+    /// <summary> Client options for Array. </summary>
     public partial class ArrayClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
