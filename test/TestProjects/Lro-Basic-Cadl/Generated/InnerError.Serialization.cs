@@ -5,64 +5,58 @@
 
 #nullable disable
 
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Cadl.Rest;
-using Pagination;
 
 namespace Azure.Core.Foundations
 {
-    public partial class CustomPage : IUtf8JsonSerializable
+    public partial class InnerError : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(NextLink))
+            writer.WritePropertyName("code");
+            writer.WriteStringValue(Code);
+            if (Optional.IsDefined(Innererror))
             {
-                writer.WritePropertyName("nextLink");
-                writer.WriteObjectValue(NextLink);
+                writer.WritePropertyName("innererror");
+                writer.WriteObjectValue(Innererror);
             }
             writer.WriteEndObject();
         }
 
-        internal static CustomPage DeserializeCustomPage(JsonElement element)
+        internal static InnerError DeserializeInnerError(JsonElement element)
         {
-            IList<LedgerEntry> value = default;
-            Optional<ResourceLocation> nextLink = default;
+            string code = default;
+            Optional<InnerError> innererror = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("value"))
+                if (property.NameEquals("code"))
                 {
-                    List<LedgerEntry> array = new List<LedgerEntry>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(LedgerEntry.DeserializeLedgerEntry(item));
-                    }
-                    value = array;
+                    code = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("nextLink"))
+                if (property.NameEquals("innererror"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    nextLink = ResourceLocation.DeserializeResourceLocation(property.Value);
+                    innererror = DeserializeInnerError(property.Value);
                     continue;
                 }
             }
-            return new CustomPage(value, nextLink);
+            return new InnerError(code, innererror);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static CustomPage FromResponse(Response response)
+        internal static InnerError FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCustomPage(document.RootElement);
+            return DeserializeInnerError(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

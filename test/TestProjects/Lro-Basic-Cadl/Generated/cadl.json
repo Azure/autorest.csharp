@@ -4,21 +4,234 @@
  "ApiVersions": [
   "2022-05-15-preview"
  ],
- "Enums": [],
- "Models": [
+ "Enums": [
   {
    "$id": "2",
+   "Name": "OperationState",
+   "Namespace": "Azure.Core.Foundations",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "InProgress",
+     "Value": "InProgress"
+    },
+    {
+     "$id": "4",
+     "Name": "Succeeded",
+     "Value": "Succeeded"
+    },
+    {
+     "$id": "5",
+     "Name": "Failed",
+     "Value": "Failed"
+    },
+    {
+     "$id": "6",
+     "Name": "Canceled",
+     "Value": "Canceled"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false
+  }
+ ],
+ "Models": [
+  {
+   "$id": "7",
+   "Name": "OperationStatusResource",
+   "Namespace": "LroBasicCadl.CustomCore",
+   "Description": "Status monitor resource for long running operations",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "8",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "",
+     "Type": {
+      "$id": "9",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "10",
+     "Name": "status",
+     "SerializedName": "status",
+     "Description": "",
+     "Type": {
+      "$ref": "2"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "11",
+     "Name": "error",
+     "SerializedName": "error",
+     "Description": "",
+     "Type": {
+      "$id": "12",
+      "Name": "Error",
+      "Namespace": "Azure.Core.Foundations",
+      "Description": "The error object.",
+      "IsNullable": false,
+      "Properties": [
+       {
+        "$id": "13",
+        "Name": "code",
+        "SerializedName": "code",
+        "Description": "",
+        "Type": {
+         "$id": "14",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "15",
+        "Name": "message",
+        "SerializedName": "message",
+        "Description": "",
+        "Type": {
+         "$id": "16",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "17",
+        "Name": "target",
+        "SerializedName": "target",
+        "Description": "",
+        "Type": {
+         "$id": "18",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "19",
+        "Name": "details",
+        "SerializedName": "details",
+        "Description": "",
+        "Type": {
+         "$id": "20",
+         "Name": "Array",
+         "ElementType": {
+          "$ref": "12"
+         },
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "21",
+        "Name": "innererror",
+        "SerializedName": "innererror",
+        "Description": "",
+        "Type": {
+         "$id": "22",
+         "Name": "InnerError",
+         "Namespace": "Azure.Core.Foundations",
+         "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "IsNullable": false,
+         "Properties": [
+          {
+           "$id": "23",
+           "Name": "code",
+           "SerializedName": "code",
+           "Description": "",
+           "Type": {
+            "$id": "24",
+            "Name": "string",
+            "Kind": "String",
+            "IsNullable": false
+           },
+           "IsRequired": true,
+           "IsReadOnly": false,
+           "IsDiscriminator": false
+          },
+          {
+           "$id": "25",
+           "Name": "innererror",
+           "SerializedName": "innererror",
+           "Description": "",
+           "Type": {
+            "$ref": "22"
+           },
+           "IsRequired": false,
+           "IsReadOnly": false,
+           "IsDiscriminator": false
+          }
+         ]
+        },
+        "IsRequired": false,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "26",
+     "Name": "operationId",
+     "SerializedName": "operationId",
+     "Description": "",
+     "Type": {
+      "$id": "27",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$ref": "12"
+  },
+  {
+   "$ref": "22"
+  },
+  {
+   "$id": "28",
    "Name": "Project",
    "Namespace": "LroBasicCadl",
    "IsNullable": false,
    "Properties": [
     {
-     "$id": "3",
+     "$id": "29",
      "Name": "id",
      "SerializedName": "id",
      "Description": "",
      "Type": {
-      "$id": "4",
+      "$id": "30",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -28,12 +241,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "5",
+     "$id": "31",
      "Name": "description",
      "SerializedName": "description",
      "Description": "",
      "Type": {
-      "$id": "6",
+      "$id": "32",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -43,12 +256,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "7",
+     "$id": "33",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "8",
+      "$id": "34",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -58,34 +271,82 @@
      "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$id": "35",
+   "Name": "ResourceLocation",
+   "Namespace": "Cadl.Rest",
+   "Description": "The location of an instance of Project",
+   "IsNullable": false,
+   "Properties": []
   }
  ],
  "Clients": [
   {
-   "$id": "9",
+   "$id": "36",
    "Name": "Authoring",
    "Operations": [
     {
-     "$id": "10",
-     "Name": "createProject",
-     "Description": "Creates a Project",
+     "$id": "37",
+     "Name": "createProjectStatusMonitor",
+     "Description": "Get a OperationStatusResource",
      "Parameters": [
       {
-       "$id": "11",
+       "$id": "38",
+       "Name": "id",
+       "NameInRequest": "id",
+       "Type": {
+        "$id": "39",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "40",
+       "Name": "operationId",
+       "NameInRequest": "operationId",
+       "Type": {
+        "$id": "41",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "42",
        "Name": "api-version",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "12",
+        "$id": "43",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "44",
         "Type": {
-         "$id": "14",
+         "$id": "45",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -102,11 +363,88 @@
        "Kind": "Client"
       },
       {
-       "$id": "15",
+       "$id": "46",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "47",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "48",
+        "Type": {
+         "$ref": "47"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "49",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "7"
+       },
+       "BodyMediaType": "Json",
+       "Headers": []
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/projects/{id}/operations/{operationId}",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "50",
+     "Name": "createProject",
+     "Description": "Creates a Project",
+     "Parameters": [
+      {
+       "$id": "51",
+       "Name": "api-version",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "52",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "44"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "53",
        "Name": "Project",
        "NameInRequest": "Project",
        "Type": {
-        "$ref": "2"
+        "$ref": "28"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -119,11 +457,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "16",
+       "$id": "54",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "17",
+        "$id": "55",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -138,19 +476,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "56",
         "Type": {
-         "$ref": "17"
+         "$ref": "55"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "19",
+       "$id": "57",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "20",
+        "$id": "58",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -165,9 +503,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "21",
+        "$id": "59",
         "Type": {
-         "$ref": "20"
+         "$ref": "58"
         },
         "Value": "application/json"
        }
@@ -175,22 +513,19 @@
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "60",
        "StatusCodes": [
         201
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "23",
+         "$id": "61",
          "Name": "Location",
          "NameInResponse": "location",
          "Description": "",
          "Type": {
-          "$id": "24",
-          "Name": "ResourceLocation",
-          "Kind": "String",
-          "IsNullable": false
+          "$ref": "35"
          }
         }
        ]
@@ -204,51 +539,26 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "LongRunning": {
-      "$id": "25",
-      "FinalStateVia": 1,
-      "FinalResponse": {
-       "$id": "26",
-       "StatusCodes": [
-        201
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [
-        {
-         "$id": "27",
-         "Name": "Location",
-         "NameInResponse": "location",
-         "Description": "",
-         "Type": {
-          "$id": "28",
-          "Name": "ResourceLocation",
-          "Kind": "String",
-          "IsNullable": false
-         }
-        }
-       ]
-      }
-     },
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "29",
+     "$id": "62",
      "Name": "updateProject",
      "Parameters": [
       {
-       "$id": "30",
+       "$id": "63",
        "Name": "api-version",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "31",
+        "$id": "64",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "13"
+        "$ref": "44"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -260,11 +570,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "32",
+       "$id": "65",
        "Name": "Project",
        "NameInRequest": "Project",
        "Type": {
-        "$ref": "2"
+        "$ref": "28"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -277,11 +587,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "33",
+       "$id": "66",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "34",
+        "$id": "67",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -296,19 +606,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "68",
         "Type": {
-         "$ref": "34"
+         "$ref": "67"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "36",
+       "$id": "69",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "37",
+        "$id": "70",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -323,9 +633,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "71",
         "Type": {
-         "$ref": "37"
+         "$ref": "70"
         },
         "Value": "application/json"
        }
@@ -333,12 +643,12 @@
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "72",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "28"
        },
        "BodyMediaType": "Json",
        "Headers": []
@@ -352,26 +662,11 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "LongRunning": {
-      "$id": "40",
-      "FinalStateVia": 1,
-      "FinalResponse": {
-       "$id": "41",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": []
-      }
-     },
      "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "42"
+    "$id": "73"
    }
   }
  ]

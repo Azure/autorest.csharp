@@ -88,8 +88,10 @@
      "Type": {
       "$id": "13",
       "Name": "ResourceLocation",
-      "Kind": "String",
-      "IsNullable": false
+      "Namespace": "Cadl.Rest",
+      "Description": "The location of an instance of LedgerEntry",
+      "IsNullable": false,
+      "Properties": []
      },
      "IsRequired": false,
      "IsReadOnly": false,
@@ -99,6 +101,9 @@
   },
   {
    "$ref": "5"
+  },
+  {
+   "$ref": "13"
   }
  ],
  "Clients": [

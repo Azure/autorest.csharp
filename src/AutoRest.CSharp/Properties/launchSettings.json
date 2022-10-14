@@ -24,10 +24,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx\\Generated"
     },
-    "apimanagement-control-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\apimanagement-control-plane\\Generated"
-    },
     "ApiVersion": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion\\Generated"
@@ -35,14 +31,6 @@
     "AppConfiguration": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\Generated"
-    },
-    "appconfiguration-data-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\appconfiguration-data-plane\\Generated"
-    },
-    "appplatform-resource-manager": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\appplatform-resource-manager\\Generated"
     },
     "azure-parameter-grouping": {
       "commandName": "Project",
@@ -79,10 +67,6 @@
     "Azure.Storage.Tables": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\Generated"
-    },
-    "batch-data-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\batch-data-plane\\Generated"
     },
     "body-array": {
       "commandName": "Project",
@@ -184,38 +168,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\Generated"
     },
-    "cognitiveservices-data-plane-AnomalyDetector": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-AnomalyDetector\\Generated"
-    },
-    "cognitiveservices-data-plane-FormRecognizer": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-FormRecognizer\\Generated"
-    },
-    "cognitiveservices-data-plane-InkRecognizer": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-InkRecognizer\\Generated"
-    },
-    "cognitiveservices-data-plane-LocalSearch": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-LocalSearch\\Generated"
-    },
-    "cognitiveservices-data-plane-LUIS-Runtime": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-LUIS-Runtime\\Generated"
-    },
-    "cognitiveservices-data-plane-Personalizer": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-Personalizer\\Generated"
-    },
-    "cognitiveservices-data-plane-TextAnalytics": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-TextAnalytics\\Generated"
-    },
-    "cognitiveservices-data-plane-TranslatorText": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-TranslatorText\\Generated"
-    },
     "CognitiveServices.TextAnalytics": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\Generated"
@@ -256,10 +208,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Customizations-Cadl\\Generated"
     },
-    "datalake-store-data-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\datalake-store-data-plane\\Generated"
-    },
     "dpg-customization-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\Generated"
@@ -295,14 +243,6 @@
     "FlattenedParameters": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FlattenedParameters\\Generated"
-    },
-    "graphrbac-data-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\graphrbac-data-plane\\Generated"
-    },
-    "hdinsight-data-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\hdinsight-data-plane\\Generated"
     },
     "head": {
       "commandName": "Project",
@@ -347,10 +287,6 @@
     "JsonAsBinary": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\JsonAsBinary\\Generated"
-    },
-    "keyvault-data-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\keyvault-data-plane\\Generated"
     },
     "lro": {
       "commandName": "Project",
@@ -484,10 +420,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelWithConverterUsage\\Generated"
     },
-    "monitor-data-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\monitor-data-plane\\Generated"
-    },
     "multiple-inheritance": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\multiple-inheritance\\Generated"
@@ -515,10 +447,6 @@
     "OmitOperationGroups": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\OmitOperationGroups\\Generated"
-    },
-    "operationalinsights-data-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\operationalinsights-data-plane\\Generated"
     },
     "Pagination": {
       "commandName": "Project",
@@ -624,17 +552,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SupersetInheritance\\Generated"
     },
-    "synapse-data-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\synapse-data-plane\\Generated"
-    },
     "TenantOnly": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TenantOnly\\Generated"
-    },
-    "timeseriesinsights-data-plane": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\timeseriesinsights-data-plane\\Generated"
     },
     "TypeSchemaMapping": {
       "commandName": "Project",

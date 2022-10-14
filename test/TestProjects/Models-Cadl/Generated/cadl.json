@@ -100,7 +100,7 @@
      "Description": "",
      "Type": {
       "$id": "15",
-      "Name": "int32",
+      "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -130,7 +130,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "19",
-       "Name": "int32",
+       "Name": "Int32",
        "Kind": "Int32",
        "IsNullable": false
       },
@@ -306,7 +306,7 @@
      "Description": "",
      "Type": {
       "$id": "40",
-      "Name": "int32",
+      "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -392,7 +392,7 @@
       },
       "ValueType": {
        "$id": "50",
-       "Name": "int32",
+       "Name": "Int32",
        "Kind": "Int32",
        "IsNullable": false
       },
@@ -502,7 +502,7 @@
      "Description": "",
      "Type": {
       "$id": "63",
-      "Name": "int32",
+      "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -544,7 +544,7 @@
      "Description": "",
      "Type": {
       "$id": "68",
-      "Name": "int32",
+      "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -559,7 +559,7 @@
      "Description": "",
      "Type": {
       "$id": "70",
-      "Name": "int64",
+      "Name": "Int64",
       "Kind": "Int64",
       "IsNullable": false
      },
@@ -574,7 +574,7 @@
      "Description": "",
      "Type": {
       "$id": "72",
-      "Name": "safeint",
+      "Name": "Int64",
       "Kind": "Int64",
       "IsNullable": false
      },
@@ -589,7 +589,7 @@
      "Description": "",
      "Type": {
       "$id": "74",
-      "Name": "float32",
+      "Name": "float",
       "Kind": "Float32",
       "IsNullable": false
      },
@@ -604,7 +604,7 @@
      "Description": "",
      "Type": {
       "$id": "76",
-      "Name": "float64",
+      "Name": "double",
       "Kind": "Float64",
       "IsNullable": false
      },
@@ -619,7 +619,7 @@
      "Description": "",
      "Type": {
       "$id": "78",
-      "Name": "boolean",
+      "Name": "bool",
       "Kind": "Boolean",
       "IsNullable": false
      },
@@ -634,7 +634,7 @@
      "Description": "",
      "Type": {
       "$id": "80",
-      "Name": "zonedDateTime",
+      "Name": "DateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -649,7 +649,7 @@
      "Description": "",
      "Type": {
       "$id": "82",
-      "Name": "duration",
+      "Name": "TimeSpan",
       "Kind": "DurationISO8601",
       "IsNullable": false
      },
@@ -688,7 +688,7 @@
      "Description": "",
      "Type": {
       "$id": "87",
-      "Name": "int32",
+      "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -726,7 +726,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "93",
-       "Name": "int32",
+       "Name": "Int32",
        "Kind": "Int32",
        "IsNullable": false
       },
@@ -805,7 +805,7 @@
       },
       "ValueType": {
        "$id": "102",
-       "Name": "int32",
+       "Name": "Int32",
        "Kind": "Int32",
        "IsNullable": false
       },
@@ -895,7 +895,7 @@
      "Description": "",
      "Type": {
       "$id": "114",
-      "Name": "int32",
+      "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -925,7 +925,7 @@
      "Description": "",
      "Type": {
       "$id": "118",
-      "Name": "int32",
+      "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -1035,7 +1035,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "130",
-       "Name": "int32",
+       "Name": "Int32",
        "Kind": "Int32",
        "IsNullable": false
       },
@@ -1078,7 +1078,7 @@
       },
       "ValueType": {
        "$id": "136",
-       "Name": "int32",
+       "Name": "Int32",
        "Kind": "Int32",
        "IsNullable": false
       },
@@ -1167,7 +1167,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "149",
-       "Name": "int32",
+       "Name": "Int32",
        "Kind": "Int32",
        "IsNullable": false
       },
@@ -1210,7 +1210,7 @@
       },
       "ValueType": {
        "$id": "155",
-       "Name": "int32",
+       "Name": "Int32",
        "Kind": "Int32",
        "IsNullable": false
       },
@@ -1303,7 +1303,7 @@
      "Description": "",
      "Type": {
       "$id": "167",
-      "Name": "int32",
+      "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
      },

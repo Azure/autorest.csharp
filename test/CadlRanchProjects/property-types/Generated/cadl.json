@@ -62,7 +62,7 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Name": "boolean",
+      "Name": "bool",
       "Kind": "Boolean",
       "IsNullable": false
      },
@@ -110,7 +110,7 @@
      "Description": "",
      "Type": {
       "$id": "14",
-      "Name": "bytes",
+      "Name": "Bytes",
       "Kind": "BinaryData",
       "IsNullable": false
      },
@@ -134,7 +134,7 @@
      "Description": "",
      "Type": {
       "$id": "17",
-      "Name": "int32",
+      "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -158,7 +158,7 @@
      "Description": "",
      "Type": {
       "$id": "20",
-      "Name": "float32",
+      "Name": "float",
       "Kind": "Float32",
       "IsNullable": false
      },
@@ -182,7 +182,7 @@
      "Description": "",
      "Type": {
       "$id": "23",
-      "Name": "zonedDateTime",
+      "Name": "DateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -206,7 +206,7 @@
      "Description": "",
      "Type": {
       "$id": "26",
-      "Name": "duration",
+      "Name": "TimeSpan",
       "Kind": "DurationISO8601",
       "IsNullable": false
      },
@@ -349,7 +349,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "43",
-       "Name": "int32",
+       "Name": "Int32",
        "Kind": "Int32",
        "IsNullable": false
       },

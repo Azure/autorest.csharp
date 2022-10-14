@@ -111,7 +111,7 @@
      "Description": "",
      "Type": {
       "$id": "17",
-      "Name": "int32",
+      "Name": "Int32",
       "Kind": "Int32",
       "IsNullable": false
      },
