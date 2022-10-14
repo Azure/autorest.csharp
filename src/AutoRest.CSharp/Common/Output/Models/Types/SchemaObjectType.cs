@@ -33,7 +33,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
-        private ObjectTypeDiscriminator? _discriminator;
 
         public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
             : base(context)
@@ -75,8 +74,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
-
-        public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
         protected override bool IsAbstract => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
@@ -282,7 +279,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseCtor);
         }
 
-        public virtual bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
         protected bool SkipInitializerConstructor => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.SkipInitCtor;
@@ -303,7 +300,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private ObjectTypeDiscriminator? BuildDiscriminator()
+        protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
             Discriminator? schemaDiscriminator = ObjectSchema.Discriminator;
             ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();

@@ -74,7 +74,7 @@
     },
     "Azure.ResourceManager.Sample": {
         "commandName": "Project",
-        "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-Cadl\\Generated"
+        "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Models-Cadl\\Generated"
     },
     "Azure.Storage.Tables": {
       "commandName": "Project",

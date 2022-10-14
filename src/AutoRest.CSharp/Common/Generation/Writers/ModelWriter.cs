@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -17,6 +18,8 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ModelWriter
     {
+        internal delegate void MethodBodyImplementation(CodeWriter codeWriter, ObjectType objectType);
+
         public void WriteModel(CodeWriter writer, TypeProvider model)
         {
             switch (model)
@@ -81,7 +84,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var property in schema.Properties)
             {
-                Stack<ObjectTypeProperty> hierarchyStack = property.HeirarchyStack;
+                Stack<ObjectTypeProperty> hierarchyStack = property.GetHeirarchyStack();
                 if (Configuration.AzureArm && hierarchyStack.Count > 1)
                 {
                     var innerProperty = hierarchyStack.Pop();
@@ -386,22 +389,23 @@ Examples:
                         writer.Line($";");
                     }
 
-                    //TODO make virtual property with default null on base class
+                    //TODO make the proper initializer here instead
                     if (schema is ModelTypeProvider modelTypeProvider)
                     {
                         foreach (var parameter in constructor.Signature.Parameters)
                         {
-                            var field = modelTypeProvider.Fields.GetFieldByParameter(parameter);
-                            if (!field.IsField)
-                                continue;
-                            writer
-                                .Append($"{field.Name:I} = {parameter.Name:I}")
-                                .WriteConversion(parameter.Type, field.Type)
-                                .LineRaw(";");
+                            if (modelTypeProvider.Fields.TryGetFieldByParameter(parameter, out var field))
+                            {
+                                if (!field.IsField)
+                                    continue;
+                                writer
+                                    .Append($"{field.Name:I} = {parameter.Name:I}")
+                                    .WriteConversion(parameter.Type, field.Type)
+                                    .LineRaw(";");
+                            }
                         }
                     }
                 }
-
                 writer.Line();
             }
         }

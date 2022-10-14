@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
@@ -16,11 +17,20 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure;
+using Azure.Core;
+using static Azure.Core.HttpHeader;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelTypeProvider : SerializableObjectType
     {
+        private static readonly Parameter[] _fromResponseParameters = { new Parameter("response", "The response to deserialize the model from.", new CSharpType(typeof(Response)), null, ValidationType.None, null) };
+        private MethodSignature FromResponseSignature => new MethodSignature("FromResponse", null, "Deserializes the model from a raw response.", GetFromResponseModifiers(), Type, null, _fromResponseParameters);
+
+        private static readonly Parameter[] _toRequestContentParameters = Array.Empty<Parameter>();
+        private MethodSignature ToRequestContentSignature => new MethodSignature("ToRequestContent", null, "Convert into a Utf8JsonRequestContent.", GetToRequestContentModifiers(), typeof(RequestContent), null, _toRequestContentParameters);
+
         private ModelTypeProviderFields? _fields;
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
@@ -30,6 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
+        public override bool IncludeConverter => false;
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
         public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
@@ -50,6 +61,36 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = inputModel.Accessibility ?? "public";
         }
 
+        private MethodSignatureModifiers GetFromResponseModifiers()
+        {
+            var signatures = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static;
+            var parent = GetBaseObjectType();
+            if (parent is ModelTypeProvider parentModelType)
+            {
+                if (parentModelType.Methods.Any(m => m.Signature.Name == "FromResponse"))
+                    signatures |= MethodSignatureModifiers.New;
+            }
+            return signatures;
+        }
+
+        private MethodSignatureModifiers GetToRequestContentModifiers()
+        {
+            //TODO if no one inherits from this we can omit the virtual
+            var signatures = MethodSignatureModifiers.Internal;
+            var parent = GetBaseObjectType();
+            if (parent is null)
+            {
+                signatures |= MethodSignatureModifiers.Virtual;
+            }
+            else if (parent is ModelTypeProvider parentModelType)
+            {
+                signatures |= (parentModelType.Methods.Any(m => m.Signature.Name == "ToRequestContent"))
+                    ? MethodSignatureModifiers.Override
+                    : MethodSignatureModifiers.Virtual;
+            }
+            return signatures;
+        }
+
         protected override string CreateDescription()
         {
             return _inputModel.Description ?? $"The {_inputModel.Name}.";
@@ -62,58 +103,94 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ConstructorSignature EnsurePublicConstructorSignature()
         {
-            return CreatePublicConstructor(Declaration.Name, _inputModel.Usage, Fields.PublicConstructorParameters);
+            return CreatePublicConstructorSignature(Declaration.Name, _inputModel.Usage, Fields.PublicConstructorParameters);
         }
 
         private ConstructorSignature EnsureSerializationConstructorSignature()
         {
             return IncludeDeserializer
-                ? CreateSerializationConstructor(Declaration.Name, Fields.PublicConstructorParameters, Fields.SerializationParameters) ?? InitializationConstructorSignature
+                ? CreateSerializationConstructorSignature(Declaration.Name, Fields.PublicConstructorParameters, Fields.SerializationParameters) ?? InitializationConstructorSignature
                 : InitializationConstructorSignature;
         }
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
         {
-            foreach (var parameter in Fields.SerializationParameters)
+            List<JsonPropertySerialization> result = new List<JsonPropertySerialization>();
+            foreach (var objType in EnumerateHierarchy())
             {
-                var field = Fields.GetFieldByParameter(parameter);
-                string name;
-                try
+                foreach (var property in objType.Properties)
                 {
-                    name = field.Name;
-                }
-                catch (InvalidOperationException e)
-                {
-                    throw new InvalidOperationException($"Field with {field.Declaration.RequestedName} isn't written yet to type {Declaration.Name}", e);
-                }
+                    if (property.InputModelProperty is null)
+                        continue;
 
-                var property = Fields.GetInputByField(field);
-                var serializedName = property.SerializedName ?? property.Name;
-                var optionalViaNullability = !property.IsRequired && !field.Type.IsNullable && !TypeFactory.IsCollectionType(field.Type);
-                var valueType = field.Type;
-                var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, valueType);
-                yield return new JsonPropertySerialization(parameter.Name, name, serializedName, field.Type, valueType, valueSerialization, property.IsRequired, property.IsReadOnly, optionalViaNullability);
+                    var declaredName = property.Declaration.Name;
+                    var serializedName = property.InputModelProperty.SerializedName ?? property.InputModelProperty.Name;
+                    var optionalViaNullability = !property.IsRequired && !property.ValueType.IsNullable && !TypeFactory.IsCollectionType(property.ValueType);
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType);
+                    var paramName = declaredName.StartsWith("_", StringComparison.OrdinalIgnoreCase) ? declaredName.Substring(1) : declaredName.FirstCharToLowerCase();
+                    result.Add(new JsonPropertySerialization(
+                        paramName,
+                        declaredName,
+                        serializedName,
+                        property.ValueType,
+                        property.ValueType,
+                        valueSerialization,
+                        property.IsRequired,
+                        property.IsReadOnly,
+                        optionalViaNullability));
+                }
             }
+            return result;
         }
 
-        private static ConstructorSignature? CreateSerializationConstructor(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
+        private ConstructorSignature? CreateSerializationConstructorSignature(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {
             if (!serializationParameters.Any(p => TypeFactory.IsList(p.Type)) && publicParameters.SequenceEqual(serializationParameters))
             {
                 return null;
             }
 
-            return new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, serializationParameters.Select(CreateSerializationConstructorParameter).ToList());
+            //get base public ctor params
+            List<Parameter> fullParameterList = new List<Parameter>();
+            var parent = GetBaseObjectType();
+            if (parent is not null && parent.SerializationConstructor is not null)
+            {
+                fullParameterList.AddRange(parent.SerializationConstructor.Signature.Parameters);
+            }
+            fullParameterList.AddRange(serializationParameters.Select(CreateSerializationConstructorParameter));
+
+            return new ConstructorSignature(
+                name,
+                $"Initializes a new instance of {name}",
+                null,
+                MethodSignatureModifiers.Internal,
+                fullParameterList,
+                new(true, GetBaseObjectType()?.InitializationConstructor.Signature.Parameters ?? Array.Empty<Parameter>()));
         }
 
-        private static ConstructorSignature CreatePublicConstructor(string name, InputModelTypeUsage usage, IEnumerable<Parameter> parameters)
+        private ConstructorSignature CreatePublicConstructorSignature(string name, InputModelTypeUsage usage, IEnumerable<Parameter> parameters)
         {
+            //get base public ctor params
+            List<Parameter> fullParameterList = new List<Parameter>();
+            var parent = GetBaseObjectType();
+            if (parent is not null && parent.InitializationConstructor is not null)
+            {
+                fullParameterList.AddRange(parent.InitializationConstructor.Signature.Parameters);
+            }
+            fullParameterList.AddRange(parameters.Select(CreatePublicConstructorParameter));
+
             var summary = $"Initializes a new instance of {name}";
             var accessibility = usage == InputModelTypeUsage.Output
                 ? MethodSignatureModifiers.Internal
                 : MethodSignatureModifiers.Public;
 
-            return new ConstructorSignature(name, summary, null, accessibility, parameters.Select(CreatePublicConstructorParameter).ToList());
+            return new ConstructorSignature(
+                name,
+                summary,
+                null,
+                accessibility,
+                fullParameterList,
+                new(true, GetBaseObjectType()?.InitializationConstructor.Signature.Parameters ?? Array.Empty<Parameter>()));
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
@@ -124,18 +201,26 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()
         {
-            return new ObjectTypeConstructor(InitializationConstructorSignature, GetPropertyInitializers(true));
+            ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.InitializationConstructor;
+
+            return new ObjectTypeConstructor(InitializationConstructorSignature, GetPropertyInitializers(Fields.PublicConstructorParameters), baseCtor);
         }
 
         protected override ObjectTypeConstructor BuildSerializationConstructor()
         {
-            return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(false));
+            ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.SerializationConstructor;
+
+            return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(Fields.SerializationParameters), baseCtor);
         }
 
-        private ObjectPropertyInitializer[] GetPropertyInitializers(bool checkRequired)
+        private ObjectPropertyInitializer[] GetPropertyInitializers(IReadOnlyList<Parameter> parameters)
         {
-            //List<Parameter> defaultCtorParameters = new List<Parameter>();
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
+
+            Dictionary<string, Parameter> parameterMap = parameters.ToDictionary(
+                parameter => parameter.Name,
+                parameter => parameter);
+
             foreach (var property in Properties)
             {
                 // Only required properties that are not discriminators go into default ctor
@@ -156,7 +241,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         BuilderHelpers.ParseConstant(constantSchema.Value.Value, propertyType) :
                         Constant.NewInstanceOf(propertyType);
                 }
-                else if (IsStruct || !checkRequired || property.IsRequired == true)
+                else if (IsStruct || parameterMap.ContainsKey(property.Declaration.Name.FirstCharToLowerCase()))
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
@@ -214,14 +299,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             foreach (var field in Fields)
-                yield return new ObjectTypeProperty(field, this);
+                yield return new ObjectTypeProperty(field, Fields.GetInputByField(field), this);
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            yield return BuildInitializationConstructor();
+            yield return InitializationConstructor;
             if (SerializationConstructorSignature != InitializationConstructorSignature)
-                yield return BuildSerializationConstructor();
+                yield return SerializationConstructor;
         }
 
         protected override bool EnsureHasJsonSerialization()
@@ -254,6 +339,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override XmlObjectSerialization? EnsureXmlSerialization()
         {
             return null;
+        }
+
+        protected override IEnumerable<ModelMethodDefinition> BuildMethods()
+        {
+            yield return new ModelMethodDefinition(FromResponseSignature, SerializationWriter.JsonFromResponseMethod);
+            yield return new ModelMethodDefinition(ToRequestContentSignature, SerializationWriter.JsonToRequestContentMethod);
         }
     }
 }
