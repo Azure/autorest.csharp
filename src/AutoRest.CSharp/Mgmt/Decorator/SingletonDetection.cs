@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var currentRequestPath = operationSet.GetRequestPath();
             // if we are a singleton resource,
             // we need to find the suffix which should be the difference between our path and our parent resource
-            var parentRequestPath = operationSet.ParentRequestPath();
+            var parentRequestPath = currentRequestPath.ParentRequestPath();
             var diff = parentRequestPath.TrimAncestorFrom(currentRequestPath);
             // if not all of the segment in difference are constant, we cannot be a singleton resource
             if (!diff.Any() || !diff.All(s => s.IsConstant))

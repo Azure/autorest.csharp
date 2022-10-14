@@ -413,7 +413,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns></returns>
         protected virtual RequestPath GetContextualPath(OperationSet operationSet, RequestPath operationRequestPath)
         {
-            var contextualPath = operationSet.GetRequestPath();
+            var contextualPath = RequestPath;
             // we need to replace the scope in this contextual path with the actual scope in the operation
             var scope = contextualPath.GetScopePath();
             if (!scope.IsParameterizedScope())

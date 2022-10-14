@@ -42,12 +42,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (resource is BaseResource)
                 return Enumerable.Empty<MgmtTypeProvider>();
 
-            return resource.OperationSet.GetParent();
-        }
-
-        private static IEnumerable<MgmtTypeProvider> GetParent(this OperationSet resourceOperationSet)
-        {
-            var parentRequestPath = resourceOperationSet.ParentRequestPath();
+            var resourceOperationSet = resource.OperationSet;
+            var parentRequestPath = resourceOperationSet.ParentRequestPath(resource.ResourceType);
 
             if (parentRequestPath.Equals(resourceOperationSet.GetRequestPath()))
             {
@@ -72,7 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (scope.IsParameterizedScope())
             {
                 // we already verified that the scope is parameterized, therefore we assert the type can never be null
-                var types = resourceOperationSet.GetRequestPath().GetParameterizedScopeResourceTypes()!;
+                var types = resource.RequestPath.GetParameterizedScopeResourceTypes()!;
                 return FindScopeParents(types).Distinct();
             }
             // otherwise we use the tenant as a fallback
@@ -103,13 +99,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        public static RequestPath ParentRequestPath(this OperationSet operationSet)
+        public static RequestPath ParentRequestPath(this OperationSet operationSet, ResourceTypeSegment resourceTypeHint)
         {
             // escape the calculation if this is configured in the configuration
             if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operationSet.RequestPath, out var rawPath))
                 return GetRequestPathFromRawPath(rawPath);
 
-            return operationSet.GetRequestPath().ParentRequestPath();
+            return operationSet.GetRequestPath(resourceTypeHint).ParentRequestPath();
         }
 
         private static RequestPath GetRequestPathFromRawPath(string rawPath)
@@ -170,7 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        public static RequestPath GetParent(this RequestPath requestPath)
+        private static RequestPath GetParent(this RequestPath requestPath)
         {
             // find a parent resource in the resource list
             // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate

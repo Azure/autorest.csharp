@@ -638,7 +638,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             while (pathToWalk.Count > 2)
             {
-                pathToWalk = pathToWalk.GetParent();
+                pathToWalk = pathToWalk.ParentRequestPath();
                 if (RawRequestPathToResourceData.TryGetValue(pathToWalk.ToString()!, out var parentData))
                 {
                     return parentData.Declaration.Name.Substring(0, parentData.Declaration.Name.Length - 4);
