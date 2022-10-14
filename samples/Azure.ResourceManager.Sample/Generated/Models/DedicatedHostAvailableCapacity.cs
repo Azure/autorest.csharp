@@ -10,7 +10,10 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Dedicated host unutilized capacity. </summary>
+    /// <summary>
+    /// Dedicated host unutilized capacity.
+    /// Serialized Name: DedicatedHostAvailableCapacity
+    /// </summary>
     internal partial class DedicatedHostAvailableCapacity
     {
         /// <summary> Initializes a new instance of DedicatedHostAvailableCapacity. </summary>
@@ -20,13 +23,19 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of DedicatedHostAvailableCapacity. </summary>
-        /// <param name="allocatableVMs"> The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host. </param>
+        /// <param name="allocatableVMs">
+        /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
+        /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs
+        /// </param>
         internal DedicatedHostAvailableCapacity(IReadOnlyList<DedicatedHostAllocatableVM> allocatableVMs)
         {
             AllocatableVMs = allocatableVMs;
         }
 
-        /// <summary> The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host. </summary>
+        /// <summary>
+        /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
+        /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs
+        /// </summary>
         public IReadOnlyList<DedicatedHostAllocatableVM> AllocatableVMs { get; }
     }
 }

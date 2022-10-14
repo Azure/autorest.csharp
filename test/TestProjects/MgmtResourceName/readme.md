@@ -15,12 +15,7 @@ no-resource-suffix:
   - Disk
   - Memory
 
-
-directive:
-  - rename-model:
-      from: NetworkResource
-      to: Network
-  - rename-model:
-      from: MemoryResource
-      to: Memory
+rename-mapping:
+  NetworkResource: Network
+  MemoryResource: Memory
 ```

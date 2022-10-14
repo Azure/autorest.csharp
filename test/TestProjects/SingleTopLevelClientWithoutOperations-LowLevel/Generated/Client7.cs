@@ -13,7 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace SingleTopLevelClientWithoutOperations_LowLevel
 {
-    /// <summary> The Client7 service client. </summary>
+    // Data plane generated sub-client. The Client7 sub-client.
+    /// <summary> The Client7 sub-client. </summary>
     public partial class Client7
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
@@ -45,7 +46,21 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call OperationAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
+        /// 
+        /// Response response = await client.OperationAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Client7.Operation");
@@ -62,7 +77,21 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             }
         }
 
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Operation and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
+        /// 
+        /// Response response = client.Operation();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response Operation(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Client7.Operation");

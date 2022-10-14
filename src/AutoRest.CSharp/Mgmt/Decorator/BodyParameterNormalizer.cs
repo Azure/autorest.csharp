@@ -3,8 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 
@@ -14,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static readonly string Content = "Content";
 
-        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName)
         {
             switch (method)
             {
@@ -29,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void UpdateUsingReplacement(RequestParameter bodyParameter, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
             var schemaName = bodyParameter.Schema.Language.Default.Name;
             if (schemaName.EndsWith("Parameters", StringComparison.Ordinal))
@@ -43,22 +45,35 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (schemaName.EndsWith("Input", StringComparison.Ordinal))
                 schemaName = schemaName.ReplaceLast("Input", Content);
             var paramName = NormalizeParamNames.GetNewName(bodyParameter.Language.Default.Name, schemaName, resourceDataDictionary);
+            // TODO -- we need to add a check here to see if this rename introduces parameter name collisions
             UpdateRequestParameter(bodyParameter, paramName, schemaName);
         }
 
-        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, CachedDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
+        internal static void UpdateParameterNameOnly(RequestParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary)
         {
+            bodyParam.Language.Default.SerializedName ??= bodyParam.Language.Default.Name;
             bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, bodyParam.Schema.Name, resourceDataDictionary);
         }
 
         private static void UpdateRequestParameter(RequestParameter parameter, string parameterName, string schemaName)
         {
+            parameter.Language.Default.SerializedName ??= parameter.Language.Default.Name;
             parameter.Language.Default.Name = parameterName;
             parameter.Schema.Language.Default.Name = schemaName;
             if (parameter.Schema is ChoiceSchema ||
                 parameter.Schema is SealedChoiceSchema ||
                 parameter.Schema is ObjectSchema)
-                CodeModelExtension.UpdateAcronym(parameter.Schema);
+                SchemaNameAndFormatUpdater.UpdateAcronym(parameter.Schema);
         }
+
+        internal static void MakeRequired(RequestParameter bodyParameter, HttpMethod method)
+        {
+            if (MethodsRequiredBodyParameter.Contains(method))
+            {
+                bodyParameter.Required = true;
+            }
+        }
+
+        private static readonly HttpMethod[] MethodsRequiredBodyParameter = new[] { HttpMethod.Put, HttpMethod.Patch };
     }
 }

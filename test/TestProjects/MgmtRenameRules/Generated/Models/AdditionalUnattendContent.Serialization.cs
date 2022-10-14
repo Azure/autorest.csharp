@@ -18,42 +18,52 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(PassName))
             {
                 writer.WritePropertyName("passName");
-                writer.WriteStringValue(PassName);
+                writer.WriteStringValue(PassName.Value.ToString());
             }
             if (Optional.IsDefined(ComponentName))
             {
                 writer.WritePropertyName("componentName");
-                writer.WriteStringValue(ComponentName);
+                writer.WriteStringValue(ComponentName.Value.ToString());
             }
             if (Optional.IsDefined(SettingName))
             {
                 writer.WritePropertyName("settingName");
                 writer.WriteStringValue(SettingName.Value.ToSerialString());
             }
-            if (Optional.IsDefined(Content))
+            if (Optional.IsDefined(BackupFrequency))
             {
-                writer.WritePropertyName("content");
-                writer.WriteStringValue(Content);
+                writer.WritePropertyName("backupFrequency");
+                writer.WriteNumberValue(BackupFrequency.Value);
             }
             writer.WriteEndObject();
         }
 
         internal static AdditionalUnattendContent DeserializeAdditionalUnattendContent(JsonElement element)
         {
-            Optional<string> passName = default;
-            Optional<string> componentName = default;
-            Optional<SettingNames> settingName = default;
-            Optional<string> content = default;
+            Optional<PassName> passName = default;
+            Optional<ComponentName> componentName = default;
+            Optional<SettingName> settingName = default;
+            Optional<int> backupFrequency = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"))
                 {
-                    passName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    passName = new PassName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("componentName"))
                 {
-                    componentName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    componentName = new ComponentName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("settingName"))
@@ -63,16 +73,21 @@ namespace MgmtRenameRules.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    settingName = property.Value.GetString().ToSettingNames();
+                    settingName = property.Value.GetString().ToSettingName();
                     continue;
                 }
-                if (property.NameEquals("content"))
+                if (property.NameEquals("backupFrequency"))
                 {
-                    content = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    backupFrequency = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new AdditionalUnattendContent(passName.Value, componentName.Value, Optional.ToNullable(settingName), content.Value);
+            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), Optional.ToNullable(backupFrequency));
         }
     }
 }

@@ -11,4 +11,5 @@ input-file: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da19
 namespace: Azure.AI.DocumentTranslation
 security: AzureKey
 security-header-name: Ocp-Apim-Subscription-Key
+disable-pagination-top-renaming: true
 ```

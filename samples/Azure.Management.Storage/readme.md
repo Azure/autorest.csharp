@@ -31,13 +31,19 @@ operation-positions:
 override-operation-name:
   DeletedAccounts_List: GetAll
 
+format-by-name-rules:
+  'tenantId': 'uuid'
+  'resourceType': 'resource-type'
+  'etag': 'etag'
+  'location': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
+
+rename-mapping:
+  BlobServiceProperties: BlobService
+  FileServiceProperties: FileService
+
 directive:
-  - rename-model:
-      from: BlobServiceProperties
-      to: BlobService
-  - rename-model:
-      from: FileServiceProperties
-      to: FileService
   - from: swagger-document
     where: $.definitions.FileShareItems.properties.value.items["$ref"]
     transform: return "#/definitions/FileShare"
@@ -51,4 +57,7 @@ directive:
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares"].get.parameters[4].type
     transform: return "integer"
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges"].post
+    transform: $["x-ms-long-running-operation-options"]["enable-interim-state"] = true
 ```

@@ -152,6 +152,18 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath-LowLevel\\Generated"
     },
+    "cadl-api-key": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\api-key\\Generated"
+    },
+    "cadl-extensible-enums": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\extensible-enums\\Generated"
+    },
+    "cadl-property-types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\property-types\\Generated"
+    },
     "CognitiveSearch": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\Generated"
@@ -192,6 +204,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-paging\\Generated"
     },
+    "Customizations-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Customizations-Cadl\\Generated"
+    },
     "dpg-customization-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\Generated"
@@ -219,6 +235,10 @@
     "ExtensionClientName": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\Generated"
+    },
+    "FirstTest-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FirstTest-Cadl\\Generated"
     },
     "FlattenedParameters": {
       "commandName": "Project",
@@ -272,6 +292,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro\\Generated"
     },
+    "Lro-Basic-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Lro-Basic-Cadl\\Generated"
+    },
     "lro-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\lro\\Generated"
@@ -312,10 +336,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtHierarchicalNonResource\\Generated"
     },
-    "MgmtKeyvault": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtKeyvault\\src\\Generated"
-    },
     "MgmtListMethods": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtListMethods\\Generated"
@@ -323,6 +343,14 @@
     "MgmtLRO": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtLRO\\Generated"
+    },
+    "MgmtMockAndSample": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMockAndSample\\src\\Generated"
+    },
+    "MgmtMockAndSample.Tests": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMockAndSample\\tests\\Generated"
     },
     "MgmtMultipleParentResource": {
       "commandName": "Project",
@@ -335,6 +363,10 @@
     "MgmtOperations": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtOperations\\Generated"
+    },
+    "MgmtOptionalConstant": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtOptionalConstant\\Generated"
     },
     "MgmtParamOrdering": {
       "commandName": "Project",
@@ -376,6 +408,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelNamespace\\Generated"
     },
+    "Models-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Models-Cadl\\Generated"
+    },
     "ModelShapes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelShapes\\Generated"
@@ -416,6 +452,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination\\Generated"
     },
+    "Pagination-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination-Cadl\\Generated"
+    },
+    "PaginationParams-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PaginationParams-LowLevel\\Generated"
+    },
     "paging": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\paging\\Generated"
@@ -423,6 +467,14 @@
     "paging-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\paging\\Generated"
+    },
+    "ParameterSequence-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ParameterSequence-LowLevel\\Generated"
+    },
+    "PetStore-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-Cadl\\Generated"
     },
     "ProtocolMethodsInRestClient": {
       "commandName": "Project",
@@ -452,9 +504,21 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceRename\\Generated"
     },
+    "security-aad-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\security-aad\\Generated"
+    },
+    "security-key-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\security-key\\Generated"
+    },
     "SecurityDefinition-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SecurityDefinition-LowLevel\\Generated"
+    },
+    "ServiceVersionOverride": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ServiceVersionOverride\\Generated"
     },
     "SingletonResource": {
       "commandName": "Project",

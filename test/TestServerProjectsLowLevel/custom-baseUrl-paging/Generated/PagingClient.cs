@@ -15,6 +15,7 @@ using Azure.Core.Pipeline;
 
 namespace custom_baseUrl_paging_LowLevel
 {
+    // Data plane generated client. The Paging service client.
     /// <summary> The Paging service client. </summary>
     public partial class PagingClient
     {
@@ -60,20 +61,35 @@ namespace custom_baseUrl_paging_LowLevel
 
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPagesPartialUrlAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetPagesPartialUrlAsync("<accountName>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -104,20 +120,35 @@ namespace custom_baseUrl_paging_LowLevel
 
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPagesPartialUrl with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetPagesPartialUrl("<accountName>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -148,20 +179,35 @@ namespace custom_baseUrl_paging_LowLevel
 
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPagesPartialUrlOperationAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetPagesPartialUrlOperationAsync("<accountName>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -192,20 +238,35 @@ namespace custom_baseUrl_paging_LowLevel
 
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPagesPartialUrlOperation with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetPagesPartialUrlOperation("<accountName>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -237,20 +298,35 @@ namespace custom_baseUrl_paging_LowLevel
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="nextLink"> Next link for the list operation. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPagesPartialUrlOperationNextAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -281,20 +357,35 @@ namespace custom_baseUrl_paging_LowLevel
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="nextLink"> Next link for the list operation. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPagesPartialUrlOperationNext with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 

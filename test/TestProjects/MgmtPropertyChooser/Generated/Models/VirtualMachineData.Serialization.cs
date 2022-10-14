@@ -42,7 +42,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityWithNoUserIdentity))
             {
                 writer.WritePropertyName("identityWithNoUserIdentity");
-                writer.WriteObjectValue(IdentityWithNoUserIdentity);
+                JsonSerializer.Serialize(writer, IdentityWithNoUserIdentity);
             }
             if (Optional.IsDefined(IdentityWithNoSystemIdentity))
             {
@@ -75,14 +75,17 @@ namespace MgmtPropertyChooser
                 writer.WritePropertyName("fakeWritableSubResource");
                 JsonSerializer.Serialize(writer, FakeWritableSubResource);
             }
-            writer.WritePropertyName("tags");
-            writer.WriteStartObject();
-            foreach (var item in Tags)
+            if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WritePropertyName("location");
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
@@ -108,19 +111,19 @@ namespace MgmtPropertyChooser
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
             Optional<IdentityWithDifferentPropertyType> identityWithDifferentPropertyType = default;
-            Optional<IdentityWithNoUserIdentity> identityWithNoUserIdentity = default;
+            Optional<ManagedServiceIdentity> identityWithNoUserIdentity = default;
             Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
             Optional<ManagedServiceIdentity> identityV3 = default;
             Optional<IList<string>> zones = default;
             Optional<IReadOnlyList<MgmtPropertyChooserResourceData>> fakeResources = default;
             Optional<SubResource> fakeSubResource = default;
             Optional<WritableSubResource> fakeWritableSubResource = default;
-            IDictionary<string, string> tags = default;
+            Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<string> provisioningState = default;
             Optional<string> licenseType = default;
             Optional<string> vmId = default;
@@ -189,7 +192,7 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    identityWithNoUserIdentity = IdentityWithNoUserIdentity.DeserializeIdentityWithNoUserIdentity(property.Value);
+                    identityWithNoUserIdentity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("identityWithNoSystemIdentity"))
@@ -265,6 +268,11 @@ namespace MgmtPropertyChooser
                 }
                 if (property.NameEquals("tags"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -295,6 +303,11 @@ namespace MgmtPropertyChooser
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -331,7 +344,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData, tags, location, plan, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, identityV3, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, plan, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity, identityWithNoSystemIdentity.Value, identityV3, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

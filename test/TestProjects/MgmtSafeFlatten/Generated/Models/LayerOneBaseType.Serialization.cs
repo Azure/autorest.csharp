@@ -39,7 +39,7 @@ namespace MgmtSafeFlatten.Models
                     continue;
                 }
             }
-            return new LayerOneBaseType(name);
+            return new UnknownLayerOneBaseType(name);
         }
     }
 }

@@ -53,19 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static bool TryGetConfigOperationName(this Operation operation, [MaybeNullWhen(false)] out string name)
         {
-            var operationId = operation.OperationId();
-            return Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operationId, out name);
-        }
-
-        public static string OperationId(this Operation operation)
-        {
-            if (_operationIdCache.TryGetValue(operation, out var result))
-                return result;
-
-            var operationGroup = MgmtContext.Library.GetOperationGroup(operation);
-            result = operationGroup.Key.IsNullOrEmpty() ? operation.Language.Default.Name : $"{operationGroup.Key}_{operation.Language.Default.Name}";
-            _operationIdCache.TryAdd(operation, result);
-            return result;
+            return Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.OperationId!, out name);
         }
 
         public static RequestPath GetRequestPath(this Operation operation, ResourceTypeSegment? hint = null)
@@ -238,8 +226,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))
                 return cacheResult;
 
-            var resourceType = operation.GetRequestPath().GetResourceType();
+            var requestPath = operation.GetRequestPath();
+            var resourceType = requestPath.GetResourceType();
             var candidates = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType));
+
+            // When more than one candidate is found and all the segments in ResourceType is constant, it's possible that some unexpected resources are included.
+            // If this happen, We determine the right candidate by doing a further check on the scope request path.
+            if (candidates.Count() > 1 && resourceType.IsConstant)
+            {
+                return candidates.Where(resource => resource.RequestPath.GetScopePath().Equals(requestPath.GetScopePath()));
+            }
 
             return candidates;
         }

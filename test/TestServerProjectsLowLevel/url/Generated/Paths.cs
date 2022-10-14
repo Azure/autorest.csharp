@@ -14,6 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace url_LowLevel
 {
+    // Data plane generated client. The Paths service client.
     /// <summary> The Paths service client. </summary>
     public partial class Paths
     {
@@ -47,16 +48,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get true Boolean value on path. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetBooleanTrueAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetBooleanTrueAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetBooleanTrueAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetBooleanTrue");
@@ -74,16 +78,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get true Boolean value on path. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetBooleanTrue.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetBooleanTrue();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetBooleanTrue(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetBooleanTrue");
@@ -101,16 +108,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get false Boolean value on path. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetBooleanFalseAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetBooleanFalseAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetBooleanFalseAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetBooleanFalse");
@@ -128,16 +138,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get false Boolean value on path. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetBooleanFalse.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetBooleanFalse();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetBooleanFalse(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetBooleanFalse");
@@ -155,16 +168,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetIntOneMillionAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetIntOneMillionAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetIntOneMillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetIntOneMillion");
@@ -182,16 +198,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetIntOneMillion.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetIntOneMillion();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetIntOneMillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetIntOneMillion");
@@ -209,16 +228,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetIntNegativeOneMillionAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetIntNegativeOneMillionAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetIntNegativeOneMillion");
@@ -236,16 +258,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetIntNegativeOneMillion.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetIntNegativeOneMillion();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetIntNegativeOneMillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetIntNegativeOneMillion");
@@ -263,16 +288,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetTenBillionAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetTenBillionAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetTenBillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetTenBillion");
@@ -290,16 +318,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetTenBillion.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetTenBillion();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetTenBillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetTenBillion");
@@ -317,16 +348,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetNegativeTenBillionAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetNegativeTenBillionAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetNegativeTenBillion");
@@ -344,16 +378,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetNegativeTenBillion.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetNegativeTenBillion();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetNegativeTenBillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.GetNegativeTenBillion");
@@ -371,16 +408,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call FloatScientificPositiveAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.FloatScientificPositiveAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.FloatScientificPositive");
@@ -398,16 +438,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call FloatScientificPositive.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.FloatScientificPositive();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response FloatScientificPositive(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.FloatScientificPositive");
@@ -425,16 +468,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call FloatScientificNegativeAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.FloatScientificNegativeAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.FloatScientificNegative");
@@ -452,16 +498,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call FloatScientificNegative.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.FloatScientificNegative();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response FloatScientificNegative(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.FloatScientificNegative");
@@ -479,16 +528,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DoubleDecimalPositiveAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.DoubleDecimalPositiveAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DoubleDecimalPositive");
@@ -506,16 +558,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DoubleDecimalPositive.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.DoubleDecimalPositive();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response DoubleDecimalPositive(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DoubleDecimalPositive");
@@ -533,16 +588,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DoubleDecimalNegativeAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.DoubleDecimalNegativeAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DoubleDecimalNegative");
@@ -560,16 +618,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DoubleDecimalNegative.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.DoubleDecimalNegative();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response DoubleDecimalNegative(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DoubleDecimalNegative");
@@ -587,16 +648,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call StringUnicodeAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.StringUnicodeAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> StringUnicodeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.StringUnicode");
@@ -614,16 +678,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call StringUnicode.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.StringUnicode();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response StringUnicode(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.StringUnicode");
@@ -641,16 +708,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call StringUrlEncodedAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.StringUrlEncodedAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> StringUrlEncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.StringUrlEncoded");
@@ -668,16 +738,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call StringUrlEncoded.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.StringUrlEncoded();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response StringUrlEncoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.StringUrlEncoded");
@@ -694,17 +767,21 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call StringUrlNonEncodedAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.StringUrlNonEncodedAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
+        /// <remarks> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </remarks>
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.StringUrlNonEncoded");
@@ -721,17 +798,21 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call StringUrlNonEncoded.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.StringUrlNonEncoded();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
+        /// <remarks> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </remarks>
         public virtual Response StringUrlNonEncoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.StringUrlNonEncoded");
@@ -749,16 +830,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos;. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call StringEmptyAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.StringEmptyAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> StringEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.StringEmpty");
@@ -776,16 +860,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos;. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call StringEmpty.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.StringEmpty();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response StringEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.StringEmpty");
@@ -804,18 +891,21 @@ namespace url_LowLevel
 
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="stringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call StringNullAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.StringNullAsync("<stringPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
@@ -836,18 +926,21 @@ namespace url_LowLevel
 
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="stringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call StringNull with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.StringNull("<stringPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response StringNull(string stringPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
@@ -868,18 +961,21 @@ namespace url_LowLevel
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
         /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call EnumValidAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.EnumValidAsync("<enumPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -900,18 +996,21 @@ namespace url_LowLevel
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
         /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call EnumValid with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.EnumValid("<enumPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response EnumValid(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -932,18 +1031,21 @@ namespace url_LowLevel
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
         /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call EnumNullAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.EnumNullAsync("<enumPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -964,18 +1066,21 @@ namespace url_LowLevel
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
         /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call EnumNull with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.EnumNull("<enumPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response EnumNull(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -996,17 +1101,20 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ByteMultiByteAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.ByteMultiByteAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1027,17 +1135,20 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ByteMultiByte with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.ByteMultiByte(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response ByteMultiByte(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1057,16 +1168,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ByteEmptyAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.ByteEmptyAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> ByteEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.ByteEmpty");
@@ -1084,16 +1198,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ByteEmpty.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.ByteEmpty();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response ByteEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.ByteEmpty");
@@ -1112,17 +1229,20 @@ namespace url_LowLevel
 
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ByteNullAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.ByteNullAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1143,17 +1263,20 @@ namespace url_LowLevel
 
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ByteNull with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.ByteNull(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response ByteNull(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1173,16 +1296,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DateValidAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.DateValidAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> DateValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DateValid");
@@ -1200,16 +1326,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DateValid.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.DateValid();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response DateValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DateValid");
@@ -1228,16 +1357,19 @@ namespace url_LowLevel
 
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DateNullAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.DateNullAsync(DateTimeOffset.UtcNow);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DateNull");
@@ -1256,16 +1388,19 @@ namespace url_LowLevel
 
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DateNull with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.DateNull(DateTimeOffset.UtcNow);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response DateNull(DateTimeOffset datePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DateNull");
@@ -1283,16 +1418,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DateTimeValidAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.DateTimeValidAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> DateTimeValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DateTimeValid");
@@ -1310,16 +1448,19 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DateTimeValid.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.DateTimeValid();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response DateTimeValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DateTimeValid");
@@ -1338,16 +1479,19 @@ namespace url_LowLevel
 
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DateTimeNullAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DateTimeNull");
@@ -1366,16 +1510,19 @@ namespace url_LowLevel
 
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call DateTimeNull with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.DateTimeNull(DateTimeOffset.UtcNow);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response DateTimeNull(DateTimeOffset dateTimePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.DateTimeNull");
@@ -1394,17 +1541,20 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Base64UrlAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.Base64UrlAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestContext context = null)
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
@@ -1425,17 +1575,20 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Base64Url with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.Base64Url(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Base64Url(byte[] base64UrlPath, RequestContext context = null)
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
@@ -1456,17 +1609,20 @@ namespace url_LowLevel
 
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ArrayCsvInPathAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.ArrayCsvInPathAsync(new String[]{"<arrayPath>"});
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestContext context = null)
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
@@ -1487,17 +1643,20 @@ namespace url_LowLevel
 
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ArrayCsvInPath with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.ArrayCsvInPath(new String[]{"<arrayPath>"});
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestContext context = null)
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
@@ -1518,16 +1677,19 @@ namespace url_LowLevel
 
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call UnixTimeUrlAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.UnixTimeUrlAsync(DateTimeOffset.UtcNow);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.UnixTimeUrl");
@@ -1546,16 +1708,19 @@ namespace url_LowLevel
 
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call UnixTimeUrl with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.UnixTimeUrl(DateTimeOffset.UtcNow);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Paths.UnixTimeUrl");

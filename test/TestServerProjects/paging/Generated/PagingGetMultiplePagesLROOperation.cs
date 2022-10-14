@@ -19,7 +19,7 @@ namespace paging
     /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
     public partial class PagingGetMultiplePagesLROOperation : Operation<AsyncPageable<Product>>, IOperationSource<AsyncPageable<Product>>
     {
-        private readonly OperationInternals<AsyncPageable<Product>> _operation;
+        private readonly OperationInternal<AsyncPageable<Product>> _operation;
         private readonly Func<string, Task<Response>> _nextPageFunc;
 
         /// <summary> Initializes a new instance of PagingGetMultiplePagesLROOperation for mocking. </summary>
@@ -29,12 +29,15 @@ namespace paging
 
         internal PagingGetMultiplePagesLROOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, Func<string, Task<Response>> nextPageFunc)
         {
-            _operation = new OperationInternals<AsyncPageable<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "PagingGetMultiplePagesLROOperation");
+            IOperation<AsyncPageable<Product>> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal<AsyncPageable<Product>>(clientDiagnostics, nextLinkOperation, response, "PagingGetMultiplePagesLROOperation");
             _nextPageFunc = nextPageFunc;
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override AsyncPageable<Product> Value => _operation.Value;
@@ -46,7 +49,7 @@ namespace paging
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);

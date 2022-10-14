@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace lro_LowLevel
 {
+    // Data plane generated client. The LRORetrys service client.
     /// <summary> The LRORetrys service client. </summary>
     public partial class LRORetrys
     {
@@ -47,39 +48,84 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call Put201CreatingSucceeded200Async with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// BinaryData data = await operation.WaitForCompletionAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// This sample shows how to call Put201CreatingSucceeded200Async with all parameters and request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
+        ///     tags = new {
+        ///         key = "<String>",
+        ///     },
+        ///     location = "<location>",
+        /// };
+        /// 
+        /// var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// BinaryData data = await operation.WaitForCompletionAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("type").ToString());
+        /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
         /// 
@@ -91,7 +137,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201CreatingSucceeded200Request(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LRORetrys.Put201CreatingSucceeded200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Put201CreatingSucceeded200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -102,39 +148,84 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call Put201CreatingSucceeded200 with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// BinaryData data = operation.WaitForCompletion();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// This sample shows how to call Put201CreatingSucceeded200 with all parameters and request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
+        ///     tags = new {
+        ///         key = "<String>",
+        ///     },
+        ///     location = "<location>",
+        /// };
+        /// 
+        /// var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// BinaryData data = operation.WaitForCompletion();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("type").ToString());
+        /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
         /// 
@@ -146,7 +237,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201CreatingSucceeded200Request(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LRORetrys.Put201CreatingSucceeded200", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Put201CreatingSucceeded200", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -157,39 +248,84 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call PutAsyncRelativeRetrySucceededAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// var operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// BinaryData data = await operation.WaitForCompletionAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// This sample shows how to call PutAsyncRelativeRetrySucceededAsync with all parameters and request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
+        ///     tags = new {
+        ///         key = "<String>",
+        ///     },
+        ///     location = "<location>",
+        /// };
+        /// 
+        /// var operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// BinaryData data = await operation.WaitForCompletionAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("type").ToString());
+        /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
         /// 
@@ -201,7 +337,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetrySucceededRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LRORetrys.PutAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.PutAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -212,39 +348,84 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call PutAsyncRelativeRetrySucceeded with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// var operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// BinaryData data = operation.WaitForCompletion();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// This sample shows how to call PutAsyncRelativeRetrySucceeded with all parameters and request content, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
+        ///     tags = new {
+        ///         key = "<String>",
+        ///     },
+        ///     location = "<location>",
+        /// };
+        /// 
+        /// var operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// BinaryData data = operation.WaitForCompletion();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("type").ToString());
+        /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
         /// 
@@ -256,7 +437,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetrySucceededRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LRORetrys.PutAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LRORetrysClient.PutAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -267,25 +448,44 @@ namespace lro_LowLevel
 
         /// <summary> Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call DeleteProvisioning202Accepted200SucceededAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
+        /// 
+        /// BinaryData data = await operation.WaitForCompletionAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("type").ToString());
+        /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
         /// 
@@ -297,7 +497,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LRORetrys.DeleteProvisioning202Accepted200Succeeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -308,25 +508,44 @@ namespace lro_LowLevel
 
         /// <summary> Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call DeleteProvisioning202Accepted200Succeeded with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
+        /// 
+        /// BinaryData data = operation.WaitForCompletion();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
+        /// Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("type").ToString());
+        /// Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+        /// Console.WriteLine(result.GetProperty("location").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
         /// 
@@ -338,7 +557,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LRORetrys.DeleteProvisioning202Accepted200Succeeded", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -349,24 +568,29 @@ namespace lro_LowLevel
 
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete202Retry200Async with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
         /// 
-        /// </remarks>
-        public virtual async Task<Operation<BinaryData>> Delete202Retry200Async(WaitUntil waitUntil, RequestContext context = null)
+        /// var operation = await client.Delete202Retry200Async(WaitUntil.Completed);
+        /// 
+        /// var response = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// </example>
+        public virtual async Task<Operation> Delete202Retry200Async(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LRORetrys.Delete202Retry200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete202Retry200Request(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LRORetrys.Delete202Retry200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Delete202Retry200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -377,24 +601,29 @@ namespace lro_LowLevel
 
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete202Retry200 with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
         /// 
-        /// </remarks>
-        public virtual Operation<BinaryData> Delete202Retry200(WaitUntil waitUntil, RequestContext context = null)
+        /// var operation = client.Delete202Retry200(WaitUntil.Completed);
+        /// 
+        /// var response = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// </example>
+        public virtual Operation Delete202Retry200(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LRORetrys.Delete202Retry200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete202Retry200Request(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LRORetrys.Delete202Retry200", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Delete202Retry200", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -405,24 +634,29 @@ namespace lro_LowLevel
 
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call DeleteAsyncRelativeRetrySucceededAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
         /// 
-        /// </remarks>
-        public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetrySucceededAsync(WaitUntil waitUntil, RequestContext context = null)
+        /// var operation = await client.DeleteAsyncRelativeRetrySucceededAsync(WaitUntil.Completed);
+        /// 
+        /// var response = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// </example>
+        public virtual async Task<Operation> DeleteAsyncRelativeRetrySucceededAsync(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LRORetrys.DeleteAsyncRelativeRetrySucceeded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetrySucceededRequest(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LRORetrys.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -433,24 +667,29 @@ namespace lro_LowLevel
 
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call DeleteAsyncRelativeRetrySucceeded with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
         /// 
-        /// </remarks>
-        public virtual Operation<BinaryData> DeleteAsyncRelativeRetrySucceeded(WaitUntil waitUntil, RequestContext context = null)
+        /// var operation = client.DeleteAsyncRelativeRetrySucceeded(WaitUntil.Completed);
+        /// 
+        /// var response = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// </example>
+        public virtual Operation DeleteAsyncRelativeRetrySucceeded(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LRORetrys.DeleteAsyncRelativeRetrySucceeded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetrySucceededRequest(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LRORetrys.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -461,38 +700,72 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post202Retry200Async with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// This sample shows how to call Post202Retry200Async with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
+        ///     tags = new {
+        ///         key = "<String>",
+        ///     },
+        ///     location = "<location>",
+        /// };
+        /// 
+        /// var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Operation<BinaryData>> Post202Retry200Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> Post202Retry200Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LRORetrys.Post202Retry200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost202Retry200Request(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LRORetrys.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -503,38 +776,72 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post202Retry200 with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// This sample shows how to call Post202Retry200 with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
+        ///     tags = new {
+        ///         key = "<String>",
+        ///     },
+        ///     location = "<location>",
+        /// };
+        /// 
+        /// var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
         /// 
         /// </remarks>
-        public virtual Operation<BinaryData> Post202Retry200(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation Post202Retry200(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LRORetrys.Post202Retry200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost202Retry200Request(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LRORetrys.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -545,38 +852,72 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call PostAsyncRelativeRetrySucceededAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// This sample shows how to call PostAsyncRelativeRetrySucceededAsync with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
+        ///     tags = new {
+        ///         key = "<String>",
+        ///     },
+        ///     location = "<location>",
+        /// };
+        /// 
+        /// var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetrySucceededAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> PostAsyncRelativeRetrySucceededAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LRORetrys.PostAsyncRelativeRetrySucceeded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetrySucceededRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LRORetrys.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -587,38 +928,72 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call PostAsyncRelativeRetrySucceeded with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// var operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// This sample shows how to call PostAsyncRelativeRetrySucceeded with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new LRORetrysClient(credential);
+        /// 
+        /// var data = new {
+        ///     properties = new {
+        ///         provisioningState = "<provisioningState>",
+        ///     },
+        ///     tags = new {
+        ///         key = "<String>",
+        ///     },
+        ///     location = "<location>",
+        /// };
+        /// 
+        /// var operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Product</c>:
         /// <code>{
-        ///   id: string,
-        ///   type: string,
-        ///   tags: Dictionary&lt;string, string&gt;,
-        ///   location: string,
-        ///   name: string,
         ///   properties: {
-        ///     provisioningState: string,
-        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
-        ///   }
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   code: number,
-        ///   message: string
+        ///     provisioningState: string, # Optional.
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;, # Optional.
+        ///   }, # Optional.
+        ///   id: string, # Optional. Resource Id
+        ///   type: string, # Optional. Resource Type
+        ///   tags: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
+        ///   location: string, # Optional. Resource Location
+        ///   name: string, # Optional. Resource Name
         /// }
         /// </code>
         /// 
         /// </remarks>
-        public virtual Operation<BinaryData> PostAsyncRelativeRetrySucceeded(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation PostAsyncRelativeRetrySucceeded(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LRORetrys.PostAsyncRelativeRetrySucceeded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetrySucceededRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LRORetrys.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {

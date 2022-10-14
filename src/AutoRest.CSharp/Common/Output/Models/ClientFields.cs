@@ -5,6 +5,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -23,6 +25,9 @@ namespace AutoRest.CSharp.Output.Models
 
         public FieldDeclaration ClientDiagnosticsProperty { get; }
         public FieldDeclaration PipelineField { get; }
+        public FieldDeclaration? EndpointField { get; }
+
+        public CodeWriterScopeDeclarations ScopeDeclarations { get; }
 
         private readonly FieldDeclaration? _keyAuthField;
         private readonly FieldDeclaration? _tokenAuthField;
@@ -32,11 +37,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyList<FieldDeclaration> CredentialFields { get; }
 
-        public static ClientFields CreateForClient(IEnumerable<Parameter> parameters, BuildContext context) => new(parameters, context);
+        public static ClientFields CreateForClient(IEnumerable<Parameter> parameters, InputAuth authorization) => new(parameters, authorization);
 
         public static ClientFields CreateForRestClient(IEnumerable<Parameter> parameters) => new(parameters, null);
 
-        private ClientFields(IEnumerable<Parameter> parameters, BuildContext? context)
+        private ClientFields(IEnumerable<Parameter> parameters, InputAuth? authorization)
         {
             ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, Internal | ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), writeAsProperty: true);
             PipelineField = new(Private | ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
@@ -46,34 +51,31 @@ namespace AutoRest.CSharp.Output.Models
             var credentialFields = new List<FieldDeclaration>();
             var properties = new List<FieldDeclaration>();
 
-            if (context != null)
+            if (authorization != null)
             {
                 parameterNamesToFields[KnownParameters.Pipeline.Name] = PipelineField;
                 parameterNamesToFields[KnownParameters.ClientDiagnostics.Name] = ClientDiagnosticsProperty;
 
-                foreach (var scheme in context.CodeModel.Security.Schemes)
+                if (authorization.ApiKey is not null)
                 {
-                    switch (scheme)
-                    {
-                        case KeySecurityScheme keySecurityScheme:
-                            AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{keySecurityScheme.Name:L}");
-                            _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
+                    AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{authorization.ApiKey.Name:L}");
+                    _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
 
-                            fields.Add(AuthorizationHeaderConstant);
-                            fields.Add(_keyAuthField);
-                            credentialFields.Add(_keyAuthField);
-                            parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
-                            break;
-                        case OAuth2SecurityScheme oAuth2SecurityScheme:
-                            ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {oAuth2SecurityScheme.Scopes.GetLiteralsFormattable()} }}");
-                            _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
+                    fields.Add(AuthorizationHeaderConstant);
+                    fields.Add(_keyAuthField);
+                    credentialFields.Add(_keyAuthField);
+                    parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
+                }
 
-                            fields.Add(ScopesConstant);
-                            fields.Add(_tokenAuthField);
-                            credentialFields.Add(_tokenAuthField);
-                            parameterNamesToFields[KnownParameters.TokenAuth.Name] = _tokenAuthField;
-                            break;
-                    }
+                if (authorization.OAuth2 is not null)
+                {
+                    ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {authorization.OAuth2.Scopes.GetLiteralsFormattable()} }}");
+                    _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
+
+                    fields.Add(ScopesConstant);
+                    fields.Add(_tokenAuthField);
+                    credentialFields.Add(_tokenAuthField);
+                    parameterNamesToFields[KnownParameters.TokenAuth.Name] = _tokenAuthField;
                 }
 
                 fields.Add(PipelineField);
@@ -94,10 +96,15 @@ namespace AutoRest.CSharp.Output.Models
                     fields.Add(field);
                 }
                 parameterNamesToFields.Add(parameter.Name, field);
+
+                if (parameter.Name == KnownParameters.Endpoint.Name && parameter.Type.EqualsIgnoreNullable(KnownParameters.Endpoint.Type))
+                {
+                    EndpointField = field;
+                }
             }
 
             fields.AddRange(properties);
-            if (context != null)
+            if (authorization != null)
             {
                 fields.Add(ClientDiagnosticsProperty);
             }
@@ -105,6 +112,7 @@ namespace AutoRest.CSharp.Output.Models
             _fields = fields;
             _parameterNamesToFields = parameterNamesToFields;
             CredentialFields = credentialFields;
+            ScopeDeclarations = new CodeWriterScopeDeclarations(fields.Select(f => f.Declaration));
         }
 
         public FieldDeclaration? GetFieldByParameter(string parameterName, CSharpType parameterType)

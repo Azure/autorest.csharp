@@ -4,14 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Humanizer;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -25,11 +24,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 case SchemaObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case EnumType e when e.IsExtendable:
-                    WriteChoiceSchema(writer, e);
+                case EnumType e when e.IsExtensible:
+                    WriteExtendableEnum(writer, e);
                     break;
-                case EnumType e when !e.IsExtendable:
-                    WriteSealedChoiceSchema(writer, e);
+                case EnumType e when !e.IsExtensible:
+                    WriteEnum(writer, e);
                     break;
                 default:
                     throw new NotImplementedException();
@@ -82,16 +81,15 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var property in schema.Properties)
             {
-                Stack<ObjectTypeProperty> heiarchyStack = new Stack<ObjectTypeProperty>();
-                heiarchyStack.Push(property);
-                BuildHeirarchy(property, heiarchyStack);
-                if (Configuration.AzureArm && heiarchyStack.Count > 1)
+                Stack<ObjectTypeProperty> hierarchyStack = new Stack<ObjectTypeProperty>();
+                hierarchyStack.Push(property);
+                BuildHierarchy(property, hierarchyStack);
+                if (Configuration.AzureArm && hierarchyStack.Count > 1)
                 {
-                    var innerProperty = heiarchyStack.Pop();
-                    var immediateParentProperty = heiarchyStack.Pop();
+                    var innerProperty = hierarchyStack.Pop();
+                    var immediateParentProperty = hierarchyStack.Pop();
 
-                    string immediateParentPropertyName = GetPropertyName(immediateParentProperty.Declaration);
-                    string myPropertyName = GetCombinedPropertyName(immediateParentPropertyName, innerProperty.Declaration);
+                    string myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentProperty);
                     string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
                     WriteProperty(writer, property, "internal");
                     bool isOverridenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
@@ -212,7 +210,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private bool AllCtorsContainMyProperty(ObjectType enclosingType, ObjectTypeProperty property)
+        private static bool AllCtorsContainMyProperty(ObjectType enclosingType, ObjectTypeProperty property)
         {
             foreach (var ctor in enclosingType.Constructors)
             {
@@ -223,7 +221,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return true;
         }
 
-        private bool HasCtorWithSingleParam(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
+        internal static bool HasCtorWithSingleParam(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
         {
             var type = property.Declaration.Type;
             if (type.IsFrameworkType)
@@ -250,7 +248,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        private bool HasDefaultPublicCtor(ObjectTypeProperty objectTypeProperty)
+        private static bool HasDefaultPublicCtor(ObjectTypeProperty objectTypeProperty)
         {
             var type = objectTypeProperty.Declaration.Type;
             if (type.IsFrameworkType)
@@ -268,76 +266,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        private string GetCombinedPropertyName(string immediateParentPropertyName, MemberDeclarationOptions property)
-        {
-            string parentName = immediateParentPropertyName;
-
-            if (property.Type.Equals(typeof(bool)) || property.Type.Equals(typeof(bool?)))
-            {
-                return property.Name.Equals("Enabled", StringComparison.Ordinal) ? $"{parentName}{property.Name}" : property.Name;
-            }
-
-            if (property.Name.Equals("Id", StringComparison.Ordinal))
-                return $"{parentName}{property.Name}";
-
-            if (immediateParentPropertyName.EndsWith(property.Name, StringComparison.Ordinal))
-                return immediateParentPropertyName;
-
-            IEnumerable<string> parentWords = immediateParentPropertyName.SplitByCamelCase();
-            if (immediateParentPropertyName.EndsWith("Profile", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Policy", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Configuration", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Properties", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Settings", StringComparison.Ordinal))
-            {
-                parentWords = parentWords.Take(parentWords.Count() - 1);
-            }
-
-            var parentWordArray = parentWords.ToArray();
-            var parentWordsHash = new HashSet<string>(parentWordArray);
-            var nameWords = property.Name.SplitByCamelCase().ToArray();
-            var lastWord = string.Empty;
-            for (int i = 0; i < nameWords.Length; i++)
-            {
-                var word = nameWords[i];
-                lastWord = word;
-                if (parentWordsHash.Contains(word))
-                {
-                    if (i == nameWords.Length - 2 && parentWordArray.Length >= 2 && word.Equals(parentWordArray[parentWordArray.Length - 2], StringComparison.Ordinal))
-                    {
-                        parentWords = parentWords.Take(parentWords.Count() - 2);
-                        break;
-                    }
-                    {
-                        return property.Name;
-                    }
-                }
-
-                //need to depluralize the last word and check
-                if (i == nameWords.Length - 1 && parentWordsHash.Contains(lastWord.ToSingular(false)))
-                    return property.Name;
-            }
-
-            parentName = string.Join("", parentWords);
-
-            return $"{parentName}{property.Name}";
-        }
-
-        private string GetPropertyName(MemberDeclarationOptions property)
-        {
-            const string properties = "Properties";
-            if (property.Name.Equals(properties, StringComparison.Ordinal))
-            {
-                string typeName = property.Type.Name;
-                int index = typeName.IndexOf(properties);
-                if (index > -1 && index + properties.Length == typeName.Length)
-                    return typeName.Substring(0, index);
-
-                return typeName;
-            }
-            return property.Name;
-        }
-
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property, string? overrideAccessibility = null)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
@@ -349,36 +277,84 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
+        private void BuildHierarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
         {
             if (property.IsSinglePropertyObject(out var childProp))
             {
                 heirarchyStack.Push(childProp);
-                BuildHeirarchy(childProp, heirarchyStack);
+                BuildHierarchy(childProp, heirarchyStack);
             }
         }
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
+            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type);
             if (!string.IsNullOrWhiteSpace(property.Description))
             {
-                return $"{property.Description}";
+                return $"{property.Description}{binaryDataExtraDescription}";
             }
-            var nameToUse = overrideName ?? property.Declaration.Name;
-            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
-            if (property.IsReadOnly)
-            {
-                return $"Gets the {splitDeclarationName}";
-            }
-            else
-            {
-                return $"Gets or sets the {splitDeclarationName}";
-            }
+            return $"{property.CreateDefaultPropertyDescription(overrideName)}{binaryDataExtraDescription}";
         }
 
+        private FormattableString CreateBinaryDataExtraDescription(CSharpType type)
+        {
+            if (type.IsFrameworkType)
+            {
+                if (type.FrameworkType == typeof(BinaryData))
+                {
+                    return ConstructBinaryDataDescription("this property");
+                }
+                if (TypeFactory.IsList(type) &&
+                    type.Arguments[0].IsFrameworkType &&
+                    type.Arguments[0].FrameworkType == typeof(BinaryData))
+                {
+                    return ConstructBinaryDataDescription("the element of this property");
+                }
+                if (TypeFactory.IsDictionary(type) &&
+                    type.Arguments[1].IsFrameworkType &&
+                    type.Arguments[1].FrameworkType == typeof(BinaryData))
+                {
+                    return ConstructBinaryDataDescription("the value of this property");
+                }
+            }
+            return $"";
+        }
+
+        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc)
+        {
+            return $@"
+<para>
+To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
+</para>
+<para>
+To assign an already formated json string to this property use <see cref=""{typeof(BinaryData)}.FromString(string)""/>.
+</para>
+<para>
+Examples:
+<list type=""bullet"">
+<item>
+<term>BinaryData.FromObjectAsJson(""foo"")</term>
+<description>Creates a payload of ""foo"".</description>
+</item>
+<item>
+<term>BinaryData.FromString(""\""foo\"""")</term>
+<description>Creates a payload of ""foo"".</description>
+</item>
+<item>
+<term>BinaryData.FromObjectAsJson(new {{ key = ""value"" }})</term>
+<description>Creates a payload of {{ ""key"": ""value"" }}.</description>
+</item>
+<item>
+<term>BinaryData.FromString(""{{\""key\"": \""value\""}}"")</term>
+<description>Creates a payload of {{ ""key"": ""value"" }}.</description>
+</item>
+</list>
+</para>";
+        }
         private string GetAbstract(SchemaObjectType schema)
         {
-            return schema.IsAbstract ? "abstract " : string.Empty;
+            // Limit this change to management plane to avoid data plane affected
+            return schema.Declaration.IsAbstract && Configuration.AzureArm ? "abstract " : string.Empty;
         }
 
         protected virtual void AddClassAttributes(CodeWriter writer, SchemaObjectType schema)
@@ -418,7 +394,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteSealedChoiceSchema(CodeWriter writer, EnumType schema)
+        public static void WriteEnum(CodeWriter writer, EnumType schema)
         {
             if (schema.Declaration.IsUserDefined)
             {
@@ -441,20 +417,20 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteChoiceSchema(CodeWriter writer, EnumType schema)
+        public static void WriteExtendableEnum(CodeWriter writer, EnumType enumType)
         {
-            var cs = schema.Type;
-            string name = schema.Declaration.Name;
-            var isString = schema.BaseType.FrameworkType == typeof(string);
+            var cs = enumType.Type;
+            string name = enumType.Declaration.Name;
+            var isString = enumType.ValueType.FrameworkType == typeof(string);
 
-            using (writer.Namespace(schema.Declaration.Namespace))
+            using (writer.Namespace(enumType.Declaration.Namespace))
             {
-                writer.WriteXmlDocumentationSummary($"{schema.Description}");
+                writer.WriteXmlDocumentationSummary($"{enumType.Description}");
 
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
-                using (writer.Scope($"{schema.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
+                using (writer.Scope($"{enumType.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
                 {
-                    writer.Line($"private readonly {schema.BaseType} _value;");
+                    writer.Line($"private readonly {enumType.ValueType} _value;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref=\"{name}\"/>.");
@@ -464,7 +440,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.WriteXmlDocumentationException(typeof(ArgumentNullException), $"<paramref name=\"value\"/> is null.");
                     }
 
-                    using (writer.Scope($"public {name}({schema.BaseType} value)"))
+                    using (writer.Scope($"public {name}({enumType.ValueType} value)"))
                     {
                         writer.Append($"_value = value");
                         if (isString)
@@ -475,17 +451,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     writer.Line();
 
-                    foreach (var choice in schema.Values)
+                    foreach (var choice in enumType.Values)
                     {
-                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, schema.Values);
-                        writer.Line($"private const {schema.BaseType} {fieldName} = {choice.Value.Value:L};");
+                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, enumType.Values);
+                        writer.Line($"private const {enumType.ValueType} {fieldName} = {choice.Value.Value:L};");
                     }
                     writer.Line();
 
-                    foreach (var choice in schema.Values)
+                    foreach (var choice in enumType.Values)
                     {
                         writer.WriteXmlDocumentationSummary($"{choice.Description}");
-                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, schema.Values);
+                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, enumType.Values);
                         writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({fieldName});").Line();
                     }
 
@@ -496,7 +472,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"public static bool operator !=({cs} left, {cs} right) => !left.Equals(right);");
 
                     writer.WriteXmlDocumentationSummary($"Converts a string to a <see cref=\"{name}\"/>.");
-                    writer.Line($"public static implicit operator {cs}({schema.BaseType} value) => new {cs}(value);");
+                    writer.Line($"public static implicit operator {cs}({enumType.ValueType} value) => new {cs}(value);");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
@@ -507,11 +483,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"public bool Equals({cs} other) => ");
                     if (isString)
                     {
-                        writer.Line($"{schema.BaseType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
+                        writer.Line($"{enumType.ValueType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
                     }
                     else
                     {
-                        writer.Line($"{schema.BaseType}.Equals(_value, other._value);");
+                        writer.Line($"{enumType.ValueType}.Equals(_value, other._value);");
                     }
                     writer.Line();
 
@@ -542,7 +518,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private string GetValueFieldName(string enumName, string enumValue, IList<EnumTypeValue> enumValues)
+        private static string GetValueFieldName(string enumName, string enumValue, IList<EnumTypeValue> enumValues)
         {
             if (enumName != $"{enumValue}Value")
             {
@@ -560,7 +536,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{enumValue}Value{index}";
         }
 
-        private void WriteEditorBrowsableFalse(CodeWriter writer)
+        private static void WriteEditorBrowsableFalse(CodeWriter writer)
         {
             writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
         }

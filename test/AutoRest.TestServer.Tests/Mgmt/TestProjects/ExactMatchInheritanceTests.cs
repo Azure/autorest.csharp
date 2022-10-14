@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -56,8 +57,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("Id", "ExactMatchModel1Data", typeof(ResourceIdentifier))]
         [TestCase("ResourceType", "ExactMatchModel1Data", typeof(ResourceType))]
         [TestCase("SupportingUris", "ExactMatchModel1Data", typeof(IList<Uri>))]
-        [TestCase("Type1", "ExactMatchModel1Data", typeof(ResourceType?))]
-        [TestCase("Type2", "ExactMatchModel1Data", typeof(string))]
+        [TestCase("Type1", "ExactMatchModel1Data", typeof(Type1?))]
+        [TestCase("Type2", "ExactMatchModel1Data", typeof(Type2?))]
+        [TestCase("Type3", "ExactMatchModel1Data", typeof(IPAddress))]
+        [TestCase("Type4", "ExactMatchModel1Data", typeof(object))]
         public void ValidatePropertyType(string propertyName, string className, Type expectedType)
         {
             var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == className);

@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Namespace(restClient.Type.Namespace))
             {
-                using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}"))
+                using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}", scopeDeclarations: restClient.Fields.ScopeDeclarations))
                 {
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
@@ -48,20 +48,21 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields, responseClassifierTypes);
 
-            if (protocolMethod.IsLongRunning)
+            var longRunning = protocolMethod.LongRunning;
+            if (longRunning != null)
             {
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, false);
+                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, null, true);
+                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, null, false);
             }
             else if (protocolMethod.PagingInfo != null)
             {
-                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, false);
+                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, null, true);
+                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, null, false);
             }
             else
             {
-                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, false);
+                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, null, true);
+                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, null, false);
             }
         }
 
@@ -98,11 +99,12 @@ namespace AutoRest.CSharp.Generation.Writers
             };
 
             var parameters = operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
-            var method = new MethodSignature(operation.Name, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
+            var method = new MethodSignature(operation.Name, operation.Summary, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
 
-            writer.WriteXmlDocumentationSummary($"{method.Description}")
+            writer.WriteXmlDocumentationSummary($"{method.SummaryText}")
                 .WriteXmlDocumentationParameters(method.Parameters)
-                .WriteXmlDocumentationRequiredParametersException(method.Parameters);
+                .WriteXmlDocumentationRequiredParametersException(method.Parameters)
+                .WriteXmlDocumentation("remarks", $"{method.DescriptionText}");
 
             if (method.ReturnDescription != null)
             {

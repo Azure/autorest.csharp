@@ -83,9 +83,15 @@ namespace xml_service.Models
 
         /// <summary> Initializes a new instance of BlobPrefix. </summary>
         /// <param name="name"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <returns> A new <see cref="Models.BlobPrefix"/> instance for mocking. </returns>
         public static BlobPrefix BlobPrefix(string name = null)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             return new BlobPrefix(name);
         }
 

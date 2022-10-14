@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new ConstructorSignature(
                 Name: Type.Name,
+                Summary: null,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
                 Modifiers: Internal,
                 Parameters: new[] { ArmClientParameter, ResourceIdentifierParameter },
@@ -47,8 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // we just leave this implementation here since it could work for now
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
-                        MgmtContext.Library.GetRestClientMethod(operation),
-                        MgmtContext.Library.GetRestClient(operation),
+                        operation,
                         operation.GetRequestPath(),
                         Extension.ContextualPath,
                         operationName));

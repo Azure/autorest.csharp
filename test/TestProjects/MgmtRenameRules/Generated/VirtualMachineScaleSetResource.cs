@@ -153,13 +153,14 @@ namespace MgmtRenameRules
         /// Operation Id: VirtualMachineScaleSetVMs_Get
         /// </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<VirtualMachineScaleSetVmResource>> GetVirtualMachineScaleSetVmAsync(string instanceId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineScaleSetVmResource>> GetVirtualMachineScaleSetVmAsync(string instanceId, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetVirtualMachineScaleSetVms().GetAsync(instanceId, cancellationToken).ConfigureAwait(false);
+            return await GetVirtualMachineScaleSetVms().GetAsync(instanceId, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -168,13 +169,14 @@ namespace MgmtRenameRules
         /// Operation Id: VirtualMachineScaleSetVMs_Get
         /// </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
         [ForwardsClientCalls]
-        public virtual Response<VirtualMachineScaleSetVmResource> GetVirtualMachineScaleSetVm(string instanceId, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineScaleSetVmResource> GetVirtualMachineScaleSetVm(string instanceId, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return GetVirtualMachineScaleSetVms().Get(instanceId, cancellationToken);
+            return GetVirtualMachineScaleSetVms().Get(instanceId, expand, cancellationToken);
         }
 
         /// <summary>
@@ -1435,11 +1437,26 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.TagValues[key] = value;
-                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (await CanUseTagResourceAsync(cancellationToken: cancellationToken).ConfigureAwait(false))
+                {
+                    var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
+                    originalTags.Value.Data.TagValues[key] = value;
+                    await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var patch = new VirtualMachineScaleSetPatch();
+                    foreach (var tag in current.Tags)
+                    {
+                        patch.Tags.Add(tag);
+                    }
+                    patch.Tags[key] = value;
+                    var result = await UpdateAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {
@@ -1466,11 +1483,26 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var originalTags = GetTagResource().Get(cancellationToken);
-                originalTags.Value.Data.TagValues[key] = value;
-                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (CanUseTagResource(cancellationToken: cancellationToken))
+                {
+                    var originalTags = GetTagResource().Get(cancellationToken);
+                    originalTags.Value.Data.TagValues[key] = value;
+                    GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                    var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                    return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var patch = new VirtualMachineScaleSetPatch();
+                    foreach (var tag in current.Tags)
+                    {
+                        patch.Tags.Add(tag);
+                    }
+                    patch.Tags[key] = value;
+                    var result = Update(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {
@@ -1495,12 +1527,23 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                await GetTagResource().DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (await CanUseTagResourceAsync(cancellationToken: cancellationToken).ConfigureAwait(false))
+                {
+                    await GetTagResource().DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
+                    originalTags.Value.Data.TagValues.ReplaceWith(tags);
+                    await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var patch = new VirtualMachineScaleSetPatch();
+                    patch.Tags.ReplaceWith(tags);
+                    var result = await UpdateAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {
@@ -1525,12 +1568,23 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                GetTagResource().Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
-                var originalTags = GetTagResource().Get(cancellationToken);
-                originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (CanUseTagResource(cancellationToken: cancellationToken))
+                {
+                    GetTagResource().Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
+                    var originalTags = GetTagResource().Get(cancellationToken);
+                    originalTags.Value.Data.TagValues.ReplaceWith(tags);
+                    GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                    var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                    return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var patch = new VirtualMachineScaleSetPatch();
+                    patch.Tags.ReplaceWith(tags);
+                    var result = Update(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {
@@ -1555,11 +1609,26 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.TagValues.Remove(key);
-                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (await CanUseTagResourceAsync(cancellationToken: cancellationToken).ConfigureAwait(false))
+                {
+                    var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
+                    originalTags.Value.Data.TagValues.Remove(key);
+                    await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    var patch = new VirtualMachineScaleSetPatch();
+                    foreach (var tag in current.Tags)
+                    {
+                        patch.Tags.Add(tag);
+                    }
+                    patch.Tags.Remove(key);
+                    var result = await UpdateAsync(WaitUntil.Completed, patch, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {
@@ -1584,11 +1653,26 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var originalTags = GetTagResource().Get(cancellationToken);
-                originalTags.Value.Data.TagValues.Remove(key);
-                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (CanUseTagResource(cancellationToken: cancellationToken))
+                {
+                    var originalTags = GetTagResource().Get(cancellationToken);
+                    originalTags.Value.Data.TagValues.Remove(key);
+                    GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                    var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                    return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    var patch = new VirtualMachineScaleSetPatch();
+                    foreach (var tag in current.Tags)
+                    {
+                        patch.Tags.Add(tag);
+                    }
+                    patch.Tags.Remove(key);
+                    var result = Update(WaitUntil.Completed, patch, cancellationToken: cancellationToken);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {

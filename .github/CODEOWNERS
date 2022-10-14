@@ -3,4 +3,20 @@
 ################
 
 # Git Hub bot rules
-/.github/fabricbot.json  @AlexGhiondea @jsquire
+/.github/CODEOWNERS                           @jsquire @ronniegeraghty
+/.github/fabricbot.json                       @jsquire @ronniegeraghty
+
+#####################
+# Code Generation
+#####################
+
+# Catch all
+*                                              @AlexanderSher @lirenhe @chunyu3 @m-nash
+
+# Management CSharp CodeReviewers
+/samples/Azure.Management.Storage/             @allenjzhang @m-nash
+/samples/Azure.Network.Management.Interface/   @allenjzhang @m-nash
+/samples/Azure.ResourceManager.*/              @allenjzhang @m-nash
+/src/AutoRest.CSharp/Mgmt/                     @allenjzhang @m-nash
+/src/AutoRest.CSharp/Common/                   @allenjzhang @m-nash
+/test/AutoRest.TestServer.Tests/Mgmt/          @allenjzhang @m-nash

@@ -31,7 +31,7 @@ namespace MgmtRenameRules.Models
 
         internal static VirtualMachineScaleSetManagedDiskParameters DeserializeVirtualMachineScaleSetManagedDiskParameters(JsonElement element)
         {
-            Optional<StorageAccountTypes> storageAccountType = default;
+            Optional<StorageAccountType> storageAccountType = default;
             Optional<WritableSubResource> diskEncryptionSet = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -42,7 +42,7 @@ namespace MgmtRenameRules.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    storageAccountType = new StorageAccountTypes(property.Value.GetString());
+                    storageAccountType = new StorageAccountType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("diskEncryptionSet"))

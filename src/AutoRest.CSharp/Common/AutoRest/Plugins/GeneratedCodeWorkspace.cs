@@ -104,6 +104,38 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 .ToImmutableHashSet();
         }
 
+        /// <summary>
+        /// Add some additional files into this project
+        /// </summary>
+        /// <param name="directory"></param>
+        /// <param name="skipPredicate"></param>
+        /// <param name="folders"></param>
+        public void AddDirectory(string directory, Func<string, bool>? skipPredicate = null, IEnumerable<string>? folders = null)
+        {
+            _project = AddDirectory(_project, directory, skipPredicate, folders);
+        }
+
+        /// <summary>
+        /// Add the files in the directory to a project per a given predicate with the folders specified
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="directory"></param>
+        /// <param name="skipPredicate"></param>
+        /// <param name="folders"></param>
+        /// <returns></returns>
+        internal static Project AddDirectory(Project project, string directory, Func<string, bool>? skipPredicate = null, IEnumerable<string>? folders = null)
+        {
+            foreach (string sourceFile in Directory.GetFiles(directory, "*.cs", SearchOption.AllDirectories))
+            {
+                if (skipPredicate != null && skipPredicate(sourceFile))
+                    continue;
+
+                project = project.AddDocument(sourceFile, File.ReadAllText(sourceFile), folders ?? Array.Empty<string>(), sourceFile).Project;
+            }
+
+            return project;
+        }
+
         public static async Task<GeneratedCodeWorkspace> Create(string projectDirectory, string outputDirectory, string[] sharedSourceFolders)
         {
             var projectTask = Interlocked.Exchange(ref _cachedProject, null);
@@ -114,23 +146,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 projectDirectory = Path.GetFullPath(projectDirectory);
                 outputDirectory = Path.GetFullPath(outputDirectory);
 
-                foreach (string sourceFile in Directory.GetFiles(projectDirectory, "*.cs", SearchOption.AllDirectories))
-                {
-                    // Ignore existing generated code
-                    if (sourceFile.StartsWith(outputDirectory))
-                    {
-                        continue;
-                    }
-                    generatedCodeProject = generatedCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
-                }
+                generatedCodeProject = AddDirectory(generatedCodeProject, projectDirectory, skipPredicate: sourceFile => sourceFile.StartsWith(outputDirectory));
             }
 
             foreach (var sharedSourceFolder in sharedSourceFolders)
             {
-                foreach (string sharedSourceFile in Directory.GetFiles(sharedSourceFolder, "*.cs", SearchOption.AllDirectories))
-                {
-                    generatedCodeProject = generatedCodeProject.AddDocument(sharedSourceFile, File.ReadAllText(sharedSourceFile), SharedFolders, sharedSourceFile).Project;
-                }
+                generatedCodeProject = AddDirectory(generatedCodeProject, sharedSourceFolder, folders: SharedFolders);
             }
 
             generatedCodeProject = generatedCodeProject.WithParseOptions(new CSharpParseOptions(preprocessorSymbols: new[] { "EXPERIMENTAL" }));
@@ -172,14 +193,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static bool IsSharedDocument(Document document) => document.Folders.Contains(SharedFolder);
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
 
-        public async Task InternalizeOrphanedModels(ImmutableHashSet<string> modelsToKeep)
+        /// <summary>
+        /// This method delegates the caller to do something on the generated code project
+        /// </summary>
+        /// <param name="processor"></param>
+        /// <returns></returns>
+        public async Task PostProcess(Func<Project, Task<Project>> processor)
         {
-            _project = await Internalizer.InternalizeAsync(_project, modelsToKeep);
-        }
-
-        public async Task RemoveUnusedModels(ImmutableHashSet<string> modelsToKeep)
-        {
-            _project = await Remover.RemoveUnusedAsync(_project, modelsToKeep);
+            _project = await processor(_project);
         }
     }
 }

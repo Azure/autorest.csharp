@@ -19,7 +19,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public ArmClientExtensionsWriter(ArmClientExtensions extensions) : this(new CodeWriter(), extensions)
         {
-            This = extensions;
         }
 
         public ArmClientExtensionsWriter(CodeWriter writer, ArmClientExtensions extensions) : base(writer, extensions)

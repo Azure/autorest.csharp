@@ -9,16 +9,31 @@ using System;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Api request input for LogAnalytics getRequestRateByInterval Api. </summary>
+    /// <summary>
+    /// Api request input for LogAnalytics getRequestRateByInterval Api.
+    /// Serialized Name: RequestRateByIntervalInput
+    /// </summary>
     public partial class RequestRateByIntervalContent : LogAnalyticsInputBase
     {
         /// <summary> Initializes a new instance of RequestRateByIntervalContent. </summary>
-        /// <param name="blobContainerSasUri"> SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to. </param>
-        /// <param name="fromOn"> From time of the query. </param>
-        /// <param name="toOn"> To time of the query. </param>
-        /// <param name="intervalLength"> Interval value in minutes used to create LogAnalytics call rate logs. </param>
+        /// <param name="blobContainerSasUri">
+        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
+        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
+        /// </param>
+        /// <param name="fromTime">
+        /// From time of the query
+        /// Serialized Name: LogAnalyticsInputBase.fromTime
+        /// </param>
+        /// <param name="toTime">
+        /// To time of the query
+        /// Serialized Name: LogAnalyticsInputBase.toTime
+        /// </param>
+        /// <param name="intervalLength">
+        /// Interval value in minutes used to create LogAnalytics call rate logs.
+        /// Serialized Name: RequestRateByIntervalInput.intervalLength
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainerSasUri"/> is null. </exception>
-        public RequestRateByIntervalContent(Uri blobContainerSasUri, DateTimeOffset fromOn, DateTimeOffset toOn, IntervalInMins intervalLength) : base(blobContainerSasUri, fromOn, toOn)
+        public RequestRateByIntervalContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, IntervalInMin intervalLength) : base(blobContainerSasUri, fromTime, toTime)
         {
             if (blobContainerSasUri == null)
             {
@@ -28,7 +43,10 @@ namespace Azure.ResourceManager.Sample.Models
             IntervalLength = intervalLength;
         }
 
-        /// <summary> Interval value in minutes used to create LogAnalytics call rate logs. </summary>
-        public IntervalInMins IntervalLength { get; }
+        /// <summary>
+        /// Interval value in minutes used to create LogAnalytics call rate logs.
+        /// Serialized Name: RequestRateByIntervalInput.intervalLength
+        /// </summary>
+        public IntervalInMin IntervalLength { get; }
     }
 }

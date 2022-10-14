@@ -39,14 +39,17 @@ namespace MgmtRenameRules
                 }
                 writer.WriteEndArray();
             }
-            writer.WritePropertyName("tags");
-            writer.WriteStartObject();
-            foreach (var item in Tags)
+            if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-            writer.WriteEndObject();
             writer.WritePropertyName("location");
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
@@ -145,12 +148,12 @@ namespace MgmtRenameRules
             Optional<MgmtRenameRulesPlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IList<string>> zones = default;
-            IDictionary<string, string> tags = default;
+            Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<HardwareProfile> hardwareProfile = default;
             Optional<StorageProfile> storageProfile = default;
             Optional<AdditionalCapabilities> additionalCapabilities = default;
@@ -161,8 +164,8 @@ namespace MgmtRenameRules
             Optional<WritableSubResource> availabilitySet = default;
             Optional<WritableSubResource> virtualMachineScaleSet = default;
             Optional<WritableSubResource> proximityPlacementGroup = default;
-            Optional<VirtualMachinePriorityTypes> priority = default;
-            Optional<VirtualMachineEvictionPolicyTypes> evictionPolicy = default;
+            Optional<VirtualMachinePriorityType> priority = default;
+            Optional<VirtualMachineEvictionPolicyType> evictionPolicy = default;
             Optional<BillingProfile> billingProfile = default;
             Optional<WritableSubResource> host = default;
             Optional<WritableSubResource> hostGroup = default;
@@ -210,6 +213,11 @@ namespace MgmtRenameRules
                 }
                 if (property.NameEquals("tags"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -240,6 +248,11 @@ namespace MgmtRenameRules
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -359,7 +372,7 @@ namespace MgmtRenameRules
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            priority = new VirtualMachinePriorityTypes(property0.Value.GetString());
+                            priority = new VirtualMachinePriorityType(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("evictionPolicy"))
@@ -369,7 +382,7 @@ namespace MgmtRenameRules
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            evictionPolicy = new VirtualMachineEvictionPolicyTypes(property0.Value.GetString());
+                            evictionPolicy = new VirtualMachineEvictionPolicyType(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("billingProfile"))
@@ -436,7 +449,7 @@ namespace MgmtRenameRules
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData, tags, location, plan.Value, identity, Optional.ToList(zones), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, plan.Value, identity, Optional.ToList(zones), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

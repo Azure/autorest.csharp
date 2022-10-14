@@ -15,6 +15,27 @@ namespace XmlDeserialization
 {
     public partial class XmlInstanceData : IUtf8JsonSerializable, IXmlSerializable
     {
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        {
+            writer.WriteStartElement(nameHint ?? "XmlInstance");
+            writer.WriteStartElement("id");
+            writer.WriteValue(Id);
+            writer.WriteEndElement();
+            writer.WriteStartElement("name");
+            writer.WriteValue(Name);
+            writer.WriteEndElement();
+            writer.WriteStartElement("type");
+            writer.WriteValue(ResourceType);
+            writer.WriteEndElement();
+            if (Optional.IsDefined(SystemData))
+            {
+                writer.WriteStartElement("systemData");
+                writer.WriteValue(SystemData);
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
@@ -26,7 +47,7 @@ namespace XmlDeserialization
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -46,29 +67,16 @@ namespace XmlDeserialization
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
             }
-            return new XmlInstanceData(id, name, type, systemData);
-        }
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
-        {
-            writer.WriteStartElement(nameHint ?? "XmlInstance");
-            writer.WriteStartElement("id");
-            writer.WriteValue(Id);
-            writer.WriteEndElement();
-            writer.WriteStartElement("name");
-            writer.WriteValue(Name);
-            writer.WriteEndElement();
-            writer.WriteStartElement("type");
-            writer.WriteValue(ResourceType);
-            writer.WriteEndElement();
-            writer.WriteStartElement("systemData");
-            writer.WriteValue(SystemData);
-            writer.WriteEndElement();
-            writer.WriteEndElement();
+            return new XmlInstanceData(id, name, type, systemData.Value);
         }
     }
 }

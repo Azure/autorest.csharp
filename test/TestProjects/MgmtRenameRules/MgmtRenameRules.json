@@ -4695,9 +4695,9 @@
                         "modelAsString": false
                     }
                 },
-                "content": {
+                "backupFrequency": {
                     "type": "string",
-                    "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted."
+                    "description": "Specifies the frequency for content backup"
                 }
             },
             "description": "Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied."
@@ -5893,12 +5893,47 @@
                 "managedDisk": {
                     "description": "The managed disk parameters.",
                     "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
+                },
+                "securityType": {
+                  "$ref": "#/definitions/DiskSecurityType"
                 }
             },
             "required": [
                 "createOption"
             ],
             "description": "Describes a virtual machine scale set operating system disk."
+        },
+        "DiskSecurityType": {
+          "type": "string",
+          "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
+          "enum": [
+            "TrustedLaunch",
+            "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
+            "ConfidentialVM_DiskEncryptedWithPlatformKey",
+            "ConfidentialVM_DiskEncryptedWithCustomerKey"
+          ],
+          "x-ms-enum": {
+            "name": "DiskSecurityTypes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "TrustedLaunch",
+                "description": "Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)"
+              },
+              {
+                "value": "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
+                "description": "Indicates Confidential VM disk with only VM guest state encrypted"
+              },
+              {
+                "value": "ConfidentialVM_DiskEncryptedWithPlatformKey",
+                "description": "Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a platform managed key"
+              },
+              {
+                "value": "ConfidentialVM_DiskEncryptedWithCustomerKey",
+                "description": "Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a customer managed key"
+              }
+            ]
+          }
         },
         "VirtualMachineScaleSetUpdateOSDisk": {
             "properties": {
@@ -6044,6 +6079,13 @@
                 "publicIPAddressConfiguration": {
                     "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfiguration",
                     "description": "The publicIPAddressConfiguration."
+                },
+                "ipAddresses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "IP Addresses"
                 },
                 "privateIPAddressVersion": {
                     "type": "string",
@@ -6662,6 +6704,18 @@
         },
         "VirtualMachineScaleSetProperties": {
             "properties": {
+                "ipsecSomething": {
+                    "type": "string",
+                    "description": "The IPsec"
+                },
+                "testIPSec": {
+                    "type": "string",
+                    "description": "The IPsec"
+                },
+                "p2sServer": {
+                    "type": "string",
+                    "description": "The P2S Server"
+                },
                 "upgradePolicy": {
                     "$ref": "#/definitions/UpgradePolicy",
                     "description": "The upgrade policy."
@@ -7820,6 +7874,22 @@
                     "readOnly": true,
                     "$ref": "#/definitions/LogAnalyticsOutput",
                     "description": "LogAnalyticsOutput"
+                },
+                "contentType": {
+                    "type": "string",
+                    "description": "The content type."
+                },
+                "content": {
+                    "type": "string",
+                    "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted."
+                },
+                "method": {
+                    "type": "string",
+                    "description": "Gets the workflow trigger callback URL HTTP method."
+                },
+                "basePath": {
+                    "type": "string",
+                    "description": "Gets the workflow trigger callback URL base path."
                 }
             },
             "description": "LogAnalytics operation status response"

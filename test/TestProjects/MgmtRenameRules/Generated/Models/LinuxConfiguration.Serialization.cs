@@ -37,7 +37,7 @@ namespace MgmtRenameRules.Models
         {
             Optional<bool> disablePasswordAuthentication = default;
             Optional<SshConfiguration> ssh = default;
-            Optional<bool> provisionVMAgent = default;
+            Optional<bool> provisionVmAgent = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("disablePasswordAuthentication"))
@@ -67,11 +67,11 @@ namespace MgmtRenameRules.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    provisionVMAgent = property.Value.GetBoolean();
+                    provisionVmAgent = property.Value.GetBoolean();
                     continue;
                 }
             }
-            return new LinuxConfiguration(Optional.ToNullable(disablePasswordAuthentication), ssh.Value, Optional.ToNullable(provisionVMAgent));
+            return new LinuxConfiguration(Optional.ToNullable(disablePasswordAuthentication), ssh.Value, Optional.ToNullable(provisionVmAgent));
         }
     }
 }

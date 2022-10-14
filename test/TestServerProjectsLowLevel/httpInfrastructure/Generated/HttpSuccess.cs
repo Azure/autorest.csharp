@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
+    // Data plane generated client. The HttpSuccess service client.
     /// <summary> The HttpSuccess service client. </summary>
     public partial class HttpSuccess
     {
@@ -46,16 +47,19 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head200Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.Head200Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Head200Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Head200");
@@ -73,16 +77,19 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head200.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.Head200();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Head200(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Head200");
@@ -100,16 +107,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get 200 success. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Get200Async and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.Get200Async();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Get200Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Get200");
@@ -127,16 +139,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get 200 success. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Get200 and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.Get200();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response Get200(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Get200");
@@ -154,16 +171,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Options 200 success. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Options200Async and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.Options200Async();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Options200Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Options200");
@@ -181,16 +203,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Options 200 success. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Options200 and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.Options200();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response Options200(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Options200");
@@ -208,17 +235,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put boolean value true returning 200 success. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put200Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Put200Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Put200Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Put200");
@@ -236,17 +268,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put boolean value true returning 200 success. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put200 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Put200(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Put200(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Put200");
@@ -264,17 +301,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Patch200Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Patch200Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Patch200Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Patch200");
@@ -292,17 +334,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Patch200 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Patch200(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Patch200(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Patch200");
@@ -320,17 +367,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post200Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Post200Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Post200Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Post200");
@@ -348,17 +400,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post200 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Post200(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Post200(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Post200");
@@ -376,17 +433,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete200Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Delete200Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Delete200Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Delete200");
@@ -404,17 +466,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete200 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Delete200(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Delete200(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Delete200");
@@ -432,17 +499,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put201Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Put201Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Put201Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Put201");
@@ -460,17 +532,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put201 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Put201(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Put201(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Put201");
@@ -488,17 +565,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post201Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Post201Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Post201Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Post201");
@@ -516,17 +598,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post201 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Post201(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Post201(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Post201");
@@ -544,17 +631,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put202Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Put202Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Put202Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Put202");
@@ -572,17 +664,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put202 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Put202(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Put202(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Put202");
@@ -600,17 +697,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Patch202Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Patch202Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Patch202Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Patch202");
@@ -628,17 +730,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Patch202 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Patch202(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Patch202(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Patch202");
@@ -656,17 +763,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post202Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Post202Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Post202Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Post202");
@@ -684,17 +796,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post202 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Post202(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Post202(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Post202");
@@ -712,17 +829,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete202Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Delete202Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Delete202Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Delete202");
@@ -740,17 +862,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete202 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Delete202(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Delete202(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Delete202");
@@ -768,16 +895,19 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head204Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.Head204Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Head204Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Head204");
@@ -795,16 +925,19 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head204.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.Head204();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Head204(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Head204");
@@ -822,17 +955,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put204Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Put204Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Put204Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Put204");
@@ -850,17 +988,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Put204 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Put204(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Put204(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Put204");
@@ -878,17 +1021,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Patch204Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Patch204Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Patch204Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Patch204");
@@ -906,17 +1054,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Patch204 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Patch204(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Patch204(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Patch204");
@@ -934,17 +1087,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post204Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Post204Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Post204Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Post204");
@@ -962,17 +1120,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Post204 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Post204(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Post204(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Post204");
@@ -990,17 +1153,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete204Async with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = await client.Delete204Async(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Delete204Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Delete204");
@@ -1018,17 +1186,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Delete204 with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// var data = true;
+        /// 
+        /// Response response = client.Delete204(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Delete204(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Delete204");
@@ -1046,16 +1219,19 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 404 status code. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head404Async.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.Head404Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> Head404Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Head404");
@@ -1073,16 +1249,19 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 404 status code. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head404.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new HttpSuccessClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.Head404();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response Head404(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccess.Head404");

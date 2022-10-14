@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_string_LowLevel
 {
+    // Data plane generated client. The Enum service client.
     /// <summary> The Enum service client. </summary>
     public partial class Enum
     {
@@ -46,16 +47,21 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetNotExpandableAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetNotExpandableAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetNotExpandableAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Enum.GetNotExpandable");
@@ -73,16 +79,21 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetNotExpandable and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetNotExpandable();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response GetNotExpandable(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Enum.GetNotExpandable");
@@ -100,18 +111,23 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutNotExpandableAsync with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
-        /// </remarks>
+        /// var data = "red color";
+        /// 
+        /// Response response = await client.PutNotExpandableAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> PutNotExpandableAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -131,18 +147,23 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutNotExpandable with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
-        /// </remarks>
+        /// var data = "red color";
+        /// 
+        /// Response response = client.PutNotExpandable(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response PutNotExpandable(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -162,16 +183,21 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetReferencedAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetReferencedAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetReferencedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Enum.GetReferenced");
@@ -189,16 +215,21 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetReferenced and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetReferenced();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response GetReferenced(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Enum.GetReferenced");
@@ -216,18 +247,23 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutReferencedAsync with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
-        /// </remarks>
+        /// var data = "red color";
+        /// 
+        /// Response response = await client.PutReferencedAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> PutReferencedAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -247,18 +283,23 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutReferenced with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
         /// 
-        /// </remarks>
+        /// var data = "red color";
+        /// 
+        /// Response response = client.PutReferenced(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response PutReferenced(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -278,18 +319,31 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetReferencedConstantAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
+        /// 
+        /// Response response = await client.GetReferencedConstantAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("ColorConstant").ToString());
+        /// Console.WriteLine(result.GetProperty("field1").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>RefColorConstant</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant,
-        ///   field1: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ColorConstant: string, # Required. Referenced Color Constant Description.
+        ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
         /// 
@@ -311,18 +365,31 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetReferencedConstant and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
+        /// 
+        /// Response response = client.GetReferencedConstant();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("ColorConstant").ToString());
+        /// Console.WriteLine(result.GetProperty("field1").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>RefColorConstant</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant,
-        ///   field1: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ColorConstant: string, # Required. Referenced Color Constant Description.
+        ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
         /// 
@@ -344,20 +411,47 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutReferencedConstantAsync with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
+        /// 
+        /// var data = new {
+        ///     ColorConstant = "<ColorConstant>",
+        /// };
+        /// 
+        /// Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutReferencedConstantAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
+        /// 
+        /// var data = new {
+        ///     ColorConstant = "<ColorConstant>",
+        ///     field1 = "<field1>",
+        /// };
+        /// 
+        /// Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>RefColorConstant</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant (required),
-        ///   field1: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ColorConstant: string, # Required. Referenced Color Constant Description.
+        ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
         /// 
@@ -381,20 +475,47 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutReferencedConstant with required request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
+        /// 
+        /// var data = new {
+        ///     ColorConstant = "<ColorConstant>",
+        /// };
+        /// 
+        /// Response response = client.PutReferencedConstant(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutReferencedConstant with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new EnumClient(credential);
+        /// 
+        /// var data = new {
+        ///     ColorConstant = "<ColorConstant>",
+        ///     field1 = "<field1>",
+        /// };
+        /// 
+        /// Response response = client.PutReferencedConstant(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>RefColorConstant</c>:
         /// <code>{
-        ///   ColorConstant: ColorConstant (required),
-        ///   field1: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ColorConstant: string, # Required. Referenced Color Constant Description.
+        ///   field1: string, # Optional. Sample string.
         /// }
         /// </code>
         /// 

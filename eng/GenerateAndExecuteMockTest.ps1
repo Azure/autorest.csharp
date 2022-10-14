@@ -8,7 +8,6 @@ function Find-Mapping([string]$path) {
             if ($outputFolderMatchResult -ne $false) {
                 $outputFolder = $matches[0].Replace("/", "")
             }
-
             #rpName has mutiple match rules
             $rpNameMatchResult = $item -match "Azure\.Management\.[^\/]+"
             if ($rpNameMatchResult -ne $false) {
@@ -46,7 +45,7 @@ function Update-Branch([string]$CommitId, [string]$Path) {
     $fileContent = Get-Content $file
     $store = @()
     foreach ($item in $fileContent) {
-        $store += $item.ToString().Replace("master", $CommitId)
+        $store += $item.ToString().Replace("main", $CommitId)
     }
     $store | Out-File -FilePath $file
 }
@@ -59,11 +58,6 @@ function Update-Sln([string]$path, [string]$RPName) {
         $store += $line.ToString().Replace("""tests\Azure", """mocktests\Azure")
     }
     $store | Out-File -FilePath $slnFile
-}
-function Send-ErrorMessage([string]$message) {
-    Write-Host $message
-    Write-Host "MockTestInit script exit."
-    exit
 }
 function Show-Result([array]$list) {
     $i = 0
@@ -153,7 +147,7 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
 
     # Generate MockTest code
     if ((Test-Path $mockMd) -and (Test-Path $csproj)) {
-        $result = & autorest --use=$autorestVersion $mockMd --testmodeler="{}" --debug
+        $result = & autorest --max-memory-size=8192 --use=$autorestVersion $mockMd --testmodeler="{}" --debug 
         if ($?) {
             Write-Host "$RPName MockTest Generate Successed"
             $Script:testGenerateSuccessedRps += $RPName
@@ -187,13 +181,7 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
 function  MockTestInit {
     param(
         [Parameter()]
-        [string] $CommitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b",
-        [Parameter()]
-        [bool]$GenerateNewSDKs = $false,
-        [Parameter()]
-        [bool]$NpmInit = $false,
-        [Parameter()]
-        [string]$netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
+        [bool]$GenerateNewSDKs = $false
     )
     begin {
         Write-Host "Mock Test Initialize Start."
@@ -213,30 +201,35 @@ function  MockTestInit {
     }
     process {
         # Install npm and autorest
-        if ($NpmInit) {
-            & npm install -g autorest
-        }
+        & npm install -g autorest
 
         # Build current autorest project 
         $projRoot = Join-Path $PSScriptRoot "..\"
-        & cd $projRoot
+        Set-Location $projRoot
         $null = & dotnet build
         if (-not $?) {
-            Send-ErrorMessage -message "Autorest build fail."
+            Write-Host "Autorest build fail."
+            exit
         }
         $autorestVersion = Join-Path $projRoot "\artifacts\bin\AutoRest.CSharp\Debug\netcoreapp3.1"
 
-        # Clone Template project and add 'dotnet new' ref
-        & git clone https://github.com/dvbb/MgmtTemplate.git $projRoot\MgmtTemplate
-        & dotnet new -i $projRoot\MgmtTemplate\Azure.ResourceManager.Template
-        & dotnet new -i $projRoot\MgmtTemplate\mocktests
+        # Clone Azure/azure-rest-api-specs and get latest commitId
+        & git clone https://github.com/Azure/azure-rest-api-specs.git $projRoot\azure-rest-api-specs
+        $SpecsRepoPath = Join-Path $projRoot "azure-rest-api-specs" 
+        Set-Location $projRoot\azure-rest-api-specs
+        $CommitId = (git rev-parse HEAD).Substring(0,40)
 
         # Clone Azure/azure-sdk-for-net
-        & git clone $netSdkRepoUri $projRoot\azure-sdk-for-net
+        & git clone https://github.com/Azure/azure-sdk-for-net.git $projRoot\azure-sdk-for-net
         $netRepoRoot = Join-Path $projRoot "azure-sdk-for-net"
         $netRepoSdkFolder = Join-Path $netRepoRoot "sdk"
         $CodeGenTargetFile = Join-Path $netRepoRoot "\eng\CodeGeneration.targets"
         Update-AutorestTarget -file $CodeGenTargetFile -autorestVersion $autorestVersion
+
+        # Add the required Template
+        & git clone https://github.com/dvbb/MgmtTemplate.git $projRoot\MgmtTemplate
+        & dotnet new -i $netRepoRoot\eng\templates\Azure.ResourceManager.Template
+        & dotnet new -i $projRoot\MgmtTemplate\mocktests # [Warning] Mocktests's template are temporarily stored in a private repository
 
         # Launch Mock-service-host
         # Warning: Only absolute paths can be used in ScriptBlock.
@@ -246,10 +239,6 @@ function  MockTestInit {
 
         # Generate Track2 SDK Template
         if ($GenerateNewSDKs) {
-            # Clone Azure/azure-rest-api-specs
-            & git clone https://github.com/Azure/azure-rest-api-specs.git $projRoot\azure-rest-api-specs
-            $SpecsRepoPath = Join-Path $projRoot "azure-rest-api-specs" 
-        
             # Get RP Mapping from azure-rest-api-specs repo of local
             Write-Output "Start RP mapping "
             $folderNames = Get-ChildItem $SpecsRepoPath/specification
@@ -429,8 +418,6 @@ function  MockTestInit {
 }
 
 # Generate & Run All SDK
-$commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
 $GenerateNewSDKs = $true
-$NpmInit = $true
-$netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
-MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
+$env:NODE_OPTIONS="--max_old_space_size=8192"
+MockTestInit -GenerateNewSDKs $GenerateNewSDKs

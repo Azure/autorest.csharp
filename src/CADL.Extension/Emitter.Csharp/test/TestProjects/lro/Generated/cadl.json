@@ -1,0 +1,282 @@
+{
+ "$id": "1",
+ "Name": "lrooperation",
+ "ApiVersions": [
+  "2022-05-15-preview"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "Pet",
+   "Namespace": "LroOperation",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "5",
+     "Name": "tag",
+     "SerializedName": "tag",
+     "Description": "",
+     "Type": {
+      "$id": "6",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "7",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "8",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "9",
+   "Name": "Projects",
+   "Operations": [
+    {
+     "$id": "10",
+     "Name": "createOrUpdate",
+     "Description": "Creates a new pet or updates an existing one.",
+     "Parameters": [
+      {
+       "$id": "11",
+       "Name": "Endpoint",
+       "NameInRequest": "Endpoint",
+       "Type": {
+        "$id": "12",
+        "Name": "Uri",
+        "Kind": "Uri",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "13",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "14",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "15",
+       "Name": "content-type",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "16",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "17",
+        "Type": {
+         "$ref": "16"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "18",
+       "Name": "api-version",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "19",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$id": "20",
+        "Type": {
+         "$id": "21",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-05-15-preview"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "22",
+       "Name": "Pet",
+       "NameInRequest": "Pet",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "23",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "24",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "25",
+        "Type": {
+         "$ref": "24"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "26",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "27",
+         "Name": "Operation-Location",
+         "NameInResponse": "operationLocation",
+         "Description": "The location for monitoring the operation state.",
+         "Type": {
+          "$id": "28",
+          "Name": "ResourceLocation",
+          "Kind": "String",
+          "IsNullable": false
+         }
+        }
+       ]
+      },
+      {
+       "$id": "29",
+       "StatusCodes": [
+        201
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "30",
+         "Name": "Operation-Location",
+         "NameInResponse": "operationLocation",
+         "Description": "The location for monitoring the operation state.",
+         "Type": {
+          "$id": "31",
+          "Name": "ResourceLocation",
+          "Kind": "String",
+          "IsNullable": false
+         }
+        }
+       ]
+      }
+     ],
+     "HttpMethod": "PATCH",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{Endpoint}/language",
+     "Path": "/authoring/analyze-text/Pet/{name}",
+     "RequestMediaTypes": [
+      "application/merge-patch+json"
+     ],
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "32"
+   }
+  }
+ ]
+}

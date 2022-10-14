@@ -16,6 +16,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
 {
@@ -125,10 +126,11 @@ namespace MgmtParamOrdering
         /// Operation Id: DedicatedHosts_Get
         /// </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual async Task<Response<DedicatedHostResource>> GetAsync(string hostName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostResource>> GetAsync(string hostName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
@@ -136,7 +138,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _dedicatedHostRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostResource(Client, response.Value), response.GetRawResponse());
@@ -154,10 +156,11 @@ namespace MgmtParamOrdering
         /// Operation Id: DedicatedHosts_Get
         /// </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual Response<DedicatedHostResource> Get(string hostName, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostResource> Get(string hostName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
@@ -165,7 +168,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _dedicatedHostRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken);
+                var response = _dedicatedHostRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostResource(Client, response.Value), response.GetRawResponse());
@@ -267,10 +270,11 @@ namespace MgmtParamOrdering
         /// Operation Id: DedicatedHosts_Get
         /// </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual async Task<Response<bool>> ExistsAsync(string hostName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string hostName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
@@ -278,7 +282,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _dedicatedHostRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -294,10 +298,11 @@ namespace MgmtParamOrdering
         /// Operation Id: DedicatedHosts_Get
         /// </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual Response<bool> Exists(string hostName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> Exists(string hostName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
@@ -305,7 +310,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _dedicatedHostRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
+                var response = _dedicatedHostRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)

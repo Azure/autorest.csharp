@@ -6777,7 +6777,7 @@ schemas: !Schemas
                             - output
                           language: !Languages 
                             default:
-                              name: FileService
+                              name: FileServiceProperties
                               description: The properties of File services in storage account.
                               namespace: ''
                           protocol: !Protocols {}
@@ -10415,7 +10415,7 @@ schemas: !Schemas
                 - output
               language: !Languages 
                 default:
-                  name: BlobService
+                  name: BlobServiceProperties
                   description: The properties of a storage account’s Blob service.
                   namespace: ''
               protocol: !Protocols {}
@@ -25496,6 +25496,7 @@ operationGroups:
                     status: InProgress
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
+            enable-interim-state: true
             final-state-via: location
         language: !Languages 
           default:

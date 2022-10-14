@@ -3703,6 +3703,156 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/updateConfigurations": {
+            "post": {
+                "tags": ["Configurations"],
+                "operationId": "Fakes_UpdateConfigurations",
+                "description": "Update configurations for each VM family in workspace.",
+                "parameters": [
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "value",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                          "$ref": "#/definitions/FakeConfigurationListResult"
+                        },
+                        "description": "The parameters for updating a list of fake configuration."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The operation was successful.",
+                        "schema": {
+                            "$ref": "#/definitions/FakeConfigurationListResult"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/configurations/{configurationName}": {
+            "put": {
+                "tags": ["Configurations"],
+                "operationId": "Configurations_CreateOrUpdate",
+                "description": "Create or update a fake configuration.",
+                "parameters": [
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "configurationName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake configuration."
+                    },
+                    {
+                        "name": "value",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/FakeConfiguration"
+                        },
+                        "description": "The parameters for creating or updating a fake configuration."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The operation was successful.",
+                        "schema": {
+                            "$ref": "#/definitions/FakeConfiguration"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Configurations"],
+                "operationId": "Configurations_Get",
+                "description": "Get configuration for each VM family in workspace.",
+                "parameters": [
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "configurationName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the configuration."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The operation was successful.",
+                        "schema": {
+                            "$ref": "#/definitions/FakeConfiguration"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/configurations": {
+            "get": {
+                "tags": ["Configurations"],
+                "operationId": "Configurations_List",
+                "description": "List all configurations for each VM family in workspace.",
+                "parameters": [
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The operation was successful.",
+                        "schema": {
+                            "$ref": "#/definitions/FakeConfigurationListResult"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -4805,6 +4955,32 @@
                 }
             },
             "description": "The properties for update Quota response."
+        },
+        "FakeConfiguration": {
+            "properties": {
+                "configValue": {
+                    "type": "string",
+                    "description": "Value of the configuration."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Describes the properties of a Fake Configuration."
+        },
+        "FakeConfigurationListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FakeConfiguration"
+                    },
+                    "description": "The list of Fake Configuration."
+                }
+            },
+            "description": "The List of Fake Configuration operation response."
         }
     },
     "parameters": {

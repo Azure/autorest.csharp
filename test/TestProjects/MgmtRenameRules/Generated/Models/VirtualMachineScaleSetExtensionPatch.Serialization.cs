@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtRenameRules.Models
 {
@@ -83,9 +84,10 @@ namespace MgmtRenameRules.Models
 
         internal static VirtualMachineScaleSetExtensionPatch DeserializeVirtualMachineScaleSetExtensionPatch(JsonElement element)
         {
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
+            Optional<SystemData> systemData = default;
             Optional<string> forceUpdateTag = default;
             Optional<string> publisher = default;
             Optional<string> type0 = default;
@@ -98,6 +100,11 @@ namespace MgmtRenameRules.Models
             Optional<IList<string>> provisionAfterExtensions = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = new ResourceIdentifier(property.Value.GetString());
+                    continue;
+                }
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
@@ -105,12 +112,17 @@ namespace MgmtRenameRules.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("systemData"))
                 {
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -206,7 +218,7 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetExtensionPatch(id.Value, name.Value, type.Value, forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, Optional.ToList(provisionAfterExtensions));
+            return new VirtualMachineScaleSetExtensionPatch(id, name, type, systemData.Value, forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, Optional.ToList(provisionAfterExtensions));
         }
     }
 }

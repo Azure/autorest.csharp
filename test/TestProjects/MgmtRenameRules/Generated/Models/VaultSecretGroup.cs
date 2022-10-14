@@ -11,7 +11,10 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Describes a set of certificates which are all in the same Key Vault. </summary>
+    /// <summary>
+    /// Describes a set of certificates which are all in the same Key Vault.
+    /// Serialized Name: VaultSecretGroup
+    /// </summary>
     public partial class VaultSecretGroup
     {
         /// <summary> Initializes a new instance of VaultSecretGroup. </summary>
@@ -21,15 +24,24 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of VaultSecretGroup. </summary>
-        /// <param name="sourceVault"> The relative URL of the Key Vault containing all of the certificates in VaultCertificates. </param>
-        /// <param name="vaultCertificates"> The list of key vault references in SourceVault which contain certificates. </param>
+        /// <param name="sourceVault">
+        /// The relative URL of the Key Vault containing all of the certificates in VaultCertificates.
+        /// Serialized Name: VaultSecretGroup.sourceVault
+        /// </param>
+        /// <param name="vaultCertificates">
+        /// The list of key vault references in SourceVault which contain certificates.
+        /// Serialized Name: VaultSecretGroup.vaultCertificates
+        /// </param>
         internal VaultSecretGroup(WritableSubResource sourceVault, IList<VaultCertificate> vaultCertificates)
         {
             SourceVault = sourceVault;
             VaultCertificates = vaultCertificates;
         }
 
-        /// <summary> The relative URL of the Key Vault containing all of the certificates in VaultCertificates. </summary>
+        /// <summary>
+        /// The relative URL of the Key Vault containing all of the certificates in VaultCertificates.
+        /// Serialized Name: VaultSecretGroup.sourceVault
+        /// </summary>
         internal WritableSubResource SourceVault { get; set; }
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier SourceVaultId
@@ -43,7 +55,10 @@ namespace MgmtRenameRules.Models
             }
         }
 
-        /// <summary> The list of key vault references in SourceVault which contain certificates. </summary>
+        /// <summary>
+        /// The list of key vault references in SourceVault which contain certificates.
+        /// Serialized Name: VaultSecretGroup.vaultCertificates
+        /// </summary>
         public IList<VaultCertificate> VaultCertificates { get; }
     }
 }

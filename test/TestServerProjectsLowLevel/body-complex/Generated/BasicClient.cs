@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
+    // Data plane generated client. The Basic service client.
     /// <summary> The Basic service client. </summary>
     public partial class BasicClient
     {
@@ -59,19 +60,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetValidAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// Response response = await client.GetValidAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -93,19 +108,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetValid and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// Response response = client.GetValid();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -127,21 +156,47 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValidAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValidAsync with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// var data = new {
+        ///     id = 1234,
+        ///     name = "<name>",
+        ///     color = "cyan",
+        /// };
+        /// 
+        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -165,21 +220,47 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call PutValid.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.PutValid(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call PutValid with all request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// var data = new {
+        ///     id = 1234,
+        ///     name = "<name>",
+        ///     color = "cyan",
+        /// };
+        /// 
+        /// Response response = client.PutValid(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -203,19 +284,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetInvalidAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// Response response = await client.GetInvalidAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -237,19 +332,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetInvalid and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// Response response = client.GetInvalid();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -271,19 +380,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is empty. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetEmptyAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// Response response = await client.GetEmptyAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -305,19 +428,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is empty. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetEmpty and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// Response response = client.GetEmpty();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -339,19 +476,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type whose properties are null. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetNullAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// Response response = await client.GetNullAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -373,19 +524,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type whose properties are null. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetNull and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// Response response = client.GetNull();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -407,19 +572,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetNotProvidedAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// Response response = await client.GetNotProvidedAsync();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -441,19 +620,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetNotProvided and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new BasicClient(credential);
+        /// 
+        /// Response response = client.GetNotProvided();
+        /// 
+        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("name").ToString());
+        /// Console.WriteLine(result.GetProperty("color").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the response payload.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>Basic</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. Basic Id
+        ///   name: string, # Optional. Name property with a very long description that does not fit on a single line and a line break.
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 

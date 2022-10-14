@@ -36,7 +36,7 @@ namespace ProtocolMethodsInRestClient
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal HttpMessage CreateCreateRequest(Resource resource)
+        internal HttpMessage CreateCreateRequest(Grouped grouped, Resource resource)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -44,6 +44,11 @@ namespace ProtocolMethodsInRestClient
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/template/resources", false);
+            if (grouped?.First != null)
+            {
+                uri.AppendQuery("first", grouped.First, true);
+            }
+            uri.AppendQuery("second", grouped.Second, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             if (resource != null)
@@ -57,11 +62,18 @@ namespace ProtocolMethodsInRestClient
         }
 
         /// <summary> Create or update resource. </summary>
+        /// <param name="grouped"> Parameter group. </param>
         /// <param name="resource"> Information about the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<Resource>> CreateAsync(Resource resource = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="grouped"/> is null. </exception>
+        public async Task<Response<Resource>> CreateAsync(Grouped grouped, Resource resource = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateCreateRequest(resource);
+            if (grouped == null)
+            {
+                throw new ArgumentNullException(nameof(grouped));
+            }
+
+            using var message = CreateCreateRequest(grouped, resource);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -78,11 +90,18 @@ namespace ProtocolMethodsInRestClient
         }
 
         /// <summary> Create or update resource. </summary>
+        /// <param name="grouped"> Parameter group. </param>
         /// <param name="resource"> Information about the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Resource> Create(Resource resource = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="grouped"/> is null. </exception>
+        public Response<Resource> Create(Grouped grouped, Resource resource = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateCreateRequest(resource);
+            if (grouped == null)
+            {
+                throw new ArgumentNullException(nameof(grouped));
+            }
+
+            using var message = CreateCreateRequest(grouped, resource);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -98,7 +117,7 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateCreateRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateCreateRequest(int second, RequestContent content, string first, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -106,6 +125,11 @@ namespace ProtocolMethodsInRestClient
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/template/resources", false);
+            uri.AppendQuery("second", second, true);
+            if (first != null)
+            {
+                uri.AppendQuery("first", first, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -114,30 +138,19 @@ namespace ProtocolMethodsInRestClient
         }
 
         /// <summary> Create or update resource. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Request Body</c>:
-        /// <code>{
-        ///   name: string,
-        ///   id: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   name: string,
-        ///   id: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
+        /// <param name="second"> Second in group. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="first"> First in group. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual async Task<Response> CreateAsync(int second, RequestContent content, string first = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(content, context);
+                using HttpMessage message = CreateCreateRequest(second, content, first, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -148,30 +161,19 @@ namespace ProtocolMethodsInRestClient
         }
 
         /// <summary> Create or update resource. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Request Body</c>:
-        /// <code>{
-        ///   name: string,
-        ///   id: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   name: string,
-        ///   id: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual Response Create(RequestContent content, RequestContext context = null)
+        /// <param name="second"> Second in group. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="first"> First in group. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual Response Create(int second, RequestContent content, string first = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(content, context);
+                using HttpMessage message = CreateCreateRequest(second, content, first, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -181,7 +183,7 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceId)
+        internal HttpMessage CreateDeleteRequest(string resourceId, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -191,21 +193,26 @@ namespace ProtocolMethodsInRestClient
             uri.AppendPath("/template/resources/", false);
             uri.AppendPath(resourceId, true);
             request.Uri = uri;
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch);
+            }
             return message;
         }
 
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceId, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string resourceId, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (resourceId == null)
             {
                 throw new ArgumentNullException(nameof(resourceId));
             }
 
-            using var message = CreateDeleteRequest(resourceId);
+            using var message = CreateDeleteRequest(resourceId, ifMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -218,16 +225,17 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="ifMatch"> The ETag of the transformation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
-        public Response Delete(string resourceId, CancellationToken cancellationToken = default)
+        public Response Delete(string resourceId, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (resourceId == null)
             {
                 throw new ArgumentNullException(nameof(resourceId));
             }
 
-            using var message = CreateDeleteRequest(resourceId);
+            using var message = CreateDeleteRequest(resourceId, ifMatch);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -238,7 +246,7 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceId, RequestContext context)
+        internal HttpMessage CreateDeleteRequest(string resourceId, ETag? ifMatch, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
@@ -248,15 +256,22 @@ namespace ProtocolMethodsInRestClient
             uri.AppendPath("/template/resources/", false);
             uri.AppendPath(resourceId, true);
             request.Uri = uri;
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch.Value);
+            }
             return message;
         }
 
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="ifMatch"> The ETag of the transformation. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> DeleteAsync(string resourceId, RequestContext context = null)
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual async Task<Response> DeleteAsync(string resourceId, ETag? ifMatch = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
@@ -264,7 +279,7 @@ namespace ProtocolMethodsInRestClient
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteRequest(resourceId, context);
+                using HttpMessage message = CreateDeleteRequest(resourceId, ifMatch, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -276,10 +291,13 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="ifMatch"> The ETag of the transformation. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response Delete(string resourceId, RequestContext context = null)
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual Response Delete(string resourceId, ETag? ifMatch = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
@@ -287,7 +305,7 @@ namespace ProtocolMethodsInRestClient
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeleteRequest(resourceId, context);
+                using HttpMessage message = CreateDeleteRequest(resourceId, ifMatch, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -22,6 +24,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         private string _projectName;
         private string? _subFolder;
+        protected HashSet<Type> TagResourceExceptions { get; } = new HashSet<Type>();
 
         public TestProjectTests() : this("")
         {
@@ -185,7 +188,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 VerifyMethodReturnType(resource, resource, "Get");
                 var resourceData = GetResourceDataByResource(resource);
-                if (typeof(TrackedResourceData).IsAssignableFrom(resourceData))
+                if (IsTaggable(resourceData, resource))
                 {
                     VerifyMethodReturnType(resource, resource, "AddTag");
                     VerifyMethodReturnType(resource, resource, "SetTags");
@@ -387,7 +390,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (!IsInheritFromTrackedResource(resourceData))
+                if (!IsTaggable(resourceData, type))
                 {
                     continue;
                 }
@@ -400,6 +403,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 TypeAsserts.HasParameter(method, "value", typeof(string));
                 TypeAsserts.HasParameter(method, "cancellationToken", typeof(CancellationToken));
             }
+        }
+
+        private bool IsTaggable(Type resourceData, Type resource)
+        {
+            return !TagResourceExceptions.Contains(resource) && IsInheritFromTrackedResource(resourceData);
         }
 
         [Test]
@@ -418,7 +426,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (!IsInheritFromTrackedResource(resourceData))
+                if (!IsTaggable(resourceData, type))
                 {
                     continue;
                 }
@@ -439,7 +447,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (!IsInheritFromTrackedResource(resourceData))
+                if (!IsTaggable(resourceData, type))
                 {
                     continue;
                 }
@@ -732,13 +740,33 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
+        private object? GetFirstVauleFromExtensibleEnumType(Type type)
+        {
+            foreach (FieldInfo f in type.GetRuntimeFields())
+            {
+                if (f.IsStatic && f.FieldType == type)
+                    return f.GetValue(null);
+            }
+            // Empty? should throw exception
+            return null;
+        }
+
         private ResourceIdentifier GetSampleResourceId(Type operation)
         {
             var createIdMethod = operation.GetMethod("CreateResourceIdentifier", BindingFlags.Static | BindingFlags.Public);
-            List<string> keys = new List<string>();
+            List<object> keys = new List<object>();
             foreach (var p in createIdMethod.GetParameters())
             {
-                keys.Add(GetSampleKey(p.Name));
+                if (p.ParameterType == typeof(string))
+                {
+                    keys.Add(GetSampleKey(p.Name));
+                }
+                else
+                {
+                    object val = GetFirstVauleFromExtensibleEnumType(p.ParameterType);
+                    Assert.IsNotNull(val);
+                    keys.Add(val);
+                }
             }
             return createIdMethod.Invoke(null, keys.ToArray()) as ResourceIdentifier;
         }

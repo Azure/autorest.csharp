@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Azure.Core;
@@ -39,6 +40,15 @@ namespace AutoRest.CSharp.Input.Source
                     }
                 }
             }
+        }
+
+        public IReadOnlyList<string>? GetServiceVersionOverrides()
+        {
+            var osvAttributeType = _compilation.GetTypeByMetadataName(typeof(CodeGenOverrideServiceVersionsAttribute).FullName!)!;
+            var osvAttribute = _compilation.Assembly.GetAttributes()
+                .FirstOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, osvAttributeType));
+
+            return osvAttribute?.ConstructorArguments[0].Values.Select(v => v.Value).OfType<string>().ToList();
         }
 
         public ModelTypeMapping CreateForModel(INamedTypeSymbol? symbol)

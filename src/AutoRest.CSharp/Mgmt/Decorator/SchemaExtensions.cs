@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         /// <param name="schema"></param>
         /// <returns></returns>
-        private static IEnumerable<Property> GetAllProperties(this ObjectSchema schema)
+        internal static IEnumerable<Property> GetAllProperties(this ObjectSchema schema)
         {
             return schema.Parents!.All.OfType<ObjectSchema>().SelectMany(parentSchema => parentSchema.Properties).Concat(schema.Properties);
         }
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             var allProperties = objSchema.GetAllProperties();
 
-            return allProperties.Any(property => IsTagsProperty(property));
+            return allProperties.Any(property => IsTagsProperty(property) && !property.IsReadOnly);
         }
 
         public static bool IsTagsOnly(this Schema schema)
@@ -102,5 +102,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return objSchema.GetAllProperties().Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Schema.Type == AllSchemaTypes.String);
         }
+
+        internal static string GetOriginalName(this Schema schema) => schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
     }
 }

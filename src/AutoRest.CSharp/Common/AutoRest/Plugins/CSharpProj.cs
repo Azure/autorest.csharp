@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.25.0-alpha.20220504.1"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.25.0"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.3.1"" />
   </ItemGroup>
 ";
 
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var context = new BuildContext(codeModel, null);
 
-            var isTestProject = Configuration.MgmtConfiguration.TestModeler is not null;
+            var isTestProject = Configuration.MgmtConfiguration.TestGen is not null;
             if (isTestProject)
             {
                 _coreCsProjContent += string.Format(@"
@@ -107,7 +107,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include = ""NUnit"" Version = ""3.12.0"" />
+    <PackageReference Include=""NUnit"" Version=""3.12.0"" />
+    <PackageReference Include=""Azure.Identity"" Version=""1.6.0"" />
   </ItemGroup>
 
   <ItemGroup>
@@ -140,7 +141,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var projectFile = $"{Configuration.ProjectFolder}{context.DefaultNamespace}";
             if (isTestProject)
             {
-                projectFile += "Test";
+                projectFile += ".Tests";
             }
             await autoRest.WriteFile($"{projectFile}.csproj", csProjContent, "source-file-csharp");
 

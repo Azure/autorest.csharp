@@ -190,7 +190,7 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="stringBody"> The binary to use. </param>
+        /// <param name="stringBody"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Azure.Response> AnalyzeBodyAsync(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
@@ -206,7 +206,7 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="stringBody"> The binary to use. </param>
+        /// <param name="stringBody"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Azure.Response AnalyzeBody(Stream stringBody = null, CancellationToken cancellationToken = default)
         {

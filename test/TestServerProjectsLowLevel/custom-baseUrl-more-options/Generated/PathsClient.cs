@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace custom_baseUrl_more_options_LowLevel
 {
+    // Data plane generated client. The Paths service client.
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient
     {
@@ -68,18 +69,29 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="secret"> Secret value. </param>
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetEmptyAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient("<subscriptionId>", credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call GetEmptyAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient("<subscriptionId>", credential);
+        /// 
+        /// Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", "<keyVersion>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
         {
             Argument.AssertNotNull(vault, nameof(vault));
@@ -105,18 +117,29 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="secret"> Secret value. </param>
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetEmpty with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient("<subscriptionId>", credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call GetEmpty with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathsClient("<subscriptionId>", credential);
+        /// 
+        /// Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", "<keyVersion>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
         {
             Argument.AssertNotNull(vault, nameof(vault));

@@ -243,10 +243,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
-        private void WriteSingletonResourceGetMethod(Resource resource)
+        protected virtual void WriteSingletonResourceGetMethod(Resource resource)
         {
             var signature = new MethodSignature(
                 $"Get{resource.ResourceName}",
+                null,
                 $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.ResourceName}.",
                 GetMethodModifiers(),
                 resource.Type,
@@ -258,11 +259,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteResourceCollectionGetMethod(Resource resource)
+        protected virtual void WriteResourceCollectionGetMethod(Resource resource)
         {
             var resourceCollection = resource.ResourceCollection!;
             var signature = new MethodSignature(
                 $"{GetResourceCollectionMethodName(resourceCollection)}",
+                null,
                 $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {This.ResourceName}.",
                 GetMethodModifiers(),
                 resourceCollection.Type,
@@ -274,7 +276,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
+        protected virtual void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
         {
             var getOperation = resourceCollection.GetOperation;
             // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
@@ -284,7 +286,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.ResourceName}",
                 Modifiers = GetMethodModifiers(),
                 // There could be parameters to get resource collection
-                Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
+                Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).Distinct().ToArray(),
             };
 
             _writer.Line();
@@ -374,7 +376,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var field in This.Fields)
             {
-                _writer.WriteFieldDeclaration(field);
+                _writer.WriteField(field);
             }
             _writer.Line();
         }
@@ -513,14 +515,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _ => throw new InvalidOperationException("Unknown method combination"),
             };
 
-        protected CodeWriter.CodeWriterScope WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
+        protected IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             _writer.Line();
-            var returnDescription = clientOperation.ReturnsDescription is not null ? clientOperation.ReturnsDescription(isAsync) : null;
+            var returnDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
             return WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync);
         }
 
-        protected CodeWriter.CodeWriterScope WriteCommonMethod(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
+        protected IDisposable WriteCommonMethod(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
         {
             var scope = WriteCommonMethodWithoutValidation(signature, returnDescription, isAsync);
             if (This.Accessibility == "public")
@@ -529,7 +531,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return scope;
         }
 
-        private CodeWriter.CodeWriterScope WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
+        protected IDisposable WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
         {
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);
@@ -833,15 +835,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var operation = new {LibraryArmOperation}");
-            if (operation.ReturnType.IsGenericType)
+            if (operation.InterimOperation is not null)
             {
-                _writer.Append($"<{operation.MgmtReturnType}>");
+                _writer.Append($"var operation = new {operation.InterimOperation.TypeName}");
+            }
+            else
+            {
+                _writer.Append($"var operation = new {LibraryArmOperation}");
+                if (operation.ReturnType.IsGenericType)
+                {
+                    _writer.Append($"<{operation.MgmtReturnType}>");
+                }
             }
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                if (operation.MgmtReturnType is not null)
+                if (operation.MgmtReturnType is not null && MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType))
                 {
                     _writer.Append($"{typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, response), response.GetRawResponse())");
                 }

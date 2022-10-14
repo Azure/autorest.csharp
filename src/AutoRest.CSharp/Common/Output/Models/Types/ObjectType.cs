@@ -14,6 +14,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CSharpType? _inheritsType;
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
+        private string? _description;
 
         protected ObjectType(BuildContext context) : base(context)
         {
@@ -26,12 +27,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
-        public string? Description { get; protected set; }
+        public string? Description => _description ??= CreateDescription();
         public abstract ObjectTypeProperty? AdditionalPropertiesProperty { get; }
         protected abstract ObjectTypeConstructor BuildInitializationConstructor();
         protected abstract ObjectTypeConstructor BuildSerializationConstructor();
         protected abstract CSharpType? CreateInheritedType();
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
+        protected abstract string CreateDescription();
 
         public IEnumerable<ObjectType> EnumerateHierarchy()
         {
@@ -53,13 +55,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected abstract IEnumerable<ObjectTypeConstructor> BuildConstructors();
 
-        protected ObjectTypeConstructor? GetBaseCtor()
-        {
-            if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
-            {
-                return objectType.Constructors.First();
-            }
-            return null;
-        }
+        protected ObjectType? GetBaseObjectType()
+            => Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType } ? objectType : null;
     }
 }

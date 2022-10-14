@@ -2,27 +2,46 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure.Core;
+using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class SystemObjectType : ObjectType
     {
-        private Type _type;
+        private static ConcurrentDictionary<Type, SystemObjectType> _typeCache = new ConcurrentDictionary<Type, SystemObjectType>();
+
+        public static SystemObjectType Create(Type type, BuildContext context)
+        {
+            if (_typeCache.TryGetValue(type, out var result))
+                return result;
+
+            result = new SystemObjectType(type, context);
+            _typeCache.TryAdd(type, result);
+            return result;
+        }
+
+        private readonly Type _type;
+        private readonly BuildContext _context;
 
         public SystemObjectType(Type type, BuildContext context)
             : base(context)
         {
             _type = type;
+            _context = context;
             DefaultName = GetNameWithoutGeneric(type);
         }
 
@@ -42,21 +61,33 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal Type SystemType => _type;
 
-        private ConstructorInfo GetCtor(string attributeType)
+        internal static bool TryGetCtor(Type type, string attributeType, [MaybeNullWhen(false)] out ConstructorInfo result)
         {
-            foreach (var ctor in _type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
+            foreach (var ctor in type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
             {
                 if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == attributeType) != null)
-                    return ctor;
+                {
+                    result = ctor;
+                    return true;
+                }
             }
 
-            throw new InvalidOperationException($"{attributeType} ctor was not found for {_type.Name}");
+            result = null;
+            return false;
+        }
+
+        private static ConstructorInfo GetCtor(Type type, string attributeType)
+        {
+            if (TryGetCtor(type, attributeType, out var ctor))
+                return ctor;
+
+            throw new InvalidOperationException($"{attributeType} ctor was not found for {type.Name}");
         }
 
         private static Type? GetSerializeAs(Type type) => type.Name switch
         {
-            "ResourceIdentifier" => type,
-            "SystemData" => type,
+            _ when type == typeof(ResourceIdentifier) => type,
+            _ when type == typeof(SystemData) => type,
             _ => null,
         };
 
@@ -89,7 +120,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return index == -1 ? name : name.Substring(0, index);
         }
 
-        private ObjectTypeConstructor BuildConstructor(ConstructorInfo ctor)
+        private ObjectTypeConstructor BuildConstructor(ConstructorInfo ctor, ObjectTypeConstructor? baseConstructor)
         {
             var parameters = ctor.GetParameters()
                 .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, ValidationType.None, null))
@@ -104,10 +135,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var modifiers = ctor.IsFamily ? Protected : Public;
 
-            return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), GetBaseCtor());
+            return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), baseConstructor);
         }
 
-        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtor(ReferenceClassFinder.InitializationCtorAttributeName));
+        protected override ObjectTypeConstructor BuildInitializationConstructor()
+            => BuildConstructor(GetCtor(_type, ReferenceClassFinder.InitializationCtorAttributeName), GetBaseObjectType()?.InitializationConstructor);
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
@@ -115,25 +147,33 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var getter = property.GetGetMethod();
                 var setter = property.GetSetMethod();
+                var isNullable = IsNullable(property.PropertyType);
                 MemberDeclarationOptions memberDeclarationOptions = new MemberDeclarationOptions(
                     getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
-                    new CSharpType(property.PropertyType));
-                Property prop = new Property();
-                prop.Nullable = false;
-                prop.ReadOnly = GetReadOnly(property); //TODO read this from attribute from reference object
-                prop.SerializedName = GetSerializedName(property.Name);
-                prop.Summary = $"Gets{GetPropertySummary(setter)} {property.Name}";
-                prop.Required = true;
-                prop.Language.Default.Name = property.Name;
+                    new CSharpType(property.PropertyType, isNullable));
+                Property prop = new Property()
+                {
+                    Nullable = isNullable,
+                    ReadOnly = property.IsReadOnly(),
+                    SerializedName = GetSerializedName(property.Name),
+                    Summary = $"Gets{GetPropertySummary(setter)} {property.Name}",
+                    Required = IsRequired(property),
+                    Language = new Languages()
+                    {
+                        Default = new Language() { Name = property.Name },
+                    }
+                };
 
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
                 //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
                 //given that the generation will fail with the new types
-                if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IDictionary<,>))
+                if (TypeFactory.IsDictionary(property.PropertyType))
                 {
-                    prop.Schema = new DictionarySchema();
-                    prop.Schema.Type = AllSchemaTypes.Dictionary;
+                    prop.Schema = new DictionarySchema()
+                    {
+                        Type = AllSchemaTypes.Dictionary
+                    };
                 }
 
                 yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
@@ -142,9 +182,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private string GetSerializedName(string name)
         {
-            if (name.Equals("ResourceType", StringComparison.Ordinal))
-                return "type";
-            return ToCamelCase(name);
+            var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
+
+            return dict[name].SerializedName;
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -153,11 +193,22 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return BuildSerializationConstructor();
         }
 
-        private bool GetReadOnly(PropertyInfo property)
+        private bool IsRequired(PropertyInfo property)
         {
-            if (property.Name == "Tags")
-                return false;
-            return property.GetSetMethod() == null;
+            var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
+
+            return dict[property.Name].Required;
+        }
+
+        private bool IsNullable(Type type)
+        {
+            if (type == null)
+                return true; // obvious
+            if (!type.IsValueType)
+                return true; // ref-type
+            if (Nullable.GetUnderlyingType(type) != null)
+                return true; // Nullable<T>
+            return false; // value-type
         }
 
         private string GetPropertySummary(MethodInfo? setter)
@@ -165,11 +216,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter != null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtor(ReferenceClassFinder.SerializationCtorAttributeName));
+        protected override ObjectTypeConstructor BuildSerializationConstructor()
+            => BuildConstructor(GetCtor(_type, ReferenceClassFinder.SerializationCtorAttributeName), GetBaseObjectType()?.SerializationConstructor);
 
         protected override CSharpType? CreateInheritedType()
         {
-            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(Context, _type.BaseType);
+            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(_context, _type.BaseType);
+        }
+
+        protected override string CreateDescription()
+        {
+            throw new NotImplementedException("Currently we don't support getting description in SystemObjectType");
         }
     }
 }

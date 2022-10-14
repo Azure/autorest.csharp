@@ -1,7 +1,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace AutoRest.CSharp.Utilities
+namespace AutoRest.CSharp.Utilities.Tests
 {
     public class StringExtensionsTests
     {
@@ -25,6 +25,8 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("dataTip", "dataTips")]
         [TestCase("tipData", "tipDatas")]
         [TestCase("da_ta", "da_tas")]
+        [TestCase("redis", "redis")]
+        [TestCase("redis", "redis", false)]
         public void ValidatePluralize(string noun, string expected, bool inputIsKnownToBeSingle = true)
         {
             var plural = noun.ToPlural(inputIsKnownToBeSingle);
@@ -49,6 +51,8 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("children", "child")]
         [TestCase("data", "data", false)]
         [TestCase("datas", "data", false)]
+        [TestCase("redis", "redis")]
+        [TestCase("redis", "redis", false)]
         public void ValidateSingularize(string noun, string expected, bool inputIsKnownToBePlural = true)
         {
             var singular = noun.ToSingular(inputIsKnownToBePlural);

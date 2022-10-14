@@ -1,0 +1,1097 @@
+{
+ "$id": "1",
+ "Name": "cadlfirsttest",
+ "Description": "This is a sample cadl project.",
+ "ApiVersions": [
+  "0.1.0"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Name": "SimpleEnum",
+   "Namespace": "CadlFirstTest",
+   "Description": "Simple enum",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "4",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "5",
+     "Name": "Four",
+     "Value": "4"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false
+  },
+  {
+   "$id": "6",
+   "Name": "ExtensibleEnum",
+   "Namespace": "CadlFirstTest",
+   "Description": "Extensible enum",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "7",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "8",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "9",
+     "Name": "Four",
+     "Value": "4"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false
+  }
+ ],
+ "Models": [
+  {
+   "$id": "10",
+   "Name": "Thing",
+   "Namespace": "CadlFirstTest",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "11",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "12",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "13",
+   "Name": "RoundTripModel",
+   "Namespace": "CadlFirstTest",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "14",
+     "Name": "requiredString",
+     "SerializedName": "requiredString",
+     "Description": "",
+     "Type": {
+      "$id": "15",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "16",
+     "Name": "requiredInt",
+     "SerializedName": "requiredInt",
+     "Description": "",
+     "Type": {
+      "$id": "17",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "18",
+     "Name": "requiredCollection",
+     "SerializedName": "requiredCollection",
+     "Description": "",
+     "Type": {
+      "$id": "19",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "2"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "20",
+     "Name": "requiredDictionary",
+     "SerializedName": "requiredDictionary",
+     "Description": "",
+     "Type": {
+      "$id": "21",
+      "Name": "Dictionary",
+      "KeyType": {
+       "$id": "22",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "ValueType": {
+       "$ref": "6"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "23",
+     "Name": "requiredModel",
+     "SerializedName": "requiredModel",
+     "Description": "",
+     "Type": {
+      "$ref": "10"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "24",
+   "Name": "CadlFirstTest",
+   "Description": "This is a sample cadl project.",
+   "Operations": [
+    {
+     "$id": "25",
+     "Name": "topAction",
+     "Description": "top level method",
+     "Parameters": [
+      {
+       "$id": "26",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "Endpoint Service",
+       "Type": {
+        "$id": "27",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "28",
+        "Type": {
+         "$id": "29",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:300"
+       }
+      },
+      {
+       "$id": "30",
+       "Name": "action",
+       "NameInRequest": "action",
+       "Type": {
+        "$id": "31",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "32",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "33",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "34",
+        "Type": {
+         "$ref": "33"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "35",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "36",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "37",
+        "Type": {
+         "$id": "38",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "0.1.0"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "39",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json",
+       "Headers": []
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/top/{action}",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "40",
+     "Name": "topAction2",
+     "Description": "top level method2",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "41",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "42",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "43",
+        "Type": {
+         "$ref": "42"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "35"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "44",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json",
+       "Headers": []
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/top2",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "45",
+     "Name": "patchAction",
+     "Description": "top level patch",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "46",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "10"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "47",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "48",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "49",
+        "Type": {
+         "$ref": "48"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "50",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "51",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "52",
+        "Type": {
+         "$ref": "51"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "35"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "53",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json",
+       "Headers": []
+      }
+     ],
+     "HttpMethod": "PATCH",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/patch",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "54",
+     "Name": "anonymousBody",
+     "Description": "body parameter without body decorator",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "55",
+       "Name": "Thing",
+       "NameInRequest": "Thing",
+       "Type": {
+        "$ref": "10"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "56",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "57",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "58",
+        "Type": {
+         "$ref": "57"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "59",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "60",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "61",
+        "Type": {
+         "$ref": "60"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "35"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "62",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json",
+       "Headers": []
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/anonymousBody",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "63"
+   }
+  },
+  {
+   "$id": "64",
+   "Name": "Demo",
+   "Description": "Hello world service",
+   "Operations": [
+    {
+     "$id": "65",
+     "Name": "sayHi",
+     "Description": "Return hi",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "66",
+       "Name": "headParameter",
+       "NameInRequest": "head-parameter",
+       "Type": {
+        "$id": "67",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "68",
+       "Name": "queryParameter",
+       "NameInRequest": "queryParameter",
+       "Type": {
+        "$id": "69",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "70",
+       "Name": "optionalQuery",
+       "NameInRequest": "optionalQuery",
+       "Type": {
+        "$id": "71",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "72",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "73",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "74",
+        "Type": {
+         "$ref": "73"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "35"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "75",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json",
+       "Headers": []
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/hello",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "76"
+   }
+  },
+  {
+   "$id": "77",
+   "Name": "Demo2",
+   "Operations": [
+    {
+     "$id": "78",
+     "Name": "helloAgain",
+     "Description": "Return hi again",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "79",
+       "Name": "p1",
+       "NameInRequest": "p1",
+       "Type": {
+        "$id": "80",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "81",
+       "Name": "contentType",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "82",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "83",
+        "Type": {
+         "$ref": "82"
+        },
+        "Value": "text/plain"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "84",
+       "Name": "p2",
+       "NameInRequest": "p2",
+       "Type": {
+        "$id": "85",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "86",
+       "Name": "action",
+       "NameInRequest": "action",
+       "Type": {
+        "$ref": "13"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "87",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "88",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "89",
+        "Type": {
+         "$ref": "88"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "35"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "90",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json",
+       "Headers": []
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/againHi/{p2}",
+     "RequestMediaTypes": [
+      "text/plain"
+     ],
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "91",
+     "Name": "noContentType",
+     "Description": "Return hi again",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "92",
+       "Name": "p1",
+       "NameInRequest": "p1",
+       "Type": {
+        "$id": "93",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "94",
+       "Name": "p2",
+       "NameInRequest": "p2",
+       "Type": {
+        "$id": "95",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "96",
+       "Name": "action",
+       "NameInRequest": "action",
+       "Type": {
+        "$ref": "13"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "97",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "98",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "99",
+        "Type": {
+         "$ref": "98"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "100",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "101",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "102",
+        "Type": {
+         "$ref": "101"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "35"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "103",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json",
+       "Headers": []
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/noContentType/{p2}",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "104",
+     "Name": "helloDemo2",
+     "Description": "Return hi in demo2",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "105",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "106",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "107",
+        "Type": {
+         "$ref": "106"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "35"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "108",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "10"
+       },
+       "BodyMediaType": "Json",
+       "Headers": []
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/demoHi",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "109"
+   }
+  }
+ ],
+ "Auth": {
+  "$id": "110",
+  "ApiKey": {
+   "$id": "111",
+   "Name": "x-ms-api-key"
+  },
+  "OAuth2": {
+   "$id": "112",
+   "Scopes": [
+    "https://api.example.com/.default"
+   ]
+  }
+ }
+}

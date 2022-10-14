@@ -15,6 +15,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
@@ -69,8 +70,8 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope0 = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.CreateOrUpdate");
-            scope0.Start();
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.CreateOrUpdate");
+            scope.Start();
             try
             {
                 var response = await _resourceLinkRestClient.CreateOrUpdateAsync(_scope, data, cancellationToken).ConfigureAwait(false);
@@ -81,7 +82,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -99,8 +100,8 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope0 = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.CreateOrUpdate");
-            scope0.Start();
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.CreateOrUpdate");
+            scope.Start();
             try
             {
                 var response = _resourceLinkRestClient.CreateOrUpdate(_scope, data, cancellationToken);
@@ -111,7 +112,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -124,8 +125,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ResourceLinkResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope0 = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.Get");
-            scope0.Start();
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.Get");
+            scope.Start();
             try
             {
                 var response = await _resourceLinkRestClient.GetAsync(_scope, cancellationToken).ConfigureAwait(false);
@@ -135,7 +136,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -148,8 +149,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceLinkResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope0 = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.Get");
-            scope0.Start();
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.Get");
+            scope.Start();
             try
             {
                 var response = _resourceLinkRestClient.Get(_scope, cancellationToken);
@@ -159,7 +160,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -169,37 +170,38 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/links
         /// Operation Id: ResourceLinks_ListAtSourceScope
         /// </summary>
+        /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<ResourceLinkResource> GetAllAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<ResourceLinkResource> GetAllAsync(Filter? filter = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<ResourceLinkResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope0 = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
-                scope0.Start();
+                using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
+                scope.Start();
                 try
                 {
-                    var response = await _resourceLinkRestClient.ListAtSourceScopeAsync(_scope, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resourceLinkRestClient.ListAtSourceScopeAsync(_scope, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
-                    scope0.Failed(e);
+                    scope.Failed(e);
                     throw;
                 }
             }
             async Task<Page<ResourceLinkResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope0 = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
-                scope0.Start();
+                using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
+                scope.Start();
                 try
                 {
-                    var response = await _resourceLinkRestClient.ListAtSourceScopeNextPageAsync(nextLink, _scope, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resourceLinkRestClient.ListAtSourceScopeNextPageAsync(nextLink, _scope, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
-                    scope0.Failed(e);
+                    scope.Failed(e);
                     throw;
                 }
             }
@@ -211,37 +213,38 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/links
         /// Operation Id: ResourceLinks_ListAtSourceScope
         /// </summary>
+        /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<ResourceLinkResource> GetAll(CancellationToken cancellationToken = default)
+        public virtual Pageable<ResourceLinkResource> GetAll(Filter? filter = null, CancellationToken cancellationToken = default)
         {
             Page<ResourceLinkResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope0 = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
-                scope0.Start();
+                using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
+                scope.Start();
                 try
                 {
-                    var response = _resourceLinkRestClient.ListAtSourceScope(_scope, cancellationToken: cancellationToken);
+                    var response = _resourceLinkRestClient.ListAtSourceScope(_scope, filter, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
-                    scope0.Failed(e);
+                    scope.Failed(e);
                     throw;
                 }
             }
             Page<ResourceLinkResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope0 = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
-                scope0.Start();
+                using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
+                scope.Start();
                 try
                 {
-                    var response = _resourceLinkRestClient.ListAtSourceScopeNextPage(nextLink, _scope, cancellationToken: cancellationToken);
+                    var response = _resourceLinkRestClient.ListAtSourceScopeNextPage(nextLink, _scope, filter, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
-                    scope0.Failed(e);
+                    scope.Failed(e);
                     throw;
                 }
             }
@@ -256,8 +259,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> ExistsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope0 = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.Exists");
-            scope0.Start();
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.Exists");
+            scope.Start();
             try
             {
                 var response = await _resourceLinkRestClient.GetAsync(_scope, cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -265,7 +268,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -278,8 +281,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> Exists(CancellationToken cancellationToken = default)
         {
-            using var scope0 = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.Exists");
-            scope0.Start();
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.Exists");
+            scope.Start();
             try
             {
                 var response = _resourceLinkRestClient.Get(_scope, cancellationToken: cancellationToken);
@@ -287,7 +290,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }

@@ -29,11 +29,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else if (extensions.MgmtPropertyReferenceType)
                 {
-                    writer.Line($"[{ReferenceTypePropertyChooser.PropertyReferenceAttribute}]");
+                    writer.Line($"[{ReferenceClassFinder.PropertyReferenceTypeAttribute}]");
                 }
                 else if (extensions.MgmtTypeReferenceType)
                 {
-                    writer.Line($"[{TypeReferenceTypeChooser.TyepReferenceTypeAttribute}]");
+                    writer.Line($"[{ReferenceClassFinder.TypeReferenceTypeAttribute}]");
                 }
             }
         }

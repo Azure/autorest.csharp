@@ -27,7 +27,7 @@ namespace MgmtHierarchicalNonResource
     public partial class SharedGalleryResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SharedGalleryResource"/> instance. </summary>
-        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string location, string galleryUniqueName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, AzureLocation location, string galleryUniqueName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}";
             return new ResourceIdentifier(resourceId);
@@ -154,7 +154,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SharedGalleryImage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<SharedGalleryImage> GetSharedGalleryImagesAsync(SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<SharedGalleryImage> GetSharedGalleryImagesAsync(SharedToValue? sharedTo = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<SharedGalleryImage>> FirstPageFunc(int? pageSizeHint)
             {
@@ -197,7 +197,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SharedGalleryImage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<SharedGalleryImage> GetSharedGalleryImages(SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<SharedGalleryImage> GetSharedGalleryImages(SharedToValue? sharedTo = null, CancellationToken cancellationToken = default)
         {
             Page<SharedGalleryImage> FirstPageFunc(int? pageSizeHint)
             {
@@ -297,7 +297,7 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
         /// <returns> An async collection of <see cref="SharedGalleryImageVersion" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<SharedGalleryImageVersion> GetSharedGalleryImageVersionsAsync(string galleryImageName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<SharedGalleryImageVersion> GetSharedGalleryImageVersionsAsync(string galleryImageName, SharedToValue? sharedTo = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
@@ -345,7 +345,7 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
         /// <returns> A collection of <see cref="SharedGalleryImageVersion" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<SharedGalleryImageVersion> GetSharedGalleryImageVersions(string galleryImageName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<SharedGalleryImageVersion> GetSharedGalleryImageVersions(string galleryImageName, SharedToValue? sharedTo = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 

@@ -59,16 +59,35 @@ namespace AutoRest.CSharp.Output.Builders
 
         public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
         {
-            ByteArraySchema {Format: ByteArraySchemaFormat.Base64url} => SerializationFormat.Bytes_Base64Url,
-            ByteArraySchema {Format: ByteArraySchemaFormat.Byte} => SerializationFormat.Bytes_Base64,
-            UnixTimeSchema _ => SerializationFormat.DateTime_Unix,
-            DateTimeSchema {Format: DateTimeSchemaFormat.DateTime} => SerializationFormat.DateTime_ISO8601,
-            DateTimeSchema {Format: DateTimeSchemaFormat.DateTimeRfc1123} => SerializationFormat.DateTime_RFC1123,
+            ByteArraySchema byteArraySchema => byteArraySchema.Format switch
+                {
+                    ByteArraySchemaFormat.Base64url => SerializationFormat.Bytes_Base64Url,
+                    ByteArraySchemaFormat.Byte => SerializationFormat.Bytes_Base64,
+                    _ => SerializationFormat.Default
+                },
+
+            UnixTimeSchema => SerializationFormat.DateTime_Unix,
+            DateTimeSchema dateTimeSchema => dateTimeSchema.Format switch
+                {
+                    DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+                    DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
+                    _ => SerializationFormat.Default
+                },
+
             DateSchema _ => SerializationFormat.Date_ISO8601,
-            DurationSchema _ => schema.Extensions?.Format?.Equals(XMsFormat.DurationConstant) == true ? SerializationFormat.Duration_Constant : SerializationFormat.Duration_ISO8601,
             TimeSchema _ => SerializationFormat.Time_ISO8601,
+
+            DurationSchema _ => schema.Extensions?.Format switch
+                {
+                    XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
+                    _ => SerializationFormat.Duration_ISO8601
+                },
+
             _ => schema.Extensions?.Format switch
                 {
+                    XMsFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+                    XMsFormat.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
+                    XMsFormat.DateTimeUnix => SerializationFormat.DateTime_Unix,
                     XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
                     _ => SerializationFormat.Default
                 }
@@ -91,19 +110,19 @@ namespace AutoRest.CSharp.Output.Builders
         public static string CSharpName(this HttpResponseHeader header) =>
             header.Language!.Default.Name.ToCleanName();
 
-        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null, bool existingTypeOverrides = false)
+        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null, bool existingTypeOverrides = false, bool isAbstract = false)
         {
             if (existingType != null)
             {
                 return new TypeDeclarationOptions(existingType.Name,
                     existingType.ContainingNamespace.ToDisplayString(),
                     SyntaxFacts.GetText(existingType.DeclaredAccessibility),
-                    existingType.IsAbstract,
+                    existingType.IsAbstract || isAbstract,
                     existingTypeOverrides
                 );
             }
 
-            return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, false, false);
+            return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, isAbstract, false);
         }
 
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)
@@ -112,8 +131,9 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 var newType = existingMember switch
                 {
+                    IFieldSymbol { Type: INamedTypeSymbol { EnumUnderlyingType: { } } } => defaultType, // Special case for enums
+                    IFieldSymbol fieldSymbol => typeFactory.CreateType(fieldSymbol.Type),
                     IPropertySymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
-                    IFieldSymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
                     _ => defaultType
                 };
 
@@ -161,7 +181,7 @@ namespace AutoRest.CSharp.Output.Builders
             return newType.WithNullable(defaultType.IsNullable);
         }
 
-        public static string CreateDescription(Schema schema)
+        public static string CreateDescription(this Schema schema)
         {
             return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
                 $"The {schema.Name}." :
@@ -179,6 +199,20 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             return name;
+        }
+
+        public static FormattableString CreateDefaultPropertyDescription(this ObjectTypeProperty property, string? overrideName = null)
+        {
+            var nameToUse = overrideName ?? property.Declaration.Name;
+            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
+            if (property.IsReadOnly)
+            {
+                return $"Gets the {splitDeclarationName}";
+            }
+            else
+            {
+                return $"Gets or sets the {splitDeclarationName}";
+            }
         }
     }
 }

@@ -22,6 +22,13 @@ namespace AutoRest.CSharp.Generation.Types
         {
         }
 
+        public CSharpType(Type type, bool isNullable) : this(
+            type.IsGenericType ? type.GetGenericTypeDefinition() : type,
+            isNullable,
+            type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
+        {
+        }
+
         public CSharpType(Type type, Type? serializeAs) : this(
             type.IsGenericType ? type.GetGenericTypeDefinition() : type,
             type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
@@ -36,6 +43,7 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType(Type type, bool isNullable, params CSharpType[] arguments)
         {
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
+            Debug.Assert(type.IsGenericTypeDefinition || arguments.Length == 0, "arguments can be added only to the generic type definition.");
             _type = type;
 
             Namespace = type.Namespace;
@@ -135,7 +143,8 @@ namespace AutoRest.CSharp.Generation.Types
         internal static CSharpType FromSystemType(BuildContext context, Type type)
         {
             var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
-            var systemObjectType = new SystemObjectType(type, context);
+            var systemObjectType = SystemObjectType.Create(type, context);
+            // TODO -- why we do not just return systemObjectType.Type here? because of the generic types?
             return new CSharpType(
                 systemObjectType,
                 type.Namespace ?? context.DefaultNamespace,

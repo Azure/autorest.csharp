@@ -8,7 +8,7 @@ namespace NamespaceForEnums
     [CodeGenModel("Fruit")]
     internal enum CustomFruitEnum
     {
-        [CodeGenMember("apple")]
+        [CodeGenMember("Apple")]
         Apple2,
         Pear
     }

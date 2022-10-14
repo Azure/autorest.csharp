@@ -239,18 +239,11 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Retrieves information about the resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   name: string,
-        ///   id: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> GetAsync(string resourceId, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
@@ -271,18 +264,11 @@ namespace ProtocolMethodsInRestClient
 
         /// <summary> Retrieves information about the resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   name: string,
-        ///   id: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
         public virtual Response Get(string resourceId, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));

@@ -98,11 +98,11 @@ namespace MgmtScopeResource
         internal static FakePolicyAssignmentData DeserializeFakePolicyAssignmentData(JsonElement element)
         {
             Optional<string> location = default;
-            Optional<SystemAssignedServiceIdentity> identity = default;
+            Optional<ManagedServiceIdentity> identity = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<string> displayName = default;
             Optional<string> policyDefinitionId = default;
             Optional<string> scope = default;
@@ -126,7 +126,7 @@ namespace MgmtScopeResource
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    identity = JsonSerializer.Deserialize<SystemAssignedServiceIdentity>(property.Value.ToString());
+                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -146,6 +146,11 @@ namespace MgmtScopeResource
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
@@ -247,7 +252,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new FakePolicyAssignmentData(id, name, type, systemData, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, Optional.ToList(notScopes), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), Optional.ToList(nonComplianceMessages));
+            return new FakePolicyAssignmentData(id, name, type, systemData.Value, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, Optional.ToList(notScopes), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), Optional.ToList(nonComplianceMessages));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -17,10 +17,15 @@ namespace AutoRest.CSharp.Input
 
             public bool SuppressListException { get; }
 
+            public bool ShowSerializedNames { get; }
+
             public MgmtDebugConfiguration(
-                JsonElement? suppressListException = default)
+                JsonElement? suppressListException = default,
+                JsonElement? showSerializedNames = default
+            )
             {
-                SuppressListException = suppressListException == null || !IsValidJsonElement(suppressListException) ? false : Convert.ToBoolean(suppressListException.ToString());
+                SuppressListException = DeserializeBoolean(suppressListException, false);
+                ShowSerializedNames = DeserializeBoolean(showSerializedNames, false);
             }
 
             internal static MgmtDebugConfiguration LoadConfiguration(JsonElement root)
@@ -29,21 +34,25 @@ namespace AutoRest.CSharp.Input
                     return new MgmtDebugConfiguration();
 
                 root.TryGetProperty(nameof(SuppressListException), out var suppressListException);
+                root.TryGetProperty(nameof(ShowSerializedNames), out var showSerializedNames);
 
                 return new MgmtDebugConfiguration(
-                    suppressListException: suppressListException
+                    suppressListException: suppressListException,
+                    showSerializedNames: showSerializedNames
                 );
             }
 
             internal static MgmtDebugConfiguration GetConfiguration(IPluginCommunication autoRest)
             {
                 return new MgmtDebugConfiguration(
-                    suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult());
+                    suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult(),
+                    showSerializedNames: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "show-serialized-names")).GetAwaiter().GetResult()
+                );
             }
 
             public void Write(Utf8JsonWriter writer, string settingName)
             {
-                if (!SuppressListException)
+                if (!SuppressListException && !ShowSerializedNames)
                     return;
 
                 writer.WriteStartObject(settingName);
@@ -51,40 +60,63 @@ namespace AutoRest.CSharp.Input
                 if (SuppressListException)
                     writer.WriteBoolean(nameof(SuppressListException), SuppressListException);
 
+                if (ShowSerializedNames)
+                    writer.WriteBoolean(nameof(ShowSerializedNames), ShowSerializedNames);
+
                 writer.WriteEndObject();
             }
         }
 
-        public class TestModelerConfiguration
+        public class TestGenConfiguration
         {
-            private const string TestModelerOptionsFormat = "testmodeler.{0}";
+            private const string TestGenOptionsFormat = "testgen.{0}";
 
             public string? IgnoreReason { get; }
+            public string? SourceCodePath { get; }
+            public bool Mock { get; }
+            public bool Sample { get; }
 
-            public TestModelerConfiguration(JsonElement? ignoreReason = default)
+            public TestGenConfiguration(
+                JsonElement? ignoreReason = default,
+                JsonElement? sourceCodePath = default,
+                JsonElement? mock = default,
+                JsonElement? sample = default)
             {
-                IgnoreReason = (ignoreReason is null || ignoreReason.Value.ValueKind == JsonValueKind.Null) ? null : ignoreReason.ToString();
+                IgnoreReason = !IsValidJsonElement(ignoreReason) ? null : ignoreReason.ToString();
+                SourceCodePath = !IsValidJsonElement(sourceCodePath) ? null : sourceCodePath.ToString();
+                Mock = DeserializeBoolean(mock, false);
+                Sample = DeserializeBoolean(sample, false);
             }
 
-            internal static TestModelerConfiguration? LoadConfiguration(JsonElement root)
+            internal static TestGenConfiguration? LoadConfiguration(JsonElement root)
             {
                 if (root.ValueKind != JsonValueKind.Object)
                     return null;
 
-                var hasIgnoreReason = root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
+                root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
+                root.TryGetProperty(nameof(SourceCodePath), out var sourceCodePath);
+                root.TryGetProperty(nameof(Mock), out var mock);
+                root.TryGetProperty(nameof(Sample), out var sample);
 
-                return new TestModelerConfiguration(ignoreReason: hasIgnoreReason ? ignoreReason : null);
+                return new TestGenConfiguration(
+                    ignoreReason: ignoreReason,
+                    sourceCodePath: sourceCodePath,
+                    mock: mock,
+                    sample: sample);
             }
 
-            internal static TestModelerConfiguration? GetConfiguration(IPluginCommunication autoRest)
+            internal static TestGenConfiguration? GetConfiguration(IPluginCommunication autoRest)
             {
-                var testModeler = autoRest.GetValue<JsonElement?>("testmodeler").GetAwaiter().GetResult();
-                if (testModeler is null || testModeler.Value.ValueKind == JsonValueKind.Null)
+                var testGen = autoRest.GetValue<JsonElement?>("testgen").GetAwaiter().GetResult();
+                if (!IsValidJsonElement(testGen))
                 {
                     return null;
                 }
-                return new TestModelerConfiguration(
-                    ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestModelerOptionsFormat, "ignore-reason")).GetAwaiter().GetResult());
+                return new TestGenConfiguration(
+                    ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "ignore-reason")).GetAwaiter().GetResult(),
+                    sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "source-path")).GetAwaiter().GetResult(),
+                    mock: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "mock")).GetAwaiter().GetResult(),
+                    sample: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "sample")).GetAwaiter().GetResult());
             }
 
             public void Write(Utf8JsonWriter writer, string settingName)
@@ -94,9 +126,34 @@ namespace AutoRest.CSharp.Input
                 if (IgnoreReason is not null)
                     writer.WriteString(nameof(IgnoreReason), IgnoreReason);
 
+                if (SourceCodePath is not null)
+                    writer.WriteString(nameof(SourceCodePath), SourceCodePath);
+
+                if (Mock)
+                    writer.WriteBoolean(nameof(Mock), Mock);
+
+                if (Sample)
+                    writer.WriteBoolean(nameof(Sample), Sample);
+
                 writer.WriteEndObject();
             }
         }
+
+        public record RenameRuleTarget(string Value, string? ParameterValue)
+        {
+            internal static RenameRuleTarget Parse(string rawValue)
+            {
+                var spans = rawValue.AsSpan();
+                var index = spans.IndexOf('|');
+                if (index < 0)
+                    return new RenameRuleTarget(rawValue, null);
+
+                return new RenameRuleTarget(spans.Slice(0, index).ToString(), spans.Slice(index, rawValue.Length - index).ToString());
+            }
+        }
+
+        private static IReadOnlyDictionary<string, RenameRuleTarget> ParseRenameRules(IReadOnlyDictionary<string, string> renameRules)
+            => renameRules.ToDictionary(kv => kv.Key, kv => RenameRuleTarget.Parse(kv.Value));
 
         public MgmtConfiguration(
             IReadOnlyList<string> operationGroupsToOmit,
@@ -105,7 +162,13 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> listException,
             IReadOnlyList<string> promptedEnumValues,
             IReadOnlyList<string> keepOrphanedModels,
+            IReadOnlyList<string> keepPluralEnums,
+            IReadOnlyList<string> keepPluralResourceData,
             IReadOnlyList<string> noResourceSuffix,
+            IReadOnlyList<string> schemasToPrependRPPrefix,
+            IReadOnlyList<string> generateArmResourceExtensions,
+            IReadOnlyList<string> suppressAbstractBaseClass,
+            IReadOnlyList<string> preventWrappingReturnType,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
@@ -116,40 +179,48 @@ namespace AutoRest.CSharp.Input
             JsonElement? overrideOperationName = default,
             JsonElement? operationPositions = default,
             JsonElement? renameRules = default,
+            JsonElement? formatByNameRules = default,
+            JsonElement? renameMapping = default,
+            JsonElement? irregularPluralWords = default,
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
             JsonElement? resourceModelRequiresType = default,
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
-            TestModelerConfiguration? testmodeler = default,
-            JsonElement? operationIdMappings = default)
+            TestGenConfiguration? testGen = default,
+            JsonElement? operationIdMappings = default,
+            JsonElement? updateRequiredCopy = default,
+            JsonElement? patchInitializerCustomization = default)
         {
-            RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
-            RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
-            RequestPathToResourceData = !IsValidJsonElement(requestPathToResourceData) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceData.ToString());
-            RequestPathToResourceType = !IsValidJsonElement(requestPathToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceType.ToString());
-            RequestPathToScopeResourceTypes = !IsValidJsonElement(requestPathToScopeResourceTypes) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(requestPathToScopeResourceTypes.ToString());
-            RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
-            OverrideOperationName = !IsValidJsonElement(overrideOperationName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(overrideOperationName.ToString());
-            RenameRules = !IsValidJsonElement(renameRules) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(renameRules.ToString());
+            RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
+            RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
+            RequestPathToResourceData = DeserializeDictionary<string, string>(requestPathToResourceData);
+            RequestPathToResourceType = DeserializeDictionary<string, string>(requestPathToResourceType);
+            RequestPathToScopeResourceTypes = DeserializeDictionary<string, string[]>(requestPathToScopeResourceTypes);
+            RequestPathToSingletonResource = DeserializeDictionary<string, string>(requestPathToSingletonResource);
+            OverrideOperationName = DeserializeDictionary<string, string>(overrideOperationName);
+            RawRenameRules = DeserializeDictionary<string, string>(renameRules);
+            FormatByNameRules = DeserializeDictionary<string, string>(formatByNameRules);
+            RenameMapping = DeserializeDictionary<string, string>(renameMapping);
+            IrregularPluralWords = DeserializeDictionary<string, string>(irregularPluralWords);
             try
             {
-                OperationPositions = !IsValidJsonElement(operationPositions) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(operationPositions.ToString());
+                OperationPositions = DeserializeDictionary<string, string[]>(operationPositions);
             }
             catch (JsonException)
             {
-                var operationPositionsStrDict = !IsValidJsonElement(operationPositions) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationPositions.ToString());
+                var operationPositionsStrDict = DeserializeDictionary<string, string>(operationPositions);
                 OperationPositions = operationPositionsStrDict.ToDictionary(kv => kv.Key, kv => kv.Value.Split(";"));
             }
             MgmtDebug = mgmtDebug;
             // TODO: A unified way to load from both readme and configuration.json
             try
             {
-                MergeOperations = !IsValidJsonElement(mergeOperations) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(mergeOperations.ToString());
+                MergeOperations = DeserializeDictionary<string, string[]>(mergeOperations);
             }
             catch (JsonException)
             {
-                var mergeOperationsStrDict = !IsValidJsonElement(mergeOperations) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(mergeOperations.ToString());
+                var mergeOperationsStrDict = DeserializeDictionary<string, string>(mergeOperations);
                 MergeOperations = mergeOperationsStrDict.ToDictionary(kv => kv.Key, kv => kv.Value.Split(";"));
             }
             OperationGroupsToOmit = operationGroupsToOmit;
@@ -158,16 +229,35 @@ namespace AutoRest.CSharp.Input
             ListException = listException;
             PromptedEnumValues = promptedEnumValues;
             KeepOrphanedModels = keepOrphanedModels;
+            KeepPluralEnums = keepPluralEnums;
+            KeepPluralResourceData = keepPluralResourceData;
             NoResourceSuffix = noResourceSuffix;
-            IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
-            DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
-            DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
-            DoesSingletonRequiresKeyword = !IsValidJsonElement(singletonRequiresKeyword) ? false : Convert.ToBoolean(singletonRequiresKeyword.ToString());
-            TestModeler = testmodeler;
-            OperationIdMappings = !IsValidJsonElement(operationIdMappings)
-                ? new Dictionary<string, IReadOnlyDictionary<string, string>>()
-                : JsonSerializer.Deserialize<Dictionary<string, IReadOnlyDictionary<string, string>>>(operationIdMappings.ToString());
+            PrependRPPrefix = schemasToPrependRPPrefix;
+            GenerateArmResourceExtensions = generateArmResourceExtensions;
+            SuppressAbstractBaseClass = suppressAbstractBaseClass;
+            if (preventWrappingReturnType.Any())
+            {
+                Console.Error.WriteLine($"WARNING: The configuration 'prevent-wrapping-return-type' is a workaround and will be removed in the future.");
+            }
+            PreventWrappingReturnType = preventWrappingReturnType;
+            IsArmCore = DeserializeBoolean(armCore, false);
+            DoesResourceModelRequireType = DeserializeBoolean(resourceModelRequiresType, true);
+            DoesResourceModelRequireName = DeserializeBoolean(resourceModelRequiresName, true);
+            DoesSingletonRequiresKeyword = DeserializeBoolean(singletonRequiresKeyword, false);
+            TestGen = testGen;
+            OperationIdMappings = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(operationIdMappings);
+            UpdateRequiredCopy = DeserializeDictionary<string, string>(updateRequiredCopy);
+            PatchInitializerCustomization = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(patchInitializerCustomization);
         }
+
+        private static bool DeserializeBoolean(JsonElement? jsonElement, bool defaultValue = false)
+            => jsonElement == null || !IsValidJsonElement(jsonElement) ? defaultValue : Convert.ToBoolean(jsonElement.ToString());
+
+        private static IReadOnlyList<string> DeserializeArray(JsonElement jsonElement)
+            => jsonElement.ValueKind != JsonValueKind.Array ? Array.Empty<string>() : jsonElement.EnumerateArray().Select(t => t.ToString()).ToArray();
+
+        private static Dictionary<TKey, TValue> DeserializeDictionary<TKey, TValue>(JsonElement? jsonElement) where TKey : notnull
+            => !IsValidJsonElement(jsonElement) ? new Dictionary<TKey, TValue>() : JsonSerializer.Deserialize<Dictionary<TKey, TValue>>(jsonElement.ToString()!)!;
 
         public MgmtDebugConfiguration MgmtDebug { get; }
         /// <summary>
@@ -188,7 +278,12 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string> RequestPathToResourceType { get; }
         public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
         public IReadOnlyDictionary<string, string> OverrideOperationName { get; }
-        public IReadOnlyDictionary<string, string> RenameRules { get; }
+        private IReadOnlyDictionary<string, string> RawRenameRules { get; }
+        private IReadOnlyDictionary<string, RenameRuleTarget>? _renameRules;
+        public IReadOnlyDictionary<string, RenameRuleTarget> RenameRules => _renameRules ??= ParseRenameRules(RawRenameRules);
+        public IReadOnlyDictionary<string, string> FormatByNameRules { get; }
+        public IReadOnlyDictionary<string, string> RenameMapping { get; }
+        public IReadOnlyDictionary<string, string> IrregularPluralWords { get; }
         public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> OperationPositions { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
@@ -198,12 +293,20 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> ListException { get; }
         public IReadOnlyList<string> PromptedEnumValues { get; }
         public IReadOnlyList<string> KeepOrphanedModels { get; }
+        public IReadOnlyList<string> KeepPluralEnums { get; }
+        public IReadOnlyList<string> KeepPluralResourceData { get; }
+        public IReadOnlyList<string> PrependRPPrefix { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
+        public IReadOnlyDictionary<string, string> UpdateRequiredCopy {get;}
+        public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> PatchInitializerCustomization { get; }
 
-        public IReadOnlyList<string> NoResourceSuffix { get;}
+        public IReadOnlyList<string> NoResourceSuffix { get; }
+        public IReadOnlyList<string> GenerateArmResourceExtensions { get; }
+        public IReadOnlyList<string> SuppressAbstractBaseClass { get; }
+        public IReadOnlyList<string> PreventWrappingReturnType { get; }
 
         public bool IsArmCore { get; }
-        public TestModelerConfiguration? TestModeler { get; }
+        public TestGenConfiguration? TestGen { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -214,7 +317,13 @@ namespace AutoRest.CSharp.Input
                 listException: autoRest.GetValue<string[]?>("list-exception").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 promptedEnumValues: autoRest.GetValue<string[]?>("prompted-enum-values").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 keepOrphanedModels: autoRest.GetValue<string[]?>("keep-orphaned-models").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                keepPluralEnums: autoRest.GetValue<string[]?>("keep-plural-enums").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                keepPluralResourceData: autoRest.GetValue<string[]?>("keep-plural-resource-data").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 noResourceSuffix: autoRest.GetValue<string[]?>("no-resource-suffix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                schemasToPrependRPPrefix: autoRest.GetValue<string[]?>("prepend-rp-prefix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                suppressAbstractBaseClass: autoRest.GetValue<string[]?>("suppress-abstract-base-class").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                preventWrappingReturnType: autoRest.GetValue<string[]?>("prevent-wrapping-return-type").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
@@ -225,13 +334,18 @@ namespace AutoRest.CSharp.Input
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 overrideOperationName: autoRest.GetValue<JsonElement?>("override-operation-name").GetAwaiter().GetResult(),
                 renameRules: autoRest.GetValue<JsonElement?>("rename-rules").GetAwaiter().GetResult(),
+                formatByNameRules: autoRest.GetValue<JsonElement?>("format-by-name-rules").GetAwaiter().GetResult(),
+                renameMapping: autoRest.GetValue<JsonElement?>("rename-mapping").GetAwaiter().GetResult(),
+                irregularPluralWords: autoRest.GetValue<JsonElement?>("irregular-plural-words").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
-                testmodeler: TestModelerConfiguration.GetConfiguration(autoRest),
-                operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult());
+                testGen: TestGenConfiguration.GetConfiguration(autoRest),
+                operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult(),
+                updateRequiredCopy: autoRest.GetValue<JsonElement?>("update-required-copy").GetAwaiter().GetResult(),
+                patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -241,7 +355,12 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(NoPropertyTypeReplacement), NoPropertyTypeReplacement);
             WriteNonEmptySettings(writer, nameof(ListException), ListException);
             WriteNonEmptySettings(writer, nameof(KeepOrphanedModels), KeepOrphanedModels);
+            WriteNonEmptySettings(writer, nameof(KeepPluralEnums), KeepPluralEnums);
             WriteNonEmptySettings(writer, nameof(NoResourceSuffix), NoResourceSuffix);
+            WriteNonEmptySettings(writer, nameof(PrependRPPrefix), PrependRPPrefix);
+            WriteNonEmptySettings(writer, nameof(GenerateArmResourceExtensions), GenerateArmResourceExtensions);
+            WriteNonEmptySettings(writer, nameof(SuppressAbstractBaseClass), SuppressAbstractBaseClass);
+            WriteNonEmptySettings(writer, nameof(PreventWrappingReturnType), PreventWrappingReturnType);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
             WriteNonEmptySettings(writer, nameof(OperationPositions), OperationPositions);
@@ -250,7 +369,10 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
             WriteNonEmptySettings(writer, nameof(RequestPathToScopeResourceTypes), RequestPathToScopeResourceTypes);
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
-            WriteNonEmptySettings(writer, nameof(RenameRules), RenameRules);
+            WriteNonEmptySettings(writer, nameof(RawRenameRules), RawRenameRules);
+            WriteNonEmptySettings(writer, nameof(FormatByNameRules), FormatByNameRules);
+            WriteNonEmptySettings(writer, nameof(RenameMapping), RenameMapping);
+            WriteNonEmptySettings(writer, nameof(IrregularPluralWords), IrregularPluralWords);
             WriteNonEmptySettings(writer, nameof(OverrideOperationName), OverrideOperationName);
             MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
@@ -261,22 +383,30 @@ namespace AutoRest.CSharp.Input
                 writer.WriteBoolean(nameof(DoesResourceModelRequireName), DoesResourceModelRequireName);
             if (DoesSingletonRequiresKeyword)
                 writer.WriteBoolean(nameof(DoesSingletonRequiresKeyword), DoesSingletonRequiresKeyword);
-            if (TestModeler is not null)
+            if (TestGen is not null)
             {
-                TestModeler.Write(writer, nameof(TestModeler));
+                TestGen.Write(writer, nameof(TestGen));
             }
             WriteNonEmptySettings(writer, nameof(OperationIdMappings), OperationIdMappings);
             WriteNonEmptySettings(writer, nameof(PromptedEnumValues), PromptedEnumValues);
+            WriteNonEmptySettings(writer, nameof(UpdateRequiredCopy), UpdateRequiredCopy);
+            WriteNonEmptySettings(writer, nameof(PatchInitializerCustomization), PatchInitializerCustomization);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
         {
-            root.TryGetProperty(nameof(OperationGroupsToOmit), out var operationGroupsToOmit);
-            root.TryGetProperty(nameof(RequestPathIsNonResource), out var requestPathIsNonResource);
-            root.TryGetProperty(nameof(NoPropertyTypeReplacement), out var noPropertyTypeReplacement);
-            root.TryGetProperty(nameof(ListException), out var listException);
-            root.TryGetProperty(nameof(KeepOrphanedModels), out var keepOrphanedModels);
-            root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffix);
+            root.TryGetProperty(nameof(OperationGroupsToOmit), out var operationGroupsToOmitElement);
+            root.TryGetProperty(nameof(RequestPathIsNonResource), out var requestPathIsNonResourceElement);
+            root.TryGetProperty(nameof(NoPropertyTypeReplacement), out var noPropertyTypeReplacementElement);
+            root.TryGetProperty(nameof(ListException), out var listExceptionElement);
+            root.TryGetProperty(nameof(KeepOrphanedModels), out var keepOrphanedModelsElement);
+            root.TryGetProperty(nameof(KeepPluralEnums), out var keepPluralEnumsElement);
+            root.TryGetProperty(nameof(KeepPluralResourceData), out var keepPluralResourceDataElement);
+            root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffixElement);
+            root.TryGetProperty(nameof(PrependRPPrefix), out var prependRPPrefixElement);
+            root.TryGetProperty(nameof(GenerateArmResourceExtensions), out var generateArmResourceExtensionsElement);
+            root.TryGetProperty(nameof(SuppressAbstractBaseClass), out var suppressAbstractBaseClassElement);
+            root.TryGetProperty(nameof(PreventWrappingReturnType), out var preventWrappingReturnTypeElement);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
@@ -284,53 +414,52 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(RequestPathToScopeResourceTypes), out var requestPathToScopeResourceTypes);
             root.TryGetProperty(nameof(OperationPositions), out var operationPositions);
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
-            root.TryGetProperty(nameof(RenameRules), out var renameRules);
+            root.TryGetProperty(nameof(RawRenameRules), out var renameRules);
+            root.TryGetProperty(nameof(FormatByNameRules), out var formatByNameRules);
+            root.TryGetProperty(nameof(RenameMapping), out var renameMapping);
+            root.TryGetProperty(nameof(IrregularPluralWords), out var irregularPluralWords);
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
-            root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValues);
+            root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValuesElement);
 
-            var operationGroupList = operationGroupsToOmit.ValueKind == JsonValueKind.Array
-                ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-
-            var requestPathIsNonResourceList = requestPathIsNonResource.ValueKind == JsonValueKind.Array
-                ? requestPathIsNonResource.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-
-            var noPropertyTypeReplacementList = noPropertyTypeReplacement.ValueKind == JsonValueKind.Array
-                ? noPropertyTypeReplacement.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-
-            var listExceptionList = listException.ValueKind == JsonValueKind.Array
-                ? listException.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-
-            var promptedEnumValuesList = promptedEnumValues.ValueKind == JsonValueKind.Array
-                ? promptedEnumValues.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-            var keepOrphanedModelsList = keepOrphanedModels.ValueKind == JsonValueKind.Array
-                ? keepOrphanedModels.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
-            var noResourceSuffixList = noResourceSuffix.ValueKind == JsonValueKind.Array
-                ? noResourceSuffix.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
+            var operationGroupToOmit = DeserializeArray(operationGroupsToOmitElement);
+            var requestPathIsNonResource = DeserializeArray(requestPathIsNonResourceElement);
+            var noPropertyTypeReplacement = DeserializeArray(noPropertyTypeReplacementElement);
+            var listException = DeserializeArray(listExceptionElement);
+            var promptedEnumValues = DeserializeArray(promptedEnumValuesElement);
+            var keepOrphanedModels = DeserializeArray(keepOrphanedModelsElement);
+            var keepPluralEnums = DeserializeArray(keepPluralEnumsElement);
+            var keepPluralResourceData = DeserializeArray(keepPluralResourceDataElement);
+            var noResourceSuffix = DeserializeArray(noResourceSuffixElement);
+            var prependRPPrefix = DeserializeArray(prependRPPrefixElement);
+            var generateArmResourceExtensions = DeserializeArray(generateArmResourceExtensionsElement);
+            var suppressAbstractBaseClass = DeserializeArray(suppressAbstractBaseClassElement);
+            var preventWrappingReturnType = DeserializeArray(preventWrappingReturnTypeElement);
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
             root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
             root.TryGetProperty(nameof(DoesSingletonRequiresKeyword), out var singletonRequiresKeyword);
-            root.TryGetProperty(nameof(TestModeler), out var testModelerRoot);
+            root.TryGetProperty(nameof(TestGen), out var testModelerRoot);
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
+            root.TryGetProperty(nameof(UpdateRequiredCopy), out var updateRequiredCopy);
+            root.TryGetProperty(nameof(PatchInitializerCustomization), out var patchInitializerCustomization);
 
             return new MgmtConfiguration(
-                operationGroupsToOmit: operationGroupList,
-                requestPathIsNonResource: requestPathIsNonResourceList,
-                noPropertyTypeReplacement: noPropertyTypeReplacementList,
-                listException: listExceptionList,
-                promptedEnumValues: promptedEnumValuesList,
-                keepOrphanedModels: keepOrphanedModelsList,
-                noResourceSuffix: noResourceSuffixList,
+                operationGroupsToOmit: operationGroupToOmit,
+                requestPathIsNonResource: requestPathIsNonResource,
+                noPropertyTypeReplacement: noPropertyTypeReplacement,
+                listException: listException,
+                promptedEnumValues: promptedEnumValues,
+                keepOrphanedModels: keepOrphanedModels,
+                keepPluralEnums: keepPluralEnums,
+                keepPluralResourceData: keepPluralResourceData,
+                noResourceSuffix: noResourceSuffix,
+                schemasToPrependRPPrefix: prependRPPrefix,
+                generateArmResourceExtensions: generateArmResourceExtensions,
+                suppressAbstractBaseClass: suppressAbstractBaseClass,
+                preventWrappingReturnType: preventWrappingReturnType,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
@@ -341,13 +470,18 @@ namespace AutoRest.CSharp.Input
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 overrideOperationName: operationIdToName,
                 renameRules: renameRules,
+                formatByNameRules: formatByNameRules,
+                renameMapping: renameMapping,
+                irregularPluralWords: irregularPluralWords,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
                 resourceModelRequiresType: resourceModelRequiresType,
                 resourceModelRequiresName: resourceModelRequiresName,
                 singletonRequiresKeyword: singletonRequiresKeyword,
-                testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot),
-                operationIdMappings: operationIdMappings);
+                testGen: TestGenConfiguration.LoadConfiguration(testModelerRoot),
+                operationIdMappings: operationIdMappings,
+                updateRequiredCopy: updateRequiredCopy,
+                patchInitializerCustomization: patchInitializerCustomization);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)

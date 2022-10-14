@@ -9,15 +9,27 @@ using System;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Api request input for LogAnalytics getThrottledRequests Api. </summary>
+    /// <summary>
+    /// Api request input for LogAnalytics getThrottledRequests Api.
+    /// Serialized Name: ThrottledRequestsInput
+    /// </summary>
     public partial class ThrottledRequestsContent : LogAnalyticsInputBase
     {
         /// <summary> Initializes a new instance of ThrottledRequestsContent. </summary>
-        /// <param name="blobContainerSasUri"> SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to. </param>
-        /// <param name="fromOn"> From time of the query. </param>
-        /// <param name="toOn"> To time of the query. </param>
+        /// <param name="blobContainerSasUri">
+        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
+        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
+        /// </param>
+        /// <param name="fromTime">
+        /// From time of the query
+        /// Serialized Name: LogAnalyticsInputBase.fromTime
+        /// </param>
+        /// <param name="toTime">
+        /// To time of the query
+        /// Serialized Name: LogAnalyticsInputBase.toTime
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainerSasUri"/> is null. </exception>
-        public ThrottledRequestsContent(Uri blobContainerSasUri, DateTimeOffset fromOn, DateTimeOffset toOn) : base(blobContainerSasUri, fromOn, toOn)
+        public ThrottledRequestsContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime) : base(blobContainerSasUri, fromTime, toTime)
         {
             if (blobContainerSasUri == null)
             {

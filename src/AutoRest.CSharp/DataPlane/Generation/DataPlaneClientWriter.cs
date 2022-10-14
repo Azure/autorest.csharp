@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -25,7 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class DataPlaneClientWriter : ClientWriter
     {
-        public void WriteClient(CodeWriter writer, DataPlaneClient client, BuildContext context)
+        public void WriteClient(CodeWriter writer, DataPlaneClient client, DataPlaneOutputLibrary library)
         {
             var cs = client.Type;
             var @namespace = cs.Namespace;
@@ -35,7 +36,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client.RestClient, true);
-                    WriteClientCtors(writer, client, context);
+                    WriteClientCtors(writer, client, library);
 
                     foreach (var clientMethod in client.Methods)
                     {
@@ -68,7 +69,7 @@ namespace AutoRest.CSharp.Generation.Writers
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
             var parameters = clientMethod.RestClientMethod.Parameters;
-            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
+            writer.WriteXmlDocumentationSummary($"{clientMethod.RestClientMethod.SummaryText}");
 
             foreach (Parameter parameter in parameters)
             {
@@ -76,6 +77,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            writer.WriteXmlDocumentation("remarks", $"{clientMethod.RestClientMethod.DescriptionText}");
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
@@ -129,7 +131,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string CredentialVariable = "credential";
         private const string OptionsVariable = "options";
 
-        private void WriteClientCtors(CodeWriter writer, DataPlaneClient client, BuildContext context)
+        private void WriteClientCtors(CodeWriter writer, DataPlaneClient client, DataPlaneOutputLibrary library)
         {
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
@@ -138,129 +140,118 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.Line();
 
-            var schemes = context.CodeModel.Security.Schemes.OfType<SecurityScheme>().Distinct(SecuritySchemesComparer.Instance);
-            var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
-            foreach (var scheme in schemes)
+            var clientOptionsName = library.ClientOptions!.Declaration.Name;
+
+            if (library.Authentication.ApiKey != null)
             {
-                if (scheme is AzureKeySecurityScheme)
+                var ctorParams = client.GetClientConstructorParameters(typeof(AzureKeyCredential));
+                writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
+                foreach (Parameter parameter in ctorParams)
                 {
-                    throw new NotSupportedException($"{typeof(AzureKeySecurityScheme)} is not supported. Use {typeof(KeySecurityScheme)} instead");
+                    writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
                 }
-                if (scheme is AADTokenSecurityScheme)
+                writer.WriteXmlDocumentationParameter(OptionsVariable, $"The options for configuring the client.");
+
+                writer.Append($"public {client.Type.Name:D}(");
+                foreach (Parameter parameter in ctorParams)
                 {
-                    throw new NotSupportedException($"{typeof(AADTokenSecurityScheme)} is not supported. Use {typeof(OAuth2SecurityScheme)} instead");
+                    writer.WriteParameter(parameter);
                 }
+                writer.Append($" {clientOptionsName} {OptionsVariable} = null)");
 
-                if (scheme is KeySecurityScheme keySecurityScheme)
+                using (writer.Scope())
                 {
-                    var ctorParams = client.GetClientConstructorParameters(typeof(AzureKeyCredential));
-                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
-                    foreach (Parameter parameter in ctorParams)
-                    {
-                        writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-                    }
-                    writer.WriteXmlDocumentationParameter(OptionsVariable, $"The options for configuring the client.");
-
-                    writer.Append($"public {client.Type.Name:D}(");
-                    foreach (Parameter parameter in ctorParams)
-                    {
-                        writer.WriteParameter(parameter);
-                    }
-                    writer.Append($" {clientOptionsName}ClientOptions {OptionsVariable} = null)");
-
-                    using (writer.Scope())
-                    {
-                        writer.WriteParameterNullChecks(ctorParams);
-                        writer.Line();
-
-                        writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
-                        writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
-                        writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"{keySecurityScheme.Name}\"));");
-                        writer.Append($"this.RestClient = new {client.RestClient.Type}(");
-                        foreach (var parameter in client.RestClient.Parameters)
-                        {
-                            if (parameter.IsApiVersionParameter)
-                            {
-                                writer.Append($"{OptionsVariable}.Version, ");
-                            }
-                            else if (parameter == KnownParameters.ClientDiagnostics)
-                            {
-                                writer.Append($"{ClientDiagnosticsField}, ");
-                            }
-                            else if (parameter == KnownParameters.Pipeline)
-                            {
-                                writer.Append($"{PipelineField}, ");
-                            }
-                            else
-                            {
-                                writer.Append($"{parameter.Name}, ");
-                            }
-                        }
-                        writer.RemoveTrailingComma();
-                        writer.Append($");");
-                    }
+                    writer.WriteParameterNullChecks(ctorParams);
                     writer.Line();
+
+                    writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
+                    writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"{library.Authentication.ApiKey.Name}\"));");
+                    writer.Append($"this.RestClient = new {client.RestClient.Type}(");
+                    foreach (var parameter in client.RestClient.Parameters)
+                    {
+                        if (parameter.IsApiVersionParameter)
+                        {
+                            writer.Append($"{OptionsVariable}.Version, ");
+                        }
+                        else if (parameter == KnownParameters.ClientDiagnostics)
+                        {
+                            writer.Append($"{ClientDiagnosticsField}, ");
+                        }
+                        else if (parameter == KnownParameters.Pipeline)
+                        {
+                            writer.Append($"{PipelineField}, ");
+                        }
+                        else
+                        {
+                            writer.Append($"{parameter.Name}, ");
+                        }
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.Append($");");
                 }
-                else if (scheme is OAuth2SecurityScheme oauth2SecurityScheme)
+                writer.Line();
+            }
+
+            if (library.Authentication.OAuth2 != null)
+            {
+                var ctorParams = client.GetClientConstructorParameters(typeof(TokenCredential));
+                writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
+                foreach (Parameter parameter in ctorParams)
                 {
-                    var ctorParams = client.GetClientConstructorParameters(typeof(TokenCredential));
-                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
-                    foreach (Parameter parameter in ctorParams)
-                    {
-                        writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-                    }
-                    writer.WriteXmlDocumentationParameter(OptionsVariable, $"The options for configuring the client.");
-
-                    writer.Append($"public {client.Type.Name:D}(");
-                    foreach (Parameter parameter in ctorParams)
-                    {
-                        writer.WriteParameter(parameter);
-                    }
-                    writer.Append($" {clientOptionsName}ClientOptions {OptionsVariable} = null)");
-
-                    using (writer.Scope())
-                    {
-                        writer.WriteParameterNullChecks(ctorParams);
-                        writer.Line();
-
-                        writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
-                        writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
-                        var scopesParam = new CodeWriterDeclaration("scopes");
-                        writer.Append($"string[] {scopesParam:D} = ");
-                        writer.Append($"{{ ");
-                        foreach (var credentialScope in oauth2SecurityScheme.Scopes)
-                        {
-                            writer.Append($"{credentialScope:L}, ");
-                        }
-                        writer.RemoveTrailingComma();
-                        writer.Line($"}};");
-
-                        writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({CredentialVariable}, {scopesParam}));");
-                        writer.Append($"this.RestClient = new {client.RestClient.Type}(");
-                        foreach (var parameter in client.RestClient.Parameters)
-                        {
-                            if (parameter.IsApiVersionParameter)
-                            {
-                                writer.Append($"{OptionsVariable}.Version, ");
-                            }
-                            else if (parameter == KnownParameters.ClientDiagnostics)
-                            {
-                                writer.Append($"{ClientDiagnosticsField}, ");
-                            }
-                            else if (parameter == KnownParameters.Pipeline)
-                            {
-                                writer.Append($"{PipelineField}, ");
-                            }
-                            else
-                            {
-                                writer.Append($"{parameter.Name}, ");
-                            }
-                        }
-                        writer.RemoveTrailingComma();
-                        writer.Append($");");
-                    }
-                    writer.Line();
+                    writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
                 }
+                writer.WriteXmlDocumentationParameter(OptionsVariable, $"The options for configuring the client.");
+
+                writer.Append($"public {client.Type.Name:D}(");
+                foreach (Parameter parameter in ctorParams)
+                {
+                    writer.WriteParameter(parameter);
+                }
+                writer.Append($" {clientOptionsName} {OptionsVariable} = null)");
+
+                using (writer.Scope())
+                {
+                    writer.WriteParameterNullChecks(ctorParams);
+                    writer.Line();
+
+                    writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
+                    writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                    var scopesParam = new CodeWriterDeclaration("scopes");
+                    writer.Append($"string[] {scopesParam:D} = ");
+                    writer.Append($"{{ ");
+                    foreach (var credentialScope in library.Authentication.OAuth2.Scopes)
+                    {
+                        writer.Append($"{credentialScope:L}, ");
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.Line($"}};");
+
+                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({CredentialVariable}, {scopesParam}));");
+                    writer.Append($"this.RestClient = new {client.RestClient.Type}(");
+                    foreach (var parameter in client.RestClient.Parameters)
+                    {
+                        if (parameter.IsApiVersionParameter)
+                        {
+                            writer.Append($"{OptionsVariable}.Version, ");
+                        }
+                        else if (parameter == KnownParameters.ClientDiagnostics)
+                        {
+                            writer.Append($"{ClientDiagnosticsField}, ");
+                        }
+                        else if (parameter == KnownParameters.Pipeline)
+                        {
+                            writer.Append($"{PipelineField}, ");
+                        }
+                        else
+                        {
+                            writer.Append($"{parameter.Name}, ");
+                        }
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.Append($");");
+                }
+                writer.Line();
             }
 
             var internalConstructor = BuildInternalConstructor(client);
@@ -281,7 +272,7 @@ namespace AutoRest.CSharp.Generation.Writers
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
             var parameters = pagingMethod.Method.Parameters;
 
-            writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.Description}");
+            writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.SummaryText}");
 
             foreach (Parameter parameter in parameters)
             {
@@ -290,6 +281,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
+            writer.WriteXmlDocumentation("remarks", $"{pagingMethod.Method.DescriptionText}");
 
             writer.Append($"{pagingMethod.Accessibility} virtual {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
@@ -356,9 +348,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             RestClientMethod originalMethod = lroMethod.StartMethod;
             CSharpType returnType = async ? new CSharpType(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
-            Parameter[] parameters = originalMethod.Parameters;
+            var parameters = originalMethod.Parameters;
 
-            writer.WriteXmlDocumentationSummary($"{originalMethod.Description}");
+            writer.WriteXmlDocumentationSummary($"{originalMethod.SummaryText}");
 
             foreach (Parameter parameter in parameters)
             {
@@ -366,6 +358,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
+            writer.WriteXmlDocumentation("remarks", $"{originalMethod.DescriptionText}");
 
             string asyncText = async ? "async " : string.Empty;
             writer.Append($"{lroMethod.Accessibility} virtual {asyncText}{returnType} {CreateStartOperationName(lroMethod.Name, async)}(");
@@ -419,90 +412,11 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private class SecuritySchemesComparer : IEqualityComparer<SecurityScheme>
-        {
-            public static IEqualityComparer<SecurityScheme> Instance { get; } = new SecuritySchemesComparer();
-
-            private SecuritySchemesComparer() { }
-
-            public bool Equals(SecurityScheme? x, SecurityScheme? y)
-            {
-                if (ReferenceEquals(x, y))
-                {
-                    return true;
-                }
-
-                if (ReferenceEquals(x, null))
-                {
-                    return false;
-                }
-
-                if (ReferenceEquals(y, null))
-                {
-                    return false;
-                }
-
-                if (x.GetType() != y.GetType())
-                {
-                    return false;
-                }
-
-                return (x, y) switch
-                {
-                    (AzureKeySecurityScheme azureX, AzureKeySecurityScheme azureY)
-                        => azureX.Type == azureY.Type && azureX.HeaderName == azureY.HeaderName,
-                    (AADTokenSecurityScheme aadX, AADTokenSecurityScheme aadY)
-                        => aadX.Type == aadY.Type && aadX.Scopes.SequenceEqual(aadY.Scopes, StringComparer.Ordinal),
-                    _ => x.Type == y.Type
-                };
-            }
-
-            public int GetHashCode(SecurityScheme obj) =>
-                obj switch
-                {
-                    AzureKeySecurityScheme azure => HashCode.Combine(azure.Type, azure.HeaderName),
-                    AADTokenSecurityScheme aad => GetAADTokenSecurityHashCode(aad),
-                    _ => HashCode.Combine(obj.Type)
-                };
-
-            private static int GetAADTokenSecurityHashCode(AADTokenSecurityScheme aad)
-            {
-                var hashCode = new HashCode();
-                hashCode.Add(aad.Type);
-                foreach (var value in aad.Scopes)
-                {
-                    hashCode.Add(value);
-                }
-                return hashCode.ToHashCode();
-            }
-        }
-
-        //private IEnumerable<ConstructorSignature> BuildPublicConstructors(DataPlaneRestClient restClient)
-        //{
-        //    if (restClient.Fields.CredentialFields.Count == 0)
-        //    {
-        //        yield return BuildPublicConstructor(restClient, null);
-        //    }
-        //    else
-        //    {
-        //        foreach (var credentialField in restClient.Fields.CredentialFields)
-        //        {
-        //            yield return BuildPublicConstructor(restClient, credentialField);
-        //        }
-        //    }
-        //}
-
-        //private ConstructorSignature BuildPublicConstructor(DataPlaneRestClient restClient, FieldDeclaration? credentialField)
-        //{
-        //    var constructorParameters = RestClientBuilder.GetConstructorParameters(Parameters, credentialField?.Type).Append(clientOptionsParameter).ToArray();
-        //    return new ConstructorSignature(restClient.Declaration.Name, $"Initializes a new instance of {restClient.Declaration.Name}", MethodSignatureModifiers.Public, constructorParameters);
-        //}
-
         private static ConstructorSignature BuildInternalConstructor(DataPlaneClient client)
         {
             var constructorParameters = new[]{KnownParameters.ClientDiagnostics, KnownParameters.Pipeline}.Union(client.RestClient.Parameters).ToArray();
             var name = client.Declaration.Name;
-            return new ConstructorSignature(name, $"Initializes a new instance of {name}", MethodSignatureModifiers.Internal, constructorParameters);
+            return new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, constructorParameters);
         }
     }
 }

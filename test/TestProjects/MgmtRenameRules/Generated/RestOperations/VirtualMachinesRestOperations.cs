@@ -37,7 +37,7 @@ namespace MgmtRenameRules
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateListByLocationRequest(string subscriptionId, string location)
+        internal HttpMessage CreateListByLocationRequest(string subscriptionId, AzureLocation location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -60,12 +60,11 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<VirtualMachineListResult>> ListByLocationAsync(string subscriptionId, string location, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        public async Task<Response<VirtualMachineListResult>> ListByLocationAsync(string subscriptionId, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             using var message = CreateListByLocationRequest(subscriptionId, location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -87,12 +86,11 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<VirtualMachineListResult> ListByLocation(string subscriptionId, string location, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        public Response<VirtualMachineListResult> ListByLocation(string subscriptionId, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             using var message = CreateListByLocationRequest(subscriptionId, location);
             _pipeline.Send(message, cancellationToken);
@@ -206,9 +204,9 @@ namespace MgmtRenameRules
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue(data);
-            request.Content = content0;
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(data);
+            request.Content = content;
             _userAgent.Apply(message);
             return message;
         }
@@ -284,9 +282,9 @@ namespace MgmtRenameRules
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue(patch);
-            request.Content = content0;
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(patch);
+            request.Content = content;
             _userAgent.Apply(message);
             return message;
         }
@@ -422,7 +420,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmName)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmName, InstanceViewType? expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -435,7 +433,10 @@ namespace MgmtRenameRules
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachines/", false);
             uri.AppendPath(vmName, true);
-            uri.AppendQuery("$expand", "instanceView", true);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand.Value.ToString(), true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -447,16 +448,17 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<VirtualMachineData>> GetAsync(string subscriptionId, string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineData>> GetAsync(string subscriptionId, string resourceGroupName, string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, vmName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, vmName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -478,16 +480,17 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<VirtualMachineData> Get(string subscriptionId, string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineData> Get(string subscriptionId, string resourceGroupName, string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, vmName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, vmName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1539,7 +1542,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateListByLocationNextPageRequest(string nextLink, string subscriptionId, string location)
+        internal HttpMessage CreateListByLocationNextPageRequest(string nextLink, string subscriptionId, AzureLocation location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1558,13 +1561,12 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<VirtualMachineListResult>> ListByLocationNextPageAsync(string nextLink, string subscriptionId, string location, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        public async Task<Response<VirtualMachineListResult>> ListByLocationNextPageAsync(string nextLink, string subscriptionId, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             using var message = CreateListByLocationNextPageRequest(nextLink, subscriptionId, location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1587,13 +1589,12 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<VirtualMachineListResult> ListByLocationNextPage(string nextLink, string subscriptionId, string location, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        public Response<VirtualMachineListResult> ListByLocationNextPage(string nextLink, string subscriptionId, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             using var message = CreateListByLocationNextPageRequest(nextLink, subscriptionId, location);
             _pipeline.Send(message, cancellationToken);

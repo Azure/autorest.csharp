@@ -4,11 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -46,6 +43,26 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
+        public static CodeWriter LineIf(this CodeWriter writer, FormattableString formattableString, bool condition)
+        {
+            if (condition)
+            {
+                writer.Line(formattableString);
+            }
+
+            return writer;
+        }
+
+        public static CodeWriter LineRawIf(this CodeWriter writer, string str, bool condition)
+        {
+            if (condition)
+            {
+                writer.LineRaw(str);
+            }
+
+            return writer;
+        }
+
         public static CodeWriter AppendNullableValue(this CodeWriter writer, CSharpType type)
         {
             if (type.IsNullable && type.IsValueType)
@@ -56,7 +73,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static CodeWriter WriteFieldDeclaration(this CodeWriter writer, FieldDeclaration field)
+        public static CodeWriter WriteField(this CodeWriter writer, FieldDeclaration field, bool declareInCurrentScope = true)
         {
             if (field.Description != null)
             {
@@ -79,14 +96,22 @@ namespace AutoRest.CSharp.Generation.Writers
                     .AppendRawIf("readonly ", modifiers.HasFlag(FieldModifiers.ReadOnly));
             }
 
-            writer.Append($"{field.Type} {field.Declaration:D}");
+            if (declareInCurrentScope)
+            {
+                writer.Append($"{field.Type} {field.Declaration:D}");
+            }
+            else
+            {
+                writer.Append($"{field.Type} {field.Declaration:I}");
+            }
 
             if (field.WriteAsProperty)
             {
                 writer.AppendRaw(modifiers.HasFlag(FieldModifiers.ReadOnly) ? "{ get; }" : "{ get; set; }");
             }
 
-            if (field.DefaultValue != null)
+            if (field.DefaultValue != null &&
+                (modifiers.HasFlag(FieldModifiers.Const) || modifiers.HasFlag(FieldModifiers.Static)))
             {
                 return writer.AppendRaw(" = ").Append(field.DefaultValue).Line($";");
             }
@@ -98,13 +123,13 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var field in fields)
             {
-                writer.WriteFieldDeclaration(field);
+                writer.WriteField(field, declareInCurrentScope: false);
             }
 
             return writer.Line();
         }
 
-        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
+        public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)
             {
@@ -139,6 +164,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Append($"{methodBase.Name}(")
                 .AppendRawIf("this ", methodBase.Modifiers.HasFlag(Extension));
 
+            var outerScope = writer.AmbientScope();
+
             foreach (var parameter in methodBase.Parameters)
             {
                 writer.WriteParameter(parameter);
@@ -169,16 +196,27 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"#pragma warning restore {disabledWarning}");
             }
 
-            return writer.Scope();
+            var innerScope = writer.Scope();
+            return Disposable.Create(() =>
+            {
+                innerScope.Dispose();
+                outerScope.Dispose();
+            });
         }
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
         {
-            writer.WriteXmlDocumentationSummary($"{methodBase.Description}");
+            return writer
+                .WriteXmlDocumentationSummary($"{methodBase.SummaryText}")
+                .WriteMethodDocumentationSignature(methodBase);
+        }
+
+        public static CodeWriter WriteMethodDocumentationSignature(this CodeWriter writer, MethodSignatureBase methodBase)
+        {
             writer.WriteXmlDocumentationParameters(methodBase.Parameters);
             writer.WriteXmlDocumentationRequiredParametersException(methodBase.Parameters);
             writer.WriteXmlDocumentationNonEmptyParametersException(methodBase.Parameters);
-            if (methodBase is MethodSignature {ReturnDescription: { }} method)
+            if (methodBase is MethodSignature { ReturnDescription: { } } method)
             {
                 writer.WriteXmlDocumentationReturns(method.ReturnDescription);
             }
@@ -274,9 +312,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (parameter.Type.Equals(typeof(RequestConditions)))
                 {
-#pragma warning disable CS8605 // Unboxing a possibly null value.
-                    foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)))
-#pragma warning restore CS8605 // Unboxing a possibly null value.
+                    foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)).Cast<RequestConditionHeaders>())
                     {
                         if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
                         {
@@ -299,6 +335,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
             => writer.Append(GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)).LineRaw(";");
+
+        public static CodeWriter WriteMethodCall(this CodeWriter writer, MethodSignature method, IEnumerable<FormattableString> parameters, bool asyncCall)
+        {
+            var parametersFs = parameters.ToArray().Join(", ");
+            if (asyncCall)
+            {
+                return writer.Append($"await {method.WithAsync(true).Name}({parametersFs}).ConfigureAwait(false)");
+            }
+
+            return writer.Append($"{method.WithAsync(false).Name}({parametersFs})");
+        }
 
         private static FormattableString GetMethodCallFormattableString(bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
             => asyncCall ? (FormattableString)$"await {asyncMethodName}({parameters}).ConfigureAwait(false)" : (FormattableString)$"{syncMethodName}({parameters})";
@@ -341,8 +388,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant) => writer.Append(constant.GetConstantFormattable());
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,
-            Action<CodeWriter, CodeWriterDelegate> valueCallback, string responseVariable, CSharpType? type)
+        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, Action<FormattableString> valueCallback, string responseVariable, CSharpType? type)
         {
             switch (serialization)
             {
@@ -359,16 +405,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter AppendEnumToString(this CodeWriter writer, EnumType enumType)
         {
-            if (!enumType.IsExtendable)
+            if (!enumType.IsExtensible)
             {
                 writer.UseNamespace(enumType.Type.Namespace);
             }
-            return writer.AppendRaw(enumType.IsExtendable ? ".ToString()" : ".ToSerialString()");
+            return writer.AppendRaw(enumType.IsExtensible ? ".ToString()" : ".ToSerialString()");
         }
 
-        public static CodeWriter AppendEnumFromString(this CodeWriter writer, EnumType enumType, CodeWriterDelegate value)
+        public static CodeWriter AppendEnumFromString(this CodeWriter writer, EnumType enumType, FormattableString value)
         {
-            if (enumType.IsExtendable)
+            if (enumType.IsExtensible)
             {
                 writer.Append($"new {enumType.Type}({value})");
             }
@@ -382,37 +428,12 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         public static CodeWriter WriteReferenceOrConstant(this CodeWriter writer, ReferenceOrConstant value)
-        {
-            if (value.IsConstant)
-            {
-                writer.WriteConstant(value.Constant);
-            }
-            else
-            {
-                var parts = value.Reference.Name.Split(".");
-
-                bool first = true;
-                foreach (var part in parts)
-                {
-                    if (first)
-                    {
-                        first = false;
-                    }
-                    else
-                    {
-                        writer.AppendRaw(".");
-                    }
-                    writer.Identifier(part);
-                }
-            }
-
-            return writer;
-        }
+            => writer.Append(value.GetReferenceOrConstantFormattable());
 
         public static CodeWriter WriteInitialization(
             this CodeWriter writer,
-            Action<CodeWriter, CodeWriterDelegate> valueCallback,
-            ObjectType objectType,
+            Action<FormattableString> valueCallback,
+            TypeProvider objectType,
             ObjectTypeConstructor constructor,
             IEnumerable<PropertyInitializer> initializers)
         {
@@ -421,7 +442,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // Find longest satisfiable ctor
             List<PropertyInitializer> selectedCtorInitializers = constructor.Signature.Parameters
                 .Select(constructor.FindPropertyInitializedByParameter)
-                .Select(property => initializersSet.SingleOrDefault(i => i.Property == property))
+                .Select(property => initializersSet.SingleOrDefault(i => i.Name == property?.Declaration.Name && Equals(i.Type, property.Declaration.Type)))
                 .ToList();
 
             // Checks if constructor parameters can be satisfied by the provided initializer list
@@ -430,7 +451,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // Find properties that would have to be initialized using a foreach loop
             var collectionInitializers = initializersSet
                 .Except(selectedCtorInitializers)
-                .Where(i => i.Property.IsReadOnly && TypeFactory.IsCollectionType(i.Property.Declaration.Type))
+                .Where(i => i.IsReadOnly && TypeFactory.IsCollectionType(i.Type))
                 .ToArray();
 
             // Find properties that would have to be initialized via property initializers
@@ -439,53 +460,25 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Except(collectionInitializers)
                 .ToArray();
 
-            void WriteObjectInitializer(CodeWriter codeWriter)
+            var constructorParameters = selectedCtorInitializers
+                .Select<PropertyInitializer, FormattableString>(pi => $"{pi.Value}{GetConversion(writer, pi.ValueType!, pi.Type)}")
+                .ToArray()
+                .Join(", ");
+
+            var propertyInitializers = restOfInitializers
+                .Select<PropertyInitializer, FormattableString>(pi => $"{pi.Name} = {pi.Value}{GetConversion(writer, pi.ValueType!, pi.Type)}")
+                .ToArray()
+                .Join(",\n ");
+
+            var objectInitializerFormattable = restOfInitializers.Any()
+                ? $"new {objectType.Type}({constructorParameters}) {{\n{propertyInitializers}\n}}"
+                : (FormattableString)$"new {objectType.Type}({constructorParameters})";
+
+            if (collectionInitializers.Any())
             {
-                // writes the new Model(param1, param2)
-                // {
-                //    property = param3
-                // }
-                // part
+                var modelVariable = new CodeWriterDeclaration(objectType.Declaration.Name.ToVariableName());
+                writer.Line($"{objectType.Type} {modelVariable:D} = {objectInitializerFormattable};");
 
-                codeWriter.Append($"new {objectType.Type}(");
-                foreach (var initializer in selectedCtorInitializers)
-                {
-                    if (initializer.Type != null)
-                    {
-                        codeWriter.Append(initializer.Value);
-                        codeWriter.WriteConversion(initializer.Type, initializer.Property.Declaration.Type);
-                    }
-
-                    codeWriter.Append($", ");
-                }
-
-                codeWriter.RemoveTrailingComma();
-                codeWriter.Append($")");
-
-                if (restOfInitializers.Any())
-                {
-                    using (codeWriter.Scope($"", newLine: false))
-                    {
-                        foreach (var propertyInitializer in restOfInitializers)
-                        {
-                            codeWriter.Append($"{propertyInitializer.Property.Declaration.Name} = ");
-
-                            if (propertyInitializer.Type != null)
-                            {
-                                codeWriter.Append(propertyInitializer.Value);
-                                codeWriter.WriteConversion(propertyInitializer.Type, propertyInitializer.Property.Declaration.Type);
-                            }
-
-                            codeWriter.Line($",");
-                        }
-
-                        codeWriter.RemoveTrailingComma();
-                    }
-                }
-            }
-
-            void WriteCollectionInitializer(CodeWriter writer1, CodeWriterDeclaration codeWriterDeclaration)
-            {
                 // Writes the:
                 // foreach (var value in param)
                 // {
@@ -494,30 +487,20 @@ namespace AutoRest.CSharp.Generation.Writers
                 foreach (var propertyInitializer in collectionInitializers)
                 {
                     var valueVariable = new CodeWriterDeclaration("value");
-                    using (writer1.Scope($"if ({propertyInitializer.Value} != null)"))
+                    using (writer.Scope($"if ({propertyInitializer.Value} != null)"))
                     {
-                        using (writer1.Scope($"foreach (var {valueVariable:D} in {propertyInitializer.Value})"))
+                        using (writer.Scope($"foreach (var {valueVariable:D} in {propertyInitializer.Value})"))
                         {
-                            writer1.Append($"{codeWriterDeclaration}.{propertyInitializer.Property.Declaration.Name}.Add({valueVariable});");
+                            writer.Append($"{modelVariable:I}.{propertyInitializer.Name}.Add({valueVariable});");
                         }
                     }
                 }
-            }
 
-            if (collectionInitializers.Any())
-            {
-                var modelVariable = new CodeWriterDeclaration(objectType.Declaration.Name.ToVariableName());
-                writer.Append($"{objectType.Type} {modelVariable:D} = ");
-                WriteObjectInitializer(writer);
-                writer.Line($";");
-
-                WriteCollectionInitializer(writer, modelVariable);
-
-                valueCallback(writer, w => w.Append(modelVariable));
+                valueCallback($"{modelVariable:I}");
             }
             else
             {
-                valueCallback(writer, WriteObjectInitializer);
+                valueCallback(objectInitializerFormattable);
             }
 
 
@@ -526,56 +509,55 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to)
         {
-            if (to.IsFrameworkType && from.IsFrameworkType)
+            if (TypeFactory.RequiresToList(from, to))
             {
-                if (to.FrameworkType == typeof(IReadOnlyList<>) &&
-                    from.FrameworkType == typeof(IEnumerable<>))
-                {
-                    writer.UseNamespace(typeof(Enumerable).Namespace!);
-                    writer.AppendIf($"?", from.IsNullable).Append($".ToList()");
-                }
-                else if (to.FrameworkType == typeof(IList<>) &&
-                    from.FrameworkType == typeof(IEnumerable<>))
-                {
-                    writer.UseNamespace(typeof(Enumerable).Namespace!);
-                    writer.AppendIf($"?", from.IsNullable).Append($".ToList()");
-                }
+                writer.UseNamespace(typeof(Enumerable).Namespace!);
+                return writer.AppendRaw(from.IsNullable ? "?.ToList()" : ".ToList()");
             }
 
             return writer;
         }
 
-        internal static CodeWriter.CodeWriterScope? WriteDefinedCheck(this CodeWriter writer, ObjectTypeProperty? property)
+        private static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
         {
-            CodeWriter.CodeWriterScope? scope = default;
-            if (property != null &&
-                property.SchemaProperty != null &&
-                !property.SchemaProperty.IsRequired)
+            if (TypeFactory.RequiresToList(from, to))
             {
-                var method = TypeFactory.IsCollectionType(property.Declaration.Type) ? nameof(Optional.IsCollectionDefined) : nameof(Optional.IsDefined);
-
-                var propertyName = property!.Declaration.Name;
-                return writer.Scope($"if ({typeof(Optional)}.{method}({propertyName:I}))");
+                writer.UseNamespace(typeof(Enumerable).Namespace!);
+                return from.IsNullable ? "?.ToList()" : ".ToList()";
             }
 
-            return scope;
+            return string.Empty;
         }
 
-        internal static CodeWriter.CodeWriterScope? WritePropertyNullCheckIf(this CodeWriter writer, ObjectTypeProperty? property)
+        public static CodeWriter.CodeWriterScope? WriteDefinedCheck(this CodeWriter writer, PropertySerialization property)
         {
-            if (property == null)
+            if (property.IsRequired)
+            {
+                return default;
+            }
+
+            var method = TypeFactory.IsCollectionType(property.PropertyType)
+                ? nameof(Optional.IsCollectionDefined)
+                : nameof(Optional.IsDefined);
+            var propertyName = property.PropertyName;
+            return writer.Scope($"if ({typeof(Optional)}.{method}({propertyName:I}))");
+
+        }
+
+        public static CodeWriter.CodeWriterScope? WritePropertyNullCheckIf(this CodeWriter writer, PropertySerialization property)
+        {
+            if (property.ValueType == null)
             {
                 return null;
             }
 
-            bool hasNullableType = property.ValueType.IsNullable;
-            if (hasNullableType)
+            if (!property.ValueType.IsNullable)
             {
-                var propertyName = property.Declaration.Name;
-                return writer.Scope($"if ({propertyName} != null)");
+                return null;
             }
 
-            return null;
+            var propertyName = property.PropertyName;
+            return writer.Scope($"if ({propertyName} != null)");
         }
     }
 }

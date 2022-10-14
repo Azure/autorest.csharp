@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using MgmtRenameRules;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
     public class MgmtRenameRulesTests : TestProjectTests
     {
-        public MgmtRenameRulesTests() : base("MgmtRenameRules")
-        { }
+        public MgmtRenameRulesTests()
+            : base("MgmtRenameRules")
+        {
+            TagResourceExceptions.Add(typeof(VirtualMachineScaleSetRollingUpgradeResource));
+        }
 
         [TestCase(true, "AutomaticOSUpgradePolicy")]
         [TestCase(false, "AutomaticOsUpgradePolicy")]
-        [TestCase(true, "VmDiskTypes")]
-        [TestCase(false, "VMDiskTypes")]
+        [TestCase(true, "VmDiskType")]
+        [TestCase(false, "VMDiskType")]
         [TestCase(true, "IPVersion")]
         [TestCase(false, "IpVersion")]
         [TestCase(true, "VirtualMachineScaleSetVmInstanceIds")]

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,6 +16,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -310,6 +312,43 @@ namespace MgmtListMethods
             return GetFakeParents().Get(fakeParentName, cancellationToken);
         }
 
+        /// <summary> Gets a collection of FakeConfigurationResources in the Fake. </summary>
+        /// <returns> An object representing collection of FakeConfigurationResources and their operations over a FakeConfigurationResource. </returns>
+        public virtual FakeConfigurationCollection GetFakeConfigurations()
+        {
+            return GetCachedClient(Client => new FakeConfigurationCollection(Client, Id));
+        }
+
+        /// <summary>
+        /// Get configuration for each VM family in workspace.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/configurations/{configurationName}
+        /// Operation Id: Configurations_Get
+        /// </summary>
+        /// <param name="configurationName"> The name of the configuration. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="configurationName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public virtual async Task<Response<FakeConfigurationResource>> GetFakeConfigurationAsync(string configurationName, CancellationToken cancellationToken = default)
+        {
+            return await GetFakeConfigurations().GetAsync(configurationName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get configuration for each VM family in workspace.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/configurations/{configurationName}
+        /// Operation Id: Configurations_Get
+        /// </summary>
+        /// <param name="configurationName"> The name of the configuration. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="configurationName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public virtual Response<FakeConfigurationResource> GetFakeConfiguration(string configurationName, CancellationToken cancellationToken = default)
+        {
+            return GetFakeConfigurations().Get(configurationName, cancellationToken);
+        }
+
         /// <summary>
         /// Retrieves information about an fake.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
@@ -421,6 +460,68 @@ namespace MgmtListMethods
         }
 
         /// <summary>
+        /// Update configurations for each VM family in workspace.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/updateConfigurations
+        /// Operation Id: Fakes_UpdateConfigurations
+        /// </summary>
+        /// <param name="value"> The parameters for updating a list of fake configuration. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
+        /// <returns> An async collection of <see cref="FakeConfigurationResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<FakeConfigurationResource> UpdateConfigurationsAsync(FakeConfigurationListResult value, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(value, nameof(value));
+
+            async Task<Page<FakeConfigurationResource>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.UpdateConfigurations");
+                scope.Start();
+                try
+                {
+                    var response = await _fakeRestClient.UpdateConfigurationsAsync(Id.SubscriptionId, Id.Name, value, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value0 => new FakeConfigurationResource(Client, value0)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+        }
+
+        /// <summary>
+        /// Update configurations for each VM family in workspace.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/updateConfigurations
+        /// Operation Id: Fakes_UpdateConfigurations
+        /// </summary>
+        /// <param name="value"> The parameters for updating a list of fake configuration. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
+        /// <returns> A collection of <see cref="FakeConfigurationResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<FakeConfigurationResource> UpdateConfigurations(FakeConfigurationListResult value, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(value, nameof(value));
+
+            Page<FakeConfigurationResource> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.UpdateConfigurations");
+                scope.Start();
+                try
+                {
+                    var response = _fakeRestClient.UpdateConfigurations(Id.SubscriptionId, Id.Name, value, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value0 => new FakeConfigurationResource(Client, value0)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+        }
+
+        /// <summary>
         /// Add a tag to the current resource.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
         /// Operation Id: Fakes_Get
@@ -438,11 +539,21 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.TagValues[key] = value;
-                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (await CanUseTagResourceAsync(cancellationToken: cancellationToken).ConfigureAwait(false))
+                {
+                    var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
+                    originalTags.Value.Data.TagValues[key] = value;
+                    await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    current.Tags[key] = value;
+                    var result = await UpdateAsync(WaitUntil.Completed, current, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {
@@ -469,11 +580,21 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = GetTagResource().Get(cancellationToken);
-                originalTags.Value.Data.TagValues[key] = value;
-                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
-                return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (CanUseTagResource(cancellationToken: cancellationToken))
+                {
+                    var originalTags = GetTagResource().Get(cancellationToken);
+                    originalTags.Value.Data.TagValues[key] = value;
+                    GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                    var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
+                    return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    current.Tags[key] = value;
+                    var result = Update(WaitUntil.Completed, current, cancellationToken: cancellationToken);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {
@@ -498,12 +619,22 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                await GetTagResource().DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (await CanUseTagResourceAsync(cancellationToken: cancellationToken).ConfigureAwait(false))
+                {
+                    await GetTagResource().DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
+                    originalTags.Value.Data.TagValues.ReplaceWith(tags);
+                    await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    current.Tags.ReplaceWith(tags);
+                    var result = await UpdateAsync(WaitUntil.Completed, current, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {
@@ -528,12 +659,22 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                GetTagResource().Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
-                var originalTags = GetTagResource().Get(cancellationToken);
-                originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
-                return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (CanUseTagResource(cancellationToken: cancellationToken))
+                {
+                    GetTagResource().Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
+                    var originalTags = GetTagResource().Get(cancellationToken);
+                    originalTags.Value.Data.TagValues.ReplaceWith(tags);
+                    GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                    var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
+                    return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    current.Tags.ReplaceWith(tags);
+                    var result = Update(WaitUntil.Completed, current, cancellationToken: cancellationToken);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {
@@ -558,11 +699,21 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.TagValues.Remove(key);
-                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (await CanUseTagResourceAsync(cancellationToken: cancellationToken).ConfigureAwait(false))
+                {
+                    var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
+                    originalTags.Value.Data.TagValues.Remove(key);
+                    await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = (await GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Value.Data;
+                    current.Tags.Remove(key);
+                    var result = await UpdateAsync(WaitUntil.Completed, current, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {
@@ -587,11 +738,21 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = GetTagResource().Get(cancellationToken);
-                originalTags.Value.Data.TagValues.Remove(key);
-                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
-                return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                if (CanUseTagResource(cancellationToken: cancellationToken))
+                {
+                    var originalTags = GetTagResource().Get(cancellationToken);
+                    originalTags.Value.Data.TagValues.Remove(key);
+                    GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                    var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
+                    return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                }
+                else
+                {
+                    var current = Get(cancellationToken: cancellationToken).Value.Data;
+                    current.Tags.Remove(key);
+                    var result = Update(WaitUntil.Completed, current, cancellationToken: cancellationToken);
+                    return Response.FromValue(result.Value, result.GetRawResponse());
+                }
             }
             catch (Exception e)
             {

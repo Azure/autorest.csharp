@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace CollapseRequestCondition_LowLevel
 {
+    // Data plane generated client. The RequestConditionCollapse service client.
     /// <summary> The RequestConditionCollapse service client. </summary>
     public partial class RequestConditionCollapse
     {
@@ -45,9 +46,33 @@ namespace CollapseRequestCondition_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CollapsePutAsync with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = await client.CollapsePutAsync(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call CollapsePutAsync with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = await client.CollapsePutAsync(RequestContent.Create(data), null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> CollapsePutAsync(RequestContent content, RequestConditions requestConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.CollapsePut");
@@ -64,9 +89,33 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CollapsePut with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = client.CollapsePut(RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call CollapsePut with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// var data = "<String>";
+        /// 
+        /// Response response = client.CollapsePut(RequestContent.Create(data), null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response CollapsePut(RequestContent content, RequestConditions requestConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.CollapsePut");
@@ -84,7 +133,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CollapseGetAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.CollapseGetAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call CollapseGetAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.CollapseGetAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.CollapseGet");
@@ -102,7 +171,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call CollapseGet.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.CollapseGet();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call CollapseGet with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.CollapseGet(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.CollapseGet");
@@ -120,7 +209,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call MissIfNoneMatchGetAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.MissIfNoneMatchGetAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call MissIfNoneMatchGetAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.MissIfNoneMatchGetAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> MissIfNoneMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
@@ -140,7 +249,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call MissIfNoneMatchGet.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.MissIfNoneMatchGet();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call MissIfNoneMatchGet with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.MissIfNoneMatchGet(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response MissIfNoneMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
@@ -160,7 +289,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call MissIfMatchGetAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.MissIfMatchGetAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call MissIfMatchGetAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.MissIfMatchGetAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> MissIfMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -180,7 +329,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call MissIfMatchGet.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.MissIfMatchGet();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call MissIfMatchGet with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.MissIfMatchGet(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response MissIfMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -200,7 +369,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call MissIfModifiedSinceGetAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.MissIfModifiedSinceGetAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call MissIfModifiedSinceGetAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.MissIfModifiedSinceGetAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> MissIfModifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
@@ -220,7 +409,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call MissIfModifiedSinceGet.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.MissIfModifiedSinceGet();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call MissIfModifiedSinceGet with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.MissIfModifiedSinceGet(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response MissIfModifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
@@ -240,7 +449,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call MissIfUnmodifiedSinceGetAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.MissIfUnmodifiedSinceGetAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call MissIfUnmodifiedSinceGetAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.MissIfUnmodifiedSinceGetAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> MissIfUnmodifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
@@ -260,7 +489,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call MissIfUnmodifiedSinceGet.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.MissIfUnmodifiedSinceGet();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call MissIfUnmodifiedSinceGet with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.MissIfUnmodifiedSinceGet(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response MissIfUnmodifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
@@ -280,7 +529,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call MissIfMatchIfNoneMatchGetAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.MissIfMatchIfNoneMatchGetAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call MissIfMatchIfNoneMatchGetAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.MissIfMatchIfNoneMatchGetAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> MissIfMatchIfNoneMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -301,7 +570,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call MissIfMatchIfNoneMatchGet.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.MissIfMatchIfNoneMatchGet();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call MissIfMatchIfNoneMatchGet with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.MissIfMatchIfNoneMatchGet(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response MissIfMatchIfNoneMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -322,7 +611,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call IfModifiedSinceGetAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.IfModifiedSinceGetAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call IfModifiedSinceGetAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.IfModifiedSinceGetAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> IfModifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -344,7 +653,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call IfModifiedSinceGet.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.IfModifiedSinceGet();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call IfModifiedSinceGet with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.IfModifiedSinceGet(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response IfModifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -366,7 +695,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call IfUnmodifiedSinceGetAsync.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.IfUnmodifiedSinceGetAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call IfUnmodifiedSinceGetAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = await client.IfUnmodifiedSinceGetAsync(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> IfUnmodifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -388,7 +737,27 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call IfUnmodifiedSinceGet.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.IfUnmodifiedSinceGet();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call IfUnmodifiedSinceGet with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new RequestConditionCollapseClient(credential);
+        /// 
+        /// Response response = client.IfUnmodifiedSinceGet(null);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response IfUnmodifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");

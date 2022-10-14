@@ -42,13 +42,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return;
 
             _writer.Line();
-            string staticText = IsArmCore ? string.Empty : "static ";
-            FormattableString signatureParamText = IsArmCore ? (FormattableString)$"" : (FormattableString)$"{This.ExtensionParameter.Type} {This.ExtensionParameter.Name}";
-            using (_writer.Scope($"private {staticText}{This.ExtensionParameter.Type.Name}ExtensionClient GetExtensionClient({signatureParamText})"))
+            var extensionClientSignature = new MethodSignature(
+                "GetExtensionClient",
+                null,
+                null,
+                Private | Static,
+                This.ExtensionClient.Type,
+                null,
+                new[] { This.ExtensionParameter });
+            using (_writer.WriteMethodDeclaration(extensionClientSignature))
             {
                 using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
                 {
-                    _writer.Line($"return new {This.ExtensionParameter.Type.Name}ExtensionClient({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
+                    _writer.Line($"return new {extensionClientSignature.ReturnType}({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
                 }
                 _writer.Line($");");
             }
@@ -56,10 +62,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
         {
-            string asyncText = isAsync ? "Async" : string.Empty;
-            string configureAwait = isAsync & !isPaging ? ".ConfigureAwait(false)" : string.Empty;
-            string awaitText = isAsync & !isPaging ? " await" : string.Empty;
-            _writer.Append($"return{awaitText} GetExtensionClient({This.ExtensionParameter.Name}).{signature.Name}{asyncText}(");
+            _writer.AppendRaw("return ")
+                .AppendRawIf("await ", isAsync && !isPaging)
+                .Append($"GetExtensionClient({This.ExtensionParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
 
             foreach (var parameter in signature.Parameters.Skip(1))
             {
@@ -67,7 +72,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             _writer.RemoveTrailingComma();
-            _writer.Line($"){configureAwait};");
+            _writer.AppendRaw(")")
+                .AppendRawIf(".ConfigureAwait(false)", isAsync && !isPaging)
+                .LineRaw(";");
         }
 
         protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)

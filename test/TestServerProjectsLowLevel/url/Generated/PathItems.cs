@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace url_LowLevel
 {
+    // Data plane generated client. The PathItems service client.
     /// <summary> The PathItems service client. </summary>
     public partial class PathItems
     {
@@ -56,18 +57,29 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetAllWithValuesAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call GetAllWithValuesAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// 
+        /// Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -92,18 +104,29 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetAllWithValues with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetAllWithValues("<pathItemStringPath>", "<localStringPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call GetAllWithValues with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// 
+        /// Response response = client.GetAllWithValues("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -128,18 +151,29 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetGlobalQueryNullAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call GetGlobalQueryNullAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// 
+        /// Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -164,18 +198,29 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetGlobalQueryNull with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetGlobalQueryNull("<pathItemStringPath>", "<localStringPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call GetGlobalQueryNull with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// 
+        /// Response response = client.GetGlobalQueryNull("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -200,18 +245,29 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain null value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetGlobalAndLocalQueryNullAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call GetGlobalAndLocalQueryNullAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// 
+        /// Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -236,18 +292,29 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain null value. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetGlobalAndLocalQueryNull with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetGlobalAndLocalQueryNull("<pathItemStringPath>", "<localStringPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call GetGlobalAndLocalQueryNull with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// 
+        /// Response response = client.GetGlobalAndLocalQueryNull("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -272,18 +339,29 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringQuery"> should contain value null. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetLocalPathItemQueryNullAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
         /// 
-        /// </remarks>
+        /// Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call GetLocalPathItemQueryNullAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// 
+        /// Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
@@ -308,18 +386,29 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringQuery"> should contain value null. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetLocalPathItemQueryNull with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
         /// 
-        /// </remarks>
+        /// Response response = client.GetLocalPathItemQueryNull("<pathItemStringPath>", "<localStringPath>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call GetLocalPathItemQueryNull with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PathItemsClient("<globalStringPath>", credential);
+        /// 
+        /// Response response = client.GetLocalPathItemQueryNull("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));

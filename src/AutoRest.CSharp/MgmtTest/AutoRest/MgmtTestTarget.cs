@@ -4,61 +4,131 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.MgmtTest.Generation;
-using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.MgmtTest.AutoRest;
+using AutoRest.CSharp.MgmtTest.Generation.Mock;
+using AutoRest.CSharp.MgmtTest.Generation.Samples;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTestTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel)
         {
             Debug.Assert(codeModel.TestModel is not null);
+            Debug.Assert(Configuration.MgmtConfiguration.TestGen is not null);
 
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+            var sourceCodePath = GetSourceCodePath();
+            var sourceCodeProject = new SourceCodeProject(sourceCodePath, Configuration.SharedSourceFolders);
+            var sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
 
-            // force trigger the model initialization
-            foreach (var _ in MgmtContext.Library.ResourceSchemaMap)
+            // construct the MgmtTestOutputLibrary
+            var library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
+
+            // add the files in the source code project into the GeneratedCodeWorkspace so that our Roslyn could know how to simplify them
+            project.AddDirectory(sourceCodePath);
+
+            if (Configuration.MgmtConfiguration.TestGen.Mock)
             {
+                WriteMockTests(project, library);
             }
 
-            var extensionsWriter = new CodeWriter();
-
-            bool hasCollectionTest = false;
-            foreach (var resourceCollection in MgmtContext.Library.ResourceCollections)
+            if (Configuration.MgmtConfiguration.TestGen.Sample)
             {
-                var codeWriter = new CodeWriter();
-                var collectionTestWriter = new ResourceCollectionTestWriter(codeWriter, resourceCollection);
-                collectionTestWriter.WriteCollectionTest();
-
-                project.AddGeneratedFile($"Mock/{resourceCollection.Type.Name}Test.cs", codeWriter.ToString());
-                hasCollectionTest = true;
+                WriteSamples(project, library);
             }
 
-            if (hasCollectionTest)
+            if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
+                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
+        }
+
+        private static void WriteMockTests(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
+        {
+            // write the collection mock tests
+            foreach (var collectionTest in library.ResourceCollectionMockTests)
             {
-                var mockExtensionWriter = new TestHelperWriter(extensionsWriter);
-                mockExtensionWriter.WriteMockExtension();
-                project.AddGeneratedFile($"Mock/TestHelper.cs", extensionsWriter.ToString());
+                var collectionTestWriter = new ResourceCollectionMockTestWriter(collectionTest);
+                collectionTestWriter.Write();
+
+                AddGeneratedFile(project, $"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
             }
 
-            foreach (var resource in MgmtContext.Library.ArmResources)
+            foreach (var resourceTest in library.ResourceMockTests)
             {
-                var codeWriter = new CodeWriter();
-                var resourceTestWriter = new ResourceTestWriter(codeWriter, resource);
-                resourceTestWriter.WriteCollectionTest();
+                var resourceTestWriter = new ResourceMockTestWriter(resourceTest);
+                resourceTestWriter.Write();
 
-                project.AddGeneratedFile($"Mock/{resource.Type.Name}Test.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
             }
 
-            var subscriptionExtensionsCodeWriter = new CodeWriter();
-            new MgmtExtensionTestWriter(subscriptionExtensionsCodeWriter).Write();
-            project.AddGeneratedFile($"Mock/{MgmtContext.Library.ExtensionWrapper.Type.Name}Test.cs", subscriptionExtensionsCodeWriter.ToString());
+            var extensionWrapperTest = library.ExtensionWrapperMockTest;
+            var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(extensionWrapperTest, library.ExtensionMockTests);
+            extensionWrapperTestWriter.Write();
+
+            AddGeneratedFile(project, $"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+        }
+
+        private static void WriteSamples(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
+        {
+            var names = new Dictionary<string, int>();
+            foreach (var sample in library.Samples)
+            {
+                var sampleWriter = new MgmtSampleWriter(sample);
+                sampleWriter.Write();
+
+                var filename = GetFilename(sample.Type.Name, names);
+                AddGeneratedFile(project, $"Samples/{filename}.cs", sampleWriter.ToString());
+            }
+        }
+
+        private static string GetFilename(string name, Dictionary<string, int> names)
+        {
+            if (names.TryGetValue(name, out var count))
+            {
+                names[name]++;
+                return $"{name}{count}";
+            }
+
+            names[name] = 1;
+            return name;
+        }
+
+        private static string GetSourceCodePath()
+        {
+            if (Configuration.MgmtConfiguration.TestGen?.SourceCodePath != null)
+                return Configuration.MgmtConfiguration.TestGen.SourceCodePath;
+
+            return Path.Combine(Configuration.OutputFolder, "../../src");
+        }
+
+        private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
+        private static IDictionary<GeneratedCodeWorkspace, IList<string>> _overriddenProjectFilenames = new Dictionary<GeneratedCodeWorkspace, IList<string>>();
+
+        private static void AddGeneratedFile(GeneratedCodeWorkspace project, string filename, string text)
+        {
+            if (!_addedProjectFilenames.TryGetValue(project, out var addedFileNames))
+            {
+                addedFileNames = new HashSet<string>();
+                _addedProjectFilenames.Add(project, addedFileNames);
+            }
+            if (addedFileNames.Contains(filename))
+            {
+                if (!_overriddenProjectFilenames.TryGetValue(project, out var overriddenFileNames))
+                {
+                    overriddenFileNames = new List<string>();
+                    _overriddenProjectFilenames.Add(project, overriddenFileNames);
+                }
+                overriddenFileNames.Add(filename);
+            }
+            else
+            {
+                addedFileNames.Add(filename);
+            }
+            project.AddGeneratedFile(filename, text);
         }
     }
 }

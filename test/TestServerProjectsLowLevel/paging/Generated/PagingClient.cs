@@ -16,6 +16,7 @@ using Azure.Core.Pipeline;
 
 namespace paging_LowLevel
 {
+    // Data plane generated client. The Paging service client.
     /// <summary> The Paging service client. </summary>
     public partial class PagingClient
     {
@@ -60,12 +61,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetNoItemNamePagesAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetNoItemNamePagesAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValue</c>:
         /// <code>{
-        ///   value: [Product],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -93,12 +116,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetNoItemNamePages and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetNoItemNamePages())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValue</c>:
         /// <code>{
-        ///   value: [Product],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -126,19 +171,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetNullNextLinkNamePagesAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetNullNextLinkNamePagesAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -160,19 +220,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetNullNextLinkNamePages and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetNullNextLinkNamePages())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -194,19 +269,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSinglePagesAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetSinglePagesAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -234,19 +324,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSinglePages and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetSinglePages())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -274,12 +379,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call FirstResponseEmptyAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.FirstResponseEmptyAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValue</c>:
         /// <code>{
-        ///   value: [Product],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -307,12 +434,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call FirstResponseEmpty and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.FirstResponseEmpty())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValue</c>:
         /// <code>{
-        ///   value: [Product],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -343,19 +492,45 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetMultiplePagesAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// This sample shows how to call GetMultiplePagesAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetMultiplePagesAsync("<clientRequestId>", 1234, 1234))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -386,19 +561,45 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePages and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetMultiplePages())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// This sample shows how to call GetMultiplePages with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetMultiplePages("<clientRequestId>", 1234, 1234))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -427,19 +628,34 @@ namespace paging_LowLevel
 
         /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetWithQueryParamsAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetWithQueryParamsAsync(1234))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -468,19 +684,34 @@ namespace paging_LowLevel
 
         /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetWithQueryParams with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetWithQueryParams(1234))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -509,19 +740,45 @@ namespace paging_LowLevel
 
         /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
         /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call DuplicateParamsAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.DuplicateParamsAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// This sample shows how to call DuplicateParamsAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.DuplicateParamsAsync("<filter>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -550,19 +807,45 @@ namespace paging_LowLevel
 
         /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
         /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call DuplicateParams and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.DuplicateParams())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// This sample shows how to call DuplicateParams with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.DuplicateParams("<filter>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -590,19 +873,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call NextOperationWithQueryParamsAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.NextOperationWithQueryParamsAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -624,19 +922,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call NextOperationWithQueryParams and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.NextOperationWithQueryParams())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -661,19 +974,45 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetOdataMultiplePagesAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetOdataMultiplePagesAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// This sample shows how to call GetOdataMultiplePagesAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetOdataMultiplePagesAsync("<clientRequestId>", 1234, 1234))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -704,19 +1043,45 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetOdataMultiplePages and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetOdataMultiplePages())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// This sample shows how to call GetOdataMultiplePages with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetOdataMultiplePages("<clientRequestId>", 1234, 1234))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -748,19 +1113,45 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesWithOffsetAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetMultiplePagesWithOffsetAsync(1234))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// This sample shows how to call GetMultiplePagesWithOffsetAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetMultiplePagesWithOffsetAsync(1234, "<clientRequestId>", 1234, 1234))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -792,19 +1183,45 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesWithOffset with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetMultiplePagesWithOffset(1234))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// This sample shows how to call GetMultiplePagesWithOffset with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetMultiplePagesWithOffset(1234, "<clientRequestId>", 1234, 1234))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -832,19 +1249,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesRetryFirstAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetMultiplePagesRetryFirstAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -872,19 +1304,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesRetryFirst and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetMultiplePagesRetryFirst())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -912,19 +1359,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesRetrySecondAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetMultiplePagesRetrySecondAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -952,19 +1414,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesRetrySecond and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetMultiplePagesRetrySecond())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -992,19 +1469,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSinglePagesFailureAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetSinglePagesFailureAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1032,19 +1524,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSinglePagesFailure and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetSinglePagesFailure())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1072,19 +1579,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesFailureAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetMultiplePagesFailureAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1112,19 +1634,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesFailure and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetMultiplePagesFailure())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1152,19 +1689,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesFailureUriAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetMultiplePagesFailureUriAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1192,19 +1744,34 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesFailureUri and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetMultiplePagesFailureUri())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1234,21 +1801,36 @@ namespace paging_LowLevel
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesFragmentNextLinkAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1281,21 +1863,36 @@ namespace paging_LowLevel
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesFragmentNextLink with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVersion>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1328,21 +1925,36 @@ namespace paging_LowLevel
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesFragmentWithGroupingNextLinkAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1375,21 +1987,36 @@ namespace paging_LowLevel
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesFragmentWithGroupingNextLink with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenant>", "<apiVersion>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1423,21 +2050,36 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call NextFragmentAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1470,21 +2112,36 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call NextFragment with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1517,21 +2174,36 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call NextFragmentWithGroupingAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// await foreach (var data in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1564,21 +2236,36 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call NextFragmentWithGrouping with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// foreach (var data in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "<apiVersion>"))
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>OdataProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   odata.nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1608,23 +2295,23 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPagingModelWithItemNameWithXMSClientNameAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
-        /// </remarks>
+        /// await foreach (var data in client.GetPagingModelWithItemNameWithXMSClientNameAsync())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext context = null)
         {
             return GetPagingModelWithItemNameWithXMSClientNameImplementationAsync("PagingClient.GetPagingModelWithItemNameWithXMSClientName", context);
@@ -1648,23 +2335,23 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Body</c>:
-        /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
-        /// }
-        /// </code>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetPagingModelWithItemNameWithXMSClientName and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
         /// 
-        /// </remarks>
+        /// foreach (var data in client.GetPagingModelWithItemNameWithXMSClientName())
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestContext context = null)
         {
             return GetPagingModelWithItemNameWithXMSClientNameImplementation("PagingClient.GetPagingModelWithItemNameWithXMSClientName", context);
@@ -1692,19 +2379,51 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="AsyncPageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesLROAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed);
+        /// 
+        /// var response = await operation.WaitForCompletionAsync();
+        /// await foreach (var data in response.Value)
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// This sample shows how to call GetMultiplePagesLROAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234);
+        /// 
+        /// var response = await operation.WaitForCompletionAsync();
+        /// await foreach (var data in response.Value)
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1716,7 +2435,7 @@ namespace paging_LowLevel
             try
             {
                 using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerableAsync).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerableAsync).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1748,19 +2467,51 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="Pageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetMultiplePagesLRO with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// var operation = client.GetMultiplePagesLRO(WaitUntil.Completed);
+        /// 
+        /// var response = operation.WaitForCompletion();
+        /// foreach (var data in response.Value)
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.ToString());
+        /// }
+        /// ]]></code>
+        /// This sample shows how to call GetMultiplePagesLRO with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new PagingClient(credential);
+        /// 
+        /// var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, "<clientRequestId>", 1234, 1234);
+        /// 
+        /// var response = operation.WaitForCompletion();
+        /// foreach (var data in response.Value)
+        /// {
+        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+        /// }
+        /// ]]></code>
+        /// </example>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for one item in the pageable response.
+        /// 
+        /// Response Body:
+        /// 
+        /// Schema for <c>ProductResultValues</c>:
         /// <code>{
-        ///   values: [
-        ///     {
-        ///       properties: {
-        ///         id: number,
-        ///         name: string
-        ///       }
-        ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   properties: {
+        ///     id: number, # Optional.
+        ///     name: string, # Optional.
+        ///   }, # Optional.
         /// }
         /// </code>
         /// 
@@ -1772,7 +2523,7 @@ namespace paging_LowLevel
             try
             {
                 using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerable);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerable);
             }
             catch (Exception e)
             {

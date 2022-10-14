@@ -25,6 +25,18 @@
   "RequestPathToSingletonResource": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}": "managementPolicies/default"
   },
+  "FormatByNameRules": {
+    "tenantId": "uuid",
+    "resourceType": "resource-type",
+    "etag": "etag",
+    "location": "azure-location",
+    "*Uri": "Uri",
+    "*Uris": "Uri"
+  },
+  "RenameMapping": {
+    "BlobServiceProperties": "BlobService",
+    "FileServiceProperties": "FileService"
+  },
   "OverrideOperationName": {
     "DeletedAccounts_List": "GetAll"
   }

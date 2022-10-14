@@ -7,7 +7,10 @@
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> Describes a Virtual Machine Scale Set VM Reimage Parameters. </summary>
+    /// <summary>
+    /// Describes a Virtual Machine Scale Set VM Reimage Parameters.
+    /// Serialized Name: VirtualMachineScaleSetVMReimageParameters
+    /// </summary>
     public partial class VirtualMachineScaleSetVmReimageContent : VirtualMachineReimageContent
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVmReimageContent. </summary>

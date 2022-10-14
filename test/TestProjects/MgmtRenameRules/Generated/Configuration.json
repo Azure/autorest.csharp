@@ -10,9 +10,9 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "KeepOrphanedModels": [
-    "VmDiskTypes"
+    "VmDiskType"
   ],
-  "RenameRules": {
+  "RawRenameRules": {
     "Os": "OS",
     "Ip": "IP",
     "Ips": "IPs",
@@ -20,6 +20,34 @@
     "IDs": "Ids",
     "VM": "Vm",
     "VMs": "Vms",
-    "VMScaleSet": "VmScaleSet"
+    "VMScaleSet": "VmScaleSet",
+    "Ipsec": "IPsec|ipsec",
+    "IPSec": "IPsec|ipsec",
+    "P2s": "P2S|p2s",
+    "P2S": "P2S|p2s"
+  },
+  "FormatByNameRules": {
+    "tenantId": "uuid",
+    "etag": "etag",
+    "location": "azure-location",
+    "contentType": "content-type",
+    "*Uri": "Uri",
+    "*Uris": "Uri"
+  },
+  "RenameMapping": {
+    "SshPublicKey": "SshPublicKeyInfo",
+    "SshPublicKeyResource": "SshPublicKey",
+    "LogAnalyticsOperationResult": "LogAnalytics",
+    "RollingUpgradeStatusInfo": "VirtualMachineScaleSetRollingUpgrade",
+    "UpgradeOperationHistoricalStatusInfo.type": "-|resource-type",
+    "DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey": "ConfidentialVmGuestStateOnlyEncryptedWithPlatformKey",
+    "AdditionalUnattendContent.backupFrequency": "-|integer",
+    "LogAnalyticsOperationResult.method": "requestMethod|request-method",
+    "LogAnalyticsOperationResult.content": "-|any",
+    "LogAnalyticsOperationResult.basePath": "basePathUri|uri",
+    "VirtualMachineScaleSetIPConfiguration.properties.ipAddresses": "-|ip-address"
+  },
+  "MgmtDebug": {
+    "ShowSerializedNames": true
   }
 }

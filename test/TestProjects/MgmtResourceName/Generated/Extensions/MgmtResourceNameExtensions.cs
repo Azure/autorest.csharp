@@ -18,6 +18,57 @@ namespace MgmtResourceName
     /// <summary> A class to add extension methods to MgmtResourceName. </summary>
     public static partial class MgmtResourceNameExtensions
     {
+        private static TenantResourceExtensionClient GetExtensionClient(TenantResource tenantResource)
+        {
+            return tenantResource.GetCachedClient((client) =>
+            {
+                return new TenantResourceExtensionClient(client, tenantResource.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of ProviderOperationResources in the TenantResource. </summary>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ProviderOperationResources and their operations over a ProviderOperationResource. </returns>
+        public static ProviderOperationCollection GetProviderOperations(this TenantResource tenantResource)
+        {
+            return GetExtensionClient(tenantResource).GetProviderOperations();
+        }
+
+        /// <summary>
+        /// Gets provider operations metadata for the specified resource provider.
+        /// Request Path: /providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}
+        /// Operation Id: ProviderOperations_Get
+        /// </summary>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <param name="resourceProviderNamespace"> The namespace of the resource provider. </param>
+        /// <param name="expand"> Specifies whether to expand the values. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resourceProviderNamespace"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceProviderNamespace"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<ProviderOperationResource>> GetProviderOperationAsync(this TenantResource tenantResource, string resourceProviderNamespace, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await tenantResource.GetProviderOperations().GetAsync(resourceProviderNamespace, expand, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets provider operations metadata for the specified resource provider.
+        /// Request Path: /providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}
+        /// Operation Id: ProviderOperations_Get
+        /// </summary>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <param name="resourceProviderNamespace"> The namespace of the resource provider. </param>
+        /// <param name="expand"> Specifies whether to expand the values. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resourceProviderNamespace"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceProviderNamespace"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static Response<ProviderOperationResource> GetProviderOperation(this TenantResource tenantResource, string resourceProviderNamespace, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return tenantResource.GetProviderOperations().Get(resourceProviderNamespace, expand, cancellationToken);
+        }
+
         private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
@@ -151,7 +202,7 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
-        /// Operation Id: NetworkResources_Get
+        /// Operation Id: networkResources_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="networkResourceName"> The String to use. </param>
@@ -166,7 +217,7 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
-        /// Operation Id: NetworkResources_Get
+        /// Operation Id: networkResources_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="networkResourceName"> The String to use. </param>
@@ -189,7 +240,7 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}
-        /// Operation Id: DisplayResources_Get
+        /// Operation Id: displayResources_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="displayResourceName"> The String to use. </param>
@@ -204,7 +255,7 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}
-        /// Operation Id: DisplayResources_Get
+        /// Operation Id: displayResources_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="displayResourceName"> The String to use. </param>
@@ -307,6 +358,25 @@ namespace MgmtResourceName
             {
                 DisplayResource.ValidateResourceId(id);
                 return new DisplayResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region ProviderOperationResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ProviderOperationResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ProviderOperationResource.CreateResourceIdentifier" /> to create a <see cref="ProviderOperationResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ProviderOperationResource" /> object. </returns>
+        public static ProviderOperationResource GetProviderOperationResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                ProviderOperationResource.ValidateResourceId(id);
+                return new ProviderOperationResource(client, id);
             }
             );
         }

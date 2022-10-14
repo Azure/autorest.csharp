@@ -19,11 +19,6 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public IEnumerable<Operation> AllRawOperations { get; }
 
-        protected MgmtExtensions(MgmtExtensions mgmtExtension)
-            : this(mgmtExtension.AllRawOperations, mgmtExtension.ArmCoreType, mgmtExtension.ContextualPath)
-        {
-        }
-
         public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath)
             : base(armCoreType.Name)
         {
@@ -93,8 +88,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // we just leave this implementation here since it could work for now
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
-                        MgmtContext.Library.GetRestClientMethod(operation),
-                        MgmtContext.Library.GetRestClient(operation),
+                        operation,
                         operation.GetRequestPath(),
                         ContextualPath,
                         operationName),
@@ -157,5 +151,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return null;
         }
+
+        private MgmtExtensionClient? _extensionClient;
+        public virtual MgmtExtensionClient ExtensionClient => _extensionClient ??= new MgmtExtensionClient(this);
     }
 }

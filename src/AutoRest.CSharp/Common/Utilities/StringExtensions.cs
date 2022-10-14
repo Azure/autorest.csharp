@@ -7,6 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Models;
 using Humanizer;
 using Humanizer.Inflections;
 using Microsoft.CodeAnalysis.CSharp;
@@ -20,6 +22,7 @@ namespace AutoRest.CSharp.Utilities
             Vocabularies.Default.AddUncountable("data");
             // "S".Singularize() throws exception, github issue link: https://github.com/Humanizr/Humanizer/issues/1154
             Vocabularies.Default.AddUncountable("S");
+            Vocabularies.Default.AddIrregular("redis", "redis");
         }
 
         public static bool IsNullOrEmpty(this string? text) => String.IsNullOrEmpty(text);
@@ -89,7 +92,15 @@ namespace AutoRest.CSharp.Utilities
         }
 
         [return: NotNullIfNotNull("name")]
-        public static string ToVariableName(this string name) => ToCleanName(name, isCamelCase: false);
+        public static string ToVariableName(this string name) => Configuration.AzureArm ? name.ToMgmtVariableName() : ToCleanName(name, isCamelCase: false);
+
+        [return: NotNullIfNotNull("name")]
+        public static string ToMgmtVariableName(this string name)
+        {
+            var variableName = NameTransformer.Instance.EnsureNameCase(name).VariableName;
+
+            return ToCleanName(variableName, isCamelCase: false);
+        }
 
         public static GetPathPartsEnumerator GetPathParts(string? path) => new GetPathPartsEnumerator(path);
 
@@ -342,6 +353,11 @@ namespace AutoRest.CSharp.Utilities
                 return $"{string.Join("", words.SkipLast(1))}{lastWordSingular}";
             }
             return plural;
+        }
+
+        public static bool IsLastWordSingular(this string str)
+        {
+            return str == str.LastWordToSingular(false);
         }
 
         public static string FirstCharToLowerCase(this string str)

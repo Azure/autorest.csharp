@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -13,8 +14,10 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Azure.ResourceManager;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -96,6 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new ConstructorSignature(
               Name: Type.Name,
+              null,
               Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
               Modifiers: Internal,
               Parameters: _armClientCtorParameters,
@@ -108,6 +112,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new ConstructorSignature(
                 Name: Type.Name,
+                null,
                 Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
                 Modifiers: Internal,
                 Parameters: new[] { ArmClientParameter, ResourceDataParameter },
@@ -142,12 +147,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             var operation = OperationSet.GetOperation(method);
             if (operation is not null)
             {
-                var restClient = MgmtContext.Library.GetRestClient(operation);
                 var requestPath = operation.GetRequestPath(ResourceType);
                 var contextualPath = GetContextualPath(OperationSet, requestPath);
                 var restOperation = new MgmtRestOperation(
-                    MgmtContext.Library.GetRestClientMethod(operation),
-                    restClient,
+                    operation,
                     requestPath,
                     contextualPath,
                     operationName,
@@ -170,7 +173,50 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string? SingletonResourceIdSuffix { get; }
 
-        public bool IsTaggable => ResourceData.IsTaggable;
+        private bool? _isTaggable;
+        public bool IsTaggable => GetIsTaggable();
+
+        private bool GetIsTaggable()
+        {
+            if (_isTaggable is not null)
+                return _isTaggable.Value;
+
+            var bodyParameter = GetBodyParameter();
+            if (ResourceData.IsTaggable && bodyParameter is not null)
+            {
+                var bodyParamType = bodyParameter.Type;
+                _isTaggable = bodyParamType.Equals(ResourceData.Type) ? ResourceData.IsTaggable : DoesUpdateSchemaHaveTags(bodyParamType);
+            }
+            else
+            {
+                _isTaggable = false;
+            }
+
+            return _isTaggable.Value;
+        }
+
+        private bool DoesUpdateSchemaHaveTags(CSharpType bodyParamType)
+        {
+            if (bodyParamType.IsFrameworkType)
+                return false;
+            if (bodyParamType.Implementation is null)
+                return false;
+            if (bodyParamType.Implementation is not SchemaObjectType schemaObject)
+                return false;
+            return schemaObject.ObjectSchema.HasTags();
+        }
+
+        private Parameter? GetBodyParameter()
+        {
+            //found a case in logic where there is a patch with only a cancellation token
+            //I think this is a bug in there swagger but this works around that since generation
+            //will fail if the update doesn't have a body param
+            var op = UpdateOperation ?? CreateOperation;
+            if (op is null)
+                return null;
+
+            return op.MethodParameters.FirstOrDefault(p => p.RequestLocation == Common.Input.RequestLocation.Body);
+        }
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>
@@ -190,8 +236,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
-            var operationId = operation.OperationId();
-            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operationId, out var positions))
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operation.OperationId!, out var positions))
             {
                 return positions.Contains(Position);
             }
@@ -240,7 +285,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         getOperation.MgmtReturnType,
                         "Add a tag to the current resource.",
                         TagKeyParameter,
-                        TagValueParameter)));
+                        TagValueParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -248,7 +293,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "SetTags",
                         getOperation.MgmtReturnType,
                         "Replace the tags on the resource with the given set.",
-                        TagSetParameter)));
+                        TagSetParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -256,7 +301,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "RemoveTag",
                         getOperation.MgmtReturnType,
                         "Removes a tag by key from the resource.",
-                        TagKeyParameter)));
+                        TagKeyParameter), isConvenientOperation: true));
             }
             return result;
         }
@@ -308,10 +353,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
                     GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                 // get the MgmtRestOperation with a proper name
-                var restClient = MgmtContext.Library.GetRestClient(operation);
                 var restOperation = new MgmtRestOperation(
-                    MgmtContext.Library.GetRestClientMethod(operation),
-                    restClient,
+                    operation,
                     requestPath,
                     contextualPath,
                     methodName);
@@ -375,18 +418,38 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var an = clientPrefix.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
-            var parent = ResourceName.Equals("Tenant", StringComparison.Ordinal) ? null : this.Parent().First();
+            var parents = this.Parent();
+            var parentTypes = parents.Select(parent => parent is MgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();
+            var parentDescription = CreateParentDescription(parentTypes);
 
             lines.Add($"A Class representing {an} {ResourceName} along with the instance operations that can be performed on it.");
             lines.Add($"If you have a <see cref=\"{typeof(ResourceIdentifier)}\" /> you can construct {an} <see cref=\"{Type}\" />");
             lines.Add($"from an instance of <see cref=\"{typeof(ArmClient)}\" /> using the Get{DefaultName} method.");
-            if (parent is not null)
+            // only append the following information when the parent of me is not myself, aka TenantResource
+            if (parentDescription != null && !parents.Contains(this))
             {
-                var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
-                lines.Add($"Otherwise you can get one from its parent resource <see cref=\"{parentType}\" /> using the Get{ResourceName} method.");
+                lines.Add($"Otherwise you can get one from its parent resource {parentDescription} using the Get{ResourceName} method.");
             }
 
             return FormattableStringHelpers.Join(lines, "\r\n");
+        }
+
+        protected static FormattableString? CreateParentDescription(IReadOnlyList<CSharpType> parentTypes) => parentTypes.Count switch
+        {
+            0 => null,
+            _ => FormattableStringHelpers.Join(parentTypes.Select(type => (FormattableString)$"<see cref=\"{type}\" />").ToList(), ", ", " or "),
+        };
+
+        private static Type? ToFormatTypeByName(string? name) => name switch
+        {
+            "location" => typeof(AzureLocation),
+            _ => null
+        };
+
+        private Parameter CreateResourceIdentifierParameter(Segment segment)
+        {
+            CSharpType ctype = ToFormatTypeByName(segment.Reference.Name) is Type type ? new CSharpType(type, false) : segment.Reference.Type;
+            return new Parameter(segment.Reference.Name, null, ctype, null, ValidationType.AssertNotNull, null);
         }
 
         /// <summary>
@@ -397,11 +460,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return new MethodSignature(
                     Name: "CreateResourceIdentifier",
+                    null,
                     Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
                     Modifiers: Public | Static,
                     ReturnType: typeof(ResourceIdentifier),
                     ReturnDescription: null,
-                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, ValidationType.AssertNotNull, null)).ToArray());
+                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
         }
 
         public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
