@@ -37,7 +37,6 @@ namespace CustomCore {
   @Cadl.Rest.parentResource(T)
   @Cadl.Rest.resource("operations")
   model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
-    @key
     operationId: string;
   }
 
