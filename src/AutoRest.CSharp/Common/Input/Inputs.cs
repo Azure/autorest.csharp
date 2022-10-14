@@ -134,7 +134,10 @@ namespace AutoRest.CSharp.Common.Input
         public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<OperationResponseHeader>()) { }
     }
 
-    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse);
+    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse)
+    {
+        public OperationLongRunning() : this(FinalStateVia: OperationFinalStateVia.Location, FinalResponse: new OperationResponse()) { }
+    }
 
     internal record OperationPaging(string? NextLinkName, string? ItemName)
     {

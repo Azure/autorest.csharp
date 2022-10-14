@@ -172,6 +172,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\api-key\\Generated"
     },
+    "cadl-extensible-enums": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\extensible-enums\\Generated"
+    },
     "cadl-property-types": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\property-types\\Generated"
@@ -352,6 +356,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro\\Generated"
     },
+    "Lro-Basic-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Lro-Basic-Cadl\\Generated"
+    },
     "lro-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\lro\\Generated"
@@ -531,6 +539,10 @@
     "paging-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\paging\\Generated"
+    },
+    "ParameterSequence-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ParameterSequence-LowLevel\\Generated"
     },
     "PetStore-Cadl": {
       "commandName": "Project",

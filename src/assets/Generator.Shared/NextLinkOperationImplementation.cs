@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
@@ -217,32 +218,41 @@ namespace Azure.Core
         /// </summary>
         private string? GetFinalUri()
         {
-            // Set final uri as null if the response header doesn't contain "Operation-Location" or "Azure-AsyncOperation".
+            // Set final uri as null if the response for initial request doesn't contain header "Operation-Location" or "Azure-AsyncOperation".
             if (_headerSource is not (HeaderSource.OperationLocation or HeaderSource.AzureAsyncOperation))
             {
                 return null;
             }
 
-            // Set final uri as null if original request is a delete method.
+            // Set final uri as null if initial request is a delete method.
             if (_requestMethod == RequestMethod.Delete)
             {
                 return null;
             }
 
-            // Set final uri as original request's uri if one of these requirements are met:
-            // 1.Original request is a put method;
-            // 2.Original request is a management plane patch method. For data plane patch method, the final uri will be determinned by the original response header and "_finalStateVia";
-            // 3.Original response header contains "Location" and FinalStateVia is configured to OriginalUri.
-            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch && _startRequestUri.Scheme == "https" && _startRequestUri.Host == "management.azure.com" || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
+            // Handle final-state-via options: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation-options
+            switch (_finalStateVia)
+            {
+                case OperationFinalStateVia.LocationOverride when _originalResponseHasLocation:
+                    return _lastKnownLocation;
+                case OperationFinalStateVia.OperationLocation or OperationFinalStateVia.AzureAsyncOperation when _requestMethod == RequestMethod.Post:
+                    return null;
+                case OperationFinalStateVia.OriginalUri:
+                    return _startRequestUri.AbsoluteUri;
+            }
+
+            // If initial request is PUT or PATCH, return initial request Uri
+            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch)
             {
                 return _startRequestUri.AbsoluteUri;
             }
 
-            // Set final uri as last known location header if original response header contains "Location" and FinalStateVia is configured to Location.
-            if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.Location)
+            // If response for initial request contains header "Location", return last known location
+            if (_originalResponseHasLocation)
             {
                 return _lastKnownLocation;
             }
+
             return null;
         }
 
