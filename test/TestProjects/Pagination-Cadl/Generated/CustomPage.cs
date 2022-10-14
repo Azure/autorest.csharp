@@ -26,17 +26,19 @@ namespace Azure.Core.Foundations
 
             Value = value.ToList();
         }
+
         /// <summary> Initializes a new instance of CustomPage. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
         internal CustomPage(IList<LedgerEntry> value, ResourceLocation nextLink)
         {
-            Value = value;
+            Value = value.ToList();
             NextLink = nextLink;
         }
 
+        /// <summary> Gets the value. </summary>
         public IList<LedgerEntry> Value { get; }
-
+        /// <summary> Gets or sets the next link. </summary>
         public ResourceLocation NextLink { get; set; }
     }
 }

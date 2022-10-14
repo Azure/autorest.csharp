@@ -14,6 +14,7 @@ namespace ModelsInCadl
         public ErrorModel()
         {
         }
+
         /// <summary> Initializes a new instance of ErrorModel. </summary>
         /// <param name="innerError"></param>
         internal ErrorModel(ErrorModel innerError)
@@ -21,6 +22,7 @@ namespace ModelsInCadl
             InnerError = innerError;
         }
 
+        /// <summary> Gets or sets the inner error. </summary>
         public ErrorModel InnerError { get; set; }
     }
 }

@@ -34,33 +34,6 @@ namespace ModelsInCadl
                     writer.WriteNull("optionalInt");
                 }
             }
-            if (Optional.IsCollectionDefined(OptionalStringList))
-            {
-                writer.WritePropertyName("optionalStringList");
-                writer.WriteStartArray();
-                foreach (var item in OptionalStringList)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(OptionalIntList))
-            {
-                writer.WritePropertyName("optionalIntList");
-                writer.WriteStartArray();
-                foreach (var item in OptionalIntList)
-                {
-                    writer.WriteNumberValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WritePropertyName("optionalModelCollection");
-            writer.WriteStartArray();
-            foreach (var item in OptionalModelCollection)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
             if (Optional.IsDefined(OptionalModel))
             {
                 writer.WritePropertyName("optionalModel");
@@ -70,39 +43,6 @@ namespace ModelsInCadl
             writer.WriteStringValue(OptionalFixedStringEnum.ToSerialString());
             writer.WritePropertyName("optionalExtensibleEnum");
             writer.WriteStringValue(OptionalExtensibleEnum.ToString());
-            if (Optional.IsCollectionDefined(OptionalIntRecord))
-            {
-                writer.WritePropertyName("optionalIntRecord");
-                writer.WriteStartObject();
-                foreach (var item in OptionalIntRecord)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteNumberValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
-            if (Optional.IsCollectionDefined(OptionalStringRecord))
-            {
-                writer.WritePropertyName("optionalStringRecord");
-                writer.WriteStartObject();
-                foreach (var item in OptionalStringRecord)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
-            if (Optional.IsCollectionDefined(OptionalModelRecord))
-            {
-                writer.WritePropertyName("optionalModelRecord");
-                writer.WriteStartObject();
-                foreach (var item in OptionalModelRecord)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
             writer.WriteEndObject();
         }
 
@@ -245,17 +185,20 @@ namespace ModelsInCadl
             return new RoundTripOptionalModel(optionalString, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), optionalModelCollection, optionalModel, optionalFixedStringEnum, optionalExtensibleEnum, Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord));
         }
 
-        internal RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
-        }
-
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
         internal static RoundTripOptionalModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeRoundTripOptionalModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

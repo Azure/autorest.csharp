@@ -13,7 +13,7 @@ using Azure.Core;
 namespace ModelsInCadl
 {
     /// <summary> Derived model. </summary>
-    public partial class DerivedModel
+    public partial class DerivedModel : BaseModel
     {
         /// <summary> Initializes a new instance of DerivedModel. </summary>
         /// <param name="requiredCollection"></param>
@@ -24,13 +24,15 @@ namespace ModelsInCadl
 
             RequiredCollection = requiredCollection.ToList();
         }
+
         /// <summary> Initializes a new instance of DerivedModel. </summary>
         /// <param name="requiredCollection"></param>
         internal DerivedModel(IList<CollectionItem> requiredCollection)
         {
-            RequiredCollection = requiredCollection;
+            RequiredCollection = requiredCollection.ToList();
         }
 
+        /// <summary> Gets the required collection. </summary>
         public IList<CollectionItem> RequiredCollection { get; }
     }
 }

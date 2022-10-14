@@ -27,37 +27,6 @@ namespace ModelsInCadl
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredExtensibleEnum");
             writer.WriteStringValue(RequiredExtensibleEnum.ToString());
-            writer.WritePropertyName("requiredCollection");
-            writer.WriteStartArray();
-            foreach (var item in RequiredCollection)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("requiredIntRecord");
-            writer.WriteStartObject();
-            foreach (var item in RequiredIntRecord)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteNumberValue(item.Value);
-            }
-            writer.WriteEndObject();
-            writer.WritePropertyName("requiredStringRecord");
-            writer.WriteStartObject();
-            foreach (var item in RequiredStringRecord)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
-            }
-            writer.WriteEndObject();
-            writer.WritePropertyName("requiredModelRecord");
-            writer.WriteStartObject();
-            foreach (var item in RequiredModelRecord)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -143,17 +112,20 @@ namespace ModelsInCadl
             return new RoundTripModel(requiredString, requiredInt, requiredModel, requiredFixedStringEnum, requiredExtensibleEnum, requiredCollection, requiredIntRecord, requiredStringRecord, requiredModelRecord);
         }
 
-        internal RequestContent ToRequestContent()
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal new static RoundTripModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeRoundTripModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
             return content;
-        }
-
-        internal static RoundTripModel FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripModel(document.RootElement);
         }
     }
 }

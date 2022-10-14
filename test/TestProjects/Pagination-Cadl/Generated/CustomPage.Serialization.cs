@@ -19,13 +19,6 @@ namespace Azure.Core.Foundations
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("value");
-            writer.WriteStartArray();
-            foreach (var item in Value)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))
             {
                 writer.WritePropertyName("nextLink");
@@ -64,17 +57,20 @@ namespace Azure.Core.Foundations
             return new CustomPage(value, nextLink);
         }
 
-        internal RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
-        }
-
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
         internal static CustomPage FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeCustomPage(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

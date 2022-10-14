@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -21,23 +22,37 @@ namespace ModelsInCadl
 
         internal static RecordItem DeserializeRecordItem(JsonElement element)
         {
+            IList<CollectionItem> requiredCollection = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("requiredCollection"))
+                {
+                    List<CollectionItem> array = new List<CollectionItem>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                    }
+                    requiredCollection = array;
+                    continue;
+                }
             }
-            return new RecordItem();
+            return new RecordItem(requiredCollection);
         }
 
-        internal RequestContent ToRequestContent()
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal new static RecordItem FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeRecordItem(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
             return content;
-        }
-
-        internal static RecordItem FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRecordItem(document.RootElement);
         }
     }
 }

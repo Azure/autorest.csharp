@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using Azure.Core;
 
 namespace ModelsInCadl
@@ -24,19 +24,20 @@ namespace ModelsInCadl
             Argument.AssertNotNull(optionalReadOnlyIntRecord, nameof(optionalReadOnlyIntRecord));
             Argument.AssertNotNull(optionalReadOnlyStringRecord, nameof(optionalReadOnlyStringRecord));
 
+            RequiredReadonlyStringList = new ChangeTrackingList<string>();
+            RequiredReadonlyIntList = new ChangeTrackingList<int>();
+            RequiredReadOnlyModelCollection = new ChangeTrackingList<CollectionItem>();
+            RequiredReadOnlyIntRecord = new ChangeTrackingDictionary<string, int>();
+            RequiredStringRecord = new ChangeTrackingDictionary<string, string>();
+            RequiredReadOnlyModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
+            OptionalReadonlyStringList = new ChangeTrackingList<string>();
+            OptionalReadonlyIntList = new ChangeTrackingList<int>();
+            OptionalReadOnlyModelCollection = new ChangeTrackingList<CollectionItem>();
             OptionalReadOnlyIntRecord = optionalReadOnlyIntRecord;
             OptionalReadOnlyStringRecord = optionalReadOnlyStringRecord;
-            RequiredReadonlyStringList = Array.Empty<string>();
-            RequiredReadonlyIntList = Array.Empty<int>();
-            RequiredReadOnlyModelCollection = Array.Empty<CollectionItem>();
-            RequiredReadOnlyIntRecord = new ReadOnlyDictionary<string, int>(new Dictionary<string, int>(0));
-            RequiredStringRecord = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(0));
-            RequiredReadOnlyModelRecord = new ReadOnlyDictionary<string, RecordItem>(new Dictionary<string, RecordItem>(0));
-            OptionalReadonlyStringList = Array.Empty<string>();
-            OptionalReadonlyIntList = Array.Empty<int>();
-            OptionalReadOnlyModelCollection = Array.Empty<CollectionItem>();
-            OptionalModelRecord = new ReadOnlyDictionary<string, RecordItem>(new Dictionary<string, RecordItem>(0));
+            OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
         }
+
         /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
         /// <param name="requiredReadonlyString"></param>
         /// <param name="requiredReadonlyInt"></param>
@@ -72,62 +73,63 @@ namespace ModelsInCadl
             RequiredReadonlyExtensibleEnum = requiredReadonlyExtensibleEnum;
             OptionalReadonlyFixedStringEnum = optionalReadonlyFixedStringEnum;
             OptionalReadonlyExtensibleEnum = optionalReadonlyExtensibleEnum;
-            RequiredReadonlyStringList = requiredReadonlyStringList;
-            RequiredReadonlyIntList = requiredReadonlyIntList;
-            RequiredReadOnlyModelCollection = requiredReadOnlyModelCollection;
+            RequiredReadonlyStringList = requiredReadonlyStringList.ToList();
+            RequiredReadonlyIntList = requiredReadonlyIntList.ToList();
+            RequiredReadOnlyModelCollection = requiredReadOnlyModelCollection.ToList();
             RequiredReadOnlyIntRecord = requiredReadOnlyIntRecord;
             RequiredStringRecord = requiredStringRecord;
             RequiredReadOnlyModelRecord = requiredReadOnlyModelRecord;
-            OptionalReadonlyStringList = optionalReadonlyStringList;
-            OptionalReadonlyIntList = optionalReadonlyIntList;
-            OptionalReadOnlyModelCollection = optionalReadOnlyModelCollection;
+            OptionalReadonlyStringList = optionalReadonlyStringList.ToList();
+            OptionalReadonlyIntList = optionalReadonlyIntList.ToList();
+            OptionalReadOnlyModelCollection = optionalReadOnlyModelCollection.ToList();
             OptionalReadOnlyIntRecord = optionalReadOnlyIntRecord;
             OptionalReadOnlyStringRecord = optionalReadOnlyStringRecord;
             OptionalModelRecord = optionalModelRecord;
         }
 
+        /// <summary> Gets the required readonly string. </summary>
         public string RequiredReadonlyString { get; }
-
+        /// <summary> Gets the required readonly int. </summary>
         public int RequiredReadonlyInt { get; }
-
+        /// <summary> Gets the optional readonly string. </summary>
         public string OptionalReadonlyString { get; }
-
+        /// <summary> Gets the optional readonly int. </summary>
         public int? OptionalReadonlyInt { get; }
-
+        /// <summary> Gets the required readonly model. </summary>
         public DerivedModel RequiredReadonlyModel { get; }
-
+        /// <summary> Gets the optional readonly model. </summary>
         public DerivedModel OptionalReadonlyModel { get; }
-
+        /// <summary> Gets the required readonly fixed string enum. </summary>
         public FixedStringEnum RequiredReadonlyFixedStringEnum { get; }
-
+        /// <summary> Gets the required readonly extensible enum. </summary>
         public ExtensibleEnum RequiredReadonlyExtensibleEnum { get; }
-
+        /// <summary> Gets the optional readonly fixed string enum. </summary>
         public FixedStringEnum OptionalReadonlyFixedStringEnum { get; }
-
+        /// <summary> Gets the optional readonly extensible enum. </summary>
         public ExtensibleEnum OptionalReadonlyExtensibleEnum { get; }
-
+        /// <summary> Gets the required readonly string list. </summary>
         public IReadOnlyList<string> RequiredReadonlyStringList { get; }
-
+        /// <summary> Gets the required readonly int list. </summary>
         public IReadOnlyList<int> RequiredReadonlyIntList { get; }
-
+        /// <summary> Gets the required read only model collection. </summary>
         public IReadOnlyList<CollectionItem> RequiredReadOnlyModelCollection { get; }
-
+        /// <summary> Gets the required read only int record. </summary>
         public IReadOnlyDictionary<string, int> RequiredReadOnlyIntRecord { get; }
-
+        /// <summary> Gets the required string record. </summary>
         public IReadOnlyDictionary<string, string> RequiredStringRecord { get; }
-
+        /// <summary> Gets the required read only model record. </summary>
         public IReadOnlyDictionary<string, RecordItem> RequiredReadOnlyModelRecord { get; }
-
+        /// <summary> Gets the optional readonly string list. </summary>
         public IReadOnlyList<string> OptionalReadonlyStringList { get; }
-
+        /// <summary> Gets the optional readonly int list. </summary>
         public IReadOnlyList<int> OptionalReadonlyIntList { get; }
-
+        /// <summary> Gets the optional read only model collection. </summary>
         public IReadOnlyList<CollectionItem> OptionalReadOnlyModelCollection { get; }
-
+        /// <summary> Gets the optional read only int record. </summary>
         public IDictionary<string, int> OptionalReadOnlyIntRecord { get; }
-
+        /// <summary> Gets the optional read only string record. </summary>
         public IDictionary<string, string> OptionalReadOnlyStringRecord { get; }
-
+        /// <summary> Gets the optional model record. </summary>
         public IReadOnlyDictionary<string, RecordItem> OptionalModelRecord { get; }
     }
 }

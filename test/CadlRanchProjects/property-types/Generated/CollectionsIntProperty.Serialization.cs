@@ -17,13 +17,6 @@ namespace Models.Property.Types
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("property");
-            writer.WriteStartArray();
-            foreach (var item in Property)
-            {
-                writer.WriteNumberValue(item);
-            }
-            writer.WriteEndArray();
             writer.WriteEndObject();
         }
 
@@ -46,17 +39,20 @@ namespace Models.Property.Types
             return new CollectionsIntProperty(property);
         }
 
-        internal RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
-        }
-
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
         internal static CollectionsIntProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeCollectionsIntProperty(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

@@ -21,21 +21,6 @@ namespace CadlFirstTest
             writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt");
             writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("requiredCollection");
-            writer.WriteStartArray();
-            foreach (var item in RequiredCollection)
-            {
-                writer.WriteStringValue(item.ToSerialString());
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("requiredDictionary");
-            writer.WriteStartObject();
-            foreach (var item in RequiredDictionary)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value.ToString());
-            }
-            writer.WriteEndObject();
             writer.WritePropertyName("requiredModel");
             writer.WriteObjectValue(RequiredModel);
             writer.WriteEndObject();
@@ -89,17 +74,20 @@ namespace CadlFirstTest
             return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel);
         }
 
-        internal RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
-        }
-
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
         internal static RoundTripModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeRoundTripModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }
