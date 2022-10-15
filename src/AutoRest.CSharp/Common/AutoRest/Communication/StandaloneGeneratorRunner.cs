@@ -12,20 +12,24 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Communication
 {
     internal class StandaloneGeneratorRunner
     {
-        public static async Task RunAsync(string[] args)
+        public static async Task RunAsync(CommandLineOptions options)
         {
-            var basePath = args.Single(a => !a.StartsWith("--"));
+            var basePath = options.BasePath!;
+            var generatedPath = basePath.EndsWith("Generated", StringComparison.OrdinalIgnoreCase) ? basePath : Path.Combine(basePath, "src", "Generated");
 
-            LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
+            var configurationPath = options.ConfigurationPath ?? Path.Combine(generatedPath, "Configuration.json");
+            LoadConfiguration(basePath, File.ReadAllText(configurationPath));
 
-            var codeModelInputPath = Path.Combine(basePath, "CodeModel.yaml");
-            var cadlInputFile = Path.Combine(basePath, "cadl.json");
+            var codeModelInputPath = Path.Combine(generatedPath, "CodeModel.yaml");
+            var cadlInputFile = Path.Combine(generatedPath, "cadl.json");
 
             GeneratedCodeWorkspace workspace;
             if (File.Exists(cadlInputFile))
@@ -33,17 +37,27 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 var json = await File.ReadAllTextAsync(cadlInputFile);
                 var rootNamespace = CadlSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {cadlInputFile} has failed.");
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
+                if (options.IsNewProject)
+                {
+                    new CSharpProj().Execute(Configuration.Namespace ?? rootNamespace.Name, generatedPath);
+                }
             }
             else if (File.Exists(codeModelInputPath))
             {
                 var yaml = await File.ReadAllTextAsync(codeModelInputPath);
                 var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(yaml));
                 workspace = await new CSharpGen().ExecuteAsync(codeModelTask);
+                if (options.IsNewProject)
+                {
+                    var codeModel = await codeModelTask;
+                    new CSharpProj().Execute(Configuration.Namespace ?? codeModel.Language.Default.Name, generatedPath);
+                }
             }
             else
             {
-                throw new InvalidOperationException($"Neither CodeModel.yaml nor cadl.json exist in {basePath} folder.");
+                throw new InvalidOperationException($"Neither CodeModel.yaml nor cadl.json exist in {generatedPath} folder.");
             }
+
 
             await foreach (var file in workspace.GetGeneratedFilesAsync())
             {
@@ -51,7 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 {
                     continue;
                 }
-                var filename = Path.Combine(basePath, file.Name);
+                var filename = Path.Combine(generatedPath, file.Name);
                 Console.WriteLine($"Writing {filename}");
                 Directory.CreateDirectory(Path.GetDirectoryName(filename));
                 await File.WriteAllTextAsync(filename, file.Text);
@@ -60,7 +74,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
         private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, bool value)
         {
-            var defaultValue = Configuration.GetDefaultOptionValue (option);
+            var defaultValue = Configuration.GetDefaultOptionValue(option);
             if (!defaultValue.HasValue || defaultValue.Value != value)
             {
                 writer.WriteBoolean(option, value);

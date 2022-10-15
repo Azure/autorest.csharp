@@ -2,12 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -83,7 +87,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             return version;
         }
-
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
@@ -96,7 +99,27 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Configuration.Initialize(autoRest);
 
             var context = new BuildContext(codeModel, null);
+            Execute(context.DefaultNamespace, async (filename, text) =>
+            {
+                await autoRest.WriteFile(filename, text, "source-file-csharp");
+            });
+            return true;
+        }
 
+        public void Execute(string defaultNamespace, string generatedDir)
+        {
+            Execute(defaultNamespace, async (filename, text) =>
+            {
+                //TODO adding to workspace makes the formatting messed up since its a raw xml document
+                //somewhere it tries to parse it as a syntax tree and when it converts back to text
+                //its no longer valid xml.  We should consider a "raw files" concept in the work space
+                //so the file writing can still remain in one place
+                await File.WriteAllTextAsync(Path.Combine(generatedDir, filename), text);
+            });
+        }
+
+        private void Execute(string defaultNamespace, Action<string, string> writeFile)
+        {
             var isTestProject = Configuration.MgmtConfiguration.TestGen is not null;
             if (isTestProject)
             {
@@ -113,7 +136,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
   <ItemGroup>
     <Compile Include = ""..\..\..\..\src\assets\TestFramework\*.cs"" />
-  </ItemGroup>", context.DefaultNamespace);
+  </ItemGroup>", defaultNamespace);
             }
 
             string csProjContent;
@@ -138,14 +161,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
 
-            var projectFile = $"{Configuration.ProjectFolder}{context.DefaultNamespace}";
+            var projectFile = $"../{Configuration.ProjectFolder}{defaultNamespace}";
             if (isTestProject)
             {
                 projectFile += ".Tests";
             }
-            await autoRest.WriteFile($"{projectFile}.csproj", csProjContent, "source-file-csharp");
-
-            return true;
+            writeFile($"{projectFile}.csproj", csProjContent);
         }
     }
 }
