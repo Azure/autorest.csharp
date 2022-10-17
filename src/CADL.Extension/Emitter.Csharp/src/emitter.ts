@@ -68,6 +68,8 @@ import {
 import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
+import { dllFilePath } from "@autorest/csharp";
+import { exec } from "child_process";
 
 export interface NetEmitterOptions {
     outputFile: string;
@@ -102,8 +104,8 @@ export async function $onEmit(
         const outPath =
             version.trim().length > 0
                 ? resolvePath(
-                      options.outputFile?.replace(".json", `.${version}.json`)
-                  )
+                    options.outputFile?.replace(".json", `.${version}.json`)
+                )
                 : resolvePath(options.outputFile);
 
         const root = createModel(program);
@@ -115,6 +117,18 @@ export async function $onEmit(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
             );
+
+            exec(`dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath}`, (error, stdout, stderr) => {
+                if (error) {
+                    console.log(`error: ${error.message}`);
+                }
+                else if (stderr) {
+                    console.log(`stderr: ${stderr}`);
+                }
+                else if (stdout) {
+                    console.log(`stdout: ${stdout}`);
+                }
+            });
         }
     }
 }
@@ -406,9 +420,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                      Type: inputType,
-                      Value: mediaTypes[0]
-                  } as InputConstant)
+                    Type: inputType,
+                    Value: mediaTypes[0]
+                } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -625,8 +639,8 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVersion
-            ? InputOperationParameterKind.Client
-            : InputOperationParameterKind.Method;
+                ? InputOperationParameterKind.Client
+                : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
