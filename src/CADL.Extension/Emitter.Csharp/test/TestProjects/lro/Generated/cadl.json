@@ -49,7 +49,7 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -128,7 +128,7 @@
         },
         "Value": "application/merge-patch+json"
        },
-       "IsRequired": false,
+       "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": true,
@@ -222,17 +222,45 @@
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "27",
+         "Name": "Operation-Location",
+         "NameInResponse": "operationLocation",
+         "Description": "The location for monitoring the operation state.",
+         "Type": {
+          "$id": "28",
+          "Name": "ResourceLocation",
+          "Kind": "String",
+          "IsNullable": false
+         }
+        }
+       ]
       },
       {
-       "$id": "27",
+       "$id": "29",
        "StatusCodes": [
         201
        ],
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "30",
+         "Name": "Operation-Location",
+         "NameInResponse": "operationLocation",
+         "Description": "The location for monitoring the operation state.",
+         "Type": {
+          "$id": "31",
+          "Name": "ResourceLocation",
+          "Kind": "String",
+          "IsNullable": false
+         }
+        }
+       ]
       }
      ],
      "HttpMethod": "PATCH",
@@ -242,12 +270,12 @@
      "RequestMediaTypes": [
       "application/merge-patch+json"
      ],
-     "BufferResponse": false,
+     "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "28"
+    "$id": "32"
    }
   }
  ]

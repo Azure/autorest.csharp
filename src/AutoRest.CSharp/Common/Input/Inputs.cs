@@ -122,17 +122,26 @@ namespace AutoRest.CSharp.Common.Input
         { }
     }
 
-    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<HttpResponseHeader> Headers)
+    internal record OperationResponseHeader(string Name, string NameInResponse, string Description, InputType Type)
     {
-        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<HttpResponseHeader>()) { }
+        public OperationResponseHeader() : this("", "", "", InputPrimitiveType.String) { }
     }
 
-    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse);
+    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<OperationResponseHeader> Headers)
+    {
+        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<OperationResponseHeader>()) { }
+    }
+
+    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse)
+    {
+        public OperationLongRunning() : this(FinalStateVia: OperationFinalStateVia.Location, FinalResponse: new OperationResponse()) { }
+    }
 
     internal record OperationPaging(string? NextLinkName, string? ItemName)
     {
         public InputOperation? NextLinkOperation => NextLinkOperationRef?.Invoke() ?? null;
         public Func<InputOperation>? NextLinkOperationRef { get; init; }
+        public OperationPaging():this(null, null) { }
     }
 
     internal abstract record InputType(string Name, bool IsNullable = false) { }

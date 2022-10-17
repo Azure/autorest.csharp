@@ -1,5 +1,7 @@
 #Requires -Version 7.0
 param($filter)
+
+$ErrorActionPreference = 'Stop'
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 
 $cadlProjectPath = Join-Path $repoRoot "src/CADL.Extension/Emitter.Csharp"
@@ -17,6 +19,11 @@ foreach ($directory in Get-ChildItem $testEmitterPath -Directory)
     Write-Host "Emit CADL json for $testName"
     $projectPath = Join-Path $testEmitterPath $testName
     node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $projectPath/Generated $projectPath/$testName.cadl --emit @azure-tools/cadl-csharp
+    if (!$?) {
+        Pop-Location
+        throw "Failed to emit cadl model for $testName."
+    }
+
 }
 
 # samples

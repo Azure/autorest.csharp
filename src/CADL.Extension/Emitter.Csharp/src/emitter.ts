@@ -2,12 +2,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    createCadlLibrary,
+    DecoratedType,
     getDoc,
     getServiceNamespace,
     getServiceNamespaceString,
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    JSONSchemaType,
     Model,
     ModelProperty,
     Operation,
@@ -28,7 +31,7 @@ import { CodeModel } from "./type/CodeModel.js";
 import { InputClient } from "./type/InputClient.js";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
-import { InputOperation } from "./type/InputOperation.js";
+import { InputOperation, Paging } from "./type/InputOperation.js";
 import { RequestMethod, parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
@@ -50,24 +53,53 @@ import { resolveServers } from "./lib/cadlServer.js";
 import {
     convenienceApiKey,
     getExternalDocs,
-    getOperationId
+    getOperationId,
+    hasDecorator
 } from "./lib/decorators.js";
 import { InputAuth } from "./type/InputAuth.js";
 import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
 import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
-import { getConsumes, getProduces, getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
+import { getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
+import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
+import { OperationPaging } from "./type/OperationPaging.js";
+import { OperationLongRunning } from "./type/OperationLongRunning.js";
+import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
+import { getOperationLink } from "@azure-tools/cadl-azure-core";
+import { dllFilePath } from "@autorest/csharp";
+import { exec } from "child_process";
 
 export interface NetEmitterOptions {
     outputFile: string;
     logFile: string;
+    skipSDKGeneration: boolean;
 }
 
 const defaultOptions = {
     outputFile: "cadl.json",
-    logFile: "log.json"
+    logFile: "log.json",
+    skipSDKGeneration: false
 };
+
+const EmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+        outputFile: { type: "string", nullable: true },
+        logFile: { type: "string", nullable: true },
+        skipSDKGeneration: { type: "boolean", nullable: true }
+    },
+    required: [],
+};
+
+export const $lib = createCadlLibrary({
+    name: "CSharpEmitter",
+    diagnostics: {},
+    emitter: {
+        options: EmitterOptionsSchema,
+    },
+});
 
 export async function $onEmit(
     program: Program,
@@ -82,7 +114,8 @@ export async function $onEmit(
         logFile: resolvePath(
             program.compilerOptions.outputPath ?? "./cadl-output",
             resolvedOptions.logFile
-        )
+        ),
+        skipSDKGeneration: resolvedOptions.skipSDKGeneration
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -105,6 +138,16 @@ export async function $onEmit(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
             );
+
+            options.skipSDKGeneration !== true && exec(`dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath}`, (error, stdout, stderr) => {
+                if (error) {
+                    console.log(`error: ${error.message}`);
+                }
+                else if (stderr) {
+                    console.log(`stderr: ${stderr}`);
+                }
+                console.log(`stdout: ${stdout}`);
+            });
         }
     }
 }
@@ -184,20 +227,27 @@ function createModel(program: Program): any {
         console.log("routes:" + routes.length);
         const clients: InputClient[] = [];
         //create endpoint parameter from servers
-        let endPointParam = undefined;
+        let urlParameters: InputParameter[] | undefined = undefined;
         let url: string = "";
         if (servers !== undefined) {
             const cadlServers = resolveServers(program, servers);
             if (cadlServers.length > 0) {
                 /* choose the first server as endpoint. */
                 url = cadlServers[0].url;
-                endPointParam = cadlServers[0].parameters[0];
+                urlParameters = cadlServers[0].parameters;
             }
         }
 
+        const lroMonitorOperations = getAllLroMonitorOperations(
+            routes,
+            program
+        );
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
-            if (!isSupportedOperation(operation)) continue;
+
+            // do not generate LRO monitor operation
+            if (lroMonitorOperations.has(operation.operation)) continue;
+
             const groupName: string = getOperationGroupName(
                 program,
                 operation.operation
@@ -219,7 +269,7 @@ function createModel(program: Program): any {
                 program,
                 operation,
                 url,
-                endPointParam,
+                urlParameters,
                 modelMap,
                 enumMap
             );
@@ -276,21 +326,60 @@ function createModel(program: Program): any {
             throw err;
         }
     }
+
+    function getAllLroMonitorOperations(
+        routes: OperationDetails[],
+        program: Program
+    ): Set<Operation> {
+        const lroMonitorOperations = new Set<Operation>();
+        for (const operation of routes) {
+            let operationLink = getOperationLink(
+                program,
+                operation.operation,
+                "polling"
+            );
+            if (operationLink !== undefined) {
+                lroMonitorOperations.add(operationLink.linkedOperation);
+            }
+        }
+        return lroMonitorOperations;
+    }
 }
 
-function applyDefaultContentTypeAndAcceptParameter(operation: InputOperation): void {
+function applyDefaultContentTypeAndAcceptParameter(
+    operation: InputOperation
+): void {
     const defaultValue: string = "application/json";
-    if (operation.Parameters.some(value => value.Location === RequestLocation.Body)
-        && !operation.Parameters.some(value => value.IsContentType === true)) {
-        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "contentType", "Content-Type"));
+    if (
+        operation.Parameters.some(
+            (value) => value.Location === RequestLocation.Body
+        ) &&
+        !operation.Parameters.some((value) => value.IsContentType === true)
+    ) {
+        operation.Parameters.push(
+            createContentTypeOrAcceptParameter(
+                [defaultValue],
+                "contentType",
+                "Content-Type"
+            )
+        );
         operation.RequestMediaTypes = [defaultValue];
     }
 
-    if (!operation.Parameters.some(
-        value =>
-            value.Location === RequestLocation.Header &&
-            value.NameInRequest.toLowerCase() === "accept")) {
-        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "accept", "Accept"))
+    if (
+        !operation.Parameters.some(
+            (value) =>
+                value.Location === RequestLocation.Header &&
+                value.NameInRequest.toLowerCase() === "accept"
+        )
+    ) {
+        operation.Parameters.push(
+            createContentTypeOrAcceptParameter(
+                [defaultValue],
+                "accept",
+                "Accept"
+            )
+        );
     }
 }
 
@@ -353,7 +442,7 @@ function processServiceAuthentication(
                     break;
                 default:
                     throw new Error("Not supported authentication.");
-    }
+            }
         }
     }
 
@@ -366,10 +455,7 @@ function processServiceAuthentication(
     return auth;
 }
 
-function getOperationGroupName(
-    program: Program,
-    operation: Operation
-): string {
+function getOperationGroupName(program: Program, operation: Operation): string {
     const explicitOperationId = getOperationId(program, operation);
     if (explicitOperationId) {
         const ids: string[] = explicitOperationId.split("_");
@@ -396,7 +482,7 @@ function loadOperation(
     program: Program,
     operation: OperationDetails,
     uri: string,
-    endpoint: InputParameter | undefined = undefined,
+    urlParameters: InputParameter[] | undefined = undefined,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
@@ -413,7 +499,11 @@ function loadOperation(
     const externalDocs = getExternalDocs(program, op);
 
     const parameters: InputParameter[] = [];
-    if (endpoint) parameters.push(endpoint);
+    if (urlParameters) {
+        for (const param of urlParameters) {
+            parameters.push(param);
+        }
+    }
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
     }
@@ -424,7 +514,9 @@ function loadOperation(
         );
     } else if (cadlParameters.bodyType) {
         if (resourceOperation) {
-            parameters.push(loadBodyParameter(program, resourceOperation.resourceType));
+            parameters.push(
+                loadBodyParameter(program, resourceOperation.resourceType)
+            );
         } else {
             const effectiveBodyType = getEffectiveSchemaType(
                 program,
@@ -438,7 +530,11 @@ function loadOperation(
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(program, res, resourceOperation);
+        const operationResponse = loadOperationResponse(
+            program,
+            res,
+            resourceOperation
+        );
         if (operationResponse) {
             responses.push(operationResponse);
         }
@@ -457,6 +553,31 @@ function loadOperation(
     const generateConvenienceMethod: boolean =
         requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
 
+    /* handle lro */
+    /* handle paging. */
+    let paging: OperationPaging | undefined = undefined;
+    for (const res of operation.responses) {
+        const body = res.responses[0]?.body;
+        if (body?.type) {
+            if (
+                body.type.kind === "Model" &&
+                hasDecorator(body?.type, "$pagedResult")
+            ) {
+                const itemsProperty = Array.from(
+                    body.type.properties.values()
+                ).find((it) => hasDecorator(it, "$items"));
+                const nextLinkProperty = Array.from(
+                    body.type.properties.values()
+                ).find((it) => hasDecorator(it, "$nextLink"));
+                paging = {
+                    NextLinkName: nextLinkProperty?.name,
+                    ItemName: itemsProperty?.name
+                } as OperationPaging;
+            }
+        }
+    }
+    /* TODO: handle lro */
+
     return {
         Name: op.name,
         Summary: summary,
@@ -470,6 +591,12 @@ function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
+        LongRunning: loadOperationLongRunning(
+            program,
+            operation,
+            resourceOperation
+        ),
+        Paging: paging,
         GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;
 
@@ -561,10 +688,16 @@ function loadOperation(
         status.push(Number(response.statusCode));
         //TODO: what to do if more than 1 response?
         const body = response.responses[0]?.body;
+
         let type: InputType | undefined = undefined;
         if (body?.type) {
             if (resourceOperation && resourceOperation.operation !== "list") {
-                type = getInputType(program, resourceOperation.resourceType, models, enums);
+                type = getInputType(
+                    program,
+                    resourceOperation.resourceType,
+                    models,
+                    enums
+                );
             } else {
                 const cadlType = getEffectiveSchemaType(program, body.type);
                 const inputType: InputType = getInputType(
@@ -577,24 +710,88 @@ function loadOperation(
             }
         }
 
+        const headers = response.responses[0]?.headers;
+        const responseHeaders: HttpResponseHeader[] = [];
+        if (headers) {
+            for (const key of Object.keys(headers)) {
+                responseHeaders.push({
+                    Name: key,
+                    NameInResponse: headers[key].name,
+                    Description: getDoc(program, headers[key]) ?? "",
+                    Type: getInputType(
+                        program,
+                        headers[key].type,
+                        models,
+                        enums
+                    )
+                } as HttpResponseHeader);
+            }
+        }
+
         return {
             StatusCodes: status,
             BodyType: type,
-            BodyMediaType: BodyMediaType.Json
+            BodyMediaType: BodyMediaType.Json,
+            Headers: responseHeaders
         } as OperationResponse;
+    }
+
+    function loadOperationLongRunning(
+        program: Program,
+        op: OperationDetails,
+        resourceOperation?: ResourceOperation
+    ): OperationLongRunning | undefined {
+        if (!isLroOperation(program, op.operation)) return undefined;
+
+        let finalResponse = loadLongRunningFinalResponse(
+            program,
+            op,
+            resourceOperation
+        );
+        if (finalResponse === undefined) return undefined;
+
+        return {
+            FinalStateVia: OperationFinalStateVia.Location, // data plane only supports `location`
+            FinalResponse: finalResponse
+        } as OperationLongRunning;
+    }
+
+    function loadLongRunningFinalResponse(
+        program: Program,
+        op: OperationDetails,
+        resourceOperation?: ResourceOperation
+    ): OperationResponse | undefined {
+        let finalResponse: any | undefined;
+        for (const response of op.responses) {
+            if (response.statusCode === "200") {
+                finalResponse = response;
+                break;
+            }
+            if (response.statusCode === "204") {
+                finalResponse = response;
+            }
+        }
+
+        if (finalResponse !== undefined) {
+            return loadOperationResponse(
+                program,
+                finalResponse,
+                resourceOperation
+            );
+        }
+
+        return loadOperationResponse(
+            program,
+            op.responses[0],
+            resourceOperation
+        );
+    }
+
+    function isLroOperation(program: Program, op: Operation) {
+        return getOperationLink(program, op, "polling") !== undefined;
     }
 }
 
-function isLroOperation(op: OperationDetails) {
-    return false;
-}
-function isPagingOperation(op: OperationDetails) {
-    return false;
-}
-function isSupportedOperation(op: OperationDetails) {
-    if (isLroOperation(op) || isPagingOperation(op)) return false;
-    return true;
-}
 class ErrorTypeFoundError extends Error {
     constructor() {
         super("Error type found in evaluated Cadl output");

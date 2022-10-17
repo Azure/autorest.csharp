@@ -72,7 +72,7 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -122,7 +122,7 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "17",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },
@@ -201,7 +201,8 @@
        "StatusCodes": [
         200
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "DELETE",
@@ -226,7 +227,7 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "28",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },
@@ -280,7 +281,8 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       },
       {
        "$id": "33",
@@ -290,7 +292,8 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -391,7 +394,8 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "POST",
@@ -468,7 +472,8 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",
@@ -491,7 +496,7 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "51",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },
@@ -545,7 +550,8 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": []
       }
      ],
      "HttpMethod": "GET",

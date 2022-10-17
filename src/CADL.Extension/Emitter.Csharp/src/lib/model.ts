@@ -16,8 +16,12 @@ import {
     ModelProperty,
     Namespace,
     NeverType,
+    Operation,
     Program,
-    Type
+    resolveUsages,
+    Type,
+    UsageFlags,
+    UsageTracker
 } from "@cadl-lang/compiler";
 import { getDiscriminator } from "@cadl-lang/rest";
 import {
@@ -48,49 +52,7 @@ export function mapCadlTypeToCSharpInputTypeKind(
     const kind = cadlType.kind;
     switch (kind) {
         case "Model":
-            const name = cadlType.name;
-            switch (name) {
-                case "bytes":
-                    return InputTypeKind.BinaryData;
-                case "int8":
-                    return InputTypeKind.Int32;
-                case "int16":
-                    return InputTypeKind.Int32;
-                case "int32":
-                    return InputTypeKind.Int32;
-                case "int64":
-                    return InputTypeKind.Int64;
-                case "safeint":
-                    return InputTypeKind.Int64;
-                case "uint8":
-                    return InputTypeKind.Int32;
-                case "uint16":
-                    return InputTypeKind.Int32;
-                case "uint32":
-                    return InputTypeKind.Int32;
-                case "uint64":
-                    return InputTypeKind.Int64;
-                case "float32":
-                    return InputTypeKind.Float32;
-                case "float64":
-                    return InputTypeKind.Float64;
-                case "string":
-                    return InputTypeKind.String;
-                case "boolean":
-                    return InputTypeKind.Boolean;
-                case "plainDate":
-                    return InputTypeKind.DateTime;
-                case "zonedDateTime":
-                    return InputTypeKind.DateTime;
-                case "plainTime":
-                    return InputTypeKind.Time;
-                case "duration":
-                    return InputTypeKind.Duration;
-                case "Map":
-                    return InputTypeKind.Dictionary;
-                default:
-                    return InputTypeKind.Model;
-            }
+            return getCSharpInputTypeKindByIntrinsicModelName(cadlType.name);
         case "ModelProperty":
             return InputTypeKind.Object;
         case "Enum":
@@ -103,6 +65,53 @@ export function mapCadlTypeToCSharpInputTypeKind(
             return InputTypeKind.String;
         default:
             return InputTypeKind.UnKnownKind;
+    }
+}
+
+function getCSharpInputTypeKindByIntrinsicModelName(
+    name: string
+): InputTypeKind {
+    switch (name) {
+        case "bytes":
+            return InputTypeKind.BinaryData;
+        case "int8":
+            return InputTypeKind.Int32;
+        case "int16":
+            return InputTypeKind.Int32;
+        case "int32":
+            return InputTypeKind.Int32;
+        case "int64":
+            return InputTypeKind.Int64;
+        case "safeint":
+            return InputTypeKind.Int64;
+        case "uint8":
+            return InputTypeKind.Int32;
+        case "uint16":
+            return InputTypeKind.Int32;
+        case "uint32":
+            return InputTypeKind.Int32;
+        case "uint64":
+            return InputTypeKind.Int64;
+        case "float32":
+            return InputTypeKind.Float32;
+        case "float64":
+            return InputTypeKind.Float64;
+        case "string":
+            return InputTypeKind.String;
+        case "boolean":
+            return InputTypeKind.Boolean;
+        case "plainDate":
+            return InputTypeKind.DateTime;
+        case "zonedDateTime":
+            return InputTypeKind.DateTime;
+        case "plainTime":
+            return InputTypeKind.Time;
+        case "duration":
+            return InputTypeKind.Duration;
+        case "Map":
+            return InputTypeKind.Dictionary;
+        default:
+            return InputTypeKind.Model;
     }
 }
 
@@ -163,7 +172,6 @@ export function mapCadlIntrinsicModelToCsharpModel(
             return "UnKnownType";
     }
 }
-
 /**
  * If type is an anonymous model, tries to find a named model that has the same
  * set of properties when non-schema properties are excluded.
@@ -171,9 +179,10 @@ export function mapCadlIntrinsicModelToCsharpModel(
 export function getEffectiveSchemaType(program: Program, type: Type): Type {
     let target = type;
     if (type.kind === "Model" && !type.name) {
-        const effective = getEffectiveModelType(program,
+        const effective = getEffectiveModelType(
+            program,
             type,
-            isSchemaProperty
+            isSchemaPropertyInternal
         );
         if (effective.name) {
             target = effective;
@@ -182,19 +191,23 @@ export function getEffectiveSchemaType(program: Program, type: Type): Type {
 
     return target;
 
-    /**
-     * A "schema property" here is a property that is emitted to OpenAPI schema.
-     *
-     * Headers, parameters, status codes are not schema properties even they are
-     * represented as properties in Cadl.
-     */
-    function isSchemaProperty(property: ModelProperty) {
-        const headerInfo = getHeaderFieldName(program, property);
-        const queryInfo = getQueryParamName(program, property);
-        const pathInfo = getPathParamName(program, property);
-        const statusCodeinfo = isStatusCode(program, property);
-        return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
+    function isSchemaPropertyInternal(property: ModelProperty) {
+        return isSchemaProperty(program, property);
     }
+}
+
+/**
+ * A "schema property" here is a property that is emitted to OpenAPI schema.
+ *
+ * Headers, parameters, status codes are not schema properties even they are
+ * represented as properties in Cadl.
+ */
+function isSchemaProperty(program: Program, property: ModelProperty) {
+    const headerInfo = getHeaderFieldName(program, property);
+    const queryInfo = getQueryParamName(program, property);
+    const pathInfo = getPathParamName(program, property);
+    const statusCodeinfo = isStatusCode(program, property);
+    return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
 }
 
 export function getDefaultValue(type: Type): any {
@@ -241,18 +254,30 @@ export function getInputType(
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
     } else {
-        return {
-            Name: InputTypeKind.UnKnownKind,
-            IsNullable: false
-        } as InputType;
+        throw new Error("Unsupported type.");
     }
 
     function getInputModelType(m: Model): InputType {
         const intrinsicName = getIntrinsicModelName(program, m);
-        if (intrinsicName && intrinsicName === "string") {
-            const values = getKnownValues(program, m);
-            if (values) {
-                return getInputModelForExtensibleEnum(m, values);
+        if (intrinsicName) {
+            switch (intrinsicName) {
+                case "string":
+                    const values = getKnownValues(program, m);
+                    if (values) {
+                        return getInputModelForExtensibleEnum(m, values);
+                    }
+                // if the model is one of the Cadl Intrinsic type.
+                // it's a base Cadl "primitive" that corresponds directly to an c# data type.
+                // In such cases, we don't want to emit a ref and instead just
+                // emit the base type directly.
+                default:
+                    return {
+                        Name: m.name,
+                        Kind: getCSharpInputTypeKindByIntrinsicModelName(
+                            intrinsicName
+                        ),
+                        IsNullable: false
+                    } as InputPrimitiveType;
             }
         }
 
@@ -273,25 +298,10 @@ export function getInputType(
             }
         }
 
-        if (m.name === intrinsicName) {
-            // if the model is one of the Cadl Intrinsic type.
-            // it's a base Cadl "primitive" that corresponds directly to an c# data type.
-            // In such cases, we don't want to emit a ref and instead just
-            // emit the base type directly.
-            return {
-                Name: mapCadlIntrinsicModelToCsharpModel(program, m) ?? m.name,
-                Kind: mapCadlTypeToCSharpInputTypeKind(program, m),
-                IsNullable: false
-            } as InputPrimitiveType;
-        } else {
-            return getInputModelForModel(m);
-        }
+        return getInputModelForModel(m);
     }
 
-    function getInputModelForExtensibleEnum(
-        m: Model,
-        e: Enum
-    ): InputEnumType {
+    function getInputModelForExtensibleEnum(m: Model, e: Enum): InputEnumType {
         let extensibleEnum = enums.get(m.name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
@@ -327,7 +337,9 @@ export function getInputType(
                 );
             }
             const allowValues: InputEnumTypeValue[] = [];
-            const enumValueType = enumMemberType(e.members.entries().next().value);
+            const enumValueType = enumMemberType(
+                e.members.entries().next().value
+            );
 
             for (const key of e.members.keys()) {
                 const option = e.members.get(key);
@@ -335,12 +347,14 @@ export function getInputType(
                     throw Error(`No member value for $key`);
                 }
                 if (enumValueType !== enumMemberType(option)) {
-                    throw new Error("The enum member value type is not consistent.");
+                    throw new Error(
+                        "The enum member value type is not consistent."
+                    );
                 }
                 const member = {
                     Name: key,
                     Value: option.value ?? option?.name,
-                    Description: getDoc(program, option),
+                    Description: getDoc(program, option)
                 } as InputEnumTypeValue;
                 allowValues.push(member);
             }
@@ -449,7 +463,10 @@ export function getInputType(
         discriminatorPropertyName?: string
     ): void {
         inputProperties.forEach((value: ModelProperty, key: string) => {
-            if (value.name !== discriminatorPropertyName) {
+            if (
+                value.name !== discriminatorPropertyName &&
+                isSchemaProperty(program, value)
+            ) {
                 const vis = getVisibility(program, value);
                 let isReadOnly: boolean = false;
                 if (vis && vis.includes("read") && vis.length === 1) {

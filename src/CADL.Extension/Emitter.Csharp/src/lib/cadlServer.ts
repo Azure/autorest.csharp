@@ -38,18 +38,24 @@ export function resolveServers(
     return servers.map((server) => {
         const parameters: InputParameter[] = [];
         let url: string = server.url;
+        let endpoint: string = url
+            .replace("http://", "")
+            .replace("https://", "")
+            .split("/")[0];
         for (const [name, prop] of server.parameters) {
             // if (!validateValidServerVariable(program, prop)) {
             //   continue;
             // }
-
+            const isEndpoint: boolean = endpoint === `{${name}}`;
             let defaultValue = undefined;
             const value = prop.default ? getDefaultValue(prop.default) : "";
             if (value) {
                 defaultValue = {
                     Type: {
-                        Name: "Uri",
-                        Kind: InputTypeKind.Uri,
+                        Name: isEndpoint ? "Uri" : "String",
+                        Kind: isEndpoint
+                            ? InputTypeKind.Uri
+                            : InputTypeKind.String,
                         IsNullable: false
                     } as InputPrimitiveType,
                     Value: value
@@ -60,8 +66,8 @@ export function resolveServers(
                 NameInRequest: name,
                 Description: getDoc(program, prop),
                 Type: {
-                    Name: "Uri",
-                    Kind: InputTypeKind.Uri,
+                    Name: isEndpoint ? "Uri" : "String",
+                    Kind: isEndpoint ? InputTypeKind.Uri : InputTypeKind.String,
                     IsNullable: false
                 } as InputPrimitiveType,
                 Location: RequestLocation.Uri,
@@ -69,7 +75,7 @@ export function resolveServers(
                 IsResourceParameter: false,
                 IsContentType: false,
                 IsRequired: true,
-                IsEndpoint: true,
+                IsEndpoint: isEndpoint,
                 SkipUrlEncoding: false,
                 Explode: false,
                 Kind: InputOperationParameterKind.Client,
