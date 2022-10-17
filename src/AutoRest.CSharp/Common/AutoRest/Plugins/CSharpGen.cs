@@ -22,8 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ValidateConfiguration();
 
             Directory.CreateDirectory(Configuration.OutputFolder);
-            var projectDirectory = Path.Combine(Configuration.OutputFolder, Configuration.ProjectFolder);
-            var project = await GeneratedCodeWorkspace.Create(projectDirectory, Configuration.OutputFolder, Configuration.SharedSourceFolders);
+            var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
             var codeModel = await codeModelTask;
@@ -56,7 +55,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ValidateConfiguration();
 
             Directory.CreateDirectory(Configuration.OutputFolder);
-            var project = await GeneratedCodeWorkspace.Create(Configuration.ProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
+            var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             LowLevelTarget.Execute(project, rootNamespace, sourceInputModel, true);
             return project;
@@ -72,6 +71,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
+            Console.SetOut(Console.Error); //if you send anything to stdout there is an autorest error so this protects us against that happening
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName))
                 throw new Exception("Generator did not receive the code model file.");

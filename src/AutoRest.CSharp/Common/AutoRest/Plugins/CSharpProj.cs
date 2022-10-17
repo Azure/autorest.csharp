@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var context = new BuildContext(codeModel, null);
             Execute(context.DefaultNamespace, async (filename, text) =>
             {
-                await autoRest.WriteFile(filename, text, "source-file-csharp");
+                await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
             });
             return true;
         }
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 //somewhere it tries to parse it as a syntax tree and when it converts back to text
                 //its no longer valid xml.  We should consider a "raw files" concept in the work space
                 //so the file writing can still remain in one place
-                await File.WriteAllTextAsync(Path.Combine(generatedDir, filename), text);
+                await File.WriteAllTextAsync(Path.Combine(Configuration.AbsoluteProjectFolder, filename), text);
             });
         }
 
@@ -166,7 +166,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 projectFile += ".Tests";
             }
-            writeFile(Path.Combine(Configuration.ProjectFolder, $"{projectFile}.csproj"), csProjContent);
+            writeFile($"{projectFile}.csproj", csProjContent);
         }
     }
 }

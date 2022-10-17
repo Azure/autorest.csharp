@@ -48,7 +48,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 
             StandaloneGeneratorRunner.LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
-            var projectDirectory = Path.Combine(Configuration.OutputFolder, Configuration.ProjectFolder);
+            var projectDirectory = Path.Combine(Configuration.OutputFolder, Configuration.RelativeProjectFolder);
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;

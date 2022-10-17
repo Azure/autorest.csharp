@@ -22,14 +22,13 @@ namespace AutoRest.CSharp.AutoRest.Communication
     {
         public static async Task RunAsync(CommandLineOptions options)
         {
-            string projectPath;
+            string? projectPath = null;
             string outputPath;
             bool wasProjectPathPassedIn = options.ProjectPath is not null;
             if (options.Standalone is not null)
             {
                 //TODO this is only here for back compat we should consider removing it
                 outputPath = options.Standalone;
-                projectPath = Path.Combine(options.Standalone, "../");
             }
             else
             {
@@ -38,7 +37,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
 
             var configurationPath = options.ConfigurationPath ?? Path.Combine(outputPath, "Configuration.json");
-            LoadConfiguration(projectPath, outputPath, File.ReadAllText(configurationPath), wasProjectPathPassedIn);
+            LoadConfiguration(projectPath, outputPath, File.ReadAllText(configurationPath));
 
             var codeModelInputPath = Path.Combine(outputPath, "CodeModel.yaml");
             var cadlInputFile = Path.Combine(outputPath, "cadl.json");
@@ -99,10 +98,16 @@ namespace AutoRest.CSharp.AutoRest.Communication
             {
                 return;
             }
-            var defaultValue = Configuration.GetDefaultOptionStringValue(option);
-            if (defaultValue == null || defaultValue != value)
+
+            switch (option)
             {
-                writer.WriteString(option, value);
+                case Configuration.Options.ProjectFolder:
+                    if (value != Configuration.ProjectFolderDefault)
+                        writer.WriteString(option, value);
+                    break;
+                default:
+                    writer.WriteString(option, value);
+                    break;
             }
         }
 
@@ -131,7 +136,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
-                    WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.ProjectFolder);
+                    WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), Configuration.ProtocolMethodList);
 
                     Configuration.MgmtConfiguration.SaveConfiguration(writer);
@@ -160,19 +165,15 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
-        private static string? ReadStringOption(JsonElement root, string option, string? defaultValue = null)
+        private static string? ReadStringOption(JsonElement root, string option)
         {
             if (root.TryGetProperty(option, out JsonElement value))
-            {
                 return value.GetString();
-            }
-            else
-            {
-                return defaultValue ?? Configuration.GetDefaultOptionStringValue(option);
-            }
+
+            return null;
         }
 
-        internal static void LoadConfiguration(string projectPathDefault, string outputPath, string json, bool wasProjectPathPassedIn)
+        internal static void LoadConfiguration(string? projectPath, string outputPath, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
@@ -203,7 +204,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
-                ReadStringOption(root, Configuration.Options.ProjectFolder, wasProjectPathPassedIn ? projectPathDefault : null)!,
+                projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
                 protocolMethods,
                 MgmtConfiguration.LoadConfiguration(root)
             );
