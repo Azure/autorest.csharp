@@ -3,7 +3,6 @@
 
 import {
     createCadlLibrary,
-    createCadlLibrary,
     DecoratedType,
     getDoc,
     getServiceNamespace,
@@ -11,7 +10,6 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
-    JSONSchemaType,
     JSONSchemaType,
     Model,
     ModelProperty,
@@ -100,14 +98,6 @@ const EmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     },
     required: [],
 };
-
-export const $lib = createCadlLibrary({
-    name: "CSharpEmitter",
-    diagnostics: {},
-    emitter: {
-        options: EmitterOptionsSchema,
-    },
-});
 
 export const $lib = createCadlLibrary({
     name: "CSharpEmitter",
