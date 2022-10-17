@@ -269,10 +269,6 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     AddParameter(text, requestParameter);
                 }
-                else
-                {
-                    ErrorHelpers.ThrowError($"\n\nError while processing request '{uriPart}'\n\n  '{text}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
-                }
             }
         }
 

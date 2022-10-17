@@ -129,6 +129,77 @@
           }
         }
       }
+    },
+    "/test3/{id}/{name}": {
+      "get": {
+        "operationId": "optionalPathParameters",
+        "description": "Optional PathParameters",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Query parameter Id",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Query parameter skip",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Query parameter status",
+            "type": "string",
+            "required": true,
+            "x-ms-client-default": "start"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          }
+        }
+      }
+    },
+    "/test4/{id}/{name}": {
+      "get": {
+        "operationId": "optionalPathParametersWithMixedSequence",
+        "description": "Optional path parameters with mixed sequence",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Query parameter status",
+            "type": "string",
+            "required": true,
+            "x-ms-client-default": "start"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Query parameter skip",
+            "type": "integer",
+            "required": true,
+            "x-ms-client-default": 12
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Query parameter Id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          }
+        }
+      }
     }
   },
   "definitions": {

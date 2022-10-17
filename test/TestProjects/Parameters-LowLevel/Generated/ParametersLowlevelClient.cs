@@ -11,11 +11,11 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace RequestContextAllOptional_LowLevel
+namespace Parameters_LowLevel
 {
-    // Data plane generated client. The RequestContextAllOptional service client.
-    /// <summary> The RequestContextAllOptional service client. </summary>
-    public partial class RequestContextAllOptionalClient
+    // Data plane generated client. The ParametersLowlevel service client.
+    /// <summary> The ParametersLowlevel service client. </summary>
+    public partial class ParametersLowlevelClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -28,28 +28,28 @@ namespace RequestContextAllOptional_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of RequestContextAllOptionalClient for mocking. </summary>
-        protected RequestContextAllOptionalClient()
+        /// <summary> Initializes a new instance of ParametersLowlevelClient for mocking. </summary>
+        protected ParametersLowlevelClient()
         {
         }
 
-        /// <summary> Initializes a new instance of RequestContextAllOptionalClient. </summary>
+        /// <summary> Initializes a new instance of ParametersLowlevelClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public RequestContextAllOptionalClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new RequestContextAllOptionalClientOptions())
+        public ParametersLowlevelClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new ParametersLowlevelClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of RequestContextAllOptionalClient. </summary>
+        /// <summary> Initializes a new instance of ParametersLowlevelClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public RequestContextAllOptionalClient(AzureKeyCredential credential, Uri endpoint, RequestContextAllOptionalClientOptions options)
+        public ParametersLowlevelClient(AzureKeyCredential credential, Uri endpoint, ParametersLowlevelClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new RequestContextAllOptionalClientOptions();
+            options ??= new ParametersLowlevelClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
@@ -69,7 +69,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call NoRequestBodyResponseBodyAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// Response response = await client.NoRequestBodyResponseBodyAsync(1234);
         /// 
@@ -79,7 +79,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call NoRequestBodyResponseBodyAsync with all parameters, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, <start>);
         /// 
@@ -89,7 +89,7 @@ namespace RequestContextAllOptional_LowLevel
         /// </example>
         public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -115,7 +115,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call NoRequestBodyResponseBody with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// Response response = client.NoRequestBodyResponseBody(1234);
         /// 
@@ -125,7 +125,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call NoRequestBodyResponseBody with all parameters, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// Response response = client.NoRequestBodyResponseBody(1234, 1234, 12, <start>);
         /// 
@@ -135,7 +135,7 @@ namespace RequestContextAllOptional_LowLevel
         /// </example>
         public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -158,7 +158,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call RequestBodyResponseBodyAsync and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -170,7 +170,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call RequestBodyResponseBodyAsync with all request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// var data = new {
         ///     Code = "<Code>",
@@ -208,7 +208,7 @@ namespace RequestContextAllOptional_LowLevel
         /// </remarks>
         public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -231,7 +231,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call RequestBodyResponseBody and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// var data = new {};
         /// 
@@ -243,7 +243,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call RequestBodyResponseBody with all request content, and how to parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// var data = new {
         ///     Code = "<Code>",
@@ -281,7 +281,7 @@ namespace RequestContextAllOptional_LowLevel
         /// </remarks>
         public virtual Response RequestBodyResponseBody(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -305,7 +305,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call DeleteNoRequestBodyResponseBodyAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>");
         /// 
@@ -317,7 +317,7 @@ namespace RequestContextAllOptional_LowLevel
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
 
-            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -341,7 +341,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call DeleteNoRequestBodyResponseBody with required parameters and parse the result.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>");
         /// 
@@ -353,7 +353,7 @@ namespace RequestContextAllOptional_LowLevel
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
 
-            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -375,7 +375,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call NoRequestBodyNoResponseBodyAsync.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// Response response = await client.NoRequestBodyNoResponseBodyAsync();
         /// Console.WriteLine(response.Status);
@@ -383,7 +383,7 @@ namespace RequestContextAllOptional_LowLevel
         /// </example>
         public virtual async Task<Response> NoRequestBodyNoResponseBodyAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyNoResponseBody");
             scope.Start();
             try
             {
@@ -405,7 +405,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call NoRequestBodyNoResponseBody.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// Response response = client.NoRequestBodyNoResponseBody();
         /// Console.WriteLine(response.Status);
@@ -413,7 +413,7 @@ namespace RequestContextAllOptional_LowLevel
         /// </example>
         public virtual Response NoRequestBodyNoResponseBody(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyNoResponseBody");
             scope.Start();
             try
             {
@@ -436,7 +436,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call RequestBodyNoResponseBodyAsync with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -446,7 +446,7 @@ namespace RequestContextAllOptional_LowLevel
         /// </example>
         public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyNoResponseBody");
             scope.Start();
             try
             {
@@ -469,7 +469,7 @@ namespace RequestContextAllOptional_LowLevel
         /// This sample shows how to call RequestBodyNoResponseBody with required request content.
         /// <code><![CDATA[
         /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
+        /// var client = new ParametersLowlevelClient(credential);
         /// 
         /// var data = "<String>";
         /// 
@@ -479,11 +479,191 @@ namespace RequestContextAllOptional_LowLevel
         /// </example>
         public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyNoResponseBody");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Optional PathParameters. </summary>
+        /// <param name="id"> Query parameter Id. </param>
+        /// <param name="skip"> Query parameter skip. </param>
+        /// <param name="name"> Query parameter status. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call OptionalPathParametersAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// Response response = await client.OptionalPathParametersAsync(1234, 1234);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call OptionalPathParametersAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// Response response = await client.OptionalPathParametersAsync(1234, 1234, <start>);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
+        public virtual async Task<Response> OptionalPathParametersAsync(int id, int skip, string name = "start", RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathParameters");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOptionalPathParametersRequest(id, name, skip, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Optional PathParameters. </summary>
+        /// <param name="id"> Query parameter Id. </param>
+        /// <param name="skip"> Query parameter skip. </param>
+        /// <param name="name"> Query parameter status. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call OptionalPathParameters with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// Response response = client.OptionalPathParameters(1234, 1234);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call OptionalPathParameters with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// Response response = client.OptionalPathParameters(1234, 1234, <start>);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
+        public virtual Response OptionalPathParameters(int id, int skip, string name = "start", RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathParameters");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOptionalPathParametersRequest(id, name, skip, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Optional path parameters with mixed sequence. </summary>
+        /// <param name="id"> Query parameter Id. </param>
+        /// <param name="name"> Query parameter status. </param>
+        /// <param name="skip"> Query parameter skip. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call OptionalPathParametersWithMixedSequenceAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call OptionalPathParametersWithMixedSequenceAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, <start>, 12);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
+        public virtual async Task<Response> OptionalPathParametersWithMixedSequenceAsync(int id, string name = "start", int skip = 12, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathParametersWithMixedSequence");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOptionalPathParametersWithMixedSequenceRequest(id, name, skip, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Optional path parameters with mixed sequence. </summary>
+        /// <param name="id"> Query parameter Id. </param>
+        /// <param name="name"> Query parameter status. </param>
+        /// <param name="skip"> Query parameter skip. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call OptionalPathParametersWithMixedSequence with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// Response response = client.OptionalPathParametersWithMixedSequence(1234);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call OptionalPathParametersWithMixedSequence with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// Response response = client.OptionalPathParametersWithMixedSequence(1234, <start>, 12);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
+        public virtual Response OptionalPathParametersWithMixedSequence(int id, string name = "start", int skip = 12, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathParametersWithMixedSequence");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOptionalPathParametersWithMixedSequenceRequest(id, name, skip, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -568,6 +748,38 @@ namespace RequestContextAllOptional_LowLevel
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateOptionalPathParametersRequest(int id, string name, int skip, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test3/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(name, true);
+            uri.AppendQuery("skip", skip, true);
+            request.Uri = uri;
+            return message;
+        }
+
+        internal HttpMessage CreateOptionalPathParametersWithMixedSequenceRequest(int id, string name, int skip, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test4/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(name, true);
+            uri.AppendQuery("skip", skip, true);
+            request.Uri = uri;
             return message;
         }
 

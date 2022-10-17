@@ -1,7 +1,7 @@
 !CodeModel 
 info: !Info 
   description: Test
-  title: RequestContextAllOptional
+  title: Parameters-Lowlevel
 schemas: !Schemas 
   numbers:
     - !NumberSchema &ref_4
@@ -492,6 +492,161 @@ operationGroups:
             name: RequestBodyNoResponseBody
             description: RequestBody and No ResponseBody
         protocol: !Protocols {}
+      - !Operation 
+        operationId: optionalPathParameters
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_18
+            schema: *ref_4
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: id
+                description: Query parameter Id
+                serializedName: id
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_19
+            schema: *ref_4
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: skip
+                description: Query parameter skip
+                serializedName: skip
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_20
+            schema: *ref_5
+            clientDefaultValue: start
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-client-default: start
+            language: !Languages 
+              default:
+                name: name
+                description: Query parameter status
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /test3/{id}/{name}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_18
+          - *ref_19
+          - *ref_20
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OptionalPathParameters
+            description: Optional PathParameters
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: optionalPathParametersWithMixedSequence
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_21
+            schema: *ref_5
+            clientDefaultValue: start
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-client-default: start
+            language: !Languages 
+              default:
+                name: name
+                description: Query parameter status
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_22
+            schema: *ref_4
+            clientDefaultValue: 12
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-client-default: 12
+            language: !Languages 
+              default:
+                name: skip
+                description: Query parameter skip
+                serializedName: skip
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_23
+            schema: *ref_4
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: id
+                description: Query parameter Id
+                serializedName: id
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /test4/{id}/{name}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_21
+          - *ref_22
+          - *ref_23
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OptionalPathParametersWithMixedSequence
+            description: Optional path parameters with mixed sequence
+        protocol: !Protocols {}
     language: !Languages 
       default:
         name: ''
@@ -506,7 +661,7 @@ security: !Security
       in: header
 language: !Languages 
   default:
-    name: RequestContextAllOptional
+    name: ParametersLowlevel
     description: ''
 protocol: !Protocols 
   http: !HttpModel {}
