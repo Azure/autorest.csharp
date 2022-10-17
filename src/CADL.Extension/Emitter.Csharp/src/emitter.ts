@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    createCadlLibrary,
     DecoratedType,
     getDoc,
     getServiceNamespace,
@@ -9,6 +10,7 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    JSONSchemaType,
     Model,
     ModelProperty,
     Operation,
@@ -70,6 +72,8 @@ import { getOperationLink } from "@azure-tools/cadl-azure-core";
 import fs from 'fs'
 import path from 'node:path'
 import { Configuration } from "./type/Configuration.js";
+import { dllFilePath } from "@autorest/csharp";
+import { exec } from "child_process";
 
 export interface NetEmitterOptions {
     "sdk-folder": string;
@@ -79,12 +83,14 @@ export interface NetEmitterOptions {
     "library-name"?: string;
     "shared-source-folders"?: string[];
     "single-top-level-client"?: boolean;
+    skipSDKGeneration: boolean;
 }
 
 const defaultOptions = {
     "sdk-folder": ".",
     outputFile: "cadl.json",
     logFile: "log.json",
+    skipSDKGeneration: false,
     "shared-source-folders": ["..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared", "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"]
 };
 
@@ -99,6 +105,7 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
       "library-name": {type: "string", nullable: true},
       "shared-source-folders": {type: "array", items: {type: "string"}, nullable: true},
       "single-top-level-client": {type: "boolean", nullable: true},
+      skipSDKGeneration: {type: "boolean", nullable: true}
     },
     required: [],
   };
@@ -126,7 +133,8 @@ export async function $onEmit(
             program.compilerOptions.outputPath ?? "./cadl-output",
             resolvedOptions.logFile
         ),
-        "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? ".")
+        "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
+        skipSDKGeneration: resolvedOptions.skipSDKGeneration
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -136,8 +144,8 @@ export async function $onEmit(
         const outPath =
             version.trim().length > 0
                 ? resolvePath(
-                      options.outputFile?.replace(".json", `.${version}.json`)
-                  )
+                    options.outputFile?.replace(".json", `.${version}.json`)
+                )
                 : resolvePath(options.outputFile);
 
         const root = createModel(program);
@@ -155,6 +163,7 @@ export async function $onEmit(
                 )
             );
 
+<<<<<<< HEAD
             //emit configuration.json
             const configurationOutPath = resolvePath(dir, "Configuration.json");
             const configurations = {
@@ -171,6 +180,17 @@ export async function $onEmit(
                     JSON.stringify(configurations, null, 2)
                 )
             );
+=======
+            options.skipSDKGeneration !== true && exec(`dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath}`, (error, stdout, stderr) => {
+                if (error) {
+                    console.log(`error: ${error.message}`);
+                }
+                else if (stderr) {
+                    console.log(`stderr: ${stderr}`);
+                }
+                console.log(`stdout: ${stdout}`);
+            });
+>>>>>>> 06522ddfd880c22f70e62172574d7e976344938c
         }
     }
 }
@@ -434,9 +454,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                      Type: inputType,
-                      Value: mediaTypes[0]
-                  } as InputConstant)
+                    Type: inputType,
+                    Value: mediaTypes[0]
+                } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -653,8 +673,8 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVersion
-            ? InputOperationParameterKind.Client
-            : InputOperationParameterKind.Method;
+                ? InputOperationParameterKind.Client
+                : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
