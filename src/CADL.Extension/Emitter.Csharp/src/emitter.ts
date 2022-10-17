@@ -2,12 +2,18 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    createCadlLibrary,
+    DecoratedType,
     getDoc,
     getServiceNamespace,
     getServiceNamespaceString,
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    JSONSchemaType,
+    Model,
+    ModelProperty,
+    Operation,
     Program,
     resolvePath
 } from "@cadl-lang/compiler";
@@ -60,11 +66,6 @@ import { InputConstant } from "./type/InputConstant.js";
 import { Usage } from "./type/Usage.js";
 import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
 import { OperationPaging } from "./type/OperationPaging.js";
-import {
-    Model,
-    ModelProperty,
-    Operation
-} from "@cadl-lang/compiler/dist/core/types.js";
 import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
@@ -74,12 +75,33 @@ import { exec } from "child_process";
 export interface NetEmitterOptions {
     outputFile: string;
     logFile: string;
+    skipSDKGeneration: boolean;
 }
 
 const defaultOptions = {
     outputFile: "cadl.json",
-    logFile: "log.json"
+    logFile: "log.json",
+    skipSDKGeneration: false
 };
+
+const EmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+        outputFile: { type: "string", nullable: true },
+        logFile: { type: "string", nullable: true },
+        skipSDKGeneration: { type: "boolean", nullable: true }
+    },
+    required: [],
+};
+
+export const $lib = createCadlLibrary({
+    name: "CSharpEmitter",
+    diagnostics: {},
+    emitter: {
+        options: EmitterOptionsSchema,
+    },
+});
 
 export async function $onEmit(
     program: Program,
@@ -94,7 +116,8 @@ export async function $onEmit(
         logFile: resolvePath(
             program.compilerOptions.outputPath ?? "./cadl-output",
             resolvedOptions.logFile
-        )
+        ),
+        skipSDKGeneration: resolvedOptions.skipSDKGeneration
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -118,16 +141,14 @@ export async function $onEmit(
                 )
             );
 
-            exec(`dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath}`, (error, stdout, stderr) => {
+            options.skipSDKGeneration !== true && exec(`dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath}`, (error, stdout, stderr) => {
                 if (error) {
                     console.log(`error: ${error.message}`);
                 }
                 else if (stderr) {
                     console.log(`stderr: ${stderr}`);
                 }
-                else if (stdout) {
-                    console.log(`stdout: ${stdout}`);
-                }
+                console.log(`stdout: ${stdout}`);
             });
         }
     }
