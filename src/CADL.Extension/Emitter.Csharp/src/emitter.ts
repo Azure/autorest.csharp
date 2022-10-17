@@ -71,11 +71,13 @@ import { exec } from "child_process";
 export interface NetEmitterOptions {
     outputFile: string;
     logFile: string;
+    runCodegen: 'true' | 'false';
 }
 
 const defaultOptions = {
     outputFile: "cadl.json",
-    logFile: "log.json"
+    logFile: "log.json",
+    runCodegen: "true"
 };
 
 export async function $onEmit(
@@ -91,7 +93,8 @@ export async function $onEmit(
         logFile: resolvePath(
             program.compilerOptions.outputPath ?? "./cadl-output",
             resolvedOptions.logFile
-        )
+        ),
+        runCodegen: resolvedOptions.runCodegen
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -115,16 +118,14 @@ export async function $onEmit(
                 )
             );
 
-            exec(`dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath}`, (error, stdout, stderr) => {
+            options.runCodegen === 'true' && exec(`dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath}`, (error, stdout, stderr) => {
                 if (error) {
                     console.log(`error: ${error.message}`);
                 }
                 else if (stderr) {
                     console.log(`stderr: ${stderr}`);
                 }
-                else if (stdout) {
-                    console.log(`stdout: ${stdout}`);
-                }
+                console.log(`stdout: ${stdout}`);
             });
         }
     }
