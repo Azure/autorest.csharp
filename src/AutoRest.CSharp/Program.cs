@@ -12,6 +12,7 @@ using AutoRest.CSharp.AutoRest.Communication.MessageHandling;
 using AutoRest.CSharp.AutoRest.Communication.Serialization;
 using AutoRest.CSharp.AutoRest.Plugins;
 using CommandLine;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp
 {
@@ -35,7 +36,7 @@ namespace AutoRest.CSharp
             // Initialize workspace in the background
             GeneratedCodeWorkspace.Initialize();
 
-            if (options.BasePath is not null)
+            if (options.ProjectPath is not null || options.Standalone is not null)
             {
                 if (options.ShouldDebug)
                 {

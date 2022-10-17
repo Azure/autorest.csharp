@@ -22,14 +22,26 @@ namespace AutoRest.CSharp.AutoRest.Communication
     {
         public static async Task RunAsync(CommandLineOptions options)
         {
-            var basePath = options.BasePath!;
-            var generatedPath = basePath.EndsWith("Generated", StringComparison.OrdinalIgnoreCase) ? basePath : Path.Combine(basePath, "src", "Generated");
+            string projectPath;
+            string outputPath;
+            bool wasProjectPathPassedIn = options.ProjectPath is not null;
+            if (options.Standalone is not null)
+            {
+                //TODO this is only here for back compat we should consider removing it
+                outputPath = options.Standalone;
+                projectPath = Path.Combine(options.Standalone, "../");
+            }
+            else
+            {
+                projectPath = options.ProjectPath!;
+                outputPath = Path.Combine(projectPath, "Generated");
+            }
 
-            var configurationPath = options.ConfigurationPath ?? Path.Combine(generatedPath, "Configuration.json");
-            LoadConfiguration(basePath, File.ReadAllText(configurationPath));
+            var configurationPath = options.ConfigurationPath ?? Path.Combine(outputPath, "Configuration.json");
+            LoadConfiguration(projectPath, outputPath, File.ReadAllText(configurationPath), wasProjectPathPassedIn);
 
-            var codeModelInputPath = Path.Combine(generatedPath, "CodeModel.yaml");
-            var cadlInputFile = Path.Combine(generatedPath, "cadl.json");
+            var codeModelInputPath = Path.Combine(outputPath, "CodeModel.yaml");
+            var cadlInputFile = Path.Combine(outputPath, "cadl.json");
 
             GeneratedCodeWorkspace workspace;
             if (File.Exists(cadlInputFile))
@@ -39,7 +51,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
                 if (options.IsNewProject)
                 {
-                    new CSharpProj().Execute(Configuration.Namespace ?? rootNamespace.Name, generatedPath);
+                    new CSharpProj().Execute(Configuration.Namespace ?? rootNamespace.Name, outputPath);
                 }
             }
             else if (File.Exists(codeModelInputPath))
@@ -50,12 +62,12 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 if (options.IsNewProject)
                 {
                     var codeModel = await codeModelTask;
-                    new CSharpProj().Execute(Configuration.Namespace ?? codeModel.Language.Default.Name, generatedPath);
+                    new CSharpProj().Execute(Configuration.Namespace ?? codeModel.Language.Default.Name, outputPath);
                 }
             }
             else
             {
-                throw new InvalidOperationException($"Neither CodeModel.yaml nor cadl.json exist in {generatedPath} folder.");
+                throw new InvalidOperationException($"Neither CodeModel.yaml nor cadl.json exist in {outputPath} folder.");
             }
 
 
@@ -65,7 +77,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 {
                     continue;
                 }
-                var filename = Path.Combine(generatedPath, file.Name);
+                var filename = Path.Combine(outputPath, file.Name);
                 Console.WriteLine($"Writing {filename}");
                 Directory.CreateDirectory(Path.GetDirectoryName(filename));
                 await File.WriteAllTextAsync(filename, file.Text);
@@ -148,7 +160,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
-        private static string? ReadStringOption(JsonElement root, string option)
+        private static string? ReadStringOption(JsonElement root, string option, string? defaultValue = null)
         {
             if (root.TryGetProperty(option, out JsonElement value))
             {
@@ -156,11 +168,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
             else
             {
-                return Configuration.GetDefaultOptionStringValue(option);
+                return defaultValue ?? Configuration.GetDefaultOptionStringValue(option);
             }
         }
 
-        internal static void LoadConfiguration(string basePath, string json)
+        internal static void LoadConfiguration(string projectPathDefault, string outputPath, string json, bool wasProjectPathPassedIn)
         {
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
@@ -168,7 +180,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
             foreach (var sharedSourceFolder in root.GetProperty(nameof(Configuration.SharedSourceFolders)).EnumerateArray())
             {
-                sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()!));
+                sharedSourceFolders.Add(Path.Combine(outputPath, sharedSourceFolder.GetString()!));
             }
 
             root.TryGetProperty(nameof(Configuration.Options.ProtocolMethodList), out var protocolMethodList);
@@ -177,7 +189,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 : Array.Empty<string>();
 
             Configuration.Initialize(
-                Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
+                Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
                 root.GetProperty(nameof(Configuration.Namespace)).GetString(),
                 root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
                 sharedSourceFolders.ToArray(),
@@ -191,7 +203,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
-                ReadStringOption(root, Configuration.Options.ProjectFolder)!,
+                ReadStringOption(root, Configuration.Options.ProjectFolder, wasProjectPathPassedIn ? projectPathDefault : null)!,
                 protocolMethods,
                 MgmtConfiguration.LoadConfiguration(root)
             );

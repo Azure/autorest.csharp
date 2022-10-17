@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.Input
             switch (option)
             {
                 case Options.ProjectFolder:
-                    return "./";
+                    return "../";
                 default:
                     return null;
             }

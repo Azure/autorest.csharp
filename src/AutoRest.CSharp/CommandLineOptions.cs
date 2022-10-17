@@ -10,13 +10,16 @@ namespace AutoRest.CSharp
 {
     internal class CommandLineOptions
     {
-        [Option(longName: "standalone", Required = false, Default = null, HelpText = "Path to the solution directory.")]
-        public string? BasePath { get; set; }
+        [Option('p', "project-path", SetName = "basePath", Required = false, Default = null, HelpText = "Path to the project directory.  This is used instead of --standalone")]
+        public string? ProjectPath { get; set; }
 
-        [Option(shortName: 'c', longName: "configuration", Required = false, Default = null, HelpText = "Path to the configuration file.")]
+        [Option('s', "standalone", SetName = "basePath", Required = false, Default = null, HelpText = "Path to the generated directory.")]
+        public string? Standalone { get; set; }
+
+        [Option('c', "configuration", Required = false, Default = null, HelpText = "Path to the configuration file.")]
         public string? ConfigurationPath { get; set; }
 
-        [Option(longName: "new-project", Required = false, Default = false, HelpText = "Generate a new solution folder project and project files.")]
+        [Option('n', "new-project", Required = false, Default = false, HelpText = "Generate a new solution folder project and project files.")]
         public bool IsNewProject { get; set; }
 
         [Option(longName: "debug", Required = false, Default = false, Hidden = true, HelpText = "Attempt to attach the debugger on execute.")]

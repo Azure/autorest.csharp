@@ -161,12 +161,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
 
-            var projectFile = $"../{Configuration.ProjectFolder}{defaultNamespace}";
+            var projectFile = defaultNamespace;
             if (isTestProject)
             {
                 projectFile += ".Tests";
             }
-            writeFile($"{projectFile}.csproj", csProjContent);
+            writeFile(Path.Combine(Configuration.ProjectFolder, $"{projectFile}.csproj"), csProjContent);
         }
     }
 }
