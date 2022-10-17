@@ -87,7 +87,7 @@
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "RoundTrip"
   },
   {
    "$id": "15",
