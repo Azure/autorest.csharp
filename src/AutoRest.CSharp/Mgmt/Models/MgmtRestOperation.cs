@@ -363,7 +363,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <param name="resourceScope"></param>
         /// <param name="operationScope"></param>
         /// <returns></returns>
-        private static bool DoesScopeCover(RequestPath operationScope, RequestPath resourceScope)
+        private static bool DoesScopeCover(RequestPath operationScope, RequestPath resourceScope, RequestPath operationPath, RequestPath resourcePath)
         {
             if (operationScope.Equals(resourceScope))
                 return true;
@@ -371,7 +371,14 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (operationScope.IsAncestorOf(resourceScope))
                 return true;
 
-            // TODO -- handle the parameterized scope cases
+            // if resource has a parameterized scope, operation does not, we need to check if the scope type of the operation is included by the scope of resource
+            if (resourceScope.IsParameterizedScope() && !operationScope.IsParameterizedScope())
+            {
+                var resourceScopeTypes = resourceScope.GetParameterizedScopeResourceTypes();
+                var operationScopeType = operationScope.GetResourceType();
+                if (resourceScopeTypes.Contains(ResourceTypeSegment.Any) || resourceScopeTypes.Contains(operationScopeType))
+                    return true;
+            }
             return false;
         }
 
@@ -389,22 +396,29 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
         }
 
-        private static bool TryGetListMatch(HttpMethod method, RequestPath resourcePath, RequestPath requestPath, bool isList, out ResourceMatchType matchType)
+        private static bool TryGetListMatch(HttpMethod method, RequestPath resourcePath, RequestPath operationPath, bool isList, out ResourceMatchType matchType)
         {
             matchType = ResourceMatchType.None;
             if (!isList)
                 return false;
             if (method != HttpMethod.Get)
                 return false;
-            var requestLastSegment = requestPath.Last();
-            if (!requestLastSegment.IsConstant)
+            var operationLastSegment = operationPath.Last();
+            if (!operationLastSegment.IsConstant)
                 return false;
             SeparateScope(resourcePath, out var resourceScopePath, out var trimmedResourcePath);
-            SeparateScope(requestPath, out var operationScopePath, out var trimmedOperationPath);
+            SeparateScope(operationPath, out var operationScopePath, out var trimmedOperationPath);
 
-            if (trimmedResourcePath.Count > 0 && trimmedOperationPath.Equals(new RequestPath(trimmedResourcePath.SkipLast(1))) && DoesScopeCover(operationScopePath, resourceScopePath))
+            if (trimmedResourcePath.Count > 0 && trimmedOperationPath.Equals(new RequestPath(trimmedResourcePath.SkipLast(1))) && DoesScopeCover(operationScopePath, resourceScopePath, operationPath, resourcePath))
             {
-                matchType = DoesScopeCover(resourceScopePath, operationScopePath) ? ResourceMatchType.ParentList : ResourceMatchType.AncestorList;
+                matchType = (resourceScopePath.IsParameterizedScope(), operationScopePath.IsParameterizedScope()) switch
+                {
+                    // if they are neither scope, we just check if the scope is the same. If it is the same, it is parent list, otherwise it is ancestor list.
+                    (false, false) => resourceScopePath.GetResourceType() == operationScopePath.GetResourceType() ? ResourceMatchType.ParentList : ResourceMatchType.AncestorList,
+                    // if resource has a scope, and the operation does not, and since we are here, the scope of resource covers the scope of the operation, this should always be a parent list (it should be a branch in the parent list operation
+                    (true, false) => ResourceMatchType.ParentList,
+                    _ => ResourceMatchType.AncestorList,
+                };
                 return true;
             }
 

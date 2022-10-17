@@ -20,9 +20,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             Configuration.Initialize(".", null, null, Array.Empty<string>(), true, true, true, true, true, true, false, false, false, false, "/..", Array.Empty<string>(), mgmtConfiguration);
         }
 
-        private RequestPath GetFromString(string path) => new RequestPath(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => new Segment(TrimRawSegment(segment), isConstant: !segment.Contains('{'))).ToList());
+        private static RequestPath GetFromString(string path) => new RequestPath(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => GetSegmentFromString(segment)).ToList());
 
-        private string TrimRawSegment(string segment) => segment.TrimStart('{').TrimEnd('}');
+        private static Segment GetSegmentFromString(string str)
+        {
+            var trimmed = TrimRawSegment(str);
+            var isScope = trimmed == "scope";
+            return new Segment(trimmed, escape: !isScope, isConstant: !isScope && !str.Contains('{'));
+        }
+
+        private static string TrimRawSegment(string segment) => segment.TrimStart('{').TrimEnd('}');
 
         private void TestPair(ResourceMatchType expected, HttpMethod httpMethod, string resourcePathStr, string requestPathStr, bool isList)
         {
@@ -30,6 +37,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             RequestPath requestPath = GetFromString(requestPathStr);
             Assert.AreEqual(expected, MgmtRestOperation.GetMatchType(httpMethod, resourcePath, requestPath, isList));
         }
+
+        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+            "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}",
+            "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/eventSubscriptions")]
+        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+            "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}",
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/providers/Microsoft.EventGrid/eventSubscriptions")]
+        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+            "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}",
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/Microsoft.EventGrid/eventSubscriptions")]
+        public void ValidateScopeListMatching(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.ChildList, HttpMethod.Get, true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}",
