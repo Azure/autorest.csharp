@@ -39,14 +39,14 @@ namespace CadlFirstTest
         /// <summary> Initializes a new instance of Demo2Client. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public Demo2Client(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlfirsttestClientOptions())
+        public Demo2Client(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlFirstTestClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of Demo2Client. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public Demo2Client(TokenCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlfirsttestClientOptions())
+        public Demo2Client(TokenCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlFirstTestClientOptions())
         {
         }
 
@@ -55,11 +55,11 @@ namespace CadlFirstTest
         /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public Demo2Client(AzureKeyCredential credential, Uri endpoint, CadlfirsttestClientOptions options)
+        public Demo2Client(AzureKeyCredential credential, Uri endpoint, CadlFirstTestClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new CadlfirsttestClientOptions();
+            options ??= new CadlFirstTestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
@@ -73,11 +73,11 @@ namespace CadlFirstTest
         /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public Demo2Client(TokenCredential credential, Uri endpoint, CadlfirsttestClientOptions options)
+        public Demo2Client(TokenCredential credential, Uri endpoint, CadlFirstTestClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new CadlfirsttestClientOptions();
+            options ??= new CadlFirstTestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;

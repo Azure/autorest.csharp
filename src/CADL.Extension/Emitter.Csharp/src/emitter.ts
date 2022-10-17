@@ -13,7 +13,9 @@ import {
     ModelProperty,
     Operation,
     Program,
-    resolvePath
+    resolvePath,
+    createCadlLibrary,
+    JSONSchemaType
 } from "@cadl-lang/compiler";
 import {
     getAllRoutes,
@@ -65,16 +67,49 @@ import { OperationPaging } from "./type/OperationPaging.js";
 import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
+import fs from 'fs'
+import path from 'node:path'
+import { Configuration } from "./type/Configuration.js";
 
 export interface NetEmitterOptions {
+    "sdk-folder": string;
     outputFile: string;
     logFile: string;
+    "namespace"?: string;
+    "library-name"?: string;
+    "shared-source-folders"?: string[];
+    "single-top-level-client"?: boolean;
 }
 
 const defaultOptions = {
+    "sdk-folder": ".",
     outputFile: "cadl.json",
-    logFile: "log.json"
+    logFile: "log.json",
+    "shared-source-folders": ["..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared", "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"]
 };
+
+const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+      "sdk-folder": { type: "string", nullable: true },
+      outputFile: { type: "string", nullable: true },
+      logFile: { type: "string", nullable: true },
+      "namespace": {type: "string", nullable: true},
+      "library-name": {type: "string", nullable: true},
+      "shared-source-folders": {type: "array", items: {type: "string"}, nullable: true},
+      "single-top-level-client": {type: "boolean", nullable: true},
+    },
+    required: [],
+  };
+  
+export const $lib = createCadlLibrary({
+name: "cadl-csharp",
+diagnostics: {},
+emitter: {
+    options: NetEmitterOptionsSchema,
+},
+});
 
 export async function $onEmit(
     program: Program,
@@ -84,18 +119,20 @@ export async function $onEmit(
     const options: NetEmitterOptions = {
         outputFile: resolvePath(
             program.compilerOptions.outputPath ?? "./cadl-output",
+            emitterOptions["sdk-folder"],
             resolvedOptions.outputFile
         ),
         logFile: resolvePath(
             program.compilerOptions.outputPath ?? "./cadl-output",
             resolvedOptions.logFile
-        )
+        ),
+        "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? ".")
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
         const namespace =
-            getServiceNamespaceString(program)?.toLowerCase() || "";
+            getServiceNamespaceString(program) || "";
         const outPath =
             version.trim().length > 0
                 ? resolvePath(
@@ -106,10 +143,32 @@ export async function $onEmit(
         const root = createModel(program);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
+            const dir = path.dirname(outPath);
+
+            if (!fs.existsSync(dir)){
+                fs.mkdirSync(dir, { recursive: true });
+            }
             await program.host.writeFile(
                 outPath,
                 prettierOutput(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
+                )
+            );
+
+            //emit configuration.json
+            const configurationOutPath = resolvePath(dir, "Configuration.json");
+            const configurations = {
+                OutputFolder: ".",
+                Namespace: resolvedOptions.namespace ?? namespace,
+                LibraryName: resolvedOptions["library-name"] ?? null,
+                SharedSourceFolders: resolvedOptions["shared-source-folders"] ?? [],
+                SingleTopLevelClient: resolvedOptions["single-top-level-client"]
+            } as Configuration;
+
+            await program.host.writeFile(
+                configurationOutPath,
+                prettierOutput(
+                    JSON.stringify(configurations, null, 2)
                 )
             );
         }
@@ -177,7 +236,7 @@ function createModel(program: Program): any {
         } as InputConstant
     };
     const namespace =
-        getServiceNamespaceString(program)?.toLowerCase() || "client";
+        getServiceNamespaceString(program) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
     let auth = undefined;
     if (authentication) {
