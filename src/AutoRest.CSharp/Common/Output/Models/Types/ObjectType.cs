@@ -22,14 +22,17 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IEnumerable<ModelMethodDefinition>? _methods;
         private ObjectTypeDiscriminator? _discriminator;
 
-        protected ObjectType(BuildContext context) : base(context)
-        {
-        }
-        protected ObjectType(string defaultNamespace, SourceInputModel? sourceInputModel):base(defaultNamespace, sourceInputModel)
+        protected ObjectType(BuildContext context)
+            : base(context)
         {
         }
 
-        public bool IsStruct => ExistingType?.IsValueType == true;
+        protected ObjectType(string defaultNamespace, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
+        {
+        }
+
+        public bool IsStruct => ExistingType?.IsValueType ?? false;
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 

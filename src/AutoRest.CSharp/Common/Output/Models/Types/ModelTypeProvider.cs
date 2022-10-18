@@ -234,14 +234,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Constant? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
-                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
-                {
-                    // Turn constants into initializers
-                    initializationValue = constantSchema.Value.Value != null ?
-                        BuilderHelpers.ParseConstant(constantSchema.Value.Value, propertyType) :
-                        Constant.NewInstanceOf(propertyType);
-                }
-                else if (IsStruct || parameterMap.ContainsKey(property.Declaration.Name.FirstCharToLowerCase()))
+                if (IsStruct || parameterMap.ContainsKey(property.Declaration.Name.FirstCharToLowerCase()))
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
@@ -291,7 +284,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override CSharpType? CreateInheritedType()
         {
             if (_inputModel.BaseModel is not null)
-                return new CSharpType(new ModelTypeProvider(_inputModel.BaseModel!, DefaultNamespace, null, _typeFactory));
+                return _typeFactory.CreateType(_inputModel.BaseModel!);
 
             return null;
         }

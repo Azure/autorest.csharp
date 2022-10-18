@@ -111,7 +111,6 @@ export async function $onEmit(
     program: Program,
     emitterOptions: NetEmitterOptions
 ) {
-    console.info("Hello Worldx");
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
     const options: NetEmitterOptions = {
         outputFile: resolvePath(
