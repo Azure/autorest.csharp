@@ -195,7 +195,7 @@ export async function $onEmit(
                 prettierOutput(JSON.stringify(configurations, null, 2))
             );
             if (options.skipSDKGeneration !== true) {
-                let command = `dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath} --new-project ${options.newProject}`;
+                let command = `dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${outputFolder} --new-project ${options.newProject}`;
                 if (options.configurationPath) {
                     command = `${command} -c ${options.configurationPath}`;
                 }
