@@ -12,7 +12,7 @@ using Property.Optional;
 
 namespace CadlRanchProjects.Tests
 {
-    public class property_optional : CadlRanchTestBase
+    public class PropertyOptionalTests : CadlRanchTestBase
     {
         [Test]
         public Task Models_Property_Optional_String_getAll() => Test(async (host) =>
