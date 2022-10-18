@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    createCadlLibrary,
     DecoratedType,
     getDoc,
     getServiceNamespace,
@@ -9,6 +10,7 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    JSONSchemaType,
     Model,
     ModelProperty,
     Operation,
@@ -65,16 +67,45 @@ import { OperationPaging } from "./type/OperationPaging.js";
 import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
+import { dllFilePath } from "@autorest/csharp";
+import { exec } from "child_process";
 
 export interface NetEmitterOptions {
     outputFile: string;
     logFile: string;
+    skipSDKGeneration: boolean;
+    newProject: boolean;
+    configurationPath: string;
 }
 
 const defaultOptions = {
     outputFile: "cadl.json",
-    logFile: "log.json"
+    logFile: "log.json",
+    skipSDKGeneration: false,
+    newProject: false,
+    configurationPath: null
 };
+
+const EmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+        outputFile: { type: "string", nullable: true },
+        logFile: { type: "string", nullable: true },
+        skipSDKGeneration: { type: "boolean", nullable: true },
+        newProject: { type: "boolean", nullable: true },
+        configurationPath: { type: "string", nullable: true }
+    },
+    required: [],
+};
+
+export const $lib = createCadlLibrary({
+    name: "CSharpEmitter",
+    diagnostics: {},
+    emitter: {
+        options: EmitterOptionsSchema,
+    },
+});
 
 export async function $onEmit(
     program: Program,
@@ -90,7 +121,10 @@ export async function $onEmit(
         logFile: resolvePath(
             program.compilerOptions.outputPath ?? "./cadl-output",
             resolvedOptions.logFile
-        )
+        ),
+        skipSDKGeneration: resolvedOptions.skipSDKGeneration,
+        newProject: resolvedOptions.newProject,
+        configurationPath: resolvedOptions.configurationPath
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -100,8 +134,8 @@ export async function $onEmit(
         const outPath =
             version.trim().length > 0
                 ? resolvePath(
-                      options.outputFile?.replace(".json", `.${version}.json`)
-                  )
+                    options.outputFile?.replace(".json", `.${version}.json`)
+                )
                 : resolvePath(options.outputFile);
 
         const root = createModel(program);
@@ -113,6 +147,23 @@ export async function $onEmit(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
             );
+
+            if (options.skipSDKGeneration !== true) {
+                let command = `dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath} --new-project ${options.newProject}`;
+                if (options.configurationPath) {
+                    command = `${command} -c ${options.configurationPath}`;
+                }
+
+                exec(command, (error, stdout, stderr) => {
+                    if (error) {
+                        console.log(`error: ${error.message}`);
+                    }
+                    else if (stderr) {
+                        console.log(`stderr: ${stderr}`);
+                    }
+                    console.log(`stdout: ${stdout}`);
+                });
+            }            
         }
     }
 }
@@ -376,9 +427,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                      Type: inputType,
-                      Value: mediaTypes[0]
-                  } as InputConstant)
+                    Type: inputType,
+                    Value: mediaTypes[0]
+                } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -595,8 +646,8 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVersion
-            ? InputOperationParameterKind.Client
-            : InputOperationParameterKind.Method;
+                ? InputOperationParameterKind.Client
+                : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
