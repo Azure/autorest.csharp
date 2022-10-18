@@ -38,7 +38,7 @@ export function resolveServers(
     return servers.map((server) => {
         const parameters: InputParameter[] = [];
         let url: string = server.url;
-        let endpoint: string = url
+        const endpoint: string = url
             .replace("http://", "")
             .replace("https://", "")
             .split("/")[0];

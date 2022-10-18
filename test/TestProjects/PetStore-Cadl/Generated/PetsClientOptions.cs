@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace CadlPetStore
+namespace PetStore
 {
     /// <summary> Client options for PetsClient. </summary>
     public partial class PetsClientOptions : ClientOptions

@@ -15,9 +15,7 @@ import {
     ModelProperty,
     Operation,
     Program,
-    resolvePath,
-    createCadlLibrary,
-    JSONSchemaType
+    resolvePath
 } from "@cadl-lang/compiler";
 import {
     getAllRoutes,
@@ -69,8 +67,8 @@ import { OperationPaging } from "./type/OperationPaging.js";
 import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
-import fs from 'fs'
-import path from 'node:path'
+import fs from "fs";
+import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
 import { dllFilePath } from "@autorest/csharp";
 import { exec } from "child_process";
@@ -79,7 +77,7 @@ export interface NetEmitterOptions {
     "sdk-folder": string;
     outputFile: string;
     logFile: string;
-    "namespace"?: string;
+    namespace?: string;
     "library-name"?: string;
     "shared-source-folders"?: string[];
     "single-top-level-client"?: boolean;
@@ -91,31 +89,38 @@ const defaultOptions = {
     outputFile: "cadl.json",
     logFile: "log.json",
     skipSDKGeneration: false,
-    "shared-source-folders": ["..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared", "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"]
+    "shared-source-folders": [
+        resolvePath(dllFilePath, "..", "Generator.Shared"),
+        resolvePath(dllFilePath, "..", "Azure.Core.Shared")
+    ]
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     type: "object",
     additionalProperties: false,
     properties: {
-      "sdk-folder": { type: "string", nullable: true },
-      outputFile: { type: "string", nullable: true },
-      logFile: { type: "string", nullable: true },
-      "namespace": {type: "string", nullable: true},
-      "library-name": {type: "string", nullable: true},
-      "shared-source-folders": {type: "array", items: {type: "string"}, nullable: true},
-      "single-top-level-client": {type: "boolean", nullable: true},
-      skipSDKGeneration: {type: "boolean", nullable: true}
+        "sdk-folder": { type: "string", nullable: true },
+        outputFile: { type: "string", nullable: true },
+        logFile: { type: "string", nullable: true },
+        namespace: { type: "string", nullable: true },
+        "library-name": { type: "string", nullable: true },
+        "shared-source-folders": {
+            type: "array",
+            items: { type: "string" },
+            nullable: true
+        },
+        "single-top-level-client": { type: "boolean", nullable: true },
+        skipSDKGeneration: { type: "boolean", nullable: true }
     },
-    required: [],
-  };
-  
+    required: []
+};
+
 export const $lib = createCadlLibrary({
-name: "cadl-csharp",
-diagnostics: {},
-emitter: {
-    options: NetEmitterOptionsSchema,
-},
+    name: "cadl-csharp",
+    diagnostics: {},
+    emitter: {
+        options: NetEmitterOptionsSchema
+    }
 });
 
 export async function $onEmit(
@@ -123,29 +128,33 @@ export async function $onEmit(
     emitterOptions: NetEmitterOptions
 ) {
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
+    const resolvedSharedFolders: string[] = [];
+    const outputFolder = resolvePath(
+        program.compilerOptions.outputPath ?? "./cadl-output",
+        emitterOptions["sdk-folder"]
+    );
+    for (const sharedFolder of resolvedOptions["shared-source-folders"]) {
+        resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder));
+    }
     const options: NetEmitterOptions = {
-        outputFile: resolvePath(
-            program.compilerOptions.outputPath ?? "./cadl-output",
-            emitterOptions["sdk-folder"],
-            resolvedOptions.outputFile
-        ),
+        outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
         logFile: resolvePath(
             program.compilerOptions.outputPath ?? "./cadl-output",
             resolvedOptions.logFile
         ),
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
-        skipSDKGeneration: resolvedOptions.skipSDKGeneration
+        skipSDKGeneration: resolvedOptions.skipSDKGeneration,
+        "shared-source-folders": resolvedSharedFolders
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const namespace =
-            getServiceNamespaceString(program) || "";
+        const namespace = getServiceNamespaceString(program) || "";
         const outPath =
             version.trim().length > 0
                 ? resolvePath(
-                    options.outputFile?.replace(".json", `.${version}.json`)
-                )
+                      options.outputFile?.replace(".json", `.${version}.json`)
+                  )
                 : resolvePath(options.outputFile);
 
         const root = createModel(program);
@@ -153,7 +162,7 @@ export async function $onEmit(
         if (root) {
             const dir = path.dirname(outPath);
 
-            if (!fs.existsSync(dir)){
+            if (!fs.existsSync(dir)) {
                 fs.mkdirSync(dir, { recursive: true });
             }
             await program.host.writeFile(
@@ -163,34 +172,36 @@ export async function $onEmit(
                 )
             );
 
-<<<<<<< HEAD
             //emit configuration.json
             const configurationOutPath = resolvePath(dir, "Configuration.json");
             const configurations = {
                 OutputFolder: ".",
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
-                SharedSourceFolders: resolvedOptions["shared-source-folders"] ?? [],
+                SharedSourceFolders: options["shared-source-folders"] ?? [],
                 SingleTopLevelClient: resolvedOptions["single-top-level-client"]
             } as Configuration;
 
             await program.host.writeFile(
                 configurationOutPath,
-                prettierOutput(
-                    JSON.stringify(configurations, null, 2)
-                )
+                prettierOutput(JSON.stringify(configurations, null, 2))
             );
-=======
-            options.skipSDKGeneration !== true && exec(`dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath}`, (error, stdout, stderr) => {
-                if (error) {
-                    console.log(`error: ${error.message}`);
-                }
-                else if (stderr) {
-                    console.log(`stderr: ${stderr}`);
-                }
-                console.log(`stdout: ${stdout}`);
-            });
->>>>>>> 06522ddfd880c22f70e62172574d7e976344938c
+            options.skipSDKGeneration !== true &&
+                exec(
+                    `dotnet ${resolvePath(
+                        dllFilePath
+                    )} --no-build --standalone ${
+                        program.compilerOptions.outputPath
+                    }`,
+                    (error, stdout, stderr) => {
+                        if (error) {
+                            console.log(`error: ${error.message}`);
+                        } else if (stderr) {
+                            console.log(`stderr: ${stderr}`);
+                        }
+                        console.log(`stdout: ${stdout}`);
+                    }
+                );
         }
     }
 }
@@ -255,8 +266,7 @@ function createModel(program: Program): any {
             Value: version
         } as InputConstant
     };
-    const namespace =
-        getServiceNamespaceString(program) || "client";
+    const namespace = getServiceNamespaceString(program) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
     let auth = undefined;
     if (authentication) {
@@ -376,7 +386,7 @@ function createModel(program: Program): any {
     ): Set<Operation> {
         const lroMonitorOperations = new Set<Operation>();
         for (const operation of routes) {
-            let operationLink = getOperationLink(
+            const operationLink = getOperationLink(
                 program,
                 operation.operation,
                 "polling"
@@ -454,9 +464,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                    Type: inputType,
-                    Value: mediaTypes[0]
-                } as InputConstant)
+                      Type: inputType,
+                      Value: mediaTypes[0]
+                  } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -673,8 +683,8 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVersion
-                ? InputOperationParameterKind.Client
-                : InputOperationParameterKind.Method;
+            ? InputOperationParameterKind.Client
+            : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
@@ -786,7 +796,7 @@ function loadOperation(
     ): OperationLongRunning | undefined {
         if (!isLroOperation(program, op.operation)) return undefined;
 
-        let finalResponse = loadLongRunningFinalResponse(
+        const finalResponse = loadLongRunningFinalResponse(
             program,
             op,
             resourceOperation

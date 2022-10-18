@@ -4,7 +4,7 @@
 export interface Configuration {
     OutputFolder: string;
     Namespace: string;
-    LibraryName: string| null;
+    LibraryName: string | null;
     SharedSourceFolders: string[];
     SingleTopLevelClient?: boolean;
 }
