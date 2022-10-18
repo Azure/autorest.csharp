@@ -74,6 +74,7 @@ export interface NetEmitterOptions {
     outputFile: string;
     logFile: string;
     skipSDKGeneration: boolean;
+    projectPath: string;
     newProject: boolean;
     configurationPath: string;
 }
@@ -82,6 +83,7 @@ const defaultOptions = {
     outputFile: "cadl.json",
     logFile: "log.json",
     skipSDKGeneration: false,
+    projectPath: null,
     newProject: false,
     configurationPath: null
 };
@@ -93,6 +95,7 @@ const EmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         outputFile: { type: "string", nullable: true },
         logFile: { type: "string", nullable: true },
         skipSDKGeneration: { type: "boolean", nullable: true },
+        projectPath: { type: "string", nullable: true },
         newProject: { type: "boolean", nullable: true },
         configurationPath: { type: "string", nullable: true }
     },
@@ -122,6 +125,7 @@ export async function $onEmit(
             resolvedOptions.logFile
         ),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
+        projectPath: resolvedOptions.projectPath,
         newProject: resolvedOptions.newProject,
         configurationPath: resolvedOptions.configurationPath
     };
@@ -148,7 +152,12 @@ export async function $onEmit(
             );
 
             if (options.skipSDKGeneration !== true) {
-                let command = `dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath} --new-project ${options.newProject}`;
+                if (options.projectPath == null) {
+                    console.error("Please provide a project path");
+                    return;
+                }
+
+                let command = `dotnet ${resolvePath(dllFilePath)} -p ${options.projectPath} -n ${options.newProject}`;
                 if (options.configurationPath) {
                     command = `${command} -c ${options.configurationPath}`;
                 }
