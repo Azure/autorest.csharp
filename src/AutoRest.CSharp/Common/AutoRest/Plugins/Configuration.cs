@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.Input
 {
     internal static class Configuration
     {
+        internal static readonly string ProjectFolderDefault = "../";
+
         public static class Options
         {
             public const string OutputFolder = "output-folder";
@@ -33,7 +35,7 @@ namespace AutoRest.CSharp.Input
 
         public static void Initialize(string outputFolder, string? ns, string? name, string[] sharedSourceFolders,
             bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference,
-            bool generation1ConvenienceClient, bool singleTopLevelClient, bool skipSerializationFormatXml, bool disablePaginationTopRenaming, string projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
+            bool generation1ConvenienceClient, bool singleTopLevelClient, bool skipSerializationFormatXml, bool disablePaginationTopRenaming, string? projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
         {
             _outputFolder = outputFolder;
             Namespace = ns;
@@ -47,7 +49,17 @@ namespace AutoRest.CSharp.Input
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
-            _projectFolder = Path.IsPathRooted(projectFolder) ? Path.GetRelativePath(outputFolder, projectFolder) : projectFolder;
+            projectFolder ??= ProjectFolderDefault;
+            if (Path.IsPathRooted(projectFolder))
+            {
+                _absoluteProjectFolder = projectFolder;
+                projectFolder = Path.GetRelativePath(outputFolder, projectFolder);
+            }
+            else
+            {
+                _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
+            }
+            _relativeProjectFolder = projectFolder;
             _protocolMethodList = protocolMethodList;
             SkipSerializationFormatXml = skipSerializationFormatXml;
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
@@ -78,8 +90,10 @@ namespace AutoRest.CSharp.Input
         private static MgmtConfiguration? _mgmtConfiguration;
         public static MgmtConfiguration MgmtConfiguration => _mgmtConfiguration ?? throw new InvalidOperationException("Configuration has not been initialized");
 
-        private static string? _projectFolder;
-        public static string ProjectFolder => _projectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
+        private static string? _relativeProjectFolder;
+        public static string RelativeProjectFolder => _relativeProjectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
+        private static string? _absoluteProjectFolder;
+        public static string AbsoluteProjectFolder => _absoluteProjectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         public static void Initialize(IPluginCommunication autoRest)
         {
@@ -98,7 +112,7 @@ namespace AutoRest.CSharp.Input
                 singleTopLevelClient: GetOptionValue(autoRest, Options.SingleTopLevelClient),
                 skipSerializationFormatXml: GetOptionValue(autoRest, Options.SkipSerializationFormatXml),
                 disablePaginationTopRenaming: GetOptionValue(autoRest, Options.DisablePaginationTopRenaming),
-                projectFolder: GetOptionStringValue(autoRest, Options.ProjectFolder, TrimFileSuffix),
+                projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
@@ -133,23 +147,6 @@ namespace AutoRest.CSharp.Input
                     return false;
                 case Options.DisablePaginationTopRenaming:
                     return false;
-                default:
-                    return null;
-            }
-        }
-
-        private static string GetOptionStringValue(IPluginCommunication autoRest, string option, Func<string, string>? func)
-        {
-            var projectFolder = autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult();
-            return projectFolder == null ? GetDefaultOptionStringValue(option)! : (func == null ? projectFolder : func(projectFolder));
-        }
-
-        public static string? GetDefaultOptionStringValue(string option)
-        {
-            switch (option)
-            {
-                case Options.ProjectFolder:
-                    return "../";
                 default:
                     return null;
             }
