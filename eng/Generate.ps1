@@ -241,6 +241,7 @@ $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 $cadlRanchProjectNames =
     'api-key',
     'extensible-enums',
+    'property-optional',
     'property-types'
 
 if (!($Exclude -contains "CadlRanchProjects"))
