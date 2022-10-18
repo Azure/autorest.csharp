@@ -23,6 +23,35 @@ namespace ModelsInCadl
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredModel");
             writer.WriteObjectValue(RequiredModel);
+            writer.WritePropertyName("requiredIntCollection");
+            writer.WriteStartArray();
+            foreach (var item in RequiredIntCollection)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredStringCollection");
+            writer.WriteStartArray();
+            foreach (var item in RequiredStringCollection)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredModelCollection");
+            writer.WriteStartArray();
+            foreach (var item in RequiredModelCollection)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredModelRecord");
+            writer.WriteStartObject();
+            foreach (var item in RequiredModelRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 

@@ -27,6 +27,37 @@ namespace ModelsInCadl
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredExtensibleEnum");
             writer.WriteStringValue(RequiredExtensibleEnum.ToString());
+            writer.WritePropertyName("requiredCollection");
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollection)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredIntRecord");
+            writer.WriteStartObject();
+            foreach (var item in RequiredIntRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("requiredStringRecord");
+            writer.WriteStartObject();
+            foreach (var item in RequiredStringRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("requiredModelRecord");
+            writer.WriteStartObject();
+            foreach (var item in RequiredModelRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 

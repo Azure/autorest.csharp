@@ -17,6 +17,22 @@ namespace ModelsInCadl
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("optionalReadOnlyIntRecord");
+            writer.WriteStartObject();
+            foreach (var item in OptionalReadOnlyIntRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("optionalReadOnlyStringRecord");
+            writer.WriteStartObject();
+            foreach (var item in OptionalReadOnlyStringRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 

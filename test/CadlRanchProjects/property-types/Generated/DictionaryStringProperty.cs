@@ -24,7 +24,7 @@ namespace Models.Property.Types
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
-        public IDictionary<string, string> Property { get; set; }
+        /// <summary> Gets the property. </summary>
+        public IDictionary<string, string> Property { get; }
     }
 }

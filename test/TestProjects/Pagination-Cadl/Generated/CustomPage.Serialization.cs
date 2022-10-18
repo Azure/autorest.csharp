@@ -18,6 +18,13 @@ namespace Azure.Core.Foundations
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("value");
+            writer.WriteStartArray();
+            foreach (var item in Value)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))
             {
                 writer.WritePropertyName("nextLink");

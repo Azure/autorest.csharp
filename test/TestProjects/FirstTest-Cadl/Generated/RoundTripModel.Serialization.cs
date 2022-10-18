@@ -21,6 +21,21 @@ namespace CadlFirstTest
             writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt");
             writer.WriteNumberValue(RequiredInt);
+            writer.WritePropertyName("requiredCollection");
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollection)
+            {
+                writer.WriteStringValue(item.ToSerialString());
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredDictionary");
+            writer.WriteStartObject();
+            foreach (var item in RequiredDictionary)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value.ToString());
+            }
+            writer.WriteEndObject();
             writer.WritePropertyName("requiredModel");
             writer.WriteObjectValue(RequiredModel);
             writer.WriteEndObject();

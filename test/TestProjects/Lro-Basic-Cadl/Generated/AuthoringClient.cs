@@ -43,185 +43,26 @@ namespace LroBasicCadl
             _apiVersion = options.Version;
         }
 
-        /// <summary> Get a OperationStatusResource. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="operationId"> The String to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="operationId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="operationId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call CreateProjectStatusMonitorAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var client = new AuthoringClient();
-        /// 
-        /// Response response = await client.CreateProjectStatusMonitorAsync("<id>", "<operationId>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("status").ToString());
-        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-        /// Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-        /// Console.WriteLine(result.GetProperty("operationId").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>OperationStatusResource</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        ///   status: &quot;InProgress&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Canceled&quot;, # Required.
-        ///   error: {
-        ///     code: string, # Required.
-        ///     message: string, # Required.
-        ///     target: string, # Optional.
-        ///     details: [Error], # Required.
-        ///     innererror: {
-        ///       code: string, # Required.
-        ///       innererror: InnerError, # Optional.
-        ///     }, # Optional.
-        ///   }, # Optional.
-        ///   operationId: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual async Task<Response> CreateProjectStatusMonitorAsync(string id, string operationId, RequestContext context = null)
-        {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));
-
-            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.CreateProjectStatusMonitor");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateCreateProjectStatusMonitorRequest(id, operationId, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get a OperationStatusResource. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="operationId"> The String to use. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="operationId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="operationId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call CreateProjectStatusMonitor with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var client = new AuthoringClient();
-        /// 
-        /// Response response = client.CreateProjectStatusMonitor("<id>", "<operationId>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("status").ToString());
-        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-        /// Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-        /// Console.WriteLine(result.GetProperty("operationId").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>OperationStatusResource</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        ///   status: &quot;InProgress&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Canceled&quot;, # Required.
-        ///   error: {
-        ///     code: string, # Required.
-        ///     message: string, # Required.
-        ///     target: string, # Optional.
-        ///     details: [Error], # Required.
-        ///     innererror: {
-        ///       code: string, # Required.
-        ///       innererror: InnerError, # Optional.
-        ///     }, # Optional.
-        ///   }, # Optional.
-        ///   operationId: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual Response CreateProjectStatusMonitor(string id, string operationId, RequestContext context = null)
-        {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));
-
-            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.CreateProjectStatusMonitor");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateCreateProjectStatusMonitorRequest(id, operationId, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> Creates a Project. </summary>
-        /// <param name="project"> The Project to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="project"/> is null. </exception>
-        public virtual async Task<Response> CreateProjectAsync(Project project, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(project, nameof(project));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await CreateProjectAsync(project.ToRequestContent(), context).ConfigureAwait(false);
-            return response;
-        }
-
-        /// <summary> Creates a Project. </summary>
-        /// <param name="project"> The Project to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="project"/> is null. </exception>
-        public virtual Response CreateProject(Project project, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(project, nameof(project));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = CreateProject(project.ToRequestContent(), context);
-            return response;
-        }
-
-        /// <summary> Creates a Project. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <example>
-        /// This sample shows how to call CreateProjectAsync.
+        /// This sample shows how to call CreateProjectAsync with required parameters.
         /// <code><![CDATA[
         /// var client = new AuthoringClient();
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.CreateProjectAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
-        /// This sample shows how to call CreateProjectAsync with all request content.
+        /// This sample shows how to call CreateProjectAsync with all parameters and request content.
         /// <code><![CDATA[
         /// var client = new AuthoringClient();
         /// 
@@ -230,8 +71,10 @@ namespace LroBasicCadl
         ///     name = "<name>",
         /// };
         /// 
-        /// Response response = await client.CreateProjectAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = await operation.WaitForCompletionResponseAsync();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -248,7 +91,7 @@ namespace LroBasicCadl
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> CreateProjectAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> CreateProjectAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -257,7 +100,7 @@ namespace LroBasicCadl
             try
             {
                 using HttpMessage message = CreateCreateProjectRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "AuthoringClient.CreateProject", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -267,22 +110,25 @@ namespace LroBasicCadl
         }
 
         /// <summary> Creates a Project. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
+        /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <example>
-        /// This sample shows how to call CreateProject.
+        /// This sample shows how to call CreateProject with required parameters.
         /// <code><![CDATA[
         /// var client = new AuthoringClient();
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.CreateProject(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
-        /// This sample shows how to call CreateProject with all request content.
+        /// This sample shows how to call CreateProject with all parameters and request content.
         /// <code><![CDATA[
         /// var client = new AuthoringClient();
         /// 
@@ -291,8 +137,10 @@ namespace LroBasicCadl
         ///     name = "<name>",
         /// };
         /// 
-        /// Response response = client.CreateProject(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
+        /// var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+        /// 
+        /// var response = operation.WaitForCompletionResponse();
+        /// Console.WriteLine(response.Status)
         /// ]]></code>
         /// </example>
         /// <remarks>
@@ -309,7 +157,7 @@ namespace LroBasicCadl
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response CreateProject(RequestContent content, RequestContext context = null)
+        public virtual Operation CreateProject(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -318,7 +166,7 @@ namespace LroBasicCadl
             try
             {
                 using HttpMessage message = CreateCreateProjectRequest(content, context);
-                return _pipeline.ProcessMessage(message, context);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "AuthoringClient.CreateProject", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -327,48 +175,26 @@ namespace LroBasicCadl
             }
         }
 
-        /// <param name="project"> The Project to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="project"/> is null. </exception>
-        public virtual async Task<Response<Project>> UpdateProjectAsync(Project project, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(project, nameof(project));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await UpdateProjectAsync(project.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Project.FromResponse(response), response);
-        }
-
-        /// <param name="project"> The Project to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="project"/> is null. </exception>
-        public virtual Response<Project> UpdateProject(Project project, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(project, nameof(project));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = UpdateProject(project.ToRequestContent(), context);
-            return Response.FromValue(Project.FromResponse(response), response);
-        }
-
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call UpdateProjectAsync and parse the result.
+        /// This sample shows how to call UpdateProjectAsync with required parameters and parse the result.
         /// <code><![CDATA[
         /// var client = new AuthoringClient();
         /// 
         /// var data = new {};
         /// 
-        /// Response response = await client.UpdateProjectAsync(RequestContent.Create(data));
+        /// var operation = await client.UpdateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// BinaryData data = await operation.WaitForCompletionAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// ]]></code>
-        /// This sample shows how to call UpdateProjectAsync with all request content, and how to parse the result.
+        /// This sample shows how to call UpdateProjectAsync with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var client = new AuthoringClient();
         /// 
@@ -377,9 +203,10 @@ namespace LroBasicCadl
         ///     name = "<name>",
         /// };
         /// 
-        /// Response response = await client.UpdateProjectAsync(RequestContent.Create(data));
+        /// var operation = await client.UpdateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// BinaryData data = await operation.WaitForCompletionAsync();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("description").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -409,7 +236,7 @@ namespace LroBasicCadl
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> UpdateProjectAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> UpdateProjectAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -418,7 +245,7 @@ namespace LroBasicCadl
             try
             {
                 using HttpMessage message = CreateUpdateProjectRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "AuthoringClient.UpdateProject", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -427,24 +254,26 @@ namespace LroBasicCadl
             }
         }
 
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
         /// <example>
-        /// This sample shows how to call UpdateProject and parse the result.
+        /// This sample shows how to call UpdateProject with required parameters and parse the result.
         /// <code><![CDATA[
         /// var client = new AuthoringClient();
         /// 
         /// var data = new {};
         /// 
-        /// Response response = client.UpdateProject(RequestContent.Create(data));
+        /// var operation = client.UpdateProject(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// BinaryData data = operation.WaitForCompletion();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// ]]></code>
-        /// This sample shows how to call UpdateProject with all request content, and how to parse the result.
+        /// This sample shows how to call UpdateProject with all parameters and request content, and how to parse the result.
         /// <code><![CDATA[
         /// var client = new AuthoringClient();
         /// 
@@ -453,9 +282,10 @@ namespace LroBasicCadl
         ///     name = "<name>",
         /// };
         /// 
-        /// Response response = client.UpdateProject(RequestContent.Create(data));
+        /// var operation = client.UpdateProject(WaitUntil.Completed, RequestContent.Create(data));
         /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+        /// BinaryData data = operation.WaitForCompletion();
+        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
         /// Console.WriteLine(result.GetProperty("id").ToString());
         /// Console.WriteLine(result.GetProperty("description").ToString());
         /// Console.WriteLine(result.GetProperty("name").ToString());
@@ -485,7 +315,7 @@ namespace LroBasicCadl
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response UpdateProject(RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> UpdateProject(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -494,29 +324,13 @@ namespace LroBasicCadl
             try
             {
                 using HttpMessage message = CreateUpdateProjectRequest(content, context);
-                return _pipeline.ProcessMessage(message, context);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "AuthoringClient.UpdateProject", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        internal HttpMessage CreateCreateProjectStatusMonitorRequest(string id, string operationId, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/projects/", false);
-            uri.AppendPath(id, true);
-            uri.AppendPath("/operations/", false);
-            uri.AppendPath(operationId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
         }
 
         internal HttpMessage CreateCreateProjectRequest(RequestContent content, RequestContext context)
@@ -560,9 +374,9 @@ namespace LroBasicCadl
             return new RequestContext() { CancellationToken = cancellationToken };
         }
 
-        private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
         private static ResponseClassifier _responseClassifier201;
         private static ResponseClassifier ResponseClassifier201 => _responseClassifier201 ??= new StatusCodeClassifier(stackalloc ushort[] { 201 });
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

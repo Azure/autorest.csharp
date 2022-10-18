@@ -29,7 +29,7 @@ namespace Models.Property.Optional
         }
 
         /// <summary>
-        /// Gets or sets the property
+        /// Gets the property
         /// <para>
         /// To assign an object to the element of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -58,6 +58,6 @@ namespace Models.Property.Optional
         /// </list>
         /// </para>
         /// </summary>
-        public IList<BinaryData> Property { get; set; }
+        public IList<BinaryData> Property { get; }
     }
 }
