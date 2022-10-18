@@ -17,6 +17,13 @@ namespace Models.Property.Types
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("property");
+            writer.WriteStartArray();
+            foreach (var item in Property)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
 

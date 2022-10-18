@@ -17,6 +17,16 @@ namespace Models.Property.Optional
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Azure.Core.Optional.IsCollectionDefined(Property))
+            {
+                writer.WritePropertyName("property");
+                writer.WriteStartArray();
+                foreach (var item in Property)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 

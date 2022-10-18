@@ -32,7 +32,7 @@ namespace Models.Property.Types
             Property = property.ToList();
         }
 
-        /// <summary> Gets the property. </summary>
-        public IList<string> Property { get; }
+        /// <summary> Gets or sets the property. </summary>
+        public IList<string> Property { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace Models.Property.Optional
             Property = property.ToList();
         }
 
-        /// <summary> Gets the property. </summary>
-        public IList<StringProperty> Property { get; }
+        /// <summary> Gets or sets the property. </summary>
+        public IList<StringProperty> Property { get; set; }
     }
 }
