@@ -16,6 +16,7 @@ namespace Models.Property.Optional
         {
             RequiredProperty = requiredProperty;
         }
+
         /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
         /// <param name="optionalProperty"></param>
         /// <param name="requiredProperty"></param>
@@ -25,8 +26,9 @@ namespace Models.Property.Optional
             RequiredProperty = requiredProperty;
         }
 
+        /// <summary> Gets or sets the optional property. </summary>
         public string OptionalProperty { get; set; }
-
+        /// <summary> Gets or sets the required property. </summary>
         public int RequiredProperty { get; set; }
     }
 }

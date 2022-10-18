@@ -14,6 +14,7 @@ namespace Models.Property.Optional
         public StringProperty()
         {
         }
+
         /// <summary> Initializes a new instance of StringProperty. </summary>
         /// <param name="property"></param>
         internal StringProperty(string property)
@@ -21,6 +22,7 @@ namespace Models.Property.Optional
             Property = property;
         }
 
+        /// <summary> Gets or sets the property. </summary>
         public string Property { get; set; }
     }
 }

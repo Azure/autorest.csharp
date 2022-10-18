@@ -18,20 +18,6 @@ namespace Models.Property.Optional
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Azure.Core.Optional.IsCollectionDefined(Property))
-            {
-                writer.WritePropertyName("property");
-                writer.WriteStartArray();
-                foreach (var item in Property)
-                {
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item);
-#else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.ToString()).RootElement);
-#endif
-                }
-                writer.WriteEndArray();
-            }
             writer.WriteEndObject();
         }
 
@@ -59,17 +45,20 @@ namespace Models.Property.Optional
             return new CollectionsByteProperty(Azure.Core.Optional.ToList(property));
         }
 
-        internal RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
-        }
-
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
         internal static CollectionsByteProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeCollectionsByteProperty(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

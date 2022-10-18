@@ -271,32 +271,24 @@
      "IsDiscriminator": false
     }
    ]
-  },
-  {
-   "$id": "35",
-   "Name": "ResourceLocation",
-   "Namespace": "Cadl.Rest",
-   "Description": "The location of an instance of Project",
-   "IsNullable": false,
-   "Properties": []
   }
  ],
  "Clients": [
   {
-   "$id": "36",
+   "$id": "35",
    "Name": "Authoring",
    "Operations": [
     {
-     "$id": "37",
+     "$id": "36",
      "Name": "createProjectStatusMonitor",
      "Description": "Get a OperationStatusResource",
      "Parameters": [
       {
-       "$id": "38",
+       "$id": "37",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "39",
+        "$id": "38",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -312,11 +304,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "40",
+       "$id": "39",
        "Name": "operationId",
        "NameInRequest": "operationId",
        "Type": {
-        "$id": "41",
+        "$id": "40",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -332,21 +324,21 @@
        "Kind": "Method"
       },
       {
-       "$id": "42",
+       "$id": "41",
        "Name": "api-version",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "43",
+        "$id": "42",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "44",
+        "$id": "43",
         "Type": {
-         "$id": "45",
+         "$id": "44",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -363,11 +355,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "46",
+       "$id": "45",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "47",
+        "$id": "46",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -382,9 +374,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "48",
+        "$id": "47",
         "Type": {
-         "$ref": "47"
+         "$ref": "46"
         },
         "Value": "application/json"
        }
@@ -392,7 +384,7 @@
      ],
      "Responses": [
       {
-       "$id": "49",
+       "$id": "48",
        "StatusCodes": [
         200
        ],
@@ -411,24 +403,24 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "50",
+     "$id": "49",
      "Name": "createProject",
      "Description": "Creates a Project",
      "Parameters": [
       {
-       "$id": "51",
+       "$id": "50",
        "Name": "api-version",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "52",
+        "$id": "51",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "44"
+        "$ref": "43"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -440,7 +432,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "53",
+       "$id": "52",
        "Name": "Project",
        "NameInRequest": "Project",
        "Type": {
@@ -457,11 +449,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "54",
+       "$id": "53",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "55",
+        "$id": "54",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -476,19 +468,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "56",
+        "$id": "55",
         "Type": {
-         "$ref": "55"
+         "$ref": "54"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "57",
+       "$id": "56",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "57",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -503,9 +495,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "58",
         "Type": {
-         "$ref": "58"
+         "$ref": "57"
         },
         "Value": "application/json"
        }
@@ -513,19 +505,22 @@
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "59",
        "StatusCodes": [
         201
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "61",
+         "$id": "60",
          "Name": "Location",
          "NameInResponse": "location",
          "Description": "",
          "Type": {
-          "$ref": "35"
+          "$id": "61",
+          "Name": "ResourceLocation",
+          "Kind": "String",
+          "IsNullable": false
          }
         }
        ]
@@ -558,7 +553,7 @@
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "44"
+        "$ref": "43"
        },
        "IsRequired": true,
        "IsApiVersion": true,
