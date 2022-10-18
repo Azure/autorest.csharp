@@ -82,6 +82,8 @@ export interface NetEmitterOptions {
     "shared-source-folders"?: string[];
     "single-top-level-client"?: boolean;
     skipSDKGeneration: boolean;
+    newProject: boolean;
+    configurationPath: string;
 }
 
 const defaultOptions = {
@@ -92,7 +94,9 @@ const defaultOptions = {
     "shared-source-folders": [
         resolvePath(dllFilePath, "..", "Generator.Shared"),
         resolvePath(dllFilePath, "..", "Azure.Core.Shared")
-    ]
+    ],
+    newProject: false,
+    configurationPath: null
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -110,7 +114,9 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             nullable: true
         },
         "single-top-level-client": { type: "boolean", nullable: true },
-        skipSDKGeneration: { type: "boolean", nullable: true }
+        skipSDKGeneration: { type: "boolean", nullable: true },
+        newProject: { type: "boolean", nullable: true },
+        configurationPath: { type: "string", nullable: true }
     },
     required: []
 };
@@ -143,8 +149,10 @@ export async function $onEmit(
             resolvedOptions.logFile
         ),
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
+        "shared-source-folders": resolvedSharedFolders,
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
-        "shared-source-folders": resolvedSharedFolders
+        newProject: resolvedOptions.newProject,
+        configurationPath: resolvedOptions.configurationPath
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -186,22 +194,22 @@ export async function $onEmit(
                 configurationOutPath,
                 prettierOutput(JSON.stringify(configurations, null, 2))
             );
-            options.skipSDKGeneration !== true &&
-                exec(
-                    `dotnet ${resolvePath(
-                        dllFilePath
-                    )} --no-build --standalone ${
-                        program.compilerOptions.outputPath
-                    }`,
-                    (error, stdout, stderr) => {
-                        if (error) {
-                            console.log(`error: ${error.message}`);
-                        } else if (stderr) {
-                            console.log(`stderr: ${stderr}`);
-                        }
-                        console.log(`stdout: ${stdout}`);
+            if (options.skipSDKGeneration !== true) {
+                let command = `dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath} --new-project ${options.newProject}`;
+                if (options.configurationPath) {
+                    command = `${command} -c ${options.configurationPath}`;
+                }
+
+                exec(command, (error, stdout, stderr) => {
+                    if (error) {
+                        console.log(`error: ${error.message}`);
                     }
-                );
+                    else if (stderr) {
+                        console.log(`stderr: ${stderr}`);
+                    }
+                    console.log(`stdout: ${stdout}`);
+                });
+            }            
         }
     }
 }
