@@ -128,6 +128,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var optionalViaNullability = !property.IsRequired && !property.ValueType.IsNullable && !TypeFactory.IsCollectionType(property.ValueType);
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType);
                     var paramName = declaredName.StartsWith("_", StringComparison.OrdinalIgnoreCase) ? declaredName.Substring(1) : declaredName.FirstCharToLowerCase();
+                    //TODO we should change this property name on the JsonPropertySerialization since it isn't whether it is "readonly"
+                    //or not it indicates if we should serialize this or not which is different.  Lists are readonly
+                    //in the sense that the don't have setters but they aren't necessarily always readonly in the spec and therefore
+                    //should be serialized based on the spec not based on the presence of a setter
+                    var isReadOnly = property.Declaration.Type.IsCollectionType() ? property.InputModelProperty.IsReadOnly : property.IsReadOnly;
                     result.Add(new JsonPropertySerialization(
                         paramName,
                         declaredName,
@@ -136,7 +141,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         property.ValueType,
                         valueSerialization,
                         property.IsRequired,
-                        property.IsReadOnly,
+                        isReadOnly,
                         optionalViaNullability));
                 }
             }

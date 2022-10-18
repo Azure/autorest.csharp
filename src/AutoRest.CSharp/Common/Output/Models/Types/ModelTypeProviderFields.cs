@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType;
             var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
-            var propertyIsReadOnly = inputModelProperty.IsReadOnly;
+            var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
 
             var fieldModifiers = propertyIsReadOnly ? Public | ReadOnly : Public;
 
