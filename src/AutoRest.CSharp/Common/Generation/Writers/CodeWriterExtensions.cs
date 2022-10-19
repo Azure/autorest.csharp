@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     .AppendRawIf("new ", methodBase.Modifiers.HasFlag(New))
                     .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
                     .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
-                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async)); // abstract methods cannot have async modifier
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
                 if (method.ReturnType != null)
                 {
                     writer.Append($"{method.ReturnType} ");
@@ -572,7 +572,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Scope($"if ({propertyName} != null)");
         }
 
-        public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
+        public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType, IEnumerable<Attribute>? attributes = default)
         {
             writer.WriteXmlDocumentationSummary(signature.FormattableDescription);
             writer.WriteXmlDocumentationParameters(signature.Parameters);
@@ -586,7 +586,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (returnDesc is not null)
                 writer.WriteXmlDocumentationReturns(returnDesc);
 
-            if (enableAttributes && attributes is not null)
+            if (attributes is not null)
             {
                 foreach (var attribute in attributes)
                 {
@@ -596,9 +596,9 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
         }
 
-        public static IDisposable WriteCommonMethod(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)
+        public static IDisposable WriteCommonMethod(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType, IEnumerable<Attribute>? attributes = default)
         {
-            var scope = WriteCommonMethodWithoutValidation(writer, signature, returnDescription, isAsync, isPublicType);
+            var scope = WriteCommonMethodWithoutValidation(writer, signature, returnDescription, isAsync, isPublicType, attributes);
             if (isPublicType)
                 writer.WriteParametersValidation(signature.Parameters);
 
