@@ -565,7 +565,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             var hasResourceWithSameName = resources.Any(r => r.ResourceName == candidateName);
 
-            // TODO -- maybe a better fallback name for the base resource name
             return hasResourceWithSameName ? $"Base{candidateName}" : candidateName;
         }
 
