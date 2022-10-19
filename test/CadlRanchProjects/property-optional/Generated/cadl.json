@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "models.property.optional",
+ "Name": "Models.Property.Optional",
  "Description": "Illustrates models with optional properties.",
  "ApiVersions": [
   "1.0.0"
@@ -13,6 +13,7 @@
    "Namespace": "Models.Property.Optional",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "3",
@@ -37,6 +38,7 @@
    "Namespace": "Models.Property.Optional",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "6",
@@ -61,6 +63,7 @@
    "Namespace": "Models.Property.Optional",
    "Description": "Model with a datetime property",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "9",
@@ -85,6 +88,7 @@
    "Namespace": "Models.Property.Optional",
    "Description": "Model with a duration property",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "12",
@@ -109,6 +113,7 @@
    "Namespace": "Models.Property.Optional",
    "Description": "Model with collection bytes properties",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "15",
@@ -138,6 +143,7 @@
    "Namespace": "Models.Property.Optional",
    "Description": "Model with collection models properties",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "19",
@@ -164,6 +170,7 @@
    "Namespace": "Models.Property.Optional",
    "Description": "Model with required and optional properties",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "22",

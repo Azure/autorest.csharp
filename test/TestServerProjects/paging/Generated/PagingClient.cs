@@ -31,10 +31,11 @@ namespace paging
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        internal PagingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        internal PagingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "1.0.0")
         {
-            RestClient = new PagingRestClient(clientDiagnostics, pipeline, endpoint);
+            RestClient = new PagingRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -220,6 +221,94 @@ namespace paging
                 try
                 {
                     var response = RestClient.GetSinglePagesNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> A paging operation that finishes on the first call with body params without a nextlink. </summary>
+        /// <param name="parameters"> put {&apos;name&apos;: &apos;body&apos;} to pass the test. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual AsyncPageable<Product> GetSinglePagesWithBodyParamsAsync(BodyParam parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesWithBodyParams");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetSinglePagesWithBodyParamsAsync(parameters, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesWithBodyParams");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetSinglePagesWithBodyParamsNextPageAsync(nextLink, parameters, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> A paging operation that finishes on the first call with body params without a nextlink. </summary>
+        /// <param name="parameters"> put {&apos;name&apos;: &apos;body&apos;} to pass the test. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Pageable<Product> GetSinglePagesWithBodyParams(BodyParam parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesWithBodyParams");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetSinglePagesWithBodyParams(parameters, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesWithBodyParams");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetSinglePagesWithBodyParamsNextPage(nextLink, parameters, cancellationToken);
                     return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -524,6 +613,80 @@ namespace paging
                 try
                 {
                     var response = RestClient.DuplicateParamsNextPage(nextLink, filter, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Paging with max page size. We don&apos;t want to. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> PageWithMaxPageSizeAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.PageWithMaxPageSize");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.PageWithMaxPageSizeAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.PageWithMaxPageSize");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.PageWithMaxPageSizeNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Paging with max page size. We don&apos;t want to. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> PageWithMaxPageSize(CancellationToken cancellationToken = default)
+        {
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.PageWithMaxPageSize");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.PageWithMaxPageSize(cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.PageWithMaxPageSize");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.PageWithMaxPageSizeNextPage(nextLink, cancellationToken);
                     return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1293,6 +1456,154 @@ namespace paging
                 {
                     var response = RestClient.NextFragmentWithGrouping(nextLink, customParameterGroup, cancellationToken);
                     return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> A paging operation with api version. When calling the next link, you want to append your client&apos;s api version to the next link. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> AppendApiVersionAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.AppendApiVersion");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.AppendApiVersionAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.AppendApiVersion");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.AppendApiVersionNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> A paging operation with api version. When calling the next link, you want to append your client&apos;s api version to the next link. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> AppendApiVersion(CancellationToken cancellationToken = default)
+        {
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.AppendApiVersion");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.AppendApiVersion(cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.AppendApiVersion");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.AppendApiVersionNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client&apos;s api version. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> ReplaceApiVersionAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.ReplaceApiVersion");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ReplaceApiVersionAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.ReplaceApiVersion");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ReplaceApiVersionNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client&apos;s api version. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> ReplaceApiVersion(CancellationToken cancellationToken = default)
+        {
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.ReplaceApiVersion");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.ReplaceApiVersion(cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.ReplaceApiVersion");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.ReplaceApiVersionNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

@@ -13,11 +13,10 @@ namespace body_formdata_urlencoded.Models
     internal partial class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
     {
         /// <summary> Initializes a new instance of PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema. </summary>
-        /// <param name="grantType"> Constant part of a formdata body. </param>
         /// <param name="service"> Indicates the name of your Azure container registry. </param>
         /// <param name="aadAccessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="service"/> or <paramref name="aadAccessToken"/> is null. </exception>
-        internal PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema(PostContentSchemaGrantType grantType, string service, string aadAccessToken)
+        internal PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema(string service, string aadAccessToken)
         {
             if (service == null)
             {
@@ -28,13 +27,13 @@ namespace body_formdata_urlencoded.Models
                 throw new ArgumentNullException(nameof(aadAccessToken));
             }
 
-            GrantType = grantType;
+            GrantType = "access_token";
             Service = service;
             AadAccessToken = aadAccessToken;
         }
 
         /// <summary> Constant part of a formdata body. </summary>
-        public PostContentSchemaGrantType GrantType { get; }
+        public string GrantType { get; }
         /// <summary> Indicates the name of your Azure container registry. </summary>
         public string Service { get; }
         /// <summary> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </summary>
