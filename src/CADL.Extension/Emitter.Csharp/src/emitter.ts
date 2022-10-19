@@ -853,7 +853,7 @@ function loadOperation(
 
     function loadLongRunningFinalResponse(
         program: Program,
-        op: OperationDetails,
+        op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationResponse | undefined {
         let finalResponse: any | undefined;
