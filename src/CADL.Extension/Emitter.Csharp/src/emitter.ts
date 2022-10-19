@@ -18,12 +18,12 @@ import {
     resolvePath
 } from "@cadl-lang/compiler";
 import {
-    getAllRoutes,
+    getAllHttpServices,
     getAuthentication,
     getServers,
+    HttpOperation,
     HttpOperationParameter,
     HttpOperationResponse,
-    OperationDetails,
     ServiceAuthentication
 } from "@cadl-lang/rest/http";
 import { getExtensions } from "@cadl-lang/openapi";
@@ -225,10 +225,14 @@ function createModel(program: Program): any {
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
     try {
-        const [routes] = getAllRoutes(program);
+        const [services] = getAllHttpServices(program);
+        const routes = services[0].operations;
+        if (routes.length === 0) {
+            throw "No Routes";
+        }
         console.log("routes:" + routes.length);
         const clients: InputClient[] = [];
-        const convenienceOperations: OperationDetails[] = [];
+        const convenienceOperations: HttpOperation[] = [];
         //create endpoint parameter from servers
         let urlParameters: InputParameter[] | undefined = undefined;
         let url: string = "";
@@ -337,7 +341,7 @@ function createModel(program: Program): any {
     }
 
     function getAllLroMonitorOperations(
-        routes: OperationDetails[],
+        routes: HttpOperation[],
         program: Program
     ): Set<Operation> {
         const lroMonitorOperations = new Set<Operation>();
@@ -510,7 +514,7 @@ function getOperationGroupName(program: Program, operation: Operation): string {
 
 function loadOperation(
     program: Program,
-    operation: OperationDetails,
+    operation: HttpOperation,
     uri: string,
     urlParameters: InputParameter[] | undefined = undefined,
     models: Map<string, InputModelType>,
@@ -768,7 +772,7 @@ function loadOperation(
 
     function loadOperationLongRunning(
         program: Program,
-        op: OperationDetails,
+        op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationLongRunning | undefined {
         if (!isLroOperation(program, op.operation)) return undefined;

@@ -30,8 +30,8 @@ import {
     getHeaderFieldName,
     getPathParamName,
     getQueryParamName,
-    isStatusCode,
-    OperationDetails
+    HttpOperation,
+    isStatusCode
 } from "@cadl-lang/rest/http";
 import { toNamespacedPath } from "path";
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
@@ -528,7 +528,7 @@ export function getInputType(
 
 export function getUsages(
     program: Program,
-    ops?: OperationDetails[]
+    ops?: HttpOperation[]
 ): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
     const result: {
         inputs: string[];
