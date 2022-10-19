@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Property.Optional
+namespace Models.Property.Optional
 {
     // Data plane generated client. Test optional and required properties
     /// <summary> Test optional and required properties. </summary>
