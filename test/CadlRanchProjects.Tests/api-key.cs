@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using api_key;
-using Authentication.ApiKey;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
