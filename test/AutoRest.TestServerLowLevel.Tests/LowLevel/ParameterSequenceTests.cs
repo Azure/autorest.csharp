@@ -13,6 +13,7 @@ namespace AutoRest.LowLevel.Tests
     {
         [TestCase(typeof(ParametersLowlevelClient), "OptionalPathParameters", new string[] { "id", "skip", "name", "context" }, new bool[] { false, false, true, true})]
         [TestCase(typeof(ParametersLowlevelClient),"OptionalPathParametersWithMixedSequence", new string[] { "id", "name", "skip", "context" }, new bool[] { false, true, true, true})]
+        [TestCase(typeof(ParametersLowlevelClient),"OptionalPathBodyParametersWithMixedSequence", new string[] { "name", "skip", "content", "id", "top", "max", "context" }, new bool[] { false, false, false, true, true, true, true})]
         [TestCase(typeof(ParameterOrdersClient),"OperationValue", new string[] { "start", "end", "cancellationToken" }, new bool[] { false, true, true})]
         [TestCase(typeof(ParameterOrdersClient),"Operation", new string[] { "start", "end", "context" }, new bool[] { false, true, true})]
         [TestCase(typeof(ParameterOrdersClient),"Operation2Value", new string[] { "end", "start", "cancellationToken" }, new bool[] { false, true, true})]

@@ -673,6 +673,142 @@ namespace Parameters_LowLevel
             }
         }
 
+        /// <summary> Optional path/body parameters with mixed sequence. </summary>
+        /// <param name="name"> Query parameter status. </param>
+        /// <param name="skip"> Query parameter skip. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="id"> Query parameter Id. </param>
+        /// <param name="top"> Query parameter top. </param>
+        /// <param name="max"> Query parameter max. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call OptionalPathBodyParametersWithMixedSequenceAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync("<name>", 1234, RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call OptionalPathBodyParametersWithMixedSequenceAsync with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// var data = new {
+        ///     Code = "<Code>",
+        ///     Status = "<Status>",
+        /// };
+        /// 
+        /// Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync("<name>", 1234, RequestContent.Create(data), 123, 1234, 50);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>TestModel</c>:
+        /// <code>{
+        ///   Code: string, # Optional.
+        ///   Status: string, # Optional.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual async Task<Response> OptionalPathBodyParametersWithMixedSequenceAsync(string name, int skip, RequestContent content, int id = 123, int? top = null, int max = 50, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathBodyParametersWithMixedSequence");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOptionalPathBodyParametersWithMixedSequenceRequest(id, name, skip, content, top, max, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Optional path/body parameters with mixed sequence. </summary>
+        /// <param name="name"> Query parameter status. </param>
+        /// <param name="skip"> Query parameter skip. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="id"> Query parameter Id. </param>
+        /// <param name="top"> Query parameter top. </param>
+        /// <param name="max"> Query parameter max. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call OptionalPathBodyParametersWithMixedSequence with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// var data = new {};
+        /// 
+        /// Response response = client.OptionalPathBodyParametersWithMixedSequence("<name>", 1234, RequestContent.Create(data));
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call OptionalPathBodyParametersWithMixedSequence with all parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new AzureKeyCredential("<key>");
+        /// var client = new ParametersLowlevelClient(credential);
+        /// 
+        /// var data = new {
+        ///     Code = "<Code>",
+        ///     Status = "<Status>",
+        /// };
+        /// 
+        /// Response response = client.OptionalPathBodyParametersWithMixedSequence("<name>", 1234, RequestContent.Create(data), 123, 1234, 50);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
+        /// <remarks>
+        /// Below is the JSON schema for the request payload.
+        /// 
+        /// Request Body:
+        /// 
+        /// Schema for <c>TestModel</c>:
+        /// <code>{
+        ///   Code: string, # Optional.
+        ///   Status: string, # Optional.
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+        public virtual Response OptionalPathBodyParametersWithMixedSequence(string name, int skip, RequestContent content, int id = 123, int? top = null, int max = 50, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathBodyParametersWithMixedSequence");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOptionalPathBodyParametersWithMixedSequenceRequest(id, name, skip, content, top, max, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int? top, int skip, string status, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -780,6 +916,29 @@ namespace Parameters_LowLevel
             uri.AppendPath(name, true);
             uri.AppendQuery("skip", skip, true);
             request.Uri = uri;
+            return message;
+        }
+
+        internal HttpMessage CreateOptionalPathBodyParametersWithMixedSequenceRequest(int id, string name, int skip, RequestContent content, int? top, int max, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test5/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(name, true);
+            uri.AppendQuery("skip", skip, true);
+            if (top != null)
+            {
+                uri.AppendQuery("top", top.Value, true);
+            }
+            uri.AppendQuery("max", max, true);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 
