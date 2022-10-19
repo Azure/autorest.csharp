@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -17,10 +18,7 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="tagsParameter"/> is null. </exception>
         public TagScoringParameters(string tagsParameter)
         {
-            if (tagsParameter == null)
-            {
-                throw new ArgumentNullException(nameof(tagsParameter));
-            }
+            Argument.AssertNotNull(tagsParameter, nameof(tagsParameter));
 
             TagsParameter = tagsParameter;
         }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -17,10 +18,7 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public CognitiveServicesAccountKey(string key)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             Key = key;
             OdataType = "#Microsoft.Azure.Search.CognitiveServicesByKey";

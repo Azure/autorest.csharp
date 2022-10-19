@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -19,10 +20,7 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="skillsets"/> is null. </exception>
         internal ListSkillsetsResult(IEnumerable<Skillset> skillsets)
         {
-            if (skillsets == null)
-            {
-                throw new ArgumentNullException(nameof(skillsets));
-            }
+            Argument.AssertNotNull(skillsets, nameof(skillsets));
 
             Skillsets = skillsets.ToList();
         }

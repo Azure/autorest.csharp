@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -19,18 +20,9 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="keyVaultKeyName"/>, <paramref name="keyVaultKeyVersion"/> or <paramref name="keyVaultUri"/> is null. </exception>
         public EncryptionKey(string keyVaultKeyName, string keyVaultKeyVersion, string keyVaultUri)
         {
-            if (keyVaultKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(keyVaultKeyName));
-            }
-            if (keyVaultKeyVersion == null)
-            {
-                throw new ArgumentNullException(nameof(keyVaultKeyVersion));
-            }
-            if (keyVaultUri == null)
-            {
-                throw new ArgumentNullException(nameof(keyVaultUri));
-            }
+            Argument.AssertNotNull(keyVaultKeyName, nameof(keyVaultKeyName));
+            Argument.AssertNotNull(keyVaultKeyVersion, nameof(keyVaultKeyVersion));
+            Argument.AssertNotNull(keyVaultUri, nameof(keyVaultUri));
 
             KeyVaultKeyName = keyVaultKeyName;
             KeyVaultKeyVersion = keyVaultKeyVersion;

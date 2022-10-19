@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "CadlFirstTest",
+ "Name": "cadlfirsttest",
  "Description": "This is a sample cadl project.",
  "ApiVersions": [
   "0.1.0"

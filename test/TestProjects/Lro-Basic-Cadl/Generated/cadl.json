@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "LroBasicCadl",
+ "Name": "lrobasiccadl",
  "ApiVersions": [
   "2022-05-15-preview"
  ],

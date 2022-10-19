@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "ExtensibleEnums",
+ "Name": "extensibleenums",
  "ApiVersions": [
   "1.0.0"
  ],

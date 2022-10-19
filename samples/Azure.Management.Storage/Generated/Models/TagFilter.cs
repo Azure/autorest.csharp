@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -19,18 +20,9 @@ namespace Azure.Management.Storage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="op"/> or <paramref name="value"/> is null. </exception>
         public TagFilter(string name, string op, string value)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (op == null)
-            {
-                throw new ArgumentNullException(nameof(op));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(op, nameof(op));
+            Argument.AssertNotNull(value, nameof(value));
 
             Name = name;
             Op = op;

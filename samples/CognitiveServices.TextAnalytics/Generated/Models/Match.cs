@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -20,10 +21,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         internal Match(double confidenceScore, string text, int offset, int length)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
+            Argument.AssertNotNull(text, nameof(text));
 
             ConfidenceScore = confidenceScore;
             Text = text;

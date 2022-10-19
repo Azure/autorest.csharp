@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Models.Property.Types",
+ "Name": "models.property.types",
  "Description": "Illustrates various property types for models",
  "ApiVersions": [
   "1.0.0"
