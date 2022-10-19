@@ -10,6 +10,7 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    isErrorModel,
     JSONSchemaType,
     Model,
     ModelProperty,
@@ -747,7 +748,8 @@ function loadOperation(
             StatusCodes: status,
             BodyType: type,
             BodyMediaType: BodyMediaType.Json,
-            Headers: responseHeaders
+            Headers: responseHeaders,
+            IsErrorResponse: isErrorModel(program, response.type)
         } as OperationResponse;
     }
 
