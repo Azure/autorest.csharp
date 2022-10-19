@@ -8,7 +8,7 @@
 namespace ModelsInCadl
 {
     /// <summary> Deriver model with discriminator property. </summary>
-    public partial class DerivedModelWithDiscriminatorB
+    public partial class DerivedModelWithDiscriminatorB : BaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorB. </summary>
         /// <param name="requiredInt"></param>
@@ -17,6 +17,7 @@ namespace ModelsInCadl
             RequiredInt = requiredInt;
         }
 
+        /// <summary> Gets or sets the required int. </summary>
         public int RequiredInt { get; set; }
     }
 }

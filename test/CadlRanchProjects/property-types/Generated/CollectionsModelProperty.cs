@@ -24,13 +24,15 @@ namespace Models.Property.Types
 
             Property = property.ToList();
         }
+
         /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
         /// <param name="property"></param>
         internal CollectionsModelProperty(IList<InnerModel> property)
         {
-            Property = property;
+            Property = property.ToList();
         }
 
+        /// <summary> Gets the property. </summary>
         public IList<InnerModel> Property { get; }
     }
 }

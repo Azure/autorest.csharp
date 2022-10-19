@@ -17,8 +17,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _ => new ModelWriter()
         };
 
-        protected override void AddClassAttributes(CodeWriter writer, SchemaObjectType schema)
+        protected override void AddClassAttributes(CodeWriter writer, ObjectType objectType)
         {
+            if (objectType is not SchemaObjectType schema)
+                return;
             var extensions = schema.ObjectSchema.Extensions;
             if (extensions != null)
             {

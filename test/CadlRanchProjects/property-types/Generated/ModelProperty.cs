@@ -23,6 +23,7 @@ namespace Models.Property.Types
             Property = property;
         }
 
+        /// <summary> Gets or sets the property. </summary>
         public InnerModel Property { get; set; }
     }
 }

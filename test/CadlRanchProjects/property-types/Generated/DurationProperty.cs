@@ -19,6 +19,7 @@ namespace Models.Property.Types
             Property = property;
         }
 
+        /// <summary> Gets or sets the property. </summary>
         public TimeSpan Property { get; set; }
     }
 }

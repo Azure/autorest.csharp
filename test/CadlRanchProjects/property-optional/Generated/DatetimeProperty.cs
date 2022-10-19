@@ -16,6 +16,7 @@ namespace Models.Property.Optional
         public DatetimeProperty()
         {
         }
+
         /// <summary> Initializes a new instance of DatetimeProperty. </summary>
         /// <param name="property"></param>
         internal DatetimeProperty(DateTimeOffset? property)
@@ -23,6 +24,7 @@ namespace Models.Property.Optional
             Property = property;
         }
 
+        /// <summary> Gets or sets the property. </summary>
         public DateTimeOffset? Property { get; set; }
     }
 }

@@ -198,7 +198,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             return;
 
                         case ObjectType:
-                        case ModelTypeProvider:
+                        //case ModelTypeProvider:
                             writer.Line($"{writerName}.WriteObjectValue({name:I});");
                             return;
 
@@ -626,8 +626,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 case ObjectType objectType:
                     return $"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})";
 
-                case ModelTypeProvider model:
-                    return $"{model.Type}.Deserialize{model.Declaration.Name}({element})";
+                //case ModelTypeProvider model:
+                //    return $"{model.Type}.Deserialize{model.Declaration.Name}({element})";
 
                 case EnumType clientEnum:
                     var value = GetFrameworkTypeValueFormattable(element, clientEnum.ValueType.FrameworkType, SerializationFormat.Default);
