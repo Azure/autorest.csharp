@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace CadlPagination
+namespace Pagination
 {
     // Data plane generated client. The Pagination service client.
     /// <summary> The Pagination service client. </summary>

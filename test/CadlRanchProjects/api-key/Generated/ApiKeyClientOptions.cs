@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace api_key
+namespace Authentication.ApiKey
 {
     /// <summary> Client options for ApiKeyClient. </summary>
     public partial class ApiKeyClientOptions : ClientOptions

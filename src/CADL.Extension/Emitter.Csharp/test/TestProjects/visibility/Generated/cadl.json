@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "cadl.visibility",
+ "Name": "Cadl.visibility",
  "Description": "Illustrates read, write and read/write properties.",
  "ApiVersions": [
   "1.0.0"

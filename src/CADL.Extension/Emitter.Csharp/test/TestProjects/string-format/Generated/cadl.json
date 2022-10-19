@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "stringformat",
+ "Name": "stringFormat",
  "ApiVersions": [
   "2015-06-18"
  ],

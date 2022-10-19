@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace CadlPagination
+namespace Pagination
 {
     /// <summary> Client options for PaginationClient. </summary>
     public partial class PaginationClientOptions : ClientOptions

@@ -13,7 +13,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using CustomizationsInCadl;
 
-namespace GeneratedModels
+namespace CustomizationsInCadl
 {
     // Data plane generated client. CADL project to test various types of models.
     /// <summary> CADL project to test various types of models. </summary>
