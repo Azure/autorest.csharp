@@ -283,8 +283,23 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 if (method.DeclaringType != type)
                     continue;
 
-                Assert.IsTrue(method.IsVirtual, $"{method.Name} was not virtual but was public on {type.Name}");
+                Assert.IsTrue(IsMethodVirtual(method), $"{method.Name} was not virtual but was public on {type.Name}");
             }
+        }
+
+        private bool IsMethodVirtual(MethodInfo method)
+        {
+            if (method.IsVirtual)
+                return true;
+
+            // if the method is not virtual, we need to verify if it has a corresponding Core method which is either abstract or virtual
+            var type = method.DeclaringType!;
+            var coreMethodName = method.Name.EndsWith("Async") ?
+                $"{method.Name.Substring(0, method.Name.Length - 5)}Core" :
+                $"{method.Name}Core";
+            var coreMethod = type.GetMethod(coreMethodName, BindingFlags.Instance | BindingFlags.NonPublic);
+
+            return coreMethod.IsAbstract || coreMethod.IsVirtual;
         }
 
         [Test]
@@ -345,8 +360,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllResources())
             {
-                var expectedBaseOperationsType = typeof(ArmResource);
-                Assert.AreEqual(expectedBaseOperationsType, type.BaseType);
+                // since we have polymorphic resources, the resource types are not guaranteed to be direct child class of ArmResource. But they should all be derived class of ArmResource directly or indirectly
+                Assert.IsTrue(type.IsSubclassOf(typeof(ArmResource)));
             }
         }
 
@@ -545,7 +560,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type t in allTypes)
             {
-                if (t.BaseType.FullName == typeof(ArmResource).FullName &&
+                if (t.IsSubclassOf(typeof(ArmResource)) &&
                     !t.Name.Contains("Tests") &&
                     t.Namespace == _projectName &&
                     !t.Name.EndsWith("ExtensionClient"))
@@ -705,17 +720,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateParentResourceOperation()
         {
-            foreach (var operation in FindAllResources())
+            foreach (var resource in FindAllResources())
             {
-                var operationTypeProperty = operation.GetField("ResourceType");
-                ResourceType operationType = (ResourceType)operationTypeProperty.GetValue(operation);
-                ResourceIdentifier resourceIdentifier = GetSampleResourceId(operation);
+                // the base resource will also show up in this list, we need to skip them
+                if (resource.IsAbstract)
+                    continue;
+                var operationTypeProperty = resource.GetField("ResourceType");
+                ResourceType operationType = (ResourceType)operationTypeProperty.GetValue(resource);
+                ResourceIdentifier resourceIdentifier = GetSampleResourceId(resource);
                 foreach (var collection in FindAllCollections())
                 {
                     if (IsParent(collection, resourceIdentifier))
                     {
                         var resourceName = collection.Name.Remove(collection.Name.LastIndexOf("Collection"));
-                        var method = operation.GetMethod($"Get{resourceName.ToPlural()}");
+                        var method = resource.GetMethod($"Get{resourceName.ToPlural()}");
                         Assert.NotNull(method);
                         Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(collection.Namespace + "." + collection.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);

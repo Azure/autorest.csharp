@@ -50,8 +50,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
-            var model = await codeModelTask;
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(model, sourceInputModel));
+            var codeModel = await codeModelTask;
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+
+            foreach (var model in MgmtContext.Library.Models)
+            {
+                _ = model;
+            }
         }
 
         [Test]
@@ -135,6 +140,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         {
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
+                // we skip the base resource because they are abstract and some methods are not guaranteed to be there
+                if (resource is BaseResource)
+                    continue;
                 var name = $"{_projectName}.{resource.Type.Name}";
                 var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
                 if (IsSingletonOperation(generatedResourceType))
@@ -161,6 +169,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         {
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
+                // we skip the base resource because they are abstract and some methods are not guaranteed to be there
+                if (resource is BaseResource)
+                    continue;
                 var name = $"{_projectName}.{resource.Type.Name}";
                 var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
                 if (IsSingletonOperation(generatedResourceType))
