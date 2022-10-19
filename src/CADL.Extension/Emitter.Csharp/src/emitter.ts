@@ -76,12 +76,16 @@ export interface NetEmitterOptions {
     outputFile: string;
     logFile: string;
     skipSDKGeneration: boolean;
+    newProject: boolean;
+    configurationPath: string;
 }
 
 const defaultOptions = {
     outputFile: "cadl.json",
     logFile: "log.json",
-    skipSDKGeneration: false
+    skipSDKGeneration: false,
+    newProject: false,
+    configurationPath: null
 };
 
 const EmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -90,7 +94,9 @@ const EmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     properties: {
         outputFile: { type: "string", nullable: true },
         logFile: { type: "string", nullable: true },
-        skipSDKGeneration: { type: "boolean", nullable: true }
+        skipSDKGeneration: { type: "boolean", nullable: true },
+        newProject: { type: "boolean", nullable: true },
+        configurationPath: { type: "string", nullable: true }
     },
     required: [],
 };
@@ -117,7 +123,9 @@ export async function $onEmit(
             program.compilerOptions.outputPath ?? "./cadl-output",
             resolvedOptions.logFile
         ),
-        skipSDKGeneration: resolvedOptions.skipSDKGeneration
+        skipSDKGeneration: resolvedOptions.skipSDKGeneration,
+        newProject: resolvedOptions.newProject,
+        configurationPath: resolvedOptions.configurationPath
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -141,15 +149,22 @@ export async function $onEmit(
                 )
             );
 
-            options.skipSDKGeneration !== true && exec(`dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath}`, (error, stdout, stderr) => {
-                if (error) {
-                    console.log(`error: ${error.message}`);
+            if (options.skipSDKGeneration !== true) {
+                let command = `dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${program.compilerOptions.outputPath} --new-project ${options.newProject}`;
+                if (options.configurationPath) {
+                    command = `${command} -c ${options.configurationPath}`;
                 }
-                else if (stderr) {
-                    console.log(`stderr: ${stderr}`);
-                }
-                console.log(`stdout: ${stdout}`);
-            });
+
+                exec(command, (error, stdout, stderr) => {
+                    if (error) {
+                        console.log(`error: ${error.message}`);
+                    }
+                    else if (stderr) {
+                        console.log(`stderr: ${stderr}`);
+                    }
+                    console.log(`stdout: ${stdout}`);
+                });
+            }            
         }
     }
 }
