@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -17,11 +18,13 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ModelWriter
     {
+        internal delegate void MethodBodyImplementation(CodeWriter codeWriter, ObjectType objectType);
+
         public void WriteModel(CodeWriter writer, TypeProvider model)
         {
             switch (model)
             {
-                case SchemaObjectType objectSchema:
+                case ObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
                 case EnumType e when e.IsExtensible:
@@ -35,7 +38,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteObjectSchema(CodeWriter writer, SchemaObjectType schema)
+        private void WriteObjectSchema(CodeWriter writer, ObjectType schema)
         {
             using (writer.Namespace(schema.Declaration.Namespace))
             {
@@ -81,9 +84,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var property in schema.Properties)
             {
-                Stack<ObjectTypeProperty> hierarchyStack = new Stack<ObjectTypeProperty>();
-                hierarchyStack.Push(property);
-                BuildHierarchy(property, hierarchyStack);
+                Stack<ObjectTypeProperty> hierarchyStack = property.GetHeirarchyStack();
                 if (Configuration.AzureArm && hierarchyStack.Count > 1)
                 {
                     var innerProperty = hierarchyStack.Pop();
@@ -277,15 +278,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void BuildHierarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
-        {
-            if (property.IsSinglePropertyObject(out var childProp))
-            {
-                heirarchyStack.Push(childProp);
-                BuildHierarchy(childProp, heirarchyStack);
-            }
-        }
-
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
             FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type);
@@ -351,13 +343,13 @@ Examples:
 </list>
 </para>";
         }
-        private string GetAbstract(SchemaObjectType schema)
+        private string GetAbstract(ObjectType schema)
         {
             // Limit this change to management plane to avoid data plane affected
             return schema.Declaration.IsAbstract && Configuration.AzureArm ? "abstract " : string.Empty;
         }
 
-        protected virtual void AddClassAttributes(CodeWriter writer, SchemaObjectType schema)
+        protected virtual void AddClassAttributes(CodeWriter writer, ObjectType schema)
         {
         }
 
@@ -373,7 +365,15 @@ Examples:
                 AddCtorAttribute(writer, schema, constructor);
                 using (writer.WriteMethodDeclaration(constructor.Signature))
                 {
-                    writer.WriteParameterNullChecks(constructor.Signature.Parameters);
+                    //TODO use feature flag fron Configuration
+                    if (schema is ModelTypeProvider)
+                    {
+                        writer.WriteParametersValidation(constructor.Signature.Parameters);
+                    }
+                    else
+                    {
+                        writer.WriteParameterNullChecks(constructor.Signature.Parameters);
+                    }
 
                     foreach (var initializer in constructor.Initializers)
                     {
@@ -388,8 +388,24 @@ Examples:
 
                         writer.Line($";");
                     }
-                }
 
+                    //TODO make the proper initializer here instead
+                    if (schema is ModelTypeProvider modelTypeProvider)
+                    {
+                        foreach (var parameter in constructor.Signature.Parameters)
+                        {
+                            if (modelTypeProvider.Fields.TryGetFieldByParameter(parameter, out var field))
+                            {
+                                if (!field.IsField)
+                                    continue;
+                                writer
+                                    .Append($"{field.Name:I} = {parameter.Name:I}")
+                                    .WriteConversion(parameter.Type, field.Type)
+                                    .LineRaw(";");
+                            }
+                        }
+                    }
+                }
                 writer.Line();
             }
         }

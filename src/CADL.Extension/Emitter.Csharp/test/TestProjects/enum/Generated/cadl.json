@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "cadl.enumpropertiesbasic",
+ "Name": "Cadl.EnumPropertiesBasic",
  "Description": "Illustrates input models with required enum type properties.",
  "ApiVersions": [
   "1.0.0"

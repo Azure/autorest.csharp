@@ -24,6 +24,7 @@ namespace ModelsInCadl
             RequiredModelRecord = requiredModelRecord;
         }
 
+        /// <summary> Gets the required model record. </summary>
         public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }

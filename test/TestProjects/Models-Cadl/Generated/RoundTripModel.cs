@@ -13,7 +13,7 @@ using Azure.Core;
 namespace ModelsInCadl
 {
     /// <summary> Model used both as input and output. </summary>
-    public partial class RoundTripModel
+    public partial class RoundTripModel : BaseModel
     {
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"></param>
@@ -45,6 +45,7 @@ namespace ModelsInCadl
             RequiredStringRecord = requiredStringRecord;
             RequiredModelRecord = requiredModelRecord;
         }
+
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
@@ -62,28 +63,29 @@ namespace ModelsInCadl
             RequiredModel = requiredModel;
             RequiredFixedStringEnum = requiredFixedStringEnum;
             RequiredExtensibleEnum = requiredExtensibleEnum;
-            RequiredCollection = requiredCollection;
+            RequiredCollection = requiredCollection.ToList();
             RequiredIntRecord = requiredIntRecord;
             RequiredStringRecord = requiredStringRecord;
             RequiredModelRecord = requiredModelRecord;
         }
 
+        /// <summary> Gets or sets the required string. </summary>
         public string RequiredString { get; set; }
-
+        /// <summary> Gets or sets the required int. </summary>
         public int RequiredInt { get; set; }
-
+        /// <summary> Gets or sets the required model. </summary>
         public BaseModelWithDiscriminator RequiredModel { get; set; }
-
+        /// <summary> Gets or sets the required fixed string enum. </summary>
         public FixedStringEnum RequiredFixedStringEnum { get; set; }
-
+        /// <summary> Gets or sets the required extensible enum. </summary>
         public ExtensibleEnum RequiredExtensibleEnum { get; set; }
-
+        /// <summary> Gets the required collection. </summary>
         public IList<CollectionItem> RequiredCollection { get; }
-
+        /// <summary> Gets the required int record. </summary>
         public IDictionary<string, int> RequiredIntRecord { get; }
-
+        /// <summary> Gets the required string record. </summary>
         public IDictionary<string, string> RequiredStringRecord { get; }
-
+        /// <summary> Gets the required model record. </summary>
         public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }

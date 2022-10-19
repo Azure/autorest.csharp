@@ -19,7 +19,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 null, null, null);
 
             var model = new ModelTypeProvider(input, "test", null);
-            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedModelCodes(model, expectedModelCodes);
         }
 
@@ -32,7 +31,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 null, new List<InputModelType>(), null);
 
             var model = new ModelTypeProvider(input, "test", null);
-            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -45,7 +43,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 null, new List<InputModelType>(), null);
 
             var model = new ModelTypeProvider(input, "test", null);
-            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -70,7 +67,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 null, null, null);
 
             var model = new ModelTypeProvider(input, "test", null);
-            model.FinishInitialization(input, CadlTypeFactory, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 

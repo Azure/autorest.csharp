@@ -353,9 +353,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (!valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
                     continue; // skip the property that does not have a value
 
-                var hierarchyStack = new Stack<ObjectTypeProperty>();
-                hierarchyStack.Push(property);
-                BuildHeirarchy(property, hierarchyStack);
+                var hierarchyStack = property.GetHeirarchyStack();
                 // check if this property is safe-flattened
                 if (hierarchyStack.Count > 1)
                 {
@@ -405,15 +403,6 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 exampleValue = inner;
             }
             return exampleValue;
-        }
-
-        private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
-        {
-            if (property.IsSinglePropertyObject(out var childProp))
-            {
-                heirarchyStack.Push(childProp);
-                BuildHeirarchy(childProp, heirarchyStack);
-            }
         }
 
         private static bool IsPropertyAssignable(ObjectTypeProperty property)

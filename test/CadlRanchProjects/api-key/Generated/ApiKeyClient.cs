@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace api_key
+namespace Authentication.ApiKey
 {
     // Data plane generated client. Illustrates clients generated with ApiKey authentication.
     /// <summary> Illustrates clients generated with ApiKey authentication. </summary>
