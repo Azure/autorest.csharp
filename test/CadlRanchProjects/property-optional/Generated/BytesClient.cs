@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Property.Optional
+namespace Models.Property.Optional
 {
     // Data plane generated client. The Bytes service client.
     /// <summary> The Bytes service client. </summary>

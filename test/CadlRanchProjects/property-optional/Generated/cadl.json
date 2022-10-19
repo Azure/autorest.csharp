@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "models.property.optional",
+ "Name": "Models.Property.Optional",
  "Description": "Illustrates models with optional properties.",
  "ApiVersions": [
   "1.0.0"

@@ -8,9 +8,9 @@
 using System;
 using Azure.Core;
 
-namespace Property.Optional
+namespace Models.Property.Optional
 {
-    /// <summary> Client options for models.property.optional library clients. </summary>
+    /// <summary> Client options for Models.Property.Optional library clients. </summary>
     public partial class ModelsPropertyOptionalClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
