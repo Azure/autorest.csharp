@@ -94,8 +94,8 @@ const defaultOptions = {
     logFile: "log.json",
     skipSDKGeneration: false,
     "shared-source-folders": [
-        resolvePath(dllFilePath, "..", "Generator.Shared"),
-        resolvePath(dllFilePath, "..", "Azure.Core.Shared")
+        resolvePath(dllFilePath, "..", "Generator.Shared").replaceAll("\\", "/"),
+        resolvePath(dllFilePath, "..", "Azure.Core.Shared").replaceAll("\\", "/")
     ],
     newProject: false,
     configurationPath: null
@@ -142,7 +142,7 @@ export async function $onEmit(
         emitterOptions["sdk-folder"]
     );
     for (const sharedFolder of resolvedOptions["shared-source-folders"]) {
-        resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder));
+        resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder).replaceAll("\\", "/"));
     }
     const options: NetEmitterOptions = {
         outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),

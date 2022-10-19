@@ -3,7 +3,7 @@
   "Namespace": "Cadl.TestServer.ArrayBasic",
   "LibraryName": null,
   "SharedSourceFolders": [
-    "..\\..\\..\\..\\..\\..\\..\\node_modules\\@autorest\\csharp\\Generator.Shared",
-    "..\\..\\..\\..\\..\\..\\..\\node_modules\\@autorest\\csharp\\Azure.Core.Shared"
+    "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
+    "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ]
 }
