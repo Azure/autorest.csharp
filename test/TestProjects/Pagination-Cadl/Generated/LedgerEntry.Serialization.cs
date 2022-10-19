@@ -39,6 +39,8 @@ namespace Pagination
             return new LedgerEntry(contents, collectionId, transactionId);
         }
 
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
         internal static LedgerEntry FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);

@@ -153,6 +153,8 @@ namespace ModelsInCadl
             return new RoundTripOptionalModel(optionalString, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), optionalModelCollection, optionalModel, optionalFixedStringEnum, optionalExtensibleEnum, Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord));
         }
 
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
         internal static RoundTripOptionalModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);

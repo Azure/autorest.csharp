@@ -36,14 +36,15 @@ namespace CadlFirstTest
             RequiredModel = requiredModel;
         }
 
+        /// <summary> Gets the required string. </summary>
         public string RequiredString { get; }
-
+        /// <summary> Gets the required int. </summary>
         public int RequiredInt { get; }
-
+        /// <summary> Gets the required collection. </summary>
         public IList<SimpleEnum> RequiredCollection { get; }
-
+        /// <summary> Gets the required dictionary. </summary>
         public IDictionary<string, ExtensibleEnum> RequiredDictionary { get; }
-
+        /// <summary> Gets the required model. </summary>
         public Thing RequiredModel { get; }
     }
 }

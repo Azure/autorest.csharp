@@ -82,13 +82,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (model.Usage != InputModelTypeUsage.None)
                 {
-                    models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel));
+                    models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory));
                 }
-            }
-
-            foreach (var (inputModel, modelTypeProvider) in models)
-            {
-                modelTypeProvider.FinishInitialization(inputModel, typeFactory, _sourceInputModel);
             }
         }
 

@@ -14,6 +14,8 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal record MethodSignature(string Name, string? Summary, string? Description, MethodSignatureModifiers Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, IReadOnlyList<Parameter> Parameters) : MethodSignatureBase(Name, Summary, Description, Modifiers, Parameters)
     {
+        public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
+
         public MethodSignature WithAsync(bool isAsync)
             => isAsync && !Modifiers.HasFlag(Async)
                 ? MakeAsync()

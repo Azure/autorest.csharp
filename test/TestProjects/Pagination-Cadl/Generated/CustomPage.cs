@@ -25,17 +25,19 @@ namespace Azure.Core.Foundations
 
             Value = value.ToList();
         }
+
         /// <summary> Initializes a new instance of CustomPage. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
         internal CustomPage(IReadOnlyList<LedgerEntry> value, string nextLink)
         {
-            Value = value;
+            Value = value.ToList();
             NextLink = nextLink;
         }
 
+        /// <summary> Gets the value. </summary>
         public IReadOnlyList<LedgerEntry> Value { get; }
-
+        /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }
 }

@@ -40,6 +40,8 @@ namespace Azure.Core.Foundations
             return new CustomPage(value, nextLink);
         }
 
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
         internal static CustomPage FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);

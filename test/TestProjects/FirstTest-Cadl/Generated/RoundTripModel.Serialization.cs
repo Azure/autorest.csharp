@@ -15,10 +15,6 @@ namespace CadlFirstTest
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredString");
-            writer.WriteStringValue(RequiredString);
-            writer.WritePropertyName("requiredInt");
-            writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredCollection");
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)
@@ -34,12 +30,11 @@ namespace CadlFirstTest
                 writer.WriteStringValue(item.Value.ToString());
             }
             writer.WriteEndObject();
-            writer.WritePropertyName("requiredModel");
-            writer.WriteObjectValue(RequiredModel);
             writer.WriteEndObject();
         }
 
-        internal RequestContent ToRequestContent()
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace ModelsInCadl
 {
     /// <summary> Model used both as input and output with primitive types. </summary>
-    public partial class RoundTripPrimitiveModel
+    public partial class RoundTripPrimitiveModel : BaseModel
     {
         /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
         /// <param name="requiredString"></param>
@@ -39,22 +39,23 @@ namespace ModelsInCadl
             RequiredTimeSpan = requiredTimeSpan;
         }
 
+        /// <summary> Gets or sets the required string. </summary>
         public string RequiredString { get; set; }
-
+        /// <summary> Gets or sets the required int. </summary>
         public int RequiredInt { get; set; }
-
+        /// <summary> Gets or sets the required int 64. </summary>
         public long RequiredInt64 { get; set; }
-
+        /// <summary> Gets or sets the required safe int. </summary>
         public long RequiredSafeInt { get; set; }
-
+        /// <summary> Gets or sets the required float. </summary>
         public float RequiredFloat { get; set; }
-
+        /// <summary> Gets or sets the required double. </summary>
         public double RequiredDouble { get; set; }
-
+        /// <summary> Gets or sets the required boolean. </summary>
         public bool RequiredBoolean { get; set; }
-
+        /// <summary> Gets or sets the required date time offset. </summary>
         public DateTimeOffset RequiredDateTimeOffset { get; set; }
-
+        /// <summary> Gets or sets the required time span. </summary>
         public TimeSpan RequiredTimeSpan { get; set; }
     }
 }

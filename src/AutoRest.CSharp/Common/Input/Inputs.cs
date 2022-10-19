@@ -3,8 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using Azure.Core;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input
@@ -184,7 +186,9 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
-    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator) { }
+    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
+    {
+    }
 
     internal record InputConstant(object Value, InputType Type);
 

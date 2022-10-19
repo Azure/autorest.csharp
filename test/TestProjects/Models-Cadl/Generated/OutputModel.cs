@@ -13,7 +13,7 @@ using Azure.Core;
 namespace ModelsInCadl
 {
     /// <summary> Model used only as output. </summary>
-    public partial class OutputModel
+    public partial class OutputModel : BaseModel
     {
         /// <summary> Initializes a new instance of OutputModel. </summary>
         /// <param name="requiredString"></param>
@@ -35,6 +35,7 @@ namespace ModelsInCadl
             RequiredCollection = requiredCollection.ToList();
             RequiredModelRecord = requiredModelRecord;
         }
+
         /// <summary> Initializes a new instance of OutputModel. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
@@ -46,18 +47,19 @@ namespace ModelsInCadl
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
-            RequiredCollection = requiredCollection;
+            RequiredCollection = requiredCollection.ToList();
             RequiredModelRecord = requiredModelRecord;
         }
 
+        /// <summary> Gets or sets the required string. </summary>
         public string RequiredString { get; set; }
-
+        /// <summary> Gets or sets the required int. </summary>
         public int RequiredInt { get; set; }
-
+        /// <summary> Gets or sets the required model. </summary>
         public DerivedModel RequiredModel { get; set; }
-
+        /// <summary> Gets the required collection. </summary>
         public IList<CollectionItem> RequiredCollection { get; }
-
+        /// <summary> Gets the required model record. </summary>
         public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }

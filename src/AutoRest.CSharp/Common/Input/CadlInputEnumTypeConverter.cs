@@ -29,7 +29,8 @@ namespace AutoRest.CSharp.Common.Input
             string? ns = null;
             string? accessibility = null;
             string? description = null;
-            InputModelTypeUsage? usage = null;
+            InputModelTypeUsage usage = InputModelTypeUsage.None;
+            string? usageString = null;
             bool isExtendable = false;
             InputPrimitiveType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? allowedValues = null;
@@ -40,7 +41,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputEnumType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
-                    || reader.TryReadWithConverter(nameof(InputModelType.Usage), options, ref usage)
+                    || reader.TryReadString(nameof(InputEnumType.Usage), ref usageString)
                     || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
                     || reader.TryReadPrimitiveType(nameof(InputEnumType.EnumValueType), ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.AllowedValues), options, ref allowedValues);
@@ -60,12 +61,17 @@ namespace AutoRest.CSharp.Common.Input
                 System.Console.Error.WriteLine($"[Warn]: Enum '{name}' must have a description");
             }
 
+            if (usageString != null)
+            {
+                Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
+            }
+
             if (allowedValues == null || allowedValues.Count == 0)
             {
                 throw new JsonException("Enum must have at least one value");
             }
 
-            var enumType = new InputEnumType(name, ns, accessibility, description, usage ?? InputModelTypeUsage.None, valueType ?? InputPrimitiveType.Int32, allowedValues, isExtendable);
+            var enumType = new InputEnumType(name, ns, accessibility, description, usage, valueType ?? InputPrimitiveType.Int32, allowedValues, isExtendable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);

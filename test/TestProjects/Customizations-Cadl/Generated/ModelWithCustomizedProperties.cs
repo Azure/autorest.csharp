@@ -16,7 +16,7 @@ namespace CustomizationsInCadl
     {
         /// <summary> Initializes a new instance of ModelWithCustomizedProperties. </summary>
         /// <param name="propertyToMakeInternal"></param>
-        /// <param name="propertyToRename"></param>
+        /// <param name="renamedProperty"></param>
         /// <param name="propertyToMakeFloat"></param>
         /// <param name="propertyToMakeInt"></param>
         /// <param name="propertyToMakeDuration"></param>
@@ -24,13 +24,13 @@ namespace CustomizationsInCadl
         /// <param name="propertyToMakeJsonElement"></param>
         /// <param name="propertyToField"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="propertyToMakeString"/> or <paramref name="propertyToField"/> is null. </exception>
-        public ModelWithCustomizedProperties(int propertyToMakeInternal, int propertyToRename, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField)
+        public ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField)
         {
             Argument.AssertNotNull(propertyToMakeString, nameof(propertyToMakeString));
             Argument.AssertNotNull(propertyToField, nameof(propertyToField));
 
             PropertyToMakeInternal = propertyToMakeInternal;
-            RenamedProperty = propertyToRename;
+            RenamedProperty = renamedProperty;
             PropertyToMakeFloat = propertyToMakeFloat;
             PropertyToMakeInt = propertyToMakeInt;
             PropertyToMakeDuration = propertyToMakeDuration;
