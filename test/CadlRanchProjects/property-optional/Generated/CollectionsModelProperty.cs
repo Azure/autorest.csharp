@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Linq;
 using Azure.Core;
 
 namespace Models.Property.Optional
@@ -18,13 +19,15 @@ namespace Models.Property.Optional
         {
             Property = new ChangeTrackingList<StringProperty>();
         }
+
         /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
         /// <param name="property"></param>
         internal CollectionsModelProperty(IList<StringProperty> property)
         {
-            Property = property;
+            Property = property.ToList();
         }
 
+        /// <summary> Gets the property. </summary>
         public IList<StringProperty> Property { get; }
     }
 }

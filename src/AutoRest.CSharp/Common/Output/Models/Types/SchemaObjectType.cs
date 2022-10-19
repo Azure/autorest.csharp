@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -21,21 +22,17 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class SchemaObjectType : ObjectType
+    internal class SchemaObjectType : SerializableObjectType
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly SchemaTypeUsage _usage;
 
         private readonly ModelTypeMapping? _sourceTypeMapping;
-        private readonly bool _hasJsonSerialization;
-        private readonly bool _hasXmlSerialization;
+        private readonly IReadOnlyList<KnownMediaType> _supportedSerializationFormats;
 
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
-        private ObjectTypeDiscriminator? _discriminator;
-        private JsonObjectSerialization? _jsonSerialization;
-        private XmlObjectSerialization? _xmlSerialization;
 
         public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
             : base(context)
@@ -68,9 +65,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _usage |= Enum.Parse<SchemaTypeUsage>(objectSchema.Extensions?.Usage!, true);
             }
 
-            var supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
-            _hasJsonSerialization = supportedSerializationFormats.Contains(KnownMediaType.Json);
-            _hasXmlSerialization = supportedSerializationFormats.Contains(KnownMediaType.Xml);
+            _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -79,11 +74,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
-        public bool IsStruct => ExistingType?.IsValueType == true;
-
-        public JsonObjectSerialization? JsonSerialization => _hasJsonSerialization ? _jsonSerialization ??= _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this) : null;
-        public XmlObjectSerialization? XmlSerialization => _hasXmlSerialization ? _xmlSerialization ??= _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
-        public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
         protected override bool IsAbstract => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
@@ -126,7 +116,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             List<ObjectPropertyInitializer> serializationInitializers = new List<ObjectPropertyInitializer>();
             ObjectTypeConstructor? baseSerializationCtor = null;
 
-            if (Inherits is {IsFrameworkType: false, Implementation: ObjectType objectType})
+            if (Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType })
             {
                 baseSerializationCtor = objectType.SerializationConstructor;
                 serializationConstructorParameters.AddRange(baseSerializationCtor.Signature.Parameters);
@@ -289,9 +279,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseCtor);
         }
 
-        public bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
-        public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output);
-        public virtual bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
         protected bool SkipInitializerConstructor => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.SkipInitCtor;
@@ -312,7 +300,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private ObjectTypeDiscriminator? BuildDiscriminator()
+        protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
             Discriminator? schemaDiscriminator = ObjectSchema.Discriminator;
             ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
@@ -612,6 +600,36 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string CreateDescription()
         {
             return ObjectSchema.CreateDescription();
+        }
+
+        protected override bool EnsureHasJsonSerialization()
+        {
+            return _supportedSerializationFormats.Contains(KnownMediaType.Json);
+        }
+
+        protected override bool EnsureHasXmlSerialization()
+        {
+            return _supportedSerializationFormats.Contains(KnownMediaType.Xml); ;
+        }
+
+        protected override bool EnsureIncludeSerializer()
+        {
+            return _usage.HasFlag(SchemaTypeUsage.Input);
+        }
+
+        protected override bool EnsureIncludeDeserializer()
+        {
+            return _usage.HasFlag(SchemaTypeUsage.Output);
+        }
+
+        protected override JsonObjectSerialization EnsureJsonSerialization()
+        {
+            return _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this);
+        }
+
+        protected override XmlObjectSerialization EnsureXmlSerialization()
+        {
+            return _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this);
         }
     }
 }

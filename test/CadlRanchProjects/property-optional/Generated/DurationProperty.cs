@@ -16,6 +16,7 @@ namespace Models.Property.Optional
         public DurationProperty()
         {
         }
+
         /// <summary> Initializes a new instance of DurationProperty. </summary>
         /// <param name="property"></param>
         internal DurationProperty(TimeSpan? property)
@@ -23,6 +24,7 @@ namespace Models.Property.Optional
             Property = property;
         }
 
+        /// <summary> Gets or sets the property. </summary>
         public TimeSpan? Property { get; set; }
     }
 }

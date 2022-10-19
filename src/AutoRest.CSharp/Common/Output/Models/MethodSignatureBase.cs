@@ -26,8 +26,8 @@ namespace AutoRest.CSharp.Output.Models
         Extension = 32,
         Virtual = 64,
         Async = 128,
-        Abstract = 256,
+        New = 256,
         Override = 512,
-        New = 1024,
+        Abstract = 1024
     }
 }

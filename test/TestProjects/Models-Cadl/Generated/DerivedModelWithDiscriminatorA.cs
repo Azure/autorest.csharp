@@ -11,7 +11,7 @@ using Azure.Core;
 namespace ModelsInCadl
 {
     /// <summary> Deriver model with discriminator property. </summary>
-    public partial class DerivedModelWithDiscriminatorA
+    public partial class DerivedModelWithDiscriminatorA : BaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
         /// <param name="requiredString"></param>
@@ -23,6 +23,7 @@ namespace ModelsInCadl
             RequiredString = requiredString;
         }
 
+        /// <summary> Gets or sets the required string. </summary>
         public string RequiredString { get; set; }
     }
 }

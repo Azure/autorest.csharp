@@ -571,5 +571,38 @@ namespace AutoRest.CSharp.Generation.Writers
             var propertyName = property.PropertyName;
             return writer.Scope($"if ({propertyName} != null)");
         }
+
+        public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
+        {
+            writer.WriteXmlDocumentationSummary(signature.FormattableDescription);
+            writer.WriteXmlDocumentationParameters(signature.Parameters);
+            if (isPublicType)
+            {
+                writer.WriteXmlDocumentationNonEmptyParametersException(signature.Parameters);
+                writer.WriteXmlDocumentationRequiredParametersException(signature.Parameters);
+            }
+
+            FormattableString? returnDesc = returnDescription ?? signature.ReturnDescription;
+            if (returnDesc is not null)
+                writer.WriteXmlDocumentationReturns(returnDesc);
+
+            if (enableAttributes && attributes is not null)
+            {
+                foreach (var attribute in attributes)
+                {
+                    writer.Line($"[{attribute.GetType()}]");
+                }
+            }
+            return writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
+        }
+
+        public static IDisposable WriteCommonMethod(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)
+        {
+            var scope = WriteCommonMethodWithoutValidation(writer, signature, returnDescription, isAsync, isPublicType);
+            if (isPublicType)
+                writer.WriteParametersValidation(signature.Parameters);
+
+            return scope;
+        }
     }
 }

@@ -3,9 +3,7 @@
   "Namespace": "LroBasicCadl",
   "LibraryName": null,
   "SharedSourceFolders": [
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
-  ],
-  "public-clients": true,
-  "skip-csproj-packagereference": true
+    "..\\..\\..\\..\\node_modules\\@autorest\\csharp\\Generator.Shared",
+    "..\\..\\..\\..\\node_modules\\@autorest\\csharp\\Azure.Core.Shared"
+  ]
 }

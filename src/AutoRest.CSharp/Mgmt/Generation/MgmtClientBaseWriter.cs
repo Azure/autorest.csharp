@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 resource.Type,
                 $"Returns a <see cref=\"{resource.Type}\" /> object.",
                 GetParametersForSingletonEntry());
-            using (WriteCommonMethod(signature, null, false))
+            using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
             {
                 WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!, signature);
             }
@@ -309,7 +309,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 resourceCollection.Type,
                 $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
                 GetParametersForCollectionEntry(resourceCollection));
-            using (WriteCommonMethod(signature, null, false))
+            using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
             {
                 WriteResourceCollectionEntry(resourceCollection, signature);
             }
@@ -329,7 +329,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             };
 
             _writer.Line();
-            using (WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, new List<Attribute> { new ForwardsClientCallsAttribute() }))
+            using (_writer.WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, This.Accessibility == "public", true, new List<Attribute> { new ForwardsClientCallsAttribute() }))
             {
                 WriteResourceEntry(resourceCollection, isAsync);
             }

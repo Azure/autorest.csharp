@@ -7,7 +7,6 @@ using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using property_types;
 using Models.Property.Types;
 using System.Collections.Generic;
 

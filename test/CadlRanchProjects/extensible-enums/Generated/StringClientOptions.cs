@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace extensible_enums
+namespace ExtensibleEnums
 {
     /// <summary> Client options for StringClient. </summary>
     public partial class StringClientOptions : ClientOptions

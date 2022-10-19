@@ -78,7 +78,7 @@ namespace ModelsInCadl
                 }
                 if (property.NameEquals("requiredModel"))
                 {
-                    requiredModel = BaseModel.DeserializeBaseModel(property.Value);
+                    requiredModel = DeserializeBaseModel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("requiredIntCollection"))
@@ -125,17 +125,20 @@ namespace ModelsInCadl
             return new InputModel(requiredString, requiredInt, requiredModel, requiredIntCollection, requiredStringCollection, requiredModelCollection, requiredModelRecord);
         }
 
-        internal RequestContent ToRequestContent()
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal new static InputModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeInputModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
             return content;
-        }
-
-        internal static InputModel FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInputModel(document.RootElement);
         }
     }
 }
