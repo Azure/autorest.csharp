@@ -8,7 +8,6 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Models.Property.Optional;
 using NUnit.Framework;
-using Property.Optional;
 
 namespace CadlRanchProjects.Tests
 {

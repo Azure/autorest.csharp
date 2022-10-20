@@ -28,10 +28,10 @@ namespace Azure.Core.Tests
             new object[] { new DateTime (2001, 1, 1, 1, 1, 1, DateTimeKind.Utc), @"""2001-01-01T01:01:01.0000000Z""" },
             new object[] { (IEnumerable<object>)new List<object>() { 1, 2, 3, 4 }, "[1,2,3,4]" },
             new object[] { (IEnumerable<KeyValuePair<string, object>>)new List<KeyValuePair<string, object>>() {
-                KeyValuePair.Create<string, object> ("a", (object)1),
-                KeyValuePair.Create<string, object> ("b", (object)2),
-                KeyValuePair.Create<string, object> ("c", (object)3),
-                KeyValuePair.Create<string, object> ("d", (object)4),
+                new KeyValuePair<string, object> ("a", (object)1),
+                new KeyValuePair<string, object> ("b", (object)2),
+                new KeyValuePair<string, object> ("c", (object)3),
+                new KeyValuePair<string, object> ("d", (object)4),
             },
             @"{""a"":1,""b"":2,""c"":3,""d"":4}"
             },
