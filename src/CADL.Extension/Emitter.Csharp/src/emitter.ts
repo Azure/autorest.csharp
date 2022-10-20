@@ -141,7 +141,7 @@ export async function $onEmit(
         emitterOptions["sdk-folder"]
     );
     for (const sharedFolder of resolvedOptions["shared-source-folders"]) {
-        resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder));
+        resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder).replaceAll("\\", "/"));
     }
     const options: NetEmitterOptions = {
         outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
