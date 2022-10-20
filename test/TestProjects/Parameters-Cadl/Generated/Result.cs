@@ -23,6 +23,7 @@ namespace ParametersCadl.ParameterOrders
             Id = id;
         }
 
+        /// <summary> Gets or sets the id. </summary>
         public string Id { get; set; }
     }
 }

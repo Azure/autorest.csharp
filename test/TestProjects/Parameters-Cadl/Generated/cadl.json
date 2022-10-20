@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "parameterscadl",
+ "Name": "ParametersCadl",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
@@ -148,7 +148,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -243,7 +244,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "HEAD",
