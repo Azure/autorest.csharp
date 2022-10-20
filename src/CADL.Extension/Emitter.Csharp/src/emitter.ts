@@ -83,8 +83,7 @@ export interface NetEmitterOptions {
     "shared-source-folders"?: string[];
     "single-top-level-client"?: boolean;
     skipSDKGeneration: boolean;
-    newProject: boolean;
-    configurationPath: string;
+    "new-project": boolean;
 }
 
 const defaultOptions = {
@@ -96,8 +95,7 @@ const defaultOptions = {
         resolvePath(dllFilePath, "..", "Generator.Shared"),
         resolvePath(dllFilePath, "..", "Azure.Core.Shared")
     ],
-    newProject: false,
-    configurationPath: null
+    "new-project": false
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -116,8 +114,7 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         },
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", nullable: true },
-        newProject: { type: "boolean", nullable: true },
-        configurationPath: { type: "string", nullable: true }
+        "new-project": { type: "boolean", nullable: true }
     },
     required: []
 };
@@ -138,10 +135,11 @@ export async function $onEmit(
     const resolvedSharedFolders: string[] = [];
     const outputFolder = resolvePath(
         program.compilerOptions.outputPath ?? "./cadl-output",
-        emitterOptions["sdk-folder"]
+        emitterOptions["sdk-folder"],
+        "Generated"
     );
     for (const sharedFolder of resolvedOptions["shared-source-folders"]) {
-        resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder));
+        resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder).replaceAll("\\", "/"));
     }
     const options: NetEmitterOptions = {
         outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
@@ -152,8 +150,7 @@ export async function $onEmit(
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
         "shared-source-folders": resolvedSharedFolders,
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
-        newProject: resolvedOptions.newProject,
-        configurationPath: resolvedOptions.configurationPath
+        "new-project": resolvedOptions["new-project"]
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -169,10 +166,8 @@ export async function $onEmit(
         const root = createModel(program);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
-            const dir = path.dirname(outPath);
-
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir, { recursive: true });
+            if (!fs.existsSync(outputFolder)) {
+                fs.mkdirSync(outputFolder, { recursive: true });
             }
             await program.host.writeFile(
                 outPath,
@@ -182,7 +177,7 @@ export async function $onEmit(
             );
 
             //emit configuration.json
-            const configurationOutPath = resolvePath(dir, "Configuration.json");
+            const configurationOutPath = resolvePath(outputFolder, "Configuration.json");
             const configurations = {
                 OutputFolder: ".",
                 Namespace: resolvedOptions.namespace ?? namespace,
@@ -196,9 +191,9 @@ export async function $onEmit(
                 prettierOutput(JSON.stringify(configurations, null, 2))
             );
             if (options.skipSDKGeneration !== true) {
-                let command = `dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${outputFolder} --new-project ${options.newProject}`;
-                if (options.configurationPath) {
-                    command = `${command} -c ${options.configurationPath}`;
+                let command = `dotnet ${resolvePath(dllFilePath)} -p ${path.dirname(outputFolder)}`;
+                if (options["new-project"] === true) {
+                    command = `${command} -n ${options["new-project"]}`;
                 }
 
                 exec(command, (error, stdout, stderr) => {
