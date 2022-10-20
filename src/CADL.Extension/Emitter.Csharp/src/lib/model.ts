@@ -338,7 +338,7 @@ export function getInputType(
             }
             const allowValues: InputEnumTypeValue[] = [];
             const enumValueType = enumMemberType(
-                e.members.entries().next().value
+                e.members.entries().next().value[1]
             );
 
             for (const key of e.members.keys()) {
