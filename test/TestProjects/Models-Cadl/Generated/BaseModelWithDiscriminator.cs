@@ -8,7 +8,7 @@
 namespace ModelsInCadl
 {
     /// <summary> Base model with discriminator property. </summary>
-    public partial class BaseModelWithDiscriminator
+    public partial class BaseModelWithDiscriminator : BaseModel
     {
         /// <summary> Initializes a new instance of BaseModelWithDiscriminator. </summary>
         public BaseModelWithDiscriminator()

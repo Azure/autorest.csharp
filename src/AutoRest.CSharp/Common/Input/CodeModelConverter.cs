@@ -141,7 +141,8 @@ namespace AutoRest.CSharp.Common.Input
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
             BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
-            Headers: GetResponseHeaders(response.HttpResponse.Headers)
+            Headers: GetResponseHeaders(response.HttpResponse.Headers),
+            IsErrorResponse: false
         );
 
         private OperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(

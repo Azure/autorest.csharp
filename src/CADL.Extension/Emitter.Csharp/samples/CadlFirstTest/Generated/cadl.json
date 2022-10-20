@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "demo.helloworld",
+ "Name": "Demo.HelloWorld",
  "ApiVersions": [
   "0.1.0"
  ],
@@ -260,7 +260,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -316,7 +317,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -416,7 +418,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -485,7 +488,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -594,7 +598,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -653,7 +658,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

@@ -22,6 +22,7 @@ namespace Pagination
 
             Contents = contents;
         }
+
         /// <summary> Initializes a new instance of LedgerEntry. </summary>
         /// <param name="contents"></param>
         /// <param name="collectionId"></param>
@@ -33,10 +34,11 @@ namespace Pagination
             TransactionId = transactionId;
         }
 
+        /// <summary> Gets or sets the contents. </summary>
         public string Contents { get; set; }
-
+        /// <summary> Gets the collection id. </summary>
         public string CollectionId { get; }
-
+        /// <summary> Gets the transaction id. </summary>
         public string TransactionId { get; }
     }
 }

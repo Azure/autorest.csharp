@@ -16,6 +16,7 @@ namespace CustomizationsInCadl
         public RootModel()
         {
         }
+
         /// <summary> Initializes a new instance of RootModel. </summary>
         /// <param name="propertyModelToMakeInternal"></param>
         /// <param name="propertyModelToRename"></param>
@@ -34,17 +35,17 @@ namespace CustomizationsInCadl
             PropertyEnumWithValueToRename = propertyEnumWithValueToRename;
             PropertyEnumToBeMadeExtensible = propertyEnumToBeMadeExtensible;
         }
-
+        /// <summary> Gets or sets the property model to rename. </summary>
         public RenamedModel PropertyModelToRename { get; set; }
-
+        /// <summary> Gets or sets the property model to change namespace. </summary>
         public ModelToChangeNamespace PropertyModelToChangeNamespace { get; set; }
-
+        /// <summary> Gets or sets the property model with customized properties. </summary>
         public ModelWithCustomizedProperties PropertyModelWithCustomizedProperties { get; set; }
-
+        /// <summary> Gets or sets the property enum to rename. </summary>
         public RenamedEnum? PropertyEnumToRename { get; set; }
-
+        /// <summary> Gets or sets the property enum with value to rename. </summary>
         public EnumWithValueToRename? PropertyEnumWithValueToRename { get; set; }
-
+        /// <summary> Gets or sets the property enum to be made extensible. </summary>
         public EnumToBeMadeExtensible? PropertyEnumToBeMadeExtensible { get; set; }
     }
 }

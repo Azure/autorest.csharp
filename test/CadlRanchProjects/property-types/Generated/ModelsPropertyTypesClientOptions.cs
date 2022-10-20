@@ -8,9 +8,9 @@
 using System;
 using Azure.Core;
 
-namespace property_types
+namespace Models.Property.Types
 {
-    /// <summary> Client options for models.property.types library clients. </summary>
+    /// <summary> Client options for Models.Property.Types library clients. </summary>
     public partial class ModelsPropertyTypesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

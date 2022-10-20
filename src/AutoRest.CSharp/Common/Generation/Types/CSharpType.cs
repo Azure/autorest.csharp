@@ -154,5 +154,17 @@ namespace AutoRest.CSharp.Generation.Types
                 false,
                 genericTypes.ToArray());
         }
+
+        public bool IsCollectionType()
+        {
+            if (!IsFrameworkType)
+                return false;
+
+            return FrameworkType.Equals(typeof(IList<>)) ||
+                FrameworkType.Equals(typeof(IEnumerable<>)) ||
+                FrameworkType == typeof(IReadOnlyList<>) ||
+                FrameworkType.Equals(typeof(IDictionary<,>)) ||
+                FrameworkType == typeof(IReadOnlyDictionary<,>);
+        }
     }
 }

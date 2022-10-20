@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -15,7 +16,17 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeProperty
     {
+        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty, ObjectType enclosingType)
+            : this(new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type), field.Description?.ToString() ?? String.Empty, field.Modifiers.HasFlag(FieldModifiers.ReadOnly), null, field.IsRequired, inputModelProperty: inputModelProperty)
+        {
+        }
+
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
+            :this(declaration, description, isReadOnly, schemaProperty, (schemaProperty is null ? false : schemaProperty.IsRequired), valueType, optionalViaNullability)
+        {
+        }
+
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null)
         {
             Description = description;
             IsReadOnly = isReadOnly;
@@ -23,11 +34,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             OptionalViaNullability = optionalViaNullability;
             ValueType = valueType ?? declaration.Type;
             Declaration = declaration;
+            IsRequired = isRequired;
+            InputModelProperty = inputModelProperty;
         }
 
+        public bool IsRequired { get; }
         public MemberDeclarationOptions Declaration { get; }
         public string Description { get; }
         public Property? SchemaProperty { get; }
+        public InputModelProperty? InputModelProperty { get; }
 
         /// <summary>
         /// Gets or sets the value indicating whether nullable type of this property represents optionality of the value.
@@ -156,6 +171,24 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
             return extraDescription;
+        }
+
+        public Stack<ObjectTypeProperty> GetHeirarchyStack()
+        {
+            var heirarchyStack = new Stack<ObjectTypeProperty>();
+            heirarchyStack.Push(this);
+            BuildHeirarchy(this, heirarchyStack);
+            return heirarchyStack;
+        }
+
+        private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
+        {
+            //if we get back the same property exit early since this means we have a single property type which references itself
+            if (property.IsSinglePropertyObject(out var childProp) && !property.Equals(childProp))
+            {
+                heirarchyStack.Push(childProp);
+                BuildHeirarchy(childProp, heirarchyStack);
+            }
         }
     }
 }

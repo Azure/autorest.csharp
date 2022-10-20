@@ -23,6 +23,7 @@ namespace Authentication.ApiKey
             Error = error;
         }
 
+        /// <summary> Gets or sets the error. </summary>
         public string Error { get; set; }
     }
 }

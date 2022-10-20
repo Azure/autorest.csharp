@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "lrobasiccadl",
+ "Name": "LroBasicCadl",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
@@ -193,7 +193,8 @@
           "IsNullable": false
          }
         }
-       ]
+       ],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -226,7 +227,8 @@
           "IsNullable": false
          }
         }
-       ]
+       ],
+       "IsErrorResponse": false
       }
      },
      "GenerateConvenienceMethod": true
@@ -341,7 +343,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -364,7 +367,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      },
      "GenerateConvenienceMethod": true

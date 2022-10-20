@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "customizationsincadl",
+ "Name": "CustomizationsInCadl",
  "Description": "CADL project to test various types of models.",
  "ApiVersions": [
   "0.1.0"
@@ -505,7 +505,8 @@
         "$ref": "14"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

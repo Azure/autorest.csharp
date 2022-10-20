@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
-using extensible_enums;
 using ExtensibleEnums;
 using NUnit.Framework;
 

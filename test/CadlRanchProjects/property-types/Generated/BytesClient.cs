@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace property_types
+namespace Models.Property.Types
 {
     // Data plane generated client. The Bytes service client.
     /// <summary> The Bytes service client. </summary>

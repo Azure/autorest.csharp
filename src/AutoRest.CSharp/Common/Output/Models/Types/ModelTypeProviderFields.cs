@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -48,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
 
-                var parameter = Parameter.FromModelProperty(inputModelProperty, field.Type);
+                var parameter = Parameter.FromModelProperty(inputModelProperty, existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.FirstCharToLowerCase(), field.Type);
                 parametersToFields[parameter.Name] = field;
                 serializationParameters.Add(parameter);
                 if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly)
@@ -66,6 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public FieldDeclaration GetFieldByParameter(Parameter parameter) => _parameterNamesToFields[parameter.Name];
+        public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)]out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
         public InputModelProperty GetInputByField(FieldDeclaration field) => _fieldsToInputs[field];
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
@@ -80,7 +82,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var fieldModifiers = propertyIsReadOnly ? Public | ReadOnly : Public;
 
-            return new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, fieldName, GetPropertyDefaultValue(fieldType, inputModelProperty.IsRequired), writeAsProperty: true);
+            CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
+            declaration.SetActualName(fieldName);
+            return new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(fieldType, inputModelProperty.IsRequired), inputModelProperty.IsRequired, false, true);
         }
 
         private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, bool isRequired, TypeFactory typeFactory)
@@ -104,8 +108,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             };
 
             var writeAsProperty = existingMember is IPropertySymbol;
+            CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
+            declaration.SetActualName(existingMember.Name);
 
-            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, existingMember.Name, GetPropertyDefaultValue(originalType, isRequired), writeAsProperty: writeAsProperty);
+            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(originalType, isRequired), isRequired, existingMember is IFieldSymbol, writeAsProperty);
         }
 
         private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)

@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "securityclient",
+ "Name": "SecurityClient",
  "Description": "Illustrates clients generated from a Cadl with security.",
  "ApiVersions": [
   "1.0.0"
@@ -115,7 +115,8 @@
         200
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

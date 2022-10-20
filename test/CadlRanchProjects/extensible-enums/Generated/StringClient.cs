@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace extensible_enums
+namespace ExtensibleEnums
 {
     // Data plane generated client. The String service client.
     /// <summary> The String service client. </summary>

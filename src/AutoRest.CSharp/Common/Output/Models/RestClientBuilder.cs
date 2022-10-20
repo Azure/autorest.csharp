@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             List<Response> clientResponse = new List<Response>();
-            foreach (var response in operation.Responses)
+            foreach (var response in operation.Responses.Where(r => !r.IsErrorResponse))
             {
                 List<StatusCodes> statusCodes = new List<StatusCodes>();
                 foreach (var statusCode in response.StatusCodes)

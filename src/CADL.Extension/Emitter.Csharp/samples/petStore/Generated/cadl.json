@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "petstore",
+ "Name": "PetStore",
  "Description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
  "ApiVersions": [
   "2021-03-25"
@@ -273,7 +273,8 @@
         200
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "DELETE",
@@ -353,7 +354,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       },
       {
        "$id": "42",
@@ -364,7 +366,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -466,7 +469,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -576,7 +580,8 @@
         "$ref": "9"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "cadl.headclient",
+ "Name": "Cadl.HeadClient",
  "Description": "Illustrates clients generated from a Cadl with head parameter.",
  "ApiVersions": [
   "1.0.0"
@@ -202,7 +202,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -304,7 +305,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
