@@ -139,7 +139,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -195,7 +196,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       },
       {
        "$id": "24",
@@ -206,7 +208,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": true
       }
      ],
      "HttpMethod": "GET",

@@ -201,7 +201,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

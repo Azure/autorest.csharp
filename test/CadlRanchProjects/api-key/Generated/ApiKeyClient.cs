@@ -195,7 +195,7 @@ namespace Authentication.ApiKey
 
         internal HttpMessage CreateInvalidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier204403);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -209,7 +209,5 @@ namespace Authentication.ApiKey
 
         private static ResponseClassifier _responseClassifier204;
         private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new StatusCodeClassifier(stackalloc ushort[] { 204 });
-        private static ResponseClassifier _responseClassifier204403;
-        private static ResponseClassifier ResponseClassifier204403 => _responseClassifier204403 ??= new StatusCodeClassifier(stackalloc ushort[] { 204, 403 });
     }
 }

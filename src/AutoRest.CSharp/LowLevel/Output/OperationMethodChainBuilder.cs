@@ -116,12 +116,15 @@ namespace AutoRest.CSharp.Output.Models
 
         private ReturnTypeChain BuildReturnTypes()
         {
-            var operationBodyTypes = Operation.Responses.Select(r => r.BodyType).WhereNotNull().Distinct().ToArray();
-            CSharpType? responseType = operationBodyTypes.Length switch
+            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
+            CSharpType? responseType = null;
+            if (operationBodyTypes != null && operationBodyTypes.Length != 0)
             {
-                0 => null,
-                1 => _typeFactory.CreateType(operationBodyTypes[0]),
-                _ => new CSharpType(typeof(object))
+                var firstBodyType = operationBodyTypes[0];
+                if (firstBodyType != null)
+                {
+                    responseType = _typeFactory.CreateType(firstBodyType);
+                }
             };
 
             if (Operation.Paging != null)

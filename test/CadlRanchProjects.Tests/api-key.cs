@@ -19,10 +19,11 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Authentication_ApiKey_invalid() => Test(async (host) =>
+        public Task Authentication_ApiKey_invalid() => Test((host) =>
         {
-            Response response = await new ApiKeyClient(new AzureKeyCredential("valid-key"), host, null).InvalidAsync();
-            Assert.AreEqual("invalid-api-key", InvalidAuth.FromResponse(response).Error);
+            var exception = Assert.ThrowsAsync<RequestFailedException>(() => new ApiKeyClient(new AzureKeyCredential("valid-key"), host, null).InvalidAsync());
+            Assert.AreEqual(403, exception.Status);
+            return Task.CompletedTask;
         });
     }
 }
