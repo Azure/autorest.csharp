@@ -28,7 +28,7 @@
    ],
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "RoundTrip"
   },
   {
    "$id": "5",
@@ -56,7 +56,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with a boolean property",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "7",
@@ -81,7 +81,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with a string property",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "10",
@@ -106,7 +106,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with a bytes property",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "13",
@@ -131,7 +131,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with a int property",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "16",
@@ -156,7 +156,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with a float property",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "19",
@@ -181,7 +181,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with a datetime property",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "22",
@@ -206,7 +206,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with a duration property",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "25",
@@ -231,7 +231,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with enum properties",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "28",
@@ -253,7 +253,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with extensible enum properties",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "30",
@@ -275,7 +275,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with model properties",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "32",
@@ -288,7 +288,7 @@
       "Namespace": "Models.Property.Types",
       "Description": "Inner model. Will be a property type for ModelWithModelProperties",
       "IsNullable": false,
-      "Usage": "None",
+      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "34",
@@ -322,7 +322,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with collection string properties",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "37",
@@ -352,7 +352,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with collection int properties",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "41",
@@ -382,7 +382,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with collection model properties",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "45",
@@ -409,7 +409,7 @@
    "Namespace": "Models.Property.Types",
    "Description": "Model with dictionary string properties",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "48",

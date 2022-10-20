@@ -86,6 +86,7 @@ export interface NetEmitterOptions {
     skipSDKGeneration: boolean;
     newProject: boolean;
     configurationPath: string;
+    generateConvenienceAPI: boolean; //workaround for cadl-ranch project
 }
 
 const defaultOptions = {
@@ -98,7 +99,8 @@ const defaultOptions = {
         resolvePath(dllFilePath, "..", "Azure.Core.Shared").replaceAll("\\", "/")
     ],
     newProject: false,
-    configurationPath: null
+    configurationPath: null,
+    generateConvenienceAPI: false
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -118,7 +120,8 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", nullable: true },
         newProject: { type: "boolean", nullable: true },
-        configurationPath: { type: "string", nullable: true }
+        configurationPath: { type: "string", nullable: true },
+        generateConvenienceAPI: {type: "boolean", nullable: true}
     },
     required: []
 };
@@ -154,7 +157,8 @@ export async function $onEmit(
         "shared-source-folders": resolvedSharedFolders,
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         newProject: resolvedOptions.newProject,
-        configurationPath: resolvedOptions.configurationPath
+        configurationPath: resolvedOptions.configurationPath,
+        generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -167,7 +171,7 @@ export async function $onEmit(
                   )
                 : resolvePath(options.outputFile);
 
-        const root = createModel(program);
+        const root = createModel(program, options.generateConvenienceAPI);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const dir = path.dirname(outPath);
@@ -230,7 +234,7 @@ function getClient(
     return undefined;
 }
 
-function createModel(program: Program): any {
+function createModel(program: Program, generateConvenienceAPI: boolean = false): any {
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {
         return;
@@ -353,7 +357,7 @@ function createModel(program: Program): any {
                 }
             }
             client.Operations.push(op);
-            if (op.GenerateConvenienceMethod)
+            if (op.GenerateConvenienceMethod || generateConvenienceAPI)
                 convenienceOperations.push(operation);
         }
         if (apiVersions.size > 1) {

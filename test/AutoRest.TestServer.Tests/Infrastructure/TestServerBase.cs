@@ -13,13 +13,14 @@ namespace AutoRest.TestServer.Tests.Infrastructure
     {
         private static Lazy<BuildPropertiesAttribute> _buildProperties = new(() => (BuildPropertiesAttribute)typeof(TestServerBase).Assembly.GetCustomAttributes(typeof(BuildPropertiesAttribute), false)[0]);
 
-        private readonly Process _process;
+        //private readonly Process _process;
         public HttpClient Client { get; }
         public Uri Host { get; }
         public string Port { get; }
 
         public TestServerBase(string baseDirectory, string processArguments)
         {
+            /*
             var portPhrase = "Started server on port ";
             var startup = Path.Combine(baseDirectory, "dist", "cli", "cli.js");
 
@@ -53,6 +54,12 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             {
                 throw new InvalidOperationException($"Unable to detect server port {_process.StandardOutput.ReadToEnd()} {_process.StandardError.ReadToEnd()}");
             }
+            */
+            Host = new Uri($"http://localhost:3021");
+            Client = new HttpClient
+            {
+                BaseAddress = Host
+            };
         }
 
         protected static string GetCoverageDirectory()
@@ -71,7 +78,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             throw new InvalidOperationException($"Cannot find 'node_modules' in parent directories of {typeof(TestServerV1).Assembly.Location}.");
         }
-
+        /*
         private void ReadOutput()
         {
             while (!_process.HasExited && !_process.StandardOutput.EndOfStream)
@@ -80,17 +87,19 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 _process.StandardError.ReadToEnd();
             }
         }
-
+        */
         protected virtual void Stop(Process process)
         {
-            process.Kill(true);
+            //process.Kill(true);
         }
 
         public void Dispose()
         {
+            /*
             Stop(_process);
 
             _process?.Dispose();
+            */
             Client?.Dispose();
         }
     }

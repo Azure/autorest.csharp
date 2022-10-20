@@ -36,11 +36,12 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     }
 }
 
-function Add-Cadl([string]$name, [string]$output, [string]$mainFile="") {
+function Add-Cadl([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
     $cadlDefinitions[$name] = @{
         'projectName'=$name;
         'output'=$output;
-        'mainFile'=$mainFile
+        'mainFile'=$mainFile;
+        'arguments'=$arguments
     }
 }
 
@@ -57,7 +58,7 @@ function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$
     if ($cadlFolders) {
         $cadlFolder = $cadlFolders[0]
         $cadlMain = Join-Path $cadlFolder "main.cadl"
-        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain
+        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true"
     }
 }
 
@@ -364,6 +365,6 @@ $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
 $keys | %{ $cadlDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-Cadl $_.output $_.projectName $_.mainFile $using:sharedSource $using:fast $using:debug;
+        Invoke-Cadl $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel
