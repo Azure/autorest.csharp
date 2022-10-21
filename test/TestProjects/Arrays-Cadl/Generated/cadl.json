@@ -1,0 +1,722 @@
+{
+ "$id": "1",
+ "Name": "ArraysInCadl",
+ "Description": "CADL project to test various types of arrays.",
+ "ApiVersions": [
+  "0.1.0"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "BaseModel",
+   "Namespace": "ArraysInCadl",
+   "Description": "Base model",
+   "IsNullable": false,
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "property",
+     "SerializedName": "property",
+     "Description": "",
+     "Type": {
+      "$id": "4",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "5",
+   "Name": "ArraysInCadl",
+   "Description": "CADL project to test various types of arrays.",
+   "Operations": [
+    {
+     "$id": "6",
+     "Name": "outputStringArray",
+     "Description": "Output string array.",
+     "Parameters": [
+      {
+       "$id": "7",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "8",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "9",
+        "Type": {
+         "$ref": "8"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "10",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "11",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "12",
+        "Type": {
+         "$id": "13",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "0.1.0"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "14",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "15",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "16",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/outputStringArray",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "17",
+     "Name": "outputInt32Array",
+     "Description": "Output int32 array.",
+     "Parameters": [
+      {
+       "$id": "18",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "19",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "20",
+        "Type": {
+         "$ref": "19"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "21",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "22",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "23",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/outputInt32Array",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "24",
+     "Name": "outputInt64Array",
+     "Description": "Output int64 array.",
+     "Parameters": [
+      {
+       "$id": "25",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "26",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "27",
+        "Type": {
+         "$ref": "26"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "28",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "29",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "30",
+         "Name": "int64",
+         "Kind": "Int64",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/outputInt64Array",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "31",
+     "Name": "outputSafeIntArray",
+     "Description": "Output safeint array.",
+     "Parameters": [
+      {
+       "$id": "32",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "33",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "34",
+        "Type": {
+         "$ref": "33"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "35",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "36",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "37",
+         "Name": "safeint",
+         "Kind": "Int64",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/outputSafeIntArray",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "38",
+     "Name": "outputFloat32Array",
+     "Description": "Output float32 array.",
+     "Parameters": [
+      {
+       "$id": "39",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "40",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "41",
+        "Type": {
+         "$ref": "40"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "42",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "43",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "44",
+         "Name": "float32",
+         "Kind": "Float32",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/outputFloat32Array",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "45",
+     "Name": "outputFloat64Array",
+     "Description": "Output float64 array.",
+     "Parameters": [
+      {
+       "$id": "46",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "47",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "48",
+        "Type": {
+         "$ref": "47"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "49",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "50",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "51",
+         "Name": "float64",
+         "Kind": "Float64",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/outputFloat64Array",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "52",
+     "Name": "outputBooleanArray",
+     "Description": "Output boolean array.",
+     "Parameters": [
+      {
+       "$id": "53",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "54",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "55",
+        "Type": {
+         "$ref": "54"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "56",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "57",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "58",
+         "Name": "boolean",
+         "Kind": "Boolean",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/outputBooleanArray",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "59",
+     "Name": "outputZonedDateTimeArray",
+     "Description": "Output zonedDateTime array.",
+     "Parameters": [
+      {
+       "$id": "60",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "61",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "62",
+        "Type": {
+         "$ref": "61"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "63",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "64",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "65",
+         "Name": "zonedDateTime",
+         "Kind": "DateTime",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/outputZonedDateTimeArray",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "66",
+     "Name": "outputDurationArray",
+     "Description": "Output duration array.",
+     "Parameters": [
+      {
+       "$id": "67",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "68",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "69",
+        "Type": {
+         "$ref": "68"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "70",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "71",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "72",
+         "Name": "duration",
+         "Kind": "DurationISO8601",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/outputDurationArray",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "73",
+     "Name": "outputBaseModeleArray",
+     "Description": "Output model array.",
+     "Parameters": [
+      {
+       "$id": "74",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "75",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "76",
+        "Type": {
+         "$ref": "75"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "77",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "78",
+        "Name": "Array",
+        "ElementType": {
+         "$ref": "2"
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/outputBaseModelArray",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "79"
+   }
+  }
+ ]
+}

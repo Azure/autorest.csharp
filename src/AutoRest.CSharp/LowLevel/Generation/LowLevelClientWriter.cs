@@ -74,8 +74,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             if (clientMethod.ConvenienceMethod is not null)
                             {
-                                WriteConvenienceMethod(writer, clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, client.Fields, true);
-                                WriteConvenienceMethod(writer, clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, client.Fields, false);
+                                WriteConvenienceMethod(writer, clientMethod, client.Fields, true);
+                                WriteConvenienceMethod(writer, clientMethod, client.Fields, false);
                             }
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, true);
                             WriteClientMethod(writer, clientMethod, client.Fields, exampleComposer, false);
@@ -230,20 +230,23 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteConvenienceMethod(CodeWriter writer, MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
+        private static void WriteConvenienceMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
         {
-            using (WriteConvenienceMethodDeclaration(writer, convenienceMethod.Signature, async))
+            var protocolMethodSignature = clientMethod.ProtocolMethodSignature;
+            var convenienceMethod = clientMethod.ConvenienceMethod;
+
+            using (WriteConvenienceMethodDeclaration(writer, convenienceMethod!.Signature, async))
             {
                 if (convenienceMethod.Diagnostic != null)
                 {
                     using (WriteDiagnosticScope(writer, convenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
                     {
-                        WriteConvenienceMethodBody(writer, protocolMethodSignature, convenienceMethod, async);
+                        WriteConvenienceMethodBody(writer, clientMethod, async);
                     }
                 }
                 else
                 {
-                    WriteConvenienceMethodBody(writer, protocolMethodSignature, convenienceMethod, async);
+                    WriteConvenienceMethodBody(writer, clientMethod, async);
                 }
             }
             writer.Line();
@@ -277,9 +280,12 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteConvenienceMethodBody(CodeWriter writer, MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, bool async)
+        private static void WriteConvenienceMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
-            var responseType = convenienceMethod.ResponseType;
+            var protocolMethodSignature = clientMethod.ProtocolMethodSignature;
+            var convenienceMethod = clientMethod.ConvenienceMethod;
+
+            var responseType = convenienceMethod!.ResponseType;
 
             var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
             writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
@@ -307,13 +313,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 .WriteMethodCall(protocolMethodSignature, parameters, async)
                 .LineRaw(";");
 
-            if (responseType == null)
+            if (clientMethod.RequestMethod.Responses.Length > 0)
             {
-                writer.Line($"return {responseVariable:I};");
-            }
-            else
-            {
-                writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
+                ResponseWriterHelpers.WriteRawResponseToGeneric(writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, responseVariable.ActualName);
             }
         }
 

@@ -1,0 +1,75 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+
+@serviceTitle("Arrays in CADL")
+@serviceVersion("0.1.0")
+@doc("CADL project to test various types of arrays.")
+namespace ArraysInCadl;
+
+using Cadl.Http;
+using Cadl.Rest;
+
+@doc("Base model")
+model BaseModel {
+    property: string;
+}
+
+@route("/outputStringArray")
+@doc("Output string array.")
+@get
+@OpenAPI.extension("x-ms-convenient-api", true)
+op outputStringArray(): string[];
+
+@route("/outputInt32Array")
+@doc("Output int32 array.")
+@get
+@OpenAPI.extension("x-ms-convenient-api", true)
+op outputInt32Array(): int32[];
+
+@route("/outputInt64Array")
+@doc("Output int64 array.")
+@get
+@OpenAPI.extension("x-ms-convenient-api", true)
+op outputInt64Array(): int64[];
+
+@route("/outputSafeIntArray")
+@doc("Output safeint array.")
+@get
+@OpenAPI.extension("x-ms-convenient-api", true)
+op outputSafeIntArray(): safeint[];
+
+@route("/outputFloat32Array")
+@doc("Output float32 array.")
+@get
+@OpenAPI.extension("x-ms-convenient-api", true)
+op outputFloat32Array(): float32[];
+
+@route("/outputFloat64Array")
+@doc("Output float64 array.")
+@get
+@OpenAPI.extension("x-ms-convenient-api", true)
+op outputFloat64Array(): float64[];
+
+@route("/outputBooleanArray")
+@doc("Output boolean array.")
+@get
+@OpenAPI.extension("x-ms-convenient-api", true)
+op outputBooleanArray(): boolean[];
+
+@route("/outputZonedDateTimeArray")
+@doc("Output zonedDateTime array.")
+@get
+@OpenAPI.extension("x-ms-convenient-api", true)
+op outputZonedDateTimeArray(): zonedDateTime[];
+
+@route("/outputDurationArray")
+@doc("Output duration array.")
+@get
+@OpenAPI.extension("x-ms-convenient-api", true)
+op outputDurationArray(): duration[];
+
+@route("/outputBaseModelArray")
+@doc("Output model array.")
+@get
+@OpenAPI.extension("x-ms-convenient-api", true)
+op outputBaseModeleArray(): BaseModel[];
