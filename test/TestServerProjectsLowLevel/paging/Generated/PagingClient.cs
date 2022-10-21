@@ -24,7 +24,6 @@ namespace paging_LowLevel
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -59,7 +58,6 @@ namespace paging_LowLevel
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
@@ -373,174 +371,6 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetSinglePagesRequest(context)
                         : CreateGetSinglePagesNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
-        }
-
-        /// <summary> A paging operation that finishes on the first call with body params without a nextlink. </summary>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetSinglePagesWithBodyParamsAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PagingClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// await foreach (var data in client.GetSinglePagesWithBodyParamsAsync(RequestContent.Create(data)))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.ToString());
-        /// }
-        /// ]]></code>
-        /// This sample shows how to call GetSinglePagesWithBodyParamsAsync with all request content, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PagingClient(credential);
-        /// 
-        /// var data = new {
-        ///     name = "<name>",
-        /// };
-        /// 
-        /// await foreach (var data in client.GetSinglePagesWithBodyParamsAsync(RequestContent.Create(data)))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload and one item in the pageable response.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>BodyParam</c>:
-        /// <code>{
-        ///   name: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>ProductResultValues</c>:
-        /// <code>{
-        ///   properties: {
-        ///     id: number, # Optional.
-        ///     name: string, # Optional.
-        ///   }, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual AsyncPageable<BinaryData> GetSinglePagesWithBodyParamsAsync(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            return GetSinglePagesWithBodyParamsImplementationAsync("PagingClient.GetSinglePagesWithBodyParams", content, context);
-        }
-
-        private AsyncPageable<BinaryData> GetSinglePagesWithBodyParamsImplementationAsync(string diagnosticsScopeName, RequestContent content, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetSinglePagesWithBodyParamsRequest(content, context)
-                        : CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, content, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
-        }
-
-        /// <summary> A paging operation that finishes on the first call with body params without a nextlink. </summary>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetSinglePagesWithBodyParams and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PagingClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// foreach (var data in client.GetSinglePagesWithBodyParams(RequestContent.Create(data)))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.ToString());
-        /// }
-        /// ]]></code>
-        /// This sample shows how to call GetSinglePagesWithBodyParams with all request content, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PagingClient(credential);
-        /// 
-        /// var data = new {
-        ///     name = "<name>",
-        /// };
-        /// 
-        /// foreach (var data in client.GetSinglePagesWithBodyParams(RequestContent.Create(data)))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload and one item in the pageable response.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>BodyParam</c>:
-        /// <code>{
-        ///   name: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>ProductResultValues</c>:
-        /// <code>{
-        ///   properties: {
-        ///     id: number, # Optional.
-        ///     name: string, # Optional.
-        ///   }, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual Pageable<BinaryData> GetSinglePagesWithBodyParams(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            return GetSinglePagesWithBodyParamsImplementation("PagingClient.GetSinglePagesWithBodyParams", content, context);
-        }
-
-        private Pageable<BinaryData> GetSinglePagesWithBodyParamsImplementation(string diagnosticsScopeName, RequestContent content, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetSinglePagesWithBodyParamsRequest(content, context)
-                        : CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, content, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1035,116 +865,6 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateDuplicateParamsRequest(filter, context)
                         : CreateDuplicateParamsNextPageRequest(nextLink, filter, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
-        }
-
-        /// <summary> Paging with max page size. We don&apos;t want to. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call PageWithMaxPageSizeAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PagingClient(credential);
-        /// 
-        /// await foreach (var data in client.PageWithMaxPageSizeAsync())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>ProductResultValues</c>:
-        /// <code>{
-        ///   properties: {
-        ///     id: number, # Optional.
-        ///     name: string, # Optional.
-        ///   }, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual AsyncPageable<BinaryData> PageWithMaxPageSizeAsync(RequestContext context = null)
-        {
-            return PageWithMaxPageSizeImplementationAsync("PagingClient.PageWithMaxPageSize", context);
-        }
-
-        private AsyncPageable<BinaryData> PageWithMaxPageSizeImplementationAsync(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreatePageWithMaxPageSizeRequest(context)
-                        : CreatePageWithMaxPageSizeNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
-        }
-
-        /// <summary> Paging with max page size. We don&apos;t want to. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call PageWithMaxPageSize and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PagingClient(credential);
-        /// 
-        /// foreach (var data in client.PageWithMaxPageSize())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>ProductResultValues</c>:
-        /// <code>{
-        ///   properties: {
-        ///     id: number, # Optional.
-        ///     name: string, # Optional.
-        ///   }, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual Pageable<BinaryData> PageWithMaxPageSize(RequestContext context = null)
-        {
-            return PageWithMaxPageSizeImplementation("PagingClient.PageWithMaxPageSize", context);
-        }
-
-        private Pageable<BinaryData> PageWithMaxPageSizeImplementation(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreatePageWithMaxPageSizeRequest(context)
-                        : CreatePageWithMaxPageSizeNextPageRequest(nextLink, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -2326,226 +2046,6 @@ namespace paging_LowLevel
             }
         }
 
-        /// <summary> A paging operation with api version. When calling the next link, you want to append your client&apos;s api version to the next link. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call AppendApiVersionAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PagingClient(credential);
-        /// 
-        /// await foreach (var data in client.AppendApiVersionAsync())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>ProductResultValues</c>:
-        /// <code>{
-        ///   properties: {
-        ///     id: number, # Optional.
-        ///     name: string, # Optional.
-        ///   }, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual AsyncPageable<BinaryData> AppendApiVersionAsync(RequestContext context = null)
-        {
-            return AppendApiVersionImplementationAsync("PagingClient.AppendApiVersion", context);
-        }
-
-        private AsyncPageable<BinaryData> AppendApiVersionImplementationAsync(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateAppendApiVersionRequest(context)
-                        : CreateAppendApiVersionNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
-        }
-
-        /// <summary> A paging operation with api version. When calling the next link, you want to append your client&apos;s api version to the next link. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call AppendApiVersion and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PagingClient(credential);
-        /// 
-        /// foreach (var data in client.AppendApiVersion())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>ProductResultValues</c>:
-        /// <code>{
-        ///   properties: {
-        ///     id: number, # Optional.
-        ///     name: string, # Optional.
-        ///   }, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual Pageable<BinaryData> AppendApiVersion(RequestContext context = null)
-        {
-            return AppendApiVersionImplementation("PagingClient.AppendApiVersion", context);
-        }
-
-        private Pageable<BinaryData> AppendApiVersionImplementation(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateAppendApiVersionRequest(context)
-                        : CreateAppendApiVersionNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
-        }
-
-        /// <summary> A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client&apos;s api version. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call ReplaceApiVersionAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PagingClient(credential);
-        /// 
-        /// await foreach (var data in client.ReplaceApiVersionAsync())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>ProductResultValues</c>:
-        /// <code>{
-        ///   properties: {
-        ///     id: number, # Optional.
-        ///     name: string, # Optional.
-        ///   }, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual AsyncPageable<BinaryData> ReplaceApiVersionAsync(RequestContext context = null)
-        {
-            return ReplaceApiVersionImplementationAsync("PagingClient.ReplaceApiVersion", context);
-        }
-
-        private AsyncPageable<BinaryData> ReplaceApiVersionImplementationAsync(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateReplaceApiVersionRequest(context)
-                        : CreateReplaceApiVersionNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
-        }
-
-        /// <summary> A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client&apos;s api version. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call ReplaceApiVersion and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PagingClient(credential);
-        /// 
-        /// foreach (var data in client.ReplaceApiVersion())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>ProductResultValues</c>:
-        /// <code>{
-        ///   properties: {
-        ///     id: number, # Optional.
-        ///     name: string, # Optional.
-        ///   }, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        public virtual Pageable<BinaryData> ReplaceApiVersion(RequestContext context = null)
-        {
-            return ReplaceApiVersionImplementation("PagingClient.ReplaceApiVersion", context);
-        }
-
-        private Pageable<BinaryData> ReplaceApiVersionImplementation(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateReplaceApiVersionRequest(context)
-                        : CreateReplaceApiVersionNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
-        }
-
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
@@ -3089,21 +2589,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetSinglePagesWithBodyParamsRequest(RequestContent content, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/single/getWithBodyParams", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
         internal HttpMessage CreateFirstResponseEmptyRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -3169,20 +2654,6 @@ namespace paging_LowLevel
             {
                 uri.AppendQuery("$filter", filter, true);
             }
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreatePageWithMaxPageSizeRequest(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/maxPageSize", false);
-            uri.AppendQuery("$maxpagesize", "5", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -3327,7 +2798,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
-            uri.AppendQuery("api_version", _apiVersion, true);
+            uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -3342,7 +2813,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(tenant, true);
-            uri.AppendQuery("api_version", _apiVersion, true);
+            uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -3373,34 +2844,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateAppendApiVersionRequest(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/apiVersion/append/1", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateReplaceApiVersionRequest(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/apiVersion/replace/1", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         internal HttpMessage CreateNextFragmentRequest(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -3412,7 +2855,7 @@ namespace paging_LowLevel
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
             uri.AppendRawNextLink(nextLink, false);
-            uri.AppendQuery("api_version", _apiVersion, true);
+            uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -3429,7 +2872,7 @@ namespace paging_LowLevel
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
             uri.AppendRawNextLink(nextLink, false);
-            uri.AppendQuery("api_version", _apiVersion, true);
+            uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -3462,19 +2905,6 @@ namespace paging_LowLevel
         }
 
         internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLink, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateGetSinglePagesWithBodyParamsNextPageRequest(string nextLink, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -3526,19 +2956,6 @@ namespace paging_LowLevel
         }
 
         internal HttpMessage CreateDuplicateParamsNextPageRequest(string nextLink, string filter, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreatePageWithMaxPageSizeNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -3654,32 +3071,6 @@ namespace paging_LowLevel
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLink, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateAppendApiVersionNextPageRequest(string nextLink, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateReplaceApiVersionNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

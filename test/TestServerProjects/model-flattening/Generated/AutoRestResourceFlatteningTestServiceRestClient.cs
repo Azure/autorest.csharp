@@ -565,7 +565,7 @@ namespace model_flattening
             }
         }
 
-        internal HttpMessage CreatePostFlattenedSimpleProductRequest(string productId, string description, string maxProductDisplayName, string genericValue, string odataValue)
+        internal HttpMessage CreatePostFlattenedSimpleProductRequest(string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -580,6 +580,7 @@ namespace model_flattening
             {
                 Description = description,
                 MaxProductDisplayName = maxProductDisplayName,
+                Capacity = capacity,
                 GenericValue = genericValue,
                 OdataValue = odataValue
             };
@@ -593,18 +594,19 @@ namespace model_flattening
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="productId"/> is null. </exception>
-        public async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description = null, string maxProductDisplayName = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description = null, string maxProductDisplayName = null, SimpleProductPropertiesMaxProductCapacity? capacity = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
             if (productId == null)
             {
                 throw new ArgumentNullException(nameof(productId));
             }
 
-            using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue);
+            using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, capacity, genericValue, odataValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -624,18 +626,19 @@ namespace model_flattening
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="productId"/> is null. </exception>
-        public Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description = null, string maxProductDisplayName = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
+        public Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description = null, string maxProductDisplayName = null, SimpleProductPropertiesMaxProductCapacity? capacity = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
             if (productId == null)
             {
                 throw new ArgumentNullException(nameof(productId));
             }
 
-            using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, genericValue, odataValue);
+            using var message = CreatePostFlattenedSimpleProductRequest(productId, description, maxProductDisplayName, capacity, genericValue, odataValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -668,6 +671,7 @@ namespace model_flattening
             {
                 Description = flattenParameterGroup.Description,
                 MaxProductDisplayName = flattenParameterGroup.MaxProductDisplayName,
+                Capacity = flattenParameterGroup.Capacity,
                 GenericValue = flattenParameterGroup.GenericValue,
                 OdataValue = flattenParameterGroup.OdataValue
             };
