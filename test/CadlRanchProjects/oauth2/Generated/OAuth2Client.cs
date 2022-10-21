@@ -11,14 +11,14 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Authentication.ApiKey
+namespace Authentication.OAuth2
 {
-    // Data plane generated client. Illustrates clients generated with ApiKey authentication.
-    /// <summary> Illustrates clients generated with ApiKey authentication. </summary>
-    public partial class ApiKeyClient
+    // Data plane generated client. Illustrates clients generated with OAuth2 authentication.
+    /// <summary> Illustrates clients generated with OAuth2 authentication. </summary>
+    public partial class OAuth2Client
     {
-        private const string AuthorizationHeader = "x-ms-api-key";
-        private readonly AzureKeyCredential _keyCredential;
+        private static readonly string[] AuthorizationScopes = new string[] { "https://security.microsoft.com/.default" };
+        private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -29,32 +29,32 @@ namespace Authentication.ApiKey
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ApiKeyClient for mocking. </summary>
-        protected ApiKeyClient()
+        /// <summary> Initializes a new instance of OAuth2Client for mocking. </summary>
+        protected OAuth2Client()
         {
         }
 
-        /// <summary> Initializes a new instance of ApiKeyClient. </summary>
+        /// <summary> Initializes a new instance of OAuth2Client. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ApiKeyClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new ApiKeyClientOptions())
+        public OAuth2Client(TokenCredential credential) : this(credential, new Uri("http://localhost:3000"), new OAuth2ClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of ApiKeyClient. </summary>
+        /// <summary> Initializes a new instance of OAuth2Client. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public ApiKeyClient(AzureKeyCredential credential, Uri endpoint, ApiKeyClientOptions options)
+        public OAuth2Client(TokenCredential credential, Uri endpoint, OAuth2ClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new ApiKeyClientOptions();
+            options ??= new OAuth2ClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _tokenCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
             _apiVersion = options.Version;
         }
@@ -66,8 +66,8 @@ namespace Authentication.ApiKey
         /// <example>
         /// This sample shows how to call ValidAsync.
         /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ApiKeyClient(credential);
+        /// var credential = new DefaultAzureCredential();
+        /// var client = new OAuth2Client(credential);
         /// 
         /// Response response = await client.ValidAsync();
         /// Console.WriteLine(response.Status);
@@ -75,7 +75,7 @@ namespace Authentication.ApiKey
         /// </example>
         public virtual async Task<Response> ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Valid");
+            using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Valid");
             scope.Start();
             try
             {
@@ -96,8 +96,8 @@ namespace Authentication.ApiKey
         /// <example>
         /// This sample shows how to call Valid.
         /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ApiKeyClient(credential);
+        /// var credential = new DefaultAzureCredential();
+        /// var client = new OAuth2Client(credential);
         /// 
         /// Response response = client.Valid();
         /// Console.WriteLine(response.Status);
@@ -105,7 +105,7 @@ namespace Authentication.ApiKey
         /// </example>
         public virtual Response Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Valid");
+            using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Valid");
             scope.Start();
             try
             {
@@ -119,15 +119,15 @@ namespace Authentication.ApiKey
             }
         }
 
-        /// <summary> Check whether client is authenticated. </summary>
+        /// <summary> Check whether client is authenticated. Will return an invalid bearer error. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
         /// This sample shows how to call InvalidAsync.
         /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ApiKeyClient(credential);
+        /// var credential = new DefaultAzureCredential();
+        /// var client = new OAuth2Client(credential);
         /// 
         /// Response response = await client.InvalidAsync();
         /// Console.WriteLine(response.Status);
@@ -135,7 +135,7 @@ namespace Authentication.ApiKey
         /// </example>
         public virtual async Task<Response> InvalidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Invalid");
+            using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Invalid");
             scope.Start();
             try
             {
@@ -149,15 +149,15 @@ namespace Authentication.ApiKey
             }
         }
 
-        /// <summary> Check whether client is authenticated. </summary>
+        /// <summary> Check whether client is authenticated. Will return an invalid bearer error. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <example>
         /// This sample shows how to call Invalid.
         /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ApiKeyClient(credential);
+        /// var credential = new DefaultAzureCredential();
+        /// var client = new OAuth2Client(credential);
         /// 
         /// Response response = client.Invalid();
         /// Console.WriteLine(response.Status);
@@ -165,7 +165,7 @@ namespace Authentication.ApiKey
         /// </example>
         public virtual Response Invalid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Invalid");
+            using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Invalid");
             scope.Start();
             try
             {
@@ -186,7 +186,7 @@ namespace Authentication.ApiKey
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/authentication/api-key/valid", false);
+            uri.AppendPath("/authentication/oauth2/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -200,7 +200,7 @@ namespace Authentication.ApiKey
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/authentication/api-key/invalid", false);
+            uri.AppendPath("/authentication/oauth2/invalid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

@@ -123,7 +123,7 @@ namespace Azure.Core
 #if NETCOREAPP2_1_OR_GREATER
                         Port = int.Parse(value.Slice(0, separator), NumberStyles.Integer, CultureInfo.InvariantCulture);
 #else
-                        Port = int.Parse(value.ToString(), CultureInfo.InvariantCulture);
+                        Port = int.Parse(value.Slice(0, separator).ToString(), CultureInfo.InvariantCulture);
 #endif
                         value = value.Slice(separator + 1);
                     }

@@ -76,7 +76,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
         Try
         {
             $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
-            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true $arguments"
+            $emitCommand = "npx cadl compile --output-path $baseOutput $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true $arguments"
             Invoke $emitCommand    
         }
         Finally 

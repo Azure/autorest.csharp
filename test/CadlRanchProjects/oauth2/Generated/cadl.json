@@ -1,7 +1,7 @@
 {
  "$id": "1",
- "Name": "Cadl.visibility",
- "Description": "Illustrates read, write and read/write properties.",
+ "Name": "Authentication.OAuth2",
+ "Description": "Illustrates clients generated with OAuth2 authentication.",
  "ApiVersions": [
   "1.0.0"
  ],
@@ -9,48 +9,17 @@
  "Models": [
   {
    "$id": "2",
-   "Name": "Dog",
-   "Namespace": "Cadl.visibility",
+   "Name": "InvalidAuth",
+   "Namespace": "Authentication.OAuth2",
    "IsNullable": false,
-   "Usage": "None",
    "Properties": [
     {
      "$id": "3",
-     "Name": "id",
-     "SerializedName": "id",
+     "Name": "error",
+     "SerializedName": "error",
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "int32",
-      "Kind": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "5",
-     "Name": "secretName",
-     "SerializedName": "secretName",
-     "Description": "",
-     "Type": {
-      "$id": "6",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "7",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
-      "$id": "8",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -64,21 +33,22 @@
  ],
  "Clients": [
   {
-   "$id": "9",
-   "Name": "visibility",
-   "Description": "Illustrates read, write and read/write properties.",
+   "$id": "5",
+   "Name": "OAuth2",
+   "Description": "Illustrates clients generated with OAuth2 authentication.",
    "Operations": [
     {
-     "$id": "10",
-     "Name": "sendVisibilityPropertyModel",
+     "$id": "6",
+     "Name": "valid",
+     "Description": "Check whether client is authenticated",
      "Parameters": [
       {
-       "$id": "11",
+       "$id": "7",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "12",
+        "$id": "8",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -93,9 +63,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "9",
         "Type": {
-         "$id": "14",
+         "$id": "10",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -104,55 +74,11 @@
        }
       },
       {
-       "$id": "15",
-       "Name": "input",
-       "NameInRequest": "input",
-       "Type": {
-        "$ref": "2"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "16",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "17",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "18",
-        "Type": {
-         "$ref": "17"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "19",
+       "$id": "11",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "20",
+        "$id": "12",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -167,20 +93,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "21",
+        "$id": "13",
         "Type": {
-         "$ref": "20"
+         "$ref": "12"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "22",
+       "$id": "14",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "23",
+        "$id": "15",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -195,9 +121,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "24",
+        "$id": "16",
         "Type": {
-         "$id": "25",
+         "$id": "17",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -208,29 +134,104 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "18",
        "StatusCodes": [
-        200
+        204
        ],
        "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
-     "HttpMethod": "POST",
+     "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/visibility",
-     "RequestMediaTypes": [
-      "application/json"
+     "Path": "/authentication/oauth2/valid",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "19",
+     "Name": "invalid",
+     "Description": "Check whether client is authenticated. Will return an invalid bearer error.",
+     "Parameters": [
+      {
+       "$ref": "7"
+      },
+      {
+       "$id": "20",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "21",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "22",
+        "Type": {
+         "$ref": "21"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "14"
+      }
      ],
+     "Responses": [
+      {
+       "$id": "23",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      },
+      {
+       "$id": "24",
+       "StatusCodes": [
+        403
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": true
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/authentication/oauth2/invalid",
      "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "27"
+    "$id": "25"
    }
   }
- ]
+ ],
+ "Auth": {
+  "$id": "26",
+  "OAuth2": {
+   "$id": "27",
+   "Scopes": [
+    "https://security.microsoft.com/.default"
+   ]
+  }
+ }
 }

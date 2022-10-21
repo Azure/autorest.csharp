@@ -238,7 +238,8 @@
           "IsNullable": false
          }
         }
-       ]
+       ],
+       "IsErrorResponse": false
       },
       {
        "$id": "29",
@@ -262,7 +263,8 @@
           "IsNullable": false
          }
         }
-       ]
+       ],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PATCH",

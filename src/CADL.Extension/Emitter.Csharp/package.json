@@ -46,7 +46,7 @@
         "typescript": "~4.7.2"
     },
     "dependencies": {
-        "@autorest/csharp": "3.0.0-beta.20221014.2",
+        "@autorest/csharp": "3.0.0-beta.20221019.2",
         "@azure-tools/cadl-azure-core": "0.8.0",
         "@azure-tools/cadl-autorest": "0.21.0",
         "@cadl-lang/compiler": "0.36.0",
