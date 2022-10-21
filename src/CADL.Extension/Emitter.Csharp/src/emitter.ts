@@ -80,7 +80,7 @@ export interface NetEmitterOptions {
     logFile: string;
     namespace?: string;
     "library-name"?: string;
-    "shared-source-folders"?: string[];
+    "shared-source-folders"?: string;
     "single-top-level-client"?: boolean;
     skipSDKGeneration: boolean;
     "new-project": boolean;
@@ -94,7 +94,7 @@ const defaultOptions = {
     "shared-source-folders": [
         resolvePath(dllFilePath, "..", "Generator.Shared"),
         resolvePath(dllFilePath, "..", "Azure.Core.Shared")
-    ],
+    ].join(";"),
     "new-project": false
 };
 
@@ -107,11 +107,7 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         logFile: { type: "string", nullable: true },
         namespace: { type: "string", nullable: true },
         "library-name": { type: "string", nullable: true },
-        "shared-source-folders": {
-            type: "array",
-            items: { type: "string" },
-            nullable: true
-        },
+        "shared-source-folders": { type: "string", nullable: true },
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", nullable: true },
         "new-project": { type: "boolean", nullable: true }
@@ -138,7 +134,7 @@ export async function $onEmit(
         emitterOptions["sdk-folder"],
         "Generated"
     );
-    for (const sharedFolder of resolvedOptions["shared-source-folders"]) {
+    for (const sharedFolder of resolvedOptions["shared-source-folders"].split(";")) {
         resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder).replaceAll("\\", "/"));
     }
     const options: NetEmitterOptions = {
@@ -148,7 +144,7 @@ export async function $onEmit(
             resolvedOptions.logFile
         ),
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
-        "shared-source-folders": resolvedSharedFolders,
+        "shared-source-folders": resolvedSharedFolders.join(";"),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         "new-project": resolvedOptions["new-project"]
     };
@@ -182,7 +178,7 @@ export async function $onEmit(
                 OutputFolder: ".",
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
-                SharedSourceFolders: options["shared-source-folders"] ?? [],
+                SharedSourceFolders: options["shared-source-folders"]?.split(";") ?? [],
                 SingleTopLevelClient: resolvedOptions["single-top-level-client"]
             } as Configuration;
 
