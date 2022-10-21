@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -313,9 +314,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 .WriteMethodCall(protocolMethodSignature, parameters, async)
                 .LineRaw(";");
 
-            if (clientMethod.RequestMethod.Responses.Length > 0)
+            if (responseType == null)
+            {
+                writer.Line($"return {responseVariable:I};");
+            }
+            else if (TypeFactory.IsList(responseType))
             {
                 ResponseWriterHelpers.WriteRawResponseToGeneric(writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, responseVariable.ActualName);
+            }
+            else
+            {
+                writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
             }
         }
 
