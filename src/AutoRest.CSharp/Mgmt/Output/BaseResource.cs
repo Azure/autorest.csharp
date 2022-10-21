@@ -53,14 +53,6 @@ internal class BaseResource : Resource
     public override MgmtClientOperation? DeleteOperation => throw new InvalidOperationException("We should not access the Get operation of base resource in this way, please iterate AllOperations instead");
     public override MgmtClientOperation? UpdateOperation => throw new InvalidOperationException("We should not access the Get operation of base resource in this way, please iterate AllOperations instead");
 
-    private MgmtClientOperation EnsureGetOperation()
-    {
-        // we take the get operation of the first derived resource to represent the get operation in the base
-        var originalGetOperation = DerivedResources.First().GetOperation;
-
-        return MgmtClientOperation.Override(originalGetOperation, originalGetOperation.Name, Type, overrideDescription: $"The default implementation for operation {originalGetOperation.Name}", overrideOwner: this);
-    }
-
     protected override IEnumerable<MgmtClientOperation> EnsureAllOperations() => ClientOperations;
 
     protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()

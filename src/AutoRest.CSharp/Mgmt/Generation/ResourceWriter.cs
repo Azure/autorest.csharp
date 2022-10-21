@@ -141,7 +141,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 base.WriteMethod(coreOperation, isAsync);
                 _writer.Line();
 
-                // TODO -- move this condition into resource
                 // determine whether we need to write this method here
                 if (!clientOperation.ReturnType.Equals(coreOperation.ReturnType) || clientOperation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Virtual))
                 {
@@ -476,7 +475,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, getOperation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
             }
 
-            var valueConverter = getOperation.GetValueConverter(tagOperation.MgmtReturnType, $"{ArmClientReference}", $"{originalResponse}.Value");
+            var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", tagOperation.MgmtReturnType);
             if (valueConverter != null)
             {
                 _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {originalResponse}.GetRawResponse());");

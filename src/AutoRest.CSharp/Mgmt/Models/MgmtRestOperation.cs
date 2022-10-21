@@ -148,10 +148,17 @@ namespace AutoRest.CSharp.Mgmt.Models
             //modify some of the values
             Name = nameOverride;
             _mgmtReturnType = overrideReturnType;
+            _originalMgmtReturnType = other.MgmtReturnType;
             _description = overrideDescription;
             OverrideParameters = overrideParameters;
             OperationSource = GetOperationSource();
         }
+
+        private CSharpType? _originalMgmtReturnType;
+        /// <summary>
+        /// This is tracking the MgmtReturnType before the return type is overridden
+        /// </summary>
+        public CSharpType? OriginalMgmtReturnType => _originalMgmtReturnType ??= MgmtReturnType;
 
         private OperationSource? GetOperationSource()
         {
@@ -208,39 +215,59 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
         }
 
-        public FormattableString? GetValueConverter(CSharpType? returnType, FormattableString clientVariable, FormattableString valueVariable)
+        /// <summary>
+        /// This method returns a value converter statement in <see cref="FormattableString"/> from the underlying rest operation return type, to the desired <paramref name="mgmtReturnType"/>
+        /// Note: MgmtReturnType always refers to the type that is not wrapped by Response, LRO or Pageable.
+        /// This method also accepts an optional parameter <paramref name="concreteMgmtReturnType"/>. If this is passed in, this method will regard this as the real instantiation type but will cast the result to the mgmtReturnType
+        /// </summary>
+        /// <param name="clientVariable"></param>
+        /// <param name="valueVariable"></param>
+        /// <param name="mgmtReturnType"></param>
+        /// <param name="concreteMgmtReturnType"></param>
+        /// <returns></returns>
+        public FormattableString? GetValueConverter(FormattableString clientVariable, FormattableString valueVariable, CSharpType? mgmtReturnType, CSharpType? concreteMgmtReturnType = null)
         {
             var restReturnType = IsPagingOperation ? PagingMethod!.ItemType : Method.ReturnType;
             // when the method returns nothing, when this happens, the methodReturnType should either be Response, or ArmOperation
-            if (restReturnType == null && returnType == null)
+            if (restReturnType == null && mgmtReturnType == null)
                 return null;
 
             Debug.Assert(restReturnType != null);
-            Debug.Assert(returnType != null);
+            Debug.Assert(mgmtReturnType != null);
 
             // check if this operation need a response converter
-            if (returnType.Equals(restReturnType))
+            if (mgmtReturnType.Equals(restReturnType))
                 return null;
 
             if (InterimOperation != null)
                 return null;
 
-            // check the implementation of those types -- all should be a type provider
-            if (returnType.IsFrameworkType || restReturnType.IsFrameworkType)
-                return null;
+            var isRestReturnTypeResourceData = restReturnType.TryCastResourceData(out _);
 
             // first check: if the method is returning a BaseResource and the rest operation is returning a ResourceData
-            if (returnType.Implementation is BaseResource returnBaseResource && restReturnType.Implementation is ResourceData)
+            if (isRestReturnTypeResourceData && mgmtReturnType.TryCast<BaseResource>(out var returnBaseResource))
             {
-                // in this case we should call the static Resource factory in the base resource
-                return $"{returnBaseResource.Type}.GetResource({clientVariable}, {valueVariable})";
+                if (concreteMgmtReturnType == null)
+                {
+                    // in this case we should call the static Resource factory in the base resource
+                    return GetValueConverter(returnBaseResource, clientVariable, valueVariable);
+                }
+                else
+                {
+                    // if we have a concreteReturnType, we should create the instance of the concrete type, and cast it to the real return type
+                    // this casting might be redundant but roslyn will take the rest of it (it will remove the cast if it is unnecessary)
+                    if (concreteMgmtReturnType.TryCastResource(out var resource))
+                    {
+                        return $"({mgmtReturnType}){GetValueConverter(resource, clientVariable, valueVariable)}";
+                    }
+                }
             }
 
             // second check: if the method is returning a Resource and the rest operation is returning a ResourceData
-            if (returnType.Implementation is Resource returnResource && restReturnType.Implementation is ResourceData)
+            if (isRestReturnTypeResourceData && mgmtReturnType.TryCastResource(out var returnResource))
             {
                 // in this case we should call the constructor of the resource to wrap it into a resource
-                return $"new {returnResource.Type}({clientVariable}, {valueVariable})";
+                return GetValueConverter(returnResource, clientVariable, valueVariable);
             }
 
             // otherwise we return null
@@ -248,7 +275,18 @@ namespace AutoRest.CSharp.Mgmt.Models
         }
 
         public FormattableString? GetValueConverter(FormattableString clientVariable, FormattableString valueVariable)
-            => GetValueConverter(MgmtReturnType, clientVariable, valueVariable);
+        {
+            //var concreteReturnType = OriginalMgmtReturnType != null && OriginalMgmtReturnType.Equals(MgmtReturnType) ?
+            //    null :
+            //    OriginalMgmtReturnType;
+            return GetValueConverter(clientVariable, valueVariable, MgmtReturnType, OriginalMgmtReturnType);
+        }
+
+        private FormattableString GetValueConverter(Resource resource, FormattableString clientVariable, FormattableString valueVariable) => resource switch
+        {
+            BaseResource => $"{resource.Type}.GetResource({clientVariable}, {valueVariable})",
+            _ => $"new {resource.Type}({clientVariable}, {valueVariable})"
+        };
 
         internal enum ResourceMatchType
         {
