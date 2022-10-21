@@ -76,7 +76,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
         Try
         {
             $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
-            $emitCommand = "npx cadl compile --output-path $baseOutput $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true $arguments"
+            $emitCommand = "npx cadl compile --output-path $baseOutput $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true --option @azure-tools/cadl-csharp.shared-source-folders=$repoRootPath/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared;$repoRootPath/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Azure.Core.Shared $arguments"
             Invoke $emitCommand    
         }
         Finally 
