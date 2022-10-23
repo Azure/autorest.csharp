@@ -116,12 +116,13 @@ namespace AutoRest.TestServer.Tests
                 productId: "123",
                 description: "product description",
                 maxProductDisplayName: "max name",
+                capacity: SimpleProductPropertiesMaxProductCapacity.Large,
                 genericValue: null,
                 odataValue: "http://foo");
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
-            Assert.AreEqual("Large", result.Value.Capacity);
+            Assert.AreEqual(SimpleProductPropertiesMaxProductCapacity.Large, result.Value.Capacity);
             Assert.AreEqual("http://foo", result.Value.OdataValue);
         });
 
@@ -154,7 +155,7 @@ namespace AutoRest.TestServer.Tests
             {
                 Description = "product description",
                 MaxProductDisplayName = "max name",
-                Capacity = "Large",
+                Capacity = SimpleProductPropertiesMaxProductCapacity.Large,
                 OdataValue = "http://foo",
                 GenericValue = "https://generic"
             };
@@ -162,7 +163,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
-            Assert.AreEqual("Large", result.Value.Capacity);
+            Assert.AreEqual(SimpleProductPropertiesMaxProductCapacity.Large, result.Value.Capacity);
             Assert.AreEqual("http://foo", result.Value.OdataValue);
             Assert.AreEqual("https://generic", result.Value.GenericValue);
         });
@@ -176,12 +177,12 @@ namespace AutoRest.TestServer.Tests
                     Description = "product description",
                     MaxProductDisplayName = "max name",
                     OdataValue = "http://foo",
-                    Capacity = "Large"
+                    Capacity = SimpleProductPropertiesMaxProductCapacity.Large
                 });
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
-            Assert.AreEqual("Large", result.Value.Capacity);
+            Assert.AreEqual(SimpleProductPropertiesMaxProductCapacity.Large, result.Value.Capacity);
             Assert.AreEqual("http://foo", result.Value.OdataValue);
         });
 
