@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "Models.Property.Optional",
+  "Namespace": "Authentication.OAuth2",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",
