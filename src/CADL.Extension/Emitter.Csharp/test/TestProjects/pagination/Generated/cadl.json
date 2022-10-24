@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "pagination",
+ "Name": "Pagination",
  "ApiVersions": [
   "2022-05-13"
  ],
@@ -88,10 +88,8 @@
      "Type": {
       "$id": "13",
       "Name": "ResourceLocation",
-      "Namespace": "Cadl.Rest",
-      "Description": "The location of an instance of LedgerEntry",
-      "IsNullable": false,
-      "Properties": []
+      "Kind": "String",
+      "IsNullable": false
      },
      "IsRequired": false,
      "IsReadOnly": false,
@@ -101,9 +99,6 @@
   },
   {
    "$ref": "5"
-  },
-  {
-   "$ref": "13"
   }
  ],
  "Clients": [
@@ -206,7 +201,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

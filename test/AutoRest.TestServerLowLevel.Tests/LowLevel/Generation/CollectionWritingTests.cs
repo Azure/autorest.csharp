@@ -19,8 +19,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
                 null, new List<InputModelType>(), null);
 
-            var model = new ModelTypeProvider(input, "test", null);
-            model.FinishInitialization(input, CadlTypeFactory, null);
+            var model = new ModelTypeProvider(input, "test", null, CadlTypeFactory);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -32,8 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
                 null, new List<InputModelType>(), null);
 
-            var model = new ModelTypeProvider(input, "test", null);
-            model.FinishInitialization(input, CadlTypeFactory, null);
+            var model = new ModelTypeProvider(input, "test", null, CadlTypeFactory);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -45,8 +43,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
                 null, new List<InputModelType>(), null);
 
-            var model = new ModelTypeProvider(input, "test", null);
-            model.FinishInitialization(input, CadlTypeFactory, null);
+            var model = new ModelTypeProvider(input, "test", null, CadlTypeFactory);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 

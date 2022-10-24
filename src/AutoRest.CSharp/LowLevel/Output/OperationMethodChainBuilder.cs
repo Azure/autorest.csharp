@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Output.Models
         public LowLevelClientMethod BuildOperationMethodChain()
         {
             var returnTypeChain = BuildReturnTypes();
-            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
+            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().OrderBy(p => p.DefaultValue != null).ToArray();
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Protocol, null, protocolMethodParameters);
             var convenienceMethod = ShouldConvenienceMethodGenerated(returnTypeChain) ? BuildConvenienceMethod(returnTypeChain) : null;
 
@@ -116,12 +116,15 @@ namespace AutoRest.CSharp.Output.Models
 
         private ReturnTypeChain BuildReturnTypes()
         {
-            var operationBodyTypes = Operation.Responses.Select(r => r.BodyType).WhereNotNull().Distinct().ToArray();
-            CSharpType? responseType = operationBodyTypes.Length switch
+            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
+            CSharpType? responseType = null;
+            if (operationBodyTypes != null && operationBodyTypes.Length != 0)
             {
-                0 => null,
-                1 => _typeFactory.CreateType(operationBodyTypes[0]),
-                _ => new CSharpType(typeof(object))
+                var firstBodyType = operationBodyTypes[0];
+                if (firstBodyType != null)
+                {
+                    responseType = _typeFactory.CreateType(firstBodyType);
+                }
             };
 
             if (Operation.Paging != null)
@@ -173,9 +176,10 @@ namespace AutoRest.CSharp.Output.Models
                 name = _restClientMethod.Name.IsLastWordSingular() ? $"{_restClientMethod.Name}Value" : $"{_restClientMethod.Name.LastWordToSingular()}Values";
             }
 
-            var parameters = _orderedParameters.Select(p => p.Convenience).WhereNotNull().ToArray();
+            var parameters = _orderedParameters.Select(p => p.Convenience).WhereNotNull().OrderBy(p => p.DefaultValue != null).ToArray();
             var protocolToConvenience = _orderedParameters
                 .Where(p => p.Protocol != null)
+                .OrderBy(p => p.Protocol!.DefaultValue != null)
                 .Select(p => (p.Protocol!, p.Convenience))
                 .ToArray();
 
@@ -184,7 +188,7 @@ namespace AutoRest.CSharp.Output.Models
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }
 
-        public void BuildParameters()
+        private void BuildParameters()
         {
             var operationParameters = Operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
 

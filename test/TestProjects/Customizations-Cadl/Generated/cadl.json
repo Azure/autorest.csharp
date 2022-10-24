@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "customizationsincadl",
+ "Name": "CustomizationsInCadl",
  "Description": "CADL project to test various types of models.",
  "ApiVersions": [
   "0.1.0"
@@ -112,7 +112,7 @@
         "Description": "",
         "Type": {
          "$id": "18",
-         "Name": "Int32",
+         "Name": "int32",
          "Kind": "Int32",
          "IsNullable": false
         },
@@ -145,7 +145,7 @@
         "Description": "",
         "Type": {
          "$id": "22",
-         "Name": "Int32",
+         "Name": "int32",
          "Kind": "Int32",
          "IsNullable": false
         },
@@ -178,7 +178,7 @@
         "Description": "",
         "Type": {
          "$id": "26",
-         "Name": "Int32",
+         "Name": "int32",
          "Kind": "Int32",
          "IsNullable": false
         },
@@ -211,7 +211,7 @@
         "Description": "",
         "Type": {
          "$id": "30",
-         "Name": "Int32",
+         "Name": "int32",
          "Kind": "Int32",
          "IsNullable": false
         },
@@ -226,7 +226,7 @@
         "Description": "",
         "Type": {
          "$id": "32",
-         "Name": "Int32",
+         "Name": "int32",
          "Kind": "Int32",
          "IsNullable": false
         },
@@ -241,7 +241,7 @@
         "Description": "",
         "Type": {
          "$id": "34",
-         "Name": "Int32",
+         "Name": "int32",
          "Kind": "Int32",
          "IsNullable": false
         },
@@ -256,7 +256,7 @@
         "Description": "",
         "Type": {
          "$id": "36",
-         "Name": "float",
+         "Name": "float32",
          "Kind": "Float32",
          "IsNullable": false
         },
@@ -286,7 +286,7 @@
         "Description": "",
         "Type": {
          "$id": "40",
-         "Name": "TimeSpan",
+         "Name": "duration",
          "Kind": "DurationISO8601",
          "IsNullable": false
         },
@@ -505,7 +505,8 @@
         "$ref": "14"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

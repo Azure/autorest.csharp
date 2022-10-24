@@ -25,8 +25,9 @@ namespace Models.Inheritance
             Age = age;
         }
 
+        /// <summary> Gets or sets the kind. </summary>
         public string Kind { get; set; }
-
+        /// <summary> Gets or sets the age. </summary>
         public int Age { get; set; }
     }
 }

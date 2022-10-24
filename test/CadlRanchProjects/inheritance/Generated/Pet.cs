@@ -23,6 +23,7 @@ namespace Models.Inheritance
             Name = name;
         }
 
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
     }
 }

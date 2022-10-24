@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Azure.Core;
 
 namespace Models.Inheritance
@@ -16,34 +17,37 @@ namespace Models.Inheritance
     {
         /// <summary> Initializes a new instance of Salmon. </summary>
         /// <param name="kind"></param>
+        /// <param name="age"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
-        public Salmon(string kind)
+        public Salmon(string kind, int age) : base(kind, age)
         {
             Argument.AssertNotNull(kind, nameof(kind));
 
-            Kind = kind;
             Friends = new ChangeTrackingList<Fish>();
             Hate = new ChangeTrackingDictionary<string, Fish>();
         }
+
         /// <summary> Initializes a new instance of Salmon. </summary>
         /// <param name="kind"></param>
+        /// <param name="age"></param>
         /// <param name="friends"></param>
         /// <param name="hate"></param>
         /// <param name="partner"></param>
-        internal Salmon(string kind, IList<Fish> friends, IDictionary<string, Fish> hate, Fish partner)
+        /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
+        internal Salmon(string kind, int age, IList<Fish> friends, IDictionary<string, Fish> hate, Fish partner) : base(kind, age)
         {
-            Kind = kind;
-            Friends = friends;
+            Argument.AssertNotNull(kind, nameof(kind));
+
+            Friends = friends.ToList();
             Hate = hate;
             Partner = partner;
         }
 
-        public string Kind { get; set; }
-
+        /// <summary> Gets the friends. </summary>
         public IList<Fish> Friends { get; }
-
+        /// <summary> Gets the hate. </summary>
         public IDictionary<string, Fish> Hate { get; }
-
+        /// <summary> Gets or sets the partner. </summary>
         public Fish Partner { get; set; }
     }
 }

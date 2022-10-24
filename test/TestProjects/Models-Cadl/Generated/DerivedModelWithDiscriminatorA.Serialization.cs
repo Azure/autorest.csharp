@@ -35,17 +35,20 @@ namespace ModelsInCadl
             return new DerivedModelWithDiscriminatorA(requiredString);
         }
 
-        internal RequestContent ToRequestContent()
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal new static DerivedModelWithDiscriminatorA FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeDerivedModelWithDiscriminatorA(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
             return content;
-        }
-
-        internal static DerivedModelWithDiscriminatorA FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithDiscriminatorA(document.RootElement);
         }
     }
 }

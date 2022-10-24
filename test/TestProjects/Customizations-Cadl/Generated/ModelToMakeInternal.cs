@@ -17,6 +17,7 @@ namespace CustomizationsInCadl
             RequiredInt = requiredInt;
         }
 
+        /// <summary> Gets or sets the required int. </summary>
         public int RequiredInt { get; set; }
     }
 }

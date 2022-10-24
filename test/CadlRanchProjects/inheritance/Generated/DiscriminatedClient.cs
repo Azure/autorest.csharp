@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Models.Inheritance;
 
-namespace inheritance
+namespace Models.Inheritance
 {
     // Data plane generated client. The Discriminated service client.
     /// <summary> The Discriminated service client. </summary>
@@ -47,42 +45,6 @@ namespace inheritance
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
             _apiVersion = options.Version;
-        }
-
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetModelValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetModelAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetModelValue(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetModel(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -171,30 +133,6 @@ namespace inheritance
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <param name="input"> The Fish to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual async Task<Response> PutModelAsync(Fish input, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(input, nameof(input));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return response;
-        }
-
-        /// <param name="input"> The Fish to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual Response PutModel(Fish input, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(input, nameof(input));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutModel(input.ToRequestContent(), context);
-            return response;
         }
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -297,42 +235,6 @@ namespace inheritance
             }
         }
 
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetRecursiveModelValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetRecursiveModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetRecursiveModelAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetRecursiveModelValue(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetRecursiveModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetRecursiveModel(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -419,30 +321,6 @@ namespace inheritance
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <param name="input"> The Fish to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual async Task<Response> PutRecursiveModelAsync(Fish input, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(input, nameof(input));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutRecursiveModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return response;
-        }
-
-        /// <param name="input"> The Fish to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual Response PutRecursiveModel(Fish input, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(input, nameof(input));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutRecursiveModel(input.ToRequestContent(), context);
-            return response;
         }
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -545,42 +423,6 @@ namespace inheritance
             }
         }
 
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetMissingDiscriminatorValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetMissingDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetMissingDiscriminatorAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetMissingDiscriminatorValue(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetMissingDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetMissingDiscriminator(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -661,42 +503,6 @@ namespace inheritance
             {
                 using HttpMessage message = CreateGetMissingDiscriminatorRequest(context);
                 return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetWrongDiscriminatorValueAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetWrongDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetWrongDiscriminatorAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetWrongDiscriminatorValue(CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetWrongDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetWrongDiscriminator(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -879,17 +685,6 @@ namespace inheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        private static RequestContext DefaultRequestContext = new RequestContext();
-        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "authentication.apikey",
+ "Name": "Authentication.ApiKey",
  "Description": "Illustrates clients generated with ApiKey authentication.",
  "ApiVersions": [
   "1.0.0"
@@ -139,7 +139,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -195,7 +196,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       },
       {
        "$id": "24",
@@ -206,7 +208,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": true
       }
      ],
      "HttpMethod": "GET",

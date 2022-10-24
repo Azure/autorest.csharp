@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    createCadlLibrary,
     DecoratedType,
     getDoc,
     getServiceNamespace,
@@ -9,6 +10,8 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    isErrorModel,
+    JSONSchemaType,
     Model,
     ModelProperty,
     Operation,
@@ -62,53 +65,143 @@ import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
 import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
 import { OperationPaging } from "./type/OperationPaging.js";
+import { OperationLongRunning } from "./type/OperationLongRunning.js";
+import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
+import { getOperationLink } from "@azure-tools/cadl-azure-core";
+import fs from "fs";
+import path from "node:path";
+import { Configuration } from "./type/Configuration.js";
+import { dllFilePath } from "@autorest/csharp";
+import { exec } from "child_process";
 
 export interface NetEmitterOptions {
+    "sdk-folder": string;
     outputFile: string;
     logFile: string;
+    namespace?: string;
+    "library-name"?: string;
+    "shared-source-folders"?: string;
+    "single-top-level-client"?: boolean;
+    skipSDKGeneration: boolean;
+    "new-project": boolean;
 }
 
 const defaultOptions = {
+    "sdk-folder": ".",
     outputFile: "cadl.json",
-    logFile: "log.json"
+    logFile: "log.json",
+    skipSDKGeneration: false,
+    "shared-source-folders": [
+        resolvePath(dllFilePath, "..", "Generator.Shared"),
+        resolvePath(dllFilePath, "..", "Azure.Core.Shared")
+    ].join(";"),
+    "new-project": false
 };
+
+const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+        "sdk-folder": { type: "string", nullable: true },
+        outputFile: { type: "string", nullable: true },
+        logFile: { type: "string", nullable: true },
+        namespace: { type: "string", nullable: true },
+        "library-name": { type: "string", nullable: true },
+        "shared-source-folders": { type: "string", nullable: true },
+        "single-top-level-client": { type: "boolean", nullable: true },
+        skipSDKGeneration: { type: "boolean", nullable: true },
+        "new-project": { type: "boolean", nullable: true }
+    },
+    required: []
+};
+
+export const $lib = createCadlLibrary({
+    name: "cadl-csharp",
+    diagnostics: {},
+    emitter: {
+        options: NetEmitterOptionsSchema
+    }
+});
 
 export async function $onEmit(
     program: Program,
     emitterOptions: NetEmitterOptions
 ) {
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
+    const resolvedSharedFolders: string[] = [];
+    const outputFolder = resolvePath(
+        program.compilerOptions.outputPath ?? "./cadl-output",
+        emitterOptions["sdk-folder"],
+        "Generated"
+    );
+    for (const sharedFolder of resolvedOptions["shared-source-folders"].split(";")) {
+        resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder).replaceAll("\\", "/"));
+    }
     const options: NetEmitterOptions = {
-        outputFile: resolvePath(
-            program.compilerOptions.outputPath ?? "./cadl-output",
-            resolvedOptions.outputFile
-        ),
+        outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
         logFile: resolvePath(
             program.compilerOptions.outputPath ?? "./cadl-output",
             resolvedOptions.logFile
-        )
+        ),
+        "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
+        "shared-source-folders": resolvedSharedFolders.join(";"),
+        skipSDKGeneration: resolvedOptions.skipSDKGeneration,
+        "new-project": resolvedOptions["new-project"]
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const namespace =
-            getServiceNamespaceString(program)?.toLowerCase() || "";
+        const namespace = getServiceNamespaceString(program) || "";
         const outPath =
             version.trim().length > 0
                 ? resolvePath(
-                    options.outputFile?.replace(".json", `.${version}.json`)
-                )
+                      options.outputFile?.replace(".json", `.${version}.json`)
+                  )
                 : resolvePath(options.outputFile);
 
         const root = createModel(program);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
+            if (!fs.existsSync(outputFolder)) {
+                fs.mkdirSync(outputFolder, { recursive: true });
+            }
             await program.host.writeFile(
                 outPath,
                 prettierOutput(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
             );
+
+            //emit configuration.json
+            const configurationOutPath = resolvePath(outputFolder, "Configuration.json");
+            const configurations = {
+                OutputFolder: ".",
+                Namespace: resolvedOptions.namespace ?? namespace,
+                LibraryName: resolvedOptions["library-name"] ?? null,
+                SharedSourceFolders: options["shared-source-folders"]?.split(";") ?? [],
+                SingleTopLevelClient: resolvedOptions["single-top-level-client"]
+            } as Configuration;
+
+            await program.host.writeFile(
+                configurationOutPath,
+                prettierOutput(JSON.stringify(configurations, null, 2))
+            );
+            if (options.skipSDKGeneration !== true) {
+                let command = `dotnet ${resolvePath(dllFilePath)} -p ${path.dirname(outputFolder)}`;
+                if (options["new-project"] === true) {
+                    command = `${command} -n ${options["new-project"]}`;
+                }
+
+                exec(command, (error, stdout, stderr) => {
+                    if (error) {
+                        console.log(`error: ${error.message}`);
+                    }
+                    else if (stderr) {
+                        console.log(`stderr: ${stderr}`);
+                    }
+                    console.log(`stdout: ${stdout}`);
+                });
+            }            
         }
     }
 }
@@ -173,8 +266,7 @@ function createModel(program: Program): any {
             Value: version
         } as InputConstant
     };
-    const namespace =
-        getServiceNamespaceString(program)?.toLowerCase() || "client";
+    const namespace = getServiceNamespaceString(program) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
     let auth = undefined;
     if (authentication) {
@@ -188,7 +280,7 @@ function createModel(program: Program): any {
         console.log("routes:" + routes.length);
         const clients: InputClient[] = [];
         //create endpoint parameter from servers
-        let urlParameters : InputParameter[] | undefined = undefined;
+        let urlParameters: InputParameter[] | undefined = undefined;
         let url: string = "";
         if (servers !== undefined) {
             const cadlServers = resolveServers(program, servers);
@@ -199,8 +291,16 @@ function createModel(program: Program): any {
             }
         }
 
+        const lroMonitorOperations = getAllLroMonitorOperations(
+            routes,
+            program
+        );
         for (const operation of routes) {
             console.log(JSON.stringify(operation.path));
+
+            // do not generate LRO monitor operation
+            if (lroMonitorOperations.has(operation.operation)) continue;
+
             const groupName: string = getOperationGroupName(
                 program,
                 operation.operation
@@ -279,21 +379,60 @@ function createModel(program: Program): any {
             throw err;
         }
     }
+
+    function getAllLroMonitorOperations(
+        routes: OperationDetails[],
+        program: Program
+    ): Set<Operation> {
+        const lroMonitorOperations = new Set<Operation>();
+        for (const operation of routes) {
+            const operationLink = getOperationLink(
+                program,
+                operation.operation,
+                "polling"
+            );
+            if (operationLink !== undefined) {
+                lroMonitorOperations.add(operationLink.linkedOperation);
+            }
+        }
+        return lroMonitorOperations;
+    }
 }
 
-function applyDefaultContentTypeAndAcceptParameter(operation: InputOperation): void {
+function applyDefaultContentTypeAndAcceptParameter(
+    operation: InputOperation
+): void {
     const defaultValue: string = "application/json";
-    if (operation.Parameters.some(value => value.Location === RequestLocation.Body)
-        && !operation.Parameters.some(value => value.IsContentType === true)) {
-        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "contentType", "Content-Type"));
+    if (
+        operation.Parameters.some(
+            (value) => value.Location === RequestLocation.Body
+        ) &&
+        !operation.Parameters.some((value) => value.IsContentType === true)
+    ) {
+        operation.Parameters.push(
+            createContentTypeOrAcceptParameter(
+                [defaultValue],
+                "contentType",
+                "Content-Type"
+            )
+        );
         operation.RequestMediaTypes = [defaultValue];
     }
 
-    if (!operation.Parameters.some(
-        value =>
-            value.Location === RequestLocation.Header &&
-            value.NameInRequest.toLowerCase() === "accept")) {
-        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "accept", "Accept"))
+    if (
+        !operation.Parameters.some(
+            (value) =>
+                value.Location === RequestLocation.Header &&
+                value.NameInRequest.toLowerCase() === "accept"
+        )
+    ) {
+        operation.Parameters.push(
+            createContentTypeOrAcceptParameter(
+                [defaultValue],
+                "accept",
+                "Accept"
+            )
+        );
     }
 }
 
@@ -325,9 +464,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                    Type: inputType,
-                    Value: mediaTypes[0]
-                } as InputConstant)
+                      Type: inputType,
+                      Value: mediaTypes[0]
+                  } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -414,7 +553,7 @@ function loadOperation(
 
     const parameters: InputParameter[] = [];
     if (urlParameters) {
-        for(const param of urlParameters) {
+        for (const param of urlParameters) {
             parameters.push(param);
         }
     }
@@ -505,6 +644,11 @@ function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
+        LongRunning: loadOperationLongRunning(
+            program,
+            operation,
+            resourceOperation
+        ),
         Paging: paging,
         GenerateConvenienceMethod: generateConvenienceMethod
     } as InputOperation;
@@ -539,8 +683,8 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVersion
-                ? InputOperationParameterKind.Client
-                : InputOperationParameterKind.Method;
+            ? InputOperationParameterKind.Client
+            : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
@@ -641,8 +785,64 @@ function loadOperation(
             StatusCodes: status,
             BodyType: type,
             BodyMediaType: BodyMediaType.Json,
-            Headers: responseHeaders
+            Headers: responseHeaders,
+            IsErrorResponse: isErrorModel(program, response.type)
         } as OperationResponse;
+    }
+
+    function loadOperationLongRunning(
+        program: Program,
+        op: OperationDetails,
+        resourceOperation?: ResourceOperation
+    ): OperationLongRunning | undefined {
+        if (!isLroOperation(program, op.operation)) return undefined;
+
+        const finalResponse = loadLongRunningFinalResponse(
+            program,
+            op,
+            resourceOperation
+        );
+        if (finalResponse === undefined) return undefined;
+
+        return {
+            FinalStateVia: OperationFinalStateVia.Location, // data plane only supports `location`
+            FinalResponse: finalResponse
+        } as OperationLongRunning;
+    }
+
+    function loadLongRunningFinalResponse(
+        program: Program,
+        op: OperationDetails,
+        resourceOperation?: ResourceOperation
+    ): OperationResponse | undefined {
+        let finalResponse: any | undefined;
+        for (const response of op.responses) {
+            if (response.statusCode === "200") {
+                finalResponse = response;
+                break;
+            }
+            if (response.statusCode === "204") {
+                finalResponse = response;
+            }
+        }
+
+        if (finalResponse !== undefined) {
+            return loadOperationResponse(
+                program,
+                finalResponse,
+                resourceOperation
+            );
+        }
+
+        return loadOperationResponse(
+            program,
+            op.responses[0],
+            resourceOperation
+        );
+    }
+
+    function isLroOperation(program: Program, op: Operation) {
+        return getOperationLink(program, op, "polling") !== undefined;
     }
 }
 

@@ -24,6 +24,7 @@ namespace PetStore
             Name = name;
             Age = age;
         }
+
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"></param>
         /// <param name="tag"></param>
@@ -35,10 +36,11 @@ namespace PetStore
             Age = age;
         }
 
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-
+        /// <summary> Gets or sets the tag. </summary>
         public string Tag { get; set; }
-
+        /// <summary> Gets or sets the age. </summary>
         public int Age { get; set; }
     }
 }

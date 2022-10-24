@@ -1,9 +1,9 @@
 {
   "OutputFolder": ".",
-  "Namespace": "CadlFirstTest",
+  "Namespace": "Cadl.EnumPropertiesBasic",
   "LibraryName": null,
   "SharedSourceFolders": [
-    "c:\\project\\autorest.csharp\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "c:\\project\\autorest.csharp\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+    "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
+    "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ]
 }

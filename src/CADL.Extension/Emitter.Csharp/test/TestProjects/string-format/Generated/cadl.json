@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "stringformat",
+ "Name": "stringFormat",
  "ApiVersions": [
   "2015-06-18"
  ],
@@ -22,7 +22,7 @@
        "NameInRequest": "time",
        "Type": {
         "$id": "5",
-        "Name": "DateTime",
+        "Name": "zonedDateTime",
         "Kind": "DateTime",
         "IsNullable": false
        },
@@ -102,7 +102,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -175,7 +176,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

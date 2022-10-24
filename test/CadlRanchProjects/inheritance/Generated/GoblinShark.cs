@@ -14,15 +14,14 @@ namespace Models.Inheritance
     public partial class GoblinShark : Shark
     {
         /// <summary> Initializes a new instance of GoblinShark. </summary>
+        /// <param name="kind"></param>
+        /// <param name="age"></param>
         /// <param name="sharktype"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sharktype"/> is null. </exception>
-        public GoblinShark(string sharktype)
+        /// <exception cref="ArgumentNullException"> <paramref name="kind"/> or <paramref name="sharktype"/> is null. </exception>
+        public GoblinShark(string kind, int age, string sharktype) : base(kind, age, sharktype)
         {
+            Argument.AssertNotNull(kind, nameof(kind));
             Argument.AssertNotNull(sharktype, nameof(sharktype));
-
-            Sharktype = sharktype;
         }
-
-        public string Sharktype { get; set; }
     }
 }

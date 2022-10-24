@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace GeneratedModels
+namespace CustomizationsInCadl
 {
     /// <summary> Client options for CustomizationsInCadlClient. </summary>
     public partial class CustomizationsInCadlClientOptions : ClientOptions

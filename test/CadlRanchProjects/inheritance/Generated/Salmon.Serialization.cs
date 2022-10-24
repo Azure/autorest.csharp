@@ -17,8 +17,6 @@ namespace Models.Inheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("kind");
-            writer.WriteStringValue(Kind);
             if (Optional.IsCollectionDefined(Friends))
             {
                 writer.WritePropertyName("friends");
@@ -45,22 +43,22 @@ namespace Models.Inheritance
                 writer.WritePropertyName("partner");
                 writer.WriteObjectValue(Partner);
             }
+            writer.WritePropertyName("kind");
+            writer.WriteStringValue(Kind);
+            writer.WritePropertyName("age");
+            writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }
 
         internal static Salmon DeserializeSalmon(JsonElement element)
         {
-            string kind = default;
             Optional<IList<Fish>> friends = default;
             Optional<IDictionary<string, Fish>> hate = default;
             Optional<Fish> partner = default;
+            string kind = default;
+            int age = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("kind"))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("friends"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -101,21 +99,34 @@ namespace Models.Inheritance
                     partner = DeserializeFish(property.Value);
                     continue;
                 }
+                if (property.NameEquals("kind"))
+                {
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("age"))
+                {
+                    age = property.Value.GetInt32();
+                    continue;
+                }
             }
-            return new Salmon(kind, Optional.ToList(friends), Optional.ToDictionary(hate), partner);
+            return new Salmon(kind, age, Optional.ToList(friends), Optional.ToDictionary(hate), partner);
         }
 
-        internal RequestContent ToRequestContent()
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal new static Salmon FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSalmon(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
             return content;
-        }
-
-        internal static Salmon FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSalmon(document.RootElement);
         }
     }
 }

@@ -24,15 +24,16 @@ namespace ModelsInCadl
         {
             Argument.AssertNotNull(optionalModelCollection, nameof(optionalModelCollection));
 
+            OptionalStringList = new ChangeTrackingList<string>();
+            OptionalIntList = new ChangeTrackingList<int>();
             OptionalModelCollection = optionalModelCollection.ToList();
             OptionalFixedStringEnum = optionalFixedStringEnum;
             OptionalExtensibleEnum = optionalExtensibleEnum;
-            OptionalStringList = new ChangeTrackingList<string>();
-            OptionalIntList = new ChangeTrackingList<int>();
             OptionalIntRecord = new ChangeTrackingDictionary<string, int>();
             OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
         }
+
         /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
         /// <param name="optionalString"></param>
         /// <param name="optionalInt"></param>
@@ -49,9 +50,9 @@ namespace ModelsInCadl
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
-            OptionalStringList = optionalStringList;
-            OptionalIntList = optionalIntList;
-            OptionalModelCollection = optionalModelCollection;
+            OptionalStringList = optionalStringList.ToList();
+            OptionalIntList = optionalIntList.ToList();
+            OptionalModelCollection = optionalModelCollection.ToList();
             OptionalModel = optionalModel;
             OptionalFixedStringEnum = optionalFixedStringEnum;
             OptionalExtensibleEnum = optionalExtensibleEnum;
@@ -60,26 +61,27 @@ namespace ModelsInCadl
             OptionalModelRecord = optionalModelRecord;
         }
 
+        /// <summary> Gets or sets the optional string. </summary>
         public string OptionalString { get; set; }
-
+        /// <summary> Gets or sets the optional int. </summary>
         public int? OptionalInt { get; set; }
-
+        /// <summary> Gets the optional string list. </summary>
         public IList<string> OptionalStringList { get; }
-
+        /// <summary> Gets the optional int list. </summary>
         public IList<int> OptionalIntList { get; }
-
+        /// <summary> Gets the optional model collection. </summary>
         public IList<CollectionItem> OptionalModelCollection { get; }
-
+        /// <summary> Gets or sets the optional model. </summary>
         public DerivedModel OptionalModel { get; set; }
-
+        /// <summary> Gets or sets the optional fixed string enum. </summary>
         public FixedStringEnum OptionalFixedStringEnum { get; set; }
-
+        /// <summary> Gets or sets the optional extensible enum. </summary>
         public ExtensibleEnum OptionalExtensibleEnum { get; set; }
-
+        /// <summary> Gets the optional int record. </summary>
         public IDictionary<string, int> OptionalIntRecord { get; }
-
+        /// <summary> Gets the optional string record. </summary>
         public IDictionary<string, string> OptionalStringRecord { get; }
-
+        /// <summary> Gets the optional model record. </summary>
         public IDictionary<string, RecordItem> OptionalModelRecord { get; }
     }
 }

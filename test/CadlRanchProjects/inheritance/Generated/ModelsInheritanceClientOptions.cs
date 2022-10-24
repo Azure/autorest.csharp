@@ -8,9 +8,9 @@
 using System;
 using Azure.Core;
 
-namespace inheritance
+namespace Models.Inheritance
 {
-    /// <summary> Client options for models.inheritance library clients. </summary>
+    /// <summary> Client options for Models.Inheritance library clients. </summary>
     public partial class ModelsInheritanceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

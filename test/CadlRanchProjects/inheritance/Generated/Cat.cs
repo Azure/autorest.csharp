@@ -5,18 +5,26 @@
 
 #nullable disable
 
+using System;
+using Azure.Core;
+
 namespace Models.Inheritance
 {
     /// <summary> The second level model in the normal multiple levels inheritance. </summary>
     public partial class Cat : Pet
     {
         /// <summary> Initializes a new instance of Cat. </summary>
+        /// <param name="name"></param>
         /// <param name="age"></param>
-        public Cat(int age)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public Cat(string name, int age) : base(name)
         {
+            Argument.AssertNotNull(name, nameof(name));
+
             Age = age;
         }
 
+        /// <summary> Gets or sets the age. </summary>
         public int Age { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace inheritance
+namespace Models.Inheritance
 {
     // Data plane generated client. Illustrates inheritance and polymorphic model.
     /// <summary> Illustrates inheritance and polymorphic model. </summary>

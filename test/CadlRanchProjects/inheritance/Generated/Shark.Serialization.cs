@@ -20,6 +20,8 @@ namespace Models.Inheritance
             writer.WriteStringValue(Sharktype);
             writer.WritePropertyName("kind");
             writer.WriteStringValue(Kind);
+            writer.WritePropertyName("age");
+            writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }
 
@@ -27,6 +29,7 @@ namespace Models.Inheritance
         {
             string sharktype = default;
             string kind = default;
+            int age = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sharktype"))
@@ -39,21 +42,29 @@ namespace Models.Inheritance
                     kind = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("age"))
+                {
+                    age = property.Value.GetInt32();
+                    continue;
+                }
             }
-            return new Shark(sharktype, kind);
+            return new Shark(kind, age, sharktype);
         }
 
-        internal RequestContent ToRequestContent()
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal new static Shark FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeShark(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
             return content;
-        }
-
-        internal static Shark FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeShark(document.RootElement);
         }
     }
 }

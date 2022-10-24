@@ -3,8 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using Azure.Core;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input
@@ -127,12 +129,15 @@ namespace AutoRest.CSharp.Common.Input
         public OperationResponseHeader() : this("", "", "", InputPrimitiveType.String) { }
     }
 
-    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<OperationResponseHeader> Headers)
+    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<OperationResponseHeader> Headers, bool IsErrorResponse)
     {
-        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<OperationResponseHeader>()) { }
+        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<OperationResponseHeader>(), IsErrorResponse: false) { }
     }
 
-    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse);
+    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse)
+    {
+        public OperationLongRunning() : this(FinalStateVia: OperationFinalStateVia.Location, FinalResponse: new OperationResponse()) { }
+    }
 
     internal record OperationPaging(string? NextLinkName, string? ItemName)
     {
@@ -181,7 +186,9 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
-    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator) { }
+    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
+    {
+    }
 
     internal record InputConstant(object Value, InputType Type);
 

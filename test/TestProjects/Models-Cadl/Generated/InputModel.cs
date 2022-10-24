@@ -13,7 +13,7 @@ using Azure.Core;
 namespace ModelsInCadl
 {
     /// <summary> Model used only as input. </summary>
-    public partial class InputModel
+    public partial class InputModel : BaseModel
     {
         /// <summary> Initializes a new instance of InputModel. </summary>
         /// <param name="requiredString"></param>
@@ -41,6 +41,7 @@ namespace ModelsInCadl
             RequiredModelCollection = requiredModelCollection.ToList();
             RequiredModelRecord = requiredModelRecord;
         }
+
         /// <summary> Initializes a new instance of InputModel. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
@@ -54,24 +55,25 @@ namespace ModelsInCadl
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
-            RequiredIntCollection = requiredIntCollection;
-            RequiredStringCollection = requiredStringCollection;
-            RequiredModelCollection = requiredModelCollection;
+            RequiredIntCollection = requiredIntCollection.ToList();
+            RequiredStringCollection = requiredStringCollection.ToList();
+            RequiredModelCollection = requiredModelCollection.ToList();
             RequiredModelRecord = requiredModelRecord;
         }
 
+        /// <summary> Gets or sets the required string. </summary>
         public string RequiredString { get; set; }
-
+        /// <summary> Gets or sets the required int. </summary>
         public int RequiredInt { get; set; }
-
+        /// <summary> Gets or sets the required model. </summary>
         public BaseModel RequiredModel { get; set; }
-
+        /// <summary> Gets the required int collection. </summary>
         public IList<int> RequiredIntCollection { get; }
-
+        /// <summary> Gets the required string collection. </summary>
         public IList<string> RequiredStringCollection { get; }
-
+        /// <summary> Gets the required model collection. </summary>
         public IList<CollectionItem> RequiredModelCollection { get; }
-
+        /// <summary> Gets the required model record. </summary>
         public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }

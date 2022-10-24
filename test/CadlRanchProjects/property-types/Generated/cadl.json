@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "models.property.types",
+ "Name": "Models.Property.Types",
  "Description": "Illustrates various property types for models",
  "ApiVersions": [
   "1.0.0"
@@ -62,7 +62,7 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Name": "bool",
+      "Name": "boolean",
       "Kind": "Boolean",
       "IsNullable": false
      },
@@ -110,7 +110,7 @@
      "Description": "",
      "Type": {
       "$id": "14",
-      "Name": "Bytes",
+      "Name": "bytes",
       "Kind": "BinaryData",
       "IsNullable": false
      },
@@ -134,7 +134,7 @@
      "Description": "",
      "Type": {
       "$id": "17",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -158,7 +158,7 @@
      "Description": "",
      "Type": {
       "$id": "20",
-      "Name": "float",
+      "Name": "float32",
       "Kind": "Float32",
       "IsNullable": false
      },
@@ -182,7 +182,7 @@
      "Description": "",
      "Type": {
       "$id": "23",
-      "Name": "DateTime",
+      "Name": "zonedDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -206,7 +206,7 @@
      "Description": "",
      "Type": {
       "$id": "26",
-      "Name": "TimeSpan",
+      "Name": "duration",
       "Kind": "DurationISO8601",
       "IsNullable": false
      },
@@ -349,7 +349,7 @@
       "Name": "Array",
       "ElementType": {
        "$id": "43",
-       "Name": "Int32",
+       "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
       },
@@ -532,7 +532,8 @@
         "$ref": "6"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -631,7 +632,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -701,7 +703,8 @@
         "$ref": "9"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -800,7 +803,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -870,7 +874,8 @@
         "$ref": "12"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -969,7 +974,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -1039,7 +1045,8 @@
         "$ref": "15"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -1138,7 +1145,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -1208,7 +1216,8 @@
         "$ref": "18"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -1307,7 +1316,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -1377,7 +1387,8 @@
         "$ref": "21"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -1476,7 +1487,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -1546,7 +1558,8 @@
         "$ref": "24"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -1645,7 +1658,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -1715,7 +1729,8 @@
         "$ref": "27"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -1814,7 +1829,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -1884,7 +1900,8 @@
         "$ref": "29"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -1983,7 +2000,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -2053,7 +2071,8 @@
         "$ref": "31"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -2152,7 +2171,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -2222,7 +2242,8 @@
         "$ref": "36"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -2321,7 +2342,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -2391,7 +2413,8 @@
         "$ref": "40"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -2490,7 +2513,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -2560,7 +2584,8 @@
         "$ref": "44"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -2659,7 +2684,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -2729,7 +2755,8 @@
         "$ref": "47"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -2828,7 +2855,8 @@
         204
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",

@@ -14,20 +14,19 @@ namespace Models.Inheritance
     public partial class Shark : Fish
     {
         /// <summary> Initializes a new instance of Shark. </summary>
-        /// <param name="sharktype"></param>
         /// <param name="kind"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sharktype"/> or <paramref name="kind"/> is null. </exception>
-        public Shark(string sharktype, string kind)
+        /// <param name="age"></param>
+        /// <param name="sharktype"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="kind"/> or <paramref name="sharktype"/> is null. </exception>
+        public Shark(string kind, int age, string sharktype) : base(kind, age)
         {
-            Argument.AssertNotNull(sharktype, nameof(sharktype));
             Argument.AssertNotNull(kind, nameof(kind));
+            Argument.AssertNotNull(sharktype, nameof(sharktype));
 
             Sharktype = sharktype;
-            Kind = kind;
         }
 
+        /// <summary> Gets or sets the sharktype. </summary>
         public string Sharktype { get; set; }
-
-        public string Kind { get; set; }
     }
 }

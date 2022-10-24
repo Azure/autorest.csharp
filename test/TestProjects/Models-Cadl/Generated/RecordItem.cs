@@ -5,14 +5,21 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace ModelsInCadl
 {
     /// <summary> Record item model. </summary>
-    public partial class RecordItem
+    public partial class RecordItem : DerivedModel
     {
         /// <summary> Initializes a new instance of RecordItem. </summary>
-        public RecordItem()
+        /// <param name="requiredCollection"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredCollection"/> is null. </exception>
+        public RecordItem(IEnumerable<CollectionItem> requiredCollection) : base(requiredCollection)
         {
+            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
         }
     }
 }

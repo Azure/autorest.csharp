@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "cadl.testserver.arraybasic",
+ "Name": "Cadl.TestServer.ArrayBasic",
  "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
  "ApiVersions": [
   "1.0.0"
@@ -50,7 +50,7 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -198,7 +198,8 @@
         "IsNullable": false
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

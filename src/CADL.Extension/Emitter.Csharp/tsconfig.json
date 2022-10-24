@@ -17,14 +17,15 @@
       "declaration": true,
       "stripInternal": true,
       "noEmitHelpers": false,
-      "target": "es2019",
-      "lib": ["es2019"],
+      "target": "es2021",
+      "lib": ["es2021"],
       "experimentalDecorators": true,
       "newLine": "LF",
       "outDir": "dist",
       "rootDir": ".",
       "tsBuildInfoFile": "temp/tsconfig.tsbuildinfo",
-      "types": ["node", "mocha"]
+      "types": ["node", "mocha"],
+      "skipLibCheck": true
     },
     "include": ["src/**/*.ts", "test/**/*.ts"]
 }

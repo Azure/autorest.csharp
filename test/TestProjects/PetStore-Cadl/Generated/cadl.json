@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "petstore",
+ "Name": "PetStore",
  "Description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
  "ApiVersions": [
   "2021-03-25"
@@ -72,7 +72,7 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -122,7 +122,7 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "17",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },
@@ -202,7 +202,8 @@
         200
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "DELETE",
@@ -227,7 +228,7 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "28",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },
@@ -282,7 +283,8 @@
         "$ref": "5"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       },
       {
        "$id": "33",
@@ -293,7 +295,8 @@
         "$ref": "5"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -395,7 +398,8 @@
         "$ref": "5"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -473,7 +477,8 @@
         "$ref": "5"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -496,7 +501,7 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "51",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },
@@ -551,7 +556,8 @@
         "$ref": "5"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

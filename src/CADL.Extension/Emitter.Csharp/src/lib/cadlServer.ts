@@ -38,19 +38,24 @@ export function resolveServers(
     return servers.map((server) => {
         const parameters: InputParameter[] = [];
         let url: string = server.url;
-        let endpoint: string = url.replace("http://", "").replace("https://", "").split("/")[0];
+        const endpoint: string = url
+            .replace("http://", "")
+            .replace("https://", "")
+            .split("/")[0];
         for (const [name, prop] of server.parameters) {
             // if (!validateValidServerVariable(program, prop)) {
             //   continue;
             // }
-            const isEndpoint: boolean = endpoint === (`{${name}}`);
+            const isEndpoint: boolean = endpoint === `{${name}}`;
             let defaultValue = undefined;
             const value = prop.default ? getDefaultValue(prop.default) : "";
             if (value) {
                 defaultValue = {
                     Type: {
-                        Name: isEndpoint ? "Uri": "String",
-                        Kind: isEndpoint ? InputTypeKind.Uri : InputTypeKind.String,
+                        Name: isEndpoint ? "Uri" : "String",
+                        Kind: isEndpoint
+                            ? InputTypeKind.Uri
+                            : InputTypeKind.String,
                         IsNullable: false
                     } as InputPrimitiveType,
                     Value: value
@@ -61,7 +66,7 @@ export function resolveServers(
                 NameInRequest: name,
                 Description: getDoc(program, prop),
                 Type: {
-                    Name: isEndpoint ? "Uri": "String",
+                    Name: isEndpoint ? "Uri" : "String",
                     Kind: isEndpoint ? InputTypeKind.Uri : InputTypeKind.String,
                     IsNullable: false
                 } as InputPrimitiveType,

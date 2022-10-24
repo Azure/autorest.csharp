@@ -18,12 +18,15 @@ namespace Models.Inheritance
             writer.WriteStartObject();
             writer.WritePropertyName("age");
             writer.WriteNumberValue(Age);
+            writer.WritePropertyName("name");
+            writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
 
         internal static Cat DeserializeCat(JsonElement element)
         {
             int age = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("age"))
@@ -31,21 +34,29 @@ namespace Models.Inheritance
                     age = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
             }
-            return new Cat(age);
+            return new Cat(name, age);
         }
 
-        internal RequestContent ToRequestContent()
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal new static Cat FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeCat(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
             return content;
-        }
-
-        internal static Cat FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCat(document.RootElement);
         }
     }
 }

@@ -1,0 +1,9 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "Cadl.TestServer.MultiInterfaceClient",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
+    "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
+  ]
+}
