@@ -63,16 +63,7 @@ namespace Authentication.OAuth2
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ValidAsync.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new OAuth2Client(credential);
-        /// 
-        /// Response response = await client.ValidAsync();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Valid");
@@ -93,16 +84,7 @@ namespace Authentication.OAuth2
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Valid.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new OAuth2Client(credential);
-        /// 
-        /// Response response = client.Valid();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='Valid(RequestContext)']/*" />
         public virtual Response Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Valid");
@@ -123,16 +105,7 @@ namespace Authentication.OAuth2
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call InvalidAsync.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new OAuth2Client(credential);
-        /// 
-        /// Response response = await client.InvalidAsync();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='InvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Invalid");
@@ -153,16 +126,7 @@ namespace Authentication.OAuth2
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Invalid.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new OAuth2Client(credential);
-        /// 
-        /// Response response = client.Invalid();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/OAuth2Client.xml" path="doc/members/member[@name='Invalid(RequestContext)']/*" />
         public virtual Response Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("OAuth2Client.Invalid");
