@@ -50,29 +50,7 @@ namespace Models.Property.Types
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new CollectionsStringClient();
-        /// 
-        /// Response response = await client.GetAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("property")[0].ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>CollectionsStringProperty</c>:
-        /// <code>{
-        ///   property: [string], # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/CollectionsStringClient.xml" path="doc/members/member[@name='GetAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("CollectionsStringClient.Get");
@@ -92,29 +70,7 @@ namespace Models.Property.Types
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call Get and parse the result.
-        /// <code><![CDATA[
-        /// var client = new CollectionsStringClient();
-        /// 
-        /// Response response = client.Get();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("property")[0].ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>CollectionsStringProperty</c>:
-        /// <code>{
-        ///   property: [string], # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/CollectionsStringClient.xml" path="doc/members/member[@name='Get(RequestContext)']/*" />
         public virtual Response Get(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("CollectionsStringClient.Get");
@@ -136,33 +92,7 @@ namespace Models.Property.Types
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutAsync with required request content.
-        /// <code><![CDATA[
-        /// var client = new CollectionsStringClient();
-        /// 
-        /// var data = new {
-        ///     property = new[] {
-        ///         "<String>"
-        ///     },
-        /// };
-        /// 
-        /// Response response = await client.PutAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>CollectionsStringProperty</c>:
-        /// <code>{
-        ///   property: [string], # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/CollectionsStringClient.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -186,33 +116,7 @@ namespace Models.Property.Types
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Put with required request content.
-        /// <code><![CDATA[
-        /// var client = new CollectionsStringClient();
-        /// 
-        /// var data = new {
-        ///     property = new[] {
-        ///         "<String>"
-        ///     },
-        /// };
-        /// 
-        /// Response response = client.Put(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>CollectionsStringProperty</c>:
-        /// <code>{
-        ///   property: [string], # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/CollectionsStringClient.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

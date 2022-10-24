@@ -66,38 +66,7 @@ namespace Pagination
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetLedgerEntriesAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PaginationClient(endpoint, credential);
-        /// 
-        /// await foreach (var data in client.GetLedgerEntriesAsync())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("contents").ToString());
-        ///     Console.WriteLine(result.GetProperty("collectionId").ToString());
-        ///     Console.WriteLine(result.GetProperty("transactionId").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
-        /// 
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Array</c>:
-        /// <code>{
-        ///   contents: string, # Required.
-        ///   collectionId: string, # Required.
-        ///   transactionId: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntriesAsync(RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetLedgerEntriesAsync(RequestContext context = null)
         {
             return GetLedgerEntriesImplementationAsync("PaginationClient.GetLedgerEntries", context);
@@ -124,38 +93,7 @@ namespace Pagination
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetLedgerEntries and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new PaginationClient(endpoint, credential);
-        /// 
-        /// foreach (var data in client.GetLedgerEntries())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("contents").ToString());
-        ///     Console.WriteLine(result.GetProperty("collectionId").ToString());
-        ///     Console.WriteLine(result.GetProperty("transactionId").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
-        /// 
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Array</c>:
-        /// <code>{
-        ///   contents: string, # Required.
-        ///   collectionId: string, # Required.
-        ///   transactionId: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntries(RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetLedgerEntries(RequestContext context = null)
         {
             return GetLedgerEntriesImplementation("PaginationClient.GetLedgerEntries", context);
