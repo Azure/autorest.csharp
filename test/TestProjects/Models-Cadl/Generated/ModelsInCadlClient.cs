@@ -88,6 +88,7 @@ namespace ModelsInCadl
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("requiredString").ToString());
         /// Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
         /// Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
         /// Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
         /// Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
@@ -119,6 +120,7 @@ namespace ModelsInCadl
         ///   requiredString: string, # Required.
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
+        ///     discriminatorProperty: string, # Required.
         ///   }, # Required.
         ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
@@ -198,6 +200,7 @@ namespace ModelsInCadl
         /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
         /// Console.WriteLine(result.GetProperty("requiredString").ToString());
         /// Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        /// Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
         /// Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
         /// Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
         /// Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
@@ -229,6 +232,7 @@ namespace ModelsInCadl
         ///   requiredString: string, # Required.
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
+        ///     discriminatorProperty: string, # Required.
         ///   }, # Required.
         ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
@@ -974,7 +978,9 @@ namespace ModelsInCadl
         /// var data = new {
         ///     requiredString = "<requiredString>",
         ///     requiredInt = 1234,
-        ///     requiredModel = new {},
+        ///     requiredModel = new {
+        ///         discriminatorProperty = "",
+        ///     },
         ///     requiredFixedStringEnum = "1",
         ///     requiredExtensibleEnum = "1",
         ///     requiredCollection = new[] {
@@ -1020,6 +1026,7 @@ namespace ModelsInCadl
         ///   requiredString: string, # Required.
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
+        ///     discriminatorProperty: string, # Required.
         ///   }, # Required.
         ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
@@ -1085,7 +1092,9 @@ namespace ModelsInCadl
         /// var data = new {
         ///     requiredString = "<requiredString>",
         ///     requiredInt = 1234,
-        ///     requiredModel = new {},
+        ///     requiredModel = new {
+        ///         discriminatorProperty = "",
+        ///     },
         ///     requiredFixedStringEnum = "1",
         ///     requiredExtensibleEnum = "1",
         ///     requiredCollection = new[] {
@@ -1131,6 +1140,7 @@ namespace ModelsInCadl
         ///   requiredString: string, # Required.
         ///   requiredInt: number, # Required.
         ///   requiredModel: {
+        ///     discriminatorProperty: string, # Required.
         ///   }, # Required.
         ///   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
         ///   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.

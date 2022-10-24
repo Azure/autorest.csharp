@@ -16,15 +16,23 @@ namespace ModelsInCadl
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("discriminatorProperty");
+            writer.WriteStringValue(DiscriminatorProperty);
             writer.WriteEndObject();
         }
 
         internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element)
         {
+            string discriminatorProperty = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("discriminatorProperty"))
+                {
+                    discriminatorProperty = property.Value.GetString();
+                    continue;
+                }
             }
-            return new BaseModelWithDiscriminator();
+            return new BaseModelWithDiscriminator(discriminatorProperty);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

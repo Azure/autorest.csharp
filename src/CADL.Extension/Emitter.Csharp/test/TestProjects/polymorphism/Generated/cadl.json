@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "polymorphismoperation",
+ "Name": "PolymorphismOperation",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
@@ -36,7 +36,7 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -72,26 +72,11 @@
      "IsRequired": true,
      "IsReadOnly": false,
      "IsDiscriminator": true
-    },
-    {
-     "$id": "10",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "",
-     "Type": {
-      "$id": "11",
-      "Name": "String",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": true
     }
    ]
   },
   {
-   "$id": "12",
+   "$id": "10",
    "Name": "SawShark",
    "Namespace": "PolymorphismOperation",
    "Description": "The third level model SawShark in polymorphic multiple levels inheritance.",
@@ -100,26 +85,10 @@
    "BaseModel": {
     "$ref": "7"
    },
-   "Properties": [
-    {
-     "$id": "13",
-     "Name": "sharktype",
-     "SerializedName": "sharktype",
-     "Description": "",
-     "Type": {
-      "$id": "14",
-      "Name": "String",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": true
-    }
-   ]
+   "Properties": []
   },
   {
-   "$id": "15",
+   "$id": "11",
    "Name": "GoblinShark",
    "Namespace": "PolymorphismOperation",
    "Description": "The third level model GoblinShark in polymorphic multiple levels inheritance.",
@@ -128,26 +97,10 @@
    "BaseModel": {
     "$ref": "7"
    },
-   "Properties": [
-    {
-     "$id": "16",
-     "Name": "sharktype",
-     "SerializedName": "sharktype",
-     "Description": "",
-     "Type": {
-      "$id": "17",
-      "Name": "String",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": true
-    }
-   ]
+   "Properties": []
   },
   {
-   "$id": "18",
+   "$id": "12",
    "Name": "Salmon",
    "Namespace": "PolymorphismOperation",
    "Description": "The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic instances.",
@@ -158,27 +111,12 @@
    },
    "Properties": [
     {
-     "$id": "19",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "",
-     "Type": {
-      "$id": "20",
-      "Name": "String",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": true
-    },
-    {
-     "$id": "21",
+     "$id": "13",
      "Name": "friends",
      "SerializedName": "friends",
      "Description": "",
      "Type": {
-      "$id": "22",
+      "$id": "14",
       "Name": "Array",
       "ElementType": {
        "$ref": "2"
@@ -190,15 +128,15 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "23",
+     "$id": "15",
      "Name": "hate",
      "SerializedName": "hate",
      "Description": "",
      "Type": {
-      "$id": "24",
+      "$id": "16",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "25",
+       "$id": "17",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -213,7 +151,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "26",
+     "$id": "18",
      "Name": "partner",
      "SerializedName": "partner",
      "Description": "",
@@ -229,20 +167,20 @@
  ],
  "Clients": [
   {
-   "$id": "27",
+   "$id": "19",
    "Name": "Discriminated",
    "Operations": [
     {
-     "$id": "28",
+     "$id": "20",
      "Name": "putModel",
      "Description": "Generate and receive polymorphic model in multiple levels inheritance with 2 discriminators.",
      "Parameters": [
       {
-       "$id": "29",
+       "$id": "21",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Type": {
-        "$id": "30",
+        "$id": "22",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -258,7 +196,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "31",
+       "$id": "23",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -275,11 +213,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "32",
+       "$id": "24",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "33",
+        "$id": "25",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -294,19 +232,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "26",
         "Type": {
-         "$ref": "33"
+         "$ref": "25"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "35",
+       "$id": "27",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "36",
+        "$id": "28",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -321,20 +259,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "29",
         "Type": {
-         "$ref": "36"
+         "$ref": "28"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "38",
+       "$id": "30",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "39",
+        "$id": "31",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -349,9 +287,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "32",
         "Type": {
-         "$id": "41",
+         "$id": "33",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -362,12 +300,13 @@
      ],
      "Responses": [
       {
-       "$id": "42",
+       "$id": "34",
        "StatusCodes": [
         200
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -381,19 +320,19 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "43",
+     "$id": "35",
      "Name": "getRecursiveModel",
      "Description": "Generate and receive polymorphic models has collection and dictionary properties referring to other polymorphic models.",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "21"
       },
       {
-       "$id": "44",
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "45",
+        "$id": "37",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -408,20 +347,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "46",
+        "$id": "38",
         "Type": {
-         "$ref": "45"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "38"
+       "$ref": "30"
       }
      ],
      "Responses": [
       {
-       "$id": "47",
+       "$id": "39",
        "StatusCodes": [
         200
        ],
@@ -429,7 +368,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -440,15 +380,15 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "48",
+     "$id": "40",
      "Name": "putRecursiveModel",
      "Description": "Generate and send polymorphic models has collection and dictionary properties referring to other polymorphic models.",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "21"
       },
       {
-       "$id": "49",
+       "$id": "41",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -465,11 +405,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "50",
+       "$id": "42",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "51",
+        "$id": "43",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -484,19 +424,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "52",
+        "$id": "44",
         "Type": {
-         "$ref": "51"
+         "$ref": "43"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "53",
+       "$id": "45",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "54",
+        "$id": "46",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -511,25 +451,26 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "55",
+        "$id": "47",
         "Type": {
-         "$ref": "54"
+         "$ref": "46"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "38"
+       "$ref": "30"
       }
      ],
      "Responses": [
       {
-       "$id": "56",
+       "$id": "48",
        "StatusCodes": [
         200
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -543,19 +484,19 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "57",
+     "$id": "49",
      "Name": "getMissingDiscriminator",
      "Description": "Get a model omitting the discriminator.",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "21"
       },
       {
-       "$id": "58",
+       "$id": "50",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "59",
+        "$id": "51",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -570,20 +511,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "60",
+        "$id": "52",
         "Type": {
-         "$ref": "59"
+         "$ref": "51"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "38"
+       "$ref": "30"
       }
      ],
      "Responses": [
       {
-       "$id": "61",
+       "$id": "53",
        "StatusCodes": [
         200
        ],
@@ -591,7 +532,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -602,19 +544,19 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "62",
+     "$id": "54",
      "Name": "getWrongDiscriminator",
      "Description": "Get a model containing discriminator value never defined.",
      "Parameters": [
       {
-       "$ref": "29"
+       "$ref": "21"
       },
       {
-       "$id": "63",
+       "$id": "55",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "64",
+        "$id": "56",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -629,20 +571,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "65",
+        "$id": "57",
         "Type": {
-         "$ref": "64"
+         "$ref": "56"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "38"
+       "$ref": "30"
       }
      ],
      "Responses": [
       {
-       "$id": "66",
+       "$id": "58",
        "StatusCodes": [
         200
        ],
@@ -650,7 +592,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -662,7 +605,7 @@
     }
    ],
    "Protocol": {
-    "$id": "67"
+    "$id": "59"
    }
   }
  ]
