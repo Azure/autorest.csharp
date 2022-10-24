@@ -241,6 +241,7 @@ $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 $cadlRanchProjectNames =
     'api-key',
     'oauth2',
+    'hello',
     'extensible-enums',
     'property-optional',
     'property-types'
