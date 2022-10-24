@@ -89,38 +89,7 @@ namespace ParametersCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call OperationAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var client = new ParameterOrdersClient();
-        /// 
-        /// Response response = await client.OperationAsync(1234);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// ]]></code>
-        /// This sample shows how to call OperationAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var client = new ParameterOrdersClient();
-        /// 
-        /// Response response = await client.OperationAsync(1234, 1234);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Result</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/ParameterOrdersClient.xml" path="doc/members/member[@name='OperationAsync(Int32,Int32,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(int start, int? end = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParameterOrdersClient.Operation");
@@ -142,38 +111,7 @@ namespace ParametersCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call Operation with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var client = new ParameterOrdersClient();
-        /// 
-        /// Response response = client.Operation(1234);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// ]]></code>
-        /// This sample shows how to call Operation with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var client = new ParameterOrdersClient();
-        /// 
-        /// Response response = client.Operation(1234, 1234);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Result</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/ParameterOrdersClient.xml" path="doc/members/member[@name='Operation(Int32,Int32,RequestContext)']/*" />
         public virtual Response Operation(int start, int? end = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParameterOrdersClient.Operation");
@@ -235,38 +173,7 @@ namespace ParametersCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call Operation2Async with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var client = new ParameterOrdersClient();
-        /// 
-        /// Response response = await client.Operation2Async(1234);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// ]]></code>
-        /// This sample shows how to call Operation2Async with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var client = new ParameterOrdersClient();
-        /// 
-        /// Response response = await client.Operation2Async(1234, 1234);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Result</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/ParameterOrdersClient.xml" path="doc/members/member[@name='Operation2Async(Int32,Int32,RequestContext)']/*" />
         public virtual async Task<Response> Operation2Async(int end, int? start = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParameterOrdersClient.Operation2");
@@ -288,38 +195,7 @@ namespace ParametersCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call Operation2 with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var client = new ParameterOrdersClient();
-        /// 
-        /// Response response = client.Operation2(1234);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// ]]></code>
-        /// This sample shows how to call Operation2 with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var client = new ParameterOrdersClient();
-        /// 
-        /// Response response = client.Operation2(1234, 1234);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Result</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/ParameterOrdersClient.xml" path="doc/members/member[@name='Operation2(Int32,Int32,RequestContext)']/*" />
         public virtual Response Operation2(int end, int? start = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParameterOrdersClient.Operation2");

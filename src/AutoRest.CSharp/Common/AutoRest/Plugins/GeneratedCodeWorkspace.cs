@@ -19,18 +19,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class GeneratedCodeWorkspace
     {
-        public static string SharedFolder = "shared";
-        public static string GeneratedFolder = "Generated";
+        public static readonly string SharedFolder = "shared";
+        public static readonly string GeneratedFolder = "Generated";
 
         private static readonly string[] SharedFolders = { SharedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
         private static Task<Project>? _cachedProject;
 
         private Project _project;
+        private Dictionary<string, string> _docFiles { get; init; }
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
             _project = generatedCodeProject;
+            _docFiles = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -51,6 +53,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root = root.WithAdditionalAnnotations(Simplifier.Annotation);
             document = document.WithSyntaxRoot(root);
             _project = document.Project;
+        }
+
+        /// <summary>
+        /// Add generated doc file.
+        /// </summary>
+        /// <param name="name">Name of the doc file, including the relative path to the "Generated" folder.</param>
+        /// <param name="text">Content of the doc file.</param>
+        public void AddGeneratedDocFile(string name, string text)
+        {
+            _docFiles.Add(name, text);
         }
 
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
@@ -76,6 +88,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var processed = await task;
                 var text = await processed.GetSyntaxTreeAsync();
                 yield return (processed.Name, text!.ToString());
+            }
+
+            foreach (var doc in _docFiles)
+            {
+                yield return (doc.Key, doc.Value);
             }
         }
 

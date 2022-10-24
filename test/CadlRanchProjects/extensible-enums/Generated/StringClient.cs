@@ -50,17 +50,7 @@ namespace ExtensibleEnums
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetKnownValueAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new StringClient();
-        /// 
-        /// Response response = await client.GetKnownValueAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetKnownValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetKnownValueAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetKnownValue");
@@ -80,17 +70,7 @@ namespace ExtensibleEnums
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetKnownValue and parse the result.
-        /// <code><![CDATA[
-        /// var client = new StringClient();
-        /// 
-        /// Response response = client.GetKnownValue();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetKnownValue(RequestContext)']/*" />
         public virtual Response GetKnownValue(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetKnownValue");
@@ -110,17 +90,7 @@ namespace ExtensibleEnums
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetUnknownValueAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new StringClient();
-        /// 
-        /// Response response = await client.GetUnknownValueAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetUnknownValue");
@@ -140,17 +110,7 @@ namespace ExtensibleEnums
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetUnknownValue and parse the result.
-        /// <code><![CDATA[
-        /// var client = new StringClient();
-        /// 
-        /// Response response = client.GetUnknownValue();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
         public virtual Response GetUnknownValue(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetUnknownValue");
@@ -172,17 +132,7 @@ namespace ExtensibleEnums
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutKnownValueAsync with required request content.
-        /// <code><![CDATA[
-        /// var client = new StringClient();
-        /// 
-        /// var data = "Monday";
-        /// 
-        /// Response response = await client.PutKnownValueAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutKnownValueAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -206,17 +156,7 @@ namespace ExtensibleEnums
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutKnownValue with required request content.
-        /// <code><![CDATA[
-        /// var client = new StringClient();
-        /// 
-        /// var data = "Monday";
-        /// 
-        /// Response response = client.PutKnownValue(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutKnownValue(RequestContent,RequestContext)']/*" />
         public virtual Response PutKnownValue(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -240,17 +180,7 @@ namespace ExtensibleEnums
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutUnknownValueAsync with required request content.
-        /// <code><![CDATA[
-        /// var client = new StringClient();
-        /// 
-        /// var data = "Monday";
-        /// 
-        /// Response response = await client.PutUnknownValueAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutUnknownValueAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -274,17 +204,7 @@ namespace ExtensibleEnums
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutUnknownValue with required request content.
-        /// <code><![CDATA[
-        /// var client = new StringClient();
-        /// 
-        /// var data = "Monday";
-        /// 
-        /// Response response = client.PutUnknownValue(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutUnknownValue(RequestContent,RequestContext)']/*" />
         public virtual Response PutUnknownValue(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

@@ -11,6 +11,7 @@
    "Name": "Project",
    "Namespace": "LroBasicCadl",
    "IsNullable": false,
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",
@@ -68,7 +69,6 @@
     {
      "$id": "10",
      "Name": "createProject",
-     "Description": "Creates a Project",
      "Parameters": [
       {
        "$id": "11",

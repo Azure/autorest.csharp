@@ -1,4 +1,5 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
 
 @serviceTitle("Models in CADL")
 @serviceVersion("0.1.0")
@@ -101,4 +102,5 @@ model RootModel {
 @route("/inputToRoundTrip")
 @doc("RoundTrip operation to make RootModel round-trip")
 @get
+@OpenAPI.extension("x-ms-convenient-api", true)
 op roundTrip(@body input: RootModel): RootModel;

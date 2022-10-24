@@ -29,7 +29,8 @@
     }
    ],
    "IsExtensible": false,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "None"
   },
   {
    "$id": "6",
@@ -55,7 +56,8 @@
     }
    ],
    "IsExtensible": true,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "RoundTrip"
   }
  ],
  "Models": [
@@ -64,6 +66,7 @@
    "Name": "Thing",
    "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "11",
@@ -87,6 +90,7 @@
    "Name": "RoundTripModel",
    "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "14",

@@ -11,16 +11,8 @@ using Azure.Core;
 
 namespace ParametersCadl.ParameterOrders
 {
-    public partial class Result : IUtf8JsonSerializable
+    public partial class Result
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
-            writer.WriteEndObject();
-        }
-
         internal static Result DeserializeResult(JsonElement element)
         {
             string id = default;
@@ -41,14 +33,6 @@ namespace ParametersCadl.ParameterOrders
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeResult(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }
