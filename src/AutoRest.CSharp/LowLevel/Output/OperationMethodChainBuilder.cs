@@ -187,7 +187,7 @@ namespace AutoRest.CSharp.Output.Models
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }
 
-        public void BuildParameters()
+        private void BuildParameters()
         {
             var operationParameters = Operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
 
@@ -225,10 +225,10 @@ namespace AutoRest.CSharp.Output.Models
                             : requestConditionSerializationFormat;
 
                         break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, IsRequired: true }:
+                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: null }:
                         requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
                         break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, IsRequired: false }:
+                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: not null }:
                         optionalPathParameters.Add(operationParameter.NameInRequest, operationParameter);
                         break;
                     case { IsRequired: true, DefaultValue: null }:

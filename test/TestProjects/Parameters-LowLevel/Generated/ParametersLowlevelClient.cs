@@ -528,7 +528,7 @@ namespace Parameters_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptionalPathParametersRequest(id, name, skip, context);
+                using HttpMessage message = CreateOptionalPathParametersRequest(id, skip, name, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -573,7 +573,7 @@ namespace Parameters_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptionalPathParametersRequest(id, name, skip, context);
+                using HttpMessage message = CreateOptionalPathParametersRequest(id, skip, name, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -731,7 +731,7 @@ namespace Parameters_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptionalPathBodyParametersWithMixedSequenceRequest(id, name, skip, content, top, max, context);
+                using HttpMessage message = CreateOptionalPathBodyParametersWithMixedSequenceRequest(name, skip, content, id, top, max, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -799,7 +799,7 @@ namespace Parameters_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptionalPathBodyParametersWithMixedSequenceRequest(id, name, skip, content, top, max, context);
+                using HttpMessage message = CreateOptionalPathBodyParametersWithMixedSequenceRequest(name, skip, content, id, top, max, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -887,7 +887,7 @@ namespace Parameters_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateOptionalPathParametersRequest(int id, string name, int skip, RequestContext context)
+        internal HttpMessage CreateOptionalPathParametersRequest(int id, int skip, string name, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -919,7 +919,7 @@ namespace Parameters_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateOptionalPathBodyParametersWithMixedSequenceRequest(int id, string name, int skip, RequestContent content, int? top, int max, RequestContext context)
+        internal HttpMessage CreateOptionalPathBodyParametersWithMixedSequenceRequest(string name, int skip, RequestContent content, int id, int? top, int max, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
