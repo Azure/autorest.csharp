@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputModelType.Accessibility), ref accessibility)
                     || reader.TryReadString(nameof(InputModelType.Description), ref description)
-                    || reader.TryReadString(nameof(InputEnumType.Usage), ref usageString)
+                    || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
                     || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
 
                 if (isKnownProperty)
