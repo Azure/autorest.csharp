@@ -331,7 +331,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructorSignature, CreatePropertySerializations().ToArray(), null, null, false, true, true);
+            return new(Type, SerializationConstructorSignature, CreatePropertySerializations().ToArray(), null, null, false, EnsureIncludeSerializer(), EnsureIncludeDeserializer());
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()
@@ -341,8 +341,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<ModelMethodDefinition> BuildMethods()
         {
-            yield return new ModelMethodDefinition(FromResponseSignature, SerializationWriter.JsonFromResponseMethod);
-            yield return new ModelMethodDefinition(ToRequestContentSignature, SerializationWriter.JsonToRequestContentMethod);
+            if (EnsureIncludeDeserializer()) yield return new ModelMethodDefinition(FromResponseSignature, SerializationWriter.JsonFromResponseMethod);
+            if (EnsureIncludeSerializer()) yield return new ModelMethodDefinition(ToRequestContentSignature, SerializationWriter.JsonToRequestContentMethod);
         }
     }
 }

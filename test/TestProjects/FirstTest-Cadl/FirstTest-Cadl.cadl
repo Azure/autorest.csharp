@@ -73,7 +73,7 @@ namespace Hello.Demo2 {
     @route("/againHi")
     @doc("Return hi again")
     @get
-    @OpenAPI.extension("x-ms-convenient-api", false)
+    @OpenAPI.extension("x-ms-convenient-api", true)
     op helloAgain(@header p1: string, @body action: RoundTripModel, @Cadl.Http.header contentType: "text/plain", @path p2: string): Thing;
 
     @route("/noContentType")
@@ -82,7 +82,7 @@ namespace Hello.Demo2 {
     op noContentType(@header p1: string, @body action: RoundTripModel, @path p2: string): Thing;
 
     @route("/demoHi")
-    @OpenAPI.extension("x-ms-convenient-api", false)
+    @OpenAPI.extension("x-ms-convenient-api", true)
     @doc("Return hi in demo2")
     @get
     op helloDemo2(): Thing;

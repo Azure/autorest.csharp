@@ -48,7 +48,8 @@
     }
    ],
    "IsExtensible": true,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "RoundTrip"
   }
  ],
  "Models": [],

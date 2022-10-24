@@ -16,14 +16,14 @@ namespace Authentication.OAuth2
         /// <summary> Initializes a new instance of InvalidAuth. </summary>
         /// <param name="error"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
-        public InvalidAuth(string error)
+        internal InvalidAuth(string error)
         {
             Argument.AssertNotNull(error, nameof(error));
 
             Error = error;
         }
 
-        /// <summary> Gets or sets the error. </summary>
-        public string Error { get; set; }
+        /// <summary> Gets the error. </summary>
+        public string Error { get; }
     }
 }

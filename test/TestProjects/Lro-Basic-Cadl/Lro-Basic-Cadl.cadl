@@ -29,6 +29,7 @@ interface Authoring {
   
   @OpenAPI.extension("x-ms-convenient-api", true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
+  @OpenAPI.extension("x-ms-convenient-api", true)
   op updateProject is Azure.Core.Foundations.Operation<Project, Project>;
 }
 
@@ -36,10 +37,10 @@ namespace CustomCore {
   @Cadl.Rest.parentResource(T)
   @Cadl.Rest.resource("operations")
   model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
-    @key
     operationId: string;
   }
 
   @Cadl.Http.route("operations")
+  @OpenAPI.extension("x-ms-convenient-api", true)
   op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
 }

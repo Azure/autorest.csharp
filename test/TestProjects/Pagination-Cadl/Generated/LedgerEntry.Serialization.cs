@@ -11,16 +11,8 @@ using Azure.Core;
 
 namespace Pagination
 {
-    public partial class LedgerEntry : IUtf8JsonSerializable
+    public partial class LedgerEntry
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("contents");
-            writer.WriteStringValue(Contents);
-            writer.WriteEndObject();
-        }
-
         internal static LedgerEntry DeserializeLedgerEntry(JsonElement element)
         {
             string contents = default;
@@ -53,14 +45,6 @@ namespace Pagination
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeLedgerEntry(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }
