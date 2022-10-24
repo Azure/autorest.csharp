@@ -191,7 +191,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             var operationParameters = Operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
 
-            var pathParameters = new Dictionary<string, InputParameter>();
+            var requiredPathParameters = new Dictionary<string, InputParameter>();
+            var optionalPathParameters = new Dictionary<string, InputParameter>();
             var requiredRequestParameters = new List<InputParameter>();
             var optionalRequestParameters = new List<InputParameter>();
 
@@ -224,8 +225,11 @@ namespace AutoRest.CSharp.Output.Models
                             : requestConditionSerializationFormat;
 
                         break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path }:
-                        pathParameters.Add(operationParameter.NameInRequest, operationParameter);
+                    case { Location: RequestLocation.Uri or RequestLocation.Path, IsRequired: true }:
+                        requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
+                        break;
+                    case { Location: RequestLocation.Uri or RequestLocation.Path, IsRequired: false }:
+                        optionalPathParameters.Add(operationParameter.NameInRequest, operationParameter);
                         break;
                     case { IsRequired: true, DefaultValue: null }:
                         requiredRequestParameters.Add(operationParameter);
@@ -237,10 +241,12 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             AddWaitForCompletion();
-            AddUriOrPathParameters(Operation.Uri, pathParameters);
-            AddUriOrPathParameters(Operation.Path, pathParameters);
+            AddUriOrPathParameters(Operation.Uri, requiredPathParameters);
+            AddUriOrPathParameters(Operation.Path, requiredPathParameters);
             AddQueryOrHeaderParameters(requiredRequestParameters);
             AddBody(bodyParameter, contentTypeRequestParameter);
+            AddUriOrPathParameters(Operation.Uri, optionalPathParameters);
+            AddUriOrPathParameters(Operation.Path, optionalPathParameters);
             AddQueryOrHeaderParameters(optionalRequestParameters);
             AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
             AddRequestContext();
