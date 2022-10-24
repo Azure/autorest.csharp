@@ -26,10 +26,10 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
-        public static MgmtClientOperation Override(MgmtClientOperation clientOperation, string overrideName, CSharpType? overrideReturnType, string? overrideDescription = null, string? overrideDiagnosticName = null, MgmtTypeProvider? overrideOwner = null)
+        public static MgmtClientOperation Override(MgmtClientOperation clientOperation, string overrideName, CSharpType? overrideReturnType, string? overrideDescription = null, string? overrideDiagnosticName = null, MgmtTypeProvider? overrideCarrier = null)
         {
-            overrideOwner ??= clientOperation.Carrier;
-            var newOperation = MgmtClientOperation.FromOperations(overrideOwner, clientOperation.Select(operation => new MgmtRestOperation(
+            overrideCarrier ??= clientOperation.Carrier;
+            var newOperation = MgmtClientOperation.FromOperations(overrideCarrier, clientOperation.Select(operation => new MgmtRestOperation(
                 other: operation,
                 nameOverride: overrideName,
                 overrideReturnType: overrideReturnType,

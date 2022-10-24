@@ -30,7 +30,7 @@ namespace MgmtPolymorphicResources
             {
                 return new VirtualMachineScaleSetExtensionResource(client, data);
             }
-            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: VirtualMachineExtensionResource or VirtualMachineScaleSetExtensionResource");
+            return new UnknownAbstractVirtualMachineExtensionResource(client, data);
         }
 
         private static bool IsVirtualMachineExtensionResource(ResourceIdentifier id)

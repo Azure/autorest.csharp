@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample
             {
                 return new VirtualMachineScaleSetVirtualMachineExtensionResource(client, data);
             }
-            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: VirtualMachineExtensionResource or VirtualMachineScaleSetVirtualMachineExtensionResource");
+            return new UnknownBaseVirtualMachineExtensionResource(client, data);
         }
 
         private static bool IsVirtualMachineExtensionResource(ResourceIdentifier id)

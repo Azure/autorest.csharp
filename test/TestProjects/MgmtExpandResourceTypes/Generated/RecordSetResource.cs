@@ -60,7 +60,7 @@ namespace MgmtExpandResourceTypes
             {
                 return new RecordSetTxtResource(client, data);
             }
-            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: RecordSetAResource, RecordSetAaaaResource, RecordSetCaaResource, RecordSetCNameResource, RecordSetMxResource, RecordSetNsResource, RecordSetPtrResource, RecordSetSoaResource, RecordSetSrvResource or RecordSetTxtResource");
+            return new UnknownRecordSetResource(client, data);
         }
 
         private static bool IsRecordSetAResource(ResourceIdentifier id)

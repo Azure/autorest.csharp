@@ -27,7 +27,7 @@ namespace MgmtPolymorphicResources
             {
                 return new VirtualMachineScaleSetGuestConfigurationAssignmentResource(client, data);
             }
-            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: VirtualMachineGuestConfigurationAssignmentResource or VirtualMachineScaleSetGuestConfigurationAssignmentResource");
+            return new UnknownGuestConfigurationAssignmentResource(client, data);
         }
 
         private static bool IsVirtualMachineGuestConfigurationAssignmentResource(ResourceIdentifier id)

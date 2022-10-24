@@ -3,13 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -26,15 +22,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
-        public static ResourceWriter GetWriter(CodeWriter writer, Resource resource) => resource switch
+        public static ResourceWriter GetWriter(Resource resource) => resource switch
         {
-            BaseResource baseResource => new BaseResourceWriter(writer, baseResource),
-            _ => new ResourceWriter(writer, resource),
+            BaseResource baseResource => new BaseResourceWriter(baseResource),
+            BaseResource.UnknownPolymorphicResource unknownResource => new UnknownPolymorphicResourceWriter(unknownResource),
+            _ => new ResourceWriter(resource),
         };
 
         private Resource This { get; }
 
-        protected internal ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
+        protected internal ResourceWriter(Resource resource) : base(new(), resource)
         {
             This = resource;
         }
@@ -155,7 +152,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteRedirectMethodBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
+        protected void WriteRedirectMethodBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
             // we should always get the corresponding core operation for this operation
             var coreOperation = This.CommonOperations[clientOperation];

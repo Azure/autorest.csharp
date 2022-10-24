@@ -30,7 +30,7 @@ namespace MgmtMultipleParentResource
             {
                 return new TheParentSubParentChildResource(client, data);
             }
-            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: AnotherParentChildResource or TheParentSubParentChildResource");
+            return new UnknownChildBodyResource(client, data);
         }
 
         private static bool IsAnotherParentChildResource(ResourceIdentifier id)

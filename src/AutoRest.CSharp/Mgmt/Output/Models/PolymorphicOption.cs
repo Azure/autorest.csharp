@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -14,13 +15,18 @@ namespace AutoRest.CSharp.Mgmt.Output.Models;
 
 internal class PolymorphicOption
 {
-    public Resource Resource { get; }
+    public Resource? Resource { get; }
 
     public BaseResource BaseResource { get; }
 
     public ScopeResourceTypeConstraint? ScopeResourceTypeConstraint { get; }
 
     public Segment? ResourceNameConstraint { get; }
+
+    public PolymorphicOption(BaseResource baseResource)
+    {
+        BaseResource = baseResource;
+    }
 
     public PolymorphicOption(Resource resource, BaseResource baseResource)
     {
@@ -53,7 +59,7 @@ internal class PolymorphicOption
 
     private MethodSignature? _methodSignature;
     public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(
-        Name: $"Is{Resource.Type.Name}",
+        Name: $"Is{Resource?.Type.Name ?? throw new InvalidOperationException("The fallback resource should never have this method")}",
         Summary: null,
         Description: null,
         Modifiers: MethodSignatureModifiers.Private | MethodSignatureModifiers.Static,
