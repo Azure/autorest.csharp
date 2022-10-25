@@ -38,7 +38,8 @@ namespace AutoRest.CSharp.Output.Models
             _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
             _azureCoreTypeMapping = new()
             {
-                [("Azure.Core.Operations", "Error")] = typeof(Azure.ResponseError)
+                [("Azure.Core.Foundations", "Error")] = typeof(Azure.ResponseError),
+                [("Azure.Core.Foundations", "InnerError")] = typeof(Azure.ResponseError).Assembly.GetType("Azure.ResponseInnerError", true)!
             };
         }
 
