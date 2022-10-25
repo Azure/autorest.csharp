@@ -51,31 +51,7 @@ namespace Models.Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetAllAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// Response response = await client.GetAllAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("optionalProperty").ToString());
-        /// Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>RequiredAndOptionalProperty</c>:
-        /// <code>{
-        ///   optionalProperty: string, # Optional.
-        ///   requiredProperty: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/RequiredAndOptionalClient.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetAllAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptionalClient.GetAll");
@@ -96,31 +72,7 @@ namespace Models.Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetAll and parse the result.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// Response response = client.GetAll();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("optionalProperty").ToString());
-        /// Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>RequiredAndOptionalProperty</c>:
-        /// <code>{
-        ///   optionalProperty: string, # Optional.
-        ///   requiredProperty: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/RequiredAndOptionalClient.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
         public virtual Response GetAll(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptionalClient.GetAll");
@@ -141,31 +93,7 @@ namespace Models.Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetRequiredOnlyAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// Response response = await client.GetRequiredOnlyAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("optionalProperty").ToString());
-        /// Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>RequiredAndOptionalProperty</c>:
-        /// <code>{
-        ///   optionalProperty: string, # Optional.
-        ///   requiredProperty: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/RequiredAndOptionalClient.xml" path="doc/members/member[@name='GetRequiredOnlyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetRequiredOnlyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptionalClient.GetRequiredOnly");
@@ -186,31 +114,7 @@ namespace Models.Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetRequiredOnly and parse the result.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// Response response = client.GetRequiredOnly();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("optionalProperty").ToString());
-        /// Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>RequiredAndOptionalProperty</c>:
-        /// <code>{
-        ///   optionalProperty: string, # Optional.
-        ///   requiredProperty: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/RequiredAndOptionalClient.xml" path="doc/members/member[@name='GetRequiredOnly(RequestContext)']/*" />
         public virtual Response GetRequiredOnly(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptionalClient.GetRequiredOnly");
@@ -233,44 +137,7 @@ namespace Models.Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutAllAsync with required request content.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// var data = new {
-        ///     requiredProperty = 1234,
-        /// };
-        /// 
-        /// Response response = await client.PutAllAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutAllAsync with all request content.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// var data = new {
-        ///     optionalProperty = "<optionalProperty>",
-        ///     requiredProperty = 1234,
-        /// };
-        /// 
-        /// Response response = await client.PutAllAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>RequiredAndOptionalProperty</c>:
-        /// <code>{
-        ///   optionalProperty: string, # Optional.
-        ///   requiredProperty: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/RequiredAndOptionalClient.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -295,44 +162,7 @@ namespace Models.Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutAll with required request content.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// var data = new {
-        ///     requiredProperty = 1234,
-        /// };
-        /// 
-        /// Response response = client.PutAll(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutAll with all request content.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// var data = new {
-        ///     optionalProperty = "<optionalProperty>",
-        ///     requiredProperty = 1234,
-        /// };
-        /// 
-        /// Response response = client.PutAll(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>RequiredAndOptionalProperty</c>:
-        /// <code>{
-        ///   optionalProperty: string, # Optional.
-        ///   requiredProperty: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/RequiredAndOptionalClient.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -357,44 +187,7 @@ namespace Models.Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutRequiredOnlyAsync with required request content.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// var data = new {
-        ///     requiredProperty = 1234,
-        /// };
-        /// 
-        /// Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutRequiredOnlyAsync with all request content.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// var data = new {
-        ///     optionalProperty = "<optionalProperty>",
-        ///     requiredProperty = 1234,
-        /// };
-        /// 
-        /// Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>RequiredAndOptionalProperty</c>:
-        /// <code>{
-        ///   optionalProperty: string, # Optional.
-        ///   requiredProperty: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/RequiredAndOptionalClient.xml" path="doc/members/member[@name='PutRequiredOnlyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutRequiredOnlyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -419,44 +212,7 @@ namespace Models.Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutRequiredOnly with required request content.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// var data = new {
-        ///     requiredProperty = 1234,
-        /// };
-        /// 
-        /// Response response = client.PutRequiredOnly(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutRequiredOnly with all request content.
-        /// <code><![CDATA[
-        /// var client = new RequiredAndOptionalClient();
-        /// 
-        /// var data = new {
-        ///     optionalProperty = "<optionalProperty>",
-        ///     requiredProperty = 1234,
-        /// };
-        /// 
-        /// Response response = client.PutRequiredOnly(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>RequiredAndOptionalProperty</c>:
-        /// <code>{
-        ///   optionalProperty: string, # Optional.
-        ///   requiredProperty: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/RequiredAndOptionalClient.xml" path="doc/members/member[@name='PutRequiredOnly(RequestContent,RequestContext)']/*" />
         public virtual Response PutRequiredOnly(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

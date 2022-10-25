@@ -21,15 +21,19 @@ import {
     resolveUsages,
     Type,
     UsageFlags,
-    UsageTracker
+    UsageTracker,
+    TrackableType,
+    getDiscriminator
 } from "@cadl-lang/compiler";
-import { getDiscriminator } from "@cadl-lang/rest";
+import { getResourceOperation } from "@cadl-lang/rest";
 import {
     getHeaderFieldName,
     getPathParamName,
     getQueryParamName,
+    HttpOperation,
     isStatusCode
 } from "@cadl-lang/rest/http";
+import { toNamespacedPath } from "path";
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
 import { InputModelProperty } from "../type/InputModelProperty.js";
 import {
@@ -41,6 +45,7 @@ import {
     InputType
 } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
+import { Usage } from "../type/Usage.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -416,6 +421,7 @@ export function getInputType(
                     ?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
+                Usage: Usage.None,
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
 
@@ -535,4 +541,72 @@ export function getInputType(
         }
         return namespaceString;
     }
+}
+
+export function getUsages(
+    program: Program,
+    ops?: HttpOperation[]
+): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
+    const result: {
+        inputs: string[];
+        outputs: string[];
+        roundTrips: string[];
+    } = { inputs: [], outputs: [], roundTrips: [] };
+    if (!ops) {
+        return result;
+    }
+
+    const operations: Operation[] = ops.map((op) => op.operation);
+    const usages = resolveUsages(operations);
+    let usagesMap: Map<string, UsageFlags> = new Map<string, UsageFlags>();
+    for (const type of usages.types) {
+        let typeName = "";
+        if ("name" in type) typeName = type.name ?? "";
+        if (type.kind === "Model") {
+            const effectiveType = getEffectiveModelType(program, type);
+            typeName = effectiveType.name;
+        }
+        let affectTypes: string[] = [];
+        if (typeName !== "") affectTypes.push(typeName);
+        if (type.kind === "Model" && type.templateArguments) {
+            for (const arg of type.templateArguments) {
+                if (arg.kind === "Model" && "name" in arg && arg.name !== "") {
+                    affectTypes.push(arg.name);
+                }
+            }
+        }
+
+        for (const name of affectTypes) {
+            let value = usagesMap.get(name);
+            if (!value) value = UsageFlags.None;
+            if (usages.isUsedAs(type, UsageFlags.Input))
+                value = value | UsageFlags.Input;
+            if (usages.isUsedAs(type, UsageFlags.Output))
+                value = value | UsageFlags.Output;
+            usagesMap.set(name, value);
+        }
+    }
+    /* handle resource operation. */
+    for (const op of ops) {
+        const resourceOperation = getResourceOperation(program, op.operation);
+        if (resourceOperation) {
+            if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+                const resourceName = resourceOperation.resourceType.name;
+                let value = usagesMap.get(resourceName);
+                if (!value) value = UsageFlags.Input;
+                else value = value | UsageFlags.Input;
+                usagesMap.set(resourceName, value);
+            }
+        }
+    }
+    for (const [key, value] of usagesMap) {
+        if (value === (UsageFlags.Input | UsageFlags.Output)) {
+            result.roundTrips.push(key);
+        } else if (value === UsageFlags.Input) {
+            result.inputs.push(key);
+        } else if (value === UsageFlags.Output) {
+            result.outputs.push(key);
+        }
+    }
+    return result;
 }

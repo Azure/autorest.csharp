@@ -50,31 +50,7 @@ namespace Models.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetModelAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// Response response = await client.GetModelAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("kind").ToString());
-        /// Console.WriteLine(result.GetProperty("age").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='GetModelAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetModelAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetModel");
@@ -94,31 +70,7 @@ namespace Models.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetModel and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// Response response = client.GetModel();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("kind").ToString());
-        /// Console.WriteLine(result.GetProperty("age").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='GetModel(RequestContext)']/*" />
         public virtual Response GetModel(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetModel");
@@ -140,33 +92,7 @@ namespace Models.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutModelAsync with required request content.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// var data = new {
-        ///     kind = "",
-        ///     age = 1234,
-        /// };
-        /// 
-        /// Response response = await client.PutModelAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='PutModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -190,33 +116,7 @@ namespace Models.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutModel with required request content.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// var data = new {
-        ///     kind = "",
-        ///     age = 1234,
-        /// };
-        /// 
-        /// Response response = client.PutModel(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='PutModel(RequestContent,RequestContext)']/*" />
         public virtual Response PutModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -238,31 +138,7 @@ namespace Models.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetRecursiveModelAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// Response response = await client.GetRecursiveModelAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("kind").ToString());
-        /// Console.WriteLine(result.GetProperty("age").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetRecursiveModelAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetRecursiveModel");
@@ -282,31 +158,7 @@ namespace Models.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetRecursiveModel and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// Response response = client.GetRecursiveModel();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("kind").ToString());
-        /// Console.WriteLine(result.GetProperty("age").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='GetRecursiveModel(RequestContext)']/*" />
         public virtual Response GetRecursiveModel(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetRecursiveModel");
@@ -328,33 +180,7 @@ namespace Models.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutRecursiveModelAsync with required request content.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// var data = new {
-        ///     kind = "",
-        ///     age = 1234,
-        /// };
-        /// 
-        /// Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutRecursiveModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -378,33 +204,7 @@ namespace Models.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutRecursiveModel with required request content.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// var data = new {
-        ///     kind = "",
-        ///     age = 1234,
-        /// };
-        /// 
-        /// Response response = client.PutRecursiveModel(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='PutRecursiveModel(RequestContent,RequestContext)']/*" />
         public virtual Response PutRecursiveModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -426,31 +226,7 @@ namespace Models.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetMissingDiscriminatorAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// Response response = await client.GetMissingDiscriminatorAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("kind").ToString());
-        /// Console.WriteLine(result.GetProperty("age").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetMissingDiscriminatorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetMissingDiscriminator");
@@ -470,31 +246,7 @@ namespace Models.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetMissingDiscriminator and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// Response response = client.GetMissingDiscriminator();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("kind").ToString());
-        /// Console.WriteLine(result.GetProperty("age").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(RequestContext)']/*" />
         public virtual Response GetMissingDiscriminator(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetMissingDiscriminator");
@@ -514,31 +266,7 @@ namespace Models.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetWrongDiscriminatorAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// Response response = await client.GetWrongDiscriminatorAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("kind").ToString());
-        /// Console.WriteLine(result.GetProperty("age").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetWrongDiscriminatorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetWrongDiscriminator");
@@ -558,31 +286,7 @@ namespace Models.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetWrongDiscriminator and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DiscriminatedClient();
-        /// 
-        /// Response response = client.GetWrongDiscriminator();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("kind").ToString());
-        /// Console.WriteLine(result.GetProperty("age").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Fish</c>:
-        /// <code>{
-        ///   kind: string, # Required.
-        ///   age: number, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DiscriminatedClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(RequestContext)']/*" />
         public virtual Response GetWrongDiscriminator(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DiscriminatedClient.GetWrongDiscriminator");
