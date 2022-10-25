@@ -141,7 +141,8 @@ namespace AutoRest.CSharp.Common.Input
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
             BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
-            Headers: GetResponseHeaders(response.HttpResponse.Headers)
+            Headers: GetResponseHeaders(response.HttpResponse.Headers),
+            IsErrorResponse: false
         );
 
         private OperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(
@@ -379,6 +380,7 @@ namespace AutoRest.CSharp.Common.Input
             Namespace: schema.Extensions?.Namespace,
             Accessibility: schema.Extensions?.Accessibility,
             Description: schema.CreateDescription(),
+            Usage: InputModelTypeUsage.RoundTrip,
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
             AllowedValues: choices.Select(CreateEnumValue).ToList(),
             IsExtensible: isExtensible

@@ -36,30 +36,15 @@ namespace CadlFirstTest
             RequiredModel = requiredModel;
         }
 
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredDictionary"></param>
-        /// <param name="requiredModel"></param>
-        internal RoundTripModel(string requiredString, int requiredInt, IList<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary, Thing requiredModel)
-        {
-            RequiredString = requiredString;
-            RequiredInt = requiredInt;
-            RequiredCollection = requiredCollection.ToList();
-            RequiredDictionary = requiredDictionary;
-            RequiredModel = requiredModel;
-        }
-
-        /// <summary> Gets or sets the required string. </summary>
-        public string RequiredString { get; set; }
-        /// <summary> Gets or sets the required int. </summary>
-        public int RequiredInt { get; set; }
+        /// <summary> Gets the required string. </summary>
+        public string RequiredString { get; }
+        /// <summary> Gets the required int. </summary>
+        public int RequiredInt { get; }
         /// <summary> Gets the required collection. </summary>
         public IList<SimpleEnum> RequiredCollection { get; }
         /// <summary> Gets the required dictionary. </summary>
         public IDictionary<string, ExtensibleEnum> RequiredDictionary { get; }
-        /// <summary> Gets or sets the required model. </summary>
-        public Thing RequiredModel { get; set; }
+        /// <summary> Gets the required model. </summary>
+        public Thing RequiredModel { get; }
     }
 }

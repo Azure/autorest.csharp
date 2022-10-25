@@ -11,7 +11,7 @@ namespace ModelsInCadl
     public partial class ErrorModel
     {
         /// <summary> Initializes a new instance of ErrorModel. </summary>
-        public ErrorModel()
+        internal ErrorModel()
         {
         }
 
@@ -22,7 +22,7 @@ namespace ModelsInCadl
             InnerError = innerError;
         }
 
-        /// <summary> Gets or sets the inner error. </summary>
-        public ErrorModel InnerError { get; set; }
+        /// <summary> Gets the inner error. </summary>
+        public ErrorModel InnerError { get; }
     }
 }

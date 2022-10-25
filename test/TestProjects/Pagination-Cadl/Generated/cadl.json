@@ -12,6 +12,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "3",
@@ -26,6 +27,7 @@
        "Name": "LedgerEntry",
        "Namespace": "Pagination",
        "IsNullable": false,
+       "Usage": "Output",
        "Properties": [
         {
          "$id": "6",
@@ -201,7 +203,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -214,7 +217,7 @@
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

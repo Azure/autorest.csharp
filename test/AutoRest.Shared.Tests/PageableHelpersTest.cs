@@ -176,8 +176,8 @@ namespace Azure.Core.Tests
                 }
             });
             Assert.IsTrue(scopes.TrueForAll(s => s.IsCompleted));
-            Assert.IsTrue(scopes.SkipLast(1).All(s => !s.IsFailed));
-            Assert.IsTrue(scopes[^1].IsFailed);
+            Assert.IsTrue(scopes.Take(scopes.Count - 1).All(s => !s.IsFailed));
+            Assert.IsTrue(scopes.Last().IsFailed);
         }
 
         [Test]
@@ -250,8 +250,8 @@ namespace Azure.Core.Tests
 
             CollectionAssert.AreEqual(new[] { 1, 2, 3 }, values);
             Assert.IsTrue(scopes.TrueForAll(s => s.IsCompleted));
-            Assert.IsTrue(scopes.SkipLast(1).All(s => !s.IsFailed));
-            Assert.IsTrue(scopes[^1].IsFailed);
+            Assert.IsTrue(scopes.Take(scopes.Count - 1).All(s => !s.IsFailed));
+            Assert.IsTrue(scopes.Last().IsFailed);
         }
 
         [Test]

@@ -13,6 +13,7 @@
    "Namespace": "Cadl.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "3",
@@ -37,6 +38,7 @@
    "Namespace": "Cadl.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "6",
@@ -166,7 +168,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -269,7 +272,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -340,7 +344,8 @@
         "$ref": "5"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -443,7 +448,8 @@
         "$ref": "5"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",

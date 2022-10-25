@@ -66,29 +66,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetItemAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParameterSequenceClient(credential);
-        /// 
-        /// Response response = await client.GetItemAsync("<itemName>", "<origin>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call GetItemAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParameterSequenceClient(credential);
-        /// 
-        /// Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks> Get item. </remarks>
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItemAsync(String,String,String,RequestContext)']/*" />
         public virtual async Task<Response> GetItemAsync(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -117,29 +95,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetItem with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParameterSequenceClient(credential);
-        /// 
-        /// Response response = client.GetItem("<itemName>", "<origin>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call GetItem with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParameterSequenceClient(credential);
-        /// 
-        /// Response response = client.GetItem("<itemName>", "<origin>", "<version>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks> Get item. </remarks>
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItem(String,String,String,RequestContext)']/*" />
         public virtual Response GetItem(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -168,29 +124,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call SelectItemAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParameterSequenceClient(credential);
-        /// 
-        /// Response response = await client.SelectItemAsync("<itemName>", "<origin>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call SelectItemAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParameterSequenceClient(credential);
-        /// 
-        /// Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks> Select item. </remarks>
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItemAsync(String,String,String,RequestContext)']/*" />
         public virtual async Task<Response> SelectItemAsync(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -219,29 +153,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call SelectItem with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParameterSequenceClient(credential);
-        /// 
-        /// Response response = client.SelectItem("<itemName>", "<origin>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call SelectItem with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParameterSequenceClient(credential);
-        /// 
-        /// Response response = client.SelectItem("<itemName>", "<origin>", "<version>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks> Select item. </remarks>
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItem(String,String,String,RequestContext)']/*" />
         public virtual Response SelectItem(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));

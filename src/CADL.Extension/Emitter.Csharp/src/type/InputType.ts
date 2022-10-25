@@ -18,6 +18,7 @@ export interface InputModelType extends InputType {
     Namespace?: string;
     Accessibility?: string;
     Description: string;
+    Usage: string;
     Properties: InputModelProperty[];
     BaseModel?: InputModelType;
     DiscriminatorPropertyName?: string;
@@ -31,6 +32,7 @@ export interface InputEnumType extends InputType {
     EnumValueType: string;
     AllowedValues: InputEnumTypeValue[];
     IsExtensible: boolean;
+    Usage: string;
 }
 
 export interface InputListType extends InputType {

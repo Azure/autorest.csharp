@@ -11,6 +11,7 @@
    "Name": "Project",
    "Namespace": "LroBasicCadl",
    "IsNullable": false,
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",
@@ -68,7 +69,6 @@
     {
      "$id": "10",
      "Name": "createProject",
-     "Description": "Creates a Project",
      "Parameters": [
       {
        "$id": "11",
@@ -193,7 +193,8 @@
           "IsNullable": false
          }
         }
-       ]
+       ],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -226,7 +227,8 @@
           "IsNullable": false
          }
         }
-       ]
+       ],
+       "IsErrorResponse": false
       }
      },
      "GenerateConvenienceMethod": true
@@ -341,7 +343,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -364,7 +367,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      },
      "GenerateConvenienceMethod": true
