@@ -66,7 +66,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
         #clean up
         if (Test-Path $outputPath/Generated/*) 
         {
-            Remove-Item $outputPath/Generated/*
+            Remove-Item $outputPath/Generated/* -Recurse
         }
         
         # emit cadl json

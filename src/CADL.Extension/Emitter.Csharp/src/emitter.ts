@@ -155,7 +155,6 @@ export async function $onEmit(
             const generatedFolder = resolvePath(outputFolder, "Generated");
             
             //resolve shared folders based on generator path override
-            console.info(`csharpGeneratorPath: ${options.csharpGeneratorPath}`);
             const resolvedSharedFolders: string[] = [];
             var sharedFolders = [
                 resolvePath(options.csharpGeneratorPath, "..", "Generator.Shared"),
@@ -164,7 +163,6 @@ export async function $onEmit(
             for (const sharedFolder of sharedFolders) {
                 resolvedSharedFolders.push(path.relative(generatedFolder, sharedFolder));
             }
-            console.info(resolvedSharedFolders);
      
             if (!fs.existsSync(generatedFolder)) {
                 fs.mkdirSync(generatedFolder, { recursive: true });
@@ -189,9 +187,9 @@ export async function $onEmit(
                 resolvePath(generatedFolder, "Configuration.json"),
                 prettierOutput(JSON.stringify(configurations, null, 2))
             );
-            console.info(`Setting up new project: ${options.newProject}`)
+
             if (options.skipSDKGeneration !== true) {
-                const newProjectOption = options.newProject ? "--new-project" : "";
+                const newProjectOption = options["new-project"] ? "--new-project" : "";
                 let command = `dotnet ${resolvePath(options.csharpGeneratorPath)} --project-path ${outputFolder} ${newProjectOption}`;
                 console.info(command);
 
