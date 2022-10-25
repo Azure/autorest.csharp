@@ -79,11 +79,10 @@ export interface NetEmitterOptions {
     logFile: string;
     namespace?: string;
     "library-name"?: string;
-    "shared-source-folders"?: string[];
     "single-top-level-client"?: boolean;
     skipSDKGeneration: boolean;
     newProject: boolean;
-    configurationPath: string;
+    csharpGeneratorPath: string;
 }
 
 const defaultOptions = {
@@ -91,12 +90,8 @@ const defaultOptions = {
     outputFile: "cadl.json",
     logFile: "log.json",
     skipSDKGeneration: false,
-    "shared-source-folders": [
-        resolvePath(dllFilePath, "..", "Generator.Shared"),
-        resolvePath(dllFilePath, "..", "Azure.Core.Shared")
-    ],
     newProject: false,
-    configurationPath: null
+    csharpGeneratorPath: dllFilePath
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -108,15 +103,10 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         logFile: { type: "string", nullable: true },
         namespace: { type: "string", nullable: true },
         "library-name": { type: "string", nullable: true },
-        "shared-source-folders": {
-            type: "array",
-            items: { type: "string" },
-            nullable: true
-        },
         "single-top-level-client": { type: "boolean", nullable: true },
-        skipSDKGeneration: { type: "boolean", nullable: true },
+        skipSDKGeneration: { type: "boolean", default: false },
         newProject: { type: "boolean", nullable: true },
-        configurationPath: { type: "string", nullable: true }
+        csharpGeneratorPath: { type: "string", nullable: true }
     },
     required: []
 };
@@ -139,9 +129,6 @@ export async function $onEmit(
         program.compilerOptions.outputPath ?? "./cadl-output",
         emitterOptions["sdk-folder"]
     );
-    for (const sharedFolder of resolvedOptions["shared-source-folders"]) {
-        resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder));
-    }
     const options: NetEmitterOptions = {
         outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
         logFile: resolvePath(
@@ -149,56 +136,60 @@ export async function $onEmit(
             resolvedOptions.logFile
         ),
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
-        "shared-source-folders": resolvedSharedFolders,
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         newProject: resolvedOptions.newProject,
-        configurationPath: resolvedOptions.configurationPath
+        csharpGeneratorPath: resolvedOptions.csharpGeneratorPath
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
         const namespace = getServiceNamespaceString(program) || "";
-        const outPath =
-            version.trim().length > 0
-                ? resolvePath(
-                      options.outputFile?.replace(".json", `.${version}.json`)
-                  )
-                : resolvePath(options.outputFile);
 
         const root = createModel(program);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
-            const dir = path.dirname(outPath);
-
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir, { recursive: true });
+            const generatedFolder = resolvePath(outputFolder, "Generated");
+            
+            //resolve shared folders based on generator path override
+            console.info(`csharpGeneratorPath: ${options.csharpGeneratorPath}`);
+            const resolvedSharedFolders: string[] = [];
+            var sharedFolders = [
+                resolvePath(options.csharpGeneratorPath, "..", "Generator.Shared"),
+                resolvePath(options.csharpGeneratorPath, "..", "Azure.Core.Shared"),
+            ]
+            for (const sharedFolder of sharedFolders) {
+                resolvedSharedFolders.push(path.relative(generatedFolder, sharedFolder));
+            }
+            console.info(resolvedSharedFolders);
+     
+            if (!fs.existsSync(generatedFolder)) {
+                fs.mkdirSync(generatedFolder, { recursive: true });
             }
             await program.host.writeFile(
-                outPath,
+                resolvePath(generatedFolder, "cadl.json"),
                 prettierOutput(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
             );
 
             //emit configuration.json
-            const configurationOutPath = resolvePath(dir, "Configuration.json");
             const configurations = {
                 OutputFolder: ".",
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
-                SharedSourceFolders: options["shared-source-folders"] ?? [],
+                SharedSourceFolders: resolvedSharedFolders ?? [],
                 SingleTopLevelClient: resolvedOptions["single-top-level-client"]
             } as Configuration;
 
             await program.host.writeFile(
-                configurationOutPath,
+                resolvePath(generatedFolder, "Configuration.json"),
                 prettierOutput(JSON.stringify(configurations, null, 2))
             );
+            console.info(`Setting up new project: ${options.newProject}`)
             if (options.skipSDKGeneration !== true) {
-                let command = `dotnet ${resolvePath(dllFilePath)} --no-build --standalone ${outputFolder} --new-project ${options.newProject}`;
-                if (options.configurationPath) {
-                    command = `${command} -c ${options.configurationPath}`;
-                }
+                const newProjectOption = options.newProject ? "--new-project" : "";
+                let command = `dotnet ${resolvePath(options.csharpGeneratorPath)} --project-path ${outputFolder} ${newProjectOption}`;
+                console.info(command);
 
                 exec(command, (error, stdout, stderr) => {
                     if (error) {
