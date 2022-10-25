@@ -1,5 +1,6 @@
 import "@cadl-lang/rest";
 import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
 
 @serviceTitle("Models in CADL")
 @serviceVersion("0.1.0")
@@ -8,6 +9,7 @@ namespace CustomizationsInCadl;
 
 using Cadl.Http;
 using Cadl.Rest;
+using Azure.DPG;
 
 @doc("Public model made internal")
 model ModelToMakeInternal {
@@ -102,5 +104,5 @@ model RootModel {
 @route("/inputToRoundTrip")
 @doc("RoundTrip operation to make RootModel round-trip")
 @get
-@OpenAPI.extension("x-ms-convenient-api", true)
+@convenienceAPI
 op roundTrip(@body input: RootModel): RootModel;

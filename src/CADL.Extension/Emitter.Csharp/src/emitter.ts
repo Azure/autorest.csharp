@@ -3,7 +3,6 @@
 
 import {
     createCadlLibrary,
-    DecoratedType,
     getDoc,
     getServiceNamespace,
     getServiceNamespaceString,
@@ -27,7 +26,6 @@ import {
     HttpOperationResponse,
     ServiceAuthentication
 } from "@cadl-lang/rest/http";
-import { getExtensions } from "@cadl-lang/openapi";
 import { CodeModel } from "./type/CodeModel.js";
 import { InputClient } from "./type/InputClient.js";
 
@@ -53,7 +51,6 @@ import {
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
 import {
-    convenienceApiKey,
     getExternalDocs,
     getOperationId,
     hasDecorator
@@ -75,6 +72,7 @@ import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
 import { dllFilePath } from "@autorest/csharp";
 import { exec } from "child_process";
+import { getConvenienceAPIName } from "@azure-tools/cadl-dpg";
 
 export interface NetEmitterOptions {
     "sdk-folder": string;
@@ -638,8 +636,7 @@ function loadOperation(
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const convenienceApiDecorator: boolean =
-        getExtensions(program, op).get(convenienceApiKey) ?? false;
+    const convenienceApiDecorator: boolean = getConvenienceAPIName(program, op) !== undefined;
     const generateConvenienceMethod: boolean =
         requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
 

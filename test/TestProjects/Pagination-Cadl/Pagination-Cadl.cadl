@@ -3,12 +3,14 @@ import "@cadl-lang/versioning";
 import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-autorest";
 import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
 using Cadl.Rest;
 using Cadl.Versioning;
 using Azure.Core;
 using OpenAPI;
+using Azure.DPG;
 
 //
 // ** Service description **
@@ -144,7 +146,7 @@ namespace Pagination {
 
   @summary("Gets ledger entries from a collection corresponding to a range.")
   @doc("A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.")
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenienceAPI
   op ListLedgerEntries is Azure.Core.ResourceList<LedgerEntry>;
   
 }
