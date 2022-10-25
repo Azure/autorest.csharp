@@ -19,7 +19,7 @@ namespace AutoRest.CSharp
         [Option('c', "configuration", Required = false, Default = null, HelpText = "Path to the configuration file.")]
         public string? ConfigurationPath { get; set; }
 
-        [Option('n', "new-project", Required = false, Default = false, HelpText = "Generate a new solution folder project and project files.")]
+        [Option('n', "new-project", Required = false, Default = false, HelpText = "Generate a new solution folder and project files.")]
         public bool IsNewProject { get; set; }
 
         [Option(longName: "debug", Required = false, Default = false, Hidden = true, HelpText = "Attempt to attach the debugger on execute.")]

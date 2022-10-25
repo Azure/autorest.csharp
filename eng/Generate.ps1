@@ -295,9 +295,16 @@ $cadlDefinitions.Keys | ForEach-Object {
     $testProjectEntries[$_] = $cadlDefinitions[$_];
 }
 
-foreach ($key in Sort-FileSafe ($testProjectEntries.Keys))
-{
+foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     $definition = $testProjectEntries[$key];
+
+    if ($definition.output.Contains("\smoketests\")) {
+        #skip writing the smoketests since these aren't actually defined locally
+        #these get added when a filter is used so it can find the filter using
+        #all possible sources
+        continue;
+    }
+
     $outputPath = Join-Path $definition.output "Generated"
     if ($key -eq "TypeSchemaMapping")
     {
@@ -346,6 +353,10 @@ if ($reset -or $env:TF_BUILD)
 if (!$noBuild)
 {
     Invoke "dotnet build $autoRestPluginProject"
+
+    #build the emitter
+    $emitterDir = "$PSScriptRoot/../src/CADL.Extension/Emitter.Csharp"
+    Invoke "npm --prefix $emitterDir run build"
 }
 
 

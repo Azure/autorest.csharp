@@ -58,25 +58,25 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
 
     $baseOutput = Resolve-Path -Path $baseOutput
     $baseOutput = $baseOutput -replace "\\", "/"
-    $outputPath = Join-Path $baseOutput "Generated"
-    $outputPath = $outputPath -replace "\\", "/"
+    $outputPath = $baseOutput
 
     if (!$fast) 
     {
         #clean up
-        if (Test-Path $outputPath) 
+        if (Test-Path $outputPath/Generated/*) 
         {
-            Remove-Item $outputPath/* -Include *.* -Exclude *Configuration.json*
+            Remove-Item $outputPath/Generated/* -Recurse
         }
         
         # emit cadl json
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath
         Push-Location $repoRootPath
+        $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/autorest.csharp.dll"
         Try
         {
             $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
-            $emitCommand = "npx cadl compile --output-path $baseOutput $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true --option @azure-tools/cadl-csharp.shared-source-folders=$repoRootPath/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared;$repoRootPath/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Azure.Core.Shared $arguments"
+            $emitCommand = "npx cadl compile --output-path $outputPath $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
             Invoke $emitCommand    
         }
         Finally 
@@ -85,9 +85,6 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
         }        
     }
 
-    $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
-    $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
-    Invoke $command
     Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
 }
 
