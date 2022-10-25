@@ -236,6 +236,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void WriteClientMethod(LowLevelClientMethod clientMethod, ClientFields fields, bool async)
         {
+            using (WriteClientMethodDeclarationWithExternalXmlDoc(clientMethod, async))
+            {
+                WriteProtocolMethodBody(writer, clientMethod, fields, async);
+            }
+            writer.Line();
+        }
+
+        public static void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
+        {
             using (WriteClientMethodDeclaration(writer, clientMethod, async))
             {
                 WriteProtocolMethodBody(writer, clientMethod, fields, async);
