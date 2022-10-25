@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Property.Optional
+namespace Models.Property.Optional
 {
     // Data plane generated client. The String service client.
     /// <summary> The String service client. </summary>
