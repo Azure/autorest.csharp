@@ -1,4 +1,6 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
 
 @serviceTitle("Models in CADL")
 @serviceVersion("0.1.0")
@@ -7,6 +9,7 @@ namespace ModelsInCadl;
 
 using Cadl.Http;
 using Cadl.Rest;
+using Azure.DPG;
 
 @doc("Base model")
 model BaseModel {
@@ -305,29 +308,35 @@ model ErrorModel {
 @route("/inputToRoundTrip")
 @doc("Input to RoundTrip")
 @get
+@convenienceAPI
 op inputToRoundTrip(@body input: InputModel): RoundTripModel;
 
 @route("/inputToRoundTripPrimitive")
 @doc("Input to RoundTripPrimitive")
 @get
+@convenienceAPI
 op inputToRoundTripPrimitive(@body input: InputModel): RoundTripPrimitiveModel;
 
 @route("/inputToRoundTripOptional")
 @doc("Input to RoundTripOptional")
 @get
+@convenienceAPI
 op inputToRoundTripOptional(@body input: InputModel): RoundTripOptionalModel;
 
 @route("/inputToRoundTripReadOnly")
 @doc("Input to RoundTripReadOnly")
 @get
+@convenienceAPI
 op inputToRoundTripReadOnly(@body input: InputModel): RoundTripReadOnlyModel;
 
 @route("/roundTripToOutput")
 @doc("RoundTrip to Output")
 @get
+@convenienceAPI
 op roundTripToOutput(@body input: RoundTripModel): OutputModel;
 
 @route("/selfReference")
 @doc("Returns model that has property of its own type")
 @get
+@convenienceAPI
 op selfReference(): ErrorModel;

@@ -13,29 +13,11 @@ using Pagination;
 
 namespace Azure.Core.Foundations
 {
-    public partial class CustomPage : IUtf8JsonSerializable
+    public partial class CustomPage
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("value");
-            writer.WriteStartArray();
-            foreach (var item in Value)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
-            if (Optional.IsDefined(NextLink))
-            {
-                writer.WritePropertyName("nextLink");
-                writer.WriteStringValue(NextLink);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static CustomPage DeserializeCustomPage(JsonElement element)
         {
-            IList<LedgerEntry> value = default;
+            IReadOnlyList<LedgerEntry> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -64,14 +46,6 @@ namespace Azure.Core.Foundations
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeCustomPage(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }

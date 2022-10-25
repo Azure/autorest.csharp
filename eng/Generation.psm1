@@ -50,7 +50,7 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fast="", $debug="")
+function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
 {
     if (!(Test-Path $baseOutput)) {
         New-Item $baseOutput -ItemType Directory
@@ -77,7 +77,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fa
         Try
         {
             $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
-            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.csharpGeneratorPath=$autorestCsharpBinPath"
+            $emitCommand = "npx cadl compile --output-path $outputPath $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.csharpGeneratorPath=$autorestCsharpBinPath"
             Invoke $emitCommand    
         }
         Finally 

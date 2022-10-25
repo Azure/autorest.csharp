@@ -12,6 +12,7 @@
    "Name": "Pet",
    "Namespace": "PetStore",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "3",
@@ -65,6 +66,7 @@
    "Name": "ToyListResults",
    "Namespace": "PetStore",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "10",
@@ -79,6 +81,7 @@
        "Name": "Toy",
        "Namespace": "PetStore",
        "IsNullable": false,
+       "Usage": "None",
        "Properties": [
         {
          "$id": "13",
@@ -273,7 +276,8 @@
         200
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "DELETE",
@@ -353,7 +357,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       },
       {
        "$id": "42",
@@ -364,7 +369,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -466,7 +472,8 @@
         "$ref": "2"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -576,7 +583,8 @@
         "$ref": "9"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",

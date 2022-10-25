@@ -18,7 +18,12 @@ foreach ($directory in Get-ChildItem $testEmitterPath -Directory)
     }
     Write-Host "Emit CADL json for $testName"
     $projectPath = Join-Path $testEmitterPath $testName
-    node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $projectPath/Generated $projectPath/$testName.cadl --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true
+    #clean up
+    if (Test-Path $projectPath/Generated)
+    {
+        Remove-Item $projectPath/Generated -Force -Recurse
+    }
+    node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $projectPath $projectPath/$testName.cadl --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true
     if (!$?) {
         Pop-Location
         throw "Failed to emit cadl model for $testName."
@@ -37,7 +42,12 @@ foreach ($directory in Get-ChildItem $samplePath -Directory)
     }
     Write-Host "Emit CADL json for $testName"
     $projectPath = Join-Path $samplePath $testName
-    node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $projectPath/Generated $projectPath/$testName.cadl --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true
+     #clean up
+     if (Test-Path $projectPath/Generated)
+     {
+         Remove-Item $projectPath/Generated -Force -Recurse
+     }
+    node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $projectPath $projectPath/$testName.cadl --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true
 }
 
 Pop-Location

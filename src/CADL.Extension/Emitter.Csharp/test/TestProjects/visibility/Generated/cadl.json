@@ -12,6 +12,7 @@
    "Name": "Dog",
    "Namespace": "Cadl.visibility",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "3",
@@ -212,7 +213,8 @@
         200
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",

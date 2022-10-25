@@ -65,28 +65,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call NoRequestBodyResponseBodyAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// Response response = await client.NoRequestBodyResponseBodyAsync(1234);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call NoRequestBodyResponseBodyAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, <start>);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/RequestContextAllOptionalClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBodyAsync(Int32,Int32,Int32,String,RequestContext)']/*" />
         public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
@@ -111,28 +90,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call NoRequestBodyResponseBody with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// Response response = client.NoRequestBodyResponseBody(1234);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call NoRequestBodyResponseBody with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// Response response = client.NoRequestBodyResponseBody(1234, 1234, 12, <start>);
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/RequestContextAllOptionalClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBody(Int32,Int32,Int32,String,RequestContext)']/*" />
         public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
@@ -154,58 +112,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call RequestBodyResponseBodyAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call RequestBodyResponseBodyAsync with all request content, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// var data = new {
-        ///     Code = "<Code>",
-        ///     Status = "<Status>",
-        /// };
-        /// 
-        /// Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("Code").ToString());
-        /// Console.WriteLine(result.GetProperty("Status").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>TestModel</c>:
-        /// <code>{
-        ///   Code: string, # Optional.
-        ///   Status: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>TestModel</c>:
-        /// <code>{
-        ///   Code: string, # Optional.
-        ///   Status: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/RequestContextAllOptionalClient.xml" path="doc/members/member[@name='RequestBodyResponseBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyResponseBody");
@@ -227,58 +134,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call RequestBodyResponseBody and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call RequestBodyResponseBody with all request content, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// var data = new {
-        ///     Code = "<Code>",
-        ///     Status = "<Status>",
-        /// };
-        /// 
-        /// Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("Code").ToString());
-        /// Console.WriteLine(result.GetProperty("Status").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>TestModel</c>:
-        /// <code>{
-        ///   Code: string, # Optional.
-        ///   Status: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>TestModel</c>:
-        /// <code>{
-        ///   Code: string, # Optional.
-        ///   Status: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/RequestContextAllOptionalClient.xml" path="doc/members/member[@name='RequestBodyResponseBody(RequestContent,RequestContext)']/*" />
         public virtual Response RequestBodyResponseBody(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyResponseBody");
@@ -301,18 +157,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call DeleteNoRequestBodyResponseBodyAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/RequestContextAllOptionalClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBodyAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
@@ -337,18 +182,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call DeleteNoRequestBodyResponseBody with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/RequestContextAllOptionalClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBody(String,RequestContext)']/*" />
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
@@ -371,16 +205,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call NoRequestBodyNoResponseBodyAsync.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// Response response = await client.NoRequestBodyNoResponseBodyAsync();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/RequestContextAllOptionalClient.xml" path="doc/members/member[@name='NoRequestBodyNoResponseBodyAsync(RequestContext)']/*" />
         public virtual async Task<Response> NoRequestBodyNoResponseBodyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
@@ -401,16 +226,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call NoRequestBodyNoResponseBody.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// Response response = client.NoRequestBodyNoResponseBody();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/RequestContextAllOptionalClient.xml" path="doc/members/member[@name='NoRequestBodyNoResponseBody(RequestContext)']/*" />
         public virtual Response NoRequestBodyNoResponseBody(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
@@ -432,18 +248,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call RequestBodyNoResponseBodyAsync with required request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// var data = "<String>";
-        /// 
-        /// Response response = await client.RequestBodyNoResponseBodyAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/RequestContextAllOptionalClient.xml" path="doc/members/member[@name='RequestBodyNoResponseBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");
@@ -465,18 +270,7 @@ namespace RequestContextAllOptional_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call RequestBodyNoResponseBody with required request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RequestContextAllOptionalClient(credential);
-        /// 
-        /// var data = "<String>";
-        /// 
-        /// Response response = client.RequestBodyNoResponseBody(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/RequestContextAllOptionalClient.xml" path="doc/members/member[@name='RequestBodyNoResponseBody(RequestContent,RequestContext)']/*" />
         public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");

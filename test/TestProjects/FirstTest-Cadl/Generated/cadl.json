@@ -30,7 +30,8 @@
     }
    ],
    "IsExtensible": false,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "Input"
   },
   {
    "$id": "6",
@@ -56,7 +57,8 @@
     }
    ],
    "IsExtensible": true,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "Input"
   }
  ],
  "Models": [
@@ -65,6 +67,7 @@
    "Name": "Thing",
    "Namespace": "CadlFirstTest",
    "IsNullable": false,
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "11",
@@ -88,6 +91,7 @@
    "Name": "RoundTripModel",
    "Namespace": "CadlFirstTest",
    "IsNullable": false,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "14",
@@ -305,7 +309,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -364,7 +369,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -467,7 +473,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PATCH",
@@ -573,7 +580,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -705,7 +713,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -857,7 +866,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -868,7 +878,7 @@
       "text/plain"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "91",
@@ -1003,7 +1013,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -1065,7 +1076,8 @@
         "$ref": "10"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -1073,7 +1085,7 @@
      "Uri": "{host}",
      "Path": "/demoHi",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

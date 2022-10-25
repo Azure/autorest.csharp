@@ -30,7 +30,8 @@
     }
    ],
    "IsExtensible": false,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "RoundTrip"
   },
   {
    "$id": "6",
@@ -56,7 +57,8 @@
     }
    ],
    "IsExtensible": false,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "RoundTrip"
   },
   {
    "$id": "10",
@@ -82,7 +84,8 @@
     }
    ],
    "IsExtensible": false,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "RoundTrip"
   }
  ],
  "Models": [
@@ -92,6 +95,7 @@
    "Namespace": "CustomizationsInCadl",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "IsNullable": false,
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "15",
@@ -104,6 +108,7 @@
       "Namespace": "CustomizationsInCadl",
       "Description": "Public model made internal",
       "IsNullable": false,
+      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "17",
@@ -137,6 +142,7 @@
       "Namespace": "CustomizationsInCadl",
       "Description": "Renamed model (original name: ModelToRename)",
       "IsNullable": false,
+      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "21",
@@ -170,6 +176,7 @@
       "Namespace": "CustomizationsInCadl",
       "Description": "Model moved into custom namespace",
       "IsNullable": false,
+      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "25",
@@ -203,6 +210,7 @@
       "Namespace": "CustomizationsInCadl",
       "Description": "Model with customized properties",
       "IsNullable": false,
+      "Usage": "RoundTrip",
       "Properties": [
        {
         "$id": "29",
@@ -505,7 +513,8 @@
         "$ref": "14"
        },
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -516,7 +525,7 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
