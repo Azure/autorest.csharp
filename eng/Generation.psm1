@@ -59,7 +59,6 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
     $baseOutput = Resolve-Path -Path $baseOutput
     $baseOutput = $baseOutput -replace "\\", "/"
     $outputPath = $baseOutput
-    $outputPath = $outputPath -replace "\\", "/"
 
     if (!$fast) 
     {
