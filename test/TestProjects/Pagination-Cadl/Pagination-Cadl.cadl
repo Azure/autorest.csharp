@@ -3,12 +3,14 @@ import "@cadl-lang/versioning";
 import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-autorest";
 import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
 using Cadl.Rest;
 using Cadl.Versioning;
 using Azure.Core;
 using OpenAPI;
+using Azure.DPG;
 
 //
 // ** Service description **

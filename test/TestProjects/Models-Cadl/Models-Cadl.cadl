@@ -1,5 +1,6 @@
 import "@cadl-lang/rest";
 import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
 
 @serviceTitle("Models in CADL")
 @serviceVersion("0.1.0")
@@ -8,6 +9,7 @@ namespace ModelsInCadl;
 
 using Cadl.Http;
 using Cadl.Rest;
+using Azure.DPG;
 
 @doc("Base model")
 model BaseModel {

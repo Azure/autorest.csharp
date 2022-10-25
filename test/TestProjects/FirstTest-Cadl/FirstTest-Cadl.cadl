@@ -1,5 +1,6 @@
 import "@cadl-lang/rest";
 import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
 
 @serviceTitle("Hello world")
 @serviceVersion("0.1.0")
@@ -20,6 +21,7 @@ model AuthFlow {
 }
 
 using Cadl.Http;
+using Azure.DPG;
 
 @doc("Simple enum")
 enum SimpleEnum {

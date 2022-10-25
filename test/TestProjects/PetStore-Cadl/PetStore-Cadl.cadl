@@ -1,8 +1,10 @@
 import "@cadl-lang/rest";
 import "./decorators.mjs";
 import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
+using Azure.DPG;
 
 @serviceTitle("Pet Store Service")
 @serviceVersion("2021-03-25")
