@@ -73,7 +73,7 @@ namespace Hello.Demo2 {
     @route("/againHi")
     @doc("Return hi again")
     @get
-    @OpenAPI.extension("x-ms-convenient-api", true)
+    @convenienceAPI
     op helloAgain(@header p1: string, @body action: RoundTripModel, @Cadl.Http.header contentType: "text/plain", @path p2: string): Thing;
 
     @route("/noContentType")
@@ -82,7 +82,7 @@ namespace Hello.Demo2 {
     op noContentType(@header p1: string, @body action: RoundTripModel, @path p2: string): Thing;
 
     @route("/demoHi")
-    @OpenAPI.extension("x-ms-convenient-api", true)
+    @convenienceAPI
     @doc("Return hi in demo2")
     @get
     op helloDemo2(): Thing;
@@ -91,7 +91,7 @@ namespace Hello.Demo2 {
 @route("/top")
 @doc("top level method")
 @get
-@OpenAPI.extension("x-ms-convenient-api", true)
+@convenienceAPI
 op topAction(@path @format("date") action: string): Thing;
 
 @route("/top2")
@@ -103,11 +103,11 @@ op topAction2(): Thing;
 @route("/patch")
 @doc("top level patch")
 @patch
-@OpenAPI.extension("x-ms-convenient-api", true)
+@convenienceAPI
 op patchAction(@body body: Thing): Thing;
 
 @route("/anonymousBody")
 @doc("body parameter without body decorator")
 @post
-@OpenAPI.extension("x-ms-convenient-api", true)
+@convenienceAPI
 op anonymousBody( ...Thing ): Thing;

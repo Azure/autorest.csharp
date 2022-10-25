@@ -102,5 +102,5 @@ model RootModel {
 @route("/inputToRoundTrip")
 @doc("RoundTrip operation to make RootModel round-trip")
 @get
-@OpenAPI.extension("x-ms-convenient-api", true)
+@convenienceAPI
 op roundTrip(@body input: RootModel): RootModel;

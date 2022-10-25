@@ -25,7 +25,7 @@ model Cat {
 interface dogs {
   @doc("Illustrate grouping operations on subclient.")
   @get
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenienceAPI
   getDogsConvenient(): Dog;
 
   @doc("Illustrate grouping operations on subclient.")
