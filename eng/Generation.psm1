@@ -50,7 +50,7 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fast="", $debug="")
+function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
 {
     if (!(Test-Path $baseOutput)) {
         New-Item $baseOutput -ItemType Directory
@@ -76,7 +76,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fa
         Try
         {
             $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
-            $emitCommand = "npx cadl compile --output-path $baseOutput $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true"
+            $emitCommand = "npx cadl compile --output-path $baseOutput $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.skipSDKGeneration=true --option @azure-tools/cadl-csharp.shared-source-folders=$repoRootPath/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared;$repoRootPath/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Azure.Core.Shared $arguments"
             Invoke $emitCommand    
         }
         Finally 

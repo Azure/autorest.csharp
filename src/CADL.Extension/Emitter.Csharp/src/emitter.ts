@@ -19,12 +19,12 @@ import {
     resolvePath
 } from "@cadl-lang/compiler";
 import {
-    getAllRoutes,
+    getAllHttpServices,
     getAuthentication,
     getServers,
+    HttpOperation,
     HttpOperationParameter,
     HttpOperationResponse,
-    OperationDetails,
     ServiceAuthentication
 } from "@cadl-lang/rest/http";
 import { getExtensions } from "@cadl-lang/openapi";
@@ -47,7 +47,8 @@ import { OperationResponse } from "./type/OperationResponse.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
-    getInputType
+    getInputType,
+    getUsages
 } from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
@@ -63,6 +64,7 @@ import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
 import { getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
+import { Usage } from "./type/Usage.js";
 import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
 import { OperationPaging } from "./type/OperationPaging.js";
 import { OperationLongRunning } from "./type/OperationLongRunning.js";
@@ -80,9 +82,10 @@ export interface NetEmitterOptions {
     logFile: string;
     namespace?: string;
     "library-name"?: string;
-    "shared-source-folders"?: string[];
+    "shared-source-folders"?: string;
     "single-top-level-client"?: boolean;
     skipSDKGeneration: boolean;
+    generateConvenienceAPI: boolean; //workaround for cadl-ranch project
     "new-project": boolean;
 }
 
@@ -94,7 +97,7 @@ const defaultOptions = {
     "shared-source-folders": [
         resolvePath(dllFilePath, "..", "Generator.Shared"),
         resolvePath(dllFilePath, "..", "Azure.Core.Shared")
-    ],
+    ].join(";"),
     "new-project": false
 };
 
@@ -107,13 +110,10 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         logFile: { type: "string", nullable: true },
         namespace: { type: "string", nullable: true },
         "library-name": { type: "string", nullable: true },
-        "shared-source-folders": {
-            type: "array",
-            items: { type: "string" },
-            nullable: true
-        },
+        "shared-source-folders": { type: "string", nullable: true },
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", nullable: true },
+        generateConvenienceAPI: {type: "boolean", nullable: true},
         "new-project": { type: "boolean", nullable: true }
     },
     required: []
@@ -138,7 +138,7 @@ export async function $onEmit(
         emitterOptions["sdk-folder"],
         "Generated"
     );
-    for (const sharedFolder of resolvedOptions["shared-source-folders"]) {
+    for (const sharedFolder of resolvedOptions["shared-source-folders"].split(";")) {
         resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder).replaceAll("\\", "/"));
     }
     const options: NetEmitterOptions = {
@@ -148,8 +148,9 @@ export async function $onEmit(
             resolvedOptions.logFile
         ),
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
-        "shared-source-folders": resolvedSharedFolders,
+        "shared-source-folders": resolvedSharedFolders.join(";"),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
+        generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
         "new-project": resolvedOptions["new-project"]
     };
     const version: string = "";
@@ -163,7 +164,7 @@ export async function $onEmit(
                   )
                 : resolvePath(options.outputFile);
 
-        const root = createModel(program);
+        const root = createModel(program, options.generateConvenienceAPI);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             if (!fs.existsSync(outputFolder)) {
@@ -182,7 +183,7 @@ export async function $onEmit(
                 OutputFolder: ".",
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
-                SharedSourceFolders: options["shared-source-folders"] ?? [],
+                SharedSourceFolders: options["shared-source-folders"]?.split(";") ?? [],
                 SingleTopLevelClient: resolvedOptions["single-top-level-client"]
             } as Configuration;
 
@@ -224,7 +225,7 @@ function getClient(
     return undefined;
 }
 
-function createModel(program: Program): any {
+function createModel(program: Program, generateConvenienceAPI: boolean = false): any {
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {
         return;
@@ -280,9 +281,14 @@ function createModel(program: Program): any {
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
     try {
-        const [routes] = getAllRoutes(program);
+        const [services] = getAllHttpServices(program);
+        const routes = services[0].operations;
+        if (routes.length === 0) {
+            throw "No Routes";
+        }
         console.log("routes:" + routes.length);
         const clients: InputClient[] = [];
+        const convenienceOperations: HttpOperation[] = [];
         //create endpoint parameter from servers
         let urlParameters: InputParameter[] | undefined = undefined;
         let url: string = "";
@@ -342,6 +348,8 @@ function createModel(program: Program): any {
                 }
             }
             client.Operations.push(op);
+            if (op.GenerateConvenienceMethod || generateConvenienceAPI)
+                convenienceOperations.push(operation);
         }
         if (apiVersions.size > 1) {
             apiVersionParam.Kind = InputOperationParameterKind.Constant;
@@ -366,6 +374,10 @@ function createModel(program: Program): any {
             }
         }
 
+        const usages = getUsages(program, convenienceOperations);
+        setUsage(usages, modelMap);
+        setUsage(usages, enumMap);
+
         const clientModel = {
             Name: namespace,
             Description: description,
@@ -385,7 +397,7 @@ function createModel(program: Program): any {
     }
 
     function getAllLroMonitorOperations(
-        routes: OperationDetails[],
+        routes: HttpOperation[],
         program: Program
     ): Set<Operation> {
         const lroMonitorOperations = new Set<Operation>();
@@ -400,6 +412,27 @@ function createModel(program: Program): any {
             }
         }
         return lroMonitorOperations;
+    }
+}
+
+function setUsage(
+    usages: { inputs: string[]; outputs: string[]; roundTrips: string[] },
+    models: Map<string, InputModelType | InputEnumType>
+) {
+    for (let [name, m] of models) {
+        if (usages.inputs.includes(name)) {
+            m.Usage = Usage.Input;
+        } else if (usages.outputs.includes(name)) {
+            m.Usage = Usage.Output;
+        } else if (usages.roundTrips.includes(name)) {
+            m.Usage = Usage.RoundTrip;
+        } else {
+            if ((m as InputEnumType).IsExtensible) {
+                m.Usage = Usage.RoundTrip;
+            } else {
+                m.Usage = Usage.None;
+            }
+        }
     }
 }
 
@@ -537,7 +570,7 @@ function getOperationGroupName(program: Program, operation: Operation): string {
 
 function loadOperation(
     program: Program,
-    operation: OperationDetails,
+    operation: HttpOperation,
     uri: string,
     urlParameters: InputParameter[] | undefined = undefined,
     models: Map<string, InputModelType>,
@@ -796,7 +829,7 @@ function loadOperation(
 
     function loadOperationLongRunning(
         program: Program,
-        op: OperationDetails,
+        op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationLongRunning | undefined {
         if (!isLroOperation(program, op.operation)) return undefined;
@@ -816,7 +849,7 @@ function loadOperation(
 
     function loadLongRunningFinalResponse(
         program: Program,
-        op: OperationDetails,
+        op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationResponse | undefined {
         let finalResponse: any | undefined;

@@ -13,6 +13,7 @@
    "Namespace": "Cadl.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "3",
@@ -37,6 +38,7 @@
    "Namespace": "Cadl.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "6",

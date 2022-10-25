@@ -11,16 +11,8 @@ using Azure.Core;
 
 namespace Authentication.OAuth2
 {
-    public partial class InvalidAuth : IUtf8JsonSerializable
+    public partial class InvalidAuth
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("error");
-            writer.WriteStringValue(Error);
-            writer.WriteEndObject();
-        }
-
         internal static InvalidAuth DeserializeInvalidAuth(JsonElement element)
         {
             string error = default;
@@ -41,14 +33,6 @@ namespace Authentication.OAuth2
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeInvalidAuth(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }

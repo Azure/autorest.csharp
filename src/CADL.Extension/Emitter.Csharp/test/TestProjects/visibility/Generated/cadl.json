@@ -12,6 +12,7 @@
    "Name": "Dog",
    "Namespace": "Cadl.visibility",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "3",
