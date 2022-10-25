@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="NoRequestBodyResponseBodyAsync(Int32,Int32,Int32,String,RequestContext)">
+<example>
+This sample shows how to call NoRequestBodyResponseBodyAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+Response response = await client.NoRequestBodyResponseBodyAsync(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call NoRequestBodyResponseBodyAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, <start>);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="NoRequestBodyResponseBody(Int32,Int32,Int32,String,RequestContext)">
+<example>
+This sample shows how to call NoRequestBodyResponseBody with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+Response response = client.NoRequestBodyResponseBody(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call NoRequestBodyResponseBody with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+Response response = client.NoRequestBodyResponseBody(1234, 1234, 12, <start>);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="RequestBodyResponseBodyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call RequestBodyResponseBodyAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+var data = new {};
+
+Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call RequestBodyResponseBodyAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+var data = new {
+    Code = "<Code>",
+    Status = "<Status>",
+};
+
+Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("Code").ToString());
+Console.WriteLine(result.GetProperty("Status").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>TestModel</c>:
+<code>{
+  Code: string, # Optional.
+  Status: string, # Optional.
+}
+</code>
+
+Response Body:
+
+Schema for <c>TestModel</c>:
+<code>{
+  Code: string, # Optional.
+  Status: string, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="RequestBodyResponseBody(RequestContent,RequestContext)">
+<example>
+This sample shows how to call RequestBodyResponseBody and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+var data = new {};
+
+Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call RequestBodyResponseBody with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+var data = new {
+    Code = "<Code>",
+    Status = "<Status>",
+};
+
+Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("Code").ToString());
+Console.WriteLine(result.GetProperty("Status").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>TestModel</c>:
+<code>{
+  Code: string, # Optional.
+  Status: string, # Optional.
+}
+</code>
+
+Response Body:
+
+Schema for <c>TestModel</c>:
+<code>{
+  Code: string, # Optional.
+  Status: string, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="DeleteNoRequestBodyResponseBodyAsync(String,RequestContext)">
+<example>
+This sample shows how to call DeleteNoRequestBodyResponseBodyAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="DeleteNoRequestBodyResponseBody(String,RequestContext)">
+<example>
+This sample shows how to call DeleteNoRequestBodyResponseBody with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="NoRequestBodyNoResponseBodyAsync(RequestContext)">
+<example>
+This sample shows how to call NoRequestBodyNoResponseBodyAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+Response response = await client.NoRequestBodyNoResponseBodyAsync();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="NoRequestBodyNoResponseBody(RequestContext)">
+<example>
+This sample shows how to call NoRequestBodyNoResponseBody.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+Response response = client.NoRequestBodyNoResponseBody();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="RequestBodyNoResponseBodyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call RequestBodyNoResponseBodyAsync with required request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+var data = "<String>";
+
+Response response = await client.RequestBodyNoResponseBodyAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="RequestBodyNoResponseBody(RequestContent,RequestContext)">
+<example>
+This sample shows how to call RequestBodyNoResponseBody with required request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new RequestContextAllOptionalClient(credential);
+
+var data = "<String>";
+
+Response response = client.RequestBodyNoResponseBody(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

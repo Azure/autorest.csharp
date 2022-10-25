@@ -16,7 +16,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of LedgerEntry. </summary>
         /// <param name="contents"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="contents"/> is null. </exception>
-        public LedgerEntry(string contents)
+        internal LedgerEntry(string contents)
         {
             Argument.AssertNotNull(contents, nameof(contents));
 
@@ -34,8 +34,8 @@ namespace Pagination
             TransactionId = transactionId;
         }
 
-        /// <summary> Gets or sets the contents. </summary>
-        public string Contents { get; set; }
+        /// <summary> Gets the contents. </summary>
+        public string Contents { get; }
         /// <summary> Gets the collection id. </summary>
         public string CollectionId { get; }
         /// <summary> Gets the transaction id. </summary>

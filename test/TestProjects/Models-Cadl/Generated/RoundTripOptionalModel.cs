@@ -20,7 +20,7 @@ namespace ModelsInCadl
         /// <param name="optionalFixedStringEnum"></param>
         /// <param name="optionalExtensibleEnum"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="optionalModelCollection"/> is null. </exception>
-        public RoundTripOptionalModel(IEnumerable<CollectionItem> optionalModelCollection, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum)
+        internal RoundTripOptionalModel(IEnumerable<CollectionItem> optionalModelCollection, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum)
         {
             Argument.AssertNotNull(optionalModelCollection, nameof(optionalModelCollection));
 
@@ -46,7 +46,7 @@ namespace ModelsInCadl
         /// <param name="optionalIntRecord"></param>
         /// <param name="optionalStringRecord"></param>
         /// <param name="optionalModelRecord"></param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord)
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IReadOnlyList<string> optionalStringList, IReadOnlyList<int> optionalIntList, IReadOnlyList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum, IReadOnlyDictionary<string, int> optionalIntRecord, IReadOnlyDictionary<string, string> optionalStringRecord, IReadOnlyDictionary<string, RecordItem> optionalModelRecord)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
@@ -61,27 +61,27 @@ namespace ModelsInCadl
             OptionalModelRecord = optionalModelRecord;
         }
 
-        /// <summary> Gets or sets the optional string. </summary>
-        public string OptionalString { get; set; }
-        /// <summary> Gets or sets the optional int. </summary>
-        public int? OptionalInt { get; set; }
+        /// <summary> Gets the optional string. </summary>
+        public string OptionalString { get; }
+        /// <summary> Gets the optional int. </summary>
+        public int? OptionalInt { get; }
         /// <summary> Gets the optional string list. </summary>
-        public IList<string> OptionalStringList { get; }
+        public IReadOnlyList<string> OptionalStringList { get; }
         /// <summary> Gets the optional int list. </summary>
-        public IList<int> OptionalIntList { get; }
+        public IReadOnlyList<int> OptionalIntList { get; }
         /// <summary> Gets the optional model collection. </summary>
-        public IList<CollectionItem> OptionalModelCollection { get; }
-        /// <summary> Gets or sets the optional model. </summary>
-        public DerivedModel OptionalModel { get; set; }
-        /// <summary> Gets or sets the optional fixed string enum. </summary>
-        public FixedStringEnum OptionalFixedStringEnum { get; set; }
-        /// <summary> Gets or sets the optional extensible enum. </summary>
-        public ExtensibleEnum OptionalExtensibleEnum { get; set; }
+        public IReadOnlyList<CollectionItem> OptionalModelCollection { get; }
+        /// <summary> Gets the optional model. </summary>
+        public DerivedModel OptionalModel { get; }
+        /// <summary> Gets the optional fixed string enum. </summary>
+        public FixedStringEnum OptionalFixedStringEnum { get; }
+        /// <summary> Gets the optional extensible enum. </summary>
+        public ExtensibleEnum OptionalExtensibleEnum { get; }
         /// <summary> Gets the optional int record. </summary>
-        public IDictionary<string, int> OptionalIntRecord { get; }
+        public IReadOnlyDictionary<string, int> OptionalIntRecord { get; }
         /// <summary> Gets the optional string record. </summary>
-        public IDictionary<string, string> OptionalStringRecord { get; }
+        public IReadOnlyDictionary<string, string> OptionalStringRecord { get; }
         /// <summary> Gets the optional model record. </summary>
-        public IDictionary<string, RecordItem> OptionalModelRecord { get; }
+        public IReadOnlyDictionary<string, RecordItem> OptionalModelRecord { get; }
     }
 }

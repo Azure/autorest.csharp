@@ -43,54 +43,13 @@ namespace LroBasicCadl
             _apiVersion = options.Version;
         }
 
-        /// <summary> Creates a Project. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <example>
-        /// This sample shows how to call CreateProjectAsync with required parameters.
-        /// <code><![CDATA[
-        /// var client = new AuthoringClient();
-        /// 
-        /// var data = new {};
-        /// 
-        /// var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// 
-        /// var response = await operation.WaitForCompletionResponseAsync();
-        /// Console.WriteLine(response.Status)
-        /// ]]></code>
-        /// This sample shows how to call CreateProjectAsync with all parameters and request content.
-        /// <code><![CDATA[
-        /// var client = new AuthoringClient();
-        /// 
-        /// var data = new {
-        ///     description = "<description>",
-        ///     name = "<name>",
-        /// };
-        /// 
-        /// var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// 
-        /// var response = await operation.WaitForCompletionResponseAsync();
-        /// Console.WriteLine(response.Status)
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>Project</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        ///   description: string, # Optional.
-        ///   name: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='CreateProjectAsync(WaitUntil,RequestContent,RequestContext)']/*" />
         public virtual async Task<Operation> CreateProjectAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -109,54 +68,13 @@ namespace LroBasicCadl
             }
         }
 
-        /// <summary> Creates a Project. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <example>
-        /// This sample shows how to call CreateProject with required parameters.
-        /// <code><![CDATA[
-        /// var client = new AuthoringClient();
-        /// 
-        /// var data = new {};
-        /// 
-        /// var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
-        /// 
-        /// var response = operation.WaitForCompletionResponse();
-        /// Console.WriteLine(response.Status)
-        /// ]]></code>
-        /// This sample shows how to call CreateProject with all parameters and request content.
-        /// <code><![CDATA[
-        /// var client = new AuthoringClient();
-        /// 
-        /// var data = new {
-        ///     description = "<description>",
-        ///     name = "<name>",
-        /// };
-        /// 
-        /// var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
-        /// 
-        /// var response = operation.WaitForCompletionResponse();
-        /// Console.WriteLine(response.Status)
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>Project</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        ///   description: string, # Optional.
-        ///   name: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='CreateProject(WaitUntil,RequestContent,RequestContext)']/*" />
         public virtual Operation CreateProject(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -181,61 +99,7 @@ namespace LroBasicCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call UpdateProjectAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var client = new AuthoringClient();
-        /// 
-        /// var data = new {};
-        /// 
-        /// var operation = await client.UpdateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// 
-        /// BinaryData data = await operation.WaitForCompletionAsync();
-        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// ]]></code>
-        /// This sample shows how to call UpdateProjectAsync with all parameters and request content, and how to parse the result.
-        /// <code><![CDATA[
-        /// var client = new AuthoringClient();
-        /// 
-        /// var data = new {
-        ///     description = "<description>",
-        ///     name = "<name>",
-        /// };
-        /// 
-        /// var operation = await client.UpdateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
-        /// 
-        /// BinaryData data = await operation.WaitForCompletionAsync();
-        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("description").ToString());
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>Project</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        ///   description: string, # Optional.
-        ///   name: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Project</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        ///   description: string, # Optional.
-        ///   name: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='UpdateProjectAsync(WaitUntil,RequestContent,RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> UpdateProjectAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -260,61 +124,7 @@ namespace LroBasicCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call UpdateProject with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var client = new AuthoringClient();
-        /// 
-        /// var data = new {};
-        /// 
-        /// var operation = client.UpdateProject(WaitUntil.Completed, RequestContent.Create(data));
-        /// 
-        /// BinaryData data = operation.WaitForCompletion();
-        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// ]]></code>
-        /// This sample shows how to call UpdateProject with all parameters and request content, and how to parse the result.
-        /// <code><![CDATA[
-        /// var client = new AuthoringClient();
-        /// 
-        /// var data = new {
-        ///     description = "<description>",
-        ///     name = "<name>",
-        /// };
-        /// 
-        /// var operation = client.UpdateProject(WaitUntil.Completed, RequestContent.Create(data));
-        /// 
-        /// BinaryData data = operation.WaitForCompletion();
-        /// JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        /// Console.WriteLine(result.GetProperty("id").ToString());
-        /// Console.WriteLine(result.GetProperty("description").ToString());
-        /// Console.WriteLine(result.GetProperty("name").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>Project</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        ///   description: string, # Optional.
-        ///   name: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>Project</c>:
-        /// <code>{
-        ///   id: string, # Required.
-        ///   description: string, # Optional.
-        ///   name: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='UpdateProject(WaitUntil,RequestContent,RequestContext)']/*" />
         public virtual Operation<BinaryData> UpdateProject(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

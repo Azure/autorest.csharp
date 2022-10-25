@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Property.Optional
+namespace Models.Property.Optional
 {
     // Data plane generated client. The Duration service client.
     /// <summary> The Duration service client. </summary>
@@ -51,29 +51,7 @@ namespace Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetAllAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// Response response = await client.GetAllAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("property").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DurationProperty</c>:
-        /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetAllAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DurationClient.GetAll");
@@ -94,29 +72,7 @@ namespace Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetAll and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// Response response = client.GetAll();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("property").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DurationProperty</c>:
-        /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
         public virtual Response GetAll(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DurationClient.GetAll");
@@ -137,29 +93,7 @@ namespace Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetDefaultAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// Response response = await client.GetDefaultAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("property").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DurationProperty</c>:
-        /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='GetDefaultAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DurationClient.GetDefault");
@@ -180,29 +114,7 @@ namespace Property.Optional
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetDefault and parse the result.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// Response response = client.GetDefault();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("property").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DurationProperty</c>:
-        /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='GetDefault(RequestContext)']/*" />
         public virtual Response GetDefault(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DurationClient.GetDefault");
@@ -225,40 +137,7 @@ namespace Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutAllAsync.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.PutAllAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutAllAsync with all request content.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// var data = new {
-        ///     property = PT1H23M45S,
-        /// };
-        /// 
-        /// Response response = await client.PutAllAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>DurationProperty</c>:
-        /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -283,40 +162,7 @@ namespace Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutAll.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.PutAll(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutAll with all request content.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// var data = new {
-        ///     property = PT1H23M45S,
-        /// };
-        /// 
-        /// Response response = client.PutAll(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>DurationProperty</c>:
-        /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -341,40 +187,7 @@ namespace Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutDefaultAsync.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.PutDefaultAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutDefaultAsync with all request content.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// var data = new {
-        ///     property = PT1H23M45S,
-        /// };
-        /// 
-        /// Response response = await client.PutDefaultAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>DurationProperty</c>:
-        /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='PutDefaultAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDefaultAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -399,40 +212,7 @@ namespace Property.Optional
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutDefault.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.PutDefault(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutDefault with all request content.
-        /// <code><![CDATA[
-        /// var client = new DurationClient();
-        /// 
-        /// var data = new {
-        ///     property = PT1H23M45S,
-        /// };
-        /// 
-        /// Response response = client.PutDefault(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>DurationProperty</c>:
-        /// <code>{
-        ///   property: string (duration ISO 8601 Format), # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='PutDefault(RequestContent,RequestContext)']/*" />
         public virtual Response PutDefault(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

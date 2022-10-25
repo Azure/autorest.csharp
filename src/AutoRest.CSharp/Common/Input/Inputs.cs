@@ -129,9 +129,9 @@ namespace AutoRest.CSharp.Common.Input
         public OperationResponseHeader() : this("", "", "", InputPrimitiveType.String) { }
     }
 
-    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<OperationResponseHeader> Headers)
+    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<OperationResponseHeader> Headers, bool IsErrorResponse)
     {
-        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<OperationResponseHeader>()) { }
+        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<OperationResponseHeader>(), IsErrorResponse: false) { }
     }
 
     internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse)
@@ -244,5 +244,13 @@ namespace AutoRest.CSharp.Common.Input
         String,
         Time,
         Uri,
+    }
+
+    internal enum InputModelTypeUsage
+    {
+        None = 0,
+        Input = 1,
+        Output = 2,
+        RoundTrip = Input | Output
     }
 }

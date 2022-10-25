@@ -1,6 +1,6 @@
 {
     "name": "@azure-tools/cadl-csharp",
-    "version": "0.1.6-dev.1",
+    "version": "0.1.6-dev.2",
     "author": "Microsoft Corporation",
     "description": "Cadl library for emitting csharp model from the Cadl REST protocol binding",
     "homepage": "https://github.com/Microsoft/cadl",
@@ -46,16 +46,17 @@
         "typescript": "~4.7.2"
     },
     "dependencies": {
-        "@autorest/csharp": "3.0.0-beta.20221014.2",
-        "@azure-tools/cadl-azure-core": "0.7.0",
-        "@azure-tools/cadl-autorest": "0.20.0",
-        "@cadl-lang/compiler": "0.35.0",
-        "@cadl-lang/eslint-config-cadl": "0.4.0",
+        "@autorest/csharp": "3.0.0-beta.20221019.2",
+        "@azure-tools/cadl-azure-core": "0.8.0",
+        "@azure-tools/cadl-autorest": "0.21.0",
+        "@azure-tools/cadl-dpg": "0.1.0",
+        "@cadl-lang/compiler": "0.36.1",
+        "@cadl-lang/eslint-config-cadl": "0.4.1",
         "@cadl-lang/eslint-plugin": "0.1.1",
-        "@cadl-lang/library-linter": "0.2.0",
-        "@cadl-lang/openapi": "0.12.0",
-        "@cadl-lang/rest": "0.17.0",
-        "@cadl-lang/versioning": "0.8.0",
+        "@cadl-lang/library-linter": "0.2.1",
+        "@cadl-lang/openapi": "0.13.0",
+        "@cadl-lang/rest": "0.18.0",
+        "@cadl-lang/versioning": "0.9.0",
         "js-yaml": "^4.1.0",
         "json-serialize-refs": "^0.0.6-0"
     }
