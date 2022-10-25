@@ -28,12 +28,18 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string _defaultNamespace;
         private readonly string _libraryName;
 
+        private readonly Dictionary<(string Namespace, string Name), Type> _azureCoreTypeMapping;
+
         public DpgOutputLibraryBuilder(InputNamespace rootNamespace, SourceInputModel? sourceInputModel)
         {
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;
             _defaultNamespace = Configuration.Namespace ?? rootNamespace.Name;
             _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
+            _azureCoreTypeMapping = new()
+            {
+                [("Azure.Core.Operations", "Error")] = typeof(Azure.ResponseError)
+            };
         }
 
         public DpgOutputLibrary Build(bool isCadlInput)
@@ -80,10 +86,17 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var model in _rootNamespace.Models)
             {
-                // TODO -- check if the type is defined in cadl-azure-core
                 if (model.Usage != InputModelTypeUsage.None)
                 {
-                    models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory));
+                    // TODO -- check if the type is defined in cadl-azure-core
+                    if (_azureCoreTypeMapping.TryGetValue((model.Namespace ?? _defaultNamespace, model.Name), out var coreType))
+                    {
+                        models.Add(model, SystemObjectType.Create(coreType, _defaultNamespace, _sourceInputModel));
+                    }
+                    else
+                    {
+                        models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory));
+                    }
                 }
             }
         }
