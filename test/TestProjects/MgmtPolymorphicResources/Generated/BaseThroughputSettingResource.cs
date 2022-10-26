@@ -30,7 +30,7 @@ namespace MgmtPolymorphicResources
             {
                 return new TableThroughputSettingResource(client, data);
             }
-            return new UnknownBaseThroughputSettingResource(client, data);
+            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: ThroughputSettingResource or TableThroughputSettingResource");
         }
 
         private static bool IsThroughputSettingResource(ResourceIdentifier id)

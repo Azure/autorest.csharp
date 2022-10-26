@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     Initializer: initializer);
         }
 
-        public override CSharpType? BaseType => PolymorphicOption?.BaseResource.Type ?? typeof(ArmResource);
+        public override CSharpType? BaseType => PolymorphicOption == null ? typeof(ArmResource) : PolymorphicOption.BaseResource.Type;
 
         public override Resource? DefaultResource => this;
 

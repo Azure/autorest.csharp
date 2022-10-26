@@ -33,7 +33,7 @@ namespace MgmtExtensionResource
             {
                 return new ManagementGroupPolicyDefinitionResource(client, data);
             }
-            return new UnknownPolicyDefinitionResource(client, data);
+            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: SubscriptionPolicyDefinitionResource, BuiltInPolicyDefinitionResource or ManagementGroupPolicyDefinitionResource");
         }
 
         private static bool IsSubscriptionPolicyDefinitionResource(ResourceIdentifier id)

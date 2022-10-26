@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal class BaseResourceWriter : ResourceWriter
     {
         private BaseResource This { get; }
-        protected internal BaseResourceWriter(BaseResource baseResource) : base(baseResource)
+        protected internal BaseResourceWriter(CodeWriter writer, BaseResource baseResource) : base(writer, baseResource)
         {
             This = baseResource;
         }
@@ -55,14 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // throws when it matches nothing
                 var resourceNames = This.DerivedResources.Select(resource => (FormattableString)$"{resource.Type.Name}").ToList();
                 var resourceNameList = resourceNames.Join(", ", " or ");
-                //_writer.Line($"throw new {typeof(InvalidOperationException)}($\"The resource identifier {{data.Id}} cannot be recognized as one of the following resource candidates: {resourceNameList}\");");
-                _writer.Append($"return new {This.FallbackResource.Type}(");
-                foreach (var parameter in signature.Parameters)
-                {
-                    _writer.AppendRaw(parameter.Name).AppendRaw(",");
-                }
-                _writer.RemoveTrailingComma();
-                _writer.LineRaw(");");
+                _writer.Line($"throw new {typeof(InvalidOperationException)}($\"The resource identifier {{data.Id}} cannot be recognized as one of the following resource candidates: {resourceNameList}\");");
             }
             _writer.Line();
 

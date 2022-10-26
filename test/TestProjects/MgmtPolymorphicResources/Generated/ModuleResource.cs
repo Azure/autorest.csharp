@@ -29,7 +29,7 @@ namespace MgmtPolymorphicResources
             {
                 return new AutomationAccountModuleResource(client, data);
             }
-            return new UnknownModuleResource(client, data);
+            throw new InvalidOperationException($"The resource identifier {data.Id} cannot be recognized as one of the following resource candidates: AutomationAccountPython2PackageResource or AutomationAccountModuleResource");
         }
 
         private static bool IsAutomationAccountPython2PackageResource(ResourceIdentifier id)

@@ -12,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Output.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
+using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Output;
 
@@ -97,7 +98,7 @@ internal class BaseResource : Resource
         foreach ((var key, var list) in EnsureOperationCategorizationDictionary())
         {
             // here we only use the first client operation to represent the base operation (since we never write an implementation of this method, it is fine
-            var baseOperation = MgmtClientOperation.Override(list.First().Operation, key.Name, key.ReturnType, overrideDescription: $"The default implementation for operation {key.Name}", overrideCarrier: this);
+            var baseOperation = MgmtClientOperation.Override(list.First().Operation, key.Name, key.ReturnType, overrideDescription: $"The default implementation for operation {key.Name}", overrideOwner: this);
             _baseCommonOperations.Add(key, baseOperation);
         }
         return _baseCommonOperations;
@@ -117,17 +118,13 @@ internal class BaseResource : Resource
         var result = new Dictionary<Resource, List<MgmtCommonOperation>>();
         foreach ((var key, var list) in commonOperationsDict)
         {
-            var baseOperation = baseOperationDict[key];
             foreach ((var resource, var operation) in list)
             {
+                var baseOperation = baseOperationDict[key];
                 // construct a core method here
                 var coreOperation = MgmtClientOperation.Override(operation, $"{baseOperation.Name}Core", baseOperation.MgmtReturnType, overrideDiagnosticName: operation.Name);
                 result.AddInList(resource, new MgmtCommonOperation(operation, coreOperation));
             }
-
-            // add the fallback resource in the dictionary as well
-            var fallbackCoreOperation = MgmtClientOperation.Override(baseOperation, $"{baseOperation.Name}Core", baseOperation.MgmtReturnType, overrideCarrier: FallbackResource);
-            result.AddInList(FallbackResource, new MgmtCommonOperation(baseOperation, fallbackCoreOperation));
         }
 
         return result;
@@ -159,29 +156,4 @@ internal class BaseResource : Resource
             ReturnType: Type,
             ReturnDescription: null,
             Parameters: new[] { ArmClientParameter, ResourceDataParameter });
-
-    private UnknownPolymorphicResource? _fallback;
-    public UnknownPolymorphicResource FallbackResource => _fallback ??= new UnknownPolymorphicResource(this);
-
-    internal class UnknownPolymorphicResource : Resource
-    {
-        private BaseResource BaseResource { get; }
-        public UnknownPolymorphicResource(BaseResource baseResource) : base(baseResource.OperationSet, Enumerable.Empty<Operation>(), $"Unknown{baseResource.ResourceName}", baseResource.ResourceType, baseResource.ResourceData)
-        {
-            BaseResource = baseResource;
-        }
-
-        protected override string DefaultAccessibility => "internal";
-
-        protected override HashSet<NameSetKey> EnsureUniqueSets()
-        {
-            return new HashSet<NameSetKey>();
-        }
-
-        protected override IEnumerable<MgmtClientOperation> EnsureAllOperations() => ClientOperations;
-
-        protected override IEnumerable<MgmtClientOperation> EnsureClientOperations() => BaseResource.ClientOperations;
-
-        public override bool CanValidateResourceType => false;
-    }
 }
