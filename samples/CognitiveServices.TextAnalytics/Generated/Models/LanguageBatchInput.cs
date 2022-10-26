@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -19,10 +20,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <exception cref="ArgumentNullException"> <paramref name="documents"/> is null. </exception>
         public LanguageBatchInput(IEnumerable<LanguageInput> documents)
         {
-            if (documents == null)
-            {
-                throw new ArgumentNullException(nameof(documents));
-            }
+            Argument.AssertNotNull(documents, nameof(documents));
 
             Documents = documents.ToList();
         }

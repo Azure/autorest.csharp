@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace ModelWithConverterUsage.Models
 {
@@ -17,10 +18,7 @@ namespace ModelWithConverterUsage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="modelProperty"/> is null. </exception>
         public ModelStruct(string modelProperty)
         {
-            if (modelProperty == null)
-            {
-                throw new ArgumentNullException(nameof(modelProperty));
-            }
+            Argument.AssertNotNull(modelProperty, nameof(modelProperty));
 
             ModelProperty = modelProperty;
         }

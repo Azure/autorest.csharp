@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -18,14 +19,8 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="synonyms"/> is null. </exception>
         public SynonymMap(string name, string synonyms)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (synonyms == null)
-            {
-                throw new ArgumentNullException(nameof(synonyms));
-            }
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(synonyms, nameof(synonyms));
 
             Name = name;
             Format = "solr";

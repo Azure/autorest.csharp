@@ -21,10 +21,7 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         internal VaultData(VaultProperties properties)
         {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
+            Argument.AssertNotNull(properties, nameof(properties));
 
             Tags = new ChangeTrackingDictionary<string, string>();
             Properties = properties;

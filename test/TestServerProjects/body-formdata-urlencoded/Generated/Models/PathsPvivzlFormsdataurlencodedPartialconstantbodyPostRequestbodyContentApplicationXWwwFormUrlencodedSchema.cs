@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace body_formdata_urlencoded.Models
 {
@@ -19,14 +20,8 @@ namespace body_formdata_urlencoded.Models
         /// <exception cref="ArgumentNullException"> <paramref name="service"/> or <paramref name="aadAccessToken"/> is null. </exception>
         internal PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema(PostContentSchemaGrantType grantType, string service, string aadAccessToken)
         {
-            if (service == null)
-            {
-                throw new ArgumentNullException(nameof(service));
-            }
-            if (aadAccessToken == null)
-            {
-                throw new ArgumentNullException(nameof(aadAccessToken));
-            }
+            Argument.AssertNotNull(service, nameof(service));
+            Argument.AssertNotNull(aadAccessToken, nameof(aadAccessToken));
 
             GrantType = grantType;
             Service = service;
