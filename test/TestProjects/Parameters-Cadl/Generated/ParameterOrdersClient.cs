@@ -6,12 +6,10 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using ParametersCadl.ParameterOrders;
 
 namespace ParametersCadl
 {
@@ -42,46 +40,6 @@ namespace ParametersCadl
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _apiVersion = options.Version;
-        }
-
-        /// <param name="start"> The Int32 to use. </param>
-        /// <param name="end"> The Int32 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Result>> OperationValueAsync(int start, int? end = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("ParameterOrdersClient.OperationValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await OperationAsync(start, end, context).ConfigureAwait(false);
-                return Response.FromValue(Result.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="start"> The Int32 to use. </param>
-        /// <param name="end"> The Int32 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Result> OperationValue(int start, int? end = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("ParameterOrdersClient.OperationValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = Operation(start, end, context);
-                return Response.FromValue(Result.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <param name="start"> The Int32 to use. </param>
@@ -120,46 +78,6 @@ namespace ParametersCadl
             {
                 using HttpMessage message = CreateOperationRequest(start, end, context);
                 return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="end"> The Int32 to use. </param>
-        /// <param name="start"> The Int32 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Result>> Operation2ValueAsync(int end, int? start = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("ParameterOrdersClient.Operation2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await Operation2Async(end, start, context).ConfigureAwait(false);
-                return Response.FromValue(Result.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="end"> The Int32 to use. </param>
-        /// <param name="start"> The Int32 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Result> Operation2Value(int end, int? start = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("ParameterOrdersClient.Operation2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = Operation2(end, start, context);
-                return Response.FromValue(Result.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -246,17 +164,6 @@ namespace ParametersCadl
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        private static RequestContext DefaultRequestContext = new RequestContext();
-        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;
