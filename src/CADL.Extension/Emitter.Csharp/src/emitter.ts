@@ -161,7 +161,7 @@ export async function $onEmit(
                 resolvePath(options.csharpGeneratorPath, "..", "Azure.Core.Shared"),
             ]
             for (const sharedFolder of sharedFolders) {
-                resolvedSharedFolders.push(path.relative(generatedFolder, sharedFolder));
+                resolvedSharedFolders.push(path.relative(generatedFolder, sharedFolder).replaceAll("\\", "/"));
             }
      
             if (!fs.existsSync(generatedFolder)) {
