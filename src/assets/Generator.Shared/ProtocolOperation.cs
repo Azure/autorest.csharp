@@ -19,16 +19,13 @@ namespace Azure.Core
         internal ProtocolOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
         {
             _resultSelector = resultSelector;
-            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, out string id);
+            Id = id;
             _operation = new OperationInternal<T>(clientDiagnostics, this, response, scopeName);
         }
 
-#pragma warning disable CA1822
-        // This scenario is currently unsupported.
-        // See: https://github.com/Azure/autorest.csharp/issues/2158.
         /// <inheritdoc />
-        public override string Id => throw new NotSupportedException();
-#pragma warning restore CA1822
+        public override string Id { get; }
 
         /// <inheritdoc />
         public override T Value => _operation.Value;

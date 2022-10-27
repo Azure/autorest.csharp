@@ -4,6 +4,7 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
@@ -36,10 +37,20 @@ namespace Azure.Core
             Uri startRequestUri,
             Response response,
             OperationFinalStateVia finalStateVia,
+            out string id,
             string? apiVersionOverride = null)
         {
             string? apiVersionStr = apiVersionOverride ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
+            var lroDetails = new Dictionary<string, string>()
+            {
+                ["HeaderSource"] = HeaderSource.Location.ToString(),
+                ["NextRequestUri"] = nextRequestUri,
+                ["InitialUri"] = startRequestUri.AbsoluteUri,
+                ["InitialResponse"] = response.ToString()
+            };
+            var lroData = BinaryData.FromObjectAsJson(lroDetails);
+            id = Convert.ToBase64String(lroData.ToArray());
             if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
             {
                 return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
@@ -61,9 +72,10 @@ namespace Azure.Core
             Uri startRequestUri,
             Response response,
             OperationFinalStateVia finalStateVia,
+            out string id,
             string? apiVersionOverride = null)
         {
-            var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia, apiVersionOverride);
+            var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia, out id, apiVersionOverride);
             return new OperationToOperationOfT<T>(operationSource, operation);
         }
 
