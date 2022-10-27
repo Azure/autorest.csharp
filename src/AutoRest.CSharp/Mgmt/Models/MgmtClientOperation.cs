@@ -106,6 +106,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         // TODO -- we need a better way to get this
         public IEnumerable<Parameter> Parameters => _operations.First().Parameters;
 
+        public CSharpType? MgmtReturnType => _operations.First().MgmtReturnType;
+
         public CSharpType ReturnType => _operations.First().ReturnType;
 
         public MethodSignatureModifiers Accessibility => _operations.First().Accessibility;

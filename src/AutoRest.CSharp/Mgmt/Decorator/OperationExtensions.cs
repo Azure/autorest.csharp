@@ -91,27 +91,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return valueType.EqualsByName(resourceData.Type);
         }
 
-        private static ISet<ResourceTypeSegment> GetScopeResourceTypes(RequestPath requestPath)
-        {
-            var scope = requestPath.GetScopePath();
-            if (scope.IsParameterizedScope())
-            {
-                return new HashSet<ResourceTypeSegment>(requestPath.GetParameterizedScopeResourceTypes()!);
-            }
-
-            return new HashSet<ResourceTypeSegment> { scope.GetResourceType() };
-        }
-
-        private static bool IsScopeCompatible(RequestPath requestPath, RequestPath resourcePath)
-        {
-            // get scope types
-            var requestScopeTypes = GetScopeResourceTypes(requestPath);
-            var resourceScopeTypes = GetScopeResourceTypes(resourcePath);
-            if (resourceScopeTypes.Contains(ResourceTypeSegment.Any))
-                return true;
-            return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
-        }
-
         private static OperationSet? FindOperationSetOfResource(RequestPath requestPath)
         {
             if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(requestPath, out var rawPath))
@@ -125,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // 1. Compare if they have the same scope
                 // 2. Compare if they have the "compatible" remaining path
                 // check if they have compatible scopes
-                if (!IsScopeCompatible(requestPath, resourceRequestPath))
+                if (!RequestPath.IsScopeCompatible(requestPath, resourceRequestPath))
                     continue;
                 // check the remaining path
                 var trimmedRequestPath = requestPath.TrimScope();
@@ -226,15 +205,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))
                 return cacheResult;
 
-            var requestPath = operation.GetRequestPath();
-            var resourceType = requestPath.GetResourceType();
-            var candidates = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType));
-
-            // When more than one candidate is found and all the segments in ResourceType is constant, it's possible that some unexpected resources are included.
-            // If this happen, We determine the right candidate by doing a further check on the scope request path.
-            if (candidates.Count() > 1 && resourceType.IsConstant)
+            // we expand the path here to ensure the resource types we are dealing with here are all constants (at least ensure they are constants when we are expecting to find a resource)
+            var requestPaths = operation.GetRequestPath().Expand();
+            var candidates = new List<Resource>();
+            foreach (var path in requestPaths)
             {
-                return candidates.Where(resource => resource.RequestPath.GetScopePath().Equals(requestPath.GetScopePath()));
+                var resourceType = path.GetResourceType();
+                // we find the resource with the same type of this operation, and under the same scope
+                var resources = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType) && resource.RequestPath.GetScopePath().Equals(path.GetScopePath()));
+                candidates.AddRange(resources);
             }
 
             return candidates;

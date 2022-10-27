@@ -563,7 +563,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Scope($"if ({propertyName} != null)");
         }
 
-        public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
+        public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType, IEnumerable<Attribute>? attributes = default)
         {
             writer.WriteXmlDocumentationSummary(signature.FormattableDescription);
             writer.WriteXmlDocumentationParameters(signature.Parameters);
@@ -577,7 +577,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (returnDesc is not null)
                 writer.WriteXmlDocumentationReturns(returnDesc);
 
-            if (enableAttributes && attributes is not null)
+            if (attributes is not null)
             {
                 foreach (var attribute in attributes)
                 {

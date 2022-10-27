@@ -23,11 +23,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// <summary>
     /// Code writer for resource collection.
     /// A resource collection should have 3 operations:
-    /// 1. CreateOrUpdate (4 variants)
+    /// 1. CreateOrUpdate (2 variants)
     /// 2. Get (2 variants)
-    /// 3. List (4 variants)
-    /// and the following builder methods:
-    /// 1. Construct
+    /// 3. List (2 variants)
     /// </summary>
     internal class ResourceCollectionWriter : MgmtClientBaseWriter
     {
@@ -98,14 +96,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             writer.Line($"if ({response}.Value == null)");
-            writer.Line($"return {typeof(Response)}.FromValue<{operation.ReturnType.UnWrapResponse()}>(null, {response}.GetRawResponse());");
+            writer.Line($"return {typeof(Response)}.FromValue<{operation.MgmtReturnType}>(null, {response}.GetRawResponse());");
 
             if (This.Resource.ResourceData.ShouldSetResourceIdentifier)
             {
                 writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(This.Resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
             }
 
-            writer.Line($"return {typeof(Response)}.FromValue(new {operation.ReturnType.UnWrapResponse()}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
+            writer.Line($"return {typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
         }
     }
 }
