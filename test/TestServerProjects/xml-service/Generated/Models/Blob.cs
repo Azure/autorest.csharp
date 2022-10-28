@@ -22,18 +22,9 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="snapshot"/> or <paramref name="properties"/> is null. </exception>
         internal Blob(string name, bool deleted, string snapshot, BlobProperties properties)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (snapshot == null)
-            {
-                throw new ArgumentNullException(nameof(snapshot));
-            }
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(snapshot, nameof(snapshot));
+            Argument.AssertNotNull(properties, nameof(properties));
 
             Name = name;
             Deleted = deleted;

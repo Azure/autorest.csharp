@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -25,10 +26,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="instanceIds"/> is null. </exception>
         public VirtualMachineScaleSetVMInstanceRequiredIDs(IEnumerable<string> instanceIds)
         {
-            if (instanceIds == null)
-            {
-                throw new ArgumentNullException(nameof(instanceIds));
-            }
+            Argument.AssertNotNull(instanceIds, nameof(instanceIds));
 
             InstanceIds = instanceIds.ToList();
         }

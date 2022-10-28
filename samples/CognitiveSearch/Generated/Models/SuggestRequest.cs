@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -18,14 +19,8 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>
         public SuggestRequest(string searchText, string suggesterName)
         {
-            if (searchText == null)
-            {
-                throw new ArgumentNullException(nameof(searchText));
-            }
-            if (suggesterName == null)
-            {
-                throw new ArgumentNullException(nameof(suggesterName));
-            }
+            Argument.AssertNotNull(searchText, nameof(searchText));
+            Argument.AssertNotNull(suggesterName, nameof(suggesterName));
 
             SearchText = searchText;
             SuggesterName = suggesterName;

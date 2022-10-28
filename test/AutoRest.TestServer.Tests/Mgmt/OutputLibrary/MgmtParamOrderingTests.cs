@@ -53,6 +53,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase(typeof(VirtualMachineScaleSetResource), "Deallocate", true, new[]{ "vmInstanceIDs", "expand" }, new[] { false, false })]
         [TestCase(typeof(VirtualMachineScaleSetResource), "DeleteInstances", true, new[]{ "vmInstanceIDs", "forceDeletion"}, new[] { true, false })]
         [TestCase(typeof(VirtualMachineScaleSetResource), "GetInstanceView", false, new[]{ "filter", "expand" }, new[] { true, false })]
+        [TestCase(typeof(AvailabilitySetsRestOperations), "Update", false, new[]{ "subscriptionId", "resourceGroupName", "patch", "availabilitySetName" }, new[] { true, true, true, false })]
         public void ValidateOperationMethodParameterList(Type type, string methodName, bool isLro, string[] parameterNames, bool[] isRequiredParameters)
         {
             var parameters = type.GetMethod(methodName).GetParameters();

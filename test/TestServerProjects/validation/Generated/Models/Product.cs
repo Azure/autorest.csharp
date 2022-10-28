@@ -20,14 +20,8 @@ namespace validation.Models
         /// <exception cref="ArgumentNullException"> <paramref name="child"/> or <paramref name="constChild"/> is null. </exception>
         public Product(ChildProduct child, ConstantProduct constChild)
         {
-            if (child == null)
-            {
-                throw new ArgumentNullException(nameof(child));
-            }
-            if (constChild == null)
-            {
-                throw new ArgumentNullException(nameof(constChild));
-            }
+            Argument.AssertNotNull(child, nameof(child));
+            Argument.AssertNotNull(constChild, nameof(constChild));
 
             DisplayNames = new ChangeTrackingList<string>();
             Child = child;

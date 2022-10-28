@@ -4,7 +4,7 @@
 using Azure;
 using Azure.Core;
 using NUnit.Framework;
-using RequestContextAllOptional_LowLevel;
+using Parameters_LowLevel;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
         public void NoRequestBodyResponseBody([Values("NoRequestBodyResponseBody", "NoRequestBodyResponseBodyAsync")] string methodName)
         {
             TypeAsserts.HasPublicInstanceMethod(
-                typeof(RequestContextAllOptionalClient),
+                typeof(ParametersLowlevelClient),
                 methodName,
                 new TypeAsserts.Parameter[] {
                     new("id", typeof(int)),
@@ -28,7 +28,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void OptionalRequestContextDeleteNoRequestBodyResponseBody()
         {
-            var client = typeof(RequestContextAllOptionalClient);
+            var client = typeof(ParametersLowlevelClient);
             var method = client.GetMethod("DeleteNoRequestBodyResponseBody");
             var parameters = method.GetParameters();
 
@@ -42,7 +42,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void RequestBodyResponseBody()
         {
-            var client = typeof(RequestContextAllOptionalClient);
+            var client = typeof(ParametersLowlevelClient);
             var method = client.GetMethod("RequestBodyResponseBody");
             var parameters = method.GetParameters();
 
@@ -56,7 +56,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoRequestBodyNoResponseBody()
         {
-            var client = typeof(RequestContextAllOptionalClient);
+            var client = typeof(ParametersLowlevelClient);
             var method = client.GetMethod("NoRequestBodyNoResponseBody");
             var parameters = method.GetParameters();
 
@@ -68,7 +68,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void RequestBodyNoResponseBody()
         {
-            var client = typeof(RequestContextAllOptionalClient);
+            var client = typeof(ParametersLowlevelClient);
             var method = client.GetMethod("RequestBodyNoResponseBody");
             var parameters = method.GetParameters();
 

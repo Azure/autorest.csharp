@@ -29,14 +29,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="secretUri"/> or <paramref name="sourceVault"/> is null. </exception>
         public KeyVaultSecretReference(Uri secretUri, WritableSubResource sourceVault)
         {
-            if (secretUri == null)
-            {
-                throw new ArgumentNullException(nameof(secretUri));
-            }
-            if (sourceVault == null)
-            {
-                throw new ArgumentNullException(nameof(sourceVault));
-            }
+            Argument.AssertNotNull(secretUri, nameof(secretUri));
+            Argument.AssertNotNull(sourceVault, nameof(sourceVault));
 
             SecretUri = secretUri;
             SourceVault = sourceVault;
