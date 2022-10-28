@@ -49,7 +49,7 @@ namespace Azure.Core
         public static Pageable<T> Select<T>(Pageable<BinaryData> input, Func<BinaryData, T> deserializeFunc) where T : notnull
             => new PageableWrapper<T>((ct, ph) => input
                 .AsPages(ct, ph)
-                .Select(page => Page<T>.FromValues(page.Values.Select(item => deserializeFunc(item)).ToArray(), page.ContinuationToken, page.GetRawResponse()));
+                .Select(page => Page<T>.FromValues(page.Values.Select(item => deserializeFunc(item)).ToArray(), page.ContinuationToken, page.GetRawResponse())));
 
         public static Pageable<T> CreatePageable<T>(Func<string?, int?, IEnumerable<Page<T>>> enumerableFactory, ClientDiagnostics clientDiagnostics, string scopeName) where T : notnull
             => new PageableWrapper<T>((ct, ph) => new EnumerableWithScope<T>(enumerableFactory(ct, ph), clientDiagnostics, scopeName));

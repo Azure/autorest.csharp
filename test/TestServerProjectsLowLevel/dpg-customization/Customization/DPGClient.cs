@@ -159,7 +159,7 @@ namespace dpg_customization_LowLevel
             context.CancellationToken = cancellationToken;
 
             Pageable<BinaryData> pageableBindaryData = GetPagesImplementation("DPGClient.GetPagesValues", mode, context);
-            return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
+            return PageableHelpers.Select(pageableBindaryData, item => Product.DeserializeProduct(JsonDocument.Parse(item.ToMemory()).RootElement));
         }
     }
 }
