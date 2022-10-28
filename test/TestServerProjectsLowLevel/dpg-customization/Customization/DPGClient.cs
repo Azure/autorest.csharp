@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -143,7 +144,7 @@ namespace dpg_customization_LowLevel
             var context = new RequestContext { CancellationToken = cancellationToken };
 
             AsyncPageable<BinaryData> pageableBindaryData = GetPagesImplementationAsync("DPGClient.GetPagesValues", mode, context);
-            return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
+            return PageableHelpers.Select(pageableBindaryData, item => Product.DeserializeProduct(JsonDocument.Parse(item.ToMemory()).RootElement));
         }
 
         /// <summary> Get pages that you will either return to users in pages of raw bodies, or pages of models following growup. </summary>

@@ -28,11 +28,28 @@ namespace Azure.Core
             }
         }
 
+        public static AsyncPageable<T> Select<T>(AsyncPageable<BinaryData> input, Func<BinaryData, T> deserializeFunc) where T : notnull
+            => new AsyncPageableWrapper<T>((ct, ph) => SelectPage(input.AsPages(ct, ph), deserializeFunc));
+
+        private static async IAsyncEnumerable<Page<T>> SelectPage<T>(IAsyncEnumerable<Page<BinaryData>> pages, Func<BinaryData, T> deserializeFunc, [EnumeratorCancellation] CancellationToken cancellationToken = default) where T : notnull
+        {
+            await foreach (var page in pages.WithCancellation(cancellationToken).ConfigureAwait(false))
+            {
+                var values = page.Values.Select(item => deserializeFunc(item)).ToArray();
+                yield return Page<T>.FromValues(values, page.ContinuationToken, page.GetRawResponse());
+            }
+        }
+
         public static Pageable<T> Select<T>(Pageable<BinaryData> input, Func<Response, IReadOnlyList<T>> selectFunc) where T : notnull
             => new PageableWrapper<T>((ct, ph) => input
                 .AsPages(ct, ph)
                 .Select(page => Page<T>.FromValues(selectFunc(page.GetRawResponse()), page.ContinuationToken, page.GetRawResponse()))
             );
+
+        public static Pageable<T> Select<T>(Pageable<BinaryData> input, Func<BinaryData, T> deserializeFunc) where T : notnull
+            => new PageableWrapper<T>((ct, ph) => input
+                .AsPages(ct, ph)
+                .Select(page => Page<T>.FromValues(page.Values.Select(item => deserializeFunc(item)).ToArray(), page.ContinuationToken, page.GetRawResponse()));
 
         public static Pageable<T> CreatePageable<T>(Func<string?, int?, IEnumerable<Page<T>>> enumerableFactory, ClientDiagnostics clientDiagnostics, string scopeName) where T : notnull
             => new PageableWrapper<T>((ct, ph) => new EnumerableWithScope<T>(enumerableFactory(ct, ph), clientDiagnostics, scopeName));
