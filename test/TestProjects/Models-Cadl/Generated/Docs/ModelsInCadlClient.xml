@@ -43,6 +43,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
@@ -75,6 +76,7 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
   }, # Required.
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
   requiredCollection: [
     {
@@ -131,6 +133,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
@@ -163,6 +166,7 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
   }, # Required.
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
   requiredCollection: [
     {
@@ -754,6 +758,7 @@ var data = new {
     requiredInt = 1234,
     requiredModel = new {},
     requiredFixedStringEnum = "1",
+    requiredFixedIntEnum = "1",
     requiredExtensibleEnum = "1",
     requiredCollection = new[] {
         new {
@@ -800,6 +805,7 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
   }, # Required.
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
   requiredCollection: [
     {
@@ -843,6 +849,7 @@ var data = new {
     requiredInt = 1234,
     requiredModel = new {},
     requiredFixedStringEnum = "1",
+    requiredFixedIntEnum = "1",
     requiredExtensibleEnum = "1",
     requiredCollection = new[] {
         new {
@@ -889,6 +896,7 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
   }, # Required.
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
   requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
   requiredCollection: [
     {

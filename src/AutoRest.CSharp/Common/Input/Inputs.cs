@@ -192,7 +192,15 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputConstant(object Value, InputType Type);
 
-    internal record InputEnumTypeValue(string Name, string Value, string? Description);
+    internal record InputEnumTypeValue(string Name, object Value, string? Description)
+    {
+        public virtual string GetJsonValueString() => GetValueString();
+        public string GetValueString() => (Value.ToString() ?? string.Empty);
+    }
+
+    internal record InputEnumTypeStringValue(string Name, string StringValue, string? Description) : InputEnumTypeValue(Name, StringValue, Description);
+    internal record InputEnumTypeIntegerValue(string Name, Int32 IntegerValue, string? Description) : InputEnumTypeValue(Name, IntegerValue, Description);
+    internal record InputEnumTypeFloatValue(string Name, float FloatValue, string? Description) : InputEnumTypeValue(Name, FloatValue, Description);
 
     internal enum InputOperationParameterKind
     {
