@@ -72,7 +72,7 @@ import fsExtra from "fs-extra"
 import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
 import { dllFilePath } from "@autorest/csharp";
-import { exec } from "child_process";
+import { execSync } from "child_process";
 import { getConvenienceAPIName } from "@azure-tools/cadl-dpg";
 
 export interface NetEmitterOptions {
@@ -206,15 +206,13 @@ export async function $onEmit(
                 let command = `dotnet ${resolvePath(options.csharpGeneratorPath)} --project-path ${outputFolder} ${newProjectOption}`;
                 console.info(command);
 
-                exec(command, (error, stdout, stderr) => {
-                    if (error) {
-                        console.log(`error: ${error.message}`);
-                    }
-                    else if (stderr) {
-                        console.log(`stderr: ${stderr}`);
-                    }
-                    console.log(`stdout: ${stdout}`);
-                });
+                try {
+                    execSync(command, {stdio: 'inherit'});
+                } catch(error: any) {
+                    if (error.message) console.log(error.message);
+                    if (error.stderr) console.error(error.stderr);
+                    if (error.stdout) console.log(error.stdout);
+                }
             }
             
             if (!options["save-inputs"]) {
@@ -912,3 +910,4 @@ class ErrorTypeFoundError extends Error {
         super("Error type found in evaluated Cadl output");
     }
 }
+
