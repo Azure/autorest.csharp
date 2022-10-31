@@ -25,7 +25,7 @@
   </PropertyGroup>
 
   <Target Name="GenerateCode" Condition="'$(_GenerateCode)' == 'true' AND Exists('$(AutoRestInput)')" >
-    <ReadLinesFromFile File="$(AutoRestInput)" >
+    <ReadLinesFromFile File="$(AutoRestInput)">
        <Output TaskParameter="Lines" ItemName="AutoRestInputLines"/>
     </ReadLinesFromFile>
 
