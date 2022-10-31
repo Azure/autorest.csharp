@@ -15,6 +15,7 @@ input-file:
 - $(this-folder)/../specification/mockSwagger/providers.json
 - $(this-folder)/../specification/mockSwagger/authorization.json
 - $(this-folder)/../specification/mockSwagger/tenantActivityLogs_API.json
+- $(this-folder)/../specification/mockSwagger/resources.json
 clear-output-folder: true
 namespace: MgmtMockAndSample
 modelerfour:
