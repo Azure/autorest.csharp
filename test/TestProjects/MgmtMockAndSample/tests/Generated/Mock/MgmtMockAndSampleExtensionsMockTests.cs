@@ -12,7 +12,6 @@ using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
-using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -23,16 +22,6 @@ namespace MgmtMockAndSample.Tests.Mock
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
-        }
-
-        [RecordedTest]
-        public async Task CheckNameAvailabilityVault()
-        {
-            // Example: Validate a vault name
-
-            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
-            await subscriptionResource.CheckNameAvailabilityVaultAsync(new VaultCheckNameAvailabilityContent("sample-vault"));
         }
 
         [RecordedTest]
