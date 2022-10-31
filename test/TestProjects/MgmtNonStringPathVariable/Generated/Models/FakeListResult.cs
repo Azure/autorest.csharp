@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 using MgmtNonStringPathVariable;
 
 namespace MgmtNonStringPathVariable.Models
@@ -20,10 +21,7 @@ namespace MgmtNonStringPathVariable.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal FakeListResult(IEnumerable<FakeData> value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
         }

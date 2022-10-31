@@ -20,10 +20,7 @@ namespace additionalProperties.Models
         /// <exception cref="ArgumentNullException"> <paramref name="odataLocation"/> is null. </exception>
         public PetAPInPropertiesWithAPString(int id, string odataLocation)
         {
-            if (odataLocation == null)
-            {
-                throw new ArgumentNullException(nameof(odataLocation));
-            }
+            Argument.AssertNotNull(odataLocation, nameof(odataLocation));
 
             Id = id;
             OdataLocation = odataLocation;

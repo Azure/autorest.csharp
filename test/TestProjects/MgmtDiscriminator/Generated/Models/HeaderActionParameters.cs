@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
@@ -19,10 +20,7 @@ namespace MgmtDiscriminator.Models
         /// <exception cref="ArgumentNullException"> <paramref name="headerName"/> is null. </exception>
         public HeaderActionParameters(HeaderActionParametersTypeName typeName, HeaderAction headerAction, string headerName)
         {
-            if (headerName == null)
-            {
-                throw new ArgumentNullException(nameof(headerName));
-            }
+            Argument.AssertNotNull(headerName, nameof(headerName));
 
             TypeName = typeName;
             HeaderAction = headerAction;

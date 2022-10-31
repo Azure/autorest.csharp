@@ -2,8 +2,10 @@ import "@azure-tools/cadl-azure-core";
 import "@cadl-lang/openapi";
 import "@cadl-lang/rest";
 import "@cadl-lang/versioning";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
+using Azure.DPG;
 
 @serviceTitle("Text authoring")
 @serviceVersion("2022-05-15-preview")
@@ -23,13 +25,13 @@ model Project {
 interface Authoring {
   createProjectStatusMonitor is CustomCore.PollingOperation<Project>;
 
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenienceAPI
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
   createProject is Azure.Core.LongRunningResourceCreateWithServiceProvidedName<Project>;
   
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenienceAPI
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenienceAPI
   op updateProject is Azure.Core.Foundations.Operation<Project, Project>;
 }
 
@@ -41,6 +43,6 @@ namespace CustomCore {
   }
 
   @Cadl.Http.route("operations")
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenienceAPI
   op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
 }

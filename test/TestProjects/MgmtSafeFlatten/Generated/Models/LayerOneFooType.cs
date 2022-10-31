@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace MgmtSafeFlatten.Models
 {
@@ -17,10 +18,7 @@ namespace MgmtSafeFlatten.Models
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public LayerOneFooType(string parameters)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             Parameters = parameters;
             Name = LayerOneTypeName.LayerOneFoo;

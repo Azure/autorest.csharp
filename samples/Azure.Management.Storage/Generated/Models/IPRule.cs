@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -17,10 +18,7 @@ namespace Azure.Management.Storage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="ipAddressOrRange"/> is null. </exception>
         public IPRule(string ipAddressOrRange)
         {
-            if (ipAddressOrRange == null)
-            {
-                throw new ArgumentNullException(nameof(ipAddressOrRange));
-            }
+            Argument.AssertNotNull(ipAddressOrRange, nameof(ipAddressOrRange));
 
             IPAddressOrRange = ipAddressOrRange;
         }

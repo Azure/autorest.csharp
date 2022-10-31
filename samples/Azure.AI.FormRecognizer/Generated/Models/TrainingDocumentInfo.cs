@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -22,14 +23,8 @@ namespace Azure.AI.FormRecognizer.Models
         /// <exception cref="ArgumentNullException"> <paramref name="documentName"/> or <paramref name="errors"/> is null. </exception>
         internal TrainingDocumentInfo(string documentName, int pages, IEnumerable<ErrorInformation> errors, TrainStatus status)
         {
-            if (documentName == null)
-            {
-                throw new ArgumentNullException(nameof(documentName));
-            }
-            if (errors == null)
-            {
-                throw new ArgumentNullException(nameof(errors));
-            }
+            Argument.AssertNotNull(documentName, nameof(documentName));
+            Argument.AssertNotNull(errors, nameof(errors));
 
             DocumentName = documentName;
             Pages = pages;

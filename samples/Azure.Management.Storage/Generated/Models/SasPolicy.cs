@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -18,10 +19,7 @@ namespace Azure.Management.Storage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="sasExpirationPeriod"/> is null. </exception>
         public SasPolicy(string sasExpirationPeriod, ExpirationAction expirationAction)
         {
-            if (sasExpirationPeriod == null)
-            {
-                throw new ArgumentNullException(nameof(sasExpirationPeriod));
-            }
+            Argument.AssertNotNull(sasExpirationPeriod, nameof(sasExpirationPeriod));
 
             SasExpirationPeriod = sasExpirationPeriod;
             ExpirationAction = expirationAction;
