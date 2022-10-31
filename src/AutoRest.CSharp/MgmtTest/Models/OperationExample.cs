@@ -72,15 +72,15 @@ namespace AutoRest.CSharp.MgmtTest.Models
             if (scopePath.IsParameterizedScope())
             {
                 var trimmedPath = resourcePath.TrimScope();
-                return ComposeResourceIdentifierForScopePath2(scopePath, trimmedPath);
+                return ComposeResourceIdentifierForScopePath(scopePath, trimmedPath);
             }
             else
             {
-                return ComposeResourceIdentifierForUsualPath2(RequestPath, resourcePath);
+                return ComposeResourceIdentifierForUsualPath(RequestPath, resourcePath);
             }
         }
 
-        private IEnumerable<ResourceIdentifierInitializer> ComposeResourceIdentifierForScopePath2(RequestPath scopePath, RequestPath trimmedPath)
+        private IEnumerable<ResourceIdentifierInitializer> ComposeResourceIdentifierForScopePath(RequestPath scopePath, RequestPath trimmedPath)
         {
             // we need to find the scope, and put everything in the scope into the scope parameter
             var operationScopePath = RequestPath.GetScopePath();
@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             }
         }
 
-        private IEnumerable<ResourceIdentifierInitializer> ComposeResourceIdentifierForUsualPath2(RequestPath requestPath, RequestPath resourcePath)
+        private IEnumerable<ResourceIdentifierInitializer> ComposeResourceIdentifierForUsualPath(RequestPath requestPath, RequestPath resourcePath)
         {
             // we first take the same amount of segments from my own request path, in case there is a case that the parameter names from these two paths are different
             var piecesFromMyOwn = requestPath.Take(resourcePath.Count);
