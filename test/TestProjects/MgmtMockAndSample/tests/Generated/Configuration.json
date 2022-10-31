@@ -17,6 +17,9 @@
   "GenerateArmResourceExtensions": [
     "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}"
   ],
+  "RequestPathToParent": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}/validate": "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}"
+  },
   "FormatByNameRules": {
     "tenantId": "uuid",
     "resourceType": "resource-type",

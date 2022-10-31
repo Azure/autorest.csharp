@@ -27,6 +27,10 @@ generate-arm-resource-extensions:
 list-exception:
 - /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}
 - /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}
+
+request-path-to-parent:
+  /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}/validate: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+
 format-by-name-rules:
   'tenantId': 'uuid'
   'resourceType': 'resource-type'

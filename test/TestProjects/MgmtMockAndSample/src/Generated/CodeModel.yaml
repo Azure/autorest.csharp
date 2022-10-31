@@ -1567,7 +1567,7 @@ schemas: !Schemas
           name: RoleAssignmentPropertiesPrincipalId
           description: The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group.
       protocol: !Protocols {}
-    - !StringSchema &ref_480
+    - !StringSchema &ref_481
       type: string
       apiVersions:
         - !ApiVersion 
@@ -2773,7 +2773,7 @@ schemas: !Schemas
           name: ApiVersion20171001Preview
           description: Api Version (2017-10-01-preview)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_479
+    - !ConstantSchema &ref_480
       type: constant
       value: !ConstantValue 
         value: '2015-04-01'
@@ -2783,7 +2783,7 @@ schemas: !Schemas
           name: ApiVersion20150401
           description: Api Version (2015-04-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_485
+    - !ConstantSchema &ref_486
       type: constant
       value: !ConstantValue 
         value: '2021-04-01'
@@ -7337,7 +7337,7 @@ schemas: !Schemas
           description: Role assignment create parameters.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_483
+    - !ObjectSchema &ref_484
       type: object
       apiVersions:
         - !ApiVersion 
@@ -7455,7 +7455,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_259
     - *ref_260
-    - !ObjectSchema &ref_484
+    - !ObjectSchema &ref_485
       type: object
       apiVersions:
         - !ApiVersion 
@@ -7487,7 +7487,7 @@ schemas: !Schemas
           description: Describes the format of Error response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_488
+    - !ObjectSchema &ref_489
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16086,13 +16086,83 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: RoleAssignments_Validate
+        apiVersions:
+          - !ApiVersion 
+            version: 2017-10-01-preview
+        parameters:
+          - *ref_314
+          - !Parameter 
+            schema: *ref_457
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_317
+          - !Parameter &ref_477
+            schema: *ref_456
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: roleAssignmentName
+                description: The name of the role assignment to delete.
+                serializedName: roleAssignmentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}/validate
+                method: post
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_477
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns an array of role assignments.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-examples:
+            Validate role assignments for subscription:
+              parameters:
+                api-version: 2017-10-01-preview
+                roleAssignmentName: roleAssignmentId
+                subscriptionId: subId
+              responses:
+                '200': {}
+        language: !Languages 
+          default:
+            name: Validate
+            description: Gets all role assignments for the subscription.
+        protocol: !Protocols {}
+      - !Operation 
         operationId: RoleAssignments_ListForScope
         apiVersions:
           - !ApiVersion 
             version: 2017-10-01-preview
         parameters:
           - *ref_314
-          - !Parameter &ref_477
+          - !Parameter &ref_478
             schema: *ref_456
             implementation: Method
             required: true
@@ -16106,7 +16176,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_478
+          - !Parameter &ref_479
             schema: *ref_456
             implementation: Method
             language: !Languages 
@@ -16159,8 +16229,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_477
           - *ref_478
+          - *ref_479
         responses:
           - !SchemaResponse 
             schema: *ref_464
@@ -16219,7 +16289,7 @@ operationGroups:
         parameters:
           - *ref_314
           - !Parameter 
-            schema: *ref_479
+            schema: *ref_480
             implementation: Method
             origin: modelerfour:synthesized/api-version
             required: true
@@ -16231,8 +16301,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_481
-            schema: *ref_480
+          - !Parameter &ref_482
+            schema: *ref_481
             implementation: Method
             language: !Languages 
               default:
@@ -16248,8 +16318,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_482
-            schema: *ref_480
+          - !Parameter &ref_483
+            schema: *ref_481
             implementation: Method
             language: !Languages 
               default:
@@ -16289,11 +16359,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_481
           - *ref_482
+          - *ref_483
         responses:
           - !SchemaResponse 
-            schema: *ref_483
+            schema: *ref_484
             language: !Languages 
               default:
                 name: ''
@@ -16307,7 +16377,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_484
+            schema: *ref_485
             language: !Languages 
               default:
                 name: ''
@@ -16363,7 +16433,7 @@ operationGroups:
         parameters:
           - *ref_314
           - !Parameter 
-            schema: *ref_485
+            schema: *ref_486
             implementation: Method
             origin: modelerfour:synthesized/api-version
             required: true
@@ -16376,7 +16446,7 @@ operationGroups:
               http: !HttpParameter 
                 in: query
         requestMediaTypes:
-          application/json: !Request &ref_487
+          application/json: !Request &ref_488
             parameters:
               - !Parameter 
                 schema: *ref_318
@@ -16391,7 +16461,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_486
+              - !Parameter &ref_487
                 schema: *ref_172
                 implementation: Method
                 required: true
@@ -16417,7 +16487,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_486
+              - *ref_487
             language: !Languages 
               default:
                 name: ''
@@ -16431,11 +16501,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_487
+          - *ref_488
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_488
+            schema: *ref_489
             language: !Languages 
               default:
                 name: ''

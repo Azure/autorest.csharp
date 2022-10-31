@@ -108,5 +108,30 @@ namespace MgmtMockAndSample
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
+
+        // Validate role assignments for subscription
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        public async Task Validate_ValidateRoleAssignmentsForSubscription()
+        {
+            // Generated from example definition: 
+            // this example is just showing the usage of "RoleAssignments_Validate" operation, for the dependent resources, they will have to be created separately.
+
+            // authenticate your client
+            ArmClient client = new ArmClient(new DefaultAzureCredential());
+
+            // this example assumes you already have this RoleAssignmentResource created on azure
+            // for more information of creating RoleAssignmentResource, please refer to the document of RoleAssignmentResource
+            string subscriptionId = "subId";
+            string scope = $"/subscriptions/{subscriptionId}";
+            string roleAssignmentName = "roleAssignmentId";
+            ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(scope, roleAssignmentName);
+            RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
+
+            // invoke the operation
+            await roleAssignment.ValidateAsync();
+
+            Console.WriteLine($"Succeeded");
+        }
     }
 }
