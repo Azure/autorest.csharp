@@ -13,6 +13,7 @@
    "Description": "This is base model for polymorphic multiple levels inheritance with a discriminator.",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "3",
@@ -57,6 +58,7 @@
    "BaseModel": {
     "$ref": "2"
    },
+   "Usage": "None",
    "Properties": [
     {
      "$id": "8",
@@ -85,6 +87,7 @@
    "BaseModel": {
     "$ref": "7"
    },
+   "Usage": "None",
    "Properties": []
   },
   {
@@ -97,6 +100,7 @@
    "BaseModel": {
     "$ref": "7"
    },
+   "Usage": "None",
    "Properties": []
   },
   {
@@ -109,6 +113,7 @@
    "BaseModel": {
     "$ref": "2"
    },
+   "Usage": "None",
    "Properties": [
     {
      "$id": "13",
