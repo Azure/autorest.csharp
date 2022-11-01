@@ -11,10 +11,10 @@ namespace ModelsInCadl
     public enum FixedIntEnum
     {
         /// <summary> 1. </summary>
-        One,
+        One = 1,
         /// <summary> 2. </summary>
-        Two,
+        Two = 2,
         /// <summary> 4. </summary>
-        Four
+        Four = 4
     }
 }
