@@ -26,7 +26,7 @@ namespace ModelsInCadl
             writer.WritePropertyName("requiredFixedStringEnum");
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredFixedIntEnum");
-            writer.WriteNumberValue(RequiredFixedIntEnum.ToSerialString());
+            writer.WriteNumberValue(RequiredFixedIntEnum.ToSerialInt32());
             writer.WritePropertyName("requiredExtensibleEnum");
             writer.WriteStringValue(RequiredExtensibleEnum.ToString());
             writer.WritePropertyName("requiredCollection");

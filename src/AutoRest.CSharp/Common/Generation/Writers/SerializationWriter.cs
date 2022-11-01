@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 
@@ -237,7 +238,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 using (writer.Scope($"internal static partial class {declaredTypeName}Extensions"))
                 {
-                    using (writer.Scope($"public static {schema.ValueType} ToSerialString(this {declaredTypeName} value) => value switch", end: "};"))
+                    using (writer.Scope($"public static {schema.ValueType} ToSerial{schema.ValueType.Name.FirstCharToUpperCase()}(this {declaredTypeName} value) => value switch", end: "};"))
                     {
                         foreach (EnumTypeValue value in schema.Values)
                         {

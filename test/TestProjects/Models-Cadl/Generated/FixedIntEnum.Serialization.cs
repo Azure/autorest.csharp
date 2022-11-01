@@ -11,7 +11,7 @@ namespace ModelsInCadl
 {
     internal static partial class FixedIntEnumExtensions
     {
-        public static int ToSerialString(this FixedIntEnum value) => value switch
+        public static int ToSerialInt32(this FixedIntEnum value) => value switch
         {
             FixedIntEnum.One => 1,
             FixedIntEnum.Two => 2,
