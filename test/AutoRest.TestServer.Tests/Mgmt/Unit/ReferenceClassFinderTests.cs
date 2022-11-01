@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Common.Utilities;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt

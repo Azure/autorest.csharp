@@ -34,9 +34,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ModelTypeProviderFields? _fields;
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
-        private InputModelType _inputModel;
         private TypeFactory _typeFactory;
         private SourceInputModel? _sourceInputModel;
+
+        internal InputModelType InputModel { get; }
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -55,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory!;
-            _inputModel = inputModel;
+            InputModel = inputModel;
             _sourceInputModel = sourceInputModel;
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
@@ -93,17 +94,17 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override string CreateDescription()
         {
-            return _inputModel.Description ?? $"The {_inputModel.Name}.";
+            return InputModel.Description ?? $"The {InputModel.Name}.";
         }
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
+            return new ModelTypeProviderFields(InputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
         {
-            return CreatePublicConstructorSignature(Declaration.Name, _inputModel.Usage, Fields.PublicConstructorParameters);
+            return CreatePublicConstructorSignature(Declaration.Name, InputModel.Usage, Fields.PublicConstructorParameters);
         }
 
         private ConstructorSignature EnsureSerializationConstructorSignature()
@@ -288,8 +289,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override CSharpType? CreateInheritedType()
         {
-            if (_inputModel.BaseModel is not null)
-                return _typeFactory.CreateType(_inputModel.BaseModel!);
+            if (InputModel.BaseModel is not null)
+                return _typeFactory.CreateType(InputModel.BaseModel!);
 
             return null;
         }
@@ -319,12 +320,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool EnsureIncludeSerializer()
         {
-            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
+            return InputModel.Usage.HasFlag(InputModelTypeUsage.Input);
         }
 
         protected override bool EnsureIncludeDeserializer()
         {
-            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
+            return InputModel.Usage.HasFlag(InputModelTypeUsage.Output);
         }
 
         protected override JsonObjectSerialization EnsureJsonSerialization()

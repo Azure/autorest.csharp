@@ -749,15 +749,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return provider?.Type;
         }
 
-        public bool TryGetTypeProvider(string originalName, [MaybeNullWhen(false)] out TypeProvider provider)
-        {
-            if (_schemaOrNameToModels.TryGetValue(originalName, out provider))
-                return true;
-
-            provider = ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
-            return provider != null;
-        }
-
         public IEnumerable<Resource> FindResources(ResourceData resourceData)
         {
             return ArmResources.Where(resource => resource.ResourceData == resourceData);
