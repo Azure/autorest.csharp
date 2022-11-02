@@ -9,42 +9,42 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace ModelsInCadl
+namespace Models.Inheritance
 {
-    public partial class BaseModelWithDiscriminator : IUtf8JsonSerializable
+    public partial class Pet : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("discriminatorProperty");
-            writer.WriteStringValue(DiscriminatorProperty);
+            writer.WritePropertyName("name");
+            writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
 
-        internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element)
+        internal static Pet DeserializePet(JsonElement element)
         {
-            string discriminatorProperty = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("discriminatorProperty"))
+                if (property.NameEquals("name"))
                 {
-                    discriminatorProperty = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
-            return new BaseModelWithDiscriminator(discriminatorProperty);
+            return new Pet(name);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static BaseModelWithDiscriminator FromResponse(Response response)
+        internal static Pet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBaseModelWithDiscriminator(document.RootElement);
+            return DeserializePet(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

@@ -9,46 +9,54 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace ModelsInCadl
+namespace Models.Inheritance
 {
-    public partial class DerivedModelWithDiscriminatorB : IUtf8JsonSerializable
+    public partial class Siamese : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredInt");
-            writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("discriminatorProperty");
-            writer.WriteStringValue(DiscriminatorProperty);
+            writer.WritePropertyName("smart");
+            writer.WriteBooleanValue(Smart);
+            writer.WritePropertyName("age");
+            writer.WriteNumberValue(Age);
+            writer.WritePropertyName("name");
+            writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
 
-        internal static DerivedModelWithDiscriminatorB DeserializeDerivedModelWithDiscriminatorB(JsonElement element)
+        internal static Siamese DeserializeSiamese(JsonElement element)
         {
-            int requiredInt = default;
-            string discriminatorProperty = default;
+            bool smart = default;
+            int age = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredInt"))
+                if (property.NameEquals("smart"))
                 {
-                    requiredInt = property.Value.GetInt32();
+                    smart = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("discriminatorProperty"))
+                if (property.NameEquals("age"))
                 {
-                    discriminatorProperty = property.Value.GetString();
+                    age = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
                     continue;
                 }
             }
-            return new DerivedModelWithDiscriminatorB(discriminatorProperty, requiredInt);
+            return new Siamese(name, age, smart);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static DerivedModelWithDiscriminatorB FromResponse(Response response)
+        internal new static Siamese FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithDiscriminatorB(document.RootElement);
+            return DeserializeSiamese(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

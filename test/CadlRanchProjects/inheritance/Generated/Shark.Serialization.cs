@@ -9,46 +9,54 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace ModelsInCadl
+namespace Models.Inheritance
 {
-    public partial class DerivedModelWithDiscriminatorB : IUtf8JsonSerializable
+    public partial class Shark : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredInt");
-            writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("discriminatorProperty");
-            writer.WriteStringValue(DiscriminatorProperty);
+            writer.WritePropertyName("sharktype");
+            writer.WriteStringValue(Sharktype);
+            writer.WritePropertyName("kind");
+            writer.WriteStringValue(Kind);
+            writer.WritePropertyName("age");
+            writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }
 
-        internal static DerivedModelWithDiscriminatorB DeserializeDerivedModelWithDiscriminatorB(JsonElement element)
+        internal static Shark DeserializeShark(JsonElement element)
         {
-            int requiredInt = default;
-            string discriminatorProperty = default;
+            string sharktype = default;
+            string kind = default;
+            int age = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredInt"))
+                if (property.NameEquals("sharktype"))
                 {
-                    requiredInt = property.Value.GetInt32();
+                    sharktype = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("discriminatorProperty"))
+                if (property.NameEquals("kind"))
                 {
-                    discriminatorProperty = property.Value.GetString();
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("age"))
+                {
+                    age = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new DerivedModelWithDiscriminatorB(discriminatorProperty, requiredInt);
+            return new Shark(kind, age, sharktype);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static DerivedModelWithDiscriminatorB FromResponse(Response response)
+        internal new static Shark FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithDiscriminatorB(document.RootElement);
+            return DeserializeShark(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

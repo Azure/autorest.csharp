@@ -9,38 +9,46 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace ModelsInCadl
+namespace Models.Inheritance
 {
-    public partial class BaseModelWithDiscriminator : IUtf8JsonSerializable
+    public partial class Cat : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("discriminatorProperty");
-            writer.WriteStringValue(DiscriminatorProperty);
+            writer.WritePropertyName("age");
+            writer.WriteNumberValue(Age);
+            writer.WritePropertyName("name");
+            writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
 
-        internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element)
+        internal static Cat DeserializeCat(JsonElement element)
         {
-            string discriminatorProperty = default;
+            int age = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("discriminatorProperty"))
+                if (property.NameEquals("age"))
                 {
-                    discriminatorProperty = property.Value.GetString();
+                    age = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
                     continue;
                 }
             }
-            return new BaseModelWithDiscriminator(discriminatorProperty);
+            return new Cat(name, age);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static BaseModelWithDiscriminator FromResponse(Response response)
+        internal new static Cat FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBaseModelWithDiscriminator(document.RootElement);
+            return DeserializeCat(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

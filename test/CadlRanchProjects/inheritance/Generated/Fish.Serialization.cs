@@ -9,42 +9,50 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace ModelsInCadl
+namespace Models.Inheritance
 {
-    public partial class BaseModelWithDiscriminator : IUtf8JsonSerializable
+    public partial class Fish : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("discriminatorProperty");
-            writer.WriteStringValue(DiscriminatorProperty);
+            writer.WritePropertyName("kind");
+            writer.WriteStringValue(Kind);
+            writer.WritePropertyName("age");
+            writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }
 
-        internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element)
+        internal static Fish DeserializeFish(JsonElement element)
         {
-            string discriminatorProperty = default;
+            string kind = default;
+            int age = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("discriminatorProperty"))
+                if (property.NameEquals("kind"))
                 {
-                    discriminatorProperty = property.Value.GetString();
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("age"))
+                {
+                    age = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new BaseModelWithDiscriminator(discriminatorProperty);
+            return new Fish(kind, age);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static BaseModelWithDiscriminator FromResponse(Response response)
+        internal static Fish FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBaseModelWithDiscriminator(document.RootElement);
+            return DeserializeFish(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
