@@ -18,7 +18,8 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
-$cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http' 
+$cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http'
+$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option @azure-tools/cadl-csharp.clear-output-folder=true'
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -36,11 +37,12 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     }
 }
 
-function Add-Cadl([string]$name, [string]$output, [string]$mainFile="") {
+function Add-Cadl([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
     $cadlDefinitions[$name] = @{
         'projectName'=$name;
         'output'=$output;
-        'mainFile'=$mainFile
+        'mainFile'=$mainFile;
+        'arguments'="$cadlEmitOptions $arguments"
     }
 }
 
@@ -57,7 +59,7 @@ function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$
     if ($cadlFolders) {
         $cadlFolder = $cadlFolders[0]
         $cadlMain = Join-Path $cadlFolder "main.cadl"
-        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain
+        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true"
     }
 }
 
@@ -240,9 +242,11 @@ if (!($Exclude -contains "Samples"))
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 $cadlRanchProjectNames =
     'api-key',
+    'oauth2',
     'extensible-enums',
     'property-optional',
-    'property-types'
+    'property-types',
+    'inheritance'
 
 if (!($Exclude -contains "CadlRanchProjects"))
 {
@@ -293,9 +297,16 @@ $cadlDefinitions.Keys | ForEach-Object {
     $testProjectEntries[$_] = $cadlDefinitions[$_];
 }
 
-foreach ($key in Sort-FileSafe ($testProjectEntries.Keys))
-{
+foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     $definition = $testProjectEntries[$key];
+
+    if ($definition.output.Contains("\smoketests\")) {
+        #skip writing the smoketests since these aren't actually defined locally
+        #these get added when a filter is used so it can find the filter using
+        #all possible sources
+        continue;
+    }
+
     $outputPath = Join-Path $definition.output "Generated"
     if ($key -eq "TypeSchemaMapping")
     {
@@ -344,6 +355,10 @@ if ($reset -or $env:TF_BUILD)
 if (!$noBuild)
 {
     Invoke "dotnet build $autoRestPluginProject"
+
+    #build the emitter
+    $emitterDir = "$PSScriptRoot/../src/CADL.Extension/Emitter.Csharp"
+    Invoke "npm --prefix $emitterDir run build"
 }
 
 
@@ -364,6 +379,6 @@ $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
 $keys | %{ $cadlDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-Cadl $_.output $_.projectName $_.mainFile $using:sharedSource $using:fast $using:debug;
+        Invoke-Cadl $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel

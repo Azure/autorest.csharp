@@ -138,7 +138,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_Duration_putDefault() => Test(async (host) =>
         {
-            Response response = await new DatetimeClient(host, null).PutDefaultAsync(new DatetimeProperty().ToRequestContent());
+            Response response = await new DurationClient(host, null).PutDefaultAsync(new DatetimeProperty().ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
 

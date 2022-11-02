@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -19,18 +20,9 @@ namespace MgmtScopeResource.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="location"/> or <paramref name="customerId"/> is null. </exception>
         internal WorkspaceInfo(string id, string location, string customerId)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-            if (customerId == null)
-            {
-                throw new ArgumentNullException(nameof(customerId));
-            }
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(location, nameof(location));
+            Argument.AssertNotNull(customerId, nameof(customerId));
 
             Id = id;
             Location = location;

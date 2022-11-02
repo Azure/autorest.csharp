@@ -342,6 +342,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 {
                     result.Add(resource);
                 }
+                result.Add(resource);
             }
 
             FormattableString errorText = (FormattableString)$"{restClient.Type.Name}.{method.Name}";

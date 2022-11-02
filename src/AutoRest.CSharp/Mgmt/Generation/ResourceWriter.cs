@@ -26,10 +26,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
-        public static ResourceWriter GetWriter(CodeWriter writer, Resource resource) => resource switch
+        public static ResourceWriter GetWriter(Resource resource) => resource switch
         {
-            BaseResource baseResource => new BaseResourceWriter(writer, baseResource),
-            _ => new ResourceWriter(writer, resource),
+            BaseResource baseResource => new BaseResourceWriter(new CodeWriter(), baseResource),
+            _ => new ResourceWriter(new CodeWriter(), resource),
         };
 
         private Resource This { get; }

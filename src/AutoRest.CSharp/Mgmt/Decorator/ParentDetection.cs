@@ -50,7 +50,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // my parent is myself? Only tenant has this attribute, return empty
                 return Enumerable.Empty<MgmtTypeProvider>();
             }
-
             if (MgmtContext.Library.TryGetArmResource(parentRequestPath, out var parent))
             {
                 return parent.AsIEnumerable();

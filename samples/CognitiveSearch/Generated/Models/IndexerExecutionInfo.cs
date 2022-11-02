@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -21,14 +22,8 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="executionHistory"/> or <paramref name="limits"/> is null. </exception>
         internal IndexerExecutionInfo(IndexerStatus status, IEnumerable<IndexerExecutionResult> executionHistory, IndexerLimits limits)
         {
-            if (executionHistory == null)
-            {
-                throw new ArgumentNullException(nameof(executionHistory));
-            }
-            if (limits == null)
-            {
-                throw new ArgumentNullException(nameof(limits));
-            }
+            Argument.AssertNotNull(executionHistory, nameof(executionHistory));
+            Argument.AssertNotNull(limits, nameof(limits));
 
             Status = status;
             ExecutionHistory = executionHistory.ToList();

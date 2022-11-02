@@ -232,15 +232,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>
         /// </summary>
         public ResourceData ResourceData { get; }
-
-        /// <summary>
-        /// Finds the correspondng <see cref="PolymorphicOption"/> of this <see cref="Resource"/>
-        /// </summary>
-        public PolymorphicOption? PolymorphicOption { get; internal set; }
-
-        // the resource data is only settable when this resource is not polymorphic. If this is polymorphic, the setting of resource data is done in its corresponding base resource class
-        public override bool CanSetResourceData => PolymorphicOption == null;
-
         private MgmtClientOperation? _createOperation;
         private MgmtClientOperation? _getOperation;
         private MgmtClientOperation? _deleteOperation;
@@ -249,6 +240,14 @@ namespace AutoRest.CSharp.Mgmt.Output
         public virtual MgmtClientOperation GetOperation => _getOperation ??= GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
         public virtual MgmtClientOperation? DeleteOperation => _deleteOperation ??= GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
         public virtual MgmtClientOperation? UpdateOperation => _updateOperation ??= EnsureUpdateOperation();
+
+        /// <summary>
+        /// Finds the correspondng <see cref="PolymorphicOption"/> of this <see cref="Resource"/>
+        /// </summary>
+        public PolymorphicOption? PolymorphicOption { get; internal set; }
+
+        // the resource data is only settable when this resource is not polymorphic. If this is polymorphic, the setting of resource data is done in its corresponding base resource class
+        public override bool CanSetResourceData => PolymorphicOption == null;
 
         private MgmtClientOperation? EnsureUpdateOperation()
         {
@@ -472,15 +471,14 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Returns the different method signature for different base path of this resource
         /// </summary>
         /// <returns></returns>
-        public MethodSignature CreateResourceIdentifierMethodSignature
-            => _createResourceIdentifierMethodSignature ??= new MethodSignature(
-                Name: "CreateResourceIdentifier",
-                null,
-                Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
-                Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Static,
-                ReturnType: typeof(ResourceIdentifier),
-                ReturnDescription: null,
-                Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
+        public MethodSignature CreateResourceIdentifierMethodSignature => _createResourceIdentifierMethodSignature ??= new MethodSignature(
+            Name: "CreateResourceIdentifier",
+            null,
+            Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
+            Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Static,
+            ReturnType: typeof(ResourceIdentifier),
+            ReturnDescription: null,
+            Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
 
         public static FormattableString ResourceDataIdExpression(FormattableString dataExpression, ResourceData data)
         {

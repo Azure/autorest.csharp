@@ -51,7 +51,8 @@
     }
    ],
    "IsExtensible": false,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "None"
   },
   {
    "$id": "10",
@@ -85,7 +86,8 @@
     }
    ],
    "IsExtensible": true,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "RoundTrip"
   },
   {
    "$id": "15",
@@ -111,7 +113,8 @@
     }
    ],
    "IsExtensible": false,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "None"
   }
  ],
  "Models": [
@@ -121,6 +124,7 @@
    "Namespace": "Cadl.EnumPropertiesBasic",
    "Description": "Input model with enum properties.",
    "IsNullable": false,
+   "Usage": "None",
    "Properties": [
     {
      "$id": "20",
@@ -312,7 +316,8 @@
         200
        ],
        "BodyMediaType": "Json",
-       "Headers": []
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",

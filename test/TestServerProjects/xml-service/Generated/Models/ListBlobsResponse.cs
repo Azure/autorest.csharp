@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -23,30 +24,12 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="containerName"/>, <paramref name="prefix"/>, <paramref name="marker"/>, <paramref name="delimiter"/>, <paramref name="blobs"/> or <paramref name="nextMarker"/> is null. </exception>
         internal ListBlobsResponse(string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker)
         {
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (prefix == null)
-            {
-                throw new ArgumentNullException(nameof(prefix));
-            }
-            if (marker == null)
-            {
-                throw new ArgumentNullException(nameof(marker));
-            }
-            if (delimiter == null)
-            {
-                throw new ArgumentNullException(nameof(delimiter));
-            }
-            if (blobs == null)
-            {
-                throw new ArgumentNullException(nameof(blobs));
-            }
-            if (nextMarker == null)
-            {
-                throw new ArgumentNullException(nameof(nextMarker));
-            }
+            Argument.AssertNotNull(containerName, nameof(containerName));
+            Argument.AssertNotNull(prefix, nameof(prefix));
+            Argument.AssertNotNull(marker, nameof(marker));
+            Argument.AssertNotNull(delimiter, nameof(delimiter));
+            Argument.AssertNotNull(blobs, nameof(blobs));
+            Argument.AssertNotNull(nextMarker, nameof(nextMarker));
 
             ContainerName = containerName;
             Prefix = prefix;

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace model_flattening.Models
 {
@@ -18,14 +19,8 @@ namespace model_flattening.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="productId"/> is null. </exception>
         public FlattenParameterGroup(string name, string productId)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (productId == null)
-            {
-                throw new ArgumentNullException(nameof(productId));
-            }
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(productId, nameof(productId));
 
             Name = name;
             ProductId = productId;

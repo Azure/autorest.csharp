@@ -2670,8 +2670,11 @@ operationGroups:
                 in: path
           - !Parameter &ref_117
             schema: *ref_1
+            clientDefaultValue: test
             implementation: Method
             required: true
+            extensions:
+              x-ms-client-default: test
             language: !Languages 
               default:
                 name: availabilitySetName

@@ -553,6 +553,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     foreach (var resource in resourcesWithSameData)
                         resource.PolymorphicOption = new PolymorphicOption(resource, baseResource);
                 }
+
+                if (resourcesWithSameData.Count > 1)
+                {
+                    var baseResource = new BaseResource(GetBaseResourceName(resourceDataSchemaName, resourcesWithSameData), resourcesWithSameData);
+                    foreach (var resource in resourcesWithSameData)
+                        resource.PolymorphicOption = new PolymorphicOption(resource, baseResource);
+                }
             }
 
             return requestPathToResources;

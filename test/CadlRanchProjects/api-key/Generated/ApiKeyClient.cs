@@ -63,16 +63,7 @@ namespace Authentication.ApiKey
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ValidAsync.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ApiKeyClient(credential);
-        /// 
-        /// Response response = await client.ValidAsync();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Valid");
@@ -93,16 +84,7 @@ namespace Authentication.ApiKey
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Valid.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ApiKeyClient(credential);
-        /// 
-        /// Response response = client.Valid();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='Valid(RequestContext)']/*" />
         public virtual Response Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Valid");
@@ -123,16 +105,7 @@ namespace Authentication.ApiKey
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call InvalidAsync.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ApiKeyClient(credential);
-        /// 
-        /// Response response = await client.InvalidAsync();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='InvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Invalid");
@@ -153,16 +126,7 @@ namespace Authentication.ApiKey
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Invalid.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ApiKeyClient(credential);
-        /// 
-        /// Response response = client.Invalid();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='Invalid(RequestContext)']/*" />
         public virtual Response Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Invalid");
@@ -195,7 +159,7 @@ namespace Authentication.ApiKey
 
         internal HttpMessage CreateInvalidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier204403);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -209,7 +173,5 @@ namespace Authentication.ApiKey
 
         private static ResponseClassifier _responseClassifier204;
         private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new StatusCodeClassifier(stackalloc ushort[] { 204 });
-        private static ResponseClassifier _responseClassifier204403;
-        private static ResponseClassifier ResponseClassifier204403 => _responseClassifier204403 ??= new StatusCodeClassifier(stackalloc ushort[] { 204, 403 });
     }
 }
