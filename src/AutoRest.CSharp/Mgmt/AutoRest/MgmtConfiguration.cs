@@ -186,7 +186,6 @@ namespace AutoRest.CSharp.Input
             JsonElement? irregularPluralWords = default,
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
-            JsonElement? strictCommonOperations = default,
             JsonElement? resourceModelRequiresType = default,
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
@@ -247,7 +246,6 @@ namespace AutoRest.CSharp.Input
             }
             PreventWrappingReturnType = preventWrappingReturnType;
             IsArmCore = DeserializeBoolean(armCore, false);
-            IsStrictCommonOperationEnabled = DeserializeBoolean(strictCommonOperations, true);
             DoesResourceModelRequireType = DeserializeBoolean(resourceModelRequiresType, true);
             DoesResourceModelRequireName = DeserializeBoolean(resourceModelRequiresName, true);
             DoesSingletonRequiresKeyword = DeserializeBoolean(singletonRequiresKeyword, false);
@@ -318,8 +316,6 @@ namespace AutoRest.CSharp.Input
 
         public bool IsArmCore { get; }
 
-        public bool IsStrictCommonOperationEnabled { get; }
-
         public TestGenConfiguration? TestGen { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
@@ -355,7 +351,6 @@ namespace AutoRest.CSharp.Input
                 irregularPluralWords: autoRest.GetValue<JsonElement?>("irregular-plural-words").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
-                strictCommonOperations: autoRest.GetValue<JsonElement?>("strict-common-operations").GetAwaiter().GetResult(),
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
@@ -397,9 +392,6 @@ namespace AutoRest.CSharp.Input
             MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
-            // only write to the configuration file when this is false which is not the default value
-            if (!IsStrictCommonOperationEnabled)
-                writer.WriteBoolean(nameof(IsStrictCommonOperationEnabled), IsStrictCommonOperationEnabled);
 
             if (!DoesResourceModelRequireType)
                 writer.WriteBoolean(nameof(DoesResourceModelRequireType), DoesResourceModelRequireType);
@@ -465,7 +457,6 @@ namespace AutoRest.CSharp.Input
             var virtualOperations = DeserializeArray(virtualOperationsElement);
 
             root.TryGetProperty("ArmCore", out var isArmCore);
-            root.TryGetProperty(nameof(IsStrictCommonOperationEnabled), out var isStrictCommonOperationEnabled);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
             root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
@@ -507,7 +498,6 @@ namespace AutoRest.CSharp.Input
                 irregularPluralWords: irregularPluralWords,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
-                strictCommonOperations: isStrictCommonOperationEnabled,
                 resourceModelRequiresType: resourceModelRequiresType,
                 resourceModelRequiresName: resourceModelRequiresName,
                 singletonRequiresKeyword: singletonRequiresKeyword,
