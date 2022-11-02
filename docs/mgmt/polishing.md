@@ -8,6 +8,7 @@
     - [Rename a property in a class](#rename-a-property-in-a-class)
     - [Change the format of a property](#change-the-format-of-a-property)
     - [Rename an enumeration value in an enumeration type](#rename-an-enumeration-value-in-an-enumeration-type)
+  - [Rename a parameter in an operation](#rename-a-parameter-in-an-operation)
   - [Irregular Plural Words](#irregular-plural-words)
   - [Keep Plural Enums](#keep-plural-enums)
   - [Suppress Abstract Base Class](#suppress-abstract-base-class)
@@ -224,6 +225,20 @@ rename-mapping:
   EnumType.enum_value: NewValue
 ```
 where the `EnumType` is the original name of the enumeration type in the **swagger**, and `enum_value` is the original name of the enumeration value in the **swagger**. In case we have spaces or other special character, you might need to use quotes to enclosing the key in this mapping to ensure everything is good without compile errors.
+
+## Rename a parameter in an operation
+
+There is a configuration that allows you to change the parameter names in an operation. For instance
+```yaml
+rename-mapping:
+  VirtualMachines_CreateOrUpdate:
+    name: vmName
+```
+This configuration is a two-level dictionary. The key of the first level dictionary is the operation id you would like to change. In the above sample, the generator will change the parameter names that match in the operation with operation id `VirtualMachines_CreateOrUpdate`.
+
+The value of the first level dictionary of this configuration is another dictionary, the original parameter name as its keys, and the desired value as its value. In the above sample, the generator will rename the parameter `name` to `vmName` in the operation `VirtualMachines_CreateOrUpdate`.
+
+If the parameter name specified does not exist in the specified operation, nothing will happen.
 
 ## Irregular Plural Words
 
