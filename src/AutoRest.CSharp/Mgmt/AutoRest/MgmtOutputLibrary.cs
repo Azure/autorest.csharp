@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private CachedDictionary<string, ResourceData> RawRequestPathToResourceData { get; }
 
         /// <summary>
-        /// This is a map from request path to the <see cref="ResourceObjectAssociation"/> which consists from <see cref="ResourceTypeSegment"/>, <see cref="Output.ResourceData"/>, <see cref="Resource"/> and <see cref="ResouColl"/>
+        /// This is a map from request path to the <see cref="ResourceObjectAssociation"/> which consists from <see cref="ResourceTypeSegment"/>, <see cref="Output.ResourceData"/>, <see cref="Resource"/> and <see cref="ResourceCollection"/>
         /// </summary>
         private CachedDictionary<RequestPath, ResourceObjectAssociation> RequestPathToResources { get; }
 
@@ -364,6 +364,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             return restClientMethods;
         }
+
+        private ModelFactoryTypeProvider? _modelFactory;
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(MgmtContext.Context.DefaultNamespace, AllSchemaMap.Values, MgmtContext.Context.SourceInputModel);
 
         private ArmClientExtensions? _armClientExtensions;
         public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= EnsureArmClientExtensions();

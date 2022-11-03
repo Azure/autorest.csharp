@@ -15,14 +15,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
     internal static class Remover
     {
-        public static async Task<Project> RemoveUnusedAsync(Project project, ImmutableHashSet<string> modelsToKeep)
+        public static async Task<Project> RemoveUnusedAsync(Project project, ImmutableHashSet<string> modelsToKeep, string? modelFactoryName)
         {
             var compilation = await project.GetCompilationAsync();
             if (compilation == null)
                 return project;
 
             // find all the declarations, including non-public declared
-            var definitions = await Internalizer.GetModels(project, false);
+            var definitions = await Internalizer.GetModels(project, false, modelFactoryName);
             // build reference map
             var referenceMap = await BuildReferenceMap(compilation, project, definitions);
             // get root nodes

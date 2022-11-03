@@ -12,6 +12,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using Configuration = AutoRest.CSharp.Input.Configuration;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -20,18 +21,16 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         public IEnumerable<MethodSignature> Methods { get; }
-        public string DefaultClientName { get; }
 
         private ModelFactoryTypeProvider(IEnumerable<MethodSignature> methods, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             Methods = methods;
 
-            DefaultName = $"{defaultClientName}ModelFactory";
-            DefaultClientName = defaultClientName;
+            DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(InputNamespace rootNamespace, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
+        public static ModelFactoryTypeProvider? TryCreate(string rootNamespaceName, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
         {
             var schemaObjectTypes = models.OfType<SchemaObjectType>()
                 .Where(RequiresModelFactory)
@@ -42,8 +41,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             }
 
-            var defaultClientName = ClientBuilder.GetClientPrefix(Configuration.LibraryName, rootNamespace.Name);
-            var defaultNamespace = GetDefaultModelNamespace(null, rootNamespace.Name);
+            var defaultClientName = ClientBuilder.GetClientPrefix(Configuration.LibraryName, rootNamespaceName);
+            var defaultNamespace = GetDefaultModelNamespace(null, rootNamespaceName);
 
             return new ModelFactoryTypeProvider(schemaObjectTypes.Select(CreateMethod), defaultClientName, defaultNamespace, sourceInputModel);
         }

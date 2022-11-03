@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
     internal static class Internalizer
     {
-        public static async Task<Project> InternalizeAsync(Project project, ImmutableHashSet<string> modelsToKeep)
+        public static async Task<Project> InternalizeAsync(Project project, ImmutableHashSet<string> modelsToKeep, string? modelFactoryName)
         {
             var compilation = await GetCompilationAsync(project);
 
@@ -40,6 +40,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             {
                 project = MarkInternal(project, model);
             }
+
+            // TODO -- mark the methods in model factory internal
 
             return project;
         }
@@ -193,9 +195,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             return compilation;
         }
 
-        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
+        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly, string? modelFactoryName = null)
         {
-            var classVisitor = new DefinitionVisitor(publicOnly);
+            var classVisitor = new DefinitionVisitor(publicOnly, modelFactoryName);
 
             foreach (var document in project.Documents)
             {
