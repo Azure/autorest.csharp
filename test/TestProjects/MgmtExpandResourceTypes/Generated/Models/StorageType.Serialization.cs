@@ -11,14 +11,6 @@ namespace MgmtExpandResourceTypes.Models
 {
     internal static partial class StorageTypeExtensions
     {
-        public static int ToSerialInt32(this StorageType value) => value switch
-        {
-            StorageType.StandardLRS => 1,
-            StorageType.StandardZRS => 2,
-            StorageType.StandardGRS => 3,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StorageType value.")
-        };
-
         public static StorageType ToStorageType(this int value)
         {
             if (Equals(value, 1)) return StorageType.StandardLRS;

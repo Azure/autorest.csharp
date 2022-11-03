@@ -11,14 +11,6 @@ namespace ModelsInCadl
 {
     internal static partial class FixedIntEnumExtensions
     {
-        public static int ToSerialInt32(this FixedIntEnum value) => value switch
-        {
-            FixedIntEnum.One => 1,
-            FixedIntEnum.Two => 2,
-            FixedIntEnum.Four => 4,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown FixedIntEnum value.")
-        };
-
         public static FixedIntEnum ToFixedIntEnum(this int value)
         {
             if (Equals(value, 1)) return FixedIntEnum.One;

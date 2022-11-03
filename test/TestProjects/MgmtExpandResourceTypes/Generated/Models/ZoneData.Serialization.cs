@@ -47,12 +47,12 @@ namespace MgmtExpandResourceTypes
             if (Optional.IsDefined(MachineType))
             {
                 writer.WritePropertyName("machineType");
-                writer.WriteNumberValue(MachineType.Value.ToSerialInt32());
+                writer.WriteNumberValue((int)MachineType.Value);
             }
             if (Optional.IsDefined(StorageType))
             {
                 writer.WritePropertyName("storageType");
-                writer.WriteNumberValue(StorageType.Value.ToSerialInt32());
+                writer.WriteNumberValue((int)StorageType.Value);
             }
             if (Optional.IsCollectionDefined(RegistrationVirtualNetworks))
             {

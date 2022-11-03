@@ -11,14 +11,6 @@ namespace MgmtExpandResourceTypes.Models
 {
     internal static partial class MachineTypeExtensions
     {
-        public static int ToSerialInt32(this MachineType value) => value switch
-        {
-            MachineType.One => 1,
-            MachineType.Two => 2,
-            MachineType.Four => 4,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MachineType value.")
-        };
-
         public static MachineType ToMachineType(this int value)
         {
             if (Equals(value, 1)) return MachineType.One;
