@@ -16,7 +16,7 @@ using Azure.ResourceManager.Sample;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Model factory for read-only models. </summary>
-    internal static partial class SampleModelFactory
+    public static partial class SampleModelFactory
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
         /// <param name="id"> The id. </param>
@@ -189,19 +189,6 @@ namespace Azure.ResourceManager.Sample.Models
             return new SubResourceReadOnly(id);
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupInstanceView. </summary>
-        /// <param name="hosts">
-        /// List of instance view of the dedicated hosts under the dedicated host group.
-        /// Serialized Name: DedicatedHostGroupInstanceView.hosts
-        /// </param>
-        /// <returns> A new <see cref="Models.DedicatedHostGroupInstanceView"/> instance for mocking. </returns>
-        public static DedicatedHostGroupInstanceView DedicatedHostGroupInstanceView(IEnumerable<DedicatedHostInstanceViewWithName> hosts = null)
-        {
-            hosts ??= new List<DedicatedHostInstanceViewWithName>();
-
-            return new DedicatedHostGroupInstanceView(hosts?.ToList());
-        }
-
         /// <summary> Initializes a new instance of DedicatedHostInstanceViewWithName. </summary>
         /// <param name="assetId">
         /// Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
@@ -246,19 +233,6 @@ namespace Azure.ResourceManager.Sample.Models
             statuses ??= new List<InstanceViewStatus>();
 
             return new DedicatedHostInstanceView(assetId, availableCapacity, statuses?.ToList());
-        }
-
-        /// <summary> Initializes a new instance of DedicatedHostAvailableCapacity. </summary>
-        /// <param name="allocatableVMs">
-        /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
-        /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs
-        /// </param>
-        /// <returns> A new <see cref="Models.DedicatedHostAvailableCapacity"/> instance for mocking. </returns>
-        public static DedicatedHostAvailableCapacity DedicatedHostAvailableCapacity(IEnumerable<DedicatedHostAllocatableVM> allocatableVMs = null)
-        {
-            allocatableVMs ??= new List<DedicatedHostAllocatableVM>();
-
-            return new DedicatedHostAvailableCapacity(allocatableVMs?.ToList());
         }
 
         /// <summary> Initializes a new instance of DedicatedHostAllocatableVM. </summary>
@@ -414,19 +388,6 @@ namespace Azure.ResourceManager.Sample.Models
             tags ??= new Dictionary<string, string>();
 
             return new VirtualMachineExtensionData(id, name, resourceType, systemData, tags, location, forceUpdateTag, publisher, extensionType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, instanceView);
-        }
-
-        /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
-        /// <param name="value">
-        /// The list of extensions
-        /// Serialized Name: VirtualMachineExtensionsListResult.value
-        /// </param>
-        /// <returns> A new <see cref="Models.VirtualMachineExtensionsListResult"/> instance for mocking. </returns>
-        public static VirtualMachineExtensionsListResult VirtualMachineExtensionsListResult(IEnumerable<VirtualMachineExtensionData> value = null)
-        {
-            value ??= new List<VirtualMachineExtensionData>();
-
-            return new VirtualMachineExtensionsListResult(value?.ToList());
         }
 
         /// <summary> Initializes a new instance of DataDiskImage. </summary>
@@ -850,17 +811,6 @@ namespace Azure.ResourceManager.Sample.Models
             return new DiskInstanceView(name, encryptionSettings?.ToList(), statuses?.ToList());
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineHealthStatus. </summary>
-        /// <param name="status">
-        /// The health status information for the VM.
-        /// Serialized Name: VirtualMachineHealthStatus.status
-        /// </param>
-        /// <returns> A new <see cref="Models.VirtualMachineHealthStatus"/> instance for mocking. </returns>
-        public static VirtualMachineHealthStatus VirtualMachineHealthStatus(InstanceViewStatus status = null)
-        {
-            return new VirtualMachineHealthStatus(status);
-        }
-
         /// <summary> Initializes a new instance of BootDiagnosticsInstanceView. </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI. &lt;br&gt;&lt;br&gt;NOTE: This will **not** be set if boot diagnostics is currently enabled with managed storage.
@@ -1054,46 +1004,6 @@ namespace Azure.ResourceManager.Sample.Models
         public static LastPatchInstallationSummary LastPatchInstallationSummary(PatchOperationStatus? status = null, string installationActivityId = null, bool? maintenanceWindowExceeded = null, RebootStatus? rebootStatus = null, int? notSelectedPatchCount = null, int? excludedPatchCount = null, int? pendingPatchCount = null, int? installedPatchCount = null, int? failedPatchCount = null, DateTimeOffset? startOn = null, DateTimeOffset? lastModifiedOn = null, string startedBy = null, ApiError error = null)
         {
             return new LastPatchInstallationSummary(status, installationActivityId, maintenanceWindowExceeded, rebootStatus, notSelectedPatchCount, excludedPatchCount, pendingPatchCount, installedPatchCount, failedPatchCount, startOn, lastModifiedOn, startedBy, error);
-        }
-
-        /// <summary> Initializes a new instance of VirtualMachineIdentity. </summary>
-        /// <param name="principalId">
-        /// The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
-        /// Serialized Name: VirtualMachineIdentity.principalId
-        /// </param>
-        /// <param name="tenantId">
-        /// The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
-        /// Serialized Name: VirtualMachineIdentity.tenantId
-        /// </param>
-        /// <param name="resourceIdentityType">
-        /// The type of identity used for the virtual machine. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine.
-        /// Serialized Name: VirtualMachineIdentity.type
-        /// </param>
-        /// <param name="userAssignedIdentities">
-        /// The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}&apos;.
-        /// Serialized Name: VirtualMachineIdentity.userAssignedIdentities
-        /// </param>
-        /// <returns> A new <see cref="Models.VirtualMachineIdentity"/> instance for mocking. </returns>
-        public static Models.VirtualMachineIdentity VirtualMachineIdentity(string principalId = null, Guid? tenantId = null, Models.ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
-        {
-            userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
-
-            return new Models.VirtualMachineIdentity(principalId, tenantId, resourceIdentityType, userAssignedIdentities);
-        }
-
-        /// <summary> Initializes a new instance of Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties. </summary>
-        /// <param name="principalId">
-        /// The principal id of user assigned identity.
-        /// Serialized Name: Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties.principalId
-        /// </param>
-        /// <param name="clientId">
-        /// The client id of user assigned identity.
-        /// Serialized Name: Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties.clientId
-        /// </param>
-        /// <returns> A new <see cref="Models.Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties"/> instance for mocking. </returns>
-        public static Models.Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties(string principalId = null, string clientId = null)
-        {
-            return new Models.Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties(principalId, clientId);
         }
 
         /// <summary> Initializes a new instance of ImageData. </summary>
@@ -1410,46 +1320,6 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetExtensionData(id, name, resourceType, forceUpdateTag, publisher, extensionType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList());
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIdentity. </summary>
-        /// <param name="principalId">
-        /// The principal id of virtual machine scale set identity. This property will only be provided for a system assigned identity.
-        /// Serialized Name: VirtualMachineScaleSetIdentity.principalId
-        /// </param>
-        /// <param name="tenantId">
-        /// The tenant id associated with the virtual machine scale set. This property will only be provided for a system assigned identity.
-        /// Serialized Name: VirtualMachineScaleSetIdentity.tenantId
-        /// </param>
-        /// <param name="resourceIdentityType">
-        /// The type of identity used for the virtual machine scale set. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine scale set.
-        /// Serialized Name: VirtualMachineScaleSetIdentity.type
-        /// </param>
-        /// <param name="userAssignedIdentities">
-        /// The list of user identities associated with the virtual machine scale set. The user identity dictionary key references will be ARM resource ids in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}&apos;.
-        /// Serialized Name: VirtualMachineScaleSetIdentity.userAssignedIdentities
-        /// </param>
-        /// <returns> A new <see cref="Models.VirtualMachineScaleSetIdentity"/> instance for mocking. </returns>
-        public static Models.VirtualMachineScaleSetIdentity VirtualMachineScaleSetIdentity(string principalId = null, Guid? tenantId = null, Models.ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
-        {
-            userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
-
-            return new Models.VirtualMachineScaleSetIdentity(principalId, tenantId, resourceIdentityType, userAssignedIdentities);
-        }
-
-        /// <summary> Initializes a new instance of ComponentsNj115SSchemasVirtualmachinescalesetidentityPropertiesUserassignedidentitiesAdditionalproperties. </summary>
-        /// <param name="principalId">
-        /// The principal id of user assigned identity.
-        /// Serialized Name: ComponentsNj115SSchemasVirtualmachinescalesetidentityPropertiesUserassignedidentitiesAdditionalproperties.principalId
-        /// </param>
-        /// <param name="clientId">
-        /// The client id of user assigned identity.
-        /// Serialized Name: ComponentsNj115SSchemasVirtualmachinescalesetidentityPropertiesUserassignedidentitiesAdditionalproperties.clientId
-        /// </param>
-        /// <returns> A new <see cref="Models.ComponentsNj115SSchemasVirtualmachinescalesetidentityPropertiesUserassignedidentitiesAdditionalproperties"/> instance for mocking. </returns>
-        public static Models.ComponentsNj115SSchemasVirtualmachinescalesetidentityPropertiesUserassignedidentitiesAdditionalproperties ComponentsNj115SSchemasVirtualmachinescalesetidentityPropertiesUserassignedidentitiesAdditionalproperties(string principalId = null, string clientId = null)
-        {
-            return new Models.ComponentsNj115SSchemasVirtualmachinescalesetidentityPropertiesUserassignedidentitiesAdditionalproperties(principalId, clientId);
-        }
-
         /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceView. </summary>
         /// <param name="virtualMachine">
         /// The instance view status summary for the virtual machine scale set.
@@ -1475,19 +1345,6 @@ namespace Azure.ResourceManager.Sample.Models
             orchestrationServices ??= new List<OrchestrationServiceSummary>();
 
             return new VirtualMachineScaleSetInstanceView(virtualMachine, extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList());
-        }
-
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceViewStatusesSummary. </summary>
-        /// <param name="statusesSummary">
-        /// The extensions information.
-        /// Serialized Name: VirtualMachineScaleSetInstanceViewStatusesSummary.statusesSummary
-        /// </param>
-        /// <returns> A new <see cref="Models.VirtualMachineScaleSetInstanceViewStatusesSummary"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetInstanceViewStatusesSummary VirtualMachineScaleSetInstanceViewStatusesSummary(IEnumerable<VirtualMachineStatusCodeCount> statusesSummary = null)
-        {
-            statusesSummary ??= new List<VirtualMachineStatusCodeCount>();
-
-            return new VirtualMachineScaleSetInstanceViewStatusesSummary(statusesSummary?.ToList());
         }
 
         /// <summary> Initializes a new instance of VirtualMachineStatusCodeCount. </summary>
@@ -1981,17 +1838,6 @@ namespace Azure.ResourceManager.Sample.Models
         public static LogAnalytics LogAnalytics(LogAnalyticsOutput properties = null)
         {
             return new LogAnalytics(properties);
-        }
-
-        /// <summary> Initializes a new instance of LogAnalyticsOutput. </summary>
-        /// <param name="output">
-        /// Output file Uri path to blob container.
-        /// Serialized Name: LogAnalyticsOutput.output
-        /// </param>
-        /// <returns> A new <see cref="Models.LogAnalyticsOutput"/> instance for mocking. </returns>
-        public static LogAnalyticsOutput LogAnalyticsOutput(string output = null)
-        {
-            return new LogAnalyticsOutput(output);
         }
     }
 }

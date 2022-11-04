@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -21,12 +22,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
     internal static class Internalizer
     {
-        public static async Task<Project> InternalizeAsync(Project project, ImmutableHashSet<string> modelsToKeep, string? modelFactoryName)
+        public static async Task<Project> InternalizeAsync(Project project, ImmutableHashSet<string> modelsToKeep, string? modelFactoryNamespace, string? modelFactoryName)
         {
             var compilation = await GetCompilationAsync(project);
 
             // first get all the declared models
-            var definitions = await GetModels(project, true);
+            var definitions = await GetModels(project, true, modelFactoryName);
             // get the root nodes
             var rootNodes = await GetRootNodes(project, modelsToKeep, true);
             // traverse all the root and recursively add all the things we met
@@ -41,9 +42,45 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
                 project = MarkInternal(project, model);
             }
 
-            // TODO -- mark the methods in model factory internal
+            // TODO -- remove the methods that correspond to the internal models
+            project = await RemoveMethodsFromModelFactoryAsync(project, $"{modelFactoryNamespace}.{modelFactoryName}", definitions);
 
             return project;
+        }
+
+        private static async Task<Project> RemoveMethodsFromModelFactoryAsync(Project project, string modelFactoryFullname, IEnumerable<BaseTypeDeclarationSyntax> modelsToRemove)
+        {
+            var compilation = await GetCompilationAsync(project);
+            var modelFactory = compilation.GetTypeByMetadataName(modelFactoryFullname);
+
+            if (modelFactory == null)
+                return project;
+
+            var namesToRemove = new HashSet<string>(modelsToRemove.Select(item => item.Identifier.Text));
+            var nodesToRemove = new List<SyntaxNode>();
+
+            foreach (var method in modelFactory.GetMembers().OfType<IMethodSymbol>())
+            {
+                if (namesToRemove.Contains(method.Name))
+                {
+                    foreach (var reference in method.DeclaringSyntaxReferences)
+                    {
+                        var node = await reference.GetSyntaxAsync();
+                        nodesToRemove.Add(node);
+                    }
+                }
+            }
+
+            // our model factory should only be defined at one place
+            var modelFactoryNode = await modelFactory.DeclaringSyntaxReferences.Single().GetSyntaxAsync();
+            var modelFactoryTree = modelFactoryNode.SyntaxTree;
+            var modelFactoryDocument = project.GetDocument(modelFactoryTree)!;
+
+            var root = await modelFactoryTree.GetRootAsync();
+            root = root.RemoveNodes(nodesToRemove, SyntaxRemoveOptions.KeepNoTrivia);
+            modelFactoryDocument = modelFactoryDocument.WithSyntaxRoot(root!);
+
+            return modelFactoryDocument.Project;
         }
 
         private static async IAsyncEnumerable<BaseTypeDeclarationSyntax> TraverseAllPublicModelsAsync(Compilation compilation, Project project, ImmutableHashSet<BaseTypeDeclarationSyntax> rootNodes)
