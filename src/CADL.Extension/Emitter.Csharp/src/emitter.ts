@@ -68,10 +68,11 @@ import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
 import fs from "fs";
+import fsExtra from "fs-extra"
 import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
 import { dllFilePath } from "@autorest/csharp";
-import { exec } from "child_process";
+import { execSync } from "child_process";
 import { getConvenienceAPIName } from "@azure-tools/cadl-dpg";
 
 export interface NetEmitterOptions {
@@ -85,6 +86,8 @@ export interface NetEmitterOptions {
     generateConvenienceAPI: boolean; //workaround for cadl-ranch project
     "new-project": boolean;
     csharpGeneratorPath: string;
+    "clear-output-folder"?: boolean;
+    "save-inputs"?: boolean;
 }
 
 const defaultOptions = {
@@ -93,7 +96,9 @@ const defaultOptions = {
     logFile: "log.json",
     skipSDKGeneration: false,
     "new-project": false,
-    csharpGeneratorPath: dllFilePath
+    csharpGeneratorPath: dllFilePath,
+    "clear-output-folder": false,
+    "save-inputs": false
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -109,7 +114,9 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         skipSDKGeneration: { type: "boolean", default: false },
         generateConvenienceAPI: { type: "boolean", nullable: true },
         "new-project": { type: "boolean", nullable: true },
-        csharpGeneratorPath: { type: "string", nullable: true }
+        csharpGeneratorPath: { type: "string", nullable: true },
+        "clear-output-folder": { type: "boolean", nullable: true },
+        "save-inputs": { type: "boolean", nullable: true },
     },
     required: []
 };
@@ -142,7 +149,9 @@ export async function $onEmit(
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
         "new-project": resolvedOptions["new-project"],
-        csharpGeneratorPath: resolvedOptions.csharpGeneratorPath
+        csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
+        "clear-output-folder": resolvedOptions["clear-output-folder"],
+        "save-inputs": resolvedOptions["save-inputs"]
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -166,6 +175,10 @@ export async function $onEmit(
      
             if (!fs.existsSync(generatedFolder)) {
                 fs.mkdirSync(generatedFolder, { recursive: true });
+            }
+            
+            if (options["clear-output-folder"]) {
+                fsExtra.emptyDirSync(generatedFolder);
             }
             await program.host.writeFile(
                 resolvePath(generatedFolder, "cadl.json"),
@@ -193,18 +206,32 @@ export async function $onEmit(
                 let command = `dotnet ${resolvePath(options.csharpGeneratorPath)} --project-path ${outputFolder} ${newProjectOption}`;
                 console.info(command);
 
-                exec(command, (error, stdout, stderr) => {
-                    if (error) {
-                        console.log(`error: ${error.message}`);
-                    }
-                    else if (stderr) {
-                        console.log(`stderr: ${stderr}`);
-                    }
-                    console.log(`stdout: ${stdout}`);
-                });
-            }            
+                try {
+                    execSync(command, {stdio: 'inherit'});
+                } catch(error: any) {
+                    if (error.message) console.log(error.message);
+                    if (error.stderr) console.error(error.stderr);
+                    if (error.stdout) console.log(error.stdout);
+                }
+            }
+            
+            if (!options["save-inputs"]) {
+                // delete
+                deleteFile(resolvePath(generatedFolder, "cadl.json"));
+                deleteFile(resolvePath(generatedFolder, "Configuration.json"));
+            }
         }
     }
+}
+
+function deleteFile(filePath: string) {
+    fs.unlink(filePath, err => {
+        if (err) {
+            console.log(`stderr: ${err}`);
+        }
+    
+        console.log(`File ${filePath} is deleted.`)
+    });
 }
 
 function prettierOutput(output: string) {
@@ -883,3 +910,4 @@ class ErrorTypeFoundError extends Error {
         super("Error type found in evaluated Cadl output");
     }
 }
+

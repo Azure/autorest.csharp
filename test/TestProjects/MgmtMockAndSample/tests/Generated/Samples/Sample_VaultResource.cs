@@ -284,6 +284,30 @@ CertificatePermission.Get
             Console.WriteLine($"Succeeded");
         }
 
+        // Validate a vault name
+        [NUnit.Framework.Test]
+        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        public async Task CheckNameAvailabilityVault_ValidateAVaultName()
+        {
+            // Generated from example definition: 
+            // this example is just showing the usage of "Vaults_CheckNameAvailability" operation, for the dependent resources, they will have to be created separately.
+
+            // authenticate your client
+            ArmClient client = new ArmClient(new DefaultAzureCredential());
+
+            // this example assumes you already have this SubscriptionResource created on azure
+            // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
+            // invoke the operation
+            VaultCheckNameAvailabilityContent content = new VaultCheckNameAvailabilityContent("sample-vault");
+            CheckNameAvailabilityResult result = await subscriptionResource.CheckNameAvailabilityVaultAsync(content);
+
+            Console.WriteLine($"Succeeded: {result}");
+        }
+
         // KeyVaultListPrivateLinkResources
         [NUnit.Framework.Test]
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]

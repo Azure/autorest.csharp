@@ -18,12 +18,15 @@ namespace ModelsInCadl
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString");
             writer.WriteStringValue(RequiredString);
+            writer.WritePropertyName("discriminatorProperty");
+            writer.WriteStringValue(DiscriminatorProperty);
             writer.WriteEndObject();
         }
 
         internal static DerivedModelWithDiscriminatorA DeserializeDerivedModelWithDiscriminatorA(JsonElement element)
         {
             string requiredString = default;
+            string discriminatorProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"))
@@ -31,8 +34,13 @@ namespace ModelsInCadl
                     requiredString = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("discriminatorProperty"))
+                {
+                    discriminatorProperty = property.Value.GetString();
+                    continue;
+                }
             }
-            return new DerivedModelWithDiscriminatorA(requiredString);
+            return new DerivedModelWithDiscriminatorA(discriminatorProperty, requiredString);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

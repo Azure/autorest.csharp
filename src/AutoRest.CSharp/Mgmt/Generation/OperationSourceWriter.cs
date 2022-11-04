@@ -21,14 +21,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private readonly OperationSource _opSource;
         private readonly CodeWriter _writer;
-        private readonly bool _isReturningResource;
         private readonly IReadOnlyDictionary<string, string>? _operationIdMappings;
 
         public OperationSourceWriter(OperationSource opSource)
         {
             _writer = new CodeWriter();
             _opSource = opSource;
-            _isReturningResource = MgmtContext.Library.CsharpTypeToResource.ContainsKey(_opSource.ReturnType);
             if (_opSource.Resource is not null && Configuration.MgmtConfiguration.OperationIdMappings.TryGetValue(_opSource.Resource.ResourceName, out var mappings))
                 _operationIdMappings = mappings;
         }
@@ -39,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 using (_writer.Scope($"internal class {_opSource.TypeName} : {_opSource.Interface}"))
                 {
-                    if (_isReturningResource)
+                    if (_opSource.IsReturningResource)
                     {
                         _writer.WriteField(_opSource.ArmClientField);
 
@@ -78,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             _writer.Line($"return data;");
                             _writer.Line();
                             _writer.Append($"var newId = {resourceType}.CreateResourceIdentifier(");
-                            var createIdMethod = resource.CreateResourceIdentifierMethodSignature();
+                            var createIdMethod = resource.CreateResourceIdentifierMethodSignature;
                             foreach (var param in createIdMethod.Parameters)
                             {
                                 _writer.Line();
@@ -115,7 +113,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public void WriteCreateResult(string responseVariable)
         {
             Action<FormattableString> valueCallback = fs => _writer.Line($"return {fs};");
-            if (_isReturningResource)
+            if (_opSource.IsReturningResource)
             {
                 valueCallback = fs =>
                 {
