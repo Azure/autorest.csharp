@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 
@@ -28,7 +29,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null)
         {
-            Description = description;
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
             OptionalViaNullability = optionalViaNullability;
@@ -36,6 +36,20 @@ namespace AutoRest.CSharp.Output.Models.Types
             Declaration = declaration;
             IsRequired = isRequired;
             InputModelProperty = inputModelProperty;
+            Description = (string.IsNullOrEmpty(description) ? CreateDefaultPropertyDescription(Declaration.Name, IsReadOnly) : description) + CreateExtraPropertyDiscriminatorSummary(ValueType);
+        }
+
+        public static FormattableString CreateDefaultPropertyDescription(string nameToUse, bool isReadOnly)
+        {
+            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
+            if (isReadOnly)
+            {
+                return $"Gets the {splitDeclarationName}";
+            }
+            else
+            {
+                return $"Gets or sets the {splitDeclarationName}";
+            }
         }
 
         public bool IsRequired { get; }
@@ -57,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType ValueType { get; }
         public bool IsReadOnly { get; }
 
-        private bool IsDiscriminator() => SchemaProperty?.IsDiscriminator is true;
+        private bool IsDiscriminator() => SchemaProperty?.IsDiscriminator is true || InputModelProperty?.IsDiscriminator is true;
 
         public bool IsSinglePropertyObject([MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
         {
@@ -189,6 +203,35 @@ namespace AutoRest.CSharp.Output.Models.Types
                 heirarchyStack.Push(childProp);
                 BuildHeirarchy(childProp, heirarchyStack);
             }
+        }
+
+        private static string CreateExtraPropertyDiscriminatorSummary(CSharpType valueType)
+        {
+            string updatedDescription = string.Empty;
+            if (valueType.IsFrameworkType)
+            {
+                if (TypeFactory.IsList(valueType))
+                {
+                    if (!valueType.Arguments.First().IsFrameworkType && valueType.Arguments.First().Implementation is ObjectType objectType)
+                    {
+                        updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
+                    }
+                }
+                else if (TypeFactory.IsDictionary(valueType))
+                {
+                    var objectTypes = valueType.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is ObjectType);
+                    if (objectTypes.Count() > 0)
+                    {
+                        var subDescription = objectTypes.Select(o => ((ObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator());
+                        updatedDescription = string.Join("", subDescription);
+                    }
+                }
+            }
+            else if (valueType.Implementation is ObjectType objectType)
+            {
+                updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
+            }
+            return updatedDescription;
         }
     }
 }

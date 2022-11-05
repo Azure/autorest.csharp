@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models.Types;
@@ -16,7 +17,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/roundtrip-basic/main.cadl#L15-L23
             var input = new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", "Round-trip Model", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
-                null, null, null);
+                null, null, null, null);
 
             var model = new ModelTypeProvider(input, "test", null);
             ValidateGeneratedModelCodes(model, expectedModelCodes);
@@ -28,7 +29,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/input-basic/main.cadl
             var input = new InputModelType("InputModel", "Cadl.TestServer.InputBasic", "public", "Input Model", InputModelTypeUsage.Input,
                 new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
-                null, new List<InputModelType>(), null);
+                null, new List<InputModelType>(), null, null);
 
             var model = new ModelTypeProvider(input, "test", null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
@@ -40,7 +41,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/output-basic/main.cadl#L15-L23
             var input = new InputModelType("OutputModel", "Cadl.TestServer.OutputBasic", "public", "Output Model", InputModelTypeUsage.Output,
                 new List<InputModelProperty>{ RequiredStringProperty, RequiredIntProperty },
-                null, new List<InputModelType>(), null);
+                null, new List<InputModelType>(), null, null);
 
             var model = new ModelTypeProvider(input, "test", null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
@@ -64,7 +65,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                     new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, true, false, false),
                     new InputModelProperty("requiredBytes", "requiredBytes", "", InputPrimitiveType.BinaryData, true, false, false)
                 },
-                null, null, null);
+                null, null, null, null);
 
             var model = new ModelTypeProvider(input, "test", null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);

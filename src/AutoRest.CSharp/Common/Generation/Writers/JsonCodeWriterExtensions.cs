@@ -446,7 +446,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization, string? backingTypeName = null)
+        public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization)
         {
             // this is the first level of object hierarchy
             // collect all properties and initialize the dictionary
@@ -491,11 +491,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var parameterValues = propertyVariables.ToDictionary(v => v.Key.ParameterName, v => GetOptionalFormattable(v.Key, v.Value));
-            var parameters = serialization.Constructor.Parameters
+            var parametersToUse = serialization.Discriminator?.DefaultObjectType is null
+                ? serialization.Constructor.Parameters
+                : serialization.Discriminator.DefaultObjectType.InitializationConstructor.Signature.Parameters;
+            var parameters = parametersToUse
                 .Select(p => parameterValues[p.Name])
                 .ToArray();
 
-            writer.Append($"return new {(backingTypeName != null ? backingTypeName : serialization.Type)}({parameters.Join(", ")});");
+            var typeToConstruct = serialization.Discriminator?.DefaultObjectType is null ? serialization.Type : serialization.Discriminator.DefaultObjectType.Type;
+
+            writer.Append($"return new {typeToConstruct}({parameters.Join(", ")});");
         }
 
         private static FormattableString GetDeserializeValueFormattable(JsonValueSerialization serialization, FormattableString element)

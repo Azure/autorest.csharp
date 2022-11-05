@@ -186,21 +186,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                if (declaration.IsAbstract)
-                {
-                    if (Configuration.AzureArm)
-                    {
-                        writer.WriteObjectInitialization(serialization, $"Unknown{declaration.Name}");
-                    }
-                    else
-                    {
-                        writer.Line($"throw new {typeof(NotSupportedException)}(\"Deserialization of abstract type '{serialization.Type}' not supported.\");");
-                    }
-                }
-                else
-                {
-                    writer.WriteObjectInitialization(serialization);
-                }
+                writer.WriteObjectInitialization(serialization);
             }
             writer.Line();
         }

@@ -305,6 +305,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             Discriminator? schemaDiscriminator = ObjectSchema.Discriminator;
             ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
             Constant? value = null;
+            ObjectType? defaultDerivedType = null;
 
             if (schemaDiscriminator == null)
             {
@@ -331,7 +332,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 property,
                 schemaDiscriminator.Property.SerializedName,
                 implementations,
-                value
+                value,
+                defaultDerivedType
             );
         }
 

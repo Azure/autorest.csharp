@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (!parentProperties.Contains(property.Declaration.Name))
                 {
-                    var propertyType = UpdatePropertyDescription(CreatePropertyType(property));
+                    var propertyType = CreatePropertyType(property);
                     yield return propertyType;
                 }
             }
@@ -234,62 +234,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CreateDescription()
         {
-            return ObjectSchema.CreateDescription() + CreateExtraDescriptionWithDiscriminator();
-        }
-
-        public static readonly List<string> DiscriminatorDescFixedPart = new List<string> { "Please note ",
-            " is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.",
-            "The available derived classes include " };
-
-        protected virtual string CreateExtraDescriptionWithDiscriminator()
-        {
-            if (Discriminator?.HasDescendants == true)
-            {
-                List<FormattableString> childrenList = new List<FormattableString>();
-                foreach (var implementation in Discriminator.Implementations)
-                {
-                    childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
-                }
-                return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}" +
-                    $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
-            }
-            return string.Empty;
-        }
-
-        private ObjectTypeProperty UpdatePropertyDescription(ObjectTypeProperty property)
-        {
-            CSharpType type = property.ValueType;
-            string updatedDescription = string.Empty;
-            if (type.IsFrameworkType)
-            {
-                if (TypeFactory.IsList(type))
-                {
-                    if (!type.Arguments.First().IsFrameworkType && type.Arguments.First().Implementation is MgmtObjectType objectType)
-                    {
-                        updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
-                    }
-                }
-                else if (TypeFactory.IsDictionary(type))
-                {
-                    var objectTypes = type.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is MgmtObjectType);
-                    if (objectTypes.Count() > 0)
-                    {
-                        var subDescription = objectTypes.Select(o => ((MgmtObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator());
-                        updatedDescription = string.Join("", subDescription);
-                    }
-                }
-            }
-            else if (type.Implementation is MgmtObjectType objectType)
-            {
-                updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
-            }
-            return updatedDescription.IsNullOrEmpty() ? property :
-                new ObjectTypeProperty(property.Declaration,
-                property.Description + updatedDescription,
-                property.IsReadOnly,
-                property.SchemaProperty,
-                property.ValueType,
-                property.OptionalViaNullability);
+            return ObjectSchema.CreateDescription();
         }
 
         private ObjectSchema? BuildBackingSchema()

@@ -238,8 +238,8 @@ namespace AutoRest.CSharp.Common.Input
                     ? GetOrCreateModel(parent, schemaUsages)
                     : null,
                 DerivedModels: derived,
-                DiscriminatorValue: schema.DiscriminatorValue
-            );
+                DiscriminatorValue: schema.DiscriminatorValue,
+                DiscriminatorPropertyName: schema.Discriminator?.Property.CSharpName());
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;

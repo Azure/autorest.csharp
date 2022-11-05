@@ -78,11 +78,46 @@ namespace AutoRest.CSharp.Output.Models
 
         private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
         {
+            Dictionary<InputModelType, List<InputModelType>> derivedTypesLookup = new Dictionary<InputModelType, List<InputModelType>>();
+            foreach (var model in _rootNamespace.Models)
+            {
+                if (model.BaseModel is null)
+                    continue;
+
+                if (!derivedTypesLookup.TryGetValue(model.BaseModel, out var derivedTypes))
+                {
+                    derivedTypes = new List<InputModelType>();
+                    derivedTypesLookup.Add(model.BaseModel, derivedTypes);
+                }
+                derivedTypes.Add(model);
+            }
+
             foreach (var model in _rootNamespace.Models)
             {
                 if (model.Usage != InputModelTypeUsage.None)
                 {
-                    models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory));
+                    derivedTypesLookup.TryGetValue(model, out var children);
+                    InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
+                    ModelTypeProvider? defaultDerivedType = null;
+                    if (derivedTypesArray.Length > 0 && model.DiscriminatorPropertyName is not null)
+                    {
+                        //create the "Unknown" version
+                        var unknownDerviedType = new InputModelType(
+                            $"Unknown{model.Name}",
+                            model.Namespace,
+                            "internal",
+                            $"Unknown version of {model.Name}",
+                            InputModelTypeUsage.Output,
+                            Array.Empty<InputModelProperty>(),
+                            model,
+                            Array.Empty<InputModelType>(),
+                            "Unknown", //TODO: do we need to support extensible enum / int values?
+                            null,
+                            true);
+                        defaultDerivedType = new ModelTypeProvider(unknownDerviedType, _defaultNamespace, _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
+                        models.Add(unknownDerviedType, defaultDerivedType);
+                    }
+                    models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
                 }
             }
         }
