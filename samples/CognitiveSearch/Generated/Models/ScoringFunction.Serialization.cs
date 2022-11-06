@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -39,41 +40,10 @@ namespace CognitiveSearch.Models
                     case "freshness": return FreshnessScoringFunction.DeserializeFreshnessScoringFunction(element);
                     case "magnitude": return MagnitudeScoringFunction.DeserializeMagnitudeScoringFunction(element);
                     case "tag": return TagScoringFunction.DeserializeTagScoringFunction(element);
+                    default: return UnknownScoringFunction.DeserializeUnknownScoringFunction(element);
                 }
             }
-            string type = default;
-            string fieldName = default;
-            double boost = default;
-            Optional<ScoringFunctionInterpolation> interpolation = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("fieldName"))
-                {
-                    fieldName = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("boost"))
-                {
-                    boost = property.Value.GetDouble();
-                    continue;
-                }
-                if (property.NameEquals("interpolation"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    interpolation = property.Value.GetString().ToScoringFunctionInterpolation();
-                    continue;
-                }
-            }
-            return new ScoringFunction(type, fieldName, boost, Optional.ToNullable(interpolation));
+            throw new InvalidOperationException("Unable to find the discriminator 'type' in JsonElement");
         }
     }
 }

@@ -19,9 +19,10 @@ namespace TypeSchemaMapping.Models
                 switch (discriminator.GetString())
                 {
                     case "DerivedFromAbstractModel": return DerivedFromAbstractModel.DeserializeDerivedFromAbstractModel(element);
+                    default: return UnknownAbstractModel.DeserializeUnknownAbstractModel(element);
                 }
             }
-            throw new NotSupportedException("Deserialization of abstract type 'global::TypeSchemaMapping.Models.AbstractModel' not supported.");
+            throw new InvalidOperationException("Unable to find the discriminator 'DiscriminatorProperty' in JsonElement");
         }
     }
 }

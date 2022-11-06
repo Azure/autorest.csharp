@@ -5,8 +5,8 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
-using Azure.Core;
 
 namespace body_complex.Models
 {
@@ -19,24 +19,10 @@ namespace body_complex.Models
                 switch (discriminator.GetString())
                 {
                     case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element);
+                    default: return UnknownDotFish.DeserializeUnknownDotFish(element);
                 }
             }
-            string fishType = default;
-            Optional<string> species = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("fish.type"))
-                {
-                    fishType = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("species"))
-                {
-                    species = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new DotFish(fishType, species.Value);
+            throw new InvalidOperationException("Unable to find the discriminator 'fish.type' in JsonElement");
         }
     }
 }

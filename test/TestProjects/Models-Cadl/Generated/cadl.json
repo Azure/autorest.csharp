@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "modelsincadl",
+ "Name": "ModelsInCadl",
  "Description": "CADL project to test various types of models.",
  "ApiVersions": [
   "0.1.0"
@@ -334,9 +334,6 @@
       "Description": "Base model with discriminator property.",
       "IsNullable": false,
       "DiscriminatorPropertyName": "discriminatorProperty",
-      "BaseModel": {
-       "$ref": "10"
-      },
       "Usage": "RoundTrip",
       "Properties": []
      },

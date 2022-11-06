@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -21,22 +22,28 @@ namespace ModelsInCadl
 
         internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element)
         {
-            foreach (var property in element.EnumerateObject())
+            if (element.TryGetProperty("discriminatorProperty", out JsonElement discriminator))
             {
+                switch (discriminator.GetString())
+                {
+                    case "DerivedModelWithDiscriminatorA": return DerivedModelWithDiscriminatorA.DeserializeDerivedModelWithDiscriminatorA(element);
+                    case "DerivedModelWithDiscriminatorB": return DerivedModelWithDiscriminatorB.DeserializeDerivedModelWithDiscriminatorB(element);
+                    default: return UnknownBaseModelWithDiscriminator.DeserializeUnknownBaseModelWithDiscriminator(element);
+                }
             }
-            return new BaseModelWithDiscriminator();
+            throw new InvalidOperationException("Unable to find the discriminator 'discriminatorProperty' in JsonElement");
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static BaseModelWithDiscriminator FromResponse(Response response)
+        internal static BaseModelWithDiscriminator FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeBaseModelWithDiscriminator(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

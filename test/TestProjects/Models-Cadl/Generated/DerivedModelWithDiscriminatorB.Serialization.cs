@@ -24,11 +24,17 @@ namespace ModelsInCadl
         internal static DerivedModelWithDiscriminatorB DeserializeDerivedModelWithDiscriminatorB(JsonElement element)
         {
             int requiredInt = default;
+            string discriminatorProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredInt"))
                 {
                     requiredInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("discriminatorProperty"))
+                {
+                    discriminatorProperty = property.Value.GetString();
                     continue;
                 }
             }

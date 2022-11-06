@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -40,24 +41,10 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.StandardTokenizer": return StandardTokenizer.DeserializeStandardTokenizer(element);
                     case "#Microsoft.Azure.Search.StandardTokenizerV2": return StandardTokenizerV2.DeserializeStandardTokenizerV2(element);
                     case "#Microsoft.Azure.Search.UaxUrlEmailTokenizer": return UaxUrlEmailTokenizer.DeserializeUaxUrlEmailTokenizer(element);
+                    default: return UnknownTokenizer.DeserializeUnknownTokenizer(element);
                 }
             }
-            string odataType = default;
-            string name = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("@odata.type"))
-                {
-                    odataType = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new Tokenizer(odataType, name);
+            throw new InvalidOperationException("Unable to find the discriminator '@odata.type' in JsonElement");
         }
     }
 }
