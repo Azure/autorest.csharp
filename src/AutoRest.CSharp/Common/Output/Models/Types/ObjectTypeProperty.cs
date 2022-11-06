@@ -22,12 +22,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
-            :this(declaration, description, isReadOnly, schemaProperty, (schemaProperty is null ? false : schemaProperty.IsRequired), valueType, optionalViaNullability)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
+            :this(declaration, parameterDescription, isReadOnly, schemaProperty, (schemaProperty is null ? false : schemaProperty.IsRequired), valueType, optionalViaNullability)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -36,7 +36,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             Declaration = declaration;
             IsRequired = isRequired;
             InputModelProperty = inputModelProperty;
-            Description = (string.IsNullOrEmpty(description) ? CreateDefaultPropertyDescription(Declaration.Name, IsReadOnly) : description) + CreateExtraPropertyDiscriminatorSummary(ValueType);
+            _baseParameterDescription = parameterDescription;
+            Description = string.IsNullOrEmpty(parameterDescription) ? CreateDefaultPropertyDescription(Declaration.Name, IsReadOnly).ToString() : parameterDescription;
         }
 
         public static FormattableString CreateDefaultPropertyDescription(string nameToUse, bool isReadOnly)
@@ -55,8 +56,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IsRequired { get; }
         public MemberDeclarationOptions Declaration { get; }
         public string Description { get; }
+        private string? _propertyDescription;
+        public string PropertyDescription => _propertyDescription ??= Description + CreateExtraPropertyDiscriminatorSummary(ValueType);
         public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
+        private string? _parameterDescription;
+        private string _baseParameterDescription;
+        public string ParameterDescription => _parameterDescription ??= _baseParameterDescription + CreateExtraPropertyDiscriminatorSummary(ValueType);
 
         /// <summary>
         /// Gets or sets the value indicating whether nullable type of this property represents optionality of the value.

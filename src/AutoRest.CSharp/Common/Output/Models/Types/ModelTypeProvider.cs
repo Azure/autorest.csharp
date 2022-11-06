@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
-                        property.Description,
+                        property.ParameterDescription,
                         inputType,
                         defaultParameterValue,
                         validate,

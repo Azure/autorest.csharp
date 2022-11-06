@@ -39,10 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        protected override bool IsAbstract => base.IsAbstract || BackingSchema != null;
-
-        private ObjectSchema? _backingSchema;
-        public ObjectSchema? BackingSchema => _backingSchema ??= BuildBackingSchema();
+        protected override bool IsAbstract => base.IsAbstract || DefaultDerivedType != null;
 
         private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
@@ -235,48 +232,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string CreateDescription()
         {
             return ObjectSchema.CreateDescription();
-        }
-
-        private ObjectSchema? BuildBackingSchema()
-        {
-            if (ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0 && !Configuration.MgmtConfiguration.SuppressAbstractBaseClass.Contains(DefaultName))
-            {
-                return BuildInternalBackingSchema();
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private ObjectSchema BuildInternalBackingSchema()
-        {
-            // TODO: Avoid potential duplicated schema name and discriminator value.
-            // Note: When this Todo is done, the method IsDescendantOf also needs to be updated.
-            // Reason:
-            // Here we just hard coded the name and discriminator value for the internal backing schema.
-            // This could work now, but there are also potential duplicate conflict issue.
-            var schema = new ObjectSchema
-            {
-                Language = new Languages
-                {
-                    Default = new Language
-                    {
-                        Name = "Unknown" + ObjectSchema.Language.Default.Name
-                    }
-                },
-                Parents = new Relations
-                {
-                    All = { ObjectSchema },
-                    Immediate = { ObjectSchema }
-                },
-                DiscriminatorValue = "Unknown",
-                SerializationFormats = { KnownMediaType.Json }
-            };
-            ICollection<string> usages = ObjectSchema.Usage.Select(u => u.ToString()).ToList();
-            usages.Add("Model");
-            schema.Extensions = new RecordOfStringAndAny { { "x-csharp-usage", string.Join(',', usages) }, { "x-ms-skip-init-ctor", true } };
-            return schema;
         }
     }
 }

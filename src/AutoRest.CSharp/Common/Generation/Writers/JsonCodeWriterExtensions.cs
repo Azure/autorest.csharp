@@ -493,7 +493,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var parameterValues = propertyVariables.ToDictionary(v => v.Key.ParameterName, v => GetOptionalFormattable(v.Key, v.Value));
             var parametersToUse = serialization.Discriminator?.DefaultObjectType is null
                 ? serialization.Constructor.Parameters
-                : serialization.Discriminator.DefaultObjectType.InitializationConstructor.Signature.Parameters;
+                : serialization.Discriminator.DefaultObjectType.SerializationConstructor.Signature.Parameters;
             var parameters = parametersToUse
                 .Select(p => parameterValues[p.Name])
                 .ToArray();

@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -34,9 +35,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
+        private BuildContext _context;
+
         public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
             : base(context)
         {
+            _context = context;
             DefaultName = objectSchema.CSharpName();
             DefaultNamespace = GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
             ObjectSchema = objectSchema;
@@ -74,6 +78,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
+
+        private ObjectType? _defaultDerivedType;
+        public ObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerviedType();
 
         protected override bool IsAbstract => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
@@ -128,7 +135,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var deserializationParameter = new Parameter(
                     property.Declaration.Name.ToVariableName(),
-                    property.Description,
+                    property.ParameterDescription,
                     type,
                     null,
                     ValidationType.None,
@@ -234,7 +241,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
-                        property.Description,
+                        property.ParameterDescription,
                         inputType,
                         defaultParameterValue,
                         validate,
@@ -305,7 +312,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             Discriminator? schemaDiscriminator = ObjectSchema.Discriminator;
             ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
             Constant? value = null;
-            ObjectType? defaultDerivedType = null;
+            ObjectType? defaultDerivedType = DefaultDerivedType;
 
             if (schemaDiscriminator == null)
             {
@@ -632,6 +639,48 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override XmlObjectSerialization EnsureXmlSerialization()
         {
             return _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this);
+        }
+
+        private ObjectType? BuildDefaultDerviedType()
+        {
+            if (ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0 && !Configuration.MgmtConfiguration.SuppressAbstractBaseClass.Contains(DefaultName))
+            {
+                return BuildInternalDefaultDerivedType();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private ObjectType BuildInternalDefaultDerivedType()
+        {
+            // TODO: Avoid potential duplicated schema name and discriminator value.
+            // Note: When this Todo is done, the method IsDescendantOf also needs to be updated.
+            // Reason:
+            // Here we just hard coded the name and discriminator value for the internal backing schema.
+            // This could work now, but there are also potential duplicate conflict issue.
+            var schema = new ObjectSchema
+            {
+                Language = new Languages
+                {
+                    Default = new Language
+                    {
+                        Name = "Unknown" + ObjectSchema.Language.Default.Name
+                    }
+                },
+                Parents = new Relations
+                {
+                    All = { ObjectSchema },
+                    Immediate = { ObjectSchema }
+                },
+                DiscriminatorValue = "Unknown",
+                SerializationFormats = { KnownMediaType.Json }
+            };
+            ICollection<string> usages = ObjectSchema.Usage.Select(u => u.ToString()).ToList();
+            usages.Add("Model");
+            schema.Extensions = new RecordOfStringAndAny { { "x-csharp-usage", string.Join(',', usages) }, { "x-ms-skip-init-ctor", true } };
+            return new SchemaObjectType(schema, _context);
         }
     }
 }

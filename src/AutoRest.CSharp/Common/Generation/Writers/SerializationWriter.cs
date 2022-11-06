@@ -182,11 +182,16 @@ namespace AutoRest.CSharp.Generation.Writers
                                 var implementationFormattable = JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(implementation.Type.Implementation, $"element", JsonSerializationOptions.None);
                                 writer.Line($"case {implementation.Key:L}: return {implementationFormattable};");
                             }
+                            if (serialization.Discriminator?.DefaultObjectType is not null)
+                                writer.Line($"default: return {JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(serialization.Discriminator.DefaultObjectType.Type.Implementation, $"element", JsonSerializationOptions.None)};");
                         }
                     }
+                    if (serialization.Discriminator?.DefaultObjectType is not null)
+                        writer.Line($"throw new {typeof(InvalidOperationException)}(\"Unable to find the discriminator '{serialization.Discriminator.SerializedName}' in JsonElement\");");
                 }
 
-                writer.WriteObjectInitialization(serialization);
+                if (serialization.Discriminator?.DefaultObjectType is null)
+                    writer.WriteObjectInitialization(serialization);
             }
             writer.Line();
         }

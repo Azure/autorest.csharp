@@ -281,9 +281,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
             FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type);
-            if (!string.IsNullOrWhiteSpace(property.Description))
+            if (!string.IsNullOrWhiteSpace(property.PropertyDescription))
             {
-                return $"{property.Description}{binaryDataExtraDescription}";
+                return $"{property.PropertyDescription}{binaryDataExtraDescription}";
             }
             return $"{ObjectTypeProperty.CreateDefaultPropertyDescription(overrideName ?? property.Declaration.Name, property.IsReadOnly)}{binaryDataExtraDescription}";
         }

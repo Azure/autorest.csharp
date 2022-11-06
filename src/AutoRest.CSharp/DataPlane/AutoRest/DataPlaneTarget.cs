@@ -28,15 +28,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in library.Models)
             {
-                var codeWriter = new CodeWriter();
-                modelWriter.WriteModel(codeWriter, model);
-
-                var serializerCodeWriter = new CodeWriter();
-                serializeWriter.WriteSerialization(serializerCodeWriter, model);
-
-                var name = model.Type.Name;
-                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
-                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                WriteModel(project, modelWriter, serializeWriter, model);
             }
 
             var modelFactoryType = library.ModelFactory;
@@ -84,6 +76,22 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }
+        }
+
+        private static void WriteModel(GeneratedCodeWorkspace project, ModelWriter modelWriter, SerializationWriter serializeWriter, TypeProvider model)
+        {
+            var codeWriter = new CodeWriter();
+            modelWriter.WriteModel(codeWriter, model);
+
+            var serializerCodeWriter = new CodeWriter();
+            serializeWriter.WriteSerialization(serializerCodeWriter, model);
+
+            var name = model.Type.Name;
+            project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+            project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+
+            if (model is SchemaObjectType schemaObjectType && schemaObjectType.DefaultDerivedType is not null)
+                WriteModel(project, modelWriter, serializeWriter, schemaObjectType.DefaultDerivedType);
         }
     }
 }
