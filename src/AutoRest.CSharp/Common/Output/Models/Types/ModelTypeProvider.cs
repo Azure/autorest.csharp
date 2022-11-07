@@ -134,7 +134,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                     //or not it indicates if we should serialize this or not which is different.  Lists are readonly
                     //in the sense that the don't have setters but they aren't necessarily always readonly in the spec and therefore
                     //should be serialized based on the spec not based on the presence of a setter
-                    var isReadOnly = property.Declaration.Type.IsCollectionType() ? property.InputModelProperty.IsReadOnly : property.IsReadOnly;
+                    var shouldSkipSerialization = property.InputModelProperty.IsDiscriminator
+                        ? false
+                        : property.Declaration.Type.IsCollectionType() ? property.InputModelProperty.IsReadOnly : property.IsReadOnly;
                     result.Add(new JsonPropertySerialization(
                         paramName,
                         declaredName,
@@ -143,7 +145,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         property.ValueType,
                         valueSerialization,
                         property.IsRequired,
-                        isReadOnly,
+                        shouldSkipSerialization,
                         optionalViaNullability));
                 }
             }
@@ -205,22 +207,26 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (parent is not null)
             {
                 var ctor = isInitializer ? parent.InitializationConstructor : parent.SerializationConstructor;
-                parametersToPassToBase = _inputModel.IsDefaultDiscriminator ? ctor.Signature.Parameters : ctor.Signature.Parameters.Where(p => p.Name != Discriminator?.SerializedName);
-                fullParameterList.AddRange(parametersToPassToBase);
+                parametersToPassToBase = ctor.Signature.Parameters;
+                fullParameterList.AddRange(_inputModel.IsDefaultDiscriminator ? parametersToPassToBase : parametersToPassToBase.Where(p => p.Name != Discriminator?.SerializedName));
             }
             fullParameterList.AddRange(parameters.Select(creator));
         }
 
         private FormattableString[] GetInitializersFromParameters(IEnumerable<Parameter> parametersToPassToBase)
         {
-            var baseInitializers = ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase);
+            var baseInitializers = ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase).ToArray();
             if (Discriminator?.Value is not null && !_inputModel.IsDefaultDiscriminator)
             {
                 FormattableString discriminatorInitializer = Discriminator.Value.Value.Type.Equals(typeof(string)) ? (FormattableString)$"\"{Discriminator.Value.Value.Value}\"" : (FormattableString)$"{Discriminator.Value.Value.Value}";
-                baseInitializers = baseInitializers.Append(discriminatorInitializer);
+                for (int i = 0; i < baseInitializers.Length; i++)
+                {
+                    if (baseInitializers[i].ToString() == Discriminator.SerializedName)
+                        baseInitializers[i] = discriminatorInitializer;
+                }
             }
 
-            return baseInitializers.ToArray();
+            return baseInitializers;
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)

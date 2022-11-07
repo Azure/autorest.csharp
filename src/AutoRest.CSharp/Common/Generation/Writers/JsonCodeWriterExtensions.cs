@@ -222,7 +222,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (JsonPropertySerialization property in propertySerializations)
             {
-                if (property.IsReadOnly)
+                if (property.ShouldSkipSerialization)
                 {
                     continue;
                 }
