@@ -228,7 +228,7 @@ where the `EnumType` is the original name of the enumeration type in the **swagg
 
 ## Rename a parameter in an operation
 
-There is a configuration that allows you to change the parameter names in an operation. For instance
+There is a configuration that allows you to change the parameter names in an operation. For instance,
 ```yaml
 parameter-rename-mapping:
   VirtualMachines_CreateOrUpdate:
@@ -236,7 +236,7 @@ parameter-rename-mapping:
 ```
 This configuration is a two-level dictionary. The key of the first level dictionary is the operation id you would like to change. In the above sample, the generator will change the parameter names that match in the operation with operation id `VirtualMachines_CreateOrUpdate`.
 
-The value of the first level dictionary of this configuration is another dictionary, the original parameter name as its keys, and the desired value as its value. In the above sample, the generator will rename the parameter `name` to `vmName` in the operation `VirtualMachines_CreateOrUpdate`.
+The value of the first level dictionary of this configuration is another dictionary, the original parameter name as its keys, and the desired parameter name as its value. In the above sample, the generator will rename the parameter `name` to `vmName` in the operation `VirtualMachines_CreateOrUpdate`.
 
 If the parameter name specified does not exist in the specified operation, nothing will happen.
 
