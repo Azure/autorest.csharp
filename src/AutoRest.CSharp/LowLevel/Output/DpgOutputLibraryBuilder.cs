@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models
             SetRequestsToClients(clientInfosByName.Values);
 
             var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
-            var models = new Dictionary<InputModelType, ModelTypeProvider>();
+            var models = new Dictionary<InputModelType, ObjectType>();
             var clients = new List<LowLevelClient>();
 
             var library = new DpgOutputLibrary(enums, models, clients, clientOptions, isCadlInput);
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
+        private void CreateModels(IDictionary<InputModelType, ObjectType> models, TypeFactory typeFactory)
         {
             foreach (var model in _rootNamespace.Models)
             {

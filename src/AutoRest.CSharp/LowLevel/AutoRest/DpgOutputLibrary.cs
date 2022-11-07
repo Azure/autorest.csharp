@@ -12,18 +12,20 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class DpgOutputLibrary : OutputLibrary
     {
-        private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
-        private readonly IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
+        private readonly Dictionary<InputEnumType, EnumType> _enums;
+        private readonly Dictionary<InputModelType, ObjectType> _models;
         private readonly bool _isCadlInput;
 
         public TypeFactory TypeFactory { get; }
         public IEnumerable<EnumType> Enums => _enums.Values;
-        public IEnumerable<ModelTypeProvider> Models => _models.Values;
+        public IEnumerable<ObjectType> Models => _models.Values;
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
-        public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
 
-        public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
+        private IEnumerable<TypeProvider>? _allModels;
+        public IEnumerable<TypeProvider> AllModels => _allModels ??= new List<TypeProvider>(_enums.Values).Concat(_models.Values);
+
+        public DpgOutputLibrary(Dictionary<InputEnumType, EnumType> enums, Dictionary<InputModelType, ObjectType> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
         {
             TypeFactory = new TypeFactory(this);
             _enums = enums;
