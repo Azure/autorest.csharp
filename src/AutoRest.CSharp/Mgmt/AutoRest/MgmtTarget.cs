@@ -188,17 +188,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             var codeWriter = new CodeWriter();
 
-            if (model is MgmtObjectType objectType && objectType.DefaultDerivedType != null)
-            {
-                var backingModel =objectType.DefaultDerivedType;
-                var name = backingModel.Type.Name;
-                WriteArmModel(project, backingModel, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
-                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
-            }
-            else
-            {
-                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
-            }
+            ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
             AddGeneratedFile(project, modelFileName, codeWriter.ToString());
 

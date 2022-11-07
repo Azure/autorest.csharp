@@ -92,34 +92,52 @@ namespace AutoRest.CSharp.Output.Models
                 derivedTypes.Add(model);
             }
 
+            Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
+
             foreach (var model in _rootNamespace.Models)
             {
                 if (model.Usage != InputModelTypeUsage.None)
                 {
                     derivedTypesLookup.TryGetValue(model, out var children);
                     InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
-                    ModelTypeProvider? defaultDerivedType = null;
-                    if (derivedTypesArray.Length > 0 && model.DiscriminatorPropertyName is not null)
-                    {
-                        //create the "Unknown" version
-                        var unknownDerviedType = new InputModelType(
-                            $"Unknown{model.Name}",
-                            model.Namespace,
-                            "internal",
-                            $"Unknown version of {model.Name}",
-                            InputModelTypeUsage.Output,
-                            Array.Empty<InputModelProperty>(),
-                            model,
-                            Array.Empty<InputModelType>(),
-                            "Unknown", //TODO: do we need to support extensible enum / int values?
-                            null,
-                            true);
-                        defaultDerivedType = new ModelTypeProvider(unknownDerviedType, _defaultNamespace, _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
-                        models.Add(unknownDerviedType, defaultDerivedType);
-                    }
+                    ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
                     models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
                 }
             }
+        }
+
+        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, InputModelType[] derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
+        {
+            //only want to create one instance of the default derived per polymorphic set
+            ModelTypeProvider? defaultDerivedType = null;
+            bool isBasePolyType = derivedTypesArray.Length > 0 && model.DiscriminatorPropertyName is not null;
+            bool isChildPolyTYpe = model.DiscriminatorValue is not null;
+            if (isBasePolyType || isChildPolyTYpe)
+            {
+                InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
+                string defaultDerivedName = $"Unknown{actualBase.Name}";
+                if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out defaultDerivedType))
+                {
+                    //create the "Unknown" version
+                    var unknownDerviedType = new InputModelType(
+                        defaultDerivedName,
+                        actualBase.Namespace,
+                        "internal",
+                        $"Unknown version of {actualBase.Name}",
+                        InputModelTypeUsage.Output,
+                        Array.Empty<InputModelProperty>(),
+                        actualBase,
+                        Array.Empty<InputModelType>(),
+                        "Unknown", //TODO: do we need to support extensible enum / int values?
+                        null,
+                        true);
+                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, _defaultNamespace, _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
+                    defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
+                    models.Add(unknownDerviedType, defaultDerivedType);
+                }
+            }
+
+            return defaultDerivedType;
         }
 
         private IEnumerable<InputClient> UpdateOperations()

@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             _derivedTypes = derivedTypes;
-            _defaultDerivedType = defaultDerivedType;
+            _defaultDerivedType = defaultDerivedType ?? (inputModel.IsDefaultDiscriminator ? this : null);
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -402,7 +402,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 discriminatorPropertyName,
                 implementations,
                 value,
-                _defaultDerivedType
+                _defaultDerivedType!
             );
         }
     }

@@ -461,9 +461,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 propertyVariables.Add(additionalProperties, new ObjectPropertyVariable(propertyDeclaration, additionalProperties.PropertyType));
             }
 
+            bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType?.Type);
+
             foreach (var variable in propertyVariables)
             {
-                writer.Line($"{variable.Value.Type} {variable.Value.Declaration:D} = default;");
+                string defaultValue ="default";
+                if (serialization.Discriminator?.SerializedName == variable.Key.SerializedName && isThisTheDefaultDerivedType && serialization.Discriminator.Value is not null)
+                    defaultValue = $"\"{serialization.Discriminator.Value.Value.Value}\"";
+                writer.Line($"{variable.Value.Type} {variable.Value.Declaration:D} = {defaultValue};");
             }
 
             var dictionaryVariable = new CodeWriterDeclaration("additionalPropertiesDictionary");
@@ -491,16 +496,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var parameterValues = propertyVariables.ToDictionary(v => v.Key.ParameterName, v => GetOptionalFormattable(v.Key, v.Value));
-            var parametersToUse = serialization.Discriminator?.DefaultObjectType is null
-                ? serialization.Constructor.Parameters
-                : serialization.Discriminator.DefaultObjectType.SerializationConstructor.Signature.Parameters;
-            var parameters = parametersToUse
+            var parameters = serialization.Constructor.Parameters
                 .Select(p => parameterValues[p.Name])
                 .ToArray();
 
-            var typeToConstruct = serialization.Discriminator?.DefaultObjectType is null ? serialization.Type : serialization.Discriminator.DefaultObjectType.Type;
-
-            writer.Append($"return new {typeToConstruct}({parameters.Join(", ")});");
+            writer.Append($"return new {serialization.Type}({parameters.Join(", ")});");
         }
 
         private static FormattableString GetDeserializeValueFormattable(JsonValueSerialization serialization, FormattableString element)

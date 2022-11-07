@@ -15,9 +15,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeDiscriminatorImplementation[] Implementations { get; }
 
-        public ObjectType? DefaultObjectType { get; }
+        public ObjectType DefaultObjectType { get; }
 
-        public ObjectTypeDiscriminator(ObjectTypeProperty property, string serializedName, ObjectTypeDiscriminatorImplementation[] implementations, Constant? value, ObjectType? defaultObjectType)
+        public ObjectTypeDiscriminator(ObjectTypeProperty property, string serializedName, ObjectTypeDiscriminatorImplementation[] implementations, Constant? value, ObjectType defaultObjectType)
         {
             Property = property;
             Implementations = implementations;

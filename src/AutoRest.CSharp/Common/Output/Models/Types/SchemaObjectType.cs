@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -19,6 +20,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -80,6 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
 
         private ObjectType? _defaultDerivedType;
+        private bool _hasCalculatedDefaultDerivedType;
         public ObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerviedType();
 
         protected override bool IsAbstract => ObjectSchema != null &&
@@ -312,7 +315,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             Discriminator? schemaDiscriminator = ObjectSchema.Discriminator;
             ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
             Constant? value = null;
-            ObjectType? defaultDerivedType = DefaultDerivedType;
 
             if (schemaDiscriminator == null)
             {
@@ -327,6 +329,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 implementations = CreateDiscriminatorImplementations(schemaDiscriminator);
             }
+
+            ObjectType defaultDerivedType = DefaultDerivedType!;
 
             var property = GetPropertyForSchemaProperty(schemaDiscriminator.Property, includeParents: true);
 
@@ -643,44 +647,18 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ObjectType? BuildDefaultDerviedType()
         {
-            if (ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0 && !Configuration.MgmtConfiguration.SuppressAbstractBaseClass.Contains(DefaultName))
-            {
-                return BuildInternalDefaultDerivedType();
-            }
-            else
-            {
-                return null;
-            }
-        }
+            if (_hasCalculatedDefaultDerivedType)
+                return _defaultDerivedType;
 
-        private ObjectType BuildInternalDefaultDerivedType()
-        {
-            // TODO: Avoid potential duplicated schema name and discriminator value.
-            // Note: When this Todo is done, the method IsDescendantOf also needs to be updated.
-            // Reason:
-            // Here we just hard coded the name and discriminator value for the internal backing schema.
-            // This could work now, but there are also potential duplicate conflict issue.
-            var schema = new ObjectSchema
-            {
-                Language = new Languages
-                {
-                    Default = new Language
-                    {
-                        Name = "Unknown" + ObjectSchema.Language.Default.Name
-                    }
-                },
-                Parents = new Relations
-                {
-                    All = { ObjectSchema },
-                    Immediate = { ObjectSchema }
-                },
-                DiscriminatorValue = "Unknown",
-                SerializationFormats = { KnownMediaType.Json }
-            };
-            ICollection<string> usages = ObjectSchema.Usage.Select(u => u.ToString()).ToList();
-            usages.Add("Model");
-            schema.Extensions = new RecordOfStringAndAny { { "x-csharp-usage", string.Join(',', usages) }, { "x-ms-skip-init-ctor", true } };
-            return new SchemaObjectType(schema, _context);
+            _hasCalculatedDefaultDerivedType = true;
+            if (_context.BaseLibrary is null)
+                return null;
+
+            var defaultDerivedSchema = ObjectSchema.GetDefaultDerivedSchema();
+            if (defaultDerivedSchema is null)
+                return null;
+
+            return _context.BaseLibrary.FindTypeProviderForSchema(defaultDerivedSchema) as ObjectType;
         }
     }
 }
