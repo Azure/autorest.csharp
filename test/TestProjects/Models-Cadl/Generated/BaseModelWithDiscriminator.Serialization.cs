@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -28,10 +27,9 @@ namespace ModelsInCadl
                 {
                     case "DerivedModelWithDiscriminatorA": return DerivedModelWithDiscriminatorA.DeserializeDerivedModelWithDiscriminatorA(element);
                     case "DerivedModelWithDiscriminatorB": return DerivedModelWithDiscriminatorB.DeserializeDerivedModelWithDiscriminatorB(element);
-                    default: return UnknownBaseModelWithDiscriminator.DeserializeUnknownBaseModelWithDiscriminator(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator 'discriminatorProperty' in JsonElement");
+            return UnknownBaseModelWithDiscriminator.DeserializeUnknownBaseModelWithDiscriminator(element);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

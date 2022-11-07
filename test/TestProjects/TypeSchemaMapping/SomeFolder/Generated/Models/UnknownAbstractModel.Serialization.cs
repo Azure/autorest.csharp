@@ -14,7 +14,7 @@ namespace TypeSchemaMapping.Models
     {
         internal static UnknownAbstractModel DeserializeUnknownAbstractModel(JsonElement element)
         {
-            string discriminatorProperty = default;
+            string discriminatorProperty = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("DiscriminatorProperty"))

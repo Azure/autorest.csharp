@@ -14,7 +14,7 @@ namespace body_complex.Models
     {
         internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element)
         {
-            MyKind kind = default;
+            MyKind kind = "Unknown";
             Optional<string> propB1 = default;
             Optional<string> propBH1 = default;
             foreach (var property in element.EnumerateObject())

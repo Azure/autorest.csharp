@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -40,10 +39,9 @@ namespace CognitiveSearch.Models
                     case "freshness": return FreshnessScoringFunction.DeserializeFreshnessScoringFunction(element);
                     case "magnitude": return MagnitudeScoringFunction.DeserializeMagnitudeScoringFunction(element);
                     case "tag": return TagScoringFunction.DeserializeTagScoringFunction(element);
-                    default: return UnknownScoringFunction.DeserializeUnknownScoringFunction(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator 'type' in JsonElement");
+            return UnknownScoringFunction.DeserializeUnknownScoringFunction(element);
         }
     }
 }

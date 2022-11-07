@@ -52,7 +52,7 @@ namespace CognitiveSearch.Models
 
         internal static UnknownSkill DeserializeUnknownSkill(JsonElement element)
         {
-            string odataType = default;
+            string odataType = "Unknown";
             Optional<string> name = default;
             Optional<string> description = default;
             Optional<string> context = default;

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    internal partial class UnknownDeliveryRuleCondition : IUtf8JsonSerializable
+    internal partial class UnknownDeliveryRuleAction : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -20,18 +20,18 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        internal static UnknownDeliveryRuleCondition DeserializeUnknownDeliveryRuleCondition(JsonElement element)
+        internal static UnknownDeliveryRuleAction DeserializeUnknownDeliveryRuleAction(JsonElement element)
         {
-            MatchVariable name = "Unknown";
+            DeliveryRuleActionType name = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    name = new MatchVariable(property.Value.GetString());
+                    name = new DeliveryRuleActionType(property.Value.GetString());
                     continue;
                 }
             }
-            return new UnknownDeliveryRuleCondition(name);
+            return new UnknownDeliveryRuleAction(name);
         }
     }
 }

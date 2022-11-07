@@ -14,7 +14,7 @@ namespace body_complex.Models
     {
         internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element)
         {
-            string fishType = default;
+            string fishType = "Unknown";
             Optional<string> species = default;
             foreach (var property in element.EnumerateObject())
             {

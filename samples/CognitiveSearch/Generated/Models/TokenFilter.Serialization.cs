@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -54,10 +53,9 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.TruncateTokenFilter": return TruncateTokenFilter.DeserializeTruncateTokenFilter(element);
                     case "#Microsoft.Azure.Search.UniqueTokenFilter": return UniqueTokenFilter.DeserializeUniqueTokenFilter(element);
                     case "#Microsoft.Azure.Search.WordDelimiterTokenFilter": return WordDelimiterTokenFilter.DeserializeWordDelimiterTokenFilter(element);
-                    default: return UnknownTokenFilter.DeserializeUnknownTokenFilter(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator '@odata.type' in JsonElement");
+            return UnknownTokenFilter.DeserializeUnknownTokenFilter(element);
         }
     }
 }

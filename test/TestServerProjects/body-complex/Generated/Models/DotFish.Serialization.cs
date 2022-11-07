@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 
 namespace body_complex.Models
@@ -19,10 +18,9 @@ namespace body_complex.Models
                 switch (discriminator.GetString())
                 {
                     case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element);
-                    default: return UnknownDotFish.DeserializeUnknownDotFish(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator 'fish.type' in JsonElement");
+            return UnknownDotFish.DeserializeUnknownDotFish(element);
         }
     }
 }

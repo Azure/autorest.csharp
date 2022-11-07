@@ -5,17 +5,25 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownFish : IUtf8JsonSerializable
+    internal partial class UnknownShark : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Age))
+            {
+                writer.WritePropertyName("age");
+                writer.WriteNumberValue(Age.Value);
+            }
+            writer.WritePropertyName("birthday");
+            writer.WriteStringValue(Birthday, "O");
             writer.WritePropertyName("fishtype");
             writer.WriteStringValue(Fishtype);
             if (Optional.IsDefined(Species))
@@ -38,14 +46,31 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        internal static UnknownFish DeserializeUnknownFish(JsonElement element)
+        internal static UnknownShark DeserializeUnknownShark(JsonElement element)
         {
+            Optional<int> age = default;
+            DateTimeOffset birthday = default;
             string fishtype = "Unknown";
             Optional<string> species = default;
             float length = default;
             Optional<IList<Fish>> siblings = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("age"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    age = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("birthday"))
+                {
+                    birthday = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
                 if (property.NameEquals("fishtype"))
                 {
                     fishtype = property.Value.GetString();
@@ -77,7 +102,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new UnknownFish(fishtype, species.Value, length, Optional.ToList(siblings));
+            return new UnknownShark(fishtype, species.Value, length, Optional.ToList(siblings), Optional.ToNullable(age), birthday);
         }
     }
 }

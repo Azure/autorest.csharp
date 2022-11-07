@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -30,10 +29,9 @@ namespace MgmtDiscriminator.Models
                     case "QueryString": return DeliveryRuleQueryStringCondition.DeserializeDeliveryRuleQueryStringCondition(element);
                     case "RemoteAddress": return DeliveryRuleRemoteAddressCondition.DeserializeDeliveryRuleRemoteAddressCondition(element);
                     case "RequestMethod": return DeliveryRuleRequestMethodCondition.DeserializeDeliveryRuleRequestMethodCondition(element);
-                    default: return UnknownDeliveryRuleCondition.DeserializeUnknownDeliveryRuleCondition(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator 'name' in JsonElement");
+            return UnknownDeliveryRuleCondition.DeserializeUnknownDeliveryRuleCondition(element);
         }
     }
 }

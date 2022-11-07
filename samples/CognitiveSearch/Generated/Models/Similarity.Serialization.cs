@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -29,10 +28,9 @@ namespace CognitiveSearch.Models
                 {
                     case "#Microsoft.Azure.Search.BM25Similarity": return BM25Similarity.DeserializeBM25Similarity(element);
                     case "#Microsoft.Azure.Search.ClassicSimilarity": return ClassicSimilarity.DeserializeClassicSimilarity(element);
-                    default: return UnknownSimilarity.DeserializeUnknownSimilarity(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator '@odata.type' in JsonElement");
+            return UnknownSimilarity.DeserializeUnknownSimilarity(element);
         }
     }
 }

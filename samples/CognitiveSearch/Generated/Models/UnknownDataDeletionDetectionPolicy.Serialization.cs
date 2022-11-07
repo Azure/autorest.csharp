@@ -22,7 +22,7 @@ namespace CognitiveSearch.Models
 
         internal static UnknownDataDeletionDetectionPolicy DeserializeUnknownDataDeletionDetectionPolicy(JsonElement element)
         {
-            string odataType = default;
+            string odataType = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.type"))

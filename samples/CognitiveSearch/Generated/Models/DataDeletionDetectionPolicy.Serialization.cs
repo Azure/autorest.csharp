@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -28,10 +27,9 @@ namespace CognitiveSearch.Models
                 switch (discriminator.GetString())
                 {
                     case "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy": return SoftDeleteColumnDeletionDetectionPolicy.DeserializeSoftDeleteColumnDeletionDetectionPolicy(element);
-                    default: return UnknownDataDeletionDetectionPolicy.DeserializeUnknownDataDeletionDetectionPolicy(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator '@odata.type' in JsonElement");
+            return UnknownDataDeletionDetectionPolicy.DeserializeUnknownDataDeletionDetectionPolicy(element);
         }
     }
 }

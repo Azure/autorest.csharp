@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
 
         internal static UnknownCognitiveServicesAccount DeserializeUnknownCognitiveServicesAccount(JsonElement element)
         {
-            string odataType = default;
+            string odataType = "Unknown";
             Optional<string> description = default;
             foreach (var property in element.EnumerateObject())
             {

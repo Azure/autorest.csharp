@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 
 namespace TypeSchemaMapping.Models
@@ -19,10 +18,9 @@ namespace TypeSchemaMapping.Models
                 switch (discriminator.GetString())
                 {
                     case "DerivedFromAbstractModel": return DerivedFromAbstractModel.DeserializeDerivedFromAbstractModel(element);
-                    default: return UnknownAbstractModel.DeserializeUnknownAbstractModel(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator 'DiscriminatorProperty' in JsonElement");
+            return UnknownAbstractModel.DeserializeUnknownAbstractModel(element);
         }
     }
 }

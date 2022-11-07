@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -34,10 +33,9 @@ namespace CognitiveSearch.Models
                 {
                     case "#Microsoft.Azure.Search.CognitiveServicesByKey": return CognitiveServicesAccountKey.DeserializeCognitiveServicesAccountKey(element);
                     case "#Microsoft.Azure.Search.DefaultCognitiveServices": return DefaultCognitiveServicesAccount.DeserializeDefaultCognitiveServicesAccount(element);
-                    default: return UnknownCognitiveServicesAccount.DeserializeUnknownCognitiveServicesAccount(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator '@odata.type' in JsonElement");
+            return UnknownCognitiveServicesAccount.DeserializeUnknownCognitiveServicesAccount(element);
         }
     }
 }

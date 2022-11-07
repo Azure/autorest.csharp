@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -68,10 +67,9 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Skills.Util.ShaperSkill": return ShaperSkill.DeserializeShaperSkill(element);
                     case "#Microsoft.Skills.Vision.ImageAnalysisSkill": return ImageAnalysisSkill.DeserializeImageAnalysisSkill(element);
                     case "#Microsoft.Skills.Vision.OcrSkill": return OcrSkill.DeserializeOcrSkill(element);
-                    default: return UnknownSkill.DeserializeUnknownSkill(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator '@odata.type' in JsonElement");
+            return UnknownSkill.DeserializeUnknownSkill(element);
         }
     }
 }

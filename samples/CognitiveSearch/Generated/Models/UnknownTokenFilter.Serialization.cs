@@ -24,7 +24,7 @@ namespace CognitiveSearch.Models
 
         internal static UnknownTokenFilter DeserializeUnknownTokenFilter(JsonElement element)
         {
-            string odataType = default;
+            string odataType = "Unknown";
             string name = default;
             foreach (var property in element.EnumerateObject())
             {

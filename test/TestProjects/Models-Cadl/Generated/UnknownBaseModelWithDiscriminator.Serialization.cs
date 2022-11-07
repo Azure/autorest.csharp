@@ -15,7 +15,7 @@ namespace ModelsInCadl
     {
         internal static UnknownBaseModelWithDiscriminator DeserializeUnknownBaseModelWithDiscriminator(JsonElement element)
         {
-            string discriminatorProperty = default;
+            string discriminatorProperty = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("discriminatorProperty"))

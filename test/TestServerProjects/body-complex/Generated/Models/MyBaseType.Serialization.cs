@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 
 namespace body_complex.Models
@@ -19,10 +18,9 @@ namespace body_complex.Models
                 switch (discriminator.GetString())
                 {
                     case "Kind1": return MyDerivedType.DeserializeMyDerivedType(element);
-                    default: return UnknownMyBaseType.DeserializeUnknownMyBaseType(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator 'kind' in JsonElement");
+            return UnknownMyBaseType.DeserializeUnknownMyBaseType(element);
         }
     }
 }

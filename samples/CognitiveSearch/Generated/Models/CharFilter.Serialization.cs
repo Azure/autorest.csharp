@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -31,10 +30,9 @@ namespace CognitiveSearch.Models
                 {
                     case "#Microsoft.Azure.Search.MappingCharFilter": return MappingCharFilter.DeserializeMappingCharFilter(element);
                     case "#Microsoft.Azure.Search.PatternReplaceCharFilter": return PatternReplaceCharFilter.DeserializePatternReplaceCharFilter(element);
-                    default: return UnknownCharFilter.DeserializeUnknownCharFilter(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator '@odata.type' in JsonElement");
+            return UnknownCharFilter.DeserializeUnknownCharFilter(element);
         }
     }
 }

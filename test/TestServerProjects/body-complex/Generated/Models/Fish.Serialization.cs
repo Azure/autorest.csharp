@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -50,10 +49,9 @@ namespace body_complex.Models
                     case "sawshark": return Sawshark.DeserializeSawshark(element);
                     case "shark": return Shark.DeserializeShark(element);
                     case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
-                    default: return UnknownFish.DeserializeUnknownFish(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator 'fishtype' in JsonElement");
+            return UnknownFish.DeserializeUnknownFish(element);
         }
     }
 }

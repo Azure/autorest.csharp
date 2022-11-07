@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -29,10 +28,9 @@ namespace MgmtSafeFlatten.Models
                 {
                     case "LayerOneBar": return LayerOneBarType.DeserializeLayerOneBarType(element);
                     case "LayerOneFoo": return LayerOneFooType.DeserializeLayerOneFooType(element);
-                    default: return UnknownLayerOneBaseType.DeserializeUnknownLayerOneBaseType(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator 'name' in JsonElement");
+            return UnknownLayerOneBaseType.DeserializeUnknownLayerOneBaseType(element);
         }
     }
 }

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -33,10 +32,9 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.PatternAnalyzer": return PatternAnalyzer.DeserializePatternAnalyzer(element);
                     case "#Microsoft.Azure.Search.StandardAnalyzer": return StandardAnalyzer.DeserializeStandardAnalyzer(element);
                     case "#Microsoft.Azure.Search.StopAnalyzer": return StopAnalyzer.DeserializeStopAnalyzer(element);
-                    default: return UnknownAnalyzer.DeserializeUnknownAnalyzer(element);
                 }
             }
-            throw new InvalidOperationException("Unable to find the discriminator '@odata.type' in JsonElement");
+            return UnknownAnalyzer.DeserializeUnknownAnalyzer(element);
         }
     }
 }

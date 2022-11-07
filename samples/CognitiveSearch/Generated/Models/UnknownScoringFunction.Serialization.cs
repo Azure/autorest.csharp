@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
 
         internal static UnknownScoringFunction DeserializeUnknownScoringFunction(JsonElement element)
         {
-            string type = default;
+            string type = "Unknown";
             string fieldName = default;
             double boost = default;
             Optional<ScoringFunctionInterpolation> interpolation = default;
