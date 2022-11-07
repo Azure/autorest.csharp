@@ -230,7 +230,7 @@ where the `EnumType` is the original name of the enumeration type in the **swagg
 
 There is a configuration that allows you to change the parameter names in an operation. For instance
 ```yaml
-rename-mapping:
+parameter-rename-mapping:
   VirtualMachines_CreateOrUpdate:
     name: vmName
 ```
