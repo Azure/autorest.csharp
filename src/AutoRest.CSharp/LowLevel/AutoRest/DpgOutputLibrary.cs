@@ -82,7 +82,17 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public override CSharpType ResolveModel(InputModelType model)
-            => _rawModels.TryGetValue(model, out var modelFactory) ? modelFactory.Type : new CSharpType(typeof(object), model.IsNullable);
+        {
+            if (!AllModelMap.IsPopulated)
+            {
+                return _rawModels.TryGetValue(model, out var objectType) ? objectType.Type : new CSharpType(typeof(object), model.IsNullable);
+            }
+            else if (AllModelMap.TryGetValue(model, out var result))
+            {
+                return result.Type;
+            }
+            throw new KeyNotFoundException($"{model.Namespace}.{model.Name} was not found in model and resource schema map");
+        }
 
         public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 

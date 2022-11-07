@@ -48,6 +48,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in library.AllModels)
             {
+                if (model is SystemObjectType)
+                    continue;
+
                 var codeWriter = new CodeWriter();
                 var modelWriter = new ModelWriter();
                 modelWriter.WriteModel(codeWriter, model);
