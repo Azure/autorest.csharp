@@ -51,38 +51,46 @@ namespace AutoRest.CSharp.Common.Decorator
             if (actualBaseSchema is null)
                 throw new InvalidOperationException($"Found a child poly {schema.Language.Default.Name} that we weren't able to determine its base poly from {string.Join(',', schema.Parents?.Immediate.Select(p => p.Name) ?? Array.Empty<string>())}");
 
-            string defaultDerivedSchemaName = "Unknown" + actualBaseSchema.Language.Default.Name;
             ObjectSchema? defaultDerivedSchema = null;
-            if (!defaultDerivedSchemas.TryGetValue(defaultDerivedSchemaName, out defaultDerivedSchema))
+
+            //if I have children and parents then I am my own defaultDerivedType
+            if (actualBaseSchema.HasParents())
+                defaultDerivedSchema = actualBaseSchema;
+
+            if (defaultDerivedSchema is null)
             {
-                defaultDerivedSchema = new ObjectSchema
+                string defaultDerivedSchemaName = "Unknown" + actualBaseSchema.Language.Default.Name;
+                if (!defaultDerivedSchemas.TryGetValue(defaultDerivedSchemaName, out defaultDerivedSchema))
                 {
-                    Language = new Languages
+                    defaultDerivedSchema = new ObjectSchema
                     {
-                        Default = new Language
+                        Language = new Languages
                         {
-                            Name = defaultDerivedSchemaName
-                        }
-                    },
-                    Parents = new Relations
-                    {
-                        All = { actualBaseSchema },
-                        Immediate = { actualBaseSchema }
-                    },
-                    //Discriminator = actualBaseSchema.Discriminator,
-                    DiscriminatorValue = "Unknown", //TODO: do we need to handle int / fixed enums?
-                    SerializationFormats = { KnownMediaType.Json },
-                };
-                defaultDerivedSchema.Extensions = new RecordOfStringAndAny { { "x-ms-skip-init-ctor", true } };
-                List<string> usages = new List<string>();
-                usages.Add("Model");
-                if (actualBaseSchema.Usage.Contains(SchemaContext.Input))
-                    usages.Add("Input");
-                if (actualBaseSchema.Usage.Contains(SchemaContext.Output) || actualBaseSchema.Usage.Contains(SchemaContext.Exception))
-                    usages.Add("Output");
-                defaultDerivedSchema.Extensions.Add("x-csharp-usage", string.Join(',', usages));
-                defaultDerivedSchema.Extensions.Add(DefaultDerivedExtension, defaultDerivedSchema);
-                defaultDerivedSchemas.Add(defaultDerivedSchema.Name, defaultDerivedSchema);
+                            Default = new Language
+                            {
+                                Name = defaultDerivedSchemaName
+                            }
+                        },
+                        Parents = new Relations
+                        {
+                            All = { actualBaseSchema },
+                            Immediate = { actualBaseSchema }
+                        },
+                        //Discriminator = actualBaseSchema.Discriminator,
+                        DiscriminatorValue = "Unknown", //TODO: do we need to handle int / fixed enums?
+                        SerializationFormats = { KnownMediaType.Json },
+                    };
+                    defaultDerivedSchema.Extensions = new RecordOfStringAndAny { { "x-ms-skip-init-ctor", true } };
+                    List<string> usages = new List<string>();
+                    usages.Add("Model");
+                    if (actualBaseSchema.Usage.Contains(SchemaContext.Input))
+                        usages.Add("Input");
+                    if (actualBaseSchema.Usage.Contains(SchemaContext.Output) || actualBaseSchema.Usage.Contains(SchemaContext.Exception))
+                        usages.Add("Output");
+                    defaultDerivedSchema.Extensions.Add("x-csharp-usage", string.Join(',', usages));
+                    defaultDerivedSchema.Extensions.Add(DefaultDerivedExtension, defaultDerivedSchema);
+                    defaultDerivedSchemas.Add(defaultDerivedSchema.Name, defaultDerivedSchema);
+                }
             }
 
             if (defaultDerivedSchema is not null)
@@ -96,6 +104,11 @@ namespace AutoRest.CSharp.Common.Decorator
         private static bool IsBasePolySchema(this ObjectSchema schema)
         {
             return schema.Discriminator?.All is not null;
+        }
+
+        private static bool HasParents(this ObjectSchema schema)
+        {
+            return schema.Parents?.All.Count > 0;
         }
     }
 }

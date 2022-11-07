@@ -170,7 +170,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} element)"))
             {
-                if (serialization.Discriminator?.HasDescendants == true)
+                bool hasDecendants = serialization.Discriminator is null ? false : serialization.Discriminator.HasDescendants;
+                bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType.Type);
+                if (serialization.Discriminator is not null && hasDecendants)
                 {
                     using (writer.Scope($"if (element.TryGetProperty({serialization.Discriminator.SerializedName:L}, out {typeof(JsonElement)} discriminator))"))
                     {
@@ -184,9 +186,11 @@ namespace AutoRest.CSharp.Generation.Writers
                             }
                         }
                     }
-                    writer.Line($"return {JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(serialization.Discriminator.DefaultObjectType.Type.Implementation, $"element", JsonSerializationOptions.None)};");
+                    if (!isThisTheDefaultDerivedType)
+                        writer.Line($"return {JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(serialization.Discriminator.DefaultObjectType.Type.Implementation, $"element", JsonSerializationOptions.None)};");
                 }
-                else
+
+                if (!hasDecendants || serialization.Discriminator is null || isThisTheDefaultDerivedType)
                 {
                     writer.WriteObjectInitialization(serialization);
                 }

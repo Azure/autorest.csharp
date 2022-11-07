@@ -461,7 +461,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 propertyVariables.Add(additionalProperties, new ObjectPropertyVariable(propertyDeclaration, additionalProperties.PropertyType));
             }
 
-            bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType?.Type);
+            bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType.Type);
 
             foreach (var variable in propertyVariables)
             {
