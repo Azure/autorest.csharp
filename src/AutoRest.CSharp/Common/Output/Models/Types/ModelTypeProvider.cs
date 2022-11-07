@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         public override bool IncludeConverter => false;
-        protected override bool IsAbstract => _inputModel.DiscriminatorPropertyName is not null;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClass.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
         public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();

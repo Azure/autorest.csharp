@@ -138,6 +138,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), Configuration.ProtocolMethodList);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.SuppressAbstractBaseClass), Configuration.SuppressAbstractBaseClass);
 
                     Configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -188,6 +189,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
             var protocolMethods = protocolMethodList.ValueKind == JsonValueKind.Array
                 ? protocolMethodList.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : Array.Empty<string>();
+            root.TryGetProperty(nameof(Configuration.Options.SuppressAbstractBaseClass), out var suppressAbstractBaseClassElement);
+            var suppressAbstractBaseClass = Configuration.DeserializeArray(suppressAbstractBaseClassElement);
 
             Configuration.Initialize(
                 Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
@@ -206,6 +209,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
                 protocolMethods,
+                suppressAbstractBaseClass,
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }

@@ -115,6 +115,11 @@ namespace AutoRest.CSharp.Output.Models
             if (isBasePolyType || isChildPolyTYpe)
             {
                 InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
+
+                //Since the unknown type is used for deserialization only we don't need to create if its an input only model
+                if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
+                    return null;
+
                 string defaultDerivedName = $"Unknown{actualBase.Name}";
                 if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out defaultDerivedType))
                 {

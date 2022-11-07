@@ -88,6 +88,8 @@ namespace AutoRest.CSharp.Generation.Types
 
         public Type? SerializeAs { get; }
 
+        public bool HasParent => IsFrameworkType ? false : Implementation is ObjectType objectType ? objectType.Inherits is not null : false;
+
         protected bool Equals(CSharpType other, bool ignoreNullable)
             => Equals(_implementation, other._implementation) &&
                _type == other._type &&

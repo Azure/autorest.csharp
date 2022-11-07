@@ -19,6 +19,7 @@ using Azure.Core;
 using Azure.ResourceManager.Models;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 using Configuration = AutoRest.CSharp.Input.Configuration;
+using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -466,8 +467,15 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach (var variable in propertyVariables)
             {
                 string defaultValue ="default";
-                if (serialization.Discriminator?.SerializedName == variable.Key.SerializedName && isThisTheDefaultDerivedType && serialization.Discriminator.Value is not null)
+                if (serialization.Discriminator?.SerializedName == variable.Key.SerializedName &&
+                    isThisTheDefaultDerivedType &&
+                    serialization.Discriminator.Value is not null &&
+                    (!serialization.Discriminator.Property.ValueType.IsEnum ||
+                    (serialization.Discriminator.Property.ValueType.Implementation is EnumType enumType &&
+                    enumType.IsExtensible)))
+                {
                     defaultValue = $"\"{serialization.Discriminator.Value.Value.Value}\"";
+                }
                 writer.Line($"{variable.Value.Type} {variable.Value.Declaration:D} = {defaultValue};");
             }
 

@@ -51,6 +51,14 @@ namespace AutoRest.CSharp.Common.Decorator
             if (actualBaseSchema is null)
                 throw new InvalidOperationException($"Found a child poly {schema.Language.Default.Name} that we weren't able to determine its base poly from {string.Join(',', schema.Parents?.Immediate.Select(p => p.Name) ?? Array.Empty<string>())}");
 
+            //Since the unknown type is used for deserialization only we don't need to create if its an input only model
+            var hasXCsharpUsageOutput = !actualBaseSchema.Extensions?.Usage?.Contains("output", StringComparison.OrdinalIgnoreCase);
+            if (!actualBaseSchema.Usage.Contains(SchemaContext.Output) &&
+                !actualBaseSchema.Usage.Contains(SchemaContext.Exception) &&
+                hasXCsharpUsageOutput.HasValue &&
+                hasXCsharpUsageOutput.Value)
+                return;
+
             ObjectSchema? defaultDerivedSchema = null;
 
             //if I have children and parents then I am my own defaultDerivedType
@@ -62,6 +70,16 @@ namespace AutoRest.CSharp.Common.Decorator
                 string defaultDerivedSchemaName = "Unknown" + actualBaseSchema.Language.Default.Name;
                 if (!defaultDerivedSchemas.TryGetValue(defaultDerivedSchemaName, out defaultDerivedSchema))
                 {
+                    //TODO: Not sure if we want to do this or have a linter rule to block fixed enums from discriminators
+                    //if (actualBaseSchema.Discriminator?.Property.Schema is SealedChoiceSchema sealedChoiceSchema)
+                    //{
+                    //    if (!sealedChoiceSchema.Choices.Any(v => v.Value == "Unknown" || v.Value == "None"))
+                    //    {
+                    //        var unknownChoice = new ChoiceValue();
+                    //        unknownChoice.Value = "Unknown";
+                    //        sealedChoiceSchema.Choices.Add(unknownChoice);
+                    //    }
+                    //}
                     defaultDerivedSchema = new ObjectSchema
                     {
                         Language = new Languages
@@ -76,17 +94,21 @@ namespace AutoRest.CSharp.Common.Decorator
                             All = { actualBaseSchema },
                             Immediate = { actualBaseSchema }
                         },
-                        //Discriminator = actualBaseSchema.Discriminator,
-                        DiscriminatorValue = "Unknown", //TODO: do we need to handle int / fixed enums?
+                        DiscriminatorValue = "Unknown",
                         SerializationFormats = { KnownMediaType.Json },
                     };
                     defaultDerivedSchema.Extensions = new RecordOfStringAndAny { { "x-ms-skip-init-ctor", true } };
-                    List<string> usages = new List<string>();
+                    HashSet<string> usages = new HashSet<string>();
                     usages.Add("Model");
                     if (actualBaseSchema.Usage.Contains(SchemaContext.Input))
                         usages.Add("Input");
                     if (actualBaseSchema.Usage.Contains(SchemaContext.Output) || actualBaseSchema.Usage.Contains(SchemaContext.Exception))
                         usages.Add("Output");
+                    if (actualBaseSchema.Extensions?.Usage?.Contains("output", StringComparison.OrdinalIgnoreCase) ?? false)
+                        usages.Add("Output");
+                    if (actualBaseSchema.Extensions?.Usage?.Contains("input", StringComparison.OrdinalIgnoreCase) ?? false)
+                        usages.Add("Input");
+
                     defaultDerivedSchema.Extensions.Add("x-csharp-usage", string.Join(',', usages));
                     defaultDerivedSchema.Extensions.Add(DefaultDerivedExtension, defaultDerivedSchema);
                     defaultDerivedSchemas.Add(defaultDerivedSchema.Name, defaultDerivedSchema);
@@ -103,7 +125,8 @@ namespace AutoRest.CSharp.Common.Decorator
 
         private static bool IsBasePolySchema(this ObjectSchema schema)
         {
-            return schema.Discriminator?.All is not null;
+            return schema.Discriminator?.All is not null ||
+                (schema.Discriminator is not null && !schema.HasParents()); //this is the case where I am a solo placeholder but might have derived types later
         }
 
         private static bool HasParents(this ObjectSchema schema)
