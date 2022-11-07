@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -55,7 +57,61 @@ namespace body_complex.Models
                     case "sawshark": return Sawshark.DeserializeSawshark(element);
                 }
             }
-            return UnknownShark.DeserializeUnknownShark(element);
+            Optional<int> age = default;
+            DateTimeOffset birthday = default;
+            string fishtype = "shark";
+            Optional<string> species = default;
+            float length = default;
+            Optional<IList<Fish>> siblings = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("age"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    age = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("birthday"))
+                {
+                    birthday = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("fishtype"))
+                {
+                    fishtype = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("species"))
+                {
+                    species = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("length"))
+                {
+                    length = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("siblings"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    List<Fish> array = new List<Fish>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(DeserializeFish(item));
+                    }
+                    siblings = array;
+                    continue;
+                }
+            }
+            return new Shark(fishtype, species.Value, length, Optional.ToList(siblings), Optional.ToNullable(age), birthday);
         }
     }
 }

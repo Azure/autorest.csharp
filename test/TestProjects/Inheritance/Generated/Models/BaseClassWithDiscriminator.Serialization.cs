@@ -35,7 +35,22 @@ namespace Inheritance.Models
                     case "ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties": return ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties.DeserializeClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(element);
                 }
             }
-            return UnknownBaseClassWithDiscriminator.DeserializeUnknownBaseClassWithDiscriminator(element);
+            string discriminatorProperty = default;
+            Optional<string> baseClassProperty = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("DiscriminatorProperty"))
+                {
+                    discriminatorProperty = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("BaseClassProperty"))
+                {
+                    baseClassProperty = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new BaseClassWithDiscriminator(baseClassProperty.Value, discriminatorProperty);
         }
     }
 }
