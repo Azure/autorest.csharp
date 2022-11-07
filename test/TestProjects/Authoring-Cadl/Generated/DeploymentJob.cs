@@ -8,8 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure;
 using Azure.Core;
-using Azure.Core.Foundations;
 
 namespace Azure.Language.Authoring
 {
@@ -23,7 +23,7 @@ namespace Azure.Language.Authoring
         /// <param name="errors"></param>
         /// <param name="id"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="jobId"/>, <paramref name="warnings"/>, <paramref name="errors"/> or <paramref name="id"/> is null. </exception>
-        internal DeploymentJob(string jobId, JobStatus status, IEnumerable<JobWarning> warnings, Core.Foundations.Error errors, string id)
+        internal DeploymentJob(string jobId, JobStatus status, IEnumerable<JobWarning> warnings, ResponseError errors, string id)
         {
             Argument.AssertNotNull(jobId, nameof(jobId));
             Argument.AssertNotNull(warnings, nameof(warnings));
@@ -46,7 +46,7 @@ namespace Azure.Language.Authoring
         /// <param name="warnings"></param>
         /// <param name="errors"></param>
         /// <param name="id"></param>
-        internal DeploymentJob(string jobId, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, DateTimeOffset expirationDateTime, JobStatus status, IReadOnlyList<JobWarning> warnings, Core.Foundations.Error errors, string id)
+        internal DeploymentJob(string jobId, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, DateTimeOffset expirationDateTime, JobStatus status, IReadOnlyList<JobWarning> warnings, ResponseError errors, string id)
         {
             JobId = jobId;
             CreatedDateTime = createdDateTime;
@@ -71,7 +71,7 @@ namespace Azure.Language.Authoring
         /// <summary> Gets the warnings. </summary>
         public IReadOnlyList<JobWarning> Warnings { get; }
         /// <summary> Gets the errors. </summary>
-        public Core.Foundations.Error Errors { get; }
+        public ResponseError Errors { get; }
         /// <summary> Gets the id. </summary>
         public string Id { get; }
     }

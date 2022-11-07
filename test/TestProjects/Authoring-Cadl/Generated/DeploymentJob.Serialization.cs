@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Azure.Core.Foundations;
 
 namespace Azure.Language.Authoring
 {
@@ -24,7 +23,7 @@ namespace Azure.Language.Authoring
             DateTimeOffset expirationDateTime = default;
             JobStatus status = default;
             IReadOnlyList<JobWarning> warnings = default;
-            Core.Foundations.Error errors = default;
+            ResponseError errors = default;
             string id = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -65,7 +64,7 @@ namespace Azure.Language.Authoring
                 }
                 if (property.NameEquals("errors"))
                 {
-                    errors = Core.Foundations.Error.DeserializeError(property.Value);
+                    errors = JsonSerializer.Deserialize<ResponseError>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("id"))

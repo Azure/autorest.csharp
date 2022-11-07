@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Decorator
         internal static bool IsEqual(Type sourceType, ModelTypeProvider targetType)
         {
             var sourceTypeProperties = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
-            var targetTypeProperties = targetType.Properties.ToList();
+            var targetTypeProperties = targetType.MyProperties.ToList();
 
             return IsEqual(sourceType, targetType, sourceTypeProperties, targetTypeProperties, new Dictionary<Type, CSharpType> { { sourceType, targetType.Type } });
         }
@@ -247,7 +247,7 @@ namespace AutoRest.CSharp.Decorator
             var isArgMatches = false;
             if (parentPropertyType.IsClass && !childPropertyType.IsFrameworkType && childPropertyType.Implementation is ModelTypeProvider model)
             {
-                isArgMatches = IsEqual(parentPropertyType, model, parentPropertyType.GetProperties().ToList(), model.Properties.ToList(), new Dictionary<Type, CSharpType> { { parentPropertyType, childPropertyType } });
+                isArgMatches = IsEqual(parentPropertyType, model, parentPropertyType.GetProperties().ToList(), model.MyProperties.ToList(), new Dictionary<Type, CSharpType> { { parentPropertyType, childPropertyType } });
             }
             else if (!childPropertyType.IsFrameworkType && childPropertyType.Implementation as EnumType != null)
             {

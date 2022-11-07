@@ -44,6 +44,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override bool IncludeConverter => false;
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
+
+        private ModelTypeProviderFields? _myFields;
+        private ModelTypeProviderFields MyFields => _myFields ??= EnsureFields();
         public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         public ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
@@ -299,6 +302,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             foreach (var field in Fields)
                 yield return new ObjectTypeProperty(field, Fields.GetInputByField(field), this);
+        }
+
+        private ObjectTypeProperty[]? _myProperties;
+        internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
+
+        private IEnumerable<ObjectTypeProperty> BuildMyProperties()
+        {
+            foreach (var field in MyFields)
+                yield return new ObjectTypeProperty(field, MyFields.GetInputByField(field), this);
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
