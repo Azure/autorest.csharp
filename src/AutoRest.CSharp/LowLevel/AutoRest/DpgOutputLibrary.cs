@@ -26,9 +26,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly string _libraryName;
         private readonly bool _isCadlInput;
 
-        //private readonly Dictionary<InputEnumType, EnumType> _enums;
-        //private readonly Dictionary<InputModelType, ObjectType> _rawModels;
-
         public TypeFactory TypeFactory { get; }
 
         private readonly Dictionary<InputType, TypeProvider> _inputToTypeProviders = new();
@@ -61,54 +58,46 @@ namespace AutoRest.CSharp.Output.Models.Types
             AllModelMap = new CachedDictionary<InputType, TypeProvider>(InitializeModels);
         }
 
-        //public DpgOutputLibrary(Dictionary<InputEnumType, EnumType> enums, Dictionary<InputModelType, ObjectType> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
-        //{
-        //    TypeFactory = new TypeFactory(this);
-        //    _enums = enums;
-        //    _rawModels = models;
-        //    _isCadlInput = isCadlInput;
-        //    RestClients = restClients;
-        //    ClientOptions = clientOptions;
-        //    AllModelMap = new CachedDictionary<InputModelType, ObjectType>(InitializeModels);
-        //}
-
         private Dictionary<InputType, TypeProvider> InitializeModels()
         {
-            foreach (var input in _rootNamespace.Models)
+            if (_isCadlInput)
             {
-                if (input.Usage != InputModelTypeUsage.None)
+                foreach (var input in _rootNamespace.Models)
                 {
-                    var model = BuildModel(input);
-                    _inputToTypeProviders.Add(input, model);
-                }
-            }
-
-            foreach (var input in _rootNamespace.Enums)
-            {
-                if (input.Usage != InputModelTypeUsage.None)
-                {
-                    var enumModel = BuildModel(input);
-                    _inputToTypeProviders.Add(input, enumModel);
-                }
-            }
-
-            var replacedTypes = new Dictionary<InputModelType, ObjectType>();
-            foreach (var input in _rootNamespace.Models)
-            {
-                if (_inputToTypeProviders.TryGetValue(input, out var type) && type is ModelTypeProvider modelTypeProvider)
-                {
-                    var csharpType = TypeReferenceTypeChooser.GetExactMatch(modelTypeProvider);
-                    if (csharpType != null)
+                    if (input.Usage != InputModelTypeUsage.None)
                     {
-                        replacedTypes.Add(input, (SystemObjectType)csharpType.Implementation);
+                        var model = BuildModel(input);
+                        _inputToTypeProviders.Add(input, model);
                     }
                 }
-            }
 
-            // replace those filtered types
-            foreach (var (inputModel, objectType) in replacedTypes)
-            {
-                _inputToTypeProviders[inputModel] = objectType;
+                foreach (var input in _rootNamespace.Enums)
+                {
+                    if (input.Usage != InputModelTypeUsage.None)
+                    {
+                        var enumModel = BuildModel(input);
+                        _inputToTypeProviders.Add(input, enumModel);
+                    }
+                }
+
+                var replacedTypes = new Dictionary<InputModelType, ObjectType>();
+                foreach (var input in _rootNamespace.Models)
+                {
+                    if (_inputToTypeProviders.TryGetValue(input, out var type) && type is ModelTypeProvider modelTypeProvider)
+                    {
+                        var csharpType = TypeReferenceTypeChooser.GetExactMatch(modelTypeProvider);
+                        if (csharpType != null)
+                        {
+                            replacedTypes.Add(input, (SystemObjectType)csharpType.Implementation);
+                        }
+                    }
+                }
+
+                // replace those filtered types
+                foreach (var (inputModel, objectType) in replacedTypes)
+                {
+                    _inputToTypeProviders[inputModel] = objectType;
+                }
             }
 
             return _inputToTypeProviders;
