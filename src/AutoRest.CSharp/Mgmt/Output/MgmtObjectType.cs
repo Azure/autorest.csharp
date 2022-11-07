@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     {
                         // we cannot directly return the FrameworkType here, we need to wrap it inside the SystemObjectType
                         // in order to let the constructor builder have the ability to get base constructor
-                        return CSharpType.FromSystemType(MgmtContext.Context, existingBaseType.FrameworkType);
+                        return CSharpType.FromSystemType(existingBaseType.FrameworkType, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel);
                     }
                 }
                 // if we did not find that type, this means the customization code is referencing something unrecognized

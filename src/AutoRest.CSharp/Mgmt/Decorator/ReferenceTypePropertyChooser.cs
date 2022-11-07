@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                     if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace, replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType> { { replacementType, typeToReplace.Type } }))
                     {
-                        result = CSharpType.FromSystemType(MgmtContext.Context, replacementType);
+                        result = CSharpType.FromSystemType(replacementType, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel);
                         _valueCache.TryAdd(typeToReplace.ObjectSchema, result);
                         return result;
                     }

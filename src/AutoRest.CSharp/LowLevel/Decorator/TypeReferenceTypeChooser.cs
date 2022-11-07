@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Decorator
             {
                 if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace))
                 {
-                    var csharpType = CSharpType.FromSystemType(MgmtContext.Context, replacementType);
+                    var csharpType = CSharpType.FromSystemType(replacementType, replacementType.Namespace!, null);
                     _valueCache.TryAdd(typeToReplace.InputModel, csharpType);
                     return csharpType;
                 }

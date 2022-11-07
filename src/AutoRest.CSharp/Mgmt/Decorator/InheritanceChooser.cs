@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static CSharpType GetCSharpType(Type parentType)
         {
-            return CSharpType.FromSystemType(MgmtContext.Context, parentType);
+            return CSharpType.FromSystemType(parentType, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel);
         }
 
         private static List<PropertyInfo> GetParentPropertiesToCompare(Type parentType, ObjectTypeProperty[] properties)
