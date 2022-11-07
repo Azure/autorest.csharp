@@ -99,10 +99,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
-                var codeWriter = new CodeWriter();
-                new ResourceWriter(codeWriter, resource).Write();
+                var writer = new ResourceWriter(resource);
+                writer.Write();
 
-                AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }
 
             // write extension class

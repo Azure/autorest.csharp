@@ -18,6 +18,8 @@ namespace ModelsInCadl
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt");
             writer.WriteNumberValue(RequiredInt);
+            writer.WritePropertyName("discriminatorProperty");
+            writer.WriteStringValue(DiscriminatorProperty);
             writer.WriteEndObject();
         }
 
@@ -38,7 +40,7 @@ namespace ModelsInCadl
                     continue;
                 }
             }
-            return new DerivedModelWithDiscriminatorB(requiredInt);
+            return new DerivedModelWithDiscriminatorB(discriminatorProperty, requiredInt);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

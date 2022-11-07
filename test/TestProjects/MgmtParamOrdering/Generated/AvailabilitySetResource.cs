@@ -205,7 +205,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _availabilitySetRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, patch, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -231,7 +231,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _availabilitySetRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken);
+                var response = _availabilitySetRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, patch, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

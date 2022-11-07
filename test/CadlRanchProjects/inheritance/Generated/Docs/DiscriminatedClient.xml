@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetModelAsync(RequestContext)">
+<example>
+This sample shows how to call GetModelAsync and parse the result.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+Response response = await client.GetModelAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetModel(RequestContext)">
+<example>
+This sample shows how to call GetModel and parse the result.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+Response response = client.GetModel();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutModelAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutModelAsync with required request content.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+var data = new {
+    kind = "",
+    age = 1234,
+};
+
+Response response = await client.PutModelAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutModel(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutModel with required request content.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+var data = new {
+    kind = "",
+    age = 1234,
+};
+
+Response response = client.PutModel(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetRecursiveModelAsync(RequestContext)">
+<example>
+This sample shows how to call GetRecursiveModelAsync and parse the result.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+Response response = await client.GetRecursiveModelAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetRecursiveModel(RequestContext)">
+<example>
+This sample shows how to call GetRecursiveModel and parse the result.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+Response response = client.GetRecursiveModel();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutRecursiveModelAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutRecursiveModelAsync with required request content.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+var data = new {
+    kind = "",
+    age = 1234,
+};
+
+Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutRecursiveModel(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutRecursiveModel with required request content.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+var data = new {
+    kind = "",
+    age = 1234,
+};
+
+Response response = client.PutRecursiveModel(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetMissingDiscriminatorAsync(RequestContext)">
+<example>
+This sample shows how to call GetMissingDiscriminatorAsync and parse the result.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+Response response = await client.GetMissingDiscriminatorAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetMissingDiscriminator(RequestContext)">
+<example>
+This sample shows how to call GetMissingDiscriminator and parse the result.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+Response response = client.GetMissingDiscriminator();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetWrongDiscriminatorAsync(RequestContext)">
+<example>
+This sample shows how to call GetWrongDiscriminatorAsync and parse the result.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+Response response = await client.GetWrongDiscriminatorAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetWrongDiscriminator(RequestContext)">
+<example>
+This sample shows how to call GetWrongDiscriminator and parse the result.
+<code><![CDATA[
+var client = new DiscriminatedClient();
+
+Response response = client.GetWrongDiscriminator();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  kind: string, # Required.
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>
