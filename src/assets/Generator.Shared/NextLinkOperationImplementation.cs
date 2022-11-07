@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
@@ -101,7 +100,7 @@ namespace Azure.Core
 
             if (hasCompleted)
             {
-                string? finalUri = GetFinalUri();
+                string? finalUri = GetFinalUri(response);
                 var finalResponse = finalUri != null
                     ? await GetResponseAsync(async, finalUri, cancellationToken).ConfigureAwait(false)
                     : response;
@@ -216,7 +215,7 @@ namespace Azure.Core
         /// <summary>
         /// This function is used to get the final request uri after the lro has completed.
         /// </summary>
-        private string? GetFinalUri()
+        private string? GetFinalUri(Response response)
         {
             // Set final uri as null if the response for initial request doesn't contain header "Operation-Location" or "Azure-AsyncOperation".
             if (_headerSource is not (HeaderSource.OperationLocation or HeaderSource.AzureAsyncOperation))
@@ -239,6 +238,30 @@ namespace Azure.Core
                     return null;
                 case OperationFinalStateVia.OriginalUri:
                     return _startRequestUri.AbsoluteUri;
+            }
+
+            // If body contains resourceLocation, use it: https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#target-resource-location
+            var contentStream = response.ContentStream;
+            if (contentStream is { CanSeek: true, Length: > 0 })
+            {
+                try
+                {
+                    using JsonDocument document = JsonDocument.Parse(contentStream);
+                    var root = document.RootElement;
+                    if (root.TryGetProperty("resourceLocation", out var resourceLocation))
+                    {
+                        var resourceLocationValue = resourceLocation.GetString();
+                        if (resourceLocationValue != null)
+                        {
+                            return resourceLocationValue;
+                        }
+                    }
+                }
+                finally
+                {
+                    // It is required to reset the position of the content after reading as this response may be used for deserialization.
+                    contentStream.Position = 0;
+                }
             }
 
             // If initial request is PUT or PATCH, return initial request Uri
