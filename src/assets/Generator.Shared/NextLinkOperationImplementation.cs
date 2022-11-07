@@ -5,8 +5,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -42,27 +44,73 @@ namespace Azure.Core
         {
             string? apiVersionStr = apiVersionOverride ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
-            var lroDetails = new Dictionary<string, string>()
-            {
-                ["HeaderSource"] = HeaderSource.Location.ToString(),
-                ["NextRequestUri"] = nextRequestUri,
-                ["InitialUri"] = startRequestUri.AbsoluteUri,
-                ["InitialResponse"] = response.ToString()
-            };
-            var lroData = BinaryData.FromObjectAsJson(lroDetails);
-            id = Convert.ToBase64String(lroData.ToArray());
-            if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
-            {
-                return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
-            }
-
             var (originalResponseHasLocation, lastKnownLocation) = headerSource == HeaderSource.Location
                 ? (true, nextRequestUri)
                 : response.Headers.TryGetValue("Location", out var locationUri)
                     ? (true, locationUri)
                     : (false, null);
+            var serializeOptions = new JsonSerializerOptions { Converters = { new StreamConverter() } };
+            var lroDetails = new Dictionary<string, string?>()
+            {
+                ["HeaderSource"] = headerSource.ToString(),
+                ["NextRequestUri"] = nextRequestUri,
+                ["InitialUri"] = startRequestUri.AbsoluteUri,
+                ["InitialResponse"] = BinaryData.FromObjectAsJson<Response>(response, serializeOptions).ToString(),
+                ["RequestMethod"] = requestMethod.ToString(),
+                ["OriginalResponseHasLocation"] = originalResponseHasLocation.ToString(),
+                ["LastKnownLocation"] = lastKnownLocation,
+                ["FinalStateVia"] = finalStateVia.ToString()
+            };
+            var lroData = BinaryData.FromObjectAsJson(lroDetails);
+            id = Convert.ToBase64String(lroData.ToArray());
+
+            if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
+            {
+                return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
+            }
 
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
+        }
+
+        public static IOperation Create(
+            HttpPipeline pipeline,
+            RequestMethod requestMethod,
+            Uri startRequestUri,
+            Response response,
+            OperationFinalStateVia finalStateVia,
+            string nextRequestUri,
+            string headerSourceStr,
+            bool originalResponseHasLocation,
+            string lastKnownLocation,
+            string? apiVersionOverride = null)
+        {
+            string? apiVersionStr = apiVersionOverride ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
+            if (!Enum.TryParse(headerSourceStr, out HeaderSource headerSource))
+                headerSource = HeaderSource.None;
+
+            if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
+            {
+                return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
+            }
+
+            return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
+        }
+
+        public static IOperation<T> Create<T>(
+            IOperationSource<T> operationSource,
+            HttpPipeline pipeline,
+            RequestMethod requestMethod,
+            Uri startRequestUri,
+            Response response,
+            OperationFinalStateVia finalStateVia,
+            string nextRequestUri,
+            string headerSourceStr,
+            bool originalResponseHasLocation,
+            string lastKnownLocation,
+            string? apiVersionOverride = null)
+        {
+            var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia, nextRequestUri, headerSourceStr, originalResponseHasLocation, lastKnownLocation, apiVersionOverride);
+            return new OperationToOperationOfT<T>(operationSource, operation);
         }
 
         public static IOperation<T> Create<T>(
@@ -434,6 +482,64 @@ namespace Azure.Core
                 }
 
                 return OperationState<T>.Pending(state.RawResponse);
+            }
+        }
+
+        private class StreamConverter : JsonConverter<Stream>
+        {
+            /// <summary> Serialize stream to BinaryData string. </summary>
+            /// <param name="writer"> The writer. </param>
+            /// <param name="model"> The Stream model. </param>
+            /// <param name="options"> The options for JsonSerializer. </param>
+            public override void Write(Utf8JsonWriter writer, Stream model, JsonSerializerOptions options)
+            {
+                if (model.Length == 0)
+                {
+                    //JsonSerializer.Serialize(writer, JsonDocument.Parse("{}").RootElement);
+                    writer.WriteNullValue();
+                    return;
+                }
+                MemoryStream? memoryContent = model as MemoryStream;
+
+                if (memoryContent == null)
+                {
+                    throw new InvalidOperationException($"The response is not fully buffered.");
+                }
+
+                if (memoryContent.TryGetBuffer(out ArraySegment<byte> segment))
+                {
+                    var data = new BinaryData(segment.AsMemory());
+#if NET6_0_OR_GREATER
+                    writer.WriteRawValue(data);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(data.ToString()).RootElement);
+#endif
+                }
+                else
+                {
+                    var data = new BinaryData(memoryContent.ToArray());
+#if NET6_0_OR_GREATER
+                    writer.WriteRawValue(data);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(data.ToString()).RootElement);
+#endif
+                }
+            }
+
+            /// <summary> Deserialize Stream from BinaryData string. </summary>
+            /// <param name="reader"> The reader. </param>
+            /// <param name="typeToConvert"> The type to convert </param>
+            /// <param name="options"> The options for JsonSerializer. </param>
+            public override Stream Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                using var document = JsonDocument.ParseValue(ref reader);
+                foreach (var property in document.RootElement.EnumerateObject())
+                {
+                    // todo: add null check
+                    var value = property.Value.GetString();
+                    return BinaryData.FromString(value!).ToStream();
+                }
+                return new BinaryData(Array.Empty<byte>()).ToStream();
             }
         }
     }
