@@ -4,6 +4,7 @@
 #nullable enable
 
 using System;
+using System.Linq;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -15,6 +16,8 @@ namespace Azure.Core
     internal class NextLinkOperationImplementation : IOperation
     {
         private const string ApiVersionParam = "api-version";
+        private static readonly string[] FailureStates = { "failed", "canceled" };
+        private static readonly string[] SuccessStates = { "succeeded" };
 
         private readonly HeaderSource _headerSource;
         private readonly bool _originalResponseHasLocation;
@@ -300,13 +303,13 @@ namespace Azure.Core
             {
                 if (TryGetStatusFromContentStream(response.ContentStream, headerSource, out var status, out resourceLocation))
                 {
-                    if (status.Equals("failed", StringComparison.OrdinalIgnoreCase) || status.Equals("canceled", StringComparison.OrdinalIgnoreCase))
+                    if (FailureStates.Contains(status))
                     {
                         failureState = OperationState.Failure(response);
                         return true;
                     }
 
-                    return status.Equals("succeeded", StringComparison.OrdinalIgnoreCase);
+                    return SuccessStates.Contains(status);
                 }
 
                 // If headerSource is None and provisioningState was not found, it defaults to Succeeded.
@@ -337,12 +340,12 @@ namespace Azure.Core
                 switch (headerSource)
                 {
                     case HeaderSource.None when root.TryGetProperty("properties", out var properties) && properties.TryGetProperty("provisioningState", out JsonElement property):
-                        status = property.GetRequiredString();
+                        status = property.GetRequiredString().ToLowerInvariant();
                         return true;
                     case HeaderSource.OperationLocation when root.TryGetProperty("status", out var property):
                     case HeaderSource.AzureAsyncOperation when root.TryGetProperty("status", out property):
-                        status = property.GetRequiredString();
-                        resourceLocation = root.TryGetProperty("resourceLocation", out var resourceLocationProperty)
+                        status = property.GetRequiredString().ToLowerInvariant();
+                        resourceLocation = SuccessStates.Contains(status) && root.TryGetProperty("resourceLocation", out var resourceLocationProperty)
                             ? resourceLocationProperty.GetString()
                             : null;
                         return true;
