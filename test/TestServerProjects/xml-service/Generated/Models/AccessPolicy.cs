@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -19,10 +20,7 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="permission"/> is null. </exception>
         public AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission)
         {
-            if (permission == null)
-            {
-                throw new ArgumentNullException(nameof(permission));
-            }
+            Argument.AssertNotNull(permission, nameof(permission));
 
             Start = start;
             Expiry = expiry;

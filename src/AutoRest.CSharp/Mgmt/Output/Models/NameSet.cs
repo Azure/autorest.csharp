@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+namespace AutoRest.CSharp.Mgmt.Output.Models;
+
 internal readonly struct NameSet
 {
     public string DiagnosticField { get; }

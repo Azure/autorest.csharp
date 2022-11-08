@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -18,10 +19,7 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="etag"/> is null. </exception>
         internal BlobProperties(DateTimeOffset lastModified, string etag)
         {
-            if (etag == null)
-            {
-                throw new ArgumentNullException(nameof(etag));
-            }
+            Argument.AssertNotNull(etag, nameof(etag));
 
             LastModified = lastModified;
             Etag = etag;

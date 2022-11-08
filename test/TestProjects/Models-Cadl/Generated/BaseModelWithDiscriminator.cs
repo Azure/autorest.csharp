@@ -5,14 +5,25 @@
 
 #nullable disable
 
+using System;
+using Azure.Core;
+
 namespace ModelsInCadl
 {
     /// <summary> Base model with discriminator property. </summary>
     public partial class BaseModelWithDiscriminator : BaseModel
     {
         /// <summary> Initializes a new instance of BaseModelWithDiscriminator. </summary>
-        public BaseModelWithDiscriminator()
+        /// <param name="discriminatorProperty"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="discriminatorProperty"/> is null. </exception>
+        public BaseModelWithDiscriminator(string discriminatorProperty)
         {
+            Argument.AssertNotNull(discriminatorProperty, nameof(discriminatorProperty));
+
+            DiscriminatorProperty = discriminatorProperty;
         }
+
+        /// <summary> Gets or sets the discriminator property. </summary>
+        public string DiscriminatorProperty { get; set; }
     }
 }

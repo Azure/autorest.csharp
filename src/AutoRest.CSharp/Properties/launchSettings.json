@@ -164,6 +164,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\extensible-enums\\Generated"
     },
+    "cadl-inheritance": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\inheritance\\Generated"
+    },
     "cadl-oauth2": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\oauth2\\Generated"
@@ -480,6 +484,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\paging\\Generated"
     },
+    "Parameters-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Parameters-Cadl\\Generated"
+    },
+    "Parameters-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Parameters-LowLevel\\Generated"
+    },
     "ParameterSequence-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ParameterSequence-LowLevel\\Generated"
@@ -499,10 +511,6 @@
     "ReferenceTypes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ReferenceTypes\\Generated"
-    },
-    "RequestContextAllOptional-LowLevel": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RequestContextAllOptional-LowLevel\\Generated"
     },
     "required-optional": {
       "commandName": "Project",

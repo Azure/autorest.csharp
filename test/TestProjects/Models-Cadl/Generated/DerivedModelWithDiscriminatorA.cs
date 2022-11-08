@@ -14,10 +14,12 @@ namespace ModelsInCadl
     public partial class DerivedModelWithDiscriminatorA : BaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
+        /// <param name="discriminatorProperty"></param>
         /// <param name="requiredString"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
-        public DerivedModelWithDiscriminatorA(string requiredString)
+        /// <exception cref="ArgumentNullException"> <paramref name="discriminatorProperty"/> or <paramref name="requiredString"/> is null. </exception>
+        public DerivedModelWithDiscriminatorA(string discriminatorProperty, string requiredString) : base(discriminatorProperty)
         {
+            Argument.AssertNotNull(discriminatorProperty, nameof(discriminatorProperty));
             Argument.AssertNotNull(requiredString, nameof(requiredString));
 
             RequiredString = requiredString;

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -17,10 +18,7 @@ namespace MgmtScopeResource.Models
         /// <exception cref="ArgumentNullException"> <paramref name="workspace"/> is null. </exception>
         internal DataContainer(WorkspaceInfo workspace)
         {
-            if (workspace == null)
-            {
-                throw new ArgumentNullException(nameof(workspace));
-            }
+            Argument.AssertNotNull(workspace, nameof(workspace));
 
             Workspace = workspace;
         }

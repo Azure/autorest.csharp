@@ -68,10 +68,11 @@ import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
 import fs from "fs";
+import fsExtra from "fs-extra"
 import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
 import { dllFilePath } from "@autorest/csharp";
-import { exec } from "child_process";
+import { execSync } from "child_process";
 import { getConvenienceAPIName } from "@azure-tools/cadl-dpg";
 
 export interface NetEmitterOptions {
@@ -80,11 +81,13 @@ export interface NetEmitterOptions {
     logFile: string;
     namespace?: string;
     "library-name"?: string;
-    "shared-source-folders"?: string;
     "single-top-level-client"?: boolean;
     skipSDKGeneration: boolean;
     generateConvenienceAPI: boolean; //workaround for cadl-ranch project
     "new-project": boolean;
+    csharpGeneratorPath: string;
+    "clear-output-folder"?: boolean;
+    "save-inputs"?: boolean;
 }
 
 const defaultOptions = {
@@ -92,11 +95,10 @@ const defaultOptions = {
     outputFile: "cadl.json",
     logFile: "log.json",
     skipSDKGeneration: false,
-    "shared-source-folders": [
-        resolvePath(dllFilePath, "..", "Generator.Shared"),
-        resolvePath(dllFilePath, "..", "Azure.Core.Shared")
-    ].join(";"),
-    "new-project": false
+    "new-project": false,
+    csharpGeneratorPath: dllFilePath,
+    "clear-output-folder": false,
+    "save-inputs": false
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -108,11 +110,13 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         logFile: { type: "string", nullable: true },
         namespace: { type: "string", nullable: true },
         "library-name": { type: "string", nullable: true },
-        "shared-source-folders": { type: "string", nullable: true },
         "single-top-level-client": { type: "boolean", nullable: true },
-        skipSDKGeneration: { type: "boolean", nullable: true },
-        generateConvenienceAPI: {type: "boolean", nullable: true},
-        "new-project": { type: "boolean", nullable: true }
+        skipSDKGeneration: { type: "boolean", default: false },
+        generateConvenienceAPI: { type: "boolean", nullable: true },
+        "new-project": { type: "boolean", nullable: true },
+        csharpGeneratorPath: { type: "string", nullable: true },
+        "clear-output-folder": { type: "boolean", nullable: true },
+        "save-inputs": { type: "boolean", nullable: true },
     },
     required: []
 };
@@ -133,12 +137,8 @@ export async function $onEmit(
     const resolvedSharedFolders: string[] = [];
     const outputFolder = resolvePath(
         program.compilerOptions.outputPath ?? "./cadl-output",
-        emitterOptions["sdk-folder"],
-        "Generated"
+        emitterOptions["sdk-folder"]
     );
-    for (const sharedFolder of resolvedOptions["shared-source-folders"].split(";")) {
-        resolvedSharedFolders.push(path.relative(outputFolder, sharedFolder).replaceAll("\\", "/"));
-    }
     const options: NetEmitterOptions = {
         outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
         logFile: resolvePath(
@@ -146,67 +146,92 @@ export async function $onEmit(
             resolvedOptions.logFile
         ),
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
-        "shared-source-folders": resolvedSharedFolders.join(";"),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
-        "new-project": resolvedOptions["new-project"]
+        "new-project": resolvedOptions["new-project"],
+        csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
+        "clear-output-folder": resolvedOptions["clear-output-folder"],
+        "save-inputs": resolvedOptions["save-inputs"]
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
         const namespace = getServiceNamespaceString(program) || "";
-        const outPath =
-            version.trim().length > 0
-                ? resolvePath(
-                      options.outputFile?.replace(".json", `.${version}.json`)
-                  )
-                : resolvePath(options.outputFile);
 
         const root = createModel(program, options.generateConvenienceAPI);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
-            if (!fs.existsSync(outputFolder)) {
-                fs.mkdirSync(outputFolder, { recursive: true });
+            const generatedFolder = resolvePath(outputFolder, "Generated");
+            
+            //resolve shared folders based on generator path override
+            const resolvedSharedFolders: string[] = [];
+            var sharedFolders = [
+                resolvePath(options.csharpGeneratorPath, "..", "Generator.Shared"),
+                resolvePath(options.csharpGeneratorPath, "..", "Azure.Core.Shared"),
+            ]
+            for (const sharedFolder of sharedFolders) {
+                resolvedSharedFolders.push(path.relative(generatedFolder, sharedFolder).replaceAll("\\", "/"));
+            }
+     
+            if (!fs.existsSync(generatedFolder)) {
+                fs.mkdirSync(generatedFolder, { recursive: true });
+            }
+            
+            if (options["clear-output-folder"]) {
+                fsExtra.emptyDirSync(generatedFolder);
             }
             await program.host.writeFile(
-                outPath,
+                resolvePath(generatedFolder, "cadl.json"),
                 prettierOutput(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
             );
 
             //emit configuration.json
-            const configurationOutPath = resolvePath(outputFolder, "Configuration.json");
             const configurations = {
                 OutputFolder: ".",
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
-                SharedSourceFolders: options["shared-source-folders"]?.split(";") ?? [],
+                SharedSourceFolders: resolvedSharedFolders ?? [],
                 SingleTopLevelClient: resolvedOptions["single-top-level-client"]
             } as Configuration;
 
             await program.host.writeFile(
-                configurationOutPath,
+                resolvePath(generatedFolder, "Configuration.json"),
                 prettierOutput(JSON.stringify(configurations, null, 2))
             );
-            if (options.skipSDKGeneration !== true) {
-                let command = `dotnet ${resolvePath(dllFilePath)} -p ${path.dirname(outputFolder)}`;
-                if (options["new-project"] === true) {
-                    command = `${command} -n ${options["new-project"]}`;
-                }
 
-                exec(command, (error, stdout, stderr) => {
-                    if (error) {
-                        console.log(`error: ${error.message}`);
-                    }
-                    else if (stderr) {
-                        console.log(`stderr: ${stderr}`);
-                    }
-                    console.log(`stdout: ${stdout}`);
-                });
-            }            
+            if (options.skipSDKGeneration !== true) {
+                const newProjectOption = options["new-project"] ? "--new-project" : "";
+                let command = `dotnet ${resolvePath(options.csharpGeneratorPath)} --project-path ${outputFolder} ${newProjectOption}`;
+                console.info(command);
+
+                try {
+                    execSync(command, {stdio: 'inherit'});
+                } catch(error: any) {
+                    if (error.message) console.log(error.message);
+                    if (error.stderr) console.error(error.stderr);
+                    if (error.stdout) console.log(error.stdout);
+                }
+            }
+            
+            if (!options["save-inputs"]) {
+                // delete
+                deleteFile(resolvePath(generatedFolder, "cadl.json"));
+                deleteFile(resolvePath(generatedFolder, "Configuration.json"));
+            }
         }
     }
+}
+
+function deleteFile(filePath: string) {
+    fs.unlink(filePath, err => {
+        if (err) {
+            console.log(`stderr: ${err}`);
+        }
+    
+        console.log(`File ${filePath} is deleted.`)
+    });
 }
 
 function prettierOutput(output: string) {
@@ -885,3 +910,4 @@ class ErrorTypeFoundError extends Error {
         super("Error type found in evaluated Cadl output");
     }
 }
+

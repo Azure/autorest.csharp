@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace RequestContextAllOptional_LowLevel
+namespace Models.Inheritance
 {
-    /// <summary> Client options for RequestContextAllOptionalClient. </summary>
-    public partial class RequestContextAllOptionalClientOptions : ClientOptions
+    /// <summary> Client options for Models.Inheritance library clients. </summary>
+    public partial class ModelsInheritanceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace RequestContextAllOptional_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of RequestContextAllOptionalClientOptions. </summary>
-        public RequestContextAllOptionalClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of ModelsInheritanceClientOptions. </summary>
+        public ModelsInheritanceClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

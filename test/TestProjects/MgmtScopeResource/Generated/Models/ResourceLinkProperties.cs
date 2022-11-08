@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -17,10 +18,7 @@ namespace MgmtScopeResource.Models
         /// <exception cref="ArgumentNullException"> <paramref name="targetId"/> is null. </exception>
         public ResourceLinkProperties(string targetId)
         {
-            if (targetId == null)
-            {
-                throw new ArgumentNullException(nameof(targetId));
-            }
+            Argument.AssertNotNull(targetId, nameof(targetId));
 
             TargetId = targetId;
         }

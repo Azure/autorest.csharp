@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -18,10 +19,7 @@ namespace MgmtScopeResource.Models
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         internal WhatIfChange(string resourceId, ChangeType changeType)
         {
-            if (resourceId == null)
-            {
-                throw new ArgumentNullException(nameof(resourceId));
-            }
+            Argument.AssertNotNull(resourceId, nameof(resourceId));
 
             ResourceId = resourceId;
             ChangeType = changeType;

@@ -19,10 +19,7 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ScoringProfile(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
             Functions = new ChangeTrackingList<ScoringFunction>();

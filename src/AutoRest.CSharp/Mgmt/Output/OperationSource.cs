@@ -22,9 +22,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             Resource = resource;
             ArmClientField = new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(ArmClient), "_client");
             ArmClientCtor = new ConstructorSignature(TypeName, null, null, Internal, new[] { MgmtTypeProvider.ArmClientParameter });
-            var serializationType = resource is null ? ReturnType : resource.Type.Equals(returnType) ? resource.ResourceData.Type : ReturnType;
-            ResponseSerialization = new SerializationBuilder().Build(KnownMediaType.Json, schema, serializationType);
+            ResponseSerialization = new SerializationBuilder().Build(KnownMediaType.Json, schema, resource?.ResourceData.Type ?? returnType);
         }
+
+        public bool IsReturningResource => !ReturnType.IsFrameworkType && ReturnType.Implementation is Resource;
 
         public CSharpType ReturnType { get; }
         public CSharpType Interface { get; }
