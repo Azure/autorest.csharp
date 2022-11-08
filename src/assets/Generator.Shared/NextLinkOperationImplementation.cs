@@ -4,7 +4,7 @@
 #nullable enable
 
 using System;
-using System.Linq;
+using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,8 +15,6 @@ namespace Azure.Core
     internal class NextLinkOperationImplementation : IOperation
     {
         private const string ApiVersionParam = "api-version";
-        private static readonly string[] FailureStates = { "failed", "canceled" };
-        private static readonly string[] SuccessStates = { "succeeded" };
 
         private readonly HeaderSource _headerSource;
         private readonly bool _originalResponseHasLocation;
@@ -39,17 +37,16 @@ namespace Azure.Core
         {
             string? apiVersionStr = apiVersionOverride ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
-            if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
+            if (headerSource == HeaderSource.None)
             {
-                return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
+                var state = ParseState(response, headerSource, out _);
+                if (state.HasCompleted)
+                {
+                    return new CompletedOperation(state.HasCompleted ? GetOperationStateFromFinalResponse(requestMethod, response) : state);
+                }
             }
 
-            var (originalResponseHasLocation, lastKnownLocation) = headerSource == HeaderSource.Location
-                ? (true, nextRequestUri)
-                : response.Headers.TryGetValue("Location", out var locationUri)
-                    ? (true, locationUri)
-                    : (false, null);
-
+            var originalResponseHasLocation = response.Headers.TryGetValue("Location", out var lastKnownLocation);
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
@@ -92,24 +89,24 @@ namespace Azure.Core
         {
             Response response = await GetResponseAsync(async, _nextRequestUri, cancellationToken).ConfigureAwait(false);
 
-            var hasCompleted = IsFinalState(response, _headerSource, out var failureState);
-            if (failureState != null)
+            var state = ParseState(response, _headerSource, out var resourceLocation);
+            if (!state.HasSucceeded)
             {
-                return failureState.Value;
+                UpdateNextRequestUri(response.Headers);
+                return state;
             }
 
-            if (hasCompleted)
+            if (!state.HasSucceeded)
             {
-                string? finalUri = GetFinalUri(response);
-                var finalResponse = finalUri != null
-                    ? await GetResponseAsync(async, finalUri, cancellationToken).ConfigureAwait(false)
-                    : response;
-
-                return GetOperationStateFromFinalResponse(_requestMethod, finalResponse);
+                return state;
             }
 
-            UpdateNextRequestUri(response.Headers);
-            return OperationState.Pending(response);
+            string? finalUri = GetFinalUri(resourceLocation);
+            var finalResponse = finalUri != null
+                ? await GetResponseAsync(async, finalUri, cancellationToken).ConfigureAwait(false)
+                : response;
+
+            return GetOperationStateFromFinalResponse(_requestMethod, finalResponse);
         }
 
         private static OperationState GetOperationStateFromFinalResponse(RequestMethod requestMethod, Response response)
@@ -215,7 +212,7 @@ namespace Azure.Core
         /// <summary>
         /// This function is used to get the final request uri after the lro has completed.
         /// </summary>
-        private string? GetFinalUri(Response response)
+        private string? GetFinalUri(string? resourceLocation)
         {
             // Set final uri as null if the response for initial request doesn't contain header "Operation-Location" or "Azure-AsyncOperation".
             if (_headerSource is not (HeaderSource.OperationLocation or HeaderSource.AzureAsyncOperation))
@@ -240,28 +237,10 @@ namespace Azure.Core
                     return _startRequestUri.AbsoluteUri;
             }
 
-            // If body contains resourceLocation, use it: https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#target-resource-location
-            var contentStream = response.ContentStream;
-            if (contentStream is { CanSeek: true, Length: > 0 })
+            // If response body contains resourceLocation, use it: https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#target-resource-location
+            if (resourceLocation != null)
             {
-                try
-                {
-                    using JsonDocument document = JsonDocument.Parse(contentStream);
-                    var root = document.RootElement;
-                    if (root.TryGetProperty("resourceLocation", out var resourceLocation))
-                    {
-                        var resourceLocationValue = resourceLocation.GetString();
-                        if (resourceLocationValue != null)
-                        {
-                            return resourceLocationValue;
-                        }
-                    }
-                }
-                finally
-                {
-                    // It is required to reset the position of the content after reading as this response may be used for deserialization.
-                    contentStream.Position = 0;
-                }
+                return resourceLocation;
             }
 
             // If initial request is PUT or PATCH, return initial request Uri
@@ -311,55 +290,74 @@ namespace Azure.Core
             return message;
         }
 
-        private static bool IsFinalState(Response response, HeaderSource headerSource, out OperationState? failureState)
+        private static OperationState ParseState(Response response, HeaderSource headerSource, out string? resourceLocation)
         {
-            failureState = null;
+            resourceLocation = null;
             if (headerSource == HeaderSource.Location)
             {
-                return response.Status != 202;
+                return response.Status != 202 ? OperationState.Success(response) : OperationState.Pending(response);
             }
 
-            if (response.Status is >= 200 and <= 204)
+            if (response.Status is < 200 or > 204)
             {
-                if (response.ContentStream?.Length > 0)
-                {
-                    try
-                    {
-                        using JsonDocument document = JsonDocument.Parse(response.ContentStream);
-                        var root = document.RootElement;
-                        switch (headerSource)
-                        {
-                            case HeaderSource.None when root.TryGetProperty("properties", out var properties) && properties.TryGetProperty("provisioningState", out JsonElement property):
-                            case HeaderSource.OperationLocation when root.TryGetProperty("status", out property):
-                            case HeaderSource.AzureAsyncOperation when root.TryGetProperty("status", out property):
-                                var state = property.GetRequiredString().ToLowerInvariant();
-                                if (FailureStates.Contains(state))
-                                {
-                                    failureState = OperationState.Failure(response);
-                                    return true;
-                                }
-                                else
-                                {
-                                    return SuccessStates.Contains(state);
-                                }
-                        }
-                    }
-                    finally
-                    {
-                        // It is required to reset the position of the content after reading as this response may be used for deserialization.
-                        response.ContentStream.Position = 0;
-                    }
-                }
-
-                // If provisioningState was not found, it defaults to Succeeded.
-                if (headerSource == HeaderSource.None)
-                {
-                    return true;
-                }
+                return OperationState.Failure(response);
             }
 
-            failureState = OperationState.Failure(response);
-            return true;
+            if (TryGetStatusFromContentStream(response.ContentStream, headerSource, out var status, out resourceLocation))
+            {
+                if (status.Equals("failed", StringComparison.OrdinalIgnoreCase) || status.Equals("canceled", StringComparison.OrdinalIgnoreCase))
+                {
+                    return OperationState.Failure(response);
+                }
+
+                return status.Equals("succeeded", StringComparison.OrdinalIgnoreCase) ? OperationState.Success(response) : OperationState.Pending(response);
+            }
+
+            // If headerSource is None and provisioningState was not found, it defaults to Succeeded.
+            if (headerSource == HeaderSource.None)
+            {
+                return OperationState.Success(response);
+            }
+
+            return OperationState.Failure(response);
+        }
+
+        private static bool TryGetStatusFromContentStream(Stream? stream, HeaderSource headerSource, out string status, out string? resourceLocation)
+        {
+            status = string.Empty;
+            resourceLocation = null;
+
+            if (stream is not {CanSeek: true, Length: > 0})
+            {
+                return false;
+            }
+
+            try
+            {
+                using JsonDocument document = JsonDocument.Parse(stream);
+                var root = document.RootElement;
+                switch (headerSource)
+                {
+                    case HeaderSource.None when root.TryGetProperty("properties", out var properties) && properties.TryGetProperty("provisioningState", out JsonElement property):
+                        status = property.GetRequiredString();
+                        return true;
+                    case HeaderSource.OperationLocation when root.TryGetProperty("status", out var property):
+                    case HeaderSource.AzureAsyncOperation when root.TryGetProperty("status", out property):
+                        status = property.GetRequiredString();
+                        resourceLocation = root.TryGetProperty("resourceLocation", out var resourceLocationProperty)
+                            ? resourceLocationProperty.GetString()
+                            : null;
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+            finally
+            {
+                // It is required to reset the position of the content after reading as this response may be used for deserialization.
+                stream.Position = 0;
+            }
         }
 
         private static bool ShouldIgnoreHeader(RequestMethod method, Response response)
