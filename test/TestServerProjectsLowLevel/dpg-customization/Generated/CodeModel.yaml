@@ -416,7 +416,7 @@ operationGroups:
             description: 'Post either raw response as a model and pass in ''raw'' for mode, or grow up your operation to take a model instead, and put in ''model'' as mode. '
         protocol: !Protocols {}
       - !Operation 
-        operationId: ListMultivariateModel
+        operationId: getPages
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -484,7 +484,7 @@ operationGroups:
             nextLinkName: nextLink
         language: !Languages 
           default:
-            name: ListMultivariateModel
+            name: GetPages
             description: Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
             paging:
               itemName: values

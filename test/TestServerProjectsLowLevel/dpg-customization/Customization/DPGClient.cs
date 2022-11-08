@@ -136,13 +136,13 @@ namespace dpg_customization_LowLevel
         /// <param name="mode"> The mode with which you&apos;ll be handling your returned body. &apos;raw&apos; for just dealing with the raw body, and &apos;model&apos; if you are going to convert the raw body to a customized body before returning to users. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
-        public virtual AsyncPageable<Product> GetMultivariateModelValuesAsync(string mode, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> GetPageValuesAsync(string mode, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
             var context = new RequestContext { CancellationToken = cancellationToken };
 
-            AsyncPageable<BinaryData> pageableBindaryData = GetMultivariateModelsImplementationAsync("DPGClient.GetMultivariateModelValues", mode, context);
+            AsyncPageable<BinaryData> pageableBindaryData = GetPagesImplementationAsync("DPGClient.GetPagesValues", mode, context);
             return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
         }
 
@@ -150,14 +150,14 @@ namespace dpg_customization_LowLevel
         /// <param name="mode"> The mode with which you&apos;ll be handling your returned body. &apos;raw&apos; for just dealing with the raw body, and &apos;model&apos; if you are going to convert the raw body to a customized body before returning to users. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
-        public virtual Pageable<Product> GetMultivariateModelValues(string mode, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> GetPageValues(string mode, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
             RequestContext context = new RequestContext();
             context.CancellationToken = cancellationToken;
 
-            Pageable<BinaryData> pageableBindaryData = GetMultivariateModelsImplementation("DPGClient.GetMultivariateModelValues", mode, context);
+            Pageable<BinaryData> pageableBindaryData = GetPagesImplementation("DPGClient.GetPagesValues", mode, context);
             return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
         }
     }

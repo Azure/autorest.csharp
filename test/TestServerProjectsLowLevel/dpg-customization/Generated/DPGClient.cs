@@ -170,15 +170,15 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetMultivariateModelsAsync(String,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultivariateModelsAsync(string mode, RequestContext context = null)
+        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetPagesAsync(String,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetPagesAsync(string mode, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            return GetMultivariateModelsImplementationAsync("DPGClient.GetMultivariateModels", mode, context);
+            return GetPagesImplementationAsync("DPGClient.GetPages", mode, context);
         }
 
-        private AsyncPageable<BinaryData> GetMultivariateModelsImplementationAsync(string diagnosticsScopeName, string mode, RequestContext context)
+        private AsyncPageable<BinaryData> GetPagesImplementationAsync(string diagnosticsScopeName, string mode, RequestContext context)
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -186,8 +186,8 @@ namespace dpg_customization_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultivariateModelsRequest(mode, context)
-                        : CreateGetMultivariateModelsNextPageRequest(nextLink, mode, context);
+                        ? CreateGetPagesRequest(mode, context)
+                        : CreateGetPagesNextPageRequest(nextLink, mode, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -201,15 +201,15 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetMultivariateModels(String,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultivariateModels(string mode, RequestContext context = null)
+        /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetPages(String,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetPages(string mode, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            return GetMultivariateModelsImplementation("DPGClient.GetMultivariateModels", mode, context);
+            return GetPagesImplementation("DPGClient.GetPages", mode, context);
         }
 
-        private Pageable<BinaryData> GetMultivariateModelsImplementation(string diagnosticsScopeName, string mode, RequestContext context)
+        private Pageable<BinaryData> GetPagesImplementation(string diagnosticsScopeName, string mode, RequestContext context)
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -217,8 +217,8 @@ namespace dpg_customization_LowLevel
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetMultivariateModelsRequest(mode, context)
-                        : CreateGetMultivariateModelsNextPageRequest(nextLink, mode, context);
+                        ? CreateGetPagesRequest(mode, context)
+                        : CreateGetPagesNextPageRequest(nextLink, mode, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -308,7 +308,7 @@ namespace dpg_customization_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultivariateModelsRequest(string mode, RequestContext context)
+        internal HttpMessage CreateGetPagesRequest(string mode, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -336,7 +336,7 @@ namespace dpg_customization_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultivariateModelsNextPageRequest(string nextLink, string mode, RequestContext context)
+        internal HttpMessage CreateGetPagesNextPageRequest(string nextLink, string mode, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

@@ -137,14 +137,14 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetMultivariateModelsAsync(String,RequestContext)">
+    <member name="GetPagesAsync(String,RequestContext)">
 <example>
-This sample shows how to call GetMultivariateModelsAsync with required parameters and parse the result.
+This sample shows how to call GetPagesAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-await foreach (var data in client.GetMultivariateModelsAsync("<mode>"))
+await foreach (var data in client.GetPagesAsync("<mode>"))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("received").ToString());
@@ -164,14 +164,14 @@ Schema for <c>ProductResultValues</c>:
 
 </remarks>
     </member>
-    <member name="GetMultivariateModels(String,RequestContext)">
+    <member name="GetPages(String,RequestContext)">
 <example>
-This sample shows how to call GetMultivariateModels with required parameters and parse the result.
+This sample shows how to call GetPages with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-foreach (var data in client.GetMultivariateModels("<mode>"))
+foreach (var data in client.GetPages("<mode>"))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("received").ToString());
