@@ -37,13 +37,9 @@ namespace Azure.Core
         {
             string? apiVersionStr = apiVersionOverride ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
-            if (headerSource == HeaderSource.None)
+            if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState, out _))
             {
-                var state = ParseState(response, headerSource, out _);
-                if (state.HasCompleted)
-                {
-                    return new CompletedOperation(state.HasCompleted ? GetOperationStateFromFinalResponse(requestMethod, response) : state);
-                }
+                return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
             }
 
             var originalResponseHasLocation = response.Headers.TryGetValue("Location", out var lastKnownLocation);
@@ -89,24 +85,24 @@ namespace Azure.Core
         {
             Response response = await GetResponseAsync(async, _nextRequestUri, cancellationToken).ConfigureAwait(false);
 
-            var state = ParseState(response, _headerSource, out var resourceLocation);
-            if (!state.HasSucceeded)
+            var hasCompleted = IsFinalState(response, _headerSource, out var failureState, out var resourceLocation);
+            if (failureState != null)
             {
-                UpdateNextRequestUri(response.Headers);
-                return state;
+                return failureState.Value;
             }
 
-            if (!state.HasSucceeded)
+            if (hasCompleted)
             {
-                return state;
+                string? finalUri = GetFinalUri(resourceLocation);
+                var finalResponse = finalUri != null
+                    ? await GetResponseAsync(async, finalUri, cancellationToken).ConfigureAwait(false)
+                    : response;
+
+                return GetOperationStateFromFinalResponse(_requestMethod, finalResponse);
             }
 
-            string? finalUri = GetFinalUri(resourceLocation);
-            var finalResponse = finalUri != null
-                ? await GetResponseAsync(async, finalUri, cancellationToken).ConfigureAwait(false)
-                : response;
-
-            return GetOperationStateFromFinalResponse(_requestMethod, finalResponse);
+            UpdateNextRequestUri(response.Headers);
+            return OperationState.Pending(response);
         }
 
         private static OperationState GetOperationStateFromFinalResponse(RequestMethod requestMethod, Response response)
@@ -290,36 +286,38 @@ namespace Azure.Core
             return message;
         }
 
-        private static OperationState ParseState(Response response, HeaderSource headerSource, out string? resourceLocation)
+        private static bool IsFinalState(Response response, HeaderSource headerSource, out OperationState? failureState, out string? resourceLocation)
         {
+            failureState = null;
             resourceLocation = null;
+
             if (headerSource == HeaderSource.Location)
             {
-                return response.Status != 202 ? OperationState.Success(response) : OperationState.Pending(response);
+                return response.Status != 202;
             }
 
-            if (response.Status is < 200 or > 204)
+            if (response.Status is >= 200 and <= 204)
             {
-                return OperationState.Failure(response);
-            }
-
-            if (TryGetStatusFromContentStream(response.ContentStream, headerSource, out var status, out resourceLocation))
-            {
-                if (status.Equals("failed", StringComparison.OrdinalIgnoreCase) || status.Equals("canceled", StringComparison.OrdinalIgnoreCase))
+                if (TryGetStatusFromContentStream(response.ContentStream, headerSource, out var status, out resourceLocation))
                 {
-                    return OperationState.Failure(response);
+                    if (status.Equals("failed", StringComparison.OrdinalIgnoreCase) || status.Equals("canceled", StringComparison.OrdinalIgnoreCase))
+                    {
+                        failureState = OperationState.Failure(response);
+                        return true;
+                    }
+
+                    return status.Equals("succeeded", StringComparison.OrdinalIgnoreCase);
                 }
 
-                return status.Equals("succeeded", StringComparison.OrdinalIgnoreCase) ? OperationState.Success(response) : OperationState.Pending(response);
+                // If headerSource is None and provisioningState was not found, it defaults to Succeeded.
+                if (headerSource == HeaderSource.None)
+                {
+                    return true;
+                }
             }
 
-            // If headerSource is None and provisioningState was not found, it defaults to Succeeded.
-            if (headerSource == HeaderSource.None)
-            {
-                return OperationState.Success(response);
-            }
-
-            return OperationState.Failure(response);
+            failureState = OperationState.Failure(response);
+            return true;
         }
 
         private static bool TryGetStatusFromContentStream(Stream? stream, HeaderSource headerSource, out string status, out string? resourceLocation)
