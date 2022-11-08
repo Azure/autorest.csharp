@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
                 .ToDictionary(ci => ci.Name);
-
+            AssignParents(inputClients, clientInfosByName);
             var topLevelClientInfos = SetHierarchy(clientInfosByName);
             var clientOptions = CreateClientOptions(topLevelClientInfos);
 
@@ -218,6 +218,16 @@ namespace AutoRest.CSharp.Output.Models
             return new[] { topLevelClientInfo };
         }
 
+        private static void AssignParents(in IEnumerable<InputClient> clients, IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
+        {
+            foreach (var client in clients)
+            {
+                if (!String.IsNullOrEmpty(client.Parent))
+                {
+                    clientInfosByName[client.Name].Parent = clientInfosByName[client.Parent];
+                }
+            }
+        }
         private static void AssignParents(in ClientInfo clientInfo, IReadOnlyDictionary<string, ClientInfo> clientInfosByName, SourceInputModel sourceInputModel)
         {
             var child = clientInfo;

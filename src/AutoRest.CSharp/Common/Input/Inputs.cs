@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Common.Input
         public InputOAuth2Auth() : this(Array.Empty<string>()) {}
     }
 
-    internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations)
+    internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations, string? Parent)
     {
         private readonly string? _key;
 
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Common.Input
             init => _key = value;
         }
 
-        public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>()) { }
+        public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>(), null) { }
     }
 
     internal record InputOperation(

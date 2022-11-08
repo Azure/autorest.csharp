@@ -9,4 +9,6 @@ export interface InputClient {
     Description?: string;
     Operations: InputOperation[];
     Protocol?: Protocols;
+    Parent?: string;
+    IsOperationGroup: boolean;
 }

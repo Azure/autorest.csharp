@@ -9,6 +9,7 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    ignoreDiagnostics,
     isErrorModel,
     JSONSchemaType,
     Model,
@@ -20,6 +21,7 @@ import {
 import {
     getAllHttpServices,
     getAuthentication,
+    getHttpOperation,
     getServers,
     HttpOperation,
     HttpOperationParameter,
@@ -73,7 +75,7 @@ import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
 import { dllFilePath } from "@autorest/csharp";
 import { execSync } from "child_process";
-import { getConvenienceAPIName } from "@azure-tools/cadl-dpg";
+import { getConvenienceAPIName, listClients, listOperationGroups, listOperationsInOperationGroup } from "@azure-tools/cadl-dpg";
 
 export interface NetEmitterOptions {
     "sdk-folder": string;
@@ -304,14 +306,6 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
     try {
-        const [services] = getAllHttpServices(program);
-        const routes = services[0].operations;
-        if (routes.length === 0) {
-            throw "No Routes";
-        }
-        console.log("routes:" + routes.length);
-        const clients: InputClient[] = [];
-        const convenienceOperations: HttpOperation[] = [];
         //create endpoint parameter from servers
         let urlParameters: InputParameter[] | undefined = undefined;
         let url: string = "";
@@ -323,57 +317,151 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
                 urlParameters = cadlServers[0].parameters;
             }
         }
+        const [services] = getAllHttpServices(program);
+        const routes = services[0].operations;
+        if (routes.length === 0) {
+            throw "No Routes";
+        }
+        console.log("routes:" + routes.length);
 
         const lroMonitorOperations = getAllLroMonitorOperations(
             routes,
             program
         );
-        for (const operation of routes) {
-            console.log(JSON.stringify(operation.path));
-
-            // do not generate LRO monitor operation
-            if (lroMonitorOperations.has(operation.operation)) continue;
-
-            const groupName: string = getOperationGroupName(
-                program,
-                operation.operation
-            );
-            let client = getClient(clients, groupName);
-            if (!client) {
-                const container = operation.container;
+        const clients: InputClient[] = [];
+        const convenienceOperations: HttpOperation[] = [];
+        const dpgClients = listClients(program);
+        for (const client of dpgClients) {
+            const clientOperations = listOperationsInOperationGroup(program, client);
+            const container = ignoreDiagnostics(getHttpOperation(program,clientOperations[0])).container;
+            const clientDesc = getDoc(program, container);
+            const clientSummary = getSummary(program, container);
+            const inputClient = {
+                Name: client.name,
+                Description: clientDesc,
+                Operations: [],
+                Protocol: {},
+                IsOperationGroup: false
+            } as InputClient;
+            
+            
+            for (const op of clientOperations) {
+                const httpOperation = ignoreDiagnostics(getHttpOperation(program, op));
+                const inputOperation: InputOperation = loadOperation(
+                    program,
+                    httpOperation,
+                    url,
+                    urlParameters,
+                    modelMap,
+                    enumMap
+                );
+    
+                applyDefaultContentTypeAndAcceptParameter(inputOperation);
+    
+                const apiVersionInOperation = inputOperation.Parameters.find(
+                    (value) => value.IsApiVersion
+                );
+                if (apiVersionInOperation) {
+                    if (apiVersionInOperation.DefaultValue?.Value) {
+                        apiVersions.add(apiVersionInOperation.DefaultValue.Value);
+                    }
+                }
+                inputClient.Operations.push(inputOperation);
+                if (inputOperation.GenerateConvenienceMethod || generateConvenienceAPI)
+                    convenienceOperations.push(httpOperation);
+            }
+            
+            clients.push(inputClient);
+            const dpgOperationGroups = listOperationGroups(program, client);
+            for (const dpgGroup of dpgOperationGroups) {
+                const operations = listOperationsInOperationGroup(program, dpgGroup);
+                const container = ignoreDiagnostics(getHttpOperation(program,operations[0])).container;
                 const clientDesc = getDoc(program, container);
                 const clientSummary = getSummary(program, container);
-                client = {
-                    Name: groupName,
+                const dpgGroupClient = {
+                    Name: dpgGroup.type.name,
                     Description: clientDesc,
                     Operations: [],
-                    Protocol: {}
+                    Protocol: {},
+                    Parent: client.name,
+                    IsOperationGroup: true
                 } as InputClient;
-                clients.push(client);
-            }
-            const op: InputOperation = loadOperation(
-                program,
-                operation,
-                url,
-                urlParameters,
-                modelMap,
-                enumMap
-            );
-
-            applyDefaultContentTypeAndAcceptParameter(op);
-
-            const apiVersionInOperation = op.Parameters.find(
-                (value) => value.IsApiVersion
-            );
-            if (apiVersionInOperation) {
-                if (apiVersionInOperation.DefaultValue?.Value) {
-                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
+                for (const op of operations) {
+                    const httpOperation = ignoreDiagnostics(getHttpOperation(program, op));
+                    const inputOperation: InputOperation = loadOperation(
+                        program,
+                        httpOperation,
+                        url,
+                        urlParameters,
+                        modelMap,
+                        enumMap
+                    );
+        
+                    applyDefaultContentTypeAndAcceptParameter(inputOperation);
+        
+                    const apiVersionInOperation = inputOperation.Parameters.find(
+                        (value) => value.IsApiVersion
+                    );
+                    if (apiVersionInOperation) {
+                        if (apiVersionInOperation.DefaultValue?.Value) {
+                            apiVersions.add(apiVersionInOperation.DefaultValue.Value);
+                        }
+                    }
+                    dpgGroupClient.Operations.push(inputOperation);
+                    if (inputOperation.GenerateConvenienceMethod || generateConvenienceAPI)
+                        convenienceOperations.push(httpOperation);
                 }
+                clients.push(dpgGroupClient);
             }
-            client.Operations.push(op);
-            if (op.GenerateConvenienceMethod || generateConvenienceAPI)
-                convenienceOperations.push(operation);
         }
+        
+        
+        // for (const operation of routes) {
+        //     console.log(JSON.stringify(operation.path));
+
+        //     // do not generate LRO monitor operation
+        //     if (lroMonitorOperations.has(operation.operation)) continue;
+
+        //     const groupName: string = getOperationGroupName(
+        //         program,
+        //         operation.operation
+        //     );
+        //     let client = getClient(clients, groupName);
+        //     if (!client) {
+        //         const container = operation.container;
+        //         const clientDesc = getDoc(program, container);
+        //         const clientSummary = getSummary(program, container);
+        //         client = {
+        //             Name: groupName,
+        //             Description: clientDesc,
+        //             Operations: [],
+        //             Protocol: {}
+        //         } as InputClient;
+        //         clients.push(client);
+        //     }
+        //     const op: InputOperation = loadOperation(
+        //         program,
+        //         operation,
+        //         url,
+        //         urlParameters,
+        //         modelMap,
+        //         enumMap
+        //     );
+
+        //     applyDefaultContentTypeAndAcceptParameter(op);
+
+        //     const apiVersionInOperation = op.Parameters.find(
+        //         (value) => value.IsApiVersion
+        //     );
+        //     if (apiVersionInOperation) {
+        //         if (apiVersionInOperation.DefaultValue?.Value) {
+        //             apiVersions.add(apiVersionInOperation.DefaultValue.Value);
+        //         }
+        //     }
+        //     client.Operations.push(op);
+        //     if (op.GenerateConvenienceMethod || generateConvenienceAPI)
+        //         convenienceOperations.push(operation);
+        // }
         if (apiVersions.size > 1) {
             apiVersionParam.Kind = InputOperationParameterKind.Constant;
         }

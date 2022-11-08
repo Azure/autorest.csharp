@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Common.Input
             => new(
                 Name: operationGroup.Language.Default.Name,
                 Description: operationGroup.Language.Default.Description,
-                Operations: CreateOperations(operationGroup.Operations).Values.ToArray())
+                Operations: CreateOperations(operationGroup.Operations).Values.ToArray(), null)
             {
                 Key = operationGroup.Key,
             };
