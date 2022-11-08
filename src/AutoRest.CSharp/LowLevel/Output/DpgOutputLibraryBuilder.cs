@@ -34,11 +34,6 @@ namespace AutoRest.CSharp.Output.Models
             _sourceInputModel = sourceInputModel;
             _defaultNamespace = Configuration.Namespace ?? rootNamespace.Name;
             _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
-            //_azureCoreTypeMapping = new()
-            //{
-            //    [("Azure.Core.Foundations", "Error")] = typeof(Azure.ResponseError),
-            //    [("Azure.Core.Foundations", "InnerError")] = typeof(Azure.ResponseError).Assembly.GetType("Azure.ResponseInnerError", true)!
-            //};
         }
 
         public DpgOutputLibrary Build(bool isCadlInput)
