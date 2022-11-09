@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetAsync(RequestContext)">
+    <member name="GetCollectionsIntAsync(RequestContext)">
 <example>
-This sample shows how to call GetAsync and parse the result.
+This sample shows how to call GetCollectionsIntAsync and parse the result.
 <code><![CDATA[
 var client = new CollectionsIntClient();
 
-Response response = await client.GetAsync();
+Response response = await client.GetCollectionsIntAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].ToString());
@@ -26,13 +26,13 @@ Schema for <c>CollectionsIntProperty</c>:
 
 </remarks>
     </member>
-    <member name="Get(RequestContext)">
+    <member name="GetCollectionsInt(RequestContext)">
 <example>
-This sample shows how to call Get and parse the result.
+This sample shows how to call GetCollectionsInt and parse the result.
 <code><![CDATA[
 var client = new CollectionsIntClient();
 
-Response response = client.Get();
+Response response = client.GetCollectionsInt();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].ToString());

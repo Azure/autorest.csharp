@@ -17,7 +17,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_Boolean_get() => Test(async (host) =>
         {
-            Response response = await new BooleanClient(host, null).GetAsync();
+            Response response = await new BooleanClient(host, null).GetBooleanAsync();
             Assert.AreEqual(true, BooleanProperty.FromResponse(response).Property);
         });
 
@@ -31,7 +31,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_String_get() => Test(async (host) =>
         {
-            Response response = await new StringClient(host, null).GetAsync();
+            Response response = await new StringClient(host, null).GetStringAsync();
             Assert.AreEqual("hello", StringProperty.FromResponse(response).Property);
         });
 
@@ -45,7 +45,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_Bytes_get() => Test(async (host) =>
         {
-            Response response = await new BytesClient(host, null).GetAsync();
+            Response response = await new BytesClient(host, null).GetByteAsync();
             Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), BytesProperty.FromResponse(response).Property.ToString());
         });
 
@@ -59,7 +59,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_Int_get() => Test(async (host) =>
         {
-            Response response = await new IntClient(host, null).GetAsync();
+            Response response = await new IntClient(host, null).GetIntAsync();
             Assert.AreEqual(42, IntProperty.FromResponse(response).Property);
         });
 
@@ -73,7 +73,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_Float_get() => Test(async (host) =>
         {
-            Response response = await new FloatClient(host, null).GetAsync();
+            Response response = await new FloatClient(host, null).GetFloatAsync();
             Assert.AreEqual(42.42f, FloatProperty.FromResponse(response).Property);
         });
 
@@ -87,7 +87,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_Datetime_get() => Test(async (host) =>
         {
-            Response response = await new DatetimeClient(host, null).GetAsync();
+            Response response = await new DatetimeClient(host, null).GetDatetimeAsync();
             Assert.AreEqual(DateTimeOffset.Parse("2022-08-26T18:38:00Z"), DatetimeProperty.FromResponse(response).Property);
         });
 
@@ -101,7 +101,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_Duration_get() => Test(async (host) =>
         {
-            Response response = await new DurationClient(host, null).GetAsync();
+            Response response = await new DurationClient(host, null).GetDurationAsync();
             Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), DurationProperty.FromResponse(response).Property);
         });
 
@@ -115,7 +115,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_Enum_get() => Test(async (host) =>
         {
-            Response response = await new EnumClient(host, null).GetAsync();
+            Response response = await new EnumClient(host, null).GetEnumAsync();
             Assert.AreEqual(InnerEnum.ValueOne, EnumProperty.FromResponse(response).Property);
         });
 
@@ -129,7 +129,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_ExtensibleEnum_get() => Test(async (host) =>
         {
-            Response response = await new ExtensibleEnumClient(host, null).GetAsync();
+            Response response = await new ExtensibleEnumClient(host, null).GetExtensibleEnumAsync();
             Assert.AreEqual(new InnerExtensibleEnum("UnknownValue"), ExtensibleEnumProperty.FromResponse(response).Property);
         });
 
@@ -143,7 +143,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_Model_get() => Test(async (host) =>
         {
-            Response response = await new ModelClient(host, null).GetAsync();
+            Response response = await new ModelClient(host, null).GetModelAsync();
             Assert.AreEqual("hello", ModelProperty.FromResponse(response).Property.Property);
         });
 
@@ -157,7 +157,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_CollectionsString_get() => Test(async (host) =>
         {
-            Response response = await new CollectionsStringClient(host, null).GetAsync();
+            Response response = await new CollectionsStringClient(host, null).GetCollectionsStringAsync();
             CollectionAssert.AreEqual(new[] { "hello", "world" }, CollectionsStringProperty.FromResponse(response).Property);
         });
 
@@ -171,7 +171,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_CollectionsInt_get() => Test(async (host) =>
         {
-            Response response = await new CollectionsIntClient(host, null).GetAsync();
+            Response response = await new CollectionsIntClient(host, null).GetCollectionsIntAsync();
             CollectionAssert.AreEqual(new[] { 1, 2 }, CollectionsIntProperty.FromResponse(response).Property);
         });
 
@@ -185,7 +185,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_CollectionsModel_get() => Test(async (host) =>
         {
-            Response response = await new CollectionsModelClient(host, null).GetAsync();
+            Response response = await new CollectionsModelClient(host, null).GetCollectionsModelAsync();
             var result = CollectionsModelProperty.FromResponse(response);
             Assert.AreEqual("hello", result.Property[0].Property);
             Assert.AreEqual("world", result.Property[1].Property);
@@ -201,7 +201,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Types_DictionaryString_get() => Test(async (host) =>
         {
-            Response response = await new DictionaryStringClient(host, null).GetAsync();
+            Response response = await new DictionaryStringClient(host, null).GetDictionaryStringAsync();
             var result = DictionaryStringProperty.FromResponse(response);
             Assert.AreEqual("hello", result.Property["k1"]);
             Assert.AreEqual("world", result.Property["k2"]);
