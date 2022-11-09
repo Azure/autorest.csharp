@@ -337,7 +337,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (ObjectSchema.DiscriminatorValue != null)
             {
-                value = BuilderHelpers.ParseConstant(ObjectSchema.DiscriminatorValue, property.Declaration.Type);
+                value = BuilderHelpers.ParseConstant(ObjectSchema.DiscriminatorValue, property.Declaration.Type.GetNonNullable());
             }
 
             return new ObjectTypeDiscriminator(

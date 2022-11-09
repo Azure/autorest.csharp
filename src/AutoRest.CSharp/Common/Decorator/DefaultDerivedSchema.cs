@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Decorator
             // Reason:
             // Here we just hard coded the name and discriminator value for the internal backing schema.
             // This could work now, but there are also potential duplicate conflict issue.
-            bool isChildPoly = schema.DiscriminatorValue is not null;
+           bool isChildPoly = schema.DiscriminatorValue is not null;
             bool isBasePoly = schema.IsBasePolySchema();
             if (!isChildPoly && !isBasePoly)
                 return;
@@ -55,14 +55,14 @@ namespace AutoRest.CSharp.Common.Decorator
             var hasXCsharpUsageOutput = !actualBaseSchema.Extensions?.Usage?.Contains("output", StringComparison.OrdinalIgnoreCase);
             if (!actualBaseSchema.Usage.Contains(SchemaContext.Output) &&
                 !actualBaseSchema.Usage.Contains(SchemaContext.Exception) &&
-                hasXCsharpUsageOutput.HasValue &&
-                hasXCsharpUsageOutput.Value)
+                (!hasXCsharpUsageOutput.HasValue ||
+                hasXCsharpUsageOutput.Value))
                 return;
 
             ObjectSchema? defaultDerivedSchema = null;
 
             //if I have children and parents then I am my own defaultDerivedType
-            if (actualBaseSchema.HasParents())
+            if (actualBaseSchema.HasParentsWithDiscriminator())
                 defaultDerivedSchema = actualBaseSchema;
 
             if (defaultDerivedSchema is null)
@@ -126,12 +126,12 @@ namespace AutoRest.CSharp.Common.Decorator
         private static bool IsBasePolySchema(this ObjectSchema schema)
         {
             return schema.Discriminator?.All is not null ||
-                (schema.Discriminator is not null && !schema.HasParents()); //this is the case where I am a solo placeholder but might have derived types later
+                (schema.Discriminator is not null && !schema.HasParentsWithDiscriminator()); //this is the case where I am a solo placeholder but might have derived types later
         }
 
-        private static bool HasParents(this ObjectSchema schema)
+        private static bool HasParentsWithDiscriminator(this ObjectSchema schema)
         {
-            return schema.Parents?.All.Count > 0;
+            return schema.Parents?.All.Count > 0 && schema.Parents.All.Any(parent => parent is ObjectSchema objectSchema && objectSchema.Discriminator is not null);
         }
     }
 }

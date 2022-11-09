@@ -168,5 +168,13 @@ namespace AutoRest.CSharp.Generation.Types
                 FrameworkType.Equals(typeof(IDictionary<,>)) ||
                 FrameworkType == typeof(IReadOnlyDictionary<,>);
         }
+
+        public CSharpType GetNonNullable()
+        {
+            if (!IsNullable)
+                return this;
+
+            return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
+        }
     }
 }
