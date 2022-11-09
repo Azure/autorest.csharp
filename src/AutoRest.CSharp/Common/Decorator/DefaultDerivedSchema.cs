@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Decorator
             // Reason:
             // Here we just hard coded the name and discriminator value for the internal backing schema.
             // This could work now, but there are also potential duplicate conflict issue.
-           bool isChildPoly = schema.DiscriminatorValue is not null;
+            bool isChildPoly = schema.DiscriminatorValue is not null;
             bool isBasePoly = schema.IsBasePolySchema();
             if (!isChildPoly && !isBasePoly)
                 return;
@@ -97,6 +97,15 @@ namespace AutoRest.CSharp.Common.Decorator
                         DiscriminatorValue = "Unknown",
                         SerializationFormats = { KnownMediaType.Json },
                     };
+
+                    if (actualBaseSchema.Parents is not null)
+                    {
+                        foreach (var p in actualBaseSchema.Parents.All)
+                        {
+                            defaultDerivedSchema.Parents.All.Add(p);
+                        };
+                    }
+
                     defaultDerivedSchema.Extensions = new RecordOfStringAndAny { { "x-ms-skip-init-ctor", true } };
                     HashSet<string> usages = new HashSet<string>();
                     usages.Add("Model");
