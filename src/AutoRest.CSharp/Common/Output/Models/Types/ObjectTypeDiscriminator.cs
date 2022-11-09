@@ -15,12 +15,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeDiscriminatorImplementation[] Implementations { get; }
 
-        public ObjectTypeDiscriminator(ObjectTypeProperty property, string serializedName, ObjectTypeDiscriminatorImplementation[] implementations, Constant? value)
+        public ObjectType DefaultObjectType { get; }
+
+        public ObjectTypeDiscriminator(ObjectTypeProperty property, string serializedName, ObjectTypeDiscriminatorImplementation[] implementations, Constant? value, ObjectType defaultObjectType)
         {
             Property = property;
             Implementations = implementations;
             Value = value;
             SerializedName = serializedName;
+            DefaultObjectType = defaultObjectType;
         }
 
         public bool HasDescendants => Implementations.Any();

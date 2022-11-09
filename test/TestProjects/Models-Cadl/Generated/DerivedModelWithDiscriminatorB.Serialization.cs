@@ -40,7 +40,7 @@ namespace ModelsInCadl
                     continue;
                 }
             }
-            return new DerivedModelWithDiscriminatorB(discriminatorProperty, requiredInt);
+            return new DerivedModelWithDiscriminatorB(requiredInt);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

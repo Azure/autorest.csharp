@@ -78,13 +78,71 @@ namespace AutoRest.CSharp.Output.Models
 
         private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
         {
+            Dictionary<InputModelType, List<InputModelType>> derivedTypesLookup = new Dictionary<InputModelType, List<InputModelType>>();
+            foreach (var model in _rootNamespace.Models)
+            {
+                if (model.BaseModel is null)
+                    continue;
+
+                if (!derivedTypesLookup.TryGetValue(model.BaseModel, out var derivedTypes))
+                {
+                    derivedTypes = new List<InputModelType>();
+                    derivedTypesLookup.Add(model.BaseModel, derivedTypes);
+                }
+                derivedTypes.Add(model);
+            }
+
+            Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
+
             foreach (var model in _rootNamespace.Models)
             {
                 if (model.Usage != InputModelTypeUsage.None)
                 {
-                    models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory));
+                    derivedTypesLookup.TryGetValue(model, out var children);
+                    InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
+                    ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
+                    models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
                 }
             }
+        }
+
+        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, InputModelType[] derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
+        {
+            //only want to create one instance of the default derived per polymorphic set
+            ModelTypeProvider? defaultDerivedType = null;
+            bool isBasePolyType = derivedTypesArray.Length > 0 && model.DiscriminatorPropertyName is not null;
+            bool isChildPolyTYpe = model.DiscriminatorValue is not null;
+            if (isBasePolyType || isChildPolyTYpe)
+            {
+                InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
+
+                //Since the unknown type is used for deserialization only we don't need to create if its an input only model
+                if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
+                    return null;
+
+                string defaultDerivedName = $"Unknown{actualBase.Name}";
+                if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out defaultDerivedType))
+                {
+                    //create the "Unknown" version
+                    var unknownDerviedType = new InputModelType(
+                        defaultDerivedName,
+                        actualBase.Namespace,
+                        "internal",
+                        $"Unknown version of {actualBase.Name}",
+                        InputModelTypeUsage.Output,
+                        Array.Empty<InputModelProperty>(),
+                        actualBase,
+                        Array.Empty<InputModelType>(),
+                        "Unknown", //TODO: do we need to support extensible enum / int values?
+                        null,
+                        true);
+                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, _defaultNamespace, _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
+                    defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
+                    models.Add(unknownDerviedType, defaultDerivedType);
+                }
+            }
+
+            return defaultDerivedType;
         }
 
         private IEnumerable<InputClient> UpdateOperations()

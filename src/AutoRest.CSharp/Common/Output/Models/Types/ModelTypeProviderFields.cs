@@ -36,6 +36,20 @@ namespace AutoRest.CSharp.Output.Models.Types
             var serializationParameters = new List<Parameter>();
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
+            string? discriminator = inputModel.DiscriminatorPropertyName;
+            if (discriminator is not null)
+            {
+                var originalFieldName = discriminator.FirstCharToUpperCase();
+                var inputModelProperty = new InputModelProperty(originalFieldName, discriminator, "Discriminator", InputPrimitiveType.String, true, true, true);
+                var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty);
+                fields.Add(field);
+                fieldsToInputs[field] = inputModelProperty;
+                var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type);
+                parametersToFields[parameter.Name] = field;
+                serializationParameters.Add(parameter);
+                publicParameters.Add(parameter);
+            }
+
             foreach (var inputModelProperty in inputModel.Properties)
             {
                 var originalFieldName = inputModelProperty.Name.FirstCharToUpperCase();

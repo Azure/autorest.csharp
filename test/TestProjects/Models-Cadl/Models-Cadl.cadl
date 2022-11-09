@@ -24,7 +24,7 @@ model DerivedModel extends BaseModel {
 
 @discriminator("discriminatorProperty")
 @doc("Base model with discriminator property.")
-model BaseModelWithDiscriminator extends BaseModel {}
+model BaseModelWithDiscriminator {}
 
 @doc("Deriver model with discriminator property.")
 model DerivedModelWithDiscriminatorA extends BaseModelWithDiscriminator {
