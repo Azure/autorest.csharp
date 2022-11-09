@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private bool _hasCalculatedDefaultDerivedType;
         public ObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerviedType();
 
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClass.Contains(DefaultName) &&
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) &&
             ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.MgmtReferenceType;

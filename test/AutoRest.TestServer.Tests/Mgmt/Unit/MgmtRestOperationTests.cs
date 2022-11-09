@@ -67,7 +67,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 disablePaginationTopRenaming: false,
                 projectFolder: "/..",
                 protocolMethodList: Array.Empty<string>(),
-                suppressAbstractBaseClass: Array.Empty<string>(),
+                suppressAbstractBaseClasses: Array.Empty<string>(),
                 mgmtConfiguration: mgmtConfiguration);
         }
 

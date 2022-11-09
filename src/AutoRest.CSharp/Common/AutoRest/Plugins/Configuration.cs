@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Input
             public const string ProtocolMethodList = "protocol-method-list";
             public const string SkipSerializationFormatXml = "skip-serialization-format-xml";
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
-            public const string SuppressAbstractBaseClass = "suppress-abstract-base-class";
+            public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
         }
 
         public static void Initialize(
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Input
             bool disablePaginationTopRenaming,
             string? projectFolder,
             string[] protocolMethodList,
-            IReadOnlyList<string> suppressAbstractBaseClass,
+            IReadOnlyList<string> suppressAbstractBaseClasses,
             MgmtConfiguration mgmtConfiguration)
         {
             _outputFolder = outputFolder;
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Input
             SkipSerializationFormatXml = skipSerializationFormatXml;
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
             _mgmtConfiguration = mgmtConfiguration;
-            _suppressAbstractBaseClass = suppressAbstractBaseClass;
+            _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
         }
 
         private static string? _outputFolder;
@@ -103,8 +103,8 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
-        private static IReadOnlyList<string>? _suppressAbstractBaseClass;
-        public static IReadOnlyList<string> SuppressAbstractBaseClass => _suppressAbstractBaseClass ?? throw new InvalidOperationException("Configuration has not been initialized");
+        private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
+        public static IReadOnlyList<string> SuppressAbstractBaseClasses => _suppressAbstractBaseClasses ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         private static string[]? _protocolMethodList;
         public static string[] ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Input
                 disablePaginationTopRenaming: GetOptionValue(autoRest, Options.DisablePaginationTopRenaming),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                suppressAbstractBaseClass: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClass).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
