@@ -26,7 +26,7 @@ namespace Azure.Core
         public static void WriteStringValue(this Utf8JsonWriter writer, char value) =>
             writer.WriteStringValue(value.ToString(CultureInfo.InvariantCulture));
 
-        public static void WriteNonEmptyArray(this Utf8JsonWriter writer, string name, string[] values)
+        public static void WriteNonEmptyArray(this Utf8JsonWriter writer, string name, IReadOnlyList<string> values)
         {
             if (values.Any())
             {
