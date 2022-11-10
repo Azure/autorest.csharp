@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
-    internal partial class UnknownAbstractModel
+    public partial class UnknownAbstractModel
     {
         internal static UnknownAbstractModel DeserializeUnknownAbstractModel(JsonElement element)
         {

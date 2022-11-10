@@ -8,7 +8,7 @@
 namespace body_complex.Models
 {
     /// <summary> The UnknownMyBaseType. </summary>
-    internal partial class UnknownMyBaseType : MyBaseType
+    public partial class UnknownMyBaseType : MyBaseType
     {
         /// <summary> Initializes a new instance of UnknownMyBaseType. </summary>
         /// <param name="kind"></param>

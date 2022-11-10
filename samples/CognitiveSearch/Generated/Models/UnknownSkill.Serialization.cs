@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownSkill : IUtf8JsonSerializable
+    public partial class UnknownSkill : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

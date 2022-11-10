@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownCharFilter : IUtf8JsonSerializable
+    public partial class UnknownCharFilter : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

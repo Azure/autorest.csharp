@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownFish : IUtf8JsonSerializable
+    public partial class UnknownFish : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

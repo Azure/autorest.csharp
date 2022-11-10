@@ -8,7 +8,7 @@
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownDataChangeDetectionPolicy. </summary>
-    internal partial class UnknownDataChangeDetectionPolicy : DataChangeDetectionPolicy
+    public partial class UnknownDataChangeDetectionPolicy : DataChangeDetectionPolicy
     {
         /// <summary> Initializes a new instance of UnknownDataChangeDetectionPolicy. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data change detection policy. </param>

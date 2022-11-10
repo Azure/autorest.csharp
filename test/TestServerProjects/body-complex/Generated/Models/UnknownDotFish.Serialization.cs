@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownDotFish
+    public partial class UnknownDotFish
     {
         internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element)
         {

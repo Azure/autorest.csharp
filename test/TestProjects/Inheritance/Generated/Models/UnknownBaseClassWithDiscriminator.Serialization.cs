@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Inheritance.Models
 {
-    internal partial class UnknownBaseClassWithDiscriminator : IUtf8JsonSerializable
+    public partial class UnknownBaseClassWithDiscriminator : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

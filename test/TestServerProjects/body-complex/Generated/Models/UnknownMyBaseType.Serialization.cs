@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownMyBaseType
+    public partial class UnknownMyBaseType
     {
         internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element)
         {

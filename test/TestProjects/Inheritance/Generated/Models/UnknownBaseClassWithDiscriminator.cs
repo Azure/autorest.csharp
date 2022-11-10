@@ -8,7 +8,7 @@
 namespace Inheritance.Models
 {
     /// <summary> The UnknownBaseClassWithDiscriminator. </summary>
-    internal partial class UnknownBaseClassWithDiscriminator : BaseClassWithDiscriminator
+    public partial class UnknownBaseClassWithDiscriminator : BaseClassWithDiscriminator
     {
         /// <summary> Initializes a new instance of UnknownBaseClassWithDiscriminator. </summary>
         /// <param name="baseClassProperty"></param>
