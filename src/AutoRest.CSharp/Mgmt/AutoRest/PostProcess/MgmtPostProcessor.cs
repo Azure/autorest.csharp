@@ -20,10 +20,10 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
-    internal class Internalizer : PostProcessor
+    internal class MgmtPostProcessor : PostProcessor
     {
         private readonly ImmutableHashSet<string> _modelsToKeep;
-        public Internalizer(Project project, ImmutableHashSet<string> modelsToKeep) : base(project)
+        public MgmtPostProcessor(Project project, ImmutableHashSet<string> modelsToKeep) : base(project)
         {
             _modelsToKeep = modelsToKeep;
         }

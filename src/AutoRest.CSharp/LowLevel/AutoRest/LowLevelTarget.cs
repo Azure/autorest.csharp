@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class LowLevelTarget
     {
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel, bool cadlInput)
+        public static void ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel, bool cadlInput)
         {
             var library = new DpgOutputLibraryBuilder(inputNamespace, sourceInputModel).Build(cadlInput);
 
@@ -77,16 +77,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ClientOptionsWriter.WriteClientOptions(optionsWriter, library.ClientOptions);
             project.AddGeneratedFile($"{library.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
 
-            await project.PostProcess(PostProcess);
+            //await project.PostProcess(PostProcess);
         }
 
-        private static async Task<Project> PostProcess(Project project)
-        {
-            project = await Internalizer.InternalizeAsync(project, null);
+        //private static async Task<Project> PostProcess(Project project)
+        //{
+        //    project = await Internalizer.InternalizeAsync(project, null);
 
-            project = await Remover.RemoveUnusedAsync(project, null);
+        //    //project = await Remover.RemoveUnusedAsync(project, null);
 
-            return project;
-        }
+        //    return project;
+        //}
     }
 }

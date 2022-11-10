@@ -150,10 +150,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static async Task<Project> PostProcess(Project project)
         {
             var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-            var internalizer = new Internalizer(project, modelsToKeep);
-            project = await internalizer.InternalizeAsync();
+            var postProcessor = new MgmtPostProcessor(project, modelsToKeep);
+            project = await postProcessor.InternalizeAsync();
 
-            //project = await Remover.RemoveUnusedAsync(project, modelsToKeep);
+            project = await postProcessor.RemoveAsync();
 
             return project;
         }
