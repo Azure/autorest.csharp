@@ -12,16 +12,16 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         public CSharpType PropertyType { get; }
         public CSharpType? ValueType { get; }
         public bool IsRequired { get; }
-        public bool IsReadOnly { get; }
+        public bool ShouldSkipSerialization { get; }
 
-        protected PropertySerialization(string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, bool isRequired, bool isReadOnly)
+        protected PropertySerialization(string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, bool isRequired, bool shouldSkipSerialization)
         {
             PropertyName = propertyName;
             SerializedName = serializedName;
             PropertyType = propertyType;
             ValueType = valueType;
             IsRequired = isRequired;
-            IsReadOnly = isReadOnly;
+            ShouldSkipSerialization = shouldSkipSerialization;
         }
     }
 }

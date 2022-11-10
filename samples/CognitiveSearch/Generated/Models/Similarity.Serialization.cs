@@ -30,16 +30,7 @@ namespace CognitiveSearch.Models
                     case "#Microsoft.Azure.Search.ClassicSimilarity": return ClassicSimilarity.DeserializeClassicSimilarity(element);
                 }
             }
-            string odataType = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("@odata.type"))
-                {
-                    odataType = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new Similarity(odataType);
+            return UnknownSimilarity.DeserializeUnknownSimilarity(element);
         }
     }
 }

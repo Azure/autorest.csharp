@@ -50,14 +50,14 @@ namespace Models.Property.Types
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/FloatClient.xml" path="doc/members/member[@name='GetAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetAsync(RequestContext context = null)
+        /// <include file="Docs/FloatClient.xml" path="doc/members/member[@name='GetFloatAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetFloatAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("FloatClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("FloatClient.GetFloat");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetRequest(context);
+                using HttpMessage message = CreateGetFloatRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -70,14 +70,14 @@ namespace Models.Property.Types
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/FloatClient.xml" path="doc/members/member[@name='Get(RequestContext)']/*" />
-        public virtual Response Get(RequestContext context = null)
+        /// <include file="Docs/FloatClient.xml" path="doc/members/member[@name='GetFloat(RequestContext)']/*" />
+        public virtual Response GetFloat(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("FloatClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("FloatClient.GetFloat");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetRequest(context);
+                using HttpMessage message = CreateGetFloatRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -135,7 +135,7 @@ namespace Models.Property.Types
             }
         }
 
-        internal HttpMessage CreateGetRequest(RequestContext context)
+        internal HttpMessage CreateGetFloatRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

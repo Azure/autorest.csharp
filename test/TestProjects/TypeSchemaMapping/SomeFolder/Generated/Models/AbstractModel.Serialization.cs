@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 
 namespace TypeSchemaMapping.Models
@@ -21,7 +20,7 @@ namespace TypeSchemaMapping.Models
                     case "DerivedFromAbstractModel": return DerivedFromAbstractModel.DeserializeDerivedFromAbstractModel(element);
                 }
             }
-            throw new NotSupportedException("Deserialization of abstract type 'global::TypeSchemaMapping.Models.AbstractModel' not supported.");
+            return UnknownAbstractModel.DeserializeUnknownAbstractModel(element);
         }
     }
 }

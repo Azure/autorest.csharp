@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Security;
+using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
@@ -50,6 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _operations = new CachedDictionary<InputOperation, LongRunningOperation>(EnsureLongRunningOperations);
             _headerModels = new CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
             _enums = new CachedDictionary<InputEnumType, EnumType>(BuildEnums);
+            DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             _models = new CachedDictionary<Schema, TypeProvider>(() => BuildModels(codeModel));
             _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(_input, Models, _sourceInputModel));
             _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
@@ -82,6 +84,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for HLC yet.");
 
         public override CSharpType FindTypeForSchema(Schema schema) => _models[schema].Type;
+
+        public override TypeProvider FindTypeProviderForSchema(Schema schema) => _models[schema];
 
         public override CSharpType? FindTypeByName(string originalName)
         {
