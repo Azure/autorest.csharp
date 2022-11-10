@@ -217,14 +217,14 @@ Schema for <c>SwapDeploymentsOptions</c>:
 
 </remarks>
     </member>
-    <member name="ListAsync(String,RequestContext)">
+    <member name="GetDeploymentsAsync(String,RequestContext)">
 <example>
-This sample shows how to call ListAsync with required parameters and parse the result.
+This sample shows how to call GetDeploymentsAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new DeploymentsClient(endpoint);
 
-await foreach (var data in client.ListAsync("<projectName>"))
+await foreach (var data in client.GetDeploymentsAsync("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -264,14 +264,14 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="List(String,RequestContext)">
+    <member name="GetDeployments(String,RequestContext)">
 <example>
-This sample shows how to call List with required parameters and parse the result.
+This sample shows how to call GetDeployments with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new DeploymentsClient(endpoint);
 
-foreach (var data in client.List("<projectName>"))
+foreach (var data in client.GetDeployments("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());

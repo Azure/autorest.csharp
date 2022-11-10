@@ -120,13 +120,13 @@ namespace Azure.Language.Authoring
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/GlobalClient.xml" path="doc/members/member[@name='ListTrainingConfigVersionsAsync(Int32,Int32,Int32,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> ListTrainingConfigVersionsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
+        /// <include file="Docs/GlobalClient.xml" path="doc/members/member[@name='GetTrainingConfigVersionsAsync(Int32,Int32,Int32,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetTrainingConfigVersionsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return ListTrainingConfigVersionsImplementationAsync("GlobalClient.ListTrainingConfigVersions", maxCount, skip, maxpagesize, context);
+            return GetTrainingConfigVersionsImplementationAsync("GlobalClient.GetTrainingConfigVersions", maxCount, skip, maxpagesize, context);
         }
 
-        private AsyncPageable<BinaryData> ListTrainingConfigVersionsImplementationAsync(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
+        private AsyncPageable<BinaryData> GetTrainingConfigVersionsImplementationAsync(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -134,8 +134,8 @@ namespace Azure.Language.Authoring
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateListTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context)
-                        : CreateListTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+                        ? CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context)
+                        : CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -149,13 +149,13 @@ namespace Azure.Language.Authoring
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/GlobalClient.xml" path="doc/members/member[@name='ListTrainingConfigVersions(Int32,Int32,Int32,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> ListTrainingConfigVersions(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
+        /// <include file="Docs/GlobalClient.xml" path="doc/members/member[@name='GetTrainingConfigVersions(Int32,Int32,Int32,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetTrainingConfigVersions(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return ListTrainingConfigVersionsImplementation("GlobalClient.ListTrainingConfigVersions", maxCount, skip, maxpagesize, context);
+            return GetTrainingConfigVersionsImplementation("GlobalClient.GetTrainingConfigVersions", maxCount, skip, maxpagesize, context);
         }
 
-        private Pageable<BinaryData> ListTrainingConfigVersionsImplementation(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
+        private Pageable<BinaryData> GetTrainingConfigVersionsImplementation(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -163,8 +163,8 @@ namespace Azure.Language.Authoring
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateListTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context)
-                        : CreateListTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+                        ? CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context)
+                        : CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -199,7 +199,7 @@ namespace Azure.Language.Authoring
             return message;
         }
 
-        internal HttpMessage CreateListTrainingConfigVersionsRequest(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
+        internal HttpMessage CreateGetTrainingConfigVersionsRequest(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -240,7 +240,7 @@ namespace Azure.Language.Authoring
             return message;
         }
 
-        internal HttpMessage CreateListTrainingConfigVersionsNextPageRequest(string nextLink, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
+        internal HttpMessage CreateGetTrainingConfigVersionsNextPageRequest(string nextLink, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

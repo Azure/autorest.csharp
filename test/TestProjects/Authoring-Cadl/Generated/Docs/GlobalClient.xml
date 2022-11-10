@@ -83,26 +83,26 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="ListTrainingConfigVersionsAsync(Int32,Int32,Int32,RequestContext)">
+    <member name="GetTrainingConfigVersionsAsync(Int32,Int32,Int32,RequestContext)">
 <example>
-This sample shows how to call ListTrainingConfigVersionsAsync and parse the result.
+This sample shows how to call GetTrainingConfigVersionsAsync and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new GlobalClient(endpoint);
 
-await foreach (var data in client.ListTrainingConfigVersionsAsync())
+await foreach (var data in client.GetTrainingConfigVersionsAsync())
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
     Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
 }
 ]]></code>
-This sample shows how to call ListTrainingConfigVersionsAsync with all parameters, and how to parse the result.
+This sample shows how to call GetTrainingConfigVersionsAsync with all parameters, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new GlobalClient(endpoint);
 
-await foreach (var data in client.ListTrainingConfigVersionsAsync(1234, 1234, 1234))
+await foreach (var data in client.GetTrainingConfigVersionsAsync(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
@@ -124,26 +124,26 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="ListTrainingConfigVersions(Int32,Int32,Int32,RequestContext)">
+    <member name="GetTrainingConfigVersions(Int32,Int32,Int32,RequestContext)">
 <example>
-This sample shows how to call ListTrainingConfigVersions and parse the result.
+This sample shows how to call GetTrainingConfigVersions and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new GlobalClient(endpoint);
 
-foreach (var data in client.ListTrainingConfigVersions())
+foreach (var data in client.GetTrainingConfigVersions())
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
     Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
 }
 ]]></code>
-This sample shows how to call ListTrainingConfigVersions with all parameters, and how to parse the result.
+This sample shows how to call GetTrainingConfigVersions with all parameters, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new GlobalClient(endpoint);
 
-foreach (var data in client.ListTrainingConfigVersions(1234, 1234, 1234))
+foreach (var data in client.GetTrainingConfigVersions(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());

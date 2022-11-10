@@ -201,14 +201,14 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="GetAsync(String,RequestContext)">
+    <member name="GetProjectAsync(String,RequestContext)">
 <example>
-This sample shows how to call GetAsync with required parameters and parse the result.
+This sample shows how to call GetProjectAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ProjectsClient(endpoint);
 
-Response response = await client.GetAsync("<projectName>");
+Response response = await client.GetProjectAsync("<projectName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -247,14 +247,14 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="Get(String,RequestContext)">
+    <member name="GetProject(String,RequestContext)">
 <example>
-This sample shows how to call Get with required parameters and parse the result.
+This sample shows how to call GetProject with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ProjectsClient(endpoint);
 
-Response response = client.Get("<projectName>");
+Response response = client.GetProject("<projectName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -489,14 +489,14 @@ Schema for <c>TrainingJobOptions</c>:
 
 </remarks>
     </member>
-    <member name="ListAsync(Int32,Int32,Int32,RequestContext)">
+    <member name="GetProjectsAsync(Int32,Int32,Int32,RequestContext)">
 <example>
-This sample shows how to call ListAsync and parse the result.
+This sample shows how to call GetProjectsAsync and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ProjectsClient(endpoint);
 
-await foreach (var data in client.ListAsync())
+await foreach (var data in client.GetProjectsAsync())
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -509,12 +509,12 @@ await foreach (var data in client.ListAsync())
     Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 }
 ]]></code>
-This sample shows how to call ListAsync with all parameters, and how to parse the result.
+This sample shows how to call GetProjectsAsync with all parameters, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ProjectsClient(endpoint);
 
-await foreach (var data in client.ListAsync(1234, 1234, 1234))
+await foreach (var data in client.GetProjectsAsync(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -554,14 +554,14 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="List(Int32,Int32,Int32,RequestContext)">
+    <member name="GetProjects(Int32,Int32,Int32,RequestContext)">
 <example>
-This sample shows how to call List and parse the result.
+This sample shows how to call GetProjects and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ProjectsClient(endpoint);
 
-foreach (var data in client.List())
+foreach (var data in client.GetProjects())
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -574,12 +574,12 @@ foreach (var data in client.List())
     Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 }
 ]]></code>
-This sample shows how to call List with all parameters, and how to parse the result.
+This sample shows how to call GetProjects with all parameters, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ProjectsClient(endpoint);
 
-foreach (var data in client.List(1234, 1234, 1234))
+foreach (var data in client.GetProjects(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());

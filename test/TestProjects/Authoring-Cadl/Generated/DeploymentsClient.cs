@@ -288,15 +288,15 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DeploymentsClient.xml" path="doc/members/member[@name='ListAsync(String,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> ListAsync(string projectName, RequestContext context = null)
+        /// <include file="Docs/DeploymentsClient.xml" path="doc/members/member[@name='GetDeploymentsAsync(String,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetDeploymentsAsync(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
-            return ListImplementationAsync("DeploymentsClient.List", projectName, context);
+            return GetDeploymentsImplementationAsync("DeploymentsClient.GetDeployments", projectName, context);
         }
 
-        private AsyncPageable<BinaryData> ListImplementationAsync(string diagnosticsScopeName, string projectName, RequestContext context)
+        private AsyncPageable<BinaryData> GetDeploymentsImplementationAsync(string diagnosticsScopeName, string projectName, RequestContext context)
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -304,8 +304,8 @@ namespace Azure.Language.Authoring
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateListRequest(projectName, context)
-                        : CreateListNextPageRequest(nextLink, projectName, context);
+                        ? CreateGetDeploymentsRequest(projectName, context)
+                        : CreateGetDeploymentsNextPageRequest(nextLink, projectName, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -320,15 +320,15 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DeploymentsClient.xml" path="doc/members/member[@name='List(String,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> List(string projectName, RequestContext context = null)
+        /// <include file="Docs/DeploymentsClient.xml" path="doc/members/member[@name='GetDeployments(String,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetDeployments(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
-            return ListImplementation("DeploymentsClient.List", projectName, context);
+            return GetDeploymentsImplementation("DeploymentsClient.GetDeployments", projectName, context);
         }
 
-        private Pageable<BinaryData> ListImplementation(string diagnosticsScopeName, string projectName, RequestContext context)
+        private Pageable<BinaryData> GetDeploymentsImplementation(string diagnosticsScopeName, string projectName, RequestContext context)
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -336,8 +336,8 @@ namespace Azure.Language.Authoring
                 do
                 {
                     var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateListRequest(projectName, context)
-                        : CreateListNextPageRequest(nextLink, projectName, context);
+                        ? CreateGetDeploymentsRequest(projectName, context)
+                        : CreateGetDeploymentsNextPageRequest(nextLink, projectName, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -399,7 +399,7 @@ namespace Azure.Language.Authoring
             return message;
         }
 
-        internal HttpMessage CreateListRequest(string projectName, RequestContext context)
+        internal HttpMessage CreateGetDeploymentsRequest(string projectName, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -435,7 +435,7 @@ namespace Azure.Language.Authoring
             return message;
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string projectName, RequestContext context)
+        internal HttpMessage CreateGetDeploymentsNextPageRequest(string nextLink, string projectName, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
