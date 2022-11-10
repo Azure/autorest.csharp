@@ -135,10 +135,7 @@ namespace AutoRest.CSharp.Common.Decorator
                         defaultDerivedSchema.Extensions.Add("x-csharp-usage", string.Join(',', extensionUsages));
                     }
                     defaultDerivedSchema.Extensions.Add(DefaultDerivedExtension, defaultDerivedSchema);
-                    if (actualBaseSchema.Extensions?.Accessibility != null)
-                    {
-                        defaultDerivedSchema.Extensions.Add("x-accessibility", actualBaseSchema.Extensions.Accessibility);
-                    }
+                    defaultDerivedSchema.Extensions.Add("x-accessibility", "internal");
                     defaultDerivedSchemas.Add(defaultDerivedSchema.Name, defaultDerivedSchema);
                 }
             }
