@@ -39,6 +39,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly RestClientMethod _restClientMethod;
 
         private Parameter? _protocolBodyParameter;
+        private SchemaRequestBody? _convenienceRequestBody;
         private ProtocolMethodPaging? _protocolMethodPaging;
         private RequestConditionHeaders _conditionHeaderFlag = RequestConditionHeaders.None;
 
@@ -55,6 +56,7 @@ namespace AutoRest.CSharp.Output.Models
             Operation = operation;
             BuildParameters();
             _restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, _orderedParameters.Select(p => p.CreateMessage).WhereNotNull().ToArray(), _requestParts, _protocolBodyParameter, _typeFactory);
+            _convenienceRequestBody = RestClientBuilder.GetSchemaRequestBody(operation, _typeFactory);
         }
 
         public void BuildNextPageMethod(IReadOnlyDictionary<InputOperation, OperationMethodChainBuilder> builders)
@@ -185,7 +187,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameters);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
+            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic, _convenienceRequestBody);
         }
 
         private void BuildParameters()

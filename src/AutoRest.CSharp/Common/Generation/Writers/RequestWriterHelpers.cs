@@ -213,6 +213,120 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
+        //public static WriteModelRequestToContent(CodeWriter writer, RestClientMethod clientMethod)
+        //{
+        //    switch (clientMethod.Request.Body)
+        //    {
+        //        case RequestContentRequestBody body:
+        //            WriteHeaders(writer, clientMethod, request, content: true, fields);
+        //            writer.Line($"{request}.Content = {body.Parameter.Name};");
+        //            break;
+        //        case SchemaRequestBody body:
+        //            using (WriteValueNullCheck(writer, body.Value))
+        //            {
+        //                WriteHeaders(writer, clientMethod, request, content: true, fields);
+        //                WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true));
+        //            }
+
+        //            break;
+        //        case BinaryRequestBody binaryBody:
+        //            using (WriteValueNullCheck(writer, binaryBody.Value))
+        //            {
+        //                WriteHeaders(writer, clientMethod, request, content: true, fields);
+        //                writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
+        //                WriteConstantOrParameter(writer, binaryBody.Value);
+        //                writer.Line($");");
+        //            }
+        //            break;
+        //        case TextRequestBody textBody:
+        //            using (WriteValueNullCheck(writer, textBody.Value))
+        //            {
+        //                WriteHeaders(writer, clientMethod, request, content: true, fields);
+        //                writer.Append($"{request}.Content = new {typeof(StringRequestContent)}(");
+        //                WriteConstantOrParameter(writer, textBody.Value);
+        //                writer.Line($");");
+        //            }
+        //            break;
+        //        case MultipartRequestBody multipartRequestBody:
+        //            WriteHeaders(writer, clientMethod, request, content: true, fields);
+
+        //            var multipartContent = new CodeWriterDeclaration("content");
+        //            writer.Line($"var {multipartContent:D} = new {typeof(MultipartFormDataContent)}();");
+
+        //            foreach (var bodyParameter in multipartRequestBody.RequestBodyParts)
+        //            {
+        //                switch (bodyParameter.Content)
+        //                {
+        //                    case BinaryRequestBody binaryBody:
+        //                        using (WriteValueNullCheck(writer, binaryBody.Value))
+        //                        {
+        //                            writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create(");
+        //                            WriteConstantOrParameter(writer, binaryBody.Value);
+        //                            writer.Line($"), {bodyParameter.Name:L}, null);");
+        //                        }
+        //                        break;
+        //                    case TextRequestBody textBody:
+        //                        using (WriteValueNullCheck(writer, textBody.Value))
+        //                        {
+        //                            writer.Append($"{multipartContent}.Add(new {typeof(StringRequestContent)}(");
+        //                            WriteConstantOrParameter(writer, textBody.Value);
+        //                            writer.Line($"), {bodyParameter.Name:L}, null);");
+        //                        }
+        //                        break;
+        //                    case BinaryCollectionRequestBody collectionBody:
+        //                        var collectionItemVariable = new CodeWriterDeclaration("value");
+        //                        using (writer.Scope($"foreach (var {collectionItemVariable:D} in {collectionBody.Value.Reference.Name})"))
+        //                        {
+        //                            writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}), {bodyParameter.Name:L}, null);");
+        //                        }
+        //                        break;
+        //                    default:
+        //                        throw new NotImplementedException(bodyParameter.Content?.GetType().FullName);
+        //                }
+        //            }
+        //            writer.Line($"{multipartContent}.ApplyToRequest({request});");
+        //            break;
+        //        case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
+        //            WriteHeaders(writer, clientMethod, request, content: true, fields);
+
+        //            var initializers = new List<PropertyInitializer>();
+        //            foreach (var initializer in flattenedSchemaRequestBody.Initializers)
+        //            {
+        //                initializers.Add(new PropertyInitializer(initializer.Property.Declaration.Name, initializer.Property.Declaration.Type, initializer.Property.IsReadOnly, initializer.Value.GetReferenceOrConstantFormattable(), initializer.Value.Type));
+        //            }
+        //            var modelVariable = new CodeWriterDeclaration("model");
+        //            writer.WriteInitialization(
+        //                    v => writer.Line($"var {modelVariable:D} = {v};"),
+        //                    flattenedSchemaRequestBody.ObjectType,
+        //                    flattenedSchemaRequestBody.ObjectType.InitializationConstructor,
+        //                    initializers);
+
+        //            WriteSerializeContent(writer, request, flattenedSchemaRequestBody.Serialization, $"{modelVariable:I}");
+        //            break;
+        //        case UrlEncodedBody urlEncodedRequestBody:
+        //            var urlContent = new CodeWriterDeclaration("content");
+
+        //            WriteHeaders(writer, clientMethod, request, content: true, fields);
+        //            writer.Line($"var {urlContent:D} = new {typeof(FormUrlEncodedContent)}();");
+
+        //            foreach (var (name, value) in urlEncodedRequestBody.Values)
+        //            {
+        //                using (WriteValueNullCheck(writer, value))
+        //                {
+        //                    writer.Append($"{urlContent}.Add({name:L},");
+        //                    WriteConstantOrParameterAsString(writer, value);
+        //                    writer.Line($");");
+        //                }
+        //            }
+        //            writer.Line($"{request}.Content = {urlContent};");
+        //            break;
+        //        case null:
+        //            break;
+        //        default:
+        //            throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
+        //    }
+        //}
+
         private static ReferenceOrConstant GetFieldReference(ClientFields? fields, ReferenceOrConstant value) =>
             fields != null && !value.IsConstant ? fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value : value;
 
@@ -322,7 +436,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static FormattableString GetConstantOrParameter(ReferenceOrConstant constantOrReference, bool ignoreNullability = false)
+        public static FormattableString GetConstantOrParameter(ReferenceOrConstant constantOrReference, bool ignoreNullability = false)
         {
             if (constantOrReference.IsConstant)
             {

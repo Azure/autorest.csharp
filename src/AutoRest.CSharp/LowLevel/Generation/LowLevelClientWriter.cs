@@ -17,11 +17,14 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using YamlDotNet.Core.Tokens;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
 using Response = Azure.Response;
@@ -171,8 +174,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
                 writer.Line($"{client.Fields.ClientDiagnosticsProperty.Name:I} = new {client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I}, true);");
 
-                FormattableString perCallPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
-                FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
+                FormattableString perCallPolicies = $"{typeof(Array)}.Empty<{typeof(HttpPipelinePolicy)}>()";
+                FormattableString perRetryPolicies = $"{typeof(Array)}.Empty<{typeof(HttpPipelinePolicy)}>()";
 
                 var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
                 if (credentialParameter != null)
@@ -314,11 +317,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var responseVariable = new CodeWriterDeclaration("response");
             var parameters = new List<FormattableString>();
+            bool needBodySerialization = clientMethod.RequestBodyType is InputListType && convenienceMethod.requestBody != null;
+            var contentVariable = new CodeWriterDeclaration("content");
             foreach (var (protocolParameter, convenienceParameter) in convenienceMethod.ProtocolToConvenienceParameters)
             {
                 if (convenienceParameter == KnownParameters.CancellationTokenParameter)
                 {
                     parameters.Add($"{contextVariable:I}");
+                }
+                else if (needBodySerialization && protocolParameter == KnownParameters.RequestContent)
+                {
+                    parameters.Add($"{contentVariable:I}");
                 }
                 else if (convenienceParameter != null)
                 {
@@ -327,6 +336,28 @@ namespace AutoRest.CSharp.Generation.Writers
                 else
                 {
                     throw new InvalidOperationException($"{protocolParameter.Name} protocol method parameter doesn't have matching field or parameter in convenience method {convenienceMethod.Signature.Name}");
+                }
+            }
+
+            if (clientMethod.RequestBodyType is InputListType && convenienceMethod.requestBody != null)
+            {
+                var bodySerialization = convenienceMethod.requestBody.Serialization;
+                switch (bodySerialization)
+                {
+                    case JsonSerialization jsonSerialization:
+                        {
+                            writer.Line($"var {contentVariable:D} = new {typeof(Utf8JsonRequestContent)}();");
+                            writer.ToSerializeCall(jsonSerialization, RequestWriterHelpers.GetConstantOrParameter(convenienceMethod.requestBody.Value, ignoreNullability: true), writerName: $"{contentVariable}.{nameof(Utf8JsonRequestContent.JsonWriter)}");
+                            break;
+                        }
+                    case XmlElementSerialization xmlSerialization:
+                        {
+                            writer.Line($"var {contentVariable:D} = new {typeof(XmlWriterContent)}();");
+                            writer.ToSerializeCall(xmlSerialization, RequestWriterHelpers.GetConstantOrParameter(convenienceMethod.requestBody.Value, ignoreNullability: true), writerName: $"{contentVariable}.{nameof(XmlWriterContent.XmlWriter)}");
+                            break;
+                        }
+                    default:
+                        throw new NotImplementedException(bodySerialization.ToString());
                 }
             }
 

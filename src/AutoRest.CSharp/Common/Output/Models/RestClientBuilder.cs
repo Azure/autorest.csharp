@@ -127,6 +127,28 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
+        public static SchemaRequestBody? GetSchemaRequestBody(InputOperation operation, TypeFactory typeFactory)
+        {
+            if ((new[] {BodyMediaType.None, BodyMediaType.Multipart, BodyMediaType.Form, BodyMediaType.Binary, BodyMediaType.Text}).Contains(operation.RequestBodyMediaType))
+            {
+                return null;
+            }
+
+            var bodyParameter = operation.Parameters.FirstOrDefault(rp => rp.Location == RequestLocation.Body);
+            if (bodyParameter != null)
+            {
+                CSharpType type = typeFactory.CreateType(bodyParameter.Type);
+                var bodyParameterValue = Parameter.FromInputParameter(bodyParameter, type, typeFactory);
+                var serialization = SerializationBuilder.Build(
+                    operation.RequestBodyMediaType,
+                    bodyParameter.Type,
+                    bodyParameterValue.Type);
+                return new SchemaRequestBody(bodyParameterValue, serialization);
+            }
+
+            return null;
+        }
+
         private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation)
         {
             return operation.Parameters

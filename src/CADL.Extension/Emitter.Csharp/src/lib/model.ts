@@ -258,7 +258,14 @@ export function getInputType(
         } as InputPrimitiveType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
-    } else {
+    } else if (type.kind === "Intrinsic" && type.name === "unknown") {
+        return {
+            Name: type.kind,
+            Kind: "Object",
+            IsNullable: false
+        } as InputPrimitiveType;
+    }
+    else {
         throw new Error("Unsupported type.");
     }
 
