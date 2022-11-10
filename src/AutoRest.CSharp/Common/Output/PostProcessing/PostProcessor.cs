@@ -7,6 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -172,5 +174,36 @@ internal abstract class PostProcessor
 
     protected abstract Task<HashSet<BaseTypeDeclarationSyntax>> GetRootNodes(bool publicOnly = true);
 
-    protected abstract bool HasDiscriminator(BaseTypeDeclarationSyntax node, [MaybeNullWhen(false)] out HashSet<string> identifiers);
+    protected virtual bool HasDiscriminator(BaseTypeDeclarationSyntax node, [MaybeNullWhen(false)] out HashSet<string> identifiers)
+    {
+        identifiers = null;
+        // only class models will have discriminators
+        if (node is ClassDeclarationSyntax classDeclaration)
+        {
+            if (classDeclaration.HasLeadingTrivia)
+            {
+                var syntaxTriviaList = classDeclaration.GetLeadingTrivia();
+                var filteredTriviaList = syntaxTriviaList.Where(syntaxTrivia => ObjectType.DiscriminatorDescFixedPart.All(syntaxTrivia.ToFullString().Contains));
+                if (filteredTriviaList.Count() == 1)
+                {
+                    var descendantNodes = filteredTriviaList.First().GetStructure()?.DescendantNodes().ToList();
+                    var filteredDescendantNodes = FilterTriviaWithDiscriminator(descendantNodes);
+                    var identifierNodes = filteredDescendantNodes.SelectMany(node => node.DescendantNodes().OfType<XmlCrefAttributeSyntax>());
+                    identifiers = identifierNodes.Select(identifier => identifier.Cref.ToFullString()).ToHashSet();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        return false;
+    }
+
+    private static IEnumerable<SyntaxNode> FilterTriviaWithDiscriminator(List<SyntaxNode>? nodes)
+    {
+        // If the base class has discriminator, we will add a description at the end of the original description to add the known derived types
+        // Here we use the added description to filter the syntax nodes coming from xml comment to get all the derived types exactly
+        var targetIndex = nodes?.FindLastIndex(node => node.ToFullString().Contains(MgmtObjectType.DiscriminatorDescFixedPart.Last()));
+        return nodes.Where((val, index) => index >= targetIndex);
+    }
 }
