@@ -170,7 +170,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} element)"))
             {
-                if (serialization.Discriminator?.HasDescendants == true)
+                bool hasDecendants = serialization.Discriminator is null ? false : serialization.Discriminator.HasDescendants;
+                bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType?.Type);
+                if (serialization.Discriminator is not null && hasDecendants)
                 {
                     using (writer.Scope($"if (element.TryGetProperty({serialization.Discriminator.SerializedName:L}, out {typeof(JsonElement)} discriminator))"))
                     {
@@ -186,16 +188,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                if (declaration.IsAbstract)
+                if (serialization.Discriminator is not null && !isThisTheDefaultDerivedType && !serialization.Type.HasParent)
                 {
-                    if (Configuration.AzureArm)
-                    {
-                        writer.WriteObjectInitialization(serialization, $"Unknown{declaration.Name}");
-                    }
-                    else
-                    {
-                        writer.Line($"throw new {typeof(NotSupportedException)}(\"Deserialization of abstract type '{serialization.Type}' not supported.\");");
-                    }
+                    writer.Line($"return {JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(serialization.Discriminator.DefaultObjectType.Type.Implementation, $"element", JsonSerializationOptions.None)};");
                 }
                 else
                 {

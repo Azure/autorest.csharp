@@ -728,7 +728,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public override CSharpType ResolveEnum(InputEnumType enumType) => throw new NotImplementedException($"{nameof(ResolveEnum)} is not implemented for MPG yet.");
         public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for MPG yet.");
 
-        public override CSharpType FindTypeForSchema(Schema schema)
+        public override CSharpType FindTypeForSchema(Schema schema) => FindTypeProviderForSchema(schema).Type;
+
+        public override TypeProvider FindTypeProviderForSchema(Schema schema)
         {
             TypeProvider? result;
             if (!AllSchemaMap.IsPopulated)
@@ -739,7 +741,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 throw new KeyNotFoundException($"{schema.Name} was not found in model and resource schema map");
             }
-            return result.Type;
+            return result;
         }
 
         public override CSharpType? FindTypeByName(string originalName)

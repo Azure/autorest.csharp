@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetAsync(RequestContext)">
+    <member name="GetModelAsync(RequestContext)">
 <example>
-This sample shows how to call GetAsync and parse the result.
+This sample shows how to call GetModelAsync and parse the result.
 <code><![CDATA[
 var client = new ModelClient();
 
-Response response = await client.GetAsync();
+Response response = await client.GetModelAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
@@ -28,13 +28,13 @@ Schema for <c>ModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="Get(RequestContext)">
+    <member name="GetModel(RequestContext)">
 <example>
-This sample shows how to call Get and parse the result.
+This sample shows how to call GetModel and parse the result.
 <code><![CDATA[
 var client = new ModelClient();
 
-Response response = client.Get();
+Response response = client.GetModel();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());

@@ -23,8 +23,9 @@
     <_AutoRestCommand Condition="'$(UseDefaultNamespaceAndOutputFolder)' == 'true'">$(_AutoRestCommand) --output-folder=$(MSBuildProjectDirectory)/Generated --namespace=$(RootNamespace)</_AutoRestCommand>
     <_CadlGenerateCommand Condition="'$(CadlInput)' != ''">npx cadl compile --emit @azure-tools/cadl-csharp --output-path $(MSBuildProjectDirectory)/Generated --option @azure-tools/cadl-csharp.clear-output-folder=true $(CadlInput)</_CadlGenerateCommand>
   </PropertyGroup>
-
-  <Target Name="GenerateCode" Condition="'$(_GenerateCode)' == 'true' AND Exists('$(AutoRestInput)')" >
+  
+  <Target Name="GenerateCode" DependsOnTargets="_GenerateCodeForAutorest;_GenerateCodeForCadl"/>
+  <Target Name="_GenerateCodeForAutorest" Condition="'$(_GenerateCode)' == 'true' AND Exists('$(AutoRestInput)')">
     <ReadLinesFromFile File="$(AutoRestInput)">
        <Output TaskParameter="Lines" ItemName="AutoRestInputLines"/>
     </ReadLinesFromFile>
@@ -39,7 +40,7 @@
     <Exec Command="$(_AutoRestCommand)"/>
   </Target>
 
-  <Target Name="GenerateCode" Condition="'$(_GenerateCode)' == 'true' AND '$(CadlInput)' != ''" >
+  <Target Name="_GenerateCodeForCadl" Condition="'$(_GenerateCode)' == 'true' AND '$(CadlInput)' != ''" >
     <Exec Command="$(_CadlGenerateCommand)"/>
   </Target>
 

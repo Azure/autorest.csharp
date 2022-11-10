@@ -283,7 +283,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     foreach (var variable in propertyVariables)
                     {
                         var property = variable.Key;
-                        initializers.Add(new PropertyInitializer(property.PropertyName, property.PropertyType, property.IsReadOnly, $"{variable.Value.ActualName}"));
+                        initializers.Add(new PropertyInitializer(property.PropertyName, property.PropertyType, property.ShouldSkipSerialization, $"{variable.Value.ActualName}"));
                     }
 
                     var objectType = (ObjectType) elementSerialization.Type.Implementation;

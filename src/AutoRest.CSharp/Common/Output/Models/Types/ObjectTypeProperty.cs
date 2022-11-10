@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 
@@ -21,14 +22,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
-            :this(declaration, description, isReadOnly, schemaProperty, (schemaProperty is null ? false : schemaProperty.IsRequired), valueType, optionalViaNullability)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
+            :this(declaration, parameterDescription, isReadOnly, schemaProperty, (schemaProperty is null ? false : schemaProperty.IsRequired), valueType, optionalViaNullability)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null)
         {
-            Description = description;
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
             OptionalViaNullability = optionalViaNullability;
@@ -36,13 +36,33 @@ namespace AutoRest.CSharp.Output.Models.Types
             Declaration = declaration;
             IsRequired = isRequired;
             InputModelProperty = inputModelProperty;
+            _baseParameterDescription = parameterDescription;
+            Description = string.IsNullOrEmpty(parameterDescription) ? CreateDefaultPropertyDescription(Declaration.Name, IsReadOnly).ToString() : parameterDescription;
+        }
+
+        public static FormattableString CreateDefaultPropertyDescription(string nameToUse, bool isReadOnly)
+        {
+            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
+            if (isReadOnly)
+            {
+                return $"Gets the {splitDeclarationName}";
+            }
+            else
+            {
+                return $"Gets or sets the {splitDeclarationName}";
+            }
         }
 
         public bool IsRequired { get; }
         public MemberDeclarationOptions Declaration { get; }
         public string Description { get; }
+        private string? _propertyDescription;
+        public string PropertyDescription => _propertyDescription ??= Description + CreateExtraPropertyDiscriminatorSummary(ValueType);
         public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
+        private string? _parameterDescription;
+        private string _baseParameterDescription;
+        public string ParameterDescription => _parameterDescription ??= _baseParameterDescription + CreateExtraPropertyDiscriminatorSummary(ValueType);
 
         /// <summary>
         /// Gets or sets the value indicating whether nullable type of this property represents optionality of the value.
@@ -57,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType ValueType { get; }
         public bool IsReadOnly { get; }
 
-        private bool IsDiscriminator() => SchemaProperty?.IsDiscriminator is true;
+        private bool IsDiscriminator() => SchemaProperty?.IsDiscriminator is true || InputModelProperty?.IsDiscriminator is true;
 
         public bool IsSinglePropertyObject([MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
         {
@@ -189,6 +209,35 @@ namespace AutoRest.CSharp.Output.Models.Types
                 heirarchyStack.Push(childProp);
                 BuildHeirarchy(childProp, heirarchyStack);
             }
+        }
+
+        private static string CreateExtraPropertyDiscriminatorSummary(CSharpType valueType)
+        {
+            string updatedDescription = string.Empty;
+            if (valueType.IsFrameworkType)
+            {
+                if (TypeFactory.IsList(valueType))
+                {
+                    if (!valueType.Arguments.First().IsFrameworkType && valueType.Arguments.First().Implementation is ObjectType objectType)
+                    {
+                        updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
+                    }
+                }
+                else if (TypeFactory.IsDictionary(valueType))
+                {
+                    var objectTypes = valueType.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is ObjectType);
+                    if (objectTypes.Count() > 0)
+                    {
+                        var subDescription = objectTypes.Select(o => ((ObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator());
+                        updatedDescription = string.Join("", subDescription);
+                    }
+                }
+            }
+            else if (valueType.Implementation is ObjectType objectType)
+            {
+                updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
+            }
+            return updatedDescription;
         }
     }
 }
