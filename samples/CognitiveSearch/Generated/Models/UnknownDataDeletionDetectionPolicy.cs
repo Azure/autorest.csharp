@@ -8,7 +8,7 @@
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownDataDeletionDetectionPolicy. </summary>
-    public partial class UnknownDataDeletionDetectionPolicy : DataDeletionDetectionPolicy
+    internal partial class UnknownDataDeletionDetectionPolicy : DataDeletionDetectionPolicy
     {
         /// <summary> Initializes a new instance of UnknownDataDeletionDetectionPolicy. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>

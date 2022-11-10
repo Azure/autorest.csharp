@@ -8,7 +8,7 @@
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownCharFilter. </summary>
-    public partial class UnknownCharFilter : CharFilter
+    internal partial class UnknownCharFilter : CharFilter
     {
         /// <summary> Initializes a new instance of UnknownCharFilter. </summary>
         /// <param name="odataType"> Identifies the concrete type of the char filter. </param>

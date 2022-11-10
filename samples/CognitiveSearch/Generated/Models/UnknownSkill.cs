@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownSkill. </summary>
-    public partial class UnknownSkill : Skill
+    internal partial class UnknownSkill : Skill
     {
         /// <summary> Initializes a new instance of UnknownSkill. </summary>
         /// <param name="odataType"> Identifies the concrete type of the skill. </param>

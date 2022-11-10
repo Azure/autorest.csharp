@@ -8,7 +8,7 @@
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownAnalyzer. </summary>
-    public partial class UnknownAnalyzer : Analyzer
+    internal partial class UnknownAnalyzer : Analyzer
     {
         /// <summary> Initializes a new instance of UnknownAnalyzer. </summary>
         /// <param name="odataType"> Identifies the concrete type of the analyzer. </param>

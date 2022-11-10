@@ -8,7 +8,7 @@
 namespace TypeSchemaMapping.Models
 {
     /// <summary> The UnknownAbstractModel. </summary>
-    public partial class UnknownAbstractModel : AbstractModel
+    internal partial class UnknownAbstractModel : AbstractModel
     {
         /// <summary> Initializes a new instance of UnknownAbstractModel. </summary>
         /// <param name="discriminatorProperty"></param>

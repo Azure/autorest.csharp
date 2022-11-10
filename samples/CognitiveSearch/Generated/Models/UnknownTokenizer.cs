@@ -8,7 +8,7 @@
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownTokenizer. </summary>
-    public partial class UnknownTokenizer : Tokenizer
+    internal partial class UnknownTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of UnknownTokenizer. </summary>
         /// <param name="odataType"> Identifies the concrete type of the tokenizer. </param>

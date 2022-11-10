@@ -8,7 +8,7 @@
 namespace body_complex.Models
 {
     /// <summary> The UnknownDotFish. </summary>
-    public partial class UnknownDotFish : DotFish
+    internal partial class UnknownDotFish : DotFish
     {
         /// <summary> Initializes a new instance of UnknownDotFish. </summary>
         /// <param name="fishType"></param>

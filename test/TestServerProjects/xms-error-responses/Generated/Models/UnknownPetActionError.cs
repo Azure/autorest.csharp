@@ -8,7 +8,7 @@
 namespace xms_error_responses.Models
 {
     /// <summary> The UnknownPetActionError. </summary>
-    public partial class UnknownPetActionError : PetActionError
+    internal partial class UnknownPetActionError : PetActionError
     {
         /// <summary> Initializes a new instance of UnknownPetActionError. </summary>
         /// <param name="actionResponse"> action feedback. </param>

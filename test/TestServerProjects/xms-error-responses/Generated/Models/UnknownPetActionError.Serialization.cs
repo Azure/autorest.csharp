@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xms_error_responses.Models
 {
-    public partial class UnknownPetActionError
+    internal partial class UnknownPetActionError
     {
         internal static UnknownPetActionError DeserializeUnknownPetActionError(JsonElement element)
         {
