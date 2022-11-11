@@ -91,8 +91,10 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
                     case IFieldSymbol fieldSymbol:
                         AddTypeSymbol(symbol, fieldSymbol.Type, references);
                         break;
+                    case INamedTypeSymbol innerTypeSymbol:
+                        break; // do nothing for the inner types
                     default:
-                        throw new InvalidOperationException("This should never happen");
+                        throw new InvalidOperationException($"This should never happen {member.GetType()}");
                 }
             }
         }
