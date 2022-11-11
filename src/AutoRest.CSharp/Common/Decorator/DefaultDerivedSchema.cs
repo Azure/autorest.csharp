@@ -106,20 +106,36 @@ namespace AutoRest.CSharp.Common.Decorator
                         };
                     }
 
+                    if (actualBaseSchema.Children == null)
+                    {
+                        actualBaseSchema.Children = new Relations { All = { defaultDerivedSchema }, Immediate = { defaultDerivedSchema } };
+                    }
+                    else
+                    {
+                        actualBaseSchema.Children.All.Add(defaultDerivedSchema);
+                        actualBaseSchema.Children.Immediate.Add(defaultDerivedSchema);
+                    }
+
                     defaultDerivedSchema.Extensions = new RecordOfStringAndAny { { "x-ms-skip-init-ctor", true } };
-                    HashSet<string> usages = new HashSet<string>();
-                    usages.Add("Model");
+
+                    HashSet<string> usages = new HashSet<string>() { "Model" };
                     if (actualBaseSchema.Usage.Contains(SchemaContext.Input))
                         usages.Add("Input");
                     if (actualBaseSchema.Usage.Contains(SchemaContext.Output) || actualBaseSchema.Usage.Contains(SchemaContext.Exception))
                         usages.Add("Output");
-                    if (actualBaseSchema.Extensions?.Usage?.Contains("output", StringComparison.OrdinalIgnoreCase) ?? false)
-                        usages.Add("Output");
-                    if (actualBaseSchema.Extensions?.Usage?.Contains("input", StringComparison.OrdinalIgnoreCase) ?? false)
-                        usages.Add("Input");
 
-                    defaultDerivedSchema.Extensions.Add("x-csharp-usage", string.Join(',', usages));
+                    var extensionUsages = new HashSet<string>();
+                    if (actualBaseSchema.Extensions?.Usage?.Contains("output", StringComparison.OrdinalIgnoreCase) ?? false)
+                        extensionUsages.Add("Output");
+                    if (actualBaseSchema.Extensions?.Usage?.Contains("input", StringComparison.OrdinalIgnoreCase) ?? false)
+                        extensionUsages.Add("Input");
+
+                    if (extensionUsages.Count > 0)
+                    {
+                        defaultDerivedSchema.Extensions.Add("x-csharp-usage", string.Join(',', extensionUsages));
+                    }
                     defaultDerivedSchema.Extensions.Add(DefaultDerivedExtension, defaultDerivedSchema);
+                    defaultDerivedSchema.Extensions.Add("x-accessibility", "internal");
                     defaultDerivedSchemas.Add(defaultDerivedSchema.Name, defaultDerivedSchema);
                 }
             }
