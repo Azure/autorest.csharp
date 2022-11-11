@@ -19,11 +19,11 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing;
 
 internal abstract class PostProcessor
 {
-    protected Project project;
+    protected Project _project;
 
     public PostProcessor(Project project)
     {
-        this.project = project;
+        _project = project;
     }
 
     protected record ModelSymbols(HashSet<INamedTypeSymbol> DeclaredSymbols, Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, Dictionary<Document, HashSet<INamedTypeSymbol>> DocumentCache);
@@ -33,7 +33,7 @@ internal abstract class PostProcessor
         var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
-        foreach (var document in project.Documents)
+        foreach (var document in _project.Documents)
         {
             if (!GeneratedCodeWorkspace.IsSharedDocument(document))
             {
@@ -62,14 +62,14 @@ internal abstract class PostProcessor
 
     public async Task<Project> InternalizeAsync()
     {
-        var compilation = await project.GetCompilationAsync();
+        var compilation = await _project.GetCompilationAsync();
         if (compilation == null)
-            return project;
+            return _project;
 
         // first get all the declared symbols
         var definitions = await GetModelSymbolsAsync(compilation, true);
         // build the reference map
-        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildPublicReferenceMapAsync(definitions.DeclaredSymbols, definitions.DeclaredNodesCache);
+        var referenceMap = await new ReferenceMapBuilder(compilation, _project, HasDiscriminator).BuildPublicReferenceMapAsync(definitions.DeclaredSymbols, definitions.DeclaredNodesCache);
         // get the root symbols
         var rootSymbols = GetRootSymbols(definitions);
         // traverse all the root and recursively add all the things we met
@@ -88,19 +88,19 @@ internal abstract class PostProcessor
             MarkInternal(model);
         }
 
-        return project;
+        return _project;
     }
 
     public async Task<Project> RemoveAsync()
     {
-        var compilation = await project.GetCompilationAsync();
+        var compilation = await _project.GetCompilationAsync();
         if (compilation == null)
-            return project;
+            return _project;
 
         // find all the declarations, including non-public declared
         var definitions = await GetModelSymbolsAsync(compilation, false);
         // build reference map
-        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentCache);
+        var referenceMap = await new ReferenceMapBuilder(compilation, _project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentCache);
         // get root nodes
         var rootNodes = GetRootSymbols(definitions);
         // traverse the map to determine the declarations that we are about to remove, starting from root nodes
@@ -117,7 +117,7 @@ internal abstract class PostProcessor
         // remove them one by one
         await RemoveModelsAsync(nodesToRemove);
 
-        return project;
+        return _project;
     }
 
     private static IEnumerable<INamedTypeSymbol> TraverseModelsAsync(IEnumerable<INamedTypeSymbol> rootNodes, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> referenceMap)
@@ -155,10 +155,10 @@ internal abstract class PostProcessor
     {
         var newNode = ChangeModifier(declarationNode, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword);
         var tree = declarationNode.SyntaxTree;
-        var document = project.GetDocument(tree)!;
+        var document = _project.GetDocument(tree)!;
         var newRoot = tree.GetRoot().ReplaceNode(declarationNode, newNode).WithAdditionalAnnotations(Simplifier.Annotation);
         document = document.WithSyntaxRoot(newRoot);
-        project = document.Project;
+        _project = document.Project;
     }
 
     private async Task<Project> RemoveModelsAsync(IEnumerable<BaseTypeDeclarationSyntax> unusedModels)
@@ -167,7 +167,7 @@ internal abstract class PostProcessor
         var documents = new Dictionary<Document, HashSet<BaseTypeDeclarationSyntax>>();
         foreach (var model in unusedModels)
         {
-            var document = project.GetDocument(model.SyntaxTree);
+            var document = _project.GetDocument(model.SyntaxTree);
             Debug.Assert(document != null);
             if (!documents.ContainsKey(document))
                 documents.Add(document, new HashSet<BaseTypeDeclarationSyntax>());
@@ -177,10 +177,10 @@ internal abstract class PostProcessor
 
         foreach (var models in documents.Values)
         {
-            project = await RemoveModelsFromDocumentAsync(models);
+            _project = await RemoveModelsFromDocumentAsync(models);
         }
 
-        return project;
+        return _project;
     }
 
     private static BaseTypeDeclarationSyntax ChangeModifier(BaseTypeDeclarationSyntax memberDeclaration, SyntaxKind from, SyntaxKind to)
@@ -194,9 +194,9 @@ internal abstract class PostProcessor
     private async Task<Project> RemoveModelsFromDocumentAsync(IEnumerable<BaseTypeDeclarationSyntax> models)
     {
         var tree = models.First().SyntaxTree;
-        var document = project.GetDocument(tree);
+        var document = _project.GetDocument(tree);
         if (document == null)
-            return project;
+            return _project;
         var root = await tree.GetRootAsync();
         root = root.RemoveNodes(models, SyntaxRemoveOptions.KeepNoTrivia);
         document = document.WithSyntaxRoot(root!);
@@ -211,7 +211,7 @@ internal abstract class PostProcessor
             foreach (var declarationNode in modelSymbols.DeclaredNodesCache[symbol])
             {
                 var tree = declarationNode.SyntaxTree;
-                var document = project.GetDocument(tree);
+                var document = _project.GetDocument(tree);
                 if (document == null)
                     continue;
                 if (IsRootDocument(document))
