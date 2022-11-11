@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Types
@@ -142,20 +143,23 @@ namespace AutoRest.CSharp.Generation.Types
             return new CodeWriter().Append($"{this}").ToString(false);
         }
 
-        internal static CSharpType FromSystemType(BuildContext context, Type type)
+        internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel)
         {
             var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
-            var systemObjectType = SystemObjectType.Create(type, context);
+            var systemObjectType = SystemObjectType.Create(type, defaultNamespace, sourceInputModel);
             // TODO -- why we do not just return systemObjectType.Type here? because of the generic types?
             return new CSharpType(
                 systemObjectType,
-                type.Namespace ?? context.DefaultNamespace,
+                type.Namespace ?? defaultNamespace,
                 systemObjectType.Declaration.Name,
                 type.IsValueType,
                 type.IsEnum,
                 false,
                 genericTypes.ToArray());
         }
+
+        internal static CSharpType FromSystemType(BuildContext context, Type type)
+            => FromSystemType(type, context.DefaultNamespace, context.SourceInputModel);
 
         public bool IsCollectionType()
         {
