@@ -7,7 +7,11 @@
 
 namespace Inheritance.Models
 {
-    /// <summary> The BaseClassWithDiscriminator. </summary>
+    /// <summary>
+    /// The BaseClassWithDiscriminator.
+    /// Please note <see cref="BaseClassWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+    /// The available derived classes include <see cref="ClassThatInheritsFromBaseClassWithDiscriminator"/> and <see cref="ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties"/>.
+    /// </summary>
     public partial class BaseClassWithDiscriminator : BaseClass
     {
         /// <summary> Initializes a new instance of BaseClassWithDiscriminator. </summary>

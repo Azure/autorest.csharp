@@ -597,5 +597,33 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
+    <member name="GetUnknownValueAsync(RequestContext)">
+<example>
+This sample shows how to call GetUnknownValueAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+Response response = await client.GetUnknownValueAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownValue(RequestContext)">
+<example>
+This sample shows how to call GetUnknownValue and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+Response response = client.GetUnknownValue();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
   </members>
 </doc>

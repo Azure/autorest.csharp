@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
@@ -27,7 +28,14 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public",
             "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
-            null, new List<InputModelType>(), null);
+            null, new List<InputModelType>(), null, null);
+
+        [OneTimeSetUp]
+        public void init()
+        {
+            Configuration.Initialize("Generated", "", "", new string[] { }, false, false, true, false, false, false, false, false, false, false, ".", new string[] { }, new List<string>(), null);
+        }
+
 
         internal void ValidateGeneratedCodes(string modelName, string expectedModelCodes, string expectedSerializationCodes, DpgOutputLibrary library)
         {

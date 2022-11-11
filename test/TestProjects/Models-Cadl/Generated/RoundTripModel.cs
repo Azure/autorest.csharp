@@ -73,7 +73,11 @@ namespace ModelsInCadl
         public string RequiredString { get; set; }
         /// <summary> Gets or sets the required int. </summary>
         public int RequiredInt { get; set; }
-        /// <summary> Gets or sets the required model. </summary>
+        /// <summary>
+        /// Gets or sets the required model
+        /// Please note <see cref="BaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DerivedModelWithDiscriminatorA"/> and <see cref="DerivedModelWithDiscriminatorB"/>.
+        /// </summary>
         public BaseModelWithDiscriminator RequiredModel { get; set; }
         /// <summary> Gets or sets the required fixed string enum. </summary>
         public FixedStringEnum RequiredFixedStringEnum { get; set; }
