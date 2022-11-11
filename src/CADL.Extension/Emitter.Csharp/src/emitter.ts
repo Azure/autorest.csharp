@@ -450,11 +450,7 @@ function setUsage(
         } else if (usages.roundTrips.includes(name)) {
             m.Usage = Usage.RoundTrip;
         } else {
-            if ((m as InputEnumType).IsExtensible) {
-                m.Usage = Usage.RoundTrip;
-            } else {
-                m.Usage = Usage.None;
-            }
+            m.Usage = Usage.None;
         }
     }
 }

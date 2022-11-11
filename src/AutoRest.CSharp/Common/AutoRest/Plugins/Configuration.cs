@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
 
 namespace AutoRest.CSharp.Input
@@ -31,11 +33,28 @@ namespace AutoRest.CSharp.Input
             public const string ProtocolMethodList = "protocol-method-list";
             public const string SkipSerializationFormatXml = "skip-serialization-format-xml";
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
+            public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
         }
 
-        public static void Initialize(string outputFolder, string? ns, string? name, string[] sharedSourceFolders,
-            bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference,
-            bool generation1ConvenienceClient, bool singleTopLevelClient, bool skipSerializationFormatXml, bool disablePaginationTopRenaming, string? projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
+        public static void Initialize(
+            string outputFolder,
+            string? ns,
+            string? name,
+            string[] sharedSourceFolders,
+            bool saveInputs,
+            bool azureArm,
+            bool publicClients,
+            bool modelNamespace,
+            bool headAsBoolean,
+            bool skipCSProjPackageReference,
+            bool generation1ConvenienceClient,
+            bool singleTopLevelClient,
+            bool skipSerializationFormatXml,
+            bool disablePaginationTopRenaming,
+            string? projectFolder,
+            string[] protocolMethodList,
+            IReadOnlyList<string> suppressAbstractBaseClasses,
+            MgmtConfiguration mgmtConfiguration)
         {
             _outputFolder = outputFolder;
             Namespace = ns;
@@ -64,6 +83,7 @@ namespace AutoRest.CSharp.Input
             SkipSerializationFormatXml = skipSerializationFormatXml;
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
             _mgmtConfiguration = mgmtConfiguration;
+            _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
         }
 
         private static string? _outputFolder;
@@ -83,6 +103,8 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
+        private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
+        public static IReadOnlyList<string> SuppressAbstractBaseClasses => _suppressAbstractBaseClasses ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         private static string[]? _protocolMethodList;
         public static string[] ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -114,6 +136,7 @@ namespace AutoRest.CSharp.Input
                 disablePaginationTopRenaming: GetOptionValue(autoRest, Options.DisablePaginationTopRenaming),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
@@ -166,5 +189,7 @@ namespace AutoRest.CSharp.Input
 
             return path;
         }
+        public static IReadOnlyList<string> DeserializeArray(JsonElement jsonElement)
+            => jsonElement.ValueKind != JsonValueKind.Array ? Array.Empty<string>() : jsonElement.EnumerateArray().Select(t => t.ToString()).ToArray();
     }
 }
