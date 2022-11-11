@@ -13,9 +13,9 @@ namespace ModelsInCadl
     {
         public static FixedIntEnum ToFixedIntEnum(this int value)
         {
-            if (Equals(value, 1)) return FixedIntEnum.One;
-            if (Equals(value, 2)) return FixedIntEnum.Two;
-            if (Equals(value, 4)) return FixedIntEnum.Four;
+            if (value == 1) return FixedIntEnum.One;
+            if (value == 2) return FixedIntEnum.Two;
+            if (value == 4) return FixedIntEnum.Four;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown FixedIntEnum value.");
         }
     }

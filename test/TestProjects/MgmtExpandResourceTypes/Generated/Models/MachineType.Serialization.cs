@@ -13,9 +13,9 @@ namespace MgmtExpandResourceTypes.Models
     {
         public static MachineType ToMachineType(this int value)
         {
-            if (Equals(value, 1)) return MachineType.One;
-            if (Equals(value, 2)) return MachineType.Two;
-            if (Equals(value, 4)) return MachineType.Four;
+            if (value == 1) return MachineType.One;
+            if (value == 2) return MachineType.Two;
+            if (value == 4) return MachineType.Four;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MachineType value.");
         }
     }

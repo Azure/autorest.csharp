@@ -13,9 +13,9 @@ namespace MgmtExpandResourceTypes.Models
     {
         public static StorageType ToStorageType(this int value)
         {
-            if (Equals(value, 1)) return StorageType.StandardLRS;
-            if (Equals(value, 2)) return StorageType.StandardZRS;
-            if (Equals(value, 3)) return StorageType.StandardGRS;
+            if (value == 1) return StorageType.StandardLRS;
+            if (value == 2) return StorageType.StandardZRS;
+            if (value == 3) return StorageType.StandardGRS;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StorageType value.");
         }
     }

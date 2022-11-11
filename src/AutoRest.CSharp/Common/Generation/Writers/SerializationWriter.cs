@@ -266,14 +266,21 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this {schema.ValueType} value)"))
             {
-                foreach (EnumTypeValue value in schema.Values)
+                if (isString)
                 {
-                    writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
-                    if (isString)
+                    foreach (EnumTypeValue value in schema.Values)
                     {
+                        writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
                         writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase");
+                        writer.Line($")) return {declaredTypeName}.{value.Declaration.Name};");
                     }
-                    writer.Line($")) return {declaredTypeName}.{value.Declaration.Name};");
+                }
+                else// int, and float
+                {
+                    foreach (EnumTypeValue value in schema.Values)
+                    {
+                        writer.Line($"if (value == {value.Value.Value:L}) return {declaredTypeName}.{value.Declaration.Name};");
+                    }
                 }
 
                 writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
