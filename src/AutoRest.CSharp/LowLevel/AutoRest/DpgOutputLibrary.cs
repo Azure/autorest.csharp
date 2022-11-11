@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
-            if (!_isCadlInput)
+            if (!_isCadlInput || enumType.Usage == InputModelTypeUsage.None)
             {
                 return TypeFactory.CreateType(enumType.EnumValueType);
             }
