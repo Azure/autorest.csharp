@@ -4,18 +4,16 @@
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.AutoRest.PostProcess;
+using AutoRest.CSharp.LowLevel.AutoRest.PostProcessing;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class LowLevelTarget
     {
-        public static void ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel, bool cadlInput)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel, bool cadlInput)
         {
             var library = new DpgOutputLibraryBuilder(inputNamespace, sourceInputModel).Build(cadlInput);
 
@@ -46,16 +44,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ClientOptionsWriter.WriteClientOptions(optionsWriter, library.ClientOptions);
             project.AddGeneratedFile($"{library.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
 
-            //await project.PostProcess(PostProcess);
+            await project.PostProcess(PostProcess);
         }
 
-        //private static async Task<Project> PostProcess(Project project)
-        //{
-        //    project = await Internalizer.InternalizeAsync(project, null);
+        private static async Task<Project> PostProcess(Project project)
+        {
+            var postProcessor = new DpgPostProcessor(project);
+            project = await postProcessor.InternalizeAsync();
 
-        //    //project = await Remover.RemoveUnusedAsync(project, null);
+            project = await postProcessor.RemoveAsync();
 
-        //    return project;
-        //}
+            return project;
+        }
     }
 }

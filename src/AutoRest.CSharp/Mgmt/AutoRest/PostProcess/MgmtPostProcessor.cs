@@ -3,20 +3,16 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.PostProcessing;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
-    internal class MgmtPostProcessor : PostProcessor
+    internal sealed class MgmtPostProcessor : PostProcessor
     {
         private readonly ImmutableHashSet<string> _modelsToKeep;
         public MgmtPostProcessor(Project project, ImmutableHashSet<string> modelsToKeep) : base(project)
