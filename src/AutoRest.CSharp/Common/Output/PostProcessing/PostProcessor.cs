@@ -75,15 +75,15 @@ internal abstract class PostProcessor
         // traverse all the root and recursively add all the things we met
         var publicSymbols = TraverseModelsAsync(rootSymbols, referenceMap);
 
-        var internalSymbols = definitions.DeclaredSymbols.Except(publicSymbols);
+        var symbolsToInternalize = definitions.DeclaredSymbols.Except(publicSymbols);
 
-        var declaredNodes = new List<BaseTypeDeclarationSyntax>();
-        foreach (var symbol in internalSymbols)
+        var nodesToInternalize = new List<BaseTypeDeclarationSyntax>();
+        foreach (var symbol in symbolsToInternalize)
         {
-            declaredNodes.AddRange(definitions.DeclaredNodesCache[symbol]);
+            nodesToInternalize.AddRange(definitions.DeclaredNodesCache[symbol]);
         }
 
-        foreach (var model in declaredNodes)
+        foreach (var model in nodesToInternalize)
         {
             MarkInternal(model);
         }
