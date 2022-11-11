@@ -69,6 +69,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields();
                     WriteConstructors();
 
+                    foreach (var pagingMethod in client.PagingMethods)
+                    {
+                        DataPlaneClientWriter.WritePagingOperation(writer, pagingMethod, true, client.Fields.ClientDiagnosticsProperty.Name, false);
+                        DataPlaneClientWriter.WritePagingOperation(writer, pagingMethod, false, client.Fields.ClientDiagnosticsProperty.Name, false);
+
+                        RestClientWriter.WriteOperation(writer, pagingMethod.Method, client.Fields.PipelineField.Name, true, RestClientWriter.WritePageFuncBodyWithProcessMessage, "FirstPage");
+                        RestClientWriter.WriteOperation(writer, pagingMethod.Method, client.Fields.PipelineField.Name, false, RestClientWriter.WritePageFuncBodyWithProcessMessage, "FirstPage");
+                        if (pagingMethod.NextPageMethod != null)
+                        {
+                            RestClientWriter.WriteOperation(writer, pagingMethod.NextPageMethod, client.Fields.PipelineField.Name, true, RestClientWriter.WritePageFuncBodyWithProcessMessage);
+                            RestClientWriter.WriteOperation(writer, pagingMethod.NextPageMethod, client.Fields.PipelineField.Name, false, RestClientWriter.WritePageFuncBodyWithProcessMessage);
+                        }
+                    }
+
                     foreach (var clientMethod in client.ClientMethods)
                     {
                         var longRunning = clientMethod.LongRunning;

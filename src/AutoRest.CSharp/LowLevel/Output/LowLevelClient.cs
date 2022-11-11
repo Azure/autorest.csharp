@@ -37,6 +37,7 @@ namespace AutoRest.CSharp.Output.Models
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
         public IReadOnlyList<RestClientMethod> RequestMethods { get; }
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
+        public IReadOnlyList<PagingMethod> PagingMethods { get; }
         public LowLevelClient? ParentClient;
         public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
 
@@ -73,6 +74,8 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())
                 .Distinct()
                 .ToArray();
+
+            PagingMethods = ClientMethods.Where(m => m.PagingInfo != null && m.ConvenienceMethod != null).Select(m => ClientBuilder.BuildPagingMethod(m.ConvenienceMethod!.Signature.Name, m.PagingInfo!.NextLinkName, m.PagingInfo!.ItemName, m.RequestMethod, m.PagingInfo!.NextPageMethod, Declaration)).ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 
