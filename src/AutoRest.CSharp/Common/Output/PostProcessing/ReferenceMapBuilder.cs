@@ -117,7 +117,6 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
                         var root = await document.GetSyntaxRootAsync();
                         if (root == null)
                             continue;
-                        // TODO -- this needs simplification
                         // get the node of this reference
                         var node = root.FindNode(location.Location.SourceSpan);
                         var owner = GetOwner(root, node);
@@ -192,6 +191,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
 
         private void AddToReferenceMap(INamedTypeSymbol keySymbol, ISymbol? valueSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
         {
+            // we only add the symbol when it is a named type. Anonymous type is not our concern, we just ignore them
             if (valueSymbol is not INamedTypeSymbol valueTypeSymbol)
                 return;
 
