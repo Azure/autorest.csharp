@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Generation.Types
@@ -258,6 +259,11 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.IPAddress => typeof(IPAddress),
             XMsFormat.ContentType => typeof(ContentType),
             XMsFormat.RequestMethod => typeof(RequestMethod),
+            XMsFormat.DataFactoryExpressionOfString => typeof(DataFactoryExpression<string>),
+            XMsFormat.DataFactoryExpressionOfInt => typeof(DataFactoryExpression<int>),
+            XMsFormat.DataFactoryExpressionOfDouble => typeof(DataFactoryExpression<double>),
+            XMsFormat.DataFactoryExpressionOfArray => typeof(DataFactoryExpression<Array>),
+            XMsFormat.DataFactoryExpressionOfBool => typeof(DataFactoryExpression<bool>),
             _ => null
         };
 
