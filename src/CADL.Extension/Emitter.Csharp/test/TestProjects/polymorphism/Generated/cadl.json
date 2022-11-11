@@ -173,7 +173,8 @@
  "Clients": [
   {
    "$id": "19",
-   "Name": "Discriminated",
+   "Name": "PolymorphismOperationClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "20",
@@ -611,7 +612,8 @@
    ],
    "Protocol": {
     "$id": "59"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

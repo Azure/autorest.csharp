@@ -1,83 +1,29 @@
 {
  "$id": "1",
- "Name": "Cadl.TestServer.MultiInterfaceClient",
- "Description": "Illustrates clients generated from a Cadl with multiple interfaces.",
+ "Name": "Azure.OperationGroupService",
  "ApiVersions": [
-  "1.0.0"
+  "2015-06-18"
  ],
  "Enums": [],
- "Models": [
-  {
-   "$id": "2",
-   "Name": "Dog",
-   "Namespace": "Cadl.TestServer.MultiInterfaceClient",
-   "Description": "Simple model.",
-   "IsNullable": false,
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "3",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
-      "$id": "4",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$id": "5",
-   "Name": "Cat",
-   "Namespace": "Cadl.TestServer.MultiInterfaceClient",
-   "Description": "Simple model.",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "6",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
-      "$id": "7",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  }
- ],
+ "Models": [],
  "Clients": [
   {
-   "$id": "8",
-   "Name": "MultiInterfaceClientClient",
+   "$id": "2",
+   "Name": "OperationGroupServiceClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "9",
-     "Name": "getDogsConvenient",
-     "Description": "Illustrate grouping operations on subclient.",
+     "$id": "3",
+     "Name": "zero",
      "Parameters": [
       {
-       "$id": "10",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
+       "$id": "4",
+       "Name": "operationGroupServiceUrl",
+       "NameInRequest": "operationGroupServiceUrl",
        "Type": {
-        "$id": "11",
-        "Name": "String",
-        "Kind": "String",
+        "$id": "5",
+        "Name": "Uri",
+        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -88,24 +34,14 @@
        "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "12",
-        "Type": {
-         "$id": "13",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "http://localhost:3000"
-       }
+       "Kind": "Client"
       },
       {
-       "$id": "14",
+       "$id": "6",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "15",
+        "$id": "7",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -120,20 +56,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "16",
+        "$id": "8",
         "Type": {
-         "$ref": "15"
+         "$ref": "7"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "17",
+       "$id": "9",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "18",
+        "$id": "10",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -148,25 +84,28 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "11",
         "Type": {
-         "$id": "20",
+         "$id": "12",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
         },
-        "Value": "1.0.0"
+        "Value": "2015-06-18"
        }
       }
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "13",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$id": "14",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -175,40 +114,95 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/dogs",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/top",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": false
     },
     {
-     "$id": "22",
-     "Name": "setDogs",
-     "Description": "Illustrate grouping operations on subclient.",
+     "$id": "15",
+     "Name": "one",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "4"
       },
       {
-       "$id": "23",
-       "Name": "input",
-       "NameInRequest": "input",
+       "$id": "16",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$ref": "2"
+        "$id": "17",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
        },
-       "Location": "Body",
-       "IsRequired": true,
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
+       "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "18",
+        "Type": {
+         "$ref": "17"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "9"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "19",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "20",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/Alpha",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "21"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "22",
+   "Name": "Beta",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "23",
+     "Name": "two",
+     "Parameters": [
+      {
+       "$ref": "4"
       },
       {
        "$id": "24",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "25",
         "Name": "String",
@@ -218,7 +212,7 @@
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": true,
+       "IsContentType": false,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -233,107 +227,20 @@
        }
       },
       {
+       "$ref": "9"
+      }
+     ],
+     "Responses": [
+      {
        "$id": "27",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
         "$id": "28",
-        "Name": "String",
+        "Name": "string",
         "Kind": "String",
         "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "29",
-        "Type": {
-         "$ref": "28"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "17"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "30",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/dogs/models",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateConvenienceMethod": false
-    },
-    {
-     "$id": "31",
-     "Name": "getCats",
-     "Description": "Illustrate grouping operations on subclient.",
-     "Parameters": [
-      {
-       "$ref": "10"
-      },
-      {
-       "$id": "32",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "33",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "34",
-        "Type": {
-         "$ref": "33"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "17"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "35",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -342,40 +249,96 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/cats",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/Beta",
      "BufferResponse": true,
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "36",
-     "Name": "setCats",
-     "Description": "Illustrate grouping operations on subclient.",
+     "$id": "29",
+     "Name": "three",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "4"
       },
       {
-       "$id": "37",
-       "Name": "input",
-       "NameInRequest": "input",
+       "$id": "30",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$ref": "5"
+        "$id": "31",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
        },
-       "Location": "Body",
-       "IsRequired": true,
+       "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
+       "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "32",
+        "Type": {
+         "$ref": "31"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "9"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "33",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "34",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/SubBeta",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "35"
+   },
+   "Creatable": false,
+   "Parent": "OperationGroupServiceClient"
+  },
+  {
+   "$id": "36",
+   "Name": "Gamma",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "37",
+     "Name": "four",
+     "Parameters": [
+      {
+       "$ref": "4"
       },
       {
        "$id": "38",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "39",
         "Name": "String",
@@ -385,7 +348,7 @@
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": true,
+       "IsContentType": false,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -400,11 +363,46 @@
        }
       },
       {
+       "$ref": "9"
+      }
+     ],
+     "Responses": [
+      {
        "$id": "41",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "42",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/Gamma",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "43",
+     "Name": "five",
+     "Parameters": [
+      {
+       "$ref": "4"
+      },
+      {
+       "$id": "44",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "42",
+        "$id": "45",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -419,25 +417,28 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "43",
+        "$id": "46",
         "Type": {
-         "$ref": "42"
+         "$ref": "45"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "17"
+       "$ref": "9"
       }
      ],
      "Responses": [
       {
-       "$id": "44",
+       "$id": "47",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$id": "48",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -446,19 +447,17 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/cats",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/Gamma",
      "BufferResponse": true,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "45"
+    "$id": "49"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "OperationGroupServiceClient"
   }
  ]
 }

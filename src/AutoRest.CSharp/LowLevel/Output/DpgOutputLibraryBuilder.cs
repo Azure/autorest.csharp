@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Output.Models
             var operations = ns.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
-            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any();
+            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !String.IsNullOrEmpty(ns.Parent);
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix();
 
             INamedTypeSymbol? existingType;
@@ -224,7 +224,20 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (!String.IsNullOrEmpty(client.Parent))
                 {
-                    clientInfosByName[client.Name].Parent = clientInfosByName[client.Parent];
+                    ClientInfo? targetClient = null;
+                    ClientInfo? targetParent = null;
+                    foreach (var info in clientInfosByName.Values)
+                    {
+                        if (info.OperationGroupKey == client.Name)
+                            targetClient = info;
+                        if (info.OperationGroupKey == client.Parent)
+                            targetParent = info;
+                    }
+                    if (targetClient != null && targetParent != null)
+                    {
+                        targetClient.Parent = targetParent;
+                        targetParent.Children.Add(targetClient);
+                    }
                 }
             }
         }

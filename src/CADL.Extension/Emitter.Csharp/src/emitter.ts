@@ -75,7 +75,7 @@ import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
 import { dllFilePath } from "@autorest/csharp";
 import { execSync } from "child_process";
-import { getConvenienceAPIName, listClients, listOperationGroups, listOperationsInOperationGroup } from "@azure-tools/cadl-dpg";
+import { Client, getConvenienceAPIName, isOperationGroup, listClients, listOperationGroups, listOperationsInOperationGroup, OperationGroup } from "@azure-tools/cadl-dpg";
 
 export interface NetEmitterOptions {
     "sdk-folder": string;
@@ -305,10 +305,11 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
 
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
+    let urlParameters: InputParameter[] | undefined = undefined;
+    let url: string = "";
+    const convenienceOperations: HttpOperation[] = [];
     try {
         //create endpoint parameter from servers
-        let urlParameters: InputParameter[] | undefined = undefined;
-        let url: string = "";
         if (servers !== undefined) {
             const cadlServers = resolveServers(program, servers);
             if (cadlServers.length > 0) {
@@ -329,89 +330,13 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
             program
         );
         const clients: InputClient[] = [];
-        const convenienceOperations: HttpOperation[] = [];
+        // const convenienceOperations: HttpOperation[] = [];
         const dpgClients = listClients(program);
         for (const client of dpgClients) {
-            const clientOperations = listOperationsInOperationGroup(program, client);
-            const container = ignoreDiagnostics(getHttpOperation(program,clientOperations[0])).container;
-            const clientDesc = getDoc(program, container);
-            const clientSummary = getSummary(program, container);
-            const inputClient = {
-                Name: client.name,
-                Description: clientDesc,
-                Operations: [],
-                Protocol: {},
-                IsOperationGroup: false
-            } as InputClient;
-            
-            
-            for (const op of clientOperations) {
-                const httpOperation = ignoreDiagnostics(getHttpOperation(program, op));
-                const inputOperation: InputOperation = loadOperation(
-                    program,
-                    httpOperation,
-                    url,
-                    urlParameters,
-                    modelMap,
-                    enumMap
-                );
-    
-                applyDefaultContentTypeAndAcceptParameter(inputOperation);
-    
-                const apiVersionInOperation = inputOperation.Parameters.find(
-                    (value) => value.IsApiVersion
-                );
-                if (apiVersionInOperation) {
-                    if (apiVersionInOperation.DefaultValue?.Value) {
-                        apiVersions.add(apiVersionInOperation.DefaultValue.Value);
-                    }
-                }
-                inputClient.Operations.push(inputOperation);
-                if (inputOperation.GenerateConvenienceMethod || generateConvenienceAPI)
-                    convenienceOperations.push(httpOperation);
-            }
-            
-            clients.push(inputClient);
+            clients.push(emitClient(client));
             const dpgOperationGroups = listOperationGroups(program, client);
-            for (const dpgGroup of dpgOperationGroups) {
-                const operations = listOperationsInOperationGroup(program, dpgGroup);
-                const container = ignoreDiagnostics(getHttpOperation(program,operations[0])).container;
-                const clientDesc = getDoc(program, container);
-                const clientSummary = getSummary(program, container);
-                const dpgGroupClient = {
-                    Name: dpgGroup.type.name,
-                    Description: clientDesc,
-                    Operations: [],
-                    Protocol: {},
-                    Parent: client.name,
-                    IsOperationGroup: true
-                } as InputClient;
-                for (const op of operations) {
-                    const httpOperation = ignoreDiagnostics(getHttpOperation(program, op));
-                    const inputOperation: InputOperation = loadOperation(
-                        program,
-                        httpOperation,
-                        url,
-                        urlParameters,
-                        modelMap,
-                        enumMap
-                    );
-        
-                    applyDefaultContentTypeAndAcceptParameter(inputOperation);
-        
-                    const apiVersionInOperation = inputOperation.Parameters.find(
-                        (value) => value.IsApiVersion
-                    );
-                    if (apiVersionInOperation) {
-                        if (apiVersionInOperation.DefaultValue?.Value) {
-                            apiVersions.add(apiVersionInOperation.DefaultValue.Value);
-                        }
-                    }
-                    dpgGroupClient.Operations.push(inputOperation);
-                    if (inputOperation.GenerateConvenienceMethod || generateConvenienceAPI)
-                        convenienceOperations.push(httpOperation);
-                }
-                clients.push(dpgGroupClient);
+            for (const dpgGroup of dpgOperationGroups) {  
+                clients.push(emitClient(dpgGroup, client));
             }
         }
         
@@ -505,6 +430,50 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
         } else {
             throw err;
         }
+    }
+
+    function emitClient(client: Client |OperationGroup, parent?: Client): InputClient {
+        const operations = listOperationsInOperationGroup(program, client);
+        let clientDesc = "";
+        if (operations.length > 0) {
+            const container = ignoreDiagnostics(getHttpOperation(program,operations[0])).container;
+            clientDesc = getDoc(program, container) ?? "";
+        }
+        
+        const inputClient = {
+            Name: client.kind === "DpgClient" ? client.name : client.type.name,
+            Description: clientDesc,
+            Operations: [],
+            Protocol: {},
+            Creatable: client.kind === "DpgClient",
+            Parent: parent?.name
+        } as InputClient;
+        for (const op of operations) {
+            const httpOperation = ignoreDiagnostics(getHttpOperation(program, op));
+            const inputOperation: InputOperation = loadOperation(
+                program,
+                httpOperation,
+                url,
+                urlParameters,
+                modelMap,
+                enumMap
+            );
+
+            applyDefaultContentTypeAndAcceptParameter(inputOperation);
+
+            const apiVersionInOperation = inputOperation.Parameters.find(
+                (value) => value.IsApiVersion
+            );
+            if (apiVersionInOperation) {
+                if (apiVersionInOperation.DefaultValue?.Value) {
+                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
+                }
+            }
+            inputClient.Operations.push(inputOperation);
+            if (inputOperation.GenerateConvenienceMethod || generateConvenienceAPI)
+                convenienceOperations.push(httpOperation);
+        }
+        return inputClient;
     }
 
     function getAllLroMonitorOperations(
