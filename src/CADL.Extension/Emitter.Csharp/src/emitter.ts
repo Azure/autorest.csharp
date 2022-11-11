@@ -340,53 +340,6 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
             }
         }
         
-        
-        // for (const operation of routes) {
-        //     console.log(JSON.stringify(operation.path));
-
-        //     // do not generate LRO monitor operation
-        //     if (lroMonitorOperations.has(operation.operation)) continue;
-
-        //     const groupName: string = getOperationGroupName(
-        //         program,
-        //         operation.operation
-        //     );
-        //     let client = getClient(clients, groupName);
-        //     if (!client) {
-        //         const container = operation.container;
-        //         const clientDesc = getDoc(program, container);
-        //         const clientSummary = getSummary(program, container);
-        //         client = {
-        //             Name: groupName,
-        //             Description: clientDesc,
-        //             Operations: [],
-        //             Protocol: {}
-        //         } as InputClient;
-        //         clients.push(client);
-        //     }
-        //     const op: InputOperation = loadOperation(
-        //         program,
-        //         operation,
-        //         url,
-        //         urlParameters,
-        //         modelMap,
-        //         enumMap
-        //     );
-
-        //     applyDefaultContentTypeAndAcceptParameter(op);
-
-        //     const apiVersionInOperation = op.Parameters.find(
-        //         (value) => value.IsApiVersion
-        //     );
-        //     if (apiVersionInOperation) {
-        //         if (apiVersionInOperation.DefaultValue?.Value) {
-        //             apiVersions.add(apiVersionInOperation.DefaultValue.Value);
-        //         }
-        //     }
-        //     client.Operations.push(op);
-        //     if (op.GenerateConvenienceMethod || generateConvenienceAPI)
-        //         convenienceOperations.push(operation);
-        // }
         if (apiVersions.size > 1) {
             apiVersionParam.Kind = InputOperationParameterKind.Constant;
         }
