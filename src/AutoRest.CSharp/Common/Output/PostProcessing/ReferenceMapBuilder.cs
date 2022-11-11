@@ -18,6 +18,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
     {
         internal delegate bool HasDiscriminatorDelegate(BaseTypeDeclarationSyntax node, [MaybeNullWhen(false)] out HashSet<string> identifiers);
 
+        private readonly Func<HashSet<INamedTypeSymbol>> _symbolSetInitializer = () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         private readonly Compilation _compilation;
         private readonly Project _project;
         private readonly HasDiscriminatorDelegate _hasDiscriminatorFunc;
@@ -28,8 +29,6 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             _project = project;
             _hasDiscriminatorFunc = hasDiscriminatorFunc;
         }
-
-        private readonly Dictionary<ISymbol, HashSet<BaseTypeDeclarationSyntax>> _symbolMap = new(SymbolEqualityComparer.Default);
 
         public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildPublicReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>> nodeCache)
         {
@@ -42,12 +41,12 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             return references;
         }
 
-        public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildAllReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions)
+        public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildAllReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, Dictionary<Document, HashSet<INamedTypeSymbol>> documentCache)
         {
             var references = new Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>(SymbolEqualityComparer.Default);
             foreach (var definition in definitions)
             {
-                await ProcessSymbolAsync(definition, references);
+                await ProcessSymbolAsync(definition, references, documentCache);
             }
 
             return references;
@@ -98,27 +97,38 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             }
         }
 
-        private async Task ProcessSymbolAsync(INamedTypeSymbol symbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
+        private async Task ProcessSymbolAsync(INamedTypeSymbol symbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references, Dictionary<Document, HashSet<INamedTypeSymbol>> documentCache)
         {
             foreach (var reference in await SymbolFinder.FindReferencesAsync(symbol, _project.Solution))
             {
                 foreach (var location in reference.Locations)
                 {
                     var document = location.Document;
-                    var root = await document.GetSyntaxRootAsync();
-                    if (root == null)
-                        continue;
-                    // TODO -- this needs simplification
-                    // get the node of this reference
-                    var node = root.FindNode(location.Location.SourceSpan);
-                    var owner = GetOwner(root, node);
-                    var semanticModel = _compilation.GetSemanticModel(owner.SyntaxTree);
-                    var ownerSymbol = semanticModel.GetDeclaredSymbol(owner);
+                    var candicateReferenceeSymbols = documentCache[document];
+                    if (candicateReferenceeSymbols.Count == 1)
+                    {
+                        references.AddInList(candicateReferenceeSymbols.Single(), symbol, _symbolSetInitializer);
+                    }
+                    else
+                    {
+                        // fallback to calculate the symbol when the document contains multiple type symbols
+                        // this should never happen in the generated code
+                        // customized code might have this issue
+                        var root = await document.GetSyntaxRootAsync();
+                        if (root == null)
+                            continue;
+                        // TODO -- this needs simplification
+                        // get the node of this reference
+                        var node = root.FindNode(location.Location.SourceSpan);
+                        var owner = GetOwner(root, node);
+                        var semanticModel = _compilation.GetSemanticModel(owner.SyntaxTree);
+                        var ownerSymbol = semanticModel.GetDeclaredSymbol(owner);
 
-                    if (ownerSymbol == null)
-                        continue;
-                    // add it to the map
-                    references.AddInList(ownerSymbol, symbol, () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default));
+                        if (ownerSymbol == null)
+                            continue;
+                        // add it to the map
+                        references.AddInList(ownerSymbol, symbol, _symbolSetInitializer);
+                    }
                 }
             }
 
@@ -185,36 +195,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             if (valueSymbol is not INamedTypeSymbol valueTypeSymbol)
                 return;
 
-            references.AddInList(keySymbol, valueTypeSymbol, () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default));
-        }
-
-        private void AddToReferenceMap(ISymbol keySymbol, ISymbol? valueSymbol, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)
-        {
-            if (valueSymbol == null)
-                return;
-
-            foreach (var keyDeclaration in GetAllDeclarations(keySymbol))
-            {
-                foreach (var valueDeclaration in GetAllDeclarations(valueSymbol))
-                {
-                    references.AddInList(keyDeclaration, valueDeclaration);
-                }
-            }
-        }
-
-        private HashSet<BaseTypeDeclarationSyntax> GetAllDeclarations(ISymbol symbol)
-        {
-            if (!_symbolMap.TryGetValue(symbol, out var result))
-            {
-                result = new HashSet<BaseTypeDeclarationSyntax>();
-                foreach (var reference in symbol.DeclaringSyntaxReferences)
-                {
-                    if (reference.GetSyntax() is BaseTypeDeclarationSyntax node)
-                        result.Add(node);
-                }
-            }
-
-            return result;
+            references.AddInList(keySymbol, valueTypeSymbol, _symbolSetInitializer);
         }
 
         /// <summary>

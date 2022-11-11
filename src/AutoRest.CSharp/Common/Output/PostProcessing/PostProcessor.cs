@@ -26,12 +26,13 @@ internal abstract class PostProcessor
         this.project = project;
     }
 
-    protected record ModelSymbols(HashSet<INamedTypeSymbol> DeclaredSymbols, Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache);
+    protected record ModelSymbols(HashSet<INamedTypeSymbol> DeclaredSymbols, Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, Dictionary<Document, HashSet<INamedTypeSymbol>> DocumentCache);
 
     protected virtual async Task<ModelSymbols> GetModelSymbolsAsync(Compilation compilation, bool publicOnly = true)
     {
         var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
-        var cache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
+        var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
+        var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
         foreach (var document in project.Documents)
         {
             if (!GeneratedCodeWorkspace.IsSharedDocument(document))
@@ -50,12 +51,13 @@ internal abstract class PostProcessor
                     if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public)
                         continue;
                     result.Add(symbol);
-                    cache.AddInList(symbol, typeDeclaration);
+                    declarationCache.AddInList(symbol, typeDeclaration);
+                    documentCache.AddInList(document, symbol, () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default));
                 }
             }
         }
 
-        return new ModelSymbols(result, cache);
+        return new ModelSymbols(result, declarationCache, documentCache);
     }
 
     public async Task<Project> InternalizeAsync()
@@ -98,7 +100,7 @@ internal abstract class PostProcessor
         // find all the declarations, including non-public declared
         var definitions = await GetModelSymbolsAsync(compilation, false);
         // build reference map
-        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols);
+        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentCache);
         // get root nodes
         var rootNodes = GetRootSymbols(definitions);
         // traverse the map to determine the declarations that we are about to remove, starting from root nodes
