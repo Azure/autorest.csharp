@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -25,41 +26,62 @@ internal abstract class PostProcessor
         this.project = project;
     }
 
-    protected virtual async Task<HashSet<BaseTypeDeclarationSyntax>> GetModels(bool publicOnly = true)
-    {
-        var classVisitor = new DefinitionVisitor(publicOnly);
+    protected record ModelSymbols(HashSet<INamedTypeSymbol> DeclaredSymbols, Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache);
 
+    protected virtual async Task<ModelSymbols> GetModelSymbolsAsync(Compilation compilation, bool publicOnly = true)
+    {
+        var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+        var cache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         foreach (var document in project.Documents)
         {
             if (!GeneratedCodeWorkspace.IsSharedDocument(document))
             {
                 var root = await document.GetSyntaxRootAsync();
-                classVisitor.Visit(root);
+                if (root == null)
+                    continue;
+
+                var semanticModel = compilation.GetSemanticModel(root.SyntaxTree);
+
+                foreach (var typeDeclaration in root.DescendantNodes().OfType<BaseTypeDeclarationSyntax>())
+                {
+                    var symbol = semanticModel.GetDeclaredSymbol(typeDeclaration);
+                    if (symbol == null)
+                        continue;
+                    if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public)
+                        continue;
+                    result.Add(symbol);
+                    cache.AddInList(symbol, typeDeclaration);
+                }
             }
         }
 
-        return classVisitor.ModelDeclarations;
+        return new ModelSymbols(result, cache);
     }
 
     public async Task<Project> InternalizeAsync()
     {
-        // first get all the declared models
-        var definitions = await GetModels(true);
-        // build the reference map
-        var referenceMapBuilder = new ReferenceMapBuilder(project, HasDiscriminator);
-        var referenceMap = await referenceMapBuilder.BuildPublicReferenceMapAsync(definitions);
-        // get the root nodes
-        var rootNodes = await GetRootNodes(true);
-        // traverse all the root and recursively add all the things we met
-        var publicModels = TraverseModelsAsync(rootNodes, referenceMap);
+        var compilation = await project.GetCompilationAsync();
+        if (compilation == null)
+            return project;
 
-        foreach (var model in publicModels)
+        // first get all the declared symbols
+        var definitions = await GetModelSymbolsAsync(compilation, true);
+        // build the reference map
+        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildPublicReferenceMapAsync(definitions.DeclaredSymbols, definitions.DeclaredNodesCache);
+        // get the root symbols
+        var rootSymbols = GetRootSymbols(definitions);
+        // traverse all the root and recursively add all the things we met
+        var publicSymbols = TraverseModelsAsync(rootSymbols, referenceMap);
+
+        var internalSymbols = definitions.DeclaredSymbols.Except(publicSymbols);
+
+        var declaredNodes = new List<BaseTypeDeclarationSyntax>();
+        foreach (var symbol in internalSymbols)
         {
-            definitions.Remove(model);
+            declaredNodes.AddRange(definitions.DeclaredNodesCache[symbol]);
         }
 
-        // get the models we need to mark internal
-        foreach (var model in definitions)
+        foreach (var model in declaredNodes)
         {
             MarkInternal(model);
         }
@@ -69,30 +91,37 @@ internal abstract class PostProcessor
 
     public async Task<Project> RemoveAsync()
     {
+        var compilation = await project.GetCompilationAsync();
+        if (compilation == null)
+            return project;
+
         // find all the declarations, including non-public declared
-        var definitions = await GetModels(false);
+        var definitions = await GetModelSymbolsAsync(compilation, false);
         // build reference map
-        var referenceMapBuilder = new ReferenceMapBuilder(project, HasDiscriminator);
-        var referenceMap = await referenceMapBuilder.BuildAllReferenceMapAsync(definitions);
+        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols);
         // get root nodes
-        var rootNodes = await GetRootNodes(false);
+        var rootNodes = GetRootSymbols(definitions);
         // traverse the map to determine the declarations that we are about to remove, starting from root nodes
-        var referencedDefinitions = TraverseModelsAsync(rootNodes, referenceMap);
-        // remove those declarations one by one
-        foreach (var model in referencedDefinitions)
+        var referencedSymbols = TraverseModelsAsync(rootNodes, referenceMap);
+
+        var symbolsToRemove = definitions.DeclaredSymbols.Except(referencedSymbols);
+
+        var nodesToRemove = new List<BaseTypeDeclarationSyntax>();
+        foreach (var symbol in symbolsToRemove)
         {
-            definitions.Remove(model);
+            nodesToRemove.AddRange(definitions.DeclaredNodesCache[symbol]);
         }
+
         // remove them one by one
-        await RemoveModelsAsync(definitions);
+        await RemoveModelsAsync(nodesToRemove);
 
         return project;
     }
 
-    private static IEnumerable<BaseTypeDeclarationSyntax> TraverseModelsAsync(IEnumerable<BaseTypeDeclarationSyntax> rootNodes, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> referenceMap)
+    private static IEnumerable<INamedTypeSymbol> TraverseModelsAsync(IEnumerable<INamedTypeSymbol> rootNodes, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> referenceMap)
     {
-        var queue = new Queue<BaseTypeDeclarationSyntax>(rootNodes);
-        var visited = new HashSet<BaseTypeDeclarationSyntax>();
+        var queue = new Queue<INamedTypeSymbol>(rootNodes);
+        var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         while (queue.Count > 0)
         {
             var definition = queue.Dequeue();
@@ -109,7 +138,7 @@ internal abstract class PostProcessor
         }
     }
 
-    private static IEnumerable<BaseTypeDeclarationSyntax> GetReferencedTypes(BaseTypeDeclarationSyntax definition, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> referenceMap)
+    private static IEnumerable<T> GetReferencedTypes<T>(T definition, Dictionary<T, HashSet<T>> referenceMap) where T : notnull
     {
         if (referenceMap.TryGetValue(definition, out var references))
         {
@@ -172,7 +201,29 @@ internal abstract class PostProcessor
         return document.Project;
     }
 
-    protected abstract Task<HashSet<BaseTypeDeclarationSyntax>> GetRootNodes(bool publicOnly = true);
+    protected virtual HashSet<INamedTypeSymbol> GetRootSymbols(ModelSymbols modelSymbols)
+    {
+        var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+        foreach (var symbol in modelSymbols.DeclaredSymbols)
+        {
+            foreach (var declarationNode in modelSymbols.DeclaredNodesCache[symbol])
+            {
+                var tree = declarationNode.SyntaxTree;
+                var document = project.GetDocument(tree);
+                if (document == null)
+                    continue;
+                if (IsRootDocument(document))
+                {
+                    result.Add(symbol);
+                    break; // any of the declaring document of this symbol is root, we add it to the root list, skipping the processing of other documents of this symbol (because it is unnecessary)
+                }
+            }
+        }
+
+        return result;
+    }
+
+    protected abstract bool IsRootDocument(Document document);
 
     protected virtual bool HasDiscriminator(BaseTypeDeclarationSyntax node, [MaybeNullWhen(false)] out HashSet<string> identifiers)
     {

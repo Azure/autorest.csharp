@@ -18,73 +18,48 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
     {
         internal delegate bool HasDiscriminatorDelegate(BaseTypeDeclarationSyntax node, [MaybeNullWhen(false)] out HashSet<string> identifiers);
 
+        private readonly Compilation _compilation;
         private readonly Project _project;
         private readonly HasDiscriminatorDelegate _hasDiscriminatorFunc;
 
-        public ReferenceMapBuilder(Project project, HasDiscriminatorDelegate hasDiscriminatorFunc)
+        public ReferenceMapBuilder(Compilation compilation, Project project, HasDiscriminatorDelegate hasDiscriminatorFunc)
         {
+            _compilation = compilation;
             _project = project;
             _hasDiscriminatorFunc = hasDiscriminatorFunc;
         }
 
         private readonly Dictionary<ISymbol, HashSet<BaseTypeDeclarationSyntax>> _symbolMap = new(SymbolEqualityComparer.Default);
 
-        public async Task<Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>>> BuildPublicReferenceMapAsync(IEnumerable<BaseTypeDeclarationSyntax> definitions)
+        public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildPublicReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>> nodeCache)
         {
-            var references = new Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>>();
-            var compilation = await _project.GetCompilationAsync();
-            if (compilation == null)
-                return references;
-
-            var visited = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
-
+            var references = new Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>(SymbolEqualityComparer.Default);
             foreach (var definition in definitions)
             {
-                var semanticModel = compilation.GetSemanticModel(definition.SyntaxTree);
-                var typeSymbol = semanticModel.GetDeclaredSymbol(definition);
-                if (typeSymbol == null || visited.Contains(typeSymbol))
-                    continue;
-
-                visited.Add(typeSymbol);
-
-                // go through all the element in this type and add them into the map
-                await ProcessPublicSymbolAsync(typeSymbol, references);
+                await ProcessPublicSymbolAsync(definition, references, nodeCache);
             }
 
             return references;
         }
 
-        public async Task<Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>>> BuildAllReferenceMapAsync(IEnumerable<BaseTypeDeclarationSyntax> definitions)
+        public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildAllReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions)
         {
-            var references = new Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>>();
-            var compilation = await _project.GetCompilationAsync();
-            if (compilation == null)
-                return references;
-
-            var visited = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
-
+            var references = new Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>(SymbolEqualityComparer.Default);
             foreach (var definition in definitions)
             {
-                var semanticModel = compilation.GetSemanticModel(definition.SyntaxTree);
-                var typeSymbol = semanticModel.GetDeclaredSymbol(definition);
-                if (typeSymbol == null || visited.Contains(typeSymbol))
-                    continue;
-
-                visited.Add(typeSymbol);
-
-                await ProcessSymbolAsync(typeSymbol, references);
+                await ProcessSymbolAsync(definition, references);
             }
 
             return references;
         }
 
-        private async Task ProcessPublicSymbolAsync(INamedTypeSymbol symbol, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)
+        private async Task ProcessPublicSymbolAsync(INamedTypeSymbol symbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references, Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>> cache)
         {
             // process myself, adding base and generic arguments
             AddTypeSymbol(symbol, symbol, references);
 
             // add my sibling classes
-            foreach (var declaration in GetAllDeclarations(symbol))
+            foreach (var declaration in cache[symbol])
             {
                 if (_hasDiscriminatorFunc(declaration, out var identifierCandidates))
                 {
@@ -123,7 +98,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             }
         }
 
-        private async Task ProcessSymbolAsync(ISymbol symbol, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)
+        private async Task ProcessSymbolAsync(INamedTypeSymbol symbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
         {
             foreach (var reference in await SymbolFinder.FindReferencesAsync(symbol, _project.Solution))
             {
@@ -133,12 +108,17 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
                     var root = await document.GetSyntaxRootAsync();
                     if (root == null)
                         continue;
+                    // TODO -- this needs simplification
                     // get the node of this reference
                     var node = root.FindNode(location.Location.SourceSpan);
                     var owner = GetOwner(root, node);
-                    // put all the definition of this symbol into the reference of this "owner"
-                    foreach (var declaration in GetAllDeclarations(symbol))
-                        references.AddInList(owner, declaration);
+                    var semanticModel = _compilation.GetSemanticModel(owner.SyntaxTree);
+                    var ownerSymbol = semanticModel.GetDeclaredSymbol(owner);
+
+                    if (ownerSymbol == null)
+                        continue;
+                    // add it to the map
+                    references.AddInList(ownerSymbol, symbol, () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default));
                 }
             }
 
@@ -147,9 +127,9 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             ProcessExtensionSymbol(symbol, references);
         }
 
-        private void ProcessExtensionSymbol(ISymbol symbol, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)
+        private void ProcessExtensionSymbol(INamedTypeSymbol extensionClassSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
         {
-            if (symbol is not INamedTypeSymbol extensionClassSymbol || !extensionClassSymbol.IsStatic)
+            if (!extensionClassSymbol.IsStatic)
                 return;
 
             foreach (var member in extensionClassSymbol.GetMembers())
@@ -169,25 +149,27 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             }
         }
 
-        private void AddTypeSymbol(ISymbol keySymbol, ITypeSymbol typeSymbol, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)
+        private void AddTypeSymbol(ITypeSymbol keySymbol, ITypeSymbol typeSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
         {
+            if (keySymbol is not INamedTypeSymbol keyTypeSymbol)
+                return;
             // add the class and all its partial classes to the map
             // this will make all the partial classes are referencing each other in the reference map
             // when we make the travesal over the reference map, we will not only remove one of the partial class, instead we will either keep all the partial classes (if at least one of them has references), or remove all of them (if none of them has references)
-            AddToReferenceMap(keySymbol, typeSymbol, references);
+            AddToReferenceMap(keyTypeSymbol, typeSymbol, references);
             // add the base type
-            AddToReferenceMap(keySymbol, typeSymbol.BaseType, references);
+            AddToReferenceMap(keyTypeSymbol, typeSymbol.BaseType, references);
             if (typeSymbol is INamedTypeSymbol namedType)
             {
                 // add the generic type arguments
                 foreach (var typeArgument in namedType.TypeArguments)
                 {
-                    AddToReferenceMap(keySymbol, typeArgument, references);
+                    AddToReferenceMap(keyTypeSymbol, typeArgument, references);
                 }
             }
         }
 
-        private void AddMethodSymbol(ISymbol keySymbol, IMethodSymbol methodSymbol, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)
+        private void AddMethodSymbol(INamedTypeSymbol keySymbol, IMethodSymbol methodSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
         {
             // add the return type
             AddTypeSymbol(keySymbol, methodSymbol.ReturnType, references);
@@ -196,6 +178,14 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             {
                 AddTypeSymbol(keySymbol, parameter.Type, references);
             }
+        }
+
+        private void AddToReferenceMap(INamedTypeSymbol keySymbol, ISymbol? valueSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
+        {
+            if (valueSymbol is not INamedTypeSymbol valueTypeSymbol)
+                return;
+
+            references.AddInList(keySymbol, valueTypeSymbol, () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default));
         }
 
         private void AddToReferenceMap(ISymbol keySymbol, ISymbol? valueSymbol, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)

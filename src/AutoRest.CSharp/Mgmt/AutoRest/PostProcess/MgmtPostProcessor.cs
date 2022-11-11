@@ -24,23 +24,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             _modelsToKeep = modelsToKeep;
         }
 
-        protected override async Task<HashSet<BaseTypeDeclarationSyntax>> GetRootNodes(bool publicOnly)
+        protected override bool IsRootDocument(Document document)
         {
-            var classVisitor = new DefinitionVisitor(publicOnly);
-            foreach (var document in project.Documents)
-            {
-                var root = await document.GetSyntaxRootAsync();
-                // we add a declaration as root node when
-                // 1. the file is under `Generated` or `Generated/Extensions` which is handled by `IsMgmtRootDocument`
-                // 2. the declaration has a ReferenceType or similar attribute on it which is handled by `IsReferenceType`
-                // 3. the file is custom code (not generated and not shared) which is handled by `IsCustomDocument`
-                if (IsMgmtRootDocument(document) || IsReferenceType(root) || GeneratedCodeWorkspace.IsCustomDocument(document) || ShouldKeepModel(root, _modelsToKeep))
-                {
-                    classVisitor.Visit(root);
-                }
-            }
-
-            return classVisitor.ModelDeclarations;
+            var root = document.GetSyntaxRootAsync().GetAwaiter().GetResult();
+            // a document is root when
+            // 1. the file is under `Generated` or `Generated/Extensions` which is handled by `IsMgmtRootDocument`
+            // 2. the declaration has a ReferenceType or similar attribute on it which is handled by `IsReferenceType`
+            // 3. the file is custom code (not generated and not shared) which is handled by `IsCustomDocument`
+            return IsMgmtRootDocument(document) || IsReferenceType(root) || GeneratedCodeWorkspace.IsCustomDocument(document) || ShouldKeepModel(root, _modelsToKeep);
         }
 
         private static bool IsMgmtRootDocument(Document document) => GeneratedCodeWorkspace.IsGeneratedDocument(document) && Path.GetDirectoryName(document.Name) is "Extensions" or "";
