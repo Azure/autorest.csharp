@@ -10,10 +10,6 @@ namespace AutoRest.CSharp.LowLevel.AutoRest.PostProcessing
 {
     internal sealed class DpgPostProcessor : PostProcessor
     {
-        public DpgPostProcessor(Project project) : base(project)
-        {
-        }
-
         protected override bool IsRootDocument(Document document)
         {
             // a document is a root document, when

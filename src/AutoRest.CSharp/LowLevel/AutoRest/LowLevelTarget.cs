@@ -49,10 +49,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static async Task<Project> PostProcess(Project project)
         {
-            var postProcessor = new DpgPostProcessor(project);
-            project = await postProcessor.InternalizeAsync();
+            var postProcessor = new DpgPostProcessor();
+            project = await postProcessor.InternalizeAsync(project);
 
-            project = await postProcessor.RemoveAsync();
+            project = await postProcessor.RemoveAsync(project);
 
             return project;
         }

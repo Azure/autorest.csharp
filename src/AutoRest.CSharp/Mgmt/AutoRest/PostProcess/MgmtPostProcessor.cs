@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
     internal sealed class MgmtPostProcessor : PostProcessor
     {
         private readonly ImmutableHashSet<string> _modelsToKeep;
-        public MgmtPostProcessor(Project project, ImmutableHashSet<string> modelsToKeep) : base(project)
+        public MgmtPostProcessor(ImmutableHashSet<string> modelsToKeep) : base()
         {
             _modelsToKeep = modelsToKeep;
         }
