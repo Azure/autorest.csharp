@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -233,7 +232,7 @@ internal abstract class PostProcessor
             if (classDeclaration.HasLeadingTrivia)
             {
                 var syntaxTriviaList = classDeclaration.GetLeadingTrivia();
-                var filteredTriviaList = syntaxTriviaList.Where(syntaxTrivia => ObjectType.DiscriminatorDescFixedPart.All(syntaxTrivia.ToFullString().Contains));
+                var filteredTriviaList = syntaxTriviaList.Where(syntaxTrivia => DiscriminatorDescFixedPart.All(syntaxTrivia.ToFullString().Contains));
                 if (filteredTriviaList.Count() == 1)
                 {
                     var descendantNodes = filteredTriviaList.First().GetStructure()?.DescendantNodes().ToList();
@@ -253,7 +252,9 @@ internal abstract class PostProcessor
     {
         // If the base class has discriminator, we will add a description at the end of the original description to add the known derived types
         // Here we use the added description to filter the syntax nodes coming from xml comment to get all the derived types exactly
-        var targetIndex = nodes?.FindLastIndex(node => node.ToFullString().Contains(MgmtObjectType.DiscriminatorDescFixedPart.Last()));
+        var targetIndex = nodes?.FindLastIndex(node => node.ToFullString().Contains(DiscriminatorDescFixedPart.Last()));
         return nodes.Where((val, index) => index >= targetIndex);
     }
+
+    private static readonly List<string> DiscriminatorDescFixedPart = ObjectType.DiscriminatorDescFixedPart;
 }
