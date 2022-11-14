@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace body_complex.Models
 {
@@ -21,22 +20,7 @@ namespace body_complex.Models
                     case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element);
                 }
             }
-            string fishType = default;
-            Optional<string> species = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("fish.type"))
-                {
-                    fishType = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("species"))
-                {
-                    species = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new DotFish(fishType, species.Value);
+            return UnknownDotFish.DeserializeUnknownDotFish(element);
         }
     }
 }

@@ -7,7 +7,11 @@
 
 namespace body_complex.Models
 {
-    /// <summary> The DotFish. </summary>
+    /// <summary>
+    /// The DotFish.
+    /// Please note <see cref="DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+    /// The available derived classes include <see cref="DotSalmon"/>.
+    /// </summary>
     public partial class DotFish
     {
         /// <summary> Initializes a new instance of DotFish. </summary>

@@ -5,22 +5,15 @@
 
 #nullable disable
 
-using System;
-using Azure.Core;
-
 namespace ModelsInCadl
 {
     /// <summary> Deriver model with discriminator property. </summary>
     public partial class DerivedModelWithDiscriminatorB : BaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorB. </summary>
-        /// <param name="discriminatorProperty"></param>
         /// <param name="requiredInt"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="discriminatorProperty"/> is null. </exception>
-        public DerivedModelWithDiscriminatorB(string discriminatorProperty, int requiredInt) : base(discriminatorProperty)
+        public DerivedModelWithDiscriminatorB(int requiredInt) : base("B")
         {
-            Argument.AssertNotNull(discriminatorProperty, nameof(discriminatorProperty));
-
             RequiredInt = requiredInt;
         }
 

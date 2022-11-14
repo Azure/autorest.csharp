@@ -238,8 +238,8 @@ namespace AutoRest.CSharp.Common.Input
                     ? GetOrCreateModel(parent, schemaUsages)
                     : null,
                 DerivedModels: derived,
-                DiscriminatorValue: schema.DiscriminatorValue
-            );
+                DiscriminatorValue: schema.DiscriminatorValue,
+                DiscriminatorPropertyName: schema.Discriminator?.Property.CSharpName());
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;
@@ -380,7 +380,7 @@ namespace AutoRest.CSharp.Common.Input
             Namespace: schema.Extensions?.Namespace,
             Accessibility: schema.Extensions?.Accessibility,
             Description: schema.CreateDescription(),
-            Usage: InputModelTypeUsage.RoundTrip,
+            Usage: InputModelTypeUsage.None,
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
             AllowedValues: choices.Select(CreateEnumValue).ToList(),
             IsExtensible: isExtensible

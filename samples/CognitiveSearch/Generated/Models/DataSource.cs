@@ -37,8 +37,16 @@ namespace CognitiveSearch.Models
         /// <param name="type"> The type of the datasource. </param>
         /// <param name="credentials"> Credentials for the datasource. </param>
         /// <param name="container"> The data container for the datasource. </param>
-        /// <param name="dataChangeDetectionPolicy"> The data change detection policy for the datasource. </param>
-        /// <param name="dataDeletionDetectionPolicy"> The data deletion detection policy for the datasource. </param>
+        /// <param name="dataChangeDetectionPolicy">
+        /// The data change detection policy for the datasource.
+        /// Please note <see cref="DataChangeDetectionPolicy"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="HighWaterMarkChangeDetectionPolicy"/> and <see cref="SqlIntegratedChangeTrackingPolicy"/>.
+        /// </param>
+        /// <param name="dataDeletionDetectionPolicy">
+        /// The data deletion detection policy for the datasource.
+        /// Please note <see cref="DataDeletionDetectionPolicy"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="SoftDeleteColumnDeletionDetectionPolicy"/>.
+        /// </param>
         /// <param name="eTag"> The ETag of the DataSource. </param>
         internal DataSource(string name, string description, DataSourceType type, DataSourceCredentials credentials, DataContainer container, DataChangeDetectionPolicy dataChangeDetectionPolicy, DataDeletionDetectionPolicy dataDeletionDetectionPolicy, string eTag)
         {
@@ -62,9 +70,17 @@ namespace CognitiveSearch.Models
         public DataSourceCredentials Credentials { get; set; }
         /// <summary> The data container for the datasource. </summary>
         public DataContainer Container { get; set; }
-        /// <summary> The data change detection policy for the datasource. </summary>
+        /// <summary>
+        /// The data change detection policy for the datasource.
+        /// Please note <see cref="DataChangeDetectionPolicy"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="HighWaterMarkChangeDetectionPolicy"/> and <see cref="SqlIntegratedChangeTrackingPolicy"/>.
+        /// </summary>
         public DataChangeDetectionPolicy DataChangeDetectionPolicy { get; set; }
-        /// <summary> The data deletion detection policy for the datasource. </summary>
+        /// <summary>
+        /// The data deletion detection policy for the datasource.
+        /// Please note <see cref="DataDeletionDetectionPolicy"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="SoftDeleteColumnDeletionDetectionPolicy"/>.
+        /// </summary>
         public DataDeletionDetectionPolicy DataDeletionDetectionPolicy { get; set; }
         /// <summary> The ETag of the DataSource. </summary>
         public string ETag { get; set; }
