@@ -106,7 +106,8 @@
  "Clients": [
   {
    "$id": "14",
-   "Name": "Pagination",
+   "Name": "PaginationClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "15",
@@ -222,7 +223,8 @@
    ],
    "Protocol": {
     "$id": "27"
-   }
+   },
+   "Creatable": true
   }
  ],
  "Auth": {

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="CreateProjectStatusMonitorAsync(String,String,RequestContext)">
+<example>
+This sample shows how to call CreateProjectStatusMonitorAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new LroBasicCadlClient();
+
+Response response = await client.CreateProjectStatusMonitorAsync("<id>", "<operationId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("operationId").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>OperationStatusResource</c>:
+<code>{
+  id: string, # Required.
+  status: &quot;InProgress&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Canceled&quot;, # Required.
+  error: {
+    code: string, # Required.
+    message: string, # Required.
+    target: string, # Optional.
+    details: [Error], # Required.
+    innererror: {
+      code: string, # Required.
+      innererror: InnerError, # Optional.
+    }, # Optional.
+  }, # Optional.
+  operationId: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="CreateProjectStatusMonitor(String,String,RequestContext)">
+<example>
+This sample shows how to call CreateProjectStatusMonitor with required parameters and parse the result.
+<code><![CDATA[
+var client = new LroBasicCadlClient();
+
+Response response = client.CreateProjectStatusMonitor("<id>", "<operationId>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("operationId").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>OperationStatusResource</c>:
+<code>{
+  id: string, # Required.
+  status: &quot;InProgress&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Canceled&quot;, # Required.
+  error: {
+    code: string, # Required.
+    message: string, # Required.
+    target: string, # Optional.
+    details: [Error], # Required.
+    innererror: {
+      code: string, # Required.
+      innererror: InnerError, # Optional.
+    }, # Optional.
+  }, # Optional.
+  operationId: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="CreateProjectAsync(WaitUntil,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateProjectAsync with required parameters.
+<code><![CDATA[
+var client = new LroBasicCadlClient();
+
+var data = new {};
+
+var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+
+var response = await operation.WaitForCompletionResponseAsync();
+Console.WriteLine(response.Status)
+]]></code>
+This sample shows how to call CreateProjectAsync with all parameters and request content.
+<code><![CDATA[
+var client = new LroBasicCadlClient();
+
+var data = new {
+    description = "<description>",
+    name = "<name>",
+};
+
+var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+
+var response = await operation.WaitForCompletionResponseAsync();
+Console.WriteLine(response.Status)
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Project</c>:
+<code>{
+  id: string, # Required.
+  description: string, # Optional.
+  name: string, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="CreateProject(WaitUntil,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateProject with required parameters.
+<code><![CDATA[
+var client = new LroBasicCadlClient();
+
+var data = new {};
+
+var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+
+var response = operation.WaitForCompletionResponse();
+Console.WriteLine(response.Status)
+]]></code>
+This sample shows how to call CreateProject with all parameters and request content.
+<code><![CDATA[
+var client = new LroBasicCadlClient();
+
+var data = new {
+    description = "<description>",
+    name = "<name>",
+};
+
+var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+
+var response = operation.WaitForCompletionResponse();
+Console.WriteLine(response.Status)
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Project</c>:
+<code>{
+  id: string, # Required.
+  description: string, # Optional.
+  name: string, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="UpdateProjectAsync(WaitUntil,RequestContent,RequestContext)">
+<example>
+This sample shows how to call UpdateProjectAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new LroBasicCadlClient();
+
+var data = new {};
+
+var operation = await client.UpdateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+
+BinaryData data = await operation.WaitForCompletionAsync();
+JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+This sample shows how to call UpdateProjectAsync with all parameters and request content, and how to parse the result.
+<code><![CDATA[
+var client = new LroBasicCadlClient();
+
+var data = new {
+    description = "<description>",
+    name = "<name>",
+};
+
+var operation = await client.UpdateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+
+BinaryData data = await operation.WaitForCompletionAsync();
+JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Project</c>:
+<code>{
+  id: string, # Required.
+  description: string, # Optional.
+  name: string, # Optional.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Project</c>:
+<code>{
+  id: string, # Required.
+  description: string, # Optional.
+  name: string, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="UpdateProject(WaitUntil,RequestContent,RequestContext)">
+<example>
+This sample shows how to call UpdateProject with required parameters and parse the result.
+<code><![CDATA[
+var client = new LroBasicCadlClient();
+
+var data = new {};
+
+var operation = client.UpdateProject(WaitUntil.Completed, RequestContent.Create(data));
+
+BinaryData data = operation.WaitForCompletion();
+JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+This sample shows how to call UpdateProject with all parameters and request content, and how to parse the result.
+<code><![CDATA[
+var client = new LroBasicCadlClient();
+
+var data = new {
+    description = "<description>",
+    name = "<name>",
+};
+
+var operation = client.UpdateProject(WaitUntil.Completed, RequestContent.Create(data));
+
+BinaryData data = operation.WaitForCompletion();
+JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("description").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Project</c>:
+<code>{
+  id: string, # Required.
+  description: string, # Optional.
+  name: string, # Optional.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Project</c>:
+<code>{
+  id: string, # Required.
+  description: string, # Optional.
+  name: string, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

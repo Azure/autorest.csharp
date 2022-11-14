@@ -56,7 +56,8 @@
  "Clients": [
   {
    "$id": "10",
-   "Name": "String",
+   "Name": "ExtensibleEnumsClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "11",
@@ -441,7 +442,8 @@
    ],
    "Protocol": {
     "$id": "47"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

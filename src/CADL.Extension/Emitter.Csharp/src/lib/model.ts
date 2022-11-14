@@ -23,7 +23,9 @@ import {
     UsageFlags,
     UsageTracker,
     TrackableType,
-    getDiscriminator
+    getDiscriminator,
+    IntrinsicType,
+    isVoidType
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -258,6 +260,8 @@ export function getInputType(
         } as InputPrimitiveType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
+    } else if (type.kind === "Intrinsic") {
+        return getInputModelForIntrinsicType(type);
     } else {
         throw new Error("Unsupported type.");
     }
@@ -478,6 +482,7 @@ export function getInputType(
                 if (vis && vis.includes("read") && vis.length === 1) {
                     isReadOnly = true;
                 }
+                if (isNeverType(value.type) || isVoidType(value.type)) return;
                 const inputProp = {
                     Name: value.name,
                     SerializedName: value.name,
@@ -523,6 +528,21 @@ export function getInputType(
             current = current.namespace;
         }
         return namespaceString;
+    }
+
+    function getInputModelForIntrinsicType(type: IntrinsicType): InputType {
+        switch(type.name) {
+            case "unknown":
+                return {
+                    Name: "unknown",
+                    Description: getDoc(program, type),
+                    IsNullable: false,
+                    Usage: Usage.None,
+                    Properties: []
+                } as InputModelType;
+            default:
+                throw new Error("Unsupported type.");
+        }
     }
 }
 
