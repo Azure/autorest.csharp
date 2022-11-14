@@ -140,15 +140,12 @@ internal abstract class PostProcessor
         }
     }
 
-    private static IEnumerable<T> GetReferencedTypes<T>(T definition, Dictionary<T, HashSet<T>> referenceMap) where T : notnull
+    private static IEnumerable<T> GetReferencedTypes<T, TCollection>(T definition, Dictionary<T, TCollection> referenceMap) where T : notnull where TCollection : IEnumerable<T>
     {
         if (referenceMap.TryGetValue(definition, out var references))
-        {
-            foreach (var reference in references)
-            {
-                yield return reference;
-            }
-        }
+            return references;
+
+        return Enumerable.Empty<T>();
     }
 
     private void MarkInternal(BaseTypeDeclarationSyntax declarationNode)
