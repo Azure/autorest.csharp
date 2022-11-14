@@ -4,6 +4,7 @@
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.LowLevel.AutoRest.PostProcessing;
 using AutoRest.CSharp.Output.Models;
@@ -49,6 +50,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static async Task<Project> PostProcess(Project project)
         {
+            if (Configuration.KeepUnusedModels)
+                return project;
+
             var postProcessor = new DpgPostProcessor();
             project = await postProcessor.InternalizeAsync(project);
 

@@ -149,6 +149,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static async Task<Project> PostProcess(Project project)
         {
+            if (Configuration.KeepUnusedModels)
+                return project;
+
             var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
             var postProcessor = new MgmtPostProcessor(modelsToKeep);
             project = await postProcessor.InternalizeAsync(project);

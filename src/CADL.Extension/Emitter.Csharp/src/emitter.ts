@@ -84,6 +84,7 @@ export interface NetEmitterOptions {
     "single-top-level-client"?: boolean;
     skipSDKGeneration: boolean;
     generateConvenienceAPI: boolean; //workaround for cadl-ranch project
+    "keep-unused-models": boolean; // enabling this option will let the generator skip the step of post process and hence keep all the unused models unchanged
     "new-project": boolean;
     csharpGeneratorPath: string;
     "clear-output-folder"?: boolean;
@@ -113,6 +114,7 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", default: false },
         generateConvenienceAPI: { type: "boolean", nullable: true },
+        "keep-unused-models": { type: "boolean", nullable: true },
         "new-project": { type: "boolean", nullable: true },
         csharpGeneratorPath: { type: "string", nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
@@ -148,6 +150,7 @@ export async function $onEmit(
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
+        "keep-unused-models": resolvedOptions["keep-unused-models"] ?? false,
         "new-project": resolvedOptions["new-project"],
         csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
         "clear-output-folder": resolvedOptions["clear-output-folder"],
@@ -162,7 +165,7 @@ export async function $onEmit(
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
-            
+
             //resolve shared folders based on generator path override
             const resolvedSharedFolders: string[] = [];
             var sharedFolders = [
@@ -172,11 +175,11 @@ export async function $onEmit(
             for (const sharedFolder of sharedFolders) {
                 resolvedSharedFolders.push(path.relative(generatedFolder, sharedFolder).replaceAll("\\", "/"));
             }
-     
+
             if (!fs.existsSync(generatedFolder)) {
                 fs.mkdirSync(generatedFolder, { recursive: true });
             }
-            
+
             if (options["clear-output-folder"]) {
                 fsExtra.emptyDirSync(generatedFolder);
             }
@@ -193,7 +196,8 @@ export async function $onEmit(
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient: resolvedOptions["single-top-level-client"]
+                SingleTopLevelClient: resolvedOptions["single-top-level-client"],
+                "keep-unused-models": options["keep-unused-models"],
             } as Configuration;
 
             await program.host.writeFile(
@@ -207,14 +211,14 @@ export async function $onEmit(
                 console.info(command);
 
                 try {
-                    execSync(command, {stdio: 'inherit'});
-                } catch(error: any) {
+                    execSync(command, { stdio: 'inherit' });
+                } catch (error: any) {
                     if (error.message) console.log(error.message);
                     if (error.stderr) console.error(error.stderr);
                     if (error.stdout) console.log(error.stdout);
                 }
             }
-            
+
             if (!options["save-inputs"]) {
                 // delete
                 deleteFile(resolvePath(generatedFolder, "cadl.json"));
@@ -229,7 +233,7 @@ function deleteFile(filePath: string) {
         if (err) {
             console.log(`stderr: ${err}`);
         }
-    
+
         console.log(`File ${filePath} is deleted.`)
     });
 }
@@ -520,9 +524,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                      Type: inputType,
-                      Value: mediaTypes[0]
-                  } as InputConstant)
+                    Type: inputType,
+                    Value: mediaTypes[0]
+                } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -738,8 +742,8 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVersion
-            ? InputOperationParameterKind.Client
-            : InputOperationParameterKind.Method;
+                ? InputOperationParameterKind.Client
+                : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
