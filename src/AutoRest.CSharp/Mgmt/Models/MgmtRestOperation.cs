@@ -71,6 +71,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public CSharpType? OriginalReturnType { get; }
 
+        public RestClientMethod OriginalMethod { get; }
+
         /// <summary>
         /// The actual operation
         /// </summary>
@@ -102,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Schema? FinalResponseSchema => Operation.IsLongRunning ? Operation.LongRunningFinalResponse.ResponseSchema : null;
 
-        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false)
+        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false, string? resourceName = null)
         {
             var method = MgmtContext.Library.GetRestClientMethod(operation);
             var restClient = MgmtContext.Library.GetRestClient(operation);
@@ -110,8 +112,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             _isLongRunning = isLongRunning;
             ThrowIfNull = throwIfNull;
             Operation = operation;
-            Method = method;
-            PagingMethod = GetPagingMethodWrapper(method);
+            OriginalMethod = method;
+            Method = method.UpdateMgmtRestClientMethod(resourceName, methodName);
+            PagingMethod = GetPagingMethodWrapper(method, Method);
             RestClient = restClient;
             RequestPath = requestPath;
             ContextualPath = contextualPath;
@@ -134,6 +137,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             _isLongRunning = other.IsLongRunningOperation;
             ThrowIfNull = other.ThrowIfNull;
             Operation = other.Operation;
+            OriginalMethod = other.OriginalMethod;
             Method = other.Method;
             PagingMethod = other.PagingMethod;
             RestClient = other.RestClient;
@@ -503,13 +507,13 @@ namespace AutoRest.CSharp.Mgmt.Models
                 _ => originalType // we have multiple resource matched, we can only return the original type without wrapping it
             };
         }
-        private static PagingMethodWrapper? GetPagingMethodWrapper(RestClientMethod method)
+        private static PagingMethodWrapper? GetPagingMethodWrapper(RestClientMethod originalmethod, RestClientMethod updatedMethod)
         {
-            if (MgmtContext.Library.PagingMethods.TryGetValue(method, out var pagingMethod))
-                return new PagingMethodWrapper(pagingMethod);
+            if (MgmtContext.Library.PagingMethods.TryGetValue(originalmethod, out var pagingMethod))
+                return new PagingMethodWrapper(pagingMethod.UpdateMgmtPagingMethod(originalmethod, updatedMethod));
 
-            if (method.IsListMethod(out var itemType, out var valuePropertyName))
-                return new PagingMethodWrapper(method, itemType, valuePropertyName);
+            if (originalmethod.IsListMethod(out var itemType, out var valuePropertyName))
+                return new PagingMethodWrapper(updatedMethod, itemType, valuePropertyName);
 
             return null;
         }

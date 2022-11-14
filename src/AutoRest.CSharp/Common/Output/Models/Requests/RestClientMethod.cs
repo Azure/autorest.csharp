@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class RestClientMethod
     {
-        public RestClientMethod(string name, string? summary, string? description, CSharpType? returnType, Request request, IReadOnlyList<Parameter> parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, InputOperation operation)
+        public RestClientMethod(string name, string? summary, string? description, CSharpType? returnType, Request request, IReadOnlyList<Parameter> parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, InputOperation operation, IReadOnlyList<Parameter>? originalParameters = null, Parameter? propertyBagParameter = null)
         {
             Name = name;
             Request = request;
@@ -26,6 +26,9 @@ namespace AutoRest.CSharp.Output.Models.Requests
             BufferResponse = bufferResponse;
             Accessibility = GetAccessibility(accessibility);
             Operation = operation;
+            OriginalParameters = originalParameters ?? parameters;
+            PropertyBagParameter = propertyBagParameter;
+            IsPropertyBagMethod = originalParameters == null ? false : true;
         }
 
         private static MethodSignatureModifiers GetAccessibility(string accessibility) =>
@@ -51,5 +54,17 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public CSharpType? ReturnType { get; }
         public MethodSignatureModifiers Accessibility { get; }
         public InputOperation Operation { get; }
+        /// <summary>
+        /// This property contains the original parameters as <see cref="RestClientMethod.Parameters"/> might be updated once we implement property bag feature.
+        /// </summary>
+        public IReadOnlyList<Parameter> OriginalParameters { get; }
+        /// <summary>
+        /// This property will contains the property bag parameter if <see cref="RestClientMethod.IsPropertyBagMethod"/> is true.
+        /// </summary>
+        public Parameter? PropertyBagParameter { get; }
+        /// <summary>
+        /// This property indicates whether the current method is a method affected by property bag.
+        /// </summary>
+        public bool IsPropertyBagMethod { get; }
     }
 }

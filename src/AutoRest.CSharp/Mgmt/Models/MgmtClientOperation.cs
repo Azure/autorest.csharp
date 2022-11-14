@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
             else
             {
-                parameters.AddRange(ParameterMappings.Values.First().GetPassThroughParameters());
+                parameters.AddRange(ParameterMappings.Values.First().GetPassThroughParameters(_operations.First().Method));
             }
             parameters.Add(KnownParameters.CancellationTokenParameter);
             return parameters;

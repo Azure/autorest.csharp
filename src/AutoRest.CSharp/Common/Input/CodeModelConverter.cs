@@ -258,7 +258,7 @@ namespace AutoRest.CSharp.Common.Input
             IsDiscriminator: property.IsDiscriminator ?? false
         );
 
-        private static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
+        public static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {
             { Implementation: ImplementationLocation.Client } => InputOperationParameterKind.Client,
             { Schema: ConstantSchema }                        => InputOperationParameterKind.Constant,
@@ -323,7 +323,7 @@ namespace AutoRest.CSharp.Common.Input
         private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
             => CreateType(schema, format, modelsCache) with {IsNullable = isNullable};
 
-        private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
+        public static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {
             BinarySchema => InputPrimitiveType.Stream,
 
@@ -392,7 +392,7 @@ namespace AutoRest.CSharp.Common.Input
             Value: choiceValue.Value
         );
 
-        private static RequestLocation GetRequestLocation(RequestParameter requestParameter) => requestParameter.In switch
+        public static RequestLocation GetRequestLocation(RequestParameter requestParameter) => requestParameter.In switch
         {
             HttpParameterIn.Uri => RequestLocation.Uri,
             HttpParameterIn.Path => RequestLocation.Path,

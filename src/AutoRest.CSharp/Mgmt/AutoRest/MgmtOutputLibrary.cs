@@ -89,6 +89,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private readonly Dictionary<OperationGroup, IEnumerable<string>> _operationGroupToRequestPaths = new();
 
+        /// <summary>
+        /// This is a collection that contains all the models from property bag, we use HashSet here to avoid potential duplicates
+        /// </summary>
+        public HashSet<TypeProvider> PropertyBagModels { get; }
+
         public MgmtOutputLibrary()
         {
             ApplyGlobalConfigurations();
@@ -110,6 +115,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceSchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureSchemaMap);
             ChildOperations = new CachedDictionary<string, HashSet<Operation>>(EnsureResourceChildOperations);
+
+            // initialize the property bag collection
+            // TODO -- considering provide a customized comparer
+            PropertyBagModels = new HashSet<TypeProvider>();
 
             // TODO -- remove this since this is never used
             _mergedOperations = Configuration.MgmtConfiguration.MergeOperations

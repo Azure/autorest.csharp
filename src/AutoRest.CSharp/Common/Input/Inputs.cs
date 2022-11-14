@@ -122,6 +122,14 @@ namespace AutoRest.CSharp.Common.Input
             ArraySerializationDelimiter: null,
             HeaderCollectionPrefix: null)
         { }
+
+        private readonly Schema? _schema;
+
+        public Schema Schema
+        {
+            get => _schema ?? new Schema();
+            init => _schema = value;
+        }
     }
 
     internal record OperationResponseHeader(string Name, string NameInResponse, string Description, InputType Type)
@@ -190,7 +198,7 @@ namespace AutoRest.CSharp.Common.Input
     {
     }
 
-    internal record InputConstant(object Value, InputType Type);
+    internal record InputConstant(object? Value, InputType Type);
 
     internal record InputEnumTypeValue(string Name, string Value, string? Description);
 

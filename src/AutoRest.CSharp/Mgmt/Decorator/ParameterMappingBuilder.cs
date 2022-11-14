@@ -4,12 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -274,7 +276,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var method = operation.Method;
             var contextualParameterMappingCache = new List<ContextualParameterMapping>(contextualParameterMappings);
-            foreach (var parameter in method.Parameters)
+            foreach (var parameter in method.OriginalParameters)
             {
                 // find this parameter name in the contextual parameter mappings
                 // if there is one, this parameter should use the same value expression
@@ -284,7 +286,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var p = UpdateParameterTypeOfByIdMethod(operation.RequestPath, parameter);
                 if (mapping == null)
                 {
-                    yield return new ParameterMapping(p, true, $"", Enumerable.Empty<string>());
+                    if (TryBuildPropertyBagParameterMapping(method, p, out string? valueExpression))
+                    {
+                        yield return new ParameterMapping(p, false, $"{valueExpression}", Enumerable.Empty<string>());
+                    }
+                    else
+                    {
+                        yield return new ParameterMapping(p, true, $"", Enumerable.Empty<string>());
+                    }
                 }
                 else
                 {
@@ -385,9 +394,55 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return keySegment.IsConstant ? keySegment.ConstantValue : string.Empty;
         }
 
-        public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
+        public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings, RestClientMethod method)
         {
-            return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
+            var passThroughParams = new List<Parameter>();
+            bool isPropertyBagInserted = false;
+            foreach (var parameterMapping in parameterMappings)
+            {
+                if (parameterMapping.IsPassThru)
+                {
+                    passThroughParams.Add(parameterMapping.Parameter);
+                }
+                else if (method.IsPropertyBagMethod &&
+                    method.OriginalParameters.Contains(parameterMapping.Parameter) &&
+                    isPropertyBagInserted == false)
+                {
+                    passThroughParams.Add(method.PropertyBagParameter!);
+                    isPropertyBagInserted = true;
+                }
+            }
+            return passThroughParams;
+        }
+
+        private static bool TryBuildPropertyBagParameterMapping(RestClientMethod method, Parameter parameter, out string? valueExpression)
+        {
+            valueExpression = null;
+            if (method.IsPropertyBagMethod)
+            {
+                if (!method.Parameters.Contains(parameter))
+                {
+                    if (PagingMethod.IsPageSizeName(parameter.Name))
+                    {
+                        // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
+                        if (PagingMethod.IsPageSizeType(parameter.Type.FrameworkType))
+                        {
+                            valueExpression = "pageSizeHint";
+                        }
+                        else
+                        {
+                            Console.Error.WriteLine($"WARNING: Parameter '{parameter.Name}' seems to have a page size property, but it's not a numeric type. Fix it or overwrite it if necessary.");
+                            valueExpression = $"options.{parameter.Name.FirstCharToUpperCase()}";
+                        }
+                    }
+                    else
+                    {
+                        valueExpression = $"options.{parameter.Name.FirstCharToUpperCase()}";
+                    }
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

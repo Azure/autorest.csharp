@@ -168,20 +168,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
+        private string GetEnumerableArgValue()
+        {
+            string value = "";
+            if (This is ResourceCollection collection)
+            {
+                if (collection.GetAllOperation?.OperationMappings.First().Value.Method.IsPropertyBagMethod == true)
+                {
+                    value = "null";
+                }
+            }
+            return value;
+        }
+
         private void WriteIEnumerable(CSharpType type)
         {
             _writer.Line();
             var enumeratorType = new CSharpType(typeof(IEnumerator<>), type.Arguments);
             _writer.Line($"{enumeratorType:I} {type:I}.GetEnumerator()");
+            string argValue = GetEnumerableArgValue();
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAll().GetEnumerator();");
+                _writer.Line($"return GetAll({argValue}).GetEnumerator();");
             }
             _writer.Line();
             _writer.Line($"{typeof(IEnumerator)} {typeof(IEnumerable)}.GetEnumerator()");
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAll().GetEnumerator();");
+                _writer.Line($"return GetAll({argValue}).GetEnumerator();");
             }
         }
 
@@ -190,9 +204,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             var enumeratorType = new CSharpType(typeof(IAsyncEnumerator<>), type.Arguments);
             _writer.Line($"{enumeratorType:I} {type:I}.GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Type:I} {KnownParameters.CancellationTokenParameter.Name})");
+            string argValue = GetEnumerableArgValue();
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAllAsync({KnownParameters.CancellationTokenParameter.Name}: {KnownParameters.CancellationTokenParameter.Name}).GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Name});");
+                _writer.Line($"return GetAllAsync({(argValue == "" ? argValue : argValue + ", ")}{KnownParameters.CancellationTokenParameter.Name}: {KnownParameters.CancellationTokenParameter.Name}).GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Name});");
             }
         }
 
