@@ -84,6 +84,7 @@ import {
     listOperationsInOperationGroup,
     OperationGroup
 } from "@azure-tools/cadl-dpg";
+import { ClientKind } from "./type/ClientKind.js";
 
 export interface NetEmitterOptions {
     "sdk-folder": string;
@@ -424,11 +425,11 @@ function createModel(
         }
 
         const inputClient = {
-            Name: client.kind === "DpgClient" ? client.name : client.type.name,
+            Name: client.kind === ClientKind.DpgClient ? client.name : client.type.name,
             Description: clientDesc,
             Operations: [],
             Protocol: {},
-            Creatable: client.kind === "DpgClient",
+            Creatable: client.kind === ClientKind.DpgClient,
             Parent: parent?.name
         } as InputClient;
         for (const op of operations) {
