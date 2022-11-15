@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using ExactMatchInheritance.Models;
 
@@ -55,6 +56,31 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("type4");
                 writer.WriteObjectValue(Type4);
             }
+            if (Optional.IsDefined(Type5))
+            {
+                writer.WritePropertyName("type5");
+                JsonSerializer.Serialize(writer, Type5);
+            }
+            if (Optional.IsDefined(Type6))
+            {
+                writer.WritePropertyName("type6");
+                JsonSerializer.Serialize(writer, Type6);
+            }
+            if (Optional.IsDefined(Type7))
+            {
+                writer.WritePropertyName("type7");
+                JsonSerializer.Serialize(writer, Type7);
+            }
+            if (Optional.IsDefined(Type8))
+            {
+                writer.WritePropertyName("type8");
+                JsonSerializer.Serialize(writer, Type8);
+            }
+            if (Optional.IsDefined(Type9))
+            {
+                writer.WritePropertyName("type9");
+                JsonSerializer.Serialize(writer, Type9);
+            }
             writer.WriteEndObject();
         }
 
@@ -66,6 +92,11 @@ namespace ExactMatchInheritance
             Optional<Type2> type2 = default;
             Optional<IPAddress> type3 = default;
             Optional<object> type4 = default;
+            Optional<DataFactoryExpression<string>> type5 = default;
+            Optional<DataFactoryExpression<double>> type6 = default;
+            Optional<DataFactoryExpression<bool>> type7 = default;
+            Optional<DataFactoryExpression<int>> type8 = default;
+            Optional<DataFactoryExpression<Array>> type9 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -132,6 +163,56 @@ namespace ExactMatchInheritance
                     type4 = property.Value.GetObject();
                     continue;
                 }
+                if (property.NameEquals("type5"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type5 = JsonSerializer.Deserialize<DataFactoryExpression<string>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("type6"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type6 = JsonSerializer.Deserialize<DataFactoryExpression<double>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("type7"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type7 = JsonSerializer.Deserialize<DataFactoryExpression<bool>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("type8"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type8 = JsonSerializer.Deserialize<DataFactoryExpression<int>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("type9"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type9 = JsonSerializer.Deserialize<DataFactoryExpression<Array>>(property.Value.ToString());
+                    continue;
+                }
                 if (property.NameEquals("id"))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
@@ -158,7 +239,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value);
+            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value);
         }
     }
 }

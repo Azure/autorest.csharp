@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using ExactMatchInheritance.Models;
 
@@ -34,7 +35,12 @@ namespace ExactMatchInheritance
         /// <param name="type2"></param>
         /// <param name="type3"></param>
         /// <param name="type4"></param>
-        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4) : base(id, name, resourceType, systemData)
+        /// <param name="type5"> Any object. </param>
+        /// <param name="type6"> Any object. </param>
+        /// <param name="type7"> Any object. </param>
+        /// <param name="type8"> Any object. </param>
+        /// <param name="type9"> Any object. </param>
+        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryExpression<string> type5, DataFactoryExpression<double> type6, DataFactoryExpression<bool> type7, DataFactoryExpression<int> type8, DataFactoryExpression<Array> type9) : base(id, name, resourceType, systemData)
         {
             New = @new;
             SupportingUris = supportingUris;
@@ -42,6 +48,11 @@ namespace ExactMatchInheritance
             Type2 = type2;
             Type3 = type3;
             Type4 = type4;
+            Type5 = type5;
+            Type6 = type6;
+            Type7 = type7;
+            Type8 = type8;
+            Type9 = type9;
         }
 
         /// <summary> Gets or sets the new. </summary>
@@ -56,5 +67,15 @@ namespace ExactMatchInheritance
         public IPAddress Type3 { get; set; }
         /// <summary> Gets or sets the type 4. </summary>
         public object Type4 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<string> Type5 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<double> Type6 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<bool> Type7 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<int> Type8 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<Array> Type9 { get; set; }
     }
 }
