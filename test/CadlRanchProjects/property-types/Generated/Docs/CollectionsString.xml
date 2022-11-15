@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetCollectionsStringAsync and parse the result.
 <code><![CDATA[
-var client = new TypesClient().GetCollectionsStringClient(null, <1.0.0>);
+var client = new TypesClient().GetCollectionsStringClient(<1.0.0>);
 
 Response response = await client.GetCollectionsStringAsync();
 
@@ -30,7 +30,7 @@ Schema for <c>CollectionsStringProperty</c>:
 <example>
 This sample shows how to call GetCollectionsString and parse the result.
 <code><![CDATA[
-var client = new TypesClient().GetCollectionsStringClient(null, <1.0.0>);
+var client = new TypesClient().GetCollectionsStringClient(<1.0.0>);
 
 Response response = client.GetCollectionsString();
 
@@ -55,7 +55,7 @@ Schema for <c>CollectionsStringProperty</c>:
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new TypesClient().GetCollectionsStringClient(null, <1.0.0>);
+var client = new TypesClient().GetCollectionsStringClient(<1.0.0>);
 
 var data = new {
     property = new[] {
@@ -84,7 +84,7 @@ Schema for <c>CollectionsStringProperty</c>:
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new TypesClient().GetCollectionsStringClient(null, <1.0.0>);
+var client = new TypesClient().GetCollectionsStringClient(<1.0.0>);
 
 var data = new {
     property = new[] {

@@ -16,6 +16,7 @@ namespace Models.Property.Types
     public partial class TypesClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -24,186 +25,162 @@ namespace Models.Property.Types
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of TypesClient. </summary>
-        public TypesClient() : this(new TypesClientOptions())
+        public TypesClient() : this(new Uri("http://localhost:3000"), new TypesClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of TypesClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public TypesClient(TypesClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public TypesClient(Uri endpoint, TypesClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new TypesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of Boolean. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Boolean GetBooleanClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual Boolean GetBooleanClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Boolean(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new Boolean(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of String. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual String GetStringClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual String GetStringClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new String(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new String(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of Bytes. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Bytes GetBytesClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual Bytes GetBytesClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Bytes(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new Bytes(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of Int. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Int GetIntClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual Int GetIntClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Int(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new Int(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of Float. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Float GetFloatClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual Float GetFloatClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Float(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new Float(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of Datetime. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Datetime GetDatetimeClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual Datetime GetDatetimeClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Datetime(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new Datetime(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of Duration. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Duration GetDurationClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual Duration GetDurationClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Duration(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new Duration(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of Enum. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Enum GetEnumClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual Enum GetEnumClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Enum(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new Enum(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of ExtensibleEnum. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ExtensibleEnum GetExtensibleEnumClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual ExtensibleEnum GetExtensibleEnumClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new ExtensibleEnum(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new ExtensibleEnum(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of Model. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Model GetModelClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual Model GetModelClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Model(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new Model(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of CollectionsString. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual CollectionsString GetCollectionsStringClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual CollectionsString GetCollectionsStringClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new CollectionsString(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new CollectionsString(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of CollectionsInt. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual CollectionsInt GetCollectionsIntClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual CollectionsInt GetCollectionsIntClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new CollectionsInt(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new CollectionsInt(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of CollectionsModel. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual CollectionsModel GetCollectionsModelClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual CollectionsModel GetCollectionsModelClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new CollectionsModel(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new CollectionsModel(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of DictionaryString. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual DictionaryString GetDictionaryStringClient(Uri endpoint = null, string apiVersion = "1.0.0")
+        public virtual DictionaryString GetDictionaryStringClient(string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new DictionaryString(ClientDiagnostics, _pipeline, endpoint, apiVersion);
+            return new DictionaryString(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
     }
 }

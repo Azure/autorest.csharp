@@ -531,7 +531,7 @@ export function getInputType(
     }
 
     function getInputModelForIntrinsicType(type: IntrinsicType): InputType {
-        switch(type.name) {
+        switch (type.name) {
             case "unknown":
                 return {
                     Name: "unknown",
@@ -561,7 +561,7 @@ export function getUsages(
 
     const operations: Operation[] = ops.map((op) => op.operation);
     const usages = resolveUsages(operations);
-    let usagesMap: Map<string, UsageFlags> = new Map<string, UsageFlags>();
+    const usagesMap: Map<string, UsageFlags> = new Map<string, UsageFlags>();
     for (const type of usages.types) {
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
@@ -569,7 +569,7 @@ export function getUsages(
             const effectiveType = getEffectiveModelType(program, type);
             typeName = effectiveType.name;
         }
-        let affectTypes: string[] = [];
+        const affectTypes: string[] = [];
         if (typeName !== "") affectTypes.push(typeName);
         if (type.kind === "Model" && type.templateArguments) {
             for (const arg of type.templateArguments) {

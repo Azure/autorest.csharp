@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using LroBasicCadl.CustomCore;
 
 namespace LroBasicCadl
 {
@@ -42,110 +41,6 @@ namespace LroBasicCadl
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _apiVersion = options.Version;
-        }
-
-        /// <param name="id"> The String to use. </param>
-        /// <param name="operationId"> The unique ID of the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="operationId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="operationId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response<OperationStatusResource>> CreateProjectStatusMonitorValueAsync(string id, string operationId, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));
-
-            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.CreateProjectStatusMonitorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await CreateProjectStatusMonitorAsync(id, operationId, context).ConfigureAwait(false);
-                return Response.FromValue(OperationStatusResource.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="id"> The String to use. </param>
-        /// <param name="operationId"> The unique ID of the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="operationId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="operationId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response<OperationStatusResource> CreateProjectStatusMonitorValue(string id, string operationId, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));
-
-            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.CreateProjectStatusMonitorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = CreateProjectStatusMonitor(id, operationId, context);
-                return Response.FromValue(OperationStatusResource.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="id"> The String to use. </param>
-        /// <param name="operationId"> The unique ID of the operation. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="operationId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="operationId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProjectStatusMonitorAsync(String,String,RequestContext)']/*" />
-        public virtual async Task<Response> CreateProjectStatusMonitorAsync(string id, string operationId, RequestContext context = null)
-        {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));
-
-            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.CreateProjectStatusMonitor");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateCreateProjectStatusMonitorRequest(id, operationId, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="id"> The String to use. </param>
-        /// <param name="operationId"> The unique ID of the operation. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="operationId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="operationId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProjectStatusMonitor(String,String,RequestContext)']/*" />
-        public virtual Response CreateProjectStatusMonitor(string id, string operationId, RequestContext context = null)
-        {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));
-
-            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.CreateProjectStatusMonitor");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateCreateProjectStatusMonitorRequest(id, operationId, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -248,22 +143,6 @@ namespace LroBasicCadl
             }
         }
 
-        internal HttpMessage CreateCreateProjectStatusMonitorRequest(string id, string operationId, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/projects/", false);
-            uri.AppendPath(id, true);
-            uri.AppendPath("/operations/", false);
-            uri.AppendPath(operationId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         internal HttpMessage CreateCreateProjectRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier201);
@@ -305,9 +184,9 @@ namespace LroBasicCadl
             return new RequestContext() { CancellationToken = cancellationToken };
         }
 
-        private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
         private static ResponseClassifier _responseClassifier201;
         private static ResponseClassifier ResponseClassifier201 => _responseClassifier201 ??= new StatusCodeClassifier(stackalloc ushort[] { 201 });
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

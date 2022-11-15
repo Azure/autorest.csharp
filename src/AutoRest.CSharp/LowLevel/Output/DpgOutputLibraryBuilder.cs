@@ -295,6 +295,12 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         targetClient.Parent = targetParent;
                         targetParent.Children.Add(targetClient);
+                        if (targetParent.ClientParameters.Count == 0)
+                        {
+                            var endpointParameter = targetParent.Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
+                            var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
+                            targetParent.ClientParameters = clientParameters;
+                        }
                     }
                 }
             }
@@ -408,7 +414,7 @@ namespace AutoRest.CSharp.Output.Models
             public string Description { get; }
             public INamedTypeSymbol? ExistingType { get; }
             public IReadOnlyList<InputOperation> Operations { get; }
-            public IReadOnlyList<InputParameter> ClientParameters { get; }
+            public IReadOnlyList<InputParameter> ClientParameters { get; set; }
             public ISet<InputParameter> ResourceParameters { get; }
 
             public ClientInfo? Parent { get; set; }
