@@ -301,15 +301,42 @@ namespace Azure.Core
 
             if (response.Status is >= 200 and <= 204)
             {
-                if (TryGetStatusFromContentStream(response.ContentStream, headerSource, out var status, out resourceLocation))
+                if (response.ContentStream is {CanSeek: true, Length: > 0})
                 {
-                    if (FailureStates.Contains(status))
+                    try
                     {
-                        failureState = OperationState.Failure(response);
-                        return true;
+                        using JsonDocument document = JsonDocument.Parse(response.ContentStream);
+                        var root = document.RootElement;
+                        switch (headerSource)
+                        {
+                            case HeaderSource.None when root.TryGetProperty("properties", out var properties) && properties.TryGetProperty("provisioningState", out JsonElement property):
+                            case HeaderSource.OperationLocation when root.TryGetProperty("status", out property):
+                            case HeaderSource.AzureAsyncOperation when root.TryGetProperty("status", out property):
+                                var state = property.GetRequiredString().ToLowerInvariant();
+                                if (FailureStates.Contains(state))
+                                {
+                                    failureState = OperationState.Failure(response);
+                                    return true;
+                                }
+                                else if (!SuccessStates.Contains(state))
+                                {
+                                    return false;
+                                }
+                                else
+                                {
+                                    if (headerSource is HeaderSource.OperationLocation or HeaderSource.AzureAsyncOperation && root.TryGetProperty("resourceLocation", out var resourceLocationProperty))
+                                    {
+                                        resourceLocation = resourceLocationProperty.GetString();
+                                    }
+                                    return true;
+                                }
+                        }
                     }
-
-                    return SuccessStates.Contains(status);
+                    finally
+                    {
+                        // It is required to reset the position of the content after reading as this response may be used for deserialization.
+                        response.ContentStream.Position = 0;
+                    }
                 }
 
                 // If headerSource is None and provisioningState was not found, it defaults to Succeeded.
@@ -328,37 +355,40 @@ namespace Azure.Core
             status = string.Empty;
             resourceLocation = null;
 
-            if (stream is not {CanSeek: true, Length: > 0})
+            if (stream is {CanSeek: true, Length: > 0})
             {
-                return false;
-            }
-
-            try
-            {
-                using JsonDocument document = JsonDocument.Parse(stream);
-                var root = document.RootElement;
-                switch (headerSource)
+                try
                 {
-                    case HeaderSource.None when root.TryGetProperty("properties", out var properties) && properties.TryGetProperty("provisioningState", out JsonElement property):
-                        status = property.GetRequiredString().ToLowerInvariant();
-                        return true;
-                    case HeaderSource.OperationLocation when root.TryGetProperty("status", out var property):
-                    case HeaderSource.AzureAsyncOperation when root.TryGetProperty("status", out property):
-                        status = property.GetRequiredString().ToLowerInvariant();
-                        resourceLocation = SuccessStates.Contains(status) && root.TryGetProperty("resourceLocation", out var resourceLocationProperty)
-                            ? resourceLocationProperty.GetString()
-                            : null;
-                        return true;
+                    using JsonDocument document = JsonDocument.Parse(stream);
+                    var root = document.RootElement;
+                    switch (headerSource)
+                    {
+                        case HeaderSource.None when root.TryGetProperty("properties", out var properties) &&
+                                                    properties.TryGetProperty("provisioningState",
+                                                        out JsonElement property):
+                            status = property.GetRequiredString().ToLowerInvariant();
+                            return true;
+                        case HeaderSource.OperationLocation when root.TryGetProperty("status", out var property):
+                        case HeaderSource.AzureAsyncOperation when root.TryGetProperty("status", out property):
+                            status = property.GetRequiredString().ToLowerInvariant();
+                            resourceLocation = SuccessStates.Contains(status) &&
+                                               root.TryGetProperty("resourceLocation", out var resourceLocationProperty)
+                                ? resourceLocationProperty.GetString()
+                                : null;
+                            return true;
 
-                    default:
-                        return false;
+                        default:
+                            return false;
+                    }
+                }
+                finally
+                {
+                    // It is required to reset the position of the content after reading as this response may be used for deserialization.
+                    stream.Position = 0;
                 }
             }
-            finally
-            {
-                // It is required to reset the position of the content after reading as this response may be used for deserialization.
-                stream.Position = 0;
-            }
+
+            return false;
         }
 
         private static bool ShouldIgnoreHeader(RequestMethod method, Response response)
