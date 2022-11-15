@@ -28,6 +28,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion\\Generated"
     },
+    "ApiVersion-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion-Cadl\\Generated"
+    },
     "AppConfiguration": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\Generated"
