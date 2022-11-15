@@ -371,7 +371,7 @@ function createModel(
         for (const client of clients) {
             for (const op of client.Operations) {
                 const apiVersionInOperation = op.Parameters.find(
-                    (value) => value.IsApiVersion
+                    isApiVersionParameter
                 );
                 if (apiVersionInOperation) {
                     if (apiVersions.size > 1) {
@@ -448,7 +448,7 @@ function createModel(
             applyDefaultContentTypeAndAcceptParameter(inputOperation);
 
             const apiVersionInOperation = inputOperation.Parameters.find(
-                (value) => value.IsApiVersion
+                isApiVersionParameter
             );
             if (apiVersionInOperation) {
                 if (apiVersionInOperation.DefaultValue?.Value) {
@@ -463,6 +463,18 @@ function createModel(
                 convenienceOperations.push(httpOperation);
         }
         return inputClient;
+    }
+
+    function isApiVersionParameter(parameter: InputParameter): boolean {
+        return (
+            parameter.IsApiVersion ||
+            (parameter.Location === RequestLocation.Query &&
+                parameter.Name === "api-version") ||
+            ([RequestLocation.Uri, RequestLocation.Path].includes(
+                parameter.Location
+            ) &&
+                parameter.Name === "ApiVersion")
+        );
     }
 
     function getAllLroMonitorOperations(
