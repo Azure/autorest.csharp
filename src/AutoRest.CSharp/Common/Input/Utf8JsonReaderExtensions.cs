@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Common.Input
             switch (reader.TokenType)
             {
                 case JsonTokenType.String:
-                    value = reader.GetString() ?? throw new JsonException();
+                    value = reader.GetString() ?? throw new JsonException("Enum value cannot be empty");
                     break;
                 case JsonTokenType.Number:
                     if (reader.TryGetInt32(out int intValue))
