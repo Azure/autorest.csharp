@@ -350,47 +350,6 @@ namespace Azure.Core
             return true;
         }
 
-        private static bool TryGetStatusFromContentStream(Stream? stream, HeaderSource headerSource, out string status, out string? resourceLocation)
-        {
-            status = string.Empty;
-            resourceLocation = null;
-
-            if (stream is {CanSeek: true, Length: > 0})
-            {
-                try
-                {
-                    using JsonDocument document = JsonDocument.Parse(stream);
-                    var root = document.RootElement;
-                    switch (headerSource)
-                    {
-                        case HeaderSource.None when root.TryGetProperty("properties", out var properties) &&
-                                                    properties.TryGetProperty("provisioningState",
-                                                        out JsonElement property):
-                            status = property.GetRequiredString().ToLowerInvariant();
-                            return true;
-                        case HeaderSource.OperationLocation when root.TryGetProperty("status", out var property):
-                        case HeaderSource.AzureAsyncOperation when root.TryGetProperty("status", out property):
-                            status = property.GetRequiredString().ToLowerInvariant();
-                            resourceLocation = SuccessStates.Contains(status) &&
-                                               root.TryGetProperty("resourceLocation", out var resourceLocationProperty)
-                                ? resourceLocationProperty.GetString()
-                                : null;
-                            return true;
-
-                        default:
-                            return false;
-                    }
-                }
-                finally
-                {
-                    // It is required to reset the position of the content after reading as this response may be used for deserialization.
-                    stream.Position = 0;
-                }
-            }
-
-            return false;
-        }
-
         private static bool ShouldIgnoreHeader(RequestMethod method, Response response)
             => method.Method == RequestMethod.Patch.Method && response.Status == 200;
 
