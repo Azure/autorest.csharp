@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"{writerName}.WriteObjectValue({name:I});");
                             return;
 
-                        case EnumType clientEnum when clientEnum.IsIntValueType & !clientEnum.IsExtensible:
+                        case EnumType clientEnum when clientEnum is { IsIntValueType: true, IsExtensible: false }:
                             writer
                                 .Append($"{writerName}.WriteNumberValue((int){name:I}")
                                 .AppendNullableValue(valueSerialization.Type)
