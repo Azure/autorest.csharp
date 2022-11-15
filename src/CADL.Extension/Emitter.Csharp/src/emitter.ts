@@ -162,7 +162,7 @@ export async function $onEmit(
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
-            
+
             //resolve shared folders based on generator path override
             const resolvedSharedFolders: string[] = [];
             var sharedFolders = [
@@ -172,11 +172,11 @@ export async function $onEmit(
             for (const sharedFolder of sharedFolders) {
                 resolvedSharedFolders.push(path.relative(generatedFolder, sharedFolder).replaceAll("\\", "/"));
             }
-     
+
             if (!fs.existsSync(generatedFolder)) {
                 fs.mkdirSync(generatedFolder, { recursive: true });
             }
-            
+
             if (options["clear-output-folder"]) {
                 fsExtra.emptyDirSync(generatedFolder);
             }
@@ -207,14 +207,14 @@ export async function $onEmit(
                 console.info(command);
 
                 try {
-                    execSync(command, {stdio: 'inherit'});
-                } catch(error: any) {
+                    execSync(command, { stdio: 'inherit' });
+                } catch (error: any) {
                     if (error.message) console.log(error.message);
                     if (error.stderr) console.error(error.stderr);
                     if (error.stdout) console.log(error.stdout);
                 }
             }
-            
+
             if (!options["save-inputs"]) {
                 // delete
                 deleteFile(resolvePath(generatedFolder, "cadl.json"));
@@ -229,7 +229,7 @@ function deleteFile(filePath: string) {
         if (err) {
             console.log(`stderr: ${err}`);
         }
-    
+
         console.log(`File ${filePath} is deleted.`)
     });
 }
@@ -362,9 +362,7 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
 
             applyDefaultContentTypeAndAcceptParameter(op);
 
-            const apiVersionInOperation = op.Parameters.find(
-                (value) => value.IsApiVersion
-            );
+            const apiVersionInOperation = op.Parameters.find(isApiVersionParameter);
             if (apiVersionInOperation) {
                 if (apiVersionInOperation.DefaultValue?.Value) {
                     apiVersions.add(apiVersionInOperation.DefaultValue.Value);
@@ -379,9 +377,7 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
         }
         for (const client of clients) {
             for (const op of client.Operations) {
-                const apiVersionInOperation = op.Parameters.find(
-                    (value) => value.IsApiVersion
-                );
+                const apiVersionInOperation = op.Parameters.find(isApiVersionParameter);
                 if (apiVersionInOperation) {
                     if (apiVersions.size > 1) {
                         apiVersionInOperation.Kind =
@@ -417,6 +413,12 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
         } else {
             throw err;
         }
+    }
+
+    function isApiVersionParameter(parameter: InputParameter): boolean {
+        return parameter.IsApiVersion ||
+        (parameter.Location === RequestLocation.Query && parameter.Name === "api-version") ||
+        ([RequestLocation.Uri, RequestLocation.Path].includes(parameter.Location) && parameter.Name === "ApiVersion");
     }
 
     function getAllLroMonitorOperations(
@@ -520,9 +522,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                      Type: inputType,
-                      Value: mediaTypes[0]
-                  } as InputConstant)
+                    Type: inputType,
+                    Value: mediaTypes[0]
+                } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -738,8 +740,8 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVersion
-            ? InputOperationParameterKind.Client
-            : InputOperationParameterKind.Method;
+                ? InputOperationParameterKind.Client
+                : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
