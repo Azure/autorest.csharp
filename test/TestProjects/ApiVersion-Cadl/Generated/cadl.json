@@ -36,7 +36,7 @@
  "Clients": [
   {
    "$id": "5",
-   "Name": "ApiVersionInCadl",
+   "Name": "ApiVersionInCadlClient",
    "Description": "CADL project to test api versions.",
    "Operations": [
     {
@@ -169,7 +169,8 @@
    ],
    "Protocol": {
     "$id": "19"
-   }
+   },
+   "Creatable": true
   }
  ]
 }
