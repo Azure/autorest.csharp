@@ -11,6 +11,7 @@ using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -238,10 +239,8 @@ namespace MgmtMockAndSample
 
             // invoke the operation and iterate over the result
             string type = "aaaaaaaaaaaaaaaaaa";
-            string filter = "aaaaaaaaaaaaaaaaaaaaaaaaa";
-            int? top = 22;
-            string orderby = "a";
-            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, filter: filter, top: top, orderby: orderby))
+            VirtualMachineExtensionImageGetAllOptions options = new VirtualMachineExtensionImageGetAllOptions() { Filter = "aaaaaaaaaaaaaaaaaaaaaaaaa", Top = 22, Orderby = "a" };
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, options))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
@@ -277,7 +276,8 @@ namespace MgmtMockAndSample
 
             // invoke the operation and iterate over the result
             string type = "aaaa";
-            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type))
+            VirtualMachineExtensionImageGetAllOptions options = new VirtualMachineExtensionImageGetAllOptions() { };
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, options))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
