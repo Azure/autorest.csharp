@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Security;
+using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
@@ -40,6 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _context = context;
             _sourceInputModel = context.SourceInputModel;
+            DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
 
             _defaultNamespace = Configuration.Namespace ?? _input.Name;
@@ -82,6 +84,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for HLC yet.");
 
         public override CSharpType FindTypeForSchema(Schema schema) => _models[schema].Type;
+
+        public override TypeProvider FindTypeProviderForSchema(Schema schema) => _models[schema];
 
         public override CSharpType? FindTypeByName(string originalName)
         {

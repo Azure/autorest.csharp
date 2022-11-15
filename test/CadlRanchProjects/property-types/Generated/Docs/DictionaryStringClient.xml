@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetAsync(RequestContext)">
+    <member name="GetDictionaryStringAsync(RequestContext)">
 <example>
-This sample shows how to call GetAsync and parse the result.
+This sample shows how to call GetDictionaryStringAsync and parse the result.
 <code><![CDATA[
 var client = new DictionaryStringClient();
 
-Response response = await client.GetAsync();
+Response response = await client.GetDictionaryStringAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("<test>").ToString());
@@ -26,13 +26,13 @@ Schema for <c>DictionaryStringProperty</c>:
 
 </remarks>
     </member>
-    <member name="Get(RequestContext)">
+    <member name="GetDictionaryString(RequestContext)">
 <example>
-This sample shows how to call Get and parse the result.
+This sample shows how to call GetDictionaryString and parse the result.
 <code><![CDATA[
 var client = new DictionaryStringClient();
 
-Response response = client.Get();
+Response response = client.GetDictionaryString();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("<test>").ToString());
