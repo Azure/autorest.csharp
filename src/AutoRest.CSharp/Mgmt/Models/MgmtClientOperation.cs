@@ -55,6 +55,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
+        private IReadOnlyList<Parameter>? _propertyBagParameters;
+        public IReadOnlyList<Parameter> PropertyBagParameters => _propertyBagParameters ??= EnsurePropertyBagParameters();
+
         public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
             return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter, isConvenientOperation);
@@ -165,6 +168,13 @@ namespace AutoRest.CSharp.Mgmt.Models
                 parameters.AddRange(ParameterMappings.Values.First().GetPassThroughParameters(_operations.First().Method));
             }
             parameters.Add(KnownParameters.CancellationTokenParameter);
+            return parameters;
+        }
+
+        private IReadOnlyList<Parameter> EnsurePropertyBagParameters()
+        {
+            List<Parameter> parameters = new List<Parameter>();
+            parameters.AddRange(ParameterMappings.Values.First().GetNonPassThroughPropertyBagParameters(_operations.First().Method));
             return parameters;
         }
     }

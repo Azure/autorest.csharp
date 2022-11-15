@@ -34,8 +34,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var queryOrHeaderParams = method.Parameters.Where(p => p.RequestLocation == RequestLocation.Header || p.RequestLocation == RequestLocation.Query);
             if (queryOrHeaderParams.Count() > 2)
             {
-                var queryOrHeaderParamNames = queryOrHeaderParams.Select(p => p.Name).ToImmutableHashSet();
-                var queryOrHeaderInputParams = method.Operation.Parameters.Where(p => queryOrHeaderParamNames.Contains(p.Name));
+                var queryOrHeaderParamNames = queryOrHeaderParams.Select(p => p.Name.ToLower()).ToImmutableHashSet();
+                var queryOrHeaderInputParams = method.Operation.Parameters.Where(p => queryOrHeaderParamNames.Contains(p.Name.ToLower()));
                 var schema = BuildOptionalSchema(queryOrHeaderInputParams, resourceName, methodName);
                 var schemaObject = new MgmtObjectType(schema);
                 var newParameter = BuildOptionalParameter(schemaObject);
@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     Required = p.DefaultValue == null
                 }).ToList()) };
             var resourcePrefix = resourceName is null ?
-                MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.Context.DefaultNamespace.Split('.').Last().Concat("Extensions") :
+                MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" :
                 resourceName.ReplaceLast("Resource", "").ReplaceLast("Collection", "");
             // TODO - We might need to provide configuration here to agilely rename the property bag model name
             schema.Language.Default.Name = $"{resourcePrefix}{methodName}Options";
@@ -107,7 +107,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 shouldValidate ? (FormattableString?)null : $"new {type.Name}()",
                 IsApiVersionParameter: false,
                 IsResourceIdentifier: false,
-                SkipUrlEncoding: false);
+                SkipUrlEncoding: false)
+            {
+                IsPropertyBag = true
+            };
         }
 
         private static RestClientMethod UpdateRestClientMethod(RestClientMethod method, IEnumerable<string> parameterNamesToRemove, Parameter parameterToAdd)
@@ -152,8 +155,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 method.BufferResponse,
                 method.Accessibility.ToString().ToLower(),
                 method.Operation,
-                method.Parameters,
-                parameterToAdd);
+                method.Parameters);
         }
     }
 }

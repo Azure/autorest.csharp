@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSharp.MgmtTest.Models.ExampleParameterValue>;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
@@ -57,8 +58,11 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return language.SerializedName ?? language.Name;
         }
 
-        private Dictionary<string, ExampleParameterValue>? _parameterValueMapping;
-        public Dictionary<string, ExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
+        private MappingObject? _parameterValueMapping;
+        public MappingObject ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping().Item1;
+
+        private MappingObject? _propertyBagParamValueMapping;
+        public MappingObject PropertyBagParamValueMapping => _propertyBagParamValueMapping ??= EnsureParameterValueMapping().Item2;
 
         private IEnumerable<Parameter> GetAllPossibleParameters()
         {
@@ -66,14 +70,36 @@ namespace AutoRest.CSharp.MgmtTest.Models
             var methodParameters = Operation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
                 Operation.MethodParameters.Skip(1) : Operation.MethodParameters;
 
-            return Carrier.ExtraConstructorParameters.Concat(methodParameters);
+            return Carrier.ExtraConstructorParameters.Concat(methodParameters).Concat(Operation.PropertyBagParameters);
         }
 
-        private Dictionary<string, ExampleParameterValue> EnsureParameterValueMapping()
+        private static bool TryGetPropertyBagParameterNames(IEnumerable<Parameter> parameters, out IList<string>? propertyBagParamNames)
         {
-            var result = new Dictionary<string, ExampleParameterValue>();
+            propertyBagParamNames = null;
+            if (parameters.Any(p => p.IsPropertyBag))
+            {
+                // Every method will have at most one property bag parameter
+                var propertyBagParam = parameters.First(p => p.IsPropertyBag);
+                var mgmtObject = propertyBagParam.Type.Implementation as MgmtObjectType;
+                foreach (var property in mgmtObject!.Properties)
+                {
+                    if (propertyBagParamNames == null)
+                        propertyBagParamNames = new List<string>();
+                    propertyBagParamNames.Add(property.Declaration.Name.ToVariableName());
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private Tuple<MappingObject, MappingObject> EnsureParameterValueMapping()
+        {
+            var result = new MappingObject();
+            var propertyBagMapping = new MappingObject();
+            var parameters = GetAllPossibleParameters();
+            bool hasPropertyBag = TryGetPropertyBagParameterNames(parameters, out var propertyBagParamNames);
             // get the "serialized name" of the parameters based on the raw request path
-            foreach (var parameter in GetAllPossibleParameters())
+            foreach (var parameter in parameters)
             {
                 if (ProcessKnownParameters(result, parameter))
                     continue;
@@ -88,14 +114,21 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 }
                 else
                 {
-                    result.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue));
+                    if (hasPropertyBag && propertyBagParamNames!.Contains(parameter.Name))
+                    {
+                        propertyBagMapping.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue));
+                    }
+                    else
+                    {
+                        result.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue));
+                    }
                 }
             }
 
-            return result;
+            return Tuple.Create(result, propertyBagMapping);
         }
 
-        private static bool ProcessKnownParameters(Dictionary<string, ExampleParameterValue> result, Parameter parameter)
+        private static bool ProcessKnownParameters(MappingObject result, Parameter parameter)
         {
             if (parameter == KnownParameters.WaitForCompletion)
             {
@@ -107,7 +140,11 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 // we usually do not set this parameter in generated test cases
                 return true;
             }
-
+            if (parameter.IsPropertyBag)
+            {
+                // we will not try to find the serialized name once the parameter is a property bag parameter
+                return true;
+            }
             return false;
         }
 

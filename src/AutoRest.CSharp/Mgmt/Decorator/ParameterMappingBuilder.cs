@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -16,6 +17,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -396,23 +398,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings, RestClientMethod method)
         {
-            var passThroughParams = new List<Parameter>();
-            bool isPropertyBagInserted = false;
-            foreach (var parameterMapping in parameterMappings)
-            {
-                if (parameterMapping.IsPassThru)
-                {
-                    passThroughParams.Add(parameterMapping.Parameter);
-                }
-                else if (method.IsPropertyBagMethod &&
-                    method.OriginalParameters.Contains(parameterMapping.Parameter) &&
-                    isPropertyBagInserted == false)
-                {
-                    passThroughParams.Add(method.PropertyBagParameter!);
-                    isPropertyBagInserted = true;
-                }
-            }
-            return passThroughParams;
+            var passThroughParams = parameterMappings.Where(p => p.IsPassThru)
+                .Select(p => p.Parameter)
+                .ToImmutableHashSet();
+            return method.Parameters.Where(p => passThroughParams.Contains(p) || p.IsPropertyBag).ToList();
+        }
+
+        public static List<Parameter> GetNonPassThroughPropertyBagParameters(this IEnumerable<ParameterMapping> parameterMappings, RestClientMethod method)
+        {
+            return parameterMappings.Where(p => !p.IsPassThru && !method.Parameters.Contains(p.Parameter))
+                .Select(p => p.Parameter)
+                .ToList();
         }
 
         private static bool TryBuildPropertyBagParameterMapping(RestClientMethod method, Parameter parameter, out string? valueExpression)
