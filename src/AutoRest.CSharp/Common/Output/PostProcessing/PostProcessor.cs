@@ -153,7 +153,7 @@ internal abstract class PostProcessor
     /// <param name="rootSymbols"></param>
     /// <param name="referenceMap"></param>
     /// <returns></returns>
-    private static IEnumerable<INamedTypeSymbol> VisitSymbolsFromRootAsync(IEnumerable<INamedTypeSymbol> rootSymbols, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> referenceMap)
+    private static IEnumerable<INamedTypeSymbol> VisitSymbolsFromRootAsync(IEnumerable<INamedTypeSymbol> rootSymbols, IReadOnlyDictionary<INamedTypeSymbol, IEnumerable<INamedTypeSymbol>> referenceMap)
     {
         var queue = new Queue<INamedTypeSymbol>(rootSymbols);
         var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
@@ -173,7 +173,7 @@ internal abstract class PostProcessor
         }
     }
 
-    private static IEnumerable<T> GetReferencedTypes<T, TCollection>(T definition, Dictionary<T, TCollection> referenceMap) where T : notnull where TCollection : IEnumerable<T>
+    private static IEnumerable<T> GetReferencedTypes<T>(T definition, IReadOnlyDictionary<T, IEnumerable<T>> referenceMap) where T : notnull
     {
         if (referenceMap.TryGetValue(definition, out var references))
             return references;

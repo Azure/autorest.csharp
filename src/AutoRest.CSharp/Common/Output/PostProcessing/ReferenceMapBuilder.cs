@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
     {
         internal delegate bool HasDiscriminatorDelegate(BaseTypeDeclarationSyntax node, [MaybeNullWhen(false)] out HashSet<string> identifiers);
 
-        private readonly Func<HashSet<INamedTypeSymbol>> _symbolSetInitializer = () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+        private static readonly Func<HashSet<INamedTypeSymbol>> _symbolSetInitializer = () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         private readonly Compilation _compilation;
         private readonly Project _project;
         private readonly HasDiscriminatorDelegate _hasDiscriminatorFunc;
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             _hasDiscriminatorFunc = hasDiscriminatorFunc;
         }
 
-        public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildPublicReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> nodeCache)
+        public async Task<IReadOnlyDictionary<INamedTypeSymbol, IEnumerable<INamedTypeSymbol>>> BuildPublicReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> nodeCache)
         {
             var references = new Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>(SymbolEqualityComparer.Default);
             foreach (var definition in definitions)
@@ -39,10 +39,10 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
                 await ProcessPublicSymbolAsync(definition, references, nodeCache);
             }
 
-            return references;
+            return references.ToDictionary(kv => kv.Key, kv => (IEnumerable<INamedTypeSymbol>)kv.Value, (IEqualityComparer<INamedTypeSymbol>)SymbolEqualityComparer.Default);
         }
 
-        public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildAllReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> documentCache)
+        public async Task<IReadOnlyDictionary<INamedTypeSymbol, IEnumerable<INamedTypeSymbol>>> BuildAllReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> documentCache)
         {
             var references = new Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>(SymbolEqualityComparer.Default);
             foreach (var definition in definitions)
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
                 await ProcessSymbolAsync(definition, references, documentCache);
             }
 
-            return references;
+            return references.ToDictionary(kv => kv.Key, kv => (IEnumerable<INamedTypeSymbol>)kv.Value, (IEqualityComparer<INamedTypeSymbol>)SymbolEqualityComparer.Default);
         }
 
         private async Task ProcessPublicSymbolAsync(INamedTypeSymbol symbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> cache)
@@ -84,18 +84,18 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
                 switch (member)
                 {
                     case IMethodSymbol methodSymbol:
-                        AddMethodSymbol(symbol, methodSymbol, references);
+                        ProcessMethodSymbol(symbol, methodSymbol, references);
                         break;
                     case IPropertySymbol propertySymbol:
-                        AddTypeSymbol(symbol, propertySymbol.Type, references);
+                        ProcessPropertySymbol(symbol, propertySymbol, references);
                         break;
                     case IFieldSymbol fieldSymbol:
-                        AddTypeSymbol(symbol, fieldSymbol.Type, references);
+                        ProcessFieldSymbol(symbol, fieldSymbol, references);
                         break;
                     case INamedTypeSymbol innerTypeSymbol:
                         break; // do nothing for the inner types
                     default:
-                        throw new InvalidOperationException($"This should never happen {member.GetType()}");
+                        throw new InvalidOperationException($"This case has not been covered {member.GetType()}");
                 }
             }
         }
@@ -161,27 +161,35 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             }
         }
 
-        private void AddTypeSymbol(ITypeSymbol keySymbol, ITypeSymbol typeSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
+        /// <summary>
+        /// This method recusively adds all related types in <paramref name="valueSymbol"/> to the reference map as the value of key <paramref name="keySymbol"/>
+        /// </summary>
+        /// <param name="keySymbol"></param>
+        /// <param name="valueSymbol"></param>
+        /// <param name="references"></param>
+        private void AddTypeSymbol(ITypeSymbol keySymbol, ITypeSymbol? valueSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
         {
             if (keySymbol is not INamedTypeSymbol keyTypeSymbol)
+                return;
+            if (valueSymbol is not INamedTypeSymbol valueTypeSymbol)
                 return;
             // add the class and all its partial classes to the map
             // this will make all the partial classes are referencing each other in the reference map
             // when we make the travesal over the reference map, we will not only remove one of the partial class, instead we will either keep all the partial classes (if at least one of them has references), or remove all of them (if none of them has references)
-            AddToReferenceMap(keyTypeSymbol, typeSymbol, references);
+            AddToReferenceMap(keyTypeSymbol, valueTypeSymbol, references);
             // add the base type
-            AddToReferenceMap(keyTypeSymbol, typeSymbol.BaseType, references);
-            if (typeSymbol is INamedTypeSymbol namedType)
+            AddTypeSymbol(keyTypeSymbol, valueSymbol.BaseType, references);
+            if (valueSymbol is INamedTypeSymbol namedType)
             {
                 // add the generic type arguments
                 foreach (var typeArgument in namedType.TypeArguments)
                 {
-                    AddToReferenceMap(keyTypeSymbol, typeArgument, references);
+                    AddTypeSymbol(keyTypeSymbol, typeArgument, references);
                 }
             }
         }
 
-        private void AddMethodSymbol(INamedTypeSymbol keySymbol, IMethodSymbol methodSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
+        private void ProcessMethodSymbol(INamedTypeSymbol keySymbol, IMethodSymbol methodSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
         {
             // add the return type
             AddTypeSymbol(keySymbol, methodSymbol.ReturnType, references);
@@ -192,14 +200,11 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             }
         }
 
-        private void AddToReferenceMap(INamedTypeSymbol keySymbol, ISymbol? valueSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
-        {
-            // we only add the symbol when it is a named type. Anonymous type is not our concern, we just ignore them
-            if (valueSymbol is not INamedTypeSymbol valueTypeSymbol)
-                return;
+        private void ProcessPropertySymbol(INamedTypeSymbol keySymbol, IPropertySymbol propertySymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references) => AddTypeSymbol(keySymbol, propertySymbol.Type, references);
 
-            references.AddInList(keySymbol, valueTypeSymbol, _symbolSetInitializer);
-        }
+        private void ProcessFieldSymbol(INamedTypeSymbol keySymbol, IFieldSymbol fieldSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references) => AddTypeSymbol(keySymbol, fieldSymbol.Type, references);
+
+        private void AddToReferenceMap(INamedTypeSymbol keySymbol, INamedTypeSymbol valueSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references) => references.AddInList(keySymbol, valueSymbol, _symbolSetInitializer);
 
         /// <summary>
         /// Returns the node that defines <paramref name="node"/> inside the document under the syntax root of <paramref name="root"/>, which should be <see cref="ClassDeclarationSyntax"/>, <see cref="StructDeclarationSyntax"/> or <see cref="EnumDeclarationSyntax"/>
