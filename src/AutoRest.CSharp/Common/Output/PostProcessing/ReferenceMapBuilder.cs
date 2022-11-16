@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             _hasDiscriminatorFunc = hasDiscriminatorFunc;
         }
 
-        public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildPublicReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>> nodeCache)
+        public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildPublicReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> nodeCache)
         {
             var references = new Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>(SymbolEqualityComparer.Default);
             foreach (var definition in definitions)
@@ -41,7 +42,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             return references;
         }
 
-        public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildAllReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, Dictionary<Document, HashSet<INamedTypeSymbol>> documentCache)
+        public async Task<Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>> BuildAllReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> documentCache)
         {
             var references = new Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>>(SymbolEqualityComparer.Default);
             foreach (var definition in definitions)
@@ -52,7 +53,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             return references;
         }
 
-        private async Task ProcessPublicSymbolAsync(INamedTypeSymbol symbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references, Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>> cache)
+        private async Task ProcessPublicSymbolAsync(INamedTypeSymbol symbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> cache)
         {
             // process myself, adding base and generic arguments
             AddTypeSymbol(symbol, symbol, references);
@@ -99,7 +100,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             }
         }
 
-        private async Task ProcessSymbolAsync(INamedTypeSymbol symbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references, Dictionary<Document, HashSet<INamedTypeSymbol>> documentCache)
+        private async Task ProcessSymbolAsync(INamedTypeSymbol symbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> documentCache)
         {
             foreach (var reference in await SymbolFinder.FindReferencesAsync(symbol, _project.Solution))
             {

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -22,7 +23,7 @@ internal abstract class PostProcessor
     {
     }
 
-    protected record TypeSymbols(HashSet<INamedTypeSymbol> DeclaredSymbols, Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, Dictionary<Document, HashSet<INamedTypeSymbol>> DocumentsCache);
+    protected record TypeSymbols(ImmutableHashSet<INamedTypeSymbol> DeclaredSymbols, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> DocumentsCache);
 
     /// <summary>
     /// This method reads the project, returns the types defined in it and build symbol caches to acceralate the calculation
@@ -61,7 +62,9 @@ internal abstract class PostProcessor
             }
         }
 
-        return new TypeSymbols(result, declarationCache, documentCache);
+        return new TypeSymbols(result.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default),
+            declarationCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet(), (IEqualityComparer<INamedTypeSymbol>)SymbolEqualityComparer.Default),
+            documentCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
     }
 
     protected virtual bool ShouldIncludeDocument(Document document) => !GeneratedCodeWorkspace.IsSharedDocument(document);
