@@ -34,8 +34,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var queryOrHeaderParams = method.Parameters.Where(p => p.RequestLocation == RequestLocation.Header || p.RequestLocation == RequestLocation.Query);
             if (queryOrHeaderParams.Count() > 2)
             {
-                var queryOrHeaderParamNames = queryOrHeaderParams.Select(p => p.Name.ToLower()).ToImmutableHashSet();
-                var queryOrHeaderInputParams = method.Operation.Parameters.Where(p => queryOrHeaderParamNames.Contains(p.Name.ToLower()));
+                var queryOrHeaderParamNames = queryOrHeaderParams.Select(p => p.Name).ToImmutableHashSet();
+                var queryOrHeaderInputParams = method.Operation.Parameters.Where(p => queryOrHeaderParamNames.Contains(p.Name));
                 var schema = BuildOptionalSchema(queryOrHeaderInputParams, resourceName, methodName);
                 var schemaObject = new MgmtObjectType(schema);
                 var newParameter = BuildOptionalParameter(schemaObject);
@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var resourcePrefix = resourceName is null ?
                 MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" :
                 resourceName.ReplaceLast("Resource", "").ReplaceLast("Collection", "");
-            // TODO - We might need to provide configuration here to agilely rename the property bag model name
+            // TODO - We need to provide configuration here to agilely rename the property bag model name
             schema.Language.Default.Name = $"{resourcePrefix}{methodName}Options";
             schema.Language.Default.Description = $"A class representing the query and header parameters in {methodName} method.";
             return schema;
@@ -100,10 +100,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             CSharpType type = schemaObject.Type;
             return new Parameter(
                 "options",
-                schemaObject.ObjectSchema.Language.Default.Description,
+                "A property bag which contains all the query and header parameters of this method.",
                 TypeFactory.GetInputType(type),
                 null,
-                shouldValidate ? ValidationType.AssertNotNullOrEmpty : ValidationType.None,
+                shouldValidate ? ValidationType.AssertNotNull : ValidationType.None,
                 shouldValidate ? (FormattableString?)null : $"new {type.Name}()",
                 IsApiVersionParameter: false,
                 IsResourceIdentifier: false,
