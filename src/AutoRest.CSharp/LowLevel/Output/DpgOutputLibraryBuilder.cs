@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.Output.Models
             var operations = ns.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
-            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !String.IsNullOrEmpty(ns.Parent);
+            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(ns.Parent);
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix();
 
             INamedTypeSymbol? existingType;
@@ -276,6 +276,7 @@ namespace AutoRest.CSharp.Output.Models
             return new[] { topLevelClientInfo };
         }
 
+        // assign parent according to the information in the input Model
         private static void AssignParents(in IEnumerable<InputClient> clients, IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
         {
             foreach (var client in clients)
@@ -295,16 +296,12 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         targetClient.Parent = targetParent;
                         targetParent.Children.Add(targetClient);
-                        if (targetParent.ClientParameters.Count == 0)
-                        {
-                            var endpointParameter = targetParent.Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
-                            var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
-                            targetParent.ClientParameters = clientParameters;
-                        }
                     }
                 }
             }
         }
+
+        //Assgin parent according to the customized inputModel
         private static void AssignParents(in ClientInfo clientInfo, IReadOnlyDictionary<string, ClientInfo> clientInfosByName, SourceInputModel sourceInputModel)
         {
             var child = clientInfo;
@@ -414,7 +411,22 @@ namespace AutoRest.CSharp.Output.Models
             public string Description { get; }
             public INamedTypeSymbol? ExistingType { get; }
             public IReadOnlyList<InputOperation> Operations { get; }
-            public IReadOnlyList<InputParameter> ClientParameters { get; set; }
+
+            private IReadOnlyList<InputParameter> _clientParameters;
+            public IReadOnlyList<InputParameter> ClientParameters
+            {
+                get
+                {
+                    if (_clientParameters != null && _clientParameters.Count > 0)
+                    {
+                        return _clientParameters;
+                    } else
+                    {
+                        var endpointParameter = this.Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
+                        return endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
+                    }
+                }
+            }
             public ISet<InputParameter> ResourceParameters { get; }
 
             public ClientInfo? Parent { get; set; }
@@ -434,7 +446,7 @@ namespace AutoRest.CSharp.Output.Models
                 Description = clientDescription;
                 ExistingType = existingType;
                 Operations = operations;
-                ClientParameters = clientParameters;
+                _clientParameters = clientParameters;
                 ResourceParameters = resourceParameters;
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
@@ -448,7 +460,7 @@ namespace AutoRest.CSharp.Output.Models
                 Description = string.Empty;
                 ExistingType = null;
                 Operations = Array.Empty<InputOperation>();
-                ClientParameters = clientParameters;
+                _clientParameters = clientParameters;
                 ResourceParameters = new HashSet<InputParameter>();
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
