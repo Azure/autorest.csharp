@@ -366,9 +366,7 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
 
             applyDefaultContentTypeAndAcceptParameter(op);
 
-            const apiVersionInOperation = op.Parameters.find(
-                (value) => value.IsApiVersion
-            );
+            const apiVersionInOperation = op.Parameters.find(isApiVersionParameter);
             if (apiVersionInOperation) {
                 if (apiVersionInOperation.DefaultValue?.Value) {
                     apiVersions.add(apiVersionInOperation.DefaultValue.Value);
@@ -383,9 +381,7 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
         }
         for (const client of clients) {
             for (const op of client.Operations) {
-                const apiVersionInOperation = op.Parameters.find(
-                    (value) => value.IsApiVersion
-                );
+                const apiVersionInOperation = op.Parameters.find(isApiVersionParameter);
                 if (apiVersionInOperation) {
                     if (apiVersions.size > 1) {
                         apiVersionInOperation.Kind =
@@ -421,6 +417,12 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
         } else {
             throw err;
         }
+    }
+
+    function isApiVersionParameter(parameter: InputParameter): boolean {
+        return parameter.IsApiVersion ||
+        (parameter.Location === RequestLocation.Query && parameter.Name === "api-version") ||
+        ([RequestLocation.Uri, RequestLocation.Path].includes(parameter.Location) && parameter.Name === "ApiVersion");
     }
 
     function getAllLroMonitorOperations(
