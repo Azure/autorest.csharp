@@ -334,9 +334,6 @@
       "Description": "Base model with discriminator property.",
       "IsNullable": false,
       "DiscriminatorPropertyName": "discriminatorProperty",
-      "BaseModel": {
-       "$ref": "10"
-      },
       "Usage": "RoundTrip",
       "Properties": []
      },

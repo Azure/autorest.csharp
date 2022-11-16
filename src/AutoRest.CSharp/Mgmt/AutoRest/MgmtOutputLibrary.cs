@@ -365,7 +365,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return restClientMethods;
         }
 
-        public ArmClientExtensions ArmClientExtensions => EnsureArmClientExtensions();
+        private ArmClientExtensions? _armClientExtensions;
+        public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= EnsureArmClientExtensions();
 
         private MgmtExtensions? _tenantExtensions;
         private MgmtExtensions? _managementGroupExtensions;
@@ -378,19 +379,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtExtensions ManagementGroupExtensions => _managementGroupExtensions ??= EnsureExtensions(typeof(ManagementGroupResource), RequestPath.ManagementGroup);
         public MgmtExtensions ArmResourceExtensions => _armResourceExtensions ??= EnsureExtensions(typeof(ArmResource), RequestPath.Any);
 
-        public MgmtExtensionsWrapper ExtensionWrapper => EnsureExtensionsWrapper();
-
         private MgmtExtensionsWrapper? _extensionsWrapper;
-        private MgmtExtensionsWrapper EnsureExtensionsWrapper()
-        {
-            if (_extensionsWrapper != null)
-                return _extensionsWrapper;
+        public MgmtExtensionsWrapper ExtensionWrapper => _extensionsWrapper ??= EnsureExtensionsWrapper();
 
-            _extensionsWrapper = IsArmCore ?
+        private MgmtExtensionsWrapper EnsureExtensionsWrapper() => IsArmCore ?
                 new MgmtExtensionsWrapper(new[] { TenantExtensions, ManagementGroupExtensions, ArmResourceExtensions }) :
                 new MgmtExtensionsWrapper(new[] { TenantExtensions, SubscriptionExtensions, ResourceGroupExtensions, ManagementGroupExtensions, ArmResourceExtensions, ArmClientExtensions });
-            return _extensionsWrapper;
-        }
 
         private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
         {
@@ -399,15 +393,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return new MgmtExtensions(operations, armCoreType, contextualPath);
         }
 
-        private ArmClientExtensions? _armClientExtensions;
-        private ArmClientExtensions EnsureArmClientExtensions()
-        {
-            if (_armClientExtensions != null)
-                return _armClientExtensions;
-
-            _armClientExtensions = new ArmClientExtensions(GetChildOperations(RequestPath.Tenant));
-            return _armClientExtensions;
-        }
+        private ArmClientExtensions EnsureArmClientExtensions() => new ArmClientExtensions(GetChildOperations(RequestPath.Tenant));
 
         private IEnumerable<ResourceData>? _resourceDatas;
         public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= RawRequestPathToResourceData.Values.Distinct();
@@ -417,9 +403,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private IEnumerable<Resource>? _armResources;
         public IEnumerable<Resource> ArmResources => _armResources ??= RequestPathToResources.Values.Select(bag => bag.Resource).Distinct();
-
-        private Dictionary<CSharpType, Resource>? _csharpTypeToResource;
-        public Dictionary<CSharpType, Resource> CsharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
 
         private IEnumerable<ResourceCollection>? _resourceCollections;
         public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= RequestPathToResources.Values.Select(bag => bag.ResourceCollection).WhereNotNull().Distinct();
@@ -572,14 +555,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            var resourcesWithSameName = ResourceDataSchemaNameToOperationSets[candidateName];
-            var resourcesWithSameType = ResourceOperationSets
+            // find all the expanded request paths of resources that are assiociated with the same resource data model
+            var resourcesWithSameResourceData = ResourceDataSchemaNameToOperationSets[candidateName]
+                .SelectMany(opSet => opSet.GetRequestPath().Expand()).ToList();
+            // find all the expanded resource types of resources that have the same resource type as this one
+            var resourcesWithSameResourceType = ResourceOperationSets
                 .SelectMany(opSet => opSet.GetRequestPath().Expand())
-                .Where(rqPath => rqPath.GetResourceType().Equals(resourceType));
+                .Where(rqPath => rqPath.GetResourceType().Equals(resourceType)).ToList();
 
             var isById = requestPath.IsById;
-            int countOfSameResourceDataName = resourcesWithSameName.Count();
-            int countOfSameResourceTypeName = resourcesWithSameType.Count();
+            int countOfSameResourceDataName = resourcesWithSameResourceData.Count;
+            int countOfSameResourceTypeName = resourcesWithSameResourceType.Count;
             if (!isById)
             {
                 // this is a regular resource and the name is unique
@@ -596,7 +582,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 string parentPrefix = GetParentPrefix(requestPath);
                 // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
                 // first we try to add the parent name as prefix
-                if (!DoMultipleResourcesShareMyPrefixes(requestPath, parentPrefix, resourcesWithSameType))
+                if (!DoMultipleResourcesShareMyPrefixes(requestPath, parentPrefix, resourcesWithSameResourceType))
                     return $"{parentPrefix}{name}";
 
                 // if we get here, parent prefix is not enough, we try the resource name if it is a constant
@@ -620,7 +606,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             while (pathToWalk.Count > 2)
             {
-                pathToWalk = pathToWalk.GetParent();
+                pathToWalk = pathToWalk.ParentRequestPath();
                 if (RawRequestPathToResourceData.TryGetValue(pathToWalk.ToString()!, out var parentData))
                 {
                     return parentData.Declaration.Name.Substring(0, parentData.Declaration.Name.Length - 4);
@@ -742,7 +728,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public override CSharpType ResolveEnum(InputEnumType enumType) => throw new NotImplementedException($"{nameof(ResolveEnum)} is not implemented for MPG yet.");
         public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for MPG yet.");
 
-        public override CSharpType FindTypeForSchema(Schema schema)
+        public override CSharpType FindTypeForSchema(Schema schema) => FindTypeProviderForSchema(schema).Type;
+
+        public override TypeProvider FindTypeProviderForSchema(Schema schema)
         {
             TypeProvider? result;
             if (!AllSchemaMap.IsPopulated)
@@ -753,7 +741,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 throw new KeyNotFoundException($"{schema.Name} was not found in model and resource schema map");
             }
-            return result.Type;
+            return result;
         }
 
         public override CSharpType? FindTypeByName(string originalName)

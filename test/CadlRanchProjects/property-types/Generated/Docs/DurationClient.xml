@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetAsync(RequestContext)">
+    <member name="GetDurationAsync(RequestContext)">
 <example>
-This sample shows how to call GetAsync and parse the result.
+This sample shows how to call GetDurationAsync and parse the result.
 <code><![CDATA[
 var client = new DurationClient();
 
-Response response = await client.GetAsync();
+Response response = await client.GetDurationAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
@@ -26,13 +26,13 @@ Schema for <c>DurationProperty</c>:
 
 </remarks>
     </member>
-    <member name="Get(RequestContext)">
+    <member name="GetDuration(RequestContext)">
 <example>
-This sample shows how to call Get and parse the result.
+This sample shows how to call GetDuration and parse the result.
 <code><![CDATA[
 var client = new DurationClient();
 
-Response response = client.Get();
+Response response = client.GetDuration();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());

@@ -45,11 +45,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriterPropertySet(MgmtRestClient client, Resource? resource)
         {
-            string? resourceName = resource?.Type.Name;
-            string diagPropertyName = GetDiagnosticsPropertyName(client, resource);
-            FormattableString diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceName), DiagnosticsProperty);
+            var resourceTypeExpression = ConstructResourceTypeExpression(resource);
+            var diagPropertyName = GetDiagnosticsPropertyName(client, resource);
+            FormattableString diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceTypeExpression), DiagnosticsProperty);
             _writer.Line($"private {typeof(ClientDiagnostics)} {diagPropertyName} => {GetDiagnosticFieldName(client, resource)} ??= {diagOptionsCtor};");
-            string apiVersionString = resourceName == null ? string.Empty : $", GetApiVersionOrNull({resourceName}.ResourceType)";
+            string apiVersionString = resourceTypeExpression == null ? string.Empty : $", GetApiVersionOrNull({resourceTypeExpression})";
             string restCtor = GetRestConstructorString(client, apiVersionString);
             _writer.Line($"private {client.Type} {GetRestPropertyName(client, resource)} => {GetRestFieldName(client, resource)} ??= {restCtor};");
         }

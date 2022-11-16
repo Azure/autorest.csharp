@@ -99,10 +99,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
-                var codeWriter = new CodeWriter();
-                new ResourceWriter(codeWriter, resource).Write();
+                var writer = new ResourceWriter(resource);
+                writer.Write();
 
-                AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }
 
             // write extension class
@@ -188,17 +188,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             var codeWriter = new CodeWriter();
 
-            if (model is MgmtObjectType objectType && objectType.BackingSchema != null)
-            {
-                var backingModel = new MgmtObjectType(objectType.BackingSchema);
-                var name = backingModel.Type.Name;
-                WriteArmModel(project, backingModel, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
-                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
-            }
-            else
-            {
-                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
-            }
+            ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
             AddGeneratedFile(project, modelFileName, codeWriter.ToString());
 

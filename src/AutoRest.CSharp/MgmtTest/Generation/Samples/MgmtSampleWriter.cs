@@ -93,11 +93,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             {
                 _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded\");");
             }
-            else if (result.Type.IsResourceType(out var resource))
+            else if (result.Type.TryCastResource(out var resource))
             {
                 WriteResourceResultHandling(result, resource);
             }
-            else if (result.Type.IsResourceDataType(out var resourceData))
+            else if (result.Type.TryCastResourceData(out var resourceData))
             {
                 WriteResourceDataResultHandling(result, resourceData);
             }
