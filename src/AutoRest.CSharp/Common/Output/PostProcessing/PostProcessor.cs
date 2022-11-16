@@ -31,7 +31,7 @@ internal abstract class PostProcessor
     /// </summary>
     /// <param name="compilation">The <see cref="Compilation"/> of the <paramref name="project"/> </param>
     /// <param name="project">The project to extract type symbols from</param>
-    /// <param name="publicOnly">If <paramref name="publicOnly"/> is true, only public types will be included. If <paramref name="project"/> is false, all types will be included </param>
+    /// <param name="publicOnly">If <paramref name="publicOnly"/> is true, only public types will be included. If <paramref name="publicOnly"/> is false, all types will be included </param>
     /// <returns>A instance of <see cref="TypeSymbols"/> which includes the information of the declared symbols of the given accessibility, along with some useful cache that is useful in this class. </returns>
     protected async Task<TypeSymbols> GetTypeSymbolsAsync(Compilation compilation, Project project, bool publicOnly = true)
     {
