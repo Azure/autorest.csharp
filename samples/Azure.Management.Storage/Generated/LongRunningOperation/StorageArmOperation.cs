@@ -37,11 +37,13 @@ namespace Azure.Management.Storage
             _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "StorageArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
+        internal StorageArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string id)
+        {
+            _operation = OperationInternal.Create(id, clientDiagnostics, pipeline, "StorageArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+        }
+
         /// <inheritdoc />
-#pragma warning disable CA1822
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public override string Id => throw new NotImplementedException();
-#pragma warning restore CA1822
+        public override string Id => _operation.GetOperationId();
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
