@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -39,12 +40,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var schema = BuildOptionalSchema(queryOrHeaderInputParams, resourceName, methodName, operationId);
                 var schemaObject = new MgmtObjectType(schema);
                 var newParameter = BuildOptionalParameter(schemaObject);
-                if (!MgmtContext.Library.PropertyBagModels.Contains(schemaObject) &&
-                    MgmtContext.Library.PropertyBagModels.Select(m => m.Type.Name).Contains(schemaObject.Type.Name))
+                var existingModel = MgmtContext.Library.PropertyBagModels.Where(m => m.Type.Name == schemaObject.Type.Name);
+                if (existingModel != null)
                 {
-                    // Sometimes we might have two property bag models with same name but different porperties
+                    // Sometimes we might have two or more property bag models with same name but different porperties
                     // We will throw exception in this case to prompt the user to rename the property bag model
-                    throw new InvalidOperationException($"Another property bag model named {schemaObject.Type.Name} already exists, please use configuration `rename-property-bag` to rename the property bag model corresponding to the operation {operationId}.");
+                    if (IsPropertyBagNameDuplicated(existingModel, schemaObject))
+                    {
+                        throw new InvalidOperationException($"Another property bag model named {schemaObject.Type.Name} already exists, please use configuration `rename-property-bag` to rename the property bag model corresponding to the operation {operationId}.");
+                    }
                 }
                 MgmtContext.Library.PropertyBagModels.Add(schemaObject);
                 return UpdateRestClientMethod(method, queryOrHeaderParamNames, newParameter);
@@ -169,6 +173,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 method.Accessibility.ToString().ToLower(),
                 method.Operation,
                 method.Parameters);
+        }
+
+        private static bool IsPropertyBagNameDuplicated(IEnumerable<TypeProvider> existingModels, MgmtObjectType modelToAdd)
+        {
+            foreach (var model in existingModels)
+            {
+                if (model is not MgmtObjectType mgmtModel)
+                    continue;
+                if (mgmtModel.Properties.Count() != modelToAdd.Properties.Count())
+                    return true;
+                for (int i = 0; i < mgmtModel.Properties.Count(); i++)
+                {
+                    if (mgmtModel.Properties[i].Declaration.Name != modelToAdd.Properties[i].Declaration.Name)
+                        return true;
+                }
+            }
+            return false;
         }
     }
 }

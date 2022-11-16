@@ -21,7 +21,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("FooCollection", "GetAll", true, typeof(FooGetAllOptions))]
         [TestCase("FooResource", "Get", true, typeof(FooGetOptions))]
         [TestCase("FooResource", "Update", true, typeof(WaitUntil), typeof(FooData), typeof(FooCreateOrUpdateOptions))]
-        [TestCase("FooResource", "Reconnect", true, typeof(FooReconnectOptions), typeof(FooData))]
+        [TestCase("FooResource", "Reconnect", true, typeof(FooReconnectTestOptions), typeof(FooData))]
         [TestCase("BarCollection", "CreateOrUpdate", true, typeof(WaitUntil), typeof(string), typeof(BarCreateOrUpdateOptions), typeof(BarData))]
         [TestCase("BarCollection", "Get", true, typeof(string), typeof(BarGetOptions))]
         [TestCase("BarCollection", "GetAll", true, typeof(BarGetAllOptions))]
