@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using ExactMatchInheritance;
 using ExactMatchInheritance.Models;
@@ -89,6 +90,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.NotNull(type, $"Type {className} should exist");
             var property = type.GetProperty(propertyName);
             Assert.AreEqual(exist, property != null, $"Property {propertyName} should {(exist ? string.Empty : "not")} exist");
+        }
+
+        [Test]
+        public void DataFactoryExpressionProperties()
+        {
+            Assert.AreEqual(typeof(DataFactoryExpression<string>), typeof(ExactMatchModel1Data).GetProperty("Type5").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<double>), typeof(ExactMatchModel1Data).GetProperty("Type6").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<bool>), typeof(ExactMatchModel1Data).GetProperty("Type7").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<int>), typeof(ExactMatchModel1Data).GetProperty("Type8").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<Array>), typeof(ExactMatchModel1Data).GetProperty("Type9").PropertyType);
         }
 
         private Type? FindTypeByName(string name)

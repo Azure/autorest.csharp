@@ -45,7 +45,27 @@
     "BaseClass": {
       "type": "object",
       "properties": {
-        "BaseClassProperty": { "type": "string" }
+        "BaseClassProperty": { "type": "string" },
+        "DfeString": {
+          "type": "object",
+          "x-ms-format": "dfe-string"
+        },
+        "DfeDouble": {
+          "type": "object",
+          "x-ms-format": "dfe-float"
+        },
+        "DfeBool": {
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
+        "DfeInt": {
+          "type": "object",
+          "x-ms-format": "dfe-int"
+        },
+        "DfeArray": {
+          "type": "object",
+          "x-ms-format": "dfe-array"
+        }
       }
     },
     "BaseClassWithDiscriminator": {

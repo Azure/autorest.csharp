@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using Azure.Core.Expressions.DataFactory;
+
 namespace Inheritance.Models
 {
     /// <summary> The ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty. </summary>
@@ -19,7 +22,12 @@ namespace Inheritance.Models
         /// <param name="someProperty"></param>
         /// <param name="someOtherProperty"></param>
         /// <param name="baseClassProperty"></param>
-        internal ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty(string someProperty, string someOtherProperty, string baseClassProperty) : base(someProperty, someOtherProperty, baseClassProperty)
+        /// <param name="dfeString"> Any object. </param>
+        /// <param name="dfeDouble"> Any object. </param>
+        /// <param name="dfeBool"> Any object. </param>
+        /// <param name="dfeInt"> Any object. </param>
+        /// <param name="dfeArray"> Any object. </param>
+        internal ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty(string someProperty, string someOtherProperty, string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<Array> dfeArray) : base(someProperty, someOtherProperty, baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeArray)
         {
         }
     }

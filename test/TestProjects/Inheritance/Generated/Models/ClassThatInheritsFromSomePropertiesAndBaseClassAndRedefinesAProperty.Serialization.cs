@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 
 namespace Inheritance.Models
 {
@@ -19,6 +21,31 @@ namespace Inheritance.Models
             {
                 writer.WritePropertyName("BaseClassProperty");
                 writer.WriteStringValue(BaseClassProperty);
+            }
+            if (Optional.IsDefined(DfeString))
+            {
+                writer.WritePropertyName("DfeString");
+                JsonSerializer.Serialize(writer, DfeString);
+            }
+            if (Optional.IsDefined(DfeDouble))
+            {
+                writer.WritePropertyName("DfeDouble");
+                JsonSerializer.Serialize(writer, DfeDouble);
+            }
+            if (Optional.IsDefined(DfeBool))
+            {
+                writer.WritePropertyName("DfeBool");
+                JsonSerializer.Serialize(writer, DfeBool);
+            }
+            if (Optional.IsDefined(DfeInt))
+            {
+                writer.WritePropertyName("DfeInt");
+                JsonSerializer.Serialize(writer, DfeInt);
+            }
+            if (Optional.IsDefined(DfeArray))
+            {
+                writer.WritePropertyName("DfeArray");
+                JsonSerializer.Serialize(writer, DfeArray);
             }
             if (Optional.IsDefined(SomeProperty))
             {
@@ -36,6 +63,11 @@ namespace Inheritance.Models
         internal static ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty DeserializeClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty(JsonElement element)
         {
             Optional<string> baseClassProperty = default;
+            Optional<DataFactoryExpression<string>> dfeString = default;
+            Optional<DataFactoryExpression<double>> dfeDouble = default;
+            Optional<DataFactoryExpression<bool>> dfeBool = default;
+            Optional<DataFactoryExpression<int>> dfeInt = default;
+            Optional<DataFactoryExpression<Array>> dfeArray = default;
             Optional<string> someProperty = default;
             Optional<string> someOtherProperty = default;
             foreach (var property in element.EnumerateObject())
@@ -43,6 +75,56 @@ namespace Inheritance.Models
                 if (property.NameEquals("BaseClassProperty"))
                 {
                     baseClassProperty = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("DfeString"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeString = JsonSerializer.Deserialize<DataFactoryExpression<string>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("DfeDouble"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeDouble = JsonSerializer.Deserialize<DataFactoryExpression<double>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("DfeBool"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeBool = JsonSerializer.Deserialize<DataFactoryExpression<bool>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("DfeInt"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeInt = JsonSerializer.Deserialize<DataFactoryExpression<int>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("DfeArray"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeArray = JsonSerializer.Deserialize<DataFactoryExpression<Array>>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("SomeProperty"))
@@ -56,7 +138,7 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty(someProperty.Value, someOtherProperty.Value, baseClassProperty.Value);
+            return new ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty(someProperty.Value, someOtherProperty.Value, baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeArray.Value);
         }
     }
 }

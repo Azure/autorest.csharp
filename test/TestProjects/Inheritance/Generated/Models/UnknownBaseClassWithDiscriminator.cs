@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using Azure.Core.Expressions.DataFactory;
+
 namespace Inheritance.Models
 {
     /// <summary> The UnknownBaseClassWithDiscriminator. </summary>
@@ -12,8 +15,13 @@ namespace Inheritance.Models
     {
         /// <summary> Initializes a new instance of UnknownBaseClassWithDiscriminator. </summary>
         /// <param name="baseClassProperty"></param>
+        /// <param name="dfeString"> Any object. </param>
+        /// <param name="dfeDouble"> Any object. </param>
+        /// <param name="dfeBool"> Any object. </param>
+        /// <param name="dfeInt"> Any object. </param>
+        /// <param name="dfeArray"> Any object. </param>
         /// <param name="discriminatorProperty"></param>
-        internal UnknownBaseClassWithDiscriminator(string baseClassProperty, string discriminatorProperty) : base(baseClassProperty, discriminatorProperty)
+        internal UnknownBaseClassWithDiscriminator(string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<Array> dfeArray, string discriminatorProperty) : base(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeArray, discriminatorProperty)
         {
             DiscriminatorProperty = discriminatorProperty ?? "Unknown";
         }
