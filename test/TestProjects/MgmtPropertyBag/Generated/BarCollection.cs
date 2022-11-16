@@ -62,7 +62,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A class representing the query and header parameters in CreateOrUpdate method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -97,7 +97,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A class representing the query and header parameters in CreateOrUpdate method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -131,7 +131,7 @@ namespace MgmtPropertyBag
         /// Operation Id: Bars_Get
         /// </summary>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A class representing the query and header parameters in Get method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="options"/> is null. </exception>
@@ -162,7 +162,7 @@ namespace MgmtPropertyBag
         /// Operation Id: Bars_Get
         /// </summary>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A class representing the query and header parameters in Get method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="options"/> is null. </exception>
@@ -192,7 +192,7 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
         /// Operation Id: Bars_List
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in GetAll method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
@@ -223,7 +223,7 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
         /// Operation Id: Bars_List
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in GetAll method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
@@ -255,7 +255,7 @@ namespace MgmtPropertyBag
         /// Operation Id: Bars_Get
         /// </summary>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A class representing the query and header parameters in Get method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="options"/> is null. </exception>
@@ -284,7 +284,7 @@ namespace MgmtPropertyBag
         /// Operation Id: Bars_Get
         /// </summary>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A class representing the query and header parameters in Get method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="options"/> is null. </exception>

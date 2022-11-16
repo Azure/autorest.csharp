@@ -63,7 +63,7 @@ namespace MgmtPropertyBag
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="fooName"> The foo name. </param>
         /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
-        /// <param name="options"> A class representing the query and header parameters in CreateOrUpdate method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
@@ -98,7 +98,7 @@ namespace MgmtPropertyBag
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="fooName"> The foo name. </param>
         /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
-        /// <param name="options"> A class representing the query and header parameters in CreateOrUpdate method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
@@ -131,7 +131,7 @@ namespace MgmtPropertyBag
         /// Operation Id: Foos_Get
         /// </summary>
         /// <param name="fooName"> The foo name. </param>
-        /// <param name="options"> A class representing the query and header parameters in Get method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
@@ -162,7 +162,7 @@ namespace MgmtPropertyBag
         /// Operation Id: Foos_Get
         /// </summary>
         /// <param name="fooName"> The foo name. </param>
-        /// <param name="options"> A class representing the query and header parameters in Get method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
@@ -192,7 +192,7 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos
         /// Operation Id: Foos_List
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in GetAll method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FooResource> GetAllAsync(FooGetAllOptions options, CancellationToken cancellationToken = default)
@@ -222,7 +222,7 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos
         /// Operation Id: Foos_List
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in GetAll method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FooResource> GetAll(FooGetAllOptions options, CancellationToken cancellationToken = default)
@@ -253,7 +253,7 @@ namespace MgmtPropertyBag
         /// Operation Id: Foos_Get
         /// </summary>
         /// <param name="fooName"> The foo name. </param>
-        /// <param name="options"> A class representing the query and header parameters in Get method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
@@ -282,7 +282,7 @@ namespace MgmtPropertyBag
         /// Operation Id: Foos_Get
         /// </summary>
         /// <param name="fooName"> The foo name. </param>
-        /// <param name="options"> A class representing the query and header parameters in Get method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>

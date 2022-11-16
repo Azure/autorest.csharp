@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (queryOrHeaderParams.Count() > 2)
             {
                 var queryOrHeaderParamNames = queryOrHeaderParams.Select(p => p.Name).ToImmutableHashSet();
-                var queryOrHeaderInputParams = method.Operation.Parameters.Where(p => queryOrHeaderParamNames.Contains(p.Name));
+                var queryOrHeaderInputParams = method.Operation.Parameters.Where(p => queryOrHeaderParamNames.Contains(p.Name, StringComparer.OrdinalIgnoreCase));
                 var schema = BuildOptionalSchema(queryOrHeaderInputParams, resourceName, methodName);
                 var schemaObject = new MgmtObjectType(schema);
                 var newParameter = BuildOptionalParameter(schemaObject);

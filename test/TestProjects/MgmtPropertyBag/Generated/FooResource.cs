@@ -93,7 +93,7 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in Get method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FooResource>> GetAsync(FooGetOptions options, CancellationToken cancellationToken = default)
         {
@@ -120,7 +120,7 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in Get method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FooResource> Get(FooGetOptions options, CancellationToken cancellationToken = default)
         {
@@ -149,7 +149,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
-        /// <param name="options"> A class representing the query and header parameters in CreateOrUpdate method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<FooResource>> UpdateAsync(WaitUntil waitUntil, FooData data, FooCreateOrUpdateOptions options, CancellationToken cancellationToken = default)
@@ -181,7 +181,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
-        /// <param name="options"> A class representing the query and header parameters in CreateOrUpdate method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<FooResource> Update(WaitUntil waitUntil, FooData data, FooCreateOrUpdateOptions options, CancellationToken cancellationToken = default)
@@ -211,7 +211,7 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect
         /// Operation Id: Foos_Reconnect
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in Reconnect method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="data"> The parameters supplied to the Reconnect operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FooResource>> ReconnectAsync(FooReconnectOptions options, FooData data = null, CancellationToken cancellationToken = default)
@@ -237,7 +237,7 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect
         /// Operation Id: Foos_Reconnect
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in Reconnect method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="data"> The parameters supplied to the Reconnect operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FooResource> Reconnect(FooReconnectOptions options, FooData data = null, CancellationToken cancellationToken = default)

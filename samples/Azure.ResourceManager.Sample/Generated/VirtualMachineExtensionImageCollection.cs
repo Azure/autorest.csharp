@@ -185,7 +185,7 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachineExtensionImages_ListVersions
         /// </summary>
         /// <param name="type"> The String to use. </param>
-        /// <param name="options"> A class representing the query and header parameters in GetAll method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> is null. </exception>
@@ -219,7 +219,7 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachineExtensionImages_ListVersions
         /// </summary>
         /// <param name="type"> The String to use. </param>
-        /// <param name="options"> A class representing the query and header parameters in GetAll method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> is null. </exception>

@@ -185,7 +185,7 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
         /// Operation Id: VirtualMachineScaleSetVMs_List
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in GetAll method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetVmResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineScaleSetVmResource> GetAllAsync(VirtualMachineScaleSetVmGetAllOptions options, CancellationToken cancellationToken = default)
@@ -230,7 +230,7 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
         /// Operation Id: VirtualMachineScaleSetVMs_List
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in GetAll method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSetVmResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineScaleSetVmResource> GetAll(VirtualMachineScaleSetVmGetAllOptions options, CancellationToken cancellationToken = default)

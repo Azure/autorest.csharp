@@ -186,7 +186,7 @@ namespace XmlDeserialization
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls
         /// Operation Id: XmlDeserialization_List
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in GetAll method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<XmlInstanceResource> GetAllAsync(XmlInstanceGetAllOptions options, CancellationToken cancellationToken = default)
@@ -231,7 +231,7 @@ namespace XmlDeserialization
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls
         /// Operation Id: XmlDeserialization_List
         /// </summary>
-        /// <param name="options"> A class representing the query and header parameters in GetAll method. </param>
+        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<XmlInstanceResource> GetAll(XmlInstanceGetAllOptions options, CancellationToken cancellationToken = default)
