@@ -56,7 +56,7 @@ namespace Azure.Core
     {
         private readonly IOperation<T> _operation;
         private readonly AsyncLockWithValue<OperationState<T>> _stateLock;
-        private Response _rawResponse;
+        private Response? _rawResponse;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationInternal"/> class in a final successful state.
@@ -98,7 +98,7 @@ namespace Azure.Core
         public OperationInternal(
             ClientDiagnostics clientDiagnostics,
             IOperation<T> operation,
-            Response rawResponse,
+            Response? rawResponse,
             string? operationTypeName = null,
             IEnumerable<KeyValuePair<string, string>>? scopeAttributes = null,
             DelayStrategy? fallbackStrategy = null)
@@ -119,7 +119,28 @@ namespace Azure.Core
             _stateLock = new AsyncLockWithValue<OperationState<T>>(finalState);
         }
 
-        public override Response RawResponse => _stateLock.TryGetValue(out var state) ? state.RawResponse : _rawResponse;
+        public static OperationInternal<T> Create(
+            string id,
+            IOperationSource<T> source,
+            ClientDiagnostics clientDiagnostics,
+            HttpPipeline pipeline,
+            string? operationTypeName = null,
+            IEnumerable<KeyValuePair<string, string>>? scopeAttributes = null,
+            DelayStrategy? fallbackStrategy = null,
+            string? interimApiVersion = null)
+        {
+            var lroDetails = BinaryData.FromBytes(Convert.FromBase64String(id)).ToObjectFromJson<Dictionary<string, string>>();
+
+            if (lroDetails.TryGetValue("FinalResponse", out string? finalResponse))
+            {
+                Response response = JsonSerializer.Deserialize<OperationInternal.DecodedResponse>(finalResponse)!;
+                return OperationInternal<T>.Succeeded(response, source.CreateResult(response, CancellationToken.None));
+            }
+            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, id, interimApiVersion);
+            return new OperationInternal<T>(clientDiagnostics, nextLinkOperation, null, operationTypeName, scopeAttributes, fallbackStrategy);
+        }
+
+        public override Response RawResponse => (_stateLock.TryGetValue(out var state) ? state.RawResponse : _rawResponse) ?? throw new InvalidOperationException("The operation does not have a response yet. Please call UpdateStatus or WaitForCompletion first.");
 
         public override bool HasCompleted => _stateLock.HasValue;
 
@@ -293,7 +314,7 @@ namespace Azure.Core
                 var serializeOptions = new JsonSerializerOptions { Converters = { new StreamConverter() } };
                 var lroDetails = new Dictionary<string, string>()
                 {
-                    ["InitialResponse"] = BinaryData.FromObjectAsJson<Response>(_rawResponse).ToString()
+                    ["FinalResponse"] = BinaryData.FromObjectAsJson<Response>(_rawResponse!, serializeOptions).ToString()
                 };
                 var lroData = BinaryData.FromObjectAsJson(lroDetails);
                 return Convert.ToBase64String(lroData.ToArray());
@@ -310,7 +331,7 @@ namespace Azure.Core
             throw state.OperationFailedException!;
         }
 
-        private class StreamConverter : JsonConverter<Stream>
+        internal class StreamConverter : JsonConverter<Stream>
         {
             /// <summary> Serialize stream to BinaryData string. </summary>
             /// <param name="writer"> The writer. </param>
@@ -320,7 +341,6 @@ namespace Azure.Core
             {
                 if (model.Length == 0)
                 {
-                    //JsonSerializer.Serialize(writer, JsonDocument.Parse("{}").RootElement);
                     writer.WriteNullValue();
                     return;
                 }
@@ -360,11 +380,14 @@ namespace Azure.Core
                 using var document = JsonDocument.ParseValue(ref reader);
                 foreach (var property in document.RootElement.EnumerateObject())
                 {
-                    // todo: add null check
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     var value = property.Value.GetString();
                     return BinaryData.FromString(value!).ToStream();
                 }
-                return new BinaryData(Array.Empty<byte>()).ToStream();
+                return new MemoryStream();
             }
         }
 

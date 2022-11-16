@@ -19,13 +19,12 @@ namespace Azure.Core
         internal ProtocolOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
         {
             _resultSelector = resultSelector;
-            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, out string id);
-            Id = id;
+            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
             _operation = new OperationInternal<T>(clientDiagnostics, this, response, scopeName);
         }
 
         /// <inheritdoc />
-        public override string Id { get; }
+        public override string Id => _nextLinkOperation.GetOperationId();
 
         /// <inheritdoc />
         public override T Value => _operation.Value;
@@ -65,6 +64,11 @@ namespace Azure.Core
             }
 
             return OperationState<T>.Pending(state.RawResponse);
+        }
+
+        public string GetOperationId()
+        {
+            return _nextLinkOperation.GetOperationId();
         }
     }
 }
