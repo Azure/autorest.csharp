@@ -104,6 +104,7 @@ model RoundTripModel extends BaseModel {
 
 @doc("Model used both as input and output with primitive types")
 model RoundTripPrimitiveModel extends BaseModel {
+  @key
   @doc("Required string, illustrating a reference type property.")
   requiredString: string;
 
@@ -164,6 +165,7 @@ model OutputModel extends BaseModel {
   @doc("Required int")
   requiredInt: int32;
 
+  @key
   @doc("Required model")
   requiredModel: DerivedModel;
 

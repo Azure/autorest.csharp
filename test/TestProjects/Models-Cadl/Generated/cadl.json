@@ -543,7 +543,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
+     "IsReadOnly": true,
      "IsDiscriminator": false
     },
     {
@@ -1332,7 +1332,7 @@
       "$ref": "30"
      },
      "IsRequired": true,
-     "IsReadOnly": false,
+     "IsReadOnly": true,
      "IsDiscriminator": false
     },
     {

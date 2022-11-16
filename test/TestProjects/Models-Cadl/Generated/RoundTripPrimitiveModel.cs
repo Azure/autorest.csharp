@@ -6,13 +6,33 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace ModelsInCadl
 {
     /// <summary> Model used both as input and output with primitive types. </summary>
     public partial class RoundTripPrimitiveModel : BaseModel
     {
+        /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
+        /// <param name="requiredInt"></param>
+        /// <param name="requiredInt64"></param>
+        /// <param name="requiredSafeInt"></param>
+        /// <param name="requiredFloat"></param>
+        /// <param name="requiredDouble"></param>
+        /// <param name="requiredBoolean"></param>
+        /// <param name="requiredDateTimeOffset"></param>
+        /// <param name="requiredTimeSpan"></param>
+        public RoundTripPrimitiveModel(int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan)
+        {
+            RequiredInt = requiredInt;
+            RequiredInt64 = requiredInt64;
+            RequiredSafeInt = requiredSafeInt;
+            RequiredFloat = requiredFloat;
+            RequiredDouble = requiredDouble;
+            RequiredBoolean = requiredBoolean;
+            RequiredDateTimeOffset = requiredDateTimeOffset;
+            RequiredTimeSpan = requiredTimeSpan;
+        }
+
         /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
@@ -23,11 +43,8 @@ namespace ModelsInCadl
         /// <param name="requiredBoolean"></param>
         /// <param name="requiredDateTimeOffset"></param>
         /// <param name="requiredTimeSpan"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
-        public RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan)
+        internal RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan)
         {
-            Argument.AssertNotNull(requiredString, nameof(requiredString));
-
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredInt64 = requiredInt64;
@@ -39,8 +56,8 @@ namespace ModelsInCadl
             RequiredTimeSpan = requiredTimeSpan;
         }
 
-        /// <summary> Gets or sets the required string. </summary>
-        public string RequiredString { get; set; }
+        /// <summary> Gets the required string. </summary>
+        public string RequiredString { get; }
         /// <summary> Gets or sets the required int. </summary>
         public int RequiredInt { get; set; }
         /// <summary> Gets or sets the required int 64. </summary>

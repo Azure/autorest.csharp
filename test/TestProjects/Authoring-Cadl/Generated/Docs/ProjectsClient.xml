@@ -9,7 +9,6 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ProjectsClient(endpoint);
 
 var data = new {
-    projectName = "<projectName>",
     projectKind = "CustomSingleLabelClassification",
     storageInputContainerName = "<storageInputContainerName>",
     language = "<language>",
@@ -33,7 +32,6 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ProjectsClient(endpoint);
 
 var data = new {
-    projectName = "<projectName>",
     projectKind = "CustomSingleLabelClassification",
     storageInputContainerName = "<storageInputContainerName>",
     settings = new {
@@ -109,7 +107,6 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ProjectsClient(endpoint);
 
 var data = new {
-    projectName = "<projectName>",
     projectKind = "CustomSingleLabelClassification",
     storageInputContainerName = "<storageInputContainerName>",
     language = "<language>",
@@ -133,7 +130,6 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ProjectsClient(endpoint);
 
 var data = new {
-    projectName = "<projectName>",
     projectKind = "CustomSingleLabelClassification",
     storageInputContainerName = "<storageInputContainerName>",
     settings = new {

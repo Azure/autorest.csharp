@@ -17,8 +17,6 @@ namespace ModelsInCadl
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredString");
-            writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt");
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredInt64");

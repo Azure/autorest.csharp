@@ -21,8 +21,6 @@ namespace ModelsInCadl
             writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt");
             writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("requiredModel");
-            writer.WriteObjectValue(RequiredModel);
             writer.WritePropertyName("requiredCollection");
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)

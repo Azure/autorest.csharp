@@ -12,6 +12,7 @@ import {
     getKnownValues,
     getVisibility,
     isIntrinsic,
+    isKey,
     Model,
     ModelProperty,
     Namespace,
@@ -475,7 +476,7 @@ export function getInputType(
             ) {
                 const vis = getVisibility(program, value);
                 let isReadOnly: boolean = false;
-                if (vis && vis.includes("read") && vis.length === 1) {
+                if (isKey(program, value) || (vis && vis.includes("read") && vis.length === 1)) {
                     isReadOnly = true;
                 }
                 const inputProp = {
