@@ -8,10 +8,10 @@
 namespace MgmtPropertyBag.Models
 {
     /// <summary> A class representing the query and header parameters in Reconnect method. </summary>
-    public partial class FooReconnectOptions
+    public partial class FooReconnectTestOptions
     {
-        /// <summary> Initializes a new instance of FooReconnectOptions. </summary>
-        public FooReconnectOptions()
+        /// <summary> Initializes a new instance of FooReconnectTestOptions. </summary>
+        public FooReconnectTestOptions()
         {
         }
 

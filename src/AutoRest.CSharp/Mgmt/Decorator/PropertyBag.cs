@@ -29,16 +29,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class PropertyBag
     {
-        public static RestClientMethod UpdateMgmtRestClientMethod(this RestClientMethod method, string? resourceName, string methodName)
+        public static RestClientMethod UpdateMgmtRestClientMethod(this RestClientMethod method, string? resourceName, string methodName, string operationId)
         {
             var queryOrHeaderParams = method.Parameters.Where(p => p.RequestLocation == RequestLocation.Header || p.RequestLocation == RequestLocation.Query);
             if (queryOrHeaderParams.Count() > 2)
             {
                 var queryOrHeaderParamNames = queryOrHeaderParams.Select(p => p.Name).ToImmutableHashSet();
                 var queryOrHeaderInputParams = method.Operation.Parameters.Where(p => queryOrHeaderParamNames.Contains(p.Name, StringComparer.OrdinalIgnoreCase));
-                var schema = BuildOptionalSchema(queryOrHeaderInputParams, resourceName, methodName);
+                var schema = BuildOptionalSchema(queryOrHeaderInputParams, resourceName, methodName, operationId);
                 var schemaObject = new MgmtObjectType(schema);
                 var newParameter = BuildOptionalParameter(schemaObject);
+                if (!MgmtContext.Library.PropertyBagModels.Contains(schemaObject) &&
+                    MgmtContext.Library.PropertyBagModels.Select(m => m.Type.Name).Contains(schemaObject.Type.Name))
+                {
+                    // Sometimes we might have two property bag models with same name but different porperties
+                    // We will throw exception in this case to prompt the user to rename the property bag model
+                    throw new InvalidOperationException($"Another property bag model named {schemaObject.Type.Name} already exists, please use configuration `rename-property-bag` to rename the property bag model corresponding to the operation {operationId}.");
+                }
                 MgmtContext.Library.PropertyBagModels.Add(schemaObject);
                 return UpdateRestClientMethod(method, queryOrHeaderParamNames, newParameter);
             }
@@ -66,7 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return pagingMethod;
         }
 
-        private static ObjectSchema BuildOptionalSchema(IEnumerable<InputParameter> parameters, string? resourceName, string methodName)
+        private static ObjectSchema BuildOptionalSchema(IEnumerable<InputParameter> parameters, string? resourceName, string methodName, string operationId)
         {
             var schema = new ObjectSchema {
                 Extensions = new RecordOfStringAndAny { { "x-csharp-usage", "model,input" }, { "x-accessibility", "public" } },
@@ -88,8 +95,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var resourcePrefix = resourceName is null ?
                 MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" :
                 resourceName.ReplaceLast("Resource", "").ReplaceLast("Collection", "");
-            // TODO - We need to provide configuration here to agilely rename the property bag model name
-            schema.Language.Default.Name = $"{resourcePrefix}{methodName}Options";
+            if (Configuration.MgmtConfiguration.RenamePropertyBag.TryGetValue(operationId, out string? modelName))
+            {
+                schema.Language.Default.Name = modelName;
+            }
+            else
+            {
+                schema.Language.Default.Name = $"{resourcePrefix}{methodName}Options";
+            }
             schema.Language.Default.Description = $"A class representing the query and header parameters in {methodName} method.";
             return schema;
         }

@@ -233,5 +233,37 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return ObjectSchema.CreateDescription();
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is null)
+                return false;
+            if (!base.Equals(obj))
+                return false;
+            if (obj is not MgmtObjectType other)
+                return false;
+            if (Properties.Count() != other.Properties.Count())
+                return false;
+            for (int i = 0; i < Properties.Count(); i++)
+            {
+                if (Properties[i].Declaration.Name != other.Properties[i].Declaration.Name)
+                    return false;
+            }
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = new HashCode();
+
+            hashCode.Add(DefaultName);
+            hashCode.Add(DefaultNamespace);
+            hashCode.Add(DefaultAccessibility);
+            hashCode.Add(TypeKind);
+
+            Properties.Select(p => p.Declaration.Name).ToList().ForEach(hashCode.Add);
+
+            return hashCode.ToHashCode();
+        }
     }
 }

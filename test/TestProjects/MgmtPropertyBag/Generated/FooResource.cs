@@ -214,9 +214,9 @@ namespace MgmtPropertyBag
         /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="data"> The parameters supplied to the Reconnect operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<FooResource>> ReconnectAsync(FooReconnectOptions options, FooData data = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FooResource>> ReconnectAsync(FooReconnectTestOptions options, FooData data = null, CancellationToken cancellationToken = default)
         {
-            options ??= new FooReconnectOptions();
+            options ??= new FooReconnectTestOptions();
 
             using var scope = _fooClientDiagnostics.CreateScope("FooResource.Reconnect");
             scope.Start();
@@ -240,9 +240,9 @@ namespace MgmtPropertyBag
         /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="data"> The parameters supplied to the Reconnect operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<FooResource> Reconnect(FooReconnectOptions options, FooData data = null, CancellationToken cancellationToken = default)
+        public virtual Response<FooResource> Reconnect(FooReconnectTestOptions options, FooData data = null, CancellationToken cancellationToken = default)
         {
-            options ??= new FooReconnectOptions();
+            options ??= new FooReconnectTestOptions();
 
             using var scope = _fooClientDiagnostics.CreateScope("FooResource.Reconnect");
             scope.Start();

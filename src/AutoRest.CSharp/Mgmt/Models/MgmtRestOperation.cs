@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             ThrowIfNull = throwIfNull;
             Operation = operation;
             OriginalMethod = method;
-            Method = method.UpdateMgmtRestClientMethod(resourceName, methodName);
+            Method = method.UpdateMgmtRestClientMethod(resourceName, methodName, operation.OperationId!);
             PagingMethod = GetPagingMethodWrapper(method, Method);
             RestClient = restClient;
             RequestPath = requestPath;

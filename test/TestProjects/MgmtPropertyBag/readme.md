@@ -12,4 +12,6 @@ input-file: $(this-folder)/MgmtPropertyBag.json
 namespace: MgmtPropertyBag
 modelerfour:
   lenient-model-deduplication: true
+rename-property-bag:
+  Foos_Reconnect: FooReconnectTestOptions
 ```
