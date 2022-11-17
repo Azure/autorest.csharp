@@ -541,7 +541,7 @@ export function getInputType(
                     Properties: []
                 } as InputModelType;
             default:
-                throw new Error("Unsupported type.");
+                throw new Error(`Unsupported type ${type.name}`);
         }
     }
 }

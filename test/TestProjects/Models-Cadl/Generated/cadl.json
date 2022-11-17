@@ -1441,13 +1441,8 @@
  ],
  "Clients": [
   {
-<<<<<<< HEAD
-   "$id": "176",
-   "Name": "ModelsInCadlClient",
-=======
    "$id": "181",
-   "Name": "ModelsInCadl",
->>>>>>> bea938bd853d41475abccde1f0cbaa77b7116853
+   "Name": "ModelsInCadlClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
@@ -2057,14 +2052,9 @@
     }
    ],
    "Protocol": {
-<<<<<<< HEAD
-    "$id": "231"
+    "$id": "236"
    },
    "Creatable": true
-=======
-    "$id": "236"
-   }
->>>>>>> bea938bd853d41475abccde1f0cbaa77b7116853
   }
  ]
 }

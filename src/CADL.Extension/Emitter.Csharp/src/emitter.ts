@@ -350,7 +350,7 @@ function createModel(
         const [services] = getAllHttpServices(program);
         const routes = services[0].operations;
         if (routes.length === 0) {
-            throw "No Routes";
+            throw `No Route for service ${services[0].namespace.name}`;
         }
         console.log("routes:" + routes.length);
 
