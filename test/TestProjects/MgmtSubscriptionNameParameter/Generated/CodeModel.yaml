@@ -1478,6 +1478,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            SubscriptionDelete:
+              $ref: ./examples/Subscriptions/SBSubscriptionDelete.json
         language: !Languages 
           default:
             name: Delete

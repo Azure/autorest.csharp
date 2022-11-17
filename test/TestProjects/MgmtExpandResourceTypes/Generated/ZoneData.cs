@@ -38,9 +38,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="numberOfRecordSets"> The current number of record sets in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored. </param>
         /// <param name="nameServers"> The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored. </param>
         /// <param name="zoneType"> The type of this DNS zone (Public or Private). </param>
+        /// <param name="machineType"></param>
+        /// <param name="storageType"></param>
         /// <param name="registrationVirtualNetworks"> A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private. </param>
         /// <param name="resolutionVirtualNetworks"> A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private. </param>
-        internal ZoneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, long? maxNumberOfRecordSets, long? maxNumberOfRecordsPerRecordSet, long? numberOfRecordSets, IReadOnlyList<string> nameServers, ZoneType? zoneType, IList<WritableSubResource> registrationVirtualNetworks, IList<WritableSubResource> resolutionVirtualNetworks) : base(id, name, resourceType, systemData, tags, location)
+        internal ZoneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, long? maxNumberOfRecordSets, long? maxNumberOfRecordsPerRecordSet, long? numberOfRecordSets, IReadOnlyList<string> nameServers, ZoneType? zoneType, MachineType? machineType, StorageType? storageType, IList<WritableSubResource> registrationVirtualNetworks, IList<WritableSubResource> resolutionVirtualNetworks) : base(id, name, resourceType, systemData, tags, location)
         {
             Etag = etag;
             MaxNumberOfRecordSets = maxNumberOfRecordSets;
@@ -48,6 +50,8 @@ namespace MgmtExpandResourceTypes
             NumberOfRecordSets = numberOfRecordSets;
             NameServers = nameServers;
             ZoneType = zoneType;
+            MachineType = machineType;
+            StorageType = storageType;
             RegistrationVirtualNetworks = registrationVirtualNetworks;
             ResolutionVirtualNetworks = resolutionVirtualNetworks;
         }
@@ -64,6 +68,10 @@ namespace MgmtExpandResourceTypes
         public IReadOnlyList<string> NameServers { get; }
         /// <summary> The type of this DNS zone (Public or Private). </summary>
         public ZoneType? ZoneType { get; set; }
+        /// <summary> Gets or sets the machine type. </summary>
+        public MachineType? MachineType { get; set; }
+        /// <summary> Gets or sets the storage type. </summary>
+        public StorageType? StorageType { get; set; }
         /// <summary> A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private. </summary>
         public IList<WritableSubResource> RegistrationVirtualNetworks { get; }
         /// <summary> A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private. </summary>

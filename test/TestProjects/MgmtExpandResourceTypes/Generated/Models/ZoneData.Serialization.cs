@@ -44,6 +44,16 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("zoneType");
                 writer.WriteStringValue(ZoneType.Value.ToSerialString());
             }
+            if (Optional.IsDefined(MachineType))
+            {
+                writer.WritePropertyName("machineType");
+                writer.WriteNumberValue((int)MachineType.Value);
+            }
+            if (Optional.IsDefined(StorageType))
+            {
+                writer.WritePropertyName("storageType");
+                writer.WriteNumberValue((int)StorageType.Value);
+            }
             if (Optional.IsCollectionDefined(RegistrationVirtualNetworks))
             {
                 writer.WritePropertyName("registrationVirtualNetworks");
@@ -82,6 +92,8 @@ namespace MgmtExpandResourceTypes
             Optional<long> numberOfRecordSets = default;
             Optional<IReadOnlyList<string>> nameServers = default;
             Optional<ZoneType> zoneType = default;
+            Optional<MachineType> machineType = default;
+            Optional<StorageType> storageType = default;
             Optional<IList<WritableSubResource>> registrationVirtualNetworks = default;
             Optional<IList<WritableSubResource>> resolutionVirtualNetworks = default;
             foreach (var property in element.EnumerateObject())
@@ -200,6 +212,26 @@ namespace MgmtExpandResourceTypes
                             zoneType = property0.Value.GetString().ToZoneType();
                             continue;
                         }
+                        if (property0.NameEquals("machineType"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            machineType = property0.Value.GetInt32().ToMachineType();
+                            continue;
+                        }
+                        if (property0.NameEquals("storageType"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            storageType = property0.Value.GetInt32().ToStorageType();
+                            continue;
+                        }
                         if (property0.NameEquals("registrationVirtualNetworks"))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
@@ -234,7 +266,7 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new ZoneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), Optional.ToList(nameServers), Optional.ToNullable(zoneType), Optional.ToList(registrationVirtualNetworks), Optional.ToList(resolutionVirtualNetworks));
+            return new ZoneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), Optional.ToList(nameServers), Optional.ToNullable(zoneType), Optional.ToNullable(machineType), Optional.ToNullable(storageType), Optional.ToList(registrationVirtualNetworks), Optional.ToList(resolutionVirtualNetworks));
         }
     }
 }
