@@ -200,19 +200,5 @@ namespace AutoRest.CSharp.Output.Builders
 
             return name;
         }
-
-        public static FormattableString CreateDefaultPropertyDescription(this ObjectTypeProperty property, string? overrideName = null)
-        {
-            var nameToUse = overrideName ?? property.Declaration.Name;
-            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
-            if (property.IsReadOnly)
-            {
-                return $"Gets the {splitDeclarationName}";
-            }
-            else
-            {
-                return $"Gets or sets the {splitDeclarationName}";
-            }
-        }
     }
 }

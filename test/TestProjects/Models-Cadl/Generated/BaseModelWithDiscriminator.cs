@@ -5,25 +5,23 @@
 
 #nullable disable
 
-using System;
-using Azure.Core;
-
 namespace ModelsInCadl
 {
-    /// <summary> Base model with discriminator property. </summary>
-    public partial class BaseModelWithDiscriminator : BaseModel
+    /// <summary>
+    /// Base model with discriminator property.
+    /// Please note <see cref="BaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+    /// The available derived classes include <see cref="DerivedModelWithDiscriminatorA"/> and <see cref="DerivedModelWithDiscriminatorB"/>.
+    /// </summary>
+    public abstract partial class BaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of BaseModelWithDiscriminator. </summary>
-        /// <param name="discriminatorProperty"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="discriminatorProperty"/> is null. </exception>
-        public BaseModelWithDiscriminator(string discriminatorProperty)
+        /// <param name="discriminatorProperty"> Discriminator. </param>
+        protected BaseModelWithDiscriminator(string discriminatorProperty)
         {
-            Argument.AssertNotNull(discriminatorProperty, nameof(discriminatorProperty));
-
             DiscriminatorProperty = discriminatorProperty;
         }
 
-        /// <summary> Gets or sets the discriminator property. </summary>
-        public string DiscriminatorProperty { get; set; }
+        /// <summary> Discriminator. </summary>
+        public string DiscriminatorProperty { get; }
     }
 }

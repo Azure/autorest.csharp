@@ -16,13 +16,20 @@ namespace TypeSchemaMapping.Models
         }
 
         /// <summary> Initializes a new instance of ModelWithAbstractModel. </summary>
-        /// <param name="abstractModelProperty"></param>
+        /// <param name="abstractModelProperty">
+        /// Please note <see cref="AbstractModel"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DerivedFromAbstractModel"/>.
+        /// </param>
         internal ModelWithAbstractModel(AbstractModel abstractModelProperty)
         {
             AbstractModelProperty = abstractModelProperty;
         }
 
-        /// <summary> Gets the abstract model property. </summary>
+        /// <summary>
+        /// Gets the abstract model property
+        /// Please note <see cref="AbstractModel"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DerivedFromAbstractModel"/>.
+        /// </summary>
         public AbstractModel AbstractModelProperty { get; }
     }
 }

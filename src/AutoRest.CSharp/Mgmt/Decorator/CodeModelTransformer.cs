@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
@@ -14,6 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         public static void Transform()
         {
+            DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel);
             OmitOperationGroups.RemoveOperationGroups();
             SubscriptionIdUpdater.Update();
             ConstantSchemaTransformer.TransformToChoice();

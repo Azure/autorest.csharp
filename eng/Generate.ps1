@@ -245,8 +245,7 @@ $cadlRanchProjectNames =
     'oauth2',
     'extensible-enums',
     'property-optional',
-    'property-types',
-    'inheritance'
+    'property-types'
 
 if (!($Exclude -contains "CadlRanchProjects"))
 {

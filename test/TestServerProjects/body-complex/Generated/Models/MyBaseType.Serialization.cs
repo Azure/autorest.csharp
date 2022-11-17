@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace body_complex.Models
 {
@@ -21,40 +20,7 @@ namespace body_complex.Models
                     case "Kind1": return MyDerivedType.DeserializeMyDerivedType(element);
                 }
             }
-            MyKind kind = default;
-            Optional<string> propB1 = default;
-            Optional<string> propBH1 = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("kind"))
-                {
-                    kind = new MyKind(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("propB1"))
-                {
-                    propB1 = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("helper"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.NameEquals("propBH1"))
-                        {
-                            propBH1 = property0.Value.GetString();
-                            continue;
-                        }
-                    }
-                    continue;
-                }
-            }
-            return new MyBaseType(kind, propB1.Value, propBH1.Value);
+            return UnknownMyBaseType.DeserializeUnknownMyBaseType(element);
         }
     }
 }

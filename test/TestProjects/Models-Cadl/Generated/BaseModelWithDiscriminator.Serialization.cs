@@ -23,28 +23,27 @@ namespace ModelsInCadl
 
         internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element)
         {
-            string discriminatorProperty = default;
-            foreach (var property in element.EnumerateObject())
+            if (element.TryGetProperty("discriminatorProperty", out JsonElement discriminator))
             {
-                if (property.NameEquals("discriminatorProperty"))
+                switch (discriminator.GetString())
                 {
-                    discriminatorProperty = property.Value.GetString();
-                    continue;
+                    case "DerivedModelWithDiscriminatorA": return DerivedModelWithDiscriminatorA.DeserializeDerivedModelWithDiscriminatorA(element);
+                    case "DerivedModelWithDiscriminatorB": return DerivedModelWithDiscriminatorB.DeserializeDerivedModelWithDiscriminatorB(element);
                 }
             }
-            return new BaseModelWithDiscriminator(discriminatorProperty);
+            return UnknownBaseModelWithDiscriminator.DeserializeUnknownBaseModelWithDiscriminator(element);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static BaseModelWithDiscriminator FromResponse(Response response)
+        internal static BaseModelWithDiscriminator FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeBaseModelWithDiscriminator(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

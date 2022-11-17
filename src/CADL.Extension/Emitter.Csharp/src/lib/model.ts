@@ -408,7 +408,6 @@ export function getInputType(
         const name = getFriendlyName(program, m) ?? m.name;
         let model = models.get(name);
         if (!model) {
-            const discriminator = getDiscriminator(program, m);
             const baseModel = getInputModelBaseType(m.baseModel);
             const properties: InputModelProperty[] = [];
 
@@ -427,22 +426,6 @@ export function getInputType(
 
             models.set(name, model);
 
-            if(discriminator) {
-                const discriminatorProp = {
-                    Name: discriminator.propertyName,
-                    SerializedName: discriminator.propertyName,
-                    Description: "",
-                    Type: {
-                        Name: "String",
-                        Kind: InputTypeKind.String,
-                        IsNullable: false
-                    } as InputPrimitiveType,
-                    IsRequired: true,
-                    IsReadOnly: false,
-                    IsDiscriminator: true
-                };
-                properties.push(discriminatorProp);
-            }
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(
                 m.properties,
@@ -502,7 +485,7 @@ export function getInputType(
                     Type: getInputType(program, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
-                    IsDiscriminator: value.name !== discriminatorPropertyName ? false: true
+                    IsDiscriminator: false
                 };
                 outputProperties.push(inputProp);
             }

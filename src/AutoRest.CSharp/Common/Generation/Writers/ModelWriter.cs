@@ -281,11 +281,11 @@ namespace AutoRest.CSharp.Generation.Writers
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
             FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(property.Declaration.Type);
-            if (!string.IsNullOrWhiteSpace(property.Description))
+            if (!string.IsNullOrWhiteSpace(property.PropertyDescription))
             {
-                return $"{property.Description}{binaryDataExtraDescription}";
+                return $"{property.PropertyDescription}{binaryDataExtraDescription}";
             }
-            return $"{property.CreateDefaultPropertyDescription(overrideName)}{binaryDataExtraDescription}";
+            return $"{ObjectTypeProperty.CreateDefaultPropertyDescription(overrideName ?? property.Declaration.Name, property.IsReadOnly)}{binaryDataExtraDescription}";
         }
 
         private FormattableString CreateBinaryDataExtraDescription(CSharpType type)
@@ -346,7 +346,7 @@ Examples:
         private string GetAbstract(ObjectType schema)
         {
             // Limit this change to management plane to avoid data plane affected
-            return schema.Declaration.IsAbstract && Configuration.AzureArm ? "abstract " : string.Empty;
+            return schema.Declaration.IsAbstract ? "abstract " : string.Empty;
         }
 
         protected virtual void AddClassAttributes(CodeWriter writer, ObjectType schema)

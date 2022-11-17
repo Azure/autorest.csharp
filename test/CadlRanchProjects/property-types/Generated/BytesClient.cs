@@ -50,14 +50,14 @@ namespace Models.Property.Types
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BytesClient.xml" path="doc/members/member[@name='GetAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetAsync(RequestContext context = null)
+        /// <include file="Docs/BytesClient.xml" path="doc/members/member[@name='GetByteAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetByteAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("BytesClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("BytesClient.GetByte");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetRequest(context);
+                using HttpMessage message = CreateGetByteRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -70,14 +70,14 @@ namespace Models.Property.Types
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BytesClient.xml" path="doc/members/member[@name='Get(RequestContext)']/*" />
-        public virtual Response Get(RequestContext context = null)
+        /// <include file="Docs/BytesClient.xml" path="doc/members/member[@name='GetByte(RequestContext)']/*" />
+        public virtual Response GetByte(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("BytesClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("BytesClient.GetByte");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetRequest(context);
+                using HttpMessage message = CreateGetByteRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -135,7 +135,7 @@ namespace Models.Property.Types
             }
         }
 
-        internal HttpMessage CreateGetRequest(RequestContext context)
+        internal HttpMessage CreateGetByteRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
