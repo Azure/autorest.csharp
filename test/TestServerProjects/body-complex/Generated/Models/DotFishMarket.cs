@@ -23,8 +23,14 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of DotFishMarket. </summary>
         /// <param name="sampleSalmon"></param>
         /// <param name="salmons"></param>
-        /// <param name="sampleFish"></param>
-        /// <param name="fishes"></param>
+        /// <param name="sampleFish">
+        /// Please note <see cref="DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DotSalmon"/>.
+        /// </param>
+        /// <param name="fishes">
+        /// Please note <see cref="DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DotSalmon"/>.
+        /// </param>
         internal DotFishMarket(DotSalmon sampleSalmon, IReadOnlyList<DotSalmon> salmons, DotFish sampleFish, IReadOnlyList<DotFish> fishes)
         {
             SampleSalmon = sampleSalmon;
@@ -37,9 +43,17 @@ namespace body_complex.Models
         public DotSalmon SampleSalmon { get; }
         /// <summary> Gets the salmons. </summary>
         public IReadOnlyList<DotSalmon> Salmons { get; }
-        /// <summary> Gets the sample fish. </summary>
+        /// <summary>
+        /// Gets the sample fish
+        /// Please note <see cref="DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DotSalmon"/>.
+        /// </summary>
         public DotFish SampleFish { get; }
-        /// <summary> Gets the fishes. </summary>
+        /// <summary>
+        /// Gets the fishes
+        /// Please note <see cref="DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="DotSalmon"/>.
+        /// </summary>
         public IReadOnlyList<DotFish> Fishes { get; }
     }
 }

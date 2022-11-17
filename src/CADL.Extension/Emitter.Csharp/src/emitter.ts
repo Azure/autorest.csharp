@@ -68,10 +68,11 @@ import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
 import fs from "fs";
+import fsExtra from "fs-extra"
 import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
 import { dllFilePath } from "@autorest/csharp";
-import { exec } from "child_process";
+import { execSync } from "child_process";
 import { getConvenienceAPIName } from "@azure-tools/cadl-dpg";
 
 export interface NetEmitterOptions {
@@ -85,6 +86,8 @@ export interface NetEmitterOptions {
     generateConvenienceAPI: boolean; //workaround for cadl-ranch project
     "new-project": boolean;
     csharpGeneratorPath: string;
+    "clear-output-folder"?: boolean;
+    "save-inputs"?: boolean;
 }
 
 const defaultOptions = {
@@ -93,7 +96,9 @@ const defaultOptions = {
     logFile: "log.json",
     skipSDKGeneration: false,
     "new-project": false,
-    csharpGeneratorPath: dllFilePath
+    csharpGeneratorPath: dllFilePath,
+    "clear-output-folder": false,
+    "save-inputs": false
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -109,7 +114,9 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         skipSDKGeneration: { type: "boolean", default: false },
         generateConvenienceAPI: { type: "boolean", nullable: true },
         "new-project": { type: "boolean", nullable: true },
-        csharpGeneratorPath: { type: "string", nullable: true }
+        csharpGeneratorPath: { type: "string", nullable: true },
+        "clear-output-folder": { type: "boolean", nullable: true },
+        "save-inputs": { type: "boolean", nullable: true },
     },
     required: []
 };
@@ -142,7 +149,9 @@ export async function $onEmit(
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
         "new-project": resolvedOptions["new-project"],
-        csharpGeneratorPath: resolvedOptions.csharpGeneratorPath
+        csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
+        "clear-output-folder": resolvedOptions["clear-output-folder"],
+        "save-inputs": resolvedOptions["save-inputs"]
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -153,7 +162,7 @@ export async function $onEmit(
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
-            
+
             //resolve shared folders based on generator path override
             const resolvedSharedFolders: string[] = [];
             var sharedFolders = [
@@ -163,9 +172,13 @@ export async function $onEmit(
             for (const sharedFolder of sharedFolders) {
                 resolvedSharedFolders.push(path.relative(generatedFolder, sharedFolder).replaceAll("\\", "/"));
             }
-     
+
             if (!fs.existsSync(generatedFolder)) {
                 fs.mkdirSync(generatedFolder, { recursive: true });
+            }
+
+            if (options["clear-output-folder"]) {
+                fsExtra.emptyDirSync(generatedFolder);
             }
             await program.host.writeFile(
                 resolvePath(generatedFolder, "cadl.json"),
@@ -193,18 +206,32 @@ export async function $onEmit(
                 let command = `dotnet ${resolvePath(options.csharpGeneratorPath)} --project-path ${outputFolder} ${newProjectOption}`;
                 console.info(command);
 
-                exec(command, (error, stdout, stderr) => {
-                    if (error) {
-                        console.log(`error: ${error.message}`);
-                    }
-                    else if (stderr) {
-                        console.log(`stderr: ${stderr}`);
-                    }
-                    console.log(`stdout: ${stdout}`);
-                });
-            }            
+                try {
+                    execSync(command, { stdio: 'inherit' });
+                } catch (error: any) {
+                    if (error.message) console.log(error.message);
+                    if (error.stderr) console.error(error.stderr);
+                    if (error.stdout) console.log(error.stdout);
+                }
+            }
+
+            if (!options["save-inputs"]) {
+                // delete
+                deleteFile(resolvePath(generatedFolder, "cadl.json"));
+                deleteFile(resolvePath(generatedFolder, "Configuration.json"));
+            }
         }
     }
+}
+
+function deleteFile(filePath: string) {
+    fs.unlink(filePath, err => {
+        if (err) {
+            console.log(`stderr: ${err}`);
+        }
+
+        console.log(`File ${filePath} is deleted.`)
+    });
 }
 
 function prettierOutput(output: string) {
@@ -335,9 +362,7 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
 
             applyDefaultContentTypeAndAcceptParameter(op);
 
-            const apiVersionInOperation = op.Parameters.find(
-                (value) => value.IsApiVersion
-            );
+            const apiVersionInOperation = op.Parameters.find(isApiVersionParameter);
             if (apiVersionInOperation) {
                 if (apiVersionInOperation.DefaultValue?.Value) {
                     apiVersions.add(apiVersionInOperation.DefaultValue.Value);
@@ -352,9 +377,7 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
         }
         for (const client of clients) {
             for (const op of client.Operations) {
-                const apiVersionInOperation = op.Parameters.find(
-                    (value) => value.IsApiVersion
-                );
+                const apiVersionInOperation = op.Parameters.find(isApiVersionParameter);
                 if (apiVersionInOperation) {
                     if (apiVersions.size > 1) {
                         apiVersionInOperation.Kind =
@@ -392,6 +415,12 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
         }
     }
 
+    function isApiVersionParameter(parameter: InputParameter): boolean {
+        return parameter.IsApiVersion ||
+        (parameter.Location === RequestLocation.Query && parameter.Name === "api-version") ||
+        ([RequestLocation.Uri, RequestLocation.Path].includes(parameter.Location) && parameter.Name === "ApiVersion");
+    }
+
     function getAllLroMonitorOperations(
         routes: HttpOperation[],
         program: Program
@@ -423,11 +452,7 @@ function setUsage(
         } else if (usages.roundTrips.includes(name)) {
             m.Usage = Usage.RoundTrip;
         } else {
-            if ((m as InputEnumType).IsExtensible) {
-                m.Usage = Usage.RoundTrip;
-            } else {
-                m.Usage = Usage.None;
-            }
+            m.Usage = Usage.None;
         }
     }
 }
@@ -497,9 +522,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                      Type: inputType,
-                      Value: mediaTypes[0]
-                  } as InputConstant)
+                    Type: inputType,
+                    Value: mediaTypes[0]
+                } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -715,8 +740,8 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVersion
-            ? InputOperationParameterKind.Client
-            : InputOperationParameterKind.Method;
+                ? InputOperationParameterKind.Client
+                : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
@@ -883,3 +908,4 @@ class ErrorTypeFoundError extends Error {
         super("Error type found in evaluated Cadl output");
     }
 }
+
