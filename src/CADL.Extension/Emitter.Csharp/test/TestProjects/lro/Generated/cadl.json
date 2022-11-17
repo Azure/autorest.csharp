@@ -25,7 +25,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
+     "IsReadOnly": true,
      "IsDiscriminator": false
     },
     {
