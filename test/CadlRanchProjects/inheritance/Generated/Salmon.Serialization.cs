@@ -43,6 +43,8 @@ namespace Models.Inheritance
                 writer.WritePropertyName("partner");
                 writer.WriteObjectValue(Partner);
             }
+            writer.WritePropertyName("kind");
+            writer.WriteStringValue(Kind);
             writer.WritePropertyName("age");
             writer.WriteNumberValue(Age);
             writer.WriteEndObject();
@@ -53,6 +55,7 @@ namespace Models.Inheritance
             Optional<IList<Fish>> friends = default;
             Optional<IDictionary<string, Fish>> hate = default;
             Optional<Fish> partner = default;
+            string kind = default;
             int age = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -94,6 +97,11 @@ namespace Models.Inheritance
                         continue;
                     }
                     partner = DeserializeFish(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("kind"))
+                {
+                    kind = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("age"))

@@ -36,11 +36,11 @@ model Fish {
   age: int32;
 }
 
-@doc("The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.")
+/*@doc("The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.")
 @discriminator("sharktype")
 model Shark extends Fish {
   kind: "shark";
-}
+}*/
 
 @doc("The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic instances.")
 model Salmon extends Fish {
@@ -50,7 +50,7 @@ model Salmon extends Fish {
   partner?: Fish;
 }
 
-@doc("The third level model SawShark in polymorphic multiple levels inheritance.")
+/*@doc("The third level model SawShark in polymorphic multiple levels inheritance.")
 model SawShark extends Shark {
   sharktype: "saw";
 }
@@ -58,7 +58,7 @@ model SawShark extends Shark {
 @doc("The third level model GoblinShark in polymorphic multiple levels inheritance.")
 model GoblinShark extends Shark {
   sharktype: "goblin";
-}
+}*/
 
 @scenario
 @scenarioDoc("""
