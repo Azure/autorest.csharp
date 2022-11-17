@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
                 .ToDictionary(ci => ci.Name);
-            AssignParents(inputClients, clientInfosByName);
+            AssignParentClients(inputClients, clientInfosByName);
             var topLevelClientInfos = SetHierarchy(clientInfosByName);
             var clientOptions = CreateClientOptions(topLevelClientInfos);
 
@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         // assign parent according to the information in the input Model
-        private static void AssignParents(in IEnumerable<InputClient> clients, IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
+        private static void AssignParentClients(in IEnumerable<InputClient> clients, IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
         {
             foreach (var client in clients)
             {
@@ -412,20 +412,18 @@ namespace AutoRest.CSharp.Output.Models
             public INamedTypeSymbol? ExistingType { get; }
             public IReadOnlyList<InputOperation> Operations { get; }
 
-            private IReadOnlyList<InputParameter> _clientParameters;
-            public IReadOnlyList<InputParameter> ClientParameters
+            private IReadOnlyList<InputParameter>? _clientParameters;
+            private IReadOnlyList<InputParameter> _initClientParameters;
+            public IReadOnlyList<InputParameter> ClientParameters => _clientParameters ??= EnsureClientParameters();
+
+            private IReadOnlyList<InputParameter> EnsureClientParameters()
             {
-                get
+                if (_initClientParameters.Count == 0)
                 {
-                    if (_clientParameters != null && _clientParameters.Count > 0)
-                    {
-                        return _clientParameters;
-                    } else
-                    {
-                        var endpointParameter = this.Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
-                        return endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
-                    }
+                    var endpointParameter = this.Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
+                    return endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
                 }
+                return _initClientParameters;
             }
             public ISet<InputParameter> ResourceParameters { get; }
 
@@ -446,7 +444,7 @@ namespace AutoRest.CSharp.Output.Models
                 Description = clientDescription;
                 ExistingType = existingType;
                 Operations = operations;
-                _clientParameters = clientParameters;
+                _initClientParameters = clientParameters;
                 ResourceParameters = resourceParameters;
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
@@ -460,7 +458,7 @@ namespace AutoRest.CSharp.Output.Models
                 Description = string.Empty;
                 ExistingType = null;
                 Operations = Array.Empty<InputOperation>();
-                _clientParameters = clientParameters;
+                _initClientParameters = clientParameters;
                 ResourceParameters = new HashSet<InputParameter>();
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
