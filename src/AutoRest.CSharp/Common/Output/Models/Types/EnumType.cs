@@ -65,6 +65,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
+        public bool IsStringValueType => ValueType.Equals(typeof(string));
+        public bool IsIntValueType => ValueType.Equals(typeof(Int32));
         public string? Description { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -91,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static string CreateDescription(InputEnumTypeValue value)
         {
             var description = string.IsNullOrWhiteSpace(value.Description)
-                ? value.Value
+                ? value.GetValueString()
                 : value.Description;
             return BuilderHelpers.EscapeXmlDescription(description);
         }

@@ -61,6 +61,20 @@ enum FixedStringEnum {
     Four: "4"
 }
 
+@doc("Fixed int enum")
+enum FixedIntEnum {
+    One: 1,
+    Two: 2,
+    Four: 4
+}
+
+// @doc("Fixed float enum")
+// enum FixedFloatEnum {
+//     One: 1.1,
+//     Two: 2.1,
+//     Four: 4.0
+// }
+
 @doc("Extensible enum Values")
 enum ExtensibleEnumValues {
     One: "1",
@@ -85,6 +99,12 @@ model RoundTripModel extends BaseModel {
 
   @doc("Required fixed string enum")
   requiredFixedStringEnum: FixedStringEnum;
+
+  @doc("Required fixed int enum")
+  requiredFixedIntEnum: FixedIntEnum;
+
+//   @doc("Required fixed float enum")
+//   requiredFixedFloatEnum: FixedFloatEnum;
 
   @doc("Required extensible enum")
   requiredExtensibleEnum: ExtensibleEnum;
