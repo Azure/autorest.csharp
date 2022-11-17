@@ -418,7 +418,14 @@ Examples:
                     foreach (EnumTypeValue value in schema.Values)
                     {
                         writer.WriteXmlDocumentationSummary($"{value.Description}");
-                        writer.Line($"{value.Declaration.Name},");
+                        if (schema.IsIntValueType)
+                        {
+                            writer.Line($"{value.Declaration.Name} = {value.Value.Value},");
+                        }
+                        else
+                        {
+                            writer.Line($"{value.Declaration.Name},");
+                        }
                     }
                     writer.RemoveTrailingComma();
                 }

@@ -203,9 +203,16 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"{writerName}.WriteObjectValue({name:I});");
                             return;
 
+                        case EnumType clientEnum when clientEnum is { IsIntValueType: true, IsExtensible: false }:
+                            writer
+                                .Append($"{writerName}.WriteNumberValue((int){name:I}")
+                                .AppendNullableValue(valueSerialization.Type)
+                                .Line($");");
+                            return;
                         case EnumType clientEnum:
                             writer
-                                .Append($"{writerName}.WriteStringValue({name:I}")
+                                .Append($"{writerName}.WriteStringValue({name:I}");
+                            writer
                                 .AppendNullableValue(valueSerialization.Type)
                                 .AppendEnumToString(clientEnum)
                                 .Line($");");
@@ -646,7 +653,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var value = GetFrameworkTypeValueFormattable(element, clientEnum.ValueType.FrameworkType, SerializationFormat.Default);
                     return clientEnum.IsExtensible
                         ? $"new {clientEnum.Type}({value})"
-                        : (FormattableString) $"{value}.To{clientEnum.Type:D}()";
+                        : (FormattableString)$"{value}.To{clientEnum.Type:D}()";
 
                 default:
                     throw new NotSupportedException();
