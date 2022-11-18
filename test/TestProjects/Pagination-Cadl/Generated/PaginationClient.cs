@@ -143,7 +143,7 @@ namespace Pagination
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        public async Task<Response<CustomPage>> GetLedgerEntriesFirstPageAsync(CancellationToken cancellationToken = default)
+        private async Task<Response<CustomPage>> GetLedgerEntriesFirstPageAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             using var message = CreateGetLedgerEntriesRequest(context);
@@ -154,7 +154,7 @@ namespace Pagination
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        public Response<CustomPage> GetLedgerEntriesFirstPage(CancellationToken cancellationToken = default)
+        private Response<CustomPage> GetLedgerEntriesFirstPage(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             using var message = CreateGetLedgerEntriesRequest(context);
@@ -167,7 +167,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        public async Task<Response<CustomPage>> GetLedgerEntriesNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        private async Task<Response<CustomPage>> GetLedgerEntriesNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -185,7 +185,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        public Response<CustomPage> GetLedgerEntriesNextPage(string nextLink, CancellationToken cancellationToken = default)
+        private Response<CustomPage> GetLedgerEntriesNextPage(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
