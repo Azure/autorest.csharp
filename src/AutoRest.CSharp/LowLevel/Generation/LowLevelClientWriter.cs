@@ -74,12 +74,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         DataPlaneClientWriter.WritePagingOperation(writer, pagingMethod, true, client.Fields.ClientDiagnosticsProperty.Name, false);
                         DataPlaneClientWriter.WritePagingOperation(writer, pagingMethod, false, client.Fields.ClientDiagnosticsProperty.Name, false);
 
-                        RestClientWriter.WriteOperation(writer, pagingMethod.Method, client.Fields.PipelineField.Name, true, RestClientWriter.WritePageFuncBodyWithProcessMessage, "FirstPage");
-                        RestClientWriter.WriteOperation(writer, pagingMethod.Method, client.Fields.PipelineField.Name, false, RestClientWriter.WritePageFuncBodyWithProcessMessage, "FirstPage");
+                        RestClientWriter.WriteOperation(writer, pagingMethod.Method, client.Fields.PipelineField.Name, true, RestClientWriter.WriteFuncBodyWithProcessMessage, $"{pagingMethod.Method.Name}FirstPage", MethodSignatureModifiers.Private);
+                        RestClientWriter.WriteOperation(writer, pagingMethod.Method, client.Fields.PipelineField.Name, false, RestClientWriter.WriteFuncBodyWithProcessMessage, $"{pagingMethod.Method.Name}FirstPage", MethodSignatureModifiers.Private);
                         if (pagingMethod.NextPageMethod != null)
                         {
-                            RestClientWriter.WriteOperation(writer, pagingMethod.NextPageMethod, client.Fields.PipelineField.Name, true, RestClientWriter.WritePageFuncBodyWithProcessMessage);
-                            RestClientWriter.WriteOperation(writer, pagingMethod.NextPageMethod, client.Fields.PipelineField.Name, false, RestClientWriter.WritePageFuncBodyWithProcessMessage);
+                            RestClientWriter.WriteOperation(writer, pagingMethod.NextPageMethod, client.Fields.PipelineField.Name, true, RestClientWriter.WriteFuncBodyWithProcessMessage, null, MethodSignatureModifiers.Private);
+                            RestClientWriter.WriteOperation(writer, pagingMethod.NextPageMethod, client.Fields.PipelineField.Name, false, RestClientWriter.WriteFuncBodyWithProcessMessage, null, MethodSignatureModifiers.Private);
                         }
                     }
 
