@@ -67,12 +67,9 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, string ifMatch, int? top = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag ifMatch, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
-
             return GetExtensionClient(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
         }
 
@@ -85,12 +82,9 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, string ifMatch, int? top = null, CancellationToken cancellationToken = default)
+        public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag ifMatch, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
-
             return GetExtensionClient(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
         }
 

@@ -1320,6 +1320,8 @@ operationGroups:
             schema: *ref_22
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: etag
             language: !Languages 
               default:
                 name: ifMatch
@@ -1420,6 +1422,8 @@ operationGroups:
             schema: *ref_22
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: etag
             language: !Languages 
               default:
                 name: ifMatch

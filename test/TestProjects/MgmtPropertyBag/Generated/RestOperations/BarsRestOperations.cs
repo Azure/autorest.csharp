@@ -38,7 +38,7 @@ namespace MgmtPropertyBag
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateListWithSubscriptionRequest(string subscriptionId, string ifMatch, int? top)
+        internal HttpMessage CreateListWithSubscriptionRequest(string subscriptionId, ETag ifMatch, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -65,12 +65,11 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="ifMatch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<BarListResult>> ListWithSubscriptionAsync(string subscriptionId, string ifMatch, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<BarListResult>> ListWithSubscriptionAsync(string subscriptionId, ETag ifMatch, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateListWithSubscriptionRequest(subscriptionId, ifMatch, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -93,12 +92,11 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="ifMatch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<BarListResult> ListWithSubscription(string subscriptionId, string ifMatch, int? top = null, CancellationToken cancellationToken = default)
+        public Response<BarListResult> ListWithSubscription(string subscriptionId, ETag ifMatch, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateListWithSubscriptionRequest(subscriptionId, ifMatch, top);
             _pipeline.Send(message, cancellationToken);
@@ -116,7 +114,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string ifMatch, string filter, int? top)
+        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, ETag ifMatch, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -151,13 +149,12 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="ifMatch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<IReadOnlyList<BarData>>> ListAsync(string subscriptionId, string resourceGroupName, string ifMatch, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<BarData>>> ListAsync(string subscriptionId, string resourceGroupName, ETag ifMatch, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, ifMatch, filter, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -187,13 +184,12 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="ifMatch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<IReadOnlyList<BarData>> List(string subscriptionId, string resourceGroupName, string ifMatch, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<BarData>> List(string subscriptionId, string resourceGroupName, ETag ifMatch, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, ifMatch, filter, top);
             _pipeline.Send(message, cancellationToken);
@@ -418,7 +414,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        internal HttpMessage CreateListWithSubscriptionNextPageRequest(string nextLink, string subscriptionId, string ifMatch, int? top)
+        internal HttpMessage CreateListWithSubscriptionNextPageRequest(string nextLink, string subscriptionId, ETag ifMatch, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -439,13 +435,12 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="ifMatch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<BarListResult>> ListWithSubscriptionNextPageAsync(string nextLink, string subscriptionId, string ifMatch, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<BarListResult>> ListWithSubscriptionNextPageAsync(string nextLink, string subscriptionId, ETag ifMatch, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateListWithSubscriptionNextPageRequest(nextLink, subscriptionId, ifMatch, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -469,13 +464,12 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="ifMatch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<BarListResult> ListWithSubscriptionNextPage(string nextLink, string subscriptionId, string ifMatch, int? top = null, CancellationToken cancellationToken = default)
+        public Response<BarListResult> ListWithSubscriptionNextPage(string nextLink, string subscriptionId, ETag ifMatch, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateListWithSubscriptionNextPageRequest(nextLink, subscriptionId, ifMatch, top);
             _pipeline.Send(message, cancellationToken);

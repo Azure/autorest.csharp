@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtPropertyBagTests() : base("MgmtPropertyBag") { }
 
         [TestCase("MgmtPropertyBagExtensions", "GetFoos", true, typeof(SubscriptionResource), typeof(string), typeof(int?))]
-        [TestCase("MgmtPropertyBagExtensions", "GetBars", true, typeof(SubscriptionResource), typeof(string), typeof(int?))]
+        [TestCase("MgmtPropertyBagExtensions", "GetBars", true, typeof(SubscriptionResource), typeof(ETag), typeof(int?))]
         [TestCase("FooCollection", "CreateOrUpdate", true, typeof(WaitUntil), typeof(string), typeof(FooData), typeof(FooCreateOrUpdateOptions))]
         [TestCase("FooCollection", "Get", true, typeof(string), typeof(FooGetOptions))]
         [TestCase("FooCollection", "GetAll", true, typeof(FooGetAllOptions))]

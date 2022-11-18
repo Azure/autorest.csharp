@@ -265,6 +265,28 @@ namespace AutoRest.CSharp.Generation.Types
             _ => null
         };
 
+        internal static string? GetXMsFormatType(InputType inputType)
+        {
+            if (Enum.TryParse<InputTypeKind>(inputType.Name, true, out InputTypeKind type))
+            {
+                return type switch
+                {
+                    InputTypeKind.DateTimeISO8601 => XMsFormat.DateTime,
+                    InputTypeKind.DateTimeRFC1123 => XMsFormat.DateTimeRFC1123,
+                    InputTypeKind.DateTimeUnix => XMsFormat.DateTimeUnix,
+                    InputTypeKind.DurationConstant => XMsFormat.DurationConstant,
+                    InputTypeKind.ResourceIdentifier => XMsFormat.ArmId,
+                    InputTypeKind.AzureLocation => XMsFormat.AzureLocation,
+                    InputTypeKind.ContentType => XMsFormat.ContentType,
+                    InputTypeKind.ETag => XMsFormat.ETag,
+                    InputTypeKind.ResourceType => XMsFormat.ResourceType,
+                    InputTypeKind.RequestMethod => XMsFormat.RequestMethod,
+                    _ => null
+                };
+            }
+            return null;
+        }
+
         private static Type ToFrameworkNumericType(NumberSchema schema) => schema.Type switch
         {
             AllSchemaTypes.Number => schema.Precision switch

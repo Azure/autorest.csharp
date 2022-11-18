@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (collection.GetAllOperation?.OperationMappings.First().Value.Method.IsPropertyBagMethod == true)
                 {
-                    value = "null";
+                    value = "options: null";
                 }
             }
             return value;

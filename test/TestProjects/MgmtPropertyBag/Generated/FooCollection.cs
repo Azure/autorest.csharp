@@ -307,17 +307,17 @@ namespace MgmtPropertyBag
 
         IEnumerator<FooResource> IEnumerable<FooResource>.GetEnumerator()
         {
-            return GetAll(null).GetEnumerator();
+            return GetAll(options: null).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll(null).GetEnumerator();
+            return GetAll(options: null).GetEnumerator();
         }
 
         IAsyncEnumerator<FooResource> IAsyncEnumerable<FooResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
-            return GetAllAsync(null, cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            return GetAllAsync(options: null, cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
     }
 }

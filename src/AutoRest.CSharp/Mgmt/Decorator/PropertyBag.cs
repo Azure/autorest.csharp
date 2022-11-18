@@ -11,6 +11,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -40,12 +41,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var schema = BuildOptionalSchema(queryOrHeaderInputParams, resourceName, methodName, operationId);
                 var schemaObject = new MgmtObjectType(schema);
                 var newParameter = BuildOptionalParameter(schemaObject);
-                var existingModel = MgmtContext.Library.PropertyBagModels.Where(m => m.Type.Name == schemaObject.Type.Name);
-                if (existingModel != null)
+                var existingModels = MgmtContext.Library.PropertyBagModels.Where(m => m.Type.Name == schemaObject.Type.Name);
+                if (existingModels != null)
                 {
                     // Sometimes we might have two or more property bag models with same name but different porperties
                     // We will throw exception in this case to prompt the user to rename the property bag model
-                    if (IsPropertyBagNameDuplicated(existingModel, schemaObject))
+                    if (IsPropertyBagNameDuplicated(existingModels, schemaObject))
                     {
                         throw new InvalidOperationException($"Another property bag model named {schemaObject.Type.Name} already exists, please use configuration `rename-property-bag` to rename the property bag model corresponding to the operation {operationId}.");
                     }
@@ -79,23 +80,39 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ObjectSchema BuildOptionalSchema(IEnumerable<InputParameter> parameters, string? resourceName, string methodName, string operationId)
         {
-            var schema = new ObjectSchema {
-                Extensions = new RecordOfStringAndAny { { "x-csharp-usage", "model,input" }, { "x-accessibility", "public" } },
-                ApiVersions = new Collection<ApiVersion> { parameters.FirstOrDefault().Schema.ApiVersions.FirstOrDefault() },
-                Properties = new Collection<Property>(parameters.Select(p => new Property
+            var properties = new List<Property>();
+            foreach (var parameter in parameters)
+            {
+                var propertySchema = parameter.Schema;
+                var format = TypeFactory.GetXMsFormatType(parameter.Type);
+                if (parameter.Schema is StringSchema && format != null)
                 {
-                    Schema = p.Schema,
+                    // some parameters might share one string schema, but have different x-ms-format
+                    // therefore we use deep clone here to avoid generating the wrong parameter type
+                    propertySchema = parameter.Schema.DeepClone();
+                    propertySchema.Extensions = new RecordOfStringAndAny { { "x-ms-format", format } };
+                }
+                var property = new Property
+                {
+                    Schema = propertySchema,
                     Language = new Languages
                     {
                         Default = new Language
                         {
-                            Name= p.Name,
-                            Description= p.Description
+                            Name = parameter.Name,
+                            Description = parameter.Description
                         }
                     },
                     ReadOnly = false,
-                    Required = p.DefaultValue == null
-                }).ToList()) };
+                    Required = parameter.DefaultValue == null
+                };
+                properties.Add(property);
+            }
+            var schema = new ObjectSchema {
+                Extensions = new RecordOfStringAndAny { { "x-csharp-usage", "model,input" }, { "x-accessibility", "public" } },
+                ApiVersions = new Collection<ApiVersion> { parameters.FirstOrDefault().Schema.ApiVersions.FirstOrDefault() },
+                Properties = properties
+            };
             var resourcePrefix = resourceName is null ?
                 MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" :
                 resourceName.ReplaceLast("Resource", "").ReplaceLast("Collection", "");
@@ -190,6 +207,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
             }
             return false;
+        }
+
+        private static T DeepClone<T>(this T source)
+        {
+            return BinaryData.FromObjectAsJson<T>(source).ToObjectFromJson<T>();
         }
     }
 }

@@ -5,8 +5,7 @@
 
 #nullable disable
 
-using System;
-using Azure.Core;
+using Azure;
 
 namespace MgmtPropertyBag.Models
 {
@@ -15,16 +14,13 @@ namespace MgmtPropertyBag.Models
     {
         /// <summary> Initializes a new instance of BarGetAllOptions. </summary>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public BarGetAllOptions(string ifMatch)
+        public BarGetAllOptions(ETag ifMatch)
         {
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
-
             IfMatch = ifMatch;
         }
 
         /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
-        public string IfMatch { get; }
+        public ETag IfMatch { get; }
         /// <summary> The filter to apply on the operation. </summary>
         public string Filter { get; set; }
         /// <summary> Gets or sets the top. </summary>
