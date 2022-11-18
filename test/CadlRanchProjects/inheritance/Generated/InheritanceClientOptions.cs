@@ -10,8 +10,8 @@ using Azure.Core;
 
 namespace Models.Inheritance
 {
-    /// <summary> Client options for Models.Inheritance library clients. </summary>
-    public partial class ModelsInheritanceClientOptions : ClientOptions
+    /// <summary> Client options for InheritanceClient. </summary>
+    public partial class InheritanceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2021_03_25;
 
@@ -24,8 +24,8 @@ namespace Models.Inheritance
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of ModelsInheritanceClientOptions. </summary>
-        public ModelsInheritanceClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of InheritanceClientOptions. </summary>
+        public InheritanceClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

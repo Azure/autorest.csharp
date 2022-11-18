@@ -184,7 +184,7 @@
  "Clients": [
   {
    "$id": "21",
-   "Name": "Inheritance",
+   "Name": "InheritanceClient",
    "Description": "Illustrates inheritance and polymorphic model.",
    "Operations": [
     {
@@ -510,29 +510,20 @@
      ],
      "BufferResponse": true,
      "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "53"
-   }
-  },
-  {
-   "$id": "54",
-   "Name": "Discriminated",
-   "Operations": [
+    },
     {
-     "$id": "55",
+     "$id": "53",
      "Name": "getModel",
      "Parameters": [
       {
        "$ref": "23"
       },
       {
-       "$id": "56",
+       "$id": "54",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "57",
+        "$id": "55",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -547,9 +538,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "58",
+        "$id": "56",
         "Type": {
-         "$ref": "57"
+         "$ref": "55"
         },
         "Value": "application/json"
        }
@@ -560,7 +551,7 @@
      ],
      "Responses": [
       {
-       "$id": "59",
+       "$id": "57",
        "StatusCodes": [
         200
        ],
@@ -580,14 +571,14 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "60",
+     "$id": "58",
      "Name": "putModel",
      "Parameters": [
       {
        "$ref": "23"
       },
       {
-       "$id": "61",
+       "$id": "59",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -604,11 +595,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "62",
+       "$id": "60",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "63",
+        "$id": "61",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -623,19 +614,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "64",
+        "$id": "62",
         "Type": {
-         "$ref": "63"
+         "$ref": "61"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "65",
+       "$id": "63",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "66",
+        "$id": "64",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -650,9 +641,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "65",
         "Type": {
-         "$ref": "66"
+         "$ref": "64"
         },
         "Value": "application/json"
        }
@@ -663,7 +654,7 @@
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "66",
        "StatusCodes": [
         200
        ],
@@ -683,18 +674,18 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "69",
+     "$id": "67",
      "Name": "getRecursiveModel",
      "Parameters": [
       {
        "$ref": "23"
       },
       {
-       "$id": "70",
+       "$id": "68",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "71",
+        "$id": "69",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -709,9 +700,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "72",
+        "$id": "70",
         "Type": {
-         "$ref": "71"
+         "$ref": "69"
         },
         "Value": "application/json"
        }
@@ -722,7 +713,7 @@
      ],
      "Responses": [
       {
-       "$id": "73",
+       "$id": "71",
        "StatusCodes": [
         200
        ],
@@ -742,14 +733,14 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "74",
+     "$id": "72",
      "Name": "putRecursiveModel",
      "Parameters": [
       {
        "$ref": "23"
       },
       {
-       "$id": "75",
+       "$id": "73",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -766,11 +757,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "76",
+       "$id": "74",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "77",
+        "$id": "75",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -785,19 +776,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "76",
         "Type": {
-         "$ref": "77"
+         "$ref": "75"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "79",
+       "$id": "77",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "80",
+        "$id": "78",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -812,9 +803,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "81",
+        "$id": "79",
         "Type": {
-         "$ref": "80"
+         "$ref": "78"
         },
         "Value": "application/json"
        }
@@ -825,7 +816,7 @@
      ],
      "Responses": [
       {
-       "$id": "82",
+       "$id": "80",
        "StatusCodes": [
         200
        ],
@@ -845,18 +836,18 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "83",
+     "$id": "81",
      "Name": "getMissingDiscriminator",
      "Parameters": [
       {
        "$ref": "23"
       },
       {
-       "$id": "84",
+       "$id": "82",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "85",
+        "$id": "83",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -871,9 +862,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "86",
+        "$id": "84",
         "Type": {
-         "$ref": "85"
+         "$ref": "83"
         },
         "Value": "application/json"
        }
@@ -884,7 +875,7 @@
      ],
      "Responses": [
       {
-       "$id": "87",
+       "$id": "85",
        "StatusCodes": [
         200
        ],
@@ -904,18 +895,18 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "88",
+     "$id": "86",
      "Name": "getWrongDiscriminator",
      "Parameters": [
       {
        "$ref": "23"
       },
       {
-       "$id": "89",
+       "$id": "87",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "90",
+        "$id": "88",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -930,9 +921,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "91",
+        "$id": "89",
         "Type": {
-         "$ref": "90"
+         "$ref": "88"
         },
         "Value": "application/json"
        }
@@ -943,7 +934,7 @@
      ],
      "Responses": [
       {
-       "$id": "92",
+       "$id": "90",
        "StatusCodes": [
         200
        ],
@@ -964,8 +955,9 @@
     }
    ],
    "Protocol": {
-    "$id": "93"
-   }
+    "$id": "91"
+   },
+   "Creatable": true
   }
  ]
 }
