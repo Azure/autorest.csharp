@@ -64,7 +64,8 @@
  "Clients": [
   {
    "$id": "9",
-   "Name": "Projects",
+   "Name": "LroOperationClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "10",
@@ -280,7 +281,8 @@
    ],
    "Protocol": {
     "$id": "32"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

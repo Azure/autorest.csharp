@@ -61,7 +61,8 @@
  "Clients": [
   {
    "$id": "8",
-   "Name": "dogs",
+   "Name": "MultiInterfaceClientClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "9",
@@ -285,18 +286,9 @@
      ],
      "BufferResponse": true,
      "GenerateConvenienceMethod": false
-    }
-   ],
-   "Protocol": {
-    "$id": "31"
-   }
-  },
-  {
-   "$id": "32",
-   "Name": "cats",
-   "Operations": [
+    },
     {
-     "$id": "33",
+     "$id": "31",
      "Name": "getCats",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
@@ -304,11 +296,11 @@
        "$ref": "10"
       },
       {
-       "$id": "34",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "35",
+        "$id": "33",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -323,9 +315,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "36",
+        "$id": "34",
         "Type": {
-         "$ref": "35"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
@@ -336,7 +328,7 @@
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "35",
        "StatusCodes": [
         200
        ],
@@ -356,7 +348,7 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "38",
+     "$id": "36",
      "Name": "setCats",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
@@ -364,7 +356,7 @@
        "$ref": "10"
       },
       {
-       "$id": "39",
+       "$id": "37",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -381,11 +373,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "40",
+       "$id": "38",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "41",
+        "$id": "39",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -400,19 +392,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "42",
+        "$id": "40",
         "Type": {
-         "$ref": "41"
+         "$ref": "39"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "43",
+       "$id": "41",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "42",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -427,9 +419,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "43",
         "Type": {
-         "$ref": "44"
+         "$ref": "42"
         },
         "Value": "application/json"
        }
@@ -440,7 +432,7 @@
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "44",
        "StatusCodes": [
         200
        ],
@@ -464,8 +456,9 @@
     }
    ],
    "Protocol": {
-    "$id": "47"
-   }
+    "$id": "45"
+   },
+   "Creatable": true
   }
  ]
 }

@@ -136,7 +136,7 @@ namespace dpg_customization_LowLevel
         /// <param name="mode"> The mode with which you&apos;ll be handling your returned body. &apos;raw&apos; for just dealing with the raw body, and &apos;model&apos; if you are going to convert the raw body to a customized body before returning to users. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
-        public virtual AsyncPageable<Product> GetPagesValuesAsync(string mode, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> GetPageValuesAsync(string mode, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
@@ -150,7 +150,7 @@ namespace dpg_customization_LowLevel
         /// <param name="mode"> The mode with which you&apos;ll be handling your returned body. &apos;raw&apos; for just dealing with the raw body, and &apos;model&apos; if you are going to convert the raw body to a customized body before returning to users. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
-        public virtual Pageable<Product> GetPagesValues(string mode, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> GetPageValues(string mode, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 

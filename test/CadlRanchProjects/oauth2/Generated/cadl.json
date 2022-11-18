@@ -35,7 +35,7 @@
  "Clients": [
   {
    "$id": "5",
-   "Name": "OAuth2",
+   "Name": "OAuth2Client",
    "Description": "Illustrates clients generated with OAuth2 authentication.",
    "Operations": [
     {
@@ -223,7 +223,8 @@
    ],
    "Protocol": {
     "$id": "25"
-   }
+   },
+   "Creatable": true
   }
  ],
  "Auth": {

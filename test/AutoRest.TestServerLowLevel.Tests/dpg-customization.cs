@@ -80,7 +80,7 @@ namespace AutoRest.TestServer.Tests
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
-            AsyncPageable<Product> allPages = new DPGClient(Key, host, null).GetPagesValuesAsync("model");
+            AsyncPageable<Product> allPages = new DPGClient(Key, host, null).GetPageValuesAsync("model");
             var pagesCount = 0;
             await foreach (Page<Product> page in allPages.AsPages())
             {
