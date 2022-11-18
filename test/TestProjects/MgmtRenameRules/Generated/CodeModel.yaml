@@ -2609,16 +2609,6 @@ schemas: !Schemas
             Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. <br><br>Minimum
             api-version: 2020-06-01.
       protocol: !Protocols {}
-    - !StringSchema &ref_224
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: VirtualMachineScaleSetVMInstanceViewPlacementGroupId
-          description: The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
-      protocol: !Protocols {}
     - !StringSchema &ref_249
       type: string
       apiVersions:
@@ -5064,6 +5054,17 @@ schemas: !Schemas
         default:
           name: AnyObject
           description: Any object
+      protocol: !Protocols {}
+  armIds:
+    - !ArmIdSchema &ref_224
+      type: arm-id
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: VirtualMachineScaleSetVMInstanceView-placementGroupId
+          description: The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
       protocol: !Protocols {}
   dateTimes:
     - !DateTimeSchema &ref_54
