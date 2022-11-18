@@ -23,7 +23,9 @@ import {
     UsageFlags,
     UsageTracker,
     TrackableType,
-    getDiscriminator
+    getDiscriminator,
+    IntrinsicType,
+    isVoidType
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -258,6 +260,8 @@ export function getInputType(
         } as InputPrimitiveType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
+    } else if (type.kind === "Intrinsic") {
+        return getInputModelForIntrinsicType(type);
     } else {
         throw new Error("Unsupported type.");
     }
@@ -478,6 +482,7 @@ export function getInputType(
                 if (vis && vis.includes("read") && vis.length === 1) {
                     isReadOnly = true;
                 }
+                if (isNeverType(value.type) || isVoidType(value.type)) return;
                 const inputProp = {
                     Name: value.name,
                     SerializedName: value.name,
@@ -524,6 +529,21 @@ export function getInputType(
         }
         return namespaceString;
     }
+
+    function getInputModelForIntrinsicType(type: IntrinsicType): InputType {
+        switch (type.name) {
+            case "unknown":
+                return {
+                    Name: "unknown",
+                    Description: getDoc(program, type),
+                    IsNullable: false,
+                    Usage: Usage.None,
+                    Properties: []
+                } as InputModelType;
+            default:
+                throw new Error(`Unsupported type ${type.name}`);
+        }
+    }
 }
 
 export function getUsages(
@@ -541,7 +561,7 @@ export function getUsages(
 
     const operations: Operation[] = ops.map((op) => op.operation);
     const usages = resolveUsages(operations);
-    let usagesMap: Map<string, UsageFlags> = new Map<string, UsageFlags>();
+    const usagesMap: Map<string, UsageFlags> = new Map<string, UsageFlags>();
     for (const type of usages.types) {
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
@@ -549,7 +569,7 @@ export function getUsages(
             const effectiveType = getEffectiveModelType(program, type);
             typeName = effectiveType.name;
         }
-        let affectTypes: string[] = [];
+        const affectTypes: string[] = [];
         if (typeName !== "") affectTypes.push(typeName);
         if (type.kind === "Model" && type.templateArguments) {
             for (const arg of type.templateArguments) {

@@ -10,7 +10,7 @@
  "Clients": [
   {
    "$id": "2",
-   "Name": "SecurityClient",
+   "Name": "SecurityClientClient",
    "Description": "Illustrates clients generated from a Cadl with security.",
    "Operations": [
     {
@@ -129,7 +129,8 @@
    ],
    "Protocol": {
     "$id": "16"
-   }
+   },
+   "Creatable": true
   }
  ],
  "Auth": {

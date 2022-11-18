@@ -34,7 +34,8 @@
  "Clients": [
   {
    "$id": "5",
-   "Name": "ParameterOrders",
+   "Name": "ParametersCadlClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "6",
@@ -259,7 +260,8 @@
    ],
    "Protocol": {
     "$id": "28"
-   }
+   },
+   "Creatable": true
   }
  ]
 }
