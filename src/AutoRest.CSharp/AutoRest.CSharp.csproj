@@ -45,7 +45,6 @@
 
   <ItemGroup>
     <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
-    <Compile Remove="Mgmt\Output\BaseResource.cs" />
     <None Include="package.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="readme.md" CopyToOutputDirectory="PreserveNewest" />
     <None Include="index.d.ts" CopyToOutputDirectory="PreserveNewest" />
