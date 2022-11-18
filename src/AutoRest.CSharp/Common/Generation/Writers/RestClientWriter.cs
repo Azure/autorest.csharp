@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WriteFuncBodyWithSend(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, string pipelineName, bool async)
+        private void WriteFuncBodyWithSend(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, string pipelineName, bool async)
         {
             var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
 
@@ -138,25 +138,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 .WriteMethodCall(async, $"{pipelineName}.SendAsync", $"{pipelineName}.Send", $"{messageVariable}, {KnownParameters.CancellationTokenParameter.Name}");
         }
 
-        public static void WriteFuncBodyWithProcessMessage(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, string pipelineName, bool async)
+        private void WriteStatusCodeSwitch(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, bool async, FieldDeclaration clientDiagnosticsField)
         {
-            var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-            writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
-
-            var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
-            var responseVariable = new CodeWriterDeclaration("response");
-
-            writer
-                .Line($"using var {messageVariable:D} = {requestMethodName}({operation.Parameters.GetIdentifiersFormattable()});")
-                .Append($"{typeof(Response)} {responseVariable:D} = ")
-                .WriteMethodCall(async, $"{pipelineName}.ProcessMessageAsync", $"{pipelineName}.ProcessMessage", $"{messageVariable}, {KnownParameters.RequestContext.Name}");
-
-            writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({operation.ReturnType}.FromResponse({responseVariable:I}), {responseVariable:I});");
-        }
-
-        public static void WriteStatusCodeSwitch(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, bool async, FieldDeclaration fieldDeclaration)
-        {
-            ResponseWriterHelpers.WriteStatusCodeSwitch(writer, $"{messageVariable.ActualName}", operation, async, fieldDeclaration);
+            ResponseWriterHelpers.WriteStatusCodeSwitch(writer, $"{messageVariable.ActualName}", operation, async, clientDiagnosticsField);
         }
     }
 }
