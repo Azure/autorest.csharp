@@ -9,7 +9,8 @@
  "Clients": [
   {
    "$id": "2",
-   "Name": "stringFormat",
+   "Name": "stringFormatClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "3",
@@ -190,7 +191,8 @@
    ],
    "Protocol": {
     "$id": "21"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

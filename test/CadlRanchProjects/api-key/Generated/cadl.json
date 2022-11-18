@@ -35,7 +35,7 @@
  "Clients": [
   {
    "$id": "5",
-   "Name": "ApiKey",
+   "Name": "ApiKeyClient",
    "Description": "Illustrates clients generated with ApiKey authentication.",
    "Operations": [
     {
@@ -223,7 +223,8 @@
    ],
    "Protocol": {
     "$id": "25"
-   }
+   },
+   "Creatable": true
   }
  ],
  "Auth": {
