@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static MethodSignature CreateMethod(SchemaObjectType modelType)
         {
-            var ctor = modelType.ModelFactoryInitializationConstructor.Signature;
+            var ctor = modelType.SerializationConstructor.Signature;
             var methodParameters = new Parameter[ctor.Parameters.Count];
 
             for (var i = 0; i < ctor.Parameters.Count; i++)

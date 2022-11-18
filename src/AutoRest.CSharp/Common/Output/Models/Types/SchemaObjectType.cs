@@ -186,11 +186,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             );
         }
 
-        protected override ObjectTypeConstructor BuildModelFactoryInitializationConstructor()
-        {
-            return base.BuildModelFactoryInitializationConstructor();
-        }
-
         private ReferenceOrConstant? GetPropertyDefaultValue(ObjectTypeProperty property)
         {
             if (property == Discriminator?.Property &&

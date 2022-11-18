@@ -19,7 +19,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CSharpType? _inheritsType;
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
-        private ObjectTypeConstructor? _modelFactoryInitializationConstructor;
         private string? _description;
         private IEnumerable<ModelMethodDefinition>? _methods;
         private ObjectTypeDiscriminator? _discriminator;
@@ -45,13 +44,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
 
-        public ObjectTypeConstructor ModelFactoryInitializationConstructor => _modelFactoryInitializationConstructor ??= BuildModelFactoryInitializationConstructor();
-
         public string? Description => _description ??= CreateDescription() + CreateExtraDescriptionWithDiscriminator();
         public abstract ObjectTypeProperty? AdditionalPropertiesProperty { get; }
         protected abstract ObjectTypeConstructor BuildInitializationConstructor();
         protected abstract ObjectTypeConstructor BuildSerializationConstructor();
-        protected virtual ObjectTypeConstructor BuildModelFactoryInitializationConstructor() => BuildSerializationConstructor();
         protected abstract CSharpType? CreateInheritedType();
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
         protected abstract string CreateDescription();
