@@ -39,7 +39,8 @@ namespace MgmtNonStringPathVariable
 
         internal MgmtNonStringPathVariableArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string id)
         {
-            _operation = OperationInternal.Create(id, clientDiagnostics, pipeline, "MgmtNonStringPathVariableArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, id, out string finalResponse);
+            _operation = OperationInternal.Create(clientDiagnostics, nextLinkOperation, finalResponse, "MgmtNonStringPathVariableArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
         /// <inheritdoc />

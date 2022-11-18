@@ -39,7 +39,8 @@ namespace MgmtParamOrdering
 
         internal MgmtParamOrderingArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string id)
         {
-            _operation = OperationInternal<T>.Create(id, source, clientDiagnostics, pipeline, "MgmtParamOrderingArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, id, out string finalResponse);
+            _operation = OperationInternal<T>.Create(source, clientDiagnostics, nextLinkOperation, finalResponse, "MgmtParamOrderingArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
         /// <inheritdoc />

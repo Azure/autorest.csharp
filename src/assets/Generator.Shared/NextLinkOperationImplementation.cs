@@ -70,12 +70,17 @@ namespace Azure.Core
             return new OperationToOperationOfT<T>(operationSource, operation);
         }
 
-        public static IOperation Create(
+        public static IOperation? Create(
             HttpPipeline pipeline,
             string id,
+            out string? finalResponse,
             string? apiVersionOverride = null)
         {
             var lroDetails = BinaryData.FromBytes(Convert.FromBase64String(id)).ToObjectFromJson<Dictionary<string, string>>();
+            if (lroDetails.TryGetValue("FinalResponse", out finalResponse))
+            {
+                return null;
+            }
             if (!Uri.TryCreate(lroDetails["InitialUri"], UriKind.Absolute, out var startRequestUri))
                 throw new InvalidOperationException("Invalid initial URI");
             if (!lroDetails.TryGetValue("NextRequestUri", out var nextRequestUri))
@@ -92,14 +97,19 @@ namespace Azure.Core
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
-        public static IOperation<T> Create<T>(
+        public static IOperation<T>? Create<T>(
             IOperationSource<T> operationSource,
             HttpPipeline pipeline,
             string id,
+            out string? finalResponse,
             string? apiVersionOverride = null)
         {
-            var operation = Create(pipeline, id, apiVersionOverride);
-            return new OperationToOperationOfT<T>(operationSource, operation);
+            var operation = Create(pipeline, id, out finalResponse, apiVersionOverride);
+            if (finalResponse != null)
+            {
+                return null;
+            }
+            return new OperationToOperationOfT<T>(operationSource, operation!);
         }
 
         private NextLinkOperationImplementation(
@@ -445,7 +455,13 @@ namespace Azure.Core
 
             public string GetOperationId()
             {
-                throw new NotImplementedException();
+                var serializeOptions = new JsonSerializerOptions { Converters = { new OperationInternal.StreamConverter() } };
+                var lroDetails = new Dictionary<string, string>()
+                {
+                    ["FinalResponse"] = BinaryData.FromObjectAsJson<Response>(_operationState.RawResponse, serializeOptions).ToString()
+                };
+                var lroData = BinaryData.FromObjectAsJson(lroDetails);
+                return Convert.ToBase64String(lroData.ToArray());
             }
         }
 

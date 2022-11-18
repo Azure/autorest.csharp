@@ -83,7 +83,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(string)} id)"))
                     {
-                        _writer.Line($"_operation = {_operationInternalType}.Create(id, {_sourceString}clientDiagnostics, pipeline, {_name:L}, fallbackStrategy: new {typeof(ExponentialDelayStrategy)}());");
+                        var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
+                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, id, out {typeof(string)} finalResponse);");
+                        _writer.Line($"_operation = {_operationInternalType}.Create({_sourceString}clientDiagnostics, {nextLinkOperation}, finalResponse, {_name:L}, fallbackStrategy: new {typeof(ExponentialDelayStrategy)}());");
                     }
                     _writer.Line();
 

@@ -39,7 +39,8 @@ namespace Azure.ResourceManager.Sample
 
         internal SampleArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string id)
         {
-            _operation = OperationInternal.Create(id, clientDiagnostics, pipeline, "SampleArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, id, out string finalResponse);
+            _operation = OperationInternal.Create(clientDiagnostics, nextLinkOperation, finalResponse, "SampleArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
         /// <inheritdoc />

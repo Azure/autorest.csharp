@@ -39,7 +39,8 @@ namespace ResourceRename
 
         internal ResourceRenameArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string id)
         {
-            _operation = OperationInternal<T>.Create(id, source, clientDiagnostics, pipeline, "ResourceRenameArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, id, out string finalResponse);
+            _operation = OperationInternal<T>.Create(source, clientDiagnostics, nextLinkOperation, finalResponse, "ResourceRenameArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
         /// <inheritdoc />

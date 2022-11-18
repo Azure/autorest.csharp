@@ -39,7 +39,8 @@ namespace MgmtScopeResource
 
         internal MgmtScopeResourceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string id)
         {
-            _operation = OperationInternal.Create(id, clientDiagnostics, pipeline, "MgmtScopeResourceArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, id, out string finalResponse);
+            _operation = OperationInternal.Create(clientDiagnostics, nextLinkOperation, finalResponse, "MgmtScopeResourceArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
         /// <inheritdoc />

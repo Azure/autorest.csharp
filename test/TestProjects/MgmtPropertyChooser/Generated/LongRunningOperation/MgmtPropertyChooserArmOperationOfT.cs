@@ -39,7 +39,8 @@ namespace MgmtPropertyChooser
 
         internal MgmtPropertyChooserArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string id)
         {
-            _operation = OperationInternal<T>.Create(id, source, clientDiagnostics, pipeline, "MgmtPropertyChooserArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, id, out string finalResponse);
+            _operation = OperationInternal<T>.Create(source, clientDiagnostics, nextLinkOperation, finalResponse, "MgmtPropertyChooserArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
         /// <inheritdoc />

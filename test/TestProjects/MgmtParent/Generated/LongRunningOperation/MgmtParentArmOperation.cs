@@ -39,7 +39,8 @@ namespace MgmtParent
 
         internal MgmtParentArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string id)
         {
-            _operation = OperationInternal.Create(id, clientDiagnostics, pipeline, "MgmtParentArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, id, out string finalResponse);
+            _operation = OperationInternal.Create(clientDiagnostics, nextLinkOperation, finalResponse, "MgmtParentArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
         /// <inheritdoc />

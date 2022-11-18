@@ -39,7 +39,8 @@ namespace MgmtExtensionCommonRestOperation
 
         internal MgmtExtensionCommonRestOperationArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string id)
         {
-            _operation = OperationInternal<T>.Create(id, source, clientDiagnostics, pipeline, "MgmtExtensionCommonRestOperationArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, id, out string finalResponse);
+            _operation = OperationInternal<T>.Create(source, clientDiagnostics, nextLinkOperation, finalResponse, "MgmtExtensionCommonRestOperationArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
         /// <inheritdoc />
