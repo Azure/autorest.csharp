@@ -19,6 +19,7 @@ using Azure.Core;
 using Azure.ResourceManager.Models;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 using Configuration = AutoRest.CSharp.Input.Configuration;
+using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -202,9 +203,16 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"{writerName}.WriteObjectValue({name:I});");
                             return;
 
+                        case EnumType clientEnum when clientEnum is { IsIntValueType: true, IsExtensible: false }:
+                            writer
+                                .Append($"{writerName}.WriteNumberValue((int){name:I}")
+                                .AppendNullableValue(valueSerialization.Type)
+                                .Line($");");
+                            return;
                         case EnumType clientEnum:
                             writer
-                                .Append($"{writerName}.WriteStringValue({name:I}")
+                                .Append($"{writerName}.WriteStringValue({name:I}");
+                            writer
                                 .AppendNullableValue(valueSerialization.Type)
                                 .AppendEnumToString(clientEnum)
                                 .Line($");");
@@ -222,7 +230,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (JsonPropertySerialization property in propertySerializations)
             {
-                if (property.IsReadOnly)
+                if (property.ShouldSkipSerialization)
                 {
                     continue;
                 }
@@ -446,7 +454,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization, string? backingTypeName = null)
+        public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization)
         {
             // this is the first level of object hierarchy
             // collect all properties and initialize the dictionary
@@ -461,9 +469,21 @@ namespace AutoRest.CSharp.Generation.Writers
                 propertyVariables.Add(additionalProperties, new ObjectPropertyVariable(propertyDeclaration, additionalProperties.PropertyType));
             }
 
+            bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType.Type);
+
             foreach (var variable in propertyVariables)
             {
-                writer.Line($"{variable.Value.Type} {variable.Value.Declaration:D} = default;");
+                string defaultValue ="default";
+                if (serialization.Discriminator?.SerializedName == variable.Key.SerializedName &&
+                    isThisTheDefaultDerivedType &&
+                    serialization.Discriminator.Value is not null &&
+                    (!serialization.Discriminator.Property.ValueType.IsEnum ||
+                    (serialization.Discriminator.Property.ValueType.Implementation is EnumType enumType &&
+                    enumType.IsExtensible)))
+                {
+                    defaultValue = $"\"{serialization.Discriminator.Value.Value.Value}\"";
+                }
+                writer.Line($"{variable.Value.Type} {variable.Value.Declaration:D} = {defaultValue};");
             }
 
             var dictionaryVariable = new CodeWriterDeclaration("additionalPropertiesDictionary");
@@ -495,7 +515,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Select(p => parameterValues[p.Name])
                 .ToArray();
 
-            writer.Append($"return new {(backingTypeName != null ? backingTypeName : serialization.Type)}({parameters.Join(", ")});");
+            writer.Append($"return new {serialization.Type}({parameters.Join(", ")});");
         }
 
         private static FormattableString GetDeserializeValueFormattable(JsonValueSerialization serialization, FormattableString element)
@@ -633,7 +653,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var value = GetFrameworkTypeValueFormattable(element, clientEnum.ValueType.FrameworkType, SerializationFormat.Default);
                     return clientEnum.IsExtensible
                         ? $"new {clientEnum.Type}({value})"
-                        : (FormattableString) $"{value}.To{clientEnum.Type:D}()";
+                        : (FormattableString)$"{value}.To{clientEnum.Type:D}()";
 
                 default:
                     throw new NotSupportedException();

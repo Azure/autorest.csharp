@@ -16,7 +16,7 @@ namespace ModelsInCadl
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
         /// <param name="requiredString"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
-        public DerivedModelWithDiscriminatorA(string requiredString)
+        public DerivedModelWithDiscriminatorA(string requiredString) : base("A")
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
 

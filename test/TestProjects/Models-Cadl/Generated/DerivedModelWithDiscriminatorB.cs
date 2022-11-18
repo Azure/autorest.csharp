@@ -12,7 +12,7 @@ namespace ModelsInCadl
     {
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorB. </summary>
         /// <param name="requiredInt"></param>
-        public DerivedModelWithDiscriminatorB(int requiredInt)
+        public DerivedModelWithDiscriminatorB(int requiredInt) : base("B")
         {
             RequiredInt = requiredInt;
         }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import { InputOperation } from "./InputOperation";
+import { InputParameter } from "./InputParameter";
 import { Protocols } from "./Protocols";
 
 export interface InputClient {
@@ -9,4 +10,7 @@ export interface InputClient {
     Description?: string;
     Operations: InputOperation[];
     Protocol?: Protocols;
+    Parent?: string;
+    Creatable: boolean;
+    Parameters?: InputParameter[];
 }

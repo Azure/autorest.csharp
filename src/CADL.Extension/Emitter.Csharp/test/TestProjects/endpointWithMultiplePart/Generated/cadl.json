@@ -9,7 +9,8 @@
  "Clients": [
   {
    "$id": "2",
-   "Name": "endpoint",
+   "Name": "endpointClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "3",
@@ -156,7 +157,8 @@
    ],
    "Protocol": {
     "$id": "18"
-   }
+   },
+   "Creatable": true
   }
  ]
 }
