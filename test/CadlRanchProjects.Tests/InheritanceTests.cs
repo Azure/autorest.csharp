@@ -41,7 +41,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task GetModel() => Test(async (host) =>
         {
-            var response = await new DiscriminatedClient(host, null).GetModelValueAsync();
+            var response = await new InheritanceClient(host, null).GetModelValueAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(1, response.Value.Age);
             /*Assert.IsInstanceOf<Shark>(response.Value);*/
@@ -52,7 +52,7 @@ namespace CadlRanchProjects.Tests
         {
             try
             {
-                var response = await new DiscriminatedClient(host, null).PutModelAsync(new GoblinShark(1));
+                var response = await new InheritanceClient(host, null).PutModelAsync(new GoblinShark(1));
             }
             catch (Exception) { }
             Assert.AreEqual(200, response.Status);
@@ -62,7 +62,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task GetRecursiveModel() => Test(async (host) =>
         {
-            var response = await new DiscriminatedClient(host, null).GetRecursiveModelValueAsync();
+            var response = await new InheritanceClient(host, null).GetRecursiveModelValueAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(1, response.Value.Age);
             /*Assert.IsInstanceOf<Salmon>(response.Value);*/
@@ -72,14 +72,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task PutRecursiveModel() => Test(async (host) =>
         {
-            var response = await new DiscriminatedClient(host, null).PutRecursiveModelAsync(new Salmon(1));
+            var response = await new InheritanceClient(host, null).PutRecursiveModelAsync(new Salmon(1));
             Assert.AreEqual(200, response.Status);
         });
 
         [Test]
         public Task GetMissingDiscriminator() => Test(async (host) =>
         {
-            var response = await new DiscriminatedClient(host, null).GetMissingDiscriminatorValueAsync();
+            var response = await new InheritanceClient(host, null).GetMissingDiscriminatorValueAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.IsNotInstanceOf<Salmon>(response.Value);
             //Assert.IsNotInstanceOf<Shark>(response.Value);
@@ -89,7 +89,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task GetWrongDiscriminator() => Test(async (host) =>
         {
-            var response = await new DiscriminatedClient(host, null).GetWrongDiscriminatorValueAsync();
+            var response = await new InheritanceClient(host, null).GetWrongDiscriminatorValueAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.IsNotInstanceOf<Salmon>(response.Value);
             //Assert.IsNotInstanceOf<Shark>(response.Value);
