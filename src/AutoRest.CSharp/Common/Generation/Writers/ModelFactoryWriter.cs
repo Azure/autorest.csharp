@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteFactoryMethodForSchemaObjectType(CodeWriter writer, MethodSignature method)
         {
-            var modelType = method.ReturnType?.Implementation as SchemaObjectType;
+            var modelType = method.ReturnType?.Implementation as ObjectType;
             Debug.Assert(modelType != null);
 
             var ctor = modelType.SerializationConstructor;
