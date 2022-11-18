@@ -412,7 +412,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.UseNamespace(enumType.Type.Namespace);
             }
-            return writer.AppendRaw(enumType.IsExtensible ? ".ToString()" : ".ToSerialString()");
+            return writer.AppendRaw(enumType.IsExtensible ? ".ToString()" : $".ToSerial{enumType.ValueType.Name.FirstCharToUpperCase()}()");
         }
 
         public static CodeWriter AppendEnumFromString(this CodeWriter writer, EnumType enumType, FormattableString value)

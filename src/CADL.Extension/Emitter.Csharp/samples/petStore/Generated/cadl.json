@@ -160,7 +160,7 @@
  "Clients": [
   {
    "$id": "21",
-   "Name": "Pets",
+   "Name": "PetStoreClient",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
@@ -485,29 +485,20 @@
      ],
      "BufferResponse": true,
      "GenerateConvenienceMethod": false
-    }
-   ],
-   "Protocol": {
-    "$id": "52"
-   }
-  },
-  {
-   "$id": "53",
-   "Name": "ListPetToysResponse",
-   "Operations": [
+    },
     {
-     "$id": "54",
+     "$id": "52",
      "Name": "list",
      "Parameters": [
       {
        "$ref": "23"
       },
       {
-       "$id": "55",
+       "$id": "53",
        "Name": "petId",
        "NameInRequest": "petId",
        "Type": {
-        "$id": "56",
+        "$id": "54",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -523,11 +514,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "57",
+       "$id": "55",
        "Name": "nameFilter",
        "NameInRequest": "nameFilter",
        "Type": {
-        "$id": "58",
+        "$id": "56",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -543,11 +534,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "59",
+       "$id": "57",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "60",
+        "$id": "58",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -562,9 +553,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "61",
+        "$id": "59",
         "Type": {
-         "$ref": "60"
+         "$ref": "58"
         },
         "Value": "application/json"
        }
@@ -575,7 +566,7 @@
      ],
      "Responses": [
       {
-       "$id": "62",
+       "$id": "60",
        "StatusCodes": [
         200
        ],
@@ -596,8 +587,9 @@
     }
    ],
    "Protocol": {
-    "$id": "63"
-   }
+    "$id": "61"
+   },
+   "Creatable": true
   }
  ]
 }

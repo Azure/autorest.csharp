@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="PostValidAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PostValidAsync with required request content.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var data = new {
+    smart = true,
+    age = 1234,
+    name = "<name>",
+};
+
+Response response = await client.PostValidAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Siamese</c>:
+<code>{
+  smart: boolean, # Required.
+  age: number, # Required.
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PostValid(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PostValid with required request content.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var data = new {
+    smart = true,
+    age = 1234,
+    name = "<name>",
+};
+
+Response response = client.PostValid(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Siamese</c>:
+<code>{
+  smart: boolean, # Required.
+  age: number, # Required.
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetValidAsync(RequestContext)">
+<example>
+This sample shows how to call GetValidAsync and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = await client.GetValidAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Siamese</c>:
+<code>{
+  smart: boolean, # Required.
+  age: number, # Required.
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetValid(RequestContext)">
+<example>
+This sample shows how to call GetValid and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = client.GetValid();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Siamese</c>:
+<code>{
+  smart: boolean, # Required.
+  age: number, # Required.
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutValidAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutValidAsync with required request content and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var data = new {
+    smart = true,
+    age = 1234,
+    name = "<name>",
+};
+
+Response response = await client.PutValidAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Siamese</c>:
+<code>{
+  smart: boolean, # Required.
+  age: number, # Required.
+  name: string, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Siamese</c>:
+<code>{
+  smart: boolean, # Required.
+  age: number, # Required.
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutValid(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutValid with required request content and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var data = new {
+    smart = true,
+    age = 1234,
+    name = "<name>",
+};
+
+Response response = client.PutValid(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("smart").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Siamese</c>:
+<code>{
+  smart: boolean, # Required.
+  age: number, # Required.
+  name: string, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Siamese</c>:
+<code>{
+  smart: boolean, # Required.
+  age: number, # Required.
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetModelAsync(RequestContext)">
+<example>
+This sample shows how to call GetModelAsync and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = await client.GetModelAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetModel(RequestContext)">
+<example>
+This sample shows how to call GetModel and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = client.GetModel();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutModelAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutModelAsync with required request content.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var data = new {
+    age = 1234,
+};
+
+Response response = await client.PutModelAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutModel(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutModel with required request content.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var data = new {
+    age = 1234,
+};
+
+Response response = client.PutModel(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetRecursiveModelAsync(RequestContext)">
+<example>
+This sample shows how to call GetRecursiveModelAsync and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = await client.GetRecursiveModelAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetRecursiveModel(RequestContext)">
+<example>
+This sample shows how to call GetRecursiveModel and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = client.GetRecursiveModel();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutRecursiveModelAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutRecursiveModelAsync with required request content.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var data = new {
+    age = 1234,
+};
+
+Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutRecursiveModel(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutRecursiveModel with required request content.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var data = new {
+    age = 1234,
+};
+
+Response response = client.PutRecursiveModel(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetMissingDiscriminatorAsync(RequestContext)">
+<example>
+This sample shows how to call GetMissingDiscriminatorAsync and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = await client.GetMissingDiscriminatorAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetMissingDiscriminator(RequestContext)">
+<example>
+This sample shows how to call GetMissingDiscriminator and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = client.GetMissingDiscriminator();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetWrongDiscriminatorAsync(RequestContext)">
+<example>
+This sample shows how to call GetWrongDiscriminatorAsync and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = await client.GetWrongDiscriminatorAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetWrongDiscriminator(RequestContext)">
+<example>
+This sample shows how to call GetWrongDiscriminator and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = client.GetWrongDiscriminator();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Fish</c>:
+<code>{
+  age: number, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>
