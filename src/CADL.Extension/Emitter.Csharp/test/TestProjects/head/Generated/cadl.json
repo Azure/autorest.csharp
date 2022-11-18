@@ -35,7 +35,7 @@
  "Clients": [
   {
    "$id": "5",
-   "Name": "HeadClient",
+   "Name": "HeadClientClient",
    "Description": "Illustrates clients generated from a Cadl with head parameter.",
    "Operations": [
     {
@@ -323,7 +323,8 @@
    ],
    "Protocol": {
     "$id": "34"
-   }
+   },
+   "Creatable": true
   }
  ]
 }
