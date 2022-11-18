@@ -104,42 +104,15 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
         {
             foreach (var reference in await SymbolFinder.FindReferencesAsync(symbol, _project.Solution))
             {
-                foreach (var location in reference.Locations)
-                {
-                    var document = location.Document;
-                    var candicateReferenceeSymbols = documentCache[document];
-                    if (candicateReferenceeSymbols.Count == 1)
-                    {
-                        references.AddInList(candicateReferenceeSymbols.Single(), symbol, _symbolSetInitializer);
-                    }
-                    else
-                    {
-                        // fallback to calculate the symbol when the document contains multiple type symbols
-                        // this should never happen in the generated code
-                        // customized code might have this issue
-                        var root = await document.GetSyntaxRootAsync();
-                        if (root == null)
-                            continue;
-                        // get the node of this reference
-                        var node = root.FindNode(location.Location.SourceSpan);
-                        var owner = GetOwner(root, node);
-                        var semanticModel = _compilation.GetSemanticModel(owner.SyntaxTree);
-                        var ownerSymbol = semanticModel.GetDeclaredSymbol(owner);
-
-                        if (ownerSymbol == null)
-                            continue;
-                        // add it to the map
-                        references.AddInList(ownerSymbol, symbol, _symbolSetInitializer);
-                    }
-                }
+                await AddReferenceToReferenceMapAsync(symbol, reference, references, documentCache);
             }
 
             // static class can have direct references, like ClassName.Method, but the extension methods might not have direct reference to the class itself
             // therefore here we find the references of all its members and add them to the reference map
-            ProcessExtensionSymbol(symbol, references);
+            await ProcessExtensionSymbol(symbol, references, documentCache);
         }
 
-        private void ProcessExtensionSymbol(INamedTypeSymbol extensionClassSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references)
+        private async Task ProcessExtensionSymbol(INamedTypeSymbol extensionClassSymbol, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> documentCache)
         {
             if (!extensionClassSymbol.IsStatic)
                 return;
@@ -152,12 +125,43 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
                 if (!methodSymbol.IsExtensionMethod)
                     continue;
 
-                // we only find the methods and find if it has "this" parameter
-                var firstParameter = methodSymbol.Parameters.FirstOrDefault();
-                if (firstParameter == null)
-                    continue;
+                // find which document is using this extension method, and add it to the map
+                foreach (var reference in await SymbolFinder.FindReferencesAsync(methodSymbol, _project.Solution))
+                {
+                    await AddReferenceToReferenceMapAsync(extensionClassSymbol, reference, references, documentCache);
+                }
+            }
+        }
 
-                AddTypeSymbol(firstParameter.Type, extensionClassSymbol, references);
+        private async Task AddReferenceToReferenceMapAsync(INamedTypeSymbol symbol, ReferencedSymbol reference, Dictionary<INamedTypeSymbol, HashSet<INamedTypeSymbol>> references, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> documentCache)
+        {
+            foreach (var location in reference.Locations)
+            {
+                var document = location.Document;
+                var candidateReferenceSymbols = documentCache[document];
+                if (candidateReferenceSymbols.Count == 1)
+                {
+                    references.AddInList(candidateReferenceSymbols.Single(), symbol, _symbolSetInitializer);
+                }
+                else
+                {
+                    // fallback to calculate the symbol when the document contains multiple type symbols
+                    // this should never happen in the generated code
+                    // customized code might have this issue
+                    var root = await document.GetSyntaxRootAsync();
+                    if (root == null)
+                        continue;
+                    // get the node of this reference
+                    var node = root.FindNode(location.Location.SourceSpan);
+                    var owner = GetOwner(root, node);
+                    var semanticModel = _compilation.GetSemanticModel(owner.SyntaxTree);
+                    var ownerSymbol = semanticModel.GetDeclaredSymbol(owner);
+
+                    if (ownerSymbol == null)
+                        continue;
+                    // add it to the map
+                    references.AddInList(ownerSymbol, symbol, _symbolSetInitializer);
+                }
             }
         }
 
