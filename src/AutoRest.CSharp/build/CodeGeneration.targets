@@ -1,6 +1,9 @@
 <Project>
 
   <PropertyGroup>
+    <PowerShellExe Condition="'$(PowerShellExe)' == ''">pwsh</PowerShellExe>
+    <CadlProjectSyncScriptPath Condition="'$(CadlProjectSyncScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/scripts/Cadl-Project-Sync.ps1</CadlProjectSyncScriptPath>
+    <CadlProjectGenerateScriptPath Condition="'$(CadlProjectGenerateScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/scripts/Cadl-Project-Generate.ps1</CadlProjectGenerateScriptPath>
     <_DefaultInputName Condition="Exists('$(MSBuildProjectDirectory)/autorest.md')">$(MSBuildProjectDirectory)/autorest.md</_DefaultInputName>
     <CadlInput Condition="Exists('$(MSBuildProjectDirectory)/cadl-location.yaml')">$(MSBuildProjectDirectory)/cadl-location.yaml</CadlInput>
     <AutoRestInput Condition="'$(AutoRestInput)' == ''">$(_DefaultInputName)</AutoRestInput>
@@ -22,7 +25,6 @@
     <UseDefaultNamespaceAndOutputFolder Condition="'$(UseDefaultNamespaceAndOutputFolder)' == ''">true</UseDefaultNamespaceAndOutputFolder>
     <_AutoRestCommand>node $(AutoRestEntryPoint) --max-memory-size=8192 --skip-csproj --skip-upgrade-check --version=$(AutoRestCoreVersion) $(AutoRestInput) $(AutoRestAdditionalParameters) --use=$(MSBuildThisFileDirectory)../tools/netcoreapp3.1/any/ --clear-output-folder=true --shared-source-folders=&quot;$(AzureCoreSharedCodeDirectory);$(AutoRestSharedCodeDirectory)&quot;</_AutoRestCommand>
     <_AutoRestCommand Condition="'$(UseDefaultNamespaceAndOutputFolder)' == 'true'">$(_AutoRestCommand) --output-folder=$(MSBuildProjectDirectory)/Generated --namespace=$(RootNamespace)</_AutoRestCommand>
-    <_CadlGenerateCommand Condition="'$(CadlInput)' != ''">npx cadl compile --emit @azure-tools/cadl-csharp --output-path $(MSBuildProjectDirectory)/Generated --option @azure-tools/cadl-csharp.clear-output-folder=true $(CadlInput)</_CadlGenerateCommand>
   </PropertyGroup>
 
   <Target Name="GenerateCode" DependsOnTargets="_GenerateCodeForAutorest;_GenerateCodeForCadl"/>
@@ -43,8 +45,8 @@
   </Target>
 
   <Target Name="_GenerateCodeForCadl" Condition="'$(_GenerateCode)' == 'true' AND '$(CadlInput)' != ''" >
-    <Exec Command="$(MSBuildProjectDirectory)../../../../eng/scripts/Cadl-Project-Sync.ps1 $(MSBuildProjectDirectory).."/>
-    <Exec Command="$(_CadlGenerateCommand)"/>
+    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(CadlProjectSyncScriptPath) $(MSBuildProjectDirectory)/.."/>
+    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(CadlProjectGenerateScriptPath) $(MSBuildProjectDirectory)/.."/>
   </Target>
 
   <Target Name="GenerateTest" Condition="'$(AutoRestTestsInput)' != ''">
