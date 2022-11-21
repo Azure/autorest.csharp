@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfBoolNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
                     WriteIfBoolNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
                     WriteIfBoolNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
-                    WriteIfEnumNotDefault(writer, Configuration.Options.RemoveUnusedModels, Configuration.RemoveUnusedModels);
+                    WriteIfEnumNotDefault(writer, Configuration.Options.RemoveUnusedTypes, Configuration.RemoveUnusedTypes);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), Configuration.ProtocolMethodList);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
-                ReadEnumOption<Configuration.UnusedModelRemovalLevel>(root, Configuration.Options.RemoveUnusedModels),
+                ReadEnumOption<Configuration.UnusedTypeRemovalLevel>(root, Configuration.Options.RemoveUnusedTypes),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
                 protocolMethods,
                 suppressAbstractBaseClasses,

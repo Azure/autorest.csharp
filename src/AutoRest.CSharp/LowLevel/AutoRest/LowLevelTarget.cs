@@ -51,14 +51,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static async Task<Project> PostProcess(Project project)
         {
             var postProcessor = new DpgPostProcessor();
-            switch (Configuration.RemoveUnusedModels)
+            switch (Configuration.RemoveUnusedTypes)
             {
-                case Configuration.UnusedModelRemovalLevel.KeepAll:
+                case Configuration.UnusedTypeRemovalLevel.KeepAll:
                     break;
-                case Configuration.UnusedModelRemovalLevel.Internalize:
+                case Configuration.UnusedTypeRemovalLevel.Internalize:
                     project = await postProcessor.InternalizeAsync(project);
                     break;
-                case Configuration.UnusedModelRemovalLevel.RemoveAll:
+                case Configuration.UnusedTypeRemovalLevel.RemoveAll:
                     project = await postProcessor.InternalizeAsync(project);
                     project = await postProcessor.RemoveAsync(project);
                     break;

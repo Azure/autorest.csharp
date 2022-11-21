@@ -34,10 +34,10 @@ namespace AutoRest.CSharp.Input
             public const string SkipSerializationFormatXml = "skip-serialization-format-xml";
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
             public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
-            public const string RemoveUnusedModels = "remove-unused-models";
+            public const string RemoveUnusedTypes = "remove-unused-types";
         }
 
-        public enum UnusedModelRemovalLevel
+        public enum UnusedTypeRemovalLevel
         {
             RemoveAll = 0,
             Internalize = 1,
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Input
             bool singleTopLevelClient,
             bool skipSerializationFormatXml,
             bool disablePaginationTopRenaming,
-            UnusedModelRemovalLevel removeUnusedModels,
+            UnusedTypeRemovalLevel removeUnusedTypes,
             string? projectFolder,
             string[] protocolMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Input
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
-            RemoveUnusedModels = removeUnusedModels;
+            RemoveUnusedTypes = removeUnusedTypes;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
             {
@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
-        public static UnusedModelRemovalLevel RemoveUnusedModels { get; private set; }
+        public static UnusedTypeRemovalLevel RemoveUnusedTypes { get; private set; }
         private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
         public static IReadOnlyList<string> SuppressAbstractBaseClasses => _suppressAbstractBaseClasses ?? throw new InvalidOperationException("Configuration has not been initialized");
 
@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.Input
                 singleTopLevelClient: GetOptionBoolValue(autoRest, Options.SingleTopLevelClient),
                 skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml),
                 disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
-                removeUnusedModels: GetOptionEnumValue<UnusedModelRemovalLevel>(autoRest, Options.RemoveUnusedModels),
+                removeUnusedTypes: GetOptionEnumValue<UnusedTypeRemovalLevel>(autoRest, Options.RemoveUnusedTypes),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.Input
 
         public static Enum? GetDefaultEnumOptionValue(string option) => option switch
         {
-            Options.RemoveUnusedModels => UnusedModelRemovalLevel.RemoveAll,
+            Options.RemoveUnusedTypes => UnusedTypeRemovalLevel.RemoveAll,
             _ => null
         };
 
