@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-            : base(GetDefaultNamespace(input.Namespace, defaultNamespace), sourceInputModel)
+            : base(GetDefaultNamespace(defaultNamespace), sourceInputModel)
         {
             _allowedValues = input.AllowedValues;
             _typeFactory = typeFactory;
@@ -60,8 +60,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsExtensible = isExtensible;
         }
 
-        private static string GetDefaultNamespace(string? ns, string defaultNamespace)
-            => ns ?? (Configuration.ModelNamespace ? $"{defaultNamespace}.Models" : defaultNamespace);
+        private static string GetDefaultNamespace(string defaultNamespace)
+            => Configuration.ModelNamespace ? $"{defaultNamespace}.Models" : defaultNamespace;
 
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }

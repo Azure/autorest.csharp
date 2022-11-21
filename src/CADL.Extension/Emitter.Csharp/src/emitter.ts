@@ -78,6 +78,7 @@ import { execSync } from "child_process";
 import {
     Client,
     getConvenienceAPIName,
+    isApiVersion,
     isOperationGroup,
     listClients,
     listOperationGroups,
@@ -99,6 +100,7 @@ export interface NetEmitterOptions {
     csharpGeneratorPath: string;
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
+    "model-namespace"?: boolean;
 }
 
 const defaultOptions = {
@@ -127,7 +129,8 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "new-project": { type: "boolean", nullable: true },
         csharpGeneratorPath: { type: "string", nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
-        "save-inputs": { type: "boolean", nullable: true }
+        "save-inputs": { type: "boolean", nullable: true },
+        "model-namespace": { type: "boolean", nullable: true}
     },
     required: []
 };
@@ -162,7 +165,8 @@ export async function $onEmit(
         "new-project": resolvedOptions["new-project"],
         csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
         "clear-output-folder": resolvedOptions["clear-output-folder"],
-        "save-inputs": resolvedOptions["save-inputs"]
+        "save-inputs": resolvedOptions["save-inputs"],
+        "model-namespace": resolvedOptions["model-namespace"]
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -216,7 +220,8 @@ export async function $onEmit(
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient: resolvedOptions["single-top-level-client"]
+                SingleTopLevelClient: resolvedOptions["single-top-level-client"],
+                ModelNamespace: resolvedOptions["model-namespace"]
             } as Configuration;
 
             await program.host.writeFile(
@@ -372,18 +377,26 @@ function createModel(
         for (const client of clients) {
             for (const op of client.Operations) {
                 const apiVersionInOperation = op.Parameters.find(
-                    isApiVersionParameter
+                    (value) => value.IsApiVersion
                 );
                 if (apiVersionInOperation) {
-                    if (apiVersions.size > 1) {
-                        apiVersionInOperation.Kind =
-                            InputOperationParameterKind.Constant;
-                    }
-                    if (!apiVersionInOperation.DefaultValue) {
-                        apiVersionInOperation.DefaultValue =
-                            apiVersionParam.DefaultValue;
-                    }
+                    console.log("find apiversion");
+                    // if (apiVersions.size > 1) {
+                    //     apiVersionInOperation.Kind =
+                    //         InputOperationParameterKind.Constant;
+                    // }
+                    // if (!apiVersionInOperation.DefaultValue) {
+                    //     apiVersionInOperation.DefaultValue =
+                    //         apiVersionParam.DefaultValue;
+                    // }
+
+                    //if (!apiVersionInOperation.DefaultValue) {
+                        const index = op.Parameters.findIndex((value) => value.IsApiVersion);
+                        console.log("index:" + index);
+                        op.Parameters[index] = apiVersionParam;
+                    //}
                 } else {
+                    console.log("not find apiversion");
                     op.Parameters.push(apiVersionParam);
                 }
             }
@@ -449,12 +462,10 @@ function createModel(
             applyDefaultContentTypeAndAcceptParameter(inputOperation);
 
             const apiVersionInOperation = inputOperation.Parameters.find(
-                isApiVersionParameter
+                (value) => value.IsApiVersion
             );
-            if (apiVersionInOperation) {
-                if (apiVersionInOperation.DefaultValue?.Value) {
-                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
-                }
+            if (apiVersionInOperation && apiVersionInOperation.DefaultValue?.Value) {
+                apiVersions.add(apiVersionInOperation.DefaultValue.Value);
             }
             inputClient.Operations.push(inputOperation);
             if (
@@ -464,18 +475,6 @@ function createModel(
                 convenienceOperations.push(httpOperation);
         }
         return inputClient;
-    }
-
-    function isApiVersionParameter(parameter: InputParameter): boolean {
-        return (
-            parameter.IsApiVersion ||
-            (parameter.Location === RequestLocation.Query &&
-                parameter.Name === "api-version") ||
-            ([RequestLocation.Uri, RequestLocation.Path].includes(
-                parameter.Location
-            ) &&
-                parameter.Name === "ApiVersion")
-        );
     }
 
     function getAllLroMonitorOperations(
@@ -789,15 +788,13 @@ function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
-        const isApiVersion: boolean =
-            requestLocation === RequestLocation.Query &&
-            name.toLocaleLowerCase() === "api-version";
+        const isApiVer: boolean = isApiVersion(program, parameter);
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
-            : isApiVersion
+            : isApiVer
             ? InputOperationParameterKind.Client
             : InputOperationParameterKind.Method;
         return {
@@ -808,7 +805,7 @@ function loadOperation(
             Location: requestLocation,
             DefaultValue: defaultValue,
             IsRequired: !param.optional,
-            IsApiVersion: isApiVersion,
+            IsApiVersion: isApiVer,
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
