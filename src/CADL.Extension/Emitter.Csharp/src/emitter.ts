@@ -9,6 +9,7 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    ignoreDiagnostics,
     isErrorModel,
     JSONSchemaType,
     Model,
@@ -20,6 +21,7 @@ import {
 import {
     getAllHttpServices,
     getAuthentication,
+    getHttpOperation,
     getServers,
     HttpOperation,
     HttpOperationParameter,
@@ -68,12 +70,21 @@ import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
 import fs from "fs";
-import fsExtra from "fs-extra"
+import fsExtra from "fs-extra";
 import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
 import { dllFilePath } from "@autorest/csharp";
 import { execSync } from "child_process";
-import { getConvenienceAPIName } from "@azure-tools/cadl-dpg";
+import {
+    Client,
+    getConvenienceAPIName,
+    isOperationGroup,
+    listClients,
+    listOperationGroups,
+    listOperationsInOperationGroup,
+    OperationGroup
+} from "@azure-tools/cadl-dpg";
+import { ClientKind } from "./type/ClientKind.js";
 
 export interface NetEmitterOptions {
     "sdk-folder": string;
@@ -116,7 +127,7 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "new-project": { type: "boolean", nullable: true },
         csharpGeneratorPath: { type: "string", nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
-        "save-inputs": { type: "boolean", nullable: true },
+        "save-inputs": { type: "boolean", nullable: true }
     },
     required: []
 };
@@ -162,21 +173,33 @@ export async function $onEmit(
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
-            
+
             //resolve shared folders based on generator path override
             const resolvedSharedFolders: string[] = [];
-            var sharedFolders = [
-                resolvePath(options.csharpGeneratorPath, "..", "Generator.Shared"),
-                resolvePath(options.csharpGeneratorPath, "..", "Azure.Core.Shared"),
-            ]
+            const sharedFolders = [
+                resolvePath(
+                    options.csharpGeneratorPath,
+                    "..",
+                    "Generator.Shared"
+                ),
+                resolvePath(
+                    options.csharpGeneratorPath,
+                    "..",
+                    "Azure.Core.Shared"
+                )
+            ];
             for (const sharedFolder of sharedFolders) {
-                resolvedSharedFolders.push(path.relative(generatedFolder, sharedFolder).replaceAll("\\", "/"));
+                resolvedSharedFolders.push(
+                    path
+                        .relative(generatedFolder, sharedFolder)
+                        .replaceAll("\\", "/")
+                );
             }
-     
+
             if (!fs.existsSync(generatedFolder)) {
                 fs.mkdirSync(generatedFolder, { recursive: true });
             }
-            
+
             if (options["clear-output-folder"]) {
                 fsExtra.emptyDirSync(generatedFolder);
             }
@@ -202,19 +225,23 @@ export async function $onEmit(
             );
 
             if (options.skipSDKGeneration !== true) {
-                const newProjectOption = options["new-project"] ? "--new-project" : "";
-                let command = `dotnet ${resolvePath(options.csharpGeneratorPath)} --project-path ${outputFolder} ${newProjectOption}`;
+                const newProjectOption = options["new-project"]
+                    ? "--new-project"
+                    : "";
+                const command = `dotnet ${resolvePath(
+                    options.csharpGeneratorPath
+                )} --project-path ${outputFolder} ${newProjectOption}`;
                 console.info(command);
 
                 try {
-                    execSync(command, {stdio: 'inherit'});
-                } catch(error: any) {
+                    execSync(command, { stdio: "inherit" });
+                } catch (error: any) {
                     if (error.message) console.log(error.message);
                     if (error.stderr) console.error(error.stderr);
                     if (error.stdout) console.log(error.stdout);
                 }
             }
-            
+
             if (!options["save-inputs"]) {
                 // delete
                 deleteFile(resolvePath(generatedFolder, "cadl.json"));
@@ -225,12 +252,12 @@ export async function $onEmit(
 }
 
 function deleteFile(filePath: string) {
-    fs.unlink(filePath, err => {
+    fs.unlink(filePath, (err) => {
         if (err) {
             console.log(`stderr: ${err}`);
         }
-    
-        console.log(`File ${filePath} is deleted.`)
+
+        console.log(`File ${filePath} is deleted.`);
     });
 }
 
@@ -248,7 +275,10 @@ function getClient(
     return undefined;
 }
 
-function createModel(program: Program, generateConvenienceAPI: boolean = false): any {
+function createModel(
+    program: Program,
+    generateConvenienceAPI: boolean = false
+): any {
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {
         return;
@@ -303,18 +333,12 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
 
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
+    let urlParameters: InputParameter[] | undefined = undefined;
+    let url: string = "";
+    const convenienceOperations: HttpOperation[] = [];
+    let lroMonitorOperations: Set<Operation>;
     try {
-        const [services] = getAllHttpServices(program);
-        const routes = services[0].operations;
-        if (routes.length === 0) {
-            throw "No Routes";
-        }
-        console.log("routes:" + routes.length);
-        const clients: InputClient[] = [];
-        const convenienceOperations: HttpOperation[] = [];
         //create endpoint parameter from servers
-        let urlParameters: InputParameter[] | undefined = undefined;
-        let url: string = "";
         if (servers !== undefined) {
             const cadlServers = resolveServers(program, servers);
             if (cadlServers.length > 0) {
@@ -323,64 +347,32 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
                 urlParameters = cadlServers[0].parameters;
             }
         }
-
-        const lroMonitorOperations = getAllLroMonitorOperations(
-            routes,
-            program
-        );
-        for (const operation of routes) {
-            console.log(JSON.stringify(operation.path));
-
-            // do not generate LRO monitor operation
-            if (lroMonitorOperations.has(operation.operation)) continue;
-
-            const groupName: string = getOperationGroupName(
-                program,
-                operation.operation
-            );
-            let client = getClient(clients, groupName);
-            if (!client) {
-                const container = operation.container;
-                const clientDesc = getDoc(program, container);
-                const clientSummary = getSummary(program, container);
-                client = {
-                    Name: groupName,
-                    Description: clientDesc,
-                    Operations: [],
-                    Protocol: {}
-                } as InputClient;
-                clients.push(client);
-            }
-            const op: InputOperation = loadOperation(
-                program,
-                operation,
-                url,
-                urlParameters,
-                modelMap,
-                enumMap
-            );
-
-            applyDefaultContentTypeAndAcceptParameter(op);
-
-            const apiVersionInOperation = op.Parameters.find(
-                (value) => value.IsApiVersion
-            );
-            if (apiVersionInOperation) {
-                if (apiVersionInOperation.DefaultValue?.Value) {
-                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
-                }
-            }
-            client.Operations.push(op);
-            if (op.GenerateConvenienceMethod || generateConvenienceAPI)
-                convenienceOperations.push(operation);
+        const [services] = getAllHttpServices(program);
+        const routes = services[0].operations;
+        if (routes.length === 0) {
+            throw `No Route for service ${services[0].namespace.name}`;
         }
+        console.log("routes:" + routes.length);
+
+        lroMonitorOperations = getAllLroMonitorOperations(routes, program);
+        const clients: InputClient[] = [];
+        // const convenienceOperations: HttpOperation[] = [];
+        const dpgClients = listClients(program);
+        for (const client of dpgClients) {
+            clients.push(emitClient(client));
+            const dpgOperationGroups = listOperationGroups(program, client);
+            for (const dpgGroup of dpgOperationGroups) {
+                clients.push(emitClient(dpgGroup, client));
+            }
+        }
+
         if (apiVersions.size > 1) {
             apiVersionParam.Kind = InputOperationParameterKind.Constant;
         }
         for (const client of clients) {
             for (const op of client.Operations) {
                 const apiVersionInOperation = op.Parameters.find(
-                    (value) => value.IsApiVersion
+                    isApiVersionParameter
                 );
                 if (apiVersionInOperation) {
                     if (apiVersions.size > 1) {
@@ -419,6 +411,73 @@ function createModel(program: Program, generateConvenienceAPI: boolean = false):
         }
     }
 
+    function emitClient(
+        client: Client | OperationGroup,
+        parent?: Client
+    ): InputClient {
+        const operations = listOperationsInOperationGroup(program, client);
+        let clientDesc = "";
+        if (operations.length > 0) {
+            const container = ignoreDiagnostics(
+                getHttpOperation(program, operations[0])
+            ).container;
+            clientDesc = getDoc(program, container) ?? "";
+        }
+
+        const inputClient = {
+            Name: client.kind === ClientKind.DpgClient ? client.name : client.type.name,
+            Description: clientDesc,
+            Operations: [],
+            Protocol: {},
+            Creatable: client.kind === ClientKind.DpgClient,
+            Parent: parent?.name
+        } as InputClient;
+        for (const op of operations) {
+            if (lroMonitorOperations.has(op)) continue;
+            const httpOperation = ignoreDiagnostics(
+                getHttpOperation(program, op)
+            );
+            const inputOperation: InputOperation = loadOperation(
+                program,
+                httpOperation,
+                url,
+                urlParameters,
+                modelMap,
+                enumMap
+            );
+
+            applyDefaultContentTypeAndAcceptParameter(inputOperation);
+
+            const apiVersionInOperation = inputOperation.Parameters.find(
+                isApiVersionParameter
+            );
+            if (apiVersionInOperation) {
+                if (apiVersionInOperation.DefaultValue?.Value) {
+                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
+                }
+            }
+            inputClient.Operations.push(inputOperation);
+            if (
+                inputOperation.GenerateConvenienceMethod ||
+                generateConvenienceAPI
+            )
+                convenienceOperations.push(httpOperation);
+        }
+        return inputClient;
+    }
+
+    function isApiVersionParameter(parameter: InputParameter): boolean {
+        return (
+            parameter.IsApiVersion ||
+            (parameter.Location === RequestLocation.Query &&
+                parameter.Name === "api-version") ||
+            ([RequestLocation.Uri, RequestLocation.Path].includes(
+                parameter.Location
+            ) &&
+                parameter.Name === "ApiVersion")
+        );
+    }
+
     function getAllLroMonitorOperations(
         routes: HttpOperation[],
         program: Program
@@ -442,7 +501,7 @@ function setUsage(
     usages: { inputs: string[]; outputs: string[]; roundTrips: string[] },
     models: Map<string, InputModelType | InputEnumType>
 ) {
-    for (let [name, m] of models) {
+    for (const [name, m] of models) {
         if (usages.inputs.includes(name)) {
             m.Usage = Usage.Input;
         } else if (usages.outputs.includes(name)) {
@@ -450,11 +509,7 @@ function setUsage(
         } else if (usages.roundTrips.includes(name)) {
             m.Usage = Usage.RoundTrip;
         } else {
-            if ((m as InputEnumType).IsExtensible) {
-                m.Usage = Usage.RoundTrip;
-            } else {
-                m.Usage = Usage.None;
-            }
+            m.Usage = Usage.None;
         }
     }
 }
@@ -661,7 +716,8 @@ function loadOperation(
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const convenienceApiDecorator: boolean = getConvenienceAPIName(program, op) !== undefined;
+    const convenienceApiDecorator: boolean =
+        getConvenienceAPIName(program, op) !== undefined;
     const generateConvenienceMethod: boolean =
         requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
 
@@ -910,4 +966,3 @@ class ErrorTypeFoundError extends Error {
         super("Error type found in evaluated Cadl output");
     }
 }
-

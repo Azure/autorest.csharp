@@ -65,7 +65,7 @@
  "Clients": [
   {
    "$id": "9",
-   "Name": "ArrayBasic",
+   "Name": "ArrayBasicClient",
    "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
    "Operations": [
     {
@@ -213,7 +213,8 @@
    ],
    "Protocol": {
     "$id": "26"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

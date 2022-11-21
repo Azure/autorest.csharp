@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Common.Input
             => new(
                 Name: operationGroup.Language.Default.Name,
                 Description: operationGroup.Language.Default.Description,
-                Operations: CreateOperations(operationGroup.Operations).Values.ToArray())
+                Operations: CreateOperations(operationGroup.Operations).Values.ToArray(), true, Array.Empty<InputParameter>(), null)
             {
                 Key = operationGroup.Key,
             };
@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Common.Input
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
-            VirtualParameter: input is VirtualParameter {Schema: not ConstantSchema} vp ? vp : null
+            VirtualParameter: input is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null
         );
 
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(
@@ -261,12 +261,12 @@ namespace AutoRest.CSharp.Common.Input
         private static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {
             { Implementation: ImplementationLocation.Client } => InputOperationParameterKind.Client,
-            { Schema: ConstantSchema }                        => InputOperationParameterKind.Constant,
+            { Schema: ConstantSchema } => InputOperationParameterKind.Constant,
 
             // Grouped and flattened parameters shouldn't be added to methods
-            { IsFlattened: true }                             => InputOperationParameterKind.Flattened,
-            { GroupedBy: not null }                           => InputOperationParameterKind.Grouped,
-            _                                                 => InputOperationParameterKind.Method
+            { IsFlattened: true } => InputOperationParameterKind.Flattened,
+            { GroupedBy: not null } => InputOperationParameterKind.Grouped,
+            _ => InputOperationParameterKind.Method
         };
 
         private static string? GetArraySerializationDelimiter(RequestParameter input) => input.In switch
@@ -321,56 +321,59 @@ namespace AutoRest.CSharp.Common.Input
             => CreateType(schema, schema.Extensions?.Format, modelsCache, isNullable);
 
         private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
-            => CreateType(schema, format, modelsCache) with {IsNullable = isNullable};
+            => CreateType(schema, format, modelsCache) with { IsNullable = isNullable };
 
         private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {
             BinarySchema => InputPrimitiveType.Stream,
 
             ByteArraySchema { Format: ByteArraySchemaFormat.Base64url } => InputPrimitiveType.BytesBase64Url,
-            ByteArraySchema                                             => InputPrimitiveType.Bytes,
+            ByteArraySchema => InputPrimitiveType.Bytes,
 
-            DateSchema                                                      => InputPrimitiveType.Date,
-            DateTimeSchema { Format: DateTimeSchemaFormat.DateTime }        => InputPrimitiveType.DateTimeISO8601,
+            DateSchema => InputPrimitiveType.Date,
+            DateTimeSchema { Format: DateTimeSchemaFormat.DateTime } => InputPrimitiveType.DateTimeISO8601,
             DateTimeSchema { Format: DateTimeSchemaFormat.DateTimeRfc1123 } => InputPrimitiveType.DateTimeRFC1123,
-            DateTimeSchema                                                  => InputPrimitiveType.DateTime,
-            UnixTimeSchema                                                  => InputPrimitiveType.DateTimeUnix,
+            DateTimeSchema => InputPrimitiveType.DateTime,
+            UnixTimeSchema => InputPrimitiveType.DateTimeUnix,
 
-            TimeSchema                                               => InputPrimitiveType.Time,
+            TimeSchema => InputPrimitiveType.Time,
             DurationSchema when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
-            DurationSchema                                           => InputPrimitiveType.DurationISO8601,
+            DurationSchema => InputPrimitiveType.DurationISO8601,
 
-            NumberSchema { Type: AllSchemaTypes.Number, Precision: 32 }  => InputPrimitiveType.Float32,
+            NumberSchema { Type: AllSchemaTypes.Number, Precision: 32 } => InputPrimitiveType.Float32,
             NumberSchema { Type: AllSchemaTypes.Number, Precision: 128 } => InputPrimitiveType.Float128,
-            NumberSchema { Type: AllSchemaTypes.Number }                 => InputPrimitiveType.Float64,
+            NumberSchema { Type: AllSchemaTypes.Number } => InputPrimitiveType.Float64,
             NumberSchema { Type: AllSchemaTypes.Integer, Precision: 64 } => InputPrimitiveType.Int64,
-            NumberSchema { Type: AllSchemaTypes.Integer }                => InputPrimitiveType.Int32,
+            NumberSchema { Type: AllSchemaTypes.Integer } => InputPrimitiveType.Int32,
+
+            ArmIdSchema => InputPrimitiveType.ResourceIdentifier,
+            { Type: AllSchemaTypes.ArmId } => InputPrimitiveType.ResourceIdentifier,
 
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => InputPrimitiveType.DateTimeISO8601,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeRFC1123 => InputPrimitiveType.DateTimeRFC1123,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeUnix => InputPrimitiveType.DateTimeUnix,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId            => InputPrimitiveType.ResourceIdentifier,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation    => InputPrimitiveType.AzureLocation,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ContentType      => InputPrimitiveType.ContentType,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ETag             => InputPrimitiveType.ETag,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType     => InputPrimitiveType.ResourceType,
-            { Type: AllSchemaTypes.String } when format == XMsFormat.RequestMethod    => InputPrimitiveType.RequestMethod,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId => InputPrimitiveType.ResourceIdentifier,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation => InputPrimitiveType.AzureLocation,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ContentType => InputPrimitiveType.ContentType,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ETag => InputPrimitiveType.ETag,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType => InputPrimitiveType.ResourceType,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.RequestMethod => InputPrimitiveType.RequestMethod,
 
             ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format, modelsCache),
 
-            CredentialSchema                 => InputPrimitiveType.String,
-            { Type: AllSchemaTypes.String }  => InputPrimitiveType.String,
+            CredentialSchema => InputPrimitiveType.String,
+            { Type: AllSchemaTypes.String } => InputPrimitiveType.String,
             { Type: AllSchemaTypes.Boolean } => InputPrimitiveType.Boolean,
-            { Type: AllSchemaTypes.Uuid }    => InputPrimitiveType.Guid,
-            { Type: AllSchemaTypes.Uri }     => InputPrimitiveType.Uri,
+            { Type: AllSchemaTypes.Uuid } => InputPrimitiveType.Guid,
+            { Type: AllSchemaTypes.Uri } => InputPrimitiveType.Uri,
 
-            ChoiceSchema choiceSchema       => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
+            ChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
             SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
 
-            ArraySchema array               when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
-            DictionarySchema dictionary     when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
-            ObjectSchema objectSchema       when IsDPG && modelsCache != null => modelsCache[objectSchema],
+            ArraySchema array when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
+            DictionarySchema dictionary when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
+            ObjectSchema objectSchema when IsDPG && modelsCache != null => modelsCache[objectSchema],
 
             _ => new CodeModelType(schema)
         };
@@ -380,7 +383,7 @@ namespace AutoRest.CSharp.Common.Input
             Namespace: schema.Extensions?.Namespace,
             Accessibility: schema.Extensions?.Accessibility,
             Description: schema.CreateDescription(),
-            Usage: InputModelTypeUsage.RoundTrip,
+            Usage: InputModelTypeUsage.None,
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
             AllowedValues: choices.Select(CreateEnumValue).ToList(),
             IsExtensible: isExtensible

@@ -20,13 +20,14 @@ namespace ModelsInCadl
         /// <param name="requiredInt"></param>
         /// <param name="requiredModel"></param>
         /// <param name="requiredFixedStringEnum"></param>
+        /// <param name="requiredFixedIntEnum"></param>
         /// <param name="requiredExtensibleEnum"></param>
         /// <param name="requiredCollection"></param>
         /// <param name="requiredIntRecord"></param>
         /// <param name="requiredStringRecord"></param>
         /// <param name="requiredModelRecord"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/>, <paramref name="requiredIntRecord"/>, <paramref name="requiredStringRecord"/> or <paramref name="requiredModelRecord"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, ExtensibleEnum requiredExtensibleEnum, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
+        public RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
@@ -39,6 +40,7 @@ namespace ModelsInCadl
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
             RequiredFixedStringEnum = requiredFixedStringEnum;
+            RequiredFixedIntEnum = requiredFixedIntEnum;
             RequiredExtensibleEnum = requiredExtensibleEnum;
             RequiredCollection = requiredCollection.ToList();
             RequiredIntRecord = requiredIntRecord;
@@ -51,17 +53,19 @@ namespace ModelsInCadl
         /// <param name="requiredInt"></param>
         /// <param name="requiredModel"></param>
         /// <param name="requiredFixedStringEnum"></param>
+        /// <param name="requiredFixedIntEnum"></param>
         /// <param name="requiredExtensibleEnum"></param>
         /// <param name="requiredCollection"></param>
         /// <param name="requiredIntRecord"></param>
         /// <param name="requiredStringRecord"></param>
         /// <param name="requiredModelRecord"></param>
-        internal RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
+        internal RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
             RequiredFixedStringEnum = requiredFixedStringEnum;
+            RequiredFixedIntEnum = requiredFixedIntEnum;
             RequiredExtensibleEnum = requiredExtensibleEnum;
             RequiredCollection = requiredCollection.ToList();
             RequiredIntRecord = requiredIntRecord;
@@ -81,6 +85,8 @@ namespace ModelsInCadl
         public BaseModelWithDiscriminator RequiredModel { get; set; }
         /// <summary> Gets or sets the required fixed string enum. </summary>
         public FixedStringEnum RequiredFixedStringEnum { get; set; }
+        /// <summary> Gets or sets the required fixed int enum. </summary>
+        public FixedIntEnum RequiredFixedIntEnum { get; set; }
         /// <summary> Gets or sets the required extensible enum. </summary>
         public ExtensibleEnum RequiredExtensibleEnum { get; set; }
         /// <summary> Gets the required collection. </summary>

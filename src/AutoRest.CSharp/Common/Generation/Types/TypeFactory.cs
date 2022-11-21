@@ -30,11 +30,15 @@ namespace AutoRest.CSharp.Generation.Types
             _library = library;
         }
 
+        private Type AzureResponseErrorType => typeof(Azure.ResponseError);
+
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
+            InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
             InputModelType model               => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
             InputPrimitiveType primitiveType   => primitiveType.Kind switch
             {
@@ -253,6 +257,7 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.DateTime => typeof(DateTimeOffset),
             AllSchemaTypes.Duration => typeof(TimeSpan),
             AllSchemaTypes.OdataQuery => typeof(string),
+            AllSchemaTypes.ArmId => typeof(ResourceIdentifier),
             AllSchemaTypes.String => ToXMsFormatType(format) ?? typeof(string),
             AllSchemaTypes.Time => typeof(TimeSpan),
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),

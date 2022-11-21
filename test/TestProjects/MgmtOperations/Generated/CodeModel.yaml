@@ -931,6 +931,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Create an availability set.:
+              $ref: ./examples/CreateAnAvailabilitySet.json
         language: !Languages 
           default:
             name: CreateOrUpdate
@@ -1810,6 +1814,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Create an availability set.:
+              $ref: ./examples/CreateAnAvailabilitySet.json
         language: !Languages 
           default:
             name: CreateOrUpdate
@@ -2159,6 +2167,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Create an availability set.:
+              $ref: ./examples/CreateAnAvailabilitySet.json
         language: !Languages 
           default:
             name: CreateOrUpdate
