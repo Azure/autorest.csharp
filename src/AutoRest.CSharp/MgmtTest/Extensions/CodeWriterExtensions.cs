@@ -353,7 +353,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (!valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
                     continue; // skip the property that does not have a value
 
-                var hierarchyStack = property.GetHeirarchyStack();
+                var hierarchyStack = property.GetHierarchyStack();
                 // check if this property is safe-flattened
                 if (hierarchyStack.Count > 1)
                 {

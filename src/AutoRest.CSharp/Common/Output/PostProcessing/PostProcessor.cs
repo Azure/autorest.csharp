@@ -120,13 +120,14 @@ internal abstract class PostProcessor
             project = MarkInternal(project, model);
         }
 
-        project = await RemoveMethodsFromModelFactoryAsync(project, definitions.ModelFactorySymbol, nodesToInternalize);
+        project = await RemoveMethodsFromModelFactoryAsync(project, definitions, nodesToInternalize);
 
         return project;
     }
 
-    private async Task<Project> RemoveMethodsFromModelFactoryAsync(Project project, INamedTypeSymbol? modelFactorySymbol, IEnumerable<BaseTypeDeclarationSyntax> modelsToRemove)
+    private async Task<Project> RemoveMethodsFromModelFactoryAsync(Project project, TypeSymbols definitions, IEnumerable<BaseTypeDeclarationSyntax> modelsToRemove)
     {
+        var modelFactorySymbol = definitions.ModelFactorySymbol;
         if (modelFactorySymbol == null)
             return project;
 
@@ -147,10 +148,10 @@ internal abstract class PostProcessor
 
         // find the GENERATED document of model factory (we may have the customized document of this for overloads)
         Document? modelFactoryGeneratedDocument = null;
-        foreach (var reference in modelFactorySymbol.DeclaringSyntaxReferences)
+        // the nodes corresponding to the model factory symbol has never been changed therefore the nodes inside the cache are still usable
+        foreach (var declarationNode in definitions.DeclaredNodesCache[modelFactorySymbol])
         {
-            var node = await reference.GetSyntaxAsync();
-            var document = project.GetDocument(node.SyntaxTree);
+            var document = project.GetDocument(declarationNode.SyntaxTree);
             if (document != null && GeneratedCodeWorkspace.IsGeneratedDocument(document))
             {
                 modelFactoryGeneratedDocument = document;

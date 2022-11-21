@@ -144,9 +144,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var modelFactoryProvider = MgmtContext.Library.ModelFactory;
             if (modelFactoryProvider != null)
             {
-                var codeWriter = new CodeWriter();
-                ModelFactoryWriter.WriteModelFactory(codeWriter, modelFactoryProvider);
-                AddGeneratedFile(project, $"Models/{modelFactoryProvider.Type.Name}.cs", codeWriter.ToString());
+                var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
+                modelFactoryWriter.Write();
+                AddGeneratedFile(project, $"Models/{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))

@@ -4,47 +4,82 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal static class ModelFactoryWriter
+    internal class ModelFactoryWriter
     {
-        public static void WriteModelFactory(CodeWriter writer, ModelFactoryTypeProvider modelFactoryType)
+        protected CodeWriter _writer;
+        private ModelFactoryTypeProvider This { get; }
+
+        public ModelFactoryWriter(ModelFactoryTypeProvider modelFactoryProvider) : this(new CodeWriter(), modelFactoryProvider)
         {
-            using (writer.Namespace(modelFactoryType.Type.Namespace))
+        }
+
+        public ModelFactoryWriter(CodeWriter writer, ModelFactoryTypeProvider modelFactoryProvider)
+        {
+            _writer = writer;
+            This = modelFactoryProvider;
+        }
+
+        public void Write()
+        {
+            using (_writer.Namespace(This.Type.Namespace))
             {
-                writer.WriteXmlDocumentationSummary($"Model factory for read-only models.");
-                using (writer.Scope($"{modelFactoryType.Declaration.Accessibility} static partial class {modelFactoryType.Type.Name}"))
+                _writer.WriteXmlDocumentationSummary($"Model factory for read-only models.");
+                using (_writer.Scope($"{This.Declaration.Accessibility} static partial class {This.Type:D}"))
                 {
-                    foreach (var method in modelFactoryType.Methods)
+                    foreach (var method in This.Methods)
                     {
-                        WriteFactoryMethodForSchemaObjectType(writer, method);
-                        writer.Line();
+                        WriteFactoryMethod(method);
+                        _writer.Line();
                     }
                 }
             }
         }
 
-        private static void WriteFactoryMethodForSchemaObjectType(CodeWriter writer, MethodSignature method)
+        public override string ToString()
         {
-            var modelType = method.ReturnType?.Implementation as ObjectType;
-            Debug.Assert(modelType != null);
+            return _writer.ToString();
+        }
 
-            var ctor = modelType.SerializationConstructor;
+        public void WriteModelFactory()
+        {
+            using (_writer.Namespace(This.Type.Namespace))
+            {
+                _writer.WriteXmlDocumentationSummary($"Model factory for read-only models.");
+                using (_writer.Scope($"{This.Declaration.Accessibility} static partial class {This.Type.Name}"))
+                {
+                    foreach (var method in This.Methods)
+                    {
+                        WriteFactoryMethod(method);
+                        _writer.Line();
+                    }
+                }
+            }
+        }
+
+        private void WriteFactoryMethod(MethodSignature method)
+        {
+            var model = method.ReturnType?.Implementation as SerializableObjectType;
+            Debug.Assert(model != null);
+
+            var ctor = model.SerializationConstructor;
             var initializes = new List<PropertyInitializer>();
             foreach (var parameter in method.Parameters)
             {
-                var property = ctor.FindPropertyInitializedByParameter(parameter)!;
-                initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.Name:I}", parameter.Type));
+                (var property, var assignment) = This.GetPropertyAssignment(model, parameter);
+                initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, assignment, parameter.Type));
             }
 
-            writer.WriteMethodDocumentation(method);
-            using (writer.WriteMethodDeclaration(method))
+            _writer.WriteMethodDocumentation(method);
+            using (_writer.WriteMethodDeclaration(method))
             {
-                writer.WriteParameterNullChecks(method.Parameters);
-                writer.WriteInitialization(v => writer.Line($"return {v};"), modelType, ctor, initializes);
+                _writer.WriteParameterNullChecks(method.Parameters);
+                _writer.WriteInitialization(v => _writer.Line($"return {v};"), model, ctor, initializes);
             }
         }
     }

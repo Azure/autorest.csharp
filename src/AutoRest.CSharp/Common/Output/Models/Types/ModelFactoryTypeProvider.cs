@@ -4,15 +4,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
-using Configuration = AutoRest.CSharp.Input.Configuration;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using AutoRest.CSharp.Utilities;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using Configuration = AutoRest.CSharp.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -20,13 +20,17 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
-        public IEnumerable<MethodSignature> Methods { get; }
 
-        public string FullName => $"{Type.Namespace}.{Type.Name}";
+        private IEnumerable<MethodSignature>? _methods;
+        public IEnumerable<MethodSignature> Methods => _methods ??= Models.Select(CreateMethod);
 
-        private ModelFactoryTypeProvider(IEnumerable<MethodSignature> methods, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        public IEnumerable<SerializableObjectType> Models { get; }
+
+        internal string FullName => $"{Type.Namespace}.{Type.Name}";
+
+        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
-            Methods = methods;
+            Models = objectTypes;
 
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
@@ -34,11 +38,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public static ModelFactoryTypeProvider? TryCreate(string rootNamespaceName, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
         {
-            var schemaObjectTypes = models.OfType<SchemaObjectType>()
+            var objectTypes = models.OfType<SerializableObjectType>()
                 .Where(RequiresModelFactory)
                 .ToArray();
 
-            if (!schemaObjectTypes.Any())
+            if (!objectTypes.Any())
             {
                 return null;
             }
@@ -46,36 +50,110 @@ namespace AutoRest.CSharp.Output.Models.Types
             var defaultClientName = ClientBuilder.GetClientPrefix(Configuration.LibraryName, rootNamespaceName);
             var defaultNamespace = GetDefaultModelNamespace(null, rootNamespaceName);
 
-            return new ModelFactoryTypeProvider(schemaObjectTypes.Select(CreateMethod), defaultClientName, defaultNamespace, sourceInputModel);
+            return new ModelFactoryTypeProvider(objectTypes, defaultClientName, defaultNamespace, sourceInputModel);
         }
 
-        private static MethodSignature CreateMethod(SchemaObjectType modelType)
+        public (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignment(SerializableObjectType model, Parameter parameter)
         {
-            var ctor = modelType.SerializationConstructor.Signature;
-            var methodParameters = new Parameter[ctor.Parameters.Count];
-
-            for (var i = 0; i < ctor.Parameters.Count; i++)
+            var propertyStackDict = _parameterPropertyCache[model];
+            var propertyStack = propertyStackDict[parameter];
+            var assignmentProperty = propertyStack.Last();
+            propertyStack.Pop();
+            FormattableString result = $"{parameter.Name:I}";
+            while (propertyStack.Count > 0)
             {
-                var ctorParameter = ctor.Parameters[i];
-                var inputType = TypeFactory.GetInputType(ctorParameter.Type);
+                var property = propertyStack.Pop();
+                result = $"new {property.ValueType}({result})"; // TODO -- append the conversion
+            }
+
+            return (assignmentProperty, result);
+        }
+
+        private static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
+        {
+            if (TypeFactory.RequiresToList(from, to))
+            {
+                writer.UseNamespace(typeof(Enumerable).Namespace!);
+                return from.IsNullable ? "?.ToList()" : ".ToList()";
+            }
+
+            return string.Empty;
+        }
+
+        private readonly Dictionary<SerializableObjectType, Dictionary<Parameter, Stack<ObjectTypeProperty>>> _parameterPropertyCache = new();
+
+        private MethodSignature CreateMethod(SerializableObjectType modelType)
+        {
+            var ctor = modelType.SerializationConstructor;
+            var ctorSignature = ctor.Signature;
+            var methodParameters = new List<Parameter>(ctorSignature.Parameters.Count);
+            var cache = new Dictionary<Parameter, Stack<ObjectTypeProperty>>();
+
+            foreach (var ctorParameter in ctorSignature.Parameters)
+            {
+                var property = ctor.FindPropertyInitializedByParameter(ctorParameter);
+                if (property == null)
+                    continue;
+
+                (var parameterName, var propertyStack) = GetPropertyStack(property);
+
+                // need to check the corresponding property
+                var inputType = TypeFactory.GetInputType(propertyStack.Peek().Declaration.Type);
                 if (!inputType.IsValueType)
                 {
                     inputType = inputType.WithNullable(true);
                 }
 
-                methodParameters[i] = ctorParameter with
+                var modelFactoryMethodParameter = ctorParameter with
                 {
+                    Name = parameterName,
                     Type = inputType,
                     DefaultValue = Constant.Default(inputType),
                     Initializer = inputType.GetParameterInitializer(ctorParameter.DefaultValue)
                 };
+
+                methodParameters.Add(modelFactoryMethodParameter);
+                cache.Add(modelFactoryMethodParameter, propertyStack);
             }
 
+            _parameterPropertyCache.Add(modelType, cache);
+
             FormattableString returnDescription = $"A new <see cref=\"{modelType.Declaration.Namespace}.{modelType.Declaration.Name}\"/> instance for mocking.";
-            return new MethodSignature(ctor.Name, ctor.Summary, ctor.Description, Public | Static, modelType.Type, returnDescription, methodParameters);
+
+            return new MethodSignature(ctorSignature.Name, ctorSignature.Summary, ctorSignature.Description, Public | Static, modelType.Type, returnDescription, methodParameters);
         }
 
-        private static bool RequiresModelFactory(SchemaObjectType model)
+        private (string ParameterName, Stack<ObjectTypeProperty> HierarchyStack) GetPropertyStack(ObjectTypeProperty property)
+        {
+            if (Configuration.AzureArm)
+            {
+                var hierarchyStack = property.GetHierarchyStack();
+
+                return (GetPropertyName(hierarchyStack), hierarchyStack);
+            }
+
+            var stack = new Stack<ObjectTypeProperty>();
+            stack.Push(property);
+            return (property.Declaration.Name, stack);
+        }
+
+        private string GetPropertyName(Stack<ObjectTypeProperty> hierarchyStack)
+        {
+            if (hierarchyStack.Count > 1)
+            {
+                var innerProperty = hierarchyStack.Pop();
+                var immediateParent = hierarchyStack.Pop();
+                var parameterName = innerProperty.GetCombinedPropertyName(immediateParent).ToVariableName();
+                hierarchyStack.Push(immediateParent);
+                hierarchyStack.Push(innerProperty);
+
+                return parameterName;
+            }
+
+            return hierarchyStack.Peek().Declaration.Name.ToVariableName();
+        }
+
+        private static bool RequiresModelFactory(SerializableObjectType model)
         {
             if (model.Declaration.Accessibility != "public" || !model.IncludeDeserializer || model.Declaration.IsAbstract)
             {

@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var property in schema.Properties)
             {
-                Stack<ObjectTypeProperty> hierarchyStack = property.GetHeirarchyStack();
+                Stack<ObjectTypeProperty> hierarchyStack = property.GetHierarchyStack();
                 if (Configuration.AzureArm && hierarchyStack.Count > 1)
                 {
                     var innerProperty = hierarchyStack.Pop();

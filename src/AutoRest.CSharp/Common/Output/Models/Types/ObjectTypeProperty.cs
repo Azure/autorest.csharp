@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return extraDescription;
         }
 
-        public Stack<ObjectTypeProperty> GetHeirarchyStack()
+        public Stack<ObjectTypeProperty> GetHierarchyStack()
         {
             var heirarchyStack = new Stack<ObjectTypeProperty>();
             heirarchyStack.Push(this);
