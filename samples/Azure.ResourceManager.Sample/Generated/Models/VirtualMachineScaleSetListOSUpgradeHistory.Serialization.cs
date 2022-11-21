@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    etag = new ETag(property.Value.GetString());
+                    etag = JsonSerializer.Deserialize<ETag>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("nextLink"))

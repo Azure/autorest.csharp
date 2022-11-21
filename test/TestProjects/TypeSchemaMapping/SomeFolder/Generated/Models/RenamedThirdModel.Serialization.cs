@@ -20,7 +20,7 @@ namespace CustomNamespace
             if (Optional.IsDefined(CustomizedETagProperty))
             {
                 writer.WritePropertyName("ETag");
-                writer.WriteStringValue(CustomizedETagProperty.ToString());
+                JsonSerializer.Serialize(writer, CustomizedETagProperty);
             }
             if (Optional.IsDefined(CustomizedCreatedAtProperty))
             {
@@ -43,7 +43,7 @@ namespace CustomNamespace
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    eTag = new ETag(property.Value.GetString());
+                    eTag = JsonSerializer.Deserialize<ETag>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("CreatedAt"))

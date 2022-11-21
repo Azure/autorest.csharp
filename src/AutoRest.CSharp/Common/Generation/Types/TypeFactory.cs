@@ -87,28 +87,13 @@ namespace AutoRest.CSharp.Generation.Types
             DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            ObjectSchema objectSchema when format == XMsFormat.DataFactoryExpressionOfListOfT => ConstructDfeGenericListType(objectSchema, isNullable),
+            ObjectSchema objectSchema when format == XMsFormat.DataFactoryExpressionOfListOfT => new CSharpType(
+                typeof(DataFactoryExpression<>),
+                isNullable: isNullable,
+                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)objectSchema.Extensions!["x-ms-element-type"]))),
             _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
-
-        private CSharpType ConstructDfeGenericListType(ObjectSchema schema, bool isNullable)
-        {
-            var provider = _library.FindTypeProviderForSchema(schema);
-
-            // Add a converter this schema so that we can generate JSON serialization
-            // code for the type that is using this schema as the generic type argument
-            if (provider is SchemaObjectType schemaObjectType)
-            {
-                schemaObjectType.Usage |= SchemaTypeUsage.Converter;
-            }
-
-            // ListOfT requires special handling because the generic type does not exist at compile time.
-            return new CSharpType(
-                typeof(DataFactoryExpression<>),
-                isNullable: isNullable,
-                new CSharpType(typeof(IList<>), _library.FindTypeForSchema(schema)));
-        }
 
         public static CSharpType GetImplementationType(CSharpType type)
         {

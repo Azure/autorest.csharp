@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -30,7 +29,7 @@ namespace MgmtRenameRules.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
-            IPAddresses = new ChangeTrackingList<IPAddress>();
+            IPAddresses = new ChangeTrackingList<string>();
             ApplicationGatewayBackendAddressPools = new ChangeTrackingList<WritableSubResource>();
             ApplicationSecurityGroups = new ChangeTrackingList<WritableSubResource>();
             LoadBalancerBackendAddressPools = new ChangeTrackingList<WritableSubResource>();
@@ -82,7 +81,7 @@ namespace MgmtRenameRules.Models
         /// Specifies an array of references to inbound Nat pools of the load balancers. A scale set can reference inbound nat pools of one public and one internal load balancer. Multiple scale sets cannot use the same basic sku load balancer.
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.properties.loadBalancerInboundNatPools
         /// </param>
-        internal VirtualMachineScaleSetIPConfiguration(string id, string name, WritableSubResource subnet, bool? primary, VirtualMachineScaleSetPublicIPAddressConfiguration publicIPAddressConfiguration, IList<IPAddress> ipAddresses, IPVersion? privateIPAddressVersion, IList<WritableSubResource> applicationGatewayBackendAddressPools, IList<WritableSubResource> applicationSecurityGroups, IList<WritableSubResource> loadBalancerBackendAddressPools, IList<WritableSubResource> loadBalancerInboundNatPools) : base(id)
+        internal VirtualMachineScaleSetIPConfiguration(string id, string name, WritableSubResource subnet, bool? primary, VirtualMachineScaleSetPublicIPAddressConfiguration publicIPAddressConfiguration, IList<string> ipAddresses, IPVersion? privateIPAddressVersion, IList<WritableSubResource> applicationGatewayBackendAddressPools, IList<WritableSubResource> applicationSecurityGroups, IList<WritableSubResource> loadBalancerBackendAddressPools, IList<WritableSubResource> loadBalancerInboundNatPools) : base(id)
         {
             Name = name;
             Subnet = subnet;
@@ -132,7 +131,7 @@ namespace MgmtRenameRules.Models
         /// IP Addresses
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.properties.ipAddresses
         /// </summary>
-        public IList<IPAddress> IPAddresses { get; }
+        public IList<string> IPAddresses { get; }
         /// <summary>
         /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;.
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.properties.privateIPAddressVersion

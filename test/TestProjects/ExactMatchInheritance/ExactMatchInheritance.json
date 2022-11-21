@@ -546,7 +546,7 @@
                 "type11": {
                   "type": "object",
                   "x-ms-format": "dfe-listOfT",
-                  "$ref": "#/definitions/SeparateClass"
+                  "x-ms-format-element-type": "SeparateClass"
                 },
                 "type12": {
                   "type": "object",
@@ -749,6 +749,7 @@
         },
         "SeparateClass": {
           "type": "object",
+          "x-ms-include-converter": true,
           "properties": {
             "StringProperty":
             {

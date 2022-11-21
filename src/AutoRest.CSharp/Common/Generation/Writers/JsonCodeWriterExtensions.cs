@@ -541,11 +541,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     frameworkType = serialization.Type.Arguments[0].FrameworkType;
                 }
 
-                if (IsCustomJsonConverterAdded(frameworkType))
-                {
-                    return $"JsonSerializer.Deserialize<{serialization.Type}>({element}.ToString())";
-                }
-
                 return GetFrameworkTypeValueFormattable(element, frameworkType, serialization);
             }
 
@@ -556,11 +551,6 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             bool includeFormat = false;
             SerializationFormat format = serialization?.Format ?? SerializationFormat.Default;
-
-            if (IsCustomJsonConverterAdded(frameworkType))
-            {
-                return $"JsonSerializer.Deserialize<{serialization?.Type}>({element}.ToString())";
-            }
 
             if (frameworkType == typeof(ETag) ||
                 frameworkType == typeof(Uri) ||
@@ -581,6 +571,11 @@ namespace AutoRest.CSharp.Generation.Writers
             if (frameworkType == typeof(BinaryData))
             {
                 return $"{typeof(BinaryData)}.FromString({element}.GetRawText())";
+            }
+
+            if (IsCustomJsonConverterAdded(frameworkType))
+            {
+                return $"JsonSerializer.Deserialize<{serialization?.Type}>({element}.ToString())";
             }
 
             var methodName = string.Empty;

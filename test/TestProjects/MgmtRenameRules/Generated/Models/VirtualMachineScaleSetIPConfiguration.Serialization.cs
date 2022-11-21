@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Net;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -48,7 +47,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in IPAddresses)
                 {
-                    writer.WriteStringValue(item.ToString());
+                    writer.WriteStringValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -108,7 +107,7 @@ namespace MgmtRenameRules.Models
             Optional<WritableSubResource> subnet = default;
             Optional<bool> primary = default;
             Optional<VirtualMachineScaleSetPublicIPAddressConfiguration> publicIPAddressConfiguration = default;
-            Optional<IList<IPAddress>> ipAddresses = default;
+            Optional<IList<string>> ipAddresses = default;
             Optional<IPVersion> privateIPAddressVersion = default;
             Optional<IList<WritableSubResource>> applicationGatewayBackendAddressPools = default;
             Optional<IList<WritableSubResource>> applicationSecurityGroups = default;
@@ -172,10 +171,10 @@ namespace MgmtRenameRules.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            List<IPAddress> array = new List<IPAddress>();
+                            List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(IPAddress.Parse(item.GetString()));
+                                array.Add(item.GetString());
                             }
                             ipAddresses = array;
                             continue;
