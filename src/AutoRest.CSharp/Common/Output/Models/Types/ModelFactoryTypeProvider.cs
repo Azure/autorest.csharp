@@ -22,6 +22,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
         public IEnumerable<MethodSignature> Methods { get; }
 
+        public string FullName => $"{Type.Namespace}.{Type.Name}";
+
         private ModelFactoryTypeProvider(IEnumerable<MethodSignature> methods, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             Methods = methods;

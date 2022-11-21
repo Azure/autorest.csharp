@@ -19,11 +19,14 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing;
 
 internal abstract class PostProcessor
 {
-    public PostProcessor()
+    private readonly string? _modelFactoryFullName;
+
+    public PostProcessor(string? modelFactoryFullName = null)
     {
+        _modelFactoryFullName = modelFactoryFullName;
     }
 
-    protected record TypeSymbols(ImmutableHashSet<INamedTypeSymbol> DeclaredSymbols, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> DocumentsCache);
+    protected record TypeSymbols(ImmutableHashSet<INamedTypeSymbol> DeclaredSymbols, INamedTypeSymbol? ModelFactorySymbol, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> DocumentsCache);
 
     /// <summary>
     /// This method reads the project, returns the types defined in it and build symbol caches to acceralate the calculation
@@ -38,6 +41,11 @@ internal abstract class PostProcessor
         var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
+
+        INamedTypeSymbol? modelFactorySymbol = null;
+        if (_modelFactoryFullName != null)
+            modelFactorySymbol = compilation.GetTypeByMetadataName(_modelFactoryFullName);
+
         foreach (var document in project.Documents)
         {
             if (ShouldIncludeDocument(document))
@@ -55,7 +63,11 @@ internal abstract class PostProcessor
                         continue;
                     if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public)
                         continue;
-                    result.Add(symbol);
+
+                    // we do not add the model factory symbol to the declared symbol list so that it will never be included in any process of internalization or removal
+                    if (!SymbolEqualityComparer.Default.Equals(symbol, modelFactorySymbol))
+                        result.Add(symbol);
+
                     declarationCache.AddInList(symbol, typeDeclaration);
                     documentCache.AddInList(document, symbol, () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default));
                 }
@@ -63,6 +75,7 @@ internal abstract class PostProcessor
         }
 
         return new TypeSymbols(result.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default),
+            modelFactorySymbol,
             declarationCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet(), (IEqualityComparer<INamedTypeSymbol>)SymbolEqualityComparer.Default),
             documentCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
     }
@@ -107,7 +120,53 @@ internal abstract class PostProcessor
             project = MarkInternal(project, model);
         }
 
+        project = await RemoveMethodsFromModelFactoryAsync(project, definitions.ModelFactorySymbol, nodesToInternalize);
+
         return project;
+    }
+
+    private async Task<Project> RemoveMethodsFromModelFactoryAsync(Project project, INamedTypeSymbol? modelFactorySymbol, IEnumerable<BaseTypeDeclarationSyntax> modelsToRemove)
+    {
+        if (modelFactorySymbol == null)
+            return project;
+
+        var namesToRemove = new HashSet<string>(modelsToRemove.Select(item => item.Identifier.Text));
+        var nodesToRemove = new List<SyntaxNode>();
+
+        foreach (var method in modelFactorySymbol.GetMembers().OfType<IMethodSymbol>())
+        {
+            if (namesToRemove.Contains(method.Name))
+            {
+                foreach (var reference in method.DeclaringSyntaxReferences)
+                {
+                    var node = await reference.GetSyntaxAsync();
+                    nodesToRemove.Add(node);
+                }
+            }
+        }
+
+        // find the GENERATED document of model factory (we may have the customized document of this for overloads)
+        Document? modelFactoryGeneratedDocument = null;
+        foreach (var reference in modelFactorySymbol.DeclaringSyntaxReferences)
+        {
+            var node = await reference.GetSyntaxAsync();
+            var document = project.GetDocument(node.SyntaxTree);
+            if (document != null && GeneratedCodeWorkspace.IsGeneratedDocument(document))
+            {
+                modelFactoryGeneratedDocument = document;
+                break;
+            }
+        }
+
+        // maybe this is possible, for instance, we could be adding the customization all entries previously inside the generated model factory so that the generated model factory is empty and removed.
+        if (modelFactoryGeneratedDocument == null)
+            return project;
+
+        var root = await modelFactoryGeneratedDocument.GetSyntaxRootAsync();
+        root = root?.RemoveNodes(nodesToRemove, SyntaxRemoveOptions.KeepNoTrivia);
+        modelFactoryGeneratedDocument = modelFactoryGeneratedDocument.WithSyntaxRoot(root!);
+
+        return modelFactoryGeneratedDocument.Project;
     }
 
     /// <summary>
