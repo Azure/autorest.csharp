@@ -65,6 +65,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 singleTopLevelClient: false,
                 skipSerializationFormatXml: false,
                 disablePaginationTopRenaming: false,
+                removeUnusedTypes: Configuration.UnusedTypeRemovalLevel.RemoveAll,
                 projectFolder: "/..",
                 protocolMethodList: Array.Empty<string>(),
                 suppressAbstractBaseClasses: Array.Empty<string>(),

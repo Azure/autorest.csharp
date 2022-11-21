@@ -152,15 +152,25 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            await project.PostProcess(project => PostProcess(project, modelFactoryProvider?.Type.Namespace, modelFactoryProvider?.Type.Name));
+            await project.PostProcess(PostProcess);
         }
 
-        private static async Task<Project> PostProcess(Project project, string? modelFactoryNamespace, string? modelFactoryName)
+        private static async Task<Project> PostProcess(Project project)
         {
             var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-            project = await Internalizer.InternalizeAsync(project, modelsToKeep, modelFactoryNamespace, modelFactoryName);
-
-            project = await Remover.RemoveUnusedAsync(project, modelsToKeep, modelFactoryName);
+            var postProcessor = new MgmtPostProcessor(modelsToKeep);
+            switch (Configuration.RemoveUnusedTypes)
+            {
+                case Configuration.UnusedTypeRemovalLevel.KeepAll:
+                    break;
+                case Configuration.UnusedTypeRemovalLevel.Internalize:
+                    project = await postProcessor.InternalizeAsync(project);
+                    break;
+                case Configuration.UnusedTypeRemovalLevel.RemoveAll:
+                    project = await postProcessor.InternalizeAsync(project);
+                    project = await postProcessor.RemoveAsync(project);
+                    break;
+            }
 
             return project;
         }
