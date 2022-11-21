@@ -98,11 +98,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 RestClientMethod method = restClient.GetOperationMethod(operation);
                 RestClientMethod? nextPageMethod = restClient.GetNextOperationMethod(operation);
 
-                if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
-                {
-                    throw new InvalidOperationException($"Method {method.Name} has to have a return value");
-                }
-
                 yield return BuildPagingMethod(method.Name, paging.NextLinkName, paging.ItemName, method, nextPageMethod, declaration);
             }
         }
