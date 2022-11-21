@@ -537,7 +537,24 @@
                 },
                 "type9": {
                     "type": "object",
-                    "x-ms-format": "dfe-array"
+                    "x-ms-format": "dfe-listOfObject"
+                },
+                "type10": {
+                  "type": "object",
+                  "x-ms-format": "dfe-object"
+                },
+                "type11": {
+                  "type": "object",
+                  "x-ms-format": "dfe-listOfT",
+                  "$ref": "#/definitions/SeparateClass"
+                },
+                "type12": {
+                  "type": "object",
+                  "x-ms-format": "dfe-listOfString"
+                },
+                "type13": {
+                  "type": "object",
+                  "x-ms-format": "dfe-keyValuePair"
                 }
             },
             "allOf": [
@@ -729,6 +746,19 @@
                     "type": "string"
                 }
             }
+        },
+        "SeparateClass": {
+          "type": "object",
+          "properties": {
+            "StringProperty":
+            {
+              "type": "string"
+            },
+            "ModelProperty":
+            {
+              "$ref": "#/definitions/ExactMatchModel10"
+            }
+          }
         }
     },
     "parameters": {

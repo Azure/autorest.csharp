@@ -81,6 +81,26 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("type9");
                 JsonSerializer.Serialize(writer, Type9);
             }
+            if (Optional.IsDefined(Type10))
+            {
+                writer.WritePropertyName("type10");
+                JsonSerializer.Serialize(writer, Type10);
+            }
+            if (Optional.IsDefined(Type11))
+            {
+                writer.WritePropertyName("type11");
+                JsonSerializer.Serialize(writer, Type11);
+            }
+            if (Optional.IsDefined(Type12))
+            {
+                writer.WritePropertyName("type12");
+                JsonSerializer.Serialize(writer, Type12);
+            }
+            if (Optional.IsDefined(Type13))
+            {
+                writer.WritePropertyName("type13");
+                JsonSerializer.Serialize(writer, Type13);
+            }
             writer.WriteEndObject();
         }
 
@@ -96,7 +116,11 @@ namespace ExactMatchInheritance
             Optional<DataFactoryExpression<double>> type6 = default;
             Optional<DataFactoryExpression<bool>> type7 = default;
             Optional<DataFactoryExpression<int>> type8 = default;
-            Optional<DataFactoryExpression<Array>> type9 = default;
+            Optional<DataFactoryExpression<IList<BinaryData>>> type9 = default;
+            Optional<DataFactoryExpression<BinaryData>> type10 = default;
+            Optional<DataFactoryExpression<IList<SeparateClass>>> type11 = default;
+            Optional<DataFactoryExpression<IList<string>>> type12 = default;
+            Optional<DataFactoryExpression<IDictionary<string, string>>> type13 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -210,7 +234,47 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type9 = JsonSerializer.Deserialize<DataFactoryExpression<Array>>(property.Value.ToString());
+                    type9 = JsonSerializer.Deserialize<DataFactoryExpression<IList<BinaryData>>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("type10"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type10 = JsonSerializer.Deserialize<DataFactoryExpression<BinaryData>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("type11"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type11 = JsonSerializer.Deserialize<DataFactoryExpression<IList<SeparateClass>>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("type12"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type12 = JsonSerializer.Deserialize<DataFactoryExpression<IList<string>>>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("type13"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type13 = JsonSerializer.Deserialize<DataFactoryExpression<IDictionary<string, string>>>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -239,7 +303,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value);
+            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value);
         }
     }
 }

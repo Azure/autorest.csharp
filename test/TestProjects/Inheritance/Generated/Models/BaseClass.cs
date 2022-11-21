@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core.Expressions.DataFactory;
 
 namespace Inheritance.Models
@@ -24,15 +25,23 @@ namespace Inheritance.Models
         /// <param name="dfeDouble"> Any object. </param>
         /// <param name="dfeBool"> Any object. </param>
         /// <param name="dfeInt"> Any object. </param>
-        /// <param name="dfeArray"> Any object. </param>
-        internal BaseClass(string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<Array> dfeArray)
+        /// <param name="dfeObject"> Any object. </param>
+        /// <param name="dfeListOfObject"> Any object. </param>
+        /// <param name="dfeListOfT"></param>
+        /// <param name="dfeListOfString"> Any object. </param>
+        /// <param name="dfeKeyValuePairs"> Any object. </param>
+        internal BaseClass(string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<BinaryData> dfeObject, DataFactoryExpression<IList<BinaryData>> dfeListOfObject, DataFactoryExpression<IList<SeparateClass>> dfeListOfT, DataFactoryExpression<IList<string>> dfeListOfString, DataFactoryExpression<IDictionary<string, string>> dfeKeyValuePairs)
         {
             BaseClassProperty = baseClassProperty;
             DfeString = dfeString;
             DfeDouble = dfeDouble;
             DfeBool = dfeBool;
             DfeInt = dfeInt;
-            DfeArray = dfeArray;
+            DfeObject = dfeObject;
+            DfeListOfObject = dfeListOfObject;
+            DfeListOfT = dfeListOfT;
+            DfeListOfString = dfeListOfString;
+            DfeKeyValuePairs = dfeKeyValuePairs;
         }
 
         /// <summary> Gets or sets the base class property. </summary>
@@ -46,6 +55,14 @@ namespace Inheritance.Models
         /// <summary> Any object. </summary>
         public DataFactoryExpression<int> DfeInt { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<Array> DfeArray { get; set; }
+        public DataFactoryExpression<BinaryData> DfeObject { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<IList<BinaryData>> DfeListOfObject { get; set; }
+        /// <summary> Gets or sets the dfe list of t. </summary>
+        public DataFactoryExpression<IList<SeparateClass>> DfeListOfT { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<IList<string>> DfeListOfString { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<IDictionary<string, string>> DfeKeyValuePairs { get; set; }
     }
 }

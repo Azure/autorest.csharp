@@ -76,16 +76,35 @@ namespace AutoRest.CSharp.Generation.Types
         // This function provide the capability to support the extensions is coming from outside, like parameter.
         public CSharpType CreateType(Schema schema, string? format, bool isNullable) => schema switch
         {
-            ConstantSchema constantSchema => ToXMsFormatType(constantSchema.Extensions?.Format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
+            ConstantSchema constantSchema => ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
             ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
             ArraySchema array => new CSharpType(typeof(IList<>), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
             DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
+            ObjectSchema objectSchema when format == XMsFormat.DataFactoryExpressionOfListOfT => ConstructDfeGenericListType(objectSchema, isNullable),
             _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
+
+        private CSharpType ConstructDfeGenericListType(ObjectSchema schema, bool isNullable)
+        {
+            var provider = _library.FindTypeProviderForSchema(schema);
+
+            // Add a converter this schema so that we can generate JSON serialization
+            // code for the type that is using this schema as the generic type argument
+            if (provider is SchemaObjectType schemaObjectType)
+            {
+                schemaObjectType.Usage |= SchemaTypeUsage.Converter;
+            }
+
+            // ListOfT requires special handling because the generic type does not exist at compile time.
+            return new CSharpType(
+                typeof(DataFactoryExpression<>),
+                isNullable: isNullable,
+                new CSharpType(typeof(IList<>), _library.FindTypeForSchema(schema)));
+        }
 
         public static CSharpType GetImplementationType(CSharpType type)
         {
@@ -262,8 +281,11 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.DataFactoryExpressionOfString => typeof(DataFactoryExpression<string>),
             XMsFormat.DataFactoryExpressionOfInt => typeof(DataFactoryExpression<int>),
             XMsFormat.DataFactoryExpressionOfDouble => typeof(DataFactoryExpression<double>),
-            XMsFormat.DataFactoryExpressionOfArray => typeof(DataFactoryExpression<Array>),
             XMsFormat.DataFactoryExpressionOfBool => typeof(DataFactoryExpression<bool>),
+            XMsFormat.DataFactoryExpressionOfObject => typeof(DataFactoryExpression<BinaryData>),
+            XMsFormat.DataFactoryExpressionOfListOfObject => typeof(DataFactoryExpression<IList<BinaryData>>),
+            XMsFormat.DataFactoryExpressionOfListOfString => typeof(DataFactoryExpression<IList<string>>),
+            XMsFormat.DataFactoryExpressionOfKeyValuePairs => typeof(DataFactoryExpression<IDictionary<string, string>>),
             _ => null
         };
 

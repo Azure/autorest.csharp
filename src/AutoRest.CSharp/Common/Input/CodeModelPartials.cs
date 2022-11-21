@@ -190,11 +190,15 @@ namespace AutoRest.CSharp.Input
         public const string IPAddress = "ip-address";
         public const string ContentType = "content-type";
         public const string RequestMethod = "request-method";
+        public const string DataFactoryExpressionOfObject= "dfe-object";
         public const string DataFactoryExpressionOfString = "dfe-string";
         public const string DataFactoryExpressionOfInt = "dfe-int";
         public const string DataFactoryExpressionOfDouble = "dfe-float";
-        public const string DataFactoryExpressionOfArray = "dfe-array";
         public const string DataFactoryExpressionOfBool = "dfe-bool";
+        public const string DataFactoryExpressionOfListOfT = "dfe-listOfT";
+        public const string DataFactoryExpressionOfListOfObject = "dfe-listOfObject";
+        public const string DataFactoryExpressionOfListOfString = "dfe-listOfString";
+        public const string DataFactoryExpressionOfKeyValuePairs = "dfe-keyValuePair";
     }
 
     internal partial class ServiceResponse

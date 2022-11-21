@@ -40,7 +40,11 @@ namespace ExactMatchInheritance
         /// <param name="type7"> Any object. </param>
         /// <param name="type8"> Any object. </param>
         /// <param name="type9"> Any object. </param>
-        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryExpression<string> type5, DataFactoryExpression<double> type6, DataFactoryExpression<bool> type7, DataFactoryExpression<int> type8, DataFactoryExpression<Array> type9) : base(id, name, resourceType, systemData)
+        /// <param name="type10"> Any object. </param>
+        /// <param name="type11"></param>
+        /// <param name="type12"> Any object. </param>
+        /// <param name="type13"> Any object. </param>
+        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryExpression<string> type5, DataFactoryExpression<double> type6, DataFactoryExpression<bool> type7, DataFactoryExpression<int> type8, DataFactoryExpression<IList<BinaryData>> type9, DataFactoryExpression<BinaryData> type10, DataFactoryExpression<IList<SeparateClass>> type11, DataFactoryExpression<IList<string>> type12, DataFactoryExpression<IDictionary<string, string>> type13) : base(id, name, resourceType, systemData)
         {
             New = @new;
             SupportingUris = supportingUris;
@@ -53,6 +57,10 @@ namespace ExactMatchInheritance
             Type7 = type7;
             Type8 = type8;
             Type9 = type9;
+            Type10 = type10;
+            Type11 = type11;
+            Type12 = type12;
+            Type13 = type13;
         }
 
         /// <summary> Gets or sets the new. </summary>
@@ -76,6 +84,14 @@ namespace ExactMatchInheritance
         /// <summary> Any object. </summary>
         public DataFactoryExpression<int> Type8 { get; set; }
         /// <summary> Any object. </summary>
-        public DataFactoryExpression<Array> Type9 { get; set; }
+        public DataFactoryExpression<IList<BinaryData>> Type9 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<BinaryData> Type10 { get; set; }
+        /// <summary> Gets or sets the type 11. </summary>
+        public DataFactoryExpression<IList<SeparateClass>> Type11 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<IList<string>> Type12 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<IDictionary<string, string>> Type13 { get; set; }
     }
 }

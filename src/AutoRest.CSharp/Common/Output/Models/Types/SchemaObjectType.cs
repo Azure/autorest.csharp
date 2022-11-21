@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
-        private readonly SchemaTypeUsage _usage;
+        private SchemaTypeUsage _usage;
 
         private readonly ModelTypeMapping? _sourceTypeMapping;
         private readonly IReadOnlyList<KnownMediaType> _supportedSerializationFormats;
@@ -291,6 +291,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+
+        public SchemaTypeUsage Usage
+        {
+            get => _usage;
+            set => _usage = value;
+        }
         protected bool SkipInitializerConstructor => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.SkipInitCtor;
@@ -486,7 +492,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private CSharpType GetDefaultPropertyType(Property property)
         {
-            var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable, property.Schema is AnyObjectSchema ? property.Extensions?.Format : property.Schema.Extensions?.Format);
+            var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable, property.Schema is (AnyObjectSchema or Input.ObjectSchema) ? property.Extensions?.Format : property.Schema.Extensions?.Format);
 
             if (!_usage.HasFlag(SchemaTypeUsage.Input) ||
                 property.IsReadOnly)

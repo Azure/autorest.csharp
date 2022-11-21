@@ -62,9 +62,26 @@
           "type": "object",
           "x-ms-format": "dfe-int"
         },
-        "DfeArray": {
+        "DfeObject": {
           "type": "object",
-          "x-ms-format": "dfe-array"
+          "x-ms-format": "dfe-object"
+        },
+        "DfeListOfObject": {
+          "type": "object",
+          "x-ms-format": "dfe-listOfObject"
+        },
+        "DfeListOfT": {
+          "type": "object",
+          "x-ms-format": "dfe-listOfT",
+          "$ref": "#/definitions/SeparateClass"
+        },
+        "DfeListOfString": {
+          "type": "object",
+          "x-ms-format": "dfe-listOfString"
+        },
+        "DfeKeyValuePairs": {
+          "type": "object",
+          "x-ms-format": "dfe-keyValuePair"
         }
       }
     },
@@ -233,6 +250,19 @@
         }
       ],
       "x-ms-discriminator-value": "random value"
+    },
+    "SeparateClass": {
+      "type": "object",
+      "properties": {
+        "StringProperty":
+        {
+          "type": "string"
+        },
+        "ModelProperty":
+        {
+          "$ref": "#/definitions/BaseClassWithExtensibleEnumDiscriminator"
+        }
+      }
     }
   }
 }
