@@ -46,8 +46,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var pagingMethod in client.PagingMethods)
                     {
-                        WritePagingOperation(writer, pagingMethod, true);
-                        WritePagingOperation(writer, pagingMethod, false);
+                        WritePagingOperation(writer, pagingMethod, true, ClientDiagnosticsField);
+                        WritePagingOperation(writer, pagingMethod, false, ClientDiagnosticsField);
                     }
 
                     foreach (var longRunningOperation in client.LongRunningOperationMethods)
@@ -266,11 +266,11 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WritePagingOperation(CodeWriter writer, PagingMethod pagingMethod, bool async)
+        public static void WritePagingOperation(CodeWriter writer, PagingMethod pagingMethod, bool async, string diagnosticsFieldName, bool pagingFuncInRestClient = true)
         {
             var pageType = pagingMethod.PagingResponse.ItemType;
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
-            var parameters = pagingMethod.Method.Parameters;
+            var parameters = pagingMethod.Method.Parameters.ToList().Where(p => p.Name != KnownParameters.RequestContext.Name).ToList();
 
             writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.SummaryText}");
 
@@ -307,9 +307,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
                 using (writer.Scope($"{asyncText} {funcType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
                 {
-                    using (WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField))
+                    using (WriteDiagnosticScope(writer, pagingMethod.Diagnostics, diagnosticsFieldName))
                     {
-                        writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                        if (pagingFuncInRestClient)
+                        {
+                            writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                        }
+                        else
+                        {
+                            writer.Append($"var response = {awaitText} {CreateMethodName($"{pagingMethod.Method.Name}FirstPage", async)}(");
+                        }
+
                         foreach (Parameter parameter in parameters)
                         {
                             writer.Append($"{parameter.Name}, ");
@@ -324,12 +332,19 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (pagingMethod.NextPageMethod != null)
                 {
                     nextPageFunctionName = "NextPageFunc";
-                    var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
+                    var nextPageParameters = pagingMethod.NextPageMethod.Parameters.ToList().Where(p => p.Name != KnownParameters.RequestContext.Name).ToList();
                     using (writer.Scope($"{asyncText} {funcType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                     {
-                        using (WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField))
+                        using (WriteDiagnosticScope(writer, pagingMethod.Diagnostics, diagnosticsFieldName))
                         {
-                            writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
+                            if (pagingFuncInRestClient)
+                            {
+                                writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
+                            }
+                            else
+                            {
+                                writer.Append($"var response = {awaitText} {CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
+                            }
                             foreach (Parameter parameter in nextPageParameters)
                             {
                                 writer.Append($"{parameter.Name}, ");

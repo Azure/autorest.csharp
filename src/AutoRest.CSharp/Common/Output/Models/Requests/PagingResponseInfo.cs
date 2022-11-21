@@ -14,21 +14,14 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public PagingResponseInfo(string? nextLinkName, string? itemName, CSharpType type)
         {
             ResponseType = type;
-
-            TypeProvider implementation = type.Implementation;
-            if (!(implementation is SchemaObjectType objectType))
-            {
-                throw new InvalidOperationException($"The type '{type}' has to be an object schema to be used in paging");
-            }
-
             itemName ??= "value";
 
-            ObjectTypeProperty itemProperty = objectType.GetPropertyBySerializedName(itemName);
+            ObjectTypeProperty itemProperty = GetPropertyBySerializedName(type, itemName);
 
             ObjectTypeProperty? nextLinkProperty = null;
             if (!string.IsNullOrWhiteSpace(nextLinkName))
             {
-                nextLinkProperty = objectType.GetPropertyBySerializedName(nextLinkName);
+                nextLinkProperty = GetPropertyBySerializedName(type, nextLinkName);
             }
 
             if (!TypeFactory.IsList(itemProperty.Declaration.Type))
@@ -47,5 +40,22 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public ObjectTypeProperty ItemProperty { get; }
         public CSharpType PageType => new CSharpType(typeof(Page<>), ItemType);
         public CSharpType ItemType { get; }
+
+        private ObjectTypeProperty GetPropertyBySerializedName(CSharpType type, string name)
+        {
+            TypeProvider implementation = type.Implementation;
+
+            if (implementation is SchemaObjectType objectType)
+            {
+                return objectType.GetPropertyBySerializedName(name);
+            }
+
+            if (implementation is ModelTypeProvider modelType)
+            {
+                return modelType.GetPropertyBySerializedName(name);
+            }
+
+            throw new InvalidOperationException($"The type '{type}' has to be an object schema to be used in paging");
+        }
     }
 }
