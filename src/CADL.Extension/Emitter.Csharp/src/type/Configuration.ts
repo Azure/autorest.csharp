@@ -7,5 +7,5 @@ export interface Configuration {
     LibraryName: string | null;
     SharedSourceFolders: string[];
     SingleTopLevelClient?: boolean;
-    "keep-unused-models"?: boolean;
+    "remove-unused-models"?: "removeAll" | "internalize" | "keepAll";
 }

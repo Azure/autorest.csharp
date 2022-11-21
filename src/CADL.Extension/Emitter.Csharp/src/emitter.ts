@@ -95,7 +95,7 @@ export interface NetEmitterOptions {
     "single-top-level-client"?: boolean;
     skipSDKGeneration: boolean;
     generateConvenienceAPI: boolean; //workaround for cadl-ranch project
-    "keep-unused-models": boolean; // enabling this option will let the generator skip the step of post process and hence keep all the unused models unchanged
+    "remove-unused-models"?: "removeAll" | "internalize" | "keepAll"; // enabling this option will let the generator skip the step of post process and hence keep all the unused models unchanged
     "new-project": boolean;
     csharpGeneratorPath: string;
     "clear-output-folder"?: boolean;
@@ -125,7 +125,7 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", default: false },
         generateConvenienceAPI: { type: "boolean", nullable: true },
-        "keep-unused-models": { type: "boolean", nullable: true },
+        "remove-unused-models": { type: "string", enum: ["removeAll", "internalize", "keepAll"], nullable: true },
         "new-project": { type: "boolean", nullable: true },
         csharpGeneratorPath: { type: "string", nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
@@ -161,7 +161,7 @@ export async function $onEmit(
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
-        "keep-unused-models": resolvedOptions["keep-unused-models"] ?? false,
+        "remove-unused-models": resolvedOptions["remove-unused-models"],
         "new-project": resolvedOptions["new-project"],
         csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
         "clear-output-folder": resolvedOptions["clear-output-folder"],
@@ -220,7 +220,7 @@ export async function $onEmit(
                 LibraryName: resolvedOptions["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
                 SingleTopLevelClient: resolvedOptions["single-top-level-client"],
-                "keep-unused-models": options["keep-unused-models"],
+                "remove-unused-models": options["remove-unused-models"],
             } as Configuration;
 
             await program.host.writeFile(

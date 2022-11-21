@@ -5,6 +5,5 @@
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Azure.Core.Shared"
-  ],
-  "keep-unused-models": false
+  ]
 }
