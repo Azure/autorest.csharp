@@ -92,12 +92,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     Type? frameworkType = valueSerialization.Type.SerializeAs != null ? valueSerialization.Type.SerializeAs : valueSerialization.Type.IsFrameworkType ? valueSerialization.Type.FrameworkType : null;
                     if (frameworkType != null)
                     {
-                        if (IsCustomJsonConverterAdded(frameworkType))
-                        {
-                            writer.Append($"JsonSerializer.Serialize(writer, {name:I});");
-                            return;
-                        }
-
                         if (frameworkType == typeof(JsonElement))
                         {
                             writer.Line($"{name:I}.WriteTo({writerName});");
@@ -177,6 +171,11 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"#else");
                             writer.Line($"{typeof(JsonSerializer)}.Serialize({writerName}, {typeof(JsonDocument)}.Parse({name:I}.ToString()).RootElement);");
                             writer.Line($"#endif");
+                            return;
+                        }
+                        else if (IsCustomJsonConverterAdded(frameworkType))
+                        {
+                            writer.Append($"JsonSerializer.Serialize(writer, {name:I});");
                             return;
                         }
 
