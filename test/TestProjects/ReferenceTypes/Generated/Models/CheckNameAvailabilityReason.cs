@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Fake.Models
+namespace ReferenceTypes.Models
 {
     /// <summary> The reason why the given name is not available. </summary>
     public readonly partial struct CheckNameAvailabilityReason : IEquatable<CheckNameAvailabilityReason>

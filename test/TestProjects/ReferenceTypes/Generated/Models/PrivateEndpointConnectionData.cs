@@ -7,6 +7,7 @@
 
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using ReferenceTypes.Models;
 
 namespace Azure.ResourceManager.Fake.Models
 {

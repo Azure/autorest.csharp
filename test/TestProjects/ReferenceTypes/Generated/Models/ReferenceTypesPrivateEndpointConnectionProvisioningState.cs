@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Fake.Models
+namespace ReferenceTypes.Models
 {
     /// <summary> The current provisioning state. </summary>
     public readonly partial struct ReferenceTypesPrivateEndpointConnectionProvisioningState : IEquatable<ReferenceTypesPrivateEndpointConnectionProvisioningState>

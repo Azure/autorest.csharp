@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Fake.Models
+namespace ReferenceTypes.Models
 {
     /// <summary> The private endpoint connection status. </summary>
     public readonly partial struct ReferenceTypesPrivateEndpointServiceConnectionStatus : IEquatable<ReferenceTypesPrivateEndpointServiceConnectionStatus>

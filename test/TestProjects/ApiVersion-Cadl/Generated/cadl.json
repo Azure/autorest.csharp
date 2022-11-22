@@ -78,31 +78,21 @@
         "IsNullable": false
        },
        "Location": "Uri",
-       "IsApiVersion": false,
+       "IsApiVersion": true,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "11",
-        "Type": {
-         "$id": "12",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0"
-       }
+       "Kind": "Client"
       },
       {
-       "$id": "13",
+       "$id": "11",
        "Name": "resultId",
        "NameInRequest": "resultId",
        "Type": {
-        "$id": "14",
+        "$id": "12",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -118,11 +108,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "15",
+       "$id": "13",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "16",
+        "$id": "14",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -137,9 +127,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "15",
         "Type": {
-         "$ref": "16"
+         "$ref": "14"
         },
         "Value": "application/json"
        }
@@ -147,7 +137,7 @@
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "16",
        "StatusCodes": [
         200
        ],
@@ -168,7 +158,7 @@
     }
    ],
    "Protocol": {
-    "$id": "19"
+    "$id": "17"
    },
    "Creatable": true
   }
