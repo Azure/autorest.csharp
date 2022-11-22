@@ -34,12 +34,12 @@ namespace AutoRest.CSharp.Input
             public const string SkipSerializationFormatXml = "skip-serialization-format-xml";
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
             public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
-            public const string RemoveUnusedTypes = "remove-unused-types";
+            public const string RemoveUnreferencedTypes = "remove-unreferenced-types";
         }
 
-        public enum UnusedTypeRemovalLevel
+        public enum UnreferencedTypesHandlingOption
         {
-            RemoveAll = 0,
+            RemoveOrInternalize = 0,
             Internalize = 1,
             KeepAll = 2
         }
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Input
             bool singleTopLevelClient,
             bool skipSerializationFormatXml,
             bool disablePaginationTopRenaming,
-            UnusedTypeRemovalLevel removeUnusedTypes,
+            UnreferencedTypesHandlingOption removeUnreferencedTypes,
             string? projectFolder,
             string[] protocolMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Input
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
-            RemoveUnusedTypes = removeUnusedTypes;
+            RemoveUnreferencedTypes = removeUnreferencedTypes;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
             {
@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
-        public static UnusedTypeRemovalLevel RemoveUnusedTypes { get; private set; }
+        public static UnreferencedTypesHandlingOption RemoveUnreferencedTypes { get; private set; }
         private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
         public static IReadOnlyList<string> SuppressAbstractBaseClasses => _suppressAbstractBaseClasses ?? throw new InvalidOperationException("Configuration has not been initialized");
 
@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.Input
                 singleTopLevelClient: GetOptionBoolValue(autoRest, Options.SingleTopLevelClient),
                 skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml),
                 disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
-                removeUnusedTypes: GetOptionEnumValue<UnusedTypeRemovalLevel>(autoRest, Options.RemoveUnusedTypes),
+                removeUnreferencedTypes: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.RemoveUnreferencedTypes),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.Input
 
         public static Enum? GetDefaultEnumOptionValue(string option) => option switch
         {
-            Options.RemoveUnusedTypes => UnusedTypeRemovalLevel.RemoveAll,
+            Options.RemoveUnreferencedTypes => UnreferencedTypesHandlingOption.RemoveOrInternalize,
             _ => null
         };
 

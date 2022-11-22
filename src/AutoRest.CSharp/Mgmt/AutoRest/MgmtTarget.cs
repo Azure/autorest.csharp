@@ -151,14 +151,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
             var postProcessor = new MgmtPostProcessor(modelsToKeep);
-            switch (Configuration.RemoveUnusedTypes)
+            switch (Configuration.RemoveUnreferencedTypes)
             {
-                case Configuration.UnusedTypeRemovalLevel.KeepAll:
+                case Configuration.UnreferencedTypesHandlingOption.KeepAll:
                     break;
-                case Configuration.UnusedTypeRemovalLevel.Internalize:
+                case Configuration.UnreferencedTypesHandlingOption.Internalize:
                     project = await postProcessor.InternalizeAsync(project);
                     break;
-                case Configuration.UnusedTypeRemovalLevel.RemoveAll:
+                case Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize:
                     project = await postProcessor.InternalizeAsync(project);
                     project = await postProcessor.RemoveAsync(project);
                     break;
