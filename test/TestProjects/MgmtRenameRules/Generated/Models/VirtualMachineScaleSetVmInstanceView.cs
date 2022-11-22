@@ -68,7 +68,7 @@ namespace MgmtRenameRules.Models
         /// The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.placementGroupId
         /// </param>
-        internal VirtualMachineScaleSetVmInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, IReadOnlyList<InstanceViewStatus> statuses, string assignedHost, string placementGroupId)
+        internal VirtualMachineScaleSetVmInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, IReadOnlyList<InstanceViewStatus> statuses, string assignedHost, ResourceIdentifier placementGroupId)
         {
             PlatformUpdateDomain = platformUpdateDomain;
             PlatformFaultDomain = platformFaultDomain;
@@ -146,6 +146,6 @@ namespace MgmtRenameRules.Models
         /// The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.placementGroupId
         /// </summary>
-        public string PlacementGroupId { get; }
+        public ResourceIdentifier PlacementGroupId { get; }
     }
 }

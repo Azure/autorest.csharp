@@ -25,6 +25,8 @@ namespace ModelsInCadl
             writer.WriteObjectValue(RequiredModel);
             writer.WritePropertyName("requiredFixedStringEnum");
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
+            writer.WritePropertyName("requiredFixedIntEnum");
+            writer.WriteNumberValue((int)RequiredFixedIntEnum);
             writer.WritePropertyName("requiredExtensibleEnum");
             writer.WriteStringValue(RequiredExtensibleEnum.ToString());
             writer.WritePropertyName("requiredCollection");
@@ -67,6 +69,7 @@ namespace ModelsInCadl
             int requiredInt = default;
             BaseModelWithDiscriminator requiredModel = default;
             FixedStringEnum requiredFixedStringEnum = default;
+            FixedIntEnum requiredFixedIntEnum = default;
             ExtensibleEnum requiredExtensibleEnum = default;
             IList<CollectionItem> requiredCollection = default;
             IDictionary<string, int> requiredIntRecord = default;
@@ -92,6 +95,11 @@ namespace ModelsInCadl
                 if (property.NameEquals("requiredFixedStringEnum"))
                 {
                     requiredFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
+                    continue;
+                }
+                if (property.NameEquals("requiredFixedIntEnum"))
+                {
+                    requiredFixedIntEnum = property.Value.GetInt32().ToFixedIntEnum();
                     continue;
                 }
                 if (property.NameEquals("requiredExtensibleEnum"))
@@ -140,7 +148,7 @@ namespace ModelsInCadl
                     continue;
                 }
             }
-            return new RoundTripModel(requiredString, requiredInt, requiredModel, requiredFixedStringEnum, requiredExtensibleEnum, requiredCollection, requiredIntRecord, requiredStringRecord, requiredModelRecord);
+            return new RoundTripModel(requiredString, requiredInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredCollection, requiredIntRecord, requiredStringRecord, requiredModelRecord);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

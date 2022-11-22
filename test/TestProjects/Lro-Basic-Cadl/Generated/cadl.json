@@ -64,7 +64,8 @@
  "Clients": [
   {
    "$id": "9",
-   "Name": "Authoring",
+   "Name": "LroBasicCadlClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "10",
@@ -376,7 +377,8 @@
    ],
    "Protocol": {
     "$id": "42"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

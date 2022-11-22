@@ -237,6 +237,7 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.DateTime => typeof(DateTimeOffset),
             AllSchemaTypes.Duration => typeof(TimeSpan),
             AllSchemaTypes.OdataQuery => typeof(string),
+            AllSchemaTypes.ArmId => typeof(ResourceIdentifier),
             AllSchemaTypes.String => ToXMsFormatType(extensions?.Format) ?? typeof(string),
             AllSchemaTypes.Time => typeof(TimeSpan),
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
