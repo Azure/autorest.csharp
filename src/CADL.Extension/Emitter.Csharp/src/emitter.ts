@@ -221,7 +221,7 @@ export async function $onEmit(
                 LibraryName: resolvedOptions["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
                 SingleTopLevelClient: resolvedOptions["single-top-level-client"],
-                ModelNamespace: resolvedOptions["model-namespace"]
+                "model-namespace": resolvedOptions["model-namespace"]
             } as Configuration;
 
             await program.host.writeFile(
@@ -391,9 +391,9 @@ function createModel(
                     // }
 
                     //if (!apiVersionInOperation.DefaultValue) {
-                        const index = op.Parameters.findIndex((value) => value.IsApiVersion);
-                        console.log("index:" + index);
-                        op.Parameters[index] = apiVersionParam;
+                        // const index = op.Parameters.findIndex((value) => value.IsApiVersion);
+                        // console.log("index:" + index);
+                        // op.Parameters[index] = apiVersionParam;
                     //}
                 } else {
                     console.log("not find apiversion");
