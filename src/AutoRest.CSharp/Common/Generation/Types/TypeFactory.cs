@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Generation.Types
             _ => throw new Exception("Unknown type")
         };
 
-        public CSharpType CreateType(Schema schema, bool isNullable, string? format = default, Property? property = default) => CreateType(schema, format, isNullable, property);
+        public CSharpType CreateType(Schema schema, bool isNullable, string? formatOverride = default, Property? property = default) => CreateType(schema, formatOverride ?? schema.Extensions?.Format, isNullable, property);
 
         // This function provide the capability to support the extensions is coming from outside, like parameter.
         public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
