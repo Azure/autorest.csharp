@@ -555,7 +555,12 @@
                 "type13": {
                   "type": "object",
                   "x-ms-format": "dfe-keyValuePair"
-                }
+                },
+                "type14": {
+                    "type": "object",
+                    "x-ms-format": "dfe-listOfT",
+                    "x-ms-format-element-type": "SeparateClass"
+                  }
             },
             "allOf": [
                 {

@@ -101,6 +101,11 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("type13");
                 JsonSerializer.Serialize(writer, Type13);
             }
+            if (Optional.IsDefined(Type14))
+            {
+                writer.WritePropertyName("type14");
+                JsonSerializer.Serialize(writer, Type14);
+            }
             writer.WriteEndObject();
         }
 
@@ -121,6 +126,7 @@ namespace ExactMatchInheritance
             Optional<DataFactoryExpression<IList<SeparateClass>>> type11 = default;
             Optional<DataFactoryExpression<IList<string>>> type12 = default;
             Optional<DataFactoryExpression<IDictionary<string, string>>> type13 = default;
+            Optional<DataFactoryExpression<IList<SeparateClass>>> type14 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -277,6 +283,16 @@ namespace ExactMatchInheritance
                     type13 = JsonSerializer.Deserialize<DataFactoryExpression<IDictionary<string, string>>>(property.Value.ToString());
                     continue;
                 }
+                if (property.NameEquals("type14"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type14 = JsonSerializer.Deserialize<DataFactoryExpression<IList<SeparateClass>>>(property.Value.ToString());
+                    continue;
+                }
                 if (property.NameEquals("id"))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
@@ -303,7 +319,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value);
+            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value);
         }
     }
 }

@@ -611,6 +611,17 @@ schemas: !Schemas
                       name: type13
                       description: Any object
                   protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_13
+                  serializedName: type14
+                  extensions:
+                    x-ms-format: dfe-listOfT
+                    x-ms-format-element-type: SeparateClass
+                  language: !Languages 
+                    default:
+                      name: type14
+                      description: Any object
+                  protocol: !Protocols {}
               serializationFormats:
                 - json
               usage:

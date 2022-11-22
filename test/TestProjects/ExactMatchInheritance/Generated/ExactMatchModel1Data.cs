@@ -44,7 +44,8 @@ namespace ExactMatchInheritance
         /// <param name="type11"> Any object. </param>
         /// <param name="type12"> Any object. </param>
         /// <param name="type13"> Any object. </param>
-        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryExpression<string> type5, DataFactoryExpression<double> type6, DataFactoryExpression<bool> type7, DataFactoryExpression<int> type8, DataFactoryExpression<IList<BinaryData>> type9, DataFactoryExpression<BinaryData> type10, DataFactoryExpression<IList<SeparateClass>> type11, DataFactoryExpression<IList<string>> type12, DataFactoryExpression<IDictionary<string, string>> type13) : base(id, name, resourceType, systemData)
+        /// <param name="type14"> Any object. </param>
+        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryExpression<string> type5, DataFactoryExpression<double> type6, DataFactoryExpression<bool> type7, DataFactoryExpression<int> type8, DataFactoryExpression<IList<BinaryData>> type9, DataFactoryExpression<BinaryData> type10, DataFactoryExpression<IList<SeparateClass>> type11, DataFactoryExpression<IList<string>> type12, DataFactoryExpression<IDictionary<string, string>> type13, DataFactoryExpression<IList<SeparateClass>> type14) : base(id, name, resourceType, systemData)
         {
             New = @new;
             SupportingUris = supportingUris;
@@ -61,6 +62,7 @@ namespace ExactMatchInheritance
             Type11 = type11;
             Type12 = type12;
             Type13 = type13;
+            Type14 = type14;
         }
 
         /// <summary> Gets or sets the new. </summary>
@@ -93,5 +95,7 @@ namespace ExactMatchInheritance
         public DataFactoryExpression<IList<string>> Type12 { get; set; }
         /// <summary> Any object. </summary>
         public DataFactoryExpression<IDictionary<string, string>> Type13 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<IList<SeparateClass>> Type14 { get; set; }
     }
 }

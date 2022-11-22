@@ -142,7 +142,7 @@ namespace AutoRest.CSharp.Input
                     }
 
                     var schemaToUse = schemaProperty.Extensions?.TryGetValue("x-ms-format-element-type", out var propertySchema) == true
-                        ? (Schema)propertySchema
+                        ? propertySchema as Schema ?? throw new InvalidOperationException("x-ms-format-element-type was not converted to a Schema in JsonConverterResolver")
                         : schemaProperty.Schema;
                     Apply(usages, schemaToUse, propertyUsage);
                 }
