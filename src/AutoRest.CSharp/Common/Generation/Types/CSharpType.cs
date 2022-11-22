@@ -5,6 +5,7 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -179,6 +180,16 @@ namespace AutoRest.CSharp.Generation.Types
                 return this;
 
             return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
+        }
+
+        public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
+        {
+            provider = null;
+            if (this.IsFrameworkType)
+                return false;
+
+            provider = this.Implementation as T;
+            return provider != null;
         }
     }
 }

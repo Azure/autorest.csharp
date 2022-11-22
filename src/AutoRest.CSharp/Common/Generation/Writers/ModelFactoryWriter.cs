@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var initializes = new List<PropertyInitializer>();
             foreach (var parameter in method.Parameters)
             {
-                (var property, var assignment) = This.GetPropertyAssignment(model, parameter);
+                (var property, var assignment) = This.GetPropertyAssignment(_writer, model, parameter);
                 initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, assignment, parameter.Type));
             }
 

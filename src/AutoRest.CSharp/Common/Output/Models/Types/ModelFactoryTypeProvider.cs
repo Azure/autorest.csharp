@@ -53,17 +53,36 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ModelFactoryTypeProvider(objectTypes, defaultClientName, defaultNamespace, sourceInputModel);
         }
 
-        public (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignment(SerializableObjectType model, Parameter parameter)
+        public (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignment(CodeWriter writer, SerializableObjectType model, Parameter parameter)
         {
-            var propertyStackDict = _parameterPropertyCache[model];
-            var propertyStack = propertyStackDict[parameter];
+            var propertyStack = _parameterPropertyCache[model][parameter];
             var assignmentProperty = propertyStack.Last();
-            propertyStack.Pop();
+            ObjectTypeProperty property, immediateParentProperty;
+            property = propertyStack.Pop();
             FormattableString result = $"{parameter.Name:I}";
+            CSharpType from = parameter.Type;
             while (propertyStack.Count > 0)
             {
-                var property = propertyStack.Pop();
-                result = $"new {property.ValueType}({result})"; // TODO -- append the conversion
+                immediateParentProperty = propertyStack.Pop();
+                var parentPropertyType = immediateParentProperty.Declaration.Type;
+                switch (parentPropertyType)
+                {
+                    case { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType }:
+                        // get the type of the first parameter of its ctor
+                        var to = serializableObjectType.SerializationConstructor.Signature.Parameters.First().Type;
+                        result = $"new {parentPropertyType}({result}{GetConversion(writer, from, to)})";
+                        break;
+                    case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
+                        // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its public constructor
+                        result = $"new {parentPropertyType}(){{ {property.Declaration.Name} = {result} }}";
+                        break;
+                    default:
+                        throw new InvalidOperationException($"The propertyType {parentPropertyType} (implementation type: {parentPropertyType.Implementation.GetType()}) is unhandled here, this should never happen");
+                }
+
+                // change the from type to the current type
+                property = immediateParentProperty;
+                from = parentPropertyType; // since this is the property type of the immediate parent property, we should never get another valid conversion
             }
 
             return (assignmentProperty, result);
@@ -134,7 +153,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var stack = new Stack<ObjectTypeProperty>();
             stack.Push(property);
-            return (property.Declaration.Name, stack);
+            return (property.Declaration.Name.ToVariableName(), stack);
         }
 
         private string GetPropertyName(Stack<ObjectTypeProperty> hierarchyStack)

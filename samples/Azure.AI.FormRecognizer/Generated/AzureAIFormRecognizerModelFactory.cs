@@ -15,320 +15,320 @@ namespace Azure.AI.FormRecognizer.Models
     public static partial class AzureAIFormRecognizerModelFactory
     {
         /// <summary> Initializes a new instance of ErrorInformation. </summary>
-        /// <param name="code"></param>
-        /// <param name="message"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
+        /// <param name="Code"></param>
+        /// <param name="Message"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="Code"/> or <paramref name="Message"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.ErrorInformation"/> instance for mocking. </returns>
-        public static ErrorInformation ErrorInformation(string code = null, string message = null)
+        public static ErrorInformation ErrorInformation(string Code = null, string Message = null)
         {
-            if (code == null)
+            if (Code == null)
             {
-                throw new ArgumentNullException(nameof(code));
+                throw new ArgumentNullException(nameof(Code));
             }
-            if (message == null)
+            if (Message == null)
             {
-                throw new ArgumentNullException(nameof(message));
+                throw new ArgumentNullException(nameof(Message));
             }
 
-            return new ErrorInformation(code, message);
+            return new ErrorInformation(Code, Message);
         }
 
         /// <summary> Initializes a new instance of Model. </summary>
-        /// <param name="modelInfo"> Basic custom model information. </param>
-        /// <param name="keys"> Keys extracted by the custom model. </param>
-        /// <param name="trainResult"> Custom model training result. </param>
+        /// <param name="ModelInfo"> Basic custom model information. </param>
+        /// <param name="Keys"> Keys extracted by the custom model. </param>
+        /// <param name="TrainResult"> Custom model training result. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.Model"/> instance for mocking. </returns>
-        public static Model Model(ModelInfo modelInfo = null, KeysResult keys = null, TrainResult trainResult = null)
+        public static Model Model(ModelInfo ModelInfo = null, KeysResult Keys = null, TrainResult TrainResult = null)
         {
-            return new Model(modelInfo, keys, trainResult);
+            return new Model(ModelInfo, Keys, TrainResult);
         }
 
         /// <summary> Initializes a new instance of ModelInfo. </summary>
-        /// <param name="modelId"> Model identifier. </param>
-        /// <param name="status"> Status of the model. </param>
-        /// <param name="createdDateTime"> Date and time (UTC) when the model was created. </param>
-        /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
+        /// <param name="ModelId"> Model identifier. </param>
+        /// <param name="Status"> Status of the model. </param>
+        /// <param name="CreatedDateTime"> Date and time (UTC) when the model was created. </param>
+        /// <param name="LastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.ModelInfo"/> instance for mocking. </returns>
-        public static ModelInfo ModelInfo(Guid modelId = default, ModelStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default)
+        public static ModelInfo ModelInfo(Guid ModelId = default, ModelStatus Status = default, DateTimeOffset CreatedDateTime = default, DateTimeOffset LastUpdatedDateTime = default)
         {
-            return new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime);
+            return new ModelInfo(ModelId, Status, CreatedDateTime, LastUpdatedDateTime);
         }
 
         /// <summary> Initializes a new instance of KeysResult. </summary>
-        /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clusters"/> is null. </exception>
+        /// <param name="Clusters"> Object mapping clusterIds to a list of keys. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="Clusters"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.KeysResult"/> instance for mocking. </returns>
-        public static KeysResult KeysResult(IReadOnlyDictionary<string, IList<string>> clusters = null)
+        public static KeysResult KeysResult(IReadOnlyDictionary<string, IList<string>> Clusters = null)
         {
-            clusters ??= new Dictionary<string, IList<string>>();
+            Clusters ??= new Dictionary<string, IList<string>>();
 
-            return new KeysResult(clusters);
+            return new KeysResult(Clusters);
         }
 
         /// <summary> Initializes a new instance of TrainResult. </summary>
-        /// <param name="trainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
-        /// <param name="fields"> List of fields used to train the model and the train operation error reported by each. </param>
-        /// <param name="averageModelAccuracy"> Average accuracy. </param>
-        /// <param name="errors"> Errors returned during the training operation. </param>
+        /// <param name="TrainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
+        /// <param name="Fields"> List of fields used to train the model and the train operation error reported by each. </param>
+        /// <param name="AverageModelAccuracy"> Average accuracy. </param>
+        /// <param name="Errors"> Errors returned during the training operation. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.TrainResult"/> instance for mocking. </returns>
-        public static TrainResult TrainResult(IEnumerable<TrainingDocumentInfo> trainingDocuments = null, IEnumerable<FormFieldsReport> fields = null, float? averageModelAccuracy = null, IEnumerable<ErrorInformation> errors = null)
+        public static TrainResult TrainResult(IEnumerable<TrainingDocumentInfo> TrainingDocuments = null, IEnumerable<FormFieldsReport> Fields = null, float? AverageModelAccuracy = null, IEnumerable<ErrorInformation> Errors = null)
         {
-            trainingDocuments ??= new List<TrainingDocumentInfo>();
-            fields ??= new List<FormFieldsReport>();
-            errors ??= new List<ErrorInformation>();
+            TrainingDocuments ??= new List<TrainingDocumentInfo>();
+            Fields ??= new List<FormFieldsReport>();
+            Errors ??= new List<ErrorInformation>();
 
-            return new TrainResult(trainingDocuments?.ToList(), fields?.ToList(), averageModelAccuracy, errors?.ToList());
+            return new TrainResult(TrainingDocuments?.ToList(), Fields?.ToList(), AverageModelAccuracy, Errors?.ToList());
         }
 
         /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
-        /// <param name="documentName"> Training document name. </param>
-        /// <param name="pages"> Total number of pages trained. </param>
-        /// <param name="errors"> List of errors. </param>
-        /// <param name="status"> Status of the training operation. </param>
+        /// <param name="DocumentName"> Training document name. </param>
+        /// <param name="Pages"> Total number of pages trained. </param>
+        /// <param name="Errors"> List of errors. </param>
+        /// <param name="Status"> Status of the training operation. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.TrainingDocumentInfo"/> instance for mocking. </returns>
-        public static TrainingDocumentInfo TrainingDocumentInfo(string documentName = null, int pages = default, IEnumerable<ErrorInformation> errors = null, TrainStatus status = default)
+        public static TrainingDocumentInfo TrainingDocumentInfo(string DocumentName = null, int Pages = default, IEnumerable<ErrorInformation> Errors = null, TrainStatus Status = default)
         {
-            errors ??= new List<ErrorInformation>();
+            Errors ??= new List<ErrorInformation>();
 
-            return new TrainingDocumentInfo(documentName, pages, errors?.ToList(), status);
+            return new TrainingDocumentInfo(DocumentName, Pages, Errors?.ToList(), Status);
         }
 
         /// <summary> Initializes a new instance of FormFieldsReport. </summary>
-        /// <param name="fieldName"> Training field name. </param>
-        /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
+        /// <param name="FieldName"> Training field name. </param>
+        /// <param name="Accuracy"> Estimated extraction accuracy for this field. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="FieldName"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.FormFieldsReport"/> instance for mocking. </returns>
-        public static FormFieldsReport FormFieldsReport(string fieldName = null, float accuracy = default)
+        public static FormFieldsReport FormFieldsReport(string FieldName = null, float Accuracy = default)
         {
-            if (fieldName == null)
+            if (FieldName == null)
             {
-                throw new ArgumentNullException(nameof(fieldName));
+                throw new ArgumentNullException(nameof(FieldName));
             }
 
-            return new FormFieldsReport(fieldName, accuracy);
+            return new FormFieldsReport(FieldName, Accuracy);
         }
 
         /// <summary> Initializes a new instance of AnalyzeOperationResult. </summary>
-        /// <param name="status"> Operation status. </param>
-        /// <param name="createdDateTime"> Date and time (UTC) when the analyze operation was submitted. </param>
-        /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
-        /// <param name="analyzeResult"> Results of the analyze operation. </param>
+        /// <param name="Status"> Operation status. </param>
+        /// <param name="CreatedDateTime"> Date and time (UTC) when the analyze operation was submitted. </param>
+        /// <param name="LastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
+        /// <param name="AnalyzeResult"> Results of the analyze operation. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.AnalyzeOperationResult"/> instance for mocking. </returns>
-        public static AnalyzeOperationResult AnalyzeOperationResult(OperationStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, AnalyzeResult analyzeResult = null)
+        public static AnalyzeOperationResult AnalyzeOperationResult(OperationStatus Status = default, DateTimeOffset CreatedDateTime = default, DateTimeOffset LastUpdatedDateTime = default, AnalyzeResult AnalyzeResult = null)
         {
-            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult);
+            return new AnalyzeOperationResult(Status, CreatedDateTime, LastUpdatedDateTime, AnalyzeResult);
         }
 
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
-        /// <param name="version"> Version of schema used for this result. </param>
-        /// <param name="readResults"> Text extracted from the input. </param>
-        /// <param name="pageResults"> Page-level information extracted from the input. </param>
-        /// <param name="documentResults"> Document-level information extracted from the input. </param>
-        /// <param name="errors"> List of errors reported during the analyze operation. </param>
+        /// <param name="Version"> Version of schema used for this result. </param>
+        /// <param name="ReadResults"> Text extracted from the input. </param>
+        /// <param name="PageResults"> Page-level information extracted from the input. </param>
+        /// <param name="DocumentResults"> Document-level information extracted from the input. </param>
+        /// <param name="Errors"> List of errors reported during the analyze operation. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.AnalyzeResult"/> instance for mocking. </returns>
-        public static AnalyzeResult AnalyzeResult(string version = null, IEnumerable<ReadResult> readResults = null, IEnumerable<PageResult> pageResults = null, IEnumerable<DocumentResult> documentResults = null, IEnumerable<ErrorInformation> errors = null)
+        public static AnalyzeResult AnalyzeResult(string Version = null, IEnumerable<ReadResult> ReadResults = null, IEnumerable<PageResult> PageResults = null, IEnumerable<DocumentResult> DocumentResults = null, IEnumerable<ErrorInformation> Errors = null)
         {
-            readResults ??= new List<ReadResult>();
-            pageResults ??= new List<PageResult>();
-            documentResults ??= new List<DocumentResult>();
-            errors ??= new List<ErrorInformation>();
+            ReadResults ??= new List<ReadResult>();
+            PageResults ??= new List<PageResult>();
+            DocumentResults ??= new List<DocumentResult>();
+            Errors ??= new List<ErrorInformation>();
 
-            return new AnalyzeResult(version, readResults?.ToList(), pageResults?.ToList(), documentResults?.ToList(), errors?.ToList());
+            return new AnalyzeResult(Version, ReadResults?.ToList(), PageResults?.ToList(), DocumentResults?.ToList(), Errors?.ToList());
         }
 
         /// <summary> Initializes a new instance of ReadResult. </summary>
-        /// <param name="page"> The 1-based page number in the input document. </param>
-        /// <param name="angle"> The general orientation of the text in clockwise direction, measured in degrees between (-180, 180]. </param>
-        /// <param name="width"> The width of the image/PDF in pixels/inches, respectively. </param>
-        /// <param name="height"> The height of the image/PDF in pixels/inches, respectively. </param>
-        /// <param name="unit"> The unit used by the width, height and boundingBox properties. For images, the unit is &quot;pixel&quot;. For PDF, the unit is &quot;inch&quot;. </param>
-        /// <param name="language"> The detected language on the page overall. </param>
-        /// <param name="lines"> When includeTextDetails is set to true, a list of recognized text lines. The maximum number of lines returned is 300 per page. The lines are sorted top to bottom, left to right, although in certain cases proximity is treated with higher priority. As the sorting order depends on the detected text, it may change across images and OCR version updates. Thus, business logic should be built upon the actual line location instead of order. </param>
+        /// <param name="Page"> The 1-based page number in the input document. </param>
+        /// <param name="Angle"> The general orientation of the text in clockwise direction, measured in degrees between (-180, 180]. </param>
+        /// <param name="Width"> The width of the image/PDF in pixels/inches, respectively. </param>
+        /// <param name="Height"> The height of the image/PDF in pixels/inches, respectively. </param>
+        /// <param name="Unit"> The unit used by the width, height and boundingBox properties. For images, the unit is &quot;pixel&quot;. For PDF, the unit is &quot;inch&quot;. </param>
+        /// <param name="Language"> The detected language on the page overall. </param>
+        /// <param name="Lines"> When includeTextDetails is set to true, a list of recognized text lines. The maximum number of lines returned is 300 per page. The lines are sorted top to bottom, left to right, although in certain cases proximity is treated with higher priority. As the sorting order depends on the detected text, it may change across images and OCR version updates. Thus, business logic should be built upon the actual line location instead of order. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.ReadResult"/> instance for mocking. </returns>
-        public static ReadResult ReadResult(int page = default, float angle = default, float width = default, float height = default, LengthUnit unit = default, Language? language = null, IEnumerable<TextLine> lines = null)
+        public static ReadResult ReadResult(int Page = default, float Angle = default, float Width = default, float Height = default, LengthUnit Unit = default, Language? Language = null, IEnumerable<TextLine> Lines = null)
         {
-            lines ??= new List<TextLine>();
+            Lines ??= new List<TextLine>();
 
-            return new ReadResult(page, angle, width, height, unit, language, lines?.ToList());
+            return new ReadResult(Page, Angle, Width, Height, Unit, Language, Lines?.ToList());
         }
 
         /// <summary> Initializes a new instance of TextLine. </summary>
-        /// <param name="text"> The text content of the line. </param>
-        /// <param name="boundingBox"> Bounding box of an extracted line. </param>
-        /// <param name="language"> The detected language of this line, if different from the overall page language. </param>
-        /// <param name="words"> List of words in the text line. </param>
+        /// <param name="Text"> The text content of the line. </param>
+        /// <param name="BoundingBox"> Bounding box of an extracted line. </param>
+        /// <param name="Language"> The detected language of this line, if different from the overall page language. </param>
+        /// <param name="Words"> List of words in the text line. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.TextLine"/> instance for mocking. </returns>
-        public static TextLine TextLine(string text = null, IEnumerable<float> boundingBox = null, Language? language = null, IEnumerable<TextWord> words = null)
+        public static TextLine TextLine(string Text = null, IEnumerable<float> BoundingBox = null, Language? Language = null, IEnumerable<TextWord> Words = null)
         {
-            boundingBox ??= new List<float>();
-            words ??= new List<TextWord>();
+            BoundingBox ??= new List<float>();
+            Words ??= new List<TextWord>();
 
-            return new TextLine(text, boundingBox?.ToList(), language, words?.ToList());
+            return new TextLine(Text, BoundingBox?.ToList(), Language, Words?.ToList());
         }
 
         /// <summary> Initializes a new instance of TextWord. </summary>
-        /// <param name="text"> The text content of the word. </param>
-        /// <param name="boundingBox"> Bounding box of an extracted word. </param>
-        /// <param name="confidence"> Confidence value. </param>
+        /// <param name="Text"> The text content of the word. </param>
+        /// <param name="BoundingBox"> Bounding box of an extracted word. </param>
+        /// <param name="Confidence"> Confidence value. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.TextWord"/> instance for mocking. </returns>
-        public static TextWord TextWord(string text = null, IEnumerable<float> boundingBox = null, float? confidence = null)
+        public static TextWord TextWord(string Text = null, IEnumerable<float> BoundingBox = null, float? Confidence = null)
         {
-            boundingBox ??= new List<float>();
+            BoundingBox ??= new List<float>();
 
-            return new TextWord(text, boundingBox?.ToList(), confidence);
+            return new TextWord(Text, BoundingBox?.ToList(), Confidence);
         }
 
         /// <summary> Initializes a new instance of PageResult. </summary>
-        /// <param name="page"> Page number. </param>
-        /// <param name="clusterId"> Cluster identifier. </param>
-        /// <param name="keyValuePairs"> List of key-value pairs extracted from the page. </param>
-        /// <param name="tables"> List of data tables extracted from the page. </param>
+        /// <param name="Page"> Page number. </param>
+        /// <param name="ClusterId"> Cluster identifier. </param>
+        /// <param name="KeyValuePairs"> List of key-value pairs extracted from the page. </param>
+        /// <param name="Tables"> List of data tables extracted from the page. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.PageResult"/> instance for mocking. </returns>
-        public static PageResult PageResult(int page = default, int? clusterId = null, IEnumerable<KeyValuePair> keyValuePairs = null, IEnumerable<DataTable> tables = null)
+        public static PageResult PageResult(int Page = default, int? ClusterId = null, IEnumerable<KeyValuePair> KeyValuePairs = null, IEnumerable<DataTable> Tables = null)
         {
-            keyValuePairs ??= new List<KeyValuePair>();
-            tables ??= new List<DataTable>();
+            KeyValuePairs ??= new List<KeyValuePair>();
+            Tables ??= new List<DataTable>();
 
-            return new PageResult(page, clusterId, keyValuePairs?.ToList(), tables?.ToList());
+            return new PageResult(Page, ClusterId, KeyValuePairs?.ToList(), Tables?.ToList());
         }
 
         /// <summary> Initializes a new instance of KeyValuePair. </summary>
-        /// <param name="label"> A user defined label for the key/value pair entry. </param>
-        /// <param name="key"> Information about the extracted key in a key-value pair. </param>
-        /// <param name="value"> Information about the extracted value in a key-value pair. </param>
-        /// <param name="confidence"> Confidence value. </param>
+        /// <param name="Label"> A user defined label for the key/value pair entry. </param>
+        /// <param name="Key"> Information about the extracted key in a key-value pair. </param>
+        /// <param name="Value"> Information about the extracted value in a key-value pair. </param>
+        /// <param name="Confidence"> Confidence value. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.KeyValuePair"/> instance for mocking. </returns>
-        public static KeyValuePair KeyValuePair(string label = null, KeyValueElement key = null, KeyValueElement value = null, float confidence = default)
+        public static KeyValuePair KeyValuePair(string Label = null, KeyValueElement Key = null, KeyValueElement Value = null, float Confidence = default)
         {
-            return new KeyValuePair(label, key, value, confidence);
+            return new KeyValuePair(Label, Key, Value, Confidence);
         }
 
         /// <summary> Initializes a new instance of KeyValueElement. </summary>
-        /// <param name="text"> The text content of the key or value. </param>
-        /// <param name="boundingBox"> Bounding box of the key or value. </param>
-        /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </param>
+        /// <param name="Text"> The text content of the key or value. </param>
+        /// <param name="BoundingBox"> Bounding box of the key or value. </param>
+        /// <param name="Elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.KeyValueElement"/> instance for mocking. </returns>
-        public static KeyValueElement KeyValueElement(string text = null, IEnumerable<float> boundingBox = null, IEnumerable<string> elements = null)
+        public static KeyValueElement KeyValueElement(string Text = null, IEnumerable<float> BoundingBox = null, IEnumerable<string> Elements = null)
         {
-            boundingBox ??= new List<float>();
-            elements ??= new List<string>();
+            BoundingBox ??= new List<float>();
+            Elements ??= new List<string>();
 
-            return new KeyValueElement(text, boundingBox?.ToList(), elements?.ToList());
+            return new KeyValueElement(Text, BoundingBox?.ToList(), Elements?.ToList());
         }
 
         /// <summary> Initializes a new instance of DataTable. </summary>
-        /// <param name="rows"> Number of rows. </param>
-        /// <param name="columns"> Number of columns. </param>
-        /// <param name="cells"> List of cells contained in the table. </param>
+        /// <param name="Rows"> Number of rows. </param>
+        /// <param name="Columns"> Number of columns. </param>
+        /// <param name="Cells"> List of cells contained in the table. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.DataTable"/> instance for mocking. </returns>
-        public static DataTable DataTable(int rows = default, int columns = default, IEnumerable<DataTableCell> cells = null)
+        public static DataTable DataTable(int Rows = default, int Columns = default, IEnumerable<DataTableCell> Cells = null)
         {
-            cells ??= new List<DataTableCell>();
+            Cells ??= new List<DataTableCell>();
 
-            return new DataTable(rows, columns, cells?.ToList());
+            return new DataTable(Rows, Columns, Cells?.ToList());
         }
 
         /// <summary> Initializes a new instance of DataTableCell. </summary>
-        /// <param name="rowIndex"> Row index of the cell. </param>
-        /// <param name="columnIndex"> Column index of the cell. </param>
-        /// <param name="rowSpan"> Number of rows spanned by this cell. </param>
-        /// <param name="columnSpan"> Number of columns spanned by this cell. </param>
-        /// <param name="text"> Text content of the cell. </param>
-        /// <param name="boundingBox"> Bounding box of the cell. </param>
-        /// <param name="confidence"> Confidence value. </param>
-        /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this table cell. </param>
-        /// <param name="isHeader"> Is the current cell a header cell?. </param>
-        /// <param name="isFooter"> Is the current cell a footer cell?. </param>
+        /// <param name="RowIndex"> Row index of the cell. </param>
+        /// <param name="ColumnIndex"> Column index of the cell. </param>
+        /// <param name="RowSpan"> Number of rows spanned by this cell. </param>
+        /// <param name="ColumnSpan"> Number of columns spanned by this cell. </param>
+        /// <param name="Text"> Text content of the cell. </param>
+        /// <param name="BoundingBox"> Bounding box of the cell. </param>
+        /// <param name="Confidence"> Confidence value. </param>
+        /// <param name="Elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this table cell. </param>
+        /// <param name="IsHeader"> Is the current cell a header cell?. </param>
+        /// <param name="IsFooter"> Is the current cell a footer cell?. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.DataTableCell"/> instance for mocking. </returns>
-        public static DataTableCell DataTableCell(int rowIndex = default, int columnIndex = default, int? rowSpan = null, int? columnSpan = null, string text = null, IEnumerable<float> boundingBox = null, float confidence = default, IEnumerable<string> elements = null, bool? isHeader = null, bool? isFooter = null)
+        public static DataTableCell DataTableCell(int RowIndex = default, int ColumnIndex = default, int? RowSpan = null, int? ColumnSpan = null, string Text = null, IEnumerable<float> BoundingBox = null, float Confidence = default, IEnumerable<string> Elements = null, bool? IsHeader = null, bool? IsFooter = null)
         {
-            boundingBox ??= new List<float>();
-            elements ??= new List<string>();
+            BoundingBox ??= new List<float>();
+            Elements ??= new List<string>();
 
-            return new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBox?.ToList(), confidence, elements?.ToList(), isHeader, isFooter);
+            return new DataTableCell(RowIndex, ColumnIndex, RowSpan, ColumnSpan, Text, BoundingBox?.ToList(), Confidence, Elements?.ToList(), IsHeader, IsFooter);
         }
 
         /// <summary> Initializes a new instance of DocumentResult. </summary>
-        /// <param name="docType"> Document type. </param>
-        /// <param name="pageRange"> First and last page number where the document is found. </param>
-        /// <param name="fields"> Dictionary of named field values. </param>
+        /// <param name="DocType"> Document type. </param>
+        /// <param name="PageRange"> First and last page number where the document is found. </param>
+        /// <param name="Fields"> Dictionary of named field values. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.DocumentResult"/> instance for mocking. </returns>
-        public static DocumentResult DocumentResult(string docType = null, IEnumerable<int> pageRange = null, IReadOnlyDictionary<string, FieldValue> fields = null)
+        public static DocumentResult DocumentResult(string DocType = null, IEnumerable<int> PageRange = null, IReadOnlyDictionary<string, FieldValue> Fields = null)
         {
-            pageRange ??= new List<int>();
-            fields ??= new Dictionary<string, FieldValue>();
+            PageRange ??= new List<int>();
+            Fields ??= new Dictionary<string, FieldValue>();
 
-            return new DocumentResult(docType, pageRange?.ToList(), fields);
+            return new DocumentResult(DocType, PageRange?.ToList(), Fields);
         }
 
         /// <summary> Initializes a new instance of FieldValue. </summary>
-        /// <param name="type"> Type of field value. </param>
-        /// <param name="valueString"> String value. </param>
-        /// <param name="valueDate"> Date value. </param>
-        /// <param name="valueTime"> Time value. </param>
-        /// <param name="valuePhoneNumber"> Phone number value. </param>
-        /// <param name="valueNumber"> Floating point value. </param>
-        /// <param name="valueInteger"> Integer value. </param>
-        /// <param name="valueArray"> Array of field values. </param>
-        /// <param name="valueObject"> Dictionary of named field values. </param>
-        /// <param name="text"> Text content of the extracted field. </param>
-        /// <param name="boundingBox"> Bounding box of the field value, if appropriate. </param>
-        /// <param name="confidence"> Confidence score. </param>
-        /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this field. </param>
-        /// <param name="page"> The 1-based page number in the input document. </param>
+        /// <param name="Type"> Type of field value. </param>
+        /// <param name="ValueString"> String value. </param>
+        /// <param name="ValueDate"> Date value. </param>
+        /// <param name="ValueTime"> Time value. </param>
+        /// <param name="ValuePhoneNumber"> Phone number value. </param>
+        /// <param name="ValueNumber"> Floating point value. </param>
+        /// <param name="ValueInteger"> Integer value. </param>
+        /// <param name="ValueArray"> Array of field values. </param>
+        /// <param name="ValueObject"> Dictionary of named field values. </param>
+        /// <param name="Text"> Text content of the extracted field. </param>
+        /// <param name="BoundingBox"> Bounding box of the field value, if appropriate. </param>
+        /// <param name="Confidence"> Confidence score. </param>
+        /// <param name="Elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this field. </param>
+        /// <param name="Page"> The 1-based page number in the input document. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.FieldValue"/> instance for mocking. </returns>
-        public static FieldValue FieldValue(FieldValueType type = default, string valueString = null, DateTimeOffset? valueDate = null, TimeSpan? valueTime = null, string valuePhoneNumber = null, float? valueNumber = null, int? valueInteger = null, IEnumerable<FieldValue> valueArray = null, IReadOnlyDictionary<string, FieldValue> valueObject = null, string text = null, IEnumerable<float> boundingBox = null, float? confidence = null, IEnumerable<string> elements = null, int? page = null)
+        public static FieldValue FieldValue(FieldValueType Type = default, string ValueString = null, DateTimeOffset? ValueDate = null, TimeSpan? ValueTime = null, string ValuePhoneNumber = null, float? ValueNumber = null, int? ValueInteger = null, IEnumerable<FieldValue> ValueArray = null, IReadOnlyDictionary<string, FieldValue> ValueObject = null, string Text = null, IEnumerable<float> BoundingBox = null, float? Confidence = null, IEnumerable<string> Elements = null, int? Page = null)
         {
-            valueArray ??= new List<FieldValue>();
-            valueObject ??= new Dictionary<string, FieldValue>();
-            boundingBox ??= new List<float>();
-            elements ??= new List<string>();
+            ValueArray ??= new List<FieldValue>();
+            ValueObject ??= new Dictionary<string, FieldValue>();
+            BoundingBox ??= new List<float>();
+            Elements ??= new List<string>();
 
-            return new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArray?.ToList(), valueObject, text, boundingBox?.ToList(), confidence, elements?.ToList(), page);
+            return new FieldValue(Type, ValueString, ValueDate, ValueTime, ValuePhoneNumber, ValueNumber, ValueInteger, ValueArray?.ToList(), ValueObject, Text, BoundingBox?.ToList(), Confidence, Elements?.ToList(), Page);
         }
 
         /// <summary> Initializes a new instance of CopyOperationResult. </summary>
-        /// <param name="status"> Operation status. </param>
-        /// <param name="createdDateTime"> Date and time (UTC) when the copy operation was submitted. </param>
-        /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
-        /// <param name="copyResult"> Results of the copy operation. </param>
+        /// <param name="Status"> Operation status. </param>
+        /// <param name="CreatedDateTime"> Date and time (UTC) when the copy operation was submitted. </param>
+        /// <param name="LastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
+        /// <param name="CopyResult"> Results of the copy operation. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.CopyOperationResult"/> instance for mocking. </returns>
-        public static CopyOperationResult CopyOperationResult(OperationStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, CopyResult copyResult = null)
+        public static CopyOperationResult CopyOperationResult(OperationStatus Status = default, DateTimeOffset CreatedDateTime = default, DateTimeOffset LastUpdatedDateTime = default, CopyResult CopyResult = null)
         {
-            return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult);
+            return new CopyOperationResult(Status, CreatedDateTime, LastUpdatedDateTime, CopyResult);
         }
 
         /// <summary> Initializes a new instance of CopyResult. </summary>
-        /// <param name="modelId"> Identifier of the target model. </param>
-        /// <param name="errors"> Errors returned during the copy operation. </param>
+        /// <param name="ModelId"> Identifier of the target model. </param>
+        /// <param name="Errors"> Errors returned during the copy operation. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.CopyResult"/> instance for mocking. </returns>
-        public static CopyResult CopyResult(Guid modelId = default, IEnumerable<ErrorInformation> errors = null)
+        public static CopyResult CopyResult(Guid ModelId = default, IEnumerable<ErrorInformation> Errors = null)
         {
-            errors ??= new List<ErrorInformation>();
+            Errors ??= new List<ErrorInformation>();
 
-            return new CopyResult(modelId, errors?.ToList());
+            return new CopyResult(ModelId, Errors?.ToList());
         }
 
         /// <summary> Initializes a new instance of Models. </summary>
-        /// <param name="summary"> Summary of all trained custom models. </param>
-        /// <param name="modelList"> Collection of trained custom models. </param>
-        /// <param name="nextLink"> Link to the next page of custom models. </param>
+        /// <param name="Summary"> Summary of all trained custom models. </param>
+        /// <param name="ModelList"> Collection of trained custom models. </param>
+        /// <param name="NextLink"> Link to the next page of custom models. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.Models"/> instance for mocking. </returns>
-        public static Models Models(ModelsSummary summary = null, IEnumerable<ModelInfo> modelList = null, string nextLink = null)
+        public static Models Models(ModelsSummary Summary = null, IEnumerable<ModelInfo> ModelList = null, string NextLink = null)
         {
-            modelList ??= new List<ModelInfo>();
+            ModelList ??= new List<ModelInfo>();
 
-            return new Models(summary, modelList?.ToList(), nextLink);
+            return new Models(Summary, ModelList?.ToList(), NextLink);
         }
 
         /// <summary> Initializes a new instance of ModelsSummary. </summary>
-        /// <param name="count"> Current count of trained custom models. </param>
-        /// <param name="limit"> Max number of models that can be trained for this account. </param>
-        /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the summary was last updated. </param>
+        /// <param name="Count"> Current count of trained custom models. </param>
+        /// <param name="Limit"> Max number of models that can be trained for this account. </param>
+        /// <param name="LastUpdatedDateTime"> Date and time (UTC) when the summary was last updated. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.ModelsSummary"/> instance for mocking. </returns>
-        public static ModelsSummary ModelsSummary(int count = default, int limit = default, DateTimeOffset lastUpdatedDateTime = default)
+        public static ModelsSummary ModelsSummary(int Count = default, int Limit = default, DateTimeOffset LastUpdatedDateTime = default)
         {
-            return new ModelsSummary(count, limit, lastUpdatedDateTime);
+            return new ModelsSummary(Count, Limit, LastUpdatedDateTime);
         }
     }
 }
