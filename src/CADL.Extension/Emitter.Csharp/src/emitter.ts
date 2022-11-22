@@ -86,6 +86,7 @@ import {
     OperationGroup
 } from "@azure-tools/cadl-dpg";
 import { ClientKind } from "./type/ClientKind.js";
+import { getVersions } from "@cadl-lang/versioning";
 
 export interface NetEmitterOptions {
     "sdk-folder": string;
@@ -289,19 +290,25 @@ function createModel(
         return;
     }
     const title = getServiceTitle(program);
-    const version = getServiceVersion(program);
-    if (version === "0000-00-00") {
-        console.error("No API-Version provided.");
-        return;
+    const apiVersions: Set<string> = new Set<string>();
+    let version = getServiceVersion(program);
+    if (version !== "0000-00-00") {
+        apiVersions.add(version);
+        // console.error("No API-Version provided.");
+        // return;
     }
 
+    const versions = getVersions(program, serviceNamespaceType)[1]?.getVersions();
+    if (versions) {
+        for (const ver of versions) {
+            apiVersions.add(ver.value);
+        }
+        version = versions[versions.length - 1].value; //default version
+    }
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(program, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
-
-    const apiVersions: Set<string> = new Set<string>();
-    apiVersions.add(version);
     const apiVersionParam: InputParameter = {
         Name: "apiVersion",
         NameInRequest: "api-version",
@@ -371,9 +378,6 @@ function createModel(
             }
         }
 
-        if (apiVersions.size > 1) {
-            apiVersionParam.Kind = InputOperationParameterKind.Constant;
-        }
         for (const client of clients) {
             for (const op of client.Operations) {
                 const apiVersionInOperation = op.Parameters.find(
@@ -381,25 +385,25 @@ function createModel(
                 );
                 if (apiVersionInOperation) {
                     console.log("find apiversion");
-                    // if (apiVersions.size > 1) {
-                    //     apiVersionInOperation.Kind =
-                    //         InputOperationParameterKind.Constant;
-                    // }
-                    // if (!apiVersionInOperation.DefaultValue) {
-                    //     apiVersionInOperation.DefaultValue =
-                    //         apiVersionParam.DefaultValue;
-                    // }
-
-                    //if (!apiVersionInOperation.DefaultValue) {
-                        // const index = op.Parameters.findIndex((value) => value.IsApiVersion);
-                        // console.log("index:" + index);
-                        // op.Parameters[index] = apiVersionParam;
-                    //}
+                    if (apiVersionInOperation.DefaultValue?.Value && !apiVersions.has(apiVersionInOperation.DefaultValue?.Value)) {
+                        apiVersions.add(apiVersionInOperation.DefaultValue.Value);
+                    } else {
+                        if (apiVersionInOperation.Location === apiVersionParam.Location) {
+                            const index = op.Parameters.findIndex((value) => value.IsApiVersion);
+                            console.log("index:" + index);
+                            op.Parameters[index] = apiVersionParam;
+                        }
+                        
+                    }
                 } else {
                     console.log("not find apiversion");
                     op.Parameters.push(apiVersionParam);
                 }
             }
+        }
+
+        if (apiVersions.size > 1) {
+            apiVersionParam.Kind = InputOperationParameterKind.Constant;
         }
 
         const usages = getUsages(program, convenienceOperations);
@@ -460,13 +464,6 @@ function createModel(
             );
 
             applyDefaultContentTypeAndAcceptParameter(inputOperation);
-
-            const apiVersionInOperation = inputOperation.Parameters.find(
-                (value) => value.IsApiVersion
-            );
-            if (apiVersionInOperation && apiVersionInOperation.DefaultValue?.Value) {
-                apiVersions.add(apiVersionInOperation.DefaultValue.Value);
-            }
             inputClient.Operations.push(inputOperation);
             if (
                 inputOperation.GenerateConvenienceMethod ||
