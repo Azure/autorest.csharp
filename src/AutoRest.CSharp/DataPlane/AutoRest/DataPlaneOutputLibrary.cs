@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
             _sourceInputModel = context.SourceInputModel;
             DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
-            JsonConverterResolver.ResolveConverter(codeModel);
+            SchemaUsageResolver.ResolveConverter(codeModel);
             _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
 
             _defaultNamespace = Configuration.Namespace ?? _input.Name;

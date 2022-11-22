@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static void Transform()
         {
             DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel);
-            JsonConverterResolver.ResolveConverter(MgmtContext.CodeModel);
+            SchemaUsageResolver.ResolveConverter(MgmtContext.CodeModel);
             OmitOperationGroups.RemoveOperationGroups();
             SubscriptionIdUpdater.Update();
             ConstantSchemaTransformer.TransformToChoice();

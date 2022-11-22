@@ -141,10 +141,7 @@ namespace AutoRest.CSharp.Input
                         propertyUsage &= ~SchemaTypeUsage.Input;
                     }
 
-                    var schemaToUse = schemaProperty.Extensions?.TryGetValue("x-ms-format-element-type", out var propertySchema) == true
-                        ? propertySchema as Schema ?? throw new InvalidOperationException("x-ms-format-element-type was not converted to a Schema in JsonConverterResolver")
-                        : schemaProperty.Schema;
-                    Apply(usages, schemaToUse, propertyUsage);
+                    Apply(usages, schemaProperty.Schema, propertyUsage);
                 }
             }
             else if (schema is DictionarySchema dictionarySchema)
