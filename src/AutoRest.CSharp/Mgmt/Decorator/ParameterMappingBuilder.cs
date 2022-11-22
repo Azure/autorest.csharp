@@ -399,14 +399,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings, RestClientMethod method)
         {
             var passThroughParams = parameterMappings.Where(p => p.IsPassThru)
-                .Select(p => p.Parameter)
+                .Select(p => p.Parameter.Name)
                 .ToImmutableHashSet();
-            return method.Parameters.Where(p => passThroughParams.Contains(p) || p.IsPropertyBag).ToList();
+            return method.Parameters.Where(p => passThroughParams.Contains(p.Name) || p.IsPropertyBag).ToList();
         }
 
         public static List<Parameter> GetNonPassThroughPropertyBagParameters(this IEnumerable<ParameterMapping> parameterMappings, RestClientMethod method)
         {
-            return parameterMappings.Where(p => !p.IsPassThru && !method.Parameters.Contains(p.Parameter))
+            var paramNames = method.Parameters.Select(p => p.Name).ToImmutableHashSet();
+            return parameterMappings.Where(p => !p.IsPassThru && !paramNames.Contains(p.Parameter.Name))
                 .Select(p => p.Parameter)
                 .ToList();
         }
