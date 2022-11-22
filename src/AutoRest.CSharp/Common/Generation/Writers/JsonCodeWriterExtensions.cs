@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         bool writeFormat = false;
 
-                        if (frameworkType != typeof(BinaryData))
+                        if (frameworkType != typeof(BinaryData) && frameworkType != typeof(DataFactoryExpression<>))
                             writer.Append($"{writerName}.");
                         if (frameworkType == typeof(decimal) ||
                             frameworkType == typeof(double) ||
@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (IsCustomJsonConverterAdded(frameworkType))
                         {
-                            writer.Append($"JsonSerializer.Serialize(writer, {name:I});");
+                            writer.Line($"{typeof(JsonSerializer)}.Serialize(writer, {name:I});");
                             return;
                         }
 
