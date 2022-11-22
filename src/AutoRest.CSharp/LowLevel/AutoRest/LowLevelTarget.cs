@@ -21,13 +21,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var codeWriter = new CodeWriter();
                 var modelWriter = new ModelWriter();
                 modelWriter.WriteModel(codeWriter, model);
-                var prefix = Configuration.ModelNamespace ? "Models/" : "";
-                project.AddGeneratedFile($"{prefix}{model.Type.Name}.cs", codeWriter.ToString());
+                var folderPath = Configuration.ModelNamespace ? "Models/" : "";
+                project.AddGeneratedFile($"{folderPath}{model.Type.Name}.cs", codeWriter.ToString());
 
                 var serializationCodeWriter = new CodeWriter();
                 var serializationWriter = new SerializationWriter();
                 serializationWriter.WriteSerialization(serializationCodeWriter, model);
-                project.AddGeneratedFile($"{prefix}{model.Type.Name}.Serialization.cs", serializationCodeWriter.ToString());
+                project.AddGeneratedFile($"{folderPath}{model.Type.Name}.Serialization.cs", serializationCodeWriter.ToString());
             }
 
             foreach (var client in library.RestClients)
