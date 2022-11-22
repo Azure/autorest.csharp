@@ -13,6 +13,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -42,6 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
             _sourceInputModel = context.SourceInputModel;
             DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
+            JsonConverterResolver.ResolveConverter(codeModel);
             _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
 
             _defaultNamespace = Configuration.Namespace ?? _input.Name;

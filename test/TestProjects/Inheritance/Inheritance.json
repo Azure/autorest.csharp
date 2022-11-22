@@ -73,7 +73,7 @@
         "DfeListOfT": {
           "type": "object",
           "x-ms-format": "dfe-listOfT",
-          "$ref": "#/definitions/SeparateClass"
+          "x-ms-format-element-type": "SeparateClass"
         },
         "DfeListOfString": {
           "type": "object",

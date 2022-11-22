@@ -27,7 +27,7 @@ namespace Inheritance.Models
         /// <param name="dfeInt"> Any object. </param>
         /// <param name="dfeObject"> Any object. </param>
         /// <param name="dfeListOfObject"> Any object. </param>
-        /// <param name="dfeListOfT"></param>
+        /// <param name="dfeListOfT"> Any object. </param>
         /// <param name="dfeListOfString"> Any object. </param>
         /// <param name="dfeKeyValuePairs"> Any object. </param>
         /// <param name="someProperty"></param>
