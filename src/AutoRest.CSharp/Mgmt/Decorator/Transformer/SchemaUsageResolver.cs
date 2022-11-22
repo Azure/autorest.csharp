@@ -49,7 +49,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
                 schema.Extensions ??= new RecordOfStringAndAny();
 
-                // apply converter usage
+                // apply converter usage to any schemas that are referenced with "x-ms-format-element-type" in a property
+
                 if (!schema.Extensions!.TryGetValue("x-csharp-usage", out var usages))
                 {
                     schema.Extensions.Add("x-csharp-usage", "converter");
