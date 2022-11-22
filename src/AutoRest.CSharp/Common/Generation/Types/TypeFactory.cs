@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Generation.Types
             DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            AnyObjectSchema objectSchema when format == XMsFormat.DataFactoryExpressionOfListOfT => new CSharpType(
+            AnyObjectSchema _ when format == XMsFormat.DataFactoryExpressionOfListOfT => new CSharpType(
                 typeof(DataFactoryExpression<>),
                 isNullable: isNullable,
                 new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),

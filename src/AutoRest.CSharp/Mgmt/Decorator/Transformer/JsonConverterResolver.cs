@@ -31,13 +31,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 {
                     property.Extensions!["x-ms-format-element-type"] = schema;
                     schema.Extensions ??= new RecordOfStringAndAny();
-                    if (!schema.Extensions!.ContainsKey("x-csharp-usage"))
+                    if (!schema.Extensions!.TryGetValue("x-csharp-usage", out var usages))
                     {
                         schema.Extensions.Add("x-csharp-usage", "converter");
                     }
                     else
                     {
-                        schema.Extensions!["x-csharp-usage"] += ",converter";
+                        if (usages is string usage && !string.IsNullOrEmpty(usage))
+                        {
+                            schema.Extensions!["x-csharp-usage"] += ",converter";
+                        }
+                        else
+                        {
+                            schema.Extensions!["x-csharp-usage"] = "converter";
+                        }
                     }
                 }
             }
