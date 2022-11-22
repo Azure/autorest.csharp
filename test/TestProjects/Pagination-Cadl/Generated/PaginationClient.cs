@@ -12,8 +12,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Core.Foundations;
 using Azure.Core.Pipeline;
+using Pagination.Models;
 
 namespace Pagination
 {

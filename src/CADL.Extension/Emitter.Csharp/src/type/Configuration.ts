@@ -7,4 +7,5 @@ export interface Configuration {
     LibraryName: string | null;
     SharedSourceFolders: string[];
     SingleTopLevelClient?: boolean;
+    "model-namespace"?: boolean;
 }
