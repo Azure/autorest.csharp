@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Models.Inheritance
+namespace Models.Inheritance.Models
 {
     /// <summary>
     /// This is base model for polymorphic multiple levels inheritance with a discriminator.

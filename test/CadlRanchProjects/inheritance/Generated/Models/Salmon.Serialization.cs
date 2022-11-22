@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Models.Inheritance
+namespace Models.Inheritance.Models
 {
     public partial class Salmon : IUtf8JsonSerializable
     {

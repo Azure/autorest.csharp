@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Models.Inheritance
+namespace Models.Inheritance.Models
 {
     /// <summary> This is base model for non-discriminator normal multiple levels inheritance. </summary>
     public partial class Pet

@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Models.Inheritance
+namespace Models.Inheritance.Models
 {
     internal partial class UnknownFish
     {

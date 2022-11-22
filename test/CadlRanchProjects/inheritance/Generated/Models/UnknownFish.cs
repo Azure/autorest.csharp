@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Models.Inheritance
+namespace Models.Inheritance.Models
 {
     /// <summary> Unknown version of Fish. </summary>
     internal partial class UnknownFish : Fish

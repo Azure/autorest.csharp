@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Models.Inheritance
+namespace Models.Inheritance.Models
 {
     /// <summary> The second level model in the normal multiple levels inheritance. </summary>
     public partial class Cat : Pet
