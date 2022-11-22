@@ -131,7 +131,7 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         csharpGeneratorPath: { type: "string", nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
         "save-inputs": { type: "boolean", nullable: true },
-        "model-namespace": { type: "boolean", nullable: true}
+        "model-namespace": { type: "boolean", nullable: true }
     },
     required: []
 };
@@ -221,7 +221,8 @@ export async function $onEmit(
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient: resolvedOptions["single-top-level-client"],
+                SingleTopLevelClient:
+                    resolvedOptions["single-top-level-client"],
                 "model-namespace": resolvedOptions["model-namespace"]
             } as Configuration;
 
@@ -294,16 +295,21 @@ function createModel(
     let version = getServiceVersion(program);
     if (version !== "0000-00-00") {
         apiVersions.add(version);
-        // console.error("No API-Version provided.");
-        // return;
     }
 
-    const versions = getVersions(program, serviceNamespaceType)[1]?.getVersions();
+    const versions = getVersions(
+        program,
+        serviceNamespaceType
+    )[1]?.getVersions();
     if (versions) {
         for (const ver of versions) {
             apiVersions.add(ver.value);
         }
         version = versions[versions.length - 1].value; //default version
+    }
+
+    if (apiVersions.size === 0) {
+        throw "No Api-Version Provided";
     }
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(program, serviceNamespaceType);
@@ -368,7 +374,6 @@ function createModel(
 
         lroMonitorOperations = getAllLroMonitorOperations(routes, program);
         const clients: InputClient[] = [];
-        // const convenienceOperations: HttpOperation[] = [];
         const dpgClients = listClients(program);
         for (const client of dpgClients) {
             clients.push(emitClient(client));
@@ -380,23 +385,30 @@ function createModel(
 
         for (const client of clients) {
             for (const op of client.Operations) {
-                const apiVersionInOperation = op.Parameters.find(
+                const apiVersionIndex = op.Parameters.findIndex(
                     (value) => value.IsApiVersion
                 );
-                if (apiVersionInOperation) {
-                    console.log("find apiversion");
-                    if (apiVersionInOperation.DefaultValue?.Value && !apiVersions.has(apiVersionInOperation.DefaultValue?.Value)) {
-                        apiVersions.add(apiVersionInOperation.DefaultValue.Value);
+                if (apiVersionIndex !== -1) {
+                    const apiVersionInOperation =
+                        op.Parameters[apiVersionIndex];
+                    if (
+                        apiVersionInOperation.DefaultValue?.Value &&
+                        !apiVersions.has(
+                            apiVersionInOperation.DefaultValue?.Value
+                        )
+                    ) {
+                        apiVersions.add(
+                            apiVersionInOperation.DefaultValue.Value
+                        );
                     } else {
-                        if (apiVersionInOperation.Location === apiVersionParam.Location) {
-                            const index = op.Parameters.findIndex((value) => value.IsApiVersion);
-                            console.log("index:" + index);
-                            op.Parameters[index] = apiVersionParam;
+                        if (
+                            apiVersionInOperation.Location ===
+                            apiVersionParam.Location
+                        ) {
+                            op.Parameters[apiVersionIndex] = apiVersionParam;
                         }
-                        
                     }
                 } else {
-                    console.log("not find apiversion");
                     op.Parameters.push(apiVersionParam);
                 }
             }
@@ -442,7 +454,10 @@ function createModel(
         }
 
         const inputClient = {
-            Name: client.kind === ClientKind.DpgClient ? client.name : client.type.name,
+            Name:
+                client.kind === ClientKind.DpgClient
+                    ? client.name
+                    : client.type.name,
             Description: clientDesc,
             Operations: [],
             Protocol: {},
