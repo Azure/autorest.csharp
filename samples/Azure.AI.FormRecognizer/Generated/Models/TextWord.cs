@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> An object representing a word. </summary>
-    public partial class TextWord
+    internal partial class TextWord
     {
         /// <summary> Initializes a new instance of TextWord. </summary>
         /// <param name="text"> The text content of the word. </param>

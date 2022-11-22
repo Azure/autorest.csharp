@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class KeysResult
+    internal partial class KeysResult
     {
         internal static KeysResult DeserializeKeysResult(JsonElement element)
         {

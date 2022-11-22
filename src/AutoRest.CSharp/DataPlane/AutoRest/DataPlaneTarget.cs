@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -14,7 +16,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class DataPlaneTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
             BuildContext<DataPlaneOutputLibrary> context = new BuildContext<DataPlaneOutputLibrary>(codeModel, sourceInputModel);
 
@@ -84,6 +86,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }
+
+            await project.PostProcess(new PostProcessor(modelFactoryType?.FullName));
         }
     }
 }

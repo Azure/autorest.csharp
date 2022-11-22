@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class Model
+    internal partial class Model
     {
         internal static Model DeserializeModel(JsonElement element)
         {

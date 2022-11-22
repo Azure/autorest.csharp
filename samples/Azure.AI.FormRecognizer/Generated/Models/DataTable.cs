@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Information about the extracted table contained in a page. </summary>
-    public partial class DataTable
+    internal partial class DataTable
     {
         /// <summary> Initializes a new instance of DataTable. </summary>
         /// <param name="rows"> Number of rows. </param>

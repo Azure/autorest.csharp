@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class CopyResult
+    internal partial class CopyResult
     {
         internal static CopyResult DeserializeCopyResult(JsonElement element)
         {

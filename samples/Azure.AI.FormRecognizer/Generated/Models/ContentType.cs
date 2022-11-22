@@ -8,7 +8,7 @@
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Content type for upload. </summary>
-    public enum ContentType
+    internal enum ContentType
     {
         /// <summary> Content Type &apos;application/pdf&apos;. </summary>
         ApplicationPdf,

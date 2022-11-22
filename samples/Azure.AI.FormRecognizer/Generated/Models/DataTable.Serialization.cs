@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class DataTable
+    internal partial class DataTable
     {
         internal static DataTable DeserializeDataTable(JsonElement element)
         {

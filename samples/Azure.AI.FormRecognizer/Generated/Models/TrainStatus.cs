@@ -8,7 +8,7 @@
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Status of the training operation. </summary>
-    public enum TrainStatus
+    internal enum TrainStatus
     {
         /// <summary> succeeded. </summary>
         Succeeded,

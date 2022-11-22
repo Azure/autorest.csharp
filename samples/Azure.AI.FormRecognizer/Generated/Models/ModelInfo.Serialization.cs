@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class ModelInfo
+    internal partial class ModelInfo
     {
         internal static ModelInfo DeserializeModelInfo(JsonElement element)
         {

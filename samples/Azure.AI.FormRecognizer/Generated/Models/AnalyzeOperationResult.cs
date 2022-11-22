@@ -10,7 +10,7 @@ using System;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Status and result of the queued analyze operation. </summary>
-    public partial class AnalyzeOperationResult
+    internal partial class AnalyzeOperationResult
     {
         /// <summary> Initializes a new instance of AnalyzeOperationResult. </summary>
         /// <param name="status"> Operation status. </param>

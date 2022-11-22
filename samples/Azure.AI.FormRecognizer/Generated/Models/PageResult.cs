@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Extracted information from a single page. </summary>
-    public partial class PageResult
+    internal partial class PageResult
     {
         /// <summary> Initializes a new instance of PageResult. </summary>
         /// <param name="page"> Page number. </param>

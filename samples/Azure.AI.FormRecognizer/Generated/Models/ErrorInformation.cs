@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> The ErrorInformation. </summary>
-    public partial class ErrorInformation
+    internal partial class ErrorInformation
     {
         /// <summary> Initializes a new instance of ErrorInformation. </summary>
         /// <param name="code"></param>
