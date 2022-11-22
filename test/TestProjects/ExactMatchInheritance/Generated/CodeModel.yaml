@@ -1119,8 +1119,6 @@ schemas: !Schemas
               name: modelProperty
               description: ''
           protocol: !Protocols {}
-      extensions:
-        x-ms-include-converter: true
       language: !Languages 
         default:
           name: SeparateClass

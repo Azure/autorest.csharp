@@ -75,10 +75,10 @@ namespace AutoRest.CSharp.Generation.Types
             _ => throw new Exception("Unknown type")
         };
 
-        public CSharpType CreateType(Schema schema, bool isNullable, string? format = default) => CreateType(schema, format, isNullable);
+        public CSharpType CreateType(Schema schema, bool isNullable, string? format = default, Property? property = default) => CreateType(schema, format, isNullable, property);
 
         // This function provide the capability to support the extensions is coming from outside, like parameter.
-        public CSharpType CreateType(Schema schema, string? format, bool isNullable) => schema switch
+        public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
         {
             ConstantSchema constantSchema => ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
@@ -87,10 +87,10 @@ namespace AutoRest.CSharp.Generation.Types
             DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            ObjectSchema objectSchema when format == XMsFormat.DataFactoryExpressionOfListOfT => new CSharpType(
+            AnyObjectSchema objectSchema when format == XMsFormat.DataFactoryExpressionOfListOfT => new CSharpType(
                 typeof(DataFactoryExpression<>),
                 isNullable: isNullable,
-                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)objectSchema.Extensions!["x-ms-element-type"]))),
+                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
             _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };

@@ -749,7 +749,6 @@
         },
         "SeparateClass": {
           "type": "object",
-          "x-ms-include-converter": true,
           "properties": {
             "StringProperty":
             {

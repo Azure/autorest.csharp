@@ -40,6 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             CodeModelValidator.Validate();
             Dictionary<string, Property> map = new();
+
             foreach (var schema in MgmtContext.CodeModel.AllSchemas.OfType<ObjectSchema>())
             {
                 foreach (var property in schema.Properties)
@@ -56,6 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (map.TryGetValue(schema.Name, out var property))
                 {
                     property.Extensions!["x-ms-format-element-type"] = schema;
+                    schema.Extensions ??= new RecordOfStringAndAny();
                     if (!schema.Extensions!.ContainsKey("x-csharp-usage"))
                     {
                         schema.Extensions.Add("x-csharp-usage", "converter");

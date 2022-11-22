@@ -141,7 +141,10 @@ namespace AutoRest.CSharp.Input
                         propertyUsage &= ~SchemaTypeUsage.Input;
                     }
 
-                    Apply(usages, schemaProperty.Schema, propertyUsage);
+                    var schemaToUse = schemaProperty.Extensions?.TryGetValue("x-ms-format-element-type", out var propertySchema) == true
+                        ? (Schema)propertySchema
+                        : schemaProperty.Schema;
+                    Apply(usages, schemaToUse, propertyUsage);
                 }
             }
             else if (schema is DictionarySchema dictionarySchema)
