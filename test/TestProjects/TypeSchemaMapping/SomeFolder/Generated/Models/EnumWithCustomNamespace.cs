@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace TypeSchemaMapping.Models
+namespace Very.Custom.Namespace.From.Swagger
 {
     /// <summary> Letters. </summary>
     internal readonly partial struct EnumWithCustomNamespace : IEquatable<EnumWithCustomNamespace>

@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
-            : base(GetDefaultNamespace(defaultNamespace), sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory!;
             _inputModel = inputModel;
@@ -63,9 +63,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsDefaultDiscriminator ? this : null);
         }
-
-        private static string GetDefaultNamespace(string defaultNamespace)
-            => Configuration.ModelNamespace ? $"{defaultNamespace}.Models" : defaultNamespace;
         private MethodSignatureModifiers GetFromResponseModifiers()
         {
             var signatures = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static;

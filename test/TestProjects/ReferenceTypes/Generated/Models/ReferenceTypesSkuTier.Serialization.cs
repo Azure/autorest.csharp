@@ -7,7 +7,7 @@
 
 using System;
 
-namespace ReferenceTypes.Models
+namespace Azure.ResourceManager.Fake.Models
 {
     internal static partial class ReferenceTypesSkuTierExtensions
     {
