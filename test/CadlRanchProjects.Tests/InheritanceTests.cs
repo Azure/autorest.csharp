@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Models.Inheritance;
+using Models.Inheritance.Models;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
