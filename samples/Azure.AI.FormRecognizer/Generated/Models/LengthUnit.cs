@@ -8,7 +8,7 @@
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> The unit used by the width, height and boundingBox properties. For images, the unit is &quot;pixel&quot;. For PDF, the unit is &quot;inch&quot;. </summary>
-    internal enum LengthUnit
+    public enum LengthUnit
     {
         /// <summary> pixel. </summary>
         Pixel,

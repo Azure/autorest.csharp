@@ -14,6 +14,16 @@ namespace Azure.Storage.Tables.Models
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AzureStorageTablesModelFactory
     {
+        /// <summary> Initializes a new instance of TableQueryResponse. </summary>
+        /// <param name="odataMetadata"> The metadata response of the table. </param>
+        /// <param name="value"> List of tables. </param>
+        /// <returns> A new <see cref="Models.TableQueryResponse"/> instance for mocking. </returns>
+        public static TableQueryResponse TableQueryResponse(string odataMetadata = null, IEnumerable<TableResponseProperties> value = null)
+        {
+            value ??= new List<TableResponseProperties>();
+
+            return new TableQueryResponse(odataMetadata, value?.ToList());
+        }
 
         /// <summary> Initializes a new instance of TableResponseProperties. </summary>
         /// <param name="tableName"> The name of the table. </param>
@@ -24,6 +34,29 @@ namespace Azure.Storage.Tables.Models
         public static TableResponseProperties TableResponseProperties(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null)
         {
             return new TableResponseProperties(tableName, odataType, odataId, odataEditLink);
+        }
+
+        /// <summary> Initializes a new instance of TableResponse. </summary>
+        /// <param name="tableName"> The name of the table. </param>
+        /// <param name="odataType"> The odata type of the table. </param>
+        /// <param name="odataId"> The id of the table. </param>
+        /// <param name="odataEditLink"> The edit link of the table. </param>
+        /// <param name="odataMetadata"> The metadata response of the table. </param>
+        /// <returns> A new <see cref="Models.TableResponse"/> instance for mocking. </returns>
+        public static TableResponse TableResponse(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null, string odataMetadata = null)
+        {
+            return new TableResponse(tableName, odataType, odataId, odataEditLink, odataMetadata);
+        }
+
+        /// <summary> Initializes a new instance of TableEntityQueryResponse. </summary>
+        /// <param name="odataMetadata"> The metadata response of the table. </param>
+        /// <param name="value"> List of table entities. </param>
+        /// <returns> A new <see cref="Models.TableEntityQueryResponse"/> instance for mocking. </returns>
+        public static TableEntityQueryResponse TableEntityQueryResponse(string odataMetadata = null, IEnumerable<IDictionary<string, object>> value = null)
+        {
+            value ??= new List<IDictionary<string, object>>();
+
+            return new TableEntityQueryResponse(odataMetadata, value?.ToList());
         }
 
         /// <summary> Initializes a new instance of StorageServiceStats. </summary>

@@ -12,7 +12,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Keys extracted by the custom model. </summary>
-    internal partial class KeysResult
+    public partial class KeysResult
     {
         /// <summary> Initializes a new instance of KeysResult. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>

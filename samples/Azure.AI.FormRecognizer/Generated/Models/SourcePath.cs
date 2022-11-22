@@ -8,7 +8,7 @@
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Uri or local path to source data. </summary>
-    internal partial class SourcePath
+    public partial class SourcePath
     {
         /// <summary> Initializes a new instance of SourcePath. </summary>
         public SourcePath()

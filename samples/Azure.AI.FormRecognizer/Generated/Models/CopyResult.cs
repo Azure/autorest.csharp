@@ -12,7 +12,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Custom model copy result. </summary>
-    internal partial class CopyResult
+    public partial class CopyResult
     {
         /// <summary> Initializes a new instance of CopyResult. </summary>
         /// <param name="modelId"> Identifier of the target model. </param>

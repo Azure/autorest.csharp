@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    internal partial class FieldValue
+    public partial class FieldValue
     {
         internal static FieldValue DeserializeFieldValue(JsonElement element)
         {

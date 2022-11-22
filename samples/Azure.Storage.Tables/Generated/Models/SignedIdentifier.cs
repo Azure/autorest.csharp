@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> signed identifier. </summary>
-    internal partial class SignedIdentifier
+    public partial class SignedIdentifier
     {
         /// <summary> Initializes a new instance of SignedIdentifier. </summary>
         /// <param name="id"> a unique id. </param>

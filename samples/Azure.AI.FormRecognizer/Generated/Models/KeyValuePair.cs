@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Information about the extracted key-value pair. </summary>
-    internal partial class KeyValuePair
+    public partial class KeyValuePair
     {
         /// <summary> Initializes a new instance of KeyValuePair. </summary>
         /// <param name="key"> Information about the extracted key in a key-value pair. </param>

@@ -8,7 +8,7 @@
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Status of the model. </summary>
-    internal enum ModelStatus
+    public enum ModelStatus
     {
         /// <summary> creating. </summary>
         Creating,

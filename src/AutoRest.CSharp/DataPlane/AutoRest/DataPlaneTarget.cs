@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class DataPlaneTarget
     {
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
             BuildContext<DataPlaneOutputLibrary> context = new BuildContext<DataPlaneOutputLibrary>(codeModel, sourceInputModel);
 
@@ -87,7 +87,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
-            await project.PostProcess(new PostProcessor(modelFactoryType?.FullName));
+            //await project.PostProcess(new PostProcessor(modelFactoryType?.FullName));
+            // TODO -- we could enable this once the issue in model factory is resolved.
         }
     }
 }

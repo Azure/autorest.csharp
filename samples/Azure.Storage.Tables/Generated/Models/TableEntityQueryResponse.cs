@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> The properties for the table entity query response. </summary>
-    internal partial class TableEntityQueryResponse
+    public partial class TableEntityQueryResponse
     {
         /// <summary> Initializes a new instance of TableEntityQueryResponse. </summary>
         internal TableEntityQueryResponse()

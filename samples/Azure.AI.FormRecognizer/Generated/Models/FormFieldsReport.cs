@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Report for a custom model training field. </summary>
-    internal partial class FormFieldsReport
+    public partial class FormFieldsReport
     {
         /// <summary> Initializes a new instance of FormFieldsReport. </summary>
         /// <param name="fieldName"> Training field name. </param>

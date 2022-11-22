@@ -8,7 +8,7 @@
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Filter to apply to the documents in the source path for training. </summary>
-    internal partial class TrainSourceFilter
+    public partial class TrainSourceFilter
     {
         /// <summary> Initializes a new instance of TrainSourceFilter. </summary>
         public TrainSourceFilter()

@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Information about the extracted cell in a table. </summary>
-    internal partial class DataTableCell
+    public partial class DataTableCell
     {
         /// <summary> Initializes a new instance of DataTableCell. </summary>
         /// <param name="rowIndex"> Row index of the cell. </param>

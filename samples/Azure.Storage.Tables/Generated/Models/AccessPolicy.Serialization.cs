@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    internal partial class AccessPolicy : IXmlSerializable
+    public partial class AccessPolicy : IXmlSerializable
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
