@@ -43,7 +43,7 @@ namespace CustomNamespace
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    eTag = JsonSerializer.Deserialize<ETag>(property.Value.ToString());
+                    eTag = new ETag(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("CreatedAt"))
