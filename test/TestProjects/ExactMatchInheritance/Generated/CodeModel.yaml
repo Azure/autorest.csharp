@@ -564,7 +564,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type9
                   extensions:
-                    x-ms-format: dfe-listOfObject
+                    x-ms-format: dfe-list-object
                   language: !Languages 
                     default:
                       name: type9
@@ -584,7 +584,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type11
                   extensions:
-                    x-ms-format: dfe-listOfT
+                    x-ms-format: dfe-list-generic
                     x-ms-format-element-type: SeparateClass
                   language: !Languages 
                     default:
@@ -595,7 +595,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type12
                   extensions:
-                    x-ms-format: dfe-listOfString
+                    x-ms-format: dfe-list-string
                   language: !Languages 
                     default:
                       name: type12
@@ -605,7 +605,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type13
                   extensions:
-                    x-ms-format: dfe-keyValuePair
+                    x-ms-format: dfe-key-value-pairs
                   language: !Languages 
                     default:
                       name: type13
@@ -615,7 +615,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type14
                   extensions:
-                    x-ms-format: dfe-listOfT
+                    x-ms-format: dfe-list-generic
                     x-ms-format-element-type: SeparateClass
                   language: !Languages 
                     default:

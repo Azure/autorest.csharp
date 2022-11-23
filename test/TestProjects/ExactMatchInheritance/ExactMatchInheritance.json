@@ -537,7 +537,7 @@
                 },
                 "type9": {
                     "type": "object",
-                    "x-ms-format": "dfe-listOfObject"
+                    "x-ms-format": "dfe-list-object"
                 },
                 "type10": {
                   "type": "object",
@@ -545,20 +545,20 @@
                 },
                 "type11": {
                   "type": "object",
-                  "x-ms-format": "dfe-listOfT",
+                  "x-ms-format": "dfe-list-generic",
                   "x-ms-format-element-type": "SeparateClass"
                 },
                 "type12": {
                   "type": "object",
-                  "x-ms-format": "dfe-listOfString"
+                  "x-ms-format": "dfe-list-string"
                 },
                 "type13": {
                   "type": "object",
-                  "x-ms-format": "dfe-keyValuePair"
+                  "x-ms-format": "dfe-key-value-pairs"
                 },
                 "type14": {
                     "type": "object",
-                    "x-ms-format": "dfe-listOfT",
+                    "x-ms-format": "dfe-list-generic",
                     "x-ms-format-element-type": "SeparateClass"
                 },
                 "type15": {

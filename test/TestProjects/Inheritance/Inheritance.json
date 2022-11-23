@@ -68,20 +68,20 @@
         },
         "DfeListOfObject": {
           "type": "object",
-          "x-ms-format": "dfe-listOfObject"
+          "x-ms-format": "dfe-list-object"
         },
         "DfeListOfT": {
           "type": "object",
-          "x-ms-format": "dfe-listOfT",
+          "x-ms-format": "dfe-list-generic",
           "x-ms-format-element-type": "SeparateClass"
         },
         "DfeListOfString": {
           "type": "object",
-          "x-ms-format": "dfe-listOfString"
+          "x-ms-format": "dfe-list-string"
         },
         "DfeKeyValuePairs": {
           "type": "object",
-          "x-ms-format": "dfe-keyValuePair"
+          "x-ms-format": "dfe-key-value-pairs"
         },
         "DfeDateTime": {
           "type": "object",

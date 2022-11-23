@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
@@ -108,6 +109,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(typeof(DataFactoryExpression<DateTimeOffset>), typeof(ExactMatchModel1Data).GetProperty("Type15").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<TimeSpan>), typeof(ExactMatchModel1Data).GetProperty("Type16").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<Uri>), typeof(ExactMatchModel1Data).GetProperty("Type17").PropertyType);
+            Assert.IsTrue(typeof(SeparateClass).GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute)));
         }
 
         private Type? FindTypeByName(string name)

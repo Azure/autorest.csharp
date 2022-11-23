@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Azure.Core.Expressions.DataFactory;
 using ExactMatchInheritance;
 using Inheritance.Models;
@@ -149,6 +151,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(typeof(DataFactoryExpression<DateTimeOffset>), typeof(BaseClass).GetProperty("DfeDateTime").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<TimeSpan>), typeof(BaseClass).GetProperty("DfeDuration").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<Uri>), typeof(BaseClass).GetProperty("DfeUri").PropertyType);
+            Assert.IsTrue(typeof(SeparateClass).GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute)));
         }
     }
 }

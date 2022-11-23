@@ -42,8 +42,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _context = context;
             _sourceInputModel = context.SourceInputModel;
+            // schema usage resolver must run first
+            SchemaUsageTransformer.ResolveConverter(codeModel);
             DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
-            SchemaUsageResolver.ResolveConverter(codeModel);
             _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
 
             _defaultNamespace = Configuration.Namespace ?? _input.Name;

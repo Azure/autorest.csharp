@@ -526,7 +526,7 @@ schemas: !Schemas
           schema: *ref_17
           serializedName: DfeListOfObject
           extensions:
-            x-ms-format: dfe-listOfObject
+            x-ms-format: dfe-list-object
           language: !Languages 
             default:
               name: dfeListOfObject
@@ -536,7 +536,7 @@ schemas: !Schemas
           schema: *ref_17
           serializedName: DfeListOfT
           extensions:
-            x-ms-format: dfe-listOfT
+            x-ms-format: dfe-list-generic
             x-ms-format-element-type: SeparateClass
           language: !Languages 
             default:
@@ -547,7 +547,7 @@ schemas: !Schemas
           schema: *ref_17
           serializedName: DfeListOfString
           extensions:
-            x-ms-format: dfe-listOfString
+            x-ms-format: dfe-list-string
           language: !Languages 
             default:
               name: dfeListOfString
@@ -557,7 +557,7 @@ schemas: !Schemas
           schema: *ref_17
           serializedName: DfeKeyValuePairs
           extensions:
-            x-ms-format: dfe-keyValuePair
+            x-ms-format: dfe-key-value-pairs
           language: !Languages 
             default:
               name: dfeKeyValuePairs

@@ -12,8 +12,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         public static void Transform()
         {
+            // schema usage resolver must run first
+            SchemaUsageTransformer.ResolveConverter(MgmtContext.CodeModel);
             DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel);
-            SchemaUsageResolver.ResolveConverter(MgmtContext.CodeModel);
             OmitOperationGroups.RemoveOperationGroups();
             SubscriptionIdUpdater.Update();
             ConstantSchemaTransformer.TransformToChoice();
