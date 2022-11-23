@@ -137,7 +137,11 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             foreach (var location in reference.Locations)
             {
                 var document = location.Document;
-                var candidateReferenceSymbols = documentCache[document];
+
+                // skip this reference if it comes from a document that does not define any symbol
+                if (!documentCache.TryGetValue(document, out var candidateReferenceSymbols))
+                    continue;
+
                 if (candidateReferenceSymbols.Count == 1)
                 {
                     referenceMap.AddInList(candidateReferenceSymbols.Single(), symbol);
