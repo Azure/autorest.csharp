@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace Pagination.Models
 {
-    public partial class CustomPage
+    internal partial class CustomPage
     {
         internal static CustomPage DeserializeCustomPage(JsonElement element)
         {

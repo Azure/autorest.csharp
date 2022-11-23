@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Pagination.Models
 {
     /// <summary> Paged collection of LedgerEntry items. </summary>
-    public partial class CustomPage
+    internal partial class CustomPage
     {
         /// <summary> Initializes a new instance of CustomPage. </summary>
         /// <param name="value"></param>
