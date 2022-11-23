@@ -154,9 +154,9 @@ internal class PostProcessor
     /// <param name="rootSymbols"></param>
     /// <param name="referenceMap"></param>
     /// <returns></returns>
-    private static IEnumerable<INamedTypeSymbol> VisitSymbolsFromRootAsync(IEnumerable<INamedTypeSymbol> rootSymbols, IReadOnlyDictionary<INamedTypeSymbol, IEnumerable<INamedTypeSymbol>> referenceMap)
+    private static IEnumerable<INamedTypeSymbol> VisitSymbolsFromRootAsync(IEnumerable<INamedTypeSymbol> rootSymbols, ReferenceMap referenceMap)
     {
-        var queue = new Queue<INamedTypeSymbol>(rootSymbols);
+        var queue = new Queue<INamedTypeSymbol>(rootSymbols.Concat(referenceMap.GlobalReferencedSymbols));
         var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         while (queue.Count > 0)
         {
