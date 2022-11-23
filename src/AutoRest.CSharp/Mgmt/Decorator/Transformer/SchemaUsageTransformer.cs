@@ -98,6 +98,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             if (appliedSchemas.Contains(schema))
                 return;
 
+            appliedSchemas.Add(schema);
+
             if (usages.Count > 0)
             {
                 schema.Extensions ??= new RecordOfStringAndAny();
@@ -122,7 +124,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 schema.SerializationFormats.Add(mediaType);
             }
 
-            appliedSchemas.Add(schema);
             foreach (var property in schema.Properties)
             {
                 if (property.Schema is ObjectSchema propertySchema)
