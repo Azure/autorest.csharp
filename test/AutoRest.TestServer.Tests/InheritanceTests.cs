@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Azure.Core.Expressions.DataFactory;
 using ExactMatchInheritance;
@@ -83,7 +84,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void DiscriminatorValueIsSetOnObjectSerializationConstruction()
         {
-            var baseClassWithDiscriminator = new BaseClassWithDiscriminator(null, null, null, null, null, null, null);
+            var baseClassWithDiscriminator = new BaseClassWithDiscriminator();
             Assert.AreEqual(null, baseClassWithDiscriminator.DiscriminatorProperty);
         }
 
@@ -97,7 +98,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void DiscriminatorValueIsSetOnSubClassSerializationConstruction()
         {
-            var baseClassWithDiscriminator = new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(null, null, null, null, null, null, null, null, null);
+            var baseClassWithDiscriminator = new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties();
             Assert.AreEqual("ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties", baseClassWithDiscriminator.DiscriminatorProperty);
         }
 
@@ -138,7 +139,11 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(typeof(DataFactoryExpression<double>), typeof(BaseClass).GetProperty("DfeDouble").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<bool>), typeof(BaseClass).GetProperty("DfeBool").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<int>), typeof(BaseClass).GetProperty("DfeInt").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<Array>), typeof(BaseClass).GetProperty("DfeArray").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<BinaryData>), typeof(BaseClass).GetProperty("DfeObject").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<IList<BinaryData>>), typeof(BaseClass).GetProperty("DfeListOfObject").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<IList<SeparateClass>>), typeof(BaseClass).GetProperty("DfeListOfT").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<IList<string>>), typeof(BaseClass).GetProperty("DfeListOfString").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<IDictionary<string, string>>), typeof(BaseClass).GetProperty("DfeKeyValuePairs").PropertyType);
         }
     }
 }
