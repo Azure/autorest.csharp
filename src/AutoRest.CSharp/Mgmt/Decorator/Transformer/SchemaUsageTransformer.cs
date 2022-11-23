@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     /// </summary>
     internal static class SchemaUsageTransformer
     {
-        public static void ResolveConverter(CodeModel codeModel)
+        public static void Transform(CodeModel codeModel)
         {
             Dictionary<string, List<Property>> schemaToPropertyMap = new();
             Dictionary<string, List<Schema>> schemaToEnclosingSchemasMap = new();
