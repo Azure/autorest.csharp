@@ -3,6 +3,7 @@
 
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
@@ -20,12 +21,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var codeWriter = new CodeWriter();
                 var modelWriter = new ModelWriter();
                 modelWriter.WriteModel(codeWriter, model);
-                project.AddGeneratedFile($"{model.Type.Name}.cs", codeWriter.ToString());
+                var folderPath = Configuration.ModelNamespace ? "Models/" : "";
+                project.AddGeneratedFile($"{folderPath}{model.Type.Name}.cs", codeWriter.ToString());
 
                 var serializationCodeWriter = new CodeWriter();
                 var serializationWriter = new SerializationWriter();
                 serializationWriter.WriteSerialization(serializationCodeWriter, model);
-                project.AddGeneratedFile($"{model.Type.Name}.Serialization.cs", serializationCodeWriter.ToString());
+                project.AddGeneratedFile($"{folderPath}{model.Type.Name}.Serialization.cs", serializationCodeWriter.ToString());
             }
 
             foreach (var client in library.RestClients)

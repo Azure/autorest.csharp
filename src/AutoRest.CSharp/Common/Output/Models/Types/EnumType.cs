@@ -20,19 +20,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
-
         public EnumType(ChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, true), context.DefaultNamespace, GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
+            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, true), GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
         {
         }
 
         public EnumType(SealedChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, false), context.DefaultNamespace, GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
+            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, false), GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
         {
         }
 
         public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-            : base(GetDefaultNamespace(input.Namespace, defaultNamespace), sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
             _allowedValues = input.AllowedValues;
             _typeFactory = typeFactory;
@@ -59,9 +58,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             Description = input.Description;
             IsExtensible = isExtensible;
         }
-
-        private static string GetDefaultNamespace(string? ns, string defaultNamespace)
-            => ns ?? (Configuration.ModelNamespace ? $"{defaultNamespace}.Models" : defaultNamespace);
 
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
