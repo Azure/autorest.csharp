@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Pagination.Models
 {
     /// <summary> Paged collection of LedgerEntry items. </summary>
-    public partial class PagedLedgerEntry
+    internal partial class PagedLedgerEntry
     {
         /// <summary> Initializes a new instance of PagedLedgerEntry. </summary>
         /// <param name="value"></param>

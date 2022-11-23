@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace Pagination.Models
 {
-    public partial class PagedLedgerEntry
+    internal partial class PagedLedgerEntry
     {
         internal static PagedLedgerEntry DeserializePagedLedgerEntry(JsonElement element)
         {
