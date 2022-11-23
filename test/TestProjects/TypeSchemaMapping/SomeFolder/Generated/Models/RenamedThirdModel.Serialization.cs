@@ -20,7 +20,7 @@ namespace CustomNamespace
             if (Optional.IsDefined(CustomizedETagProperty))
             {
                 writer.WritePropertyName("ETag");
-                JsonSerializer.Serialize(writer, CustomizedETagProperty);
+                writer.WriteStringValue(CustomizedETagProperty.ToString());
             }
             if (Optional.IsDefined(CustomizedCreatedAtProperty))
             {
