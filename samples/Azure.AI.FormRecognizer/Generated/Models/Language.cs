@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Language code. </summary>
-    public readonly partial struct Language : IEquatable<Language>
+    internal readonly partial struct Language : IEquatable<Language>
     {
         private readonly string _value;
 

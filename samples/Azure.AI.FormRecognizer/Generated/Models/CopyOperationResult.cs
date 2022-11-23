@@ -10,7 +10,7 @@ using System;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Status and result of the queued copy operation. </summary>
-    public partial class CopyOperationResult
+    internal partial class CopyOperationResult
     {
         /// <summary> Initializes a new instance of CopyOperationResult. </summary>
         /// <param name="status"> Operation status. </param>

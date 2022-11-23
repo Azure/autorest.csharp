@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class ErrorInformation
+    internal partial class ErrorInformation
     {
         internal static ErrorInformation DeserializeErrorInformation(JsonElement element)
         {

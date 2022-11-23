@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Request parameter to copy an existing custom model from the source resource to a target resource referenced by the resource ID. </summary>
-    public partial class CopyRequest
+    internal partial class CopyRequest
     {
         /// <summary> Initializes a new instance of CopyRequest. </summary>
         /// <param name="targetResourceId"> Azure Resource Id of the target Form Recognizer resource where the model is copied to. </param>

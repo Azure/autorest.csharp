@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Response to the list custom models operation. </summary>
-    public partial class Models
+    internal partial class Models
     {
         /// <summary> Initializes a new instance of Models. </summary>
         internal Models()

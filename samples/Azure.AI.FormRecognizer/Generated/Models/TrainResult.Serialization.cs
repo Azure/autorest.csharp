@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TrainResult
+    internal partial class TrainResult
     {
         internal static TrainResult DeserializeTrainResult(JsonElement element)
         {

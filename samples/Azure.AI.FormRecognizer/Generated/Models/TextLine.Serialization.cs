@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TextLine
+    internal partial class TextLine
     {
         internal static TextLine DeserializeTextLine(JsonElement element)
         {

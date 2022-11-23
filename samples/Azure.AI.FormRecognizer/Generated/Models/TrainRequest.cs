@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Request parameter to train a new custom model. </summary>
-    public partial class TrainRequest
+    internal partial class TrainRequest
     {
         /// <summary> Initializes a new instance of TrainRequest. </summary>
         /// <param name="source"> Source path containing the training documents. </param>

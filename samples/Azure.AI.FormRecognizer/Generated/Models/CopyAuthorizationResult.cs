@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Request parameter that contains authorization claims for copy operation. </summary>
-    public partial class CopyAuthorizationResult
+    internal partial class CopyAuthorizationResult
     {
         /// <summary> Initializes a new instance of CopyAuthorizationResult. </summary>
         /// <param name="modelId"> Model identifier. </param>

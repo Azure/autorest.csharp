@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Report for a custom model training document. </summary>
-    public partial class TrainingDocumentInfo
+    internal partial class TrainingDocumentInfo
     {
         /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
         /// <param name="documentName"> Training document name. </param>

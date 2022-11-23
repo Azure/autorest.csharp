@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> The Enum3. </summary>
-    public readonly partial struct Enum3 : IEquatable<Enum3>
+    internal readonly partial struct Enum3 : IEquatable<Enum3>
     {
         private readonly string _value;
 

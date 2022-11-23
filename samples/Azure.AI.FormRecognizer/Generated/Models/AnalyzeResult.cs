@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Analyze operation result. </summary>
-    public partial class AnalyzeResult
+    internal partial class AnalyzeResult
     {
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
         /// <param name="version"> Version of schema used for this result. </param>

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Response to the get custom model operation. </summary>
-    public partial class Model
+    internal partial class Model
     {
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="modelInfo"> Basic custom model information. </param>

@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class ReadResult
+    internal partial class ReadResult
     {
         internal static ReadResult DeserializeReadResult(JsonElement element)
         {

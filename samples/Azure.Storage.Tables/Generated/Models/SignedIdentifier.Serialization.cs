@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class SignedIdentifier : IXmlSerializable
+    internal partial class SignedIdentifier : IXmlSerializable
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
