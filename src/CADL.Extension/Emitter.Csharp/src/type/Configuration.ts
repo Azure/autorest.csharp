@@ -8,4 +8,5 @@ export interface Configuration {
     SharedSourceFolders: string[];
     SingleTopLevelClient?: boolean;
     "remove-unreferenced-types"?: "removeOrInternalize" | "internalize" | "keepAll";
+    "model-namespace"?: boolean;
 }
