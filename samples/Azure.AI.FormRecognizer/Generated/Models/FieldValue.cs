@@ -12,7 +12,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Recognized field value. </summary>
-    internal partial class FieldValue
+    public partial class FieldValue
     {
         /// <summary> Initializes a new instance of FieldValue. </summary>
         /// <param name="type"> Type of field value. </param>

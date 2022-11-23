@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Text extracted from a page in the input document. </summary>
-    internal partial class ReadResult
+    public partial class ReadResult
     {
         /// <summary> Initializes a new instance of ReadResult. </summary>
         /// <param name="page"> The 1-based page number in the input document. </param>

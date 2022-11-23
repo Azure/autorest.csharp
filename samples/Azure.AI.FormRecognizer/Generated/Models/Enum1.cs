@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> The Enum1. </summary>
-    internal readonly partial struct Enum1 : IEquatable<Enum1>
+    public readonly partial struct Enum1 : IEquatable<Enum1>
     {
         private readonly string _value;
 

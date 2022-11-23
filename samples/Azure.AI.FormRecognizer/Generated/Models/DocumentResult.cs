@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> A set of extracted fields corresponding to the input document. </summary>
-    internal partial class DocumentResult
+    public partial class DocumentResult
     {
         /// <summary> Initializes a new instance of DocumentResult. </summary>
         /// <param name="docType"> Document type. </param>

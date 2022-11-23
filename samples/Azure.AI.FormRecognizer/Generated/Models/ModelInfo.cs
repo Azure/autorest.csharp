@@ -10,7 +10,7 @@ using System;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Basic custom model information. </summary>
-    internal partial class ModelInfo
+    public partial class ModelInfo
     {
         /// <summary> Initializes a new instance of ModelInfo. </summary>
         /// <param name="modelId"> Model identifier. </param>

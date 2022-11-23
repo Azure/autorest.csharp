@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> An object representing an extracted text line. </summary>
-    internal partial class TextLine
+    public partial class TextLine
     {
         /// <summary> Initializes a new instance of TextLine. </summary>
         /// <param name="text"> The text content of the line. </param>

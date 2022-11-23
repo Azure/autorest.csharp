@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    internal partial class CopyAuthorizationResult : IUtf8JsonSerializable
+    public partial class CopyAuthorizationResult : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

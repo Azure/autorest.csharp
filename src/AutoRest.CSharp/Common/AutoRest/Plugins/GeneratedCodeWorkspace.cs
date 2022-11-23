@@ -9,8 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Common.Output.PostProcessing;
-using AutoRest.CSharp.Input;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -213,26 +211,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
 
         /// <summary>
-        /// This method invokes the postProcessor to do some post processing work
-        /// Depending on the configuration, it will either remove + internalize, just internalize or do nothing
+        /// This method delegates the caller to do something on the generated code project
         /// </summary>
-        /// <param name="postProcessor"></param>
+        /// <param name="processor"></param>
         /// <returns></returns>
-        public async Task PostProcess(PostProcessor? postProcessor = null)
+        public async Task PostProcess(Func<Project, Task<Project>> processor)
         {
-            postProcessor ??= new PostProcessor();
-            switch (Configuration.RemoveUnreferencedTypes)
-            {
-                case Configuration.UnreferencedTypesHandlingOption.KeepAll:
-                    break;
-                case Configuration.UnreferencedTypesHandlingOption.Internalize:
-                    _project = await postProcessor.InternalizeAsync(_project);
-                    break;
-                case Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize:
-                    _project = await postProcessor.InternalizeAsync(_project);
-                    _project = await postProcessor.RemoveAsync(_project);
-                    break;
-            }
+            _project = await processor(_project);
         }
     }
 }

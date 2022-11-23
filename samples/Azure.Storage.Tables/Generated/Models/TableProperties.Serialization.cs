@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    internal partial class TableProperties : IUtf8JsonSerializable
+    public partial class TableProperties : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

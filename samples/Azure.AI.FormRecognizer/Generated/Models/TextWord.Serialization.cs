@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    internal partial class TextWord
+    public partial class TextWord
     {
         internal static TextWord DeserializeTextWord(JsonElement element)
         {

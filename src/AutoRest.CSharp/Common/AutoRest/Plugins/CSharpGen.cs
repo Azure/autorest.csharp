@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (Configuration.Generation1ConvenienceClient)
             {
-                await DataPlaneTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                DataPlaneTarget.Execute(project, codeModel, sourceInputModel);
             }
             else if (Configuration.AzureArm)
             {

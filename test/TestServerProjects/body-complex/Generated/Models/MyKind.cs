@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace body_complex.Models
 {
     /// <summary> The MyKind. </summary>
-    internal readonly partial struct MyKind : IEquatable<MyKind>
+    public readonly partial struct MyKind : IEquatable<MyKind>
     {
         private readonly string _value;
 

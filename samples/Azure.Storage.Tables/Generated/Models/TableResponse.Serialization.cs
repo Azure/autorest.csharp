@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    internal partial class TableResponse
+    public partial class TableResponse
     {
         internal static TableResponse DeserializeTableResponse(JsonElement element)
         {

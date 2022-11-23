@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    internal partial class TrainingDocumentInfo
+    public partial class TrainingDocumentInfo
     {
         internal static TrainingDocumentInfo DeserializeTrainingDocumentInfo(JsonElement element)
         {

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -18,15 +17,13 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace AutoRest.CSharp.Common.Output.PostProcessing;
 
-internal class PostProcessor
+internal abstract class PostProcessor
 {
-    private readonly string? _modelFactoryFullName;
-    public PostProcessor(string? modelFactoryFullName = null)
+    public PostProcessor()
     {
-        _modelFactoryFullName = modelFactoryFullName;
     }
 
-    protected record TypeSymbols(ImmutableHashSet<INamedTypeSymbol> DeclaredSymbols, INamedTypeSymbol? ModelFactorySymbol, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> DocumentsCache);
+    protected record TypeSymbols(ImmutableHashSet<INamedTypeSymbol> DeclaredSymbols, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> DocumentsCache);
 
     /// <summary>
     /// This method reads the project, returns the types defined in it and build symbol caches to acceralate the calculation
@@ -41,11 +38,6 @@ internal class PostProcessor
         var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
-
-        INamedTypeSymbol? modelFactorySymbol = null;
-        if (_modelFactoryFullName != null)
-            modelFactorySymbol = compilation.GetTypeByMetadataName(_modelFactoryFullName);
-
         foreach (var document in project.Documents)
         {
             if (ShouldIncludeDocument(document))
@@ -63,11 +55,7 @@ internal class PostProcessor
                         continue;
                     if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public)
                         continue;
-
-                    // we do not add the model factory symbol to the declared symbol list so that it will never be included in any process of internalization or removal
-                    if (!SymbolEqualityComparer.Default.Equals(symbol, modelFactorySymbol))
-                        result.Add(symbol);
-
+                    result.Add(symbol);
                     declarationCache.AddInList(symbol, typeDeclaration);
                     documentCache.AddInList(document, symbol, () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default));
                 }
@@ -75,7 +63,6 @@ internal class PostProcessor
         }
 
         return new TypeSymbols(result.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default),
-            modelFactorySymbol,
             declarationCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet(), (IEqualityComparer<INamedTypeSymbol>)SymbolEqualityComparer.Default),
             documentCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
     }
@@ -120,53 +107,7 @@ internal class PostProcessor
             project = MarkInternal(project, model);
         }
 
-        project = await RemoveMethodsFromModelFactoryAsync(project, definitions.ModelFactorySymbol, nodesToInternalize);
-
         return project;
-    }
-
-    private async Task<Project> RemoveMethodsFromModelFactoryAsync(Project project, INamedTypeSymbol? modelFactorySymbol, IEnumerable<BaseTypeDeclarationSyntax> modelsToRemove)
-    {
-        if (modelFactorySymbol == null)
-            return project;
-
-        var namesToRemove = new HashSet<string>(modelsToRemove.Select(item => item.Identifier.Text));
-        var nodesToRemove = new List<SyntaxNode>();
-
-        foreach (var method in modelFactorySymbol.GetMembers().OfType<IMethodSymbol>())
-        {
-            if (namesToRemove.Contains(method.Name))
-            {
-                foreach (var reference in method.DeclaringSyntaxReferences)
-                {
-                    var node = await reference.GetSyntaxAsync();
-                    nodesToRemove.Add(node);
-                }
-            }
-        }
-
-        // find the GENERATED document of model factory (we may have the customized document of this for overloads)
-        Document? modelFactoryGeneratedDocument = null;
-        foreach (var reference in modelFactorySymbol.DeclaringSyntaxReferences)
-        {
-            var node = await reference.GetSyntaxAsync();
-            var document = project.GetDocument(node.SyntaxTree);
-            if (document != null && GeneratedCodeWorkspace.IsGeneratedDocument(document))
-            {
-                modelFactoryGeneratedDocument = document;
-                break;
-            }
-        }
-
-        // maybe this is possible, for instance, we could be adding the customization all entries previously inside the generated model factory so that the generated model factory is empty and removed.
-        if (modelFactoryGeneratedDocument == null)
-            return project;
-
-        var root = await modelFactoryGeneratedDocument.GetSyntaxRootAsync();
-        root = root?.RemoveNodes(nodesToRemove, SyntaxRemoveOptions.KeepNoTrivia);
-        modelFactoryGeneratedDocument = modelFactoryGeneratedDocument.WithSyntaxRoot(root!);
-
-        return modelFactoryGeneratedDocument.Project;
     }
 
     /// <summary>
@@ -189,10 +130,10 @@ internal class PostProcessor
         var definitions = await GetTypeSymbolsAsync(compilation, project, false);
         // build reference map
         var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentsCache);
-        // get root symbols
-        var rootSymbols = GetRootSymbols(project, definitions);
+        // get root nodes
+        var rootNodes = GetRootSymbols(project, definitions);
         // traverse the map to determine the declarations that we are about to remove, starting from root nodes
-        var referencedSymbols = VisitSymbolsFromRootAsync(rootSymbols, referenceMap);
+        var referencedSymbols = VisitSymbolsFromRootAsync(rootNodes, referenceMap);
 
         var symbolsToRemove = definitions.DeclaredSymbols.Except(referencedSymbols);
 
@@ -212,9 +153,9 @@ internal class PostProcessor
     /// <param name="rootSymbols"></param>
     /// <param name="referenceMap"></param>
     /// <returns></returns>
-    private static IEnumerable<INamedTypeSymbol> VisitSymbolsFromRootAsync(IEnumerable<INamedTypeSymbol> rootSymbols, ReferenceMap referenceMap)
+    private static IEnumerable<INamedTypeSymbol> VisitSymbolsFromRootAsync(IEnumerable<INamedTypeSymbol> rootSymbols, IReadOnlyDictionary<INamedTypeSymbol, IEnumerable<INamedTypeSymbol>> referenceMap)
     {
-        var queue = new Queue<INamedTypeSymbol>(rootSymbols.Concat(referenceMap.GlobalReferencedSymbols));
+        var queue = new Queue<INamedTypeSymbol>(rootSymbols);
         var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         while (queue.Count > 0)
         {
@@ -244,12 +185,7 @@ internal class PostProcessor
     {
         var newNode = ChangeModifier(declarationNode, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword);
         var tree = declarationNode.SyntaxTree;
-        var document = project.GetDocument(tree);
-
-        // this may happen if the declaration is an inner class (like a ServiceVersion enumeration class)
-        if (document == null)
-            return project;
-
+        var document = project.GetDocument(tree)!;
         var newRoot = tree.GetRoot().ReplaceNode(declarationNode, newNode).WithAdditionalAnnotations(Simplifier.Annotation);
         document = document.WithSyntaxRoot(newRoot);
         return document.Project;
@@ -279,12 +215,7 @@ internal class PostProcessor
 
     private static BaseTypeDeclarationSyntax ChangeModifier(BaseTypeDeclarationSyntax memberDeclaration, SyntaxKind from, SyntaxKind to)
     {
-        var originalTokenInList = memberDeclaration.Modifiers.FirstOrDefault(token => token.IsKind(from));
-
-        // skip this if there is no thing to replace
-        if (originalTokenInList == default)
-            return memberDeclaration;
-
+        var originalTokenInList = memberDeclaration.Modifiers.First(token => token.IsKind(from));
         var newToken = SyntaxFactory.Token(originalTokenInList.LeadingTrivia, to, originalTokenInList.TrailingTrivia);
         var newModifiers = memberDeclaration.Modifiers.Replace(originalTokenInList, newToken);
         return memberDeclaration.WithModifiers(newModifiers);
@@ -324,18 +255,7 @@ internal class PostProcessor
         return result;
     }
 
-    protected virtual bool IsRootDocument(Document document)
-    {
-        // a document is a root document, when
-        // 1. it is a custom document (not generated or shared)
-        // 2. it is a client
-        return GeneratedCodeWorkspace.IsCustomDocument(document) || IsClientDocument(document);
-    }
-
-    private static bool IsClientDocument(Document document)
-    {
-        return document.Name.EndsWith("Client.cs", StringComparison.Ordinal);
-    }
+    protected abstract bool IsRootDocument(Document document);
 
     protected virtual bool HasDiscriminator(BaseTypeDeclarationSyntax node, [MaybeNullWhen(false)] out HashSet<string> identifiers)
     {

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> An Access policy. </summary>
-    internal partial class AccessPolicy
+    public partial class AccessPolicy
     {
         /// <summary> Initializes a new instance of AccessPolicy. </summary>
         /// <param name="start"> the date-time the policy is active. </param>

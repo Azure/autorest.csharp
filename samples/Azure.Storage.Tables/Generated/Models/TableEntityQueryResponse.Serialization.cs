@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    internal partial class TableEntityQueryResponse
+    public partial class TableEntityQueryResponse
     {
         internal static TableEntityQueryResponse DeserializeTableEntityQueryResponse(JsonElement element)
         {

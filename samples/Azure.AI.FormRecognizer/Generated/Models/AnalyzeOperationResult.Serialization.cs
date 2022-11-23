@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    internal partial class AnalyzeOperationResult
+    public partial class AnalyzeOperationResult
     {
         internal static AnalyzeOperationResult DeserializeAnalyzeOperationResult(JsonElement element)
         {
