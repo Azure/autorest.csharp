@@ -46,6 +46,12 @@ model Thing {
   name: string;
 }
 
+@friendlyName("Friend")
+model NotFriend {
+  @doc("name of the NotFriend")
+  name: string;
+}
+
 model RoundTripModel {
   @doc("Required string, illustrating a reference type property.")
   requiredString: string;
@@ -125,6 +131,12 @@ op patchAction(@body body: Thing): Thing;
 @post
 @convenienceAPI
 op anonymousBody( ...Thing ): Thing;
+
+@route("/friendlyName")
+@doc("Model can have its friendly name")
+@post
+@convenienceAPI
+op friendlyModel(...NotFriend): NotFriend;
 
 namespace EnumTest {
     @get

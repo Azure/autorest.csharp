@@ -49,12 +49,29 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             }
         }
 
+        private readonly Dictionary<string, int> _sampleMethods = new();
+
         private void WriteSample(Sample sample)
         {
+            var signature = sample.GetMethodSignature(false);
+            if (_sampleMethods.TryGetValue(signature.Name, out var count))
+            {
+                _sampleMethods[signature.Name]++;
+                signature = signature with
+                {
+                    Name = $"{signature.Name}{count}", // we never care the name of the method that is enclosing the sample implementation. Our sample fetching pipeline only takes the content.
+                };
+            }
+            else
+            {
+                _sampleMethods.Add(signature.Name, 1);
+            }
+
+            // write the attributes
             _writer.Line($"// {sample.Name}");
             _writer.Line($"[NUnit.Framework.Test]");
             _writer.Line($"[NUnit.Framework.Ignore(\"Only verifying that the sample builds\")]");
-            using (_writer.WriteMethodDeclaration(sample.GetMethodSignature(false)))
+            using (_writer.WriteMethodDeclaration(signature))
             {
                 WriteSampleSteps(sample);
             }
@@ -406,11 +423,29 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
         protected override void WriteCreateResourceIdentifier(OperationExample example, CodeWriterDeclaration idDeclaration, RequestPath requestPath, CSharpType resourceType)
         {
             var parameters = new List<CodeWriterVariableDeclaration>();
-            foreach (var value in example.ComposeResourceIdentifierParameterValues(requestPath))
+            foreach (var value in example.ComposeResourceIdentifierExpressionValues(requestPath))
             {
                 var declaration = new CodeWriterVariableDeclaration(value.Name, value.Type);
-                _writer.AppendDeclaration(declaration)
-                    .AppendRaw(" = ").AppendExampleParameterValue(value).LineRaw(";");
+                if (value.Value is not null)
+                {
+                    _writer.AppendDeclaration(declaration)
+                        .AppendRaw(" = ").AppendExampleParameterValue(value.Value).LineRaw(";");
+                }
+                else
+                {
+                    // first write the variables
+                    foreach (var parameterValue in value.ScopeValues!)
+                    {
+                        var parameterDeclaration = new CodeWriterVariableDeclaration(parameterValue.Name, parameterValue.Type);
+                        _writer.AppendDeclaration(parameterDeclaration)
+                            .AppendRaw(" = ").AppendExampleParameterValue(parameterValue).LineRaw(";");
+                    }
+                    // then write the scope
+                    _writer.AppendDeclaration(declaration).AppendRaw(" = ")
+                        .AppendRaw("$\"")
+                        .AppendRaw(value.Scope!.ToString()!)
+                        .LineRaw("\";");
+                }
 
                 parameters.Add(declaration);
             }
@@ -426,11 +461,29 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
         protected override void WriteCreateScopeResourceIdentifier(OperationExample example, CodeWriterDeclaration idDeclaration, RequestPath requestPath)
         {
             var parameters = new List<CodeWriterVariableDeclaration>();
-            foreach (var value in example.ComposeResourceIdentifierParameterValues(requestPath))
+            foreach (var value in example.ComposeResourceIdentifierExpressionValues(requestPath))
             {
                 var declaration = new CodeWriterVariableDeclaration(value.Name, value.Type);
-                _writer.AppendDeclaration(declaration)
-                    .AppendRaw(" = ").AppendExampleParameterValue(value).LineRaw(";");
+                if (value.Value is not null)
+                {
+                    _writer.AppendDeclaration(declaration)
+                        .AppendRaw(" = ").AppendExampleParameterValue(value.Value).LineRaw(";");
+                }
+                else
+                {
+                    // first write the variables
+                    foreach (var parameterValue in value.ScopeValues!)
+                    {
+                        var parameterDeclaration = new CodeWriterVariableDeclaration(parameterValue.Name, parameterValue.Type);
+                        _writer.AppendDeclaration(parameterDeclaration)
+                            .AppendRaw(" = ").AppendExampleParameterValue(parameterValue).LineRaw(";");
+                    }
+                    // then write the scope
+                    _writer.AppendDeclaration(declaration).AppendRaw(" = ")
+                        .AppendRaw("$\"")
+                        .AppendRaw(value.Scope!.ToString()!)
+                        .LineRaw("\";");
+                }
 
                 parameters.Add(declaration);
             }
