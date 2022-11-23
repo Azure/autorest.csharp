@@ -563,6 +563,36 @@ schemas: !Schemas
               name: dfeKeyValuePairs
               description: Any object
           protocol: !Protocols {}
+        - !Property 
+          schema: *ref_17
+          serializedName: DfeDateTime
+          extensions:
+            x-ms-format: dfe-date-time-rfc1123
+          language: !Languages 
+            default:
+              name: dfeDateTime
+              description: Any object
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_17
+          serializedName: DfeDuration
+          extensions:
+            x-ms-format: dfe-duration
+          language: !Languages 
+            default:
+              name: dfeDuration
+              description: Any object
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_17
+          serializedName: DfeUri
+          extensions:
+            x-ms-format: dfe-uri
+          language: !Languages 
+            default:
+              name: dfeUri
+              description: Any object
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:

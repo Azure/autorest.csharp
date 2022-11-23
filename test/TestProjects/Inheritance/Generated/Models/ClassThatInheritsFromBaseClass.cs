@@ -30,7 +30,10 @@ namespace Inheritance.Models
         /// <param name="dfeListOfT"> Any object. </param>
         /// <param name="dfeListOfString"> Any object. </param>
         /// <param name="dfeKeyValuePairs"> Any object. </param>
-        internal ClassThatInheritsFromBaseClass(string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<BinaryData> dfeObject, DataFactoryExpression<IList<BinaryData>> dfeListOfObject, DataFactoryExpression<IList<SeparateClass>> dfeListOfT, DataFactoryExpression<IList<string>> dfeListOfString, DataFactoryExpression<IDictionary<string, string>> dfeKeyValuePairs) : base(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeObject, dfeListOfObject, dfeListOfT, dfeListOfString, dfeKeyValuePairs)
+        /// <param name="dfeDateTime"> Any object. </param>
+        /// <param name="dfeDuration"> Any object. </param>
+        /// <param name="dfeUri"> Any object. </param>
+        internal ClassThatInheritsFromBaseClass(string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<BinaryData> dfeObject, DataFactoryExpression<IList<BinaryData>> dfeListOfObject, DataFactoryExpression<IList<SeparateClass>> dfeListOfT, DataFactoryExpression<IList<string>> dfeListOfString, DataFactoryExpression<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryExpression<DateTimeOffset> dfeDateTime, DataFactoryExpression<TimeSpan> dfeDuration, DataFactoryExpression<Uri> dfeUri) : base(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeObject, dfeListOfObject, dfeListOfT, dfeListOfString, dfeKeyValuePairs, dfeDateTime, dfeDuration, dfeUri)
         {
         }
     }

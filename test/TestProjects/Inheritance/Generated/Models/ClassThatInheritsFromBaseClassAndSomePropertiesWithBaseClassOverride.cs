@@ -32,7 +32,10 @@ namespace Inheritance.Models
         /// <param name="dfeListOfT"> Any object. </param>
         /// <param name="dfeListOfString"> Any object. </param>
         /// <param name="dfeKeyValuePairs"> Any object. </param>
-        internal ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(string someProperty, string someOtherProperty, string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<BinaryData> dfeObject, DataFactoryExpression<IList<BinaryData>> dfeListOfObject, DataFactoryExpression<IList<SeparateClass>> dfeListOfT, DataFactoryExpression<IList<string>> dfeListOfString, DataFactoryExpression<IDictionary<string, string>> dfeKeyValuePairs) : base(someProperty, someOtherProperty)
+        /// <param name="dfeDateTime"> Any object. </param>
+        /// <param name="dfeDuration"> Any object. </param>
+        /// <param name="dfeUri"> Any object. </param>
+        internal ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(string someProperty, string someOtherProperty, string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<BinaryData> dfeObject, DataFactoryExpression<IList<BinaryData>> dfeListOfObject, DataFactoryExpression<IList<SeparateClass>> dfeListOfT, DataFactoryExpression<IList<string>> dfeListOfString, DataFactoryExpression<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryExpression<DateTimeOffset> dfeDateTime, DataFactoryExpression<TimeSpan> dfeDuration, DataFactoryExpression<Uri> dfeUri) : base(someProperty, someOtherProperty)
         {
             BaseClassProperty = baseClassProperty;
             DfeString = dfeString;
@@ -44,6 +47,9 @@ namespace Inheritance.Models
             DfeListOfT = dfeListOfT;
             DfeListOfString = dfeListOfString;
             DfeKeyValuePairs = dfeKeyValuePairs;
+            DfeDateTime = dfeDateTime;
+            DfeDuration = dfeDuration;
+            DfeUri = dfeUri;
         }
 
         /// <summary> Gets or sets the base class property. </summary>
@@ -66,5 +72,11 @@ namespace Inheritance.Models
         public DataFactoryExpression<IList<string>> DfeListOfString { get; set; }
         /// <summary> Any object. </summary>
         public DataFactoryExpression<IDictionary<string, string>> DfeKeyValuePairs { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<DateTimeOffset> DfeDateTime { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<TimeSpan> DfeDuration { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<Uri> DfeUri { get; set; }
     }
 }

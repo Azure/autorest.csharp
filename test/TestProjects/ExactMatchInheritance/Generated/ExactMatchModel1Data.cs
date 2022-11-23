@@ -45,7 +45,10 @@ namespace ExactMatchInheritance
         /// <param name="type12"> Any object. </param>
         /// <param name="type13"> Any object. </param>
         /// <param name="type14"> Any object. </param>
-        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryExpression<string> type5, DataFactoryExpression<double> type6, DataFactoryExpression<bool> type7, DataFactoryExpression<int> type8, DataFactoryExpression<IList<BinaryData>> type9, DataFactoryExpression<BinaryData> type10, DataFactoryExpression<IList<SeparateClass>> type11, DataFactoryExpression<IList<string>> type12, DataFactoryExpression<IDictionary<string, string>> type13, DataFactoryExpression<IList<SeparateClass>> type14) : base(id, name, resourceType, systemData)
+        /// <param name="type15"> Any object. </param>
+        /// <param name="type16"> Any object. </param>
+        /// <param name="type17"> Any object. </param>
+        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryExpression<string> type5, DataFactoryExpression<double> type6, DataFactoryExpression<bool> type7, DataFactoryExpression<int> type8, DataFactoryExpression<IList<BinaryData>> type9, DataFactoryExpression<BinaryData> type10, DataFactoryExpression<IList<SeparateClass>> type11, DataFactoryExpression<IList<string>> type12, DataFactoryExpression<IDictionary<string, string>> type13, DataFactoryExpression<IList<SeparateClass>> type14, DataFactoryExpression<DateTimeOffset> type15, DataFactoryExpression<TimeSpan> type16, DataFactoryExpression<Uri> type17) : base(id, name, resourceType, systemData)
         {
             New = @new;
             SupportingUris = supportingUris;
@@ -63,6 +66,9 @@ namespace ExactMatchInheritance
             Type12 = type12;
             Type13 = type13;
             Type14 = type14;
+            Type15 = type15;
+            Type16 = type16;
+            Type17 = type17;
         }
 
         /// <summary> Gets or sets the new. </summary>
@@ -97,5 +103,11 @@ namespace ExactMatchInheritance
         public DataFactoryExpression<IDictionary<string, string>> Type13 { get; set; }
         /// <summary> Any object. </summary>
         public DataFactoryExpression<IList<SeparateClass>> Type14 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<DateTimeOffset> Type15 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<TimeSpan> Type16 { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<Uri> Type17 { get; set; }
     }
 }

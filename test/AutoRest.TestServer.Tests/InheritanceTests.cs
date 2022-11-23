@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class InheritanceTests
     {
-        private const int NumberOfPublicPropertiesOnBase = 12;
+        private const int NumberOfPublicPropertiesOnBase = 15;
 
         [Test]
         public void SingularInheritanceUsesBaseClass()
@@ -107,7 +107,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void RedefinedPropertyIgnored()
         {
-            Assert.AreEqual(10, typeof(ClassThatInheritsFromBaseClassAndRedefinesAProperty).GetProperties().Length);
+            Assert.AreEqual(NumberOfPublicPropertiesOnBase - 2, typeof(ClassThatInheritsFromBaseClassAndRedefinesAProperty).GetProperties().Length);
         }
 
         [Test]
@@ -146,6 +146,9 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(typeof(DataFactoryExpression<IList<SeparateClass>>), typeof(BaseClass).GetProperty("DfeListOfT").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<IList<string>>), typeof(BaseClass).GetProperty("DfeListOfString").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<IDictionary<string, string>>), typeof(BaseClass).GetProperty("DfeKeyValuePairs").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<DateTimeOffset>), typeof(BaseClass).GetProperty("DfeDateTime").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<TimeSpan>), typeof(BaseClass).GetProperty("DfeDuration").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<Uri>), typeof(BaseClass).GetProperty("DfeUri").PropertyType);
         }
     }
 }

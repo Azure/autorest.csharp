@@ -560,7 +560,19 @@
                     "type": "object",
                     "x-ms-format": "dfe-listOfT",
                     "x-ms-format-element-type": "SeparateClass"
-                  }
+                },
+                "type15": {
+                    "type": "object",
+                    "x-ms-format": "dfe-date-time-rfc1123"
+                },
+                "type16": {
+                    "type": "object",
+                    "x-ms-format": "dfe-duration"
+                },
+                "type17": {
+                    "type": "object",
+                    "x-ms-format": "dfe-uri"
+                }
             },
             "allOf": [
                 {

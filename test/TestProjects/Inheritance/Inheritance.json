@@ -82,6 +82,18 @@
         "DfeKeyValuePairs": {
           "type": "object",
           "x-ms-format": "dfe-keyValuePair"
+        },
+        "DfeDateTime": {
+          "type": "object",
+          "x-ms-format": "dfe-date-time-rfc1123"
+        },
+        "DfeDuration": {
+            "type": "object",
+            "x-ms-format": "dfe-duration"
+        },
+        "DfeUri": {
+            "type": "object",
+            "x-ms-format": "dfe-uri"
         }
       }
     },

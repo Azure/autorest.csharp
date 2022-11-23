@@ -199,6 +199,9 @@ namespace AutoRest.CSharp.Input
         public const string DataFactoryExpressionOfListOfObject = "dfe-listOfObject";
         public const string DataFactoryExpressionOfListOfString = "dfe-listOfString";
         public const string DataFactoryExpressionOfKeyValuePairs = "dfe-keyValuePair";
+        public const string DataFactoryExpressionOfDateTimeRfc1123 = "dfe-date-time-rfc1123";
+        public const string DataFactoryExpressionOfDuration = "dfe-duration";
+        public const string DataFactoryExpressionOfUri = "dfe-uri";
     }
 
     internal partial class ServiceResponse

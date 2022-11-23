@@ -622,6 +622,36 @@ schemas: !Schemas
                       name: type14
                       description: Any object
                   protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_13
+                  serializedName: type15
+                  extensions:
+                    x-ms-format: dfe-date-time-rfc1123
+                  language: !Languages 
+                    default:
+                      name: type15
+                      description: Any object
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_13
+                  serializedName: type16
+                  extensions:
+                    x-ms-format: dfe-duration
+                  language: !Languages 
+                    default:
+                      name: type16
+                      description: Any object
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_13
+                  serializedName: type17
+                  extensions:
+                    x-ms-format: dfe-uri
+                  language: !Languages 
+                    default:
+                      name: type17
+                      description: Any object
+                  protocol: !Protocols {}
               serializationFormats:
                 - json
               usage:
