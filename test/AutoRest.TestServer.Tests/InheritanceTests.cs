@@ -13,6 +13,8 @@ namespace AutoRest.TestServer.Tests
 {
     public class InheritanceTests
     {
+        private const int NumberOfPublicPropertiesOnBase = 12;
+
         [Test]
         public void SingularInheritanceUsesBaseClass()
         {
@@ -31,7 +33,7 @@ namespace AutoRest.TestServer.Tests
             var type = typeof(ClassThatInheritsFromBaseClassAndSomeProperties);
             Assert.AreEqual(typeof(BaseClass), type.BaseType);
             // public
-            Assert.AreEqual(3, type.GetProperties().Length);
+            Assert.AreEqual(NumberOfPublicPropertiesOnBase, type.GetProperties().Length);
 
             var inheritedProperty = TypeAsserts.HasProperty(type, "BaseClassProperty", BindingFlags.Instance | BindingFlags.Public);
             Assert.AreEqual(typeof(BaseClass), inheritedProperty.DeclaringType);
@@ -49,7 +51,7 @@ namespace AutoRest.TestServer.Tests
             var type = typeof(ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride);
             Assert.AreEqual(typeof(SomeProperties), type.BaseType);
             // public
-            Assert.AreEqual(3, type.GetProperties().Length);
+            Assert.AreEqual(NumberOfPublicPropertiesOnBase, type.GetProperties().Length);
 
             var inlinedProperty = TypeAsserts.HasProperty(type, "BaseClassProperty", BindingFlags.Instance | BindingFlags.Public);
             Assert.AreEqual(type, inlinedProperty.DeclaringType);
@@ -67,7 +69,7 @@ namespace AutoRest.TestServer.Tests
             var type = typeof(ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties);
             Assert.AreEqual(typeof(BaseClassWithDiscriminator), type.BaseType);
             // public
-            Assert.AreEqual(3, type.GetProperties().Length);
+            Assert.AreEqual(NumberOfPublicPropertiesOnBase, type.GetProperties().Length);
             TypeAsserts.HasProperty(type, "DiscriminatorProperty", BindingFlags.Instance | BindingFlags.NonPublic);
             TypeAsserts.HasProperty(type, "BaseClassProperty", BindingFlags.Instance | BindingFlags.Public);
             TypeAsserts.HasProperty(type, "SomeProperty", BindingFlags.Instance | BindingFlags.Public);
@@ -105,14 +107,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void RedefinedPropertyIgnored()
         {
-            Assert.AreEqual(1, typeof(ClassThatInheritsFromBaseClassAndRedefinesAProperty).GetProperties().Length);
+            Assert.AreEqual(10, typeof(ClassThatInheritsFromBaseClassAndRedefinesAProperty).GetProperties().Length);
         }
 
         [Test]
         public void RedefinedPropertyFromComposedBaseClassIgnored()
         {
             // We expect BaseClassProperty on ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty to be ignored
-            Assert.AreEqual(3, typeof(ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty).GetProperties().Length);
+            Assert.AreEqual(NumberOfPublicPropertiesOnBase, typeof(ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty).GetProperties().Length);
         }
 
         [Test]
