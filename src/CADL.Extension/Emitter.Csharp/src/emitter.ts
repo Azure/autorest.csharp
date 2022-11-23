@@ -97,7 +97,7 @@ export interface NetEmitterOptions {
     "single-top-level-client"?: boolean;
     skipSDKGeneration: boolean;
     generateConvenienceAPI: boolean; //workaround for cadl-ranch project
-    "remove-unreferenced-types"?: "removeOrInternalize" | "internalize" | "keepAll";
+    "unreferenced-types-handling"?: "removeOrInternalize" | "internalize" | "keepAll";
     "new-project": boolean;
     csharpGeneratorPath: string;
     "clear-output-folder"?: boolean;
@@ -128,7 +128,7 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", default: false },
         generateConvenienceAPI: { type: "boolean", nullable: true },
-        "remove-unreferenced-types": { type: "string", enum: ["removeOrInternalize", "internalize", "keepAll"], nullable: true },
+        "unreferenced-types-handling": { type: "string", enum: ["removeOrInternalize", "internalize", "keepAll"], nullable: true },
         "new-project": { type: "boolean", nullable: true },
         csharpGeneratorPath: { type: "string", nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
@@ -165,7 +165,7 @@ export async function $onEmit(
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
-        "remove-unreferenced-types": resolvedOptions["remove-unreferenced-types"],
+        "unreferenced-types-handling": resolvedOptions["unreferenced-types-handling"],
         "new-project": resolvedOptions["new-project"],
         csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
         "clear-output-folder": resolvedOptions["clear-output-folder"],
@@ -225,7 +225,7 @@ export async function $onEmit(
                 LibraryName: resolvedOptions["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
                 SingleTopLevelClient: resolvedOptions["single-top-level-client"],
-                "remove-unreferenced-types": options["remove-unreferenced-types"],
+                "unreferenced-types-handling": options["unreferenced-types-handling"],
                 "model-namespace": resolvedOptions["model-namespace"]
             } as Configuration;
 

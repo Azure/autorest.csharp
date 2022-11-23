@@ -231,7 +231,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task PostProcessAsync(PostProcessor? postProcessor = null)
         {
             postProcessor ??= new PostProcessor();
-            switch (Configuration.RemoveUnreferencedTypes)
+            switch (Configuration.UnreferencedTypesHandling)
             {
                 case Configuration.UnreferencedTypesHandlingOption.KeepAll:
                     break;
