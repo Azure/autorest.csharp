@@ -77,6 +77,16 @@ model LedgerEntry {
   transactionId: string;
 }
 
+@doc("List {name} resources", TResource)
+op CustomResourceList<
+  TResource extends object,
+  TCustom extends Foundations.CustomizationFields = {}
+> is Foundations.ResourceList<
+  TResource,
+  Foundations.CustomParameters<TCustom>,
+  Page<TResource>
+>;
+
 // // TODO: No way to set "x-ms-enum.name" right now
 // @doc("Represents an assignable role.")
 // @knownValues(LedgerUserRoleKV)
@@ -148,5 +158,11 @@ namespace Pagination {
   @doc("A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.")
   @convenienceAPI
   op ListLedgerEntries is Azure.Core.ResourceList<LedgerEntry>;
-  
 }
+
+@route("/adp")
+interface UseFoundationsResourceList {
+  @doc("List upload detail for the discovery resource.")
+  @convenienceAPI
+  list is CustomResourceList<LedgerEntry>;  
+}  
