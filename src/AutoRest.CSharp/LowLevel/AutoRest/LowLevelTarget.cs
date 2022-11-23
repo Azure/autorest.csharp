@@ -6,7 +6,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.LowLevel.AutoRest.PostProcessing;
 using AutoRest.CSharp.Output.Models;
 using Microsoft.CodeAnalysis;
 
@@ -45,26 +44,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ClientOptionsWriter.WriteClientOptions(optionsWriter, library.ClientOptions);
             project.AddGeneratedFile($"{library.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
 
-            await project.PostProcess(PostProcess);
-        }
-
-        private static async Task<Project> PostProcess(Project project)
-        {
-            var postProcessor = new DpgPostProcessor();
-            switch (Configuration.RemoveUnreferencedTypes)
-            {
-                case Configuration.UnreferencedTypesHandlingOption.KeepAll:
-                    break;
-                case Configuration.UnreferencedTypesHandlingOption.Internalize:
-                    project = await postProcessor.InternalizeAsync(project);
-                    break;
-                case Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize:
-                    project = await postProcessor.InternalizeAsync(project);
-                    project = await postProcessor.RemoveAsync(project);
-                    break;
-            }
-
-            return project;
+            await project.PostProcessAsync();
         }
     }
 }

@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
-        private static void WriteIfEnumNotDefault<T>(Utf8JsonWriter writer, string option, T enumValue) where T : struct, Enum
+        private static void WriteIfNotDefault<T>(Utf8JsonWriter writer, string option, T enumValue) where T : struct, Enum
         {
             var defaultValue = Configuration.GetDefaultEnumOptionValue(option);
             if (!enumValue.Equals(defaultValue))
@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
-        private static void WriteIfBoolNotDefault(Utf8JsonWriter writer, string option, bool value)
+        private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, bool value)
         {
             var defaultValue = Configuration.GetDefaultBoolOptionValue(option);
             if (!defaultValue.HasValue || defaultValue.Value != value)
@@ -138,14 +138,14 @@ namespace AutoRest.CSharp.AutoRest.Communication
                         writer.WriteStringValue(NormalizePath(sharedSourceFolder));
                     }
                     writer.WriteEndArray();
-                    WriteIfBoolNotDefault(writer, Configuration.Options.AzureArm, Configuration.AzureArm);
-                    WriteIfBoolNotDefault(writer, Configuration.Options.PublicClients, Configuration.PublicClients);
-                    WriteIfBoolNotDefault(writer, Configuration.Options.ModelNamespace, Configuration.ModelNamespace);
-                    WriteIfBoolNotDefault(writer, Configuration.Options.HeadAsBoolean, Configuration.HeadAsBoolean);
-                    WriteIfBoolNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
-                    WriteIfBoolNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
-                    WriteIfBoolNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
-                    WriteIfEnumNotDefault(writer, Configuration.Options.RemoveUnreferencedTypes, Configuration.RemoveUnreferencedTypes);
+                    WriteIfNotDefault(writer, Configuration.Options.AzureArm, Configuration.AzureArm);
+                    WriteIfNotDefault(writer, Configuration.Options.PublicClients, Configuration.PublicClients);
+                    WriteIfNotDefault(writer, Configuration.Options.ModelNamespace, Configuration.ModelNamespace);
+                    WriteIfNotDefault(writer, Configuration.Options.HeadAsBoolean, Configuration.HeadAsBoolean);
+                    WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
+                    WriteIfNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
+                    WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
+                    WriteIfNotDefault(writer, Configuration.Options.RemoveUnreferencedTypes, Configuration.RemoveUnreferencedTypes);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), Configuration.ProtocolMethodList);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);

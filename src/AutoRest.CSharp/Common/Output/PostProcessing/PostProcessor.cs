@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -17,7 +18,7 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace AutoRest.CSharp.Common.Output.PostProcessing;
 
-internal abstract class PostProcessor
+internal class PostProcessor
 {
     public PostProcessor()
     {
@@ -130,10 +131,10 @@ internal abstract class PostProcessor
         var definitions = await GetTypeSymbolsAsync(compilation, project, false);
         // build reference map
         var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentsCache);
-        // get root nodes
-        var rootNodes = GetRootSymbols(project, definitions);
+        // get root symbols
+        var rootSymbols = GetRootSymbols(project, definitions);
         // traverse the map to determine the declarations that we are about to remove, starting from root nodes
-        var referencedSymbols = VisitSymbolsFromRootAsync(rootNodes, referenceMap);
+        var referencedSymbols = VisitSymbolsFromRootAsync(rootSymbols, referenceMap);
 
         var symbolsToRemove = definitions.DeclaredSymbols.Except(referencedSymbols);
 
@@ -215,7 +216,12 @@ internal abstract class PostProcessor
 
     private static BaseTypeDeclarationSyntax ChangeModifier(BaseTypeDeclarationSyntax memberDeclaration, SyntaxKind from, SyntaxKind to)
     {
-        var originalTokenInList = memberDeclaration.Modifiers.First(token => token.IsKind(from));
+        var originalTokenInList = memberDeclaration.Modifiers.FirstOrDefault(token => token.IsKind(from));
+
+        // skip this if there is nothing to replace
+        if (originalTokenInList == default)
+            return memberDeclaration;
+
         var newToken = SyntaxFactory.Token(originalTokenInList.LeadingTrivia, to, originalTokenInList.TrailingTrivia);
         var newModifiers = memberDeclaration.Modifiers.Replace(originalTokenInList, newToken);
         return memberDeclaration.WithModifiers(newModifiers);
@@ -255,7 +261,18 @@ internal abstract class PostProcessor
         return result;
     }
 
-    protected abstract bool IsRootDocument(Document document);
+    protected virtual bool IsRootDocument(Document document)
+    {
+        // a document is a root document, when
+        // 1. it is a custom document (not generated or shared)
+        // 2. it is a client
+        return GeneratedCodeWorkspace.IsCustomDocument(document) || IsClientDocument(document);
+    }
+
+    private static bool IsClientDocument(Document document)
+    {
+        return document.Name.EndsWith("Client.cs", StringComparison.Ordinal);
+    }
 
     protected virtual bool HasDiscriminator(BaseTypeDeclarationSyntax node, [MaybeNullWhen(false)] out HashSet<string> identifiers)
     {
