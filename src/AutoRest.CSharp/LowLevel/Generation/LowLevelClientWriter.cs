@@ -69,6 +69,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields();
                     WriteConstructors();
 
+                    foreach (var pagingMethod in client.PagingMethods)
+                    {
+                        DataPlaneClientWriter.WritePagingOperation(writer, pagingMethod, true, client.Fields.ClientDiagnosticsProperty.Name, false);
+                        DataPlaneClientWriter.WritePagingOperation(writer, pagingMethod, false, client.Fields.ClientDiagnosticsProperty.Name, false);
+
+                        RestClientWriter.WriteOperation(writer, pagingMethod.Method, client.Fields.PipelineField.Name, true, WriteFuncBodyWithProcessMessage, $"{pagingMethod.Method.Name}FirstPage", MethodSignatureModifiers.Private);
+                        RestClientWriter.WriteOperation(writer, pagingMethod.Method, client.Fields.PipelineField.Name, false, WriteFuncBodyWithProcessMessage, $"{pagingMethod.Method.Name}FirstPage", MethodSignatureModifiers.Private);
+                        if (pagingMethod.NextPageMethod != null)
+                        {
+                            RestClientWriter.WriteOperation(writer, pagingMethod.NextPageMethod, client.Fields.PipelineField.Name, true, WriteFuncBodyWithProcessMessage, null, MethodSignatureModifiers.Private);
+                            RestClientWriter.WriteOperation(writer, pagingMethod.NextPageMethod, client.Fields.PipelineField.Name, false, WriteFuncBodyWithProcessMessage, null, MethodSignatureModifiers.Private);
+                        }
+                    }
+
                     foreach (var clientMethod in client.ClientMethods)
                     {
                         var longRunning = clientMethod.LongRunning;
@@ -109,6 +123,22 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
+        }
+
+        private void WriteFuncBodyWithProcessMessage(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, string pipelineName, bool async)
+        {
+            var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
+            writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
+
+            var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
+            var responseVariable = new CodeWriterDeclaration("response");
+
+            writer
+                .Line($"using var {messageVariable:D} = {requestMethodName}({operation.Parameters.GetIdentifiersFormattable()});")
+                .Append($"{typeof(Response)} {responseVariable:D} = ")
+                .WriteMethodCall(async, $"{pipelineName}.ProcessMessageAsync", $"{pipelineName}.ProcessMessage", $"{messageVariable}, {KnownParameters.RequestContext.Name}");
+
+            writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({operation.ReturnType}.FromResponse({responseVariable:I}), {responseVariable:I});");
         }
 
         private void WriteDPGIdentificationComment()
@@ -199,7 +229,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var field = client.Fields.GetFieldByParameter(parameter);
                     if (field != null)
                     {
-                        if (parameter.IsApiVersionParameter)
+                        if (parameter.IsApiVersionParameter && parameter.RequestLocation == RequestLocation.Query)
                         {
                             writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.Version;");
                         }

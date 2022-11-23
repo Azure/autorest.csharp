@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace CadlFirstTest
 {
-    /// <summary> Client options for CadlFirstTest library clients. </summary>
+    /// <summary> Client options for CadlFirstTestClient. </summary>
     public partial class CadlFirstTestClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;

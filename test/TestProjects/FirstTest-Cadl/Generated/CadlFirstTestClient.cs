@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using CadlFirstTest.Models;
 
 namespace CadlFirstTest
 {
@@ -355,6 +356,340 @@ namespace CadlFirstTest
             }
         }
 
+        /// <summary> Return hi. </summary>
+        /// <param name="headParameter"> The String to use. </param>
+        /// <param name="queryParameter"> The String to use. </param>
+        /// <param name="optionalQuery"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='SayHiAsync(String,String,String,RequestContext)']/*" />
+        public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
+        {
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.SayHi");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi. </summary>
+        /// <param name="headParameter"> The String to use. </param>
+        /// <param name="queryParameter"> The String to use. </param>
+        /// <param name="optionalQuery"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='SayHi(String,String,String,RequestContext)']/*" />
+        public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
+        {
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.SayHi");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The String to use. </param>
+        /// <param name="p1"> The String to use. </param>
+        /// <param name="action"> The RoundTripModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<Response<Thing>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await HelloAgainAsync(p2, p1, action.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The String to use. </param>
+        /// <param name="p1"> The String to use. </param>
+        /// <param name="action"> The RoundTripModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Response<Thing> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = HelloAgain(p2, p1, action.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The String to use. </param>
+        /// <param name="p1"> The String to use. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(String,String,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> HelloAgainAsync(string p2, string p1, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloAgain");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHelloAgainRequest(p2, p1, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The String to use. </param>
+        /// <param name="p1"> The String to use. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(String,String,RequestContent,RequestContext)']/*" />
+        public virtual Response HelloAgain(string p2, string p1, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloAgain");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHelloAgainRequest(p2, p1, content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The String to use. </param>
+        /// <param name="p1"> The String to use. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='NoContentTypeAsync(String,String,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> NoContentTypeAsync(string p2, string p1, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.NoContentType");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The String to use. </param>
+        /// <param name="p1"> The String to use. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='NoContentType(String,String,RequestContent,RequestContext)']/*" />
+        public virtual Response NoContentType(string p2, string p1, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.NoContentType");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNoContentTypeRequest(p2, p1, content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi in demo2. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Thing>> HelloDemo2ValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2Value");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await HelloDemo2Async(context).ConfigureAwait(false);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi in demo2. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Thing> HelloDemo2Value(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2Value");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = HelloDemo2(context);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi in demo2. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
+        public virtual async Task<Response> HelloDemo2Async(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHelloDemo2Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return hi in demo2. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
+        public virtual Response HelloDemo2(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHelloDemo2Request(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> get extensible enum. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.GetUnknownValue");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetUnknownValueRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> get extensible enum. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
+        public virtual Response GetUnknownValue(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.GetUnknownValue");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetUnknownValueRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateTopActionRequest(string action, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -413,6 +748,90 @@ namespace CadlFirstTest
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/hello", false);
+            uri.AppendQuery("queryParameter", queryParameter, true);
+            if (optionalQuery != null)
+            {
+                uri.AppendQuery("optionalQuery", optionalQuery, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("head-parameter", headParameter);
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateHelloAgainRequest(string p2, string p1, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/againHi/", false);
+            uri.AppendPath(p2, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("p1", p1);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("content-type", "text/plain");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateNoContentTypeRequest(string p2, string p1, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/noContentType/", false);
+            uri.AppendPath(p2, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("p1", p1);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateHelloDemo2Request(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/demoHi", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetUnknownValueRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/unknown-value", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

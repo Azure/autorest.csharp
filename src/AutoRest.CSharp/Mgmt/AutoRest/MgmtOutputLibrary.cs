@@ -770,8 +770,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, MgmtContext.Context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, MgmtContext.Context),
             ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
-            ? new MgmtReferenceType(objectSchema)
-            : new MgmtObjectType(objectSchema),
+                ? new MgmtReferenceType(objectSchema)
+                : new MgmtObjectType(objectSchema),
             _ => throw new NotImplementedException($"Unhandled schema type {schema.GetType()} with name {schema.Name}")
         };
 

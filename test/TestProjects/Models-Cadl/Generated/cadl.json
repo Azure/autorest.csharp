@@ -1442,7 +1442,7 @@
  "Clients": [
   {
    "$id": "181",
-   "Name": "ModelsInCadl",
+   "Name": "ModelsInCadlClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
@@ -2053,7 +2053,8 @@
    ],
    "Protocol": {
     "$id": "236"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

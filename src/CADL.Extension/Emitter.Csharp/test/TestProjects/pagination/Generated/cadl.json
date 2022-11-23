@@ -106,7 +106,8 @@
  "Clients": [
   {
    "$id": "14",
-   "Name": "Pagination",
+   "Name": "PaginationClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "15",
@@ -136,16 +137,24 @@
       },
       {
        "$id": "18",
-       "Name": "api-version",
+       "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Description": "",
        "Type": {
         "$id": "19",
-        "Name": "string",
+        "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
        "DefaultValue": {
         "$id": "20",
         "Type": {
@@ -155,15 +164,7 @@
          "IsNullable": false
         },
         "Value": "2022-05-13"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       }
       },
       {
        "$id": "22",
@@ -222,7 +223,8 @@
    ],
    "Protocol": {
     "$id": "27"
-   }
+   },
+   "Creatable": true
   }
  ],
  "Auth": {
