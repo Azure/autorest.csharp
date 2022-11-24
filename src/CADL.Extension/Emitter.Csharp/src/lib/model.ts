@@ -567,14 +567,14 @@ export function getUsages(
         if ("name" in type) typeName = type.name ?? "";
         if (type.kind === "Model") {
             const effectiveType = getEffectiveModelType(program, type);
-            typeName = effectiveType.name;
+            typeName = getFriendlyName(program, effectiveType) ?? effectiveType.name;
         }
         const affectTypes: string[] = [];
         if (typeName !== "") affectTypes.push(typeName);
         if (type.kind === "Model" && type.templateArguments) {
             for (const arg of type.templateArguments) {
                 if (arg.kind === "Model" && "name" in arg && arg.name !== "") {
-                    affectTypes.push(arg.name);
+                    affectTypes.push(getFriendlyName(program, arg) ?? arg.name);
                 }
             }
         }

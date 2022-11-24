@@ -3,7 +3,7 @@
 
 using Azure.Core;
 
-namespace CustomizationsInCadlOther
+namespace CustomizationsInCadl.Models
 {
     [CodeGenModel("ModelToChangeNamespace")]
     public partial class ModelToChangeNamespace { }

@@ -6,7 +6,7 @@
 This sample shows how to call GetBatchDetectionResultAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ApiVersionInCadlClient(endpoint);
+var client = new ApiVersionInCadlClient(endpoint, "<apiVersion>");
 
 Response response = await client.GetBatchDetectionResultAsync("<resultId>");
 
@@ -35,7 +35,7 @@ Schema for <c>DetectionResult</c>:
 This sample shows how to call GetBatchDetectionResult with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ApiVersionInCadlClient(endpoint);
+var client = new ApiVersionInCadlClient(endpoint, "<apiVersion>");
 
 Response response = client.GetBatchDetectionResult("<resultId>");
 

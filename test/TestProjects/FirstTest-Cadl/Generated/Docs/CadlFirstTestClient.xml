@@ -257,6 +257,82 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
+    <member name="FriendlyModelAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call FriendlyModelAsync with required request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.FriendlyModelAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Friend</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Friend</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="FriendlyModel(RequestContent,RequestContext)">
+<example>
+This sample shows how to call FriendlyModel with required request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.FriendlyModel(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Friend</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Friend</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
     <member name="SayHiAsync(String,String,String,RequestContext)">
 <example>
 This sample shows how to call SayHiAsync with required parameters and parse the result.

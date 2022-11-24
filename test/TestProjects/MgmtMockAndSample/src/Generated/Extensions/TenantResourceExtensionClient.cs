@@ -21,6 +21,8 @@ namespace MgmtMockAndSample
     {
         private ClientDiagnostics _tenantActivityLogsClientDiagnostics;
         private TenantActivityLogsRestOperations _tenantActivityLogsRestClient;
+        private ClientDiagnostics _deploymentsClientDiagnostics;
+        private DeploymentsRestOperations _deploymentsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="TenantResourceExtensionClient"/> class for mocking. </summary>
         protected TenantResourceExtensionClient()
@@ -36,6 +38,8 @@ namespace MgmtMockAndSample
 
         private ClientDiagnostics TenantActivityLogsClientDiagnostics => _tenantActivityLogsClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private TenantActivityLogsRestOperations TenantActivityLogsRestClient => _tenantActivityLogsRestClient ??= new TenantActivityLogsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics DeploymentsClientDiagnostics => _deploymentsClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private DeploymentsRestOperations DeploymentsRestClient => _deploymentsRestClient ??= new DeploymentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -129,6 +133,52 @@ namespace MgmtMockAndSample
                 }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary>
+        /// Calculate the hash of the given template.
+        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
+        /// Operation Id: Deployments_CalculateTemplateHash
+        /// </summary>
+        /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(BinaryData template, CancellationToken cancellationToken = default)
+        {
+            using var scope = DeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
+            scope.Start();
+            try
+            {
+                var response = await DeploymentsRestClient.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Calculate the hash of the given template.
+        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
+        /// Operation Id: Deployments_CalculateTemplateHash
+        /// </summary>
+        /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(BinaryData template, CancellationToken cancellationToken = default)
+        {
+            using var scope = DeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
+            scope.Start();
+            try
+            {
+                var response = DeploymentsRestClient.CalculateTemplateHash(template, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

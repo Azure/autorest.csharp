@@ -23,12 +23,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var codeWriter = new CodeWriter();
                 var modelWriter = new ModelWriter();
                 modelWriter.WriteModel(codeWriter, model);
-                project.AddGeneratedFile($"{model.Type.Name}.cs", codeWriter.ToString());
+                var folderPath = Configuration.ModelNamespace ? "Models/" : "";
+                project.AddGeneratedFile($"{folderPath}{model.Type.Name}.cs", codeWriter.ToString());
 
                 var serializationCodeWriter = new CodeWriter();
                 var serializationWriter = new SerializationWriter();
                 serializationWriter.WriteSerialization(serializationCodeWriter, model);
-                project.AddGeneratedFile($"{model.Type.Name}.Serialization.cs", serializationCodeWriter.ToString());
+                project.AddGeneratedFile($"{folderPath}{model.Type.Name}.Serialization.cs", serializationCodeWriter.ToString());
             }
 
             foreach (var client in library.RestClients)
@@ -45,26 +46,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ClientOptionsWriter.WriteClientOptions(optionsWriter, library.ClientOptions);
             project.AddGeneratedFile($"{library.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
 
-            await project.PostProcess(PostProcess);
-        }
-
-        private static async Task<Project> PostProcess(Project project)
-        {
-            var postProcessor = new DpgPostProcessor();
-            switch (Configuration.RemoveUnusedTypes)
-            {
-                case Configuration.UnusedTypeRemovalLevel.KeepAll:
-                    break;
-                case Configuration.UnusedTypeRemovalLevel.Internalize:
-                    project = await postProcessor.InternalizeAsync(project);
-                    break;
-                case Configuration.UnusedTypeRemovalLevel.RemoveAll:
-                    project = await postProcessor.InternalizeAsync(project);
-                    project = await postProcessor.RemoveAsync(project);
-                    break;
-            }
-
-            return project;
+            await project.PostProcessAsync();
         }
     }
 }

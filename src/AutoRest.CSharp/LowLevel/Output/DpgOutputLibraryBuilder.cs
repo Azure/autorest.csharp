@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (inputEnum.Usage != InputModelTypeUsage.None)
                 {
-                    dictionary.Add(inputEnum, new EnumType(inputEnum, _defaultNamespace, "public", typeFactory, _sourceInputModel));
+                    dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null,_defaultNamespace), "public", typeFactory, _sourceInputModel));
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
                     derivedTypesLookup.TryGetValue(model, out var children);
                     InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
                     ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
-                    models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
+                    models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Output.Models
                         "Unknown", //TODO: do we need to support extensible enum / int values?
                         null,
                         true);
-                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, _defaultNamespace, _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
+                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
                     defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
                     models.Add(unknownDerviedType, defaultDerivedType);
                 }

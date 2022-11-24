@@ -188,11 +188,11 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 return writer.AppendListValue(typeof(object), exampleValue);
             }
             // fallback to complex object
-            using (writer.Scope($"new "))
+            using (writer.Scope($"new {typeof(Dictionary<string, object>)}()"))
             {
                 foreach ((var key, var value) in exampleValue.Properties)
                 {
-                    writer.Append($"{key} = ");
+                    writer.Append($"[{key:L}] = ");
                     writer.AppendAnonymousObject(value);
                 }
             }
@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendRawList(this CodeWriter writer, List<object?> list)
         {
-            writer.AppendRaw("new[] { ");
+            writer.Append($"new {typeof(object)}[] {{ ");
             foreach (var item in list)
             {
                 writer.AppendRawValue(item, item?.GetType() ?? typeof(object));
@@ -215,11 +215,11 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendRawDictionary(this CodeWriter writer, Dictionary<object, object?> dict)
         {
-            using (writer.Scope($"new ", newLine: false))
+            using (writer.Scope($"new {typeof(Dictionary<string, object>)}()", newLine: false))
             {
                 foreach ((var key, var value) in dict)
                 {
-                    writer.Append($"{key.ToString()} = ");
+                    writer.Append($"[{key.ToString():L}] = ");
                     writer.AppendRawValue(value, value?.GetType() ?? typeof(object));
                     writer.LineRaw(",");
                 }
