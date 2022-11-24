@@ -12,10 +12,10 @@ namespace Inheritance.Models
     /// Please note <see cref="BaseClassWithExtensibleEnumDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="DerivedClassWithExtensibleEnumDiscriminator"/> and <see cref="AnotherDerivedClassWithExtensibleEnumDiscriminator"/>.
     /// </summary>
-    internal partial class BaseClassWithExtensibleEnumDiscriminator
+    internal abstract partial class BaseClassWithExtensibleEnumDiscriminator
     {
         /// <summary> Initializes a new instance of BaseClassWithExtensibleEnumDiscriminator. </summary>
-        internal BaseClassWithExtensibleEnumDiscriminator()
+        protected BaseClassWithExtensibleEnumDiscriminator()
         {
         }
 

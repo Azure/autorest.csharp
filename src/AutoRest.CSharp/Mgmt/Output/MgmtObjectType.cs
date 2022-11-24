@@ -39,8 +39,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        protected override bool IsAbstract => base.IsAbstract || !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
-
         private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
             var name = objectSchema.CSharpName();
