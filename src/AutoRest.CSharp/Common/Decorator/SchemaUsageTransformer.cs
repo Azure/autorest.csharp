@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
 
-namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
+namespace AutoRest.CSharp.Common.Decorator
 {
     /// <summary>
     /// This class is used to transform usages for definitions listed in the "x-ms-format-element-type" property attribute.
