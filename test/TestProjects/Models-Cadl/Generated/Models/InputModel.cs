@@ -13,7 +13,7 @@ using Azure.Core;
 namespace ModelsInCadl.Models
 {
     /// <summary> Model used only as input. </summary>
-    public partial class InputModel : BaseModel
+    public partial class InputModel
     {
         /// <summary> Initializes a new instance of InputModel. </summary>
         /// <param name="requiredString"></param>
@@ -42,31 +42,12 @@ namespace ModelsInCadl.Models
             RequiredModelRecord = requiredModelRecord;
         }
 
-        /// <summary> Initializes a new instance of InputModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredModel"></param>
-        /// <param name="requiredIntCollection"></param>
-        /// <param name="requiredStringCollection"></param>
-        /// <param name="requiredModelCollection"></param>
-        /// <param name="requiredModelRecord"></param>
-        internal InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IList<int> requiredIntCollection, IList<string> requiredStringCollection, IList<CollectionItem> requiredModelCollection, IDictionary<string, RecordItem> requiredModelRecord)
-        {
-            RequiredString = requiredString;
-            RequiredInt = requiredInt;
-            RequiredModel = requiredModel;
-            RequiredIntCollection = requiredIntCollection.ToList();
-            RequiredStringCollection = requiredStringCollection.ToList();
-            RequiredModelCollection = requiredModelCollection.ToList();
-            RequiredModelRecord = requiredModelRecord;
-        }
-
-        /// <summary> Gets or sets the required string. </summary>
-        public string RequiredString { get; set; }
-        /// <summary> Gets or sets the required int. </summary>
-        public int RequiredInt { get; set; }
-        /// <summary> Gets or sets the required model. </summary>
-        public BaseModel RequiredModel { get; set; }
+        /// <summary> Gets the required string. </summary>
+        public string RequiredString { get; }
+        /// <summary> Gets the required int. </summary>
+        public int RequiredInt { get; }
+        /// <summary> Gets the required model. </summary>
+        public BaseModel RequiredModel { get; }
         /// <summary> Gets the required int collection. </summary>
         public IList<int> RequiredIntCollection { get; }
         /// <summary> Gets the required string collection. </summary>

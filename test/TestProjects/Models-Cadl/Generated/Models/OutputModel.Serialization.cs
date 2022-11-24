@@ -12,42 +12,15 @@ using Azure.Core;
 
 namespace ModelsInCadl.Models
 {
-    public partial class OutputModel : IUtf8JsonSerializable
+    public partial class OutputModel
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("requiredString");
-            writer.WriteStringValue(RequiredString);
-            writer.WritePropertyName("requiredInt");
-            writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("requiredModel");
-            writer.WriteObjectValue(RequiredModel);
-            writer.WritePropertyName("requiredCollection");
-            writer.WriteStartArray();
-            foreach (var item in RequiredCollection)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("requiredModelRecord");
-            writer.WriteStartObject();
-            foreach (var item in RequiredModelRecord)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
-            }
-            writer.WriteEndObject();
-            writer.WriteEndObject();
-        }
-
         internal static OutputModel DeserializeOutputModel(JsonElement element)
         {
             string requiredString = default;
             int requiredInt = default;
             DerivedModel requiredModel = default;
-            IList<CollectionItem> requiredCollection = default;
-            IDictionary<string, RecordItem> requiredModelRecord = default;
+            IReadOnlyList<CollectionItem> requiredCollection = default;
+            IReadOnlyDictionary<string, RecordItem> requiredModelRecord = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"))
@@ -91,18 +64,10 @@ namespace ModelsInCadl.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static OutputModel FromResponse(Response response)
+        internal static OutputModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeOutputModel(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }
