@@ -5,9 +5,7 @@
 
 #nullable disable
 
-using System.Collections.Generic;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
 
 namespace ModelsInCadl.Models
@@ -55,86 +53,8 @@ namespace ModelsInCadl.Models
             writer.WriteEndObject();
         }
 
-        internal static InputModel DeserializeInputModel(JsonElement element)
-        {
-            string requiredString = default;
-            int requiredInt = default;
-            BaseModel requiredModel = default;
-            IList<int> requiredIntCollection = default;
-            IList<string> requiredStringCollection = default;
-            IList<CollectionItem> requiredModelCollection = default;
-            IDictionary<string, RecordItem> requiredModelRecord = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("requiredString"))
-                {
-                    requiredString = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("requiredInt"))
-                {
-                    requiredInt = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("requiredModel"))
-                {
-                    requiredModel = DeserializeBaseModel(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("requiredIntCollection"))
-                {
-                    List<int> array = new List<int>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetInt32());
-                    }
-                    requiredIntCollection = array;
-                    continue;
-                }
-                if (property.NameEquals("requiredStringCollection"))
-                {
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetString());
-                    }
-                    requiredStringCollection = array;
-                    continue;
-                }
-                if (property.NameEquals("requiredModelCollection"))
-                {
-                    List<CollectionItem> array = new List<CollectionItem>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
-                    }
-                    requiredModelCollection = array;
-                    continue;
-                }
-                if (property.NameEquals("requiredModelRecord"))
-                {
-                    Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
-                    }
-                    requiredModelRecord = dictionary;
-                    continue;
-                }
-            }
-            return new InputModel(requiredString, requiredInt, requiredModel, requiredIntCollection, requiredStringCollection, requiredModelCollection, requiredModelRecord);
-        }
-
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static InputModel FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInputModel(document.RootElement);
-        }
-
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
