@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.PostProcessing;
+using AutoRest.CSharp.Input;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -218,6 +220,29 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task PostProcess(Func<Project, Task<Project>> processor)
         {
             _project = await processor(_project);
+        }
+
+        /// <summary>
+        /// This method invokes the postProcessor to do some post processing work
+        /// Depending on the configuration, it will either remove + internalize, just internalize or do nothing
+        /// </summary>
+        /// <param name="postProcessor"></param>
+        /// <returns></returns>
+        public async Task PostProcessAsync(PostProcessor? postProcessor = null)
+        {
+            postProcessor ??= new PostProcessor();
+            switch (Configuration.UnreferencedTypesHandling)
+            {
+                case Configuration.UnreferencedTypesHandlingOption.KeepAll:
+                    break;
+                case Configuration.UnreferencedTypesHandlingOption.Internalize:
+                    _project = await postProcessor.InternalizeAsync(_project);
+                    break;
+                case Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize:
+                    _project = await postProcessor.InternalizeAsync(_project);
+                    _project = await postProcessor.RemoveAsync(_project);
+                    break;
+            }
         }
     }
 }

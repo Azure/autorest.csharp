@@ -71,7 +71,9 @@ export function resolveServers(
                     IsNullable: false
                 } as InputPrimitiveType,
                 Location: RequestLocation.Uri,
-                IsApiVersion: false,
+                IsApiVersion:
+                    name.toLowerCase() === "apiversion" ||
+                    name.toLowerCase() === "api-version",
                 IsResourceParameter: false,
                 IsContentType: false,
                 IsRequired: true,

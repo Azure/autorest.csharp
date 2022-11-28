@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.Language.Authoring.Models;
 
 namespace Azure.Language.Authoring
 {
@@ -1090,7 +1091,7 @@ namespace Azure.Language.Authoring
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", "application/merge-patch+json");
+            request.Headers.Add("Content-Type", "application/merge-patch+json");
             request.Content = content;
             return message;
         }

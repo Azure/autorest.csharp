@@ -5,7 +5,7 @@ using System;
 using System.Text.Json;
 using Azure.Core;
 
-namespace CustomizationsInCadl
+namespace CustomizationsInCadl.Models
 {
     public partial class ModelWithCustomizedProperties
     {
