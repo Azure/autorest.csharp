@@ -19,9 +19,11 @@ namespace ApiVersionInCadl
     /// <summary> CADL project to test api versions. </summary>
     public partial class ApiVersionInCadlClient
     {
+        private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
+        private readonly APIVersion? _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -39,10 +41,9 @@ namespace ApiVersionInCadl
         /// Supported Cognitive Services endpoints (protocol and hostname, for example:
         /// https://westus2.api.cognitive.microsoft.com).
         /// </param>
-        /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
-        public ApiVersionInCadlClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new ApiVersionInCadlClientOptions())
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public ApiVersionInCadlClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, APIVersion.V11, new ApiVersionInCadlClientOptions())
         {
         }
 
@@ -51,18 +52,19 @@ namespace ApiVersionInCadl
         /// Supported Cognitive Services endpoints (protocol and hostname, for example:
         /// https://westus2.api.cognitive.microsoft.com).
         /// </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
-        public ApiVersionInCadlClient(Uri endpoint, string apiVersion, ApiVersionInCadlClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public ApiVersionInCadlClient(Uri endpoint, AzureKeyCredential credential, APIVersion? apiVersion, ApiVersionInCadlClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new ApiVersionInCadlClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
             _apiVersion = apiVersion;
         }
@@ -183,7 +185,7 @@ namespace ApiVersionInCadl
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/anomalydetector/", false);
-            uri.AppendRaw(_apiVersion, true);
+            uri.AppendRaw(_apiVersion.Value.ToString(), true);
             uri.AppendPath("/multivariate/detect-batch/", false);
             uri.AppendPath(resultId, true);
             request.Uri = uri;

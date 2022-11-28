@@ -249,6 +249,7 @@ export async function $onEmit(
                     if (error.message) console.log(error.message);
                     if (error.stderr) console.error(error.stderr);
                     if (error.stdout) console.log(error.stdout);
+                    throw `${error.message}\n${error.stderr}`
                 }
             }
 
@@ -361,7 +362,7 @@ function createModel(
     try {
         //create endpoint parameter from servers
         if (servers !== undefined) {
-            const cadlServers = resolveServers(program, servers);
+            const cadlServers = resolveServers(program, servers, modelMap, enumMap);
             if (cadlServers.length > 0) {
                 /* choose the first server as endpoint. */
                 url = cadlServers[0].url;
@@ -523,7 +524,7 @@ function setUsage(
         } else if (usages.roundTrips.includes(name)) {
             m.Usage = Usage.RoundTrip;
         } else {
-            m.Usage = Usage.None;
+            //m.Usage = Usage.None;
         }
     }
 }
