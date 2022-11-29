@@ -123,7 +123,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeString = JsonSerializer.Deserialize<DataFactoryExpression<string>>(property.Value.ToString());
+                    dfeString = JsonSerializer.Deserialize<DataFactoryExpression<string>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeDouble"))
@@ -133,7 +133,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeDouble = JsonSerializer.Deserialize<DataFactoryExpression<double>>(property.Value.ToString());
+                    dfeDouble = JsonSerializer.Deserialize<DataFactoryExpression<double>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeBool"))
@@ -143,7 +143,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeBool = JsonSerializer.Deserialize<DataFactoryExpression<bool>>(property.Value.ToString());
+                    dfeBool = JsonSerializer.Deserialize<DataFactoryExpression<bool>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeInt"))
@@ -153,7 +153,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeInt = JsonSerializer.Deserialize<DataFactoryExpression<int>>(property.Value.ToString());
+                    dfeInt = JsonSerializer.Deserialize<DataFactoryExpression<int>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeObject"))
@@ -163,7 +163,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeObject = JsonSerializer.Deserialize<DataFactoryExpression<BinaryData>>(property.Value.ToString());
+                    dfeObject = JsonSerializer.Deserialize<DataFactoryExpression<BinaryData>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeListOfObject"))
@@ -173,7 +173,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeListOfObject = JsonSerializer.Deserialize<DataFactoryExpression<IList<BinaryData>>>(property.Value.ToString());
+                    dfeListOfObject = JsonSerializer.Deserialize<DataFactoryExpression<IList<BinaryData>>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeListOfT"))
@@ -183,7 +183,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeListOfT = JsonSerializer.Deserialize<DataFactoryExpression<IList<SeparateClass>>>(property.Value.ToString());
+                    dfeListOfT = JsonSerializer.Deserialize<DataFactoryExpression<IList<SeparateClass>>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeListOfString"))
@@ -193,7 +193,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeListOfString = JsonSerializer.Deserialize<DataFactoryExpression<IList<string>>>(property.Value.ToString());
+                    dfeListOfString = JsonSerializer.Deserialize<DataFactoryExpression<IList<string>>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeKeyValuePairs"))
@@ -203,7 +203,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeKeyValuePairs = JsonSerializer.Deserialize<DataFactoryExpression<IDictionary<string, string>>>(property.Value.ToString());
+                    dfeKeyValuePairs = JsonSerializer.Deserialize<DataFactoryExpression<IDictionary<string, string>>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeDateTime"))
@@ -213,7 +213,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeDateTime = JsonSerializer.Deserialize<DataFactoryExpression<DateTimeOffset>>(property.Value.ToString());
+                    dfeDateTime = JsonSerializer.Deserialize<DataFactoryExpression<DateTimeOffset>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeDuration"))
@@ -223,7 +223,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeDuration = JsonSerializer.Deserialize<DataFactoryExpression<TimeSpan>>(property.Value.ToString());
+                    dfeDuration = JsonSerializer.Deserialize<DataFactoryExpression<TimeSpan>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("DfeUri"))
@@ -233,7 +233,7 @@ namespace Inheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    dfeUri = JsonSerializer.Deserialize<DataFactoryExpression<Uri>>(property.Value.ToString());
+                    dfeUri = JsonSerializer.Deserialize<DataFactoryExpression<Uri>>(property.Value.GetRawText());
                     continue;
                 }
             }

@@ -574,7 +574,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (IsCustomJsonConverterAdded(frameworkType))
             {
-                return $"JsonSerializer.Deserialize<{serialization?.Type}>({element}.ToString())";
+                return $"JsonSerializer.Deserialize<{serialization?.Type}>({element}.GetRawText())";
             }
 
             var methodName = string.Empty;

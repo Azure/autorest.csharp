@@ -218,7 +218,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type5 = JsonSerializer.Deserialize<DataFactoryExpression<string>>(property.Value.ToString());
+                    type5 = JsonSerializer.Deserialize<DataFactoryExpression<string>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type6"))
@@ -228,7 +228,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type6 = JsonSerializer.Deserialize<DataFactoryExpression<double>>(property.Value.ToString());
+                    type6 = JsonSerializer.Deserialize<DataFactoryExpression<double>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type7"))
@@ -238,7 +238,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type7 = JsonSerializer.Deserialize<DataFactoryExpression<bool>>(property.Value.ToString());
+                    type7 = JsonSerializer.Deserialize<DataFactoryExpression<bool>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type8"))
@@ -248,7 +248,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type8 = JsonSerializer.Deserialize<DataFactoryExpression<int>>(property.Value.ToString());
+                    type8 = JsonSerializer.Deserialize<DataFactoryExpression<int>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type9"))
@@ -258,7 +258,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type9 = JsonSerializer.Deserialize<DataFactoryExpression<IList<BinaryData>>>(property.Value.ToString());
+                    type9 = JsonSerializer.Deserialize<DataFactoryExpression<IList<BinaryData>>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type10"))
@@ -268,7 +268,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type10 = JsonSerializer.Deserialize<DataFactoryExpression<BinaryData>>(property.Value.ToString());
+                    type10 = JsonSerializer.Deserialize<DataFactoryExpression<BinaryData>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type11"))
@@ -278,7 +278,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type11 = JsonSerializer.Deserialize<DataFactoryExpression<IList<SeparateClass>>>(property.Value.ToString());
+                    type11 = JsonSerializer.Deserialize<DataFactoryExpression<IList<SeparateClass>>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type12"))
@@ -288,7 +288,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type12 = JsonSerializer.Deserialize<DataFactoryExpression<IList<string>>>(property.Value.ToString());
+                    type12 = JsonSerializer.Deserialize<DataFactoryExpression<IList<string>>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type13"))
@@ -298,7 +298,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type13 = JsonSerializer.Deserialize<DataFactoryExpression<IDictionary<string, string>>>(property.Value.ToString());
+                    type13 = JsonSerializer.Deserialize<DataFactoryExpression<IDictionary<string, string>>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type14"))
@@ -308,7 +308,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type14 = JsonSerializer.Deserialize<DataFactoryExpression<IList<SeparateClass>>>(property.Value.ToString());
+                    type14 = JsonSerializer.Deserialize<DataFactoryExpression<IList<SeparateClass>>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type15"))
@@ -318,7 +318,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type15 = JsonSerializer.Deserialize<DataFactoryExpression<DateTimeOffset>>(property.Value.ToString());
+                    type15 = JsonSerializer.Deserialize<DataFactoryExpression<DateTimeOffset>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type16"))
@@ -328,7 +328,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type16 = JsonSerializer.Deserialize<DataFactoryExpression<TimeSpan>>(property.Value.ToString());
+                    type16 = JsonSerializer.Deserialize<DataFactoryExpression<TimeSpan>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type17"))
@@ -338,7 +338,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type17 = JsonSerializer.Deserialize<DataFactoryExpression<Uri>>(property.Value.ToString());
+                    type17 = JsonSerializer.Deserialize<DataFactoryExpression<Uri>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -363,7 +363,7 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
             }
