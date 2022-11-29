@@ -6,9 +6,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.LowLevel.AutoRest.PostProcessing;
 using AutoRest.CSharp.Output.Models;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {

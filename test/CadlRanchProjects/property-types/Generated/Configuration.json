@@ -6,9 +6,5 @@
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Azure.Core.Shared"
   ],
-<<<<<<< HEAD
-  "remove-unused-types": "keepAll"
-=======
   "unreferenced-types-handling": "keepAll"
->>>>>>> origin/feature/v3
 }

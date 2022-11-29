@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -64,8 +65,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteFactoryMethod(MethodSignature method)
         {
-            var model = method.ReturnType?.Implementation as SerializableObjectType;
-            Debug.Assert(model != null);
+            if (!method.ReturnType!.TryCast<SerializableObjectType>(out var model))
+            {
+                // this should be impossible
+                throw new InvalidOperationException($"The return type {method.ReturnType} of method {method.Name} is not a SerializableObjectType, this should never happen");
+            }
 
             var ctor = model.SerializationConstructor;
             var initializes = new List<PropertyInitializer>();

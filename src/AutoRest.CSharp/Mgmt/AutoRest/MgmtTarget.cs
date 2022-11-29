@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
                 modelFactoryWriter.Write();
-                AddGeneratedFile(project, $"Models/{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
+                AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
