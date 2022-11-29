@@ -31,6 +31,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(typeof(MachineType), new string[] { "One", "Two", "Four" }, new int[] { 1, 2, 4 })]
         [TestCase(typeof(StorageType), new string[] { "StandardLRS", "StandardZRS", "StandardGRS" }, new int[] { 1, 2, 3 })]
+        [TestCase(typeof(MemoryType), new string[] { "Two", "Four", "_1" }, new int[] { 2, 4, -1 })]
         public void ValidateIntEnumValues(Type enumType, string[] expectedNames, int[] expectedValues)
         {
             var names = Enum.GetNames(enumType);
