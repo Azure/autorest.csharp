@@ -13,55 +13,55 @@ namespace additionalProperties.Models
     public static partial class AdditionalPropertiesModelFactory
     {
         /// <summary> Initializes a new instance of PetAPTrue. </summary>
-        /// <param name="Id"></param>
-        /// <param name="Name"></param>
-        /// <param name="Status"></param>
-        /// <param name="AdditionalProperties"> Additional Properties. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPTrue"/> instance for mocking. </returns>
-        public static PetAPTrue PetAPTrue(int Id = default, string Name = null, bool? Status = null, IDictionary<string, object> AdditionalProperties = null)
+        public static PetAPTrue PetAPTrue(int id = default, string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
         {
-            AdditionalProperties ??= new Dictionary<string, object>();
+            additionalProperties ??= new Dictionary<string, object>();
 
-            return new PetAPTrue(Id, Name, Status, AdditionalProperties);
+            return new PetAPTrue(id, name, status, additionalProperties);
         }
 
         /// <summary> Initializes a new instance of PetAPObject. </summary>
-        /// <param name="Id"></param>
-        /// <param name="Name"></param>
-        /// <param name="Status"></param>
-        /// <param name="AdditionalProperties"> Additional Properties. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPObject"/> instance for mocking. </returns>
-        public static PetAPObject PetAPObject(int Id = default, string Name = null, bool? Status = null, IDictionary<string, object> AdditionalProperties = null)
+        public static PetAPObject PetAPObject(int id = default, string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
         {
-            AdditionalProperties ??= new Dictionary<string, object>();
+            additionalProperties ??= new Dictionary<string, object>();
 
-            return new PetAPObject(Id, Name, Status, AdditionalProperties);
+            return new PetAPObject(id, name, status, additionalProperties);
         }
 
         /// <summary> Initializes a new instance of PetAPString. </summary>
-        /// <param name="Id"></param>
-        /// <param name="Name"></param>
-        /// <param name="Status"></param>
-        /// <param name="AdditionalProperties"> Additional Properties. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPString"/> instance for mocking. </returns>
-        public static PetAPString PetAPString(int Id = default, string Name = null, bool? Status = null, IDictionary<string, string> AdditionalProperties = null)
+        public static PetAPString PetAPString(int id = default, string name = null, bool? status = null, IDictionary<string, string> additionalProperties = null)
         {
-            AdditionalProperties ??= new Dictionary<string, string>();
+            additionalProperties ??= new Dictionary<string, string>();
 
-            return new PetAPString(Id, Name, Status, AdditionalProperties);
+            return new PetAPString(id, name, status, additionalProperties);
         }
 
         /// <summary> Initializes a new instance of PetAPInProperties. </summary>
-        /// <param name="Id"></param>
-        /// <param name="Name"></param>
-        /// <param name="Status"></param>
-        /// <param name="AdditionalProperties"> Dictionary of &lt;number&gt;. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
+        /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
         /// <returns> A new <see cref="Models.PetAPInProperties"/> instance for mocking. </returns>
-        public static PetAPInProperties PetAPInProperties(int Id = default, string Name = null, bool? Status = null, IDictionary<string, float> AdditionalProperties = null)
+        public static PetAPInProperties PetAPInProperties(int id = default, string name = null, bool? status = null, IDictionary<string, float> additionalProperties = null)
         {
-            AdditionalProperties ??= new Dictionary<string, float>();
+            additionalProperties ??= new Dictionary<string, float>();
 
-            return new PetAPInProperties(Id, Name, Status, AdditionalProperties);
+            return new PetAPInProperties(id, name, status, additionalProperties);
         }
     }
 }

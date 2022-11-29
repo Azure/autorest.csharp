@@ -416,6 +416,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtScopeResource\\Generated"
     },
+    "MgmtSingletonResource": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSingletonResource\\Generated"
+    },
     "MgmtSubscriptionNameParameter": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSubscriptionNameParameter\\Generated"
@@ -543,10 +547,6 @@
     "ServiceVersionOverride": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ServiceVersionOverride\\Generated"
-    },
-    "SingletonResource": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SingletonResource\\Generated"
     },
     "SingleTopLevelClientWithOperations-LowLevel": {
       "commandName": "Project",

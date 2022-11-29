@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
@@ -11,6 +12,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager.Resources.Models;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Input.Configuration;
 
@@ -53,6 +55,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ModelFactoryTypeProvider(objectTypes, defaultClientName, defaultNamespace, sourceInputModel);
         }
 
+        private HashSet<MethodInfo>? _existingModelFactoryMethods;
+        public HashSet<MethodInfo> ExistingModelFactoryMethods => _existingModelFactoryMethods ??= typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
+
         public (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignment(CodeWriter writer, SerializableObjectType model, Parameter parameter)
         {
             var propertyStack = _parameterPropertyCache[model][parameter];
@@ -73,8 +78,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                         result = $"new {parentPropertyType}({result}{GetConversion(writer, from, to)})";
                         break;
                     case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
-                        // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its public constructor
-                        result = $"new {parentPropertyType}(){{ {property.Declaration.Name} = {result} }}";
+                        // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it
+                        // find the method in the list
+                        var method = ExistingModelFactoryMethods.First(m => m.Name == systemObjectType.Type.Name);
+                        result = $"{method.DeclaringType!}.{method.Name}({result})";
                         break;
                     default:
                         throw new InvalidOperationException($"The propertyType {parentPropertyType} (implementation type: {parentPropertyType.Implementation.GetType()}) is unhandled here, this should never happen");

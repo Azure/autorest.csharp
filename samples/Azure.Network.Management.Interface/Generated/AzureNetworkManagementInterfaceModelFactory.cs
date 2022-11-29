@@ -14,772 +14,772 @@ namespace Azure.Network.Management.Interface.Models
     public static partial class AzureNetworkManagementInterfaceModelFactory
     {
         /// <summary> Initializes a new instance of NetworkInterface. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Resource name. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="Location"> Resource location. </param>
-        /// <param name="Tags"> Resource tags. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="VirtualMachine"> The reference to a virtual machine. </param>
-        /// <param name="NetworkSecurityGroup"> The reference to the NetworkSecurityGroup resource. </param>
-        /// <param name="PrivateEndpoint"> A reference to the private endpoint to which the network interface is linked. </param>
-        /// <param name="IpConfigurations"> A list of IPConfigurations of the network interface. </param>
-        /// <param name="TapConfigurations"> A list of TapConfigurations of the network interface. </param>
-        /// <param name="DnsSettings"> The DNS settings in network interface. </param>
-        /// <param name="MacAddress"> The MAC address of the network interface. </param>
-        /// <param name="Primary"> Whether this is a primary network interface on a virtual machine. </param>
-        /// <param name="EnableAcceleratedNetworking"> If the network interface is accelerated networking enabled. </param>
-        /// <param name="EnableIPForwarding"> Indicates whether IP forwarding is enabled on this network interface. </param>
-        /// <param name="HostedWorkloads"> A list of references to linked BareMetal resources. </param>
-        /// <param name="ResourceGuid"> The resource GUID property of the network interface resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the network interface resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="virtualMachine"> The reference to a virtual machine. </param>
+        /// <param name="networkSecurityGroup"> The reference to the NetworkSecurityGroup resource. </param>
+        /// <param name="privateEndpoint"> A reference to the private endpoint to which the network interface is linked. </param>
+        /// <param name="ipConfigurations"> A list of IPConfigurations of the network interface. </param>
+        /// <param name="tapConfigurations"> A list of TapConfigurations of the network interface. </param>
+        /// <param name="dnsSettings"> The DNS settings in network interface. </param>
+        /// <param name="macAddress"> The MAC address of the network interface. </param>
+        /// <param name="primary"> Whether this is a primary network interface on a virtual machine. </param>
+        /// <param name="enableAcceleratedNetworking"> If the network interface is accelerated networking enabled. </param>
+        /// <param name="enableIPForwarding"> Indicates whether IP forwarding is enabled on this network interface. </param>
+        /// <param name="hostedWorkloads"> A list of references to linked BareMetal resources. </param>
+        /// <param name="resourceGuid"> The resource GUID property of the network interface resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the network interface resource. </param>
         /// <returns> A new <see cref="Models.NetworkInterface"/> instance for mocking. </returns>
-        public static NetworkInterface NetworkInterface(string Id = null, string Name = null, string Type = null, string Location = null, IDictionary<string, string> Tags = null, string Etag = null, SubResource VirtualMachine = null, NetworkSecurityGroup NetworkSecurityGroup = null, PrivateEndpoint PrivateEndpoint = null, IEnumerable<NetworkInterfaceIPConfiguration> IpConfigurations = null, IEnumerable<NetworkInterfaceTapConfiguration> TapConfigurations = null, NetworkInterfaceDnsSettings DnsSettings = null, string MacAddress = null, bool? Primary = null, bool? EnableAcceleratedNetworking = null, bool? EnableIPForwarding = null, IEnumerable<string> HostedWorkloads = null, string ResourceGuid = null, ProvisioningState? ProvisioningState = null)
+        public static NetworkInterface NetworkInterface(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, SubResource virtualMachine = null, NetworkSecurityGroup networkSecurityGroup = null, PrivateEndpoint privateEndpoint = null, IEnumerable<NetworkInterfaceIPConfiguration> ipConfigurations = null, IEnumerable<NetworkInterfaceTapConfiguration> tapConfigurations = null, NetworkInterfaceDnsSettings dnsSettings = null, string macAddress = null, bool? primary = null, bool? enableAcceleratedNetworking = null, bool? enableIPForwarding = null, IEnumerable<string> hostedWorkloads = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
-            Tags ??= new Dictionary<string, string>();
-            IpConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
-            TapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
-            HostedWorkloads ??= new List<string>();
+            tags ??= new Dictionary<string, string>();
+            ipConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
+            tapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
+            hostedWorkloads ??= new List<string>();
 
-            return new NetworkInterface(Id, Name, Type, Location, Tags, Etag, VirtualMachine, NetworkSecurityGroup, PrivateEndpoint, IpConfigurations?.ToList(), TapConfigurations?.ToList(), DnsSettings, MacAddress, Primary, EnableAcceleratedNetworking, EnableIPForwarding, HostedWorkloads?.ToList(), ResourceGuid, ProvisioningState);
+            return new NetworkInterface(id, name, type, location, tags, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations?.ToList(), tapConfigurations?.ToList(), dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of NetworkSecurityGroup. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Resource name. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="Location"> Resource location. </param>
-        /// <param name="Tags"> Resource tags. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="SecurityRules"> A collection of security rules of the network security group. </param>
-        /// <param name="DefaultSecurityRules"> The default security rules of network security group. </param>
-        /// <param name="NetworkInterfaces"> A collection of references to network interfaces. </param>
-        /// <param name="Subnets"> A collection of references to subnets. </param>
-        /// <param name="ResourceGuid"> The resource GUID property of the network security group resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the network security group resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="securityRules"> A collection of security rules of the network security group. </param>
+        /// <param name="defaultSecurityRules"> The default security rules of network security group. </param>
+        /// <param name="networkInterfaces"> A collection of references to network interfaces. </param>
+        /// <param name="subnets"> A collection of references to subnets. </param>
+        /// <param name="resourceGuid"> The resource GUID property of the network security group resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the network security group resource. </param>
         /// <returns> A new <see cref="Models.NetworkSecurityGroup"/> instance for mocking. </returns>
-        public static NetworkSecurityGroup NetworkSecurityGroup(string Id = null, string Name = null, string Type = null, string Location = null, IDictionary<string, string> Tags = null, string Etag = null, IEnumerable<SecurityRule> SecurityRules = null, IEnumerable<SecurityRule> DefaultSecurityRules = null, IEnumerable<NetworkInterface> NetworkInterfaces = null, IEnumerable<Subnet> Subnets = null, string ResourceGuid = null, ProvisioningState? ProvisioningState = null)
+        public static NetworkSecurityGroup NetworkSecurityGroup(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<SecurityRule> securityRules = null, IEnumerable<SecurityRule> defaultSecurityRules = null, IEnumerable<NetworkInterface> networkInterfaces = null, IEnumerable<Subnet> subnets = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
-            Tags ??= new Dictionary<string, string>();
-            SecurityRules ??= new List<SecurityRule>();
-            DefaultSecurityRules ??= new List<SecurityRule>();
-            NetworkInterfaces ??= new List<NetworkInterface>();
-            Subnets ??= new List<Subnet>();
+            tags ??= new Dictionary<string, string>();
+            securityRules ??= new List<SecurityRule>();
+            defaultSecurityRules ??= new List<SecurityRule>();
+            networkInterfaces ??= new List<NetworkInterface>();
+            subnets ??= new List<Subnet>();
 
-            return new NetworkSecurityGroup(Id, Name, Type, Location, Tags, Etag, SecurityRules?.ToList(), DefaultSecurityRules?.ToList(), NetworkInterfaces?.ToList(), Subnets?.ToList(), ResourceGuid, ProvisioningState);
+            return new NetworkSecurityGroup(id, name, type, location, tags, etag, securityRules?.ToList(), defaultSecurityRules?.ToList(), networkInterfaces?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of SecurityRule. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Description"> A description for this rule. Restricted to 140 chars. </param>
-        /// <param name="Protocol"> Network protocol this rule applies to. </param>
-        /// <param name="SourcePortRange"> The source port or range. Integer or range between 0 and 65535. Asterisk &apos;*&apos; can also be used to match all ports. </param>
-        /// <param name="DestinationPortRange"> The destination port or range. Integer or range between 0 and 65535. Asterisk &apos;*&apos; can also be used to match all ports. </param>
-        /// <param name="SourceAddressPrefix"> The CIDR or source IP range. Asterisk &apos;*&apos; can also be used to match all source IPs. Default tags such as &apos;VirtualNetwork&apos;, &apos;AzureLoadBalancer&apos; and &apos;Internet&apos; can also be used. If this is an ingress rule, specifies where network traffic originates from. </param>
-        /// <param name="SourceAddressPrefixes"> The CIDR or source IP ranges. </param>
-        /// <param name="SourceApplicationSecurityGroups"> The application security group specified as source. </param>
-        /// <param name="DestinationAddressPrefix"> The destination address prefix. CIDR or destination IP range. Asterisk &apos;*&apos; can also be used to match all source IPs. Default tags such as &apos;VirtualNetwork&apos;, &apos;AzureLoadBalancer&apos; and &apos;Internet&apos; can also be used. </param>
-        /// <param name="DestinationAddressPrefixes"> The destination address prefixes. CIDR or destination IP ranges. </param>
-        /// <param name="DestinationApplicationSecurityGroups"> The application security group specified as destination. </param>
-        /// <param name="SourcePortRanges"> The source port ranges. </param>
-        /// <param name="DestinationPortRanges"> The destination port ranges. </param>
-        /// <param name="Access"> The network traffic is allowed or denied. </param>
-        /// <param name="Priority"> The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule. </param>
-        /// <param name="Direction"> The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the security rule resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="description"> A description for this rule. Restricted to 140 chars. </param>
+        /// <param name="protocol"> Network protocol this rule applies to. </param>
+        /// <param name="sourcePortRange"> The source port or range. Integer or range between 0 and 65535. Asterisk &apos;*&apos; can also be used to match all ports. </param>
+        /// <param name="destinationPortRange"> The destination port or range. Integer or range between 0 and 65535. Asterisk &apos;*&apos; can also be used to match all ports. </param>
+        /// <param name="sourceAddressPrefix"> The CIDR or source IP range. Asterisk &apos;*&apos; can also be used to match all source IPs. Default tags such as &apos;VirtualNetwork&apos;, &apos;AzureLoadBalancer&apos; and &apos;Internet&apos; can also be used. If this is an ingress rule, specifies where network traffic originates from. </param>
+        /// <param name="sourceAddressPrefixes"> The CIDR or source IP ranges. </param>
+        /// <param name="sourceApplicationSecurityGroups"> The application security group specified as source. </param>
+        /// <param name="destinationAddressPrefix"> The destination address prefix. CIDR or destination IP range. Asterisk &apos;*&apos; can also be used to match all source IPs. Default tags such as &apos;VirtualNetwork&apos;, &apos;AzureLoadBalancer&apos; and &apos;Internet&apos; can also be used. </param>
+        /// <param name="destinationAddressPrefixes"> The destination address prefixes. CIDR or destination IP ranges. </param>
+        /// <param name="destinationApplicationSecurityGroups"> The application security group specified as destination. </param>
+        /// <param name="sourcePortRanges"> The source port ranges. </param>
+        /// <param name="destinationPortRanges"> The destination port ranges. </param>
+        /// <param name="access"> The network traffic is allowed or denied. </param>
+        /// <param name="priority"> The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule. </param>
+        /// <param name="direction"> The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. </param>
+        /// <param name="provisioningState"> The provisioning state of the security rule resource. </param>
         /// <returns> A new <see cref="Models.SecurityRule"/> instance for mocking. </returns>
-        public static SecurityRule SecurityRule(string Id = null, string Name = null, string Etag = null, string Description = null, SecurityRuleProtocol? Protocol = null, string SourcePortRange = null, string DestinationPortRange = null, string SourceAddressPrefix = null, IEnumerable<string> SourceAddressPrefixes = null, IEnumerable<ApplicationSecurityGroup> SourceApplicationSecurityGroups = null, string DestinationAddressPrefix = null, IEnumerable<string> DestinationAddressPrefixes = null, IEnumerable<ApplicationSecurityGroup> DestinationApplicationSecurityGroups = null, IEnumerable<string> SourcePortRanges = null, IEnumerable<string> DestinationPortRanges = null, SecurityRuleAccess? Access = null, int? Priority = null, SecurityRuleDirection? Direction = null, ProvisioningState? ProvisioningState = null)
+        public static SecurityRule SecurityRule(string id = null, string name = null, string etag = null, string description = null, SecurityRuleProtocol? protocol = null, string sourcePortRange = null, string destinationPortRange = null, string sourceAddressPrefix = null, IEnumerable<string> sourceAddressPrefixes = null, IEnumerable<ApplicationSecurityGroup> sourceApplicationSecurityGroups = null, string destinationAddressPrefix = null, IEnumerable<string> destinationAddressPrefixes = null, IEnumerable<ApplicationSecurityGroup> destinationApplicationSecurityGroups = null, IEnumerable<string> sourcePortRanges = null, IEnumerable<string> destinationPortRanges = null, SecurityRuleAccess? access = null, int? priority = null, SecurityRuleDirection? direction = null, ProvisioningState? provisioningState = null)
         {
-            SourceAddressPrefixes ??= new List<string>();
-            SourceApplicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
-            DestinationAddressPrefixes ??= new List<string>();
-            DestinationApplicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
-            SourcePortRanges ??= new List<string>();
-            DestinationPortRanges ??= new List<string>();
+            sourceAddressPrefixes ??= new List<string>();
+            sourceApplicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
+            destinationAddressPrefixes ??= new List<string>();
+            destinationApplicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
+            sourcePortRanges ??= new List<string>();
+            destinationPortRanges ??= new List<string>();
 
-            return new SecurityRule(Id, Name, Etag, Description, Protocol, SourcePortRange, DestinationPortRange, SourceAddressPrefix, SourceAddressPrefixes?.ToList(), SourceApplicationSecurityGroups?.ToList(), DestinationAddressPrefix, DestinationAddressPrefixes?.ToList(), DestinationApplicationSecurityGroups?.ToList(), SourcePortRanges?.ToList(), DestinationPortRanges?.ToList(), Access, Priority, Direction, ProvisioningState);
+            return new SecurityRule(id, name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes?.ToList(), sourceApplicationSecurityGroups?.ToList(), destinationAddressPrefix, destinationAddressPrefixes?.ToList(), destinationApplicationSecurityGroups?.ToList(), sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), access, priority, direction, provisioningState);
         }
 
         /// <summary> Initializes a new instance of ApplicationSecurityGroup. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Resource name. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="Location"> Resource location. </param>
-        /// <param name="Tags"> Resource tags. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="ResourceGuid"> The resource GUID property of the application security group resource. It uniquely identifies a resource, even if the user changes its name or migrate the resource across subscriptions or resource groups. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the application security group resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="resourceGuid"> The resource GUID property of the application security group resource. It uniquely identifies a resource, even if the user changes its name or migrate the resource across subscriptions or resource groups. </param>
+        /// <param name="provisioningState"> The provisioning state of the application security group resource. </param>
         /// <returns> A new <see cref="Models.ApplicationSecurityGroup"/> instance for mocking. </returns>
-        public static ApplicationSecurityGroup ApplicationSecurityGroup(string Id = null, string Name = null, string Type = null, string Location = null, IDictionary<string, string> Tags = null, string Etag = null, string ResourceGuid = null, ProvisioningState? ProvisioningState = null)
+        public static ApplicationSecurityGroup ApplicationSecurityGroup(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
-            Tags ??= new Dictionary<string, string>();
+            tags ??= new Dictionary<string, string>();
 
-            return new ApplicationSecurityGroup(Id, Name, Type, Location, Tags, Etag, ResourceGuid, ProvisioningState);
+            return new ApplicationSecurityGroup(id, name, type, location, tags, etag, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of Resource. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Resource name. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="Location"> Resource location. </param>
-        /// <param name="Tags"> Resource tags. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
         /// <returns> A new <see cref="Models.Resource"/> instance for mocking. </returns>
-        public static Resource Resource(string Id = null, string Name = null, string Type = null, string Location = null, IDictionary<string, string> Tags = null)
+        public static Resource Resource(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null)
         {
-            Tags ??= new Dictionary<string, string>();
+            tags ??= new Dictionary<string, string>();
 
-            return new Resource(Id, Name, Type, Location, Tags);
+            return new Resource(id, name, type, location, tags);
         }
 
         /// <summary> Initializes a new instance of Subnet. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="AddressPrefix"> The address prefix for the subnet. </param>
-        /// <param name="AddressPrefixes"> List of address prefixes for the subnet. </param>
-        /// <param name="NetworkSecurityGroup"> The reference to the NetworkSecurityGroup resource. </param>
-        /// <param name="RouteTable"> The reference to the RouteTable resource. </param>
-        /// <param name="NatGateway"> Nat gateway associated with this subnet. </param>
-        /// <param name="ServiceEndpoints"> An array of service endpoints. </param>
-        /// <param name="ServiceEndpointPolicies"> An array of service endpoint policies. </param>
-        /// <param name="PrivateEndpoints"> An array of references to private endpoints. </param>
-        /// <param name="IpConfigurations"> An array of references to the network interface IP configurations using subnet. </param>
-        /// <param name="IpConfigurationProfiles"> Array of IP configuration profiles which reference this subnet. </param>
-        /// <param name="ResourceNavigationLinks"> An array of references to the external resources using subnet. </param>
-        /// <param name="ServiceAssociationLinks"> An array of references to services injecting into this subnet. </param>
-        /// <param name="Delegations"> An array of references to the delegations on the subnet. </param>
-        /// <param name="Purpose"> A read-only string identifying the intention of use for this subnet based on delegations and other user-defined properties. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the subnet resource. </param>
-        /// <param name="PrivateEndpointNetworkPolicies"> Enable or Disable apply network policies on private end point in the subnet. </param>
-        /// <param name="PrivateLinkServiceNetworkPolicies"> Enable or Disable apply network policies on private link service in the subnet. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="addressPrefix"> The address prefix for the subnet. </param>
+        /// <param name="addressPrefixes"> List of address prefixes for the subnet. </param>
+        /// <param name="networkSecurityGroup"> The reference to the NetworkSecurityGroup resource. </param>
+        /// <param name="routeTable"> The reference to the RouteTable resource. </param>
+        /// <param name="natGateway"> Nat gateway associated with this subnet. </param>
+        /// <param name="serviceEndpoints"> An array of service endpoints. </param>
+        /// <param name="serviceEndpointPolicies"> An array of service endpoint policies. </param>
+        /// <param name="privateEndpoints"> An array of references to private endpoints. </param>
+        /// <param name="ipConfigurations"> An array of references to the network interface IP configurations using subnet. </param>
+        /// <param name="ipConfigurationProfiles"> Array of IP configuration profiles which reference this subnet. </param>
+        /// <param name="resourceNavigationLinks"> An array of references to the external resources using subnet. </param>
+        /// <param name="serviceAssociationLinks"> An array of references to services injecting into this subnet. </param>
+        /// <param name="delegations"> An array of references to the delegations on the subnet. </param>
+        /// <param name="purpose"> A read-only string identifying the intention of use for this subnet based on delegations and other user-defined properties. </param>
+        /// <param name="provisioningState"> The provisioning state of the subnet resource. </param>
+        /// <param name="privateEndpointNetworkPolicies"> Enable or Disable apply network policies on private end point in the subnet. </param>
+        /// <param name="privateLinkServiceNetworkPolicies"> Enable or Disable apply network policies on private link service in the subnet. </param>
         /// <returns> A new <see cref="Models.Subnet"/> instance for mocking. </returns>
-        public static Subnet Subnet(string Id = null, string Name = null, string Etag = null, string AddressPrefix = null, IEnumerable<string> AddressPrefixes = null, NetworkSecurityGroup NetworkSecurityGroup = null, RouteTable RouteTable = null, SubResource NatGateway = null, IEnumerable<ServiceEndpointPropertiesFormat> ServiceEndpoints = null, IEnumerable<ServiceEndpointPolicy> ServiceEndpointPolicies = null, IEnumerable<PrivateEndpoint> PrivateEndpoints = null, IEnumerable<IPConfiguration> IpConfigurations = null, IEnumerable<IPConfigurationProfile> IpConfigurationProfiles = null, IEnumerable<ResourceNavigationLink> ResourceNavigationLinks = null, IEnumerable<ServiceAssociationLink> ServiceAssociationLinks = null, IEnumerable<Delegation> Delegations = null, string Purpose = null, ProvisioningState? ProvisioningState = null, string PrivateEndpointNetworkPolicies = null, string PrivateLinkServiceNetworkPolicies = null)
+        public static Subnet Subnet(string id = null, string name = null, string etag = null, string addressPrefix = null, IEnumerable<string> addressPrefixes = null, NetworkSecurityGroup networkSecurityGroup = null, RouteTable routeTable = null, SubResource natGateway = null, IEnumerable<ServiceEndpointPropertiesFormat> serviceEndpoints = null, IEnumerable<ServiceEndpointPolicy> serviceEndpointPolicies = null, IEnumerable<PrivateEndpoint> privateEndpoints = null, IEnumerable<IPConfiguration> ipConfigurations = null, IEnumerable<IPConfigurationProfile> ipConfigurationProfiles = null, IEnumerable<ResourceNavigationLink> resourceNavigationLinks = null, IEnumerable<ServiceAssociationLink> serviceAssociationLinks = null, IEnumerable<Delegation> delegations = null, string purpose = null, ProvisioningState? provisioningState = null, string privateEndpointNetworkPolicies = null, string privateLinkServiceNetworkPolicies = null)
         {
-            AddressPrefixes ??= new List<string>();
-            ServiceEndpoints ??= new List<ServiceEndpointPropertiesFormat>();
-            ServiceEndpointPolicies ??= new List<ServiceEndpointPolicy>();
-            PrivateEndpoints ??= new List<PrivateEndpoint>();
-            IpConfigurations ??= new List<IPConfiguration>();
-            IpConfigurationProfiles ??= new List<IPConfigurationProfile>();
-            ResourceNavigationLinks ??= new List<ResourceNavigationLink>();
-            ServiceAssociationLinks ??= new List<ServiceAssociationLink>();
-            Delegations ??= new List<Delegation>();
+            addressPrefixes ??= new List<string>();
+            serviceEndpoints ??= new List<ServiceEndpointPropertiesFormat>();
+            serviceEndpointPolicies ??= new List<ServiceEndpointPolicy>();
+            privateEndpoints ??= new List<PrivateEndpoint>();
+            ipConfigurations ??= new List<IPConfiguration>();
+            ipConfigurationProfiles ??= new List<IPConfigurationProfile>();
+            resourceNavigationLinks ??= new List<ResourceNavigationLink>();
+            serviceAssociationLinks ??= new List<ServiceAssociationLink>();
+            delegations ??= new List<Delegation>();
 
-            return new Subnet(Id, Name, Etag, AddressPrefix, AddressPrefixes?.ToList(), NetworkSecurityGroup, RouteTable, NatGateway, ServiceEndpoints?.ToList(), ServiceEndpointPolicies?.ToList(), PrivateEndpoints?.ToList(), IpConfigurations?.ToList(), IpConfigurationProfiles?.ToList(), ResourceNavigationLinks?.ToList(), ServiceAssociationLinks?.ToList(), Delegations?.ToList(), Purpose, ProvisioningState, PrivateEndpointNetworkPolicies, PrivateLinkServiceNetworkPolicies);
+            return new Subnet(id, name, etag, addressPrefix, addressPrefixes?.ToList(), networkSecurityGroup, routeTable, natGateway, serviceEndpoints?.ToList(), serviceEndpointPolicies?.ToList(), privateEndpoints?.ToList(), ipConfigurations?.ToList(), ipConfigurationProfiles?.ToList(), resourceNavigationLinks?.ToList(), serviceAssociationLinks?.ToList(), delegations?.ToList(), purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies);
         }
 
         /// <summary> Initializes a new instance of RouteTable. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Resource name. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="Location"> Resource location. </param>
-        /// <param name="Tags"> Resource tags. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Routes"> Collection of routes contained within a route table. </param>
-        /// <param name="Subnets"> A collection of references to subnets. </param>
-        /// <param name="DisableBgpRoutePropagation"> Whether to disable the routes learned by BGP on that route table. True means disable. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the route table resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="routes"> Collection of routes contained within a route table. </param>
+        /// <param name="subnets"> A collection of references to subnets. </param>
+        /// <param name="disableBgpRoutePropagation"> Whether to disable the routes learned by BGP on that route table. True means disable. </param>
+        /// <param name="provisioningState"> The provisioning state of the route table resource. </param>
         /// <returns> A new <see cref="Models.RouteTable"/> instance for mocking. </returns>
-        public static RouteTable RouteTable(string Id = null, string Name = null, string Type = null, string Location = null, IDictionary<string, string> Tags = null, string Etag = null, IEnumerable<Route> Routes = null, IEnumerable<Subnet> Subnets = null, bool? DisableBgpRoutePropagation = null, ProvisioningState? ProvisioningState = null)
+        public static RouteTable RouteTable(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<Route> routes = null, IEnumerable<Subnet> subnets = null, bool? disableBgpRoutePropagation = null, ProvisioningState? provisioningState = null)
         {
-            Tags ??= new Dictionary<string, string>();
-            Routes ??= new List<Route>();
-            Subnets ??= new List<Subnet>();
+            tags ??= new Dictionary<string, string>();
+            routes ??= new List<Route>();
+            subnets ??= new List<Subnet>();
 
-            return new RouteTable(Id, Name, Type, Location, Tags, Etag, Routes?.ToList(), Subnets?.ToList(), DisableBgpRoutePropagation, ProvisioningState);
+            return new RouteTable(id, name, type, location, tags, etag, routes?.ToList(), subnets?.ToList(), disableBgpRoutePropagation, provisioningState);
         }
 
         /// <summary> Initializes a new instance of Route. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="AddressPrefix"> The destination CIDR to which the route applies. </param>
-        /// <param name="NextHopType"> The type of Azure hop the packet should be sent to. </param>
-        /// <param name="NextHopIpAddress"> The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the route resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="addressPrefix"> The destination CIDR to which the route applies. </param>
+        /// <param name="nextHopType"> The type of Azure hop the packet should be sent to. </param>
+        /// <param name="nextHopIpAddress"> The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance. </param>
+        /// <param name="provisioningState"> The provisioning state of the route resource. </param>
         /// <returns> A new <see cref="Models.Route"/> instance for mocking. </returns>
-        public static Route Route(string Id = null, string Name = null, string Etag = null, string AddressPrefix = null, RouteNextHopType? NextHopType = null, string NextHopIpAddress = null, ProvisioningState? ProvisioningState = null)
+        public static Route Route(string id = null, string name = null, string etag = null, string addressPrefix = null, RouteNextHopType? nextHopType = null, string nextHopIpAddress = null, ProvisioningState? provisioningState = null)
         {
-            return new Route(Id, Name, Etag, AddressPrefix, NextHopType, NextHopIpAddress, ProvisioningState);
+            return new Route(id, name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState);
         }
 
         /// <summary> Initializes a new instance of ServiceEndpointPropertiesFormat. </summary>
-        /// <param name="Service"> The type of the endpoint service. </param>
-        /// <param name="Locations"> A list of locations. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the service endpoint resource. </param>
+        /// <param name="service"> The type of the endpoint service. </param>
+        /// <param name="locations"> A list of locations. </param>
+        /// <param name="provisioningState"> The provisioning state of the service endpoint resource. </param>
         /// <returns> A new <see cref="Models.ServiceEndpointPropertiesFormat"/> instance for mocking. </returns>
-        public static ServiceEndpointPropertiesFormat ServiceEndpointPropertiesFormat(string Service = null, IEnumerable<string> Locations = null, ProvisioningState? ProvisioningState = null)
+        public static ServiceEndpointPropertiesFormat ServiceEndpointPropertiesFormat(string service = null, IEnumerable<string> locations = null, ProvisioningState? provisioningState = null)
         {
-            Locations ??= new List<string>();
+            locations ??= new List<string>();
 
-            return new ServiceEndpointPropertiesFormat(Service, Locations?.ToList(), ProvisioningState);
+            return new ServiceEndpointPropertiesFormat(service, locations?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of ServiceEndpointPolicy. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Resource name. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="Location"> Resource location. </param>
-        /// <param name="Tags"> Resource tags. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="ServiceEndpointPolicyDefinitions"> A collection of service endpoint policy definitions of the service endpoint policy. </param>
-        /// <param name="Subnets"> A collection of references to subnets. </param>
-        /// <param name="ResourceGuid"> The resource GUID property of the service endpoint policy resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the service endpoint policy resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="serviceEndpointPolicyDefinitions"> A collection of service endpoint policy definitions of the service endpoint policy. </param>
+        /// <param name="subnets"> A collection of references to subnets. </param>
+        /// <param name="resourceGuid"> The resource GUID property of the service endpoint policy resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the service endpoint policy resource. </param>
         /// <returns> A new <see cref="Models.ServiceEndpointPolicy"/> instance for mocking. </returns>
-        public static ServiceEndpointPolicy ServiceEndpointPolicy(string Id = null, string Name = null, string Type = null, string Location = null, IDictionary<string, string> Tags = null, string Etag = null, IEnumerable<ServiceEndpointPolicyDefinition> ServiceEndpointPolicyDefinitions = null, IEnumerable<Subnet> Subnets = null, string ResourceGuid = null, ProvisioningState? ProvisioningState = null)
+        public static ServiceEndpointPolicy ServiceEndpointPolicy(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions = null, IEnumerable<Subnet> subnets = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
-            Tags ??= new Dictionary<string, string>();
-            ServiceEndpointPolicyDefinitions ??= new List<ServiceEndpointPolicyDefinition>();
-            Subnets ??= new List<Subnet>();
+            tags ??= new Dictionary<string, string>();
+            serviceEndpointPolicyDefinitions ??= new List<ServiceEndpointPolicyDefinition>();
+            subnets ??= new List<Subnet>();
 
-            return new ServiceEndpointPolicy(Id, Name, Type, Location, Tags, Etag, ServiceEndpointPolicyDefinitions?.ToList(), Subnets?.ToList(), ResourceGuid, ProvisioningState);
+            return new ServiceEndpointPolicy(id, name, type, location, tags, etag, serviceEndpointPolicyDefinitions?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of ServiceEndpointPolicyDefinition. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Description"> A description for this rule. Restricted to 140 chars. </param>
-        /// <param name="Service"> Service endpoint name. </param>
-        /// <param name="ServiceResources"> A list of service resources. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the service endpoint policy definition resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="description"> A description for this rule. Restricted to 140 chars. </param>
+        /// <param name="service"> Service endpoint name. </param>
+        /// <param name="serviceResources"> A list of service resources. </param>
+        /// <param name="provisioningState"> The provisioning state of the service endpoint policy definition resource. </param>
         /// <returns> A new <see cref="Models.ServiceEndpointPolicyDefinition"/> instance for mocking. </returns>
-        public static ServiceEndpointPolicyDefinition ServiceEndpointPolicyDefinition(string Id = null, string Name = null, string Etag = null, string Description = null, string Service = null, IEnumerable<string> ServiceResources = null, ProvisioningState? ProvisioningState = null)
+        public static ServiceEndpointPolicyDefinition ServiceEndpointPolicyDefinition(string id = null, string name = null, string etag = null, string description = null, string service = null, IEnumerable<string> serviceResources = null, ProvisioningState? provisioningState = null)
         {
-            ServiceResources ??= new List<string>();
+            serviceResources ??= new List<string>();
 
-            return new ServiceEndpointPolicyDefinition(Id, Name, Etag, Description, Service, ServiceResources?.ToList(), ProvisioningState);
+            return new ServiceEndpointPolicyDefinition(id, name, etag, description, service, serviceResources?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Resource name. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="Location"> Resource location. </param>
-        /// <param name="Tags"> Resource tags. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Subnet"> The ID of the subnet from which the private IP will be allocated. </param>
-        /// <param name="NetworkInterfaces"> An array of references to the network interfaces created for this private endpoint. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the private endpoint resource. </param>
-        /// <param name="PrivateLinkServiceConnections"> A grouping of information about the connection to the remote resource. </param>
-        /// <param name="ManualPrivateLinkServiceConnections"> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="subnet"> The ID of the subnet from which the private IP will be allocated. </param>
+        /// <param name="networkInterfaces"> An array of references to the network interfaces created for this private endpoint. </param>
+        /// <param name="provisioningState"> The provisioning state of the private endpoint resource. </param>
+        /// <param name="privateLinkServiceConnections"> A grouping of information about the connection to the remote resource. </param>
+        /// <param name="manualPrivateLinkServiceConnections"> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </param>
         /// <returns> A new <see cref="Models.PrivateEndpoint"/> instance for mocking. </returns>
-        public static PrivateEndpoint PrivateEndpoint(string Id = null, string Name = null, string Type = null, string Location = null, IDictionary<string, string> Tags = null, string Etag = null, Subnet Subnet = null, IEnumerable<NetworkInterface> NetworkInterfaces = null, ProvisioningState? ProvisioningState = null, IEnumerable<PrivateLinkServiceConnection> PrivateLinkServiceConnections = null, IEnumerable<PrivateLinkServiceConnection> ManualPrivateLinkServiceConnections = null)
+        public static PrivateEndpoint PrivateEndpoint(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, Subnet subnet = null, IEnumerable<NetworkInterface> networkInterfaces = null, ProvisioningState? provisioningState = null, IEnumerable<PrivateLinkServiceConnection> privateLinkServiceConnections = null, IEnumerable<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = null)
         {
-            Tags ??= new Dictionary<string, string>();
-            NetworkInterfaces ??= new List<NetworkInterface>();
-            PrivateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
-            ManualPrivateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
+            tags ??= new Dictionary<string, string>();
+            networkInterfaces ??= new List<NetworkInterface>();
+            privateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
+            manualPrivateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
 
-            return new PrivateEndpoint(Id, Name, Type, Location, Tags, Etag, Subnet, NetworkInterfaces?.ToList(), ProvisioningState, PrivateLinkServiceConnections?.ToList(), ManualPrivateLinkServiceConnections?.ToList());
+            return new PrivateEndpoint(id, name, type, location, tags, etag, subnet, networkInterfaces?.ToList(), provisioningState, privateLinkServiceConnections?.ToList(), manualPrivateLinkServiceConnections?.ToList());
         }
 
         /// <summary> Initializes a new instance of PrivateLinkServiceConnection. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
-        /// <param name="Type"> The resource type. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the private link service connection resource. </param>
-        /// <param name="PrivateLinkServiceId"> The resource id of private link service. </param>
-        /// <param name="GroupIds"> The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to. </param>
-        /// <param name="RequestMessage"> A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars. </param>
-        /// <param name="PrivateLinkServiceConnectionState"> A collection of read-only information about the state of the connection to the remote resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="type"> The resource type. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="provisioningState"> The provisioning state of the private link service connection resource. </param>
+        /// <param name="privateLinkServiceId"> The resource id of private link service. </param>
+        /// <param name="groupIds"> The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to. </param>
+        /// <param name="requestMessage"> A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars. </param>
+        /// <param name="privateLinkServiceConnectionState"> A collection of read-only information about the state of the connection to the remote resource. </param>
         /// <returns> A new <see cref="Models.PrivateLinkServiceConnection"/> instance for mocking. </returns>
-        public static PrivateLinkServiceConnection PrivateLinkServiceConnection(string Id = null, string Name = null, string Type = null, string Etag = null, ProvisioningState? ProvisioningState = null, string PrivateLinkServiceId = null, IEnumerable<string> GroupIds = null, string RequestMessage = null, PrivateLinkServiceConnectionState PrivateLinkServiceConnectionState = null)
+        public static PrivateLinkServiceConnection PrivateLinkServiceConnection(string id = null, string name = null, string type = null, string etag = null, ProvisioningState? provisioningState = null, string privateLinkServiceId = null, IEnumerable<string> groupIds = null, string requestMessage = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null)
         {
-            GroupIds ??= new List<string>();
+            groupIds ??= new List<string>();
 
-            return new PrivateLinkServiceConnection(Id, Name, Type, Etag, ProvisioningState, PrivateLinkServiceId, GroupIds?.ToList(), RequestMessage, PrivateLinkServiceConnectionState);
+            return new PrivateLinkServiceConnection(id, name, type, etag, provisioningState, privateLinkServiceId, groupIds?.ToList(), requestMessage, privateLinkServiceConnectionState);
         }
 
         /// <summary> Initializes a new instance of IPConfiguration. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="PrivateIPAddress"> The private IP address of the IP configuration. </param>
-        /// <param name="PrivateIPAllocationMethod"> The private IP address allocation method. </param>
-        /// <param name="Subnet"> The reference to the subnet resource. </param>
-        /// <param name="PublicIPAddress"> The reference to the public IP resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the IP configuration resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="privateIPAddress"> The private IP address of the IP configuration. </param>
+        /// <param name="privateIPAllocationMethod"> The private IP address allocation method. </param>
+        /// <param name="subnet"> The reference to the subnet resource. </param>
+        /// <param name="publicIPAddress"> The reference to the public IP resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the IP configuration resource. </param>
         /// <returns> A new <see cref="Models.IPConfiguration"/> instance for mocking. </returns>
-        public static IPConfiguration IPConfiguration(string Id = null, string Name = null, string Etag = null, string PrivateIPAddress = null, IPAllocationMethod? PrivateIPAllocationMethod = null, Subnet Subnet = null, PublicIPAddress PublicIPAddress = null, ProvisioningState? ProvisioningState = null)
+        public static IPConfiguration IPConfiguration(string id = null, string name = null, string etag = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, Subnet subnet = null, PublicIPAddress publicIPAddress = null, ProvisioningState? provisioningState = null)
         {
-            return new IPConfiguration(Id, Name, Etag, PrivateIPAddress, PrivateIPAllocationMethod, Subnet, PublicIPAddress, ProvisioningState);
+            return new IPConfiguration(id, name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState);
         }
 
         /// <summary> Initializes a new instance of PublicIPAddress. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Resource name. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="Location"> Resource location. </param>
-        /// <param name="Tags"> Resource tags. </param>
-        /// <param name="Sku"> The public IP address SKU. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Zones"> A list of availability zones denoting the IP allocated for the resource needs to come from. </param>
-        /// <param name="PublicIPAllocationMethod"> The public IP address allocation method. </param>
-        /// <param name="PublicIPAddressVersion"> The public IP address version. </param>
-        /// <param name="IpConfiguration"> The IP configuration associated with the public IP address. </param>
-        /// <param name="DnsSettings"> The FQDN of the DNS record associated with the public IP address. </param>
-        /// <param name="DdosSettings"> The DDoS protection custom policy associated with the public IP address. </param>
-        /// <param name="IpTags"> The list of tags associated with the public IP address. </param>
-        /// <param name="IpAddress"> The IP address associated with the public IP address resource. </param>
-        /// <param name="PublicIPPrefix"> The Public IP Prefix this Public IP Address should be allocated from. </param>
-        /// <param name="IdleTimeoutInMinutes"> The idle timeout of the public IP address. </param>
-        /// <param name="ResourceGuid"> The resource GUID property of the public IP address resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the public IP address resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="sku"> The public IP address SKU. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="zones"> A list of availability zones denoting the IP allocated for the resource needs to come from. </param>
+        /// <param name="publicIPAllocationMethod"> The public IP address allocation method. </param>
+        /// <param name="publicIPAddressVersion"> The public IP address version. </param>
+        /// <param name="ipConfiguration"> The IP configuration associated with the public IP address. </param>
+        /// <param name="dnsSettings"> The FQDN of the DNS record associated with the public IP address. </param>
+        /// <param name="ddosSettings"> The DDoS protection custom policy associated with the public IP address. </param>
+        /// <param name="ipTags"> The list of tags associated with the public IP address. </param>
+        /// <param name="ipAddress"> The IP address associated with the public IP address resource. </param>
+        /// <param name="publicIPPrefix"> The Public IP Prefix this Public IP Address should be allocated from. </param>
+        /// <param name="idleTimeoutInMinutes"> The idle timeout of the public IP address. </param>
+        /// <param name="resourceGuid"> The resource GUID property of the public IP address resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the public IP address resource. </param>
         /// <returns> A new <see cref="Models.PublicIPAddress"/> instance for mocking. </returns>
-        public static PublicIPAddress PublicIPAddress(string Id = null, string Name = null, string Type = null, string Location = null, IDictionary<string, string> Tags = null, PublicIPAddressSku Sku = null, string Etag = null, IEnumerable<string> Zones = null, IPAllocationMethod? PublicIPAllocationMethod = null, IPVersion? PublicIPAddressVersion = null, IPConfiguration IpConfiguration = null, PublicIPAddressDnsSettings DnsSettings = null, DdosSettings DdosSettings = null, IEnumerable<IpTag> IpTags = null, string IpAddress = null, SubResource PublicIPPrefix = null, int? IdleTimeoutInMinutes = null, string ResourceGuid = null, ProvisioningState? ProvisioningState = null)
+        public static PublicIPAddress PublicIPAddress(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, PublicIPAddressSku sku = null, string etag = null, IEnumerable<string> zones = null, IPAllocationMethod? publicIPAllocationMethod = null, IPVersion? publicIPAddressVersion = null, IPConfiguration ipConfiguration = null, PublicIPAddressDnsSettings dnsSettings = null, DdosSettings ddosSettings = null, IEnumerable<IpTag> ipTags = null, string ipAddress = null, SubResource publicIPPrefix = null, int? idleTimeoutInMinutes = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
-            Tags ??= new Dictionary<string, string>();
-            Zones ??= new List<string>();
-            IpTags ??= new List<IpTag>();
+            tags ??= new Dictionary<string, string>();
+            zones ??= new List<string>();
+            ipTags ??= new List<IpTag>();
 
-            return new PublicIPAddress(Id, Name, Type, Location, Tags, Sku, Etag, Zones?.ToList(), PublicIPAllocationMethod, PublicIPAddressVersion, IpConfiguration, DnsSettings, DdosSettings, IpTags?.ToList(), IpAddress, PublicIPPrefix, IdleTimeoutInMinutes, ResourceGuid, ProvisioningState);
+            return new PublicIPAddress(id, name, type, location, tags, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags?.ToList(), ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of IPConfigurationProfile. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource. This name can be used to access the resource. </param>
-        /// <param name="Type"> Sub Resource type. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Subnet"> The reference to the subnet resource to create a container network interface ip configuration. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the IP configuration profile resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource. This name can be used to access the resource. </param>
+        /// <param name="type"> Sub Resource type. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="subnet"> The reference to the subnet resource to create a container network interface ip configuration. </param>
+        /// <param name="provisioningState"> The provisioning state of the IP configuration profile resource. </param>
         /// <returns> A new <see cref="Models.IPConfigurationProfile"/> instance for mocking. </returns>
-        public static IPConfigurationProfile IPConfigurationProfile(string Id = null, string Name = null, string Type = null, string Etag = null, Subnet Subnet = null, ProvisioningState? ProvisioningState = null)
+        public static IPConfigurationProfile IPConfigurationProfile(string id = null, string name = null, string type = null, string etag = null, Subnet subnet = null, ProvisioningState? provisioningState = null)
         {
-            return new IPConfigurationProfile(Id, Name, Type, Etag, Subnet, ProvisioningState);
+            return new IPConfigurationProfile(id, name, type, etag, subnet, provisioningState);
         }
 
         /// <summary> Initializes a new instance of ResourceNavigationLink. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="LinkedResourceType"> Resource type of the linked resource. </param>
-        /// <param name="Link"> Link to the external resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the resource navigation link resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="linkedResourceType"> Resource type of the linked resource. </param>
+        /// <param name="link"> Link to the external resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the resource navigation link resource. </param>
         /// <returns> A new <see cref="Models.ResourceNavigationLink"/> instance for mocking. </returns>
-        public static ResourceNavigationLink ResourceNavigationLink(string Id = null, string Name = null, string Etag = null, string Type = null, string LinkedResourceType = null, string Link = null, ProvisioningState? ProvisioningState = null)
+        public static ResourceNavigationLink ResourceNavigationLink(string id = null, string name = null, string etag = null, string type = null, string linkedResourceType = null, string link = null, ProvisioningState? provisioningState = null)
         {
-            return new ResourceNavigationLink(Id, Name, Etag, Type, LinkedResourceType, Link, ProvisioningState);
+            return new ResourceNavigationLink(id, name, etag, type, linkedResourceType, link, provisioningState);
         }
 
         /// <summary> Initializes a new instance of ServiceAssociationLink. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="LinkedResourceType"> Resource type of the linked resource. </param>
-        /// <param name="Link"> Link to the external resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the service association link resource. </param>
-        /// <param name="AllowDelete"> If true, the resource can be deleted. </param>
-        /// <param name="Locations"> A list of locations. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="linkedResourceType"> Resource type of the linked resource. </param>
+        /// <param name="link"> Link to the external resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the service association link resource. </param>
+        /// <param name="allowDelete"> If true, the resource can be deleted. </param>
+        /// <param name="locations"> A list of locations. </param>
         /// <returns> A new <see cref="Models.ServiceAssociationLink"/> instance for mocking. </returns>
-        public static ServiceAssociationLink ServiceAssociationLink(string Id = null, string Name = null, string Etag = null, string Type = null, string LinkedResourceType = null, string Link = null, ProvisioningState? ProvisioningState = null, bool? AllowDelete = null, IEnumerable<string> Locations = null)
+        public static ServiceAssociationLink ServiceAssociationLink(string id = null, string name = null, string etag = null, string type = null, string linkedResourceType = null, string link = null, ProvisioningState? provisioningState = null, bool? allowDelete = null, IEnumerable<string> locations = null)
         {
-            Locations ??= new List<string>();
+            locations ??= new List<string>();
 
-            return new ServiceAssociationLink(Id, Name, Etag, Type, LinkedResourceType, Link, ProvisioningState, AllowDelete, Locations?.ToList());
+            return new ServiceAssociationLink(id, name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations?.ToList());
         }
 
         /// <summary> Initializes a new instance of Delegation. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within a subnet. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="ServiceName"> The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers). </param>
-        /// <param name="Actions"> The actions permitted to the service upon delegation. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the service delegation resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within a subnet. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="serviceName"> The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers). </param>
+        /// <param name="actions"> The actions permitted to the service upon delegation. </param>
+        /// <param name="provisioningState"> The provisioning state of the service delegation resource. </param>
         /// <returns> A new <see cref="Models.Delegation"/> instance for mocking. </returns>
-        public static Delegation Delegation(string Id = null, string Name = null, string Etag = null, string ServiceName = null, IEnumerable<string> Actions = null, ProvisioningState? ProvisioningState = null)
+        public static Delegation Delegation(string id = null, string name = null, string etag = null, string serviceName = null, IEnumerable<string> actions = null, ProvisioningState? provisioningState = null)
         {
-            Actions ??= new List<string>();
+            actions ??= new List<string>();
 
-            return new Delegation(Id, Name, Etag, ServiceName, Actions?.ToList(), ProvisioningState);
+            return new Delegation(id, name, etag, serviceName, actions?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfiguration. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="VirtualNetworkTaps"> The reference to Virtual Network Taps. </param>
-        /// <param name="ApplicationGatewayBackendAddressPools"> The reference to ApplicationGatewayBackendAddressPool resource. </param>
-        /// <param name="LoadBalancerBackendAddressPools"> The reference to LoadBalancerBackendAddressPool resource. </param>
-        /// <param name="LoadBalancerInboundNatRules"> A list of references of LoadBalancerInboundNatRules. </param>
-        /// <param name="PrivateIPAddress"> Private IP address of the IP configuration. </param>
-        /// <param name="PrivateIPAllocationMethod"> The private IP address allocation method. </param>
-        /// <param name="PrivateIPAddressVersion"> Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4. </param>
-        /// <param name="Subnet"> Subnet bound to the IP configuration. </param>
-        /// <param name="Primary"> Whether this is a primary customer address on the network interface. </param>
-        /// <param name="PublicIPAddress"> Public IP address bound to the IP configuration. </param>
-        /// <param name="ApplicationSecurityGroups"> Application security groups in which the IP configuration is included. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the network interface IP configuration. </param>
-        /// <param name="PrivateLinkConnectionProperties"> PrivateLinkConnection properties for the network interface. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="virtualNetworkTaps"> The reference to Virtual Network Taps. </param>
+        /// <param name="applicationGatewayBackendAddressPools"> The reference to ApplicationGatewayBackendAddressPool resource. </param>
+        /// <param name="loadBalancerBackendAddressPools"> The reference to LoadBalancerBackendAddressPool resource. </param>
+        /// <param name="loadBalancerInboundNatRules"> A list of references of LoadBalancerInboundNatRules. </param>
+        /// <param name="privateIPAddress"> Private IP address of the IP configuration. </param>
+        /// <param name="privateIPAllocationMethod"> The private IP address allocation method. </param>
+        /// <param name="privateIPAddressVersion"> Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4. </param>
+        /// <param name="subnet"> Subnet bound to the IP configuration. </param>
+        /// <param name="primary"> Whether this is a primary customer address on the network interface. </param>
+        /// <param name="publicIPAddress"> Public IP address bound to the IP configuration. </param>
+        /// <param name="applicationSecurityGroups"> Application security groups in which the IP configuration is included. </param>
+        /// <param name="provisioningState"> The provisioning state of the network interface IP configuration. </param>
+        /// <param name="privateLinkConnectionProperties"> PrivateLinkConnection properties for the network interface. </param>
         /// <returns> A new <see cref="Models.NetworkInterfaceIPConfiguration"/> instance for mocking. </returns>
-        public static NetworkInterfaceIPConfiguration NetworkInterfaceIPConfiguration(string Id = null, string Name = null, string Etag = null, IEnumerable<VirtualNetworkTap> VirtualNetworkTaps = null, IEnumerable<ApplicationGatewayBackendAddressPool> ApplicationGatewayBackendAddressPools = null, IEnumerable<BackendAddressPool> LoadBalancerBackendAddressPools = null, IEnumerable<InboundNatRule> LoadBalancerInboundNatRules = null, string PrivateIPAddress = null, IPAllocationMethod? PrivateIPAllocationMethod = null, IPVersion? PrivateIPAddressVersion = null, Subnet Subnet = null, bool? Primary = null, PublicIPAddress PublicIPAddress = null, IEnumerable<ApplicationSecurityGroup> ApplicationSecurityGroups = null, ProvisioningState? ProvisioningState = null, NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties PrivateLinkConnectionProperties = null)
+        public static NetworkInterfaceIPConfiguration NetworkInterfaceIPConfiguration(string id = null, string name = null, string etag = null, IEnumerable<VirtualNetworkTap> virtualNetworkTaps = null, IEnumerable<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = null, IEnumerable<BackendAddressPool> loadBalancerBackendAddressPools = null, IEnumerable<InboundNatRule> loadBalancerInboundNatRules = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, IPVersion? privateIPAddressVersion = null, Subnet subnet = null, bool? primary = null, PublicIPAddress publicIPAddress = null, IEnumerable<ApplicationSecurityGroup> applicationSecurityGroups = null, ProvisioningState? provisioningState = null, NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = null)
         {
-            VirtualNetworkTaps ??= new List<VirtualNetworkTap>();
-            ApplicationGatewayBackendAddressPools ??= new List<ApplicationGatewayBackendAddressPool>();
-            LoadBalancerBackendAddressPools ??= new List<BackendAddressPool>();
-            LoadBalancerInboundNatRules ??= new List<InboundNatRule>();
-            ApplicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
+            virtualNetworkTaps ??= new List<VirtualNetworkTap>();
+            applicationGatewayBackendAddressPools ??= new List<ApplicationGatewayBackendAddressPool>();
+            loadBalancerBackendAddressPools ??= new List<BackendAddressPool>();
+            loadBalancerInboundNatRules ??= new List<InboundNatRule>();
+            applicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
 
-            return new NetworkInterfaceIPConfiguration(Id, Name, Etag, VirtualNetworkTaps?.ToList(), ApplicationGatewayBackendAddressPools?.ToList(), LoadBalancerBackendAddressPools?.ToList(), LoadBalancerInboundNatRules?.ToList(), PrivateIPAddress, PrivateIPAllocationMethod, PrivateIPAddressVersion, Subnet, Primary, PublicIPAddress, ApplicationSecurityGroups?.ToList(), ProvisioningState, PrivateLinkConnectionProperties);
+            return new NetworkInterfaceIPConfiguration(id, name, etag, virtualNetworkTaps?.ToList(), applicationGatewayBackendAddressPools?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups?.ToList(), provisioningState, privateLinkConnectionProperties);
         }
 
         /// <summary> Initializes a new instance of VirtualNetworkTap. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Resource name. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="Location"> Resource location. </param>
-        /// <param name="Tags"> Resource tags. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="NetworkInterfaceTapConfigurations"> Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped. </param>
-        /// <param name="ResourceGuid"> The resource GUID property of the virtual network tap resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the virtual network tap resource. </param>
-        /// <param name="DestinationNetworkInterfaceIPConfiguration"> The reference to the private IP Address of the collector nic that will receive the tap. </param>
-        /// <param name="DestinationLoadBalancerFrontEndIPConfiguration"> The reference to the private IP address on the internal Load Balancer that will receive the tap. </param>
-        /// <param name="DestinationPort"> The VXLAN destination port that will receive the tapped traffic. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="networkInterfaceTapConfigurations"> Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped. </param>
+        /// <param name="resourceGuid"> The resource GUID property of the virtual network tap resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the virtual network tap resource. </param>
+        /// <param name="destinationNetworkInterfaceIPConfiguration"> The reference to the private IP Address of the collector nic that will receive the tap. </param>
+        /// <param name="destinationLoadBalancerFrontEndIPConfiguration"> The reference to the private IP address on the internal Load Balancer that will receive the tap. </param>
+        /// <param name="destinationPort"> The VXLAN destination port that will receive the tapped traffic. </param>
         /// <returns> A new <see cref="Models.VirtualNetworkTap"/> instance for mocking. </returns>
-        public static VirtualNetworkTap VirtualNetworkTap(string Id = null, string Name = null, string Type = null, string Location = null, IDictionary<string, string> Tags = null, string Etag = null, IEnumerable<NetworkInterfaceTapConfiguration> NetworkInterfaceTapConfigurations = null, string ResourceGuid = null, ProvisioningState? ProvisioningState = null, NetworkInterfaceIPConfiguration DestinationNetworkInterfaceIPConfiguration = null, FrontendIPConfiguration DestinationLoadBalancerFrontEndIPConfiguration = null, int? DestinationPort = null)
+        public static VirtualNetworkTap VirtualNetworkTap(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations = null, string resourceGuid = null, ProvisioningState? provisioningState = null, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration = null, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration = null, int? destinationPort = null)
         {
-            Tags ??= new Dictionary<string, string>();
-            NetworkInterfaceTapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
+            tags ??= new Dictionary<string, string>();
+            networkInterfaceTapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
 
-            return new VirtualNetworkTap(Id, Name, Type, Location, Tags, Etag, NetworkInterfaceTapConfigurations?.ToList(), ResourceGuid, ProvisioningState, DestinationNetworkInterfaceIPConfiguration, DestinationLoadBalancerFrontEndIPConfiguration, DestinationPort);
+            return new VirtualNetworkTap(id, name, type, location, tags, etag, networkInterfaceTapConfigurations?.ToList(), resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort);
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfiguration. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Sub Resource type. </param>
-        /// <param name="VirtualNetworkTap"> The reference to the Virtual Network Tap resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the network interface tap configuration resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Sub Resource type. </param>
+        /// <param name="virtualNetworkTap"> The reference to the Virtual Network Tap resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the network interface tap configuration resource. </param>
         /// <returns> A new <see cref="Models.NetworkInterfaceTapConfiguration"/> instance for mocking. </returns>
-        public static NetworkInterfaceTapConfiguration NetworkInterfaceTapConfiguration(string Id = null, string Name = null, string Etag = null, string Type = null, VirtualNetworkTap VirtualNetworkTap = null, ProvisioningState? ProvisioningState = null)
+        public static NetworkInterfaceTapConfiguration NetworkInterfaceTapConfiguration(string id = null, string name = null, string etag = null, string type = null, VirtualNetworkTap virtualNetworkTap = null, ProvisioningState? provisioningState = null)
         {
-            return new NetworkInterfaceTapConfiguration(Id, Name, Etag, Type, VirtualNetworkTap, ProvisioningState);
+            return new NetworkInterfaceTapConfiguration(id, name, etag, type, virtualNetworkTap, provisioningState);
         }
 
         /// <summary> Initializes a new instance of FrontendIPConfiguration. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Type of the resource. </param>
-        /// <param name="Zones"> A list of availability zones denoting the IP allocated for the resource needs to come from. </param>
-        /// <param name="InboundNatRules"> An array of references to inbound rules that use this frontend IP. </param>
-        /// <param name="InboundNatPools"> An array of references to inbound pools that use this frontend IP. </param>
-        /// <param name="OutboundRules"> An array of references to outbound rules that use this frontend IP. </param>
-        /// <param name="LoadBalancingRules"> An array of references to load balancing rules that use this frontend IP. </param>
-        /// <param name="PrivateIPAddress"> The private IP address of the IP configuration. </param>
-        /// <param name="PrivateIPAllocationMethod"> The Private IP allocation method. </param>
-        /// <param name="PrivateIPAddressVersion"> Whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. </param>
-        /// <param name="Subnet"> The reference to the subnet resource. </param>
-        /// <param name="PublicIPAddress"> The reference to the Public IP resource. </param>
-        /// <param name="PublicIPPrefix"> The reference to the Public IP Prefix resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the frontend IP configuration resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Type of the resource. </param>
+        /// <param name="zones"> A list of availability zones denoting the IP allocated for the resource needs to come from. </param>
+        /// <param name="inboundNatRules"> An array of references to inbound rules that use this frontend IP. </param>
+        /// <param name="inboundNatPools"> An array of references to inbound pools that use this frontend IP. </param>
+        /// <param name="outboundRules"> An array of references to outbound rules that use this frontend IP. </param>
+        /// <param name="loadBalancingRules"> An array of references to load balancing rules that use this frontend IP. </param>
+        /// <param name="privateIPAddress"> The private IP address of the IP configuration. </param>
+        /// <param name="privateIPAllocationMethod"> The Private IP allocation method. </param>
+        /// <param name="privateIPAddressVersion"> Whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. </param>
+        /// <param name="subnet"> The reference to the subnet resource. </param>
+        /// <param name="publicIPAddress"> The reference to the Public IP resource. </param>
+        /// <param name="publicIPPrefix"> The reference to the Public IP Prefix resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the frontend IP configuration resource. </param>
         /// <returns> A new <see cref="Models.FrontendIPConfiguration"/> instance for mocking. </returns>
-        public static FrontendIPConfiguration FrontendIPConfiguration(string Id = null, string Name = null, string Etag = null, string Type = null, IEnumerable<string> Zones = null, IEnumerable<SubResource> InboundNatRules = null, IEnumerable<SubResource> InboundNatPools = null, IEnumerable<SubResource> OutboundRules = null, IEnumerable<SubResource> LoadBalancingRules = null, string PrivateIPAddress = null, IPAllocationMethod? PrivateIPAllocationMethod = null, IPVersion? PrivateIPAddressVersion = null, Subnet Subnet = null, PublicIPAddress PublicIPAddress = null, SubResource PublicIPPrefix = null, ProvisioningState? ProvisioningState = null)
+        public static FrontendIPConfiguration FrontendIPConfiguration(string id = null, string name = null, string etag = null, string type = null, IEnumerable<string> zones = null, IEnumerable<SubResource> inboundNatRules = null, IEnumerable<SubResource> inboundNatPools = null, IEnumerable<SubResource> outboundRules = null, IEnumerable<SubResource> loadBalancingRules = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, IPVersion? privateIPAddressVersion = null, Subnet subnet = null, PublicIPAddress publicIPAddress = null, SubResource publicIPPrefix = null, ProvisioningState? provisioningState = null)
         {
-            Zones ??= new List<string>();
-            InboundNatRules ??= new List<SubResource>();
-            InboundNatPools ??= new List<SubResource>();
-            OutboundRules ??= new List<SubResource>();
-            LoadBalancingRules ??= new List<SubResource>();
+            zones ??= new List<string>();
+            inboundNatRules ??= new List<SubResource>();
+            inboundNatPools ??= new List<SubResource>();
+            outboundRules ??= new List<SubResource>();
+            loadBalancingRules ??= new List<SubResource>();
 
-            return new FrontendIPConfiguration(Id, Name, Etag, Type, Zones?.ToList(), InboundNatRules?.ToList(), InboundNatPools?.ToList(), OutboundRules?.ToList(), LoadBalancingRules?.ToList(), PrivateIPAddress, PrivateIPAllocationMethod, PrivateIPAddressVersion, Subnet, PublicIPAddress, PublicIPPrefix, ProvisioningState);
+            return new FrontendIPConfiguration(id, name, etag, type, zones?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), loadBalancingRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState);
         }
 
         /// <summary> Initializes a new instance of ApplicationGatewayBackendAddressPool. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Name of the backend address pool that is unique within an Application Gateway. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Type of the resource. </param>
-        /// <param name="BackendIPConfigurations"> Collection of references to IPs defined in network interfaces. </param>
-        /// <param name="BackendAddresses"> Backend addresses. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the backend address pool resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Name of the backend address pool that is unique within an Application Gateway. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Type of the resource. </param>
+        /// <param name="backendIPConfigurations"> Collection of references to IPs defined in network interfaces. </param>
+        /// <param name="backendAddresses"> Backend addresses. </param>
+        /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
         /// <returns> A new <see cref="Models.ApplicationGatewayBackendAddressPool"/> instance for mocking. </returns>
-        public static ApplicationGatewayBackendAddressPool ApplicationGatewayBackendAddressPool(string Id = null, string Name = null, string Etag = null, string Type = null, IEnumerable<NetworkInterfaceIPConfiguration> BackendIPConfigurations = null, IEnumerable<ApplicationGatewayBackendAddress> BackendAddresses = null, ProvisioningState? ProvisioningState = null)
+        public static ApplicationGatewayBackendAddressPool ApplicationGatewayBackendAddressPool(string id = null, string name = null, string etag = null, string type = null, IEnumerable<NetworkInterfaceIPConfiguration> backendIPConfigurations = null, IEnumerable<ApplicationGatewayBackendAddress> backendAddresses = null, ProvisioningState? provisioningState = null)
         {
-            BackendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
-            BackendAddresses ??= new List<ApplicationGatewayBackendAddress>();
+            backendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
+            backendAddresses ??= new List<ApplicationGatewayBackendAddress>();
 
-            return new ApplicationGatewayBackendAddressPool(Id, Name, Etag, Type, BackendIPConfigurations?.ToList(), BackendAddresses?.ToList(), ProvisioningState);
+            return new ApplicationGatewayBackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), backendAddresses?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of BackendAddressPool. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Type of the resource. </param>
-        /// <param name="BackendIPConfigurations"> An array of references to IP addresses defined in network interfaces. </param>
-        /// <param name="LoadBalancingRules"> An array of references to load balancing rules that use this backend address pool. </param>
-        /// <param name="OutboundRule"> A reference to an outbound rule that uses this backend address pool. </param>
-        /// <param name="OutboundRules"> An array of references to outbound rules that use this backend address pool. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the backend address pool resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Type of the resource. </param>
+        /// <param name="backendIPConfigurations"> An array of references to IP addresses defined in network interfaces. </param>
+        /// <param name="loadBalancingRules"> An array of references to load balancing rules that use this backend address pool. </param>
+        /// <param name="outboundRule"> A reference to an outbound rule that uses this backend address pool. </param>
+        /// <param name="outboundRules"> An array of references to outbound rules that use this backend address pool. </param>
+        /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
         /// <returns> A new <see cref="Models.BackendAddressPool"/> instance for mocking. </returns>
-        public static BackendAddressPool BackendAddressPool(string Id = null, string Name = null, string Etag = null, string Type = null, IEnumerable<NetworkInterfaceIPConfiguration> BackendIPConfigurations = null, IEnumerable<SubResource> LoadBalancingRules = null, SubResource OutboundRule = null, IEnumerable<SubResource> OutboundRules = null, ProvisioningState? ProvisioningState = null)
+        public static BackendAddressPool BackendAddressPool(string id = null, string name = null, string etag = null, string type = null, IEnumerable<NetworkInterfaceIPConfiguration> backendIPConfigurations = null, IEnumerable<SubResource> loadBalancingRules = null, SubResource outboundRule = null, IEnumerable<SubResource> outboundRules = null, ProvisioningState? provisioningState = null)
         {
-            BackendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
-            LoadBalancingRules ??= new List<SubResource>();
-            OutboundRules ??= new List<SubResource>();
+            backendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
+            loadBalancingRules ??= new List<SubResource>();
+            outboundRules ??= new List<SubResource>();
 
-            return new BackendAddressPool(Id, Name, Etag, Type, BackendIPConfigurations?.ToList(), LoadBalancingRules?.ToList(), OutboundRule, OutboundRules?.ToList(), ProvisioningState);
+            return new BackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), loadBalancingRules?.ToList(), outboundRule, outboundRules?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of InboundNatRule. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Type of the resource. </param>
-        /// <param name="FrontendIPConfiguration"> A reference to frontend IP addresses. </param>
-        /// <param name="BackendIPConfiguration"> A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP. </param>
-        /// <param name="Protocol"> The reference to the transport protocol used by the load balancing rule. </param>
-        /// <param name="FrontendPort"> The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values range from 1 to 65534. </param>
-        /// <param name="BackendPort"> The port used for the internal endpoint. Acceptable values range from 1 to 65535. </param>
-        /// <param name="IdleTimeoutInMinutes"> The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP. </param>
-        /// <param name="EnableFloatingIP"> Configures a virtual machine&apos;s endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can&apos;t be changed after you create the endpoint. </param>
-        /// <param name="EnableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the inbound NAT rule resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Type of the resource. </param>
+        /// <param name="frontendIPConfiguration"> A reference to frontend IP addresses. </param>
+        /// <param name="backendIPConfiguration"> A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP. </param>
+        /// <param name="protocol"> The reference to the transport protocol used by the load balancing rule. </param>
+        /// <param name="frontendPort"> The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values range from 1 to 65534. </param>
+        /// <param name="backendPort"> The port used for the internal endpoint. Acceptable values range from 1 to 65535. </param>
+        /// <param name="idleTimeoutInMinutes"> The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP. </param>
+        /// <param name="enableFloatingIP"> Configures a virtual machine&apos;s endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can&apos;t be changed after you create the endpoint. </param>
+        /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
+        /// <param name="provisioningState"> The provisioning state of the inbound NAT rule resource. </param>
         /// <returns> A new <see cref="Models.InboundNatRule"/> instance for mocking. </returns>
-        public static InboundNatRule InboundNatRule(string Id = null, string Name = null, string Etag = null, string Type = null, SubResource FrontendIPConfiguration = null, NetworkInterfaceIPConfiguration BackendIPConfiguration = null, TransportProtocol? Protocol = null, int? FrontendPort = null, int? BackendPort = null, int? IdleTimeoutInMinutes = null, bool? EnableFloatingIP = null, bool? EnableTcpReset = null, ProvisioningState? ProvisioningState = null)
+        public static InboundNatRule InboundNatRule(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, NetworkInterfaceIPConfiguration backendIPConfiguration = null, TransportProtocol? protocol = null, int? frontendPort = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, ProvisioningState? provisioningState = null)
         {
-            return new InboundNatRule(Id, Name, Etag, Type, FrontendIPConfiguration, BackendIPConfiguration, Protocol, FrontendPort, BackendPort, IdleTimeoutInMinutes, EnableFloatingIP, EnableTcpReset, ProvisioningState);
+            return new InboundNatRule(id, name, etag, type, frontendIPConfiguration, backendIPConfiguration, protocol, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties. </summary>
-        /// <param name="GroupId"> The group ID for current private link connection. </param>
-        /// <param name="RequiredMemberName"> The required member name for current private link connection. </param>
-        /// <param name="Fqdns"> List of FQDNs for current private link connection. </param>
+        /// <param name="groupId"> The group ID for current private link connection. </param>
+        /// <param name="requiredMemberName"> The required member name for current private link connection. </param>
+        /// <param name="fqdns"> List of FQDNs for current private link connection. </param>
         /// <returns> A new <see cref="Models.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/> instance for mocking. </returns>
-        public static NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(string GroupId = null, string RequiredMemberName = null, IEnumerable<string> Fqdns = null)
+        public static NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(string groupId = null, string requiredMemberName = null, IEnumerable<string> fqdns = null)
         {
-            Fqdns ??= new List<string>();
+            fqdns ??= new List<string>();
 
-            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(GroupId, RequiredMemberName, Fqdns?.ToList());
+            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns?.ToList());
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceDnsSettings. </summary>
-        /// <param name="DnsServers"> List of DNS servers IP addresses. Use &apos;AzureProvidedDNS&apos; to switch to azure provided DNS resolution. &apos;AzureProvidedDNS&apos; value cannot be combined with other IPs, it must be the only value in dnsServers collection. </param>
-        /// <param name="AppliedDnsServers"> If the VM that uses this NIC is part of an Availability Set, then this list will have the union of all DNS servers from all NICs that are part of the Availability Set. This property is what is configured on each of those VMs. </param>
-        /// <param name="InternalDnsNameLabel"> Relative DNS name for this NIC used for internal communications between VMs in the same virtual network. </param>
-        /// <param name="InternalFqdn"> Fully qualified DNS name supporting internal communications between VMs in the same virtual network. </param>
-        /// <param name="InternalDomainNameSuffix"> Even if internalDnsNameLabel is not specified, a DNS entry is created for the primary NIC of the VM. This DNS name can be constructed by concatenating the VM name with the value of internalDomainNameSuffix. </param>
+        /// <param name="dnsServers"> List of DNS servers IP addresses. Use &apos;AzureProvidedDNS&apos; to switch to azure provided DNS resolution. &apos;AzureProvidedDNS&apos; value cannot be combined with other IPs, it must be the only value in dnsServers collection. </param>
+        /// <param name="appliedDnsServers"> If the VM that uses this NIC is part of an Availability Set, then this list will have the union of all DNS servers from all NICs that are part of the Availability Set. This property is what is configured on each of those VMs. </param>
+        /// <param name="internalDnsNameLabel"> Relative DNS name for this NIC used for internal communications between VMs in the same virtual network. </param>
+        /// <param name="internalFqdn"> Fully qualified DNS name supporting internal communications between VMs in the same virtual network. </param>
+        /// <param name="internalDomainNameSuffix"> Even if internalDnsNameLabel is not specified, a DNS entry is created for the primary NIC of the VM. This DNS name can be constructed by concatenating the VM name with the value of internalDomainNameSuffix. </param>
         /// <returns> A new <see cref="Models.NetworkInterfaceDnsSettings"/> instance for mocking. </returns>
-        public static NetworkInterfaceDnsSettings NetworkInterfaceDnsSettings(IEnumerable<string> DnsServers = null, IEnumerable<string> AppliedDnsServers = null, string InternalDnsNameLabel = null, string InternalFqdn = null, string InternalDomainNameSuffix = null)
+        public static NetworkInterfaceDnsSettings NetworkInterfaceDnsSettings(IEnumerable<string> dnsServers = null, IEnumerable<string> appliedDnsServers = null, string internalDnsNameLabel = null, string internalFqdn = null, string internalDomainNameSuffix = null)
         {
-            DnsServers ??= new List<string>();
-            AppliedDnsServers ??= new List<string>();
+            dnsServers ??= new List<string>();
+            appliedDnsServers ??= new List<string>();
 
-            return new NetworkInterfaceDnsSettings(DnsServers?.ToList(), AppliedDnsServers?.ToList(), InternalDnsNameLabel, InternalFqdn, InternalDomainNameSuffix);
+            return new NetworkInterfaceDnsSettings(dnsServers?.ToList(), appliedDnsServers?.ToList(), internalDnsNameLabel, internalFqdn, internalDomainNameSuffix);
         }
 
         /// <summary> Initializes a new instance of EffectiveRouteListResult. </summary>
-        /// <param name="Value"> A list of effective routes. </param>
-        /// <param name="NextLink"> The URL to get the next set of results. </param>
+        /// <param name="value"> A list of effective routes. </param>
+        /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <returns> A new <see cref="Models.EffectiveRouteListResult"/> instance for mocking. </returns>
-        public static EffectiveRouteListResult EffectiveRouteListResult(IEnumerable<EffectiveRoute> Value = null, string NextLink = null)
+        public static EffectiveRouteListResult EffectiveRouteListResult(IEnumerable<EffectiveRoute> value = null, string nextLink = null)
         {
-            Value ??= new List<EffectiveRoute>();
+            value ??= new List<EffectiveRoute>();
 
-            return new EffectiveRouteListResult(Value?.ToList(), NextLink);
+            return new EffectiveRouteListResult(value?.ToList(), nextLink);
         }
 
         /// <summary> Initializes a new instance of EffectiveRoute. </summary>
-        /// <param name="Name"> The name of the user defined route. This is optional. </param>
-        /// <param name="DisableBgpRoutePropagation"> If true, on-premises routes are not propagated to the network interfaces in the subnet. </param>
-        /// <param name="Source"> Who created the route. </param>
-        /// <param name="State"> The value of effective route. </param>
-        /// <param name="AddressPrefix"> The address prefixes of the effective routes in CIDR notation. </param>
-        /// <param name="NextHopIpAddress"> The IP address of the next hop of the effective route. </param>
-        /// <param name="NextHopType"> The type of Azure hop the packet should be sent to. </param>
+        /// <param name="name"> The name of the user defined route. This is optional. </param>
+        /// <param name="disableBgpRoutePropagation"> If true, on-premises routes are not propagated to the network interfaces in the subnet. </param>
+        /// <param name="source"> Who created the route. </param>
+        /// <param name="state"> The value of effective route. </param>
+        /// <param name="addressPrefix"> The address prefixes of the effective routes in CIDR notation. </param>
+        /// <param name="nextHopIpAddress"> The IP address of the next hop of the effective route. </param>
+        /// <param name="nextHopType"> The type of Azure hop the packet should be sent to. </param>
         /// <returns> A new <see cref="Models.EffectiveRoute"/> instance for mocking. </returns>
-        public static EffectiveRoute EffectiveRoute(string Name = null, bool? DisableBgpRoutePropagation = null, EffectiveRouteSource? Source = null, EffectiveRouteState? State = null, IEnumerable<string> AddressPrefix = null, IEnumerable<string> NextHopIpAddress = null, RouteNextHopType? NextHopType = null)
+        public static EffectiveRoute EffectiveRoute(string name = null, bool? disableBgpRoutePropagation = null, EffectiveRouteSource? source = null, EffectiveRouteState? state = null, IEnumerable<string> addressPrefix = null, IEnumerable<string> nextHopIpAddress = null, RouteNextHopType? nextHopType = null)
         {
-            AddressPrefix ??= new List<string>();
-            NextHopIpAddress ??= new List<string>();
+            addressPrefix ??= new List<string>();
+            nextHopIpAddress ??= new List<string>();
 
-            return new EffectiveRoute(Name, DisableBgpRoutePropagation, Source, State, AddressPrefix?.ToList(), NextHopIpAddress?.ToList(), NextHopType);
+            return new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefix?.ToList(), nextHopIpAddress?.ToList(), nextHopType);
         }
 
         /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroupListResult. </summary>
-        /// <param name="Value"> A list of effective network security groups. </param>
-        /// <param name="NextLink"> The URL to get the next set of results. </param>
+        /// <param name="value"> A list of effective network security groups. </param>
+        /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityGroupListResult"/> instance for mocking. </returns>
-        public static EffectiveNetworkSecurityGroupListResult EffectiveNetworkSecurityGroupListResult(IEnumerable<EffectiveNetworkSecurityGroup> Value = null, string NextLink = null)
+        public static EffectiveNetworkSecurityGroupListResult EffectiveNetworkSecurityGroupListResult(IEnumerable<EffectiveNetworkSecurityGroup> value = null, string nextLink = null)
         {
-            Value ??= new List<EffectiveNetworkSecurityGroup>();
+            value ??= new List<EffectiveNetworkSecurityGroup>();
 
-            return new EffectiveNetworkSecurityGroupListResult(Value?.ToList(), NextLink);
+            return new EffectiveNetworkSecurityGroupListResult(value?.ToList(), nextLink);
         }
 
         /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroup. </summary>
-        /// <param name="NetworkSecurityGroup"> The ID of network security group that is applied. </param>
-        /// <param name="Association"> Associated resources. </param>
-        /// <param name="EffectiveSecurityRules"> A collection of effective security rules. </param>
-        /// <param name="TagMap"> Mapping of tags to list of IP Addresses included within the tag. </param>
+        /// <param name="networkSecurityGroup"> The ID of network security group that is applied. </param>
+        /// <param name="association"> Associated resources. </param>
+        /// <param name="effectiveSecurityRules"> A collection of effective security rules. </param>
+        /// <param name="tagMap"> Mapping of tags to list of IP Addresses included within the tag. </param>
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityGroup"/> instance for mocking. </returns>
-        public static EffectiveNetworkSecurityGroup EffectiveNetworkSecurityGroup(SubResource NetworkSecurityGroup = null, EffectiveNetworkSecurityGroupAssociation Association = null, IEnumerable<EffectiveNetworkSecurityRule> EffectiveSecurityRules = null, string TagMap = null)
+        public static EffectiveNetworkSecurityGroup EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup = null, EffectiveNetworkSecurityGroupAssociation association = null, IEnumerable<EffectiveNetworkSecurityRule> effectiveSecurityRules = null, string tagMap = null)
         {
-            EffectiveSecurityRules ??= new List<EffectiveNetworkSecurityRule>();
+            effectiveSecurityRules ??= new List<EffectiveNetworkSecurityRule>();
 
-            return new EffectiveNetworkSecurityGroup(NetworkSecurityGroup, Association, EffectiveSecurityRules?.ToList(), TagMap);
+            return new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRules?.ToList(), tagMap);
         }
 
         /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroupAssociation. </summary>
-        /// <param name="Subnet"> The ID of the subnet if assigned. </param>
-        /// <param name="NetworkInterface"> The ID of the network interface if assigned. </param>
+        /// <param name="subnet"> The ID of the subnet if assigned. </param>
+        /// <param name="networkInterface"> The ID of the network interface if assigned. </param>
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityGroupAssociation"/> instance for mocking. </returns>
-        public static EffectiveNetworkSecurityGroupAssociation EffectiveNetworkSecurityGroupAssociation(SubResource Subnet = null, SubResource NetworkInterface = null)
+        public static EffectiveNetworkSecurityGroupAssociation EffectiveNetworkSecurityGroupAssociation(SubResource subnet = null, SubResource networkInterface = null)
         {
-            return new EffectiveNetworkSecurityGroupAssociation(Subnet, NetworkInterface);
+            return new EffectiveNetworkSecurityGroupAssociation(subnet, networkInterface);
         }
 
         /// <summary> Initializes a new instance of EffectiveNetworkSecurityRule. </summary>
-        /// <param name="Name"> The name of the security rule specified by the user (if created by the user). </param>
-        /// <param name="Protocol"> The network protocol this rule applies to. </param>
-        /// <param name="SourcePortRange"> The source port or range. </param>
-        /// <param name="DestinationPortRange"> The destination port or range. </param>
-        /// <param name="SourcePortRanges"> The source port ranges. Expected values include a single integer between 0 and 65535, a range using &apos;-&apos; as separator (e.g. 100-400), or an asterisk (*). </param>
-        /// <param name="DestinationPortRanges"> The destination port ranges. Expected values include a single integer between 0 and 65535, a range using &apos;-&apos; as separator (e.g. 100-400), or an asterisk (*). </param>
-        /// <param name="SourceAddressPrefix"> The source address prefix. </param>
-        /// <param name="DestinationAddressPrefix"> The destination address prefix. </param>
-        /// <param name="SourceAddressPrefixes"> The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*). </param>
-        /// <param name="DestinationAddressPrefixes"> The destination address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*). </param>
-        /// <param name="ExpandedSourceAddressPrefix"> The expanded source address prefix. </param>
-        /// <param name="ExpandedDestinationAddressPrefix"> Expanded destination address prefix. </param>
-        /// <param name="Access"> Whether network traffic is allowed or denied. </param>
-        /// <param name="Priority"> The priority of the rule. </param>
-        /// <param name="Direction"> The direction of the rule. </param>
+        /// <param name="name"> The name of the security rule specified by the user (if created by the user). </param>
+        /// <param name="protocol"> The network protocol this rule applies to. </param>
+        /// <param name="sourcePortRange"> The source port or range. </param>
+        /// <param name="destinationPortRange"> The destination port or range. </param>
+        /// <param name="sourcePortRanges"> The source port ranges. Expected values include a single integer between 0 and 65535, a range using &apos;-&apos; as separator (e.g. 100-400), or an asterisk (*). </param>
+        /// <param name="destinationPortRanges"> The destination port ranges. Expected values include a single integer between 0 and 65535, a range using &apos;-&apos; as separator (e.g. 100-400), or an asterisk (*). </param>
+        /// <param name="sourceAddressPrefix"> The source address prefix. </param>
+        /// <param name="destinationAddressPrefix"> The destination address prefix. </param>
+        /// <param name="sourceAddressPrefixes"> The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*). </param>
+        /// <param name="destinationAddressPrefixes"> The destination address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*). </param>
+        /// <param name="expandedSourceAddressPrefix"> The expanded source address prefix. </param>
+        /// <param name="expandedDestinationAddressPrefix"> Expanded destination address prefix. </param>
+        /// <param name="access"> Whether network traffic is allowed or denied. </param>
+        /// <param name="priority"> The priority of the rule. </param>
+        /// <param name="direction"> The direction of the rule. </param>
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityRule"/> instance for mocking. </returns>
-        public static EffectiveNetworkSecurityRule EffectiveNetworkSecurityRule(string Name = null, EffectiveSecurityRuleProtocol? Protocol = null, string SourcePortRange = null, string DestinationPortRange = null, IEnumerable<string> SourcePortRanges = null, IEnumerable<string> DestinationPortRanges = null, string SourceAddressPrefix = null, string DestinationAddressPrefix = null, IEnumerable<string> SourceAddressPrefixes = null, IEnumerable<string> DestinationAddressPrefixes = null, IEnumerable<string> ExpandedSourceAddressPrefix = null, IEnumerable<string> ExpandedDestinationAddressPrefix = null, SecurityRuleAccess? Access = null, int? Priority = null, SecurityRuleDirection? Direction = null)
+        public static EffectiveNetworkSecurityRule EffectiveNetworkSecurityRule(string name = null, EffectiveSecurityRuleProtocol? protocol = null, string sourcePortRange = null, string destinationPortRange = null, IEnumerable<string> sourcePortRanges = null, IEnumerable<string> destinationPortRanges = null, string sourceAddressPrefix = null, string destinationAddressPrefix = null, IEnumerable<string> sourceAddressPrefixes = null, IEnumerable<string> destinationAddressPrefixes = null, IEnumerable<string> expandedSourceAddressPrefix = null, IEnumerable<string> expandedDestinationAddressPrefix = null, SecurityRuleAccess? access = null, int? priority = null, SecurityRuleDirection? direction = null)
         {
-            SourcePortRanges ??= new List<string>();
-            DestinationPortRanges ??= new List<string>();
-            SourceAddressPrefixes ??= new List<string>();
-            DestinationAddressPrefixes ??= new List<string>();
-            ExpandedSourceAddressPrefix ??= new List<string>();
-            ExpandedDestinationAddressPrefix ??= new List<string>();
+            sourcePortRanges ??= new List<string>();
+            destinationPortRanges ??= new List<string>();
+            sourceAddressPrefixes ??= new List<string>();
+            destinationAddressPrefixes ??= new List<string>();
+            expandedSourceAddressPrefix ??= new List<string>();
+            expandedDestinationAddressPrefix ??= new List<string>();
 
-            return new EffectiveNetworkSecurityRule(Name, Protocol, SourcePortRange, DestinationPortRange, SourcePortRanges?.ToList(), DestinationPortRanges?.ToList(), SourceAddressPrefix, DestinationAddressPrefix, SourceAddressPrefixes?.ToList(), DestinationAddressPrefixes?.ToList(), ExpandedSourceAddressPrefix?.ToList(), ExpandedDestinationAddressPrefix?.ToList(), Access, Priority, Direction);
+            return new EffectiveNetworkSecurityRule(name, protocol, sourcePortRange, destinationPortRange, sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), sourceAddressPrefix, destinationAddressPrefix, sourceAddressPrefixes?.ToList(), destinationAddressPrefixes?.ToList(), expandedSourceAddressPrefix?.ToList(), expandedDestinationAddressPrefix?.ToList(), access, priority, direction);
         }
 
         /// <summary> Initializes a new instance of LoadBalancer. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> Resource name. </param>
-        /// <param name="Type"> Resource type. </param>
-        /// <param name="Location"> Resource location. </param>
-        /// <param name="Tags"> Resource tags. </param>
-        /// <param name="Sku"> The load balancer SKU. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="FrontendIPConfigurations"> Object representing the frontend IPs to be used for the load balancer. </param>
-        /// <param name="BackendAddressPools"> Collection of backend address pools used by a load balancer. </param>
-        /// <param name="LoadBalancingRules"> Object collection representing the load balancing rules Gets the provisioning. </param>
-        /// <param name="Probes"> Collection of probe objects used in the load balancer. </param>
-        /// <param name="InboundNatRules"> Collection of inbound NAT Rules used by a load balancer. Defining inbound NAT rules on your load balancer is mutually exclusive with defining an inbound NAT pool. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an Inbound NAT pool. They have to reference individual inbound NAT rules. </param>
-        /// <param name="InboundNatPools"> Defines an external port range for inbound NAT to a single backend port on NICs associated with a load balancer. Inbound NAT rules are created automatically for each NIC associated with the Load Balancer using an external port from this range. Defining an Inbound NAT pool on your Load Balancer is mutually exclusive with defining inbound Nat rules. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an inbound NAT pool. They have to reference individual inbound NAT rules. </param>
-        /// <param name="OutboundRules"> The outbound rules. </param>
-        /// <param name="ResourceGuid"> The resource GUID property of the load balancer resource. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the load balancer resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="sku"> The load balancer SKU. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="frontendIPConfigurations"> Object representing the frontend IPs to be used for the load balancer. </param>
+        /// <param name="backendAddressPools"> Collection of backend address pools used by a load balancer. </param>
+        /// <param name="loadBalancingRules"> Object collection representing the load balancing rules Gets the provisioning. </param>
+        /// <param name="probes"> Collection of probe objects used in the load balancer. </param>
+        /// <param name="inboundNatRules"> Collection of inbound NAT Rules used by a load balancer. Defining inbound NAT rules on your load balancer is mutually exclusive with defining an inbound NAT pool. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an Inbound NAT pool. They have to reference individual inbound NAT rules. </param>
+        /// <param name="inboundNatPools"> Defines an external port range for inbound NAT to a single backend port on NICs associated with a load balancer. Inbound NAT rules are created automatically for each NIC associated with the Load Balancer using an external port from this range. Defining an Inbound NAT pool on your Load Balancer is mutually exclusive with defining inbound Nat rules. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an inbound NAT pool. They have to reference individual inbound NAT rules. </param>
+        /// <param name="outboundRules"> The outbound rules. </param>
+        /// <param name="resourceGuid"> The resource GUID property of the load balancer resource. </param>
+        /// <param name="provisioningState"> The provisioning state of the load balancer resource. </param>
         /// <returns> A new <see cref="Models.LoadBalancer"/> instance for mocking. </returns>
-        public static LoadBalancer LoadBalancer(string Id = null, string Name = null, string Type = null, string Location = null, IDictionary<string, string> Tags = null, LoadBalancerSku Sku = null, string Etag = null, IEnumerable<FrontendIPConfiguration> FrontendIPConfigurations = null, IEnumerable<BackendAddressPool> BackendAddressPools = null, IEnumerable<LoadBalancingRule> LoadBalancingRules = null, IEnumerable<Probe> Probes = null, IEnumerable<InboundNatRule> InboundNatRules = null, IEnumerable<InboundNatPool> InboundNatPools = null, IEnumerable<OutboundRule> OutboundRules = null, string ResourceGuid = null, ProvisioningState? ProvisioningState = null)
+        public static LoadBalancer LoadBalancer(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, LoadBalancerSku sku = null, string etag = null, IEnumerable<FrontendIPConfiguration> frontendIPConfigurations = null, IEnumerable<BackendAddressPool> backendAddressPools = null, IEnumerable<LoadBalancingRule> loadBalancingRules = null, IEnumerable<Probe> probes = null, IEnumerable<InboundNatRule> inboundNatRules = null, IEnumerable<InboundNatPool> inboundNatPools = null, IEnumerable<OutboundRule> outboundRules = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
-            Tags ??= new Dictionary<string, string>();
-            FrontendIPConfigurations ??= new List<FrontendIPConfiguration>();
-            BackendAddressPools ??= new List<BackendAddressPool>();
-            LoadBalancingRules ??= new List<LoadBalancingRule>();
-            Probes ??= new List<Probe>();
-            InboundNatRules ??= new List<InboundNatRule>();
-            InboundNatPools ??= new List<InboundNatPool>();
-            OutboundRules ??= new List<OutboundRule>();
+            tags ??= new Dictionary<string, string>();
+            frontendIPConfigurations ??= new List<FrontendIPConfiguration>();
+            backendAddressPools ??= new List<BackendAddressPool>();
+            loadBalancingRules ??= new List<LoadBalancingRule>();
+            probes ??= new List<Probe>();
+            inboundNatRules ??= new List<InboundNatRule>();
+            inboundNatPools ??= new List<InboundNatPool>();
+            outboundRules ??= new List<OutboundRule>();
 
-            return new LoadBalancer(Id, Name, Type, Location, Tags, Sku, Etag, FrontendIPConfigurations?.ToList(), BackendAddressPools?.ToList(), LoadBalancingRules?.ToList(), Probes?.ToList(), InboundNatRules?.ToList(), InboundNatPools?.ToList(), OutboundRules?.ToList(), ResourceGuid, ProvisioningState);
+            return new LoadBalancer(id, name, type, location, tags, sku, etag, frontendIPConfigurations?.ToList(), backendAddressPools?.ToList(), loadBalancingRules?.ToList(), probes?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of LoadBalancingRule. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Type of the resource. </param>
-        /// <param name="FrontendIPConfiguration"> A reference to frontend IP addresses. </param>
-        /// <param name="BackendAddressPool"> A reference to a pool of DIPs. Inbound traffic is randomly load balanced across IPs in the backend IPs. </param>
-        /// <param name="Probe"> The reference to the load balancer probe used by the load balancing rule. </param>
-        /// <param name="Protocol"> The reference to the transport protocol used by the load balancing rule. </param>
-        /// <param name="LoadDistribution"> The load distribution policy for this rule. </param>
-        /// <param name="FrontendPort"> The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values are between 0 and 65534. Note that value 0 enables &quot;Any Port&quot;. </param>
-        /// <param name="BackendPort"> The port used for internal connections on the endpoint. Acceptable values are between 0 and 65535. Note that value 0 enables &quot;Any Port&quot;. </param>
-        /// <param name="IdleTimeoutInMinutes"> The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP. </param>
-        /// <param name="EnableFloatingIP"> Configures a virtual machine&apos;s endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can&apos;t be changed after you create the endpoint. </param>
-        /// <param name="EnableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
-        /// <param name="DisableOutboundSnat"> Configures SNAT for the VMs in the backend pool to use the publicIP address specified in the frontend of the load balancing rule. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the load balancing rule resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Type of the resource. </param>
+        /// <param name="frontendIPConfiguration"> A reference to frontend IP addresses. </param>
+        /// <param name="backendAddressPool"> A reference to a pool of DIPs. Inbound traffic is randomly load balanced across IPs in the backend IPs. </param>
+        /// <param name="probe"> The reference to the load balancer probe used by the load balancing rule. </param>
+        /// <param name="protocol"> The reference to the transport protocol used by the load balancing rule. </param>
+        /// <param name="loadDistribution"> The load distribution policy for this rule. </param>
+        /// <param name="frontendPort"> The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values are between 0 and 65534. Note that value 0 enables &quot;Any Port&quot;. </param>
+        /// <param name="backendPort"> The port used for internal connections on the endpoint. Acceptable values are between 0 and 65535. Note that value 0 enables &quot;Any Port&quot;. </param>
+        /// <param name="idleTimeoutInMinutes"> The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP. </param>
+        /// <param name="enableFloatingIP"> Configures a virtual machine&apos;s endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can&apos;t be changed after you create the endpoint. </param>
+        /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
+        /// <param name="disableOutboundSnat"> Configures SNAT for the VMs in the backend pool to use the publicIP address specified in the frontend of the load balancing rule. </param>
+        /// <param name="provisioningState"> The provisioning state of the load balancing rule resource. </param>
         /// <returns> A new <see cref="Models.LoadBalancingRule"/> instance for mocking. </returns>
-        public static LoadBalancingRule LoadBalancingRule(string Id = null, string Name = null, string Etag = null, string Type = null, SubResource FrontendIPConfiguration = null, SubResource BackendAddressPool = null, SubResource Probe = null, TransportProtocol? Protocol = null, LoadDistribution? LoadDistribution = null, int? FrontendPort = null, int? BackendPort = null, int? IdleTimeoutInMinutes = null, bool? EnableFloatingIP = null, bool? EnableTcpReset = null, bool? DisableOutboundSnat = null, ProvisioningState? ProvisioningState = null)
+        public static LoadBalancingRule LoadBalancingRule(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, SubResource backendAddressPool = null, SubResource probe = null, TransportProtocol? protocol = null, LoadDistribution? loadDistribution = null, int? frontendPort = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, bool? disableOutboundSnat = null, ProvisioningState? provisioningState = null)
         {
-            return new LoadBalancingRule(Id, Name, Etag, Type, FrontendIPConfiguration, BackendAddressPool, Probe, Protocol, LoadDistribution, FrontendPort, BackendPort, IdleTimeoutInMinutes, EnableFloatingIP, EnableTcpReset, DisableOutboundSnat, ProvisioningState);
+            return new LoadBalancingRule(id, name, etag, type, frontendIPConfiguration, backendAddressPool, probe, protocol, loadDistribution, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, disableOutboundSnat, provisioningState);
         }
 
         /// <summary> Initializes a new instance of Probe. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Type of the resource. </param>
-        /// <param name="LoadBalancingRules"> The load balancer rules that use this probe. </param>
-        /// <param name="Protocol"> The protocol of the end point. If &apos;Tcp&apos; is specified, a received ACK is required for the probe to be successful. If &apos;Http&apos; or &apos;Https&apos; is specified, a 200 OK response from the specifies URI is required for the probe to be successful. </param>
-        /// <param name="Port"> The port for communicating the probe. Possible values range from 1 to 65535, inclusive. </param>
-        /// <param name="IntervalInSeconds"> The interval, in seconds, for how frequently to probe the endpoint for health status. Typically, the interval is slightly less than half the allocated timeout period (in seconds) which allows two full probes before taking the instance out of rotation. The default value is 15, the minimum value is 5. </param>
-        /// <param name="NumberOfProbes"> The number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endpoints to be taken out of rotation faster or slower than the typical times used in Azure. </param>
-        /// <param name="RequestPath"> The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the probe resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Type of the resource. </param>
+        /// <param name="loadBalancingRules"> The load balancer rules that use this probe. </param>
+        /// <param name="protocol"> The protocol of the end point. If &apos;Tcp&apos; is specified, a received ACK is required for the probe to be successful. If &apos;Http&apos; or &apos;Https&apos; is specified, a 200 OK response from the specifies URI is required for the probe to be successful. </param>
+        /// <param name="port"> The port for communicating the probe. Possible values range from 1 to 65535, inclusive. </param>
+        /// <param name="intervalInSeconds"> The interval, in seconds, for how frequently to probe the endpoint for health status. Typically, the interval is slightly less than half the allocated timeout period (in seconds) which allows two full probes before taking the instance out of rotation. The default value is 15, the minimum value is 5. </param>
+        /// <param name="numberOfProbes"> The number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endpoints to be taken out of rotation faster or slower than the typical times used in Azure. </param>
+        /// <param name="requestPath"> The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value. </param>
+        /// <param name="provisioningState"> The provisioning state of the probe resource. </param>
         /// <returns> A new <see cref="Models.Probe"/> instance for mocking. </returns>
-        public static Probe Probe(string Id = null, string Name = null, string Etag = null, string Type = null, IEnumerable<SubResource> LoadBalancingRules = null, ProbeProtocol? Protocol = null, int? Port = null, int? IntervalInSeconds = null, int? NumberOfProbes = null, string RequestPath = null, ProvisioningState? ProvisioningState = null)
+        public static Probe Probe(string id = null, string name = null, string etag = null, string type = null, IEnumerable<SubResource> loadBalancingRules = null, ProbeProtocol? protocol = null, int? port = null, int? intervalInSeconds = null, int? numberOfProbes = null, string requestPath = null, ProvisioningState? provisioningState = null)
         {
-            LoadBalancingRules ??= new List<SubResource>();
+            loadBalancingRules ??= new List<SubResource>();
 
-            return new Probe(Id, Name, Etag, Type, LoadBalancingRules?.ToList(), Protocol, Port, IntervalInSeconds, NumberOfProbes, RequestPath, ProvisioningState);
+            return new Probe(id, name, etag, type, loadBalancingRules?.ToList(), protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState);
         }
 
         /// <summary> Initializes a new instance of InboundNatPool. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within the set of inbound NAT pools used by the load balancer. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Type of the resource. </param>
-        /// <param name="FrontendIPConfiguration"> A reference to frontend IP addresses. </param>
-        /// <param name="Protocol"> The reference to the transport protocol used by the inbound NAT pool. </param>
-        /// <param name="FrontendPortRangeStart"> The first port number in the range of external ports that will be used to provide Inbound Nat to NICs associated with a load balancer. Acceptable values range between 1 and 65534. </param>
-        /// <param name="FrontendPortRangeEnd"> The last port number in the range of external ports that will be used to provide Inbound Nat to NICs associated with a load balancer. Acceptable values range between 1 and 65535. </param>
-        /// <param name="BackendPort"> The port used for internal connections on the endpoint. Acceptable values are between 1 and 65535. </param>
-        /// <param name="IdleTimeoutInMinutes"> The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP. </param>
-        /// <param name="EnableFloatingIP"> Configures a virtual machine&apos;s endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can&apos;t be changed after you create the endpoint. </param>
-        /// <param name="EnableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the inbound NAT pool resource. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within the set of inbound NAT pools used by the load balancer. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Type of the resource. </param>
+        /// <param name="frontendIPConfiguration"> A reference to frontend IP addresses. </param>
+        /// <param name="protocol"> The reference to the transport protocol used by the inbound NAT pool. </param>
+        /// <param name="frontendPortRangeStart"> The first port number in the range of external ports that will be used to provide Inbound Nat to NICs associated with a load balancer. Acceptable values range between 1 and 65534. </param>
+        /// <param name="frontendPortRangeEnd"> The last port number in the range of external ports that will be used to provide Inbound Nat to NICs associated with a load balancer. Acceptable values range between 1 and 65535. </param>
+        /// <param name="backendPort"> The port used for internal connections on the endpoint. Acceptable values are between 1 and 65535. </param>
+        /// <param name="idleTimeoutInMinutes"> The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP. </param>
+        /// <param name="enableFloatingIP"> Configures a virtual machine&apos;s endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can&apos;t be changed after you create the endpoint. </param>
+        /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
+        /// <param name="provisioningState"> The provisioning state of the inbound NAT pool resource. </param>
         /// <returns> A new <see cref="Models.InboundNatPool"/> instance for mocking. </returns>
-        public static InboundNatPool InboundNatPool(string Id = null, string Name = null, string Etag = null, string Type = null, SubResource FrontendIPConfiguration = null, TransportProtocol? Protocol = null, int? FrontendPortRangeStart = null, int? FrontendPortRangeEnd = null, int? BackendPort = null, int? IdleTimeoutInMinutes = null, bool? EnableFloatingIP = null, bool? EnableTcpReset = null, ProvisioningState? ProvisioningState = null)
+        public static InboundNatPool InboundNatPool(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, TransportProtocol? protocol = null, int? frontendPortRangeStart = null, int? frontendPortRangeEnd = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, ProvisioningState? provisioningState = null)
         {
-            return new InboundNatPool(Id, Name, Etag, Type, FrontendIPConfiguration, Protocol, FrontendPortRangeStart, FrontendPortRangeEnd, BackendPort, IdleTimeoutInMinutes, EnableFloatingIP, EnableTcpReset, ProvisioningState);
+            return new InboundNatPool(id, name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
         }
 
         /// <summary> Initializes a new instance of OutboundRule. </summary>
-        /// <param name="Id"> Resource ID. </param>
-        /// <param name="Name"> The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource. </param>
-        /// <param name="Etag"> A unique read-only string that changes whenever the resource is updated. </param>
-        /// <param name="Type"> Type of the resource. </param>
-        /// <param name="AllocatedOutboundPorts"> The number of outbound ports to be used for NAT. </param>
-        /// <param name="FrontendIPConfigurations"> The Frontend IP addresses of the load balancer. </param>
-        /// <param name="BackendAddressPool"> A reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs. </param>
-        /// <param name="ProvisioningState"> The provisioning state of the outbound rule resource. </param>
-        /// <param name="Protocol"> The protocol for the outbound rule in load balancer. </param>
-        /// <param name="EnableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
-        /// <param name="IdleTimeoutInMinutes"> The timeout for the TCP idle connection. </param>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="type"> Type of the resource. </param>
+        /// <param name="allocatedOutboundPorts"> The number of outbound ports to be used for NAT. </param>
+        /// <param name="frontendIPConfigurations"> The Frontend IP addresses of the load balancer. </param>
+        /// <param name="backendAddressPool"> A reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs. </param>
+        /// <param name="provisioningState"> The provisioning state of the outbound rule resource. </param>
+        /// <param name="protocol"> The protocol for the outbound rule in load balancer. </param>
+        /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
+        /// <param name="idleTimeoutInMinutes"> The timeout for the TCP idle connection. </param>
         /// <returns> A new <see cref="Models.OutboundRule"/> instance for mocking. </returns>
-        public static OutboundRule OutboundRule(string Id = null, string Name = null, string Etag = null, string Type = null, int? AllocatedOutboundPorts = null, IEnumerable<SubResource> FrontendIPConfigurations = null, SubResource BackendAddressPool = null, ProvisioningState? ProvisioningState = null, LoadBalancerOutboundRuleProtocol? Protocol = null, bool? EnableTcpReset = null, int? IdleTimeoutInMinutes = null)
+        public static OutboundRule OutboundRule(string id = null, string name = null, string etag = null, string type = null, int? allocatedOutboundPorts = null, IEnumerable<SubResource> frontendIPConfigurations = null, SubResource backendAddressPool = null, ProvisioningState? provisioningState = null, LoadBalancerOutboundRuleProtocol? protocol = null, bool? enableTcpReset = null, int? idleTimeoutInMinutes = null)
         {
-            FrontendIPConfigurations ??= new List<SubResource>();
+            frontendIPConfigurations ??= new List<SubResource>();
 
-            return new OutboundRule(Id, Name, Etag, Type, AllocatedOutboundPorts, FrontendIPConfigurations?.ToList(), BackendAddressPool, ProvisioningState, Protocol, EnableTcpReset, IdleTimeoutInMinutes);
+            return new OutboundRule(id, name, etag, type, allocatedOutboundPorts, frontendIPConfigurations?.ToList(), backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes);
         }
     }
 }

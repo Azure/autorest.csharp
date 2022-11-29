@@ -457,7 +457,7 @@ namespace Azure.Management.Storage.Models
         /// <returns> A new <see cref="Storage.StoragePrivateEndpointConnectionData"/> instance for mocking. </returns>
         public static StoragePrivateEndpointConnectionData StoragePrivateEndpointConnectionData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, ResourceIdentifier privateEndpointId = null, StoragePrivateLinkServiceConnectionState connectionState = null, StoragePrivateEndpointConnectionProvisioningState? provisioningState = null)
         {
-            return new StoragePrivateEndpointConnectionData(id, name, resourceType, systemData, new SubResource() { Id = privateEndpointId }, connectionState, provisioningState);
+            return new StoragePrivateEndpointConnectionData(id, name, resourceType, systemData, ResourceManagerModelFactory.SubResource(privateEndpointId), connectionState, provisioningState);
         }
 
         /// <summary> Initializes a new instance of BlobRestoreStatus. </summary>

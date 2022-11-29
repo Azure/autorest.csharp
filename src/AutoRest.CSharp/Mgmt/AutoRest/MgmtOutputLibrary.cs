@@ -366,7 +366,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private ModelFactoryTypeProvider? _modelFactory;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(MgmtContext.Context.DefaultNamespace, AllSchemaMap.Values, MgmtContext.Context.SourceInputModel);
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(MgmtContext.Context.DefaultNamespace, AllSchemaMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel);
+
+        private bool ShouldIncludeModel(TypeProvider model)
+        {
+            if (model is MgmtReferenceType)
+                return false;
+
+            return model.Type.Namespace.StartsWith(MgmtContext.Context.DefaultNamespace);
+        }
 
         private ArmClientExtensions? _armClientExtensions;
         public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= EnsureArmClientExtensions();

@@ -14,26 +14,26 @@ namespace AdditionalPropertiesEx.Models
     public static partial class AdditionalPropertiesModelFactory
     {
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
-        /// <param name="Id"></param>
-        /// <param name="AdditionalProperties"> Additional Properties. </param>
+        /// <param name="id"></param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModel"/> instance for mocking. </returns>
-        public static OutputAdditionalPropertiesModel OutputAdditionalPropertiesModel(int Id = default, IReadOnlyDictionary<string, string> AdditionalProperties = null)
+        public static OutputAdditionalPropertiesModel OutputAdditionalPropertiesModel(int id = default, IReadOnlyDictionary<string, string> additionalProperties = null)
         {
-            AdditionalProperties ??= new Dictionary<string, string>();
+            additionalProperties ??= new Dictionary<string, string>();
 
-            return new OutputAdditionalPropertiesModel(Id, AdditionalProperties);
+            return new OutputAdditionalPropertiesModel(id, additionalProperties);
         }
 
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModelStruct. </summary>
-        /// <param name="Id"></param>
-        /// <param name="AdditionalProperties"> Additional Properties. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="AdditionalProperties"/> is null. </exception>
+        /// <param name="id"></param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModelStruct"/> instance for mocking. </returns>
-        public static OutputAdditionalPropertiesModelStruct OutputAdditionalPropertiesModelStruct(int Id = default, IReadOnlyDictionary<string, string> AdditionalProperties = null)
+        public static OutputAdditionalPropertiesModelStruct OutputAdditionalPropertiesModelStruct(int id = default, IReadOnlyDictionary<string, string> additionalProperties = null)
         {
-            AdditionalProperties ??= new Dictionary<string, string>();
+            additionalProperties ??= new Dictionary<string, string>();
 
-            return new OutputAdditionalPropertiesModelStruct(Id, AdditionalProperties);
+            return new OutputAdditionalPropertiesModelStruct(id, additionalProperties);
         }
     }
 }

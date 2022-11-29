@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample.Models
             virtualMachines ??= new List<WritableSubResource>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, sku, platformUpdateDomainCount, platformFaultDomainCount, virtualMachines?.ToList(), new WritableSubResource() { Id = proximityPlacementGroupId }, statuses?.ToList());
+            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, sku, platformUpdateDomainCount, platformFaultDomainCount, virtualMachines?.ToList(), ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId), statuses?.ToList());
         }
 
         /// <summary> Initializes a new instance of VirtualMachineSize. </summary>
@@ -553,7 +553,7 @@ namespace Azure.ResourceManager.Sample.Models
             zones ??= new List<string>();
             networkInterfaces ??= new List<NetworkInterfaceReference>();
 
-            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, zones?.ToList(), new HardwareProfile(hardwareVmSize), storageProfile, new AdditionalCapabilities(ultraSSDEnabled), osProfile, new NetworkProfile(networkInterfaces?.ToList()), new SecurityProfile(encryptionAtHost), new DiagnosticsProfile(bootDiagnostics), new WritableSubResource() { Id = availabilitySetId }, new WritableSubResource() { Id = virtualMachineScaleSetId }, new WritableSubResource() { Id = proximityPlacementGroupId }, priority, evictionPolicy, new BillingProfile(billingMaxPrice), new WritableSubResource() { Id = hostId }, new WritableSubResource() { Id = hostGroupId }, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
+            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, zones?.ToList(), new HardwareProfile(hardwareVmSize), storageProfile, new AdditionalCapabilities(ultraSSDEnabled), osProfile, new NetworkProfile(networkInterfaces?.ToList()), new SecurityProfile(encryptionAtHost), new DiagnosticsProfile(bootDiagnostics), ResourceManagerModelFactory.WritableSubResource(availabilitySetId), ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId), ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId), priority, evictionPolicy, new BillingProfile(billingMaxPrice), ResourceManagerModelFactory.WritableSubResource(hostId), ResourceManagerModelFactory.WritableSubResource(hostGroupId), provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
         }
 
         /// <summary> Initializes a new instance of ImageReference. </summary>
@@ -1038,7 +1038,7 @@ namespace Azure.ResourceManager.Sample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ImageData(id, name, resourceType, systemData, tags, location, new WritableSubResource() { Id = sourceVirtualMachineId }, storageProfile, provisioningState, hyperVGeneration);
+            return new ImageData(id, name, resourceType, systemData, tags, location, ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId), storageProfile, provisioningState, hyperVGeneration);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineCaptureResult. </summary>
@@ -1261,7 +1261,7 @@ namespace Azure.ResourceManager.Sample.Models
             zones ??= new List<string>();
             scaleInRules ??= new List<VirtualMachineScaleSetScaleInRule>();
 
-            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVMs, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, new WritableSubResource() { Id = proximityPlacementGroupId }, new WritableSubResource() { Id = hostGroupId }, new AdditionalCapabilities(ultraSSDEnabled), new ScaleInPolicy(scaleInRules?.ToList()));
+            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVMs, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId), ResourceManagerModelFactory.WritableSubResource(hostGroupId), new AdditionalCapabilities(ultraSSDEnabled), new ScaleInPolicy(scaleInRules?.ToList()));
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>
@@ -1775,7 +1775,7 @@ namespace Azure.ResourceManager.Sample.Models
             networkInterfaces ??= new List<NetworkInterfaceReference>();
             networkInterfaceConfigurations ??= new List<VirtualMachineScaleSetNetworkConfiguration>();
 
-            return new VirtualMachineScaleSetVMData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, resources?.ToList(), zones?.ToList(), latestModelApplied, vmId, instanceView, new HardwareProfile(hardwareVmSize), storageProfile, new AdditionalCapabilities(ultraSSDEnabled), osProfile, new SecurityProfile(encryptionAtHost), new NetworkProfile(networkInterfaces?.ToList()), new VirtualMachineScaleSetVMNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList()), new DiagnosticsProfile(bootDiagnostics), new WritableSubResource() { Id = availabilitySetId }, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy);
+            return new VirtualMachineScaleSetVMData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, resources?.ToList(), zones?.ToList(), latestModelApplied, vmId, instanceView, new HardwareProfile(hardwareVmSize), storageProfile, new AdditionalCapabilities(ultraSSDEnabled), osProfile, new SecurityProfile(encryptionAtHost), new NetworkProfile(networkInterfaces?.ToList()), new VirtualMachineScaleSetVMNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList()), new DiagnosticsProfile(bootDiagnostics), ResourceManagerModelFactory.WritableSubResource(availabilitySetId), provisioningState, licenseType, modelDefinitionApplied, protectionPolicy);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceView. </summary>
