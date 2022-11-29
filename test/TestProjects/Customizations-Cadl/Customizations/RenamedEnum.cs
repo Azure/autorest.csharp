@@ -3,7 +3,7 @@
 
 using Azure.Core;
 
-namespace CustomizationsInCadl
+namespace CustomizationsInCadl.Models
 {
     /// <summary> Renamed enum (original name: EnumToRename). </summary>
     [CodeGenModel("EnumToRename")]

@@ -84,9 +84,18 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
+        private static void WriteIfNotDefault<T>(Utf8JsonWriter writer, string option, T enumValue) where T : struct, Enum
+        {
+            var defaultValue = Configuration.GetDefaultEnumOptionValue(option);
+            if (!enumValue.Equals(defaultValue))
+            {
+                writer.WriteString(option, enumValue.ToString());
+            }
+        }
+
         private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, bool value)
         {
-            var defaultValue = Configuration.GetDefaultOptionValue(option);
+            var defaultValue = Configuration.GetDefaultBoolOptionValue(option);
             if (!defaultValue.HasValue || defaultValue.Value != value)
             {
                 writer.WriteBoolean(option, value);
@@ -137,6 +146,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
+                    WriteIfNotDefault(writer, Configuration.Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), Configuration.ProtocolMethodList);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
@@ -163,8 +173,14 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
             else
             {
-                return Configuration.GetDefaultOptionValue(option)!.Value;
+                return Configuration.GetDefaultBoolOptionValue(option)!.Value;
             }
+        }
+
+        private static T ReadEnumOption<T>(JsonElement root, string option) where T : struct, Enum
+        {
+            var enumStr = ReadStringOption(root, option);
+            return Configuration.GetOptionEnumValueFromString<T>(option, enumStr);
         }
 
         private static string? ReadStringOption(JsonElement root, string option)
@@ -208,6 +224,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
+                ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
                 protocolMethods,
                 suppressAbstractBaseClasses,

@@ -91,31 +91,19 @@
  "Models": [
   {
    "$id": "14",
-   "Name": "BaseModel",
-   "Namespace": "ModelsInCadl",
-   "Description": "Base model",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": []
-  },
-  {
-   "$id": "15",
    "Name": "InputModel",
    "Namespace": "ModelsInCadl",
    "Description": "Model used only as input",
    "IsNullable": false,
-   "BaseModel": {
-    "$ref": "14"
-   },
-   "Usage": "RoundTrip",
+   "Usage": "Input",
    "Properties": [
     {
-     "$id": "16",
+     "$id": "15",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "",
      "Type": {
-      "$id": "17",
+      "$id": "16",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -125,12 +113,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "18",
+     "$id": "17",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "",
      "Type": {
-      "$id": "19",
+      "$id": "18",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -140,12 +128,18 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "20",
+     "$id": "19",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "",
      "Type": {
-      "$ref": "14"
+      "$id": "20",
+      "Name": "BaseModel",
+      "Namespace": "ModelsInCadl",
+      "Description": "Base model",
+      "IsNullable": false,
+      "Usage": "RoundTrip",
+      "Properties": []
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -234,7 +228,7 @@
             "Description": "Derived model",
             "IsNullable": false,
             "BaseModel": {
-             "$ref": "14"
+             "$ref": "20"
             },
             "Usage": "RoundTrip",
             "Properties": [
@@ -300,6 +294,9 @@
    ]
   },
   {
+   "$ref": "20"
+  },
+  {
    "$ref": "29"
   },
   {
@@ -315,7 +312,7 @@
    "Description": "Model used both as input and output",
    "IsNullable": false,
    "BaseModel": {
-    "$ref": "14"
+    "$ref": "20"
    },
    "Usage": "RoundTrip",
    "Properties": [
@@ -566,7 +563,7 @@
    "Description": "Model used both as input and output with primitive types",
    "IsNullable": false,
    "BaseModel": {
-    "$ref": "14"
+    "$ref": "20"
    },
    "Usage": "RoundTrip",
    "Properties": [
@@ -1327,10 +1324,7 @@
    "Namespace": "ModelsInCadl",
    "Description": "Model used only as output",
    "IsNullable": false,
-   "BaseModel": {
-    "$ref": "14"
-   },
-   "Usage": "RoundTrip",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "169",
@@ -1455,7 +1449,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "15"
+        "$ref": "14"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1587,7 +1581,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "15"
+        "$ref": "14"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1691,7 +1685,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "15"
+        "$ref": "14"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1795,7 +1789,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "15"
+        "$ref": "14"
        },
        "Location": "Body",
        "IsRequired": true,

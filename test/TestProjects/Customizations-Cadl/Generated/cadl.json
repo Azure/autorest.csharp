@@ -83,7 +83,7 @@
      "Value": "3"
     }
    ],
-   "IsExtensible": false,
+   "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
   }

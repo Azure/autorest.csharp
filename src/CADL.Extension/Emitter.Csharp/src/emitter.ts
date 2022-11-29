@@ -78,6 +78,7 @@ import { execSync } from "child_process";
 import {
     Client,
     getConvenienceAPIName,
+    isApiVersion,
     isOperationGroup,
     listClients,
     listOperationGroups,
@@ -85,6 +86,7 @@ import {
     OperationGroup
 } from "@azure-tools/cadl-dpg";
 import { ClientKind } from "./type/ClientKind.js";
+import { getVersions } from "@cadl-lang/versioning";
 
 export interface NetEmitterOptions {
     "sdk-folder": string;
@@ -95,10 +97,12 @@ export interface NetEmitterOptions {
     "single-top-level-client"?: boolean;
     skipSDKGeneration: boolean;
     generateConvenienceAPI: boolean; //workaround for cadl-ranch project
+    "unreferenced-types-handling"?: "removeOrInternalize" | "internalize" | "keepAll";
     "new-project": boolean;
     csharpGeneratorPath: string;
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
+    "model-namespace"?: boolean;
 }
 
 const defaultOptions = {
@@ -124,10 +128,12 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", default: false },
         generateConvenienceAPI: { type: "boolean", nullable: true },
+        "unreferenced-types-handling": { type: "string", enum: ["removeOrInternalize", "internalize", "keepAll"], nullable: true },
         "new-project": { type: "boolean", nullable: true },
         csharpGeneratorPath: { type: "string", nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
-        "save-inputs": { type: "boolean", nullable: true }
+        "save-inputs": { type: "boolean", nullable: true },
+        "model-namespace": { type: "boolean", nullable: true }
     },
     required: []
 };
@@ -159,10 +165,12 @@ export async function $onEmit(
         "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
+        "unreferenced-types-handling": resolvedOptions["unreferenced-types-handling"],
         "new-project": resolvedOptions["new-project"],
         csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
         "clear-output-folder": resolvedOptions["clear-output-folder"],
-        "save-inputs": resolvedOptions["save-inputs"]
+        "save-inputs": resolvedOptions["save-inputs"],
+        "model-namespace": resolvedOptions["model-namespace"]
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -216,7 +224,9 @@ export async function $onEmit(
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient: resolvedOptions["single-top-level-client"]
+                SingleTopLevelClient: resolvedOptions["single-top-level-client"],
+                "unreferenced-types-handling": options["unreferenced-types-handling"],
+                "model-namespace": resolvedOptions["model-namespace"]
             } as Configuration;
 
             await program.host.writeFile(
@@ -284,19 +294,30 @@ function createModel(
         return;
     }
     const title = getServiceTitle(program);
-    const version = getServiceVersion(program);
-    if (version === "0000-00-00") {
-        console.error("No API-Version provided.");
-        return;
+    const apiVersions: Set<string> = new Set<string>();
+    let version = getServiceVersion(program);
+    if (version !== "0000-00-00") {
+        apiVersions.add(version);
     }
 
+    const versions = getVersions(
+        program,
+        serviceNamespaceType
+    )[1]?.getVersions();
+    if (versions) {
+        for (const ver of versions) {
+            apiVersions.add(ver.value);
+        }
+        version = versions[versions.length - 1].value; //default version
+    }
+
+    if (apiVersions.size === 0) {
+        throw "No Api-Version Provided";
+    }
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(program, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
-
-    const apiVersions: Set<string> = new Set<string>();
-    apiVersions.add(version);
     const apiVersionParam: InputParameter = {
         Name: "apiVersion",
         NameInRequest: "api-version",
@@ -356,7 +377,6 @@ function createModel(
 
         lroMonitorOperations = getAllLroMonitorOperations(routes, program);
         const clients: InputClient[] = [];
-        // const convenienceOperations: HttpOperation[] = [];
         const dpgClients = listClients(program);
         for (const client of dpgClients) {
             clients.push(emitClient(client));
@@ -366,27 +386,39 @@ function createModel(
             }
         }
 
-        if (apiVersions.size > 1) {
-            apiVersionParam.Kind = InputOperationParameterKind.Constant;
-        }
         for (const client of clients) {
             for (const op of client.Operations) {
-                const apiVersionInOperation = op.Parameters.find(
-                    isApiVersionParameter
+                const apiVersionIndex = op.Parameters.findIndex(
+                    (value) => value.IsApiVersion
                 );
-                if (apiVersionInOperation) {
-                    if (apiVersions.size > 1) {
-                        apiVersionInOperation.Kind =
-                            InputOperationParameterKind.Constant;
-                    }
-                    if (!apiVersionInOperation.DefaultValue) {
-                        apiVersionInOperation.DefaultValue =
-                            apiVersionParam.DefaultValue;
+                if (apiVersionIndex !== -1) {
+                    const apiVersionInOperation =
+                        op.Parameters[apiVersionIndex];
+                    if (
+                        apiVersionInOperation.DefaultValue?.Value &&
+                        !apiVersions.has(
+                            apiVersionInOperation.DefaultValue?.Value
+                        )
+                    ) {
+                        apiVersions.add(
+                            apiVersionInOperation.DefaultValue.Value
+                        );
+                    } else {
+                        if (
+                            apiVersionInOperation.Location ===
+                            apiVersionParam.Location
+                        ) {
+                            op.Parameters[apiVersionIndex] = apiVersionParam;
+                        }
                     }
                 } else {
                     op.Parameters.push(apiVersionParam);
                 }
             }
+        }
+
+        if (apiVersions.size > 1) {
+            apiVersionParam.Kind = InputOperationParameterKind.Constant;
         }
 
         const usages = getUsages(program, convenienceOperations);
@@ -425,7 +457,10 @@ function createModel(
         }
 
         const inputClient = {
-            Name: client.kind === ClientKind.DpgClient ? client.name : client.type.name,
+            Name:
+                client.kind === ClientKind.DpgClient
+                    ? client.name
+                    : client.type.name,
             Description: clientDesc,
             Operations: [],
             Protocol: {},
@@ -447,15 +482,6 @@ function createModel(
             );
 
             applyDefaultContentTypeAndAcceptParameter(inputOperation);
-
-            const apiVersionInOperation = inputOperation.Parameters.find(
-                isApiVersionParameter
-            );
-            if (apiVersionInOperation) {
-                if (apiVersionInOperation.DefaultValue?.Value) {
-                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
-                }
-            }
             inputClient.Operations.push(inputOperation);
             if (
                 inputOperation.GenerateConvenienceMethod ||
@@ -464,18 +490,6 @@ function createModel(
                 convenienceOperations.push(httpOperation);
         }
         return inputClient;
-    }
-
-    function isApiVersionParameter(parameter: InputParameter): boolean {
-        return (
-            parameter.IsApiVersion ||
-            (parameter.Location === RequestLocation.Query &&
-                parameter.Name === "api-version") ||
-            ([RequestLocation.Uri, RequestLocation.Path].includes(
-                parameter.Location
-            ) &&
-                parameter.Name === "ApiVersion")
-        );
     }
 
     function getAllLroMonitorOperations(
@@ -789,15 +803,13 @@ function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
-        const isApiVersion: boolean =
-            requestLocation === RequestLocation.Query &&
-            name.toLocaleLowerCase() === "api-version";
+        const isApiVer: boolean = isApiVersion(program, parameter);
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
-            : isApiVersion
+            : isApiVer
             ? InputOperationParameterKind.Client
             : InputOperationParameterKind.Method;
         return {
@@ -808,7 +820,7 @@ function loadOperation(
             Location: requestLocation,
             DefaultValue: defaultValue,
             IsRequired: !param.optional,
-            IsApiVersion: isApiVersion,
+            IsApiVersion: isApiVer,
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
