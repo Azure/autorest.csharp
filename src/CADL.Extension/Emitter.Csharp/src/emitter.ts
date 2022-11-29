@@ -238,7 +238,7 @@ export async function $onEmit(
                 const newProjectOption = options["new-project"]
                     ? "--new-project"
                     : "";
-                const command = `dotnet ${resolvePath(
+                const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath
                 )} --project-path ${outputFolder} ${newProjectOption}`;
                 console.info(command);
@@ -249,7 +249,8 @@ export async function $onEmit(
                     if (error.message) console.log(error.message);
                     if (error.stderr) console.error(error.stderr);
                     if (error.stdout) console.log(error.stdout);
-                    throw `${error.message}\n${error.stderr}`
+
+                    throw error;
                 }
             }
 
