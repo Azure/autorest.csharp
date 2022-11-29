@@ -59,7 +59,7 @@ function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$
     if ($cadlFolders) {
         $cadlFolder = $cadlFolders[0]
         $cadlMain = Join-Path $cadlFolder "main.cadl"
-        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true"
+        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
     }
 }
 

@@ -6,6 +6,7 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
 using ExtensibleEnums;
+using ExtensibleEnums.Models;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests

@@ -58,6 +58,38 @@ namespace MgmtMockAndSample
             return GetExtensionClient(tenantResource).GetTenantActivityLogs(filter, select, cancellationToken);
         }
 
+        /// <summary>
+        /// Calculate the hash of the given template.
+        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
+        /// Operation Id: Deployments_CalculateTemplateHash
+        /// </summary>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
+        public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(template, nameof(template));
+
+            return await GetExtensionClient(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Calculate the hash of the given template.
+        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
+        /// Operation Id: Deployments_CalculateTemplateHash
+        /// </summary>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
+        public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(template, nameof(template));
+
+            return GetExtensionClient(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
+        }
+
         private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
         {
             return subscriptionResource.GetCachedClient((client) =>

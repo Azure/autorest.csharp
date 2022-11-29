@@ -246,5 +246,49 @@ namespace MgmtMockAndSample
                 throw;
             }
         }
+
+        /// <summary>
+        /// Gets all role assignments for the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}/validate
+        /// Operation Id: RoleAssignments_Validate
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> ValidateAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentResource.Validate");
+            scope.Start();
+            try
+            {
+                var response = await _roleAssignmentRestClient.ValidateAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Gets all role assignments for the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}/validate
+        /// Operation Id: RoleAssignments_Validate
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response Validate(CancellationToken cancellationToken = default)
+        {
+            using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentResource.Validate");
+            scope.Start();
+            try
+            {
+                var response = _roleAssignmentRestClient.Validate(Id.SubscriptionId, Id.Name, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

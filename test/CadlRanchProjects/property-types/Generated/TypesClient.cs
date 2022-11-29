@@ -182,5 +182,15 @@ namespace Models.Property.Types
 
             return new DictionaryString(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
+
+        /// <summary> Initializes a new instance of Never. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual Never GetNeverClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new Never(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
     }
 }

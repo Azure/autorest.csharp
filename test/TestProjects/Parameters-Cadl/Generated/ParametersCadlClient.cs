@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using ParametersCadl.ParameterOrders;
+using ParametersCadl.Models;
 
 namespace ParametersCadl
 {

@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ApiVersionInCadl.Models;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -38,8 +39,10 @@ namespace ApiVersionInCadl
         /// Supported Cognitive Services endpoints (protocol and hostname, for example:
         /// https://westus2.api.cognitive.microsoft.com).
         /// </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ApiVersionInCadlClient(Uri endpoint) : this(endpoint, "1.0", new ApiVersionInCadlClientOptions())
+        /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
+        public ApiVersionInCadlClient(Uri endpoint, string apiVersion) : this(endpoint, apiVersion, new ApiVersionInCadlClientOptions())
         {
         }
 

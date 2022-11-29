@@ -9,6 +9,7 @@ using Azure;
 using NUnit.Framework;
 using Models.Property.Types;
 using System.Collections.Generic;
+using Models.Property.Types.Models;
 
 namespace CadlRanchProjects.Tests
 {
