@@ -33,99 +33,90 @@ namespace MgmtDiscriminator.Models
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleAction"/> instance for mocking. </returns>
-        public static DeliveryRuleAction DeliveryRuleAction(DeliveryRuleActionType name = default, string foo = null)
+        public static DeliveryRuleAction DeliveryRuleAction(string name = null, string foo = null)
         {
             return new DeliveryRuleAction(name, foo);
         }
 
         /// <summary> Initializes a new instance of UrlRedirectAction. </summary>
-        /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlRedirectAction"/> instance for mocking. </returns>
-        public static UrlRedirectAction UrlRedirectAction(DeliveryRuleActionType name = default, string foo = null, UrlRedirectActionParameters parameters = null)
+        public static UrlRedirectAction UrlRedirectAction(string foo = null, UrlRedirectActionParameters parameters = null)
         {
-            return new UrlRedirectAction(name, foo, parameters);
+            return new UrlRedirectAction("UrlRedirect", foo, parameters);
         }
 
         /// <summary> Initializes a new instance of UrlSigningAction. </summary>
-        /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlSigningAction"/> instance for mocking. </returns>
-        public static UrlSigningAction UrlSigningAction(DeliveryRuleActionType name = default, string foo = null, UrlSigningActionParameters parameters = null)
+        public static UrlSigningAction UrlSigningAction(string foo = null, UrlSigningActionParameters parameters = null)
         {
-            return new UrlSigningAction(name, foo, parameters);
+            return new UrlSigningAction("UrlSigning", foo, parameters);
         }
 
         /// <summary> Initializes a new instance of OriginGroupOverrideAction. </summary>
-        /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.OriginGroupOverrideAction"/> instance for mocking. </returns>
-        public static OriginGroupOverrideAction OriginGroupOverrideAction(DeliveryRuleActionType name = default, string foo = null, OriginGroupOverrideActionParameters parameters = null)
+        public static OriginGroupOverrideAction OriginGroupOverrideAction(string foo = null, OriginGroupOverrideActionParameters parameters = null)
         {
-            return new OriginGroupOverrideAction(name, foo, parameters);
+            return new OriginGroupOverrideAction("OriginGroupOverride", foo, parameters);
         }
 
         /// <summary> Initializes a new instance of UrlRewriteAction. </summary>
-        /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlRewriteAction"/> instance for mocking. </returns>
-        public static UrlRewriteAction UrlRewriteAction(DeliveryRuleActionType name = default, string foo = null, UrlRewriteActionParameters parameters = null)
+        public static UrlRewriteAction UrlRewriteAction(string foo = null, UrlRewriteActionParameters parameters = null)
         {
-            return new UrlRewriteAction(name, foo, parameters);
+            return new UrlRewriteAction("UrlRewrite", foo, parameters);
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleRequestHeaderAction. </summary>
-        /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRequestHeaderAction"/> instance for mocking. </returns>
-        public static DeliveryRuleRequestHeaderAction DeliveryRuleRequestHeaderAction(DeliveryRuleActionType name = default, string foo = null, HeaderActionParameters parameters = null)
+        public static DeliveryRuleRequestHeaderAction DeliveryRuleRequestHeaderAction(string foo = null, HeaderActionParameters parameters = null)
         {
-            return new DeliveryRuleRequestHeaderAction(name, foo, parameters);
+            return new DeliveryRuleRequestHeaderAction("ModifyRequestHeader", foo, parameters);
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleResponseHeaderAction. </summary>
-        /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleResponseHeaderAction"/> instance for mocking. </returns>
-        public static DeliveryRuleResponseHeaderAction DeliveryRuleResponseHeaderAction(DeliveryRuleActionType name = default, string foo = null, HeaderActionParameters parameters = null)
+        public static DeliveryRuleResponseHeaderAction DeliveryRuleResponseHeaderAction(string foo = null, HeaderActionParameters parameters = null)
         {
-            return new DeliveryRuleResponseHeaderAction(name, foo, parameters);
+            return new DeliveryRuleResponseHeaderAction("ModifyResponseHeader", foo, parameters);
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleCacheExpirationAction. </summary>
-        /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCacheExpirationAction"/> instance for mocking. </returns>
-        public static DeliveryRuleCacheExpirationAction DeliveryRuleCacheExpirationAction(DeliveryRuleActionType name = default, string foo = null, CacheExpirationActionParameters parameters = null)
+        public static DeliveryRuleCacheExpirationAction DeliveryRuleCacheExpirationAction(string foo = null, CacheExpirationActionParameters parameters = null)
         {
-            return new DeliveryRuleCacheExpirationAction(name, foo, parameters);
+            return new DeliveryRuleCacheExpirationAction("CacheExpiration", foo, parameters);
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleCacheKeyQueryStringAction. </summary>
-        /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/> instance for mocking. </returns>
-        public static DeliveryRuleCacheKeyQueryStringAction DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType name = default, string foo = null, CacheKeyQueryStringActionParameters parameters = null)
+        public static DeliveryRuleCacheKeyQueryStringAction DeliveryRuleCacheKeyQueryStringAction(string foo = null, CacheKeyQueryStringActionParameters parameters = null)
         {
-            return new DeliveryRuleCacheKeyQueryStringAction(name, foo, parameters);
+            return new DeliveryRuleCacheKeyQueryStringAction("CacheKeyQueryString", foo, parameters);
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleRouteConfigurationOverrideAction. </summary>
-        /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/> instance for mocking. </returns>
-        public static DeliveryRuleRouteConfigurationOverrideAction DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType name = default, string foo = null, RouteConfigurationOverrideActionParameters parameters = null)
+        public static DeliveryRuleRouteConfigurationOverrideAction DeliveryRuleRouteConfigurationOverrideAction(string foo = null, RouteConfigurationOverrideActionParameters parameters = null)
         {
-            return new DeliveryRuleRouteConfigurationOverrideAction(name, foo, parameters);
+            return new DeliveryRuleRouteConfigurationOverrideAction("RouteConfigurationOverride", foo, parameters);
         }
     }
 }

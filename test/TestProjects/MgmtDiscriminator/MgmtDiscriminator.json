@@ -305,6 +305,11 @@
                         "name": "MatchVariable",
                         "modelAsString": true
                     }
+                },
+                "foo": {
+                    "description": "For test",
+                    "type": "string",
+                    "readOnly": true
                 }
             }
         },

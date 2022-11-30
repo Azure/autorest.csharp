@@ -115,6 +115,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             var methodParameters = new List<Parameter>(ctorSignature.Parameters.Count);
             var cache = new Dictionary<Parameter, Stack<ObjectTypeProperty>>();
 
+            var discriminator = modelType.Discriminator;
+
             foreach (var ctorParameter in ctorSignature.Parameters)
             {
                 var property = ctor.FindPropertyInitializedByParameter(ctorParameter);
@@ -122,9 +124,29 @@ namespace AutoRest.CSharp.Output.Models.Types
                     continue;
 
                 (var parameterName, var propertyStack) = GetPropertyStack(property);
+                property = propertyStack.Peek();
 
-                // need to check the corresponding property
-                var inputType = TypeFactory.GetInputType(propertyStack.Peek().Declaration.Type);
+                var inputType = property.Declaration.Type;
+                // check if the property is the discriminator
+                if (discriminator != null && discriminator.Property == property)
+                {
+                    var value = discriminator.Value;
+                    if (value != null)
+                    {
+                        // this is a derived class
+                        continue;
+                    }
+                    else
+                    {
+                        // this is the base
+                        if (inputType.TryCast<EnumType>(out var enumType))
+                        {
+                            inputType = enumType.ValueType;
+                        }
+                    }
+                }
+
+                inputType = TypeFactory.GetInputType(inputType);
                 if (!inputType.IsValueType)
                 {
                     inputType = inputType.WithNullable(true);
@@ -181,6 +203,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static bool RequiresModelFactory(SerializableObjectType model)
         {
+            // TODO -- we might need to remove the `IsAbstract` check
             if (model.Declaration.Accessibility != "public" || !model.IncludeDeserializer || model.Declaration.IsAbstract)
             {
                 return false;

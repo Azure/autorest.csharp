@@ -7,7 +7,9 @@ using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -79,11 +81,31 @@ namespace AutoRest.CSharp.Generation.Writers
                 initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, assignment, parameter.Type));
             }
 
+            if (model.Discriminator is ObjectTypeDiscriminator discriminator && discriminator.Value is Constant discriminatorValue)
+            {
+                var property = discriminator.Property;
+                initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{GetRawEnumValue(discriminatorValue):L}"));
+            }
+
             _writer.WriteMethodDocumentation(method);
             using (_writer.WriteMethodDeclaration(method))
             {
                 _writer.WriteParameterNullChecks(method.Parameters);
                 _writer.WriteInitialization(v => _writer.Line($"return {v};"), model, ctor, initializes);
+            }
+        }
+
+        private static object? GetRawEnumValue(Constant constant)
+        {
+            var value = constant.Value;
+            switch (value)
+            {
+                case Constant anotherConstant:
+                    return GetRawEnumValue(anotherConstant);
+                case EnumTypeValue enumValue:
+                    return GetRawEnumValue(enumValue.Value);
+                default:
+                    return value;
             }
         }
     }
