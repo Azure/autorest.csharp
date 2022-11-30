@@ -8,7 +8,7 @@
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> The MemoryType. </summary>
-    public enum MemoryType
+    public enum MemoryType : long
     {
         /// <summary> -1. </summary>
         _1 = -1,

@@ -413,7 +413,7 @@ Examples:
             {
                 writer.WriteXmlDocumentationSummary($"{schema.Description}");
 
-                using (writer.Scope($"{schema.Declaration.Accessibility} enum {schema.Declaration.Name}"))
+                using (writer.Scope($"{schema.Declaration.Accessibility} enum {schema.Declaration.Name}{(schema.IsLongValueType ? " : long" : "")}"))
                 {
                     foreach (EnumTypeValue value in schema.Values)
                     {
