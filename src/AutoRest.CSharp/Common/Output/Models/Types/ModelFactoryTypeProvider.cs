@@ -203,8 +203,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static bool RequiresModelFactory(SerializableObjectType model)
         {
-            // TODO -- we might need to remove the `IsAbstract` check
-            if (model.Declaration.Accessibility != "public" || !model.IncludeDeserializer || model.Declaration.IsAbstract)
+            if (model.Declaration.Accessibility != "public" || !model.IncludeDeserializer)
+            {
+                return false;
+            }
+
+            if (model.Declaration.IsAbstract && model.Discriminator == null)
             {
                 return false;
             }

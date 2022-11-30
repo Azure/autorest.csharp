@@ -29,6 +29,15 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleData(id, name, resourceType, systemData, properties);
         }
 
+        /// <summary> Initializes a new instance of DeliveryRuleCondition. </summary>
+        /// <param name="name"> The name of the condition for the delivery rule. </param>
+        /// <param name="foo"> For test. </param>
+        /// <returns> A new <see cref="Models.DeliveryRuleCondition"/> instance for mocking. </returns>
+        public static DeliveryRuleCondition DeliveryRuleCondition(string name = null, string foo = null)
+        {
+            return new Models.DeliveryRuleCondition(name, foo);
+        }
+
         /// <summary> Initializes a new instance of DeliveryRuleAction. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>

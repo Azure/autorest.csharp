@@ -95,18 +95,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static object? GetRawEnumValue(Constant constant)
+        private static object? GetRawEnumValue(Constant constant) => constant.Value switch
         {
-            var value = constant.Value;
-            switch (value)
-            {
-                case Constant anotherConstant:
-                    return GetRawEnumValue(anotherConstant);
-                case EnumTypeValue enumValue:
-                    return GetRawEnumValue(enumValue.Value);
-                default:
-                    return value;
-            }
-        }
+            Constant anotherConstant => GetRawEnumValue(anotherConstant),
+            EnumTypeValue enumValue => GetRawEnumValue(enumValue.Value),
+            _ => constant.Value
+        };
     }
 }
