@@ -35,11 +35,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleCondition"/> instance for mocking. </returns>
         public static DeliveryRuleCondition DeliveryRuleCondition(string name = null, string foo = null)
         {
-            return new UnknownDeliveryRuleCondition()
-            {
-                Name = name,
-                Foo = foo
-            };
+            return new UnknownDeliveryRuleCondition(name, foo);
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleAction. </summary>
@@ -48,11 +44,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleAction"/> instance for mocking. </returns>
         public static DeliveryRuleAction DeliveryRuleAction(string name = null, string foo = null)
         {
-            return new UnknownDeliveryRuleAction()
-            {
-                Name = name,
-                Foo = foo
-            };
+            return new UnknownDeliveryRuleAction(name, foo);
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleRemoteAddressCondition. </summary>

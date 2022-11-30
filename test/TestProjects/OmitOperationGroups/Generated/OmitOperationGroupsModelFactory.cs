@@ -25,6 +25,18 @@ namespace OmitOperationGroups.Models
             return new ModelZ(h, i);
         }
 
+        /// <summary> Initializes a new instance of ModelQ. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="m"></param>
+        /// <returns> A new <see cref="Models.ModelQ"/> instance for mocking. </returns>
+        public static ModelQ ModelQ(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string m = null)
+        {
+            return new ModelQ(id, name, resourceType, systemData, m);
+        }
+
         /// <summary> Initializes a new instance of Model2Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

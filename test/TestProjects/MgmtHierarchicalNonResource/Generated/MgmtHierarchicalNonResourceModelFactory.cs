@@ -8,12 +8,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MgmtHierarchicalNonResource;
 
 namespace MgmtHierarchicalNonResource.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class MgmtHierarchicalNonResourceModelFactory
     {
+        /// <summary> Initializes a new instance of SharedGalleryData. </summary>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="uniqueId"> The unique id of this shared gallery. </param>
+        /// <returns> A new <see cref="MgmtHierarchicalNonResource.SharedGalleryData"/> instance for mocking. </returns>
+        public static SharedGalleryData SharedGalleryData(string name = null, string location = null, string uniqueId = null)
+        {
+            return new SharedGalleryData(name, location, uniqueId);
+        }
+
         /// <summary> Initializes a new instance of PirSharedGalleryResource. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>

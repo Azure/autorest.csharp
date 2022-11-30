@@ -305,6 +305,25 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostData(id, name, resourceType, systemData, tags, location, sku, platformFaultDomain, autoReplaceOnFailure, hostId, virtualMachines?.ToList(), licenseType, provisioningOn, provisioningState, instanceView);
         }
 
+        /// <summary> Initializes a new instance of SshPublicKeyData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="publicKey">
+        /// SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format.
+        /// Serialized Name: SshPublicKeyResource.properties.publicKey
+        /// </param>
+        /// <returns> A new <see cref="Sample.SshPublicKeyData"/> instance for mocking. </returns>
+        public static SshPublicKeyData SshPublicKeyData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string publicKey = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new SshPublicKeyData(id, name, resourceType, systemData, tags, location, publicKey);
+        }
+
         /// <summary> Initializes a new instance of SshPublicKeyGenerateKeyPairResult. </summary>
         /// <param name="privateKey">
         /// Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
@@ -336,6 +355,41 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             return new SshPublicKeyGenerateKeyPairResult(privateKey, publicKey, id);
+        }
+
+        /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="operatingSystem">
+        /// The operating system this extension supports.
+        /// Serialized Name: VirtualMachineExtensionImage.properties.operatingSystem
+        /// </param>
+        /// <param name="computeRole">
+        /// The type of role (IaaS or PaaS) this extension supports.
+        /// Serialized Name: VirtualMachineExtensionImage.properties.computeRole
+        /// </param>
+        /// <param name="handlerSchema">
+        /// The schema defined by publisher, where extension consumers should provide settings in a matching schema.
+        /// Serialized Name: VirtualMachineExtensionImage.properties.handlerSchema
+        /// </param>
+        /// <param name="vmScaleSetEnabled">
+        /// Whether the extension can be used on xRP VMScaleSets. By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS.
+        /// Serialized Name: VirtualMachineExtensionImage.properties.vmScaleSetEnabled
+        /// </param>
+        /// <param name="supportsMultipleExtensions">
+        /// Whether the handler can support multiple extensions.
+        /// Serialized Name: VirtualMachineExtensionImage.properties.supportsMultipleExtensions
+        /// </param>
+        /// <returns> A new <see cref="Sample.VirtualMachineExtensionImageData"/> instance for mocking. </returns>
+        public static VirtualMachineExtensionImageData VirtualMachineExtensionImageData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string operatingSystem = null, string computeRole = null, string handlerSchema = null, bool? vmScaleSetEnabled = null, bool? supportsMultipleExtensions = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, operatingSystem, computeRole, handlerSchema, vmScaleSetEnabled, supportsMultipleExtensions);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionData. </summary>

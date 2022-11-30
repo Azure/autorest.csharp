@@ -246,6 +246,23 @@ namespace MgmtMockAndSample.Models
             return new DiskEncryptionSetData(id, name, resourceType, systemData, identity, encryptionType, activeKey, previousKeys?.ToList(), provisioningState, rotationToLatestKeyVersionEnabled, lastKeyRotationTimestamp, federatedClientId, minimumTlsVersion, location, tags);
         }
 
+        /// <summary> Initializes a new instance of ManagedHsmData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="properties"> Properties of the managed HSM. </param>
+        /// <param name="sku"> SKU details. </param>
+        /// <returns> A new <see cref="MgmtMockAndSample.ManagedHsmData"/> instance for mocking. </returns>
+        public static ManagedHsmData ManagedHsmData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, ManagedHsmProperties properties = null, ManagedHsmSku sku = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new ManagedHsmData(id, name, resourceType, systemData, tags, location, properties, sku);
+        }
+
         /// <summary> Initializes a new instance of ManagedHsmProperties. </summary>
         /// <param name="settings"> The settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
         /// <param name="protectedSettings"> The protected settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
@@ -280,6 +297,26 @@ namespace MgmtMockAndSample.Models
         public static MhsmPrivateEndpointConnectionItem MhsmPrivateEndpointConnectionItem(ResourceIdentifier privateEndpointId = null, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = null)
         {
             return new MhsmPrivateEndpointConnectionItem(ResourceManagerModelFactory.SubResource(privateEndpointId), privateLinkServiceConnectionState, provisioningState);
+        }
+
+        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="etag"> Modified whenever there is a change in the state of private endpoint connection. </param>
+        /// <param name="privateEndpointId"> Properties of the private endpoint object. </param>
+        /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
+        /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
+        /// <param name="sku"> SKU details. </param>
+        /// <returns> A new <see cref="MgmtMockAndSample.MhsmPrivateEndpointConnectionData"/> instance for mocking. </returns>
+        public static MhsmPrivateEndpointConnectionData MhsmPrivateEndpointConnectionData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string etag = null, ResourceIdentifier privateEndpointId = null, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = null, ManagedHsmSku sku = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new MhsmPrivateEndpointConnectionData(id, name, resourceType, systemData, tags, location, etag, ResourceManagerModelFactory.SubResource(privateEndpointId), privateLinkServiceConnectionState, provisioningState, sku);
         }
 
         /// <summary> Initializes a new instance of DeletedManagedHsmData. </summary>

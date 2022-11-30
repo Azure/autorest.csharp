@@ -7,6 +7,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
+using Azure.ResourceManager.Models;
 using SubscriptionExtensions;
 
 namespace SubscriptionExtensions.Models
@@ -14,5 +16,37 @@ namespace SubscriptionExtensions.Models
     /// <summary> Model factory for read-only models. </summary>
     public static partial class SubscriptionExtensionsModelFactory
     {
+
+        /// <summary> Initializes a new instance of ToasterData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="foo"> specifies the foo. </param>
+        /// <returns> A new <see cref="SubscriptionExtensions.ToasterData"/> instance for mocking. </returns>
+        public static ToasterData ToasterData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string foo = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new ToasterData(id, name, resourceType, systemData, tags, location, foo);
+        }
+
+        /// <summary> Initializes a new instance of OvenData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="bar"> specifies the bar. </param>
+        /// <returns> A new <see cref="SubscriptionExtensions.OvenData"/> instance for mocking. </returns>
+        public static OvenData OvenData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string bar = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new OvenData(id, name, resourceType, systemData, tags, location, bar);
+        }
     }
 }

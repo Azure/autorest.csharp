@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 else
                 {
                     model = (SerializableObjectType)discriminator.DefaultObjectType!;
-                    ctor = model.InitializationConstructor;
+                    ctor = model.SerializationConstructor;
                 }
             }
 

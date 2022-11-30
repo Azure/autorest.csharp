@@ -160,6 +160,18 @@ namespace MgmtScopeResource.Models
             return new TemplateHashResult(minifiedTemplate, templateHash);
         }
 
+        /// <summary> Initializes a new instance of ResourceLinkData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="properties"> Properties for resource link. </param>
+        /// <returns> A new <see cref="MgmtScopeResource.ResourceLinkData"/> instance for mocking. </returns>
+        public static ResourceLinkData ResourceLinkData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, ResourceLinkProperties properties = null)
+        {
+            return new ResourceLinkData(id, name, resourceType, systemData, properties);
+        }
+
         /// <summary> Initializes a new instance of ResourceLinkProperties. </summary>
         /// <param name="sourceId"> The fully qualified ID of the source resource in the link. </param>
         /// <param name="targetId"> The fully qualified ID of the target resource in the link. </param>

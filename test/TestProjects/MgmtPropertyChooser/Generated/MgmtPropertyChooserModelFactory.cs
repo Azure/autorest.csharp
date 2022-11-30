@@ -77,6 +77,21 @@ namespace MgmtPropertyChooser.Models
             return new VirtualMachineExtension(id, name, resourceType, systemData, tags, location, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState);
         }
 
+        /// <summary> Initializes a new instance of MgmtPropertyChooserResourceData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <returns> A new <see cref="Models.MgmtPropertyChooserResourceData"/> instance for mocking. </returns>
+        public static MgmtPropertyChooserResourceData MgmtPropertyChooserResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string location = null, IDictionary<string, string> tags = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new MgmtPropertyChooserResourceData(id, name, resourceType, systemData, location, tags);
+        }
+
         /// <summary> Initializes a new instance of IdentityWithRenamedProperty. </summary>
         /// <param name="testPrincipalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>

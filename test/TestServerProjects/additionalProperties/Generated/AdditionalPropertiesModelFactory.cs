@@ -25,6 +25,20 @@ namespace additionalProperties.Models
             return new PetAPTrue(id, name, status, additionalProperties);
         }
 
+        /// <summary> Initializes a new instance of CatAPTrue. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <param name="friendly"></param>
+        /// <returns> A new <see cref="Models.CatAPTrue"/> instance for mocking. </returns>
+        public static CatAPTrue CatAPTrue(int id = default, string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null, bool? friendly = null)
+        {
+            additionalProperties ??= new Dictionary<string, object>();
+
+            return new CatAPTrue(id, name, status, additionalProperties, friendly);
+        }
+
         /// <summary> Initializes a new instance of PetAPObject. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>

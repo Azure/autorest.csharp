@@ -5,10 +5,24 @@
 
 #nullable disable
 
+using Azure.Core;
+using Azure.ResourceManager.Models;
+using XmlDeserialization;
+
 namespace XmlDeserialization.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class XmlDeserializationModelFactory
     {
+        /// <summary> Initializes a new instance of XmlInstanceData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <returns> A new <see cref="XmlDeserialization.XmlInstanceData"/> instance for mocking. </returns>
+        public static XmlInstanceData XmlInstanceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null)
+        {
+            return new XmlInstanceData(id, name, resourceType, systemData);
+        }
     }
 }

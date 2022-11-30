@@ -18,6 +18,66 @@ namespace MgmtResourceName.Models
     public static partial class MgmtResourceNameModelFactory
     {
 
+        /// <summary> Initializes a new instance of MachineData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="new"></param>
+        /// <returns> A new <see cref="MgmtResourceName.MachineData"/> instance for mocking. </returns>
+        public static MachineData MachineData(ResourceIdentifier id = null, string name = null, Azure.Core.ResourceType resourceType = default, SystemData systemData = null, string @new = null)
+        {
+            return new MachineData(id, name, resourceType, systemData, @new);
+        }
+
+        /// <summary> Initializes a new instance of DiskData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="new"></param>
+        /// <returns> A new <see cref="MgmtResourceName.DiskData"/> instance for mocking. </returns>
+        public static DiskData DiskData(ResourceIdentifier id = null, string name = null, Azure.Core.ResourceType resourceType = default, SystemData systemData = null, string @new = null)
+        {
+            return new DiskData(id, name, resourceType, systemData, @new);
+        }
+
+        /// <summary> Initializes a new instance of MemoryData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="new"></param>
+        /// <returns> A new <see cref="MgmtResourceName.MemoryData"/> instance for mocking. </returns>
+        public static MemoryData MemoryData(ResourceIdentifier id = null, string name = null, Azure.Core.ResourceType resourceType = default, SystemData systemData = null, string @new = null)
+        {
+            return new MemoryData(id, name, resourceType, systemData, @new);
+        }
+
+        /// <summary> Initializes a new instance of NetworkData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="new"></param>
+        /// <returns> A new <see cref="MgmtResourceName.NetworkData"/> instance for mocking. </returns>
+        public static NetworkData NetworkData(ResourceIdentifier id = null, string name = null, Azure.Core.ResourceType resourceType = default, SystemData systemData = null, string @new = null)
+        {
+            return new NetworkData(id, name, resourceType, systemData, @new);
+        }
+
+        /// <summary> Initializes a new instance of DisplayResourceData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="new"></param>
+        /// <returns> A new <see cref="MgmtResourceName.DisplayResourceData"/> instance for mocking. </returns>
+        public static DisplayResourceData DisplayResourceData(ResourceIdentifier id = null, string name = null, Azure.Core.ResourceType resourceType = default, SystemData systemData = null, string @new = null)
+        {
+            return new DisplayResourceData(id, name, resourceType, systemData, @new);
+        }
+
         /// <summary> Initializes a new instance of ProviderOperationData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

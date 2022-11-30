@@ -42,30 +42,28 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.PetActionError"/> instance for mocking. </returns>
         public static PetActionError PetActionError(string actionResponse = null, string errorType = null, string errorMessage = null)
         {
-            return new PetActionError(actionResponse, errorType, errorMessage);
+            return new UnknownPetActionError(actionResponse, errorType, errorMessage);
         }
 
         /// <summary> Initializes a new instance of PetSadError. </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
         /// <returns> A new <see cref="Models.PetSadError"/> instance for mocking. </returns>
-        public static PetSadError PetSadError(string actionResponse = null, string errorType = null, string errorMessage = null, string reason = null)
+        public static PetSadError PetSadError(string actionResponse = null, string errorMessage = null, string reason = null)
         {
-            return new PetSadError(actionResponse, errorType, errorMessage, reason);
+            return new PetSadError(actionResponse, "PetSadError", errorMessage, reason);
         }
 
         /// <summary> Initializes a new instance of PetHungryOrThirstyError. </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
         /// <param name="hungryOrThirsty"> is the pet hungry or thirsty or both. </param>
         /// <returns> A new <see cref="Models.PetHungryOrThirstyError"/> instance for mocking. </returns>
-        public static PetHungryOrThirstyError PetHungryOrThirstyError(string actionResponse = null, string errorType = null, string errorMessage = null, string reason = null, string hungryOrThirsty = null)
+        public static PetHungryOrThirstyError PetHungryOrThirstyError(string actionResponse = null, string errorMessage = null, string reason = null, string hungryOrThirsty = null)
         {
-            return new PetHungryOrThirstyError(actionResponse, errorType, errorMessage, reason, hungryOrThirsty);
+            return new PetHungryOrThirstyError(actionResponse, "PetHungryOrThirstyError", errorMessage, reason, hungryOrThirsty);
         }
     }
 }

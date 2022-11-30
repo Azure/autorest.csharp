@@ -17,6 +17,22 @@ namespace TenantOnly.Models
     public static partial class TenantOnlyModelFactory
     {
 
+        /// <summary> Initializes a new instance of BillingAccountData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="bar"></param>
+        /// <returns> A new <see cref="TenantOnly.BillingAccountData"/> instance for mocking. </returns>
+        public static BillingAccountData BillingAccountData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string bar = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new BillingAccountData(id, name, resourceType, systemData, tags, location, bar);
+        }
+
         /// <summary> Initializes a new instance of AgreementData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
