@@ -6,7 +6,12 @@ import { http } from "@cadl-lang/rest/*";
 import { InputConstant } from "../type/InputConstant";
 import { InputOperationParameterKind } from "../type/InputOperationParameterKind.js";
 import { InputParameter } from "../type/InputParameter.js";
-import { InputEnumType, InputModelType, InputPrimitiveType, InputType } from "../type/InputType.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType,
+    InputType
+} from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { RequestLocation } from "../type/RequestLocation.js";
 import { Usage } from "../type/Usage.js";
@@ -53,12 +58,14 @@ export function resolveServers(
             const isEndpoint: boolean = endpoint === `{${name}}`;
             let defaultValue = undefined;
             const value = prop.default ? getDefaultValue(prop.default) : "";
-            const inputType: InputType = isEndpoint ? {
-                Name: "Uri",
-                Kind: InputTypeKind.Uri,
-                IsNullable: false
-            } as InputPrimitiveType : getInputType(program, prop.type, models, enums);
-            (inputType as InputEnumType|InputModelType).Usage = Usage.Input;
+            const inputType: InputType = isEndpoint
+                ? ({
+                      Name: "Uri",
+                      Kind: InputTypeKind.Uri,
+                      IsNullable: false
+                  } as InputPrimitiveType)
+                : getInputType(program, prop.type, models, enums);
+            (inputType as InputEnumType | InputModelType).Usage = Usage.Input;
 
             if (value) {
                 defaultValue = {

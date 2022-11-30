@@ -363,7 +363,12 @@ function createModel(
     try {
         //create endpoint parameter from servers
         if (servers !== undefined) {
-            const cadlServers = resolveServers(program, servers, modelMap, enumMap);
+            const cadlServers = resolveServers(
+                program,
+                servers,
+                modelMap,
+                enumMap
+            );
             if (cadlServers.length > 0) {
                 /* choose the first server as endpoint. */
                 url = cadlServers[0].url;
@@ -396,31 +401,19 @@ function createModel(
                 if (apiVersionIndex !== -1) {
                     const apiVersionInOperation =
                         op.Parameters[apiVersionIndex];
-                    if (
-                        apiVersionInOperation.DefaultValue?.Value &&
-                        !apiVersions.has(
-                            apiVersionInOperation.DefaultValue?.Value
-                        )
-                    ) {
-                        apiVersions.add(
-                            apiVersionInOperation.DefaultValue.Value
-                        );
-                    } else {
-                        if (
-                            apiVersionInOperation.Location ===
+                    if ((!apiVersionInOperation.DefaultValue?.Value ||
+                        apiVersions.has(apiVersionInOperation.DefaultValue?.Value)) &&
+                        apiVersionInOperation.Kind ===
+                            InputOperationParameterKind.Client &&
+                        apiVersionInOperation.Location ===
                             apiVersionParam.Location
-                        ) {
-                            op.Parameters[apiVersionIndex] = apiVersionParam;
-                        }
+                    ) {
+                        op.Parameters[apiVersionIndex] = apiVersionParam;
                     }
                 } else {
                     op.Parameters.push(apiVersionParam);
                 }
             }
-        }
-
-        if (apiVersions.size > 1) {
-            apiVersionParam.Kind = InputOperationParameterKind.Constant;
         }
 
         const usages = getUsages(program, convenienceOperations);
@@ -525,7 +518,7 @@ function setUsage(
         } else if (usages.roundTrips.includes(name)) {
             m.Usage = Usage.RoundTrip;
         } else {
-            //m.Usage = Usage.None;
+            m.Usage = Usage.None;
         }
     }
 }
@@ -812,7 +805,9 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVer
-            ? InputOperationParameterKind.Client
+            ? defaultValue
+                ? InputOperationParameterKind.Constant
+                : InputOperationParameterKind.Client
             : InputOperationParameterKind.Method;
         return {
             Name: param.name,

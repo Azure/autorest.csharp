@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 defaultValue,
                 validation,
                 initializer,
-                IsApiVersionParameter: operationParameter.IsApiVersion && operationParameter.Location == RequestLocation.Query,
+                IsApiVersionParameter: operationParameter.IsApiVersion,
                 IsResourceIdentifier: operationParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation);

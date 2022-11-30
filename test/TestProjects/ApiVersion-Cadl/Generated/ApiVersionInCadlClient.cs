@@ -23,7 +23,7 @@ namespace ApiVersionInCadl
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly APIVersion? _apiVersion;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -43,7 +43,7 @@ namespace ApiVersionInCadl
         /// </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public ApiVersionInCadlClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, APIVersion.V11, new ApiVersionInCadlClientOptions())
+        public ApiVersionInCadlClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new ApiVersionInCadlClientOptions())
         {
         }
 
@@ -53,10 +53,9 @@ namespace ApiVersionInCadl
         /// https://westus2.api.cognitive.microsoft.com).
         /// </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="apiVersion"> Api Version. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public ApiVersionInCadlClient(Uri endpoint, AzureKeyCredential credential, APIVersion? apiVersion, ApiVersionInCadlClientOptions options)
+        public ApiVersionInCadlClient(Uri endpoint, AzureKeyCredential credential, ApiVersionInCadlClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
@@ -66,7 +65,7 @@ namespace ApiVersionInCadl
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
+            _apiVersion = options.Version;
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
@@ -185,7 +184,7 @@ namespace ApiVersionInCadl
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/anomalydetector/", false);
-            uri.AppendRaw(_apiVersion.Value.ToString(), true);
+            uri.AppendRaw(_apiVersion, true);
             uri.AppendPath("/multivariate/detect-batch/", false);
             uri.AppendPath(resultId, true);
             request.Uri = uri;

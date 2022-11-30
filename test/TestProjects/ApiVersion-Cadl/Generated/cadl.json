@@ -3,7 +3,8 @@
  "Name": "ApiVersionInCadl",
  "Description": "CADL project to test api versions.",
  "ApiVersions": [
-  "v1.1"
+  "v1.1",
+  "v1.2"
  ],
  "Enums": [
   {
@@ -16,16 +17,21 @@
      "$id": "3",
      "Name": "v1_1",
      "Value": "v1.1"
+    },
+    {
+     "$id": "4",
+     "Name": "v1_2",
+     "Value": "v1.2"
     }
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "Input"
+   "Usage": "None"
   }
  ],
  "Models": [
   {
-   "$id": "4",
+   "$id": "5",
    "Name": "DetectionResult",
    "Namespace": "ApiVersionInCadl",
    "Description": "Detection results for the given resultId.",
@@ -33,12 +39,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "5",
+     "$id": "6",
      "Name": "resultId",
      "SerializedName": "resultId",
      "Description": "",
      "Type": {
-      "$id": "6",
+      "$id": "7",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -52,23 +58,23 @@
  ],
  "Clients": [
   {
-   "$id": "7",
+   "$id": "8",
    "Name": "ApiVersionInCadlClient",
    "Description": "CADL project to test api versions.",
    "Operations": [
     {
-     "$id": "8",
+     "$id": "9",
      "Name": "GetBatchDetectionResult",
      "Summary": "Get Multivariate Anomaly Detection Result",
      "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
      "Parameters": [
       {
-       "$id": "9",
+       "$id": "10",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
-        "$id": "10",
+        "$id": "11",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false,
@@ -85,7 +91,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "11",
+       "$id": "12",
        "Name": "ApiVersion",
        "NameInRequest": "ApiVersion",
        "Description": "Api Version",
@@ -102,7 +108,7 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "12",
+        "$id": "13",
         "Type": {
          "$ref": "2"
         },
@@ -110,11 +116,11 @@
        }
       },
       {
-       "$id": "13",
+       "$id": "14",
        "Name": "resultId",
        "NameInRequest": "resultId",
        "Type": {
-        "$id": "14",
+        "$id": "15",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -130,11 +136,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "15",
+       "$id": "16",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "16",
+        "$id": "17",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -149,9 +155,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "18",
         "Type": {
-         "$ref": "16"
+         "$ref": "17"
         },
         "Value": "application/json"
        }
@@ -159,12 +165,12 @@
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "19",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -180,15 +186,15 @@
     }
    ],
    "Protocol": {
-    "$id": "19"
+    "$id": "20"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "20",
+  "$id": "21",
   "ApiKey": {
-   "$id": "21",
+   "$id": "22",
    "Name": "Ocp-Apim-Subscription-Key"
   }
  }
