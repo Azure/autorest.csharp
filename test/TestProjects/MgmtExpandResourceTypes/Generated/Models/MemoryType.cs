@@ -11,10 +11,10 @@ namespace MgmtExpandResourceTypes.Models
     public enum MemoryType : long
     {
         /// <summary> -1. </summary>
-        _1 = -1,
+        _1 = -1L,
         /// <summary> 2. </summary>
-        Two = 2,
+        Two = 2L,
         /// <summary> 4. </summary>
-        Four = 4
+        Four = 4L
     }
 }

@@ -420,7 +420,7 @@ Examples:
                         writer.WriteXmlDocumentationSummary($"{value.Description}");
                         if (schema.IsIntValueType)
                         {
-                            writer.Line($"{value.Declaration.Name} = {value.Value.Value},");
+                            writer.Line($"{value.Declaration.Name} = {value.Value.Value:L},");
                         }
                         else
                         {
