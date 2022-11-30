@@ -38,6 +38,33 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleAction(name, foo);
         }
 
+        /// <summary> Initializes a new instance of DeliveryRuleRemoteAddressCondition. </summary>
+        /// <param name="foo"> For test. </param>
+        /// <param name="parameters"> Defines the parameters for the condition. </param>
+        /// <returns> A new <see cref="Models.DeliveryRuleRemoteAddressCondition"/> instance for mocking. </returns>
+        public static DeliveryRuleRemoteAddressCondition DeliveryRuleRemoteAddressCondition(string foo = null, RemoteAddressMatchConditionParameters parameters = null)
+        {
+            return new DeliveryRuleRemoteAddressCondition("RemoteAddress", foo, parameters);
+        }
+
+        /// <summary> Initializes a new instance of DeliveryRuleRequestMethodCondition. </summary>
+        /// <param name="foo"> For test. </param>
+        /// <param name="parameters"> Defines the parameters for the condition. </param>
+        /// <returns> A new <see cref="Models.DeliveryRuleRequestMethodCondition"/> instance for mocking. </returns>
+        public static DeliveryRuleRequestMethodCondition DeliveryRuleRequestMethodCondition(string foo = null, RequestMethodMatchConditionParameters parameters = null)
+        {
+            return new DeliveryRuleRequestMethodCondition("RequestMethod", foo, parameters);
+        }
+
+        /// <summary> Initializes a new instance of DeliveryRuleQueryStringCondition. </summary>
+        /// <param name="foo"> For test. </param>
+        /// <param name="parameters"> Defines the parameters for the condition. </param>
+        /// <returns> A new <see cref="Models.DeliveryRuleQueryStringCondition"/> instance for mocking. </returns>
+        public static DeliveryRuleQueryStringCondition DeliveryRuleQueryStringCondition(string foo = null, QueryStringMatchConditionParameters parameters = null)
+        {
+            return new DeliveryRuleQueryStringCondition("QueryString", foo, parameters);
+        }
+
         /// <summary> Initializes a new instance of UrlRedirectAction. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>

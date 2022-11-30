@@ -21,12 +21,16 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of DeliveryRuleCondition. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
-        internal DeliveryRuleCondition(MatchVariable name)
+        /// <param name="foo"> For test. </param>
+        internal DeliveryRuleCondition(MatchVariable name, string foo)
         {
             Name = name;
+            Foo = foo;
         }
 
         /// <summary> The name of the condition for the delivery rule. </summary>
         internal MatchVariable Name { get; set; }
+        /// <summary> For test. </summary>
+        public string Foo { get; }
     }
 }

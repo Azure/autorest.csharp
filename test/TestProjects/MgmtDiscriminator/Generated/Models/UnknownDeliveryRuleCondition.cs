@@ -12,7 +12,8 @@ namespace MgmtDiscriminator.Models
     {
         /// <summary> Initializes a new instance of UnknownDeliveryRuleCondition. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
-        internal UnknownDeliveryRuleCondition(MatchVariable name) : base(name)
+        /// <param name="foo"> For test. </param>
+        internal UnknownDeliveryRuleCondition(MatchVariable name, string foo) : base(name, foo)
         {
             Name = name;
         }

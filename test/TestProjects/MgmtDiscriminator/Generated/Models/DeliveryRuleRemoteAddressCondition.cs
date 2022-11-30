@@ -26,8 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of DeliveryRuleRemoteAddressCondition. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
+        /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
-        internal DeliveryRuleRemoteAddressCondition(MatchVariable name, RemoteAddressMatchConditionParameters parameters) : base(name)
+        internal DeliveryRuleRemoteAddressCondition(MatchVariable name, string foo, RemoteAddressMatchConditionParameters parameters) : base(name, foo)
         {
             Parameters = parameters;
             Name = name;

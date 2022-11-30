@@ -40,7 +40,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_103
+    - !StringSchema &ref_104
       type: string
       apiVersions:
         - !ApiVersion 
@@ -53,7 +53,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_100
+    - !StringSchema &ref_101
       type: string
       apiVersions:
         - !ApiVersion 
@@ -93,6 +93,16 @@ schemas: !Schemas
           name: DeliveryRuleType
           description: The resource type of this rule
       protocol: !Protocols {}
+    - !StringSchema &ref_67
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: DeliveryRuleConditionFoo
+          description: For test
+      protocol: !Protocols {}
     - !StringSchema &ref_44
       type: string
       apiVersions:
@@ -103,7 +113,7 @@ schemas: !Schemas
           name: DeliveryRuleActionFoo
           description: for test
       protocol: !Protocols {}
-    - !StringSchema &ref_70
+    - !StringSchema &ref_71
       type: string
       apiVersions:
         - !ApiVersion 
@@ -113,7 +123,7 @@ schemas: !Schemas
           name: ErrorDetailCode
           description: The error code.
       protocol: !Protocols {}
-    - !StringSchema &ref_71
+    - !StringSchema &ref_72
       type: string
       apiVersions:
         - !ApiVersion 
@@ -123,7 +133,7 @@ schemas: !Schemas
           name: ErrorDetailMessage
           description: The error message.
       protocol: !Protocols {}
-    - !StringSchema &ref_72
+    - !StringSchema &ref_73
       type: string
       apiVersions:
         - !ApiVersion 
@@ -133,7 +143,7 @@ schemas: !Schemas
           name: ErrorDetailTarget
           description: The error target.
       protocol: !Protocols {}
-    - !StringSchema &ref_74
+    - !StringSchema &ref_75
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1051,7 +1061,7 @@ schemas: !Schemas
           description: Protocol this rule will use when forwarding traffic to backends.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_101
+    - !ConstantSchema &ref_102
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -1061,7 +1071,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_106
+    - !ConstantSchema &ref_107
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -1071,7 +1081,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_112
+    - !ConstantSchema &ref_113
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -1082,7 +1092,7 @@ schemas: !Schemas
           description: Content Type 'application/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_67
+    - !DictionarySchema &ref_68
       type: dictionary
       elementType: !ObjectSchema &ref_1
         type: object
@@ -1104,7 +1114,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_80
+                  schema: !ObjectSchema &ref_81
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1219,7 +1229,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_81
+                  schema: !ObjectSchema &ref_82
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1244,12 +1254,12 @@ schemas: !Schemas
                             description: Algorithm to use for URL signing
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ArraySchema &ref_99
+                        schema: !ArraySchema &ref_100
                           type: array
                           apiVersions:
                             - !ApiVersion 
                               version: '2020-06-01'
-                          elementType: !ObjectSchema &ref_82
+                          elementType: !ObjectSchema &ref_83
                             type: object
                             apiVersions:
                               - !ApiVersion 
@@ -1346,7 +1356,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_83
+                  schema: !ObjectSchema &ref_84
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1440,7 +1450,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_84
+                  schema: !ObjectSchema &ref_85
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1646,7 +1656,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_85
+                  schema: !ObjectSchema &ref_86
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1746,7 +1756,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_86
+                  schema: !ObjectSchema &ref_87
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1824,7 +1834,7 @@ schemas: !Schemas
                   - *ref_1
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_87
+                  schema: !ObjectSchema &ref_88
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1840,7 +1850,7 @@ schemas: !Schemas
                             description: ''
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ObjectSchema &ref_88
+                        schema: !ObjectSchema &ref_89
                           type: object
                           apiVersions:
                             - !ApiVersion 
@@ -1981,7 +1991,7 @@ schemas: !Schemas
           description: A dictionary of mapping details about the actions that are executed when all the conditions of a rule are satisfied.
       protocol: !Protocols {}
   anyObjects:
-    - !AnyObjectSchema &ref_75
+    - !AnyObjectSchema &ref_76
       type: any-object
       language: !Languages 
         default:
@@ -1991,19 +2001,19 @@ schemas: !Schemas
   durations:
     - *ref_45
   objects:
-    - !ObjectSchema &ref_108
+    - !ObjectSchema &ref_109
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_90
+          schema: !ArraySchema &ref_91
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: !ObjectSchema &ref_68
+            elementType: !ObjectSchema &ref_69
               type: object
               apiVersions:
                 - !ApiVersion 
@@ -2040,7 +2050,7 @@ schemas: !Schemas
                       description: The resource type of this rule
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_69
+                  schema: !ObjectSchema &ref_70
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -2077,7 +2087,7 @@ schemas: !Schemas
                                     - *ref_50
                                 properties:
                                   - !Property 
-                                    schema: !ObjectSchema &ref_77
+                                    schema: !ObjectSchema &ref_78
                                       type: object
                                       apiVersions:
                                         - !ApiVersion 
@@ -2111,7 +2121,7 @@ schemas: !Schemas
                                               description: Describes if this is negate condition or not
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_93
+                                          schema: !ArraySchema &ref_94
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2134,7 +2144,7 @@ schemas: !Schemas
                                                 match.
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_94
+                                          schema: !ArraySchema &ref_95
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2196,7 +2206,7 @@ schemas: !Schemas
                                     - *ref_50
                                 properties:
                                   - !Property 
-                                    schema: !ObjectSchema &ref_78
+                                    schema: !ObjectSchema &ref_79
                                       type: object
                                       apiVersions:
                                         - !ApiVersion 
@@ -2230,7 +2240,7 @@ schemas: !Schemas
                                               description: Describes if this is negate condition or not
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_95
+                                          schema: !ArraySchema &ref_96
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2249,7 +2259,7 @@ schemas: !Schemas
                                               description: List of transforms
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_96
+                                          schema: !ArraySchema &ref_97
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2311,7 +2321,7 @@ schemas: !Schemas
                                     - *ref_50
                                 properties:
                                   - !Property 
-                                    schema: !ObjectSchema &ref_79
+                                    schema: !ObjectSchema &ref_80
                                       type: object
                                       apiVersions:
                                         - !ApiVersion 
@@ -2345,7 +2355,7 @@ schemas: !Schemas
                                               description: Describes if this is negate condition or not
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_97
+                                          schema: !ArraySchema &ref_98
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2364,7 +2374,7 @@ schemas: !Schemas
                                               description: The match value for the condition of the delivery rule
                                           protocol: !Protocols {}
                                         - !Property 
-                                          schema: !ArraySchema &ref_98
+                                          schema: !ArraySchema &ref_99
                                             type: array
                                             apiVersions:
                                               - !ApiVersion 
@@ -2438,6 +2448,16 @@ schemas: !Schemas
                               protocol: !Protocols {}
                           properties:
                             - *ref_66
+                            - !Property 
+                              schema: *ref_67
+                              readOnly: true
+                              required: false
+                              serializedName: foo
+                              language: !Languages 
+                                default:
+                                  name: foo
+                                  description: For test
+                              protocol: !Protocols {}
                           serializationFormats:
                             - json
                           usage:
@@ -2456,7 +2476,7 @@ schemas: !Schemas
                             description: The condition that must be matched for the actions to be executed
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ArraySchema &ref_89
+                        schema: !ArraySchema &ref_90
                           type: array
                           apiVersions:
                             - !ApiVersion 
@@ -2480,7 +2500,7 @@ schemas: !Schemas
                             description: A list of actions that are executed when all the conditions of a rule are satisfied.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_67
+                        schema: *ref_68
                         serializedName: extraMappingInfo
                         language: !Languages 
                           default:
@@ -2537,25 +2557,25 @@ schemas: !Schemas
           description: The list result of the rules
           namespace: ''
       protocol: !Protocols {}
-    - *ref_68
     - *ref_69
+    - *ref_70
     - *ref_50
     - *ref_1
-    - !ObjectSchema &ref_109
+    - !ObjectSchema &ref_110
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_73
+          schema: !ObjectSchema &ref_74
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             properties:
               - !Property 
-                schema: *ref_70
+                schema: *ref_71
                 readOnly: true
                 serializedName: code
                 language: !Languages 
@@ -2564,7 +2584,7 @@ schemas: !Schemas
                     description: The error code.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_71
+                schema: *ref_72
                 readOnly: true
                 serializedName: message
                 language: !Languages 
@@ -2573,7 +2593,7 @@ schemas: !Schemas
                     description: The error message.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_72
+                schema: *ref_73
                 readOnly: true
                 serializedName: target
                 language: !Languages 
@@ -2582,12 +2602,12 @@ schemas: !Schemas
                     description: The error target.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_91
+                schema: !ArraySchema &ref_92
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  elementType: *ref_73
+                  elementType: *ref_74
                   extensions:
                     x-ms-identifiers:
                       - message
@@ -2609,19 +2629,19 @@ schemas: !Schemas
                     description: The error details.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_92
+                schema: !ArraySchema &ref_93
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  elementType: !ObjectSchema &ref_76
+                  elementType: !ObjectSchema &ref_77
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_74
+                        schema: *ref_75
                         readOnly: true
                         serializedName: type
                         language: !Languages 
@@ -2630,7 +2650,7 @@ schemas: !Schemas
                             description: The additional info type.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_75
+                        schema: *ref_76
                         readOnly: true
                         serializedName: info
                         language: !Languages 
@@ -2692,36 +2712,35 @@ schemas: !Schemas
           namespace: ''
           summary: Error response
       protocol: !Protocols {}
-    - *ref_73
-    - *ref_76
-    - *ref_62
+    - *ref_74
     - *ref_77
-    - *ref_63
+    - *ref_62
     - *ref_78
-    - *ref_64
+    - *ref_63
     - *ref_79
-    - *ref_33
+    - *ref_64
     - *ref_80
-    - *ref_34
+    - *ref_33
     - *ref_81
+    - *ref_34
     - *ref_82
-    - *ref_35
     - *ref_83
+    - *ref_35
+    - *ref_84
     - *ref_31
     - *ref_36
-    - *ref_84
+    - *ref_85
     - *ref_37
     - *ref_23
     - *ref_38
     - *ref_39
-    - *ref_85
-    - *ref_40
     - *ref_86
-    - *ref_41
+    - *ref_40
     - *ref_87
+    - *ref_41
     - *ref_88
-  arrays:
     - *ref_89
+  arrays:
     - *ref_90
     - *ref_91
     - *ref_92
@@ -2732,9 +2751,10 @@ schemas: !Schemas
     - *ref_97
     - *ref_98
     - *ref_99
+    - *ref_100
 globalParameters:
-  - !Parameter &ref_104
-    schema: *ref_100
+  - !Parameter &ref_105
+    schema: *ref_101
     implementation: Client
     required: true
     extensions:
@@ -2747,7 +2767,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_102
+  - !Parameter &ref_103
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -2763,8 +2783,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_105
-    schema: *ref_101
+  - !Parameter &ref_106
+    schema: *ref_102
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -2786,9 +2806,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_102
-          - !Parameter &ref_107
-            schema: *ref_103
+          - *ref_103
+          - !Parameter &ref_108
+            schema: *ref_104
             implementation: Method
             required: true
             language: !Languages 
@@ -2799,13 +2819,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_104
           - *ref_105
+          - *ref_106
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_106
+                schema: *ref_107
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2828,10 +2848,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_107
+          - *ref_108
         responses:
           - !SchemaResponse 
-            schema: *ref_108
+            schema: *ref_109
             language: !Languages 
               default:
                 name: ''
@@ -2845,7 +2865,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_109
+            schema: *ref_110
             language: !Languages 
               default:
                 name: ''
@@ -2868,9 +2888,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_102
-          - !Parameter &ref_110
-            schema: *ref_103
+          - *ref_103
+          - !Parameter &ref_111
+            schema: *ref_104
             implementation: Method
             required: true
             language: !Languages 
@@ -2881,8 +2901,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_111
-            schema: *ref_100
+          - !Parameter &ref_112
+            schema: *ref_101
             implementation: Method
             required: true
             language: !Languages 
@@ -2893,13 +2913,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_104
           - *ref_105
+          - *ref_106
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_106
+                schema: *ref_107
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2922,11 +2942,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_110
           - *ref_111
+          - *ref_112
         responses:
           - !SchemaResponse 
-            schema: *ref_68
+            schema: *ref_69
             language: !Languages 
               default:
                 name: ''
@@ -2940,7 +2960,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_109
+            schema: *ref_110
             language: !Languages 
               default:
                 name: ''
@@ -2963,9 +2983,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_102
-          - !Parameter &ref_115
-            schema: *ref_103
+          - *ref_103
+          - !Parameter &ref_116
+            schema: *ref_104
             implementation: Method
             required: true
             language: !Languages 
@@ -2976,8 +2996,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_116
-            schema: *ref_100
+          - !Parameter &ref_117
+            schema: *ref_101
             implementation: Method
             required: true
             language: !Languages 
@@ -2988,13 +3008,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_104
           - *ref_105
+          - *ref_106
         requestMediaTypes:
-          application/json: !Request &ref_114
+          application/json: !Request &ref_115
             parameters:
               - !Parameter 
-                schema: *ref_112
+                schema: *ref_113
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -3006,8 +3026,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_113
-                schema: *ref_68
+              - !Parameter &ref_114
+                schema: *ref_69
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3019,7 +3039,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_106
+                schema: *ref_107
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3032,7 +3052,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_113
+              - *ref_114
             language: !Languages 
               default:
                 name: ''
@@ -3046,13 +3066,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_114
-        signatureParameters:
           - *ref_115
+        signatureParameters:
           - *ref_116
+          - *ref_117
         responses:
           - !SchemaResponse 
-            schema: *ref_68
+            schema: *ref_69
             language: !Languages 
               default:
                 name: ''
@@ -3065,7 +3085,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_68
+            schema: *ref_69
             language: !Languages 
               default:
                 name: ''
@@ -3078,7 +3098,7 @@ operationGroups:
                 statusCodes:
                   - '201'
           - !SchemaResponse 
-            schema: *ref_68
+            schema: *ref_69
             language: !Languages 
               default:
                 name: ''
@@ -3092,7 +3112,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_109
+            schema: *ref_110
             language: !Languages 
               default:
                 name: ''
@@ -3117,9 +3137,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_102
-          - !Parameter &ref_117
-            schema: *ref_103
+          - *ref_103
+          - !Parameter &ref_118
+            schema: *ref_104
             implementation: Method
             required: true
             language: !Languages 
@@ -3130,8 +3150,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_118
-            schema: *ref_100
+          - !Parameter &ref_119
+            schema: *ref_101
             implementation: Method
             required: true
             language: !Languages 
@@ -3142,13 +3162,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_104
           - *ref_105
+          - *ref_106
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_106
+                schema: *ref_107
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3171,8 +3191,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_117
           - *ref_118
+          - *ref_119
         responses:
           - !Response 
             language: !Languages 
@@ -3203,7 +3223,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_109
+            schema: *ref_110
             language: !Languages 
               default:
                 name: ''
