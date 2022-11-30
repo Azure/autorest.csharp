@@ -9,12 +9,12 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Resources.Models;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using Configuration = AutoRest.CSharp.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
