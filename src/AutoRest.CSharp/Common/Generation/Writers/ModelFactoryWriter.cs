@@ -81,10 +81,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, assignment, parameter.Type));
             }
 
-            if (model.Discriminator is ObjectTypeDiscriminator discriminator && discriminator.Value is Constant discriminatorValue)
+            if (model.Discriminator is ObjectTypeDiscriminator discriminator)
             {
-                var property = discriminator.Property;
-                initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{GetRawEnumValue(discriminatorValue):L}"));
+                if (discriminator.Value is Constant discriminatorValue)
+                {
+                    var property = discriminator.Property;
+                    initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{GetRawEnumValue(discriminatorValue):L}"));
+                }
+                else
+                {
+                    model = (SerializableObjectType)discriminator.DefaultObjectType!;
+                    ctor = model.InitializationConstructor;
+                }
             }
 
             _writer.WriteMethodDocumentation(method);
