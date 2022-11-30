@@ -26,8 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of OriginGroupOverrideAction. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
+        /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
-        internal OriginGroupOverrideAction(DeliveryRuleActionType name, OriginGroupOverrideActionParameters parameters) : base(name)
+        internal OriginGroupOverrideAction(DeliveryRuleActionType name, string foo, OriginGroupOverrideActionParameters parameters) : base(name, foo)
         {
             Parameters = parameters;
             Name = name;

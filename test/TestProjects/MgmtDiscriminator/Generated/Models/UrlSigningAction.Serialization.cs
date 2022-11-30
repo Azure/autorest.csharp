@@ -26,6 +26,7 @@ namespace MgmtDiscriminator.Models
         {
             UrlSigningActionParameters parameters = default;
             DeliveryRuleActionType name = default;
+            Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("parameters"))
@@ -38,8 +39,13 @@ namespace MgmtDiscriminator.Models
                     name = new DeliveryRuleActionType(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("foo"))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
             }
-            return new UrlSigningAction(name, parameters);
+            return new UrlSigningAction(name, foo.Value, parameters);
         }
     }
 }

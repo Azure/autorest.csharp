@@ -26,8 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of UrlSigningAction. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
+        /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
-        internal UrlSigningAction(DeliveryRuleActionType name, UrlSigningActionParameters parameters) : base(name)
+        internal UrlSigningAction(DeliveryRuleActionType name, string foo, UrlSigningActionParameters parameters) : base(name, foo)
         {
             Parameters = parameters;
             Name = name;

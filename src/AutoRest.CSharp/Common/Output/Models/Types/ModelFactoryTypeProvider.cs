@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            var readOnlyProperties = model.Properties
+            var readOnlyProperties = GetAllProperties(model)
                 .Where(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType))
                 .ToList();
 
@@ -208,6 +208,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             return model.Constructors
                 .Where(c => c.Signature.Modifiers.HasFlag(Public))
                 .All(c => readOnlyProperties.Any(property => c.FindParameterByInitializedProperty(property) == default));
+        }
+
+        private static IEnumerable<ObjectTypeProperty> GetAllProperties(SerializableObjectType model)
+        {
+            foreach (var hierarchy in model.EnumerateHierarchy())
+            {
+                foreach (var property in hierarchy.Properties)
+                    yield return property;
+            }
         }
     }
 }

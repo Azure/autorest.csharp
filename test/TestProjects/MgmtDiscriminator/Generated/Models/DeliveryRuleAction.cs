@@ -21,12 +21,16 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of DeliveryRuleAction. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
-        internal DeliveryRuleAction(DeliveryRuleActionType name)
+        /// <param name="foo"> for test. </param>
+        internal DeliveryRuleAction(DeliveryRuleActionType name, string foo)
         {
             Name = name;
+            Foo = foo;
         }
 
         /// <summary> The name of the action for the delivery rule. </summary>
         internal DeliveryRuleActionType Name { get; set; }
+        /// <summary> for test. </summary>
+        public string Foo { get; }
     }
 }
