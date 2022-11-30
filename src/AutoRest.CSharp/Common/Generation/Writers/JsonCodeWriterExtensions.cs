@@ -646,10 +646,10 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
                     var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? ", serializeOptions" : string.Empty;
-                    return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString(){optionalSerializeOptions})";
+                    return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.GetRawText(){optionalSerializeOptions})";
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
-                    return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString())";
+                    return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.GetRawText())";
 
                 case ObjectType objectType:
                     return $"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})";
