@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
@@ -98,34 +96,20 @@ namespace AutoRest.CSharp.Output.Models
                 || !returnTypeChain.Convenience.Equals(returnTypeChain.Protocol));
         }
 
-        private bool IsParameterTypeSame(Parameter? first, Parameter? second)
-        {
-            if ((first == null && second != null)
-                || (first != null && second == null))
-            {
-                return true;
-            }
-
-            if (first == null && second == null)
-            {
-                return true;
-            }
-
-            return first!.Type.Equals(second!.Type);
-        }
+        private static bool IsParameterTypeSame(Parameter? first, Parameter? second) => first == null || second == null || first.Type.Equals(second.Type);
 
         private ReturnTypeChain BuildReturnTypes()
         {
             var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
             CSharpType? responseType = null;
-            if (operationBodyTypes != null && operationBodyTypes.Length != 0)
+            if (operationBodyTypes.Length != 0)
             {
                 var firstBodyType = operationBodyTypes[0];
                 if (firstBodyType != null)
                 {
                     responseType = _typeFactory.CreateType(firstBodyType);
                 }
-            };
+            }
 
             if (Operation.Paging != null)
             {
@@ -218,12 +202,17 @@ namespace AutoRest.CSharp.Output.Models
                             throw new NotSupportedException("Required conditional request headers are not supported.");
                         }
 
+                        if (operationParameter.Kind != InputOperationParameterKind.Method)
+                        {
+                            throw new NotSupportedException("Conditional request headers should be specified only as method parameters.");
+                        }
+
                         requestConditionHeaders |= header;
                         requestConditionRequestParameter ??= operationParameter;
-                        requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                            ? SerializationBuilder.GetSerializationFormat(operationParameter.Type)
-                            : requestConditionSerializationFormat;
-
+                        if (header is RequestConditionHeaders.IfModifiedSince or RequestConditionHeaders.IfUnmodifiedSince)
+                        {
+                            requestConditionSerializationFormat = SerializationBuilder.GetSerializationFormat(operationParameter.Type);
+                        }
                         break;
                     case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: null }:
                         requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
@@ -295,18 +284,13 @@ namespace AutoRest.CSharp.Output.Models
             _protocolBodyParameter = bodyParameter.IsRequired
                 ? KnownParameters.RequestContent
                 : KnownParameters.RequestContentNullable;
-            _orderedParameters.Add(new ParameterChain(BuildParameter(bodyParameter), _protocolBodyParameter, _protocolBodyParameter));
 
-            if (contentTypeRequestParameter != null)
+            var convenienceBodyParameter = Parameter.FromInputParameter(bodyParameter, _typeFactory.CreateType(bodyParameter.Type), _typeFactory);
+            _orderedParameters.Add(new ParameterChain(convenienceBodyParameter, _protocolBodyParameter, _protocolBodyParameter));
+
+            if (contentTypeRequestParameter != null && Operation.RequestMediaTypes?.Count > 0)
             {
-                if (Operation.RequestMediaTypes?.Count > 1)
-                {
-                    AddContentTypeRequestParameter(contentTypeRequestParameter, Operation.RequestMediaTypes);
-                }
-                else
-                {
-                    AddParameter(contentTypeRequestParameter, typeof(ContentType));
-                }
+                AddContentTypeParameter(contentTypeRequestParameter, Operation.RequestMediaTypes);
             }
         }
 
@@ -319,21 +303,30 @@ namespace AutoRest.CSharp.Output.Models
 
             _conditionHeaderFlag = conditionHeaderFlag;
 
+            string nameInRequest;
+            InputParameter? inputParameter;
+            Parameter parameter;
             switch (conditionHeaderFlag)
             {
                 case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch:
-                    _orderedParameters.Add(new ParameterChain(KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter));
-                    AddReference(KnownParameters.MatchConditionsParameter.Name, null, KnownParameters.MatchConditionsParameter, serializationFormat);
+                    inputParameter = null;
+                    parameter = KnownParameters.MatchConditionsParameter;
+                    nameInRequest = parameter.Name;
                     break;
-                case RequestConditionHeaders.IfMatch:
-                case RequestConditionHeaders.IfNoneMatch:
-                    AddParameter(requestConditionRequestParameter, typeof(ETag));
+                case RequestConditionHeaders.IfMatch or RequestConditionHeaders.IfNoneMatch:
+                    inputParameter = requestConditionRequestParameter;
+                    parameter = Parameter.FromInputParameter(inputParameter, new CSharpType(typeof(ETag), true), _typeFactory);
+                    nameInRequest = inputParameter.NameInRequest;
                     break;
                 default:
-                    _orderedParameters.Add(new ParameterChain(KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter));
-                    AddReference(KnownParameters.RequestConditionsParameter.Name, null, KnownParameters.RequestConditionsParameter, serializationFormat);
+                    inputParameter = null;
+                    parameter = KnownParameters.RequestConditionsParameter;
+                    nameInRequest = parameter.Name;
                     break;
             }
+
+            _orderedParameters.Add(new ParameterChain(parameter, parameter, parameter));
+            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, parameter, serializationFormat));
         }
 
         public void AddRequestContext()
@@ -341,36 +334,53 @@ namespace AutoRest.CSharp.Output.Models
             _orderedParameters.Add(new ParameterChain(KnownParameters.CancellationTokenParameter, KnownParameters.RequestContext, KnownParameters.RequestContext));
         }
 
-        private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
+        private void AddContentTypeParameter(InputParameter inputParameter, IReadOnlyList<string> mediaTypes)
         {
-            var name = operationParameter.Name.ToVariableName();
-            var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
-            var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
-            _orderedParameters.Add(new ParameterChain(null, parameter, parameter));
+            CSharpType parameterType = typeof(ContentType);
+            if (mediaTypes.Count > 1) // ContentType parameter is added to protocol method only if there is more than one supported media type
+            {
+                var name = inputParameter.Name.ToVariableName();
+                var description = Parameter.CreateDescription(inputParameter, parameterType, Operation.RequestMediaTypes);
+                var parameter = new Parameter(name, description, parameterType, null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
 
-            AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
+                _orderedParameters.Add(new ParameterChain(null, parameter, parameter));
+                _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameter, SerializationFormat.Default));
+            }
+            else
+            {
+                var defaultValue = BuilderHelpers.StringConstant(mediaTypes[0]);
+                _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, defaultValue, SerializationFormat.Default));
+            }
         }
 
-        private void AddParameter(InputParameter operationParameter, CSharpType? frameworkParameterType = null)
-            => AddParameter(operationParameter.NameInRequest, operationParameter, frameworkParameterType);
-
-        private void AddParameter(string name, InputParameter inputParameter, CSharpType? frameworkParameterType = null)
+        private void AddParameter(string nameInRequest, InputParameter inputParameter)
         {
-            var protocolMethodParameter = BuildParameter(inputParameter, frameworkParameterType ?? ChangeTypeForProtocolMethod(inputParameter.Type));
+            var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
 
-            AddReference(name, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
-            if (inputParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
+            if (inputParameter.Kind == InputOperationParameterKind.Client)
             {
+                AddRequestPartFromClient(nameInRequest, inputParameter, serializationFormat);
                 return;
             }
 
+            if (inputParameter.Kind == InputOperationParameterKind.Constant)
+            {
+                AddRequestPartFromConstant(nameInRequest, inputParameter, serializationFormat);
+                return;
+            }
+
+            var parameterType = _typeFactory.CreateType(inputParameter.Type);
+            var reference = new Reference(inputParameter.Name.ToVariableName(), parameterType);
+            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, reference, serializationFormat));
+
+            var protocolMethodParameter = Parameter.FromInputParameter(inputParameter, ChangeTypeForProtocolMethod(inputParameter.Type) ?? parameterType, _typeFactory);
             if (inputParameter.Kind == InputOperationParameterKind.Grouped)
             {
                 _orderedParameters.Add(new ParameterChain(null, protocolMethodParameter, protocolMethodParameter));
                 return;
             }
 
-            var convenienceMethodParameter = BuildParameter(inputParameter);
+            var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, parameterType, _typeFactory);
             var parameterChain = inputParameter.Location == RequestLocation.None
                 ? new ParameterChain(convenienceMethodParameter, null, null)
                 : new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
@@ -378,40 +388,30 @@ namespace AutoRest.CSharp.Output.Models
             _orderedParameters.Add(parameterChain);
         }
 
-        private Parameter BuildParameter(in InputParameter operationParameter, CSharpType? typeOverride = null)
+        private void AddRequestPartFromClient(string nameInRequest, InputParameter inputParameter, SerializationFormat serializationFormat)
         {
-            var type = typeOverride != null
-                ? typeOverride.WithNullable(operationParameter.Type.IsNullable)
-                : _typeFactory.CreateType(operationParameter.Type);
-
-            return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
-        }
-
-        private void AddReference(string nameInRequest, InputParameter? operationParameter, Parameter parameter, SerializationFormat serializationFormat)
-        {
-            var reference = operationParameter != null ? CreateReference(operationParameter, parameter) : parameter;
-            _requestParts.Add(new RequestPartSource(nameInRequest, operationParameter, reference, serializationFormat));
-        }
-
-        private ReferenceOrConstant CreateReference(InputParameter? operationParameter, Parameter parameter)
-        {
-            if (operationParameter?.Kind == InputOperationParameterKind.Client)
+            var parameterName = inputParameter.Name.ToVariableName();
+            var field = inputParameter.IsEndpoint
+                ? _fields.EndpointField
+                : _fields.GetFieldByParameter(parameterName, _typeFactory.CreateType(inputParameter.Type));
+            if (field == null)
             {
-                var field = operationParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(parameter);
-                if (field == null)
-                {
-                    throw new InvalidOperationException($"Parameter {parameter.Name} should have matching field");
-                }
-
-                return new Reference(field.Name, field.Type);
+                throw new InvalidOperationException($"Parameter {parameterName} should have matching field");
             }
 
-            if (operationParameter?.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
+            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, new Reference(field.Name, field.Type), serializationFormat));
+        }
+
+        private void AddRequestPartFromConstant(string nameInRequest, InputParameter inputParameter, SerializationFormat serializationFormat)
+        {
+            var defaultValue = inputParameter.DefaultValue;
+            if (defaultValue == null)
             {
-                return (ReferenceOrConstant)parameter.DefaultValue;
+                throw new InvalidOperationException($"Input parameter {inputParameter.Name} is defined as constant, but doesn't have a default value.");
             }
 
-            return parameter;
+            var constant = BuilderHelpers.ParseConstant(defaultValue.Value, _typeFactory.CreateType(defaultValue.Type));
+            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, constant, serializationFormat));
         }
 
         private CSharpType? ChangeTypeForProtocolMethod(InputType type) => type switch
