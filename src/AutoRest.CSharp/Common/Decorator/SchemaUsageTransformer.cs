@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Common.Decorator
             if (schemaToPropertyMap.Count > 0)
             {
                 var schemaList = schemaToPropertyMap.Keys.Aggregate((a, b) => $"{a}, {b}");
-                throw new InvalidOperationException("The following schemas were referenced by properties with the 'x-ms-format-element-definition' attribute, but were not found in any definitions: " + schemaList);
+                throw new InvalidOperationException($"The following schemas were referenced by properties with the '{FormatElementDefinition}' attribute, but were not found in any definitions: " + schemaList);
             }
         }
 
