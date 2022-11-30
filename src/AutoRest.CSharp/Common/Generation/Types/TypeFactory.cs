@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Generation.Types
             AnyObjectSchema _ when format == XMsFormat.DataFactoryExpressionOfListOfT => new CSharpType(
                 typeof(DataFactoryExpression<>),
                 isNullable: isNullable,
-                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
+                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-definition"]))),
             _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
@@ -276,7 +276,6 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.DataFactoryExpressionOfDuration => typeof(DataFactoryExpression<TimeSpan>),
             XMsFormat.DataFactoryExpressionOfUri => typeof(DataFactoryExpression<Uri>),
             XMsFormat.DataFactoryExpressionOfObject => typeof(DataFactoryExpression<BinaryData>),
-            XMsFormat.DataFactoryExpressionOfListOfObject => typeof(DataFactoryExpression<IList<BinaryData>>),
             XMsFormat.DataFactoryExpressionOfListOfString => typeof(DataFactoryExpression<IList<string>>),
             XMsFormat.DataFactoryExpressionOfKeyValuePairs => typeof(DataFactoryExpression<IDictionary<string, string>>),
             _ => null

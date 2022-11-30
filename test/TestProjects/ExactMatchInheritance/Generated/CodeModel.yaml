@@ -564,7 +564,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type9
                   extensions:
-                    x-ms-format: dfe-list-object
+                    x-ms-format: dfe-object
                   language: !Languages 
                     default:
                       name: type9
@@ -574,7 +574,8 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type10
                   extensions:
-                    x-ms-format: dfe-object
+                    x-ms-format: dfe-list-generic
+                    x-ms-format-element-definition: SeparateClass
                   language: !Languages 
                     default:
                       name: type10
@@ -584,8 +585,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type11
                   extensions:
-                    x-ms-format: dfe-list-generic
-                    x-ms-format-element-type: SeparateClass
+                    x-ms-format: dfe-list-string
                   language: !Languages 
                     default:
                       name: type11
@@ -595,7 +595,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type12
                   extensions:
-                    x-ms-format: dfe-list-string
+                    x-ms-format: dfe-key-value-pairs
                   language: !Languages 
                     default:
                       name: type12
@@ -605,7 +605,8 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type13
                   extensions:
-                    x-ms-format: dfe-key-value-pairs
+                    x-ms-format: dfe-list-generic
+                    x-ms-format-element-definition: '#/definitions/SeparateClass'
                   language: !Languages 
                     default:
                       name: type13
@@ -615,8 +616,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type14
                   extensions:
-                    x-ms-format: dfe-list-generic
-                    x-ms-format-element-type: SeparateClass
+                    x-ms-format: dfe-date-time-rfc1123
                   language: !Languages 
                     default:
                       name: type14
@@ -626,7 +626,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type15
                   extensions:
-                    x-ms-format: dfe-date-time-rfc1123
+                    x-ms-format: dfe-duration
                   language: !Languages 
                     default:
                       name: type15
@@ -636,20 +636,10 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type16
                   extensions:
-                    x-ms-format: dfe-duration
-                  language: !Languages 
-                    default:
-                      name: type16
-                      description: Any object
-                  protocol: !Protocols {}
-                - !Property 
-                  schema: *ref_13
-                  serializedName: type17
-                  extensions:
                     x-ms-format: dfe-uri
                   language: !Languages 
                     default:
-                      name: type17
+                      name: type16
                       description: Any object
                   protocol: !Protocols {}
               serializationFormats:

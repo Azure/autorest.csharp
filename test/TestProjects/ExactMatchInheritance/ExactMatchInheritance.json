@@ -536,40 +536,36 @@
                     "x-ms-format": "dfe-int"
                 },
                 "type9": {
-                    "type": "object",
-                    "x-ms-format": "dfe-list-object"
-                },
-                "type10": {
                   "type": "object",
                   "x-ms-format": "dfe-object"
                 },
-                "type11": {
+                "type10": {
                   "type": "object",
                   "x-ms-format": "dfe-list-generic",
-                  "x-ms-format-element-type": "SeparateClass"
+                  "x-ms-format-element-definition": "SeparateClass"
                 },
-                "type12": {
+                "type11": {
                   "type": "object",
                   "x-ms-format": "dfe-list-string"
                 },
-                "type13": {
+                "type12": {
                   "type": "object",
                   "x-ms-format": "dfe-key-value-pairs"
                 },
-                "type14": {
+                "type13": {
                     "type": "object",
                     "x-ms-format": "dfe-list-generic",
-                    "x-ms-format-element-type": "SeparateClass"
+                    "x-ms-format-element-definition": "#/definitions/SeparateClass"
                 },
-                "type15": {
+                "type14": {
                     "type": "object",
                     "x-ms-format": "dfe-date-time-rfc1123"
                 },
-                "type16": {
+                "type15": {
                     "type": "object",
                     "x-ms-format": "dfe-duration"
                 },
-                "type17": {
+                "type16": {
                     "type": "object",
                     "x-ms-format": "dfe-uri"
                 }

@@ -28,14 +28,13 @@ namespace Inheritance.Models
         /// <param name="dfeBool"> Any object. </param>
         /// <param name="dfeInt"> Any object. </param>
         /// <param name="dfeObject"> Any object. </param>
-        /// <param name="dfeListOfObject"> Any object. </param>
         /// <param name="dfeListOfT"> Any object. </param>
         /// <param name="dfeListOfString"> Any object. </param>
         /// <param name="dfeKeyValuePairs"> Any object. </param>
         /// <param name="dfeDateTime"> Any object. </param>
         /// <param name="dfeDuration"> Any object. </param>
         /// <param name="dfeUri"> Any object. </param>
-        internal ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(string someProperty, string someOtherProperty, string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<BinaryData> dfeObject, DataFactoryExpression<IList<BinaryData>> dfeListOfObject, DataFactoryExpression<IList<SeparateClass>> dfeListOfT, DataFactoryExpression<IList<string>> dfeListOfString, DataFactoryExpression<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryExpression<DateTimeOffset> dfeDateTime, DataFactoryExpression<TimeSpan> dfeDuration, DataFactoryExpression<Uri> dfeUri) : base(someProperty, someOtherProperty)
+        internal ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(string someProperty, string someOtherProperty, string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<BinaryData> dfeObject, DataFactoryExpression<IList<SeparateClass>> dfeListOfT, DataFactoryExpression<IList<string>> dfeListOfString, DataFactoryExpression<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryExpression<DateTimeOffset> dfeDateTime, DataFactoryExpression<TimeSpan> dfeDuration, DataFactoryExpression<Uri> dfeUri) : base(someProperty, someOtherProperty)
         {
             BaseClassProperty = baseClassProperty;
             DfeString = dfeString;
@@ -43,7 +42,6 @@ namespace Inheritance.Models
             DfeBool = dfeBool;
             DfeInt = dfeInt;
             DfeObject = dfeObject;
-            DfeListOfObject = dfeListOfObject;
             DfeListOfT = dfeListOfT;
             DfeListOfString = dfeListOfString;
             DfeKeyValuePairs = dfeKeyValuePairs;
@@ -64,8 +62,6 @@ namespace Inheritance.Models
         public DataFactoryExpression<int> DfeInt { get; set; }
         /// <summary> Any object. </summary>
         public DataFactoryExpression<BinaryData> DfeObject { get; set; }
-        /// <summary> Any object. </summary>
-        public DataFactoryExpression<IList<BinaryData>> DfeListOfObject { get; set; }
         /// <summary> Any object. </summary>
         public DataFactoryExpression<IList<SeparateClass>> DfeListOfT { get; set; }
         /// <summary> Any object. </summary>

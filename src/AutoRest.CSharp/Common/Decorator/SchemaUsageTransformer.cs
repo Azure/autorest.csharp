@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
@@ -14,6 +15,9 @@ namespace AutoRest.CSharp.Common.Decorator
     /// </summary>
     internal static class SchemaUsageTransformer
     {
+        private const string FormatElementDefinition = "x-ms-format-element-definition";
+        private const string CSharpUsage = "x-csharp-usage";
+
         public static void Transform(CodeModel codeModel)
         {
             Dictionary<string, List<Property>> schemaToPropertyMap = new();
@@ -23,9 +27,14 @@ namespace AutoRest.CSharp.Common.Decorator
             {
                 foreach (var property in schema.Properties)
                 {
-                    if (property.Extensions?.TryGetValue("x-ms-format-element-type", out var value) == true)
+                    if (property.Extensions?.TryGetValue(FormatElementDefinition, out var value) == true)
                     {
                         string valueString = (string)value;
+
+                        if (valueString.StartsWith("#/definitions/"))
+                        {
+                            valueString = valueString.Substring("#/definitions/".Length);
+                        }
 
                         if (!schemaToPropertyMap.ContainsKey(valueString))
                         {
@@ -47,15 +56,16 @@ namespace AutoRest.CSharp.Common.Decorator
             {
                 if (!schemaToPropertyMap.TryGetValue(schema.Name, out var propertyList)) continue;
 
+                schemaToPropertyMap.Remove(schema.Name);
                 foreach (var property in propertyList)
                 {
-                    property.Extensions!["x-ms-format-element-type"] = schema;
+                    property.Extensions![FormatElementDefinition] = schema;
                 }
 
                 schema.Extensions ??= new RecordOfStringAndAny();
 
                 // apply usages and media types based on the enclosing schemas for the properties that reference
-                // the "x-ms-format-element-type" schema
+                // the "x-ms-format-element-definition" schema
 
                 HashSet<string> additionalUsages = new();
                 HashSet<KnownMediaType> additionalMediaTypes = new();
@@ -91,6 +101,12 @@ namespace AutoRest.CSharp.Common.Decorator
                 // recursively apply the usages and media types to the schema and all property schemas on the schema
                 Apply(schema, additionalUsages, additionalMediaTypes, new HashSet<ObjectSchema>());
             }
+
+            if (schemaToPropertyMap.Count > 0)
+            {
+                var schemaList = schemaToPropertyMap.Keys.Aggregate((a, b) => $"{a}, {b}");
+                throw new InvalidOperationException("The following schemas were referenced by properties with the 'x-ms-format-element-definition' attribute, but were not found in any definitions: " + schemaList);
+            }
         }
 
         private static void Apply(ObjectSchema schema, HashSet<string> usages, HashSet<KnownMediaType> mediaTypes, HashSet<ObjectSchema> appliedSchemas)
@@ -103,19 +119,19 @@ namespace AutoRest.CSharp.Common.Decorator
             if (usages.Count > 0)
             {
                 schema.Extensions ??= new RecordOfStringAndAny();
-                if (!schema.Extensions!.TryGetValue("x-csharp-usage", out var existingUsages))
+                if (!schema.Extensions!.TryGetValue(CSharpUsage, out var existingUsages))
                 {
-                    schema.Extensions.Add("x-csharp-usage", string.Join(",", usages));
+                    schema.Extensions.Add(CSharpUsage, string.Join(",", usages));
                 }
                 else
                 {
                     if (existingUsages is string usage && !string.IsNullOrEmpty(usage))
                     {
-                        schema.Extensions!["x-csharp-usage"] = usage + "," + string.Join(",", usages);
+                        schema.Extensions![CSharpUsage] = usage + "," + string.Join(",", usages);
                     }
                     else
                     {
-                        schema.Extensions!["x-csharp-usage"] = string.Join(",", usages);
+                        schema.Extensions![CSharpUsage] = string.Join(",", usages);
                     }
                 }
             }

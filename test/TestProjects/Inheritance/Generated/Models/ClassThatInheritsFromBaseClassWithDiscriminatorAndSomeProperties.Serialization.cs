@@ -60,11 +60,6 @@ namespace Inheritance.Models
                 writer.WritePropertyName("DfeObject");
                 JsonSerializer.Serialize(writer, DfeObject);
             }
-            if (Optional.IsDefined(DfeListOfObject))
-            {
-                writer.WritePropertyName("DfeListOfObject");
-                JsonSerializer.Serialize(writer, DfeListOfObject);
-            }
             if (Optional.IsDefined(DfeListOfT))
             {
                 writer.WritePropertyName("DfeListOfT");
@@ -109,7 +104,6 @@ namespace Inheritance.Models
             Optional<DataFactoryExpression<bool>> dfeBool = default;
             Optional<DataFactoryExpression<int>> dfeInt = default;
             Optional<DataFactoryExpression<BinaryData>> dfeObject = default;
-            Optional<DataFactoryExpression<IList<BinaryData>>> dfeListOfObject = default;
             Optional<DataFactoryExpression<IList<SeparateClass>>> dfeListOfT = default;
             Optional<DataFactoryExpression<IList<string>>> dfeListOfString = default;
             Optional<DataFactoryExpression<IDictionary<string, string>>> dfeKeyValuePairs = default;
@@ -188,16 +182,6 @@ namespace Inheritance.Models
                     dfeObject = JsonSerializer.Deserialize<DataFactoryExpression<BinaryData>>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("DfeListOfObject"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    dfeListOfObject = JsonSerializer.Deserialize<DataFactoryExpression<IList<BinaryData>>>(property.Value.GetRawText());
-                    continue;
-                }
                 if (property.NameEquals("DfeListOfT"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -259,7 +243,7 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, discriminatorProperty, someProperty.Value, someOtherProperty.Value);
+            return new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, discriminatorProperty, someProperty.Value, someOtherProperty.Value);
         }
     }
 }

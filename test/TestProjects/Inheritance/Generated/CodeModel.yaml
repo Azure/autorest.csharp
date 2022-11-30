@@ -524,20 +524,10 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_17
-          serializedName: DfeListOfObject
-          extensions:
-            x-ms-format: dfe-list-object
-          language: !Languages 
-            default:
-              name: dfeListOfObject
-              description: Any object
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_17
           serializedName: DfeListOfT
           extensions:
             x-ms-format: dfe-list-generic
-            x-ms-format-element-type: SeparateClass
+            x-ms-format-element-definition: SeparateClass
           language: !Languages 
             default:
               name: dfeListOfT

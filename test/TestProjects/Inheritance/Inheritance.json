@@ -66,14 +66,10 @@
           "type": "object",
           "x-ms-format": "dfe-object"
         },
-        "DfeListOfObject": {
-          "type": "object",
-          "x-ms-format": "dfe-list-object"
-        },
         "DfeListOfT": {
           "type": "object",
           "x-ms-format": "dfe-list-generic",
-          "x-ms-format-element-type": "SeparateClass"
+          "x-ms-format-element-definition": "SeparateClass"
         },
         "DfeListOfString": {
           "type": "object",
