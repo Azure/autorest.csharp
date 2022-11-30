@@ -65,7 +65,6 @@ export function resolveServers(
                       IsNullable: false
                   } as InputPrimitiveType)
                 : getInputType(program, prop.type, models, enums);
-            (inputType as InputEnumType | InputModelType).Usage = Usage.Input;
 
             if (value) {
                 defaultValue = {

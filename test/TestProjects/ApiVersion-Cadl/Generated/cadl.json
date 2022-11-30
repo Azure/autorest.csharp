@@ -77,8 +77,7 @@
         "$id": "11",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false,
-        "Usage": "Input"
+        "IsNullable": false
        },
        "Location": "Uri",
        "IsApiVersion": false,
