@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Common.Decorator
                 additionalUsages.Add("converter");
 
                 // recursively apply the usages and media types to the schema and all property schemas on the schema
-                Apply(schema, additionalUsages, additionalMediaTypes, new HashSet<ObjectSchema>());
+                Apply(schema, string.Join(",", additionalUsages), additionalMediaTypes, new HashSet<ObjectSchema>());
             }
 
             if (schemaToPropertyMap.Count > 0)
@@ -109,32 +109,31 @@ namespace AutoRest.CSharp.Common.Decorator
             }
         }
 
-        private static void Apply(ObjectSchema schema, HashSet<string> usages, HashSet<KnownMediaType> mediaTypes, HashSet<ObjectSchema> appliedSchemas)
+        private static void Apply(ObjectSchema schema, string usages, HashSet<KnownMediaType> mediaTypes, HashSet<ObjectSchema> appliedSchemas)
         {
             if (appliedSchemas.Contains(schema))
                 return;
 
             appliedSchemas.Add(schema);
 
-            if (usages.Count > 0)
+
+            schema.Extensions ??= new RecordOfStringAndAny();
+            if (!schema.Extensions!.TryGetValue(CSharpUsage, out var existingUsages))
             {
-                schema.Extensions ??= new RecordOfStringAndAny();
-                if (!schema.Extensions!.TryGetValue(CSharpUsage, out var existingUsages))
+                schema.Extensions.Add(CSharpUsage, usages);
+            }
+            else
+            {
+                if (existingUsages is string usage && !string.IsNullOrEmpty(usage))
                 {
-                    schema.Extensions.Add(CSharpUsage, string.Join(",", usages));
+                    schema.Extensions![CSharpUsage] = usage + "," + usages;
                 }
                 else
                 {
-                    if (existingUsages is string usage && !string.IsNullOrEmpty(usage))
-                    {
-                        schema.Extensions![CSharpUsage] = usage + "," + string.Join(",", usages);
-                    }
-                    else
-                    {
-                        schema.Extensions![CSharpUsage] = string.Join(",", usages);
-                    }
+                    schema.Extensions![CSharpUsage] = usages;
                 }
             }
+
             foreach (var mediaType in mediaTypes)
             {
                 schema.SerializationFormats.Add(mediaType);
