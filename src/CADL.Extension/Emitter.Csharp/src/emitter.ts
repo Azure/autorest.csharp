@@ -401,8 +401,21 @@ function createModel(
                 if (apiVersionIndex !== -1) {
                     const apiVersionInOperation =
                         op.Parameters[apiVersionIndex];
-                    if ((!apiVersionInOperation.DefaultValue?.Value ||
-                        apiVersions.has(apiVersionInOperation.DefaultValue?.Value)) &&
+                    if (!apiVersionInOperation.DefaultValue?.Value) {
+                        apiVersionInOperation.DefaultValue =
+                            apiVersionParam.DefaultValue;
+                    }
+                    /**
+                     * replace to the global apiVerison parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
+                     * Three checkpoints:
+                     * the parameter is query parameter,
+                     * it is client parameter
+                     * it does not has default value, or the default value is included in the global service apiVersion.
+                     */
+                    if (
+                        apiVersions.has(
+                            apiVersionInOperation.DefaultValue?.Value
+                        ) &&
                         apiVersionInOperation.Kind ===
                             InputOperationParameterKind.Client &&
                         apiVersionInOperation.Location ===

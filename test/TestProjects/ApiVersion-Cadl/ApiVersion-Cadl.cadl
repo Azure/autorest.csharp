@@ -20,7 +20,7 @@ https://westus2.api.cognitive.microsoft.com).
     Endpoint: string,
     @doc("Api Version")
     @path
-    ApiVersion?: APIVersion = "v1.1",
+    ApiVersion: APIVersion
   }
 )
 @doc("CADL project to test api versions.")

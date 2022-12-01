@@ -109,17 +109,20 @@
        "DefaultValue": {
         "$id": "13",
         "Type": {
-         "$ref": "2"
+         "$id": "14",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
         },
-        "Value": "v1.1"
+        "Value": "v1.2"
        }
       },
       {
-       "$id": "14",
+       "$id": "15",
        "Name": "resultId",
        "NameInRequest": "resultId",
        "Type": {
-        "$id": "15",
+        "$id": "16",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -135,11 +138,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "16",
+       "$id": "17",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "17",
+        "$id": "18",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -154,9 +157,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "19",
         "Type": {
-         "$ref": "17"
+         "$ref": "18"
         },
         "Value": "application/json"
        }
@@ -164,7 +167,7 @@
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "20",
        "StatusCodes": [
         200
        ],
@@ -185,15 +188,15 @@
     }
    ],
    "Protocol": {
-    "$id": "20"
+    "$id": "21"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "21",
+  "$id": "22",
   "ApiKey": {
-   "$id": "22",
+   "$id": "23",
    "Name": "Ocp-Apim-Subscription-Key"
   }
  }
