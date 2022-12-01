@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace SingleTopLevelClientWithOperations_LowLevel
 {
-    // Data plane generated sub-client. The Client2 sub-client.
+    // Data plane generated sub-client.
     /// <summary> The Client2 sub-client. </summary>
     public partial class Client2
     {

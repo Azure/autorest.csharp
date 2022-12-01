@@ -16,7 +16,7 @@ using Azure.Core.Pipeline;
 
 namespace ResourceClients_LowLevel
 {
-    // Data plane generated sub-client. The ResourceGroup sub-client.
+    // Data plane generated sub-client.
     /// <summary> The ResourceGroup sub-client. </summary>
     public partial class ResourceGroup
     {

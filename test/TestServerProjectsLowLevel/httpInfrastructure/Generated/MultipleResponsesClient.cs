@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The MultipleResponses service client.
+    // Data plane generated client.
     /// <summary> The MultipleResponses service client. </summary>
     public partial class MultipleResponsesClient
     {

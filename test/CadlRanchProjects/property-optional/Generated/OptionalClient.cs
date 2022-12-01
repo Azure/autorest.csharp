@@ -11,7 +11,7 @@ using Azure.Core.Pipeline;
 
 namespace Models.Property.Optional
 {
-    // Data plane generated client. The Optional service client.
+    // Data plane generated client.
     /// <summary> The Optional service client. </summary>
     public partial class OptionalClient
     {

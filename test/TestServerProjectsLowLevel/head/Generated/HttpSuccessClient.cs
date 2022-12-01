@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace head_LowLevel
 {
-    // Data plane generated client. The HttpSuccess service client.
+    // Data plane generated client.
     /// <summary> The HttpSuccess service client. </summary>
     public partial class HttpSuccessClient
     {
