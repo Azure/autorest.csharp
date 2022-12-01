@@ -15,11 +15,11 @@ namespace body_complex.Models
     /// Please note <see cref="Fish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="Cookiecuttershark"/>, <see cref="Goblinshark"/>, <see cref="Salmon"/>, <see cref="Sawshark"/>, <see cref="Shark"/> and <see cref="SmartSalmon"/>.
     /// </summary>
-    public partial class Fish
+    public abstract partial class Fish
     {
         /// <summary> Initializes a new instance of Fish. </summary>
         /// <param name="length"></param>
-        public Fish(float length)
+        protected Fish(float length)
         {
             Length = length;
             Siblings = new ChangeTrackingList<Fish>();
