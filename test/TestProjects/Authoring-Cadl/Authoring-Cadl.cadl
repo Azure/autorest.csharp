@@ -20,14 +20,11 @@ using Azure.DPG;
   }
 )
 @serviceTitle("Microsoft Cognitive Language Service - Analyze Text Authoring")
-@versioned(Versions)
+@serviceVersion("2022-05-15-preview")
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 @route("/authoring/analyze-text/")
 namespace Azure.Language.Authoring;
 
-enum Versions {
-  v1_1: "v1.1",
-  v1_2: "v1.2"
-}
 // Common Parameters
 
 // TODO: Use the common parameter for this

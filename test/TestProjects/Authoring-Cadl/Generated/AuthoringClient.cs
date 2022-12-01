@@ -23,6 +23,7 @@ namespace Azure.Language.Authoring
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -54,6 +55,7 @@ namespace Azure.Language.Authoring
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
         /// <summary> Creates a new project or updates an existing one. </summary>
@@ -1086,7 +1088,7 @@ namespace Azure.Language.Authoring
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/merge-patch+json");
@@ -1104,7 +1106,7 @@ namespace Azure.Language.Authoring
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1120,7 +1122,7 @@ namespace Azure.Language.Authoring
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1147,7 +1149,7 @@ namespace Azure.Language.Authoring
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1165,7 +1167,7 @@ namespace Azure.Language.Authoring
             uri.AppendPath(projectName, true);
             uri.AppendPath(":export", false);
             uri.AppendQuery("projectFileVersion", projectFileVersion, true);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1182,7 +1184,7 @@ namespace Azure.Language.Authoring
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
             uri.AppendPath(":importx", false);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1199,7 +1201,7 @@ namespace Azure.Language.Authoring
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
             uri.AppendPath(":train", false);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1219,7 +1221,7 @@ namespace Azure.Language.Authoring
             uri.AppendPath(projectName, true);
             uri.AppendPath("/deployments/", false);
             uri.AppendPath(deploymentName, true);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1237,7 +1239,7 @@ namespace Azure.Language.Authoring
             uri.AppendPath(projectName, true);
             uri.AppendPath("/deployments/", false);
             uri.AppendPath(deploymentName, true);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1255,7 +1257,7 @@ namespace Azure.Language.Authoring
             uri.AppendPath(projectName, true);
             uri.AppendPath("/deployments/", false);
             uri.AppendPath(deploymentName, true);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1272,7 +1274,7 @@ namespace Azure.Language.Authoring
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
             uri.AppendPath("/deployments", false);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1289,7 +1291,7 @@ namespace Azure.Language.Authoring
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
             uri.AppendPath("/deployments/swap", false);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1311,7 +1313,7 @@ namespace Azure.Language.Authoring
             uri.AppendPath(deploymentName, true);
             uri.AppendPath("/jobs/", false);
             uri.AppendPath(jobId, true);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1331,7 +1333,7 @@ namespace Azure.Language.Authoring
             uri.AppendPath(deploymentName, true);
             uri.AppendPath("/swap/jobs/", false);
             uri.AppendPath(jobId, true);
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1358,7 +1360,7 @@ namespace Azure.Language.Authoring
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1385,7 +1387,7 @@ namespace Azure.Language.Authoring
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", "v1.2", true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

@@ -2,8 +2,7 @@
  "$id": "1",
  "Name": "Azure.Language.Authoring",
  "ApiVersions": [
-  "v1.1",
-  "v1.2"
+  "2022-05-15-preview"
  ],
  "Enums": [
   {
@@ -33,7 +32,8 @@
     }
    ],
    "IsExtensible": true,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "None"
   },
   {
    "$id": "6",
@@ -991,8 +991,7 @@
         "$id": "126",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false,
-        "Usage": "Input"
+        "IsNullable": false
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1071,7 +1070,7 @@
        "IsResourceParameter": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
+       "Kind": "Client",
        "DefaultValue": {
         "$id": "134",
         "Type": {
@@ -1080,7 +1079,7 @@
          "Kind": "String",
          "IsNullable": false
         },
-        "Value": "v1.2"
+        "Value": "2022-05-15-preview"
        }
       },
       {

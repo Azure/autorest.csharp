@@ -13,15 +13,13 @@ namespace Azure.Language.Authoring
     /// <summary> Client options for AuthoringClient. </summary>
     public partial class AuthoringClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V1_2;
+        private const ServiceVersion LatestVersion = ServiceVersion.V2022_05_15_Preview;
 
         /// <summary> The version of the service to use. </summary>
         public enum ServiceVersion
         {
-            /// <summary> Service version "v1.1". </summary>
-            V1_1 = 1,
-            /// <summary> Service version "v1.2". </summary>
-            V1_2 = 2,
+            /// <summary> Service version "2022-05-15-preview". </summary>
+            V2022_05_15_Preview = 1,
         }
 
         internal string Version { get; }
@@ -31,8 +29,7 @@ namespace Azure.Language.Authoring
         {
             Version = version switch
             {
-                ServiceVersion.V1_1 => "v1.1",
-                ServiceVersion.V1_2 => "v1.2",
+                ServiceVersion.V2022_05_15_Preview => "2022-05-15-preview",
                 _ => throw new NotSupportedException()
             };
         }
