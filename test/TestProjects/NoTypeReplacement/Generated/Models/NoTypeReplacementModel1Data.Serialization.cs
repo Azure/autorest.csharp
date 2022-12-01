@@ -41,7 +41,7 @@ namespace NoTypeReplacement
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    foo = JsonSerializer.Deserialize<SubResource>(property.Value.ToString());
+                    foo = JsonSerializer.Deserialize<SubResource>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("id"))
