@@ -8,7 +8,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class CadlRanchServer : TestServerBase
     {
-        public CadlRanchServer(): base(GetBaseDirectory(), $"serve {GetScenariosPath()} --port 0 --coverageFile {GetCoverageFilePath()}")
+        public CadlRanchServer(): base(GetBaseDirectory(), $"serve {GetScenariosPath()} --port 0 --coverageFile {GetCoverageFilePath()} --additionalMockApiPath {GetMockApiPath()}")
         {
         }
 
@@ -26,6 +26,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         internal static string GetCoverageFilePath()
         {
             return Path.Combine(GetCoverageDirectory(), "cadl-ranch-coverage-csharp.json");
+        }
+
+        internal static string GetMockApiPath()
+        {
+            return Path.Combine(GetRepoRootDirectory(), "test", "CadlRanchMockApis", "src");
         }
 
         protected override void Stop(Process process)
