@@ -369,18 +369,16 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            var parameterType = _typeFactory.CreateType(inputParameter.Type);
-            var reference = new Reference(inputParameter.Name.ToVariableName(), parameterType);
-            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, reference, serializationFormat));
+            var protocolMethodParameter = Parameter.FromInputParameter(inputParameter, ChangeTypeForProtocolMethod(inputParameter.Type), _typeFactory);
+            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, protocolMethodParameter, serializationFormat));
 
-            var protocolMethodParameter = Parameter.FromInputParameter(inputParameter, ChangeTypeForProtocolMethod(inputParameter.Type) ?? parameterType, _typeFactory);
             if (inputParameter.Kind == InputOperationParameterKind.Grouped)
             {
                 _orderedParameters.Add(new ParameterChain(null, protocolMethodParameter, protocolMethodParameter));
                 return;
             }
 
-            var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, parameterType, _typeFactory);
+            var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
             var parameterChain = inputParameter.Location == RequestLocation.None
                 ? new ParameterChain(convenienceMethodParameter, null, null)
                 : new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
@@ -414,11 +412,11 @@ namespace AutoRest.CSharp.Output.Models
             _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, constant, serializationFormat));
         }
 
-        private CSharpType? ChangeTypeForProtocolMethod(InputType type) => type switch
+        private CSharpType ChangeTypeForProtocolMethod(InputType type) => type switch
         {
             InputEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType).WithNullable(enumType.IsNullable),
             InputModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
-            _ => null
+            _ => _typeFactory.CreateType(type)
         };
 
         private record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
