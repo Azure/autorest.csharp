@@ -285,7 +285,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? KnownParameters.RequestContent
                 : KnownParameters.RequestContentNullable;
 
-            var convenienceBodyParameter = Parameter.FromInputParameter(bodyParameter, _typeFactory.CreateType(bodyParameter.Type), _typeFactory);
+            var convenienceBodyParameter = Parameter.FromInputParameter(bodyParameter, _typeFactory);
             _orderedParameters.Add(new ParameterChain(convenienceBodyParameter, _protocolBodyParameter, _protocolBodyParameter));
 
             if (contentTypeRequestParameter != null && Operation.RequestMediaTypes?.Count > 0)
@@ -356,33 +356,29 @@ namespace AutoRest.CSharp.Output.Models
         private void AddParameter(string nameInRequest, InputParameter inputParameter)
         {
             var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
-
-            if (inputParameter.Kind == InputOperationParameterKind.Client)
+            switch (inputParameter.Kind)
             {
-                AddRequestPartFromClient(nameInRequest, inputParameter, serializationFormat);
-                return;
+                case InputOperationParameterKind.Client:
+                    AddRequestPartFromClient(nameInRequest, inputParameter, serializationFormat);
+                    return;
+                case InputOperationParameterKind.Constant:
+                    AddRequestPartFromConstant(nameInRequest, inputParameter, serializationFormat);
+                    return;
+                case InputOperationParameterKind.Grouped:
+                    AddGroupedParameter(nameInRequest, inputParameter, serializationFormat);
+                    return;
             }
 
-            if (inputParameter.Kind == InputOperationParameterKind.Constant)
+            if (inputParameter.Location == RequestLocation.None)
             {
-                AddRequestPartFromConstant(nameInRequest, inputParameter, serializationFormat);
+                AddConvenienceMethodOnlyParameter(inputParameter);
                 return;
             }
 
             var protocolMethodParameter = Parameter.FromInputParameter(inputParameter, ChangeTypeForProtocolMethod(inputParameter.Type), _typeFactory);
+            var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, _typeFactory);
+            var parameterChain = new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
             _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, protocolMethodParameter, serializationFormat));
-
-            if (inputParameter.Kind == InputOperationParameterKind.Grouped)
-            {
-                _orderedParameters.Add(new ParameterChain(null, protocolMethodParameter, protocolMethodParameter));
-                return;
-            }
-
-            var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
-            var parameterChain = inputParameter.Location == RequestLocation.None
-                ? new ParameterChain(convenienceMethodParameter, null, null)
-                : new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
-
             _orderedParameters.Add(parameterChain);
         }
 
@@ -410,6 +406,19 @@ namespace AutoRest.CSharp.Output.Models
 
             var constant = BuilderHelpers.ParseConstant(defaultValue.Value, _typeFactory.CreateType(defaultValue.Type));
             _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, constant, serializationFormat));
+        }
+
+        private void AddGroupedParameter(string nameInRequest, InputParameter inputParameter, SerializationFormat serializationFormat)
+        {
+            var protocolMethodParameter = Parameter.FromInputParameter(inputParameter, ChangeTypeForProtocolMethod(inputParameter.Type), _typeFactory);
+            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, protocolMethodParameter, serializationFormat));
+            _orderedParameters.Add(new ParameterChain(null, protocolMethodParameter, protocolMethodParameter));
+        }
+
+        private void AddConvenienceMethodOnlyParameter(InputParameter inputParameter)
+        {
+            var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, _typeFactory);
+            _orderedParameters.Add(new ParameterChain(convenienceMethodParameter, null, null));
         }
 
         private CSharpType ChangeTypeForProtocolMethod(InputType type) => type switch
