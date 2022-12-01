@@ -229,7 +229,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var field = client.Fields.GetFieldByParameter(parameter);
                     if (field != null)
                     {
-                        if (parameter.IsApiVersionParameter && parameter.RequestLocation == RequestLocation.Query)
+                        if (parameter.IsApiVersionParameter)
                         {
                             writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.Version;");
                         }
