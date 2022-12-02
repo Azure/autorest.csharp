@@ -1310,6 +1310,14 @@
                         }]
                     }
                 },
+                "memoryType": {
+                    "type": "integer",
+                    "format": "int64",
+                    "enum": [-1, 2, 4],
+                    "x-ms-enum": {
+                        "name": "MemoryType"
+                    }
+                },
                 "registrationVirtualNetworks": {
                     "type": "array",
                     "items": {
