@@ -2,7 +2,12 @@ import { passOnSuccess, ScenarioMockApi, mockapi, json, MockApi } from "@azure-t
 
 export const Scenarios: Record<string, ScenarioMockApi> = {};
 
-Scenarios.DeleteAPetById = passOnSuccess(
+const dog = {
+  name: "dog",
+  age: 12,
+};
+
+Scenarios.PetStore_DeletePetById = passOnSuccess(
   mockapi.delete("/pets/1", () => {
     return {
       status: 200,
@@ -10,3 +15,39 @@ Scenarios.DeleteAPetById = passOnSuccess(
   }),
 );
 
+Scenarios.PetStore_ReadPetById = passOnSuccess(
+  mockapi.get("/pets/1", () => {
+    return {
+      status: 200,
+      body: json(dog),
+    };
+  }),
+);
+
+Scenarios.PetStore_CreatePet = passOnSuccess(
+  mockapi.post("/pets", (req) => {
+    req.expect.bodyEquals(dog);
+    return {
+      status: 200,
+      body: json(dog),
+    };
+  }),
+);
+
+Scenarios.PetStore_GetPetByKind = passOnSuccess(
+  mockapi.get("/pets/dog", () => {
+    return {
+      status: 200,
+      body: json(dog),
+    };
+  }),
+);
+
+Scenarios.PetStore_GetFirstPet = passOnSuccess(
+  mockapi.get("/pets?start=1", () => {
+    return {
+      status: 200,
+      body: json(dog),
+    };
+  }),
+);

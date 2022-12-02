@@ -6,9 +6,9 @@ using System.IO;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
 {
-    public class CadlRanchServer : TestServerBase
+    public class CadlRanchMockApiServer : TestServerBase
     {
-        public CadlRanchServer(): base(GetBaseDirectory(), $"serve {GetScenariosPath()} --port 0 --coverageFile {GetCoverageFilePath()}")
+        public CadlRanchMockApiServer() : base(GetBaseDirectory(), $"serve {GetScenariosPath()} --port 0 --coverageFile {GetCoverageFilePath()}")
         {
         }
 
@@ -20,12 +20,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         internal static string GetScenariosPath()
         {
-            var nodeModules = GetNodeModulesDirectory();
-            return Path.Combine(nodeModules, "@azure-tools", "cadl-ranch-specs", "http");
+            return Path.Combine(GetRepoRootDirectory(), "test", "CadlRanchMockApis", "src");
         }
         internal static string GetCoverageFilePath()
         {
-            return Path.Combine(GetCoverageDirectory(), "cadl-ranch-coverage-csharp.json");
+            return Path.Combine(GetCoverageDirectory(), "cadl-ranch-mock-api-coverage-csharp.json");
         }
 
         protected override void Stop(Process process)

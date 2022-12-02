@@ -66,6 +66,12 @@ stages:
           - pwsh: ./eng/CodeChecks.ps1
             displayName: "Check if code is up-to-date"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - task: Npm@1
+            displayName: 'Build CADL Ranch Mock Api project'
+            inputs:
+              command: custom
+              customCommand: run build
+              workingDir: $(Build.SourcesDirectory)/test/CadlRanchMockApis
           - script: |
               dotnet test AutoRest.CSharp.sln
             displayName: "Test"
