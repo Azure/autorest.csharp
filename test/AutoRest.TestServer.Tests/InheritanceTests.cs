@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class InheritanceTests
     {
-        private const int NumberOfPublicPropertiesOnBase = 15;
+        private const int NumberOfPublicPropertiesOnBase = 14;
 
         [Test]
         public void SingularInheritanceUsesBaseClass()
@@ -144,7 +144,6 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(typeof(DataFactoryExpression<bool>), typeof(BaseClass).GetProperty("DfeBool").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<int>), typeof(BaseClass).GetProperty("DfeInt").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<BinaryData>), typeof(BaseClass).GetProperty("DfeObject").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<IList<BinaryData>>), typeof(BaseClass).GetProperty("DfeListOfObject").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<IList<SeparateClass>>), typeof(BaseClass).GetProperty("DfeListOfT").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<IList<string>>), typeof(BaseClass).GetProperty("DfeListOfString").PropertyType);
             Assert.AreEqual(typeof(DataFactoryExpression<IDictionary<string, string>>), typeof(BaseClass).GetProperty("DfeKeyValuePairs").PropertyType);
