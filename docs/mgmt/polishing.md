@@ -265,6 +265,8 @@ keep-plural-enums:
 
 The generator will add an `abstract` modifier to the base class when its has a discriminator. This could help the user understand that it is the derived classes that really work as the base class isn't allowed to be instantiated. However, we also provide the configuration to suppress this feature, you can use `suppress-abstract-base-class` with the corresponding class name to remove the `abstract` modifier. In particular, it should be noted that there is difference between the original model name in swagger and the name in the final generated SDK and this configuration requires the finalized model name in SDK.
 
+**[Note]:** The class names specified under `suppress-abstract-base-class` are **original names**, not the names changed after applying renaming directives.
+
 ```yaml
 suppress-abstract-base-class:
   DeliveryRuleAction
