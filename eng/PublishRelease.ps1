@@ -47,7 +47,7 @@ try {
     $file = npm pack -q;
 
     Write-Host "Publishing $file on Npm..."
-    "//registry.npmjs.org/:_authToken=$env:NPM_TOKEN" | Out-File -FilePath (Joint-Path $CadlEmitterDirectory '.npmrc')
+    "//registry.npmjs.org/:_authToken=$env:NPM_TOKEN" | Out-File -FilePath (Join-Path $CadlEmitterDirectory '.npmrc')
     npm publish $file --access public
     
     Write-Host "##vso[task.setvariable variable=CadlEmitterVersion;isoutput=true]$devVersion"
