@@ -28,6 +28,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IEnumerable<SerializableObjectType> Models { get; }
 
+        public FormattableString Description => $"Model factory for generated models.";
+
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
         private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)

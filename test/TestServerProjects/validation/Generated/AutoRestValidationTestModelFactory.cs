@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace validation.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for generated models. </summary>
     public static partial class AutoRestValidationTestModelFactory
     {
         /// <summary> Initializes a new instance of Product. </summary>

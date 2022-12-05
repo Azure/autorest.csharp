@@ -7,7 +7,7 @@
 
 namespace body_string.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for generated models. </summary>
     public static partial class AutoRestSwaggerBATServiceModelFactory
     {
         /// <summary> Initializes a new instance of RefColorConstant. </summary>

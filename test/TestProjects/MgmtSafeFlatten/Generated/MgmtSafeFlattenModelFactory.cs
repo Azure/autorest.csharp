@@ -14,7 +14,7 @@ using MgmtSafeFlatten;
 
 namespace MgmtSafeFlatten.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for generated models. </summary>
     public static partial class MgmtSafeFlattenModelFactory
     {
 

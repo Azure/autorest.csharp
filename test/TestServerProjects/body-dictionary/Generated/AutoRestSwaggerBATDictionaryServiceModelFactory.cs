@@ -7,7 +7,7 @@
 
 namespace body_dictionary.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for generated models. </summary>
     public static partial class AutoRestSwaggerBATDictionaryServiceModelFactory
     {
         /// <summary> Initializes a new instance of Widget. </summary>

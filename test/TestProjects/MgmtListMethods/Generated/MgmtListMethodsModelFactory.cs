@@ -13,7 +13,7 @@ using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for generated models. </summary>
     public static partial class MgmtListMethodsModelFactory
     {
         /// <summary> Initializes a new instance of FakeData. </summary>

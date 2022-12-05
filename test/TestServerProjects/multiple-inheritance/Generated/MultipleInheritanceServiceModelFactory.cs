@@ -9,7 +9,7 @@ using System;
 
 namespace multiple_inheritance.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for generated models. </summary>
     public static partial class MultipleInheritanceServiceModelFactory
     {
         /// <summary> Initializes a new instance of Horse. </summary>

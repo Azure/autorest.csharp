@@ -15,7 +15,7 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for generated models. </summary>
     public static partial class SampleModelFactory
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>

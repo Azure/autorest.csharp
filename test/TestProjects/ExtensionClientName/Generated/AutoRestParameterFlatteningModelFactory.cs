@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace ExtensionClientName.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for generated models. </summary>
     public static partial class AutoRestParameterFlatteningModelFactory
     {
         /// <summary> Initializes a new instance of RenamedSchema. </summary>

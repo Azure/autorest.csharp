@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (_writer.Namespace(This.Type.Namespace))
             {
-                _writer.WriteXmlDocumentationSummary($"Model factory for read-only models.");
+                _writer.WriteXmlDocumentationSummary(This.Description);
                 using (_writer.Scope($"{This.Declaration.Accessibility} static partial class {This.Type:D}"))
                 {
                     foreach (var method in This.Methods)
