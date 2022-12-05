@@ -1,6 +1,6 @@
 {
     "name": "@azure-tools/cadl-csharp",
-    "version": "0.1.8",
+    "version": "0.1.10",
     "author": "Microsoft Corporation",
     "description": "Cadl library for emitting csharp model from the Cadl REST protocol binding",
     "homepage": "https://github.com/Microsoft/cadl",
@@ -47,7 +47,7 @@
         "typescript": "~4.7.2"
     },
     "dependencies": {
-        "@autorest/csharp": "3.0.0-beta.20221124.1",
+        "@autorest/csharp": "3.0.0-beta.20221201.1",
         "@azure-tools/cadl-autorest": "0.22.0",
         "@azure-tools/cadl-azure-core": "0.9.0",
         "@azure-tools/cadl-dpg": "0.3.0",

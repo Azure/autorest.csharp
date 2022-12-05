@@ -43,7 +43,7 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "7",
-        "Name": "String",
+        "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },

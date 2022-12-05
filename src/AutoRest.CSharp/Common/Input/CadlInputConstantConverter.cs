@@ -93,6 +93,22 @@ namespace AutoRest.CSharp.Common.Input
 
                     }
                     break;
+                case InputEnumType enumType:
+                    switch (enumType.EnumValueType.Kind)
+                    {
+                        case InputTypeKind.String:
+                            value = reader.GetString() ?? throw new JsonException();
+                            break;
+                        case InputTypeKind.Int32:
+                            value = reader.GetInt32();
+                            break;
+                        case InputTypeKind.Float32:
+                            value = reader.GetDouble();
+                            break;
+                        default:
+                            throw new JsonException($"Unsupported enum value type: {enumType.EnumValueType.Kind}");
+                    }
+                    break;
                 case InputModelType model:
                     throw new JsonException("Not supported type.");
                 default:

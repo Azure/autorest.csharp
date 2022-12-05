@@ -15,7 +15,7 @@ namespace TypeSchemaMapping.Models
     public abstract partial class AbstractModel
     {
         /// <summary> Initializes a new instance of AbstractModel. </summary>
-        internal AbstractModel()
+        protected AbstractModel()
         {
         }
 

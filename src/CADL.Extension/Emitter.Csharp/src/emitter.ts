@@ -238,7 +238,7 @@ export async function $onEmit(
                 const newProjectOption = options["new-project"]
                     ? "--new-project"
                     : "";
-                const command = `dotnet ${resolvePath(
+                const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath
                 )} --project-path ${outputFolder} ${newProjectOption}`;
                 console.info(command);
@@ -249,6 +249,8 @@ export async function $onEmit(
                     if (error.message) console.log(error.message);
                     if (error.stderr) console.error(error.stderr);
                     if (error.stdout) console.log(error.stdout);
+
+                    throw error;
                 }
             }
 
@@ -361,7 +363,12 @@ function createModel(
     try {
         //create endpoint parameter from servers
         if (servers !== undefined) {
-            const cadlServers = resolveServers(program, servers);
+            const cadlServers = resolveServers(
+                program,
+                servers,
+                modelMap,
+                enumMap
+            );
             if (cadlServers.length > 0) {
                 /* choose the first server as endpoint. */
                 url = cadlServers[0].url;
@@ -394,31 +401,32 @@ function createModel(
                 if (apiVersionIndex !== -1) {
                     const apiVersionInOperation =
                         op.Parameters[apiVersionIndex];
+                    if (!apiVersionInOperation.DefaultValue?.Value) {
+                        apiVersionInOperation.DefaultValue =
+                            apiVersionParam.DefaultValue;
+                    }
+                    /**
+                     * replace to the global apiVerison parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
+                     * Three checkpoints:
+                     * the parameter is query parameter,
+                     * it is client parameter
+                     * it does not has default value, or the default value is included in the global service apiVersion.
+                     */
                     if (
-                        apiVersionInOperation.DefaultValue?.Value &&
-                        !apiVersions.has(
+                        apiVersions.has(
                             apiVersionInOperation.DefaultValue?.Value
-                        )
-                    ) {
-                        apiVersions.add(
-                            apiVersionInOperation.DefaultValue.Value
-                        );
-                    } else {
-                        if (
-                            apiVersionInOperation.Location ===
+                        ) &&
+                        apiVersionInOperation.Kind ===
+                            InputOperationParameterKind.Client &&
+                        apiVersionInOperation.Location ===
                             apiVersionParam.Location
-                        ) {
-                            op.Parameters[apiVersionIndex] = apiVersionParam;
-                        }
+                    ) {
+                        op.Parameters[apiVersionIndex] = apiVersionParam;
                     }
                 } else {
                     op.Parameters.push(apiVersionParam);
                 }
             }
-        }
-
-        if (apiVersions.size > 1) {
-            apiVersionParam.Kind = InputOperationParameterKind.Constant;
         }
 
         const usages = getUsages(program, convenienceOperations);
@@ -810,7 +818,9 @@ function loadOperation(
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
             : isApiVer
-            ? InputOperationParameterKind.Client
+            ? defaultValue
+                ? InputOperationParameterKind.Constant
+                : InputOperationParameterKind.Client
             : InputOperationParameterKind.Method;
         return {
             Name: param.name,
