@@ -54,6 +54,92 @@ namespace MgmtExpandResourceTypes.Models
             return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, ResourceManagerModelFactory.WritableSubResource(targetResourceId), aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), new CnameRecord(cname), soaRecord, caaRecords?.ToList());
         }
 
+        /// <summary> Initializes a new instance of ARecord. </summary>
+        /// <param name="ipv4Address"> The IPv4 address of this A record. </param>
+        /// <returns> A new <see cref="Models.ARecord"/> instance for mocking. </returns>
+        public static ARecord ARecord(string ipv4Address = null)
+        {
+            return new ARecord(ipv4Address);
+        }
+
+        /// <summary> Initializes a new instance of AaaaRecord. </summary>
+        /// <param name="ipv6Address"> The IPv6 address of this AAAA record. </param>
+        /// <returns> A new <see cref="Models.AaaaRecord"/> instance for mocking. </returns>
+        public static AaaaRecord AaaaRecord(string ipv6Address = null)
+        {
+            return new AaaaRecord(ipv6Address);
+        }
+
+        /// <summary> Initializes a new instance of MxRecord. </summary>
+        /// <param name="preference"> The preference value for this MX record. </param>
+        /// <param name="exchange"> The domain name of the mail host for this MX record. </param>
+        /// <returns> A new <see cref="Models.MxRecord"/> instance for mocking. </returns>
+        public static MxRecord MxRecord(int? preference = null, string exchange = null)
+        {
+            return new MxRecord(preference, exchange);
+        }
+
+        /// <summary> Initializes a new instance of NsRecord. </summary>
+        /// <param name="nsdname"> The name server name for this NS record. </param>
+        /// <returns> A new <see cref="Models.NsRecord"/> instance for mocking. </returns>
+        public static NsRecord NsRecord(string nsdname = null)
+        {
+            return new NsRecord(nsdname);
+        }
+
+        /// <summary> Initializes a new instance of PtrRecord. </summary>
+        /// <param name="ptrdname"> The PTR target domain name for this PTR record. </param>
+        /// <returns> A new <see cref="Models.PtrRecord"/> instance for mocking. </returns>
+        public static PtrRecord PtrRecord(string ptrdname = null)
+        {
+            return new PtrRecord(ptrdname);
+        }
+
+        /// <summary> Initializes a new instance of SrvRecord. </summary>
+        /// <param name="priority"> The priority value for this SRV record. </param>
+        /// <param name="weight"> The weight value for this SRV record. </param>
+        /// <param name="port"> The port value for this SRV record. </param>
+        /// <param name="target"> The target domain name for this SRV record. </param>
+        /// <returns> A new <see cref="Models.SrvRecord"/> instance for mocking. </returns>
+        public static SrvRecord SrvRecord(int? priority = null, int? weight = null, int? port = null, string target = null)
+        {
+            return new SrvRecord(priority, weight, port, target);
+        }
+
+        /// <summary> Initializes a new instance of TxtRecord. </summary>
+        /// <param name="value"> The text value of this TXT record. </param>
+        /// <returns> A new <see cref="Models.TxtRecord"/> instance for mocking. </returns>
+        public static TxtRecord TxtRecord(IEnumerable<string> value = null)
+        {
+            value ??= new List<string>();
+
+            return new TxtRecord(value?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of SoaRecord. </summary>
+        /// <param name="host"> The domain name of the authoritative name server for this SOA record. </param>
+        /// <param name="email"> The email contact for this SOA record. </param>
+        /// <param name="serialNumber"> The serial number for this SOA record. </param>
+        /// <param name="refreshTime"> The refresh value for this SOA record. </param>
+        /// <param name="retryTime"> The retry time for this SOA record. </param>
+        /// <param name="expireTime"> The expire time for this SOA record. </param>
+        /// <param name="minimumTtl"> The minimum value for this SOA record. By convention this is used to determine the negative caching duration. </param>
+        /// <returns> A new <see cref="Models.SoaRecord"/> instance for mocking. </returns>
+        public static SoaRecord SoaRecord(string host = null, string email = null, long? serialNumber = null, long? refreshTime = null, long? retryTime = null, long? expireTime = null, long? minimumTtl = null)
+        {
+            return new SoaRecord(host, email, serialNumber, refreshTime, retryTime, expireTime, minimumTtl);
+        }
+
+        /// <summary> Initializes a new instance of CaaRecord. </summary>
+        /// <param name="flags"> The flags for this CAA record as an integer between 0 and 255. </param>
+        /// <param name="tag"> The tag for this CAA record. </param>
+        /// <param name="value"> The value for this CAA record. </param>
+        /// <returns> A new <see cref="Models.CaaRecord"/> instance for mocking. </returns>
+        public static CaaRecord CaaRecord(int? flags = null, string tag = null, string value = null)
+        {
+            return new CaaRecord(flags, tag, value);
+        }
+
         /// <summary> Initializes a new instance of ZoneData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -69,17 +155,18 @@ namespace MgmtExpandResourceTypes.Models
         /// <param name="zoneType"> The type of this DNS zone (Public or Private). </param>
         /// <param name="machineType"></param>
         /// <param name="storageType"></param>
+        /// <param name="memoryType"></param>
         /// <param name="registrationVirtualNetworks"> A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private. </param>
         /// <param name="resolutionVirtualNetworks"> A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private. </param>
         /// <returns> A new <see cref="MgmtExpandResourceTypes.ZoneData"/> instance for mocking. </returns>
-        public static ZoneData ZoneData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string etag = null, long? maxNumberOfRecordSets = null, long? maxNumberOfRecordsPerRecordSet = null, long? numberOfRecordSets = null, IEnumerable<string> nameServers = null, ZoneType? zoneType = null, MachineType? machineType = null, StorageType? storageType = null, IEnumerable<WritableSubResource> registrationVirtualNetworks = null, IEnumerable<WritableSubResource> resolutionVirtualNetworks = null)
+        public static ZoneData ZoneData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string etag = null, long? maxNumberOfRecordSets = null, long? maxNumberOfRecordsPerRecordSet = null, long? numberOfRecordSets = null, IEnumerable<string> nameServers = null, ZoneType? zoneType = null, MachineType? machineType = null, StorageType? storageType = null, MemoryType? memoryType = null, IEnumerable<WritableSubResource> registrationVirtualNetworks = null, IEnumerable<WritableSubResource> resolutionVirtualNetworks = null)
         {
             tags ??= new Dictionary<string, string>();
             nameServers ??= new List<string>();
             registrationVirtualNetworks ??= new List<WritableSubResource>();
             resolutionVirtualNetworks ??= new List<WritableSubResource>();
 
-            return new ZoneData(id, name, resourceType, systemData, tags, location, etag, maxNumberOfRecordSets, maxNumberOfRecordsPerRecordSet, numberOfRecordSets, nameServers?.ToList(), zoneType, machineType, storageType, registrationVirtualNetworks?.ToList(), resolutionVirtualNetworks?.ToList());
+            return new ZoneData(id, name, resourceType, systemData, tags, location, etag, maxNumberOfRecordSets, maxNumberOfRecordsPerRecordSet, numberOfRecordSets, nameServers?.ToList(), zoneType, machineType, storageType, memoryType, registrationVirtualNetworks?.ToList(), resolutionVirtualNetworks?.ToList());
         }
 
         /// <summary> Initializes a new instance of DnsResourceReferenceResult. </summary>

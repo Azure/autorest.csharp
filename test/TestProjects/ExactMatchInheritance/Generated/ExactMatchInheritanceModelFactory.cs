@@ -38,6 +38,69 @@ namespace ExactMatchInheritance.Models
             return new ExactMatchModel1Data(id, name, resourceType, systemData, @new, supportingUris?.ToList(), type1, type2, type3, type4);
         }
 
+        /// <summary> Initializes a new instance of ExactMatchModel2. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="exactMatchModel7Type"></param>
+        /// <param name="new"></param>
+        /// <returns> A new <see cref="Models.ExactMatchModel2"/> instance for mocking. </returns>
+        public static ExactMatchModel2 ExactMatchModel2(string id = null, string name = null, string exactMatchModel7Type = null, string @new = null)
+        {
+            return new ExactMatchModel2(id, name, exactMatchModel7Type, @new);
+        }
+
+        /// <summary> Initializes a new instance of ExactMatchModel7. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="exactMatchModel7Type"></param>
+        /// <returns> A new <see cref="Models.ExactMatchModel7"/> instance for mocking. </returns>
+        public static ExactMatchModel7 ExactMatchModel7(string id = null, string name = null, string exactMatchModel7Type = null)
+        {
+            return new ExactMatchModel7(id, name, exactMatchModel7Type);
+        }
+
+        /// <summary> Initializes a new instance of ExactMatchModel3. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="bar"></param>
+        /// <param name="new"></param>
+        /// <returns> A new <see cref="Models.ExactMatchModel3"/> instance for mocking. </returns>
+        public static ExactMatchModel3 ExactMatchModel3(ResourceIdentifier id = null, string name = null, string bar = null, string @new = null)
+        {
+            return new ExactMatchModel3(id, name, bar, @new);
+        }
+
+        /// <summary> Initializes a new instance of ExactMatchModel8. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="bar"></param>
+        /// <returns> A new <see cref="Models.ExactMatchModel8"/> instance for mocking. </returns>
+        public static ExactMatchModel8 ExactMatchModel8(ResourceIdentifier id = null, string name = null, string bar = null)
+        {
+            return new ExactMatchModel8(id, name, bar);
+        }
+
+        /// <summary> Initializes a new instance of ExactMatchModel4. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="exactMatchModel9Type"></param>
+        /// <param name="new"></param>
+        /// <returns> A new <see cref="Models.ExactMatchModel4"/> instance for mocking. </returns>
+        public static ExactMatchModel4 ExactMatchModel4(int? id = null, string name = null, string exactMatchModel9Type = null, string @new = null)
+        {
+            return new ExactMatchModel4(id, name, exactMatchModel9Type, @new);
+        }
+
+        /// <summary> Initializes a new instance of ExactMatchModel9. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="exactMatchModel9Type"></param>
+        /// <returns> A new <see cref="Models.ExactMatchModel9"/> instance for mocking. </returns>
+        public static ExactMatchModel9 ExactMatchModel9(int? id = null, string name = null, string exactMatchModel9Type = null)
+        {
+            return new ExactMatchModel9(id, name, exactMatchModel9Type);
+        }
+
         /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

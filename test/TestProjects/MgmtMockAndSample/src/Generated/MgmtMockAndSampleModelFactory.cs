@@ -51,6 +51,56 @@ namespace MgmtMockAndSample.Models
             return new VaultProperties(duration, createOn, tenantId, sku, accessPolicies?.ToList(), vaultUri, hsmPoolResourceId, deployments?.ToList(), enabledForDiskEncryption, enabledForTemplateDeployment, enableSoftDelete, softDeleteRetentionInDays, enableRbacAuthorization, createMode, enablePurgeProtection, networkAcls, provisioningState, privateEndpointConnections?.ToList(), publicNetworkAccess, new SinglePropertyModel(readWriteSingleStringPropertySomething), new ReadOnlySinglePropertyModel(readOnlySomething), new ExtremelyDeepSinglePropertyModel(new SuperDeepSinglePropertyModel(new VeryDeepSinglePropertyModel(new DeepSinglePropertyModel(new SinglePropertyModel(deepSomething))))));
         }
 
+        /// <summary> Initializes a new instance of AccessPolicyEntry. </summary>
+        /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
+        /// <param name="objectId"> The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. </param>
+        /// <param name="applicationId"> Application ID of the client making request on behalf of a principal. </param>
+        /// <param name="permissions"> Permissions the identity has for keys, secrets and certificates. </param>
+        /// <returns> A new <see cref="Models.AccessPolicyEntry"/> instance for mocking. </returns>
+        public static AccessPolicyEntry AccessPolicyEntry(Guid tenantId = default, string objectId = null, Guid? applicationId = null, Permissions permissions = null)
+        {
+            return new AccessPolicyEntry(tenantId, objectId, applicationId, permissions);
+        }
+
+        /// <summary> Initializes a new instance of Permissions. </summary>
+        /// <param name="keys"> Permissions to keys. </param>
+        /// <param name="secrets"> Permissions to secrets. </param>
+        /// <param name="certificates"> Permissions to certificates. </param>
+        /// <param name="storage"> Permissions to storage accounts. </param>
+        /// <returns> A new <see cref="Models.Permissions"/> instance for mocking. </returns>
+        public static Permissions Permissions(IEnumerable<KeyPermission> keys = null, IEnumerable<SecretPermission> secrets = null, IEnumerable<CertificatePermission> certificates = null, IEnumerable<StoragePermission> storage = null)
+        {
+            keys ??= new List<KeyPermission>();
+            secrets ??= new List<SecretPermission>();
+            certificates ??= new List<CertificatePermission>();
+            storage ??= new List<StoragePermission>();
+
+            return new Permissions(keys?.ToList(), secrets?.ToList(), certificates?.ToList(), storage?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of NetworkRuleSet. </summary>
+        /// <param name="bypass"> Tells what traffic can bypass network rules. This can be &apos;AzureServices&apos; or &apos;None&apos;.  If not specified the default is &apos;AzureServices&apos;. </param>
+        /// <param name="defaultAction"> The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated. </param>
+        /// <param name="ipRules"> The list of IP address rules. </param>
+        /// <param name="virtualNetworkRules"> The list of virtual network rules. </param>
+        /// <returns> A new <see cref="Models.NetworkRuleSet"/> instance for mocking. </returns>
+        public static NetworkRuleSet NetworkRuleSet(NetworkRuleBypassOption? bypass = null, NetworkRuleAction? defaultAction = null, IEnumerable<IPRule> ipRules = null, IEnumerable<VirtualNetworkRule> virtualNetworkRules = null)
+        {
+            ipRules ??= new List<IPRule>();
+            virtualNetworkRules ??= new List<VirtualNetworkRule>();
+
+            return new NetworkRuleSet(bypass, defaultAction, ipRules?.ToList(), virtualNetworkRules?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of VirtualNetworkRule. </summary>
+        /// <param name="id"> Full resource id of a vnet subnet, such as &apos;/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1&apos;. </param>
+        /// <param name="ignoreMissingVnetServiceEndpoint"> Property to specify whether NRP will ignore the check if parent subnet has serviceEndpoints configured. </param>
+        /// <returns> A new <see cref="Models.VirtualNetworkRule"/> instance for mocking. </returns>
+        public static VirtualNetworkRule VirtualNetworkRule(string id = null, bool? ignoreMissingVnetServiceEndpoint = null)
+        {
+            return new VirtualNetworkRule(id, ignoreMissingVnetServiceEndpoint);
+        }
+
         /// <summary> Initializes a new instance of PrivateEndpointConnectionItem. </summary>
         /// <param name="id"> Id of private endpoint connection. </param>
         /// <param name="etag"> Modified whenever there is a change in the state of private endpoint connection. </param>
@@ -61,6 +111,16 @@ namespace MgmtMockAndSample.Models
         public static PrivateEndpointConnectionItem PrivateEndpointConnectionItem(string id = null, string etag = null, ResourceIdentifier privateEndpointId = null, MgmtMockAndSamplePrivateLinkServiceConnectionState connectionState = null, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = null)
         {
             return new PrivateEndpointConnectionItem(id, etag, ResourceManagerModelFactory.SubResource(privateEndpointId), connectionState, provisioningState);
+        }
+
+        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateLinkServiceConnectionState. </summary>
+        /// <param name="status"> Indicates whether the connection has been approved, rejected or removed by the key vault owner. </param>
+        /// <param name="description"> The reason for approval or rejection. </param>
+        /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
+        /// <returns> A new <see cref="Models.MgmtMockAndSamplePrivateLinkServiceConnectionState"/> instance for mocking. </returns>
+        public static MgmtMockAndSamplePrivateLinkServiceConnectionState MgmtMockAndSamplePrivateLinkServiceConnectionState(MgmtMockAndSamplePrivateEndpointServiceConnectionStatus? status = null, string description = null, ActionsRequired? actionsRequired = null)
+        {
+            return new MgmtMockAndSamplePrivateLinkServiceConnectionState(status, description, actionsRequired);
         }
 
         /// <summary> Initializes a new instance of VaultData. </summary>
@@ -246,6 +306,15 @@ namespace MgmtMockAndSample.Models
             return new DiskEncryptionSetData(id, name, resourceType, systemData, identity, encryptionType, activeKey, previousKeys?.ToList(), provisioningState, rotationToLatestKeyVersionEnabled, lastKeyRotationTimestamp, federatedClientId, minimumTlsVersion, location, tags);
         }
 
+        /// <summary> Initializes a new instance of KeyForDiskEncryptionSet. </summary>
+        /// <param name="sourceVaultId"> Resource id of the KeyVault containing the key or secret. This property is optional and cannot be used if the KeyVault subscription is not the same as the Disk Encryption Set subscription. </param>
+        /// <param name="keyUri"> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </param>
+        /// <returns> A new <see cref="Models.KeyForDiskEncryptionSet"/> instance for mocking. </returns>
+        public static KeyForDiskEncryptionSet KeyForDiskEncryptionSet(ResourceIdentifier sourceVaultId = null, Uri keyUri = null)
+        {
+            return new KeyForDiskEncryptionSet(ResourceManagerModelFactory.WritableSubResource(sourceVaultId), keyUri);
+        }
+
         /// <summary> Initializes a new instance of ManagedHsmData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -289,6 +358,20 @@ namespace MgmtMockAndSample.Models
             return new ManagedHsmProperties(settings, protectedSettings, rawMessage, tenantId, initialAdminObjectIds?.ToList(), hsmUri, enableSoftDelete, softDeleteRetentionInDays, enablePurgeProtection, createMode, statusMessage, provisioningState, networkAcls, privateEndpointConnections?.ToList(), publicNetworkAccess, scheduledPurgeOn);
         }
 
+        /// <summary> Initializes a new instance of MhsmNetworkRuleSet. </summary>
+        /// <param name="bypass"> Tells what traffic can bypass network rules. This can be &apos;AzureServices&apos; or &apos;None&apos;.  If not specified the default is &apos;AzureServices&apos;. </param>
+        /// <param name="defaultAction"> The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated. </param>
+        /// <param name="ipRules"> The list of IP address rules. </param>
+        /// <param name="virtualNetworkRules"> The list of virtual network rules. </param>
+        /// <returns> A new <see cref="Models.MhsmNetworkRuleSet"/> instance for mocking. </returns>
+        public static MhsmNetworkRuleSet MhsmNetworkRuleSet(NetworkRuleBypassOption? bypass = null, NetworkRuleAction? defaultAction = null, IEnumerable<MhsmipRule> ipRules = null, IEnumerable<WritableSubResource> virtualNetworkRules = null)
+        {
+            ipRules ??= new List<MhsmipRule>();
+            virtualNetworkRules ??= new List<WritableSubResource>();
+
+            return new MhsmNetworkRuleSet(bypass, defaultAction, ipRules?.ToList(), virtualNetworkRules?.ToList());
+        }
+
         /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionItem. </summary>
         /// <param name="privateEndpointId"> Properties of the private endpoint object. </param>
         /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
@@ -297,6 +380,16 @@ namespace MgmtMockAndSample.Models
         public static MhsmPrivateEndpointConnectionItem MhsmPrivateEndpointConnectionItem(ResourceIdentifier privateEndpointId = null, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = null)
         {
             return new MhsmPrivateEndpointConnectionItem(ResourceManagerModelFactory.SubResource(privateEndpointId), privateLinkServiceConnectionState, provisioningState);
+        }
+
+        /// <summary> Initializes a new instance of MhsmPrivateLinkServiceConnectionState. </summary>
+        /// <param name="status"> Indicates whether the connection has been approved, rejected or removed by the key vault owner. </param>
+        /// <param name="description"> The reason for approval or rejection. </param>
+        /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
+        /// <returns> A new <see cref="Models.MhsmPrivateLinkServiceConnectionState"/> instance for mocking. </returns>
+        public static MhsmPrivateLinkServiceConnectionState MhsmPrivateLinkServiceConnectionState(MgmtMockAndSamplePrivateEndpointServiceConnectionStatus? status = null, string description = null, ActionsRequired? actionsRequired = null)
+        {
+            return new MhsmPrivateLinkServiceConnectionState(status, description, actionsRequired);
         }
 
         /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionData. </summary>
