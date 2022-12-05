@@ -184,8 +184,8 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
-      defaultValue: 90
-      precision: 32
+      defaultValue: !!int 90
+      precision: !!int 32
       language: !Languages 
         default:
           name: VaultPropertiesSoftDeleteRetentionInDays
@@ -196,7 +196,7 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
-      precision: 32
+      precision: !!int 32
       language: !Languages 
         default:
           name: VaultPatchPropertiesSoftDeleteRetentionInDays
@@ -207,7 +207,7 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
-      precision: 32
+      precision: !!int 32
       language: !Languages 
         default:
           name: VaultIssueSev
@@ -218,7 +218,7 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
-      precision: 32
+      precision: !!int 32
       language: !Languages 
         default:
           name: Integer
@@ -230,7 +230,7 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
-      precision: 32
+      precision: !!int 32
       language: !Languages 
         default:
           name: Integer
@@ -242,7 +242,7 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
-      precision: 32
+      precision: !!int 32
       language: !Languages 
         default:
           name: Integer
@@ -254,8 +254,8 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
-      defaultValue: 90
-      precision: 32
+      defaultValue: !!int 90
+      precision: !!int 32
       language: !Languages 
         default:
           name: ManagedHsmPropertiesSoftDeleteRetentionInDays
@@ -266,7 +266,7 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2021-10-01'
-      precision: 32
+      precision: !!int 32
       language: !Languages 
         default:
           name: Integer
@@ -7728,7 +7728,7 @@ globalParameters:
     implementation: Client
     required: true
     extensions:
-      x-ms-priority: 0
+      x-ms-priority: !!int 0
     language: !Languages &ref_490
       default:
         name: SubscriptionId
@@ -7875,7 +7875,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !SchemaResponse 
             schema: *ref_103
             language: !Languages &ref_556
@@ -7888,7 +7888,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '201'
+                  - 201
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -7976,7 +7976,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     name: sample-vault
                     type: Microsoft.KeyVault/vaults
@@ -8069,7 +8069,7 @@ operationGroups:
                       lastModifiedBy: keyVaultUser2
                       lastModifiedByType: User
                     tags: {}
-                '201':
+                201:
                   body:
                     name: sample-vault
                     type: Microsoft.KeyVault/vaults
@@ -8175,7 +8175,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     name: sample-vault
                     type: Microsoft.KeyVault/vaults
@@ -8207,7 +8207,7 @@ operationGroups:
                       lastModifiedBy: keyVaultUser2
                       lastModifiedByType: User
                     tags: {}
-                '201':
+                201:
                   body:
                     name: sample-vault
                     type: Microsoft.KeyVault/vaults
@@ -8363,7 +8363,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !SchemaResponse 
             schema: *ref_103
             language: !Languages &ref_582
@@ -8376,7 +8376,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '201'
+                  - 201
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -8455,7 +8455,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     name: sample-vault
                     type: Microsoft.KeyVault/vaults
@@ -8543,7 +8543,7 @@ operationGroups:
                       lastModifiedBy: keyVaultUser2
                       lastModifiedByType: User
                     tags: {}
-                '201':
+                201:
                   body:
                     name: sample-vault
                     type: Microsoft.KeyVault/vaults
@@ -8702,7 +8702,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '200'
+                  - 200
           - !Response 
             language: !Languages 
               default:
@@ -8711,7 +8711,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '204'
+                  - 204
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -8735,9 +8735,9 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   headers: &ref_588 {}
-                '204':
+                204:
                   headers: &ref_589 {}
         language: !Languages 
           default:
@@ -8831,7 +8831,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -8855,7 +8855,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     name: sample-vault
                     type: Microsoft.KeyVault/vaults
@@ -9018,7 +9018,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -9042,7 +9042,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     value:
                       - content: content of key1
@@ -9141,7 +9141,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -9165,15 +9165,15 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     issues:
                       - type: type1
                         description: Type 1 issue
-                        sev: 1
+                        sev: !!int 1
                       - type: type2
                         description: Type 2 issue
-                        sev: 0
+                        sev: !!int 0
                     result: passed
         language: !Languages 
           default:
@@ -9263,7 +9263,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -9287,7 +9287,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200': {}
+                200: {}
         language: !Languages 
           default:
             name: Disable
@@ -9424,7 +9424,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !SchemaResponse 
             schema: *ref_344
             language: !Languages &ref_633
@@ -9437,7 +9437,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '201'
+                  - 201
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -9474,7 +9474,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     type: Microsoft.KeyVault/vaults/accessPolicies
                     id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/accessPolicies/
@@ -9489,7 +9489,7 @@ operationGroups:
                             secrets:
                               - get
                           tenantId: 00000000-0000-0000-0000-000000000000
-                '201':
+                201:
                   body:
                     type: Microsoft.KeyVault/vaults/accessPolicies
                     id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/accessPolicies/
@@ -9595,7 +9595,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -9614,12 +9614,12 @@ operationGroups:
           x-ms-examples:
             List vaults in the specified resource group:
               parameters:
-                $top: 1
+                $top: !!int 1
                 api-version: '2021-10-01'
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     nextLink: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults?api-version=2021-10-01&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
                     value:
@@ -9774,7 +9774,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -9793,11 +9793,11 @@ operationGroups:
           x-ms-examples:
             List vaults in the specified subscription:
               parameters:
-                $top: 1
+                $top: !!int 1
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     nextLink: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?api-version=22021-10-01&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
                     value:
@@ -9940,7 +9940,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -9959,11 +9959,11 @@ operationGroups:
           x-ms-examples:
             List deleted vaults in the specified subscription:
               parameters:
-                $top: 1
+                $top: !!int 1
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     nextLink: >-
                       https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/deletedVaults?api-version=2021-10-01&%24skiptoken=HY3RaoMwAEX%2fRcbeYhJrnRXKYNWOuqpME0sfNcYui0Yxade19N8ne7hcDlzOvVuKX81eKKmt4G4dooLQwgqsL2NGHUDYV6o68Z4rY1e388RtNvRQn2vNJjEaMSgNvcbneMUcsKg8BFwft8DndQ0w9hu2QOiFLRs4TsNFNHzSMBFsGvTQGvuD%2f5bVuTOw4R03vPkH%2fVqNAlzm5SxfOwh7ACOA8POTlvPjILlaU1ke8jImOc23JCppQVfZnna0DXc4ISc3vSVuRo5zJE6%2bj25C3vwk2v2kEV2mMn7PyOc1DbtNGkonnzuLym1G400uI5QRZj0efw%3d%3d
@@ -10074,7 +10074,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -10098,7 +10098,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     name: sample-vault
                     type: Microsoft.KeyVault/deletedVaults
@@ -10199,7 +10199,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '200'
+                  - 200
           - !Response 
             language: !Languages 
               default:
@@ -10208,7 +10208,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '202'
+                  - 202
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -10232,9 +10232,9 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   headers: &ref_676 {}
-                '202':
+                202:
                   headers: &ref_677 {}
           x-ms-long-running-operation: true
         language: !Languages 
@@ -10334,7 +10334,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -10359,7 +10359,7 @@ operationGroups:
                   name: sample-vault
                   type: Microsoft.KeyVault/vaults
               responses:
-                '200':
+                200:
                   body:
                     nameAvailable: true
         language: !Languages 
@@ -10475,7 +10475,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !Response 
             language: !Languages 
               default:
@@ -10484,7 +10484,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '204'
+                  - 204
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -10509,7 +10509,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     name: sample-pec
                     type: Microsoft.KeyVault/vaults/privateEndpointConnections
@@ -10523,7 +10523,7 @@ operationGroups:
                         actionsRequired: None
                         status: Approved
                       provisioningState: Succeeded
-                '204':
+                204:
                   headers: &ref_704 {}
         language: !Languages 
           default:
@@ -10676,7 +10676,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -10707,7 +10707,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     name: sample-pec
                     type: Microsoft.KeyVault/vaults/privateEndpointConnections
@@ -10826,7 +10826,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !Response 
             language: !Languages 
               default:
@@ -10850,7 +10850,7 @@ operationGroups:
                         name: Location
                         description: The URI to poll for completion status.
                 statusCodes:
-                  - '202'
+                  - 202
           - !Response 
             language: !Languages 
               default:
@@ -10859,7 +10859,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '204'
+                  - 204
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -10884,18 +10884,18 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     name: sample-pec
                     type: Microsoft.KeyVault/vaults/privateEndpointConnections
                     id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec
                     properties:
                       provisioningState: Disconnected
-                '202':
+                202:
                   headers: &ref_721
                     Location: https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec?operationid=25334578
-                    Retry-After: '60'
-                '204': {}
+                    Retry-After: 60
+                204: {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -10989,7 +10989,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -11013,7 +11013,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     nextLink: null
                     value:
@@ -11145,7 +11145,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -11169,7 +11169,7 @@ operationGroups:
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
               responses:
-                '200':
+                200:
                   body:
                     value:
                       - name: vault
@@ -11307,7 +11307,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             VirtualMachineExtensionImages_Get_MaximumSet_Gen:
@@ -11319,7 +11319,7 @@ operationGroups:
                 subscriptionId: '{subscription-id}'
                 version: aaaaaaaaaaaaaa
               responses:
-                '200':
+                200:
                   body:
                     name: aaaaaaaaaaaaaaa
                     type: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -11342,7 +11342,7 @@ operationGroups:
                 subscriptionId: '{subscription-id}'
                 version: aaa
               responses:
-                '200':
+                200:
                   body:
                     name: aaaaaaaaaaaaaaa
                     location: aaaaaaaaaaaaa
@@ -11438,7 +11438,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             VirtualMachineExtensionImages_ListTypes_MaximumSet_Gen:
@@ -11448,7 +11448,7 @@ operationGroups:
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     - name: aaaaaaaaaaaaaaa
                       type: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -11469,7 +11469,7 @@ operationGroups:
                 publisherName: aa
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     - name: aaaaaaaaaaaaaaa
                       location: aaaaaaaaaaaaa
@@ -11614,7 +11614,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             VirtualMachineExtensionImages_ListVersions_MaximumSet_Gen:
@@ -11622,13 +11622,13 @@ operationGroups:
                 type: aaaaaaaaaaaaaaaaaa
                 $filter: aaaaaaaaaaaaaaaaaaaaaaaaa
                 $orderby: a
-                $top: 22
+                $top: !!int 22
                 api-version: '2022-03-01'
                 location: aaaaaaaaaaaaaaaaaaaaaaaaaa
                 publisherName: aaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     - name: aaaaaaaaaaaaaaa
                       type: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -11650,7 +11650,7 @@ operationGroups:
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     - name: aaaaaaaaaaaaaaa
                       location: aaaaaaaaaaaaa
@@ -11788,7 +11788,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !SchemaResponse 
             schema: *ref_143
             language: !Languages &ref_798
@@ -11801,7 +11801,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '202'
+                  - 202
         extensions:
           x-ms-examples:
             Create a disk encryption set with key vault from a different subscription.:
@@ -11820,7 +11820,7 @@ operationGroups:
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     name: myDiskEncryptionSet
                     identity:
@@ -11831,7 +11831,7 @@ operationGroups:
                         keyUrl: https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}
                       encryptionType: EncryptionAtRestWithCustomerKey
                       previousKeys: []
-                '202':
+                202:
                   body:
                     name: myDiskEncryptionSet
                     identity:
@@ -11860,7 +11860,7 @@ operationGroups:
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     name: myDiskEncryptionSet
                     identity:
@@ -11874,7 +11874,7 @@ operationGroups:
                       encryptionType: EncryptionAtRestWithCustomerKey
                       federatedClientId: 00000000-0000-0000-0000-000000000000
                       previousKeys: []
-                '202':
+                202:
                   body:
                     name: myDiskEncryptionSet
                     identity:
@@ -11905,7 +11905,7 @@ operationGroups:
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     name: myDiskEncryptionSet
                     identity:
@@ -11918,7 +11918,7 @@ operationGroups:
                           id: /subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault
                       encryptionType: EncryptionAtRestWithCustomerKey
                       previousKeys: []
-                '202':
+                202:
                   body:
                     name: myDiskEncryptionSet
                     identity:
@@ -12057,7 +12057,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !SchemaResponse 
             schema: *ref_143
             language: !Languages &ref_825
@@ -12070,7 +12070,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '202'
+                  - 202
         extensions:
           x-ms-examples:
             Update a disk encryption set with rotationToLatestKeyVersionEnabled set to true - Succeeded:
@@ -12088,7 +12088,7 @@ operationGroups:
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     name: myDiskEncryptionSet
                     type: Microsoft.Compute/diskEncryptionSets
@@ -12103,7 +12103,7 @@ operationGroups:
                       lastKeyRotationTimestamp: '2021-04-01T04:41:35.079872+00:00'
                       provisioningState: Succeeded
                       rotationToLatestKeyVersionEnabled: true
-                '202':
+                202:
                   body:
                     name: myDiskEncryptionSet
                     type: Microsoft.Compute/diskEncryptionSets
@@ -12133,7 +12133,7 @@ operationGroups:
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     name: myDiskEncryptionSet
                     type: Microsoft.Compute/diskEncryptionSets
@@ -12150,7 +12150,7 @@ operationGroups:
                         - keyUrl: https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1
                       provisioningState: Updating
                       rotationToLatestKeyVersionEnabled: true
-                '202':
+                202:
                   body:
                     name: myDiskEncryptionSet
                     type: Microsoft.Compute/diskEncryptionSets
@@ -12182,7 +12182,7 @@ operationGroups:
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     name: myDiskEncryptionSet
                     identity:
@@ -12199,7 +12199,7 @@ operationGroups:
                     tags:
                       department: Development
                       project: Encryption
-                '202':
+                202:
                   body:
                     name: myDiskEncryptionSet
                     identity:
@@ -12312,7 +12312,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             Get information about a disk encryption set when auto-key rotation failed.:
@@ -12322,7 +12322,7 @@ operationGroups:
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     name: myDiskEncryptionSet
                     type: Microsoft.Compute/diskEncryptionSets
@@ -12352,7 +12352,7 @@ operationGroups:
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     name: myDiskEncryptionSet
                     type: Microsoft.Compute/diskEncryptionSets
@@ -12446,7 +12446,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '200'
+                  - 200
           - !Response 
             language: !Languages 
               default:
@@ -12455,7 +12455,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '202'
+                  - 202
           - !Response 
             language: !Languages 
               default:
@@ -12464,7 +12464,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '204'
+                  - 204
         extensions:
           x-ms-examples:
             Delete a disk encryption set.:
@@ -12474,9 +12474,9 @@ operationGroups:
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
               responses:
-                '200': {}
-                '202': {}
-                '204': {}
+                200: {}
+                202: {}
+                204: {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -12557,7 +12557,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             List all disk encryption sets in a resource group.:
@@ -12566,7 +12566,7 @@ operationGroups:
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     nextLink: https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskEncryptionSets?$skiptoken={token}
                     value:
@@ -12674,7 +12674,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             List all disk encryption sets in a subscription.:
@@ -12682,7 +12682,7 @@ operationGroups:
                 api-version: '2022-03-02'
                 subscriptionId: '{subscription-id}'
               responses:
-                '200':
+                200:
                   body:
                     nextLink: https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskEncryptionSets?$skiptoken={token}
                     value:
@@ -12855,7 +12855,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !SchemaResponse 
             schema: *ref_155
             language: !Languages &ref_884
@@ -12868,7 +12868,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '202'
+                  - 202
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -12901,25 +12901,25 @@ operationGroups:
                         - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/default
                     protectedSettings: &ref_862
                       protected1: value2
-                      protected2: 10
+                      protected2: !!int 10
                       protected3: false
                       protected4:
-                        - '1'
-                        - '2'
-                        - '3'
+                        - 1
+                        - 2
+                        - 3
                       protected5:
                         protectedInner: something else
                     rawMessage: PFX-or-PEM-blob
                     settings: &ref_860
                       config1: value1
-                      config2: 8427
+                      config2: !!int 8427
                       config3: false
                       config4:
-                        - '1'
-                        - '2'
+                        - 1
+                        - 2
                       config5:
                         inner: something
-                    softDeleteRetentionInDays: 90
+                    softDeleteRetentionInDays: !!int 90
                     tenantId: 00000000-0000-0000-0000-000000000000
                   sku:
                     name: Standard_B1
@@ -12930,7 +12930,7 @@ operationGroups:
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     name: hsm1
                     type: Microsoft.KeyVault/managedHSMs
@@ -12943,7 +12943,7 @@ operationGroups:
                       initialAdminObjectIds:
                         - 00000000-0000-0000-0000-000000000000
                       provisioningState: Succeeded
-                      softDeleteRetentionInDays: 90
+                      softDeleteRetentionInDays: !!int 90
                       statusMessage: ManagedHsm is functional.
                       tenantId: 00000000-0000-0000-0000-000000000000
                     sku:
@@ -12952,7 +12952,7 @@ operationGroups:
                     tags:
                       Dept: hsm
                       Environment: dogfood
-                '202':
+                202:
                   body:
                     name: hsm1
                     type: Microsoft.KeyVault/managedHSMs
@@ -12965,7 +12965,7 @@ operationGroups:
                       initialAdminObjectIds:
                         - 00000000-0000-0000-0000-000000000000
                       provisioningState: Provisioning
-                      softDeleteRetentionInDays: 90
+                      softDeleteRetentionInDays: !!int 90
                       statusMessage: Allocating hardware
                       tenantId: 00000000-0000-0000-0000-000000000000
                     sku:
@@ -13098,7 +13098,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !SchemaResponse 
             schema: *ref_155
             language: !Languages &ref_893
@@ -13111,7 +13111,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '202'
+                  - 202
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -13140,7 +13140,7 @@ operationGroups:
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     name: hsm1
                     type: Microsoft.KeyVault/managedHSMs
@@ -13153,7 +13153,7 @@ operationGroups:
                       initialAdminObjectIds:
                         - 00000000-0000-0000-0000-000000000000
                       provisioningState: Succeeded
-                      softDeleteRetentionInDays: 90
+                      softDeleteRetentionInDays: !!int 90
                       statusMessage: ManagedHsm is functional.
                       tenantId: 00000000-0000-0000-0000-000000000000
                     sku:
@@ -13163,7 +13163,7 @@ operationGroups:
                       Dept: hsm
                       Environment: dogfood
                       Slice: A
-                '202':
+                202:
                   body:
                     name: hsm1
                     type: Microsoft.KeyVault/managedHSMs
@@ -13176,7 +13176,7 @@ operationGroups:
                       initialAdminObjectIds:
                         - 00000000-0000-0000-0000-000000000000
                       provisioningState: Updating
-                      softDeleteRetentionInDays: 90
+                      softDeleteRetentionInDays: !!int 90
                       statusMessage: ManagedHsm is updating.
                       tenantId: 00000000-0000-0000-0000-000000000000
                     sku:
@@ -13275,7 +13275,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '200'
+                  - 200
           - !Response 
             language: !Languages 
               default:
@@ -13284,7 +13284,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '202'
+                  - 202
           - !Response 
             language: !Languages 
               default:
@@ -13293,7 +13293,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '204'
+                  - 204
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -13317,9 +13317,9 @@ operationGroups:
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200': {}
-                '202': {}
-                '204': {}
+                200: {}
+                202: {}
+                204: {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -13413,7 +13413,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !Response 
             language: !Languages 
               default:
@@ -13422,7 +13422,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '202'
+                  - 202
           - !Response 
             language: !Languages 
               default:
@@ -13431,7 +13431,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '204'
+                  - 204
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -13455,7 +13455,7 @@ operationGroups:
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     name: hsm1
                     type: Microsoft.KeyVault/managedHSMs
@@ -13468,7 +13468,7 @@ operationGroups:
                       initialAdminObjectIds:
                         - 00000000-0000-0000-0000-000000000000
                       provisioningState: Succeeded
-                      softDeleteRetentionInDays: 90
+                      softDeleteRetentionInDays: !!int 90
                       statusMessage: ManagedHsm is functional.
                       tenantId: 00000000-0000-0000-0000-000000000000
                     sku:
@@ -13477,12 +13477,12 @@ operationGroups:
                     tags:
                       Dept: hsm
                       Environment: dogfood
-                '202':
+                202:
                   headers: &ref_905
                     Location: >-
                       https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1?api-version=2021-10-01&kv-operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9
-                    Retry-After: '60'
-                '204': {}
+                    Retry-After: 60
+                204: {}
         language: !Languages 
           default:
             name: Get
@@ -13574,7 +13574,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -13597,7 +13597,7 @@ operationGroups:
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     nextLink: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs?api-version=2021-10-01&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
                     value:
@@ -13612,7 +13612,7 @@ operationGroups:
                           initialAdminObjectIds:
                             - 00000000-0000-0000-0000-000000000000
                           provisioningState: Succeeded
-                          softDeleteRetentionInDays: 90
+                          softDeleteRetentionInDays: !!int 90
                           statusMessage: ManagedHsm is functional.
                           tenantId: 00000000-0000-0000-0000-000000000000
                         sku:
@@ -13632,7 +13632,7 @@ operationGroups:
                           initialAdminObjectIds:
                             - 00000000-0000-0000-0000-000000000000
                           provisioningState: Succeeded
-                          softDeleteRetentionInDays: 90
+                          softDeleteRetentionInDays: !!int 90
                           statusMessage: ManagedHsm is functional.
                           tenantId: 00000000-0000-0000-0000-000000000000
                         sku:
@@ -13723,7 +13723,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -13745,7 +13745,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     nextLink: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/managedHSMs?api-version=2021-10-01&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
                     value:
@@ -13760,7 +13760,7 @@ operationGroups:
                           initialAdminObjectIds:
                             - 00000000-0000-0000-0000-000000000000
                           provisioningState: Succeeded
-                          softDeleteRetentionInDays: 90
+                          softDeleteRetentionInDays: !!int 90
                           statusMessage: ManagedHsm is functional.
                           tenantId: 00000000-0000-0000-0000-000000000000
                         sku:
@@ -13780,7 +13780,7 @@ operationGroups:
                           initialAdminObjectIds:
                             - 00000000-0000-0000-0000-000000000000
                           provisioningState: Succeeded
-                          softDeleteRetentionInDays: 90
+                          softDeleteRetentionInDays: !!int 90
                           statusMessage: ManagedHsm is functional.
                           tenantId: 00000000-0000-0000-0000-000000000000
                         sku:
@@ -13859,7 +13859,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -13881,7 +13881,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     nextLink: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/deletedManagedHSMs?api-version=2021-10-01&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
                     value:
@@ -14005,7 +14005,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -14029,7 +14029,7 @@ operationGroups:
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     name: vault-agile-drawer-6404
                     type: Microsoft.KeyVault/deletedManagedHSMs
@@ -14131,7 +14131,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '202'
+                  - 202
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -14155,7 +14155,7 @@ operationGroups:
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '202': {}
+                202: {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -14257,7 +14257,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -14281,7 +14281,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     nextLink: null
                     value:
@@ -14418,7 +14418,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_417
@@ -14443,7 +14443,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     name: sample-pec
                     type: Microsoft.KeyVault/managedhsms/privateEndpointConnections
@@ -14608,7 +14608,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -14638,7 +14638,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     name: sample-pec
                     type: Microsoft.KeyVault/managedhsms/privateEndpointConnections
@@ -14756,7 +14756,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !Response 
             language: !Languages 
               default:
@@ -14780,7 +14780,7 @@ operationGroups:
                         name: Location
                         description: The URI to poll for completion status.
                 statusCodes:
-                  - '202'
+                  - 202
           - !Response 
             language: !Languages 
               default:
@@ -14789,7 +14789,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '204'
+                  - 204
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -14814,18 +14814,18 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     name: sample-pec
                     type: Microsoft.KeyVault/managedhsms/privateEndpointConnections
                     id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-vault/privateEndpointConnections/sample-pec
                     properties:
                       provisioningState: Disconnected
-                '202':
+                202:
                   headers: &ref_986
                     Location: https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec?operationid=25334578
-                    Retry-After: '60'
-                '204': {}
+                    Retry-After: 60
+                204: {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -14927,7 +14927,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -14951,7 +14951,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
               responses:
-                '200':
+                200:
                   body:
                     value:
                       - name: managedhsm
@@ -15036,7 +15036,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_325
@@ -15057,7 +15057,7 @@ operationGroups:
               parameters:
                 api-version: '2021-10-01'
               responses:
-                '200':
+                200:
                   body:
                     value:
                       - name: Microsoft.KeyVault/vaults/read
@@ -15443,7 +15443,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             List role assignments for resource:
@@ -15456,7 +15456,7 @@ operationGroups:
                 resourceType: resourceType
                 subscriptionId: subId
               responses:
-                '200':
+                200:
                   body:
                     value:
                       - name: raId
@@ -15565,7 +15565,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             List role assignments for resource group:
@@ -15574,7 +15574,7 @@ operationGroups:
                 resourceGroupName: rgname
                 subscriptionId: subId
               responses:
-                '200':
+                200:
                   body:
                     value:
                       - name: raId
@@ -15683,7 +15683,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
           - !Response 
             language: !Languages 
               default:
@@ -15692,7 +15692,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '204'
+                  - 204
         extensions:
           x-ms-examples:
             Delete role assignment by name:
@@ -15701,7 +15701,7 @@ operationGroups:
                 roleAssignmentName: roleAssignmentName
                 scope: scope
               responses:
-                '200':
+                200:
                   body:
                     name: roleassignmentId
                     type: Microsoft.Authorization/roleAssignments
@@ -15711,7 +15711,7 @@ operationGroups:
                       principalId: Pid
                       roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                       scope: /subscriptions/subId/resourcegroups/rgname
-                '204': {}
+                204: {}
         language: !Languages 
           default:
             name: Delete
@@ -15839,7 +15839,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '201'
+                  - 201
         extensions:
           x-ms-examples:
             Create role assignment:
@@ -15853,7 +15853,7 @@ operationGroups:
                 roleAssignmentName: roleAssignmentName
                 scope: scope
               responses:
-                '201':
+                201:
                   body:
                     name: roleassignmentId
                     type: Microsoft.Authorization/roleAssignments
@@ -15956,7 +15956,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             Get role assignment by name:
@@ -15966,7 +15966,7 @@ operationGroups:
                 scope: scope
                 subscriptionId: subId
               responses:
-                '200':
+                200:
                   body:
                     name: raId
                     type: Microsoft.Authorization/roleAssignments
@@ -16056,7 +16056,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             List role assignments for subscription:
@@ -16064,7 +16064,7 @@ operationGroups:
                 api-version: 2017-10-01-preview
                 subscriptionId: subId
               responses:
-                '200':
+                200:
                   body:
                     value:
                       - name: raId
@@ -16140,7 +16140,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             Validate role assignments for subscription:
@@ -16149,7 +16149,7 @@ operationGroups:
                 roleAssignmentName: roleAssignmentId
                 subscriptionId: subId
               responses:
-                '200': {}
+                200: {}
         language: !Languages 
           default:
             name: Validate
@@ -16244,7 +16244,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             List role assignments for scope:
@@ -16252,7 +16252,7 @@ operationGroups:
                 api-version: 2017-10-01-preview
                 scope: scope
               responses:
-                '200':
+                200:
                   body:
                     value:
                       - name: raId
@@ -16374,7 +16374,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         exceptions:
           - !SchemaResponse 
             schema: *ref_485
@@ -16396,7 +16396,7 @@ operationGroups:
                 api-version: '2015-04-01'
                 subscriptionId: 089bd33f-d4ec-47fe-8ba5-0753aa5c5b33
               responses:
-                '200':
+                200:
                   body:
                     nextLink: https://management.azure.com/########-####-####-####-############$skiptoken=######
                     value:
@@ -16516,7 +16516,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
+                  - 200
         extensions:
           x-ms-examples:
             Calculate template hash:
@@ -16535,24 +16535,24 @@ operationGroups:
                   resources: []
                   variables:
                     array:
-                      - 1
-                      - 2
-                      - 3
-                      - 4
+                      - !!int 1
+                      - !!int 2
+                      - !!int 3
+                      - !!int 4
                     bool: true
-                    int: 42
+                    int: !!int 42
                     object:
                       object:
                         location: West US
                         vmSize: Large
                     string: string
               responses:
-                '200':
+                200:
                   body:
                     minifiedTemplate: >-
                       {"$SCHEMA":"HTTP://SCHEMAS.MANAGEMENT.AZURE.COM/DEPLOYMENTTEMPLATE?API-VERSION=2014-04-01-PREVIEW","CONTENTVERSION":"1.0.0.0","PARAMETERS":{"STRING":{"TYPE":"STRING"}},"VARIABLES":{"STRING":"STRING","INT":42,"BOOL":TRUE,"ARRAY":[1,2,3,4],"OBJECT":{"OBJECT":{"VMSIZE":"LARGE","LOCATION":"WEST
                       US"}}},"RESOURCES":[],"OUTPUTS":{"STRING":{"TYPE":"STRING","VALUE":"MYVALUE"}}}
-                    templateHash: '695440707931307747'
+                    templateHash: 695440707931307747
         language: !Languages 
           default:
             name: CalculateTemplateHash
@@ -16771,7 +16771,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_103
                   parentsValue: {}
@@ -17080,7 +17080,7 @@ testModel:
                       properties: {}
                       language: *ref_521
                   language: *ref_516
-              '201':
+              201:
                 body:
                   schema: *ref_103
                   parentsValue: {}
@@ -17445,7 +17445,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_103
                   parentsValue: {}
@@ -17580,7 +17580,7 @@ testModel:
                       properties: {}
                       language: *ref_521
                   language: *ref_516
-              '201':
+              201:
                 body:
                   schema: *ref_103
                   parentsValue: {}
@@ -17898,7 +17898,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_103
                   parentsValue: {}
@@ -18186,7 +18186,7 @@ testModel:
                       properties: {}
                       language: *ref_521
                   language: *ref_581
-              '201':
+              201:
                 body:
                   schema: *ref_103
                   parentsValue: {}
@@ -18426,9 +18426,9 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 headers: *ref_588
-              '204':
+              204:
                 headers: *ref_589
         operation: *ref_590
         operationGroup: *ref_558
@@ -18461,7 +18461,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_103
                   parentsValue: {}
@@ -18701,7 +18701,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_337
                   parentsValue: {}
@@ -18764,7 +18764,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_340
                   parentsValue: {}
@@ -18785,7 +18785,7 @@ testModel:
                               language: *ref_613
                             sev:
                               schema: *ref_95
-                              rawValue: 1
+                              rawValue: !!int 1
                               language: *ref_614
                         - schema: *ref_97
                           parentsValue: {}
@@ -18800,7 +18800,7 @@ testModel:
                               language: *ref_613
                             sev:
                               schema: *ref_95
-                              rawValue: 0
+                              rawValue: !!int 0
                               language: *ref_614
                       language: *ref_611
                     result:
@@ -18839,7 +18839,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200': {}
+              200: {}
         operation: *ref_621
         operationGroup: *ref_558
       - operationId: Vaults_UpdateAccessPolicy
@@ -18925,7 +18925,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_344
                   parentsValue: {}
@@ -18982,7 +18982,7 @@ testModel:
                           language: *ref_629
                       language: *ref_628
                   language: *ref_630
-              '201':
+              201:
                 body:
                   schema: *ref_344
                   parentsValue: {}
@@ -19058,7 +19058,7 @@ testModel:
                 parameter: *ref_351
               - exampleValue:
                   schema: *ref_350
-                  rawValue: 1
+                  rawValue: !!int 1
                   language: *ref_636
                 parameter: *ref_352
               - exampleValue:
@@ -19070,7 +19070,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_353
                   parentsValue: {}
@@ -19304,7 +19304,7 @@ testModel:
             methodParameters:
               - exampleValue:
                   schema: *ref_350
-                  rawValue: 1
+                  rawValue: !!int 1
                   language: *ref_644
                 parameter: *ref_354
               - exampleValue:
@@ -19316,7 +19316,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_353
                   parentsValue: {}
@@ -19557,7 +19557,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_355
                   parentsValue: {}
@@ -19647,7 +19647,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_115
                   parentsValue: {}
@@ -19726,9 +19726,9 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 headers: *ref_676
-              '202':
+              202:
                 headers: *ref_677
         operation: *ref_678
         operationGroup: *ref_558
@@ -19765,7 +19765,7 @@ testModel:
             operationGroup: *ref_558
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_363
                   parentsValue: {}
@@ -19811,7 +19811,7 @@ testModel:
             operationGroup: *ref_706
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_122
                   parentsValue: {}
@@ -19866,7 +19866,7 @@ testModel:
                       rawValue: Succeeded
                       language: *ref_699
                   language: *ref_692
-              '204':
+              204:
                 headers: *ref_704
         operation: *ref_705
         operationGroup: *ref_706
@@ -19928,7 +19928,7 @@ testModel:
             operationGroup: *ref_706
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_122
                   parentsValue: {}
@@ -20019,7 +20019,7 @@ testModel:
             operationGroup: *ref_706
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_122
                   parentsValue: {}
@@ -20042,9 +20042,9 @@ testModel:
                       rawValue: Disconnected
                       language: *ref_699
                   language: *ref_720
-              '202':
+              202:
                 headers: *ref_721
-              '204': {}
+              204: {}
         operation: *ref_722
         operationGroup: *ref_706
       - operationId: PrivateEndpointConnections_ListByResource
@@ -20076,7 +20076,7 @@ testModel:
             operationGroup: *ref_706
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_379
                   parentsValue: {}
@@ -20225,7 +20225,7 @@ testModel:
             operationGroup: *ref_744
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_382
                   parentsValue: {}
@@ -20310,7 +20310,7 @@ testModel:
             operationGroup: *ref_765
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_142
                   parentsValue: {}
@@ -20401,7 +20401,7 @@ testModel:
             operationGroup: *ref_765
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_142
                   parentsValue: {}
@@ -20446,7 +20446,7 @@ testModel:
             operationGroup: *ref_765
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_389
                   elements:
@@ -20529,7 +20529,7 @@ testModel:
             operationGroup: *ref_765
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_389
                   elements:
@@ -20579,7 +20579,7 @@ testModel:
                 parameter: *ref_394
               - exampleValue:
                   schema: *ref_390
-                  rawValue: 22
+                  rawValue: !!int 22
                   language: *ref_776
                 parameter: *ref_395
               - exampleValue:
@@ -20596,7 +20596,7 @@ testModel:
             operationGroup: *ref_765
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_397
                   elements:
@@ -20684,7 +20684,7 @@ testModel:
             operationGroup: *ref_765
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_397
                   elements:
@@ -20770,7 +20770,7 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -20813,7 +20813,7 @@ testModel:
                       flattenedNames: *ref_797
                       language: *ref_796
                   language: *ref_795
-              '202':
+              202:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -20930,7 +20930,7 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -20986,7 +20986,7 @@ testModel:
                       flattenedNames: *ref_797
                       language: *ref_796
                   language: *ref_795
-              '202':
+              202:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -21112,7 +21112,7 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -21164,7 +21164,7 @@ testModel:
                       flattenedNames: *ref_797
                       language: *ref_796
                   language: *ref_795
-              '202':
+              202:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -21282,7 +21282,7 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -21343,7 +21343,7 @@ testModel:
                       rawValue: true
                       language: *ref_821
                   language: *ref_818
-              '202':
+              202:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -21457,7 +21457,7 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -21530,7 +21530,7 @@ testModel:
                       rawValue: true
                       language: *ref_821
                   language: *ref_818
-              '202':
+              202:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -21649,7 +21649,7 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -21716,7 +21716,7 @@ testModel:
                           rawValue: Encryption
                       language: *ref_763
                   language: *ref_818
-              '202':
+              202:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -21810,7 +21810,7 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -21917,7 +21917,7 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_143
                   parentsValue: {}
@@ -22023,9 +22023,9 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200': {}
-              '202': {}
-              '204': {}
+              200: {}
+              202: {}
+              204: {}
         operation: *ref_841
         operationGroup: *ref_800
       - operationId: DiskEncryptionSets_ListByResourceGroup
@@ -22052,7 +22052,7 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_412
                   parentsValue: {}
@@ -22231,7 +22231,7 @@ testModel:
             operationGroup: *ref_800
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_412
                   parentsValue: {}
@@ -22472,7 +22472,7 @@ testModel:
                           language: *ref_859
                         softDeleteRetentionInDays:
                           schema: *ref_179
-                          rawValue: 90
+                          rawValue: !!int 90
                           language: *ref_867
                         tenantId:
                           schema: *ref_175
@@ -22508,7 +22508,7 @@ testModel:
             operationGroup: *ref_886
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_155
                   parentsValue: {}
@@ -22557,7 +22557,7 @@ testModel:
                           language: *ref_880
                         softDeleteRetentionInDays:
                           schema: *ref_179
-                          rawValue: 90
+                          rawValue: !!int 90
                           language: *ref_867
                         statusMessage:
                           schema: *ref_181
@@ -22592,7 +22592,7 @@ testModel:
                           rawValue: dogfood
                       language: *ref_876
                   language: *ref_877
-              '202':
+              202:
                 body:
                   schema: *ref_155
                   parentsValue: {}
@@ -22641,7 +22641,7 @@ testModel:
                           language: *ref_880
                         softDeleteRetentionInDays:
                           schema: *ref_179
-                          rawValue: 90
+                          rawValue: !!int 90
                           language: *ref_867
                         statusMessage:
                           schema: *ref_181
@@ -22726,7 +22726,7 @@ testModel:
             operationGroup: *ref_886
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_155
                   parentsValue: {}
@@ -22775,7 +22775,7 @@ testModel:
                           language: *ref_880
                         softDeleteRetentionInDays:
                           schema: *ref_179
-                          rawValue: 90
+                          rawValue: !!int 90
                           language: *ref_867
                         statusMessage:
                           schema: *ref_181
@@ -22813,7 +22813,7 @@ testModel:
                           rawValue: A
                       language: *ref_876
                   language: *ref_892
-              '202':
+              202:
                 body:
                   schema: *ref_155
                   parentsValue: {}
@@ -22862,7 +22862,7 @@ testModel:
                           language: *ref_880
                         softDeleteRetentionInDays:
                           schema: *ref_179
-                          rawValue: 90
+                          rawValue: !!int 90
                           language: *ref_867
                         statusMessage:
                           schema: *ref_181
@@ -22931,9 +22931,9 @@ testModel:
             operationGroup: *ref_886
             originalFile: ''
             responses:
-              '200': {}
-              '202': {}
-              '204': {}
+              200: {}
+              202: {}
+              204: {}
         operation: *ref_899
         operationGroup: *ref_886
       - operationId: ManagedHsms_Get
@@ -22965,7 +22965,7 @@ testModel:
             operationGroup: *ref_886
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_155
                   parentsValue: {}
@@ -23014,7 +23014,7 @@ testModel:
                           language: *ref_880
                         softDeleteRetentionInDays:
                           schema: *ref_179
-                          rawValue: 90
+                          rawValue: !!int 90
                           language: *ref_867
                         statusMessage:
                           schema: *ref_181
@@ -23049,9 +23049,9 @@ testModel:
                           rawValue: dogfood
                       language: *ref_876
                   language: *ref_904
-              '202':
+              202:
                 headers: *ref_905
-              '204': {}
+              204: {}
         operation: *ref_906
         operationGroup: *ref_886
       - operationId: ManagedHsms_ListByResourceGroup
@@ -23078,7 +23078,7 @@ testModel:
             operationGroup: *ref_886
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_428
                   parentsValue: {}
@@ -23137,7 +23137,7 @@ testModel:
                                   language: *ref_880
                                 softDeleteRetentionInDays:
                                   schema: *ref_179
-                                  rawValue: 90
+                                  rawValue: !!int 90
                                   language: *ref_867
                                 statusMessage:
                                   schema: *ref_181
@@ -23218,7 +23218,7 @@ testModel:
                                   language: *ref_880
                                 softDeleteRetentionInDays:
                                   schema: *ref_179
-                                  rawValue: 90
+                                  rawValue: !!int 90
                                   language: *ref_867
                                 statusMessage:
                                   schema: *ref_181
@@ -23275,7 +23275,7 @@ testModel:
             operationGroup: *ref_886
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_428
                   parentsValue: {}
@@ -23334,7 +23334,7 @@ testModel:
                                   language: *ref_880
                                 softDeleteRetentionInDays:
                                   schema: *ref_179
-                                  rawValue: 90
+                                  rawValue: !!int 90
                                   language: *ref_867
                                 statusMessage:
                                   schema: *ref_181
@@ -23415,7 +23415,7 @@ testModel:
                                   language: *ref_880
                                 softDeleteRetentionInDays:
                                   schema: *ref_179
-                                  rawValue: 90
+                                  rawValue: !!int 90
                                   language: *ref_867
                                 statusMessage:
                                   schema: *ref_181
@@ -23472,7 +23472,7 @@ testModel:
             operationGroup: *ref_886
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_430
                   parentsValue: {}
@@ -23617,7 +23617,7 @@ testModel:
             operationGroup: *ref_886
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_210
                   parentsValue: {}
@@ -23701,7 +23701,7 @@ testModel:
             operationGroup: *ref_886
             originalFile: ''
             responses:
-              '202': {}
+              202: {}
         operation: *ref_944
         operationGroup: *ref_886
       - operationId: MHSMPrivateEndpointConnections_ListByResource
@@ -23733,7 +23733,7 @@ testModel:
             operationGroup: *ref_964
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_437
                   parentsValue: {}
@@ -23887,7 +23887,7 @@ testModel:
             operationGroup: *ref_964
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_163
                   parentsValue: {}
@@ -23998,7 +23998,7 @@ testModel:
             operationGroup: *ref_964
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_163
                   parentsValue: {}
@@ -24085,7 +24085,7 @@ testModel:
             operationGroup: *ref_964
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_163
                   parentsValue: {}
@@ -24108,9 +24108,9 @@ testModel:
                       rawValue: Disconnected
                       language: *ref_960
                   language: *ref_985
-              '202':
+              202:
                 headers: *ref_986
-              '204': {}
+              204: {}
         operation: *ref_987
         operationGroup: *ref_964
       - operationId: MHSMPrivateLinkResources_ListByMHSMResource
@@ -24142,7 +24142,7 @@ testModel:
             operationGroup: *ref_1001
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_454
                   parentsValue: {}
@@ -24202,7 +24202,7 @@ testModel:
             operationGroup: *ref_1036
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_455
                   parentsValue: {}
@@ -25258,7 +25258,7 @@ testModel:
             operationGroup: *ref_1058
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_464
                   parentsValue: {}
@@ -25329,7 +25329,7 @@ testModel:
             operationGroup: *ref_1058
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_464
                   parentsValue: {}
@@ -25400,7 +25400,7 @@ testModel:
             operationGroup: *ref_1058
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_250
                   parentsValue: {}
@@ -25438,7 +25438,7 @@ testModel:
                       rawValue: /subscriptions/subId/resourcegroups/rgname
                       language: *ref_1049
                   language: *ref_1068
-              '204': {}
+              204: {}
         operation: *ref_1069
         operationGroup: *ref_1058
       - operationId: RoleAssignments_Create
@@ -25486,7 +25486,7 @@ testModel:
             operationGroup: *ref_1058
             originalFile: ''
             responses:
-              '201':
+              201:
                 body:
                   schema: *ref_250
                   parentsValue: {}
@@ -25550,7 +25550,7 @@ testModel:
             operationGroup: *ref_1058
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_250
                   parentsValue: {}
@@ -25609,7 +25609,7 @@ testModel:
             operationGroup: *ref_1058
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_464
                   parentsValue: {}
@@ -25680,7 +25680,7 @@ testModel:
             operationGroup: *ref_1058
             originalFile: ''
             responses:
-              '200': {}
+              200: {}
         operation: *ref_1096
         operationGroup: *ref_1058
       - operationId: RoleAssignments_ListForScope
@@ -25702,7 +25702,7 @@ testModel:
             operationGroup: *ref_1058
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_464
                   parentsValue: {}
@@ -25763,7 +25763,7 @@ testModel:
             operationGroup: *ref_1113
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_484
                   parentsValue: {}
@@ -25822,7 +25822,7 @@ testModel:
             operationGroup: *ref_1122
             originalFile: ''
             responses:
-              '200':
+              200:
                 body:
                   schema: *ref_489
                   parentsValue: {}
@@ -25835,7 +25835,7 @@ testModel:
                       language: *ref_1119
                     templateHash:
                       schema: *ref_264
-                      rawValue: '695440707931307747'
+                      rawValue: 695440707931307747
                       language: *ref_1120
                   language: *ref_1118
         operation: *ref_1121

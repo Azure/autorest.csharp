@@ -50,7 +50,7 @@ namespace MgmtMockAndSample
                     Settings = BinaryData.FromObjectAsJson(new Dictionary<string, object>()
                     {
                         ["config1"] = "value1",
-                        ["config2"] = "8427",
+                        ["config2"] = 8427,
                         ["config3"] = "false",
                         ["config4"] = new object[] { "1", "2" },
                         ["config5"] = new Dictionary<string, object>()
@@ -61,7 +61,7 @@ namespace MgmtMockAndSample
                     ProtectedSettings = BinaryData.FromObjectAsJson(new Dictionary<string, object>()
                     {
                         ["protected1"] = "value2",
-                        ["protected2"] = "10",
+                        ["protected2"] = 10,
                         ["protected3"] = "false",
                         ["protected4"] = new object[] { "1", "2", "3" },
                         ["protected5"] = new Dictionary<string, object>()

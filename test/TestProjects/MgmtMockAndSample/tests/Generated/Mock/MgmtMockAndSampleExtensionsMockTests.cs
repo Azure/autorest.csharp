@@ -77,9 +77,9 @@ namespace MgmtMockAndSample.Tests.Mock
                 ["resources"] = new object[] { },
                 ["variables"] = new Dictionary<string, object>()
                 {
-                    ["array"] = new object[] { "1", "2", "3", "4" },
+                    ["array"] = new object[] { 1, 2, 3, 4 },
                     ["bool"] = "true",
-                    ["int"] = "42",
+                    ["int"] = 42,
                     ["object"] = new Dictionary<string, object>()
                     {
                         ["object"] = new Dictionary<string, object>()
