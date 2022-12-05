@@ -44,7 +44,8 @@ Scenarios.PetStore_GetPetByKind = passOnSuccess(
 );
 
 Scenarios.PetStore_GetFirstPet = passOnSuccess(
-  mockapi.get("/pets?start=1", () => {
+  mockapi.get("/pets", (req) => {
+    req.expect.containsQueryParam("start", "1");
     return {
       status: 200,
       body: json(dog),
