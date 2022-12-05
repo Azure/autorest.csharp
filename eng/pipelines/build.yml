@@ -71,7 +71,7 @@ stages:
             inputs:
               command: custom
               customCommand: run build
-              workingDir: $(Build.SourcesDirectory)/test/CadlRanchMockApis
+              workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
           - script: |
               dotnet test AutoRest.CSharp.sln
             displayName: "Test"
