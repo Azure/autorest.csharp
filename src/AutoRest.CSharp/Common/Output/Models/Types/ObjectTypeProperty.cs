@@ -40,6 +40,24 @@ namespace AutoRest.CSharp.Output.Models.Types
             Description = string.IsNullOrEmpty(parameterDescription) ? CreateDefaultPropertyDescription(Declaration.Name, IsReadOnly).ToString() : parameterDescription;
         }
 
+        public ObjectTypeProperty WithAccessibility(string accessibility)
+        {
+            if (accessibility == Declaration.Accessibility)
+                return this;
+
+            var newDeclaration = new MemberDeclarationOptions(accessibility, Declaration.Name, Declaration.Type);
+
+            return new ObjectTypeProperty(
+                newDeclaration,
+                _baseParameterDescription,
+                IsReadOnly,
+                SchemaProperty,
+                IsRequired,
+                valueType: ValueType,
+                optionalViaNullability: OptionalViaNullability,
+                inputModelProperty: InputModelProperty);
+        }
+
         public static FormattableString CreateDefaultPropertyDescription(string nameToUse, bool isReadOnly)
         {
             String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
@@ -89,7 +107,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (this.ValueType.Implementation is not ObjectType objType)
                 return false;
 
-            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).Where(property => property is not FlattenedObjectTypeProperty);
             bool isSingleProperty = properties.Count() == 1 && !properties.First().IsDiscriminator();
 
             if (isSingleProperty)

@@ -85,72 +85,79 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach (var property in schema.Properties)
             {
                 Stack<ObjectTypeProperty> hierarchyStack = property.GetHeirarchyStack();
-                if (Configuration.AzureArm && hierarchyStack.Count > 1)
-                {
-                    var innerProperty = hierarchyStack.Pop();
-                    var immediateParentProperty = hierarchyStack.Pop();
+                //if (Configuration.AzureArm && hierarchyStack.Count > 1)
+                //{
+                //    var innerProperty = hierarchyStack.Pop();
+                //    var immediateParentProperty = hierarchyStack.Pop();
 
-                    string myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentProperty);
-                    string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
-                    WriteProperty(writer, property, "internal");
-                    bool isOverridenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
-                    var nullable = isOverridenValueType ? "?" : String.Empty;
-                    writer.WriteXmlDocumentationSummary(CreatePropertyDescription(innerProperty, myPropertyName));
-                    using (writer.Scope($"{innerProperty.Declaration.Accessibility} {innerProperty.Declaration.Type}{nullable} {myPropertyName:D}"))
-                    {
-                        if (!property.IsReadOnly && innerProperty.IsReadOnly)
-                        {
-                            if (HasDefaultPublicCtor(property))
-                            {
-                                if (innerProperty.Declaration.Type.Arguments.Length > 0)
-                                {
-                                    WriteGetWithNullCheck(writer, property, childPropertyName);
-                                }
-                                else
-                                {
-                                    WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
-                                }
-                            }
-                            else if (HasCtorWithSingleParam(property, innerProperty))
-                            {
-                                WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
-                                WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
-                            }
-                            else
-                            {
-                                throw new InvalidOperationException($"Unsupported parameter access combination for {schema.Type.Name}, Property {property.Declaration.Name}, ChildProperty {innerProperty.Declaration.Name}");
-                            }
-                        }
-                        else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
-                        {
-                            WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
-                            if (HasDefaultPublicCtor(property))
-                            {
-                                WriteSetWithNullCheck(writer, property, childPropertyName, isOverridenValueType);
-                            }
-                            else if (HasCtorWithSingleParam(property, innerProperty))
-                            {
-                                WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
-                            }
-                            else
-                            {
-                                throw new InvalidOperationException($"Unsupported parameter access combination for {schema.Type.Name}, Property {property.Declaration.Name}, ChildProperty {innerProperty.Declaration.Name}");
-                            }
-                        }
-                        else
-                        {
-                            nullable = property.IsReadOnly ? "?" : String.Empty;
-                            writer.Line($"get => {property.Declaration.Name:D}{nullable}.{childPropertyName};");
-                            if (!property.IsReadOnly && !innerProperty.IsReadOnly)
-                                writer.Line($"set => {property.Declaration.Name:D}.{childPropertyName} = value;");
-                        }
-                    }
-                    writer.Line();
-                }
-                else
-                {
-                    WriteProperty(writer, property);
-                }
+                //    string myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentProperty);
+                //    string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
+                //    WriteProperty(writer, property);
+                //    bool isOverridenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
+                //    var nullable = isOverridenValueType ? "?" : String.Empty;
+                //    writer.WriteXmlDocumentationSummary(CreatePropertyDescription(innerProperty, myPropertyName));
+                //    using (writer.Scope($"{innerProperty.Declaration.Accessibility} {innerProperty.Declaration.Type}{nullable} {myPropertyName:D}"))
+                //    {
+                //        if (!property.IsReadOnly && innerProperty.IsReadOnly)
+                //        {
+                //            if (HasDefaultPublicCtor(property))
+                //            {
+                //                if (innerProperty.Declaration.Type.Arguments.Length > 0)
+                //                {
+                //                    WriteGetWithNullCheck(writer, property, childPropertyName);
+                //                }
+                //                else
+                //                {
+                //                    WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
+                //                }
+                //            }
+                //            else if (HasCtorWithSingleParam(property, innerProperty))
+                //            {
+                //                WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
+                //                WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
+                //            }
+                //            else
+                //            {
+                //                throw new InvalidOperationException($"Unsupported parameter access combination for {schema.Type.Name}, Property {property.Declaration.Name}, ChildProperty {innerProperty.Declaration.Name}");
+                //            }
+                //        }
+                //        else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
+                //        {
+                //            WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
+                //            if (HasDefaultPublicCtor(property))
+                //            {
+                //                WriteSetWithNullCheck(writer, property, childPropertyName, isOverridenValueType);
+                //            }
+                //            else if (HasCtorWithSingleParam(property, innerProperty))
+                //            {
+                //                WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
+                //            }
+                //            else
+                //            {
+                //                throw new InvalidOperationException($"Unsupported parameter access combination for {schema.Type.Name}, Property {property.Declaration.Name}, ChildProperty {innerProperty.Declaration.Name}");
+                //            }
+                //        }
+                //        else
+                //        {
+                //            nullable = property.IsReadOnly ? "?" : String.Empty;
+                //            writer.Line($"get => {property.Declaration.Name:D}{nullable}.{childPropertyName};");
+                //        }
+                //    }
+                //    writer.Line();
+                //}
+                //else
+                //{
+                WriteProperty(writer, property);
+                //}
+            }
+        }
+
+        private static void WriteFlattenedProperty(CodeWriter writer, FlattenedObjectTypeProperty flattenedProperty)
+        {
+            using (writer.Scope($"{flattenedProperty.Declaration.Accessibility} {flattenedProperty.Declaration.Type} {flattenedProperty.Declaration.Name:D}"))
+            {
+                writer.LineRaw("get;");
+                writer.LineRaw("set;");
             }
         }
 
@@ -267,15 +274,25 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        private void WriteProperty(CodeWriter writer, ObjectTypeProperty property, string? overrideAccessibility = null)
+        private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
-            var accessibility = overrideAccessibility ?? property.Declaration.Accessibility;
-            CSharpType propertyType = property.Declaration.Type;
-            writer.Append($"{accessibility} {propertyType} {property.Declaration.Name:D}");
-            writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
+            if (property is FlattenedObjectTypeProperty flattenedProperty)
+            {
+                WriteFlattenedProperty(writer, flattenedProperty);
+            }
+            else
+            {
+                WriteNormalProperty(writer, property);
+            }
 
             writer.Line();
+        }
+
+        private static void WriteNormalProperty(CodeWriter writer, ObjectTypeProperty property)
+        {
+            writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
+            writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
         }
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)

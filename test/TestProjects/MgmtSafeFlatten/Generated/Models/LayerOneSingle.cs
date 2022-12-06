@@ -27,13 +27,8 @@ namespace MgmtSafeFlatten.Models
         /// <summary> MyProp description. </summary>
         public string LayerTwoMyProp
         {
-            get => LayerTwo is null ? default : LayerTwo.MyProp;
-            set
-            {
-                if (LayerTwo is null)
-                    LayerTwo = new LayerTwoSingle();
-                LayerTwo.MyProp = value;
-            }
+            get;
+            set;
         }
     }
 }

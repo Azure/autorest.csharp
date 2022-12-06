@@ -68,7 +68,17 @@ namespace AutoRest.CSharp.Mgmt.Output
                 if (!parentProperties.Contains(property.Declaration.Name))
                 {
                     var propertyType = CreatePropertyType(property);
-                    yield return propertyType;
+                    // check if the type of this property is "single property type"
+                    if (propertyType.IsSinglePropertyObject(out var innerProperty))
+                    {
+                        propertyType = propertyType.WithAccessibility("internal");
+                        yield return propertyType;
+                        yield return FlattenedObjectTypeProperty.CreateFrom(propertyType);
+                    }
+                    else
+                    {
+                        yield return propertyType;
+                    }
                 }
             }
         }
@@ -103,8 +113,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             else
             {
                 ObjectTypeProperty propertyType = objectTypeProperty;
-                var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
-                if (typeToReplace != null)
+                if (objectTypeProperty.ValueType.TryCast<MgmtObjectType>(out var typeToReplace))
                 {
                     var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)

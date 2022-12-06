@@ -132,6 +132,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
+                // skip the flattened properties, we should never include them in serialization
+                if (property is FlattenedObjectTypeProperty)
+                    continue;
+
                 var type = property.Declaration.Type;
 
                 var deserializationParameter = new Parameter(
