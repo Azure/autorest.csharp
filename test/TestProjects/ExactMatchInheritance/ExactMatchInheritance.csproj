@@ -15,7 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.25.0" />
+    <PackageReference Include="Azure.Core" Version="1.26.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Azure.Core.Expressions.DataFactory" Version="1.0.0-alpha.20221121.1" />
   </ItemGroup>
 
 </Project>
