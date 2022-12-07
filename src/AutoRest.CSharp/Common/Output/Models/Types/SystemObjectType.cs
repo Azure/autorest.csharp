@@ -93,12 +93,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => null,
         };
 
-        internal IEnumerable<Attribute> GetCustomAttributes()
-        {
-            var type = _type;
-            return type.GetCustomAttributes();
-        }
-
         internal IEnumerable<PropertyInfo> GetAllProperties()
         {
             var type = _type;
