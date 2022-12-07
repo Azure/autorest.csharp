@@ -52,6 +52,9 @@ namespace AutoRest.CSharp.Common.Decorator
                 }
             }
 
+            if (schemaToPropertyMap.Count == 0)
+                return;
+
             foreach (var schema in codeModel.AllSchemas.OfType<ObjectSchema>())
             {
                 if (!schemaToPropertyMap.TryGetValue(schema.Name, out var propertyList)) continue;
