@@ -65,7 +65,7 @@
  "Clients": [
   {
    "$id": "9",
-   "Name": "visibility",
+   "Name": "visibilityClient",
    "Description": "Illustrates read, write and read/write properties.",
    "Operations": [
     {
@@ -230,7 +230,8 @@
    ],
    "Protocol": {
     "$id": "27"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

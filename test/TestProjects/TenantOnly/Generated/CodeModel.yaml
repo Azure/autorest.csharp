@@ -778,6 +778,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            UpdateBillingAccount:
+              $ref: ./examples/UpdateBillingAccount.json
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: azure-async-operation
@@ -992,6 +995,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            AgreementByName:
+              $ref: ./examples/AgreementByName.json
         language: !Languages 
           default:
             name: Get

@@ -44,6 +44,21 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("zoneType");
                 writer.WriteStringValue(ZoneType.Value.ToSerialString());
             }
+            if (Optional.IsDefined(MachineType))
+            {
+                writer.WritePropertyName("machineType");
+                writer.WriteNumberValue((int)MachineType.Value);
+            }
+            if (Optional.IsDefined(StorageType))
+            {
+                writer.WritePropertyName("storageType");
+                writer.WriteNumberValue((int)StorageType.Value);
+            }
+            if (Optional.IsDefined(MemoryType))
+            {
+                writer.WritePropertyName("memoryType");
+                writer.WriteNumberValue((long)MemoryType.Value);
+            }
             if (Optional.IsCollectionDefined(RegistrationVirtualNetworks))
             {
                 writer.WritePropertyName("registrationVirtualNetworks");
@@ -82,6 +97,9 @@ namespace MgmtExpandResourceTypes
             Optional<long> numberOfRecordSets = default;
             Optional<IReadOnlyList<string>> nameServers = default;
             Optional<ZoneType> zoneType = default;
+            Optional<MachineType> machineType = default;
+            Optional<StorageType> storageType = default;
+            Optional<MemoryType> memoryType = default;
             Optional<IList<WritableSubResource>> registrationVirtualNetworks = default;
             Optional<IList<WritableSubResource>> resolutionVirtualNetworks = default;
             foreach (var property in element.EnumerateObject())
@@ -133,7 +151,7 @@ namespace MgmtExpandResourceTypes
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -200,6 +218,36 @@ namespace MgmtExpandResourceTypes
                             zoneType = property0.Value.GetString().ToZoneType();
                             continue;
                         }
+                        if (property0.NameEquals("machineType"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            machineType = property0.Value.GetInt32().ToMachineType();
+                            continue;
+                        }
+                        if (property0.NameEquals("storageType"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            storageType = property0.Value.GetInt32().ToStorageType();
+                            continue;
+                        }
+                        if (property0.NameEquals("memoryType"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            memoryType = property0.Value.GetInt64().ToMemoryType();
+                            continue;
+                        }
                         if (property0.NameEquals("registrationVirtualNetworks"))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
@@ -210,7 +258,7 @@ namespace MgmtExpandResourceTypes
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.ToString()));
+                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
                             }
                             registrationVirtualNetworks = array;
                             continue;
@@ -225,7 +273,7 @@ namespace MgmtExpandResourceTypes
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.ToString()));
+                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
                             }
                             resolutionVirtualNetworks = array;
                             continue;
@@ -234,7 +282,7 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new ZoneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), Optional.ToList(nameServers), Optional.ToNullable(zoneType), Optional.ToList(registrationVirtualNetworks), Optional.ToList(resolutionVirtualNetworks));
+            return new ZoneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), Optional.ToList(nameServers), Optional.ToNullable(zoneType), Optional.ToNullable(machineType), Optional.ToNullable(storageType), Optional.ToNullable(memoryType), Optional.ToList(registrationVirtualNetworks), Optional.ToList(resolutionVirtualNetworks));
         }
     }
 }

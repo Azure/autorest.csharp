@@ -83,7 +83,7 @@
      "Value": "3"
     }
    ],
-   "IsExtensible": false,
+   "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
   }
@@ -392,7 +392,7 @@
  "Clients": [
   {
    "$id": "48",
-   "Name": "CustomizationsInCadl",
+   "Name": "CustomizationsInCadlClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
@@ -530,7 +530,8 @@
    ],
    "Protocol": {
     "$id": "62"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

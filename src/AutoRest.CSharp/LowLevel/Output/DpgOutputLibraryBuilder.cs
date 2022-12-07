@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
                 .ToDictionary(ci => ci.Name);
-
+            AssignParentClients(inputClients, clientInfosByName);
             var topLevelClientInfos = SetHierarchy(clientInfosByName);
             var clientOptions = CreateClientOptions(topLevelClientInfos);
 
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (inputEnum.Usage != InputModelTypeUsage.None)
                 {
-                    dictionary.Add(inputEnum, new EnumType(inputEnum, _defaultNamespace, "public", typeFactory, _sourceInputModel));
+                    dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null,_defaultNamespace), "public", typeFactory, _sourceInputModel));
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
                     derivedTypesLookup.TryGetValue(model, out var children);
                     InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
                     ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
-                    models.Add(model, new ModelTypeProvider(model, _defaultNamespace, _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
+                    models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Output.Models
                         "Unknown", //TODO: do we need to support extensible enum / int values?
                         null,
                         true);
-                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, _defaultNamespace, _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
+                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
                     defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
                     models.Add(unknownDerviedType, defaultDerivedType);
                 }
@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.Output.Models
             var operations = ns.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
-            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any();
+            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(ns.Parent);
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix();
 
             INamedTypeSymbol? existingType;
@@ -276,6 +276,32 @@ namespace AutoRest.CSharp.Output.Models
             return new[] { topLevelClientInfo };
         }
 
+        // assign parent according to the information in the input Model
+        private static void AssignParentClients(in IEnumerable<InputClient> clients, IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
+        {
+            foreach (var client in clients)
+            {
+                if (!String.IsNullOrEmpty(client.Parent))
+                {
+                    ClientInfo? targetClient = null;
+                    ClientInfo? targetParent = null;
+                    foreach (var info in clientInfosByName.Values)
+                    {
+                        if (info.OperationGroupKey == client.Name)
+                            targetClient = info;
+                        if (info.OperationGroupKey == client.Parent)
+                            targetParent = info;
+                    }
+                    if (targetClient != null && targetParent != null)
+                    {
+                        targetClient.Parent = targetParent;
+                        targetParent.Children.Add(targetClient);
+                    }
+                }
+            }
+        }
+
+        //Assgin parent according to the customized inputModel
         private static void AssignParents(in ClientInfo clientInfo, IReadOnlyDictionary<string, ClientInfo> clientInfosByName, SourceInputModel sourceInputModel)
         {
             var child = clientInfo;
@@ -385,7 +411,20 @@ namespace AutoRest.CSharp.Output.Models
             public string Description { get; }
             public INamedTypeSymbol? ExistingType { get; }
             public IReadOnlyList<InputOperation> Operations { get; }
-            public IReadOnlyList<InputParameter> ClientParameters { get; }
+
+            private IReadOnlyList<InputParameter>? _clientParameters;
+            private IReadOnlyList<InputParameter> _initClientParameters;
+            public IReadOnlyList<InputParameter> ClientParameters => _clientParameters ??= EnsureClientParameters();
+
+            private IReadOnlyList<InputParameter> EnsureClientParameters()
+            {
+                if (_initClientParameters.Count == 0)
+                {
+                    var endpointParameter = this.Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
+                    return endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
+                }
+                return _initClientParameters;
+            }
             public ISet<InputParameter> ResourceParameters { get; }
 
             public ClientInfo? Parent { get; set; }
@@ -405,7 +444,7 @@ namespace AutoRest.CSharp.Output.Models
                 Description = clientDescription;
                 ExistingType = existingType;
                 Operations = operations;
-                ClientParameters = clientParameters;
+                _initClientParameters = clientParameters;
                 ResourceParameters = resourceParameters;
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
@@ -419,7 +458,7 @@ namespace AutoRest.CSharp.Output.Models
                 Description = string.Empty;
                 ExistingType = null;
                 Operations = Array.Empty<InputOperation>();
-                ClientParameters = clientParameters;
+                _initClientParameters = clientParameters;
                 ResourceParameters = new HashSet<InputParameter>();
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();

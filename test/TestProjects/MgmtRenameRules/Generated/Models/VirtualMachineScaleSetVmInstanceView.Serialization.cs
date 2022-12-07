@@ -25,7 +25,7 @@ namespace MgmtRenameRules.Models
             Optional<BootDiagnosticsInstanceView> bootDiagnostics = default;
             Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
             Optional<string> assignedHost = default;
-            Optional<string> placementGroupId = default;
+            Optional<ResourceIdentifier> placementGroupId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("platformUpdateDomain"))
@@ -130,7 +130,12 @@ namespace MgmtRenameRules.Models
                 }
                 if (property.NameEquals("placementGroupId"))
                 {
-                    placementGroupId = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    placementGroupId = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
             }

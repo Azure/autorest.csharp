@@ -59,7 +59,7 @@ function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$
     if ($cadlFolders) {
         $cadlFolder = $cadlFolders[0]
         $cadlMain = Join-Path $cadlFolder "main.cadl"
-        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true"
+        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
     }
 }
 
@@ -255,6 +255,9 @@ if (!($Exclude -contains "CadlRanchProjects"))
     }
 }
 
+# TODO: remove later after cadl-ranch fixes the discriminator tests
+Add-Cadl "inheritance-cadl" (Join-Path $cadlRanchProjectDirectory "inheritance")
+
 # Smoke tests
 if (!($Exclude -contains "SmokeTests"))
 {
@@ -303,6 +306,11 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
         #skip writing the smoketests since these aren't actually defined locally
         #these get added when a filter is used so it can find the filter using
         #all possible sources
+        continue;
+    }
+
+    # TODO: remove later after candl ranch fixes the discriminator test
+    if ($definition.output.Contains("\CadlRanchProjects\inheritance")) {
         continue;
     }
 

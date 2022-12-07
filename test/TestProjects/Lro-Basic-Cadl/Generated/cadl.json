@@ -64,7 +64,8 @@
  "Clients": [
   {
    "$id": "9",
-   "Name": "Authoring",
+   "Name": "LroBasicCadlClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "10",
@@ -72,16 +73,24 @@
      "Parameters": [
       {
        "$id": "11",
-       "Name": "api-version",
+       "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Description": "",
        "Type": {
         "$id": "12",
-        "Name": "string",
+        "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
        "DefaultValue": {
         "$id": "13",
         "Type": {
@@ -91,15 +100,7 @@
          "IsNullable": false
         },
         "Value": "2022-05-15-preview"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       }
       },
       {
        "$id": "15",
@@ -238,31 +239,10 @@
      "Name": "updateProject",
      "Parameters": [
       {
-       "$id": "30",
-       "Name": "api-version",
-       "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
-       "Type": {
-        "$id": "31",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "DefaultValue": {
-        "$ref": "13"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       "$ref": "11"
       },
       {
-       "$id": "32",
+       "$id": "30",
        "Name": "Project",
        "NameInRequest": "Project",
        "Type": {
@@ -279,11 +259,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "33",
+       "$id": "31",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "34",
+        "$id": "32",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -298,19 +278,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "33",
         "Type": {
-         "$ref": "34"
+         "$ref": "32"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "36",
+       "$id": "34",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "37",
+        "$id": "35",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -325,9 +305,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "36",
         "Type": {
-         "$ref": "37"
+         "$ref": "35"
         },
         "Value": "application/json"
        }
@@ -335,7 +315,7 @@
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "37",
        "StatusCodes": [
         200
        ],
@@ -356,10 +336,10 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "40",
+      "$id": "38",
       "FinalStateVia": 1,
       "FinalResponse": {
-       "$id": "41",
+       "$id": "39",
        "StatusCodes": [
         200
        ],
@@ -375,8 +355,9 @@
     }
    ],
    "Protocol": {
-    "$id": "42"
-   }
+    "$id": "40"
+   },
+   "Creatable": true
   }
  ]
 }

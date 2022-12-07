@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 
@@ -237,34 +238,54 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 using (writer.Scope($"internal static partial class {declaredTypeName}Extensions"))
                 {
-                    using (writer.Scope($"public static {schema.ValueType} ToSerialString(this {declaredTypeName} value) => value switch", end: "};"))
+                    if (!schema.IsIntValueType)
                     {
-                        foreach (EnumTypeValue value in schema.Values)
-                        {
-                            writer.Line($"{declaredTypeName}.{value.Declaration.Name} => {value.Value.Value:L},");
-                        }
-
-                        writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
+                        WriteEnumSerializationMethod(writer, schema, declaredTypeName);
                     }
-                    writer.Line();
 
-                    using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this {schema.ValueType} value)"))
-                    {
-                        foreach (EnumTypeValue value in schema.Values)
-                        {
-                            writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
-                            if (isString)
-                            {
-                                writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase");
-                            }
-                            writer.Line($")) return {declaredTypeName}.{value.Declaration.Name};");
-                        }
-
-                        writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
-                    }
-                    writer.Line();
+                    WriteEnumDeserializationMethod(writer, schema, declaredTypeName, isString);
                 }
             }
+        }
+
+        private static void WriteEnumSerializationMethod(CodeWriter writer, EnumType schema, string declaredTypeName)
+        {
+            using (writer.Scope($"public static {schema.ValueType} ToSerial{schema.ValueType.Name.FirstCharToUpperCase()}(this {declaredTypeName} value) => value switch", end: "};"))
+            {
+                foreach (EnumTypeValue value in schema.Values)
+                {
+                    writer.Line($"{declaredTypeName}.{value.Declaration.Name} => {value.Value.Value:L},");
+                }
+
+                writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
+            }
+            writer.Line();
+        }
+
+        private static void WriteEnumDeserializationMethod(CodeWriter writer, EnumType schema, string declaredTypeName, bool isString)
+        {
+            using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this {schema.ValueType} value)"))
+            {
+                if (isString)
+                {
+                    foreach (EnumTypeValue value in schema.Values)
+                    {
+                        writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
+                        writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase");
+                        writer.Line($")) return {declaredTypeName}.{value.Declaration.Name};");
+                    }
+                }
+                else// int, and float
+                {
+                    foreach (EnumTypeValue value in schema.Values)
+                    {
+                        writer.Line($"if (value == {value.Value.Value:L}) return {declaredTypeName}.{value.Declaration.Name};");
+                    }
+                }
+
+                writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
+            }
+            writer.Line();
         }
     }
 }

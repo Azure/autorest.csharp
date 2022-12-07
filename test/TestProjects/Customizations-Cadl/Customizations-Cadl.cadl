@@ -70,12 +70,16 @@ enum EnumWithValueToRename {
     ValueToRename: "3"
 }
 
-@doc("Extensible enum that has been fixed enum")
-enum EnumToBeMadeExtensible {
+@doc("Extensible enum values")
+enum EnumToBeMadeExtensibleValues {
     ExOne: "1",
     ExTwo: "2",
     ExThree: "3"
 }
+
+@knownValues(EnumToBeMadeExtensibleValues)
+@doc("Extensible enum that has been fixed enum")
+model EnumToBeMadeExtensible is string;
 
 @doc("Root RoundTrip model to reference all other types to ensure generation")
 model RootModel {  

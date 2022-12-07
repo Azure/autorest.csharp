@@ -64,7 +64,8 @@
  "Clients": [
   {
    "$id": "9",
-   "Name": "Projects",
+   "Name": "LroOperationClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "10",
@@ -113,8 +114,8 @@
       },
       {
        "$id": "15",
-       "Name": "content-type",
-       "NameInRequest": "content-type",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Description": "This request has a JSON Merge Patch body.",
        "Type": {
         "$id": "16",
@@ -141,16 +142,24 @@
       },
       {
        "$id": "18",
-       "Name": "api-version",
+       "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Description": "",
        "Type": {
         "$id": "19",
-        "Name": "string",
+        "Name": "String",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
        "DefaultValue": {
         "$id": "20",
         "Type": {
@@ -160,15 +169,7 @@
          "IsNullable": false
         },
         "Value": "2022-05-15-preview"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       }
       },
       {
        "$id": "22",
@@ -280,7 +281,8 @@
    ],
    "Protocol": {
     "$id": "32"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

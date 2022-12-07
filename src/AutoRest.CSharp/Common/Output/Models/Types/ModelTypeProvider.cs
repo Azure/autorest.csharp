@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -52,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
-            : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory!;
             _inputModel = inputModel;
@@ -62,7 +63,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsDefaultDiscriminator ? this : null);
         }
-
         private MethodSignatureModifiers GetFromResponseModifiers()
         {
             var signatures = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static;
@@ -134,9 +134,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     //or not it indicates if we should serialize this or not which is different.  Lists are readonly
                     //in the sense that the don't have setters but they aren't necessarily always readonly in the spec and therefore
                     //should be serialized based on the spec not based on the presence of a setter
-                    var shouldSkipSerialization = property.InputModelProperty.IsDiscriminator
-                        ? false
-                        : property.Declaration.Type.IsCollectionType() ? property.InputModelProperty.IsReadOnly : property.IsReadOnly;
+                    bool shouldSkipSerialization = ShouldSkipSerialization(property);
                     result.Add(new JsonPropertySerialization(
                         paramName,
                         declaredName,
@@ -150,6 +148,26 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
             return result;
+        }
+
+        private bool ShouldSkipSerialization(ObjectTypeProperty property)
+        {
+            if (property.InputModelProperty!.IsDiscriminator)
+            {
+                return false;
+            }
+
+            if (property.InputModelProperty!.IsReadOnly)
+            {
+                return true;
+            }
+
+            if (property.Declaration.Type.IsCollectionType())
+            {
+                return  _inputModel.Usage is InputModelTypeUsage.Output;
+            }
+
+            return property.IsReadOnly && _inputModel.Usage is not InputModelTypeUsage.Input;
         }
 
         private ConstructorSignature? CreateSerializationConstructorSignature(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
@@ -370,6 +388,32 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return new ModelMethodDefinition(FromResponseSignature, SerializationWriter.JsonFromResponseMethod);
             if (EnsureIncludeSerializer())
                 yield return new ModelMethodDefinition(ToRequestContentSignature, SerializationWriter.JsonToRequestContentMethod);
+        }
+
+        public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
+        {
+            if (!TryGetPropertyForInputModelProperty(p => p.InputModelProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                throw new InvalidOperationException($"Unable to find object property with serialized name '{serializedName}' in schema {DefaultName}");
+            }
+
+            return objectProperty;
+        }
+
+        private bool TryGetPropertyForInputModelProperty(Func<ObjectTypeProperty, bool> propertySelector, [NotNullWhen(true)] out ObjectTypeProperty? objectProperty, bool includeParents = false)
+        {
+            objectProperty = null;
+
+            foreach (var type in EnumerateHierarchy())
+            {
+                objectProperty = type.Properties.SingleOrDefault(propertySelector);
+                if (objectProperty != null || !includeParents)
+                {
+                    break;
+                }
+            }
+
+            return objectProperty != null;
         }
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
