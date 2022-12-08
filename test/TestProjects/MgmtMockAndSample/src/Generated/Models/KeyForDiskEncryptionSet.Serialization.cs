@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sourceVault = JsonSerializer.Deserialize<WritableSubResource>(property.Value.ToString());
+                    sourceVault = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("keyUrl"))

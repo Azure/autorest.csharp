@@ -60,6 +60,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             return Path.Combine(_buildProperties.Value.ArtifactsDirectory, "coverage");
         }
 
+        protected static string GetRepoRootDirectory()
+        {
+            return _buildProperties.Value.RepoRoot;
+        }
+
         protected static string GetNodeModulesDirectory()
         {
             var repoRoot = _buildProperties.Value.RepoRoot;

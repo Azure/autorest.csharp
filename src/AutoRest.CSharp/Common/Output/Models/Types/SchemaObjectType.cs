@@ -85,10 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private bool _hasCalculatedDefaultDerivedType;
         public ObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerviedType();
 
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) &&
-            ObjectSchema != null &&
-            ObjectSchema.Extensions != null &&
-            ObjectSchema.Extensions.MgmtReferenceType;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
 
         public bool IsInheritableCommonType => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
@@ -291,6 +288,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+
         protected bool SkipInitializerConstructor => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.SkipInitCtor;
@@ -486,7 +484,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private CSharpType GetDefaultPropertyType(Property property)
         {
-            var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable);
+            var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable, property.Schema is AnyObjectSchema ? property.Extensions?.Format : property.Schema.Extensions?.Format, property: property);
 
             if (!_usage.HasFlag(SchemaTypeUsage.Input) ||
                 property.IsReadOnly)
@@ -623,7 +621,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool EnsureHasXmlSerialization()
         {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Xml); ;
+            return _supportedSerializationFormats.Contains(KnownMediaType.Xml);
         }
 
         protected override bool EnsureIncludeSerializer()
