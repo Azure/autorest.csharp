@@ -45,11 +45,11 @@ namespace Azure.Core
         {
             if (_position == null)
             {
-                if (!string.IsNullOrEmpty(Query))
+                if (HasQuery)
                 {
                     _position = RawWritingPosition.Query;
                 }
-                else if (!string.IsNullOrEmpty(Path))
+                else if (HasPath)
                 {
                     _position = RawWritingPosition.Path;
                 }
@@ -87,7 +87,7 @@ namespace Azure.Core
                     int separator = value.IndexOfAny(HostOrPort);
                     if (separator == -1)
                     {
-                        if (string.IsNullOrEmpty(Path))
+                        if (!HasPath)
                         {
                             Host += value.ToString();
                             value = ReadOnlySpan<char>.Empty;
@@ -135,12 +135,12 @@ namespace Azure.Core
                     int separator = value.IndexOf(QueryBeginSeparator);
                     if (separator == -1)
                     {
-                        AppendPath(value.ToString(), escape);
+                        AppendPath(value, escape);
                         value = ReadOnlySpan<char>.Empty;
                     }
                     else
                     {
-                        AppendPath(value.Slice(0, separator).ToString(), escape);
+                        AppendPath(value.Slice(0, separator), escape);
                         value = value.Slice(separator + 1);
                         _position = RawWritingPosition.Query;
                     }
@@ -155,13 +155,13 @@ namespace Azure.Core
                     else if (separator == -1)
                     {
                         GetQueryParts(value, out var queryName, out var queryValue);
-                        AppendQuery(queryName.ToString(), queryValue.ToString(), escape);
+                        AppendQuery(queryName, queryValue, escape);
                         value = ReadOnlySpan<char>.Empty;
                     }
                     else
                     {
                         GetQueryParts(value.Slice(0, separator), out var queryName, out var queryValue);
-                        AppendQuery(queryName.ToString(), queryValue.ToString(), escape);
+                        AppendQuery(queryName, queryValue, escape);
                         value = value.Slice(separator + 1);
                     }
                 }
