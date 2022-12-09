@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
-                    WriteResponseClassifierMethod(writer, client.RequestMethods.Select(m => m.ResponseClassifierType));
+                    WriteResponseClassifierMethod(writer, client.ResponseClassifierTypes);
                 }
             }
         }
