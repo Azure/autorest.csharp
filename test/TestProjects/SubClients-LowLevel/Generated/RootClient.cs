@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace SubClients_LowLevel
 {
-    // Data plane generated client. The Root service client.
+    // Data plane generated client.
     /// <summary> The Root service client. </summary>
     public partial class RootClient
     {

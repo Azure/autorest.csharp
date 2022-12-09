@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Models.Property.Types
 {
-    // Data plane generated sub-client. The Int sub-client.
+    // Data plane generated sub-client.
     /// <summary> The Int sub-client. </summary>
     public partial class Int
     {
