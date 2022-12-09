@@ -15,7 +15,7 @@ using CadlFirstTest.Models;
 
 namespace CadlFirstTest
 {
-    // Data plane generated client. This is a sample cadl project.
+    // Data plane generated client.
     /// <summary> This is a sample cadl project. </summary>
     public partial class CadlFirstTestClient
     {

@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Models.Property.Optional
 {
-    // Data plane generated sub-client. The Bytes sub-client.
+    // Data plane generated sub-client.
     /// <summary> The Bytes sub-client. </summary>
     public partial class Bytes
     {

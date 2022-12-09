@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 
 namespace ApiVersionInCadl
 {
-    // Data plane generated client. CADL project to test api versions.
+    // Data plane generated client.
     /// <summary> CADL project to test api versions. </summary>
     public partial class ApiVersionInCadlClient
     {

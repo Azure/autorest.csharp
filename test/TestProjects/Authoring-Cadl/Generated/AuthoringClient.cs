@@ -17,7 +17,7 @@ using Azure.Language.Authoring.Models;
 
 namespace Azure.Language.Authoring
 {
-    // Data plane generated client. The Authoring service client.
+    // Data plane generated client.
     /// <summary> The Authoring service client. </summary>
     public partial class AuthoringClient
     {

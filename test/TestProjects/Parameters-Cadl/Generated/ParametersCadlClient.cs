@@ -15,7 +15,7 @@ using ParametersCadl.Models;
 
 namespace ParametersCadl
 {
-    // Data plane generated client. The ParametersCadl service client.
+    // Data plane generated client.
     /// <summary> The ParametersCadl service client. </summary>
     public partial class ParametersCadlClient
     {

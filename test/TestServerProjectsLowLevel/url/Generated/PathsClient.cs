@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace url_LowLevel
 {
-    // Data plane generated client. The Paths service client.
+    // Data plane generated client.
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient
     {

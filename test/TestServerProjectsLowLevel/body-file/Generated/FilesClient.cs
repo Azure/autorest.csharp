@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_file_LowLevel
 {
-    // Data plane generated client. The Files service client.
+    // Data plane generated client.
     /// <summary> The Files service client. </summary>
     public partial class FilesClient
     {

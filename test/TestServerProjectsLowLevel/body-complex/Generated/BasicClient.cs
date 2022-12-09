@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    // Data plane generated client. The Basic service client.
+    // Data plane generated client.
     /// <summary> The Basic service client. </summary>
     public partial class BasicClient
     {

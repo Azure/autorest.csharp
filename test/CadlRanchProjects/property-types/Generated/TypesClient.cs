@@ -11,7 +11,7 @@ using Azure.Core.Pipeline;
 
 namespace Models.Property.Types
 {
-    // Data plane generated client. The Types service client.
+    // Data plane generated client.
     /// <summary> The Types service client. </summary>
     public partial class TypesClient
     {
