@@ -279,8 +279,25 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer.AppendRaw("default");
         }
 
+        private static ObjectType GetActualImplementation(ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
+        {
+            var discriminator = objectType.Discriminator;
+            // check if this has a discriminator
+            if (discriminator == null)
+                return objectType;
+            var discriminatorPropertyName = discriminator.Property.SchemaProperty!.SerializedName;
+            // get value of this in the valueDict and we should always has a discriminator value in the example
+            if (!valueDict.TryGetValue(discriminatorPropertyName, out var exampleValue) || exampleValue.RawValue == null)
+            {
+                throw new InvalidOperationException($"Attempting to get the discriminator value for property `{discriminatorPropertyName}` on object type {objectType.Type.Name} but got none or non-primitive type");
+            }
+            // the discriminator should always be a primitive type
+        }
+
         private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
         {
+            // need to get the actual ObjectType if this type has a discrinimator
+            objectType = GetActualImplementation(objectType, valueDict);
             // get all the properties on this type, including the properties from its base type
             var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
             var constructor = objectType.InitializationConstructor;
