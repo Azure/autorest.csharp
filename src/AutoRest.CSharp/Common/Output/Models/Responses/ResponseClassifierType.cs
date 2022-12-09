@@ -10,27 +10,16 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models.Responses
 {
-    internal readonly struct ResponseClassifierType : IEquatable<ResponseClassifierType>
+    internal record ResponseClassifierType(string Name, StatusCodes[] StatusCodes)
     {
-        public string Name { get; }
-        private readonly StatusCodes[] _statusCodes;
-
-        public ResponseClassifierType(IOrderedEnumerable<StatusCodes> statusCodes)
+        public ResponseClassifierType(IOrderedEnumerable<StatusCodes> statusCodes) : this(ComposeName(statusCodes), statusCodes.ToArray())
         {
-            _statusCodes = statusCodes.ToArray();
-            Name = nameof(ResponseClassifier) + string.Join("", _statusCodes.Select(c => c.Code?.ToString() ?? $"{c.Family * 100}To{(c.Family + 1) * 100}"));
         }
 
-        public bool Equals(ResponseClassifierType other) => Name == other.Name;
-
-        public override bool Equals(object? obj) => obj is ResponseClassifierType other && Equals(other);
+        public virtual bool Equals(ResponseClassifierType? other) => (other == null ? false : Name == other.Name);
 
         public override int GetHashCode() => Name.GetHashCode();
 
-        internal void Deconstruct(out string name, out StatusCodes[] statusCodes)
-        {
-            name = Name;
-            statusCodes = _statusCodes;
-        }
+        private static string ComposeName(IOrderedEnumerable<StatusCodes> statusCodes) => nameof(ResponseClassifier) + string.Join("", statusCodes.Select(c => c.Code?.ToString() ?? $"{c.Family * 100}To{(c.Family + 1) * 100}"));
     }
 }
