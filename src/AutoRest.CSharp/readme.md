@@ -55,10 +55,6 @@ testmodeler:
   split-parents-value: false
   add-armtemplate-payload-string: true
 #   export-explicit-type: true
-#   explicit-types:
-#     - int
-#     - string
-#     - float
 ```
 
 ## Customization
