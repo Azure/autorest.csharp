@@ -60,10 +60,10 @@ namespace AutoRest.CSharp.Input.Source
                                         if (existingCompilation.FilterMethod(methodSymbol))
                                         {
                                             _methodMap.Add(member.Name, methodSymbol);
-                                        }                                        
+                                        }
                                     }
                                 }
-                            }                            
+                            }
                         }
                     }
                 }
