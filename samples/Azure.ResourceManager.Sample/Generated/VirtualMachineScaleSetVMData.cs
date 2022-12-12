@@ -194,9 +194,16 @@ namespace Azure.ResourceManager.Sample
             get => HardwareProfile is null ? default : HardwareProfile.VmSize;
             set
             {
-                if (HardwareProfile is null)
-                    HardwareProfile = new HardwareProfile();
-                HardwareProfile.VmSize = value;
+                if (value.HasValue)
+                {
+                    if (HardwareProfile is null)
+                        HardwareProfile = new HardwareProfile();
+                    HardwareProfile.VmSize = value.Value;
+                }
+                else
+                {
+                    HardwareProfile = null;
+                }
             }
         }
 
@@ -219,9 +226,16 @@ namespace Azure.ResourceManager.Sample
             get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
             set
             {
-                if (AdditionalCapabilities is null)
-                    AdditionalCapabilities = new AdditionalCapabilities();
-                AdditionalCapabilities.UltraSSDEnabled = value;
+                if (value.HasValue)
+                {
+                    if (AdditionalCapabilities is null)
+                        AdditionalCapabilities = new AdditionalCapabilities();
+                    AdditionalCapabilities.UltraSSDEnabled = value.Value;
+                }
+                else
+                {
+                    AdditionalCapabilities = null;
+                }
             }
         }
 
@@ -244,9 +258,16 @@ namespace Azure.ResourceManager.Sample
             get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
             set
             {
-                if (SecurityProfile is null)
-                    SecurityProfile = new SecurityProfile();
-                SecurityProfile.EncryptionAtHost = value;
+                if (value.HasValue)
+                {
+                    if (SecurityProfile is null)
+                        SecurityProfile = new SecurityProfile();
+                    SecurityProfile.EncryptionAtHost = value.Value;
+                }
+                else
+                {
+                    SecurityProfile = null;
+                }
             }
         }
 

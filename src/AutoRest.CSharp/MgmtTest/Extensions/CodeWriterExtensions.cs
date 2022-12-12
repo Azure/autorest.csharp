@@ -369,7 +369,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                     // we need to know if this property has a setter, code copied from ModelWriter.WriteProperties
                     if (!property.IsReadOnly && innerProperty.IsReadOnly)
                     {
-                        if (ModelWriter.HasCtorWithSingleParam(property, innerProperty))
+                        if (FlattenedObjectTypeProperty.HasCtorWithSingleParam(property, innerProperty))
                         {
                             // this branch has a setter
                             propertiesToWrite.Add(myPropertyName, (innerProperty.Declaration.Type, exampleValue));

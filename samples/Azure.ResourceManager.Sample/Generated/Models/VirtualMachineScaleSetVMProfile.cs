@@ -107,9 +107,16 @@ namespace Azure.ResourceManager.Sample.Models
             get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
             set
             {
-                if (SecurityProfile is null)
-                    SecurityProfile = new SecurityProfile();
-                SecurityProfile.EncryptionAtHost = value;
+                if (value.HasValue)
+                {
+                    if (SecurityProfile is null)
+                        SecurityProfile = new SecurityProfile();
+                    SecurityProfile.EncryptionAtHost = value.Value;
+                }
+                else
+                {
+                    SecurityProfile = null;
+                }
             }
         }
 
@@ -167,9 +174,16 @@ namespace Azure.ResourceManager.Sample.Models
             get => BillingProfile is null ? default : BillingProfile.MaxPrice;
             set
             {
-                if (BillingProfile is null)
-                    BillingProfile = new BillingProfile();
-                BillingProfile.MaxPrice = value;
+                if (value.HasValue)
+                {
+                    if (BillingProfile is null)
+                        BillingProfile = new BillingProfile();
+                    BillingProfile.MaxPrice = value.Value;
+                }
+                else
+                {
+                    BillingProfile = null;
+                }
             }
         }
 

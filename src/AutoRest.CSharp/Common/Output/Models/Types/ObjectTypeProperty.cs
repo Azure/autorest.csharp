@@ -95,26 +95,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType ValueType { get; }
         public bool IsReadOnly { get; }
 
-        private bool IsDiscriminator() => SchemaProperty?.IsDiscriminator is true || InputModelProperty?.IsDiscriminator is true;
-
-        public bool IsSinglePropertyObject([MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
-        {
-            innerProperty = null;
-
-            if (this.ValueType.IsFrameworkType)
-                return false;
-
-            if (this.ValueType.Implementation is not ObjectType objType)
-                return false;
-
-            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).Where(property => property is not FlattenedObjectTypeProperty);
-            bool isSingleProperty = properties.Count() == 1 && !properties.First().IsDiscriminator();
-
-            if (isSingleProperty)
-                innerProperty = properties.First();
-
-            return isSingleProperty;
-        }
+        internal bool IsDiscriminator() => SchemaProperty?.IsDiscriminator is true || InputModelProperty?.IsDiscriminator is true;
 
         internal string GetCombinedPropertyName(ObjectTypeProperty immediateParentProperty)
         {
@@ -222,7 +203,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
         {
             //if we get back the same property exit early since this means we have a single property type which references itself
-            if (property.IsSinglePropertyObject(out var childProp) && !property.Equals(childProp))
+            if (MgmtObjectType.IsSinglePropertyObject(property, out var childProp) && !property.Equals(childProp))
             {
                 heirarchyStack.Push(childProp);
                 BuildHeirarchy(childProp, heirarchyStack);

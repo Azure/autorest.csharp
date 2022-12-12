@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -61,7 +62,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            List<ObjectTypeProperty> objTypeProperties = new List<ObjectTypeProperty>();
             var parentProperties = GetParentPropertyNames();
             foreach (var property in base.BuildProperties())
             {
@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var propertyType = CreatePropertyType(property);
                     // check if the type of this property is "single property type"
-                    if (propertyType.IsSinglePropertyObject(out var innerProperty))
+                    if (IsSinglePropertyObject(propertyType, out var innerProperty))
                     {
                         propertyType = propertyType.WithAccessibility("internal");
                         yield return propertyType;
@@ -81,6 +81,47 @@ namespace AutoRest.CSharp.Mgmt.Output
                     }
                 }
             }
+        }
+
+        public static bool IsSinglePropertyObject(ObjectTypeProperty property, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
+        {
+            innerProperty = null;
+
+            if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
+                return false;
+
+            return objType switch
+            {
+                SystemObjectType systemObjectType => HandleSystemObjectType(systemObjectType, out innerProperty),
+                MgmtObjectType mgmtObjectType => HandleMgmtObjectType(mgmtObjectType, out innerProperty),
+                _ => throw new InvalidOperationException($"Unhandled case {objType.GetType()} for property {property.Declaration.Type} {property.Declaration.Name}")
+            };
+        }
+
+        private static bool HandleMgmtObjectType(MgmtObjectType objType, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
+        {
+            innerProperty = null;
+            // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
+            var properties = objType.MyProperties.Where(property => property is not FlattenedObjectTypeProperty).ToArray();
+            bool isSingleProperty = properties.Length == 1 && !properties.First().IsDiscriminator();
+
+            if (isSingleProperty)
+                innerProperty = properties.First();
+
+            return isSingleProperty;
+        }
+
+        private static bool HandleSystemObjectType(SystemObjectType objType, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
+        {
+            innerProperty = null;
+
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).Where(property => property is not FlattenedObjectTypeProperty).ToArray();
+            bool isSingleProperty = properties.Length == 1;
+
+            if (isSingleProperty)
+                innerProperty = properties.First();
+
+            return isSingleProperty;
         }
 
         private IEnumerable<ObjectTypeProperty> BuildMyProperties()

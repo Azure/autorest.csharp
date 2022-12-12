@@ -82,9 +82,16 @@ namespace Azure.ResourceManager.Sample.Models
             get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
             set
             {
-                if (AdditionalCapabilities is null)
-                    AdditionalCapabilities = new AdditionalCapabilities();
-                AdditionalCapabilities.UltraSSDEnabled = value;
+                if (value.HasValue)
+                {
+                    if (AdditionalCapabilities is null)
+                        AdditionalCapabilities = new AdditionalCapabilities();
+                    AdditionalCapabilities.UltraSSDEnabled = value.Value;
+                }
+                else
+                {
+                    AdditionalCapabilities = null;
+                }
             }
         }
 

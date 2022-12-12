@@ -156,66 +156,104 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Scope($"{flattenedProperty.Declaration.Accessibility} {flattenedProperty.Declaration.Type} {flattenedProperty.Declaration.Name:D}"))
             {
-                writer.LineRaw("get;");
-                writer.LineRaw("set;");
+                // write getter
+                switch (flattenedProperty.IncludeGetterNullCheck)
+                {
+                    case true:
+                        WriteGetWithNullCheck(writer, flattenedProperty);
+                        break;
+                    case false:
+                        WriteGetWithDefault(writer, flattenedProperty);
+                        break;
+                    default:
+                        WriteGetWithEscape(writer, flattenedProperty);
+                        break;
+                }
+
+                // only write the setter when it is not readonly
+                if (!flattenedProperty.IsReadOnly)
+                {
+                    if (flattenedProperty.IncludeSetterNullCheck)
+                    {
+                        WriteSetWithNullCheck(writer, flattenedProperty);
+                    }
+                    else
+                    {
+                        WriteSetWithSingleParamCtor(writer, flattenedProperty);
+                    }
+                }
             }
         }
 
-        private static void WriteSetWithNullCheck(CodeWriter writer, ObjectTypeProperty property, string childPropertyName, bool isOverridenValueType)
+        private static void WriteSetWithNullCheck(CodeWriter writer, FlattenedObjectTypeProperty property)
         {
+            var type = property.Declaration.Type;
+            var underlyingName = property.UnderlyingProperty.Declaration.Name;
+            var underlyingType = property.UnderlyingProperty.Declaration.Type;
             using (writer.Scope($"set"))
             {
-                if (isOverridenValueType)
+                if (type.IsValueType && type.IsNullable)
                 {
                     using (writer.Scope($"if (value.HasValue)"))
                     {
-                        writer.Line($"if ({property.Declaration.Name:D} is null)");
-                        writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
-                        writer.Line($"{property.Declaration.Name:D}.{childPropertyName} = value.Value;");
+                        writer.Line($"if ({underlyingName} is null)");
+                        writer.Line($"{underlyingName} = new {underlyingType}();");
+                        writer.Line($"{underlyingName}.{property.ChildPropertyName} = value.Value;");
                     }
                     using (writer.Scope($"else"))
                     {
-                        writer.Line($"{property.Declaration.Name:D} = null;");
+                        writer.Line($"{underlyingName} = null;");
                     }
                 }
                 else
                 {
-                    writer.Line($"if ({property.Declaration.Name:D} is null)");
-                    writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
-                    writer.Line($"{property.Declaration.Name:D}.{childPropertyName} = value;");
+                    writer.Line($"if ({underlyingName} is null)");
+                    writer.Line($"{underlyingName} = new {underlyingType}();");
+                    writer.Line($"{underlyingName}.{property.ChildPropertyName} = value;");
                 }
             }
         }
 
-        private static void WriteGetWithNullCheck(CodeWriter writer, ObjectTypeProperty property, string childPropertyName)
+        private static void WriteSetWithSingleParamCtor(CodeWriter writer, FlattenedObjectTypeProperty property)
         {
-            using (writer.Scope($"get"))
-            {
-                writer.Line($"if ({property.Declaration.Name:D} is null)");
-                writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
-                writer.Line($"return {property.Declaration.Name:D}.{childPropertyName};");
-            }
-        }
-
-        private static void WriteGetWithDefault(CodeWriter writer, ObjectTypeProperty property, ObjectTypeProperty innerProperty, string childPropertyName, bool isOverridenValueType)
-        {
-            FormattableString defaultType = isOverridenValueType ? (FormattableString)$"{innerProperty.Declaration.Type}?" : (FormattableString)$"{innerProperty.Declaration.Type}";
-            writer.Line($"get => {property.Declaration.Name:D} is null ? default({defaultType}) : {property.Declaration.Name:D}.{childPropertyName};");
-        }
-
-        private static void WriteSetWithSingleParamCtor(CodeWriter writer, ObjectTypeProperty property, bool isOverridenValueType)
-        {
-            if (isOverridenValueType)
+            var propertyType = property.Declaration.Type;
+            var underlyingName = property.UnderlyingProperty.Declaration.Name;
+            var underlyingType = property.UnderlyingProperty.Declaration.Type;
+            if (propertyType.IsValueType && propertyType.IsNullable)
             {
                 using (writer.Scope($"set"))
                 {
-                    writer.Line($"{property.Declaration.Name:D} = value.HasValue ? new {property.Declaration.Type}(value.Value) : null;");
+                    writer.Line($"{underlyingName} = value.HasValue ? new {underlyingType}(value.Value) : null;");
                 }
             }
             else
             {
-                writer.Line($"set => {property.Declaration.Name:D} = new {property.Declaration.Type}(value);");
+                writer.Line($"set => {underlyingName} = new {underlyingType}(value);");
             }
+        }
+
+        private static void WriteGetWithNullCheck(CodeWriter writer, FlattenedObjectTypeProperty property)
+        {
+            var underlyingName = property.UnderlyingProperty.Declaration.Name;
+            var underlyingType = property.UnderlyingProperty.Declaration.Type;
+            using (writer.Scope($"get"))
+            {
+                writer.Line($"if ({underlyingName} is null)");
+                writer.Line($"{underlyingName} = new {underlyingType}();");
+                writer.Line($"return {underlyingName:D}.{property.ChildPropertyName};");
+            }
+        }
+
+        private static void WriteGetWithDefault(CodeWriter writer, FlattenedObjectTypeProperty property)
+        {
+            writer.Line($"get => {property.UnderlyingProperty.Declaration.Name:I} is null ? default({property.Declaration.Type}) : {property.UnderlyingProperty.Declaration.Name}.{property.ChildPropertyName};");
+        }
+
+        private static void WriteGetWithEscape(CodeWriter writer, FlattenedObjectTypeProperty property)
+        {
+            writer.Append($"get => {property.UnderlyingProperty.Declaration.Name}")
+                .AppendRawIf("?", property.IsUnderlyingPropertyNullable)
+                .Line($".{property.ChildPropertyName};");
         }
 
         private static bool AllCtorsContainMyProperty(ObjectType enclosingType, ObjectTypeProperty property)
@@ -227,51 +265,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return true;
-        }
-
-        internal static bool HasCtorWithSingleParam(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
-        {
-            var type = property.Declaration.Type;
-            if (type.IsFrameworkType)
-                return false;
-
-            if (type.Implementation is not ObjectType objType)
-                return false;
-
-            foreach (var ctor in objType.Constructors)
-            {
-                if (ctor.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                    ctor.Signature.Parameters.Count == 1)
-                {
-                    var paramType = ctor.Signature.Parameters[0].Type;
-                    var propertyType = innerProperty.Declaration.Type;
-                    if (paramType.Arguments.Length == 0 && paramType.Equals(propertyType))
-                        return true;
-
-                    if (paramType.Arguments.Length == 1 && propertyType.Arguments.Length == 1 && paramType.Arguments[0].Equals(propertyType.Arguments[0]))
-                        return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static bool HasDefaultPublicCtor(ObjectTypeProperty objectTypeProperty)
-        {
-            var type = objectTypeProperty.Declaration.Type;
-            if (type.IsFrameworkType)
-                return true;
-
-            if (type.Implementation is not ObjectType objType)
-                return true;
-
-            foreach (var ctor in objType.Constructors)
-            {
-                if (ctor.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) && !ctor.Signature.Parameters.Any())
-                    return true;
-            }
-
-            return false;
         }
 
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)

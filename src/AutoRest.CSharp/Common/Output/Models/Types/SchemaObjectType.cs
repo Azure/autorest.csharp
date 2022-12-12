@@ -210,7 +210,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var property in Properties)
             {
                 // Only required properties that are not discriminators go into default ctor
-                if (property == Discriminator?.Property)
+                // skip the flattened properties, we should never include them in the constructors
+                if (property == Discriminator?.Property || property is FlattenedObjectTypeProperty)
                 {
                     continue;
                 }
