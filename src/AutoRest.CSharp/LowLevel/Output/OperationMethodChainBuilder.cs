@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, _returnType.Protocol, null, protocolMethodParameters);
-            var convenienceMethod = ShouldConvenienceMethodGenerated() ? BuildConvenienceMethod() : null;
+            var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod() : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Output.Models
             return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
         }
 
-        private bool ShouldConvenienceMethodGenerated()
+        private bool ShouldGenerateConvenienceMethod()
         {
             return Operation.GenerateConvenienceMethod
                 && (_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
@@ -104,11 +104,12 @@ namespace AutoRest.CSharp.Output.Models
 
         private bool ShouldOverloadConvenienceMethod()
         {
-            if (!ShouldConvenienceMethodGenerated() || _sourceInputModel == null)
+            if (!ShouldGenerateConvenienceMethod() || _sourceInputModel == null)
             {
                 return false;
             }
             var existingMethod = _sourceInputModel.FindForMethod(Operation.Name.ToCleanName());
+            // If there is no existing protocol method with optional RequestContext
             if (existingMethod == null || existingMethod.Parameters.Length < 1 || existingMethod.Parameters.Last().IsOptional == false)
             {
                 return true;

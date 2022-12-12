@@ -51,23 +51,19 @@ namespace AutoRest.CSharp.Input.Source
                     {
                         if (type is INamedTypeSymbol typeSymbol)
                         {
-                            if (existingCompilation.typeFilter != null && !existingCompilation.typeFilter(typeSymbol))
+                            if (existingCompilation.FilterType(typeSymbol))
                             {
-                                continue;
-                            }
-
-                            foreach (var member in typeSymbol.GetMembers())
-                            {
-                                if (member is IMethodSymbol methodSymbol)
+                                foreach (var member in typeSymbol.GetMembers())
                                 {
-                                    if (existingCompilation.methodFilter != null && !existingCompilation.methodFilter(methodSymbol))
+                                    if (member is IMethodSymbol methodSymbol)
                                     {
-                                        continue;
+                                        if (existingCompilation.FilterMethod(methodSymbol))
+                                        {
+                                            _methodMap.Add(member.Name, methodSymbol);
+                                        }                                        
                                     }
-
-                                    _methodMap.Add(member.Name, methodSymbol);
                                 }
-                            }
+                            }                            
                         }
                     }
                 }
