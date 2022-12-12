@@ -84,72 +84,34 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var property in schema.Properties)
             {
-                Stack<ObjectTypeProperty> hierarchyStack = property.GetHeirarchyStack();
-                //if (Configuration.AzureArm && hierarchyStack.Count > 1)
-                //{
-                //    var innerProperty = hierarchyStack.Pop();
-                //    var immediateParentProperty = hierarchyStack.Pop();
-
-                //    string myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentProperty);
-                //    string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
-                //    WriteProperty(writer, property);
-                //    bool isOverridenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
-                //    var nullable = isOverridenValueType ? "?" : String.Empty;
-                //    writer.WriteXmlDocumentationSummary(CreatePropertyDescription(innerProperty, myPropertyName));
-                //    using (writer.Scope($"{innerProperty.Declaration.Accessibility} {innerProperty.Declaration.Type}{nullable} {myPropertyName:D}"))
-                //    {
-                //        if (!property.IsReadOnly && innerProperty.IsReadOnly)
-                //        {
-                //            if (HasDefaultPublicCtor(property))
-                //            {
-                //                if (innerProperty.Declaration.Type.Arguments.Length > 0)
-                //                {
-                //                    WriteGetWithNullCheck(writer, property, childPropertyName);
-                //                }
-                //                else
-                //                {
-                //                    WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
-                //                }
-                //            }
-                //            else if (HasCtorWithSingleParam(property, innerProperty))
-                //            {
-                //                WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
-                //                WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
-                //            }
-                //            else
-                //            {
-                //                throw new InvalidOperationException($"Unsupported parameter access combination for {schema.Type.Name}, Property {property.Declaration.Name}, ChildProperty {innerProperty.Declaration.Name}");
-                //            }
-                //        }
-                //        else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
-                //        {
-                //            WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
-                //            if (HasDefaultPublicCtor(property))
-                //            {
-                //                WriteSetWithNullCheck(writer, property, childPropertyName, isOverridenValueType);
-                //            }
-                //            else if (HasCtorWithSingleParam(property, innerProperty))
-                //            {
-                //                WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
-                //            }
-                //            else
-                //            {
-                //                throw new InvalidOperationException($"Unsupported parameter access combination for {schema.Type.Name}, Property {property.Declaration.Name}, ChildProperty {innerProperty.Declaration.Name}");
-                //            }
-                //        }
-                //        else
-                //        {
-                //            nullable = property.IsReadOnly ? "?" : String.Empty;
-                //            writer.Line($"get => {property.Declaration.Name:D}{nullable}.{childPropertyName};");
-                //        }
-                //    }
-                //    writer.Line();
-                //}
-                //else
-                //{
                 WriteProperty(writer, property);
-                //}
             }
+        }
+
+        private static bool AllCtorsContainMyProperty(ObjectType enclosingType, ObjectTypeProperty property)
+        {
+            foreach (var ctor in enclosingType.Constructors)
+            {
+                if (!ctor.Signature.Parameters.Any(p => p.Name == property.Declaration.Name.Camelize() && p.Type.Equals(property.Declaration.Type)))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
+        {
+            writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+            if (property is FlattenedObjectTypeProperty flattenedProperty)
+            {
+                WriteFlattenedProperty(writer, flattenedProperty);
+            }
+            else
+            {
+                WriteNormalProperty(writer, property);
+            }
+
+            writer.Line();
         }
 
         private static void WriteFlattenedProperty(CodeWriter writer, FlattenedObjectTypeProperty flattenedProperty)
@@ -252,32 +214,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"get => {property.UnderlyingProperty.Declaration.Name}")
                 .AppendRawIf("?", property.IsUnderlyingPropertyNullable)
                 .Line($".{property.ChildPropertyName};");
-        }
-
-        private static bool AllCtorsContainMyProperty(ObjectType enclosingType, ObjectTypeProperty property)
-        {
-            foreach (var ctor in enclosingType.Constructors)
-            {
-                if (!ctor.Signature.Parameters.Any(p => p.Name == property.Declaration.Name.Camelize() && p.Type.Equals(property.Declaration.Type)))
-                    return false;
-            }
-
-            return true;
-        }
-
-        private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
-        {
-            writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
-            if (property is FlattenedObjectTypeProperty flattenedProperty)
-            {
-                WriteFlattenedProperty(writer, flattenedProperty);
-            }
-            else
-            {
-                WriteNormalProperty(writer, property);
-            }
-
-            writer.Line();
         }
 
         private static void WriteNormalProperty(CodeWriter writer, ObjectTypeProperty property)
