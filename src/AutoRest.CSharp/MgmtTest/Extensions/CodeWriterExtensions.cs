@@ -242,6 +242,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, AllSchemaTypes? schemaType) => type switch
         {
+            _ when schemaType is AllSchemaTypes.Number or AllSchemaTypes.Integer => writer.AppendRaw(value),
             _ when schemaType == AllSchemaTypes.Duration => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
             _ when IsPrimitiveType(type) => writer.AppendRaw(value),
             _ when IsNewInstanceInitializedStringLikeType(type) => writer.Append($"new {type}({value:L})"),
@@ -278,8 +279,31 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer.AppendRaw("default");
         }
 
+        private static ObjectType GetActualImplementation(ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
+        {
+            var discriminator = objectType.Discriminator;
+            // check if this has a discriminator
+            if (discriminator == null)
+                return objectType;
+            var discriminatorPropertyName = discriminator.SerializedName;
+            // get value of this in the valueDict and we should always has a discriminator value in the example
+            if (!valueDict.TryGetValue(discriminatorPropertyName, out var exampleValue) || exampleValue.RawValue == null)
+            {
+                throw new InvalidOperationException($"Attempting to get the discriminator value for property `{discriminatorPropertyName}` on object type {objectType.Type.Name} but got none or non-primitive type");
+            }
+            // the discriminator should always be a primitive type
+            var actualDiscriminatorValue = exampleValue.RawValue;
+            var implementation = discriminator.Implementations.FirstOrDefault(info => info.Key.Equals(actualDiscriminatorValue));
+            if (implementation == null)
+                throw new InvalidOperationException($"Cannot find an implementation corresponding to the discriminator value {actualDiscriminatorValue} for object model type {objectType.Type.Name}");
+
+            return (ObjectType)implementation.Type.Implementation;
+        }
+
         private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
         {
+            // need to get the actual ObjectType if this type has a discrinimator
+            objectType = GetActualImplementation(objectType, valueDict);
             // get all the properties on this type, including the properties from its base type
             var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
             var constructor = objectType.InitializationConstructor;
@@ -393,7 +417,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         }
 
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
-            => TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly;
+            => property.Declaration.Accessibility == "public" && (TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
 
         private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, string value)
         {

@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace header_LowLevel
 {
-    // Data plane generated client. The Header service client.
+    // Data plane generated client.
     /// <summary> The Header service client. </summary>
     public partial class HeaderClient
     {

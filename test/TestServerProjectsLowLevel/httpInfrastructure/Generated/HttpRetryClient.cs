@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The HttpRetry service client.
+    // Data plane generated client.
     /// <summary> The HttpRetry service client. </summary>
     public partial class HttpRetryClient
     {

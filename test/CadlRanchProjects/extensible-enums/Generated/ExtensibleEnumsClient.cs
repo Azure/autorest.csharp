@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace ExtensibleEnums
 {
-    // Data plane generated client. The ExtensibleEnums service client.
+    // Data plane generated client.
     /// <summary> The ExtensibleEnums service client. </summary>
     public partial class ExtensibleEnumsClient
     {

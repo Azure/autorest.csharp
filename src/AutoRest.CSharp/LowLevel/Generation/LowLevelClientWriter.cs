@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteDPGIdentificationComment()
         {
-            writer.Line($"// Data plane generated {(client.IsSubClient ? "sub-client" : "client")}. {client.Description}");
+            writer.Line($"// Data plane generated {(client.IsSubClient ? "sub-client" : "client")}.");
         }
 
         private void WriteClientFields()
