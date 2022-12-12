@@ -122,13 +122,14 @@ stages:
             artifact: CoverageReport
           - task: AzureCLI@2
             displayName: 'Upload to Cadl Ranch Coverage Report'
-            condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
+            # condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
             inputs:
               azureSubscription: "Azure SDK Playground"
               scriptType: "bash"
               scriptLocation: "inlineScript"
               inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName cadlranchcoverage --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              addSpnToEnvironment: true
       - template: smoke-test.yml
         parameters:
           name: SmokeTest_A_C
