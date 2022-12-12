@@ -19,10 +19,12 @@ namespace AutoRest.CSharp.Input.Source
         private readonly INamedTypeSymbol _clientAttribute;
         private readonly INamedTypeSymbol _schemaMemberNameAttribute;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, IMethodSymbol> _methodMap = new Dictionary<string, IMethodSymbol>(StringComparer.OrdinalIgnoreCase);
 
-        public SourceInputModel(Compilation compilation)
+        public SourceInputModel(Compilation compilation, CompilationInput? existingCompilation = null)
         {
             _compilation = compilation;
+
             _schemaMemberNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberAttribute).FullName!)!;
             _typeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenTypeAttribute).FullName!)!;
             _modelAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenModelAttribute).FullName!)!;
@@ -40,6 +42,36 @@ namespace AutoRest.CSharp.Input.Source
                     }
                 }
             }
+
+            if (existingCompilation != null)
+            {
+                foreach (IModuleSymbol module in existingCompilation.Compilation.Assembly.Modules)
+                {
+                    foreach (var type in GetSymbols(module.GlobalNamespace))
+                    {
+                        if (type is INamedTypeSymbol typeSymbol)
+                        {
+                            if (existingCompilation.typeFilter != null && !existingCompilation.typeFilter(typeSymbol))
+                            {
+                                continue;
+                            }
+
+                            foreach (var member in typeSymbol.GetMembers())
+                            {
+                                if (member is IMethodSymbol methodSymbol)
+                                {
+                                    if (existingCompilation.methodFilter != null && !existingCompilation.methodFilter(methodSymbol))
+                                    {
+                                        continue;
+                                    }
+
+                                    _methodMap.Add(member.Name, methodSymbol);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public IReadOnlyList<string>? GetServiceVersionOverrides()
@@ -54,6 +86,12 @@ namespace AutoRest.CSharp.Input.Source
         public ModelTypeMapping CreateForModel(INamedTypeSymbol? symbol)
         {
             return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, symbol);
+        }
+
+        public IMethodSymbol? FindForMethod(string name)
+        {
+            _methodMap.TryGetValue(name, out var method);
+            return method;
         }
 
         public INamedTypeSymbol? FindForType(string ns, string name, bool includeArmCore = false)

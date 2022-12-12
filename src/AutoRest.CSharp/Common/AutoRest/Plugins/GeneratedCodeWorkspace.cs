@@ -177,6 +177,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return new GeneratedCodeWorkspace(generatedCodeProject);
         }
 
+        public static GeneratedCodeWorkspace CreateExistingCodeProject(string outputDirectory, Func<string, bool>? skipPredicate = null)
+        {
+            var workspace = new AdhocWorkspace();
+            Project project = workspace.AddProject("ExistingCode", LanguageNames.CSharp);
+
+            if (Path.IsPathRooted(outputDirectory))
+            {
+                outputDirectory = Path.GetFullPath(outputDirectory);
+                project = AddDirectory(project, outputDirectory, skipPredicate);
+            }
+
+            return new GeneratedCodeWorkspace(project);
+        }
+
         private static Project CreateGeneratedCodeProject()
         {
             var workspace = new AdhocWorkspace();

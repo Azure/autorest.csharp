@@ -62,12 +62,6 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
 
     if (!$fast) 
     {
-        #clean up
-        if (Test-Path $outputPath/Generated/*) 
-        {
-            Remove-Item $outputPath/Generated/* -Recurse
-        }
-        
         # emit cadl json
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath

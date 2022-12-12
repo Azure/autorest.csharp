@@ -24,6 +24,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx\\Generated"
     },
+    "ADP-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ADP-Cadl\\Generated"
+    },
     "ApiVersion": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion\\Generated"
@@ -199,6 +203,14 @@
     "constants": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
+    },
+    "ConvenienceInitial-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConvenienceInitial-Cadl\\Generated"
+    },
+    "ConvenienceUpdate-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConvenienceUpdate-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\ConvenienceInitial-Cadl\\Generated"
     },
     "custom-baseUrl": {
       "commandName": "Project",

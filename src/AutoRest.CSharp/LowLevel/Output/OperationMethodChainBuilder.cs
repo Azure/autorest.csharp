@@ -18,6 +18,7 @@ using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Input.Configuration;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -34,7 +35,9 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string _clientName;
         private readonly ClientFields _fields;
         private readonly TypeFactory _typeFactory;
+        private readonly SourceInputModel? _sourceInputModel;
         private readonly List<ParameterChain> _orderedParameters;
+        private readonly ReturnTypeChain _returnType;
         private readonly List<RequestPartSource> _requestParts;
         private readonly RestClientMethod _restClientMethod;
 
@@ -44,15 +47,17 @@ namespace AutoRest.CSharp.Output.Models
 
         public InputOperation Operation { get; }
 
-        public OperationMethodChainBuilder(InputOperation operation, string clientName, ClientFields fields, TypeFactory typeFactory)
+        public OperationMethodChainBuilder(InputOperation operation, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             _clientName = clientName;
             _fields = fields;
             _typeFactory = typeFactory;
+            _sourceInputModel = sourceInputModel;
             _orderedParameters = new List<ParameterChain>();
             _requestParts = new List<RequestPartSource>();
 
             Operation = operation;
+            _returnType = BuildReturnTypes();
             BuildParameters();
             _restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, _orderedParameters.Select(p => p.CreateMessage).WhereNotNull().ToArray(), _requestParts, _protocolBodyParameter, _typeFactory);
         }
@@ -79,10 +84,9 @@ namespace AutoRest.CSharp.Output.Models
 
         public LowLevelClientMethod BuildOperationMethodChain()
         {
-            var returnTypeChain = BuildReturnTypes();
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
-            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Protocol, null, protocolMethodParameters);
-            var convenienceMethod = ShouldConvenienceMethodGenerated(returnTypeChain) ? BuildConvenienceMethod(returnTypeChain) : null;
+            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, _returnType.Protocol, null, protocolMethodParameters);
+            var convenienceMethod = ShouldConvenienceMethodGenerated() ? BuildConvenienceMethod() : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
@@ -91,11 +95,26 @@ namespace AutoRest.CSharp.Output.Models
             return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
         }
 
-        private bool ShouldConvenienceMethodGenerated(ReturnTypeChain returnTypeChain)
+        private bool ShouldConvenienceMethodGenerated()
         {
             return Operation.GenerateConvenienceMethod
                 && (_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
-                || !returnTypeChain.Convenience.Equals(returnTypeChain.Protocol));
+                || !_returnType.Convenience.Equals(_returnType.Protocol));
+        }
+
+        private bool ShouldOverloadConvenienceMethod()
+        {
+            if (!ShouldConvenienceMethodGenerated() || _sourceInputModel == null)
+            {
+                return false;
+            }
+            var existingMethod = _sourceInputModel.FindForMethod(Operation.Name.ToCleanName());
+            if (existingMethod == null || existingMethod.Parameters.Length < 1 || existingMethod.Parameters.Last().IsOptional == false)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private bool IsParameterTypeSame(Parameter? first, Parameter? second)
@@ -167,9 +186,9 @@ namespace AutoRest.CSharp.Output.Models
             return new ReturnTypeChain(typeof(Response), typeof(Response), null);
         }
 
-        private ConvenienceMethod BuildConvenienceMethod(ReturnTypeChain returnTypeChain)
+        private ConvenienceMethod BuildConvenienceMethod()
         {
-            bool needNameChange = _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));
+            bool needNameChange = !ShouldOverloadConvenienceMethod() && _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));
             string name = _restClientMethod.Name;
             if (needNameChange)
             {
@@ -182,9 +201,9 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(p => (p.Protocol!, p.Convenience))
                 .ToArray();
 
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameters);
+            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, _returnType.Convenience, null, parameters);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
+            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, diagnostic);
         }
 
         private void BuildParameters()
@@ -338,7 +357,10 @@ namespace AutoRest.CSharp.Output.Models
 
         public void AddRequestContext()
         {
-            _orderedParameters.Add(new ParameterChain(KnownParameters.CancellationTokenParameter, KnownParameters.RequestContext, KnownParameters.RequestContext));
+            _orderedParameters.Add(new ParameterChain(
+                KnownParameters.CancellationTokenParameter,
+                ShouldOverloadConvenienceMethod() ? KnownParameters.RequestContextRequired : KnownParameters.RequestContext,
+                KnownParameters.RequestContext));
         }
 
         private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)

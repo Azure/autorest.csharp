@@ -19,7 +19,7 @@ $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http'
-$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option @azure-tools/cadl-csharp.clear-output-folder=true'
+$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true'
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -198,7 +198,12 @@ if (!($Exclude -contains "TestProjects"))
             continue
         }
         if ($testName.EndsWith("Cadl")) {
-            Add-Cadl $testName $directory
+            if ($testName -eq "ConvenienceUpdate-Cadl") {
+                Add-Cadl $testName $directory "" "--option @azure-tools/cadl-csharp.clear-output-folder=true --option @azure-tools/cadl-csharp.existing-project-folder=$(Convert-Path $(Join-Path $directory ".." "ConvenienceInitial-Cadl" "Generated"))"
+            }
+            else {
+                Add-Cadl $testName $directory
+            }
         } else {
             if (Test-Path $readmeConfigurationPath)
             {
@@ -318,6 +323,10 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     if ($key -eq "TypeSchemaMapping")
     {
         $outputPath = Join-Path $definition.output "SomeFolder" "Generated"
+    }
+    elseif ($key -eq "ConvenienceUpdate-Cadl")
+    {
+        $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." "ConvenienceInitial-Cadl" "Generated"))"
     }
     $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 

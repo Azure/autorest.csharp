@@ -11,6 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -56,7 +57,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
-            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
+            var existingProject = GeneratedCodeWorkspace.CreateExistingCodeProject(Configuration.ExistingProjectFolder);
+            var existingCompilation = new CompilationInput(
+                await existingProject.GetCompilationAsync(),
+                type => type.Name.EndsWith("Client"),
+                method => method.Parameters.Length > 0 && method.Parameters.Last().Name == "context");
+            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), existingCompilation);
             await LowLevelTarget.ExecuteAsync(project, rootNamespace, sourceInputModel, true);
             return project;
         }

@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
 
             var configurationPath = options.ConfigurationPath ?? Path.Combine(outputPath, "Configuration.json");
-            LoadConfiguration(projectPath, outputPath, File.ReadAllText(configurationPath));
+            LoadConfiguration(projectPath, outputPath, options.ExistingProjectFolder, File.ReadAllText(configurationPath));
 
             var codeModelInputPath = Path.Combine(outputPath, "CodeModel.yaml");
             var cadlInputFile = Path.Combine(outputPath, "cadl.json");
@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             return null;
         }
 
-        internal static void LoadConfiguration(string? projectPath, string outputPath, string json)
+        internal static void LoadConfiguration(string? projectPath, string outputPath, string? existingProjectFolder, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
@@ -226,6 +226,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
+                existingProjectFolder,
                 protocolMethods,
                 suppressAbstractBaseClasses,
                 MgmtConfiguration.LoadConfiguration(root)

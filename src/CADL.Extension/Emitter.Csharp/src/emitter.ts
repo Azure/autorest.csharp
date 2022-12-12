@@ -103,6 +103,7 @@ export interface NetEmitterOptions {
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
+    "existing-project-folder"?: string;
 }
 
 const defaultOptions = {
@@ -133,7 +134,8 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         csharpGeneratorPath: { type: "string", nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
         "save-inputs": { type: "boolean", nullable: true },
-        "model-namespace": { type: "boolean", nullable: true }
+        "model-namespace": { type: "boolean", nullable: true },
+        "existing-project-folder": {type: "string", nullable: true},
     },
     required: []
 };
@@ -170,7 +172,8 @@ export async function $onEmit(
         csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
         "clear-output-folder": resolvedOptions["clear-output-folder"],
         "save-inputs": resolvedOptions["save-inputs"],
-        "model-namespace": resolvedOptions["model-namespace"]
+        "model-namespace": resolvedOptions["model-namespace"],
+        "existing-project-folder": resolvedOptions["existing-project-folder"],
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -238,9 +241,12 @@ export async function $onEmit(
                 const newProjectOption = options["new-project"]
                     ? "--new-project"
                     : "";
+                const existingProjectOption = options["existing-project-folder"]
+                    ? `--existing-project-folder ${options["existing-project-folder"]}`
+                    : "";
                 const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath
-                )} --project-path ${outputFolder} ${newProjectOption}`;
+                )} --project-path ${outputFolder} ${newProjectOption} ${existingProjectOption}`;
                 console.info(command);
 
                 try {
