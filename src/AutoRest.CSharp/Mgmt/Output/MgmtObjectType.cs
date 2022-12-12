@@ -86,38 +86,22 @@ namespace AutoRest.CSharp.Mgmt.Output
             return objType switch
             {
                 SystemObjectType systemObjectType => HandleSystemObjectType(systemObjectType),
-                MgmtObjectType mgmtObjectType => HandleMgmtObjectType(mgmtObjectType),
+                SchemaObjectType mgmtObjectType => HandleMgmtObjectType(mgmtObjectType),
                 _ => throw new InvalidOperationException($"Unhandled case {objType.GetType()} for property {property.Declaration.Type} {property.Declaration.Name}")
             };
         }
 
-        private static bool HandleMgmtObjectType(MgmtObjectType objType)
+        private static bool HandleMgmtObjectType(SchemaObjectType objType)
         {
             // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
-            var properties = objType.MyProperties.Where(property => property is not FlattenedObjectTypeProperty).ToArray();
+            var properties = objType.GetCombinedSchemas().SelectMany(obj => obj.Properties).ToArray();
             return properties.Length == 1 && objType.Discriminator == null;
         }
 
         private static bool HandleSystemObjectType(SystemObjectType objType)
         {
-            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).Where(property => property is not FlattenedObjectTypeProperty).ToArray();
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).ToArray();
             return properties.Length == 1 && objType.Discriminator == null;
-        }
-
-        public static bool IsSinglePropertyObject(ObjectTypeProperty property, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
-        {
-            innerProperty = null;
-
-            if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
-                return false;
-
-            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).Where(property => property is not FlattenedObjectTypeProperty).ToArray();
-            bool isSingleProperty = properties.Length == 1 && objType.Discriminator == null;
-
-            if (isSingleProperty)
-                innerProperty = properties.First();
-
-            return isSingleProperty;
         }
 
         private IEnumerable<ObjectTypeProperty> BuildMyProperties()

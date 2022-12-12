@@ -3,12 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -17,7 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         public static FlattenedObjectTypeProperty CreateFrom(ObjectTypeProperty property)
         {
-            var hierarchyStack = GetHeirarchyStack(property);
+            var hierarchyStack = GetHierarchyStack(property);
             // we can only get in this method when the property has a single property type, therefore the hierarchy stack here is guaranteed to have at least two values
             var innerProperty = hierarchyStack.Pop();
             var immediateParentProperty = hierarchyStack.Pop();
@@ -106,22 +104,41 @@ namespace AutoRest.CSharp.Output.Models.Types
             return false;
         }
 
-        private static Stack<ObjectTypeProperty> GetHeirarchyStack(ObjectTypeProperty property)
+        private static Stack<ObjectTypeProperty> GetHierarchyStack(ObjectTypeProperty property)
         {
-            var heirarchyStack = new Stack<ObjectTypeProperty>();
-            heirarchyStack.Push(property);
-            BuildHeirarchy(property, heirarchyStack);
-            return heirarchyStack;
+            var hierarchyStack = new Stack<ObjectTypeProperty>();
+            var visited = new HashSet<ObjectTypeProperty>();
+            hierarchyStack.Push(property);
+            visited.Add(property);
+            BuildHeirarchy(property, hierarchyStack, visited);
+            return hierarchyStack;
         }
 
-        private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
+        private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack, HashSet<ObjectTypeProperty> visited)
         {
-            //if we get back the same property exit early since this means we have a single property type which references itself
-            if (MgmtObjectType.IsSinglePropertyObject(property, out var childProp) && !property.Equals(childProp))
+            //if we get back the same property exit early since this means we are getting into a loop of references
+            if (IsSinglePropertyObject(property, out var childProp) && !visited.Contains(childProp))
             {
                 heirarchyStack.Push(childProp);
-                BuildHeirarchy(childProp, heirarchyStack);
+                visited.Add(childProp);
+                BuildHeirarchy(childProp, heirarchyStack, visited);
             }
+        }
+
+        public static bool IsSinglePropertyObject(ObjectTypeProperty property, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
+        {
+            innerProperty = null;
+
+            if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
+                return false;
+
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).Where(property => property is not FlattenedObjectTypeProperty).ToArray();
+            bool isSingleProperty = properties.Length == 1 && objType.Discriminator == null;
+
+            if (isSingleProperty)
+                innerProperty = properties.First();
+
+            return isSingleProperty;
         }
 
         internal static string GetCombinedPropertyName(ObjectTypeProperty innerProperty, ObjectTypeProperty immediateParentProperty)

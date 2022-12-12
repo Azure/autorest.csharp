@@ -501,7 +501,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
-        protected IEnumerable<ObjectSchema> GetCombinedSchemas()
+        protected internal IEnumerable<ObjectSchema> GetCombinedSchemas()
         {
             yield return ObjectSchema;
 
