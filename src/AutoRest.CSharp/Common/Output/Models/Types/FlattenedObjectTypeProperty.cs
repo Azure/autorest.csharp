@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -14,12 +17,12 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         public static FlattenedObjectTypeProperty CreateFrom(ObjectTypeProperty property)
         {
-            var hierarchyStack = property.GetHeirarchyStack();
+            var hierarchyStack = GetHeirarchyStack(property);
             // we can only get in this method when the property has a single property type, therefore the hierarchy stack here is guaranteed to have at least two values
             var innerProperty = hierarchyStack.Pop();
             var immediateParentProperty = hierarchyStack.Pop();
 
-            var myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentProperty);
+            var myPropertyName = GetCombinedPropertyName(innerProperty, immediateParentProperty);
             var childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
 
             var propertyType = innerProperty.Declaration.Type;
@@ -33,19 +36,22 @@ namespace AutoRest.CSharp.Output.Models.Types
             // determines whether this property should has a setter
             var (isReadOnly, includeGetterNullCheck, includeSetterNullCheck) = GetFlags(property, innerProperty);
 
-            return new FlattenedObjectTypeProperty(declaration, innerProperty.ParameterDescription, property, isReadOnly, includeGetterNullCheck, includeSetterNullCheck, childPropertyName, isOverriddenValueType);
+            return new FlattenedObjectTypeProperty(declaration, innerProperty.ParameterDescription, property, hierarchyStack, isReadOnly, includeGetterNullCheck, includeSetterNullCheck, childPropertyName, isOverriddenValueType);
         }
 
         // The flattened object type property does not participate in the serialization or deserialization process, therefore we pass in null for SchemaProperty.
-        private FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false) : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
+        private FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, Stack<ObjectTypeProperty> hierarchyStack, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false) : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
         {
             UnderlyingProperty = underlyingProperty;
+            HierarchyStack = hierarchyStack;
             IncludeGetterNullCheck = includeGetterNullCheck;
             IncludeSetterNullCheck = includeSetterNullCheck;
             IsUnderlyingPropertyNullable = underlyingProperty.IsReadOnly;
             ChildPropertyName = childPropertyName;
             IsOverriddenValueType = isOverriddenValueType;
         }
+
+        public Stack<ObjectTypeProperty> HierarchyStack { get; }
 
         public ObjectTypeProperty UnderlyingProperty { get; }
 
@@ -63,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (!property.IsReadOnly && innerProperty.IsReadOnly)
             {
-                if (HasDefaultPublicCtor(property))
+                if (HasDefaultPublicCtor(property.Declaration.Type))
                 {
                     if (innerProperty.Declaration.Type.Arguments.Length > 0)
                         return (true, true, false);
@@ -77,7 +83,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
             {
-                if (HasDefaultPublicCtor(property))
+                if (HasDefaultPublicCtor(property.Declaration.Type))
                     return (false, false, true);
                 else
                     return (false, false, false);
@@ -86,40 +92,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return (true, null, false);
         }
 
-        internal static bool HasCtorWithSingleParam(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
+        private static bool HasDefaultPublicCtor(CSharpType type)
         {
-            var type = property.Declaration.Type;
-            if (type.IsFrameworkType)
-                return false;
-
-            if (type.Implementation is not ObjectType objType)
-                return false;
-
-            foreach (var ctor in objType.Constructors)
-            {
-                if (ctor.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                    ctor.Signature.Parameters.Count == 1)
-                {
-                    var paramType = ctor.Signature.Parameters[0].Type;
-                    var propertyType = innerProperty.Declaration.Type;
-                    if (paramType.Arguments.Length == 0 && paramType.Equals(propertyType))
-                        return true;
-
-                    if (paramType.Arguments.Length == 1 && propertyType.Arguments.Length == 1 && paramType.Arguments[0].Equals(propertyType.Arguments[0]))
-                        return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static bool HasDefaultPublicCtor(ObjectTypeProperty objectTypeProperty)
-        {
-            var type = objectTypeProperty.Declaration.Type;
-            if (type.IsFrameworkType)
-                return true;
-
-            if (type.Implementation is not ObjectType objType)
+            if (!type.TryCast<ObjectType>(out var objType))
                 return true;
 
             foreach (var ctor in objType.Constructors)
@@ -129,6 +104,94 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return false;
+        }
+
+        private static Stack<ObjectTypeProperty> GetHeirarchyStack(ObjectTypeProperty property)
+        {
+            var heirarchyStack = new Stack<ObjectTypeProperty>();
+            heirarchyStack.Push(property);
+            BuildHeirarchy(property, heirarchyStack);
+            return heirarchyStack;
+        }
+
+        private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
+        {
+            //if we get back the same property exit early since this means we have a single property type which references itself
+            if (MgmtObjectType.IsSinglePropertyObject(property, out var childProp) && !property.Equals(childProp))
+            {
+                heirarchyStack.Push(childProp);
+                BuildHeirarchy(childProp, heirarchyStack);
+            }
+        }
+
+        internal static string GetCombinedPropertyName(ObjectTypeProperty innerProperty, ObjectTypeProperty immediateParentProperty)
+        {
+            var immediateParentPropertyName = GetPropertyName(immediateParentProperty.Declaration);
+
+            if (innerProperty.Declaration.Type.Equals(typeof(bool)) || innerProperty.Declaration.Type.Equals(typeof(bool?)))
+            {
+                return innerProperty.Declaration.Name.Equals("Enabled", StringComparison.Ordinal) ? $"{immediateParentPropertyName}{innerProperty.Declaration.Name}" : innerProperty.Declaration.Name;
+            }
+
+            if (innerProperty.Declaration.Name.Equals("Id", StringComparison.Ordinal))
+                return $"{immediateParentPropertyName}{innerProperty.Declaration.Name}";
+
+            if (immediateParentPropertyName.EndsWith(innerProperty.Declaration.Name, StringComparison.Ordinal))
+                return immediateParentPropertyName;
+
+            var parentWords = immediateParentPropertyName.SplitByCamelCase();
+            if (immediateParentPropertyName.EndsWith("Profile", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Policy", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Configuration", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Properties", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Settings", StringComparison.Ordinal))
+            {
+                parentWords = parentWords.Take(parentWords.Count() - 1);
+            }
+
+            var parentWordArray = parentWords.ToArray();
+            var parentWordsHash = new HashSet<string>(parentWordArray);
+            var nameWords = innerProperty.Declaration.Name.SplitByCamelCase().ToArray();
+            var lastWord = string.Empty;
+            for (int i = 0; i < nameWords.Length; i++)
+            {
+                var word = nameWords[i];
+                lastWord = word;
+                if (parentWordsHash.Contains(word))
+                {
+                    if (i == nameWords.Length - 2 && parentWordArray.Length >= 2 && word.Equals(parentWordArray[parentWordArray.Length - 2], StringComparison.Ordinal))
+                    {
+                        parentWords = parentWords.Take(parentWords.Count() - 2);
+                        break;
+                    }
+                    {
+                        return innerProperty.Declaration.Name;
+                    }
+                }
+
+                //need to depluralize the last word and check
+                if (i == nameWords.Length - 1 && parentWordsHash.Contains(lastWord.ToSingular(false)))
+                    return innerProperty.Declaration.Name;
+            }
+
+            immediateParentPropertyName = string.Join("", parentWords);
+
+            return $"{immediateParentPropertyName}{innerProperty.Declaration.Name}";
+        }
+
+        internal static string GetPropertyName(MemberDeclarationOptions property)
+        {
+            const string properties = "Properties";
+            if (property.Name.Equals(properties, StringComparison.Ordinal))
+            {
+                string typeName = property.Type.Name;
+                int index = typeName.IndexOf(properties);
+                if (index > -1 && index + properties.Length == typeName.Length)
+                    return typeName.Substring(0, index);
+
+                return typeName;
+            }
+            return property.Name;
         }
     }
 }

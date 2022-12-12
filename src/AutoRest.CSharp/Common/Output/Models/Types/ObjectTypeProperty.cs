@@ -107,78 +107,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType ValueType { get; }
         public bool IsReadOnly { get; }
 
-        internal bool IsDiscriminator() => SchemaProperty?.IsDiscriminator is true || InputModelProperty?.IsDiscriminator is true;
-
-        internal string GetCombinedPropertyName(ObjectTypeProperty immediateParentProperty)
-        {
-            var immediateParentPropertyName = GetPropertyName(immediateParentProperty.Declaration);
-
-            if (Declaration.Type.Equals(typeof(bool)) || Declaration.Type.Equals(typeof(bool?)))
-            {
-                return Declaration.Name.Equals("Enabled", StringComparison.Ordinal) ? $"{immediateParentPropertyName}{Declaration.Name}" : Declaration.Name;
-            }
-
-            if (Declaration.Name.Equals("Id", StringComparison.Ordinal))
-                return $"{immediateParentPropertyName}{Declaration.Name}";
-
-            if (immediateParentPropertyName.EndsWith(Declaration.Name, StringComparison.Ordinal))
-                return immediateParentPropertyName;
-
-            var parentWords = immediateParentPropertyName.SplitByCamelCase();
-            if (immediateParentPropertyName.EndsWith("Profile", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Policy", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Configuration", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Properties", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Settings", StringComparison.Ordinal))
-            {
-                parentWords = parentWords.Take(parentWords.Count() - 1);
-            }
-
-            var parentWordArray = parentWords.ToArray();
-            var parentWordsHash = new HashSet<string>(parentWordArray);
-            var nameWords = Declaration.Name.SplitByCamelCase().ToArray();
-            var lastWord = string.Empty;
-            for (int i = 0; i < nameWords.Length; i++)
-            {
-                var word = nameWords[i];
-                lastWord = word;
-                if (parentWordsHash.Contains(word))
-                {
-                    if (i == nameWords.Length - 2 && parentWordArray.Length >= 2 && word.Equals(parentWordArray[parentWordArray.Length - 2], StringComparison.Ordinal))
-                    {
-                        parentWords = parentWords.Take(parentWords.Count() - 2);
-                        break;
-                    }
-                    {
-                        return Declaration.Name;
-                    }
-                }
-
-                //need to depluralize the last word and check
-                if (i == nameWords.Length - 1 && parentWordsHash.Contains(lastWord.ToSingular(false)))
-                    return Declaration.Name;
-            }
-
-            immediateParentPropertyName = string.Join("", parentWords);
-
-            return $"{immediateParentPropertyName}{Declaration.Name}";
-        }
-
-        internal static string GetPropertyName(MemberDeclarationOptions property)
-        {
-            const string properties = "Properties";
-            if (property.Name.Equals(properties, StringComparison.Ordinal))
-            {
-                string typeName = property.Type.Name;
-                int index = typeName.IndexOf(properties);
-                if (index > -1 && index + properties.Length == typeName.Length)
-                    return typeName.Substring(0, index);
-
-                return typeName;
-            }
-            return property.Name;
-        }
-
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {
             var extraDescription = string.Empty;
@@ -202,24 +130,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
             return extraDescription;
-        }
-
-        public Stack<ObjectTypeProperty> GetHeirarchyStack()
-        {
-            var heirarchyStack = new Stack<ObjectTypeProperty>();
-            heirarchyStack.Push(this);
-            BuildHeirarchy(this, heirarchyStack);
-            return heirarchyStack;
-        }
-
-        private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
-        {
-            //if we get back the same property exit early since this means we have a single property type which references itself
-            if (MgmtObjectType.IsSinglePropertyObject(property, out var childProp) && !property.Equals(childProp))
-            {
-                heirarchyStack.Push(childProp);
-                BuildHeirarchy(childProp, heirarchyStack);
-            }
         }
 
         private static string CreateExtraPropertyDiscriminatorSummary(CSharpType valueType)

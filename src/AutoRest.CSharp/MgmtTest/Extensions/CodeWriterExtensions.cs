@@ -353,7 +353,6 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (!valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
                     continue; // skip the property that does not have a value
 
-                var hierarchyStack = property.GetHeirarchyStack();
                 // check if this property is safe-flattened
                 var flattenedProperty = property.FlattenedProperty;
                 if (flattenedProperty != null)
@@ -362,7 +361,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                         continue;
 
                     // get example value out of the dict
-                    exampleValue = UnwrapExampleValueFromSinglePropertySchema(exampleValue, hierarchyStack);
+                    exampleValue = UnwrapExampleValueFromSinglePropertySchema(exampleValue, flattenedProperty.HierarchyStack);
                     if (exampleValue == null)
                         continue;
 
