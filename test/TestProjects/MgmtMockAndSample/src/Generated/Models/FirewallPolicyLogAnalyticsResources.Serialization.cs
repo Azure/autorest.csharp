@@ -63,7 +63,7 @@ namespace MgmtMockAndSample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    defaultWorkspaceId = JsonSerializer.Deserialize<WritableSubResource>(property.Value.ToString());
+                    defaultWorkspaceId = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
             }

@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace BodyAndPath_LowLevel
 {
-    // Data plane generated client. The BodyAndPath service client.
+    // Data plane generated client.
     /// <summary> The BodyAndPath service client. </summary>
     public partial class BodyAndPathClient
     {

@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    // Data plane generated client. The Readonlyproperty service client.
+    // Data plane generated client.
     /// <summary> The Readonlyproperty service client. </summary>
     public partial class ReadonlypropertyClient
     {

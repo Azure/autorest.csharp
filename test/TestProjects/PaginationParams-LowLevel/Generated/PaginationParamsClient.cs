@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 
 namespace PaginationParams_LowLevel
 {
-    // Data plane generated client. The PaginationParams service client.
+    // Data plane generated client.
     /// <summary> The PaginationParams service client. </summary>
     public partial class PaginationParamsClient
     {

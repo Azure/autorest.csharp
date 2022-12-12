@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Parameters_LowLevel
 {
-    // Data plane generated client. The ParametersLowlevel service client.
+    // Data plane generated client.
     /// <summary> The ParametersLowlevel service client. </summary>
     public partial class ParametersLowlevelClient
     {

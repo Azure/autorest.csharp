@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_array_LowLevel
 {
-    // Data plane generated client. The Array service client.
+    // Data plane generated client.
     /// <summary> The Array service client. </summary>
     public partial class ArrayClient
     {

@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace security_aad_LowLevel
 {
-    // Data plane generated client. The AutorestSecurityAad service client.
+    // Data plane generated client.
     /// <summary> The AutorestSecurityAad service client. </summary>
     public partial class AutorestSecurityAadClient
     {
