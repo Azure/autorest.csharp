@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -23,11 +22,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
-            :this(declaration, parameterDescription, isReadOnly, schemaProperty, (schemaProperty is null ? false : schemaProperty.IsRequired), valueType, optionalViaNullability)
+            : this(declaration, parameterDescription, isReadOnly, schemaProperty, (schemaProperty is null ? false : schemaProperty.IsRequired), valueType, optionalViaNullability)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -38,14 +37,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             InputModelProperty = inputModelProperty;
             _baseParameterDescription = parameterDescription;
             Description = string.IsNullOrEmpty(parameterDescription) ? CreateDefaultPropertyDescription(Declaration.Name, IsReadOnly).ToString() : parameterDescription;
+            IsFlattenedProperty = isFlattenedProperty;
         }
 
-        public ObjectTypeProperty WithAccessibility(string accessibility)
+        public ObjectTypeProperty MarkFlatten()
         {
-            if (accessibility == Declaration.Accessibility)
-                return this;
-
-            var newDeclaration = new MemberDeclarationOptions(accessibility, Declaration.Name, Declaration.Type);
+            var newDeclaration = new MemberDeclarationOptions("internal", Declaration.Name, Declaration.Type);
 
             return new ObjectTypeProperty(
                 newDeclaration,
@@ -55,7 +52,22 @@ namespace AutoRest.CSharp.Output.Models.Types
                 IsRequired,
                 valueType: ValueType,
                 optionalViaNullability: OptionalViaNullability,
-                inputModelProperty: InputModelProperty);
+                inputModelProperty: InputModelProperty, true);
+        }
+
+        private bool IsFlattenedProperty { get; }
+
+        private FlattenedObjectTypeProperty? _flattenedProperty;
+        public FlattenedObjectTypeProperty? FlattenedProperty => EnsureFlattenedProperty();
+
+        private FlattenedObjectTypeProperty? EnsureFlattenedProperty()
+        {
+            if (IsFlattenedProperty && _flattenedProperty == null)
+            {
+                _flattenedProperty = FlattenedObjectTypeProperty.CreateFrom(this);
+            }
+
+            return _flattenedProperty;
         }
 
         public static FormattableString CreateDefaultPropertyDescription(string nameToUse, bool isReadOnly)

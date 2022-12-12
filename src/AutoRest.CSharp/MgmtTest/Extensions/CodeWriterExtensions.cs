@@ -355,31 +355,19 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
                 var hierarchyStack = property.GetHeirarchyStack();
                 // check if this property is safe-flattened
-                if (hierarchyStack.Count > 1)
+                var flattenedProperty = property.FlattenedProperty;
+                if (flattenedProperty != null)
                 {
+                    if (!IsPropertyAssignable(flattenedProperty))
+                        continue;
+
                     // get example value out of the dict
                     exampleValue = UnwrapExampleValueFromSinglePropertySchema(exampleValue, hierarchyStack);
                     if (exampleValue == null)
                         continue;
-                    // We could build a stack hierarchy here as well, and when we pop that, we only take the last result
-                    // in the meantime we pop the example value once at a time, so that in this way we could just assign the innerest property with the innerest example values of the objects
-                    var innerProperty = hierarchyStack.Pop();
-                    var immediateParentProperty = hierarchyStack.Pop();
-                    var myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentProperty);
-                    // we need to know if this property has a setter, code copied from ModelWriter.WriteProperties
-                    if (!property.IsReadOnly && innerProperty.IsReadOnly)
-                    {
-                        if (FlattenedObjectTypeProperty.HasCtorWithSingleParam(property, innerProperty))
-                        {
-                            // this branch has a setter
-                            propertiesToWrite.Add(myPropertyName, (innerProperty.Declaration.Type, exampleValue));
-                        }
-                    }
-                    else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
-                    {
-                        // this branch always has a setter
-                        propertiesToWrite.Add(myPropertyName, (innerProperty.Declaration.Type, exampleValue));
-                    }
+
+                    // this branch always has a setter
+                    propertiesToWrite.Add(flattenedProperty.Declaration.Name, (flattenedProperty.Declaration.Type, exampleValue));
                 }
                 else
                 {

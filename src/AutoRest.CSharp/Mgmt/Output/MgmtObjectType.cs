@@ -69,18 +69,39 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var propertyType = CreatePropertyType(property);
                     // check if the type of this property is "single property type"
-                    if (IsSinglePropertyObject(propertyType, out var innerProperty))
+                    if (IsSinglePropertyObject(propertyType))
                     {
-                        propertyType = propertyType.WithAccessibility("internal");
-                        yield return propertyType;
-                        yield return FlattenedObjectTypeProperty.CreateFrom(propertyType);
+                        propertyType = propertyType.MarkFlatten();
                     }
-                    else
-                    {
-                        yield return propertyType;
-                    }
+                    yield return propertyType;
                 }
             }
+        }
+
+        private static bool IsSinglePropertyObject(ObjectTypeProperty property)
+        {
+            if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
+                return false;
+
+            return objType switch
+            {
+                SystemObjectType systemObjectType => HandleSystemObjectType(systemObjectType),
+                MgmtObjectType mgmtObjectType => HandleMgmtObjectType(mgmtObjectType),
+                _ => throw new InvalidOperationException($"Unhandled case {objType.GetType()} for property {property.Declaration.Type} {property.Declaration.Name}")
+            };
+        }
+
+        private static bool HandleMgmtObjectType(MgmtObjectType objType)
+        {
+            // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
+            var properties = objType.MyProperties.Where(property => property is not FlattenedObjectTypeProperty).ToArray();
+            return properties.Length == 1 && objType.Discriminator == null;
+        }
+
+        private static bool HandleSystemObjectType(SystemObjectType objType)
+        {
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).Where(property => property is not FlattenedObjectTypeProperty).ToArray();
+            return properties.Length == 1 && objType.Discriminator == null;
         }
 
         public static bool IsSinglePropertyObject(ObjectTypeProperty property, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
@@ -90,33 +111,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
                 return false;
 
-            return objType switch
-            {
-                SystemObjectType systemObjectType => HandleSystemObjectType(systemObjectType, out innerProperty),
-                MgmtObjectType mgmtObjectType => HandleMgmtObjectType(mgmtObjectType, out innerProperty),
-                _ => throw new InvalidOperationException($"Unhandled case {objType.GetType()} for property {property.Declaration.Type} {property.Declaration.Name}")
-            };
-        }
-
-        private static bool HandleMgmtObjectType(MgmtObjectType objType, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
-        {
-            innerProperty = null;
-            // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
-            var properties = objType.MyProperties.Where(property => property is not FlattenedObjectTypeProperty).ToArray();
-            bool isSingleProperty = properties.Length == 1 && !properties.First().IsDiscriminator();
-
-            if (isSingleProperty)
-                innerProperty = properties.First();
-
-            return isSingleProperty;
-        }
-
-        private static bool HandleSystemObjectType(SystemObjectType objType, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
-        {
-            innerProperty = null;
-
             var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).Where(property => property is not FlattenedObjectTypeProperty).ToArray();
-            bool isSingleProperty = properties.Length == 1;
+            bool isSingleProperty = properties.Length == 1 && objType.Discriminator == null;
 
             if (isSingleProperty)
                 innerProperty = properties.First();
@@ -142,8 +138,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Length; i++)
                 {
                     var argType = objectTypeProperty.ValueType.Arguments[i];
-                    var typeToReplace = argType.IsFrameworkType ? null : argType.Implementation as MgmtObjectType;
-                    if (typeToReplace != null)
+                    if (argType.TryCast<MgmtObjectType>(out var typeToReplace))
                     {
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                         objectTypeProperty.ValueType.Arguments[i] = match ?? argType;

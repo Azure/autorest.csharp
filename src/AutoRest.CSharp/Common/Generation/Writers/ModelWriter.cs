@@ -85,6 +85,9 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach (var property in schema.Properties)
             {
                 WriteProperty(writer, property);
+
+                if (property.FlattenedProperty != null)
+                    WriteProperty(writer, property.FlattenedProperty);
             }
         }
 
