@@ -52,8 +52,13 @@ namespace MgmtSafeFlatten
         /// <summary> MyProp description. </summary>
         public string LayerTwoMyProp
         {
-            get;
-            set;
+            get => LayerOne is null ? default : LayerOne.LayerTwoMyProp;
+            set
+            {
+                if (LayerOne is null)
+                    LayerOne = new LayerOneSingle();
+                LayerOne.LayerTwoMyProp = value;
+            }
         }
 
         /// <summary>
@@ -67,8 +72,13 @@ namespace MgmtSafeFlatten
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier LayerOneConflictId
         {
-            get;
-            set;
+            get => LayerOneConflict is null ? default : LayerOneConflict.Id;
+            set
+            {
+                if (LayerOneConflict is null)
+                    LayerOneConflict = new WritableSubResource();
+                LayerOneConflict.Id = value;
+            }
         }
     }
 }
