@@ -53,16 +53,9 @@ namespace Azure.ResourceManager.Sample.Models
             get => HardwareProfile is null ? default : HardwareProfile.VmSize;
             set
             {
-                if (value.HasValue)
-                {
-                    if (HardwareProfile is null)
-                        HardwareProfile = new HardwareProfile();
-                    HardwareProfile.VmSize = value.Value;
-                }
-                else
-                {
-                    HardwareProfile = null;
-                }
+                if (HardwareProfile is null)
+                    HardwareProfile = new HardwareProfile();
+                HardwareProfile.VmSize = value;
             }
         }
 
@@ -85,16 +78,9 @@ namespace Azure.ResourceManager.Sample.Models
             get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
             set
             {
-                if (value.HasValue)
-                {
-                    if (AdditionalCapabilities is null)
-                        AdditionalCapabilities = new AdditionalCapabilities();
-                    AdditionalCapabilities.UltraSSDEnabled = value.Value;
-                }
-                else
-                {
-                    AdditionalCapabilities = null;
-                }
+                if (AdditionalCapabilities is null)
+                    AdditionalCapabilities = new AdditionalCapabilities();
+                AdditionalCapabilities.UltraSSDEnabled = value;
             }
         }
 
@@ -136,16 +122,9 @@ namespace Azure.ResourceManager.Sample.Models
             get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
             set
             {
-                if (value.HasValue)
-                {
-                    if (SecurityProfile is null)
-                        SecurityProfile = new SecurityProfile();
-                    SecurityProfile.EncryptionAtHost = value.Value;
-                }
-                else
-                {
-                    SecurityProfile = null;
-                }
+                if (SecurityProfile is null)
+                    SecurityProfile = new SecurityProfile();
+                SecurityProfile.EncryptionAtHost = value;
             }
         }
 
@@ -244,16 +223,9 @@ namespace Azure.ResourceManager.Sample.Models
             get => BillingProfile is null ? default : BillingProfile.MaxPrice;
             set
             {
-                if (value.HasValue)
-                {
-                    if (BillingProfile is null)
-                        BillingProfile = new BillingProfile();
-                    BillingProfile.MaxPrice = value.Value;
-                }
-                else
-                {
-                    BillingProfile = null;
-                }
+                if (BillingProfile is null)
+                    BillingProfile = new BillingProfile();
+                BillingProfile.MaxPrice = value;
             }
         }
 

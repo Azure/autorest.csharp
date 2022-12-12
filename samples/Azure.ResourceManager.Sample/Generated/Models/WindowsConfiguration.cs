@@ -91,16 +91,9 @@ namespace Azure.ResourceManager.Sample.Models
             get => PatchSettings is null ? default : PatchSettings.PatchMode;
             set
             {
-                if (value.HasValue)
-                {
-                    if (PatchSettings is null)
-                        PatchSettings = new PatchSettings();
-                    PatchSettings.PatchMode = value.Value;
-                }
-                else
-                {
-                    PatchSettings = null;
-                }
+                if (PatchSettings is null)
+                    PatchSettings = new PatchSettings();
+                PatchSettings.PatchMode = value;
             }
         }
 

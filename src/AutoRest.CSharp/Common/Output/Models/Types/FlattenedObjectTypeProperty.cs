@@ -33,17 +33,18 @@ namespace AutoRest.CSharp.Output.Models.Types
             // determines whether this property should has a setter
             var (isReadOnly, includeGetterNullCheck, includeSetterNullCheck) = GetFlags(property, innerProperty);
 
-            return new FlattenedObjectTypeProperty(declaration, innerProperty.ParameterDescription, property, isReadOnly, includeGetterNullCheck, includeSetterNullCheck, childPropertyName);
+            return new FlattenedObjectTypeProperty(declaration, innerProperty.ParameterDescription, property, isReadOnly, includeGetterNullCheck, includeSetterNullCheck, childPropertyName, isOverriddenValueType);
         }
 
         // The flattened object type property does not participate in the serialization or deserialization process, therefore we pass in null for SchemaProperty.
-        private FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, CSharpType? valueType = null, bool optionalViaNullability = false) : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
+        private FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false) : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
         {
             UnderlyingProperty = underlyingProperty;
             IncludeGetterNullCheck = includeGetterNullCheck;
             IncludeSetterNullCheck = includeSetterNullCheck;
             IsUnderlyingPropertyNullable = underlyingProperty.IsReadOnly;
             ChildPropertyName = childPropertyName;
+            IsOverriddenValueType = isOverriddenValueType;
         }
 
         public ObjectTypeProperty UnderlyingProperty { get; }
@@ -53,6 +54,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IncludeSetterNullCheck { get; }
 
         public bool IsUnderlyingPropertyNullable { get; }
+
+        public bool IsOverriddenValueType { get; }
 
         public string ChildPropertyName { get; }
 

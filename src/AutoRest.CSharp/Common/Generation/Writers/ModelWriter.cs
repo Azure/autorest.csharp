@@ -187,12 +187,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteSetWithNullCheck(CodeWriter writer, FlattenedObjectTypeProperty property)
         {
-            var type = property.Declaration.Type;
             var underlyingName = property.UnderlyingProperty.Declaration.Name;
             var underlyingType = property.UnderlyingProperty.Declaration.Type;
             using (writer.Scope($"set"))
             {
-                if (type.IsValueType && type.IsNullable)
+                if (property.IsOverriddenValueType)
                 {
                     using (writer.Scope($"if (value.HasValue)"))
                     {
@@ -216,10 +215,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteSetWithSingleParamCtor(CodeWriter writer, FlattenedObjectTypeProperty property)
         {
-            var propertyType = property.Declaration.Type;
             var underlyingName = property.UnderlyingProperty.Declaration.Name;
             var underlyingType = property.UnderlyingProperty.Declaration.Type;
-            if (propertyType.IsValueType && propertyType.IsNullable)
+            if (property.IsOverriddenValueType)
             {
                 using (writer.Scope($"set"))
                 {
