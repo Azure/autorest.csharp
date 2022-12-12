@@ -296,7 +296,6 @@ namespace MgmtMockAndSample
 {
 new FirewallPolicyNatRuleCollection()
 {
-ActionType = FirewallPolicyNatRuleCollectionActionType.Dnat,
 Rules =
 {
 new NatRule()
@@ -371,7 +370,6 @@ Priority = 100,
 {
 new FirewallPolicyFilterRuleCollection()
 {
-ActionType = FirewallPolicyFilterRuleCollectionActionType.Deny,
 Rules =
 {
 new NetworkRule()
@@ -441,7 +439,6 @@ Priority = 100,
 {
 new FirewallPolicyFilterRuleCollection()
 {
-ActionType = FirewallPolicyFilterRuleCollectionActionType.Deny,
 Rules =
 {
 new NetworkRule()
@@ -510,7 +507,6 @@ Name = "Example-Filter-Rule-Collection",
 {
 new FirewallPolicyFilterRuleCollection()
 {
-ActionType = FirewallPolicyFilterRuleCollectionActionType.Deny,
 Rules =
 {
 new ApplicationRule()

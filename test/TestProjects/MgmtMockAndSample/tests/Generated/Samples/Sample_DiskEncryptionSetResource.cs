@@ -121,10 +121,7 @@ namespace MgmtMockAndSample
 ["project"] = "Encryption",
 },
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
-                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion"))
-                {
-                    SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
-                },
+                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion")),
             };
             ArmOperation<DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(WaitUntil.Completed, patch);
             DiskEncryptionSetResource result = lro.Value;

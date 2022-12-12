@@ -122,8 +122,6 @@ new IPRule("124.56.78.91"),new IPRule("'10.91.4.0/24'")
 new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1")
 },
                 },
-                ReadWriteSingleStringPropertySomething = "test",
-                DeepSomething = "deep-value",
             });
             ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
             VaultResource result = lro.Value;

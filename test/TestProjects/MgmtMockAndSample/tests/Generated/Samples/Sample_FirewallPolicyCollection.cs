@@ -125,14 +125,11 @@ namespace MgmtMockAndSample
 new FirewallPolicyLogAnalyticsWorkspace()
 {
 Region = "westus",
-WorkspaceIdId = new ResourceIdentifier("/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace1"),
 },new FirewallPolicyLogAnalyticsWorkspace()
 {
 Region = "eastus",
-WorkspaceIdId = new ResourceIdentifier("/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace2"),
 }
 },
-                        DefaultWorkspaceIdId = new ResourceIdentifier("/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"),
                     },
                 },
                 DnsSettings = new DnsSettings()
@@ -180,12 +177,6 @@ DestinationPorts =
 },
                     },
                 },
-                TransportSecurityCertificateAuthority = new FirewallPolicyCertificateAuthority()
-                {
-                    KeyVaultSecretId = "https://kv/secret",
-                    Name = "clientcert",
-                },
-                SkuTier = FirewallPolicySkuTier.Premium,
                 Tags =
 {
 ["key1"] = "value1",
