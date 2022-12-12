@@ -91,6 +91,9 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
                     case IFieldSymbol fieldSymbol:
                         ProcessFieldSymbol(symbol, fieldSymbol, referenceMap);
                         break;
+                    case IEventSymbol eventSymbol:
+                        ProcessEventSymbol(symbol, eventSymbol, referenceMap);
+                        break;
                     case INamedTypeSymbol innerTypeSymbol:
                         break; // do nothing for the inner types
                     default:
@@ -217,6 +220,8 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
         private void ProcessPropertySymbol(INamedTypeSymbol keySymbol, IPropertySymbol propertySymbol, ReferenceMap referenceMap) => AddTypeSymbol(keySymbol, propertySymbol.Type, referenceMap);
 
         private void ProcessFieldSymbol(INamedTypeSymbol keySymbol, IFieldSymbol fieldSymbol, ReferenceMap referenceMap) => AddTypeSymbol(keySymbol, fieldSymbol.Type, referenceMap);
+
+        private void ProcessEventSymbol(INamedTypeSymbol keySymbol, IEventSymbol eventSymbol, ReferenceMap referenceMap) => AddTypeSymbol(keySymbol, eventSymbol.Type, referenceMap);
 
         /// <summary>
         /// Returns the node that defines <paramref name="node"/> inside the document, which should be <see cref="ClassDeclarationSyntax"/>, <see cref="StructDeclarationSyntax"/> or <see cref="EnumDeclarationSyntax"/>

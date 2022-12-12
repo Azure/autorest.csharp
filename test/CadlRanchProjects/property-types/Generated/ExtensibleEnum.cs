@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Models.Property.Types
 {
-    // Data plane generated sub-client. The ExtensibleEnum sub-client.
+    // Data plane generated sub-client.
     /// <summary> The ExtensibleEnum sub-client. </summary>
     public partial class ExtensibleEnum
     {

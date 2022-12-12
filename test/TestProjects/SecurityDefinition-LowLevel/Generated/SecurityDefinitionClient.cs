@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace SecurityDefinition_LowLevel
 {
-    // Data plane generated client. The SecurityDefinition service client.
+    // Data plane generated client.
     /// <summary> The SecurityDefinition service client. </summary>
     public partial class SecurityDefinitionClient
     {

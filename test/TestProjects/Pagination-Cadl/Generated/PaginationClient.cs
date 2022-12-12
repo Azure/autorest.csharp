@@ -17,7 +17,7 @@ using Pagination.Models;
 
 namespace Pagination
 {
-    // Data plane generated client. The Pagination service client.
+    // Data plane generated client.
     /// <summary> The Pagination service client. </summary>
     public partial class PaginationClient
     {

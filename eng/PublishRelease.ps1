@@ -1,9 +1,9 @@
-param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $CoverageUser, $CoveragePass, $CoverageDirectory)
+param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $AutorestArtifactDirectory, $CadlEmitterDirectory, $CoverageUser, $CoveragePass, $CoverageDirectory)
 
-$WorkingDirectory = Resolve-Path $WorkingDirectory
+$AutorestArtifactDirectory = Resolve-Path $AutorestArtifactDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
 
-Push-Location $WorkingDirectory
+Push-Location $AutorestArtifactDirectory
 try {
     $currentVersion = node -p -e "require('./package.json').version";
     $devVersion = "$currentVersion-beta.$BuildNumber"
@@ -15,17 +15,42 @@ try {
     $file = npm pack -q;
     $name = "AutoRest C# v$devVersion"
 
-    Write-Host "Publishing $file on GitHub!"
+    Write-Host "Publishing autorest $file on GitHub!"
     
     npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1
 
-    $filePath = Join-Path $WorkingDirectory '.npmrc'
     $env:NPM_TOKEN = $NpmToken
-    "//registry.npmjs.org/:_authToken=$env:NPM_TOKEN" | Out-File -FilePath $filePath
+    "//registry.npmjs.org/:_authToken=$env:NPM_TOKEN" | Out-File -FilePath (Join-Path $AutorestArtifactDirectory '.npmrc')
 
     Write-Host "Publishing $file on Npm!"
     
     npm publish $file --access public
+}
+finally {
+    Pop-Location
+}
+
+$CadlEmitterDirectory = Resolve-Path $CadlEmitterDirectory
+
+Push-Location $CadlEmitterDirectory
+try {
+    $autorestVersion = $devVersion
+    $currentVersion = node -p -e "require('./package.json').version";
+    $devVersion = "$currentVersion-beta.$BuildNumber"
+
+    npm install @autorest/csharp@$autorestVersion --save-exact
+
+    Write-Host "Setting Cadl Emitter version to $devVersion"
+    npm version --no-git-tag-version $devVersion | Out-Null;
+
+    Write-Host "Packing cadl emitter..."
+    $file = npm pack -q;
+
+    Write-Host "Publishing $file on Npm..."
+    "//registry.npmjs.org/:_authToken=$env:NPM_TOKEN" | Out-File -FilePath (Join-Path $CadlEmitterDirectory '.npmrc')
+    npm publish $file --access public
+    
+    Write-Host "##vso[task.setvariable variable=CadlEmitterVersion;isoutput=true]$devVersion"
 }
 finally {
     Pop-Location

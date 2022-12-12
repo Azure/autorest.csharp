@@ -36,7 +36,7 @@ pipeline:
 
 ```yaml $(testgen)
 use-extension:
-  "@autorest/testmodeler": "2.3.0"
+  "@autorest/testmodeler": "2.3.2"
 
 pipeline:
   test-modeler:
@@ -54,7 +54,7 @@ testmodeler:
   use-parents-value: true
   split-parents-value: false
   add-armtemplate-payload-string: true
-  # export-explicit-type: true
+#   export-explicit-type: true
 ```
 
 ## Customization

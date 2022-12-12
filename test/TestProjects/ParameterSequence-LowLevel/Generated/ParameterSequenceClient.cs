@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace ParameterSequence_LowLevel
 {
-    // Data plane generated client. The ParameterSequence service client.
+    // Data plane generated client.
     /// <summary> The ParameterSequence service client. </summary>
     public partial class ParameterSequenceClient
     {
