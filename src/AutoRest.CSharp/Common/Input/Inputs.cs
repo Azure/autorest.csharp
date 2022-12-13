@@ -82,8 +82,19 @@ namespace AutoRest.CSharp.Common.Input
             GenerateConvenienceMethod: false)
         { }
 
-        private readonly string _cleanName = Name.ToCleanName();
-        public string CleanName => _cleanName;
+        private string? _cleanName;
+        public string CleanName
+        {
+            get
+            {
+                if (_cleanName == null)
+                {
+                    _cleanName = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+                }
+
+                return _cleanName;
+            }
+        }
     }
 
     internal record InputParameter(

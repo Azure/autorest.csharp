@@ -109,10 +109,11 @@ namespace AutoRest.CSharp.Input.Source
                     foreach (var parameter in parameters)
                     {
                         // It would be better to compare the types.
-                        if (parameter != existingParameters[index++].Name)
+                        if (parameter != existingParameters[index].Name)
                         {
                             break;
                         }
+                        ++index;
                     }
 
                     if (index == parameters.Count())
