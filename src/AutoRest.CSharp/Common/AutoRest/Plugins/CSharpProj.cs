@@ -102,11 +102,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Execute(context.DefaultNamespace, async (filename, text) =>
             {
                 await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
-            });
+            },
+                codeModelYaml.Contains("x-ms-format: dfe-"));
             return true;
         }
 
-        public void Execute(string defaultNamespace, string generatedDir)
+        public void Execute(string defaultNamespace, string generatedDir, bool includeDfe)
         {
             Execute(defaultNamespace, async (filename, text) =>
             {
@@ -115,11 +116,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 //its no longer valid xml.  We should consider a "raw files" concept in the work space
                 //so the file writing can still remain in one place
                 await File.WriteAllTextAsync(Path.Combine(Configuration.AbsoluteProjectFolder, filename), text);
-            });
+            },
+                includeDfe);
         }
 
-        private void Execute(string defaultNamespace, Action<string, string> writeFile)
+        private void Execute(string defaultNamespace, Action<string, string> writeFile, bool includeDfe)
         {
+            if (includeDfe)
+            {
+                _coreCsProjContent += @"
+  <ItemGroup>
+    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" Version=""1.0.0-alpha.20221121.1"" />
+  </ItemGroup>";
+            }
             var isTestProject = Configuration.MgmtConfiguration.TestGen is not null;
             if (isTestProject)
             {

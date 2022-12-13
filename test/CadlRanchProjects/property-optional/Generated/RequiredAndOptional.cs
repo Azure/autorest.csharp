@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Models.Property.Optional
 {
-    // Data plane generated sub-client. Test optional and required properties
+    // Data plane generated sub-client.
     /// <summary> Test optional and required properties. </summary>
     public partial class RequiredAndOptional
     {

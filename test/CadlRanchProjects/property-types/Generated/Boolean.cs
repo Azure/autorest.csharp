@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Models.Property.Types
 {
-    // Data plane generated sub-client. The Boolean sub-client.
+    // Data plane generated sub-client.
     /// <summary> The Boolean sub-client. </summary>
     public partial class Boolean
     {

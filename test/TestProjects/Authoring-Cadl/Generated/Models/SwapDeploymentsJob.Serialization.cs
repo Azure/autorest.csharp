@@ -64,7 +64,7 @@ namespace Azure.Language.Authoring.Models
                 }
                 if (property.NameEquals("errors"))
                 {
-                    errors = JsonSerializer.Deserialize<ResponseError>(property.Value.ToString());
+                    errors = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("id"))
