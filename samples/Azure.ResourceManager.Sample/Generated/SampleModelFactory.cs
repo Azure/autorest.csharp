@@ -588,7 +588,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineImage.properties.disallowed
         /// </param>
         /// <returns> A new <see cref="Models.VirtualMachineImage"/> instance for mocking. </returns>
-        public static VirtualMachineImage VirtualMachineImage(string id = null, string name = null, AzureLocation location = default, IDictionary<string, string> tags = null, PurchasePlan plan = null, OperatingSystemType osDiskImageOperatingSystem = default, IEnumerable<DataDiskImage> dataDiskImages = null, bool automaticOSUpgradeSupported = default, HyperVGeneration? hyperVGeneration = null, VmDiskType? disallowedVmDiskType = null)
+        public static VirtualMachineImage VirtualMachineImage(string id = null, string name = null, AzureLocation location = default, IDictionary<string, string> tags = null, PurchasePlan plan = null, OperatingSystemType? osDiskImageOperatingSystem = null, IEnumerable<DataDiskImage> dataDiskImages = null, bool? automaticOSUpgradeSupported = null, HyperVGeneration? hyperVGeneration = null, VmDiskType? disallowedVmDiskType = null)
         {
             tags ??= new Dictionary<string, string>();
             dataDiskImages ??= new List<DataDiskImage>();

@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         // This is not immutable therefore we have to build this everytime we call it
-        public Stack<ObjectTypeProperty> BuildHierarchyStack() => GetHierarchyStack(UnderlyingProperty);
+        public override Stack<ObjectTypeProperty> BuildHierarchyStack() => GetHierarchyStack(UnderlyingProperty);
 
         public ObjectTypeProperty UnderlyingProperty { get; }
 

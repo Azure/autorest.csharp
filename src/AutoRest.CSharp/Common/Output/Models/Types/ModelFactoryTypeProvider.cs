@@ -64,6 +64,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var propertyStack = _parameterPropertyCache[model][parameter];
             var assignmentProperty = propertyStack.Last();
+
+            // iterate over the property stack to build a nested expression of variable assignment
             ObjectTypeProperty property, immediateParentProperty;
             property = propertyStack.Pop();
             FormattableString result = $"{parameter.Name:I}";
@@ -125,9 +127,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (property == null)
                     continue;
 
-                (var parameterName, var propertyStack) = GetPropertyStack(property);
-                property = propertyStack.Peek();
+                if (property.FlattenedProperty != null)
+                    property = property.FlattenedProperty;
 
+                var parameterName = property.Declaration.Name.ToVariableName();
                 var inputType = property.Declaration.Type;
                 // check if the property is the discriminator
                 if (discriminator != null && discriminator.Property == property)
@@ -163,7 +166,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 };
 
                 methodParameters.Add(modelFactoryMethodParameter);
-                cache.Add(modelFactoryMethodParameter, propertyStack);
+                cache.Add(modelFactoryMethodParameter, property.BuildHierarchyStack());
             }
 
             _parameterPropertyCache.Add(modelType, cache);
@@ -171,36 +174,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             FormattableString returnDescription = $"A new <see cref=\"{modelType.Declaration.Namespace}.{modelType.Declaration.Name}\"/> instance for mocking.";
 
             return new MethodSignature(ctorSignature.Name, ctorSignature.Summary, ctorSignature.Description, Public | Static, modelType.Type, returnDescription, methodParameters);
-        }
-
-        private (string ParameterName, Stack<ObjectTypeProperty> HierarchyStack) GetPropertyStack(ObjectTypeProperty property)
-        {
-            if (Configuration.AzureArm)
-            {
-                var hierarchyStack = property.GetHierarchyStack();
-
-                return (GetPropertyName(hierarchyStack), hierarchyStack);
-            }
-
-            var stack = new Stack<ObjectTypeProperty>();
-            stack.Push(property);
-            return (property.Declaration.Name.ToVariableName(), stack);
-        }
-
-        private string GetPropertyName(Stack<ObjectTypeProperty> hierarchyStack)
-        {
-            if (hierarchyStack.Count > 1)
-            {
-                var innerProperty = hierarchyStack.Pop();
-                var immediateParent = hierarchyStack.Pop();
-                var parameterName = innerProperty.GetCombinedPropertyName(immediateParent).ToVariableName();
-                hierarchyStack.Push(immediateParent);
-                hierarchyStack.Push(innerProperty);
-
-                return parameterName;
-            }
-
-            return hierarchyStack.Peek().Declaration.Name.ToVariableName();
         }
 
         private static bool RequiresModelFactory(SerializableObjectType model)
@@ -215,12 +188,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            if (model.Properties.Any(p => p.Declaration.Accessibility != "public" && p.SchemaProperty?.IsDiscriminator != true))
-            {
-                return false;
-            }
-
-            var properties = GetAllProperties(model);
+            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties);
 
             if (!properties.Any())
             {
@@ -235,15 +203,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return model.Constructors
                 .Where(c => c.Signature.Modifiers.HasFlag(Public))
                 .All(c => properties.Any(property => c.FindParameterByInitializedProperty(property) == default));
-        }
-
-        private static IEnumerable<ObjectTypeProperty> GetAllProperties(SerializableObjectType model)
-        {
-            foreach (var hierarchy in model.EnumerateHierarchy())
-            {
-                foreach (var property in hierarchy.Properties)
-                    yield return property;
-            }
         }
     }
 }

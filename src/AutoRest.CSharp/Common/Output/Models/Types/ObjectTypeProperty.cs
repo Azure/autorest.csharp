@@ -70,6 +70,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _flattenedProperty;
         }
 
+        public virtual Stack<ObjectTypeProperty> BuildHierarchyStack()
+        {
+            if (FlattenedProperty != null)
+                return FlattenedProperty.BuildHierarchyStack();
+
+            var stack =  new Stack<ObjectTypeProperty>();
+            stack.Push(this);
+
+            return stack;
+        }
+
         public static FormattableString CreateDefaultPropertyDescription(string nameToUse, bool isReadOnly)
         {
             String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
