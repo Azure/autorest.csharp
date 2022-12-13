@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Input.Source
         private readonly INamedTypeSymbol _clientAttribute;
         private readonly INamedTypeSymbol _schemaMemberNameAttribute;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, IMethodSymbol> _methodMap = new Dictionary<string, IMethodSymbol>(StringComparer.OrdinalIgnoreCase);
+        private readonly List<IMethodSymbol> _methodSet = new List<IMethodSymbol>();
 
         public SourceInputModel(Compilation compilation, CompilationInput? existingCompilation = null)
         {
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Input.Source
                                     {
                                         if (existingCompilation.FilterMethod(methodSymbol))
                                         {
-                                            _methodMap.Add(member.Name, methodSymbol);
+                                            _methodSet.Add(methodSymbol);
                                         }
                                     }
                                 }
@@ -84,10 +84,44 @@ namespace AutoRest.CSharp.Input.Source
             return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, symbol);
         }
 
-        public IMethodSymbol? FindForMethod(string name)
+        public IMethodSymbol? FindForMethod(string name, IEnumerable<string> parameters)
         {
-            _methodMap.TryGetValue(name, out var method);
-            return method;
+            var methods = _methodSet.Where(m => m.Name == name);
+            if (methods == null || methods.Count() == 0)
+            {
+                return null;
+            }
+            else if (methods.Count() == 1)
+            {
+                return methods.First();
+            }
+            else
+            {
+                foreach (var method in methods)
+                {
+                    if (method.Parameters.Count() - 1 != parameters.Count())
+                    {
+                        continue;
+                    }
+
+                    var existingParameters = method.Parameters.ToArray();
+                    int index = 0;
+                    foreach (var parameter in parameters)
+                    {
+                        // It would be better to compare the types.
+                        if (parameter != existingParameters[index++].Name)
+                        {
+                            break;
+                        }
+                    }
+
+                    if (index == parameters.Count())
+                    {
+                        return method;
+                    }
+                }
+                return null;
+            }
         }
 
         public INamedTypeSymbol? FindForType(string ns, string name, bool includeArmCore = false)
