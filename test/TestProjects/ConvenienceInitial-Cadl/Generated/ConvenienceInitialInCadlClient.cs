@@ -15,7 +15,7 @@ using ConvenienceInitialInCadl.Models;
 
 namespace ConvenienceInitialInCadl
 {
-    // Data plane generated client. CADL project to test convenience method.
+    // Data plane generated client.
     /// <summary> CADL project to test convenience method. </summary>
     public partial class ConvenienceInitialInCadlClient
     {
