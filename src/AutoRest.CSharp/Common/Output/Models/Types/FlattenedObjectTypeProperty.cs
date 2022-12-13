@@ -34,14 +34,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             // determines whether this property should has a setter
             var (isReadOnly, includeGetterNullCheck, includeSetterNullCheck) = GetFlags(property, innerProperty);
 
-            return new FlattenedObjectTypeProperty(declaration, innerProperty.ParameterDescription, property, hierarchyStack, isReadOnly, includeGetterNullCheck, includeSetterNullCheck, childPropertyName, isOverriddenValueType);
+            return new FlattenedObjectTypeProperty(declaration, innerProperty.ParameterDescription, property, isReadOnly, includeGetterNullCheck, includeSetterNullCheck, childPropertyName, isOverriddenValueType);
         }
 
         // The flattened object type property does not participate in the serialization or deserialization process, therefore we pass in null for SchemaProperty.
-        private FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, Stack<ObjectTypeProperty> hierarchyStack, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false) : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
+        private FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false) : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
         {
             UnderlyingProperty = underlyingProperty;
-            HierarchyStack = hierarchyStack;
             IncludeGetterNullCheck = includeGetterNullCheck;
             IncludeSetterNullCheck = includeSetterNullCheck;
             IsUnderlyingPropertyNullable = underlyingProperty.IsReadOnly;
@@ -49,7 +48,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsOverriddenValueType = isOverriddenValueType;
         }
 
-        public Stack<ObjectTypeProperty> HierarchyStack { get; }
+        // This is not immutable therefore we have to build this everytime we call it
+        public Stack<ObjectTypeProperty> BuildHierarchyStack() => GetHierarchyStack(UnderlyingProperty);
 
         public ObjectTypeProperty UnderlyingProperty { get; }
 

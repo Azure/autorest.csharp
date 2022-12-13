@@ -370,39 +370,37 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             var propertiesToWrite = new Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)>();
             foreach (var property in properties)
             {
-                var schemaProperty = property.SchemaProperty;
-                if (!IsPropertyAssignable(property) || schemaProperty == null)
+                var propertyToDeal = property;
+                var schemaProperty = propertyToDeal.SchemaProperty;
+                if (schemaProperty == null)
                     continue; // now we explicitly ignore all the AdditionalProperties
 
                 if (!valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
                     continue; // skip the property that does not have a value
 
                 // check if this property is safe-flattened
-                var flattenedProperty = property.FlattenedProperty;
+                var flattenedProperty = propertyToDeal.FlattenedProperty;
                 if (flattenedProperty != null)
                 {
-                    if (!IsPropertyAssignable(flattenedProperty))
-                        continue;
-
-                    // get example value out of the dict
-                    exampleValue = UnwrapExampleValueFromSinglePropertySchema(exampleValue, flattenedProperty.HierarchyStack);
+                    // unwrap the single property object
+                    exampleValue = UnwrapExampleValueFromSinglePropertySchema(exampleValue, flattenedProperty);
                     if (exampleValue == null)
                         continue;
+                    propertyToDeal = flattenedProperty;
+                }
 
-                    // this branch always has a setter
-                    propertiesToWrite.Add(flattenedProperty.Declaration.Name, (flattenedProperty.Declaration.Type, exampleValue));
-                }
-                else
-                {
-                    propertiesToWrite.Add(property.Declaration.Name, (property.Declaration.Type, exampleValue));
-                }
+                if (!IsPropertyAssignable(propertyToDeal))
+                    continue; // now we explicitly ignore all the AdditionalProperties
+
+                propertiesToWrite.Add(propertyToDeal.Declaration.Name, (propertyToDeal.Declaration.Type, exampleValue));
             }
 
             return propertiesToWrite;
         }
 
-        private static ExampleValue? UnwrapExampleValueFromSinglePropertySchema(ExampleValue exampleValue, Stack<ObjectTypeProperty> hierarchyStack)
+        private static ExampleValue? UnwrapExampleValueFromSinglePropertySchema(ExampleValue exampleValue, FlattenedObjectTypeProperty flattenedProperty)
         {
+            var hierarchyStack = flattenedProperty.BuildHierarchyStack();
             // reverse the stack because it is a stack, iterating it will start from the innerest property
             // skip the first because this stack include the property we are handling here right now
             foreach (var property in hierarchyStack.Reverse().Skip(1))
