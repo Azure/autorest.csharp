@@ -22,6 +22,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -579,34 +580,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, string diagnosticVariable, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
+        protected void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, string diagnosticVariable, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             var pagingMethod = operation.PagingMethod!;
-            var returnType = new CSharpType(typeof(Page<>), itemType).WrapAsync(async);
+            var arguments = GetArguments(_writer, parameterMappings);
 
-            using (_writer.Scope($"{GetAsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
-            {
-                // no null-checks because all are optional
-                using (WriteDiagnosticScope(_writer, diagnostic, diagnosticVariable))
-                {
-                    WritePageFunctionBody(itemType, pagingMethod, operation, parameterMappings, async, false);
-                }
-            }
+            FormattableString firstPageRequest = $"{GetRestClientName(operation)}.Create{pagingMethod.Method.Name}Request({arguments})";
+            FormattableString? nextPageRequest = pagingMethod.NextPageMethod != null ? $"{GetRestClientName(operation)}.Create{pagingMethod.NextPageMethod.Name}Request({KnownParameters.NextLink.Name}, {arguments})" : (FormattableString?)null;
+            var clientDiagnosticsReference = new Reference(diagnosticVariable, typeof(ClientDiagnostics));
+            var pipelineReference = new Reference("Pipeline", typeof(HttpPipeline));
+            var scopeName = diagnostic.ScopeName;
+            var itemName = pagingMethod.ItemName;
+            var nextLinkName = pagingMethod.NextLinkName;
 
-            var nextPageFunctionName = "null";
-            if (pagingMethod.NextPageMethod != null)
-            {
-                nextPageFunctionName = "NextPageFunc";
-                var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
-                using (_writer.Scope($"{GetAsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
-                {
-                    using (WriteDiagnosticScope(_writer, diagnostic, diagnosticVariable))
-                    {
-                        WritePageFunctionBody(itemType, pagingMethod, operation, parameterMappings, async, true);
-                    }
-                }
-            }
-            _writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
+            _writer.WritePageableBody(parameterMappings.Select(p => p.Parameter).ToList(), itemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemName, nextLinkName, async);
         }
 
         protected void WritePageFunctionBody(CSharpType itemType, PagingMethodWrapper pagingMethod, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync, bool isNextPageFunc)
@@ -850,43 +837,55 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
         {
+            var arguments = GetArguments(writer, mapping, passNullForOptionalParameters);
+            writer.Append(arguments).AppendRaw(", ");
+        }
+
+        private static FormattableString GetArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
+        {
+            var args = new List<FormattableString>();
             foreach (var parameter in mapping)
             {
-                if (!parameter.IsPassThru && parameter.Parameter.Type.IsEnum)
-                    writer.UseNamespace(parameter.Parameter.Type.Namespace);
-
                 if (parameter.IsPassThru)
                 {
                     if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
                     {
-                        // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
+                        // always use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
                         if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
                         {
-                            writer.AppendRaw($"pageSizeHint, ");
+                            args.Add($"pageSizeHint");
                         }
                         else
                         {
                             Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                            writer.Append($"{parameter.Parameter.Name}, ");
+                            args.Add($"{parameter.Parameter.Name}");
                         }
                     }
                     else
                     {
                         if (passNullForOptionalParameters && parameter.Parameter.Validation == ValidationType.None)
-                            writer.Append($"null, ");
+                            args.Add($"null");
                         else
-                            writer.Append($"{parameter.Parameter.Name}, ");
+                            args.Add($"{parameter.Parameter.Name}");
                     }
                 }
                 else
                 {
+                    if (parameter.Parameter.Type.IsEnum)
+                    {
+                        writer.UseNamespace(parameter.Parameter.Type.Namespace);
+                    }
+
                     foreach (var @namespace in parameter.Usings)
                     {
                         writer.UseNamespace(@namespace);
                     }
-                    writer.Append($"{parameter.ValueExpression}, ");
+
+                    args.Add($"{parameter.ValueExpression}");
                 }
             }
+
+            return args.Join(", ");
         }
 
         public override string ToString()

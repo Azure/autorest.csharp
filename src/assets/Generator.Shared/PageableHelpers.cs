@@ -6,39 +6,27 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal static class PageableHelpers
+    internal static partial class PageableHelpers
     {
-        public static AsyncPageable<T> Select<T>(AsyncPageable<BinaryData> input, Func<Response, IReadOnlyList<T>> selectFunc) where T : notnull
-            => new AsyncPageableWrapper<T>((ct, ph) => SelectPage(input.AsPages(ct, ph), selectFunc));
-
-        private static async IAsyncEnumerable<Page<T>> SelectPage<T>(IAsyncEnumerable<Page<BinaryData>> pages, Func<Response, IReadOnlyList<T>> selectFunc, [EnumeratorCancellation] CancellationToken cancellationToken = default) where T : notnull
-        {
-            await foreach (var page in pages.WithCancellation(cancellationToken).ConfigureAwait(false))
-            {
-                var response = page.GetRawResponse();
-                yield return Page<T>.FromValues(selectFunc(response), page.ContinuationToken, response);
-            }
-        }
-
-        public static Pageable<T> Select<T>(Pageable<BinaryData> input, Func<Response, IReadOnlyList<T>> selectFunc) where T : notnull
-            => new PageableWrapper<T>((ct, ph) => input
-                .AsPages(ct, ph)
-                .Select(page => Page<T>.FromValues(selectFunc(page.GetRawResponse()), page.ContinuationToken, page.GetRawResponse()))
-            );
+        public static AsyncPageable<T> CreateAsyncPageable<T>(Func<string?, int?, CancellationToken, IAsyncEnumerable<Page<T>>> enumerableFactory, ClientDiagnostics clientDiagnostics, string scopeName) where T : notnull
+            => new AsyncPageableWrapper<T>((ct, ph) => new AsyncEnumerableWithScope<T>(enumerableFactory(ct, ph, default), clientDiagnostics, scopeName));
 
         public static Pageable<T> CreatePageable<T>(Func<string?, int?, IEnumerable<Page<T>>> enumerableFactory, ClientDiagnostics clientDiagnostics, string scopeName) where T : notnull
             => new PageableWrapper<T>((ct, ph) => new EnumerableWithScope<T>(enumerableFactory(ct, ph), clientDiagnostics, scopeName));
 
-        public static AsyncPageable<T> CreateAsyncPageable<T>(Func<string?, int?, CancellationToken, IAsyncEnumerable<Page<T>>> enumerableFactory, ClientDiagnostics clientDiagnostics, string scopeName) where T : notnull
-            => new AsyncPageableWrapper<T>((ct, ph) => new AsyncEnumerableWithScope<T>(enumerableFactory(ct, ph, default), clientDiagnostics, scopeName));
+        public static AsyncPageable<T> CreateAsyncEnumerable<T>(Func<int?, Task<Page<T>>> firstPageFunc, Func<string?, int?, Task<Page<T>>>? nextPageFunc, int? pageSize = default) where T : notnull
+        {
+            AsyncPageFunc<T> first = (continuationToken, pageSizeHint) => firstPageFunc(pageSizeHint);
+            AsyncPageFunc<T>? next = nextPageFunc != null ? new AsyncPageFunc<T>(nextPageFunc) : null;
+            return new FuncAsyncPageable<T>(first, next, pageSize);
+        }
 
         public static Pageable<T> CreateEnumerable<T>(Func<int?, Page<T>> firstPageFunc, Func<string?, int?, Page<T>>? nextPageFunc, int? pageSize = default) where T : notnull
         {
@@ -47,11 +35,16 @@ namespace Azure.Core
             return new FuncPageable<T>(first, next, pageSize);
         }
 
-        public static AsyncPageable<T> CreateAsyncEnumerable<T>(Func<int?, Task<Page<T>>> firstPageFunc, Func<string?, int?, Task<Page<T>>>? nextPageFunc, int? pageSize = default) where T : notnull
+        public static AsyncPageable<T> CreatePageableAsync<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageMethod, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
         {
-            AsyncPageFunc<T> first = (continuationToken, pageSizeHint) => firstPageFunc(pageSizeHint);
-            AsyncPageFunc<T>? next = nextPageFunc != null ? new AsyncPageFunc<T>(nextPageFunc) : null;
-            return new FuncAsyncPageable<T>(first, next, pageSize);
+            var responseParser = new ResponseParser(itemPropertyName, nextLinkPropertyName);
+            return new AsyncPageableWithScope<T>(createFirstPageRequest, createNextPageMethod, valueFactory, responseParser, pipeline, clientDiagnostics, scopeName, null, requestContext);
+        }
+
+        public static Pageable<T> CreatePageable<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageMethod, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
+        {
+            var responseParser = new ResponseParser(itemPropertyName, nextLinkPropertyName);
+            return new PageableWithScope<T>(createFirstPageRequest, createNextPageMethod, valueFactory, responseParser, pipeline, clientDiagnostics, scopeName, null, requestContext);
         }
 
         internal delegate Task<Page<T>> AsyncPageFunc<T>(string? continuationToken = default, int? pageSizeHint = default);

@@ -46,8 +46,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var pagingMethod in client.PagingMethods)
                     {
-                        WritePagingOperation(writer, pagingMethod, true, ClientDiagnosticsField);
-                        WritePagingOperation(writer, pagingMethod, false, ClientDiagnosticsField);
+                        WritePagingOperation(writer, client, pagingMethod, true);
+                        WritePagingOperation(writer, client, pagingMethod, false);
                     }
 
                     foreach (var longRunningOperation in client.LongRunningOperationMethods)
@@ -266,11 +266,26 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WritePagingOperation(CodeWriter writer, PagingMethod pagingMethod, bool async, string diagnosticsFieldName, bool pagingFuncInRestClient = true)
+        private void WritePagingOperation(CodeWriter writer, DataPlaneClient client, PagingMethod pagingMethod, bool async)
         {
             var pageType = pagingMethod.PagingResponse.ItemType;
-            CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
-            var parameters = pagingMethod.Method.Parameters.ToList().Where(p => p.Name != KnownParameters.RequestContext.Name).ToList();
+            var parameters = pagingMethod.Method.Parameters
+                .Where(p => p.Name != KnownParameters.RequestContext.Name)
+                .Append(KnownParameters.CancellationTokenParameter)
+                .ToList();
+            var clientDiagnosticsReference = new Reference(ClientDiagnosticsField, typeof(ClientDiagnostics));
+            var pipelineReference = new Reference(PipelineField, typeof(HttpPipeline));
+            var scopeName = pagingMethod.Diagnostics.ScopeName;
+            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.SchemaProperty?.SerializedName;
+            var itemName = pagingMethod.PagingResponse.ItemProperty.SchemaProperty?.SerializedName;
+            var signature = new MethodSignature(
+                pagingMethod.Name,
+                pagingMethod.Method.SummaryText,
+                pagingMethod.Method.DescriptionText,
+                MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
+                new CSharpType(typeof(Pageable<>), pageType),
+                null,
+                parameters);
 
             writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.SummaryText}");
 
@@ -279,84 +294,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
             writer.WriteXmlDocumentation("remarks", $"{pagingMethod.Method.DescriptionText}");
-
-            writer.Append($"{pagingMethod.Accessibility} virtual {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
-            foreach (Parameter parameter in parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(parameters);
-
-                var pageWrappedType = new CSharpType(typeof(Page<>), pageType);
-                var funcType = async ? new CSharpType(typeof(Task<>), pageWrappedType) : pageWrappedType;
-
-                var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-                var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
-
-                var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-                var asyncText = async ? "async" : string.Empty;
-                var awaitText = async ? "await" : string.Empty;
-                var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-                using (writer.Scope($"{asyncText} {funcType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
-                {
-                    using (WriteDiagnosticScope(writer, pagingMethod.Diagnostics, diagnosticsFieldName))
-                    {
-                        if (pagingFuncInRestClient)
-                        {
-                            writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.Method.Name, async)}(");
-                        }
-                        else
-                        {
-                            writer.Append($"var response = {awaitText} {CreateMethodName($"{pagingMethod.Method.Name}FirstPage", async)}(");
-                        }
-
-                        foreach (Parameter parameter in parameters)
-                        {
-                            writer.Append($"{parameter.Name}, ");
-                        }
-
-                        writer.Line($"cancellationToken){configureAwaitText};");
-                        writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}, {continuationTokenText}, response.GetRawResponse());");
-                    }
-                }
-
-                var nextPageFunctionName = "null";
-                if (pagingMethod.NextPageMethod != null)
-                {
-                    nextPageFunctionName = "NextPageFunc";
-                    var nextPageParameters = pagingMethod.NextPageMethod.Parameters.ToList().Where(p => p.Name != KnownParameters.RequestContext.Name).ToList();
-                    using (writer.Scope($"{asyncText} {funcType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
-                    {
-                        using (WriteDiagnosticScope(writer, pagingMethod.Diagnostics, diagnosticsFieldName))
-                        {
-                            if (pagingFuncInRestClient)
-                            {
-                                writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
-                            }
-                            else
-                            {
-                                writer.Append($"var response = {awaitText} {CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
-                            }
-                            foreach (Parameter parameter in nextPageParameters)
-                            {
-                                writer.Append($"{parameter.Name}, ");
-                            }
-                            writer.Line($"cancellationToken){configureAwaitText};");
-                            writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}, {continuationTokenText}, response.GetRawResponse());");
-                        }
-                    }
-                }
-                writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
-            }
-            writer.Line();
+            writer.WritePageable(signature, pageType, new Reference(RestClientField, client.RestClient.Type), pagingMethod.Method, pagingMethod.NextPageMethod, clientDiagnosticsReference, pipelineReference, scopeName, itemName, nextLinkName, async);
         }
 
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperationMethod lroMethod, bool async)

@@ -8,16 +8,12 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using Diagnostic = AutoRest.CSharp.Output.Models.Requests.Diagnostic;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -37,7 +33,6 @@ namespace AutoRest.CSharp.Output.Models
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
         public IReadOnlyList<RestClientMethod> RequestMethods { get; }
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
-        public IReadOnlyList<PagingMethod> PagingMethods { get; }
         public LowLevelClient? ParentClient;
         public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
 
@@ -74,8 +69,6 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())
                 .Distinct()
                 .ToArray();
-
-            PagingMethods = ClientMethods.Where(m => m.PagingInfo != null && m.ConvenienceMethod != null).Select(m => ClientBuilder.BuildPagingMethod(m.ConvenienceMethod!.Signature.Name, m.PagingInfo!.NextLinkName, m.PagingInfo!.ItemName, m.RequestMethod, m.PagingInfo!.NextPageMethod, Declaration)).ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 

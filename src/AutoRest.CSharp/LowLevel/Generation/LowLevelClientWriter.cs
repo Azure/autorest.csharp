@@ -69,20 +69,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields();
                     WriteConstructors();
 
-                    foreach (var pagingMethod in client.PagingMethods)
-                    {
-                        DataPlaneClientWriter.WritePagingOperation(writer, pagingMethod, true, client.Fields.ClientDiagnosticsProperty.Name, false);
-                        DataPlaneClientWriter.WritePagingOperation(writer, pagingMethod, false, client.Fields.ClientDiagnosticsProperty.Name, false);
-
-                        RestClientWriter.WriteOperation(writer, pagingMethod.Method, client.Fields.PipelineField.Name, true, WriteFuncBodyWithProcessMessage, $"{pagingMethod.Method.Name}FirstPage", MethodSignatureModifiers.Private);
-                        RestClientWriter.WriteOperation(writer, pagingMethod.Method, client.Fields.PipelineField.Name, false, WriteFuncBodyWithProcessMessage, $"{pagingMethod.Method.Name}FirstPage", MethodSignatureModifiers.Private);
-                        if (pagingMethod.NextPageMethod != null)
-                        {
-                            RestClientWriter.WriteOperation(writer, pagingMethod.NextPageMethod, client.Fields.PipelineField.Name, true, WriteFuncBodyWithProcessMessage, null, MethodSignatureModifiers.Private);
-                            RestClientWriter.WriteOperation(writer, pagingMethod.NextPageMethod, client.Fields.PipelineField.Name, false, WriteFuncBodyWithProcessMessage, null, MethodSignatureModifiers.Private);
-                        }
-                    }
-
                     foreach (var clientMethod in client.ClientMethods)
                     {
                         var longRunning = clientMethod.LongRunning;
@@ -91,8 +77,14 @@ namespace AutoRest.CSharp.Generation.Writers
                             WriteLongRunningOperationMethod(clientMethod, client.Fields, longRunning, true);
                             WriteLongRunningOperationMethod(clientMethod, client.Fields, longRunning, false);
                         }
-                        else if (clientMethod.PagingInfo != null)
+                        else if (clientMethod.PagingInfo is { } pagingInfo)
                         {
+                            if (clientMethod.ConvenienceMethod is { } convenienceMethod)
+                            {
+                                WriteConveniencePagingMethod(clientMethod, convenienceMethod, pagingInfo, client.Fields, true);
+                                WriteConveniencePagingMethod(clientMethod, convenienceMethod, pagingInfo, client.Fields, false);
+                            }
+
                             WritePagingMethod(clientMethod, client.Fields, true);
                             WritePagingMethod(clientMethod, client.Fields, false);
                         }
@@ -125,26 +117,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteFuncBodyWithProcessMessage(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, string pipelineName, bool async)
-        {
-            var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-            writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
-
-            var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
-            var responseVariable = new CodeWriterDeclaration("response");
-
-            writer
-                .Line($"using var {messageVariable:D} = {requestMethodName}({operation.Parameters.GetIdentifiersFormattable()});")
-                .Append($"{typeof(Response)} {responseVariable:D} = ")
-                .WriteMethodCall(async, $"{pipelineName}.ProcessMessageAsync", $"{pipelineName}.ProcessMessage", $"{messageVariable}, {KnownParameters.RequestContext.Name}");
-
-            writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({operation.ReturnType}.FromResponse({responseVariable:I}), {responseVariable:I});");
-        }
-
-        private void WriteDPGIdentificationComment()
-        {
-            writer.Line($"// Data plane generated {(client.IsSubClient ? "sub-client" : "client")}.");
-        }
+        private void WriteDPGIdentificationComment() => writer.Line($"// Data plane generated {(client.IsSubClient ? "sub-client" : "client")}.");
 
         private void WriteClientFields()
         {
@@ -366,6 +339,12 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
             }
+        }
+
+        public void WriteConveniencePagingMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ProtocolMethodPaging pagingInfo, ClientFields fields, bool async)
+        {
+            WriteConvenienceMethodDocumentation(writer, convenienceMethod.Signature);
+            writer.WritePageable(convenienceMethod.Signature, convenienceMethod.ResponseType, null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, client.Fields.ClientDiagnosticsProperty, client.Fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
         }
 
         public void WritePagingMethod(LowLevelClientMethod clientMethod, ClientFields fields, bool async)
@@ -753,15 +732,18 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, MethodSignature convenienceMethod, bool async)
         {
-            var methodSignature = convenienceMethod.WithAsync(async);
-            writer
-                .WriteMethodDocumentation(methodSignature)
-                .WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
+            WriteConvenienceMethodDocumentation(writer, convenienceMethod);
 
+            var methodSignature = convenienceMethod.WithAsync(async);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
         }
+
+        private static void WriteConvenienceMethodDocumentation(CodeWriter writer, MethodSignature convenienceMethod)
+            => writer
+                .WriteMethodDocumentation(convenienceMethod)
+                .WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
 
         private void WriteCancellationTokenToRequestContextMethod()
         {

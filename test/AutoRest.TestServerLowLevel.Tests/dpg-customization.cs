@@ -88,8 +88,7 @@ namespace AutoRest.TestServer.Tests
                 Assert.AreEqual("model", $"{page.Values.First().Received}");
             }
 
-            // +1 due to the last iteration of enumeration that doesn't make a call
-            Assert.AreEqual(pagesCount + 1, diagnosticListener.Scopes.Count);
+            Assert.AreEqual(pagesCount, diagnosticListener.Scopes.Count);
         });
 
         [Test]
