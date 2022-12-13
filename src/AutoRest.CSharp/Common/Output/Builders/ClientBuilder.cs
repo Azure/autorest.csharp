@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
 
                 RestClientMethod startMethod = restClient.GetOperationMethod(operation);
-                var name = operation.Name.ToCleanName();
+                var name = operation.CleanName;
 
                 yield return new ClientMethod(
                     name,

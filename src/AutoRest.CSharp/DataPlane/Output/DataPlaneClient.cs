@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Output.Models
                     continue;
                 }
 
-                var name = operation.Name.ToCleanName();
+                var name = operation.CleanName;
                 RestClientMethod startMethod = RestClient.GetOperationMethod(operation);
 
                 yield return new LongRunningOperationMethod(
