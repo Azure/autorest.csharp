@@ -41,7 +41,7 @@ namespace NoTypeReplacement
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    foo = JsonSerializer.Deserialize<SubResource>(property.Value.ToString());
+                    foo = JsonSerializer.Deserialize<SubResource>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -66,7 +66,7 @@ namespace NoTypeReplacement
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
             }

@@ -42,7 +42,7 @@ namespace MgmtDiscriminator.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.ToString());
+                    originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("forwardingProtocol"))

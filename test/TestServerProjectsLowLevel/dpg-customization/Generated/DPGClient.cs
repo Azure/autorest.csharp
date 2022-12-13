@@ -16,7 +16,7 @@ using Azure.Core.Pipeline;
 
 namespace dpg_customization_LowLevel
 {
-    // Data plane generated client. The DPG service client.
+    // Data plane generated client.
     /// <summary> The DPG service client. </summary>
     public partial class DPGClient
     {

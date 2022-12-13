@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteDPGIdentificationComment()
         {
-            writer.Line($"// Data plane generated {(client.IsSubClient ? "sub-client" : "client")}. {client.Description}");
+            writer.Line($"// Data plane generated {(client.IsSubClient ? "sub-client" : "client")}.");
         }
 
         private void WriteClientFields()
@@ -229,7 +229,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var field = client.Fields.GetFieldByParameter(parameter);
                     if (field != null)
                     {
-                        if (parameter.IsApiVersionParameter && parameter.RequestLocation == RequestLocation.Query)
+                        if (parameter.IsApiVersionParameter)
                         {
                             writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.Version;");
                         }

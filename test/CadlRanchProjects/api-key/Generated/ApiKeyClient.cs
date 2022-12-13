@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Authentication.ApiKey
 {
-    // Data plane generated client. Illustrates clients generated with ApiKey authentication.
+    // Data plane generated client.
     /// <summary> Illustrates clients generated with ApiKey authentication. </summary>
     public partial class ApiKeyClient
     {

@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Analytics.Purview.Account
 {
-    // Data plane generated sub-client. The PurviewAccountResourceSetRules sub-client.
+    // Data plane generated sub-client.
     /// <summary> The PurviewAccountResourceSetRules sub-client. </summary>
     public partial class PurviewAccountResourceSetRules
     {

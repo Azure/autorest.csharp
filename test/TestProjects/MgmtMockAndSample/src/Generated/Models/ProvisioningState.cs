@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace MgmtMockAndSample.Models
 {
-    /// <summary> Provisioning state. </summary>
+    /// <summary> The current provisioning state. </summary>
     public readonly partial struct ProvisioningState : IEquatable<ProvisioningState>
     {
         private readonly string _value;
@@ -23,29 +23,29 @@ namespace MgmtMockAndSample.Models
         }
 
         private const string SucceededValue = "Succeeded";
-        private const string ProvisioningValue = "Provisioning";
-        private const string FailedValue = "Failed";
         private const string UpdatingValue = "Updating";
         private const string DeletingValue = "Deleting";
+        private const string FailedValue = "Failed";
+        private const string ProvisioningValue = "Provisioning";
         private const string ActivatedValue = "Activated";
         private const string SecurityDomainRestoreValue = "SecurityDomainRestore";
         private const string RestoringValue = "Restoring";
 
-        /// <summary> The managed HSM Pool has been full provisioned. </summary>
+        /// <summary> Succeeded. </summary>
         public static ProvisioningState Succeeded { get; } = new ProvisioningState(SucceededValue);
-        /// <summary> The managed HSM Pool is currently being provisioned. </summary>
-        public static ProvisioningState Provisioning { get; } = new ProvisioningState(ProvisioningValue);
-        /// <summary> Provisioning of the managed HSM Pool has failed. </summary>
-        public static ProvisioningState Failed { get; } = new ProvisioningState(FailedValue);
-        /// <summary> The managed HSM Pool is currently being updated. </summary>
+        /// <summary> Updating. </summary>
         public static ProvisioningState Updating { get; } = new ProvisioningState(UpdatingValue);
-        /// <summary> The managed HSM Pool is currently being deleted. </summary>
+        /// <summary> Deleting. </summary>
         public static ProvisioningState Deleting { get; } = new ProvisioningState(DeletingValue);
-        /// <summary> The managed HSM pool is ready for normal use. </summary>
+        /// <summary> Failed. </summary>
+        public static ProvisioningState Failed { get; } = new ProvisioningState(FailedValue);
+        /// <summary> Provisioning. </summary>
+        public static ProvisioningState Provisioning { get; } = new ProvisioningState(ProvisioningValue);
+        /// <summary> Activated. </summary>
         public static ProvisioningState Activated { get; } = new ProvisioningState(ActivatedValue);
-        /// <summary> The managed HSM pool is waiting for a security domain restore action. </summary>
+        /// <summary> SecurityDomainRestore. </summary>
         public static ProvisioningState SecurityDomainRestore { get; } = new ProvisioningState(SecurityDomainRestoreValue);
-        /// <summary> The managed HSM pool is being restored from full HSM backup. </summary>
+        /// <summary> Restoring. </summary>
         public static ProvisioningState Restoring { get; } = new ProvisioningState(RestoringValue);
         /// <summary> Determines if two <see cref="ProvisioningState"/> values are the same. </summary>
         public static bool operator ==(ProvisioningState left, ProvisioningState right) => left.Equals(right);

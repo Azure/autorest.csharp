@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace custom_baseUrl_LowLevel
 {
-    // Data plane generated client. The Paths service client.
+    // Data plane generated client.
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient
     {

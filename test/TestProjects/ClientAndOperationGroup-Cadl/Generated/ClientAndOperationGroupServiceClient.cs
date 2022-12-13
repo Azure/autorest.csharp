@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace Azure.ClientAndOperationGroupService
 {
-    // Data plane generated client. The ClientAndOperationGroupService service client.
+    // Data plane generated client.
     /// <summary> The ClientAndOperationGroupService service client. </summary>
     public partial class ClientAndOperationGroupServiceClient
     {

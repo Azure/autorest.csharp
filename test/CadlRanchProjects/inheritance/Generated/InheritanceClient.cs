@@ -15,7 +15,7 @@ using Models.Inheritance.Models;
 
 namespace Models.Inheritance
 {
-    // Data plane generated client. Illustrates inheritance and polymorphic model.
+    // Data plane generated client.
     /// <summary> Illustrates inheritance and polymorphic model. </summary>
     public partial class InheritanceClient
     {

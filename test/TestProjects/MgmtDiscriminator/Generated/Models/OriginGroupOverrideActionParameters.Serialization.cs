@@ -35,7 +35,7 @@ namespace MgmtDiscriminator.Models
                 }
                 if (property.NameEquals("originGroup"))
                 {
-                    originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.ToString());
+                    originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
             }
