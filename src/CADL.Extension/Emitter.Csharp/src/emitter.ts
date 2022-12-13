@@ -87,26 +87,26 @@ import {
 } from "@azure-tools/cadl-dpg";
 import { ClientKind } from "./type/ClientKind.js";
 import { getVersions } from "@cadl-lang/versioning";
+import { EmitContext } from "@cadl-lang/compiler/*";
 
 export interface NetEmitterOptions {
-    "sdk-folder": string;
-    outputFile: string;
-    logFile: string;
+    outputFile?: string;
+    logFile?: string;
+    "emitter-output-dir"?: string;
     namespace?: string;
     "library-name"?: string;
     "single-top-level-client"?: boolean;
-    skipSDKGeneration: boolean;
-    generateConvenienceAPI: boolean; //workaround for cadl-ranch project
+    skipSDKGeneration?: boolean;
+    generateConvenienceAPI?: boolean; //workaround for cadl-ranch project
     "unreferenced-types-handling"?: "removeOrInternalize" | "internalize" | "keepAll";
-    "new-project": boolean;
-    csharpGeneratorPath: string;
+    "new-project"?: boolean;
+    csharpGeneratorPath?: string;
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
 }
 
 const defaultOptions = {
-    "sdk-folder": ".",
     outputFile: "cadl.json",
     logFile: "log.json",
     skipSDKGeneration: false,
@@ -120,17 +120,17 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     type: "object",
     additionalProperties: false,
     properties: {
-        "sdk-folder": { type: "string", nullable: true },
         outputFile: { type: "string", nullable: true },
         logFile: { type: "string", nullable: true },
+        "emitter-output-dir": { type: "string", nullable: true },
         namespace: { type: "string", nullable: true },
         "library-name": { type: "string", nullable: true },
         "single-top-level-client": { type: "boolean", nullable: true },
-        skipSDKGeneration: { type: "boolean", default: false },
+        skipSDKGeneration: { type: "boolean", default: false, nullable: true },
         generateConvenienceAPI: { type: "boolean", nullable: true },
         "unreferenced-types-handling": { type: "string", enum: ["removeOrInternalize", "internalize", "keepAll"], nullable: true },
         "new-project": { type: "boolean", nullable: true },
-        csharpGeneratorPath: { type: "string", nullable: true },
+        csharpGeneratorPath: { type: "string", default: dllFilePath, nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
         "save-inputs": { type: "boolean", nullable: true },
         "model-namespace": { type: "boolean", nullable: true }
@@ -147,22 +147,21 @@ export const $lib = createCadlLibrary({
 });
 
 export async function $onEmit(
-    program: Program,
-    emitterOptions: NetEmitterOptions
+    context: EmitContext<NetEmitterOptions>
 ) {
+    const program: Program = context.program;
+    const emitterOptions = context.options;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
     const resolvedSharedFolders: string[] = [];
     const outputFolder = resolvePath(
-        program.compilerOptions.outputPath ?? "./cadl-output",
-        emitterOptions["sdk-folder"]
+        emitterOptions["emitter-output-dir"] ?? "./cadl-output"
     );
     const options: NetEmitterOptions = {
         outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
         logFile: resolvePath(
-            program.compilerOptions.outputPath ?? "./cadl-output",
+            emitterOptions["emitter-output-dir"] ?? "./cadl-output",
             resolvedOptions.logFile
         ),
-        "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
         "unreferenced-types-handling": resolvedOptions["unreferenced-types-handling"],
@@ -186,12 +185,12 @@ export async function $onEmit(
             const resolvedSharedFolders: string[] = [];
             const sharedFolders = [
                 resolvePath(
-                    options.csharpGeneratorPath,
+                    options.csharpGeneratorPath ?? dllFilePath,
                     "..",
                     "Generator.Shared"
                 ),
                 resolvePath(
-                    options.csharpGeneratorPath,
+                    options.csharpGeneratorPath ?? dllFilePath,
                     "..",
                     "Azure.Core.Shared"
                 )
@@ -239,7 +238,7 @@ export async function $onEmit(
                     ? "--new-project"
                     : "";
                 const command = `dotnet --roll-forward Major ${resolvePath(
-                    options.csharpGeneratorPath
+                    options.csharpGeneratorPath ?? dllFilePath
                 )} --project-path ${outputFolder} ${newProjectOption}`;
                 console.info(command);
 

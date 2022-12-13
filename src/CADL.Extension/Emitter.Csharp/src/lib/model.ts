@@ -8,10 +8,8 @@ import {
     getEffectiveModelType,
     getFormat,
     getFriendlyName,
-    getIntrinsicModelName,
     getKnownValues,
     getVisibility,
-    isIntrinsic,
     Model,
     ModelProperty,
     Namespace,
@@ -25,7 +23,9 @@ import {
     TrackableType,
     getDiscriminator,
     IntrinsicType,
-    isVoidType
+    isVoidType,
+    isArrayModelType,
+    isRecordModelType
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -115,8 +115,8 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Time;
         case "duration":
             return InputTypeKind.Duration;
-        case "Map":
-            return InputTypeKind.Dictionary;
+        // case "Map":
+        //     return InputTypeKind.Dictionary;
         default:
             return InputTypeKind.Model;
     }
@@ -130,7 +130,10 @@ export function mapCadlIntrinsicModelToCsharpModel(
     program: Program,
     cadlType: Model
 ): string | undefined {
-    if (!isIntrinsic(program, cadlType)) {
+    // if (!isIntrinsic(program, cadlType)) {
+    //     return undefined;
+    // }
+    if (!program.checker.isStdType(cadlType)) {
         return undefined;
     }
     //const name = getIntrinsicModelName(program, cadlType);
@@ -172,7 +175,7 @@ export function mapCadlIntrinsicModelToCsharpModel(
             return "TimeSpan";
         case "duration":
             return "TimeSpan";
-        case "Map":
+        case "Record":
             // We assert on valType because Map types always have a type
             return "Dictionary";
         default:
@@ -262,50 +265,71 @@ export function getInputType(
         return getInputTypeForEnum(type);
     } else if (type.kind === "Intrinsic") {
         return getInputModelForIntrinsicType(type);
+    } else if (type.kind === "Scalar" && program.checker.isStdType(type)) {
+        return {
+            Name: type.name,
+            Kind: getCSharpInputTypeKindByIntrinsicModelName(
+                type.name
+            ),
+            IsNullable: false
+        } as InputPrimitiveType;
+    } else if (type.kind === "Union") {
+        throw new Error(`Union is not supported.`);
     } else {
-        throw new Error("Unsupported type.");
+        throw new Error(`Unsupported type ${type.kind}`);
     }
 
     function getInputModelType(m: Model): InputType {
-        const intrinsicName = getIntrinsicModelName(program, m);
-        if (intrinsicName) {
-            switch (intrinsicName) {
-                case "string":
-                    const values = getKnownValues(program, m);
-                    if (values) {
-                        return getInputModelForExtensibleEnum(m, values);
-                    }
-                // if the model is one of the Cadl Intrinsic type.
-                // it's a base Cadl "primitive" that corresponds directly to an c# data type.
-                // In such cases, we don't want to emit a ref and instead just
-                // emit the base type directly.
-                default:
-                    return {
-                        Name: m.name,
-                        Kind: getCSharpInputTypeKindByIntrinsicModelName(
-                            intrinsicName
-                        ),
-                        IsNullable: false
-                    } as InputPrimitiveType;
-            }
-        }
+        // const intrinsicName = getIntrinsicModelName(program, m);
+        // if (intrinsicName) {
+        //     switch (intrinsicName) {
+        //         case "string":
+        //             const values = getKnownValues(program, m);
+        //             if (values) {
+        //                 return getInputModelForExtensibleEnum(m, values);
+        //             }
+        //         // if the model is one of the Cadl Intrinsic type.
+        //         // it's a base Cadl "primitive" that corresponds directly to an c# data type.
+        //         // In such cases, we don't want to emit a ref and instead just
+        //         // emit the base type directly.
+        //         default:
+        //             return {
+        //                 Name: m.name,
+        //                 Kind: getCSharpInputTypeKindByIntrinsicModelName(
+        //                     intrinsicName
+        //                 ),
+        //                 IsNullable: false
+        //             } as InputPrimitiveType;
+        //     }
+        // }
 
         /* Array and Map Type. */
-        if (m.indexer) {
-            if (!isNeverType(m.indexer.key)) {
-                const name = getIntrinsicModelName(program, m.indexer.key);
-                if (m.indexer.value) {
-                    if (name === "integer") {
-                        return getInputTypeForArray(m.indexer.value);
-                    } else {
-                        return getInputTypeForMap(
+        if (!isNeverType(m)) {
+            if (isArrayModelType(program, m)) {
+                return getInputTypeForArray(m.indexer.value);
+            } else if (isRecordModelType(program, m)) {
+                return getInputTypeForMap(
                             m.indexer.key,
                             m.indexer.value
                         );
-                    }
-                }
             }
         }
+        
+        // if (m.indexer) {
+        //     if (!isNeverType(m.indexer.key)) {
+        //         const name = getIntrinsicModelName(program, m.indexer.key);
+        //         if (m.indexer.value) {
+        //             if (name === "integer") {
+        //                 return getInputTypeForArray(m.indexer.value);
+        //             } else {
+        //                 return getInputTypeForMap(
+        //                     m.indexer.key,
+        //                     m.indexer.value
+        //                 );
+        //             }
+        //         }
+        //     }
+        // }
 
         return getInputModelForModel(m);
     }
@@ -508,8 +532,11 @@ export function getInputType(
         }
 
         // Cadl "primitive" types can't be base types for models
-        const intrinsicName = getIntrinsicModelName(program, m);
-        if (intrinsicName) {
+        // const intrinsicName = getIntrinsicModelName(program, m);
+        // if (intrinsicName) {
+        //     return undefined;
+        // }
+        if (program.checker.isStdType(m)) {
             return undefined;
         }
 
