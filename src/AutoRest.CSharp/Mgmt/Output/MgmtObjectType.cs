@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -60,16 +61,46 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            List<ObjectTypeProperty> objTypeProperties = new List<ObjectTypeProperty>();
             var parentProperties = GetParentPropertyNames();
             foreach (var property in base.BuildProperties())
             {
                 if (!parentProperties.Contains(property.Declaration.Name))
                 {
                     var propertyType = CreatePropertyType(property);
+                    // check if the type of this property is "single property type"
+                    if (IsSinglePropertyObject(propertyType))
+                    {
+                        propertyType = propertyType.MarkFlatten();
+                    }
                     yield return propertyType;
                 }
             }
+        }
+
+        private static bool IsSinglePropertyObject(ObjectTypeProperty property)
+        {
+            if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
+                return false;
+
+            return objType switch
+            {
+                SystemObjectType systemObjectType => HandleSystemObjectType(systemObjectType),
+                SchemaObjectType mgmtObjectType => HandleMgmtObjectType(mgmtObjectType),
+                _ => throw new InvalidOperationException($"Unhandled case {objType.GetType()} for property {property.Declaration.Type} {property.Declaration.Name}")
+            };
+        }
+
+        private static bool HandleMgmtObjectType(SchemaObjectType objType)
+        {
+            // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
+            var properties = objType.GetCombinedSchemas().SelectMany(obj => obj.Properties).ToArray();
+            return properties.Length == 1 && objType.Discriminator == null;
+        }
+
+        private static bool HandleSystemObjectType(SystemObjectType objType)
+        {
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).ToArray();
+            return properties.Length == 1 && objType.Discriminator == null;
         }
 
         private IEnumerable<ObjectTypeProperty> BuildMyProperties()
@@ -90,8 +121,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Length; i++)
                 {
                     var argType = objectTypeProperty.ValueType.Arguments[i];
-                    var typeToReplace = argType.IsFrameworkType ? null : argType.Implementation as MgmtObjectType;
-                    if (typeToReplace != null)
+                    if (argType.TryCast<MgmtObjectType>(out var typeToReplace))
                     {
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                         objectTypeProperty.ValueType.Arguments[i] = match ?? argType;
@@ -102,8 +132,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             else
             {
                 ObjectTypeProperty propertyType = objectTypeProperty;
-                var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
-                if (typeToReplace != null)
+                if (objectTypeProperty.ValueType.TryCast<MgmtObjectType>(out var typeToReplace))
                 {
                     var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)
