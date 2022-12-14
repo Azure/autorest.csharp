@@ -187,7 +187,7 @@ namespace ResourceRename
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sshPublicKeyInfoSshPublicKeysRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sshPublicKeyInfoSshPublicKeysRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new SshPublicKeyInfoResource(Client, SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(e)), _sshPublicKeyInfoSshPublicKeysClientDiagnostics, Pipeline, "SshPublicKeyInfoCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SshPublicKeyInfoResource(Client, SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(e)), _sshPublicKeyInfoSshPublicKeysClientDiagnostics, Pipeline, "SshPublicKeyInfoCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

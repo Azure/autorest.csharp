@@ -174,7 +174,7 @@ namespace dpg_customization_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesRequest(mode, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
         }
 
         /// <summary> Get pages that you will either return to users in pages of raw bodies, or pages of models following growup. </summary>

@@ -69,7 +69,7 @@ namespace Pagination
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLedgerEntriesNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetLedgerEntries", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetLedgerEntries", "value", "nextLink", context);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
@@ -92,7 +92,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLedgerEntriesNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetLedgerEntries", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetLedgerEntries", "value", "nextLink", context);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
@@ -114,7 +114,7 @@ namespace Pagination
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationClientsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationClientsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationClients", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationClients", "value", "nextLink", context);
         }
 
         /// <summary> List upload detail for the discovery resource. </summary>
@@ -136,7 +136,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationClientsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationClientsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationClients", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationClients", "value", "nextLink", context);
         }
 
         /// <summary> List upload detail for the discovery resource. </summary>

@@ -187,7 +187,7 @@ namespace MgmtSafeFlatten
         public virtual AsyncPageable<TypeTwoResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeTwoCommonRestClient.CreateListTypeTwosRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), _typeTwoCommonClientDiagnostics, Pipeline, "TypeTwoCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), _typeTwoCommonClientDiagnostics, Pipeline, "TypeTwoCollection.GetAll", "Value", null);
         }
 
         /// <summary>

@@ -182,7 +182,7 @@ namespace NoTypeReplacement
         public virtual AsyncPageable<NoTypeReplacementModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new NoTypeReplacementModel1Resource(Client, NoTypeReplacementModel1Data.DeserializeNoTypeReplacementModel1Data(e)), _noTypeReplacementModel1ClientDiagnostics, Pipeline, "NoTypeReplacementModel1Collection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new NoTypeReplacementModel1Resource(Client, NoTypeReplacementModel1Data.DeserializeNoTypeReplacementModel1Data(e)), _noTypeReplacementModel1ClientDiagnostics, Pipeline, "NoTypeReplacementModel1Collection.GetAll", "Value", null);
         }
 
         /// <summary>

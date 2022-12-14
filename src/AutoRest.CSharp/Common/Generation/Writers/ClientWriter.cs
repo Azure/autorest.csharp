@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 
         protected void WriteClientFields(CodeWriter writer, RestClient client, bool writePipelineField)
         {
-            writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
+            writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField.GetReferenceFormattable()};");
             if (writePipelineField)
                 writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
             writer.Append($"{RestClientAccessibility} {client.Type} {RestClientField}").LineRaw(" { get; }");

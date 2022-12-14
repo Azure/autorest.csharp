@@ -182,7 +182,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<DisplayResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _displayResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new DisplayResource(Client, DisplayResourceData.DeserializeDisplayResourceData(e)), _displayResourceClientDiagnostics, Pipeline, "DisplayResourceCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new DisplayResource(Client, DisplayResourceData.DeserializeDisplayResourceData(e)), _displayResourceClientDiagnostics, Pipeline, "DisplayResourceCollection.GetAll", "Value", null);
         }
 
         /// <summary>

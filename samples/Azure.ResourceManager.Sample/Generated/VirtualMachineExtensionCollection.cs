@@ -189,7 +189,7 @@ namespace Azure.ResourceManager.Sample
         public virtual AsyncPageable<VirtualMachineExtensionResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineExtensionRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new VirtualMachineExtensionResource(Client, VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(e)), _virtualMachineExtensionClientDiagnostics, Pipeline, "VirtualMachineExtensionCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new VirtualMachineExtensionResource(Client, VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(e)), _virtualMachineExtensionClientDiagnostics, Pipeline, "VirtualMachineExtensionCollection.GetAll", "Value", null);
         }
 
         /// <summary>

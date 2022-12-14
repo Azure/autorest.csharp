@@ -119,7 +119,7 @@ namespace Azure.Network.Management.Interface
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName, networkInterfaceName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration, _clientDiagnostics, _pipeline, "NetworkInterfaceTapConfigurationsClient.List", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration, _clientDiagnostics, _pipeline, "NetworkInterfaceTapConfigurationsClient.List", "value", "nextLink", context);
         }
 
         /// <summary> Get all Tap configurations in a network interface. </summary>

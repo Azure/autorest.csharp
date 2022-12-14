@@ -179,7 +179,7 @@ namespace MgmtNonStringPathVariable
         public virtual AsyncPageable<FakeResource> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, optionalParam);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "Value", null);
         }
 
         /// <summary>

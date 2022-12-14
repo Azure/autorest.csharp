@@ -182,7 +182,7 @@ namespace SupersetInheritance
         public virtual AsyncPageable<SupersetModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new SupersetModel1Resource(Client, SupersetModel1Data.DeserializeSupersetModel1Data(e)), _supersetModel1ClientDiagnostics, Pipeline, "SupersetModel1Collection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new SupersetModel1Resource(Client, SupersetModel1Data.DeserializeSupersetModel1Data(e)), _supersetModel1ClientDiagnostics, Pipeline, "SupersetModel1Collection.GetAll", "Value", null);
         }
 
         /// <summary>

@@ -207,7 +207,7 @@ namespace MixApiVersion
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPetsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPetsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "MixApiVersionClient.GetPets", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "MixApiVersionClient.GetPets", "value", "nextLink", context);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>

@@ -120,7 +120,7 @@ namespace ExactMatchInheritance
         public virtual AsyncPageable<ExactMatchModel3> GetExactMatchModel3sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ExactMatchModel3sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, ExactMatchModel3.DeserializeExactMatchModel3, ExactMatchModel3sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetExactMatchModel3s", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, ExactMatchModel3.DeserializeExactMatchModel3, ExactMatchModel3sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetExactMatchModel3s", "Value", null);
         }
 
         /// <summary>

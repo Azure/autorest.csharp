@@ -141,7 +141,7 @@ namespace dpg_customization_LowLevel
             Argument.AssertNotNull(mode, nameof(mode));
 
             var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : default;
-            return PageableHelpers.CreatePageableAsync
+            return PageableHelpers.CreateAsyncPageable
             (
                 _ => CreateGetPagesRequest(mode, requestContext),
                 (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),

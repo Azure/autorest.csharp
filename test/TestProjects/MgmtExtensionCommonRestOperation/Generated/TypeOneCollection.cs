@@ -187,7 +187,7 @@ namespace MgmtExtensionCommonRestOperation
         public virtual AsyncPageable<TypeOneResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeOneCommonRestClient.CreateListTypeOnesRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "Value", null);
         }
 
         /// <summary>

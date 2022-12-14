@@ -69,7 +69,7 @@ namespace custom_baseUrl_paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlRequest(accountName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", context);
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
@@ -101,7 +101,7 @@ namespace custom_baseUrl_paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlOperationRequest(accountName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", context);
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
@@ -135,7 +135,7 @@ namespace custom_baseUrl_paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", context);
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>

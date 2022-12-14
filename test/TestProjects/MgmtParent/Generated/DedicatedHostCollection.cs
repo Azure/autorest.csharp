@@ -190,7 +190,7 @@ namespace MgmtParent
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _dedicatedHostRestClient.CreateListByHostGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _dedicatedHostRestClient.CreateListByHostGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new DedicatedHostResource(Client, DedicatedHostData.DeserializeDedicatedHostData(e)), _dedicatedHostClientDiagnostics, Pipeline, "DedicatedHostCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new DedicatedHostResource(Client, DedicatedHostData.DeserializeDedicatedHostData(e)), _dedicatedHostClientDiagnostics, Pipeline, "DedicatedHostCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

@@ -190,7 +190,7 @@ namespace TenantOnly
         public virtual AsyncPageable<BillingAccountResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _billingAccountRestClient.CreateListRequest(expand);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new BillingAccountResource(Client, BillingAccountData.DeserializeBillingAccountData(e)), _billingAccountClientDiagnostics, Pipeline, "BillingAccountCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BillingAccountResource(Client, BillingAccountData.DeserializeBillingAccountData(e)), _billingAccountClientDiagnostics, Pipeline, "BillingAccountCollection.GetAll", "Value", null);
         }
 
         /// <summary>

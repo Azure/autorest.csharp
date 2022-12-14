@@ -190,7 +190,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetARecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetARecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "A".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new RecordSetAResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetARecordSetsClientDiagnostics, Pipeline, "RecordSetACollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetAResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetARecordSetsClientDiagnostics, Pipeline, "RecordSetACollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

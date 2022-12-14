@@ -367,7 +367,7 @@ namespace MgmtRenameRules
         public virtual AsyncPageable<VirtualMachineSize> GetAvailableSizesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineRestClient.CreateListAvailableSizesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, VirtualMachineSize.DeserializeVirtualMachineSize, _virtualMachineClientDiagnostics, Pipeline, "VirtualMachineResource.GetAvailableSizes", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, VirtualMachineSize.DeserializeVirtualMachineSize, _virtualMachineClientDiagnostics, Pipeline, "VirtualMachineResource.GetAvailableSizes", "Value", null);
         }
 
         /// <summary>

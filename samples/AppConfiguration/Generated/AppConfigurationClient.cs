@@ -482,7 +482,7 @@ namespace AppConfiguration
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetKeysRequest(name, after, acceptDatetime);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, Key.DeserializeKey, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeys", "items", "@nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Key.DeserializeKey, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeys", "items", "@nextLink", context);
         }
 
         /// <summary> Gets a list of keys. </summary>
@@ -510,7 +510,7 @@ namespace AppConfiguration
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeyValues", "items", "@nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeyValues", "items", "@nextLink", context);
         }
 
         /// <summary> Gets a list of key-values. </summary>
@@ -539,7 +539,7 @@ namespace AppConfiguration
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetLabelsRequest(name, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, Label.DeserializeLabel, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetLabels", "items", "@nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Label.DeserializeLabel, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetLabels", "items", "@nextLink", context);
         }
 
         /// <summary> Gets a list of labels. </summary>
@@ -568,7 +568,7 @@ namespace AppConfiguration
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetRevisions", "items", "@nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetRevisions", "items", "@nextLink", context);
         }
 
         /// <summary> Gets a list of key-value revisions. </summary>

@@ -300,7 +300,7 @@ namespace MgmtMockAndSample
         public virtual AsyncPageable<MhsmPrivateLinkResource> GetMHSMPrivateLinkResourcesByMhsmResourceAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mhsmPrivateLinkResourcesRestClient.CreateListByMhsmResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, MhsmPrivateLinkResource.DeserializeMhsmPrivateLinkResource, _mhsmPrivateLinkResourcesClientDiagnostics, Pipeline, "ManagedHsmResource.GetMHSMPrivateLinkResourcesByMhsmResource", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, MhsmPrivateLinkResource.DeserializeMhsmPrivateLinkResource, _mhsmPrivateLinkResourcesClientDiagnostics, Pipeline, "ManagedHsmResource.GetMHSMPrivateLinkResourcesByMhsmResource", "Value", null);
         }
 
         /// <summary>

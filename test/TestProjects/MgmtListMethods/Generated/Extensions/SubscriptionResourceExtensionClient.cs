@@ -120,7 +120,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChWithLocRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => FakeParentWithAncestorWithNonResChWithLocRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorWithNonResChWithLocResource(Client, FakeParentWithAncestorWithNonResChWithLocData.DeserializeFakeParentWithAncestorWithNonResChWithLocData(e)), FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFakeParentWithAncestorWithNonResourceChWithLoc", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorWithNonResChWithLocResource(Client, FakeParentWithAncestorWithNonResChWithLocData.DeserializeFakeParentWithAncestorWithNonResChWithLocData(e)), FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFakeParentWithAncestorWithNonResourceChWithLoc", "Value", "NextLink");
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(string location, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChWithLocRestClient.CreateListTestByLocationsRequest(Id.SubscriptionId, location);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs", "Value", null);
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => FakeParentWithAncestorWithNonResChRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorWithNonResChResource(Client, FakeParentWithAncestorWithNonResChData.DeserializeFakeParentWithAncestorWithNonResChData(e)), FakeParentWithAncestorWithNonResChClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFakeParentWithAncestorWithNonResChes", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorWithNonResChResource(Client, FakeParentWithAncestorWithNonResChData.DeserializeFakeParentWithAncestorWithNonResChData(e)), FakeParentWithAncestorWithNonResChClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFakeParentWithAncestorWithNonResChes", "Value", "NextLink");
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithLocRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => FakeParentWithAncestorWithLocRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorWithLocResource(Client, FakeParentWithAncestorWithLocData.DeserializeFakeParentWithAncestorWithLocData(e)), FakeParentWithAncestorWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFakeParentWithAncestorWithLocs", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorWithLocResource(Client, FakeParentWithAncestorWithLocData.DeserializeFakeParentWithAncestorWithLocData(e)), FakeParentWithAncestorWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFakeParentWithAncestorWithLocs", "Value", "NextLink");
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithLocRestClient.CreateListTestByLocationsRequest(Id.SubscriptionId, location);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => FakeParentWithAncestorWithLocRestClient.CreateListTestByLocationsNextPageRequest(nextLink, Id.SubscriptionId, location);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorWithLocResource(Client, FakeParentWithAncestorWithLocData.DeserializeFakeParentWithAncestorWithLocData(e)), FakeParentWithAncestorWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFakeParentWithAncestorWithLocsByLocation", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorWithLocResource(Client, FakeParentWithAncestorWithLocData.DeserializeFakeParentWithAncestorWithLocData(e)), FakeParentWithAncestorWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFakeParentWithAncestorWithLocsByLocation", "Value", "NextLink");
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => FakeParentWithAncestorRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorResource(Client, FakeParentWithAncestorData.DeserializeFakeParentWithAncestorData(e)), FakeParentWithAncestorClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFakeParentWithAncestors", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorResource(Client, FakeParentWithAncestorData.DeserializeFakeParentWithAncestorData(e)), FakeParentWithAncestorClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFakeParentWithAncestors", "Value", "NextLink");
         }
 
         /// <summary>
@@ -291,7 +291,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorWithNonResChWithLocRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResGrpParentWithAncestorWithNonResChWithLocRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId, expand);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, ResGrpParentWithAncestorWithNonResChWithLocData.DeserializeResGrpParentWithAncestorWithNonResChWithLocData(e)), ResGrpParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetResGrpParentWithAncestorWithNonResChWithLocs", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, ResGrpParentWithAncestorWithNonResChWithLocData.DeserializeResGrpParentWithAncestorWithNonResChWithLocData(e)), ResGrpParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetResGrpParentWithAncestorWithNonResChWithLocs", "Value", "NextLink");
         }
 
         /// <summary>
@@ -321,7 +321,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorWithNonResChRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResGrpParentWithAncestorWithNonResChRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId, expand);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithAncestorWithNonResChResource(Client, ResGrpParentWithAncestorWithNonResChData.DeserializeResGrpParentWithAncestorWithNonResChData(e)), ResGrpParentWithAncestorWithNonResChClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetResGrpParentWithAncestorWithNonResChes", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithAncestorWithNonResChResource(Client, ResGrpParentWithAncestorWithNonResChData.DeserializeResGrpParentWithAncestorWithNonResChData(e)), ResGrpParentWithAncestorWithNonResChClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetResGrpParentWithAncestorWithNonResChes", "Value", "NextLink");
         }
 
         /// <summary>
@@ -350,7 +350,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorWithLocRestClient.CreateListTestRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResGrpParentWithAncestorWithLocRestClient.CreateListTestNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithAncestorWithLocResource(Client, ResGrpParentWithAncestorWithLocData.DeserializeResGrpParentWithAncestorWithLocData(e)), ResGrpParentWithAncestorWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetResGrpParentWithAncestorWithLocs", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithAncestorWithLocResource(Client, ResGrpParentWithAncestorWithLocData.DeserializeResGrpParentWithAncestorWithLocData(e)), ResGrpParentWithAncestorWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetResGrpParentWithAncestorWithLocs", "Value", "NextLink");
         }
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorWithLocRestClient.CreateListAllRequest(Id.SubscriptionId, location);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResGrpParentWithAncestorWithLocRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, location);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, ResGrpParentWithAncestorWithNonResChWithLocData.DeserializeResGrpParentWithAncestorWithNonResChWithLocData(e)), ResGrpParentWithAncestorWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, ResGrpParentWithAncestorWithNonResChWithLocData.DeserializeResGrpParentWithAncestorWithNonResChWithLocData(e)), ResGrpParentWithAncestorWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc", "Value", "NextLink");
         }
 
         /// <summary>
@@ -407,7 +407,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestorsAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorRestClient.CreateNonPageableListBySubscriptionRequest(Id.SubscriptionId);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new ResGrpParentWithAncestorResource(Client, ResGrpParentWithAncestorData.DeserializeResGrpParentWithAncestorData(e)), ResGrpParentWithAncestorClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetResGrpParentWithAncestors", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ResGrpParentWithAncestorResource(Client, ResGrpParentWithAncestorData.DeserializeResGrpParentWithAncestorData(e)), ResGrpParentWithAncestorClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetResGrpParentWithAncestors", "Value", null);
         }
 
         /// <summary>
@@ -435,7 +435,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<UpdateWorkspaceQuotas> UpdateAllQuotaAsync(string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => QuotasRestClient.CreateUpdateRequest(Id.SubscriptionId, location, content);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, UpdateWorkspaceQuotas.DeserializeUpdateWorkspaceQuotas, QuotasClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.UpdateAllQuota", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, UpdateWorkspaceQuotas.DeserializeUpdateWorkspaceQuotas, QuotasClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.UpdateAllQuota", "Value", null);
         }
 
         /// <summary>

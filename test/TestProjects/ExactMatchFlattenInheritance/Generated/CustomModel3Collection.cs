@@ -187,7 +187,7 @@ namespace ExactMatchFlattenInheritance
         public virtual AsyncPageable<CustomModel3Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _customModel3RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new CustomModel3Resource(Client, CustomModel3Data.DeserializeCustomModel3Data(e)), _customModel3ClientDiagnostics, Pipeline, "CustomModel3Collection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new CustomModel3Resource(Client, CustomModel3Data.DeserializeCustomModel3Data(e)), _customModel3ClientDiagnostics, Pipeline, "CustomModel3Collection.GetAll", "Value", null);
         }
 
         /// <summary>

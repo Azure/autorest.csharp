@@ -207,7 +207,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChResource.GetNonResourceChild", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChResource.GetNonResourceChild", "Value", null);
         }
 
         /// <summary>

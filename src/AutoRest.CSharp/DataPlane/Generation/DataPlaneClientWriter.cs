@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
-                    writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
                     writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"{library.Authentication.ApiKey.Name}\"));");
                     writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                     foreach (var parameter in client.RestClient.Parameters)
@@ -176,7 +176,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (parameter == KnownParameters.ClientDiagnostics)
                         {
-                            writer.Append($"{ClientDiagnosticsField}, ");
+                            writer.Append($"{ClientDiagnosticsField.GetReferenceFormattable()}, ");
                         }
                         else if (parameter == KnownParameters.Pipeline)
                         {
@@ -216,7 +216,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
-                    writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
                     var scopesParam = new CodeWriterDeclaration("scopes");
                     writer.Append($"string[] {scopesParam:D} = ");
                     writer.Append($"{{ ");
@@ -237,7 +237,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (parameter == KnownParameters.ClientDiagnostics)
                         {
-                            writer.Append($"{ClientDiagnosticsField}, ");
+                            writer.Append($"{ClientDiagnosticsField.GetReferenceFormattable()}, ");
                         }
                         else if (parameter == KnownParameters.Pipeline)
                         {
@@ -260,7 +260,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer
                     .Line($"this.RestClient = new {client.RestClient.Type}({client.RestClient.Parameters.GetIdentifiersFormattable()});")
-                    .Line($"{ClientDiagnosticsField} = {KnownParameters.ClientDiagnostics.Name:I};")
+                    .Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = {KnownParameters.ClientDiagnostics.Name:I};")
                     .Line($"{PipelineField} = {KnownParameters.Pipeline.Name:I};");
             }
             writer.Line();
@@ -339,7 +339,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     writer.Line($"cancellationToken){configureText};");
 
-                    writer.Append($"return new {lroMethod.Operation.Type}({ClientDiagnosticsField}, {PipelineField}, RestClient.{RequestWriterHelpers.CreateRequestMethodName(originalMethod.Name)}(");
+                    writer.Append($"return new {lroMethod.Operation.Type}({ClientDiagnosticsField.GetReferenceFormattable()}, {PipelineField}, RestClient.{RequestWriterHelpers.CreateRequestMethodName(originalMethod.Name)}(");
                     foreach (Parameter parameter in parameters)
                     {
                         writer.Append($"{parameter.Name}, ");

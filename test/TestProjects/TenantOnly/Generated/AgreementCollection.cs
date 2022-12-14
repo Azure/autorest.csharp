@@ -123,7 +123,7 @@ namespace TenantOnly
         public virtual AsyncPageable<AgreementResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _agreementRestClient.CreateListRequest(Id.Name, expand);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new AgreementResource(Client, AgreementData.DeserializeAgreementData(e)), _agreementClientDiagnostics, Pipeline, "AgreementCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AgreementResource(Client, AgreementData.DeserializeAgreementData(e)), _agreementClientDiagnostics, Pipeline, "AgreementCollection.GetAll", "Value", null);
         }
 
         /// <summary>

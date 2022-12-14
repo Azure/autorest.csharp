@@ -182,7 +182,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<MachineResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _machineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new MachineResource(Client, MachineData.DeserializeMachineData(e)), _machineClientDiagnostics, Pipeline, "MachineCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new MachineResource(Client, MachineData.DeserializeMachineData(e)), _machineClientDiagnostics, Pipeline, "MachineCollection.GetAll", "Value", null);
         }
 
         /// <summary>

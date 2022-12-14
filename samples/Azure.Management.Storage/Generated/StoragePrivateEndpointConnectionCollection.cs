@@ -186,7 +186,7 @@ namespace Azure.Management.Storage
         public virtual AsyncPageable<StoragePrivateEndpointConnectionResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _storagePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new StoragePrivateEndpointConnectionResource(Client, StoragePrivateEndpointConnectionData.DeserializeStoragePrivateEndpointConnectionData(e)), _storagePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, "StoragePrivateEndpointConnectionCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new StoragePrivateEndpointConnectionResource(Client, StoragePrivateEndpointConnectionData.DeserializeStoragePrivateEndpointConnectionData(e)), _storagePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, "StoragePrivateEndpointConnectionCollection.GetAll", "Value", null);
         }
 
         /// <summary>

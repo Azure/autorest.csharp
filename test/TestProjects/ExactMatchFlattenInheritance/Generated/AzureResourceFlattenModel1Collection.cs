@@ -187,7 +187,7 @@ namespace ExactMatchFlattenInheritance
         public virtual AsyncPageable<AzureResourceFlattenModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _azureResourceFlattenModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new AzureResourceFlattenModel1Resource(Client, AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(e)), _azureResourceFlattenModel1ClientDiagnostics, Pipeline, "AzureResourceFlattenModel1Collection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AzureResourceFlattenModel1Resource(Client, AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(e)), _azureResourceFlattenModel1ClientDiagnostics, Pipeline, "AzureResourceFlattenModel1Collection.GetAll", "Value", null);
         }
 
         /// <summary>

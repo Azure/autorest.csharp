@@ -193,7 +193,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _zoneRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _zoneRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new ZoneResource(Client, ZoneData.DeserializeZoneData(e)), _zoneClientDiagnostics, Pipeline, "ZoneCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ZoneResource(Client, ZoneData.DeserializeZoneData(e)), _zoneClientDiagnostics, Pipeline, "ZoneCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

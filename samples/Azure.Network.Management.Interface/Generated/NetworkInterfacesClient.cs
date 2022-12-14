@@ -153,7 +153,7 @@ namespace Azure.Network.Management.Interface
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListAllRequest();
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListAllNextPageRequest(nextLink);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, NetworkInterface.DeserializeNetworkInterface, _clientDiagnostics, _pipeline, "NetworkInterfacesClient.ListAll", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, NetworkInterface.DeserializeNetworkInterface, _clientDiagnostics, _pipeline, "NetworkInterfacesClient.ListAll", "value", "nextLink", context);
         }
 
         /// <summary> Gets all network interfaces in a subscription. </summary>
@@ -177,7 +177,7 @@ namespace Azure.Network.Management.Interface
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, NetworkInterface.DeserializeNetworkInterface, _clientDiagnostics, _pipeline, "NetworkInterfacesClient.List", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, NetworkInterface.DeserializeNetworkInterface, _clientDiagnostics, _pipeline, "NetworkInterfacesClient.List", "value", "nextLink", context);
         }
 
         /// <summary> Gets all network interfaces in a resource group. </summary>

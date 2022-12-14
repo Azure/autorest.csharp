@@ -158,7 +158,7 @@ namespace MgmtHierarchicalNonResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImagesRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImagesRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, SharedGalleryImage.DeserializeSharedGalleryImage, _sharedGalleryImagesClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImages", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, SharedGalleryImage.DeserializeSharedGalleryImage, _sharedGalleryImagesClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImages", "Value", "NextLink");
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MgmtHierarchicalNonResource
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImageVersionsRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImageVersionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion, _sharedGalleryImageVersionsClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImageVersions", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion, _sharedGalleryImageVersionsClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImageVersions", "Value", "NextLink");
         }
 
         /// <summary>

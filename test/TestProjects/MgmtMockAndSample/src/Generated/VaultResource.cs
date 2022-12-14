@@ -292,7 +292,7 @@ namespace MgmtMockAndSample
         public virtual AsyncPageable<VaultKey> GetKeysAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _vaultRestClient.CreateListKeysRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, VaultKey.DeserializeVaultKey, _vaultClientDiagnostics, Pipeline, "VaultResource.GetKeys", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, VaultKey.DeserializeVaultKey, _vaultClientDiagnostics, Pipeline, "VaultResource.GetKeys", "Value", null);
         }
 
         /// <summary>
@@ -460,7 +460,7 @@ namespace MgmtMockAndSample
         public virtual AsyncPageable<MgmtMockAndSamplePrivateLinkResource> GetPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _privateLinkResourcesRestClient.CreateListByVaultRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, MgmtMockAndSamplePrivateLinkResource.DeserializeMgmtMockAndSamplePrivateLinkResource, _privateLinkResourcesClientDiagnostics, Pipeline, "VaultResource.GetPrivateLinkResources", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, MgmtMockAndSamplePrivateLinkResource.DeserializeMgmtMockAndSamplePrivateLinkResource, _privateLinkResourcesClientDiagnostics, Pipeline, "VaultResource.GetPrivateLinkResources", "Value", null);
         }
 
         /// <summary>

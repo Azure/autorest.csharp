@@ -190,7 +190,7 @@ namespace MgmtMockAndSample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _firewallPolicyRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _firewallPolicyRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new FirewallPolicyResource(Client, FirewallPolicyData.DeserializeFirewallPolicyData(e)), _firewallPolicyClientDiagnostics, Pipeline, "FirewallPolicyCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FirewallPolicyResource(Client, FirewallPolicyData.DeserializeFirewallPolicyData(e)), _firewallPolicyClientDiagnostics, Pipeline, "FirewallPolicyCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

@@ -188,7 +188,7 @@ namespace MgmtParamOrdering
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _availabilitySetRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new AvailabilitySetResource(Client, AvailabilitySetData.DeserializeAvailabilitySetData(e)), _availabilitySetClientDiagnostics, Pipeline, "AvailabilitySetCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new AvailabilitySetResource(Client, AvailabilitySetData.DeserializeAvailabilitySetData(e)), _availabilitySetClientDiagnostics, Pipeline, "AvailabilitySetCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

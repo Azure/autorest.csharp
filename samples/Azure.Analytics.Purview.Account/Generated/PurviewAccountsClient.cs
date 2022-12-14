@@ -255,7 +255,7 @@ namespace Azure.Analytics.Purview.Account
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetResourceSetRulesRequest(skipToken, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetResourceSetRulesNextPageRequest(nextLink, skipToken, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountsClient.GetResourceSetRules", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountsClient.GetResourceSetRules", "value", "nextLink", context);
         }
 
         /// <summary> Get a resource set config service model. </summary>
@@ -281,7 +281,7 @@ namespace Azure.Analytics.Purview.Account
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetCollectionsRequest(skipToken, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountsClient.GetCollections", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountsClient.GetCollections", "value", "nextLink", context);
         }
 
         /// <summary> List the collections in the account. </summary>

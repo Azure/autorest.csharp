@@ -189,7 +189,7 @@ namespace MgmtRenameRules
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineScaleSetExtensionRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _virtualMachineScaleSetExtensionRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new VirtualMachineScaleSetExtensionResource(Client, VirtualMachineScaleSetExtensionData.DeserializeVirtualMachineScaleSetExtensionData(e)), _virtualMachineScaleSetExtensionClientDiagnostics, Pipeline, "VirtualMachineScaleSetExtensionCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new VirtualMachineScaleSetExtensionResource(Client, VirtualMachineScaleSetExtensionData.DeserializeVirtualMachineScaleSetExtensionData(e)), _virtualMachineScaleSetExtensionClientDiagnostics, Pipeline, "VirtualMachineScaleSetExtensionCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

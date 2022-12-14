@@ -53,7 +53,7 @@ namespace MgmtCollectionParent
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelRequest(Id.SubscriptionId, skipToken);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelNextPageRequest(nextLink, Id.SubscriptionId, skipToken);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), OrderResourceClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOrderResources", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), OrderResourceClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOrderResources", "Value", "NextLink");
         }
 
         /// <summary>

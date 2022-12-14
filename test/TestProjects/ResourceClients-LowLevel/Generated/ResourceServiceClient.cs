@@ -108,7 +108,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetGroupsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetGroupsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
         }
 
         /// <summary> Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client. </summary>
@@ -132,7 +132,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAllItemsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
         }
 
         /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>

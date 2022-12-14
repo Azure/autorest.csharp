@@ -848,7 +848,7 @@ namespace Azure.Language.Authoring
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAuthoringClientsRequest(maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAuthoringClientsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
         }
 
         /// <summary> Lists the existing projects. </summary>
@@ -880,7 +880,7 @@ namespace Azure.Language.Authoring
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAuthoringClientsRequest(projectName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAuthoringClientsNextPageRequest(nextLink, projectName, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
         }
 
         /// <summary> Lists the existing deployments. </summary>
@@ -911,7 +911,7 @@ namespace Azure.Language.Authoring
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetSupportedLanguages", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetSupportedLanguages", "value", "nextLink", context);
         }
 
         /// <param name="maxCount"> The Int32 to use. </param>
@@ -939,7 +939,7 @@ namespace Azure.Language.Authoring
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetTrainingConfigVersions", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetTrainingConfigVersions", "value", "nextLink", context);
         }
 
         /// <param name="maxCount"> The Int32 to use. </param>

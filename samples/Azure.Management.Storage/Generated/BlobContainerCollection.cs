@@ -191,7 +191,7 @@ namespace Azure.Management.Storage
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _blobContainerRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _blobContainerRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new BlobContainerResource(Client, BlobContainerData.DeserializeBlobContainerData(e)), _blobContainerClientDiagnostics, Pipeline, "BlobContainerCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new BlobContainerResource(Client, BlobContainerData.DeserializeBlobContainerData(e)), _blobContainerClientDiagnostics, Pipeline, "BlobContainerCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

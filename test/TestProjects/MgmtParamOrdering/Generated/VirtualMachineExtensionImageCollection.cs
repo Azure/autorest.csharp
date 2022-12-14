@@ -133,7 +133,7 @@ namespace MgmtParamOrdering
         public virtual AsyncPageable<VirtualMachineExtensionImageResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineExtensionImageRestClient.CreateListTypesRequest(Id.SubscriptionId, new AzureLocation(_location), _publisherName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new VirtualMachineExtensionImageResource(Client, VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e)), _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new VirtualMachineExtensionImageResource(Client, VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e)), _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace MgmtParamOrdering
             Argument.AssertNotNullOrEmpty(type, nameof(type));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineExtensionImageRestClient.CreateListVersionsRequest(Id.SubscriptionId, new AzureLocation(_location), _publisherName, type, filter, top, orderby);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new VirtualMachineExtensionImageResource(Client, VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e)), _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new VirtualMachineExtensionImageResource(Client, VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e)), _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null);
         }
 
         /// <summary>

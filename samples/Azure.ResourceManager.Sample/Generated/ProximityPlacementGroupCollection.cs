@@ -190,7 +190,7 @@ namespace Azure.ResourceManager.Sample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _proximityPlacementGroupRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _proximityPlacementGroupRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new ProximityPlacementGroupResource(Client, ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(e)), _proximityPlacementGroupClientDiagnostics, Pipeline, "ProximityPlacementGroupCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ProximityPlacementGroupResource(Client, ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(e)), _proximityPlacementGroupClientDiagnostics, Pipeline, "ProximityPlacementGroupCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

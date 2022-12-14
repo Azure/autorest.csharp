@@ -53,7 +53,7 @@ namespace MgmtOptionalConstant
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OptionalMachineOptionalsRestClient.CreateListAllRequest(Id.SubscriptionId, statusOnly);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OptionalMachineOptionalsRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, statusOnly);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOptionalMachines", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOptionalMachines", "Value", "NextLink");
         }
 
         /// <summary>

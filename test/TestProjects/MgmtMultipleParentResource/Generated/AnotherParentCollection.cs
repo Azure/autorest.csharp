@@ -191,7 +191,7 @@ namespace MgmtMultipleParentResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _anotherParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _anotherParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new AnotherParentResource(Client, AnotherParentData.DeserializeAnotherParentData(e)), _anotherParentClientDiagnostics, Pipeline, "AnotherParentCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new AnotherParentResource(Client, AnotherParentData.DeserializeAnotherParentData(e)), _anotherParentClientDiagnostics, Pipeline, "AnotherParentCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

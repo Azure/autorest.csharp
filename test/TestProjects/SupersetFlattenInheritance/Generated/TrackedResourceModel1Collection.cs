@@ -182,7 +182,7 @@ namespace SupersetFlattenInheritance
         public virtual AsyncPageable<TrackedResourceModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _trackedResourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "Value", null);
         }
 
         /// <summary>

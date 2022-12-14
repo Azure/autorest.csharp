@@ -186,7 +186,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<FakeConfigurationResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeConfigurationConfigurationsRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "Value", null);
         }
 
         /// <summary>

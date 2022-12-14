@@ -175,7 +175,7 @@ namespace Azure.Management.Storage
         public virtual AsyncPageable<BlobInventoryPolicyResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _blobInventoryPolicyRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new BlobInventoryPolicyResource(Client, BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(e)), _blobInventoryPolicyClientDiagnostics, Pipeline, "BlobInventoryPolicyCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BlobInventoryPolicyResource(Client, BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(e)), _blobInventoryPolicyClientDiagnostics, Pipeline, "BlobInventoryPolicyCollection.GetAll", "Value", null);
         }
 
         /// <summary>

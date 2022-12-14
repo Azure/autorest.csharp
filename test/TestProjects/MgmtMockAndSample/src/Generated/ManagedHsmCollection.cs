@@ -189,7 +189,7 @@ namespace MgmtMockAndSample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _managedHsmRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _managedHsmRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new ManagedHsmResource(Client, ManagedHsmData.DeserializeManagedHsmData(e)), _managedHsmClientDiagnostics, Pipeline, "ManagedHsmCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ManagedHsmResource(Client, ManagedHsmData.DeserializeManagedHsmData(e)), _managedHsmClientDiagnostics, Pipeline, "ManagedHsmCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

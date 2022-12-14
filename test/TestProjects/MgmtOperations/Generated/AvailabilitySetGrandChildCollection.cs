@@ -186,7 +186,7 @@ namespace MgmtOperations
         public virtual AsyncPageable<AvailabilitySetGrandChildResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new AvailabilitySetGrandChildResource(Client, AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e)), _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AvailabilitySetGrandChildResource(Client, AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e)), _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "Value", null);
         }
 
         /// <summary>

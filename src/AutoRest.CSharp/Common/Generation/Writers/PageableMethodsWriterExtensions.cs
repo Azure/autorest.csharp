@@ -16,7 +16,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal static class PageableMethodsWriter
+    internal static class PageableMethodsWriterExtensions
     {
         private static readonly CSharpType BinaryDataType = typeof(BinaryData);
 
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (async)
                     {
-                        writer.Line($"return await {typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageableAsync)}({createPageableParameters.Join(", ")}).ConfigureAwait(false);");
+                        writer.Line($"return await {typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}({createPageableParameters.Join(", ")}).ConfigureAwait(false);");
                     }
                     else
                     {
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"{typeof(HttpMessage)} {nextPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}, {KnownParameters.NextLink.Type} {KnownParameters.NextLink.Name}) => {nextPageRequest};");
             }
 
-            return writer.Line($"return {typeof(PageableHelpers)}.{(async ? nameof(PageableHelpers.CreatePageableAsync) : nameof(PageableHelpers.CreatePageable))}({createPageableParameters.Join(", ")});");
+            return writer.Line($"return {typeof(PageableHelpers)}.{(async ? nameof(PageableHelpers.CreateAsyncPageable) : nameof(PageableHelpers.CreatePageable))}({createPageableParameters.Join(", ")});");
         }
 
         private static bool EnsureRequestContextVariable(this CodeWriter writer, IReadOnlyList<Parameter> parameters)

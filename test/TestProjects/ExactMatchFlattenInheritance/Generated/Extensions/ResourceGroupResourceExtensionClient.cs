@@ -86,7 +86,7 @@ namespace ExactMatchFlattenInheritance
         public virtual AsyncPageable<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, AzureResourceFlattenModel2.DeserializeAzureResourceFlattenModel2, AzureResourceFlattenModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel2s", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureResourceFlattenModel2.DeserializeAzureResourceFlattenModel2, AzureResourceFlattenModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel2s", "Value", null);
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace ExactMatchFlattenInheritance
         public virtual AsyncPageable<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel3sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, AzureResourceFlattenModel3.DeserializeAzureResourceFlattenModel3, AzureResourceFlattenModel3sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel3s", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureResourceFlattenModel3.DeserializeAzureResourceFlattenModel3, AzureResourceFlattenModel3sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel3s", "Value", null);
         }
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace ExactMatchFlattenInheritance
         public virtual AsyncPageable<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel4sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4, AzureResourceFlattenModel4sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel4s", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4, AzureResourceFlattenModel4sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel4s", "Value", null);
         }
 
         /// <summary>
@@ -446,7 +446,7 @@ namespace ExactMatchFlattenInheritance
         public virtual AsyncPageable<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, AzureResourceFlattenModel5.DeserializeAzureResourceFlattenModel5, AzureResourceFlattenModel5sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel5s", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureResourceFlattenModel5.DeserializeAzureResourceFlattenModel5, AzureResourceFlattenModel5sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel5s", "Value", null);
         }
 
         /// <summary>

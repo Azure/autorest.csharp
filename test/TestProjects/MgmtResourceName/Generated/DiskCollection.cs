@@ -182,7 +182,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<Disk> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _diskRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new Disk(Client, DiskData.DeserializeDiskData(e)), _diskClientDiagnostics, Pipeline, "DiskCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new Disk(Client, DiskData.DeserializeDiskData(e)), _diskClientDiagnostics, Pipeline, "DiskCollection.GetAll", "Value", null);
         }
 
         /// <summary>

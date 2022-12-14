@@ -187,7 +187,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Name);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new FakeParentResource(Client, FakeParentData.DeserializeFakeParentData(e)), _fakeParentClientDiagnostics, Pipeline, "FakeParentCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentResource(Client, FakeParentData.DeserializeFakeParentData(e)), _fakeParentClientDiagnostics, Pipeline, "FakeParentCollection.GetAll", "Value", "NextLink");
         }
 
         /// <summary>

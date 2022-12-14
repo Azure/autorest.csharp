@@ -111,7 +111,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllRequest(filter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAllNextPageRequest(nextLink, filter, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "TopLevelClientWithOperationClient.GetAll", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "TopLevelClientWithOperationClient.GetAll", "value", "nextLink", context);
         }
 
         /// <summary> Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`. </summary>

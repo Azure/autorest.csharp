@@ -182,7 +182,7 @@ namespace ExactMatchInheritance
         public virtual AsyncPageable<ExactMatchModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _exactMatchModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new ExactMatchModel1Resource(Client, ExactMatchModel1Data.DeserializeExactMatchModel1Data(e)), _exactMatchModel1ClientDiagnostics, Pipeline, "ExactMatchModel1Collection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ExactMatchModel1Resource(Client, ExactMatchModel1Data.DeserializeExactMatchModel1Data(e)), _exactMatchModel1ClientDiagnostics, Pipeline, "ExactMatchModel1Collection.GetAll", "Value", null);
         }
 
         /// <summary>

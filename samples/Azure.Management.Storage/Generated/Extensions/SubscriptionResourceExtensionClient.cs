@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
         public virtual AsyncPageable<StorageSkuInformation> GetSkusAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SkusRestClient.CreateListRequest(Id.SubscriptionId);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, StorageSkuInformation.DeserializeStorageSkuInformation, SkusClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetSkus", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, StorageSkuInformation.DeserializeStorageSkuInformation, SkusClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetSkus", "Value", null);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Azure.Management.Storage
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => StorageAccountRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => StorageAccountRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => new StorageAccountResource(Client, StorageAccountData.DeserializeStorageAccountData(e)), StorageAccountClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetStorageAccounts", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new StorageAccountResource(Client, StorageAccountData.DeserializeStorageAccountData(e)), StorageAccountClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetStorageAccounts", "Value", "NextLink");
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Azure.Management.Storage
         public virtual AsyncPageable<StorageUsage> GetUsagesByLocationAsync(AzureLocation location, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => UsagesRestClient.CreateListByLocationRequest(Id.SubscriptionId, location);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, StorageUsage.DeserializeStorageUsage, UsagesClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetUsagesByLocation", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, StorageUsage.DeserializeStorageUsage, UsagesClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetUsagesByLocation", "Value", null);
         }
 
         /// <summary>

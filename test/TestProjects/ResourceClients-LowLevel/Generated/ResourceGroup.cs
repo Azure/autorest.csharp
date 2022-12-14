@@ -102,7 +102,7 @@ namespace ResourceClients_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetItemsNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
         }
 
         /// <summary> Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient. </summary>

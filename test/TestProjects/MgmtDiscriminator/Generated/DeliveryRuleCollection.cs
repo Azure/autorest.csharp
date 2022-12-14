@@ -187,7 +187,7 @@ namespace MgmtDiscriminator
         public virtual AsyncPageable<DeliveryRuleResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _deliveryRuleRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageableAsync(FirstPageRequest, null, e => new DeliveryRuleResource(Client, DeliveryRuleData.DeserializeDeliveryRuleData(e)), _deliveryRuleClientDiagnostics, Pipeline, "DeliveryRuleCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new DeliveryRuleResource(Client, DeliveryRuleData.DeserializeDeliveryRuleData(e)), _deliveryRuleClientDiagnostics, Pipeline, "DeliveryRuleCollection.GetAll", "Value", null);
         }
 
         /// <summary>
