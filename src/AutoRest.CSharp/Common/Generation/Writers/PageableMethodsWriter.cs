@@ -18,6 +18,58 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class PageableMethodsWriter
     {
+        private static readonly CSharpType BinaryDataType = typeof(BinaryData);
+
+        public static CodeWriter WriteLongRunningPageable(this CodeWriter writer, MethodSignature methodSignature, CSharpType? pageItemType, Reference? restClientReference, RestClientMethod createLroRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, Diagnostic diagnostic, OperationFinalStateVia finalStateVia, string? itemPropertyName, string? nextLinkPropertyName, bool async)
+        {
+            using (writer.WriteMethodDeclaration(methodSignature.WithAsync(async)))
+            {
+                writer.WriteParametersValidation(methodSignature.Parameters);
+                using (writer.WriteDiagnosticScope(diagnostic, clientDiagnosticsReference))
+                {
+                    var messageVariable = new CodeWriterDeclaration("message");
+                    var nextPageRequest = GetCreateRequestCall(restClientReference, createNextPageRequestMethod);
+                    var nextPageRequestVariable = nextPageRequest != null ? new CodeWriterDeclaration("NextPageRequest") : null;
+                    var createPageableParameters = new List<FormattableString>()
+                    {
+                        $"{KnownParameters.WaitForCompletion.Name}",
+                        $"{messageVariable:I}",
+                        nextPageRequest != null ? $"{nextPageRequestVariable:I}" : (FormattableString)$"null",
+                        GetValueFactory(pageItemType),
+                        clientDiagnosticsReference.GetReferenceFormattable(),
+                        pipelineReference.GetReferenceFormattable(),
+                        $"{typeof(OperationFinalStateVia)}.{finalStateVia}",
+                        $"{diagnostic.ScopeName:L}",
+                        $"{itemPropertyName:L}",
+                        $"{nextLinkPropertyName:L}"
+                    };
+
+                    if (writer.EnsureRequestContextVariable(methodSignature.Parameters))
+                    {
+                        createPageableParameters.Add(((Reference)KnownParameters.RequestContext).GetReferenceFormattable());
+                    }
+
+                    if (nextPageRequestVariable != null)
+                    {
+                        writer.Line($"{typeof(HttpMessage)} {nextPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}, {KnownParameters.NextLink.Type} {KnownParameters.NextLink.Name}) => {nextPageRequest};");
+                    }
+
+                    writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(createLroRequestMethod.Name)}({createLroRequestMethod.Parameters.GetIdentifiersFormattable()});");
+
+                    if (async)
+                    {
+                        writer.Line($"return await {typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageableAsync)}({createPageableParameters.Join(", ")}).ConfigureAwait(false);");
+                    }
+                    else
+                    {
+                        writer.Line($"return {typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageable)}({createPageableParameters.Join(", ")});");
+                    }
+                }
+            }
+
+            return writer.Line();
+        }
+
         public static CodeWriter WritePageable(this CodeWriter writer, MethodSignature methodSignature, CSharpType? pageItemType, Reference? restClientReference, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)
         {
             using (writer.WriteMethodDeclaration(methodSignature.WithAsync(async)))
@@ -91,19 +143,32 @@ namespace AutoRest.CSharp.Generation.Writers
                 return null;
             }
 
+            var methodName = RequestWriterHelpers.CreateRequestMethodName(method);
             if (restClientReference != null)
             {
-                return $"{restClientReference.Value.GetReferenceFormattable()}.Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()})";
+                return $"{restClientReference.Value.GetReferenceFormattable()}.{methodName}({method.Parameters.GetIdentifiersFormattable()})";
             }
 
-            return $"Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()})";
+            return $"{methodName}({method.Parameters.GetIdentifiersFormattable()})";
         }
 
         private static FormattableString GetValueFactory(CSharpType? pageItemType)
         {
-            if (pageItemType is null || pageItemType.IsFrameworkType)
+            if (pageItemType is null)
             {
-                throw new NotSupportedException("Only models are supported!");
+                throw new NotSupportedException("Type of the element of the page must be specified");
+            }
+
+            if (pageItemType.IsFrameworkType)
+            {
+                if (pageItemType.Equals(BinaryDataType))
+                {
+                    // When `JsonElement` provides access to its UTF8 buffer, change this code to create `BinaryData` from it.
+                    // See also ResponseParser.Enumerate
+                    return $"e => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.GetRawText())";
+                }
+
+                throw new NotSupportedException("Only BinaryData or user-defined models are supported!");
             }
 
             if (pageItemType.Implementation is Resource { ResourceData: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } resourceDataType } resource)

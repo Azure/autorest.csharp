@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -848,24 +846,9 @@ namespace Azure.Language.Authoring
         /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetAuthoringClientsAsync(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetAuthoringClientsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return GetAuthoringClientsImplementationAsync("AuthoringClient.GetAuthoringClients", maxCount, skip, maxpagesize, context);
-        }
-
-        private AsyncPageable<BinaryData> GetAuthoringClientsImplementationAsync(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetAuthoringClientsRequest(maxCount, skip, maxpagesize, context)
-                        : CreateGetAuthoringClientsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAuthoringClientsRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAuthoringClientsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
         }
 
         /// <summary> Lists the existing projects. </summary>
@@ -878,24 +861,9 @@ namespace Azure.Language.Authoring
         /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetAuthoringClients(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetAuthoringClients(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return GetAuthoringClientsImplementation("AuthoringClient.GetAuthoringClients", maxCount, skip, maxpagesize, context);
-        }
-
-        private Pageable<BinaryData> GetAuthoringClientsImplementation(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetAuthoringClientsRequest(maxCount, skip, maxpagesize, context)
-                        : CreateGetAuthoringClientsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAuthoringClientsRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAuthoringClientsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
         }
 
         /// <summary> Lists the existing deployments. </summary>
@@ -910,24 +878,9 @@ namespace Azure.Language.Authoring
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
-            return GetAuthoringClientsImplementationAsync("AuthoringClient.GetAuthoringClients", projectName, context);
-        }
-
-        private AsyncPageable<BinaryData> GetAuthoringClientsImplementationAsync(string diagnosticsScopeName, string projectName, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetAuthoringClientsRequest(projectName, context)
-                        : CreateGetAuthoringClientsNextPageRequest(nextLink, projectName, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAuthoringClientsRequest(projectName, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAuthoringClientsNextPageRequest(nextLink, projectName, context);
+            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
         }
 
         /// <summary> Lists the existing deployments. </summary>
@@ -942,24 +895,9 @@ namespace Azure.Language.Authoring
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
-            return GetAuthoringClientsImplementation("AuthoringClient.GetAuthoringClients", projectName, context);
-        }
-
-        private Pageable<BinaryData> GetAuthoringClientsImplementation(string diagnosticsScopeName, string projectName, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetAuthoringClientsRequest(projectName, context)
-                        : CreateGetAuthoringClientsNextPageRequest(nextLink, projectName, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAuthoringClientsRequest(projectName, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAuthoringClientsNextPageRequest(nextLink, projectName, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
         }
 
         /// <param name="maxCount"> The Int32 to use. </param>
@@ -971,24 +909,9 @@ namespace Azure.Language.Authoring
         /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetSupportedLanguagesAsync(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetSupportedLanguagesAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return GetSupportedLanguagesImplementationAsync("AuthoringClient.GetSupportedLanguages", maxCount, skip, maxpagesize, context);
-        }
-
-        private AsyncPageable<BinaryData> GetSupportedLanguagesImplementationAsync(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context)
-                        : CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetSupportedLanguages", "value", "nextLink", context);
         }
 
         /// <param name="maxCount"> The Int32 to use. </param>
@@ -1000,24 +923,9 @@ namespace Azure.Language.Authoring
         /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetSupportedLanguages(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetSupportedLanguages(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return GetSupportedLanguagesImplementation("AuthoringClient.GetSupportedLanguages", maxCount, skip, maxpagesize, context);
-        }
-
-        private Pageable<BinaryData> GetSupportedLanguagesImplementation(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context)
-                        : CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetSupportedLanguages", "value", "nextLink", context);
         }
 
         /// <param name="maxCount"> The Int32 to use. </param>
@@ -1029,24 +937,9 @@ namespace Azure.Language.Authoring
         /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetTrainingConfigVersionsAsync(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetTrainingConfigVersionsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return GetTrainingConfigVersionsImplementationAsync("AuthoringClient.GetTrainingConfigVersions", maxCount, skip, maxpagesize, context);
-        }
-
-        private AsyncPageable<BinaryData> GetTrainingConfigVersionsImplementationAsync(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context)
-                        : CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreatePageableAsync(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetTrainingConfigVersions", "value", "nextLink", context);
         }
 
         /// <param name="maxCount"> The Int32 to use. </param>
@@ -1058,24 +951,9 @@ namespace Azure.Language.Authoring
         /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetTrainingConfigVersions(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetTrainingConfigVersions(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return GetTrainingConfigVersionsImplementation("AuthoringClient.GetTrainingConfigVersions", maxCount, skip, maxpagesize, context);
-        }
-
-        private Pageable<BinaryData> GetTrainingConfigVersionsImplementation(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context)
-                        : CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetTrainingConfigVersions", "value", "nextLink", context);
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string projectName, RequestContent content, RequestContext context)

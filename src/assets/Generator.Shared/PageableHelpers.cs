@@ -37,14 +37,38 @@ namespace Azure.Core
 
         public static AsyncPageable<T> CreatePageableAsync<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageMethod, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
         {
-            var responseParser = new ResponseParser(itemPropertyName, nextLinkPropertyName);
-            return new AsyncPageableWithScope<T>(createFirstPageRequest, createNextPageMethod, valueFactory, responseParser, pipeline, clientDiagnostics, scopeName, null, requestContext);
+            var responseParser = new ResponseParser<T>(itemPropertyName, nextLinkPropertyName, valueFactory);
+            return new AsyncPageableWithScope<T>(null, createFirstPageRequest, createNextPageMethod, responseParser, pipeline, clientDiagnostics, scopeName, null, requestContext);
         }
 
         public static Pageable<T> CreatePageable<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageMethod, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
         {
-            var responseParser = new ResponseParser(itemPropertyName, nextLinkPropertyName);
-            return new PageableWithScope<T>(createFirstPageRequest, createNextPageMethod, valueFactory, responseParser, pipeline, clientDiagnostics, scopeName, null, requestContext);
+            var responseParser = new ResponseParser<T>(itemPropertyName, nextLinkPropertyName, valueFactory);
+            return new PageableWithScope<T>(null, createFirstPageRequest, createNextPageMethod, responseParser, pipeline, clientDiagnostics, scopeName, null, requestContext);
+        }
+
+        public static async ValueTask<Operation<AsyncPageable<T>>> CreatePageableAsync<T>(WaitUntil waitUntil, HttpMessage message, Func<int?, string, HttpMessage>? createNextPageMethod, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, OperationFinalStateVia finalStateVia, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
+        {
+            var responseParser = new ResponseParser<T>(itemPropertyName, nextLinkPropertyName, valueFactory);
+            var response = await pipeline.ProcessMessageAsync(message, requestContext).ConfigureAwait(false);
+            var operation = new ProtocolOperation<AsyncPageable<T>>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => new AsyncPageableWithScope<T>(r, null, createNextPageMethod, responseParser, pipeline, clientDiagnostics, scopeName, null, requestContext));
+            if (waitUntil == WaitUntil.Completed)
+            {
+                await operation.WaitForCompletionAsync(requestContext?.CancellationToken ?? default).ConfigureAwait(false);
+            }
+            return operation;
+        }
+
+        public static Operation<Pageable<T>> CreatePageable<T>(WaitUntil waitUntil, HttpMessage message, Func<int?, string, HttpMessage>? createNextPageMethod, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, OperationFinalStateVia finalStateVia, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
+        {
+            var responseParser = new ResponseParser<T>(itemPropertyName, nextLinkPropertyName, valueFactory);
+            var response = pipeline.ProcessMessage(message, requestContext);
+            var operation = new ProtocolOperation<Pageable<T>>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => new PageableWithScope<T>(r, null, createNextPageMethod, responseParser, pipeline, clientDiagnostics, scopeName, null, requestContext));
+            if (waitUntil == WaitUntil.Completed)
+            {
+                operation.WaitForCompletion(requestContext?.CancellationToken ?? default);
+            }
+            return operation;
         }
 
         internal delegate Task<Page<T>> AsyncPageFunc<T>(string? continuationToken = default, int? pageSizeHint = default);

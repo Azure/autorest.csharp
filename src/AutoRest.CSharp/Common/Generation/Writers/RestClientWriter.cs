@@ -54,20 +54,26 @@ namespace AutoRest.CSharp.Generation.Writers
             LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields, responseClassifierTypes);
 
             var longRunning = protocolMethod.LongRunning;
-            if (longRunning != null)
+            var pagingInfo = protocolMethod.PagingInfo;
+
+            switch (longRunning, pagingInfo)
             {
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, true);
-                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, false);
-            }
-            else if (protocolMethod.PagingInfo != null)
-            {
-                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, false);
-            }
-            else
-            {
-                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, true);
-                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, false);
+                case {longRunning: not null, pagingInfo: not null}:
+                    LowLevelClientWriter.WritePageableLroMethod(writer, protocolMethod, restClient.Fields, pagingInfo, longRunning, true);
+                    LowLevelClientWriter.WritePageableLroMethod(writer, protocolMethod, restClient.Fields, pagingInfo, longRunning, false);
+                    break;
+                case {longRunning: null, pagingInfo: not null}:
+                    LowLevelClientWriter.WritePageableMethod(writer, protocolMethod, restClient.Fields, pagingInfo, true);
+                    LowLevelClientWriter.WritePageableMethod(writer, protocolMethod, restClient.Fields, pagingInfo, false);
+                    break;
+                case {longRunning: not null, pagingInfo: null}:
+                    LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, true);
+                    LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, longRunning, false);
+                    break;
+                default:
+                    LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, true);
+                    LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, false);
+                    break;
             }
         }
 

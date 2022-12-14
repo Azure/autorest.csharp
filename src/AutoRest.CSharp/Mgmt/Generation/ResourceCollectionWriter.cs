@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteExistsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(clientOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(clientOperation.OperationMappings.Values.First())))
             {
                 var operation = clientOperation.OperationMappings.Values.First();
                 var response = new CodeWriterDeclaration("response");
@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteGetIfExistsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(clientOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(clientOperation.OperationMappings.Values.First())))
             {
                 // we need to write multiple branches for a normal method
                 if (clientOperation.OperationMappings.Count == 1)

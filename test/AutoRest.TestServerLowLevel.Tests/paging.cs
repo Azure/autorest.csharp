@@ -386,17 +386,18 @@ namespace AutoRest.TestServer.Tests
 
         [Ignore("Example")]
         [Test]
-        public Task PagingMultipleLROExample() => Test(async (endpoint) =>
+        public Task PagingMultipleLROExample() => Test((endpoint) =>
         {
             var lro = new PagingClient(Key, endpoint, null).GetMultiplePagesLRO(WaitUntil.Started, "id");
 
-            var response = await lro.WaitForCompletionAsync();
+            var response = lro.WaitForCompletion();
             int id = 1;
             foreach (var data in response.Value)
             {
                 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
                 Assert.AreEqual(id, result.GetProperty("properties").GetProperty("id").GetInt32());
                 Assert.IsTrue("product".Equals(result.GetProperty("properties").GetProperty("name").GetString(), StringComparison.OrdinalIgnoreCase));
+                id++;
             }
         });
 
@@ -559,7 +560,6 @@ namespace AutoRest.TestServer.Tests
             {
                 Assert.AreEqual(1, page.Values.First().ToObjectFromJson<Product>().Properties.Id);
                 Assert.AreEqual("Product", page.Values.First().ToObjectFromJson<Product>().Properties.Name);
-                Assert.IsNull(page.ContinuationToken);
             }
 
             var pageable = new PagingClient(Key, endpoint, null).GetNullNextLinkNamePages(new());
@@ -567,7 +567,6 @@ namespace AutoRest.TestServer.Tests
             {
                 Assert.AreEqual(1, page.Values.First().ToObjectFromJson<Product>().Properties.Id);
                 Assert.AreEqual("Product", page.Values.First().ToObjectFromJson<Product>().Properties.Name);
-                Assert.IsNull(page.ContinuationToken);
             }
         });
 

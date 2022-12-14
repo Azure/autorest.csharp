@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                using (WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField))
+                using (writer.WriteDiagnosticScope(clientMethod.Diagnostics, ClientDiagnosticsField))
                 {
                     writer.Append($"return (");
                     if (async)
@@ -273,7 +273,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Where(p => p.Name != KnownParameters.RequestContext.Name)
                 .Append(KnownParameters.CancellationTokenParameter)
                 .ToList();
-            var clientDiagnosticsReference = new Reference(ClientDiagnosticsField, typeof(ClientDiagnostics));
+
             var pipelineReference = new Reference(PipelineField, typeof(HttpPipeline));
             var scopeName = pagingMethod.Diagnostics.ScopeName;
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.SchemaProperty?.SerializedName;
@@ -296,7 +296,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
             writer.WriteXmlDocumentation("remarks", $"{pagingMethod.Method.DescriptionText}");
-            writer.WritePageable(signature, pageType, new Reference(RestClientField, client.RestClient.Type), pagingMethod.Method, pagingMethod.NextPageMethod, clientDiagnosticsReference, pipelineReference, scopeName, itemName, nextLinkName, async);
+            writer.WritePageable(signature, pageType, new Reference(RestClientField, client.RestClient.Type), pagingMethod.Method, pagingMethod.NextPageMethod, ClientDiagnosticsField, pipelineReference, scopeName, itemName, nextLinkName, async);
         }
 
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperationMethod lroMethod, bool async)
@@ -327,7 +327,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteParameterNullChecks(parameters);
 
-                using (WriteDiagnosticScope(writer, lroMethod.Diagnostics, ClientDiagnosticsField))
+                using (writer.WriteDiagnosticScope(lroMethod.Diagnostics, ClientDiagnosticsField))
                 {
                     string awaitText = async ? "await" : string.Empty;
                     string configureText = async ? ".ConfigureAwait(false)" : string.Empty;

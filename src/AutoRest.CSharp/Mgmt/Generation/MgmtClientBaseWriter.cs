@@ -420,7 +420,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return UseField ? names.RestField : names.RestProperty;
         }
 
-        protected string GetDiagnosticName(MgmtRestOperation operation) => GetDiagnosticName(operation.RestClient, operation.Resource);
+        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), typeof(ClientDiagnostics));
         private string GetDiagnosticName(MgmtRestClient client, Resource? resource)
         {
             var names = This.GetRestDiagNames(new NameSetKey(client, resource));
@@ -531,19 +531,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here
             // TODO -- find a better way to get this type
-            string clientDiagFieldName = GetDiagnosticName(clientOperation.OperationMappings.First().Value);
+            var clientDiagField = GetDiagnosticReference(clientOperation.OperationMappings.First().Value);
             // we need to write multiple branches for a paging method
             if (clientOperation.OperationMappings.Count == 1)
             {
                 // if we only have one branch, we would not need those if-else statements
                 var branch = clientOperation.OperationMappings.Keys.First();
-                WritePagingMethodBranch(clientOperation.ReturnType, diagnostic, clientDiagFieldName, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], isAsync);
+                WritePagingMethodBranch(clientOperation.ReturnType, diagnostic, clientDiagField, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], isAsync);
             }
             else
             {
                 var keyword = "if";
                 var escapeBranches = new List<RequestPath>();
-                foreach ((var branch, var operation) in clientOperation.OperationMappings)
+                foreach (var (branch, operation) in clientOperation.OperationMappings)
                 {
                     // we need to identify the correct branch using the resource type, therefore we need first to determine the resource type is a constant
                     var resourceType = This.GetBranchResourceType(branch);
@@ -554,7 +554,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     using (_writer.Scope($"{keyword} ({This.BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                     {
-                        WritePagingMethodBranch(clientOperation.ReturnType, diagnostic, clientDiagFieldName, operation, clientOperation.ParameterMappings[branch], isAsync);
+                        WritePagingMethodBranch(clientOperation.ReturnType, diagnostic, clientDiagField, operation, clientOperation.ParameterMappings[branch], isAsync);
                     }
                     keyword = "else if";
                 }
@@ -570,7 +570,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var branch = escapeBranches.First();
                     using (_writer.Scope($"else"))
                     {
-                        WritePagingMethodBranch(clientOperation.ReturnType, diagnostic, clientDiagFieldName, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], isAsync);
+                        WritePagingMethodBranch(clientOperation.ReturnType, diagnostic, clientDiagField, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], isAsync);
                     }
                 }
                 else
@@ -580,14 +580,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, string diagnosticVariable, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
+        protected void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, Reference clientDiagnosticsReference, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             var pagingMethod = operation.PagingMethod!;
             var arguments = GetArguments(_writer, parameterMappings);
 
             FormattableString firstPageRequest = $"{GetRestClientName(operation)}.Create{pagingMethod.Method.Name}Request({arguments})";
             FormattableString? nextPageRequest = pagingMethod.NextPageMethod != null ? $"{GetRestClientName(operation)}.Create{pagingMethod.NextPageMethod.Name}Request({KnownParameters.NextLink.Name}, {arguments})" : (FormattableString?)null;
-            var clientDiagnosticsReference = new Reference(diagnosticVariable, typeof(ClientDiagnostics));
             var pipelineReference = new Reference("Pipeline", typeof(HttpPipeline));
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
@@ -683,7 +682,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteNormalMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, Diagnostic diagnostic, bool async)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(operation)))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(operation)))
             {
                 var response = new CodeWriterDeclaration("response");
                 _writer
@@ -724,7 +723,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
             // TODO -- find a way to properly get the LRO response type here. Temporarily we are using the first one
             // TODO -- we need to write multiple branches for a LRO operation
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(clientOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(clientOperation.OperationMappings.Values.First())))
             {
                 if (clientOperation.OperationMappings.Count == 1)
                 {
@@ -781,7 +780,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            WriteLROResponse(GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, async);
+            WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, async);
         }
 
         protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool isAsync)

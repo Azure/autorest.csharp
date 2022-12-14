@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteSetTagsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteRemoveTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
