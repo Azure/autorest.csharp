@@ -366,7 +366,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private ModelFactoryTypeProvider? _modelFactory;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(MgmtContext.Context.DefaultNamespace, AllSchemaMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel);
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(MgmtContext.Context.DefaultNamespace.Split('.').Last(), MgmtContext.Context.DefaultNamespace, AllSchemaMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel);
 
         private bool ShouldIncludeModel(TypeProvider model)
         {

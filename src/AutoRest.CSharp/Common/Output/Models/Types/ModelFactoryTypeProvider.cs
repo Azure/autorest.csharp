@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = "public";
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(string rootNamespaceName, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
+        public static ModelFactoryTypeProvider? TryCreate(string defaultLibraryName, string rootNamespaceName, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
         {
             var objectTypes = models.OfType<SerializableObjectType>()
                 .Where(RequiresModelFactory)
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             }
 
-            var defaultClientName = ClientBuilder.GetClientPrefix(Configuration.LibraryName, rootNamespaceName);
+            var defaultClientName = ClientBuilder.GetClientPrefix(Configuration.LibraryName, defaultLibraryName);
             var defaultNamespace = GetDefaultModelNamespace(null, rootNamespaceName);
 
             return new ModelFactoryTypeProvider(objectTypes, defaultClientName, defaultNamespace, sourceInputModel);
