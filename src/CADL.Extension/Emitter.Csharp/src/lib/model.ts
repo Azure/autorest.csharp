@@ -265,7 +265,7 @@ export function getInputType(
         return getInputTypeForEnum(type);
     } else if (type.kind === "Intrinsic") {
         return getInputModelForIntrinsicType(type);
-    } else if (type.kind === "Scalar" && program.checker.isStdType(type)) {
+    } else if (type.kind === "Scalar" /*&& program.checker.isStdType(type)*/) {
         return {
             Name: type.name,
             Kind: getCSharpInputTypeKindByIntrinsicModelName(

@@ -76,7 +76,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
         Try
         {
             $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
-            $emitCommand = "npx cadl compile --output-path $outputPath $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
+            $emitCommand = "npx cadl compile $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.emitter-output-dir=$outputPath --option @azure-tools/cadl-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
             Invoke $emitCommand    
         }
         Finally 

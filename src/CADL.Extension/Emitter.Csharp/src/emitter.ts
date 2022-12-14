@@ -92,7 +92,6 @@ import { EmitContext } from "@cadl-lang/compiler/*";
 export interface NetEmitterOptions {
     outputFile?: string;
     logFile?: string;
-    "emitter-output-dir"?: string;
     namespace?: string;
     "library-name"?: string;
     "single-top-level-client"?: boolean;
@@ -122,7 +121,6 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     properties: {
         outputFile: { type: "string", nullable: true },
         logFile: { type: "string", nullable: true },
-        "emitter-output-dir": { type: "string", nullable: true },
         namespace: { type: "string", nullable: true },
         "library-name": { type: "string", nullable: true },
         "single-top-level-client": { type: "boolean", nullable: true },
@@ -151,15 +149,16 @@ export async function $onEmit(
 ) {
     const program: Program = context.program;
     const emitterOptions = context.options;
+    const emitterOutputDir = context.emitterOutputDir;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
     const resolvedSharedFolders: string[] = [];
     const outputFolder = resolvePath(
-        emitterOptions["emitter-output-dir"] ?? "./cadl-output"
+        emitterOutputDir ?? "./cadl-output"
     );
     const options: NetEmitterOptions = {
         outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
         logFile: resolvePath(
-            emitterOptions["emitter-output-dir"] ?? "./cadl-output",
+            emitterOutputDir ?? "./cadl-output",
             resolvedOptions.logFile
         ),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
