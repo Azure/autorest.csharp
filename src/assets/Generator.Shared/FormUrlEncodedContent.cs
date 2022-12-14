@@ -34,7 +34,9 @@ namespace Azure.Core
         public override async Task WriteToAsync(Stream stream, CancellationToken cancellation)
         {
             BuildIfNeeded ();
+#pragma warning disable CA1835
             await stream.WriteAsync(_bytes, 0, _bytes.Length, cancellation).ConfigureAwait(false);
+#pragma warning restore CA1835
         }
 
         public override void WriteTo(Stream stream, CancellationToken cancellation)
