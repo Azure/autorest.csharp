@@ -130,7 +130,7 @@ namespace Azure.Core
         {
             if (finalResponse != null)
             {
-                Response response = JsonSerializer.Deserialize<OperationInternal.DecodedResponse>(finalResponse)!;
+                Response response = JsonSerializer.Deserialize<DecodedResponse>(finalResponse)!;
                 return OperationInternal<T>.Succeeded(response, source.CreateResult(response, CancellationToken.None));
             }
             return new OperationInternal<T>(clientDiagnostics, operation!, null, operationTypeName, scopeAttributes, fallbackStrategy);
@@ -301,20 +301,18 @@ namespace Azure.Core
 
         public virtual string GetOperationId()
         {
-            try
+            var id = _operation.GetOperationId();
+            if (string.IsNullOrEmpty(id))
             {
-                return _operation.GetOperationId();
-            }
-            catch (NotImplementedException)
-            {
-                var serializeOptions = new JsonSerializerOptions { Converters = { new OperationInternal.StreamConverter() } };
+                var serializeOptions = new JsonSerializerOptions { Converters = { new StreamConverter() } };
                 var lroDetails = new Dictionary<string, string>()
                 {
                     ["FinalResponse"] = BinaryData.FromObjectAsJson<Response>(_rawResponse!, serializeOptions).ToString()
                 };
                 var lroData = BinaryData.FromObjectAsJson(lroDetails);
-                return Convert.ToBase64String(lroData.ToArray());
+                id = Convert.ToBase64String(lroData.ToArray());
             }
+            return id;
         }
 
         private static Response GetResponseFromState(OperationState<T> state)
@@ -332,10 +330,7 @@ namespace Azure.Core
             public ValueTask<OperationState<T>> UpdateStateAsync(bool async, CancellationToken cancellationToken)
                 => throw new NotSupportedException("The operation has already completed");
 
-            public string GetOperationId()
-            {
-                throw new NotImplementedException();
-            }
+            public string GetOperationId() => string.Empty;
         }
     }
 
@@ -381,12 +376,6 @@ namespace Azure.Core
         /// To get the Id of the operation for rehydration purpose.
         /// </summary>
         string GetOperationId();
-    }
-
-    internal interface IOperationSource<T>
-    {
-        T CreateResult(Response response, CancellationToken cancellationToken);
-        ValueTask<T> CreateResultAsync(Response response, CancellationToken cancellationToken);
     }
 
     /// <summary>

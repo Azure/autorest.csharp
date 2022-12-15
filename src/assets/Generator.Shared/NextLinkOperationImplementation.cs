@@ -465,7 +465,7 @@ namespace Azure.Core
 
             public string GetOperationId()
             {
-                var serializeOptions = new JsonSerializerOptions { Converters = { new OperationInternal.StreamConverter() } };
+                var serializeOptions = new JsonSerializerOptions { Converters = { new StreamConverter() } };
                 var lroDetails = new Dictionary<string, string>()
                 {
                     ["FinalResponse"] = BinaryData.FromObjectAsJson<Response>(_operationState.RawResponse, serializeOptions).ToString()

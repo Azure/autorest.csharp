@@ -81,17 +81,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(string)} id)"))
-                    {
-                        var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
-                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, id, out {typeof(string)} finalResponse);");
-                        _writer.Line($"_operation = {_operationInternalType}.Create({_sourceString}clientDiagnostics, {nextLinkOperation}, finalResponse, {_name:L}, fallbackStrategy: new {typeof(ExponentialDelayStrategy)}());");
-                    }
-                    _writer.Line();
-
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer
-                        .LineRaw("public override string Id => _operation.GetOperationId();")
+                        .LineRaw("#pragma warning disable CA1822")
+                        .LineRaw($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]")
+                        .LineRaw("public override string Id => throw new NotImplementedException();")
+                        .LineRaw("#pragma warning restore CA1822")
                         .Line();
 
                     if (_isGeneric)
