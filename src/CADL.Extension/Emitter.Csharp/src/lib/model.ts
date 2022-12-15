@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+import { isFixed } from "@azure-tools/cadl-azure-core";
 import {
     Enum,
     EnumMember,
@@ -25,7 +26,8 @@ import {
     IntrinsicType,
     isVoidType,
     isArrayModelType,
-    isRecordModelType
+    isRecordModelType,
+    Scalar
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -35,7 +37,6 @@ import {
     HttpOperation,
     isStatusCode
 } from "@cadl-lang/rest/http";
-import { toNamespacedPath } from "path";
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
 import { InputModelProperty } from "../type/InputModelProperty.js";
 import {
@@ -266,13 +267,42 @@ export function getInputType(
     } else if (type.kind === "Intrinsic") {
         return getInputModelForIntrinsicType(type);
     } else if (type.kind === "Scalar" /*&& program.checker.isStdType(type)*/) {
-        return {
-            Name: type.name,
-            Kind: getCSharpInputTypeKindByIntrinsicModelName(
-                type.name
-            ),
-            IsNullable: false
-        } as InputPrimitiveType;
+        let intrinsicName = type.name;
+        if (!program.checker.isStdType(type)) {
+            intrinsicName = type.baseScalar?.name ?? type.name; 
+        }
+        switch (intrinsicName) {
+            case "string":
+                const values = getKnownValues(program, type);
+                if (values) {
+                    return getInputModelForEnumByKnowValues(type, values);
+                }
+            // if the model is one of the Cadl Intrinsic type.
+            // it's a base Cadl "primitive" that corresponds directly to an c# data type.
+            // In such cases, we don't want to emit a ref and instead just
+            // emit the base type directly.
+            default:
+                return {
+                    Name: type.name,
+                    Kind: getCSharpInputTypeKindByIntrinsicModelName(
+                        intrinsicName
+                    ),
+                    IsNullable: false
+                } as InputPrimitiveType;
+        }
+        // if (program.checker.isStdType(type)) {
+        //     if (isStringType())
+        //     return {
+        //         Name: type.name,
+        //         Kind: getCSharpInputTypeKindByIntrinsicModelName(
+        //             type.name
+        //         ),
+        //         IsNullable: false
+        //     } as InputPrimitiveType;
+        // } else {
+
+        // }
+        
     } else if (type.kind === "Union") {
         throw new Error(`Union is not supported.`);
     } else {
@@ -334,7 +364,7 @@ export function getInputType(
         return getInputModelForModel(m);
     }
 
-    function getInputModelForExtensibleEnum(m: Model, e: Enum): InputEnumType {
+    function getInputModelForEnumByKnowValues(m: Model | Scalar, e: Enum): InputEnumType {
         let extensibleEnum = enums.get(m.name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
@@ -350,7 +380,7 @@ export function getInputType(
                 Description: getDoc(program, m),
                 EnumValueType: innerEnum.EnumValueType,
                 AllowedValues: innerEnum.AllowedValues,
-                IsExtensible: true,
+                IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
             enums.set(m.name, extensibleEnum);
@@ -399,7 +429,7 @@ export function getInputType(
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
-                IsExtensible: false,
+                IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
             if (addToCollection) enums.set(e.name, enumType);
