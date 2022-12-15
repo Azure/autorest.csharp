@@ -290,19 +290,6 @@ export function getInputType(
                     IsNullable: false
                 } as InputPrimitiveType;
         }
-        // if (program.checker.isStdType(type)) {
-        //     if (isStringType())
-        //     return {
-        //         Name: type.name,
-        //         Kind: getCSharpInputTypeKindByIntrinsicModelName(
-        //             type.name
-        //         ),
-        //         IsNullable: false
-        //     } as InputPrimitiveType;
-        // } else {
-
-        // }
-        
     } else if (type.kind === "Union") {
         throw new Error(`Union is not supported.`);
     } else {
@@ -310,29 +297,6 @@ export function getInputType(
     }
 
     function getInputModelType(m: Model): InputType {
-        // const intrinsicName = getIntrinsicModelName(program, m);
-        // if (intrinsicName) {
-        //     switch (intrinsicName) {
-        //         case "string":
-        //             const values = getKnownValues(program, m);
-        //             if (values) {
-        //                 return getInputModelForExtensibleEnum(m, values);
-        //             }
-        //         // if the model is one of the Cadl Intrinsic type.
-        //         // it's a base Cadl "primitive" that corresponds directly to an c# data type.
-        //         // In such cases, we don't want to emit a ref and instead just
-        //         // emit the base type directly.
-        //         default:
-        //             return {
-        //                 Name: m.name,
-        //                 Kind: getCSharpInputTypeKindByIntrinsicModelName(
-        //                     intrinsicName
-        //                 ),
-        //                 IsNullable: false
-        //             } as InputPrimitiveType;
-        //     }
-        // }
-
         /* Array and Map Type. */
         if (!isNeverType(m)) {
             if (isArrayModelType(program, m)) {
@@ -344,23 +308,6 @@ export function getInputType(
                         );
             }
         }
-        
-        // if (m.indexer) {
-        //     if (!isNeverType(m.indexer.key)) {
-        //         const name = getIntrinsicModelName(program, m.indexer.key);
-        //         if (m.indexer.value) {
-        //             if (name === "integer") {
-        //                 return getInputTypeForArray(m.indexer.value);
-        //             } else {
-        //                 return getInputTypeForMap(
-        //                     m.indexer.key,
-        //                     m.indexer.value
-        //                 );
-        //             }
-        //         }
-        //     }
-        // }
-
         return getInputModelForModel(m);
     }
 
@@ -562,10 +509,6 @@ export function getInputType(
         }
 
         // Cadl "primitive" types can't be base types for models
-        // const intrinsicName = getIntrinsicModelName(program, m);
-        // if (intrinsicName) {
-        //     return undefined;
-        // }
         if (program.checker.isStdType(m)) {
             return undefined;
         }
