@@ -164,7 +164,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (pageItemType.Equals(BinaryDataType))
                 {
                     // When `JsonElement` provides access to its UTF8 buffer, change this code to create `BinaryData` from it.
-                    // See also ResponseParser.Enumerate
+                    // See also PageableHelpers.ParseResponseForBinaryData
                     return $"e => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.GetRawText())";
                 }
 

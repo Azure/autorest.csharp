@@ -2,6 +2,9 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
@@ -32,11 +35,17 @@ namespace Azure.Storage.Tables
 
         public AsyncPageable<TableResponseProperties> GetTablesAsync(CancellationToken cancellationToken = default)
         {
-            return PageableHelpers.CreateAsyncEnumerable(async _ =>
+            var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? _) => _tableOperations.RestClient.CreateQueryRequest(Enum1.Three0, new QueryOptions { Format = _format });
+            static (List<TableResponseProperties>?, string?) ParseResponse(Response response)
             {
-                var response = await _tableOperations.RestClient.QueryAsync(Enum1.Three0, new QueryOptions() { Format = _format }, cancellationToken);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }, (_, __) => throw new NotImplementedException());
+                using var document = JsonDocument.Parse(response.ContentStream);
+                var items = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement).Value.ToList();
+                var nextLink = new TableInternalQueryHeaders(response).XMsContinuationNextTableName;
+                return (items, nextLink);
+            }
+
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, ParseResponse, _tableOperations.Diagnostics, _tableOperations.Pipeline, $"{nameof(TableServiceClient)}.Query", requestContext);
         }
     }
 }
