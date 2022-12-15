@@ -3,11 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
@@ -106,22 +101,6 @@ namespace Azure.Core
             _internalOperation = finalState.HasSucceeded
                 ? OperationInternal<VoidValue>.Succeeded(finalState.RawResponse, default)
                 : OperationInternal<VoidValue>.Failed(finalState.RawResponse, finalState.OperationFailedException!);
-        }
-
-        public static OperationInternal Create(
-            ClientDiagnostics clientDiagnostics,
-            IOperation? operation,
-            string? finalResponse,
-            string? operationTypeName = null,
-            IEnumerable<KeyValuePair<string, string>>? scopeAttributes = null,
-            DelayStrategy? fallbackStrategy = null)
-        {
-            if (finalResponse != null)
-            {
-                Response response = JsonSerializer.Deserialize<DecodedResponse>(finalResponse)!;
-                return OperationInternal.Succeeded(response);
-            }
-            return new OperationInternal(clientDiagnostics, operation!, null, operationTypeName, scopeAttributes, fallbackStrategy);
         }
 
         public override Response RawResponse => _internalOperation.RawResponse;

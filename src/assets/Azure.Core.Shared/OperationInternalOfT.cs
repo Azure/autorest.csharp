@@ -5,9 +5,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
@@ -117,23 +115,6 @@ namespace Azure.Core
             _operation = new FinalOperation();
             _rawResponse = finalState.RawResponse;
             _stateLock = new AsyncLockWithValue<OperationState<T>>(finalState);
-        }
-
-        public static OperationInternal<T> Create(
-            IOperationSource<T> source,
-            ClientDiagnostics clientDiagnostics,
-            IOperation<T>? operation,
-            string? finalResponse,
-            string? operationTypeName = null,
-            IEnumerable<KeyValuePair<string, string>>? scopeAttributes = null,
-            DelayStrategy? fallbackStrategy = null)
-        {
-            if (finalResponse != null)
-            {
-                Response response = JsonSerializer.Deserialize<DecodedResponse>(finalResponse)!;
-                return OperationInternal<T>.Succeeded(response, source.CreateResult(response, CancellationToken.None));
-            }
-            return new OperationInternal<T>(clientDiagnostics, operation!, null, operationTypeName, scopeAttributes, fallbackStrategy);
         }
 
         public override Response RawResponse => (_stateLock.TryGetValue(out var state) ? state.RawResponse : _rawResponse) ?? throw new InvalidOperationException("The operation does not have a response yet. Please call UpdateStatus or WaitForCompletion first.");
