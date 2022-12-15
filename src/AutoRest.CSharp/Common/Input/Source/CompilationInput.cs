@@ -9,9 +9,21 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
 {
-    public record CompilationInput(Compilation Compilation, Func<INamedTypeSymbol, bool>? TypeFilter = null, Func<IMethodSymbol, bool>? MethodFilter = null)
+    public abstract class CompilationInput
     {
-        public bool FilterType(INamedTypeSymbol type) => TypeFilter == null || TypeFilter(type);
-        public bool FilterMethod(IMethodSymbol method) => MethodFilter == null || MethodFilter(method);
+        private Compilation _compilation;
+        private Func<INamedTypeSymbol, bool>? _typeFilter;
+        private Func<IMethodSymbol, bool>? _methodFilter;
+
+        public CompilationInput(Compilation compilation, Func<INamedTypeSymbol, bool>? typeFilter = null, Func<IMethodSymbol, bool>? methodFilter = null)
+        {
+            _compilation= compilation;
+            _typeFilter= typeFilter;
+            _methodFilter= methodFilter;
+        }
+
+        public Compilation Compilation => _compilation;
+        public bool FilterType(INamedTypeSymbol type) => _typeFilter == null || _typeFilter(type);
+        public bool FilterMethod(IMethodSymbol method) => _methodFilter == null || _methodFilter(method);
     }
 }

@@ -177,6 +177,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return new GeneratedCodeWorkspace(generatedCodeProject);
         }
 
+        // TODO: Currently the outputDirectory is expected to be generated folder. We will handle the customization folder if there is a case.
         public static GeneratedCodeWorkspace CreateExistingCodeProject(string outputDirectory, Func<string, bool>? skipPredicate = null)
         {
             var workspace = new AdhocWorkspace();

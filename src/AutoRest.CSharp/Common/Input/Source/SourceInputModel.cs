@@ -49,19 +49,13 @@ namespace AutoRest.CSharp.Input.Source
                 {
                     foreach (var type in GetSymbols(module.GlobalNamespace))
                     {
-                        if (type is INamedTypeSymbol typeSymbol)
+                        if (type is INamedTypeSymbol typeSymbol && existingCompilation.FilterType(typeSymbol))
                         {
-                            if (existingCompilation.FilterType(typeSymbol))
+                            foreach (var member in typeSymbol.GetMembers())
                             {
-                                foreach (var member in typeSymbol.GetMembers())
+                                if (member is IMethodSymbol methodSymbol && existingCompilation.FilterMethod(methodSymbol))
                                 {
-                                    if (member is IMethodSymbol methodSymbol)
-                                    {
-                                        if (existingCompilation.FilterMethod(methodSymbol))
-                                        {
-                                            _methodSet.Add(methodSymbol);
-                                        }
-                                    }
+                                    _methodSet.Add(methodSymbol);
                                 }
                             }
                         }
@@ -86,12 +80,12 @@ namespace AutoRest.CSharp.Input.Source
 
         public IMethodSymbol? FindForMethod(string name, IEnumerable<string> parameters)
         {
-            var methods = _methodSet.Where(m => m.Name == name);
-            if (methods == null || methods.Count() == 0)
+            var methods = _methodSet.Where(m => m.Name == name).ToArray();
+            if (methods.Length == 0)
             {
                 return null;
             }
-            else if (methods.Count() == 1)
+            else if (methods.Length == 1)
             {
                 return methods.First();
             }
@@ -99,12 +93,13 @@ namespace AutoRest.CSharp.Input.Source
             {
                 foreach (var method in methods)
                 {
-                    if (method.Parameters.Count() - 1 != parameters.Count())
+                    var existingParameters = method.Parameters;
+                    var parametersCount = parameters.Count();
+                    if (existingParameters.Length - 1 != parametersCount)
                     {
                         continue;
                     }
 
-                    var existingParameters = method.Parameters.ToArray();
                     int index = 0;
                     foreach (var parameter in parameters)
                     {
@@ -116,7 +111,7 @@ namespace AutoRest.CSharp.Input.Source
                         ++index;
                     }
 
-                    if (index == parameters.Count())
+                    if (index == parametersCount)
                     {
                         return method;
                     }
