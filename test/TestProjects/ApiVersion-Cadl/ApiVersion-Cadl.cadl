@@ -6,6 +6,7 @@ using Cadl.Rest;
 using Cadl.Http;
 using Azure.DPG;
 using Cadl.Versioning;
+
 @versioned(Versions)
 @service({title: "Anomaly Detector"})
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
@@ -32,7 +33,7 @@ enum Versions {
 }
 
 @knownValues(Versions)
-model APIVersion is string {}
+scalar APIVersion extends string;
 
 @doc("Detection results for the given resultId.")
 @resource("multivariate/detect-batch")

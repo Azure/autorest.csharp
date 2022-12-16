@@ -12,12 +12,12 @@ namespace Models.Property.Types.Models
     {
         /// <summary> Initializes a new instance of ExtensibleEnumProperty. </summary>
         /// <param name="property"></param>
-        public ExtensibleEnumProperty(InnerExtensibleEnum property)
+        public ExtensibleEnumProperty(InnerEnum property)
         {
             Property = property;
         }
 
         /// <summary> Gets or sets the property. </summary>
-        public InnerExtensibleEnum Property { get; set; }
+        public InnerEnum Property { get; set; }
     }
 }

@@ -1,12 +1,15 @@
 import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
 
 @serviceTitle("Hello world")
 @serviceVersion("0.1.0")
 namespace Demo.HelloWorld;
 
 using Cadl.Http;
+using Azure.Core;
 
 @doc("Simple enum")
+@fixed
 enum SimpleEnum {
     One: "1",
     Two: "2",
@@ -14,15 +17,15 @@ enum SimpleEnum {
 }
 
 @doc("Extensible enum Values")
-enum ExtensibleEnumValues {
+enum ExtensibleEnum {
     One: "1",
     Two: "2",
     Four: "4"
 }
 
-@doc("Extensible enum")
-@knownValues(ExtensibleEnumValues)
-model ExtensibleEnum is string {}
+// @doc("Extensible enum")
+// @knownValues(ExtensibleEnumValues)
+// model ExtensibleEnum is string {}
 
 model Thing {
   @doc("name of the Thing")
