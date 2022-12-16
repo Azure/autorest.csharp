@@ -106,6 +106,10 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Float64;
         case "string":
             return InputTypeKind.String;
+        case "uri":
+            return InputTypeKind.String;
+        case "url":
+            return InputTypeKind.String;
         case "boolean":
             return InputTypeKind.Boolean;
         case "plainDate":
@@ -267,10 +271,15 @@ export function getInputType(
     } else if (type.kind === "Intrinsic") {
         return getInputModelForIntrinsicType(type);
     } else if (type.kind === "Scalar" /*&& program.checker.isStdType(type)*/) {
-        let intrinsicName = type.name;
-        if (!program.checker.isStdType(type)) {
-            intrinsicName = type.baseScalar?.name ?? type.name; 
+        let effectiveType = type;
+        while (!program.checker.isStdType(effectiveType)) {
+            if (type.baseScalar) {
+                effectiveType = type.baseScalar;
+            } else {
+                break;
+            }
         }
+        const intrinsicName = effectiveType.name;
         switch (intrinsicName) {
             case "string":
                 const values = getKnownValues(program, type);

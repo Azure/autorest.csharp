@@ -10,7 +10,7 @@
    "$id": "2",
    "Name": "PetKind",
    "Namespace": "PetStore",
-   "Description": "Extensible enum for pet kind",
+   "Description": "Extensible enum Values for pet kind",
    "EnumValueType": "String",
    "AllowedValues": [
     {

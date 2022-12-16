@@ -79,16 +79,12 @@ enum FixedIntEnum {
 //     Four: 4.0
 // }
 
-@doc("Extensible enum Values")
-enum ExtensibleEnumValues {
+@doc("Extensible enum")
+enum ExtensibleEnum {
     One: "1",
     Two: "2",
     Four: "4"
 }
-
-@doc("Extensible enum")
-@knownValues(ExtensibleEnumValues)
-scalar ExtensibleEnum extends string;
 
 @doc("Model used both as input and output")
 model RoundTripModel extends BaseModel {

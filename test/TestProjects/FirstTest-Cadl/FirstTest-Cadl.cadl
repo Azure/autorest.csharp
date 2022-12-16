@@ -33,16 +33,12 @@ enum SimpleEnum {
     Four: "4"
 }
 
-@doc("Extensible enum Values")
-enum ExtensibleEnumValues {
+@doc("Extensible enum")
+enum ExtensibleEnum {
     One: "1",
     Two: "2",
     Four: "4"
 }
-
-@doc("Extensible enum")
-@knownValues(ExtensibleEnumValues)
-scalar ExtensibleEnum extends string {}
 
 model Thing {
   @doc("name of the Thing")
@@ -72,7 +68,7 @@ model RoundTripModel {
   requiredModel: Thing;
 }
 
-enum DaysOfWeekExtensibleEnumValues {
+enum DaysOfWeekExtensibleEnum {
   "Monday",
   "Tuesday",
   "Wednesday",
@@ -81,8 +77,6 @@ enum DaysOfWeekExtensibleEnumValues {
   "Saturday",
   "Sunday",
 }
-@knownValues(DaysOfWeekExtensibleEnumValues)
-scalar DaysOfWeekExtensibleEnum extends string;
 
 @doc("Hello world service")
 @route("/hello")
