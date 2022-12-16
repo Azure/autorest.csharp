@@ -91,17 +91,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static bool AllCtorsContainMyProperty(ObjectType enclosingType, ObjectTypeProperty property)
-        {
-            foreach (var ctor in enclosingType.Constructors)
-            {
-                if (!ctor.Signature.Parameters.Any(p => p.Name == property.Declaration.Name.Camelize() && p.Type.Equals(property.Declaration.Type)))
-                    return false;
-            }
-
-            return true;
-        }
-
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));

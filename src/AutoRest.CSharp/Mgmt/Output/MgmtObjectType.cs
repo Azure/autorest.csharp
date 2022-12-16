@@ -85,22 +85,28 @@ namespace AutoRest.CSharp.Mgmt.Output
             return objType switch
             {
                 SystemObjectType systemObjectType => HandleSystemObjectType(systemObjectType),
-                SchemaObjectType mgmtObjectType => HandleMgmtObjectType(mgmtObjectType),
+                SchemaObjectType schemaObjectType => HandleMgmtObjectType(schemaObjectType),
                 _ => throw new InvalidOperationException($"Unhandled case {objType.GetType()} for property {property.Declaration.Type} {property.Declaration.Name}")
             };
         }
 
         private static bool HandleMgmtObjectType(SchemaObjectType objType)
         {
+            if (objType.Discriminator != null)
+                return false;
+
+            if (objType.AdditionalPropertiesProperty != null)
+                return false;
+
             // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
-            var properties = objType.GetCombinedSchemas().SelectMany(obj => obj.Properties).ToArray();
-            return properties.Length == 1 && objType.Discriminator == null;
+            var properties = objType.GetCombinedSchemas().SelectMany(obj => obj.Properties);
+            return properties.Count() == 1;
         }
 
         private static bool HandleSystemObjectType(SystemObjectType objType)
         {
-            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).ToArray();
-            return properties.Length == 1 && objType.Discriminator == null;
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            return properties.Count() == 1;
         }
 
         private IEnumerable<ObjectTypeProperty> BuildMyProperties()
