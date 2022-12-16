@@ -164,7 +164,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 updatedOperation = operation with
                 {
-                    Name = UpdateOperationName(operation, clientName),
+                    Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
                     Parameters = UpdateOperationParameters(operation.Parameters),
                     // to update the lazy initialization of `Paging.NextLinkOperation`
                     Paging = operation.Paging with { NextLinkOperationRef = operation.Paging.NextLinkOperation != null ? () => operationsMap[operation.Paging.NextLinkOperation] : null }
@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.Output.Models
             }
             else
             {
-                updatedOperation = operation with { Name = UpdateOperationName(operation, clientName) };
+                updatedOperation = operation with { Name = UpdateOperationName(operation, operation.ResourceName ?? clientName) };
             }
             operationsMap.Add(operation, updatedOperation);
 

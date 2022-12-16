@@ -46,6 +46,7 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputOperation(
         string Name,
+        string? ResourceName,
         string? Summary,
         string Description,
         string? Accessibility,
@@ -64,6 +65,7 @@ namespace AutoRest.CSharp.Common.Input
     {
         public InputOperation() : this(
             Name: string.Empty,
+            ResourceName: null,
             Summary: null,
             Description: string.Empty,
             Accessibility: null,

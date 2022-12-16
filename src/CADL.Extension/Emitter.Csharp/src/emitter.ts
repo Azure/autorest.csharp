@@ -768,6 +768,7 @@ function loadOperation(
 
     return {
         Name: op.name,
+        ResourceName: resourceOperation?.resourceType.name ?? getOperationGroupName(program, op),
         Summary: summary,
         Description: desc,
         Parameters: parameters,
