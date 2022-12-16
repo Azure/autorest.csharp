@@ -120,8 +120,6 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Time;
         case "duration":
             return InputTypeKind.Duration;
-        // case "Map":
-        //     return InputTypeKind.Dictionary;
         default:
             return InputTypeKind.Model;
     }
@@ -135,9 +133,6 @@ export function mapCadlIntrinsicModelToCsharpModel(
     program: Program,
     cadlType: Model
 ): string | undefined {
-    // if (!isIntrinsic(program, cadlType)) {
-    //     return undefined;
-    // }
     if (!program.checker.isStdType(cadlType)) {
         return undefined;
     }
