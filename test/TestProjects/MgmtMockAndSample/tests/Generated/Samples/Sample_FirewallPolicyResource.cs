@@ -126,6 +126,10 @@ WorkspaceIdId = new ResourceIdentifier("/subscriptions/subid/resourcegroups/rg1/
                         DefaultWorkspaceIdId = new ResourceIdentifier("/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"),
                     },
                 },
+                SnatPrivateRanges =
+{
+"IANAPrivateRanges"
+},
                 DnsSettings = new DnsSettings()
                 {
                     Servers =
