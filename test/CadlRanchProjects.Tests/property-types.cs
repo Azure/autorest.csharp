@@ -117,7 +117,7 @@ namespace CadlRanchProjects.Tests
         public Task Models_Property_Types_Enum_get() => Test(async (host) =>
         {
             Response response = await new TypesClient(host, null).GetEnumClient().GetEnumAsync();
-            Assert.AreEqual(InnerEnum.ValueOne, EnumProperty.FromResponse(response).Property);
+            Assert.AreEqual(FixedInnerEnum.ValueOne, EnumProperty.FromResponse(response).Property);
         });
 
         [Test]
