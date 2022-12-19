@@ -1290,7 +1290,7 @@ namespace Azure.Language.Authoring
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
-            uri.AppendPath("/deployments/swap", false);
+            uri.AppendPath("/deployments:swap", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

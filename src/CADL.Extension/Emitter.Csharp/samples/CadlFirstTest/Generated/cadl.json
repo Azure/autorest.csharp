@@ -36,7 +36,7 @@
    "$id": "6",
    "Name": "ExtensibleEnum",
    "Namespace": "Demo.HelloWorld",
-   "Description": "Extensible enum",
+   "Description": "Extensible enum Values",
    "EnumValueType": "String",
    "AllowedValues": [
     {

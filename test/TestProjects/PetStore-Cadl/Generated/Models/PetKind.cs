@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace PetStore.Models
 {
-    /// <summary> Extensible enum for pet kind. </summary>
+    /// <summary> Extensible enum Values for pet kind. </summary>
     public readonly partial struct PetKind : IEquatable<PetKind>
     {
         private readonly string _value;
