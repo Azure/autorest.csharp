@@ -51,7 +51,7 @@ namespace MgmtExpandResourceTypes.Models
             txtRecords ??= new List<TxtRecord>();
             caaRecords ??= new List<CaaRecord>();
 
-            return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, ResourceManagerModelFactory.WritableSubResource(targetResourceId), aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), new CnameRecord(cname), soaRecord, caaRecords?.ToList());
+            return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), cname != null ? new CnameRecord(cname) : null, soaRecord, caaRecords?.ToList());
         }
 
         /// <summary> Initializes a new instance of ARecord. </summary>
@@ -187,7 +187,7 @@ namespace MgmtExpandResourceTypes.Models
         {
             dnsResources ??= new List<WritableSubResource>();
 
-            return new DnsResourceReference(dnsResources?.ToList(), ResourceManagerModelFactory.WritableSubResource(targetResourceId));
+            return new DnsResourceReference(dnsResources?.ToList(), targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null);
         }
     }
 }

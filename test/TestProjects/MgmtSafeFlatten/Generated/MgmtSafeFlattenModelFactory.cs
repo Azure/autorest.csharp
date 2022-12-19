@@ -38,7 +38,7 @@ namespace MgmtSafeFlatten.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TypeOneData(id, name, resourceType, systemData, tags, location, myType, new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)), layerOneType, ResourceManagerModelFactory.WritableSubResource(layerOneConflictId));
+            return new TypeOneData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null, layerOneType, layerOneConflictId != null ? ResourceManagerModelFactory.WritableSubResource(layerOneConflictId) : null);
         }
 
         /// <summary> Initializes a new instance of LayerOneBaseType. </summary>
@@ -63,7 +63,7 @@ namespace MgmtSafeFlatten.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TypeTwoData(id, name, resourceType, systemData, tags, location, myType, new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)));
+            return new TypeTwoData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null);
         }
 
         /// <summary> Initializes a new instance of LayerOneFooType. </summary>

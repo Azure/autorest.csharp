@@ -88,7 +88,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentPropertiesExtended"/> instance for mocking. </returns>
         public static DeploymentPropertiesExtended DeploymentPropertiesExtended(ProvisioningState? provisioningState = null, string correlationId = null, DateTimeOffset? timestamp = null, TimeSpan? duration = null, BinaryData outputs = null, BinaryData parameters = null, DeploymentMode? mode = null, string error = null)
         {
-            return new DeploymentPropertiesExtended(provisioningState, correlationId, timestamp, duration, outputs, parameters, mode, new ErrorResponse(error));
+            return new DeploymentPropertiesExtended(provisioningState, correlationId, timestamp, duration, outputs, parameters, mode, error != null ? new ErrorResponse(error) : null);
         }
 
         /// <summary> Initializes a new instance of DeploymentValidateResult. </summary>
@@ -97,7 +97,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentValidateResult"/> instance for mocking. </returns>
         public static DeploymentValidateResult DeploymentValidateResult(string error = null, DeploymentPropertiesExtended properties = null)
         {
-            return new DeploymentValidateResult(new ErrorResponse(error), properties);
+            return new DeploymentValidateResult(error != null ? new ErrorResponse(error) : null, properties);
         }
 
         /// <summary> Initializes a new instance of DeploymentExportResult. </summary>
@@ -117,7 +117,7 @@ namespace MgmtScopeResource.Models
         {
             changes ??= new List<WhatIfChange>();
 
-            return new WhatIfOperationResult(status, new ErrorResponse(error), changes?.ToList());
+            return new WhatIfOperationResult(status, error != null ? new ErrorResponse(error) : null, changes?.ToList());
         }
 
         /// <summary> Initializes a new instance of WhatIfChange. </summary>
@@ -156,7 +156,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentOperationProperties"/> instance for mocking. </returns>
         public static DeploymentOperationProperties DeploymentOperationProperties(ProvisioningOperation? provisioningOperation = null, string provisioningState = null, DateTimeOffset? timestamp = null, TimeSpan? duration = null, TimeSpan? anotherDuration = null, string serviceRequestId = null, string statusCode = null, StatusMessage statusMessage = null, BinaryData requestContent = null, BinaryData responseContent = null)
         {
-            return new DeploymentOperationProperties(provisioningOperation, provisioningState, timestamp, duration, anotherDuration, serviceRequestId, statusCode, statusMessage, new HttpMessage(requestContent), new HttpMessage(responseContent));
+            return new DeploymentOperationProperties(provisioningOperation, provisioningState, timestamp, duration, anotherDuration, serviceRequestId, statusCode, statusMessage, requestContent != null ? new HttpMessage(requestContent) : null, responseContent != null ? new HttpMessage(responseContent) : null);
         }
 
         /// <summary> Initializes a new instance of StatusMessage. </summary>
@@ -165,7 +165,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.StatusMessage"/> instance for mocking. </returns>
         public static StatusMessage StatusMessage(string status = null, string error = null)
         {
-            return new StatusMessage(status, new ErrorResponse(error));
+            return new StatusMessage(status, error != null ? new ErrorResponse(error) : null);
         }
 
         /// <summary> Initializes a new instance of TemplateHashResult. </summary>

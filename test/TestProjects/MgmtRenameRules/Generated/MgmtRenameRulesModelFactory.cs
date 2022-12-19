@@ -125,7 +125,7 @@ namespace MgmtRenameRules.Models
             zones ??= new List<string>();
             networkInterfaces ??= new List<NetworkInterfaceReference>();
 
-            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, identity, zones?.ToList(), new HardwareProfile(hardwareVmSize), storageProfile, new AdditionalCapabilities(ultraSSDEnabled), osProfile, new NetworkProfile(networkInterfaces?.ToList()), new SecurityProfile(encryptionAtHost), new DiagnosticsProfile(bootDiagnostics), ResourceManagerModelFactory.WritableSubResource(availabilitySetId), ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId), ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId), priority, evictionPolicy, new BillingProfile(billingMaxPrice), ResourceManagerModelFactory.WritableSubResource(hostId), ResourceManagerModelFactory.WritableSubResource(hostGroupId), provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
+            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
         }
 
         /// <summary> Initializes a new instance of MgmtRenameRulesPlan. </summary>
@@ -262,7 +262,7 @@ namespace MgmtRenameRules.Models
         /// <returns> A new <see cref="Models.OSDisk"/> instance for mocking. </returns>
         public static OSDisk OSDisk(OperatingSystemType? osType = null, DiskEncryptionSettings encryptionSettings = null, string name = null, Uri vhdUri = null, Uri imageUri = null, CachingType? caching = null, bool? writeAcceleratorEnabled = null, DiffDiskSettings diffDiskSettings = null, DiskCreateOptionType createOption = default, int? diskSizeGB = null, ManagedDiskParameters managedDisk = null)
         {
-            return new OSDisk(osType, encryptionSettings, name, new VirtualHardDisk(vhdUri), new VirtualHardDisk(imageUri), caching, writeAcceleratorEnabled, diffDiskSettings, createOption, diskSizeGB, managedDisk);
+            return new OSDisk(osType, encryptionSettings, name, vhdUri != null ? new VirtualHardDisk(vhdUri) : null, imageUri != null ? new VirtualHardDisk(imageUri) : null, caching, writeAcceleratorEnabled, diffDiskSettings, createOption, diskSizeGB, managedDisk);
         }
 
         /// <summary> Initializes a new instance of DiskEncryptionSettings. </summary>
@@ -315,7 +315,7 @@ namespace MgmtRenameRules.Models
         /// <returns> A new <see cref="Models.ManagedDiskParameters"/> instance for mocking. </returns>
         public static ManagedDiskParameters ManagedDiskParameters(string id = null, StorageAccountType? storageAccountType = null, ResourceIdentifier diskEncryptionSetId = null)
         {
-            return new ManagedDiskParameters(id, storageAccountType, ResourceManagerModelFactory.WritableSubResource(diskEncryptionSetId));
+            return new ManagedDiskParameters(id, storageAccountType, diskEncryptionSetId != null ? ResourceManagerModelFactory.WritableSubResource(diskEncryptionSetId) : null);
         }
 
         /// <summary> Initializes a new instance of DataDisk. </summary>
@@ -370,7 +370,7 @@ namespace MgmtRenameRules.Models
         /// <returns> A new <see cref="Models.DataDisk"/> instance for mocking. </returns>
         public static DataDisk DataDisk(int lun = default, string name = null, Uri vhdUri = null, Uri imageUri = null, CachingType? caching = null, bool? writeAcceleratorEnabled = null, DiskCreateOptionType createOption = default, int? diskSizeGB = null, ManagedDiskParameters managedDisk = null, bool? toBeDetached = null, long? diskIopsReadWrite = null, long? diskMBpsReadWrite = null)
         {
-            return new DataDisk(lun, name, new VirtualHardDisk(vhdUri), new VirtualHardDisk(imageUri), caching, writeAcceleratorEnabled, createOption, diskSizeGB, managedDisk, toBeDetached, diskIopsReadWrite, diskMBpsReadWrite);
+            return new DataDisk(lun, name, vhdUri != null ? new VirtualHardDisk(vhdUri) : null, imageUri != null ? new VirtualHardDisk(imageUri) : null, caching, writeAcceleratorEnabled, createOption, diskSizeGB, managedDisk, toBeDetached, diskIopsReadWrite, diskMBpsReadWrite);
         }
 
         /// <summary> Initializes a new instance of OSProfile. </summary>
@@ -449,7 +449,7 @@ namespace MgmtRenameRules.Models
             additionalUnattendContent ??= new List<AdditionalUnattendContent>();
             winRMListeners ??= new List<WinRMListener>();
 
-            return new WindowsConfiguration(provisionVmAgent, enableAutomaticUpdates, timeZone, additionalUnattendContent?.ToList(), new PatchSettings(patchMode), new WinRMConfiguration(winRMListeners?.ToList()));
+            return new WindowsConfiguration(provisionVmAgent, enableAutomaticUpdates, timeZone, additionalUnattendContent?.ToList(), patchMode != null ? new PatchSettings(patchMode) : null, winRMListeners != null ? new WinRMConfiguration(winRMListeners?.ToList()) : null);
         }
 
         /// <summary> Initializes a new instance of AdditionalUnattendContent. </summary>
@@ -508,7 +508,7 @@ namespace MgmtRenameRules.Models
         {
             sshPublicKeys ??= new List<SshPublicKeyInfo>();
 
-            return new LinuxConfiguration(disablePasswordAuthentication, new SshConfiguration(sshPublicKeys?.ToList()), provisionVmAgent);
+            return new LinuxConfiguration(disablePasswordAuthentication, sshPublicKeys != null ? new SshConfiguration(sshPublicKeys?.ToList()) : null, provisionVmAgent);
         }
 
         /// <summary> Initializes a new instance of SshPublicKeyInfo. </summary>
@@ -540,7 +540,7 @@ namespace MgmtRenameRules.Models
         {
             vaultCertificates ??= new List<VaultCertificate>();
 
-            return new VaultSecretGroup(ResourceManagerModelFactory.WritableSubResource(sourceVaultId), vaultCertificates?.ToList());
+            return new VaultSecretGroup(sourceVaultId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVaultId) : null, vaultCertificates?.ToList());
         }
 
         /// <summary> Initializes a new instance of VaultCertificate. </summary>
@@ -655,7 +655,7 @@ namespace MgmtRenameRules.Models
             disks ??= new List<DiskInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineInstanceView(platformUpdateDomain, platformFaultDomain, computerName, osName, osVersion, hyperVGeneration, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), new VirtualMachineHealthStatus(vmHealthStatus), bootDiagnostics, assignedHost, statuses?.ToList(), patchStatus);
+            return new VirtualMachineInstanceView(platformUpdateDomain, platformFaultDomain, computerName, osName, osVersion, hyperVGeneration, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null, bootDiagnostics, assignedHost, statuses?.ToList(), patchStatus);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineAgentInstanceView. </summary>
@@ -1010,7 +1010,7 @@ namespace MgmtRenameRules.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ImageData(id, name, resourceType, systemData, tags, location, ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId), storageProfile, provisioningState, hyperVGeneration);
+            return new ImageData(id, name, resourceType, systemData, tags, location, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration);
         }
 
         /// <summary> Initializes a new instance of ImageStorageProfile. </summary>
@@ -1074,7 +1074,7 @@ namespace MgmtRenameRules.Models
         /// <returns> A new <see cref="Models.ImageOSDisk"/> instance for mocking. </returns>
         public static ImageOSDisk ImageOSDisk(ResourceIdentifier snapshotId = null, ResourceIdentifier managedDiskId = null, Uri blobUri = null, CachingType? caching = null, int? diskSizeGB = null, StorageAccountType? storageAccountType = null, ResourceIdentifier diskEncryptionSetId = null, OperatingSystemType osType = default, OperatingSystemStateType osState = default)
         {
-            return new ImageOSDisk(ResourceManagerModelFactory.WritableSubResource(snapshotId), ResourceManagerModelFactory.WritableSubResource(managedDiskId), blobUri, caching, diskSizeGB, storageAccountType, ResourceManagerModelFactory.WritableSubResource(diskEncryptionSetId), osType, osState);
+            return new ImageOSDisk(snapshotId != null ? ResourceManagerModelFactory.WritableSubResource(snapshotId) : null, managedDiskId != null ? ResourceManagerModelFactory.WritableSubResource(managedDiskId) : null, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSetId != null ? ResourceManagerModelFactory.WritableSubResource(diskEncryptionSetId) : null, osType, osState);
         }
 
         /// <summary> Initializes a new instance of ImageDisk. </summary>
@@ -1109,7 +1109,7 @@ namespace MgmtRenameRules.Models
         /// <returns> A new <see cref="Models.ImageDisk"/> instance for mocking. </returns>
         public static ImageDisk ImageDisk(ResourceIdentifier snapshotId = null, ResourceIdentifier managedDiskId = null, Uri blobUri = null, CachingType? caching = null, int? diskSizeGB = null, StorageAccountType? storageAccountType = null, ResourceIdentifier diskEncryptionSetId = null)
         {
-            return new ImageDisk(ResourceManagerModelFactory.WritableSubResource(snapshotId), ResourceManagerModelFactory.WritableSubResource(managedDiskId), blobUri, caching, diskSizeGB, storageAccountType, ResourceManagerModelFactory.WritableSubResource(diskEncryptionSetId));
+            return new ImageDisk(snapshotId != null ? ResourceManagerModelFactory.WritableSubResource(snapshotId) : null, managedDiskId != null ? ResourceManagerModelFactory.WritableSubResource(managedDiskId) : null, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSetId != null ? ResourceManagerModelFactory.WritableSubResource(diskEncryptionSetId) : null);
         }
 
         /// <summary> Initializes a new instance of ImageDataDisk. </summary>
@@ -1148,7 +1148,7 @@ namespace MgmtRenameRules.Models
         /// <returns> A new <see cref="Models.ImageDataDisk"/> instance for mocking. </returns>
         public static ImageDataDisk ImageDataDisk(ResourceIdentifier snapshotId = null, ResourceIdentifier managedDiskId = null, Uri blobUri = null, CachingType? caching = null, int? diskSizeGB = null, StorageAccountType? storageAccountType = null, ResourceIdentifier diskEncryptionSetId = null, int lun = default)
         {
-            return new ImageDataDisk(ResourceManagerModelFactory.WritableSubResource(snapshotId), ResourceManagerModelFactory.WritableSubResource(managedDiskId), blobUri, caching, diskSizeGB, storageAccountType, ResourceManagerModelFactory.WritableSubResource(diskEncryptionSetId), lun);
+            return new ImageDataDisk(snapshotId != null ? ResourceManagerModelFactory.WritableSubResource(snapshotId) : null, managedDiskId != null ? ResourceManagerModelFactory.WritableSubResource(managedDiskId) : null, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSetId != null ? ResourceManagerModelFactory.WritableSubResource(diskEncryptionSetId) : null, lun);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineCaptureResult. </summary>
@@ -1414,7 +1414,7 @@ namespace MgmtRenameRules.Models
             zones ??= new List<string>();
             scaleInRules ??= new List<VirtualMachineScaleSetScaleInRule>();
 
-            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), ipsecSomething, testIPsec, p2sServer, upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVms, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId), ResourceManagerModelFactory.WritableSubResource(hostGroupId), new AdditionalCapabilities(ultraSSDEnabled), new ScaleInPolicy(scaleInRules?.ToList()));
+            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), ipsecSomething, testIPsec, p2sServer, upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVms, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList()) : null);
         }
 
         /// <summary> Initializes a new instance of MgmtRenameRulesSku. </summary>
@@ -1556,7 +1556,7 @@ namespace MgmtRenameRules.Models
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetVmProfile"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetVmProfile VirtualMachineScaleSetVmProfile(VirtualMachineScaleSetOSProfile osProfile = null, VirtualMachineScaleSetStorageProfile storageProfile = null, VirtualMachineScaleSetNetworkProfile networkProfile = null, bool? encryptionAtHost = null, BootDiagnostics bootDiagnostics = null, VirtualMachineScaleSetExtensionProfile extensionProfile = null, string licenseType = null, VirtualMachinePriorityType? priority = null, VirtualMachineEvictionPolicyType? evictionPolicy = null, double? billingMaxPrice = null, TerminateNotificationProfile scheduledEventsTerminateNotificationProfile = null)
         {
-            return new VirtualMachineScaleSetVmProfile(osProfile, storageProfile, networkProfile, new SecurityProfile(encryptionAtHost), new DiagnosticsProfile(bootDiagnostics), extensionProfile, licenseType, priority, evictionPolicy, new BillingProfile(billingMaxPrice), new ScheduledEventsProfile(scheduledEventsTerminateNotificationProfile));
+            return new VirtualMachineScaleSetVmProfile(osProfile, storageProfile, networkProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null, extensionProfile, licenseType, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice) : null, scheduledEventsTerminateNotificationProfile != null ? new ScheduledEventsProfile(scheduledEventsTerminateNotificationProfile) : null);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetOSProfile. </summary>
@@ -1667,7 +1667,7 @@ namespace MgmtRenameRules.Models
         {
             vhdContainers ??= new List<string>();
 
-            return new VirtualMachineScaleSetOSDisk(name, caching, writeAcceleratorEnabled, createOption, diffDiskSettings, diskSizeGB, osType, new VirtualHardDisk(imageUri), vhdContainers?.ToList(), managedDisk, securityType);
+            return new VirtualMachineScaleSetOSDisk(name, caching, writeAcceleratorEnabled, createOption, diffDiskSettings, diskSizeGB, osType, imageUri != null ? new VirtualHardDisk(imageUri) : null, vhdContainers?.ToList(), managedDisk, securityType);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetManagedDiskParameters. </summary>
@@ -1682,7 +1682,7 @@ namespace MgmtRenameRules.Models
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetManagedDiskParameters"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetManagedDiskParameters VirtualMachineScaleSetManagedDiskParameters(StorageAccountType? storageAccountType = null, ResourceIdentifier diskEncryptionSetId = null)
         {
-            return new VirtualMachineScaleSetManagedDiskParameters(storageAccountType, ResourceManagerModelFactory.WritableSubResource(diskEncryptionSetId));
+            return new VirtualMachineScaleSetManagedDiskParameters(storageAccountType, diskEncryptionSetId != null ? ResourceManagerModelFactory.WritableSubResource(diskEncryptionSetId) : null);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetDataDisk. </summary>
@@ -1742,7 +1742,7 @@ namespace MgmtRenameRules.Models
         {
             networkInterfaceConfigurations ??= new List<VirtualMachineScaleSetNetworkConfiguration>();
 
-            return new VirtualMachineScaleSetNetworkProfile(ResourceManagerModelFactory.WritableSubResource(healthProbeId), networkInterfaceConfigurations?.ToList());
+            return new VirtualMachineScaleSetNetworkProfile(healthProbeId != null ? ResourceManagerModelFactory.WritableSubResource(healthProbeId) : null, networkInterfaceConfigurations?.ToList());
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfiguration. </summary>
@@ -1784,7 +1784,7 @@ namespace MgmtRenameRules.Models
             dnsServers ??= new List<string>();
             ipConfigurations ??= new List<VirtualMachineScaleSetIPConfiguration>();
 
-            return new VirtualMachineScaleSetNetworkConfiguration(id, name, primary, enableAcceleratedNetworking, ResourceManagerModelFactory.WritableSubResource(networkSecurityGroupId), new VirtualMachineScaleSetNetworkConfigurationDnsSettings(dnsServers?.ToList()), ipConfigurations?.ToList(), enableIPForwarding);
+            return new VirtualMachineScaleSetNetworkConfiguration(id, name, primary, enableAcceleratedNetworking, networkSecurityGroupId != null ? ResourceManagerModelFactory.WritableSubResource(networkSecurityGroupId) : null, dnsServers != null ? new VirtualMachineScaleSetNetworkConfigurationDnsSettings(dnsServers?.ToList()) : null, ipConfigurations?.ToList(), enableIPForwarding);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetIPConfiguration. </summary>
@@ -1841,7 +1841,7 @@ namespace MgmtRenameRules.Models
             loadBalancerBackendAddressPools ??= new List<WritableSubResource>();
             loadBalancerInboundNatPools ??= new List<WritableSubResource>();
 
-            return new VirtualMachineScaleSetIPConfiguration(id, name, ResourceManagerModelFactory.WritableSubResource(subnetId), primary, publicIPAddressConfiguration, ipAddresses?.ToList(), privateIPAddressVersion, applicationGatewayBackendAddressPools?.ToList(), applicationSecurityGroups?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatPools?.ToList());
+            return new VirtualMachineScaleSetIPConfiguration(id, name, subnetId != null ? ResourceManagerModelFactory.WritableSubResource(subnetId) : null, primary, publicIPAddressConfiguration, ipAddresses?.ToList(), privateIPAddressVersion, applicationGatewayBackendAddressPools?.ToList(), applicationSecurityGroups?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatPools?.ToList());
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetPublicIPAddressConfiguration. </summary>
@@ -1874,7 +1874,7 @@ namespace MgmtRenameRules.Models
         {
             ipTags ??= new List<VirtualMachineScaleSetIPTag>();
 
-            return new VirtualMachineScaleSetPublicIPAddressConfiguration(name, idleTimeoutInMinutes, new VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(dnsDomainNameLabel), ipTags?.ToList(), ResourceManagerModelFactory.WritableSubResource(publicIPPrefixId), publicIPAddressVersion);
+            return new VirtualMachineScaleSetPublicIPAddressConfiguration(name, idleTimeoutInMinutes, dnsDomainNameLabel != null ? new VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(dnsDomainNameLabel) : null, ipTags?.ToList(), publicIPPrefixId != null ? ResourceManagerModelFactory.WritableSubResource(publicIPPrefixId) : null, publicIPAddressVersion);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetIPTag. </summary>
@@ -2035,7 +2035,7 @@ namespace MgmtRenameRules.Models
             dnsServers ??= new List<string>();
             ipConfigurations ??= new List<VirtualMachineScaleSetUpdateIPConfiguration>();
 
-            return new VirtualMachineScaleSetUpdateNetworkConfiguration(id, name, primary, enableAcceleratedNetworking, ResourceManagerModelFactory.WritableSubResource(networkSecurityGroupId), new VirtualMachineScaleSetNetworkConfigurationDnsSettings(dnsServers?.ToList()), ipConfigurations?.ToList(), enableIPForwarding);
+            return new VirtualMachineScaleSetUpdateNetworkConfiguration(id, name, primary, enableAcceleratedNetworking, networkSecurityGroupId != null ? ResourceManagerModelFactory.WritableSubResource(networkSecurityGroupId) : null, dnsServers != null ? new VirtualMachineScaleSetNetworkConfigurationDnsSettings(dnsServers?.ToList()) : null, ipConfigurations?.ToList(), enableIPForwarding);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateIPConfiguration. </summary>
@@ -2087,7 +2087,7 @@ namespace MgmtRenameRules.Models
             loadBalancerBackendAddressPools ??= new List<WritableSubResource>();
             loadBalancerInboundNatPools ??= new List<WritableSubResource>();
 
-            return new VirtualMachineScaleSetUpdateIPConfiguration(id, name, ResourceManagerModelFactory.WritableSubResource(subnetId), primary, publicIPAddressConfiguration, privateIPAddressVersion, applicationGatewayBackendAddressPools?.ToList(), applicationSecurityGroups?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatPools?.ToList());
+            return new VirtualMachineScaleSetUpdateIPConfiguration(id, name, subnetId != null ? ResourceManagerModelFactory.WritableSubResource(subnetId) : null, primary, publicIPAddressConfiguration, privateIPAddressVersion, applicationGatewayBackendAddressPools?.ToList(), applicationSecurityGroups?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatPools?.ToList());
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdatePublicIPAddressConfiguration. </summary>
@@ -2106,7 +2106,7 @@ namespace MgmtRenameRules.Models
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetUpdatePublicIPAddressConfiguration"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetUpdatePublicIPAddressConfiguration VirtualMachineScaleSetUpdatePublicIPAddressConfiguration(string name = null, int? idleTimeoutInMinutes = null, string dnsDomainNameLabel = null)
         {
-            return new VirtualMachineScaleSetUpdatePublicIPAddressConfiguration(name, idleTimeoutInMinutes, new VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(dnsDomainNameLabel));
+            return new VirtualMachineScaleSetUpdatePublicIPAddressConfiguration(name, idleTimeoutInMinutes, dnsDomainNameLabel != null ? new VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(dnsDomainNameLabel) : null);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceView. </summary>
@@ -2134,7 +2134,7 @@ namespace MgmtRenameRules.Models
             statuses ??= new List<InstanceViewStatus>();
             orchestrationServices ??= new List<OrchestrationServiceSummary>();
 
-            return new VirtualMachineScaleSetInstanceView(new VirtualMachineScaleSetInstanceViewStatusesSummary(virtualMachineStatusesSummary?.ToList()), extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList());
+            return new VirtualMachineScaleSetInstanceView(virtualMachineStatusesSummary != null ? new VirtualMachineScaleSetInstanceViewStatusesSummary(virtualMachineStatusesSummary?.ToList()) : null, extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList());
         }
 
         /// <summary> Initializes a new instance of VirtualMachineStatusCodeCount. </summary>
@@ -2554,7 +2554,7 @@ namespace MgmtRenameRules.Models
             networkInterfaces ??= new List<NetworkInterfaceReference>();
             networkInterfaceConfigurations ??= new List<VirtualMachineScaleSetNetworkConfiguration>();
 
-            return new VirtualMachineScaleSetVmData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, zones?.ToList(), latestModelApplied, vmId, instanceView, new HardwareProfile(hardwareVmSize), storageProfile, new AdditionalCapabilities(ultraSSDEnabled), osProfile, new SecurityProfile(encryptionAtHost), new NetworkProfile(networkInterfaces?.ToList()), new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList()), new DiagnosticsProfile(bootDiagnostics), ResourceManagerModelFactory.WritableSubResource(availabilitySetId), provisioningState, licenseType, modelDefinitionApplied, protectionPolicy);
+            return new VirtualMachineScaleSetVmData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceView. </summary>
@@ -2608,7 +2608,7 @@ namespace MgmtRenameRules.Models
             disks ??= new List<DiskInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), new VirtualMachineHealthStatus(vmHealthStatus), bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId);
+            return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProtectionPolicy. </summary>
@@ -2650,7 +2650,7 @@ namespace MgmtRenameRules.Models
         /// <returns> A new <see cref="Models.LogAnalytics"/> instance for mocking. </returns>
         public static LogAnalytics LogAnalytics(string logAnalyticsOutput = null, ContentType? contentType = null, BinaryData content = null, RequestMethod? requestMethod = null, Uri basePathUri = null)
         {
-            return new LogAnalytics(new LogAnalyticsOutput(logAnalyticsOutput), contentType, content, requestMethod, basePathUri);
+            return new LogAnalytics(logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput) : null, contentType, content, requestMethod, basePathUri);
         }
     }
 }

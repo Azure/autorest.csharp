@@ -39,7 +39,7 @@ namespace Azure.Management.Storage.Models
         {
             corsRulesValue ??= new List<CorsRule>();
 
-            return new BlobServiceData(id, name, resourceType, systemData, sku, new CorsRules(corsRulesValue?.ToList()), defaultServiceVersion, deleteRetentionPolicy, isVersioningEnabled, automaticSnapshotPolicyEnabled, changeFeed, restorePolicy, containerDeleteRetentionPolicy, lastAccessTimeTrackingPolicy);
+            return new BlobServiceData(id, name, resourceType, systemData, sku, corsRulesValue != null ? new CorsRules(corsRulesValue?.ToList()) : null, defaultServiceVersion, deleteRetentionPolicy, isVersioningEnabled, automaticSnapshotPolicyEnabled, changeFeed, restorePolicy, containerDeleteRetentionPolicy, lastAccessTimeTrackingPolicy);
         }
 
         /// <summary> Initializes a new instance of DeleteRetentionPolicy. </summary>
@@ -250,7 +250,7 @@ namespace Azure.Management.Storage.Models
         {
             corsRulesValue ??= new List<CorsRule>();
 
-            return new FileServiceData(id, name, resourceType, systemData, sku, new CorsRules(corsRulesValue?.ToList()), shareDeleteRetentionPolicy, new ProtocolSettings(protocolSmb));
+            return new FileServiceData(id, name, resourceType, systemData, sku, corsRulesValue != null ? new CorsRules(corsRulesValue?.ToList()) : null, shareDeleteRetentionPolicy, protocolSmb != null ? new ProtocolSettings(protocolSmb) : null);
         }
 
         /// <summary> Initializes a new instance of SmbSetting. </summary>
@@ -262,7 +262,7 @@ namespace Azure.Management.Storage.Models
         /// <returns> A new <see cref="Models.SmbSetting"/> instance for mocking. </returns>
         public static SmbSetting SmbSetting(bool? multichannelEnabled = null, string versions = null, string authenticationMethods = null, string kerberosTicketEncryption = null, string channelEncryption = null)
         {
-            return new SmbSetting(new Multichannel(multichannelEnabled), versions, authenticationMethods, kerberosTicketEncryption, channelEncryption);
+            return new SmbSetting(multichannelEnabled != null ? new Multichannel(multichannelEnabled) : null, versions, authenticationMethods, kerberosTicketEncryption, channelEncryption);
         }
 
         /// <summary> Initializes a new instance of FileShareData. </summary>
@@ -393,7 +393,7 @@ namespace Azure.Management.Storage.Models
         /// <returns> A new <see cref="Models.Encryption"/> instance for mocking. </returns>
         public static Encryption Encryption(EncryptionServices services = null, KeySource keySource = default, bool? requireInfrastructureEncryption = null, KeyVaultProperties keyVaultProperties = null, string encryptionUserAssignedIdentity = null)
         {
-            return new Encryption(services, keySource, requireInfrastructureEncryption, keyVaultProperties, new EncryptionIdentity(encryptionUserAssignedIdentity));
+            return new Encryption(services, keySource, requireInfrastructureEncryption, keyVaultProperties, encryptionUserAssignedIdentity != null ? new EncryptionIdentity(encryptionUserAssignedIdentity) : null);
         }
 
         /// <summary> Initializes a new instance of EncryptionServices. </summary>
@@ -557,12 +557,12 @@ namespace Azure.Management.Storage.Models
         /// <param name="publicNetworkAccess"> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be &apos;Enabled&apos; or &apos;Disabled&apos;. </param>
         /// <param name="immutableStorageWithVersioning"> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default. </param>
         /// <returns> A new <see cref="Storage.StorageAccountData"/> instance for mocking. </returns>
-        public static StorageAccountData StorageAccountData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, StorageSku sku = null, StorageKind? kind = null, ManagedServiceIdentity identity = null, ExtendedLocation extendedLocation = null, ProvisioningState? provisioningState = null, Endpoints primaryEndpoints = null, string primaryLocation = null, AccountStatus? statusOfPrimary = null, DateTimeOffset? lastGeoFailoverOn = null, string secondaryLocation = null, AccountStatus? statusOfSecondary = null, DateTimeOffset? createdOn = null, CustomDomain customDomain = null, SasPolicy sasPolicy = null, int keyExpirationPeriodInDays = default, KeyCreationTime keyCreationTime = null, Endpoints secondaryEndpoints = null, Encryption encryption = null, AccessTier? accessTier = null, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication = null, bool? enableHttpsTrafficOnly = null, NetworkRuleSet networkRuleSet = null, bool? isHnsEnabled = null, GeoReplicationStats geoReplicationStats = null, bool? failoverInProgress = null, LargeFileSharesState? largeFileSharesState = null, IEnumerable<StoragePrivateEndpointConnectionData> privateEndpointConnections = null, RoutingPreference routingPreference = null, BlobRestoreStatus blobRestoreStatus = null, bool? allowBlobPublicAccess = null, MinimumTlsVersion? minimumTlsVersion = null, bool? allowSharedKeyAccess = null, bool? enableNfsV3 = null, bool? allowCrossTenantReplication = null, bool? defaultToOAuthAuthentication = null, PublicNetworkAccess? publicNetworkAccess = null, ImmutableStorageAccount immutableStorageWithVersioning = null)
+        public static StorageAccountData StorageAccountData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, StorageSku sku = null, StorageKind? kind = null, ManagedServiceIdentity identity = null, ExtendedLocation extendedLocation = null, ProvisioningState? provisioningState = null, Endpoints primaryEndpoints = null, string primaryLocation = null, AccountStatus? statusOfPrimary = null, DateTimeOffset? lastGeoFailoverOn = null, string secondaryLocation = null, AccountStatus? statusOfSecondary = null, DateTimeOffset? createdOn = null, CustomDomain customDomain = null, SasPolicy sasPolicy = null, int? keyExpirationPeriodInDays = null, KeyCreationTime keyCreationTime = null, Endpoints secondaryEndpoints = null, Encryption encryption = null, AccessTier? accessTier = null, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication = null, bool? enableHttpsTrafficOnly = null, NetworkRuleSet networkRuleSet = null, bool? isHnsEnabled = null, GeoReplicationStats geoReplicationStats = null, bool? failoverInProgress = null, LargeFileSharesState? largeFileSharesState = null, IEnumerable<StoragePrivateEndpointConnectionData> privateEndpointConnections = null, RoutingPreference routingPreference = null, BlobRestoreStatus blobRestoreStatus = null, bool? allowBlobPublicAccess = null, MinimumTlsVersion? minimumTlsVersion = null, bool? allowSharedKeyAccess = null, bool? enableNfsV3 = null, bool? allowCrossTenantReplication = null, bool? defaultToOAuthAuthentication = null, PublicNetworkAccess? publicNetworkAccess = null, ImmutableStorageAccount immutableStorageWithVersioning = null)
         {
             tags ??= new Dictionary<string, string>();
             privateEndpointConnections ??= new List<StoragePrivateEndpointConnectionData>();
 
-            return new StorageAccountData(id, name, resourceType, systemData, tags, location, sku, kind, identity, extendedLocation, provisioningState, primaryEndpoints, primaryLocation, statusOfPrimary, lastGeoFailoverOn, secondaryLocation, statusOfSecondary, createdOn, customDomain, sasPolicy, new KeyPolicy(keyExpirationPeriodInDays), keyCreationTime, secondaryEndpoints, encryption, accessTier, azureFilesIdentityBasedAuthentication, enableHttpsTrafficOnly, networkRuleSet, isHnsEnabled, geoReplicationStats, failoverInProgress, largeFileSharesState, privateEndpointConnections?.ToList(), routingPreference, blobRestoreStatus, allowBlobPublicAccess, minimumTlsVersion, allowSharedKeyAccess, enableNfsV3, allowCrossTenantReplication, defaultToOAuthAuthentication, publicNetworkAccess, immutableStorageWithVersioning);
+            return new StorageAccountData(id, name, resourceType, systemData, tags, location, sku, kind, identity, extendedLocation, provisioningState, primaryEndpoints, primaryLocation, statusOfPrimary, lastGeoFailoverOn, secondaryLocation, statusOfSecondary, createdOn, customDomain, sasPolicy, keyExpirationPeriodInDays.HasValue ? new KeyPolicy(keyExpirationPeriodInDays.Value) : null, keyCreationTime, secondaryEndpoints, encryption, accessTier, azureFilesIdentityBasedAuthentication, enableHttpsTrafficOnly, networkRuleSet, isHnsEnabled, geoReplicationStats, failoverInProgress, largeFileSharesState, privateEndpointConnections?.ToList(), routingPreference, blobRestoreStatus, allowBlobPublicAccess, minimumTlsVersion, allowSharedKeyAccess, enableNfsV3, allowCrossTenantReplication, defaultToOAuthAuthentication, publicNetworkAccess, immutableStorageWithVersioning);
         }
 
         /// <summary> Initializes a new instance of Endpoints. </summary>
@@ -634,7 +634,7 @@ namespace Azure.Management.Storage.Models
         /// <returns> A new <see cref="Storage.StoragePrivateEndpointConnectionData"/> instance for mocking. </returns>
         public static StoragePrivateEndpointConnectionData StoragePrivateEndpointConnectionData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, ResourceIdentifier privateEndpointId = null, StoragePrivateLinkServiceConnectionState connectionState = null, StoragePrivateEndpointConnectionProvisioningState? provisioningState = null)
         {
-            return new StoragePrivateEndpointConnectionData(id, name, resourceType, systemData, ResourceManagerModelFactory.SubResource(privateEndpointId), connectionState, provisioningState);
+            return new StoragePrivateEndpointConnectionData(id, name, resourceType, systemData, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, connectionState, provisioningState);
         }
 
         /// <summary> Initializes a new instance of StoragePrivateLinkServiceConnectionState. </summary>
@@ -743,7 +743,7 @@ namespace Azure.Management.Storage.Models
         {
             rules ??= new List<ManagementPolicyRule>();
 
-            return new ManagementPolicyData(id, name, resourceType, systemData, lastModifiedOn, new ManagementPolicySchema(rules?.ToList()));
+            return new ManagementPolicyData(id, name, resourceType, systemData, lastModifiedOn, rules != null ? new ManagementPolicySchema(rules?.ToList()) : null);
         }
 
         /// <summary> Initializes a new instance of ManagementPolicyRule. </summary>
@@ -801,9 +801,9 @@ namespace Azure.Management.Storage.Models
         /// <param name="tierToArchiveDaysAfterCreationGreaterThan"> The function to tier blob snapshot to archive storage. Support blob snapshot currently at Hot or Cool tier. </param>
         /// <param name="deleteDaysAfterCreationGreaterThan"> The function to delete the blob snapshot. </param>
         /// <returns> A new <see cref="Models.ManagementPolicySnapShot"/> instance for mocking. </returns>
-        public static ManagementPolicySnapShot ManagementPolicySnapShot(float tierToCoolDaysAfterCreationGreaterThan = default, float tierToArchiveDaysAfterCreationGreaterThan = default, float deleteDaysAfterCreationGreaterThan = default)
+        public static ManagementPolicySnapShot ManagementPolicySnapShot(float? tierToCoolDaysAfterCreationGreaterThan = null, float? tierToArchiveDaysAfterCreationGreaterThan = null, float? deleteDaysAfterCreationGreaterThan = null)
         {
-            return new ManagementPolicySnapShot(new DateAfterCreation(tierToCoolDaysAfterCreationGreaterThan), new DateAfterCreation(tierToArchiveDaysAfterCreationGreaterThan), new DateAfterCreation(deleteDaysAfterCreationGreaterThan));
+            return new ManagementPolicySnapShot(tierToCoolDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(tierToCoolDaysAfterCreationGreaterThan.Value) : null, tierToArchiveDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(tierToArchiveDaysAfterCreationGreaterThan.Value) : null, deleteDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(deleteDaysAfterCreationGreaterThan.Value) : null);
         }
 
         /// <summary> Initializes a new instance of ManagementPolicyVersion. </summary>
@@ -811,9 +811,9 @@ namespace Azure.Management.Storage.Models
         /// <param name="tierToArchiveDaysAfterCreationGreaterThan"> The function to tier blob version to archive storage. Support blob version currently at Hot or Cool tier. </param>
         /// <param name="deleteDaysAfterCreationGreaterThan"> The function to delete the blob version. </param>
         /// <returns> A new <see cref="Models.ManagementPolicyVersion"/> instance for mocking. </returns>
-        public static ManagementPolicyVersion ManagementPolicyVersion(float tierToCoolDaysAfterCreationGreaterThan = default, float tierToArchiveDaysAfterCreationGreaterThan = default, float deleteDaysAfterCreationGreaterThan = default)
+        public static ManagementPolicyVersion ManagementPolicyVersion(float? tierToCoolDaysAfterCreationGreaterThan = null, float? tierToArchiveDaysAfterCreationGreaterThan = null, float? deleteDaysAfterCreationGreaterThan = null)
         {
-            return new ManagementPolicyVersion(new DateAfterCreation(tierToCoolDaysAfterCreationGreaterThan), new DateAfterCreation(tierToArchiveDaysAfterCreationGreaterThan), new DateAfterCreation(deleteDaysAfterCreationGreaterThan));
+            return new ManagementPolicyVersion(tierToCoolDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(tierToCoolDaysAfterCreationGreaterThan.Value) : null, tierToArchiveDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(tierToArchiveDaysAfterCreationGreaterThan.Value) : null, deleteDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(deleteDaysAfterCreationGreaterThan.Value) : null);
         }
 
         /// <summary> Initializes a new instance of ManagementPolicyFilter. </summary>

@@ -312,7 +312,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.OriginGroupOverride"/> instance for mocking. </returns>
         public static OriginGroupOverride OriginGroupOverride(ResourceIdentifier originGroupId = null, ForwardingProtocol? forwardingProtocol = null)
         {
-            return new OriginGroupOverride(ResourceManagerModelFactory.WritableSubResource(originGroupId), forwardingProtocol);
+            return new OriginGroupOverride(originGroupId != null ? ResourceManagerModelFactory.WritableSubResource(originGroupId) : null, forwardingProtocol);
         }
     }
 }

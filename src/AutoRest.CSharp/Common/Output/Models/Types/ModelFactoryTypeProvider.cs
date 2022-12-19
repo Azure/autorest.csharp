@@ -65,10 +65,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyStack = _parameterPropertyCache[model][parameter];
             var assignmentProperty = propertyStack.Last();
 
+            // determine whether this is a value type that changed to nullable because of other enclosing properties are nullable
+            var isOverriddenValueType = assignmentProperty.FlattenedProperty != null && assignmentProperty.FlattenedProperty.IsOverriddenValueType;
+
             // iterate over the property stack to build a nested expression of variable assignment
             ObjectTypeProperty property, immediateParentProperty;
             property = propertyStack.Pop();
             FormattableString result = $"{parameter.Name:I}";
+
+            if (isOverriddenValueType)
+                result = $"{result}.Value";
+
             CSharpType from = parameter.Type;
             while (propertyStack.Count > 0)
             {
@@ -94,6 +101,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // change the from type to the current type
                 property = immediateParentProperty;
                 from = parentPropertyType; // since this is the property type of the immediate parent property, we should never get another valid conversion
+            }
+
+            if (assignmentProperty.FlattenedProperty != null)
+            {
+                if (isOverriddenValueType)
+                    result = $"{parameter.Name:I}.HasValue ? {result} : null";
+                else if (parameter.Type.IsNullable)
+                    result = $"{parameter.Name:I} != null ? {result} : null";
             }
 
             return (assignmentProperty, result);

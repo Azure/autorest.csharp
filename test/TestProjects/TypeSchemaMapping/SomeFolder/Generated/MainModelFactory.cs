@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 
 namespace TypeSchemaMapping.Models
 {
@@ -19,6 +20,15 @@ namespace TypeSchemaMapping.Models
         public static AbstractModel AbstractModel(string discriminatorProperty = null)
         {
             return new UnknownAbstractModel(discriminatorProperty);
+        }
+
+        /// <summary> Initializes a new instance of PublicModelWithInternalProperty. </summary>
+        /// <param name="stringPropertyJson"></param>
+        /// <param name="publicProperty"></param>
+        /// <returns> A new <see cref="Models.PublicModelWithInternalProperty"/> instance for mocking. </returns>
+        public static PublicModelWithInternalProperty PublicModelWithInternalProperty(JsonElement stringPropertyJson = default, string publicProperty = null)
+        {
+            return new PublicModelWithInternalProperty(stringPropertyJson, publicProperty);
         }
 
         /// <summary> Initializes a new instance of DerivedFromAbstractModel. </summary>

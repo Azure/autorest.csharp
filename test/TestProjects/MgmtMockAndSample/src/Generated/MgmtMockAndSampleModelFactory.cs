@@ -48,7 +48,7 @@ namespace MgmtMockAndSample.Models
             deployments ??= new List<string>();
             privateEndpointConnections ??= new List<PrivateEndpointConnectionItem>();
 
-            return new VaultProperties(duration, createOn, tenantId, sku, accessPolicies?.ToList(), vaultUri, hsmPoolResourceId, deployments?.ToList(), enabledForDiskEncryption, enabledForTemplateDeployment, enableSoftDelete, softDeleteRetentionInDays, enableRbacAuthorization, createMode, enablePurgeProtection, networkAcls, provisioningState, privateEndpointConnections?.ToList(), publicNetworkAccess, new SinglePropertyModel(readWriteSingleStringPropertySomething), new ReadOnlySinglePropertyModel(readOnlySomething), new ExtremelyDeepSinglePropertyModel(new SuperDeepSinglePropertyModel(new VeryDeepSinglePropertyModel(new DeepSinglePropertyModel(new SinglePropertyModel(deepSomething))))));
+            return new VaultProperties(duration, createOn, tenantId, sku, accessPolicies?.ToList(), vaultUri, hsmPoolResourceId, deployments?.ToList(), enabledForDiskEncryption, enabledForTemplateDeployment, enableSoftDelete, softDeleteRetentionInDays, enableRbacAuthorization, createMode, enablePurgeProtection, networkAcls, provisioningState, privateEndpointConnections?.ToList(), publicNetworkAccess, readWriteSingleStringPropertySomething != null ? new SinglePropertyModel(readWriteSingleStringPropertySomething) : null, readOnlySomething != null ? new ReadOnlySinglePropertyModel(readOnlySomething) : null, deepSomething != null ? new ExtremelyDeepSinglePropertyModel(new SuperDeepSinglePropertyModel(new VeryDeepSinglePropertyModel(new DeepSinglePropertyModel(new SinglePropertyModel(deepSomething))))) : null);
         }
 
         /// <summary> Initializes a new instance of AccessPolicyEntry. </summary>
@@ -110,7 +110,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.PrivateEndpointConnectionItem"/> instance for mocking. </returns>
         public static PrivateEndpointConnectionItem PrivateEndpointConnectionItem(string id = null, string etag = null, ResourceIdentifier privateEndpointId = null, MgmtMockAndSamplePrivateLinkServiceConnectionState connectionState = null, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = null)
         {
-            return new PrivateEndpointConnectionItem(id, etag, ResourceManagerModelFactory.SubResource(privateEndpointId), connectionState, provisioningState);
+            return new PrivateEndpointConnectionItem(id, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, connectionState, provisioningState);
         }
 
         /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateLinkServiceConnectionState. </summary>
@@ -182,7 +182,7 @@ namespace MgmtMockAndSample.Models
         {
             accessPolicies ??= new List<AccessPolicyEntry>();
 
-            return new VaultAccessPolicyParameters(id, name, resourceType, systemData, location, new VaultAccessPolicyProperties(accessPolicies?.ToList()));
+            return new VaultAccessPolicyParameters(id, name, resourceType, systemData, location, accessPolicies != null ? new VaultAccessPolicyProperties(accessPolicies?.ToList()) : null);
         }
 
         /// <summary> Initializes a new instance of DeletedVaultData. </summary>
@@ -238,7 +238,7 @@ namespace MgmtMockAndSample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new MgmtMockAndSamplePrivateEndpointConnectionData(id, name, resourceType, systemData, etag, ResourceManagerModelFactory.SubResource(privateEndpointId), connectionState, provisioningState, location, tags);
+            return new MgmtMockAndSamplePrivateEndpointConnectionData(id, name, resourceType, systemData, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, connectionState, provisioningState, location, tags);
         }
 
         /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateLinkResource. </summary>
@@ -312,7 +312,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.KeyForDiskEncryptionSet"/> instance for mocking. </returns>
         public static KeyForDiskEncryptionSet KeyForDiskEncryptionSet(ResourceIdentifier sourceVaultId = null, Uri keyUri = null)
         {
-            return new KeyForDiskEncryptionSet(ResourceManagerModelFactory.WritableSubResource(sourceVaultId), keyUri);
+            return new KeyForDiskEncryptionSet(sourceVaultId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVaultId) : null, keyUri);
         }
 
         /// <summary> Initializes a new instance of ManagedHsmData. </summary>
@@ -379,7 +379,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.MhsmPrivateEndpointConnectionItem"/> instance for mocking. </returns>
         public static MhsmPrivateEndpointConnectionItem MhsmPrivateEndpointConnectionItem(ResourceIdentifier privateEndpointId = null, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = null)
         {
-            return new MhsmPrivateEndpointConnectionItem(ResourceManagerModelFactory.SubResource(privateEndpointId), privateLinkServiceConnectionState, provisioningState);
+            return new MhsmPrivateEndpointConnectionItem(privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, privateLinkServiceConnectionState, provisioningState);
         }
 
         /// <summary> Initializes a new instance of MhsmPrivateLinkServiceConnectionState. </summary>
@@ -409,7 +409,7 @@ namespace MgmtMockAndSample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new MhsmPrivateEndpointConnectionData(id, name, resourceType, systemData, tags, location, etag, ResourceManagerModelFactory.SubResource(privateEndpointId), privateLinkServiceConnectionState, provisioningState, sku);
+            return new MhsmPrivateEndpointConnectionData(id, name, resourceType, systemData, tags, location, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, privateLinkServiceConnectionState, provisioningState, sku);
         }
 
         /// <summary> Initializes a new instance of DeletedManagedHsmData. </summary>
@@ -460,6 +460,191 @@ namespace MgmtMockAndSample.Models
             return new MhsmPrivateLinkResource(id, name, resourceType, systemData, tags, location, groupId, requiredMembers?.ToList(), requiredZoneNames?.ToList(), sku);
         }
 
+        /// <summary> Initializes a new instance of FirewallPolicyData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="identity"> The identity of the firewall policy. </param>
+        /// <param name="ruleCollectionGroups"> List of references to FirewallPolicyRuleCollectionGroups. </param>
+        /// <param name="provisioningState"> The provisioning state of the firewall policy resource. </param>
+        /// <param name="basePolicyId"> The parent firewall policy from which rules are inherited. </param>
+        /// <param name="firewalls"> List of references to Azure Firewalls that this Firewall Policy is associated with. </param>
+        /// <param name="childPolicies"> List of references to Child Firewall Policies. </param>
+        /// <param name="threatIntelWhitelist"> ThreatIntel Whitelist for Firewall Policy. </param>
+        /// <param name="insights"> Insights on Firewall Policy. </param>
+        /// <param name="snatPrivateRanges"> The private IP addresses/IP ranges to which traffic will not be SNAT. </param>
+        /// <param name="dnsSettings"> DNS Proxy Settings definition. </param>
+        /// <param name="intrusionDetection"> The configuration for Intrusion detection. </param>
+        /// <param name="transportSecurityCertificateAuthority"> TLS Configuration definition. </param>
+        /// <param name="skuTier"> The Firewall Policy SKU. </param>
+        /// <returns> A new <see cref="MgmtMockAndSample.FirewallPolicyData"/> instance for mocking. </returns>
+        public static FirewallPolicyData FirewallPolicyData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string etag = null, ManagedServiceIdentity identity = null, IEnumerable<WritableSubResource> ruleCollectionGroups = null, ProvisioningState? provisioningState = null, ResourceIdentifier basePolicyId = null, IEnumerable<WritableSubResource> firewalls = null, IEnumerable<WritableSubResource> childPolicies = null, FirewallPolicyThreatIntelWhitelist threatIntelWhitelist = null, FirewallPolicyInsights insights = null, IEnumerable<string> snatPrivateRanges = null, DnsSettings dnsSettings = null, FirewallPolicyIntrusionDetection intrusionDetection = null, FirewallPolicyCertificateAuthority transportSecurityCertificateAuthority = null, FirewallPolicySkuTier? skuTier = null)
+        {
+            tags ??= new Dictionary<string, string>();
+            ruleCollectionGroups ??= new List<WritableSubResource>();
+            firewalls ??= new List<WritableSubResource>();
+            childPolicies ??= new List<WritableSubResource>();
+            snatPrivateRanges ??= new List<string>();
+
+            return new FirewallPolicyData(id, name, resourceType, systemData, tags, location, etag, identity, ruleCollectionGroups?.ToList(), provisioningState, basePolicyId != null ? ResourceManagerModelFactory.WritableSubResource(basePolicyId) : null, firewalls?.ToList(), childPolicies?.ToList(), threatIntelWhitelist, insights, snatPrivateRanges != null ? new FirewallPolicySnat(snatPrivateRanges?.ToList()) : null, dnsSettings, intrusionDetection, transportSecurityCertificateAuthority != null ? new FirewallPolicyTransportSecurity(transportSecurityCertificateAuthority) : null, skuTier != null ? new FirewallPolicySku(skuTier) : null);
+        }
+
+        /// <summary> Initializes a new instance of SubResource. </summary>
+        /// <param name="id"> Resource ID. </param>
+        /// <returns> A new <see cref="Models.SubResource"/> instance for mocking. </returns>
+        public static SubResource SubResource(string id = null)
+        {
+            return new SubResource(id);
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyThreatIntelWhitelist. </summary>
+        /// <param name="ipAddresses"> List of IP addresses for the ThreatIntel Whitelist. </param>
+        /// <param name="fqdns"> List of FQDNs for the ThreatIntel Whitelist. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyThreatIntelWhitelist"/> instance for mocking. </returns>
+        public static FirewallPolicyThreatIntelWhitelist FirewallPolicyThreatIntelWhitelist(IEnumerable<string> ipAddresses = null, IEnumerable<string> fqdns = null)
+        {
+            ipAddresses ??= new List<string>();
+            fqdns ??= new List<string>();
+
+            return new FirewallPolicyThreatIntelWhitelist(ipAddresses?.ToList(), fqdns?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyInsights. </summary>
+        /// <param name="isEnabled"> A flag to indicate if the insights are enabled on the policy. </param>
+        /// <param name="retentionDays"> Number of days the insights should be enabled on the policy. </param>
+        /// <param name="logAnalyticsResources"> Workspaces needed to configure the Firewall Policy Insights. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyInsights"/> instance for mocking. </returns>
+        public static FirewallPolicyInsights FirewallPolicyInsights(bool? isEnabled = null, int? retentionDays = null, FirewallPolicyLogAnalyticsResources logAnalyticsResources = null)
+        {
+            return new FirewallPolicyInsights(isEnabled, retentionDays, logAnalyticsResources);
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyLogAnalyticsResources. </summary>
+        /// <param name="workspaces"> List of workspaces for Firewall Policy Insights. </param>
+        /// <param name="defaultWorkspaceIdId"> The default workspace Id for Firewall Policy Insights. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyLogAnalyticsResources"/> instance for mocking. </returns>
+        public static FirewallPolicyLogAnalyticsResources FirewallPolicyLogAnalyticsResources(IEnumerable<FirewallPolicyLogAnalyticsWorkspace> workspaces = null, ResourceIdentifier defaultWorkspaceIdId = null)
+        {
+            workspaces ??= new List<FirewallPolicyLogAnalyticsWorkspace>();
+
+            return new FirewallPolicyLogAnalyticsResources(workspaces?.ToList(), defaultWorkspaceIdId != null ? ResourceManagerModelFactory.WritableSubResource(defaultWorkspaceIdId) : null);
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyLogAnalyticsWorkspace. </summary>
+        /// <param name="region"> Region to configure the Workspace. </param>
+        /// <param name="workspaceIdId"> The workspace Id for Firewall Policy Insights. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyLogAnalyticsWorkspace"/> instance for mocking. </returns>
+        public static FirewallPolicyLogAnalyticsWorkspace FirewallPolicyLogAnalyticsWorkspace(string region = null, ResourceIdentifier workspaceIdId = null)
+        {
+            return new FirewallPolicyLogAnalyticsWorkspace(region, workspaceIdId != null ? ResourceManagerModelFactory.WritableSubResource(workspaceIdId) : null);
+        }
+
+        /// <summary> Initializes a new instance of DnsSettings. </summary>
+        /// <param name="servers"> List of Custom DNS Servers. </param>
+        /// <param name="enableProxy"> Enable DNS Proxy on Firewalls attached to the Firewall Policy. </param>
+        /// <param name="requireProxyForNetworkRules"> FQDNs in Network Rules are supported when set to true. </param>
+        /// <returns> A new <see cref="Models.DnsSettings"/> instance for mocking. </returns>
+        public static DnsSettings DnsSettings(IEnumerable<string> servers = null, bool? enableProxy = null, bool? requireProxyForNetworkRules = null)
+        {
+            servers ??= new List<string>();
+
+            return new DnsSettings(servers?.ToList(), enableProxy, requireProxyForNetworkRules);
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyIntrusionDetection. </summary>
+        /// <param name="mode"> Intrusion detection general state. </param>
+        /// <param name="configuration"> Intrusion detection configuration properties. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyIntrusionDetection"/> instance for mocking. </returns>
+        public static FirewallPolicyIntrusionDetection FirewallPolicyIntrusionDetection(FirewallPolicyIntrusionDetectionStateType? mode = null, FirewallPolicyIntrusionDetectionConfiguration configuration = null)
+        {
+            return new FirewallPolicyIntrusionDetection(mode, configuration);
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyIntrusionDetectionConfiguration. </summary>
+        /// <param name="signatureOverrides"> List of specific signatures states. </param>
+        /// <param name="bypassTrafficSettings"> List of rules for traffic to bypass. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyIntrusionDetectionConfiguration"/> instance for mocking. </returns>
+        public static FirewallPolicyIntrusionDetectionConfiguration FirewallPolicyIntrusionDetectionConfiguration(IEnumerable<FirewallPolicyIntrusionDetectionSignatureSpecification> signatureOverrides = null, IEnumerable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications> bypassTrafficSettings = null)
+        {
+            signatureOverrides ??= new List<FirewallPolicyIntrusionDetectionSignatureSpecification>();
+            bypassTrafficSettings ??= new List<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>();
+
+            return new FirewallPolicyIntrusionDetectionConfiguration(signatureOverrides?.ToList(), bypassTrafficSettings?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyIntrusionDetectionSignatureSpecification. </summary>
+        /// <param name="id"> Signature id. </param>
+        /// <param name="mode"> The signature state. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyIntrusionDetectionSignatureSpecification"/> instance for mocking. </returns>
+        public static FirewallPolicyIntrusionDetectionSignatureSpecification FirewallPolicyIntrusionDetectionSignatureSpecification(string id = null, FirewallPolicyIntrusionDetectionStateType? mode = null)
+        {
+            return new FirewallPolicyIntrusionDetectionSignatureSpecification(id, mode);
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyIntrusionDetectionBypassTrafficSpecifications. </summary>
+        /// <param name="name"> Name of the bypass traffic rule. </param>
+        /// <param name="description"> Description of the bypass traffic rule. </param>
+        /// <param name="protocol"> The rule bypass protocol. </param>
+        /// <param name="sourceAddresses"> List of source IP addresses or ranges for this rule. </param>
+        /// <param name="destinationAddresses"> List of destination IP addresses or ranges for this rule. </param>
+        /// <param name="destinationPorts"> List of destination ports or ranges. </param>
+        /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
+        /// <param name="destinationIpGroups"> List of destination IpGroups for this rule. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"/> instance for mocking. </returns>
+        public static FirewallPolicyIntrusionDetectionBypassTrafficSpecifications FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(string name = null, string description = null, FirewallPolicyIntrusionDetectionProtocol? protocol = null, IEnumerable<string> sourceAddresses = null, IEnumerable<string> destinationAddresses = null, IEnumerable<string> destinationPorts = null, IEnumerable<string> sourceIpGroups = null, IEnumerable<string> destinationIpGroups = null)
+        {
+            sourceAddresses ??= new List<string>();
+            destinationAddresses ??= new List<string>();
+            destinationPorts ??= new List<string>();
+            sourceIpGroups ??= new List<string>();
+            destinationIpGroups ??= new List<string>();
+
+            return new FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(name, description, protocol, sourceAddresses?.ToList(), destinationAddresses?.ToList(), destinationPorts?.ToList(), sourceIpGroups?.ToList(), destinationIpGroups?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyCertificateAuthority. </summary>
+        /// <param name="keyVaultSecretId"> Secret Id of (base-64 encoded unencrypted pfx) &apos;Secret&apos; or &apos;Certificate&apos; object stored in KeyVault. </param>
+        /// <param name="name"> Name of the CA certificate. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyCertificateAuthority"/> instance for mocking. </returns>
+        public static FirewallPolicyCertificateAuthority FirewallPolicyCertificateAuthority(string keyVaultSecretId = null, string name = null)
+        {
+            return new FirewallPolicyCertificateAuthority(keyVaultSecretId, name);
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyRuleCollectionGroupData. </summary>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
+        /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
+        /// <param name="resourceType"> Rule Group type. </param>
+        /// <param name="priority"> Priority of the Firewall Policy Rule Collection Group resource. </param>
+        /// <param name="ruleCollections">
+        /// Group of Firewall Policy rule collections.
+        /// Please note <see cref="FirewallPolicyRuleCollection"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="FirewallPolicyFilterRuleCollection"/> and <see cref="FirewallPolicyNatRuleCollection"/>.
+        /// </param>
+        /// <param name="provisioningState"> The provisioning state of the firewall policy rule collection group resource. </param>
+        /// <returns> A new <see cref="MgmtMockAndSample.FirewallPolicyRuleCollectionGroupData"/> instance for mocking. </returns>
+        public static FirewallPolicyRuleCollectionGroupData FirewallPolicyRuleCollectionGroupData(string id = null, string name = null, string etag = null, ResourceType? resourceType = null, int? priority = null, IEnumerable<FirewallPolicyRuleCollection> ruleCollections = null, ProvisioningState? provisioningState = null)
+        {
+            ruleCollections ??= new List<FirewallPolicyRuleCollection>();
+
+            return new FirewallPolicyRuleCollectionGroupData(id, name, etag, resourceType, priority, ruleCollections?.ToList(), provisioningState);
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyRuleCollection. </summary>
+        /// <param name="ruleCollectionType"> The type of the rule collection. </param>
+        /// <param name="name"> The name of the rule collection. </param>
+        /// <param name="priority"> Priority of the Firewall Policy Rule Collection resource. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyRuleCollection"/> instance for mocking. </returns>
+        public static FirewallPolicyRuleCollection FirewallPolicyRuleCollection(string ruleCollectionType = null, string name = null, int? priority = null)
+        {
+            return new UnknownFirewallPolicyRuleCollection(ruleCollectionType, name, priority);
+        }
+
         /// <summary> Initializes a new instance of RoleAssignmentData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -501,6 +686,133 @@ namespace MgmtMockAndSample.Models
         public static TemplateHashResult TemplateHashResult(string minifiedTemplate = null, string templateHash = null)
         {
             return new TemplateHashResult(minifiedTemplate, templateHash);
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyNatRuleCollection. </summary>
+        /// <param name="name"> The name of the rule collection. </param>
+        /// <param name="priority"> Priority of the Firewall Policy Rule Collection resource. </param>
+        /// <param name="actionType"> The action type of a Nat rule collection. </param>
+        /// <param name="rules">
+        /// List of rules included in a rule collection.
+        /// Please note <see cref="FirewallPolicyRule"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="ApplicationRule"/>, <see cref="NatRule"/> and <see cref="NetworkRule"/>.
+        /// </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyNatRuleCollection"/> instance for mocking. </returns>
+        public static FirewallPolicyNatRuleCollection FirewallPolicyNatRuleCollection(string name = null, int? priority = null, FirewallPolicyNatRuleCollectionActionType? actionType = null, IEnumerable<FirewallPolicyRule> rules = null)
+        {
+            rules ??= new List<FirewallPolicyRule>();
+
+            return new FirewallPolicyNatRuleCollection("FirewallPolicyNatRuleCollection", name, priority, actionType != null ? new FirewallPolicyNatRuleCollectionAction(actionType) : null, rules?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyRule. </summary>
+        /// <param name="name"> Name of the rule. </param>
+        /// <param name="description"> Description of the rule. </param>
+        /// <param name="ruleType"> Rule Type. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyRule"/> instance for mocking. </returns>
+        public static FirewallPolicyRule FirewallPolicyRule(string name = null, string description = null, string ruleType = null)
+        {
+            return new UnknownFirewallPolicyRule(name, description, ruleType);
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyFilterRuleCollection. </summary>
+        /// <param name="name"> The name of the rule collection. </param>
+        /// <param name="priority"> Priority of the Firewall Policy Rule Collection resource. </param>
+        /// <param name="actionType"> The action type of a Filter rule collection. </param>
+        /// <param name="rules">
+        /// List of rules included in a rule collection.
+        /// Please note <see cref="FirewallPolicyRule"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="ApplicationRule"/>, <see cref="NatRule"/> and <see cref="NetworkRule"/>.
+        /// </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyFilterRuleCollection"/> instance for mocking. </returns>
+        public static FirewallPolicyFilterRuleCollection FirewallPolicyFilterRuleCollection(string name = null, int? priority = null, FirewallPolicyFilterRuleCollectionActionType? actionType = null, IEnumerable<FirewallPolicyRule> rules = null)
+        {
+            rules ??= new List<FirewallPolicyRule>();
+
+            return new FirewallPolicyFilterRuleCollection("FirewallPolicyFilterRuleCollection", name, priority, actionType != null ? new FirewallPolicyFilterRuleCollectionAction(actionType) : null, rules?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of ApplicationRule. </summary>
+        /// <param name="name"> Name of the rule. </param>
+        /// <param name="description"> Description of the rule. </param>
+        /// <param name="sourceAddresses"> List of source IP addresses for this rule. </param>
+        /// <param name="destinationAddresses"> List of destination IP addresses or Service Tags. </param>
+        /// <param name="protocols"> Array of Application Protocols. </param>
+        /// <param name="targetFqdns"> List of FQDNs for this rule. </param>
+        /// <param name="targetUrls"> List of Urls for this rule condition. </param>
+        /// <param name="fqdnTags"> List of FQDN Tags for this rule. </param>
+        /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
+        /// <param name="terminateTLS"> Terminate TLS connections for this rule. </param>
+        /// <param name="webCategories"> List of destination azure web categories. </param>
+        /// <returns> A new <see cref="Models.ApplicationRule"/> instance for mocking. </returns>
+        public static ApplicationRule ApplicationRule(string name = null, string description = null, IEnumerable<string> sourceAddresses = null, IEnumerable<string> destinationAddresses = null, IEnumerable<FirewallPolicyRuleApplicationProtocol> protocols = null, IEnumerable<string> targetFqdns = null, IEnumerable<string> targetUrls = null, IEnumerable<string> fqdnTags = null, IEnumerable<string> sourceIpGroups = null, bool? terminateTLS = null, IEnumerable<string> webCategories = null)
+        {
+            sourceAddresses ??= new List<string>();
+            destinationAddresses ??= new List<string>();
+            protocols ??= new List<FirewallPolicyRuleApplicationProtocol>();
+            targetFqdns ??= new List<string>();
+            targetUrls ??= new List<string>();
+            fqdnTags ??= new List<string>();
+            sourceIpGroups ??= new List<string>();
+            webCategories ??= new List<string>();
+
+            return new ApplicationRule(name, description, "ApplicationRule", sourceAddresses?.ToList(), destinationAddresses?.ToList(), protocols?.ToList(), targetFqdns?.ToList(), targetUrls?.ToList(), fqdnTags?.ToList(), sourceIpGroups?.ToList(), terminateTLS, webCategories?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of FirewallPolicyRuleApplicationProtocol. </summary>
+        /// <param name="protocolType"> Protocol type. </param>
+        /// <param name="port"> Port number for the protocol, cannot be greater than 64000. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyRuleApplicationProtocol"/> instance for mocking. </returns>
+        public static FirewallPolicyRuleApplicationProtocol FirewallPolicyRuleApplicationProtocol(FirewallPolicyRuleApplicationProtocolType? protocolType = null, int? port = null)
+        {
+            return new FirewallPolicyRuleApplicationProtocol(protocolType, port);
+        }
+
+        /// <summary> Initializes a new instance of NatRule. </summary>
+        /// <param name="name"> Name of the rule. </param>
+        /// <param name="description"> Description of the rule. </param>
+        /// <param name="ipProtocols"> Array of FirewallPolicyRuleNetworkProtocols. </param>
+        /// <param name="sourceAddresses"> List of source IP addresses for this rule. </param>
+        /// <param name="destinationAddresses"> List of destination IP addresses or Service Tags. </param>
+        /// <param name="destinationPorts"> List of destination ports. </param>
+        /// <param name="translatedAddress"> The translated address for this NAT rule. </param>
+        /// <param name="translatedPort"> The translated port for this NAT rule. </param>
+        /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
+        /// <param name="translatedFqdn"> The translated FQDN for this NAT rule. </param>
+        /// <returns> A new <see cref="Models.NatRule"/> instance for mocking. </returns>
+        public static NatRule NatRule(string name = null, string description = null, IEnumerable<FirewallPolicyRuleNetworkProtocol> ipProtocols = null, IEnumerable<string> sourceAddresses = null, IEnumerable<string> destinationAddresses = null, IEnumerable<string> destinationPorts = null, string translatedAddress = null, string translatedPort = null, IEnumerable<string> sourceIpGroups = null, string translatedFqdn = null)
+        {
+            ipProtocols ??= new List<FirewallPolicyRuleNetworkProtocol>();
+            sourceAddresses ??= new List<string>();
+            destinationAddresses ??= new List<string>();
+            destinationPorts ??= new List<string>();
+            sourceIpGroups ??= new List<string>();
+
+            return new NatRule(name, description, "NatRule", ipProtocols?.ToList(), sourceAddresses?.ToList(), destinationAddresses?.ToList(), destinationPorts?.ToList(), translatedAddress, translatedPort, sourceIpGroups?.ToList(), translatedFqdn);
+        }
+
+        /// <summary> Initializes a new instance of NetworkRule. </summary>
+        /// <param name="name"> Name of the rule. </param>
+        /// <param name="description"> Description of the rule. </param>
+        /// <param name="ipProtocols"> Array of FirewallPolicyRuleNetworkProtocols. </param>
+        /// <param name="sourceAddresses"> List of source IP addresses for this rule. </param>
+        /// <param name="destinationAddresses"> List of destination IP addresses or Service Tags. </param>
+        /// <param name="destinationPorts"> List of destination ports. </param>
+        /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
+        /// <param name="destinationIpGroups"> List of destination IpGroups for this rule. </param>
+        /// <param name="destinationFqdns"> List of destination FQDNs. </param>
+        /// <returns> A new <see cref="Models.NetworkRule"/> instance for mocking. </returns>
+        public static NetworkRule NetworkRule(string name = null, string description = null, IEnumerable<FirewallPolicyRuleNetworkProtocol> ipProtocols = null, IEnumerable<string> sourceAddresses = null, IEnumerable<string> destinationAddresses = null, IEnumerable<string> destinationPorts = null, IEnumerable<string> sourceIpGroups = null, IEnumerable<string> destinationIpGroups = null, IEnumerable<string> destinationFqdns = null)
+        {
+            ipProtocols ??= new List<FirewallPolicyRuleNetworkProtocol>();
+            sourceAddresses ??= new List<string>();
+            destinationAddresses ??= new List<string>();
+            destinationPorts ??= new List<string>();
+            sourceIpGroups ??= new List<string>();
+            destinationIpGroups ??= new List<string>();
+            destinationFqdns ??= new List<string>();
+
+            return new NetworkRule(name, description, "NetworkRule", ipProtocols?.ToList(), sourceAddresses?.ToList(), destinationAddresses?.ToList(), destinationPorts?.ToList(), sourceIpGroups?.ToList(), destinationIpGroups?.ToList(), destinationFqdns?.ToList());
         }
     }
 }

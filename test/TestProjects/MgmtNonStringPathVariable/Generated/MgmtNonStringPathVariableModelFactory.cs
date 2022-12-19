@@ -55,7 +55,7 @@ namespace MgmtNonStringPathVariable.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new BarData(id, name, resourceType, systemData, tags, location, new BarProperties(barBuzz));
+            return new BarData(id, name, resourceType, systemData, tags, location, barBuzz != null ? new BarProperties(barBuzz) : null);
         }
     }
 }
