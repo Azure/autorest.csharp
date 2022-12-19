@@ -3,15 +3,14 @@
 
 using System;
 using System.Linq;
-using System.Reflection;
 using Azure.ResourceManager.Resources;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class SingletonResourceTests : TestProjectTests
+    public class MgmtSingletonResourceTests : TestProjectTests
     {
-        public SingletonResourceTests() : base("SingletonResource") { }
+        public MgmtSingletonResourceTests() : base("MgmtSingletonResource") { }
 
         [TestCase("CarResource", true)]
         [TestCase("IgnitionResource", true)]
@@ -53,15 +52,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ParentResource", "GetSingletonResources", false)]
         [TestCase("CarResource", "GetIgnition", true)]
         [TestCase("CarResource", "GetIgnitions", false)]
-        [TestCase("SingletonResourceExtensions", "GetCars", false, typeof(SubscriptionResource))]
-        [TestCase("SingletonResourceExtensions", "GetCars", true, typeof(ResourceGroupResource))]
-        [TestCase("SingletonResourceExtensions", "GetCar", false, typeof(SubscriptionResource))]
-        [TestCase("SingletonResourceExtensions", "GetCar", true, typeof(ResourceGroupResource))]
-        [TestCase("SingletonResourceExtensions", "GetParentResources", false, typeof(SubscriptionResource))]
-        [TestCase("SingletonResourceExtensions", "GetParentResources", true, typeof(ResourceGroupResource))]
-        [TestCase("SingletonResourceExtensions", "GetParentResource", false, typeof(SubscriptionResource))]
-        [TestCase("SingletonResourceExtensions", "GetParentResource", true, typeof(ResourceGroupResource))]
-        [TestCase("SingletonResourceExtensions", "GetParentResourc", false)]
+        [TestCase("MgmtSingletonResourceExtensions", "GetCars", false, typeof(SubscriptionResource))]
+        [TestCase("MgmtSingletonResourceExtensions", "GetCars", true, typeof(ResourceGroupResource))]
+        [TestCase("MgmtSingletonResourceExtensions", "GetCar", false, typeof(SubscriptionResource))]
+        [TestCase("MgmtSingletonResourceExtensions", "GetCar", true, typeof(ResourceGroupResource))]
+        [TestCase("MgmtSingletonResourceExtensions", "GetParentResources", false, typeof(SubscriptionResource))]
+        [TestCase("MgmtSingletonResourceExtensions", "GetParentResources", true, typeof(ResourceGroupResource))]
+        [TestCase("MgmtSingletonResourceExtensions", "GetParentResource", false, typeof(SubscriptionResource))]
+        [TestCase("MgmtSingletonResourceExtensions", "GetParentResource", true, typeof(ResourceGroupResource))]
+        [TestCase("MgmtSingletonResourceExtensions", "GetParentResourc", false)]
         public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool exist, params Type[] parameterTypes)
         {
             var possibleTypesToFind = FindAllCollections().Concat(FindAllResources())
