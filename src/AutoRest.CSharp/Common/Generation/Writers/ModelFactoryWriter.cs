@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var property = discriminator.Property;
                     initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{GetRawEnumValue(discriminatorValue):L}"));
                 }
-                else
+                else if (model.Declaration.IsAbstract)
                 {
                     model = (SerializableObjectType)discriminator.DefaultObjectType!;
                     ctor = model.SerializationConstructor;
