@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -43,6 +44,10 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly FormattableString LroProcessMessageWithoutResponseValueMethodAsyncName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync)}";
         private static readonly FormattableString CreatePageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageable)}";
         private static readonly FormattableString CreateAsyncPageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}";
+
+
+        private static readonly CodeWriterDeclaration DefaultRequestContext = new CodeWriterDeclaration("DefaultRequestContext");
+        private static readonly MethodSignature FromCancellationTokenMethodSignature = new MethodSignature("FromCancellationToken", null, null, Internal | Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
 
         private CodeWriter writer { get; init; }
         private XmlDocWriter xmlDocWriter { get; init; }
@@ -110,17 +115,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     WriteSubClientFactoryMethod();
 
-                    var responseClassifierTypes = new List<ResponseClassifierType>();
                     foreach (var method in client.RequestMethods)
                     {
-                        WriteRequestCreationMethod(writer, method, client.Fields, responseClassifierTypes);
+                        WriteRequestCreationMethod(writer, method, client.Fields);
                     }
 
                     if (client.ClientMethods.Any(cm => cm.ConvenienceMethod is not null))
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
-                    WriteResponseClassifierMethod(writer, responseClassifierTypes);
+                    WriteResponseClassifierMethod(writer, client.ResponseClassifierTypes);
                 }
             }
         }
@@ -646,14 +650,12 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteRequestCreationMethod(CodeWriter writer, RestClientMethod restMethod, ClientFields fields, List<ResponseClassifierType> responseClassifierTypes)
+        public static void WriteRequestCreationMethod(CodeWriter writer, RestClientMethod restMethod, ClientFields fields)
         {
-            var responseClassifierType = CreateResponseClassifierType(restMethod);
-            responseClassifierTypes.Add(responseClassifierType);
-            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, "internal", fields, responseClassifierType.Name, false);
+            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, "internal", fields, restMethod.ResponseClassifierType.Name, false);
         }
 
-        public static void WriteResponseClassifierMethod(CodeWriter writer, List<ResponseClassifierType> responseClassifierTypes)
+        public static void WriteResponseClassifierMethod(CodeWriter writer, IEnumerable<ResponseClassifierType> responseClassifierTypes)
         {
             foreach ((string name, StatusCodes[] statusCodes) in responseClassifierTypes.Distinct())
             {
@@ -765,15 +767,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteCancellationTokenToRequestContextMethod()
         {
-            var defaultRequestContext = new CodeWriterDeclaration("DefaultRequestContext");
-            writer.Line($"private static {typeof(RequestContext)} {defaultRequestContext:D} = new {typeof(RequestContext)}();");
+            writer.Line($"private static {typeof(RequestContext)} {DefaultRequestContext:D} = new {typeof(RequestContext)}();");
 
-            var methodSignature = new MethodSignature("FromCancellationToken", null, null, Internal | Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
-            using (writer.WriteMethodDeclaration(methodSignature))
+            using (writer.WriteMethodDeclaration(FromCancellationTokenMethodSignature))
             {
                 using (writer.Scope($"if (!{KnownParameters.CancellationTokenParameter.Name}.{nameof(CancellationToken.CanBeCanceled)})"))
                 {
-                    writer.Line($"return {defaultRequestContext:I};");
+                    writer.Line($"return {DefaultRequestContext:I};");
                 }
 
                 writer.Line().Line($"return new {typeof(RequestContext)}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
@@ -832,14 +832,6 @@ namespace AutoRest.CSharp.Generation.Writers
             codeWriter.WriteXmlDocumentationReturns(text);
         }
 
-        private static ResponseClassifierType CreateResponseClassifierType(RestClientMethod method)
-        {
-            var statusCodes = method.Responses
-                .SelectMany(r => r.StatusCodes)
-                .Distinct()
-                .OrderBy(c => c.Code ?? c.Family * 100);
-            return new ResponseClassifierType(statusCodes);
-        }
 
         private static IReadOnlyList<FormattableString> CreateSchemaDocumentationRemarks(LowLevelClientMethod clientMethod, out bool hasRequestSchema, out bool hasResponseSchema)
         {
@@ -1130,28 +1122,5 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public readonly struct ResponseClassifierType : IEquatable<ResponseClassifierType>
-        {
-            public string Name { get; }
-            private readonly StatusCodes[] _statusCodes;
-
-            public ResponseClassifierType(IOrderedEnumerable<StatusCodes> statusCodes)
-            {
-                _statusCodes = statusCodes.ToArray();
-                Name = nameof(ResponseClassifier) + string.Join("", _statusCodes.Select(c => c.Code?.ToString() ?? $"{c.Family * 100}To{(c.Family + 1) * 100}"));
-            }
-
-            public bool Equals(ResponseClassifierType other) => Name == other.Name;
-
-            public override bool Equals(object? obj) => obj is ResponseClassifierType other && Equals(other);
-
-            public override int GetHashCode() => Name.GetHashCode();
-
-            internal void Deconstruct(out string name, out StatusCodes[] statusCodes)
-            {
-                name = Name;
-                statusCodes = _statusCodes;
-            }
-        }
     }
 }
