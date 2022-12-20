@@ -50,7 +50,7 @@ namespace Inheritance.Models
         /// <returns> A new <see cref="Models.BaseClassWithDiscriminator"/> instance for mocking. </returns>
         public static BaseClassWithDiscriminator BaseClassWithDiscriminator(string baseClassProperty = null, DataFactoryExpression<string> dfeString = null, DataFactoryExpression<double> dfeDouble = null, DataFactoryExpression<bool> dfeBool = null, DataFactoryExpression<int> dfeInt = null, DataFactoryExpression<BinaryData> dfeObject = null, DataFactoryExpression<IList<SeparateClass>> dfeListOfT = null, DataFactoryExpression<IList<string>> dfeListOfString = null, DataFactoryExpression<IDictionary<string, string>> dfeKeyValuePairs = null, DataFactoryExpression<DateTimeOffset> dfeDateTime = null, DataFactoryExpression<TimeSpan> dfeDuration = null, DataFactoryExpression<Uri> dfeUri = null, string discriminatorProperty = null)
         {
-            return new UnknownBaseClassWithDiscriminator(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeObject, dfeListOfT, dfeListOfString, dfeKeyValuePairs, dfeDateTime, dfeDuration, dfeUri, discriminatorProperty);
+            return new BaseClassWithDiscriminator(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeObject, dfeListOfT, dfeListOfString, dfeKeyValuePairs, dfeDateTime, dfeDuration, dfeUri, discriminatorProperty);
         }
 
         /// <summary> Initializes a new instance of SomeProperties. </summary>

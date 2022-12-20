@@ -42,7 +42,7 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.PetActionError"/> instance for mocking. </returns>
         public static PetActionError PetActionError(string actionResponse = null, string errorType = null, string errorMessage = null)
         {
-            return new UnknownPetActionError(actionResponse, errorType, errorMessage);
+            return new PetActionError(actionResponse, errorType, errorMessage);
         }
 
         /// <summary> Initializes a new instance of PetSadError. </summary>

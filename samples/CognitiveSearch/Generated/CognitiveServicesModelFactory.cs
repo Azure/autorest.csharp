@@ -199,7 +199,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.DataChangeDetectionPolicy"/> instance for mocking. </returns>
         public static DataChangeDetectionPolicy DataChangeDetectionPolicy(string odataType = null)
         {
-            return new UnknownDataChangeDetectionPolicy(odataType);
+            return new DataChangeDetectionPolicy(odataType);
         }
 
         /// <summary> Initializes a new instance of DataDeletionDetectionPolicy. </summary>
@@ -207,7 +207,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.DataDeletionDetectionPolicy"/> instance for mocking. </returns>
         public static DataDeletionDetectionPolicy DataDeletionDetectionPolicy(string odataType = null)
         {
-            return new UnknownDataDeletionDetectionPolicy(odataType);
+            return new DataDeletionDetectionPolicy(odataType);
         }
 
         /// <summary> Initializes a new instance of ListDataSourcesResult. </summary>
@@ -397,7 +397,7 @@ namespace CognitiveSearch.Models
             inputs ??= new List<InputFieldMappingEntry>();
             outputs ??= new List<OutputFieldMappingEntry>();
 
-            return new UnknownSkill(odataType, name, description, context, inputs?.ToList(), outputs?.ToList());
+            return new Skill(odataType, name, description, context, inputs?.ToList(), outputs?.ToList());
         }
 
         /// <summary> Initializes a new instance of InputFieldMappingEntry. </summary>
@@ -428,7 +428,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.CognitiveServicesAccount"/> instance for mocking. </returns>
         public static CognitiveServicesAccount CognitiveServicesAccount(string odataType = null, string description = null)
         {
-            return new UnknownCognitiveServicesAccount(odataType, description);
+            return new CognitiveServicesAccount(odataType, description);
         }
 
         /// <summary> Initializes a new instance of ListSkillsetsResult. </summary>
@@ -579,7 +579,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ScoringFunction"/> instance for mocking. </returns>
         public static ScoringFunction ScoringFunction(string type = null, string fieldName = null, double boost = default, ScoringFunctionInterpolation? interpolation = null)
         {
-            return new UnknownScoringFunction(type, fieldName, boost, interpolation);
+            return new ScoringFunction(type, fieldName, boost, interpolation);
         }
 
         /// <summary> Initializes a new instance of CorsOptions. </summary>
@@ -599,7 +599,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.Analyzer"/> instance for mocking. </returns>
         public static Analyzer Analyzer(string odataType = null, string name = null)
         {
-            return new UnknownAnalyzer(odataType, name);
+            return new Analyzer(odataType, name);
         }
 
         /// <summary> Initializes a new instance of Tokenizer. </summary>
@@ -608,7 +608,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.Tokenizer"/> instance for mocking. </returns>
         public static Tokenizer Tokenizer(string odataType = null, string name = null)
         {
-            return new UnknownTokenizer(odataType, name);
+            return new Tokenizer(odataType, name);
         }
 
         /// <summary> Initializes a new instance of TokenFilter. </summary>
@@ -617,7 +617,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.TokenFilter"/> instance for mocking. </returns>
         public static TokenFilter TokenFilter(string odataType = null, string name = null)
         {
-            return new UnknownTokenFilter(odataType, name);
+            return new TokenFilter(odataType, name);
         }
 
         /// <summary> Initializes a new instance of CharFilter. </summary>
@@ -626,7 +626,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.CharFilter"/> instance for mocking. </returns>
         public static CharFilter CharFilter(string odataType = null, string name = null)
         {
-            return new UnknownCharFilter(odataType, name);
+            return new CharFilter(odataType, name);
         }
 
         /// <summary> Initializes a new instance of Similarity. </summary>
@@ -634,7 +634,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.Similarity"/> instance for mocking. </returns>
         public static Similarity Similarity(string odataType = null)
         {
-            return new UnknownSimilarity(odataType);
+            return new Similarity(odataType);
         }
 
         /// <summary> Initializes a new instance of ListIndexesResult. </summary>

@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
@@ -72,7 +71,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleAction"/> instance for mocking. </returns>
         public static DeliveryRuleAction DeliveryRuleAction(string name = null, string foo = null)
         {
-            return new UnknownDeliveryRuleAction(name, foo);
+            return new DeliveryRuleAction(name, foo);
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleRemoteAddressCondition. </summary>
