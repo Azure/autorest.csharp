@@ -319,12 +319,36 @@ model RoundTripReadOnlyModel {
   optionalModelRecord?: Record<RecordItem>;
 }
 
-@doc("Model that has property of its own type")
+@doc("Output model that has property of its own type")
 model ErrorModel {
+  @doc("Error message")
+  @visibility("read")
+  message: string;
+
   @doc("Required Record")
+  @visibility("read")
   innerError?: ErrorModel;
 }
 
+@doc("Input model that has property of its own type")
+model InputRecursiveModel {
+  @doc("Message")
+  message: string;
+
+  @doc("Required Record")
+  inner?: InputRecursiveModel;
+}
+
+@doc("Roundtrip model that has property of its own type")
+model RoundTripRecursiveModel {
+  @doc("Message")
+  message: string;
+
+  @doc("Required Record")
+  inner?: RoundTripRecursiveModel;
+}
+
+@doc("Input model that has property of its own type")
 @route("/inputToRoundTrip")
 @doc("Input to RoundTrip")
 @get
@@ -354,6 +378,18 @@ op inputToRoundTripReadOnly(@body input: InputModel): RoundTripReadOnlyModel;
 @get
 @convenienceAPI
 op roundTripToOutput(@body input: RoundTripModel): OutputModel;
+
+@route("/inputRecursive")
+@doc("Input recursive model")
+@post
+@convenienceAPI
+op InputRecursive(@body input: InputRecursiveModel): Response<200>|ErrorModel;
+
+@route("/roundTripRecursive")
+@doc("RoundTrip recursive model")
+@put
+@convenienceAPI
+op roundTripRecursive(@body input: RoundTripRecursiveModel): RoundTripRecursiveModel;
 
 @route("/selfReference")
 @doc("Returns model that has property of its own type")
