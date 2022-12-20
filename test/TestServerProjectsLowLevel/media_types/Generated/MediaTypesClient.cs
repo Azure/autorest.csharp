@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace media_types_LowLevel
 {
-    // Data plane generated client. The MediaTypes service client.
+    // Data plane generated client.
     /// <summary> The MediaTypes service client. </summary>
     public partial class MediaTypesClient
     {

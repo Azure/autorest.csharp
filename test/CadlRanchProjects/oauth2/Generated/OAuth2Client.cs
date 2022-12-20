@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Authentication.OAuth2
 {
-    // Data plane generated client. Illustrates clients generated with OAuth2 authentication.
+    // Data plane generated client.
     /// <summary> Illustrates clients generated with OAuth2 authentication. </summary>
     public partial class OAuth2Client
     {

@@ -23,7 +23,7 @@ using Azure.Core;
 namespace PolymorphismOperation;
 
 @doc("The endpoint to use.")
-model Endpoint is string;
+scalar Endpoint extends string;
 
 // Model types
 @doc("This is base model for polymorphic multiple levels inheritance with a discriminator.")

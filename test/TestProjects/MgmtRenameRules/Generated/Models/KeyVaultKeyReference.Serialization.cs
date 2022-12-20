@@ -36,7 +36,7 @@ namespace MgmtRenameRules.Models
                 }
                 if (property.NameEquals("sourceVault"))
                 {
-                    sourceVault = JsonSerializer.Deserialize<WritableSubResource>(property.Value.ToString());
+                    sourceVault = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
             }

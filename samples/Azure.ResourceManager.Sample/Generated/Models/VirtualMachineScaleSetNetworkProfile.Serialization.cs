@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    healthProbe = JsonSerializer.Deserialize<WritableSubResource>(property.Value.ToString());
+                    healthProbe = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("networkInterfaceConfigurations"))

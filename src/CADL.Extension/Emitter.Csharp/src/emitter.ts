@@ -78,6 +78,7 @@ import { execSync } from "child_process";
 import {
     Client,
     getConvenienceAPIName,
+    isApiVersion,
     isOperationGroup,
     listClients,
     listOperationGroups,
@@ -85,24 +86,26 @@ import {
     OperationGroup
 } from "@azure-tools/cadl-dpg";
 import { ClientKind } from "./type/ClientKind.js";
+import { getVersions } from "@cadl-lang/versioning";
+import { EmitContext } from "@cadl-lang/compiler/*";
 
 export interface NetEmitterOptions {
-    "sdk-folder": string;
-    outputFile: string;
-    logFile: string;
+    outputFile?: string;
+    logFile?: string;
     namespace?: string;
     "library-name"?: string;
     "single-top-level-client"?: boolean;
-    skipSDKGeneration: boolean;
-    generateConvenienceAPI: boolean; //workaround for cadl-ranch project
-    "new-project": boolean;
-    csharpGeneratorPath: string;
+    skipSDKGeneration?: boolean;
+    generateConvenienceAPI?: boolean; //workaround for cadl-ranch project
+    "unreferenced-types-handling"?: "removeOrInternalize" | "internalize" | "keepAll";
+    "new-project"?: boolean;
+    csharpGeneratorPath?: string;
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
+    "model-namespace"?: boolean;
 }
 
 const defaultOptions = {
-    "sdk-folder": ".",
     outputFile: "cadl.json",
     logFile: "log.json",
     skipSDKGeneration: false,
@@ -116,18 +119,19 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     type: "object",
     additionalProperties: false,
     properties: {
-        "sdk-folder": { type: "string", nullable: true },
         outputFile: { type: "string", nullable: true },
         logFile: { type: "string", nullable: true },
         namespace: { type: "string", nullable: true },
         "library-name": { type: "string", nullable: true },
         "single-top-level-client": { type: "boolean", nullable: true },
-        skipSDKGeneration: { type: "boolean", default: false },
+        skipSDKGeneration: { type: "boolean", default: false, nullable: true },
         generateConvenienceAPI: { type: "boolean", nullable: true },
+        "unreferenced-types-handling": { type: "string", enum: ["removeOrInternalize", "internalize", "keepAll"], nullable: true },
         "new-project": { type: "boolean", nullable: true },
-        csharpGeneratorPath: { type: "string", nullable: true },
+        csharpGeneratorPath: { type: "string", default: dllFilePath, nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
-        "save-inputs": { type: "boolean", nullable: true }
+        "save-inputs": { type: "boolean", nullable: true },
+        "model-namespace": { type: "boolean", nullable: true }
     },
     required: []
 };
@@ -141,28 +145,30 @@ export const $lib = createCadlLibrary({
 });
 
 export async function $onEmit(
-    program: Program,
-    emitterOptions: NetEmitterOptions
+    context: EmitContext<NetEmitterOptions>
 ) {
+    const program: Program = context.program;
+    const emitterOptions = context.options;
+    const emitterOutputDir = context.emitterOutputDir;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
     const resolvedSharedFolders: string[] = [];
     const outputFolder = resolvePath(
-        program.compilerOptions.outputPath ?? "./cadl-output",
-        emitterOptions["sdk-folder"]
+        emitterOutputDir ?? "./cadl-output"
     );
     const options: NetEmitterOptions = {
         outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
         logFile: resolvePath(
-            program.compilerOptions.outputPath ?? "./cadl-output",
+            emitterOutputDir ?? "./cadl-output",
             resolvedOptions.logFile
         ),
-        "sdk-folder": resolvePath(emitterOptions["sdk-folder"] ?? "."),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
+        "unreferenced-types-handling": resolvedOptions["unreferenced-types-handling"],
         "new-project": resolvedOptions["new-project"],
         csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
         "clear-output-folder": resolvedOptions["clear-output-folder"],
-        "save-inputs": resolvedOptions["save-inputs"]
+        "save-inputs": resolvedOptions["save-inputs"],
+        "model-namespace": resolvedOptions["model-namespace"]
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -178,12 +184,12 @@ export async function $onEmit(
             const resolvedSharedFolders: string[] = [];
             const sharedFolders = [
                 resolvePath(
-                    options.csharpGeneratorPath,
+                    options.csharpGeneratorPath ?? dllFilePath,
                     "..",
                     "Generator.Shared"
                 ),
                 resolvePath(
-                    options.csharpGeneratorPath,
+                    options.csharpGeneratorPath ?? dllFilePath,
                     "..",
                     "Azure.Core.Shared"
                 )
@@ -216,7 +222,9 @@ export async function $onEmit(
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient: resolvedOptions["single-top-level-client"]
+                SingleTopLevelClient: resolvedOptions["single-top-level-client"],
+                "unreferenced-types-handling": options["unreferenced-types-handling"],
+                "model-namespace": resolvedOptions["model-namespace"]
             } as Configuration;
 
             await program.host.writeFile(
@@ -228,8 +236,8 @@ export async function $onEmit(
                 const newProjectOption = options["new-project"]
                     ? "--new-project"
                     : "";
-                const command = `dotnet ${resolvePath(
-                    options.csharpGeneratorPath
+                const command = `dotnet --roll-forward Major ${resolvePath(
+                    options.csharpGeneratorPath ?? dllFilePath
                 )} --project-path ${outputFolder} ${newProjectOption}`;
                 console.info(command);
 
@@ -239,6 +247,8 @@ export async function $onEmit(
                     if (error.message) console.log(error.message);
                     if (error.stderr) console.error(error.stderr);
                     if (error.stdout) console.log(error.stdout);
+
+                    throw error;
                 }
             }
 
@@ -284,19 +294,30 @@ function createModel(
         return;
     }
     const title = getServiceTitle(program);
-    const version = getServiceVersion(program);
-    if (version === "0000-00-00") {
-        console.error("No API-Version provided.");
-        return;
+    const apiVersions: Set<string> = new Set<string>();
+    let version = getServiceVersion(program);
+    if (version !== "0000-00-00") {
+        apiVersions.add(version);
     }
 
+    const versions = getVersions(
+        program,
+        serviceNamespaceType
+    )[1]?.getVersions();
+    if (versions) {
+        for (const ver of versions) {
+            apiVersions.add(ver.value);
+        }
+        version = versions[versions.length - 1].value; //default version
+    }
+
+    if (apiVersions.size === 0) {
+        throw "No Api-Version Provided";
+    }
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(program, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
-
-    const apiVersions: Set<string> = new Set<string>();
-    apiVersions.add(version);
     const apiVersionParam: InputParameter = {
         Name: "apiVersion",
         NameInRequest: "api-version",
@@ -340,7 +361,12 @@ function createModel(
     try {
         //create endpoint parameter from servers
         if (servers !== undefined) {
-            const cadlServers = resolveServers(program, servers);
+            const cadlServers = resolveServers(
+                program,
+                servers,
+                modelMap,
+                enumMap
+            );
             if (cadlServers.length > 0) {
                 /* choose the first server as endpoint. */
                 url = cadlServers[0].url;
@@ -356,7 +382,6 @@ function createModel(
 
         lroMonitorOperations = getAllLroMonitorOperations(routes, program);
         const clients: InputClient[] = [];
-        // const convenienceOperations: HttpOperation[] = [];
         const dpgClients = listClients(program);
         for (const client of dpgClients) {
             clients.push(emitClient(client));
@@ -366,22 +391,35 @@ function createModel(
             }
         }
 
-        if (apiVersions.size > 1) {
-            apiVersionParam.Kind = InputOperationParameterKind.Constant;
-        }
         for (const client of clients) {
             for (const op of client.Operations) {
-                const apiVersionInOperation = op.Parameters.find(
-                    isApiVersionParameter
+                const apiVersionIndex = op.Parameters.findIndex(
+                    (value) => value.IsApiVersion
                 );
-                if (apiVersionInOperation) {
-                    if (apiVersions.size > 1) {
-                        apiVersionInOperation.Kind =
-                            InputOperationParameterKind.Constant;
-                    }
-                    if (!apiVersionInOperation.DefaultValue) {
+                if (apiVersionIndex !== -1) {
+                    const apiVersionInOperation =
+                        op.Parameters[apiVersionIndex];
+                    if (!apiVersionInOperation.DefaultValue?.Value) {
                         apiVersionInOperation.DefaultValue =
                             apiVersionParam.DefaultValue;
+                    }
+                    /**
+                     * replace to the global apiVerison parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
+                     * Three checkpoints:
+                     * the parameter is query parameter,
+                     * it is client parameter
+                     * it does not has default value, or the default value is included in the global service apiVersion.
+                     */
+                    if (
+                        apiVersions.has(
+                            apiVersionInOperation.DefaultValue?.Value
+                        ) &&
+                        apiVersionInOperation.Kind ===
+                            InputOperationParameterKind.Client &&
+                        apiVersionInOperation.Location ===
+                            apiVersionParam.Location
+                    ) {
+                        op.Parameters[apiVersionIndex] = apiVersionParam;
                     }
                 } else {
                     op.Parameters.push(apiVersionParam);
@@ -425,7 +463,10 @@ function createModel(
         }
 
         const inputClient = {
-            Name: client.kind === ClientKind.DpgClient ? client.name : client.type.name,
+            Name:
+                client.kind === ClientKind.DpgClient
+                    ? client.name
+                    : client.type.name,
             Description: clientDesc,
             Operations: [],
             Protocol: {},
@@ -447,15 +488,6 @@ function createModel(
             );
 
             applyDefaultContentTypeAndAcceptParameter(inputOperation);
-
-            const apiVersionInOperation = inputOperation.Parameters.find(
-                isApiVersionParameter
-            );
-            if (apiVersionInOperation) {
-                if (apiVersionInOperation.DefaultValue?.Value) {
-                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
-                }
-            }
             inputClient.Operations.push(inputOperation);
             if (
                 inputOperation.GenerateConvenienceMethod ||
@@ -464,18 +496,6 @@ function createModel(
                 convenienceOperations.push(httpOperation);
         }
         return inputClient;
-    }
-
-    function isApiVersionParameter(parameter: InputParameter): boolean {
-        return (
-            parameter.IsApiVersion ||
-            (parameter.Location === RequestLocation.Query &&
-                parameter.Name === "api-version") ||
-            ([RequestLocation.Uri, RequestLocation.Path].includes(
-                parameter.Location
-            ) &&
-                parameter.Name === "ApiVersion")
-        );
     }
 
     function getAllLroMonitorOperations(
@@ -789,16 +809,16 @@ function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
-        const isApiVersion: boolean =
-            requestLocation === RequestLocation.Query &&
-            name.toLocaleLowerCase() === "api-version";
+        const isApiVer: boolean = isApiVersion(program, parameter);
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
-            : isApiVersion
-            ? InputOperationParameterKind.Client
+            : isApiVer
+            ? defaultValue
+                ? InputOperationParameterKind.Constant
+                : InputOperationParameterKind.Client
             : InputOperationParameterKind.Method;
         return {
             Name: param.name,
@@ -808,7 +828,7 @@ function loadOperation(
             Location: requestLocation,
             DefaultValue: defaultValue,
             IsRequired: !param.optional,
-            IsApiVersion: isApiVersion,
+            IsApiVersion: isApiVer,
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,

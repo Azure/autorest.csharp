@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using ParametersCadl.ParameterOrders;
+using ParametersCadl.Models;
 
 namespace ParametersCadl
 {
-    // Data plane generated client. The ParametersCadl service client.
+    // Data plane generated client.
     /// <summary> The ParametersCadl service client. </summary>
     public partial class ParametersCadlClient
     {

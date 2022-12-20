@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace url_LowLevel
 {
-    // Data plane generated client. The Queries service client.
+    // Data plane generated client.
     /// <summary> The Queries service client. </summary>
     public partial class QueriesClient
     {

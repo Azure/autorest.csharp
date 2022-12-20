@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace LroBasicCadl
 {
-    // Data plane generated client. The LroBasicCadl service client.
+    // Data plane generated client.
     /// <summary> The LroBasicCadl service client. </summary>
     public partial class LroBasicCadlClient
     {

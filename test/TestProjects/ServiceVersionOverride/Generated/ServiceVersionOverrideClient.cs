@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace ServiceVersionOverride
 {
-    // Data plane generated client. The ServiceVersionOverride service client.
+    // Data plane generated client.
     /// <summary> The ServiceVersionOverride service client. </summary>
     public partial class ServiceVersionOverrideClient
     {

@@ -16,7 +16,7 @@ using Azure.Core.Pipeline;
 
 namespace ResourceClients_LowLevel
 {
-    // Data plane generated client. The ResourceService service client.
+    // Data plane generated client.
     /// <summary> The ResourceService service client. </summary>
     public partial class ResourceServiceClient
     {

@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core.Expressions.DataFactory;
+
 namespace Inheritance.Models
 {
     /// <summary> The BaseClass. </summary>
@@ -17,12 +21,56 @@ namespace Inheritance.Models
 
         /// <summary> Initializes a new instance of BaseClass. </summary>
         /// <param name="baseClassProperty"></param>
-        internal BaseClass(string baseClassProperty)
+        /// <param name="dfeString"> Any object. </param>
+        /// <param name="dfeDouble"> Any object. </param>
+        /// <param name="dfeBool"> Any object. </param>
+        /// <param name="dfeInt"> Any object. </param>
+        /// <param name="dfeObject"> Any object. </param>
+        /// <param name="dfeListOfT"> Any object. </param>
+        /// <param name="dfeListOfString"> Any object. </param>
+        /// <param name="dfeKeyValuePairs"> Any object. </param>
+        /// <param name="dfeDateTime"> Any object. </param>
+        /// <param name="dfeDuration"> Any object. </param>
+        /// <param name="dfeUri"> Any object. </param>
+        internal BaseClass(string baseClassProperty, DataFactoryExpression<string> dfeString, DataFactoryExpression<double> dfeDouble, DataFactoryExpression<bool> dfeBool, DataFactoryExpression<int> dfeInt, DataFactoryExpression<BinaryData> dfeObject, DataFactoryExpression<IList<SeparateClass>> dfeListOfT, DataFactoryExpression<IList<string>> dfeListOfString, DataFactoryExpression<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryExpression<DateTimeOffset> dfeDateTime, DataFactoryExpression<TimeSpan> dfeDuration, DataFactoryExpression<Uri> dfeUri)
         {
             BaseClassProperty = baseClassProperty;
+            DfeString = dfeString;
+            DfeDouble = dfeDouble;
+            DfeBool = dfeBool;
+            DfeInt = dfeInt;
+            DfeObject = dfeObject;
+            DfeListOfT = dfeListOfT;
+            DfeListOfString = dfeListOfString;
+            DfeKeyValuePairs = dfeKeyValuePairs;
+            DfeDateTime = dfeDateTime;
+            DfeDuration = dfeDuration;
+            DfeUri = dfeUri;
         }
 
         /// <summary> Gets or sets the base class property. </summary>
         public string BaseClassProperty { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<string> DfeString { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<double> DfeDouble { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<bool> DfeBool { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<int> DfeInt { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<BinaryData> DfeObject { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<IList<SeparateClass>> DfeListOfT { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<IList<string>> DfeListOfString { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<IDictionary<string, string>> DfeKeyValuePairs { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<DateTimeOffset> DfeDateTime { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<TimeSpan> DfeDuration { get; set; }
+        /// <summary> Any object. </summary>
+        public DataFactoryExpression<Uri> DfeUri { get; set; }
     }
 }

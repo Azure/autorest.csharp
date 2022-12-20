@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The HttpFailure service client.
+    // Data plane generated client.
     /// <summary> The HttpFailure service client. </summary>
     public partial class HttpFailureClient
     {

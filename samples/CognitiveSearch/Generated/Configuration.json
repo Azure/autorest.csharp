@@ -8,5 +8,17 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "generation1-convenience-client": true
+  "generation1-convenience-client": true,
+  "SuppressAbstractBaseClasses": [
+    "Analyzer",
+    "CharFilter",
+    "CognitiveServicesAccount",
+    "DataChangeDetectionPolicy",
+    "DataDeletionDetectionPolicy",
+    "ScoringFunction",
+    "Similarity",
+    "Skill",
+    "TokenFilter",
+    "Tokenizer"
+  ]
 }

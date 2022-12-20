@@ -29,7 +29,7 @@ namespace Azure.Language.Authoring;
 
 // TODO: Use the common parameter for this
 @doc("The endpoint to use.")
-model Endpoint is string;
+scalar Endpoint extends string;
 
 // Models
 
@@ -73,12 +73,8 @@ model Project {
   lastDeployedDateTime: zonedDateTime;
 }
 
-@knownValues(ProjectKindValues)
-@doc("The project kind.")
-model ProjectKind is string;
-
 @doc("Represents the project kind.")
-enum ProjectKindValues {
+enum ProjectKind {
   @doc("For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B.")
   CustomSingleLabelClassification,
 
@@ -125,12 +121,8 @@ model Job {
   errors: Azure.Core.Foundations.Error;
 }
 
-@doc("Represents the job status.")
-@knownValues(JobStatusValues)
-model JobStatus is string;
-
 @doc("Represents the job status values.")
-enum JobStatusValues {
+enum JobStatus {
   // These values are all camel-cased in the original spec
   notStarted,
   running,

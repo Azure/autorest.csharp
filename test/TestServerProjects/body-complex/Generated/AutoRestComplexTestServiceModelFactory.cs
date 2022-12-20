@@ -13,15 +13,6 @@ namespace body_complex.Models
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestComplexTestServiceModelFactory
     {
-        /// <summary> Initializes a new instance of DotFish. </summary>
-        /// <param name="fishType"></param>
-        /// <param name="species"></param>
-        /// <returns> A new <see cref="Models.DotFish"/> instance for mocking. </returns>
-        public static DotFish DotFish(string fishType = null, string species = null)
-        {
-            return new DotFish(fishType, species);
-        }
-
         /// <summary> Initializes a new instance of DotFishMarket. </summary>
         /// <param name="sampleSalmon"></param>
         /// <param name="salmons"></param>
@@ -60,16 +51,6 @@ namespace body_complex.Models
         public static ReadonlyObj ReadonlyObj(string id = null, int? size = null)
         {
             return new ReadonlyObj(id, size);
-        }
-
-        /// <summary> Initializes a new instance of MyBaseType. </summary>
-        /// <param name="kind"></param>
-        /// <param name="propB1"></param>
-        /// <param name="propBH1"></param>
-        /// <returns> A new <see cref="Models.MyBaseType"/> instance for mocking. </returns>
-        public static MyBaseType MyBaseType(MyKind kind = default, string propB1 = null, string propBH1 = null)
-        {
-            return new MyBaseType(kind, propB1, propBH1);
         }
 
         /// <summary> Initializes a new instance of MyDerivedType. </summary>

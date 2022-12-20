@@ -13,10 +13,11 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.Language.Authoring.Models;
 
 namespace Azure.Language.Authoring
 {
-    // Data plane generated client. The Authoring service client.
+    // Data plane generated client.
     /// <summary> The Authoring service client. </summary>
     public partial class AuthoringClient
     {
@@ -1090,7 +1091,7 @@ namespace Azure.Language.Authoring
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", "application/merge-patch+json");
+            request.Headers.Add("Content-Type", "application/merge-patch+json");
             request.Content = content;
             return message;
         }
@@ -1289,7 +1290,7 @@ namespace Azure.Language.Authoring
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
-            uri.AppendPath("/deployments/swap", false);
+            uri.AppendPath("/deployments:swap", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

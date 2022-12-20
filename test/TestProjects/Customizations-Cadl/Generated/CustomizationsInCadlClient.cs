@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using CustomizationsInCadl.Models;
 
 namespace CustomizationsInCadl
 {
-    // Data plane generated client. CADL project to test various types of models.
+    // Data plane generated client.
     /// <summary> CADL project to test various types of models. </summary>
     public partial class CustomizationsInCadlClient
     {

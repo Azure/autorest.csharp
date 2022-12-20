@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Accessibility_LowLevel
 {
-    // Data plane generated client. The Accessibility service client.
+    // Data plane generated client.
     /// <summary> The Accessibility service client. </summary>
     public partial class AccessibilityClient
     {

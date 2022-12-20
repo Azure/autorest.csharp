@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
         {
             Optional<string> id = default;
             Optional<string> etag = default;
-            Optional<SubResource> privateEndpoint = default;
+            Optional<Azure.ResourceManager.Resources.Models.SubResource> privateEndpoint = default;
             Optional<MgmtMockAndSamplePrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<MgmtMockAndSamplePrivateEndpointConnectionProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
@@ -48,7 +48,7 @@ namespace MgmtMockAndSample.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            privateEndpoint = JsonSerializer.Deserialize<SubResource>(property0.Value.ToString());
+                            privateEndpoint = JsonSerializer.Deserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"))

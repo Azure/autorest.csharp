@@ -12,9 +12,11 @@ require: $(this-folder)/../../../../readme.md
 input-file:
 - $(this-folder)/../specification/mockSwagger/keyvault.json
 - $(this-folder)/../specification/mockSwagger/managedHsm.json
+- $(this-folder)/../specification/mockSwagger/network.json
 - $(this-folder)/../specification/mockSwagger/providers.json
 - $(this-folder)/../specification/mockSwagger/authorization.json
 - $(this-folder)/../specification/mockSwagger/tenantActivityLogs_API.json
+- $(this-folder)/../specification/mockSwagger/resources.json
 clear-output-folder: true
 namespace: MgmtMockAndSample
 modelerfour:
@@ -26,6 +28,10 @@ generate-arm-resource-extensions:
 list-exception:
 - /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}
 - /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}
+
+request-path-to-parent:
+  /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}/validate: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
+
 format-by-name-rules:
   'tenantId': 'uuid'
   'resourceType': 'resource-type'

@@ -5,11 +5,14 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Azure.Core;
 
 namespace ExactMatchInheritance.Models
 {
+    [JsonConverter(typeof(ExactMatchModel11Converter))]
     public partial class ExactMatchModel11 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -41,6 +44,19 @@ namespace ExactMatchInheritance.Models
                 }
             }
             return new ExactMatchModel11(name.Value, Optional.ToNullable(type));
+        }
+
+        internal partial class ExactMatchModel11Converter : JsonConverter<ExactMatchModel11>
+        {
+            public override void Write(Utf8JsonWriter writer, ExactMatchModel11 model, JsonSerializerOptions options)
+            {
+                writer.WriteObjectValue(model);
+            }
+            public override ExactMatchModel11 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                using var document = JsonDocument.ParseValue(ref reader);
+                return DeserializeExactMatchModel11(document.RootElement);
+            }
         }
     }
 }

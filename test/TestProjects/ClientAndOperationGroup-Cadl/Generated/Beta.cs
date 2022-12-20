@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Azure.ClientAndOperationGroupService
 {
-    // Data plane generated sub-client. The Beta sub-client.
+    // Data plane generated sub-client.
     /// <summary> The Beta sub-client. </summary>
     public partial class Beta
     {
