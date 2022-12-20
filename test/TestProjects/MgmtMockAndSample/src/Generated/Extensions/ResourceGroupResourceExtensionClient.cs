@@ -51,5 +51,12 @@ namespace MgmtMockAndSample
         {
             return GetCachedClient(Client => new ManagedHsmCollection(Client, Id));
         }
+
+        /// <summary> Gets a collection of FirewallPolicyResources in the ResourceGroupResource. </summary>
+        /// <returns> An object representing collection of FirewallPolicyResources and their operations over a FirewallPolicyResource. </returns>
+        public virtual FirewallPolicyCollection GetFirewallPolicies()
+        {
+            return GetCachedClient(Client => new FirewallPolicyCollection(Client, Id));
+        }
     }
 }

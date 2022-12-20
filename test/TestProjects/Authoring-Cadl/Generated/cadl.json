@@ -9,7 +9,7 @@
    "$id": "2",
    "Name": "ProjectKind",
    "Namespace": "Azure.Language.Authoring",
-   "Description": "The project kind.",
+   "Description": "Represents the project kind.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -39,7 +39,7 @@
    "$id": "6",
    "Name": "JobStatus",
    "Namespace": "Azure.Language.Authoring",
-   "Description": "Represents the job status.",
+   "Description": "Represents the job status values.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -2391,7 +2391,7 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/language",
-     "Path": "/authoring/analyze-text/projects/{projectName}/deployments/swap",
+     "Path": "/authoring/analyze-text/projects/{projectName}/deployments:swap",
      "RequestMediaTypes": [
       "application/json"
      ],

@@ -6,9 +6,11 @@ import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
 using Azure.DPG;
+using Cadl.Versioning;
 
 @serviceTitle("Text authoring")
 @serviceVersion("2022-05-15-preview")
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace LroBasicCadl;
 
 
