@@ -44,7 +44,7 @@ namespace ModelsInCadl
             _apiVersion = options.Version;
         }
 
-        /// <summary> Input to RoundTrip. </summary>
+        /// <summary> Input model that has property of its own type. </summary>
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -57,7 +57,7 @@ namespace ModelsInCadl
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
-        /// <summary> Input to RoundTrip. </summary>
+        /// <summary> Input model that has property of its own type. </summary>
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -70,7 +70,7 @@ namespace ModelsInCadl
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
-        /// <summary> Input to RoundTrip. </summary>
+        /// <summary> Input model that has property of its own type. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -95,7 +95,7 @@ namespace ModelsInCadl
             }
         }
 
-        /// <summary> Input to RoundTrip. </summary>
+        /// <summary> Input model that has property of its own type. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -424,6 +424,158 @@ namespace ModelsInCadl
             }
         }
 
+        /// <summary> Input recursive model. </summary>
+        /// <param name="input"> The InputRecursiveModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response> InputRecursiveAsync(InputRecursiveModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await InputRecursiveAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Input recursive model. </summary>
+        /// <param name="input"> The InputRecursiveModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response InputRecursive(InputRecursiveModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = InputRecursive(input.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary> Input recursive model. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputRecursiveAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> InputRecursiveAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.InputRecursive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInputRecursiveRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Input recursive model. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputRecursive(RequestContent,RequestContext)']/*" />
+        public virtual Response InputRecursive(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.InputRecursive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInputRecursiveRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> RoundTrip recursive model. </summary>
+        /// <param name="input"> The RoundTripRecursiveModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<RoundTripRecursiveModel>> RoundTripRecursiveAsync(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await RoundTripRecursiveAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
+        }
+
+        /// <summary> RoundTrip recursive model. </summary>
+        /// <param name="input"> The RoundTripRecursiveModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<RoundTripRecursiveModel> RoundTripRecursive(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = RoundTripRecursive(input.ToRequestContent(), context);
+            return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
+        }
+
+        /// <summary> RoundTrip recursive model. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripRecursiveAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> RoundTripRecursiveAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.RoundTripRecursive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateRoundTripRecursiveRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> RoundTrip recursive model. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='RoundTripRecursive(RequestContent,RequestContext)']/*" />
+        public virtual Response RoundTripRecursive(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsInCadlClient.RoundTripRecursive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateRoundTripRecursiveRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Returns model that has property of its own type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ErrorModel>> SelfReferenceValueAsync(CancellationToken cancellationToken = default)
@@ -571,6 +723,36 @@ namespace ModelsInCadl
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/roundTripToOutput", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateInputRecursiveRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/inputRecursive", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateRoundTripRecursiveRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/roundTripRecursive", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
