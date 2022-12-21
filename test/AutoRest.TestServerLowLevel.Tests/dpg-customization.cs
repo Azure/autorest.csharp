@@ -118,7 +118,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task RawLRO_Response(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task RawLRO_Response_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -141,7 +141,30 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task RawLRO_ManualIteration(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task RawLRO_Response_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Operation result = await new DPGClient(Key, host, null, nestedScopeSuppression).LroAsync(WaitUntil.Started, "raw");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.Lro");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            await result.WaitForCompletionResponseAsync();
+            diagnosticListener.AssertAndRemoveScope("DPGClient.Lro.WaitForCompletion");
+            if (nestedScopeSuppression)
+            {
+                CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+            }
+
+            JsonData responseBody = JsonData.FromBytes(result.GetRawResponse().Content.ToMemory());
+            Assert.AreEqual("raw", (string)responseBody["received"]);
+        });
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public Task RawLRO_ManualIteration_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -162,7 +185,7 @@ namespace AutoRest.TestServer.Tests
                 diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.UpdateStatus");
                 if (nestedScopeSuppression)
                 {
-                    CollectionAssert.IsEmpty(diagnosticListener.Scopes); // TODO: is this expected
+                    CollectionAssert.IsEmpty(diagnosticListener.Scopes);
                 }
             }
         });
@@ -170,7 +193,36 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task RawLRO_WaitUntilCompleted(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task RawLRO_ManualIteration_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Operation lro = await new DPGClient(Key, host, null, nestedScopeSuppression).LroValueAsync(WaitUntil.Started, "raw");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+
+            if (!nestedScopeSuppression)
+            {
+                diagnosticListener.AssertAndRemoveScope("DPGClient.Lro");
+            }
+
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            while (!lro.HasCompleted)
+            {
+                await lro.UpdateStatusAsync();
+                diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.UpdateStatus");
+                if (nestedScopeSuppression)
+                {
+                    CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+                }
+            }
+        });
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public Task RawLRO_WaitUntilCompleted_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -183,8 +235,27 @@ namespace AutoRest.TestServer.Tests
                 CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             }
 
-            /*JsonData responseBody = JsonData.FromBytes(result.Value.ToMemory());
-            Assert.AreEqual("raw", (string)responseBody["received"]);*/
+            Assert.AreEqual("raw", result.Value.Received.ToString());
+        });
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public Task RawLRO_WaitUntilCompleted_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Operation result = await new DPGClient(Key, host, null, nestedScopeSuppression).LroValueAsync(WaitUntil.Completed, "raw");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+
+            if (nestedScopeSuppression)
+            {
+                CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+            }
+
+            JsonData responseBody = JsonData.FromBytes(result.GetRawResponse().Content.ToMemory());
+            Assert.AreEqual("raw", (string)responseBody["received"]);
         });
 
         [Test]
@@ -215,7 +286,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task HandwrittenModelLro_Response(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task HandwrittenModelLro_Response_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -240,7 +311,34 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task HandwrittenModelLro_ManualIteration(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task HandwrittenModelLro_Response_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Operation lro = await new DPGClient(Key, host, null, nestedScopeSuppression).LroValueAsync(WaitUntil.Started, "model");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+            if (!nestedScopeSuppression)
+            {
+                diagnosticListener.AssertAndRemoveScope("DPGClient.Lro");
+            }
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            await lro.WaitForCompletionResponseAsync();
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.WaitForCompletion");
+            if (nestedScopeSuppression)
+            {
+                CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+            }
+
+            JsonData responseBody = JsonData.FromBytes(lro.GetRawResponse().Content.ToMemory());
+            Assert.AreEqual("model", (string)responseBody["received"]);
+        });
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public Task HandwrittenModelLro_ManualIteration_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -259,7 +357,7 @@ namespace AutoRest.TestServer.Tests
                 diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.UpdateStatus");
                 if (nestedScopeSuppression)
                 {
-                    CollectionAssert.IsEmpty(diagnosticListener.Scopes); // TODO is this correct
+                    CollectionAssert.IsEmpty(diagnosticListener.Scopes);
                 }
             }
         });
@@ -267,7 +365,34 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task HandwrittenModelLro_WaitUntilCompleted(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task HandwrittenModelLro_ManualIteration_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Operation lro = await new DPGClient(Key, host, null, nestedScopeSuppression).LroValueAsync(WaitUntil.Started, "model");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+            if (!nestedScopeSuppression)
+            {
+                diagnosticListener.AssertAndRemoveScope("DPGClient.Lro");
+            }
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            while (!lro.HasCompleted)
+            {
+                await lro.UpdateStatusAsync();
+                diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.UpdateStatus");
+                if (nestedScopeSuppression)
+                {
+                    CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+                }
+            }
+        });
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public Task HandwrittenModelLro_WaitUntilCompleted_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -280,9 +405,31 @@ namespace AutoRest.TestServer.Tests
             }
             else
             {
-                CollectionAssert.IsEmpty(diagnosticListener.Scopes); // TODO is this correct
+                CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             }
             Assert.AreEqual("model", $"{lro.Value.Received}");
+        });
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public Task HandwrittenModelLro_WaitUntilCompleted_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Operation lro = await new DPGClient(Key, host, null, nestedScopeSuppression).LroValueAsync(WaitUntil.Completed, "model");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+            if (!nestedScopeSuppression)
+            {
+                diagnosticListener.AssertAndRemoveScope("DPGClient.Lro");
+            }
+            else
+            {
+                CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+            }
+            JsonData responseBody = JsonData.FromBytes(lro.GetRawResponse().Content.ToMemory());
+            Assert.AreEqual("model", (string)responseBody["received"]);
         });
 
         [Test]
