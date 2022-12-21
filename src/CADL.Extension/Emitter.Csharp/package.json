@@ -51,7 +51,7 @@
         "@azure-tools/cadl-autorest": "0.24.0",
         "@azure-tools/cadl-azure-core": "0.24.0",
         "@azure-tools/cadl-dpg": "0.24.0",
-        "@cadl-lang/compiler": "0.38.4",
+        "@cadl-lang/compiler": "0.38.5",
         "@cadl-lang/eslint-config-cadl": "0.5.0",
         "@cadl-lang/eslint-plugin": "0.38.0",
         "@cadl-lang/library-linter": "0.38.0",

@@ -929,6 +929,190 @@ Schema for <c>OutputModel</c>:
 
 </remarks>
     </member>
+    <member name="InputRecursiveAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InputRecursiveAsync with required request content.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {
+    message = "<message>",
+};
+
+Response response = await client.InputRecursiveAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call InputRecursiveAsync with all request content.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {
+    message = "<message>",
+};
+
+Response response = await client.InputRecursiveAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>InputRecursiveModel</c>:
+<code>{
+  message: string, # Required.
+  inner: InputRecursiveModel, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="InputRecursive(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InputRecursive with required request content.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {
+    message = "<message>",
+};
+
+Response response = client.InputRecursive(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call InputRecursive with all request content.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {
+    message = "<message>",
+};
+
+Response response = client.InputRecursive(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>InputRecursiveModel</c>:
+<code>{
+  message: string, # Required.
+  inner: InputRecursiveModel, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="RoundTripRecursiveAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call RoundTripRecursiveAsync with required request content, and how to parse the result.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {
+    message = "<message>",
+};
+
+Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("message").ToString());
+]]></code>
+This sample shows how to call RoundTripRecursiveAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {
+    message = "<message>",
+};
+
+Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>RoundTripRecursiveModel</c>:
+<code>{
+  message: string, # Required.
+  inner: RoundTripRecursiveModel, # Optional.
+}
+</code>
+
+Response Body:
+
+Schema for <c>RoundTripRecursiveModel</c>:
+<code>{
+  message: string, # Required.
+  inner: RoundTripRecursiveModel, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="RoundTripRecursive(RequestContent,RequestContext)">
+<example>
+This sample shows how to call RoundTripRecursive with required request content, and how to parse the result.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {
+    message = "<message>",
+};
+
+Response response = client.RoundTripRecursive(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("message").ToString());
+]]></code>
+This sample shows how to call RoundTripRecursive with all request content, and how to parse the result.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {
+    message = "<message>",
+};
+
+Response response = client.RoundTripRecursive(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>RoundTripRecursiveModel</c>:
+<code>{
+  message: string, # Required.
+  inner: RoundTripRecursiveModel, # Optional.
+}
+</code>
+
+Response Body:
+
+Schema for <c>RoundTripRecursiveModel</c>:
+<code>{
+  message: string, # Required.
+  inner: RoundTripRecursiveModel, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
     <member name="SelfReferenceAsync(RequestContext)">
 <example>
 This sample shows how to call SelfReferenceAsync and parse the result.
@@ -937,7 +1121,9 @@ var client = new ModelsInCadlClient();
 
 Response response = await client.SelfReferenceAsync();
 
-Console.WriteLine(response.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -947,6 +1133,7 @@ Response Body:
 
 Schema for <c>ErrorModel</c>:
 <code>{
+  message: string, # Required.
   innerError: ErrorModel, # Optional.
 }
 </code>
@@ -961,7 +1148,9 @@ var client = new ModelsInCadlClient();
 
 Response response = client.SelfReference();
 
-Console.WriteLine(response.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -971,6 +1160,7 @@ Response Body:
 
 Schema for <c>ErrorModel</c>:
 <code>{
+  message: string, # Required.
   innerError: ErrorModel, # Optional.
 }
 </code>
