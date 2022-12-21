@@ -8,12 +8,36 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using dpg_customization_LowLevel.Models;
 
 namespace dpg_customization_LowLevel
 {
     public partial class DPGClient
     {
+        /// <summary> Initializes a new instance of DPGClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <param name="nestedSpanSuppression">Flag controlling if <see cref="System.Diagnostics.Activity"/>
+        ///  created by <see cref="ClientDiagnostics"/> for client method calls should be suppressed when called
+        ///  by other Azure SDK client methods.  It's recommended to set it to true for new clients; use default (null)
+        ///  for backward compatibility reasons, or set it to false to explicitly disable suppression for specific cases.
+        ///  The default value could change in the future, the flag should be only set to false if suppression for the client
+        ///  should never be enabled.</param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public DPGClient(AzureKeyCredential credential, Uri endpoint, DPGClientOptions options, bool nestedSpanSuppression)
+        {
+            Argument.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            options ??= new DPGClientOptions();
+
+            ClientDiagnostics = new ClientDiagnostics(options, nestedSpanSuppression);
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
+        }
+
         /// <summary> Get models that you will either return to end users as a raw body, or with a model added during grow up. </summary>
         /// <param name="mode"> The mode with which you&apos;ll be handling your returned body. &apos;raw&apos; for just dealing with the raw body, and &apos;model&apos; if you are going to convert the raw body to a customized body before returning to users. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
