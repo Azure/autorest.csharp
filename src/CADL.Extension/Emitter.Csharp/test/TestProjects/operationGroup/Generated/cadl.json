@@ -15,6 +15,7 @@
     {
      "$id": "3",
      "Name": "zero",
+     "ResourceName": "OperationGroupService",
      "Parameters": [
       {
        "$id": "4",
@@ -122,6 +123,7 @@
     {
      "$id": "15",
      "Name": "one",
+     "ResourceName": "Alpha",
      "Parameters": [
       {
        "$ref": "4"
@@ -195,6 +197,7 @@
     {
      "$id": "23",
      "Name": "two",
+     "ResourceName": "Beta",
      "Parameters": [
       {
        "$ref": "4"
@@ -257,6 +260,7 @@
     {
      "$id": "29",
      "Name": "three",
+     "ResourceName": "SubBeta",
      "Parameters": [
       {
        "$ref": "4"
@@ -331,6 +335,7 @@
     {
      "$id": "37",
      "Name": "four",
+     "ResourceName": "Gamma",
      "Parameters": [
       {
        "$ref": "4"
@@ -393,6 +398,7 @@
     {
      "$id": "43",
      "Name": "five",
+     "ResourceName": "Gamma",
      "Parameters": [
       {
        "$ref": "4"

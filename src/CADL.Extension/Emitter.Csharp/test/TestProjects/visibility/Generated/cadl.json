@@ -71,6 +71,7 @@
     {
      "$id": "10",
      "Name": "sendVisibilityPropertyModel",
+     "ResourceName": "visibility",
      "Parameters": [
       {
        "$id": "11",
