@@ -936,7 +936,7 @@
          "Type": {
           "$id": "120",
           "Name": "plainDate",
-          "Kind": "DateTime",
+          "Kind": "Date",
           "IsNullable": false
          },
          "IsRequired": true,

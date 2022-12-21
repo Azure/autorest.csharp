@@ -1278,7 +1278,7 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   trainingConfigVersionStr: string, # Required.
-  modelExpirationDate: string (date &amp; time), # Required.
+  modelExpirationDate: string (date), # Required.
 }
 </code>
 
@@ -1319,7 +1319,7 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   trainingConfigVersionStr: string, # Required.
-  modelExpirationDate: string (date &amp; time), # Required.
+  modelExpirationDate: string (date), # Required.
 }
 </code>
 
