@@ -398,6 +398,7 @@
     {
      "$id": "49",
      "Name": "roundTrip",
+     "ResourceName": "CustomizationsInCadl",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {
