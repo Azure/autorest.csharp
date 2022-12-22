@@ -15,6 +15,7 @@
     {
      "$id": "3",
      "Name": "one",
+     "ResourceName": "Alpha",
      "Parameters": [
       {
        "$id": "4",
@@ -133,6 +134,7 @@
     {
      "$id": "17",
      "Name": "two",
+     "ResourceName": "Beta",
      "Parameters": [
       {
        "$ref": "4"
@@ -206,6 +208,7 @@
     {
      "$id": "25",
      "Name": "four",
+     "ResourceName": "Gamma",
      "Parameters": [
       {
        "$ref": "4"
@@ -268,6 +271,7 @@
     {
      "$id": "31",
      "Name": "five",
+     "ResourceName": "Gamma",
      "Parameters": [
       {
        "$ref": "4"

@@ -234,6 +234,7 @@
     {
      "$id": "33",
      "Name": "sendEnumPropertyModel",
+     "ResourceName": "EnumPropertiesBasic",
      "Parameters": [
       {
        "$id": "34",

@@ -16,6 +16,7 @@ export interface Paging {
 
 export interface InputOperation {
     Name: string;
+    ResourceName?: string;
     Summary?: string;
     Description?: string;
     Accessibility?: string;
