@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 DeleteDirectory(directory.FullName, keepFiles);
             }
 
-            if (directoryInfo.GetFiles().Length == 0 && directoryInfo.GetDirectories().Length == 0)
+            if (!directoryInfo.EnumerateFileSystemInfos().Any())
             {
                 directoryInfo.Delete();
             }
