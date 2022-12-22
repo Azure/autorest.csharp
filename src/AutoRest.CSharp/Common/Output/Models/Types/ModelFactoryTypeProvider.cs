@@ -148,8 +148,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var parameterName = property.Declaration.Name.ToVariableName();
                 var inputType = property.Declaration.Type;
-                // check if the property is the discriminator
-                if (discriminator != null && discriminator.Property == property)
+                // check if the property is the discriminator, but skip the check if the configuration is on for HLC only
+                if (!Configuration.ModelFactoryForHlc && discriminator != null && discriminator.Property == property)
                 {
                     var value = discriminator.Value;
                     if (value != null)

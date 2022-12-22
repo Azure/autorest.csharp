@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Input
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
             public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
             public const string UnreferencedTypesHandling = "unreferenced-types-handling";
-            public const string ModelFactoryOnlyIncludesReadOnlyModels = "model-factory-only-includes-readonly-models";
+            public const string ModelFactoryForHlc = "model-factory-for-hlc";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Input
             bool singleTopLevelClient,
             bool skipSerializationFormatXml,
             bool disablePaginationTopRenaming,
-            bool modelFactoryOnlyIncludesReadOnlyModels,
+            bool modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             string? projectFolder,
             string[] protocolMethodList,
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Input
             _protocolMethodList = protocolMethodList;
             SkipSerializationFormatXml = skipSerializationFormatXml;
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
-            ModelFactoryOnlyIncludesReadOnlyModels = modelFactoryOnlyIncludesReadOnlyModels;
+            ModelFactoryForHlc = modelFactoryForHlc;
             _mgmtConfiguration = mgmtConfiguration;
             _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
         }
@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
-        public static bool ModelFactoryOnlyIncludesReadOnlyModels { get; private set; }
+        public static bool ModelFactoryForHlc { get; private set; }
         public static UnreferencedTypesHandlingOption UnreferencedTypesHandling { get; private set; }
         private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
         public static IReadOnlyList<string> SuppressAbstractBaseClasses => _suppressAbstractBaseClasses ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.Input
                 singleTopLevelClient: GetOptionBoolValue(autoRest, Options.SingleTopLevelClient),
                 skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml),
                 disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
-                modelFactoryOnlyIncludesReadOnlyModels: GetOptionBoolValue(autoRest, Options.ModelFactoryOnlyIncludesReadOnlyModels),
+                modelFactoryForHlc: GetOptionBoolValue(autoRest, Options.ModelFactoryForHlc),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.Input
                     return false;
                 case Options.DisablePaginationTopRenaming:
                     return false;
-                case Options.ModelFactoryOnlyIncludesReadOnlyModels:
+                case Options.ModelFactoryForHlc:
                     return false;
                 default:
                     return null;

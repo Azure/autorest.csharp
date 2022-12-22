@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -81,7 +82,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, assignment, parameter.Type));
             }
 
-            if (model.Discriminator is ObjectTypeDiscriminator discriminator)
+            if (!Configuration.ModelFactoryForHlc && model.Discriminator is ObjectTypeDiscriminator discriminator)
             {
                 if (discriminator.Value is Constant discriminatorValue)
                 {

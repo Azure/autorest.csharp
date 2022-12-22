@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _headerModels = new CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
             _enums = new CachedDictionary<InputEnumType, EnumType>(BuildEnums);
             _models = new CachedDictionary<Schema, TypeProvider>(() => BuildModels(codeModel));
-            _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(_libraryName, _input.Name, Models, _sourceInputModel, Configuration.ModelFactoryOnlyIncludesReadOnlyModels));
+            _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(_libraryName, _input.Name, Models, _sourceInputModel, Configuration.ModelFactoryForHlc));
             _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
 
             ClientOptions = CreateClientOptions();
