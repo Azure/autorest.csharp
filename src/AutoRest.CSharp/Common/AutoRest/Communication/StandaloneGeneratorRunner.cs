@@ -70,6 +70,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 throw new InvalidOperationException($"Neither CodeModel.yaml nor cadl.json exist in {outputPath} folder.");
             }
 
+            if (options.ClearOutputFolder)
+            {
+                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "cadl.json" };
+                DeleteDirectory(outputPath, keepFiles);
+            }
 
             await foreach (var file in workspace.GetGeneratedFilesAsync())
             {
@@ -81,6 +86,29 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 Console.WriteLine($"Writing {filename}");
                 Directory.CreateDirectory(Path.GetDirectoryName(filename));
                 await File.WriteAllTextAsync(filename, file.Text);
+            }
+        }
+
+        private static void DeleteDirectory(string path, string[] keepFiles)
+        {
+            var directoryInfo = new DirectoryInfo(path);
+            foreach (FileInfo file in directoryInfo.GetFiles())
+            {
+                if (keepFiles.Contains(file.Name))
+                {
+                    continue;
+                }
+                file.Delete();
+            }
+
+            foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
+            {
+                DeleteDirectory(directory.FullName, keepFiles);
+            }
+
+            if (!directoryInfo.EnumerateFileSystemInfos().Any())
+            {
+                directoryInfo.Delete();
             }
         }
 
