@@ -224,6 +224,7 @@
     {
      "$id": "29",
      "Name": "getAll",
+     "ResourceName": "String",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
@@ -340,6 +341,7 @@
     {
      "$id": "42",
      "Name": "getDefault",
+     "ResourceName": "String",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
@@ -400,6 +402,7 @@
     {
      "$id": "47",
      "Name": "putAll",
+     "ResourceName": "String",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
@@ -504,6 +507,7 @@
     {
      "$id": "56",
      "Name": "putDefault",
+     "ResourceName": "String",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
@@ -620,6 +624,7 @@
     {
      "$id": "67",
      "Name": "getAll",
+     "ResourceName": "Bytes",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
@@ -680,6 +685,7 @@
     {
      "$id": "72",
      "Name": "getDefault",
+     "ResourceName": "Bytes",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
@@ -740,6 +746,7 @@
     {
      "$id": "77",
      "Name": "putAll",
+     "ResourceName": "Bytes",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
@@ -844,6 +851,7 @@
     {
      "$id": "86",
      "Name": "putDefault",
+     "ResourceName": "Bytes",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
@@ -960,6 +968,7 @@
     {
      "$id": "97",
      "Name": "getAll",
+     "ResourceName": "Datetime",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
@@ -1020,6 +1029,7 @@
     {
      "$id": "102",
      "Name": "getDefault",
+     "ResourceName": "Datetime",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
@@ -1080,6 +1090,7 @@
     {
      "$id": "107",
      "Name": "putAll",
+     "ResourceName": "Datetime",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
@@ -1184,6 +1195,7 @@
     {
      "$id": "116",
      "Name": "putDefault",
+     "ResourceName": "Datetime",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
@@ -1300,6 +1312,7 @@
     {
      "$id": "127",
      "Name": "getAll",
+     "ResourceName": "Duration",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
@@ -1360,6 +1373,7 @@
     {
      "$id": "132",
      "Name": "getDefault",
+     "ResourceName": "Duration",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
@@ -1420,6 +1434,7 @@
     {
      "$id": "137",
      "Name": "putAll",
+     "ResourceName": "Duration",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
@@ -1524,6 +1539,7 @@
     {
      "$id": "146",
      "Name": "putDefault",
+     "ResourceName": "Duration",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
@@ -1640,6 +1656,7 @@
     {
      "$id": "157",
      "Name": "getAll",
+     "ResourceName": "CollectionsByte",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
@@ -1700,6 +1717,7 @@
     {
      "$id": "162",
      "Name": "getDefault",
+     "ResourceName": "CollectionsByte",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
@@ -1760,6 +1778,7 @@
     {
      "$id": "167",
      "Name": "putAll",
+     "ResourceName": "CollectionsByte",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
@@ -1864,6 +1883,7 @@
     {
      "$id": "176",
      "Name": "putDefault",
+     "ResourceName": "CollectionsByte",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
@@ -1980,6 +2000,7 @@
     {
      "$id": "187",
      "Name": "getAll",
+     "ResourceName": "CollectionsModel",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
@@ -2040,6 +2061,7 @@
     {
      "$id": "192",
      "Name": "getDefault",
+     "ResourceName": "CollectionsModel",
      "Description": "Get models that will return the default object",
      "Parameters": [
       {
@@ -2100,6 +2122,7 @@
     {
      "$id": "197",
      "Name": "putAll",
+     "ResourceName": "CollectionsModel",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
@@ -2204,6 +2227,7 @@
     {
      "$id": "206",
      "Name": "putDefault",
+     "ResourceName": "CollectionsModel",
      "Description": "Put a body with default properties.",
      "Parameters": [
       {
@@ -2320,6 +2344,7 @@
     {
      "$id": "217",
      "Name": "getAll",
+     "ResourceName": "RequiredAndOptional",
      "Description": "Get models that will return all properties in the model",
      "Parameters": [
       {
@@ -2380,6 +2405,7 @@
     {
      "$id": "222",
      "Name": "getRequiredOnly",
+     "ResourceName": "RequiredAndOptional",
      "Description": "Get models that will return only the required properties",
      "Parameters": [
       {
@@ -2440,6 +2466,7 @@
     {
      "$id": "227",
      "Name": "putAll",
+     "ResourceName": "RequiredAndOptional",
      "Description": "Put a body with all properties present.",
      "Parameters": [
       {
@@ -2544,6 +2571,7 @@
     {
      "$id": "236",
      "Name": "putRequiredOnly",
+     "ResourceName": "RequiredAndOptional",
      "Description": "Put a body with only required properties.",
      "Parameters": [
       {
