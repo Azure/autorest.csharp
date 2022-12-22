@@ -355,32 +355,36 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteNonPageableLongRunningOperationConvenienceMethodBody(CodeWriter writer, MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, string clientDiagnosticsPropertyName, string diagnosticScope, bool async)
+        private static void WriteNonPageableLongRunningOperationConvenienceMethodBody(CodeWriter writer, MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, string clientDiagnosticsPropertyName, Diagnostic diagnostic, bool async)
         {
             var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
             WriteCancellationTokenToRequestContext(writer, contextVariable);
 
             IReadOnlyList<FormattableString> parameters = prepareConvenienceMethodParameters(convenienceMethod, contextVariable);
 
-            var responseType = convenienceMethod.ResponseType;
-            if (responseType == null)
+            using (WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsPropertyName))
             {
-                // return [await] protocolMethod(parameters...)[.ConfigureAwait(failse)];
-                writer
-                    .Append($"return ")
-                    .WriteMethodCall(protocolMethodSignature, parameters, async)
-                    .LineRaw(";");
-            }
-            else
-            {
-                // Operation<BinaryData> response = [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
-                var responseVariable = new CodeWriterDeclaration("response");
-                writer
-                    .Append($"{protocolMethodSignature.ReturnType} {responseVariable:D} = ")
-                    .WriteMethodCall(protocolMethodSignature, parameters, async)
-                    .LineRaw(";");
-                // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
-                writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, r => {responseType}.FromResponse(r), {clientDiagnosticsPropertyName}, \"{diagnosticScope}\");");
+                var responseType = convenienceMethod.ResponseType;
+                if (responseType == null)
+                {
+                    // return [await] protocolMethod(parameters...)[.ConfigureAwait(failse)];
+                    writer
+                        .Append($"return ")
+                        .WriteMethodCall(protocolMethodSignature, parameters, async)
+                        .LineRaw(";");
+                }
+                else
+                {
+                    // Operation<BinaryData> response = [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
+                    var responseVariable = new CodeWriterDeclaration("response");
+                    writer
+                        .Append($"{protocolMethodSignature.ReturnType} {responseVariable:D} = ")
+                        .WriteMethodCall(protocolMethodSignature, parameters, async)
+                        .LineRaw(";");
+                    // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
+                    writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, r => {responseType}.FromResponse(r), {clientDiagnosticsPropertyName}, \"{diagnostic.ScopeName}\");");
+                }
+
             }
         }
 
@@ -561,7 +565,14 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (clientMethod.ConvenienceMethod is not null)
             {
-                WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, client.Fields, clientMethod.ProtocolMethodDiagnostic.ScopeName, async);
+                if (clientMethod.ConvenienceMethod.Diagnostic != null)
+                {
+                    WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, clientMethod.ConvenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name, async);
+                }
+                else
+                {
+                    WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty.Name, async);
+                }
             }
 
             using (WriteClientMethodDeclarationWithExternalXmlDoc(clientMethod, async))
@@ -570,21 +581,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteNonPageableLongRunningOperationConvenienceMethod(MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, ClientFields fields, string protocolMethodDiagnosticScopeName, bool async)
+        private void WriteNonPageableLongRunningOperationConvenienceMethod(MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, Diagnostic diagnostic, string clientDiagnosticsPropertyName, bool async)
         {
             using (WriteConvenienceMethodDeclaration(writer, convenienceMethod.Signature, async))
             {
-                if (convenienceMethod.Diagnostic != null)
-                {
-                    using (WriteDiagnosticScope(writer, convenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
-                    {
-                        WriteNonPageableLongRunningOperationConvenienceMethodBody(writer, protocolMethodSignature, convenienceMethod, fields.ClientDiagnosticsProperty.Name, convenienceMethod.Diagnostic.ScopeName, async);
-                    }
-                }
-                else
-                {
-                    WriteNonPageableLongRunningOperationConvenienceMethodBody(writer, protocolMethodSignature, convenienceMethod, fields.ClientDiagnosticsProperty.Name, protocolMethodDiagnosticScopeName, async);
-                }
+                WriteNonPageableLongRunningOperationConvenienceMethodBody(writer, protocolMethodSignature, convenienceMethod, clientDiagnosticsPropertyName, diagnostic, async);
             }
             writer.Line();
         }
