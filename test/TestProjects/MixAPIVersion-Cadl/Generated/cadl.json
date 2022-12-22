@@ -168,6 +168,7 @@
     {
      "$id": "22",
      "Name": "delete",
+     "ResourceName": "Pet",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
@@ -292,6 +293,7 @@
     {
      "$id": "35",
      "Name": "read",
+     "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
@@ -385,6 +387,7 @@
     {
      "$id": "43",
      "Name": "create",
+     "ResourceName": "Pets",
      "Parameters": [
       {
        "$ref": "23"
@@ -515,6 +518,7 @@
     {
      "$id": "55",
      "Name": "listPet",
+     "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
      "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
      "Parameters": [
