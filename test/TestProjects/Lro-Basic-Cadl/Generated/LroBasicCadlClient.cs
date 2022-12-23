@@ -20,6 +20,7 @@ namespace LroBasicCadl
     public partial class LroBasicCadlClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
@@ -28,19 +29,30 @@ namespace LroBasicCadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of LroBasicCadlClient. </summary>
-        public LroBasicCadlClient() : this(new LroBasicCadlClientOptions())
+        /// <summary> Initializes a new instance of LroBasicCadlClient for mocking. </summary>
+        protected LroBasicCadlClient()
         {
         }
 
         /// <summary> Initializes a new instance of LroBasicCadlClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public LroBasicCadlClient(LroBasicCadlClientOptions options)
+        /// <param name="endpoint"> The Uri to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public LroBasicCadlClient(Uri endpoint) : this(endpoint, new LroBasicCadlClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of LroBasicCadlClient. </summary>
+        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public LroBasicCadlClient(Uri endpoint, LroBasicCadlClientOptions options)
+        {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new LroBasicCadlClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 
@@ -139,11 +151,14 @@ namespace LroBasicCadl
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="id"> The String to use. </param>
         /// <param name="project"> The Project to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="project"/> is null. </exception>
-        public virtual async Task<Operation<Project>> UpdateProjectAsync(WaitUntil waitUntil, Project project, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="project"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<Operation<Project>> UpdateProjectAsync(WaitUntil waitUntil, string id, Project project, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(project, nameof(project));
 
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -151,7 +166,7 @@ namespace LroBasicCadl
             scope.Start();
             try
             {
-                Operation<BinaryData> response = await UpdateProjectAsync(waitUntil, project.ToRequestContent(), context).ConfigureAwait(false);
+                Operation<BinaryData> response = await UpdateProjectAsync(waitUntil, id, project.ToRequestContent(), context).ConfigureAwait(false);
                 return ProtocolOperationHelpers.Convert(response, r => Project.FromResponse(r), ClientDiagnostics, "LroBasicCadlClient.UpdateProject");
             }
             catch (Exception e)
@@ -162,21 +177,24 @@ namespace LroBasicCadl
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="id"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProjectAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> UpdateProjectAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProjectAsync(WaitUntil,String,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Operation<BinaryData>> UpdateProjectAsync(WaitUntil waitUntil, string id, RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.UpdateProject");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUpdateProjectRequest(content, context);
+                using HttpMessage message = CreateUpdateProjectRequest(id, content, context);
                 return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.UpdateProject", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -187,11 +205,14 @@ namespace LroBasicCadl
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="id"> The String to use. </param>
         /// <param name="project"> The Project to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="project"/> is null. </exception>
-        public virtual Operation<Project> UpdateProject(WaitUntil waitUntil, Project project, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="project"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Operation<Project> UpdateProject(WaitUntil waitUntil, string id, Project project, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(project, nameof(project));
 
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -199,7 +220,7 @@ namespace LroBasicCadl
             scope.Start();
             try
             {
-                Operation<BinaryData> response = UpdateProject(waitUntil, project.ToRequestContent(), context);
+                Operation<BinaryData> response = UpdateProject(waitUntil, id, project.ToRequestContent(), context);
                 return ProtocolOperationHelpers.Convert(response, r => Project.FromResponse(r), ClientDiagnostics, "LroBasicCadlClient.UpdateProject");
             }
             catch (Exception e)
@@ -210,21 +231,24 @@ namespace LroBasicCadl
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="id"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProject(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> UpdateProject(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProject(WaitUntil,String,RequestContent,RequestContext)']/*" />
+        public virtual Operation<BinaryData> UpdateProject(WaitUntil waitUntil, string id, RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.UpdateProject");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUpdateProjectRequest(content, context);
+                using HttpMessage message = CreateUpdateProjectRequest(id, content, context);
                 return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.UpdateProject", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
@@ -240,6 +264,7 @@ namespace LroBasicCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/projects", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -249,13 +274,15 @@ namespace LroBasicCadl
             return message;
         }
 
-        internal HttpMessage CreateUpdateProjectRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateUpdateProjectRequest(string id, RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
             var request = message.Request;
-            request.Method = RequestMethod.Post;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/", false);
+            uri.Reset(_endpoint);
+            uri.AppendPath("/projects/", false);
+            uri.AppendPath(id, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -277,7 +304,7 @@ namespace LroBasicCadl
 
         private static ResponseClassifier _responseClassifier201;
         private static ResponseClassifier ResponseClassifier201 => _responseClassifier201 ??= new StatusCodeClassifier(stackalloc ushort[] { 201 });
-        private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier _responseClassifier200201;
+        private static ResponseClassifier ResponseClassifier200201 => _responseClassifier200201 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 201 });
     }
 }
