@@ -258,7 +258,7 @@
     {
      "$id": "31",
      "Name": "updateProject",
-     "ResourceName": "Authoring",
+     "ResourceName": "Project",
      "Parameters": [
       {
        "$ref": "11"
