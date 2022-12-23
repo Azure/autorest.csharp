@@ -258,6 +258,7 @@
     {
      "$id": "36",
      "Name": "topAction",
+     "ResourceName": "CadlFirstTest",
      "Description": "top level method",
      "Parameters": [
       {
@@ -394,6 +395,7 @@
     {
      "$id": "51",
      "Name": "topAction2",
+     "ResourceName": "CadlFirstTest",
      "Description": "top level method2",
      "Parameters": [
       {
@@ -454,6 +456,7 @@
     {
      "$id": "56",
      "Name": "patchAction",
+     "ResourceName": "CadlFirstTest",
      "Description": "top level patch",
      "Parameters": [
       {
@@ -561,6 +564,7 @@
     {
      "$id": "65",
      "Name": "anonymousBody",
+     "ResourceName": "CadlFirstTest",
      "Description": "body parameter without body decorator",
      "Parameters": [
       {
@@ -668,6 +672,7 @@
     {
      "$id": "74",
      "Name": "friendlyModel",
+     "ResourceName": "CadlFirstTest",
      "Description": "Model can have its friendly name",
      "Parameters": [
       {
@@ -775,6 +780,7 @@
     {
      "$id": "83",
      "Name": "sayHi",
+     "ResourceName": "Demo",
      "Description": "Return hi",
      "Parameters": [
       {
@@ -895,6 +901,7 @@
     {
      "$id": "94",
      "Name": "helloAgain",
+     "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Parameters": [
       {
@@ -1042,6 +1049,7 @@
     {
      "$id": "107",
      "Name": "noContentType",
+     "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Parameters": [
       {
@@ -1189,6 +1197,7 @@
     {
      "$id": "120",
      "Name": "helloDemo2",
+     "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
      "Parameters": [
       {
@@ -1249,6 +1258,7 @@
     {
      "$id": "125",
      "Name": "getUnknownValue",
+     "ResourceName": "EnumTest",
      "Description": "get extensible enum",
      "Parameters": [
       {

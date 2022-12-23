@@ -41,6 +41,7 @@
     {
      "$id": "6",
      "Name": "opWithHead",
+     "ResourceName": "HeadClient",
      "Parameters": [
       {
        "$id": "7",
@@ -220,6 +221,7 @@
     {
      "$id": "25",
      "Name": "opWithContentTypeHead",
+     "ResourceName": "HeadClient",
      "Parameters": [
       {
        "$ref": "7"
