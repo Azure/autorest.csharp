@@ -60,6 +60,6 @@
         "@cadl-lang/versioning": "0.38.0",
         "fs-extra": "^10.1.0",
         "js-yaml": "^4.1.0",
-        "json-serialize-refs": "^0.0.6-0"
+        "json-serialize-refs": "^0.1.0-0"
     }
 }
