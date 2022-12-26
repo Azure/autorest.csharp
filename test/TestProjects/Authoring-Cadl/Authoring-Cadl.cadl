@@ -218,15 +218,19 @@ model SwapDeploymentsParams {
 
 interface Projects {
   @doc("Creates a new project or updates an existing one.")
+  @convenienceAPI
   createOrUpdate is LongRunningResourceCreateOrUpdate<Project>;
 
   @doc("Gets the details of a project.")
+  @convenienceAPI
   get is ResourceRead<Project>;
 
   @doc("Deletes a project.")
+  @convenienceAPI
   delete is LongRunningResourceDelete<Project>;
 
   @doc("Lists the existing projects.")
+  @convenienceAPI
   list is ResourceList<
     Project,
     {
@@ -235,6 +239,7 @@ interface Projects {
   >;
 
   @doc("Triggers a job to export a project's data.")
+  @convenienceAPI
   export is ResourceAction<
     Project,
     ExportParams,
@@ -243,6 +248,7 @@ interface Projects {
 
   // NOTE: `import` is a reserved keyword
   @doc("Triggers a job to export a project's data.")
+  @convenienceAPI
   importx is ResourceAction<
     Project,
     ExportedProject,
@@ -250,6 +256,7 @@ interface Projects {
   >;
 
   @doc("Triggers a training job for a project.")
+  @convenienceAPI
   train is ResourceAction<
     Project,
     {
@@ -261,19 +268,24 @@ interface Projects {
 
 interface Deployments {
   @doc("Gets the details of a deployment.")
+  @convenienceAPI
   getDeployment is ResourceRead<Deployment>;
 
   @doc("Creates a new deployment or replaces an existing one.")
+  @convenienceAPI
   deployProject is LongRunningResourceCreateOrReplace<Deployment>;
 
   @doc("Deletes a project deployment.")
+  @convenienceAPI
   deleteDeployment is LongRunningResourceDelete<Deployment>;
 
   @doc("Lists the existing deployments.")
+  @convenienceAPI
   list is ResourceList<Deployment>;
 
   @doc("Swaps two existing deployments with each other.")
   @collectionAction(Deployment, "swap")
+  @convenienceAPI
   swapDeployments is ResourceCollectionAction<
     Deployment,
     SwapDeploymentsParams,
@@ -295,6 +307,7 @@ interface Jobs {
 interface Global {
   @get
   @route("languages")
+  @convenienceAPI
   getSupportedLanguages(
     ...ListQueryParams,
     ...Foundations.ApiVersionParameter
@@ -302,6 +315,7 @@ interface Global {
 
   @get
   @route("training-config-versions")
+  @convenienceAPI
   listTrainingConfigVersions(
     ...ListQueryParams,
     ...Foundations.ApiVersionParameter

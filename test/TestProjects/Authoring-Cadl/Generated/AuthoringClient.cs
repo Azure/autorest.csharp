@@ -58,6 +58,598 @@ namespace Azure.Language.Authoring
             _apiVersion = options.Version;
         }
 
+        /// <summary> Lists the existing projects. </summary>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Project> GetProjectValuesAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            async Task<Page<Project>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetProjectValues");
+                scope.Start();
+                try
+                {
+                    var response = await GetProjectsFirstPageAsync(maxCount, skip, maxpagesize, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Project>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetProjectValues");
+                scope.Start();
+                try
+                {
+                    var response = await GetProjectsNextPageAsync(nextLink, maxCount, skip, maxpagesize, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Lists the existing projects. </summary>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Project> GetProjectValues(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            Page<Project> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetProjectValues");
+                scope.Start();
+                try
+                {
+                    var response = GetProjectsFirstPage(maxCount, skip, maxpagesize, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Project> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetProjectValues");
+                scope.Start();
+                try
+                {
+                    var response = GetProjectsNextPage(nextLink, maxCount, skip, maxpagesize, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Lists the existing projects. </summary>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        private async Task<Response<CustomPageProject>> GetProjectsFirstPageAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetProjectsRequest(maxCount, skip, maxpagesize, context);
+            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            return Response.FromValue(CustomPageProject.FromResponse(response), response);
+        }
+
+        /// <summary> Lists the existing projects. </summary>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        private Response<CustomPageProject> GetProjectsFirstPage(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetProjectsRequest(maxCount, skip, maxpagesize, context);
+            Response response = _pipeline.ProcessMessage(message, context);
+            return Response.FromValue(CustomPageProject.FromResponse(response), response);
+        }
+
+        /// <summary> Lists the existing projects. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
+        private async Task<Response<CustomPageProject>> GetProjectsNextPageAsync(string nextLink, int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetProjectsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            return Response.FromValue(CustomPageProject.FromResponse(response), response);
+        }
+
+        /// <summary> Lists the existing projects. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
+        private Response<CustomPageProject> GetProjectsNextPage(string nextLink, int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetProjectsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            Response response = _pipeline.ProcessMessage(message, context);
+            return Response.FromValue(CustomPageProject.FromResponse(response), response);
+        }
+
+        /// <summary> Lists the existing deployments. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
+        public virtual AsyncPageable<Deployment> GetDeploymentValuesAsync(string projectName, CancellationToken cancellationToken = default)
+        {
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+
+            async Task<Page<Deployment>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetDeploymentValues");
+                scope.Start();
+                try
+                {
+                    var response = await GetDeploymentsFirstPageAsync(projectName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Deployment>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetDeploymentValues");
+                scope.Start();
+                try
+                {
+                    var response = await GetDeploymentsNextPageAsync(nextLink, projectName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Lists the existing deployments. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
+        public virtual Pageable<Deployment> GetDeploymentValues(string projectName, CancellationToken cancellationToken = default)
+        {
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+
+            Page<Deployment> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetDeploymentValues");
+                scope.Start();
+                try
+                {
+                    var response = GetDeploymentsFirstPage(projectName, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Deployment> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetDeploymentValues");
+                scope.Start();
+                try
+                {
+                    var response = GetDeploymentsNextPage(nextLink, projectName, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Lists the existing deployments. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
+        private async Task<Response<CustomPageDeployment>> GetDeploymentsFirstPageAsync(string projectName, CancellationToken cancellationToken = default)
+        {
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetDeploymentsRequest(projectName, context);
+            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            return Response.FromValue(CustomPageDeployment.FromResponse(response), response);
+        }
+
+        /// <summary> Lists the existing deployments. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
+        private Response<CustomPageDeployment> GetDeploymentsFirstPage(string projectName, CancellationToken cancellationToken = default)
+        {
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetDeploymentsRequest(projectName, context);
+            Response response = _pipeline.ProcessMessage(message, context);
+            return Response.FromValue(CustomPageDeployment.FromResponse(response), response);
+        }
+
+        /// <summary> Lists the existing deployments. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="projectName"/> is null. </exception>
+        private async Task<Response<CustomPageDeployment>> GetDeploymentsNextPageAsync(string nextLink, string projectName, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetDeploymentsNextPageRequest(nextLink, projectName, context);
+            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            return Response.FromValue(CustomPageDeployment.FromResponse(response), response);
+        }
+
+        /// <summary> Lists the existing deployments. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="projectName"/> is null. </exception>
+        private Response<CustomPageDeployment> GetDeploymentsNextPage(string nextLink, string projectName, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetDeploymentsNextPageRequest(nextLink, projectName, context);
+            Response response = _pipeline.ProcessMessage(message, context);
+            return Response.FromValue(CustomPageDeployment.FromResponse(response), response);
+        }
+
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<SupportedLanguage> GetSupportedLanguageValuesAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            async Task<Page<SupportedLanguage>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetSupportedLanguageValues");
+                scope.Start();
+                try
+                {
+                    var response = await GetSupportedLanguagesFirstPageAsync(maxCount, skip, maxpagesize, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<SupportedLanguage>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetSupportedLanguageValues");
+                scope.Start();
+                try
+                {
+                    var response = await GetSupportedLanguagesNextPageAsync(nextLink, maxCount, skip, maxpagesize, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<SupportedLanguage> GetSupportedLanguageValues(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            Page<SupportedLanguage> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetSupportedLanguageValues");
+                scope.Start();
+                try
+                {
+                    var response = GetSupportedLanguagesFirstPage(maxCount, skip, maxpagesize, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<SupportedLanguage> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetSupportedLanguageValues");
+                scope.Start();
+                try
+                {
+                    var response = GetSupportedLanguagesNextPage(nextLink, maxCount, skip, maxpagesize, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        private async Task<Response<PagedSupportedLanguage>> GetSupportedLanguagesFirstPageAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context);
+            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            return Response.FromValue(PagedSupportedLanguage.FromResponse(response), response);
+        }
+
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        private Response<PagedSupportedLanguage> GetSupportedLanguagesFirstPage(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context);
+            Response response = _pipeline.ProcessMessage(message, context);
+            return Response.FromValue(PagedSupportedLanguage.FromResponse(response), response);
+        }
+
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
+        private async Task<Response<PagedSupportedLanguage>> GetSupportedLanguagesNextPageAsync(string nextLink, int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            return Response.FromValue(PagedSupportedLanguage.FromResponse(response), response);
+        }
+
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
+        private Response<PagedSupportedLanguage> GetSupportedLanguagesNextPage(string nextLink, int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            Response response = _pipeline.ProcessMessage(message, context);
+            return Response.FromValue(PagedSupportedLanguage.FromResponse(response), response);
+        }
+
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<TrainingConfigVersion> GetTrainingConfigVersionValuesAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            async Task<Page<TrainingConfigVersion>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetTrainingConfigVersionValues");
+                scope.Start();
+                try
+                {
+                    var response = await GetTrainingConfigVersionsFirstPageAsync(maxCount, skip, maxpagesize, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<TrainingConfigVersion>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetTrainingConfigVersionValues");
+                scope.Start();
+                try
+                {
+                    var response = await GetTrainingConfigVersionsNextPageAsync(nextLink, maxCount, skip, maxpagesize, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<TrainingConfigVersion> GetTrainingConfigVersionValues(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            Page<TrainingConfigVersion> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetTrainingConfigVersionValues");
+                scope.Start();
+                try
+                {
+                    var response = GetTrainingConfigVersionsFirstPage(maxCount, skip, maxpagesize, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<TrainingConfigVersion> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetTrainingConfigVersionValues");
+                scope.Start();
+                try
+                {
+                    var response = GetTrainingConfigVersionsNextPage(nextLink, maxCount, skip, maxpagesize, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        private async Task<Response<PagedTrainingConfigVersion>> GetTrainingConfigVersionsFirstPageAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context);
+            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            return Response.FromValue(PagedTrainingConfigVersion.FromResponse(response), response);
+        }
+
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        private Response<PagedTrainingConfigVersion> GetTrainingConfigVersionsFirstPage(int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context);
+            Response response = _pipeline.ProcessMessage(message, context);
+            return Response.FromValue(PagedTrainingConfigVersion.FromResponse(response), response);
+        }
+
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
+        private async Task<Response<PagedTrainingConfigVersion>> GetTrainingConfigVersionsNextPageAsync(string nextLink, int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            return Response.FromValue(PagedTrainingConfigVersion.FromResponse(response), response);
+        }
+
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
+        private Response<PagedTrainingConfigVersion> GetTrainingConfigVersionsNextPage(string nextLink, int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var message = CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            Response response = _pipeline.ProcessMessage(message, context);
+            return Response.FromValue(PagedTrainingConfigVersion.FromResponse(response), response);
+        }
+
         /// <summary> Creates a new project or updates an existing one. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -116,6 +708,54 @@ namespace Azure.Language.Authoring
 
         /// <summary> Gets the details of a project. </summary>
         /// <param name="projectName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<Response<Project>> GetProjectValueAsync(string projectName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+
+            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetProjectValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await GetProjectAsync(projectName, context).ConfigureAwait(false);
+                return Response.FromValue(Project.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets the details of a project. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Response<Project> GetProjectValue(string projectName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+
+            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetProjectValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = GetProject(projectName, context);
+                return Response.FromValue(Project.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets the details of a project. </summary>
+        /// <param name="projectName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -158,6 +798,54 @@ namespace Azure.Language.Authoring
             {
                 using HttpMessage message = CreateGetProjectRequest(projectName, context);
                 return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes a project. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<Response<AcceptedResponseProject>> DeleteValueAsync(string projectName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+
+            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.DeleteValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await DeleteAsync(projectName, context).ConfigureAwait(false);
+                return Response.FromValue(AcceptedResponseProject.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes a project. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Response<AcceptedResponseProject> DeleteValue(string projectName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+
+            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.DeleteValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = Delete(projectName, context);
+                return Response.FromValue(AcceptedResponseProject.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -328,6 +1016,38 @@ namespace Azure.Language.Authoring
 
         /// <summary> Triggers a training job for a project. </summary>
         /// <param name="projectName"> The String to use. </param>
+        /// <param name="body"> The TrainingJobOptions to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<Response> TrainAsync(string projectName, TrainingJobOptions body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await TrainAsync(projectName, body.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Triggers a training job for a project. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="body"> The TrainingJobOptions to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Response Train(string projectName, TrainingJobOptions body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Train(projectName, body.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary> Triggers a training job for a project. </summary>
+        /// <param name="projectName"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -374,6 +1094,58 @@ namespace Azure.Language.Authoring
             {
                 using HttpMessage message = CreateTrainRequest(projectName, content, context);
                 return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets the details of a deployment. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<Response<Deployment>> GetDeploymentValueAsync(string projectName, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+
+            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetDeploymentValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await GetDeploymentAsync(projectName, deploymentName, context).ConfigureAwait(false);
+                return Response.FromValue(Deployment.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets the details of a deployment. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Response<Deployment> GetDeploymentValue(string projectName, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+
+            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.GetDeploymentValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = GetDeployment(projectName, deploymentName, context);
+                return Response.FromValue(Deployment.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -441,6 +1213,58 @@ namespace Azure.Language.Authoring
         /// <summary> Creates a new deployment or replaces an existing one. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<Response<ResourceOkResponseDeployment>> DeployProjectValueAsync(string projectName, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+
+            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.DeployProjectValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await DeployProjectAsync(projectName, deploymentName, context).ConfigureAwait(false);
+                return Response.FromValue(ResourceOkResponseDeployment.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Creates a new deployment or replaces an existing one. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Response<ResourceOkResponseDeployment> DeployProjectValue(string projectName, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+
+            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.DeployProjectValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = DeployProject(projectName, deploymentName, context);
+                return Response.FromValue(ResourceOkResponseDeployment.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Creates a new deployment or replaces an existing one. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="deploymentName"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -486,6 +1310,58 @@ namespace Azure.Language.Authoring
             {
                 using HttpMessage message = CreateDeployProjectRequest(projectName, deploymentName, context);
                 return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes a project deployment. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<Response<AcceptedResponseDeployment>> DeleteDeploymentValueAsync(string projectName, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+
+            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.DeleteDeploymentValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await DeleteDeploymentAsync(projectName, deploymentName, context).ConfigureAwait(false);
+                return Response.FromValue(AcceptedResponseDeployment.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes a project deployment. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Response<AcceptedResponseDeployment> DeleteDeploymentValue(string projectName, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+
+            using var scope = ClientDiagnostics.CreateScope("AuthoringClient.DeleteDeploymentValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = DeleteDeployment(projectName, deploymentName, context);
+                return Response.FromValue(AcceptedResponseDeployment.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -548,6 +1424,38 @@ namespace Azure.Language.Authoring
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> Swaps two existing deployments with each other. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="body"> The body schema of the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<Response> SwapDeploymentsAsync(string projectName, SwapDeploymentsOptions body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SwapDeploymentsAsync(projectName, body.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Swaps two existing deployments with each other. </summary>
+        /// <param name="projectName"> The String to use. </param>
+        /// <param name="body"> The body schema of the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Response SwapDeployments(string projectName, SwapDeploymentsOptions body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SwapDeployments(projectName, body.ToRequestContent(), context);
+            return response;
         }
 
         /// <summary> Swaps two existing deployments with each other. </summary>

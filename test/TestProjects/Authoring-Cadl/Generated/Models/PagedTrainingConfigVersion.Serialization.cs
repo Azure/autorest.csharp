@@ -10,22 +10,22 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Pagination.Models
+namespace Azure.Language.Authoring.Models
 {
-    internal partial class CustomPage
+    internal partial class PagedTrainingConfigVersion
     {
-        internal static CustomPage DeserializeCustomPage(JsonElement element)
+        internal static PagedTrainingConfigVersion DeserializePagedTrainingConfigVersion(JsonElement element)
         {
-            IReadOnlyList<LedgerEntry> value = default;
+            IReadOnlyList<TrainingConfigVersion> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<LedgerEntry> array = new List<LedgerEntry>();
+                    List<TrainingConfigVersion> array = new List<TrainingConfigVersion>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(LedgerEntry.DeserializeLedgerEntry(item));
+                        array.Add(TrainingConfigVersion.DeserializeTrainingConfigVersion(item));
                     }
                     value = array;
                     continue;
@@ -36,15 +36,15 @@ namespace Pagination.Models
                     continue;
                 }
             }
-            return new CustomPage(value, nextLink);
+            return new PagedTrainingConfigVersion(value, nextLink);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static CustomPage FromResponse(Response response)
+        internal static PagedTrainingConfigVersion FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCustomPage(document.RootElement);
+            return DeserializePagedTrainingConfigVersion(document.RootElement);
         }
     }
 }

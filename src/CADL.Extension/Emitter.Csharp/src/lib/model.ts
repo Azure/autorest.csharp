@@ -238,6 +238,36 @@ export function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
 }
 
+
+function getInputModelName(program: Program, model: Model): string {
+    const friendlyName = getFriendlyName(program, model);
+    if (friendlyName) {
+        return friendlyName;
+    } else if (model.templateArguments && model.templateArguments.length > 0) {
+        return getInputTemplateModelName(model);
+    } else {
+        return model.name;
+    }
+}
+
+function getInputTemplateModelName(target: Type): string {
+    switch (target.kind) {
+      case "Model": {
+        let name = target.name;
+        if (target.templateArguments) {
+          name = name + target.templateArguments.map(it => getInputTemplateModelName(it)).join("");
+        }
+        return name;
+      }
+  
+      case "String":
+        return target.value;
+  
+      default:
+        return "";
+    }
+}
+
 export function getInputType(
     program: Program,
     type: Type,
@@ -414,7 +444,7 @@ export function getInputType(
 
     function getInputModelForModel(m: Model): InputModelType {
         m = getEffectiveSchemaType(program, m) as Model;
-        const name = getFriendlyName(program, m) ?? m.name;
+        const name = getInputModelName(program, m) ?? m.name;
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
@@ -571,14 +601,14 @@ export function getUsages(
         if ("name" in type) typeName = type.name ?? "";
         if (type.kind === "Model") {
             const effectiveType = getEffectiveModelType(program, type);
-            typeName = getFriendlyName(program, effectiveType) ?? effectiveType.name;
+            typeName = getInputModelName(program, effectiveType) ?? effectiveType.name;
         }
         const affectTypes: string[] = [];
         if (typeName !== "") affectTypes.push(typeName);
         if (type.kind === "Model" && type.templateArguments) {
             for (const arg of type.templateArguments) {
                 if (arg.kind === "Model" && "name" in arg && arg.name !== "") {
-                    affectTypes.push(getFriendlyName(program, arg) ?? arg.name);
+                    affectTypes.push(getInputModelName(program, arg) ?? arg.name);
                 }
             }
         }

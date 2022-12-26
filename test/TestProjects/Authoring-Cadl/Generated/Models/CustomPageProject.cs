@@ -10,32 +10,32 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
 
-namespace Pagination.Models
+namespace Azure.Language.Authoring.Models
 {
-    /// <summary> Paged collection of LedgerEntry items. </summary>
-    internal partial class CustomPage
+    /// <summary> Paged collection of Project items. </summary>
+    internal partial class CustomPageProject
     {
-        /// <summary> Initializes a new instance of CustomPage. </summary>
+        /// <summary> Initializes a new instance of CustomPageProject. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal CustomPage(IEnumerable<LedgerEntry> value)
+        internal CustomPageProject(IEnumerable<Project> value)
         {
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of CustomPage. </summary>
+        /// <summary> Initializes a new instance of CustomPageProject. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
-        internal CustomPage(IReadOnlyList<LedgerEntry> value, string nextLink)
+        internal CustomPageProject(IReadOnlyList<Project> value, string nextLink)
         {
             Value = value.ToList();
             NextLink = nextLink;
         }
 
         /// <summary> Gets the value. </summary>
-        public IReadOnlyList<LedgerEntry> Value { get; }
+        public IReadOnlyList<Project> Value { get; }
         /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }

@@ -83,7 +83,7 @@ Schema for <c>Project</c>:
 
 Response Body:
 
-Schema for <c>Project</c>:
+Schema for <c>ResourceOkResponseProject</c>:
 <code>{
   projectName: string, # Required.
   projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
@@ -183,7 +183,7 @@ Schema for <c>Project</c>:
 
 Response Body:
 
-Schema for <c>Project</c>:
+Schema for <c>ResourceOkResponseProject</c>:
 <code>{
   projectName: string, # Required.
   projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
@@ -303,17 +303,12 @@ var client = new AuthoringClient(endpoint);
 Response response = await client.DeleteAsync("<projectName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("projectName").ToString());
-Console.WriteLine(result.GetProperty("projectKind").ToString());
-Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("multilingual").ToString());
-Console.WriteLine(result.GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("language").ToString());
-Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -321,19 +316,20 @@ Below is the JSON schema for the response payload.
 
 Response Body:
 
-Schema for <c>Project</c>:
+Schema for <c>AcceptedResponseProject</c>:
 <code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  id: string, # Required.
+  status: &quot;InProgress&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Canceled&quot;, # Required.
+  error: {
+    code: string, # Required.
+    message: string, # Required.
+    target: string, # Optional.
+    details: [Error], # Required.
+    innererror: {
+      code: string, # Required.
+      innererror: InnerError, # Optional.
+    }, # Optional.
+  }, # Optional.
 }
 </code>
 
@@ -349,17 +345,12 @@ var client = new AuthoringClient(endpoint);
 Response response = client.Delete("<projectName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("projectName").ToString());
-Console.WriteLine(result.GetProperty("projectKind").ToString());
-Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("multilingual").ToString());
-Console.WriteLine(result.GetProperty("description").ToString());
-Console.WriteLine(result.GetProperty("language").ToString());
-Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -367,19 +358,20 @@ Below is the JSON schema for the response payload.
 
 Response Body:
 
-Schema for <c>Project</c>:
+Schema for <c>AcceptedResponseProject</c>:
 <code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  id: string, # Required.
+  status: &quot;InProgress&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Canceled&quot;, # Required.
+  error: {
+    code: string, # Required.
+    message: string, # Required.
+    target: string, # Optional.
+    details: [Error], # Required.
+    innererror: {
+      code: string, # Required.
+      innererror: InnerError, # Optional.
+    }, # Optional.
+  }, # Optional.
 }
 </code>
 
@@ -559,7 +551,7 @@ Below is the JSON schema for the response payload.
 
 Response Body:
 
-Schema for <c>Deployment</c>:
+Schema for <c>ResourceOkResponseDeployment</c>:
 <code>{
   name: string, # Required.
 }
@@ -585,7 +577,7 @@ Below is the JSON schema for the response payload.
 
 Response Body:
 
-Schema for <c>Deployment</c>:
+Schema for <c>ResourceOkResponseDeployment</c>:
 <code>{
   name: string, # Required.
 }
@@ -603,7 +595,12 @@ var client = new AuthoringClient(endpoint);
 Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -611,9 +608,20 @@ Below is the JSON schema for the response payload.
 
 Response Body:
 
-Schema for <c>Deployment</c>:
+Schema for <c>AcceptedResponseDeployment</c>:
 <code>{
-  name: string, # Required.
+  id: string, # Required.
+  status: &quot;InProgress&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Canceled&quot;, # Required.
+  error: {
+    code: string, # Required.
+    message: string, # Required.
+    target: string, # Optional.
+    details: [Error], # Required.
+    innererror: {
+      code: string, # Required.
+      innererror: InnerError, # Optional.
+    }, # Optional.
+  }, # Optional.
 }
 </code>
 
@@ -629,7 +637,12 @@ var client = new AuthoringClient(endpoint);
 Response response = client.DeleteDeployment("<projectName>", "<deploymentName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -637,9 +650,20 @@ Below is the JSON schema for the response payload.
 
 Response Body:
 
-Schema for <c>Deployment</c>:
+Schema for <c>AcceptedResponseDeployment</c>:
 <code>{
-  name: string, # Required.
+  id: string, # Required.
+  status: &quot;InProgress&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Canceled&quot;, # Required.
+  error: {
+    code: string, # Required.
+    message: string, # Required.
+    target: string, # Optional.
+    details: [Error], # Required.
+    innererror: {
+      code: string, # Required.
+      innererror: InnerError, # Optional.
+    }, # Optional.
+  }, # Optional.
 }
 </code>
 
@@ -1077,17 +1101,7 @@ var client = new AuthoringClient(endpoint);
 await foreach (var data in client.GetDeploymentsAsync("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-    Console.WriteLine(result.GetProperty("multilingual").ToString());
-    Console.WriteLine(result.GetProperty("description").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
 </example>
@@ -1098,17 +1112,7 @@ Response Body:
 
 Schema for <c>Array</c>:
 <code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  name: string, # Required.
 }
 </code>
 
@@ -1124,17 +1128,7 @@ var client = new AuthoringClient(endpoint);
 foreach (var data in client.GetDeployments("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-    Console.WriteLine(result.GetProperty("multilingual").ToString());
-    Console.WriteLine(result.GetProperty("description").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
 </example>
@@ -1145,17 +1139,7 @@ Response Body:
 
 Schema for <c>Array</c>:
 <code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  name: string, # Required.
 }
 </code>
 

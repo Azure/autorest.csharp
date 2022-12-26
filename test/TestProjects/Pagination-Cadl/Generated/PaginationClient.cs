@@ -143,23 +143,23 @@ namespace Pagination
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        private async Task<Response<CustomPage>> GetPaginationLedgerEntriesFirstPageAsync(CancellationToken cancellationToken = default)
+        private async Task<Response<CustomPageLedgerEntry>> GetPaginationLedgerEntriesFirstPageAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             using var message = CreateGetPaginationLedgerEntriesRequest(context);
             Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            return Response.FromValue(CustomPage.FromResponse(response), response);
+            return Response.FromValue(CustomPageLedgerEntry.FromResponse(response), response);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        private Response<CustomPage> GetPaginationLedgerEntriesFirstPage(CancellationToken cancellationToken = default)
+        private Response<CustomPageLedgerEntry> GetPaginationLedgerEntriesFirstPage(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             using var message = CreateGetPaginationLedgerEntriesRequest(context);
             Response response = _pipeline.ProcessMessage(message, context);
-            return Response.FromValue(CustomPage.FromResponse(response), response);
+            return Response.FromValue(CustomPageLedgerEntry.FromResponse(response), response);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
@@ -167,7 +167,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        private async Task<Response<CustomPage>> GetPaginationLedgerEntriesNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        private async Task<Response<CustomPageLedgerEntry>> GetPaginationLedgerEntriesNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -177,7 +177,7 @@ namespace Pagination
             RequestContext context = FromCancellationToken(cancellationToken);
             using var message = CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, context);
             Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            return Response.FromValue(CustomPage.FromResponse(response), response);
+            return Response.FromValue(CustomPageLedgerEntry.FromResponse(response), response);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
@@ -185,7 +185,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        private Response<CustomPage> GetPaginationLedgerEntriesNextPage(string nextLink, CancellationToken cancellationToken = default)
+        private Response<CustomPageLedgerEntry> GetPaginationLedgerEntriesNextPage(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -195,7 +195,7 @@ namespace Pagination
             RequestContext context = FromCancellationToken(cancellationToken);
             using var message = CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, context);
             Response response = _pipeline.ProcessMessage(message, context);
-            return Response.FromValue(CustomPage.FromResponse(response), response);
+            return Response.FromValue(CustomPageLedgerEntry.FromResponse(response), response);
         }
 
         /// <summary> List upload detail for the discovery resource. </summary>

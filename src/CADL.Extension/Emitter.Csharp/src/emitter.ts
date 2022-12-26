@@ -68,7 +68,7 @@ import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
 import { OperationPaging } from "./type/OperationPaging.js";
 import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
-import { getOperationLink } from "@azure-tools/cadl-azure-core";
+import { getOperationLink, getPagedResult } from "@azure-tools/cadl-azure-core";
 import fs from "fs";
 import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
@@ -743,6 +743,11 @@ function loadOperation(
     for (const res of operation.responses) {
         const body = res.responses[0]?.body;
         if (body?.type) {
+            const bodyType = getEffectiveSchemaType(program, body.type);
+            if (bodyType.kind === "Model") {
+                const pagedResult = getPagedResult(program, bodyType);
+                const _ = 1;
+            }
             if (
                 body.type.kind === "Model" &&
                 hasDecorator(body?.type, "$pagedResult")
@@ -876,14 +881,14 @@ function loadOperation(
 
         let type: InputType | undefined = undefined;
         if (body?.type) {
-            if (resourceOperation && resourceOperation.operation !== "list") {
-                type = getInputType(
-                    program,
-                    resourceOperation.resourceType,
-                    models,
-                    enums
-                );
-            } else {
+            // if (resourceOperation && resourceOperation.operation !== "list") {
+            //     type = getInputType(
+            //         program,
+            //         resourceOperation.resourceType,
+            //         models,
+            //         enums
+            //     );
+            // } else {
                 const cadlType = getEffectiveSchemaType(program, body.type);
                 const inputType: InputType = getInputType(
                     program,
@@ -892,7 +897,7 @@ function loadOperation(
                     enums
                 );
                 type = inputType;
-            }
+            // }
         }
 
         const headers = response.responses[0]?.headers;
