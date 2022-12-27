@@ -3,6 +3,7 @@
 
 import {
     createCadlLibrary,
+    getDeprecated,
     getDoc,
     getServiceNamespace,
     getServiceNamespaceString,
@@ -766,6 +767,7 @@ function loadOperation(
         Name: op.name,
         ResourceName: resourceOperation?.resourceType.name ?? getOperationGroupName(program, op),
         Summary: summary,
+        Deprecated: getDeprecated(program, op),
         Description: desc,
         Parameters: parameters,
         Responses: responses,

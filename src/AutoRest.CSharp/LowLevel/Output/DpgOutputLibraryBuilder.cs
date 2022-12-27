@@ -128,6 +128,7 @@ namespace AutoRest.CSharp.Output.Models
                         defaultDerivedName,
                         actualBase.Namespace,
                         "internal",
+                        null,
                         $"Unknown version of {actualBase.Name}",
                         InputModelTypeUsage.Output,
                         Array.Empty<InputModelProperty>(),

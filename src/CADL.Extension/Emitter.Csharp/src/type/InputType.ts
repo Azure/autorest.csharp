@@ -17,6 +17,7 @@ export interface InputPrimitiveType extends InputType {
 export interface InputModelType extends InputType {
     Namespace?: string;
     Accessibility?: string;
+    Deprecated?: string;
     Description: string;
     Usage: string;
     Properties: InputModelProperty[];
@@ -28,6 +29,7 @@ export interface InputModelType extends InputType {
 export interface InputEnumType extends InputType {
     Namespace?: string;
     Accessibility?: string;
+    Deprecated?: string;
     Description: string;
     EnumValueType: string;
     AllowedValues: InputEnumTypeValue[];

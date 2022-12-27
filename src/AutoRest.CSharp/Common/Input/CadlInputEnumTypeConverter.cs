@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = id == null && name == null;
             string? ns = null;
             string? accessibility = null;
+            string? deprecated = null;
             string? description = null;
             InputModelTypeUsage usage = InputModelTypeUsage.None;
             string? usageString = null;
@@ -40,6 +41,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputEnumType.Name), ref name)
                     || reader.TryReadString(nameof(InputEnumType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
+                    || reader.TryReadString(nameof(InputEnumType.Deprecated), ref deprecated)
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
                     || reader.TryReadString(nameof(InputEnumType.Usage), ref usageString)
                     || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
@@ -72,7 +74,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             valueType ??= InputPrimitiveType.Int32;
-            var enumType = new InputEnumType(name, ns, accessibility, description, usage, valueType, normalizeValues(allowedValues, valueType), isExtendable);
+            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, normalizeValues(allowedValues, valueType), isExtendable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);
