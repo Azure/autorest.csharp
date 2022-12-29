@@ -35,7 +35,8 @@ import {
     getPathParamName,
     getQueryParamName,
     HttpOperation,
-    isStatusCode
+    isStatusCode,
+    validateRouteUnique
 } from "@cadl-lang/rest/http";
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
 import { InputModelProperty } from "../type/InputModelProperty.js";
@@ -238,12 +239,16 @@ export function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
 }
 
+export function isEnumMember(type: Type): boolean {
+    return type.kind === "EnumMember";
+}
+
 export function getInputType(
     program: Program,
     type: Type,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
-): InputType {
+): any {
     if (type.kind === "Model") {
         return getInputModelType(type);
     } else if (
@@ -256,13 +261,30 @@ export function getInputType(
             program,
             type
         );
+        // return {
+        //     Name: type.kind,
+        //     Kind: builtInKind,
+        //     IsNullable: false
+        // } as InputPrimitiveType;
+        const allowValues: InputEnumTypeValue[] = [];
+        const member = {
+            Name: type.value,
+            Value: type.value,
+            Description: getDoc(program, type)
+        } as InputEnumTypeValue;
+        allowValues.push(member);
         return {
             Name: type.kind,
-            Kind: builtInKind,
+            EnumValueType: builtInKind,
+            AllowedValues: allowValues,
+            IsExtensible: false,
             IsNullable: false
-        } as InputPrimitiveType;
+        } as InputEnumType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
+    } else if (type.kind === "EnumMember") {
+        /*TODO: need to handle the value. */
+        return getInputTypeForEnum(type.enum);
     } else if (type.kind === "Intrinsic") {
         return getInputModelForIntrinsicType(type);
     } else if (type.kind === "Scalar" /*&& program.checker.isStdType(type)*/) {
@@ -294,6 +316,8 @@ export function getInputType(
                     IsNullable: false
                 } as InputPrimitiveType;
         }
+    } else if (type.kind === "Tuple") {
+        return getInputTypeForArray(type.values[0]);
     } else if (type.kind === "Union") {
         throw new Error(`Union is not supported.`);
     } else {
@@ -488,6 +512,9 @@ export function getInputType(
                     isReadOnly = true;
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
+                if (isEnumMember(value.type)) {
+                    
+                }
                 const inputProp = {
                     Name: value.name,
                     SerializedName: value.name,

@@ -11,12 +11,16 @@ import {
     getSummary,
     ignoreDiagnostics,
     isErrorModel,
+    isGlobalNamespace,
     JSONSchemaType,
     Model,
     ModelProperty,
+    Namespace,
+    navigateTypesInNamespace,
     Operation,
     Program,
-    resolvePath
+    resolvePath,
+    Type
 } from "@cadl-lang/compiler";
 import {
     getAllHttpServices,
@@ -102,6 +106,7 @@ export interface NetEmitterOptions {
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
+    "generate-all-models"?: boolean;
 }
 
 const defaultOptions = {
@@ -111,7 +116,8 @@ const defaultOptions = {
     "new-project": false,
     csharpGeneratorPath: dllFilePath,
     "clear-output-folder": false,
-    "save-inputs": false
+    "save-inputs": false,
+    "generate-all-models": false,
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -130,7 +136,8 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         csharpGeneratorPath: { type: "string", default: dllFilePath, nullable: true },
         "clear-output-folder": { type: "boolean", nullable: true },
         "save-inputs": { type: "boolean", nullable: true },
-        "model-namespace": { type: "boolean", nullable: true }
+        "model-namespace": { type: "boolean", nullable: true },
+        "generate-all-models": { type: "boolean", nullable: true }
     },
     required: []
 };
@@ -162,19 +169,20 @@ export async function $onEmit(
         ),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
-        "unreferenced-types-handling": resolvedOptions["unreferenced-types-handling"],
+        "unreferenced-types-handling": resolvedOptions["generate-all-models"] ? "keepAll" :resolvedOptions["unreferenced-types-handling"],
         "new-project": resolvedOptions["new-project"],
         csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
         "clear-output-folder": resolvedOptions["clear-output-folder"],
         "save-inputs": resolvedOptions["save-inputs"],
-        "model-namespace": resolvedOptions["model-namespace"]
+        "model-namespace": resolvedOptions["model-namespace"],
+        "generate-all-models": resolvedOptions["generate-all-models"],
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
         const namespace = getServiceNamespaceString(program) || "";
 
-        const root = createModel(program, options.generateConvenienceAPI);
+        const root = createModel(program, options.generateConvenienceAPI, options["generate-all-models"]);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
@@ -258,13 +266,17 @@ export async function $onEmit(
 }
 
 function deleteFile(filePath: string) {
-    fs.unlink(filePath, (err) => {
-        if (err) {
-            console.log(`stderr: ${err}`);
-        }
-
-        console.log(`File ${filePath} is deleted.`);
-    });
+    if (fs.existsSync(filePath)) {
+        console.log(`File ${filePath} does not exist. No deletion. `)
+    } else {
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                console.log(`stderr: ${err}`);
+            } else {
+                console.log(`File ${filePath} is deleted.`);
+            }
+        });
+    }
 }
 
 function prettierOutput(output: string) {
@@ -283,7 +295,8 @@ function getClient(
 
 function createModel(
     program: Program,
-    generateConvenienceAPI: boolean = false
+    generateConvenienceAPI: boolean = false,
+    generateAllModels: boolean = false,
 ): any {
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {
@@ -423,9 +436,15 @@ function createModel(
             }
         }
 
-        const usages = getUsages(program, convenienceOperations);
-        setUsage(usages, modelMap);
-        setUsage(usages, enumMap);
+        if (generateAllModels) {
+            emitUnreferencedModels(serviceNamespaceType);
+            setUsageForAll(Usage.RoundTrip, modelMap);
+            setUsageForAll(Usage.RoundTrip, enumMap);
+        } else {
+            const usages = getUsages(program, convenienceOperations);
+            setUsage(usages, modelMap);
+            setUsage(usages, enumMap);
+        }
 
         const clientModel = {
             Name: namespace,
@@ -511,6 +530,21 @@ function createModel(
         }
         return lroMonitorOperations;
     }
+
+    function emitUnreferencedModels(namespace: Namespace) {
+        // if (options.omitUnreachableTypes) {
+        //     return;
+        // }
+        const computeModel = (x: Type) => getInputType(program, x, modelMap, enumMap);
+        const skipSubNamespaces = isGlobalNamespace(program, namespace);
+        navigateTypesInNamespace(namespace, {
+            model: (x) => x.name !== "" && x.kind === "Model" && computeModel(x),
+            scalar: computeModel,
+            enum: computeModel,
+            union: (x) => x.name !== undefined && computeModel(x),
+          },
+          { skipSubNamespaces })
+    }
 }
 
 function setUsage(
@@ -527,6 +561,12 @@ function setUsage(
         } else {
             m.Usage = Usage.None;
         }
+    }
+}
+
+function setUsageForAll(usage: Usage, models: Map<string, InputModelType | InputEnumType>) {
+    for (const [_, m] of models) {
+        m.Usage = usage;
     }
 }
 

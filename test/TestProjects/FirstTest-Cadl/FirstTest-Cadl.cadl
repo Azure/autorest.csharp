@@ -51,6 +51,18 @@ model NotFriend {
   name: string;
 }
 
+model NotReferenceModel {
+  @doc("name of NotReference Model")
+  name: string
+}
+
+@doc("NotReference enum")
+enum NotReferenceEnum {
+  One: "1",
+  Two: "2",
+  Four: "4"
+}
+
 model RoundTripModel {
   @doc("Required string, illustrating a reference type property.")
   requiredString: string;
