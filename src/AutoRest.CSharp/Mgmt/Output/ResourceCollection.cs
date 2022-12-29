@@ -143,8 +143,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (getAllOperation == null)
                 return getAllOperation;
 
-            getAllOperation.UpdateOperationLocation();
-
             // skip the following transformations for `ById` resources.
             // In ById resources, the required parameters of the GetAll operation is usually a scope, doing the following transform will require the constructor to accept a scope variable
             // which is not reasonable and causes problems
@@ -255,8 +253,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 //        getMgmtRestOperation.MgmtReturnType,
                 //        $"Tries to get details for this resource from the service.")));
             }
-
-            result.ForEach(op => op.UpdateOperationLocation());
 
             return result;
         }

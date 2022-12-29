@@ -73,11 +73,11 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsPropertyBagOperation => Method.IsPropertyBagMethod;
 
+        private string? _propertyBagName;
+
         private IEnumerable<string>? _propertyBagSelectedParams;
 
         private Parameter? _propertyBagParameter;
-
-        private bool _isMethodInCollection;
 
         private bool IsListOperation => PagingMethod != null;
 
@@ -114,11 +114,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Schema? FinalResponseSchema => Operation.IsLongRunning ? Operation.LongRunningFinalResponse.ResponseSchema : null;
 
-        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false)
+        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false, string? propertyBagName = null)
         {
             var method = MgmtContext.Library.GetRestClientMethod(operation);
             var restClient = MgmtContext.Library.GetRestClient(operation);
 
+            _propertyBagName = propertyBagName;
             _isLongRunning = isLongRunning;
             ThrowIfNull = throwIfNull;
             Operation = operation;
@@ -143,6 +144,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, RequestPath contextualPath, params Parameter[] overrideParameters)
         {
             //copy values from other method
+            _propertyBagName = other._propertyBagName;
             _isLongRunning = other.IsLongRunningOperation;
             ThrowIfNull = other.ThrowIfNull;
             Operation = other.Operation;
@@ -450,7 +452,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             // considering this method might be invoked several times in the future
             // we use _propertyBagParameter to cache the last reault
-            // and reutnr it directly if the input parameter is the same as the previous one
+            // and return it directly if the input parameter is the same as the previous one
             if (_propertyBagSelectedParams != null && _propertyBagSelectedParams.SequenceEqual(parameterNames))
             {
                 return _propertyBagParameter!;
@@ -459,10 +461,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 _propertyBagSelectedParams = parameterNames;
             }
-            var clientName = Resource is null ?
-                MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" :
-                _isMethodInCollection ? Resource.Type.Name.ReplaceLast("Resource", "Collection") : Resource.Type.Name;
-            //TODO: update the cilent name with Collection suffix
+            var clientName = _propertyBagName == null ?
+                MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" : _propertyBagName;
+
             var propertyBagName = $"{clientName}{Name}";
             if (Configuration.MgmtConfiguration.RenamePropertyBag.TryGetValue(OperationId, out string? modelName))
             {
@@ -489,14 +490,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
             MgmtContext.Library.PropertyBagModels.Add(schemaObject);
             return _propertyBagParameter = propertyBag.PackParameter;
-        }
-
-        internal void UpdateMethodLocation()
-        {
-            // by default we assume the method is placed in Resource
-            // use this method to update the location info of this method
-            // so we can know how to determine the name of the property bag model
-            _isMethodInCollection = true;
         }
 
         private static bool IsDuplicatedPropertyBag(IEnumerable<TypeProvider> existingModels, MgmtObjectType modelToAdd)

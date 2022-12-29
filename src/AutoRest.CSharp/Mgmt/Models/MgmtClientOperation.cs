@@ -129,14 +129,6 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsPropertyBagOperation => _operations.First().IsPropertyBagOperation;
 
-        public void UpdateOperationLocation()
-        {
-            foreach (var operation in _operations)
-            {
-                operation.UpdateMethodLocation();
-            }
-        }
-
         private IReadOnlyDictionary<RequestPath, MgmtRestOperation> EnsureOperationMappings()
         {
             return this.ToDictionary(
