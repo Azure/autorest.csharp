@@ -20,17 +20,5 @@ namespace dpg_customization_LowLevel.Models
 
         /// <summary> Gets the received. </summary>
         public ProductReceived Received { get; }
-
-        public static implicit operator Product(Response response)
-        {
-            try
-            {
-                return DeserializeProduct(JsonDocument.Parse(response.Content.ToMemory()).RootElement);
-            }
-            catch
-            {
-                throw new RequestFailedException($"Failed to cast from Response to {typeof(Product)}.");
-            }
-        }
     }
 }
