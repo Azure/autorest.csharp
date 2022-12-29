@@ -277,7 +277,7 @@
                 ],
                 "x-ms-odata": "#/definitions/Foo",
                 "operationId": "Foos_Update",
-                "description": "Update foo with two optional query parameters.",
+                "description": "Update foo.",
                 "parameters": [
                     {
                         "name": "fooName",
@@ -294,19 +294,6 @@
                             "$ref": "#/definitions/FooPatch"
                         },
                         "description": "The foo parameters supplied to the Update operation."
-                    },
-                    {
-                        "name": "$top",
-                        "in": "query",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    {
-                        "name": "$orderby",
-                        "in": "query",
-                        "required": false,
-                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"

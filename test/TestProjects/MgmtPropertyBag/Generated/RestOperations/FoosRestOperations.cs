@@ -432,7 +432,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string fooName, FooPatch patch, int? top, string orderby)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string fooName, FooPatch patch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -445,14 +445,6 @@ namespace MgmtPropertyBag
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Fake/foos/", false);
             uri.AppendPath(fooName, true);
-            if (top != null)
-            {
-                uri.AppendQuery("$top", top.Value, true);
-            }
-            if (orderby != null)
-            {
-                uri.AppendQuery("$orderby", orderby, true);
-            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -464,24 +456,22 @@ namespace MgmtPropertyBag
             return message;
         }
 
-        /// <summary> Update foo with two optional query parameters. </summary>
+        /// <summary> Update foo. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The foo name. </param>
         /// <param name="patch"> The foo parameters supplied to the Update operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fooName"/> or <paramref name="patch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FooData>> UpdateAsync(string subscriptionId, string resourceGroupName, string fooName, FooPatch patch, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FooData>> UpdateAsync(string subscriptionId, string resourceGroupName, string fooName, FooPatch patch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
             Argument.AssertNotNull(patch, nameof(patch));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, fooName, patch, top, orderby);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, fooName, patch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -497,24 +487,22 @@ namespace MgmtPropertyBag
             }
         }
 
-        /// <summary> Update foo with two optional query parameters. </summary>
+        /// <summary> Update foo. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The foo name. </param>
         /// <param name="patch"> The foo parameters supplied to the Update operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fooName"/> or <paramref name="patch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FooData> Update(string subscriptionId, string resourceGroupName, string fooName, FooPatch patch, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public Response<FooData> Update(string subscriptionId, string resourceGroupName, string fooName, FooPatch patch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
             Argument.AssertNotNull(patch, nameof(patch));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, fooName, patch, top, orderby);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, fooName, patch);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

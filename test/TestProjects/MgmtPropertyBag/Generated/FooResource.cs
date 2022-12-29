@@ -143,16 +143,14 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Update foo with two optional query parameters.
+        /// Update foo.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Update
         /// </summary>
         /// <param name="patch"> The foo parameters supplied to the Update operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
-        public virtual async Task<Response<FooResource>> UpdateAsync(FooPatch patch, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FooResource>> UpdateAsync(FooPatch patch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(patch, nameof(patch));
 
@@ -160,7 +158,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = await _fooRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, top, orderby, cancellationToken).ConfigureAwait(false);
+                var response = await _fooRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -171,16 +169,14 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Update foo with two optional query parameters.
+        /// Update foo.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Update
         /// </summary>
         /// <param name="patch"> The foo parameters supplied to the Update operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
-        public virtual Response<FooResource> Update(FooPatch patch, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public virtual Response<FooResource> Update(FooPatch patch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(patch, nameof(patch));
 
@@ -188,7 +184,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = _fooRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, top, orderby, cancellationToken);
+                var response = _fooRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken);
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
