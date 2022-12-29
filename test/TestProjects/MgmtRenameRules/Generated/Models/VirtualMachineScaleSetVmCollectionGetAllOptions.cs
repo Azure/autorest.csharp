@@ -5,13 +5,13 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample.Models
+namespace MgmtRenameRules.Models
 {
-    /// <summary> A class representing the query and header parameters in GetAll method. </summary>
-    public partial class VirtualMachineScaleSetVMGetAllOptions
+    /// <summary> The VirtualMachineScaleSetVmCollectionGetAllOptions. </summary>
+    public partial class VirtualMachineScaleSetVmCollectionGetAllOptions
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMGetAllOptions. </summary>
-        public VirtualMachineScaleSetVMGetAllOptions()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmCollectionGetAllOptions. </summary>
+        public VirtualMachineScaleSetVmCollectionGetAllOptions()
         {
         }
 

@@ -7,6 +7,8 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Output.Models;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
@@ -34,6 +36,20 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 .Distinct()
                 .OrderBy(c => c.Code ?? c.Family * 100);
             ResponseClassifierType = new ResponseClassifierType(statusCodes);
+
+            IsPropertyBagMethod = false;
+            PropertyBag = null;
+            // By default, we only enable property bag feature in management plane.
+            if (Configuration.AzureArm)
+            {
+                if (parameters.Where(p => p.RequestLocation == RequestLocation.Header || p.RequestLocation == RequestLocation.Query).Count() > 2)
+                {
+                    IsPropertyBagMethod = true;
+                    // At this point we can't finalize the name for the property bag model
+                    // So we pass in the empty string here
+                    PropertyBag = new MgmtPropertyBag(string.Empty, operation);
+                }
+            }
         }
 
         private static MethodSignatureModifiers GetAccessibility(string accessibility) =>
@@ -61,5 +77,9 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public InputOperation Operation { get; }
 
         public ResponseClassifierType ResponseClassifierType { get; }
+
+        public PropertyBag? PropertyBag { get;  }
+
+        public bool IsPropertyBagMethod { get; }
     }
 }

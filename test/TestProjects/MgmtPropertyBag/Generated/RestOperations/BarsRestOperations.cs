@@ -114,7 +114,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, ETag ifMatch, string filter, int? top)
+        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, ETag? ifMatch, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -136,13 +136,16 @@ namespace MgmtPropertyBag
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("If-Match", ifMatch);
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch.Value);
+            }
             request.Headers.Add("Accept", "application/json");
             _userAgent.Apply(message);
             return message;
         }
 
-        /// <summary> Gets a list of bar with one required header parameter and two optional query parameters. </summary>
+        /// <summary> Gets a list of bar with one optional header parameter and two optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
@@ -151,7 +154,7 @@ namespace MgmtPropertyBag
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<IReadOnlyList<BarData>>> ListAsync(string subscriptionId, string resourceGroupName, ETag ifMatch, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<BarData>>> ListAsync(string subscriptionId, string resourceGroupName, ETag? ifMatch = null, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -177,7 +180,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        /// <summary> Gets a list of bar with one required header parameter and two optional query parameters. </summary>
+        /// <summary> Gets a list of bar with one optional header parameter and two optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
@@ -186,7 +189,7 @@ namespace MgmtPropertyBag
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<IReadOnlyList<BarData>> List(string subscriptionId, string resourceGroupName, ETag ifMatch, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<BarData>> List(string subscriptionId, string resourceGroupName, ETag? ifMatch = null, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -311,7 +314,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, string barName, string ifMatch, BarData data, string filter, int? top)
+        internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, string barName, BarData data, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -334,7 +337,6 @@ namespace MgmtPropertyBag
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("If-Match", ifMatch);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
@@ -344,26 +346,24 @@ namespace MgmtPropertyBag
             return message;
         }
 
-        /// <summary> Create a bar with one required header parameter and two optional query parameters. </summary>
+        /// <summary> Create a bar with two optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="barName"/>, <paramref name="ifMatch"/> or <paramref name="data"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<BarData>> CreateAsync(string subscriptionId, string resourceGroupName, string barName, string ifMatch, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<BarData>> CreateAsync(string subscriptionId, string resourceGroupName, string barName, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
             Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateRequest(subscriptionId, resourceGroupName, barName, ifMatch, data, filter, top);
+            using var message = CreateCreateRequest(subscriptionId, resourceGroupName, barName, data, filter, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -379,26 +379,24 @@ namespace MgmtPropertyBag
             }
         }
 
-        /// <summary> Create a bar with one required header parameter and two optional query parameters. </summary>
+        /// <summary> Create a bar with two optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="barName"/>, <paramref name="ifMatch"/> or <paramref name="data"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<BarData> Create(string subscriptionId, string resourceGroupName, string barName, string ifMatch, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<BarData> Create(string subscriptionId, string resourceGroupName, string barName, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
             Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateRequest(subscriptionId, resourceGroupName, barName, ifMatch, data, filter, top);
+            using var message = CreateCreateRequest(subscriptionId, resourceGroupName, barName, data, filter, top);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

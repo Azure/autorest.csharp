@@ -33,7 +33,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         public override CSharpType? BaseType => typeof(ArmCollection);
         protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
-            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature && !p.IsPropertyBag))
+            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature &&
+            (!p.IsPropertyBag || p.Validation != ValidationType.None)))
                 return base.EnsureGetInterfaces();
 
             var getRestOperation = GetAllOperation.OperationMappings.Values.First();
@@ -141,6 +142,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             if (getAllOperation == null)
                 return getAllOperation;
+
+            getAllOperation.UpdateOperationLocation();
 
             // skip the following transformations for `ById` resources.
             // In ById resources, the required parameters of the GetAll operation is usually a scope, doing the following transform will require the constructor to accept a scope variable
@@ -252,6 +255,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 //        getMgmtRestOperation.MgmtReturnType,
                 //        $"Tries to get details for this resource from the service.")));
             }
+
+            result.ForEach(op => op.UpdateOperationLocation());
 
             return result;
         }

@@ -5,22 +5,26 @@
 
 #nullable disable
 
-using Azure;
+using System;
+using Azure.Core;
 
 namespace MgmtPropertyBag.Models
 {
-    /// <summary> A class representing the query and header parameters in GetAll method. </summary>
-    public partial class BarGetAllOptions
+    /// <summary> The BarResourceGetOptions. </summary>
+    public partial class BarResourceGetOptions
     {
-        /// <summary> Initializes a new instance of BarGetAllOptions. </summary>
+        /// <summary> Initializes a new instance of BarResourceGetOptions. </summary>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
-        public BarGetAllOptions(ETag ifMatch)
+        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
+        public BarResourceGetOptions(string ifMatch)
         {
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
+
             IfMatch = ifMatch;
         }
 
         /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
-        public ETag IfMatch { get; }
+        public string IfMatch { get; }
         /// <summary> The filter to apply on the operation. </summary>
         public string Filter { get; set; }
         /// <summary> Gets or sets the top. </summary>

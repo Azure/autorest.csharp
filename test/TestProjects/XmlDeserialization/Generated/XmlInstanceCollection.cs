@@ -186,12 +186,12 @@ namespace XmlDeserialization
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls
         /// Operation Id: XmlDeserialization_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<XmlInstanceResource> GetAllAsync(XmlInstanceGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<XmlInstanceResource> GetAllAsync(XmlInstanceCollectionGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new XmlInstanceGetAllOptions();
+            options ??= new XmlInstanceCollectionGetAllOptions();
 
             async Task<Page<XmlInstanceResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -231,12 +231,12 @@ namespace XmlDeserialization
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls
         /// Operation Id: XmlDeserialization_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<XmlInstanceResource> GetAll(XmlInstanceGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<XmlInstanceResource> GetAll(XmlInstanceCollectionGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new XmlInstanceGetAllOptions();
+            options ??= new XmlInstanceCollectionGetAllOptions();
 
             Page<XmlInstanceResource> FirstPageFunc(int? pageSizeHint)
             {

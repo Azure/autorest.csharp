@@ -278,7 +278,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var method = operation.Method;
             var contextualParameterMappingCache = new List<ContextualParameterMapping>(contextualParameterMappings);
-            foreach (var parameter in method.OriginalParameters)
+            foreach (var parameter in method.Parameters)
             {
                 // find this parameter name in the contextual parameter mappings
                 // if there is one, this parameter should use the same value expression
@@ -288,9 +288,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var p = UpdateParameterTypeOfByIdMethod(operation.RequestPath, parameter);
                 if (mapping == null)
                 {
-                    if (TryBuildPropertyBagParameterMapping(method, p, out string? valueExpression))
+                    if (method.IsPropertyBagMethod)
                     {
-                        yield return new ParameterMapping(p, false, $"{valueExpression}", Enumerable.Empty<string>());
+                        // the IsPassThru of parameter of the property bag method is still set to true
+                        // thus we can distinguish it from contextual parameter
+                        yield return new ParameterMapping(p, true, $"{GetPropertyBagValueExpression(p)}", Enumerable.Empty<string>());
                     }
                     else
                     {
@@ -396,50 +398,30 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return keySegment.IsConstant ? keySegment.ConstantValue : string.Empty;
         }
 
-        public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings, RestClientMethod method)
+        public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
         {
-            var passThroughParams = parameterMappings.Where(p => p.IsPassThru)
-                .Select(p => p.Parameter.Name)
-                .ToImmutableHashSet();
-            return method.Parameters.Where(p => passThroughParams.Contains(p.Name) || p.IsPropertyBag).ToList();
+            return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
         }
 
-        public static List<Parameter> GetNonPassThroughPropertyBagParameters(this IEnumerable<ParameterMapping> parameterMappings, RestClientMethod method)
+        private static string GetPropertyBagValueExpression(Parameter parameter)
         {
-            var paramNames = method.Parameters.Select(p => p.Name).ToImmutableHashSet();
-            return parameterMappings.Where(p => !p.IsPassThru && !paramNames.Contains(p.Parameter.Name))
-                .Select(p => p.Parameter)
-                .ToList();
-        }
-
-        private static bool TryBuildPropertyBagParameterMapping(RestClientMethod method, Parameter parameter, out string? valueExpression)
-        {
-            valueExpression = null;
-            if (method.IsPropertyBagMethod)
+            if (PagingMethod.IsPageSizeName(parameter.Name))
             {
-                if (!method.Parameters.Contains(parameter))
+                // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
+                if (PagingMethod.IsPageSizeType(parameter.Type.FrameworkType))
                 {
-                    if (PagingMethod.IsPageSizeName(parameter.Name))
-                    {
-                        // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
-                        if (PagingMethod.IsPageSizeType(parameter.Type.FrameworkType))
-                        {
-                            valueExpression = "pageSizeHint";
-                        }
-                        else
-                        {
-                            Console.Error.WriteLine($"WARNING: Parameter '{parameter.Name}' seems to have a page size property, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                            valueExpression = $"options.{parameter.Name.FirstCharToUpperCase()}";
-                        }
-                    }
-                    else
-                    {
-                        valueExpression = $"options.{parameter.Name.FirstCharToUpperCase()}";
-                    }
-                    return true;
+                    return "pageSizeHint";
+                }
+                else
+                {
+                    Console.Error.WriteLine($"WARNING: Parameter '{parameter.Name}' seems to have a page size property, but it's not a numeric type. Fix it or overwrite it if necessary.");
+                    return $"options.{parameter.Name.FirstCharToUpperCase()}";
                 }
             }
-            return false;
+            else
+            {
+                return $"options.{parameter.Name.FirstCharToUpperCase()}";
+            }
         }
     }
 }

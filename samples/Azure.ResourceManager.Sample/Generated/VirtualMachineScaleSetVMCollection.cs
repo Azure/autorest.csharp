@@ -185,12 +185,12 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
         /// Operation Id: VirtualMachineScaleSetVMs_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetVMResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineScaleSetVMResource> GetAllAsync(VirtualMachineScaleSetVMGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachineScaleSetVMResource> GetAllAsync(VirtualMachineScaleSetVMCollectionGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new VirtualMachineScaleSetVMGetAllOptions();
+            options ??= new VirtualMachineScaleSetVMCollectionGetAllOptions();
 
             async Task<Page<VirtualMachineScaleSetVMResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -230,12 +230,12 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
         /// Operation Id: VirtualMachineScaleSetVMs_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSetVMResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineScaleSetVMResource> GetAll(VirtualMachineScaleSetVMGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachineScaleSetVMResource> GetAll(VirtualMachineScaleSetVMCollectionGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new VirtualMachineScaleSetVMGetAllOptions();
+            options ??= new VirtualMachineScaleSetVMCollectionGetAllOptions();
 
             Page<VirtualMachineScaleSetVMResource> FirstPageFunc(int? pageSizeHint)
             {

@@ -7,11 +7,11 @@
 
 namespace MgmtPropertyBag.Models
 {
-    /// <summary> A class representing the query and header parameters in CreateOrUpdate method. </summary>
-    public partial class FooCreateOrUpdateOptions
+    /// <summary> The FooResourceGetOptions. </summary>
+    public partial class FooResourceGetOptions
     {
-        /// <summary> Initializes a new instance of FooCreateOrUpdateOptions. </summary>
-        public FooCreateOrUpdateOptions()
+        /// <summary> Initializes a new instance of FooResourceGetOptions. </summary>
+        public FooResourceGetOptions()
         {
         }
 

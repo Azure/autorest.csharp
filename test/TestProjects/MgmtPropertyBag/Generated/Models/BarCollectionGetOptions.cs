@@ -10,19 +10,24 @@ using Azure.Core;
 
 namespace MgmtPropertyBag.Models
 {
-    /// <summary> A class representing the query and header parameters in CreateOrUpdate method. </summary>
-    public partial class BarCreateOrUpdateOptions
+    /// <summary> The BarCollectionGetOptions. </summary>
+    public partial class BarCollectionGetOptions
     {
-        /// <summary> Initializes a new instance of BarCreateOrUpdateOptions. </summary>
+        /// <summary> Initializes a new instance of BarCollectionGetOptions. </summary>
+        /// <param name="barName"> The bar name. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public BarCreateOrUpdateOptions(string ifMatch)
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="ifMatch"/> is null. </exception>
+        public BarCollectionGetOptions(string barName, string ifMatch)
         {
+            Argument.AssertNotNull(barName, nameof(barName));
             Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
+            BarName = barName;
             IfMatch = ifMatch;
         }
 
+        /// <summary> The bar name. </summary>
+        public string BarName { get; }
         /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
         public string IfMatch { get; }
         /// <summary> The filter to apply on the operation. </summary>

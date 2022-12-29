@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -152,8 +153,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     contextualPath,
                     operationName,
                     isLongRunning,
-                    throwIfNull,
-                    Type.Name);
+                    throwIfNull);
                 result.Add(restOperation);
             }
 
@@ -364,8 +364,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     operation,
                     requestPath,
                     contextualPath,
-                    methodName,
-                    resourceName: Type.Name);
+                    methodName);
 
                 if (result.TryGetValue(key, out var list))
                 {

@@ -70,26 +70,13 @@ namespace AutoRest.CSharp.MgmtTest.Models
             var methodParameters = Operation.MethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Extension) ?
                 Operation.MethodParameters.Skip(1) : Operation.MethodParameters;
 
-            return Carrier.ExtraConstructorParameters.Concat(methodParameters).Concat(Operation.PropertyBagParameters);
-        }
-
-        private static bool TryGetPropertyBagParameterNames(IEnumerable<Parameter> parameters, out IList<string>? propertyBagParamNames)
-        {
-            propertyBagParamNames = null;
-            if (parameters.Any(p => p.IsPropertyBag))
+            // remove the property bag parameter and add the parameter in the property bag
+            if (Operation.IsPropertyBagOperation)
             {
-                // Every method will have at most one property bag parameter
-                var propertyBagParam = parameters.First(p => p.IsPropertyBag);
-                var mgmtObject = propertyBagParam.Type.Implementation as MgmtObjectType;
-                foreach (var property in mgmtObject!.Properties)
-                {
-                    if (propertyBagParamNames == null)
-                        propertyBagParamNames = new List<string>();
-                    propertyBagParamNames.Add(property.Declaration.Name.ToVariableName());
-                }
-                return true;
+                methodParameters = methodParameters.Where(p => !p.IsPropertyBag).Concat(Operation.PropertyBagUnderlyingParameters);
             }
-            return false;
+
+            return Carrier.ExtraConstructorParameters.Concat(methodParameters);
         }
 
         private Tuple<MappingObject, MappingObject> EnsureParameterValueMapping()
@@ -97,7 +84,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             var result = new MappingObject();
             var propertyBagMapping = new MappingObject();
             var parameters = GetAllPossibleParameters();
-            bool hasPropertyBag = TryGetPropertyBagParameterNames(parameters, out var propertyBagParamNames);
+            var propertyBagParamNames = Operation.PropertyBagUnderlyingParameters.Select(p => p.Name).ToList();
             // get the "serialized name" of the parameters based on the raw request path
             foreach (var parameter in parameters)
             {
@@ -114,7 +101,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 }
                 else
                 {
-                    if (hasPropertyBag && propertyBagParamNames!.Contains(parameter.Name))
+                    if (Operation.IsPropertyBagOperation && propertyBagParamNames.Contains(parameter.Name))
                     {
                         propertyBagMapping.Add(parameter.Name, new ExampleParameterValue(parameter, exampleParameter.ExampleValue));
                     }
@@ -140,11 +127,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 // we usually do not set this parameter in generated test cases
                 return true;
             }
-            if (parameter.IsPropertyBag)
-            {
-                // we will not try to find the serialized name once the parameter is a property bag parameter
-                return true;
-            }
+
             return false;
         }
 

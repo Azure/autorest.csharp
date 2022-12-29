@@ -16,17 +16,17 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("MgmtPropertyBagExtensions", "GetFoos", true, typeof(SubscriptionResource), typeof(string), typeof(int?))]
         [TestCase("MgmtPropertyBagExtensions", "GetBars", true, typeof(SubscriptionResource), typeof(ETag), typeof(int?))]
-        [TestCase("FooCollection", "CreateOrUpdate", true, typeof(WaitUntil), typeof(string), typeof(FooData), typeof(FooCreateOrUpdateOptions))]
-        [TestCase("FooCollection", "Get", true, typeof(string), typeof(FooGetOptions))]
-        [TestCase("FooCollection", "GetAll", true, typeof(FooGetAllOptions))]
-        [TestCase("FooResource", "Get", true, typeof(FooGetOptions))]
-        [TestCase("FooResource", "Update", true, typeof(WaitUntil), typeof(FooData), typeof(FooCreateOrUpdateOptions))]
-        [TestCase("FooResource", "Reconnect", true, typeof(FooReconnectTestOptions), typeof(FooData))]
-        [TestCase("BarCollection", "CreateOrUpdate", true, typeof(WaitUntil), typeof(string), typeof(BarCreateOrUpdateOptions), typeof(BarData))]
-        [TestCase("BarCollection", "Get", true, typeof(string), typeof(BarGetOptions))]
-        [TestCase("BarCollection", "GetAll", true, typeof(BarGetAllOptions))]
-        [TestCase("BarResource", "Get", true, typeof(BarGetOptions))]
-        [TestCase("BarResource", "Update", true, typeof(WaitUntil), typeof(BarCreateOrUpdateOptions), typeof(BarData))]
+        [TestCase("FooCollection", "CreateOrUpdate", true, typeof(WaitUntil), typeof(FooCollectionCreateOrUpdateOptions))]
+        [TestCase("FooCollection", "Get", true, typeof(FooCollectionGetOptions))]
+        [TestCase("FooCollection", "GetAll", true, typeof(FooCollectionGetAllOptions))]
+        [TestCase("FooResource", "Get", true, typeof(FooResourceGetOptions))]
+        [TestCase("FooResource", "Update", true, typeof(FooPatch), typeof(int?), typeof(string))]
+        [TestCase("FooResource", "Reconnect", true, typeof(FooReconnectTestOptions))]
+        [TestCase("BarCollection", "CreateOrUpdate", true, typeof(WaitUntil), typeof(string), typeof(BarData), typeof(string), typeof(int?))]
+        [TestCase("BarCollection", "Get", true, typeof(BarCollectionGetOptions))]
+        [TestCase("BarCollection", "GetAll", true, typeof(BarCollectionGetAllOptions))]
+        [TestCase("BarResource", "Get", true, typeof(BarResourceGetOptions))]
+        [TestCase("BarResource", "Update", true, typeof(WaitUntil), typeof(BarData), typeof(string), typeof(int?))]
         public void ValidatePropertyBag(string className, string methodName, bool exist, params Type[] parameterTypes)
         {
             var classesToCheck = FindAllCollections().Concat(FindAllResources()).Append(FindExtensionClass());

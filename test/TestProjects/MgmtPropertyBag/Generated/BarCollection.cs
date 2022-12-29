@@ -56,28 +56,28 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Create a bar with one required header parameter and two optional query parameters.
+        /// Create a bar with two optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/>, <paramref name="options"/> or <paramref name="data"/> is null. </exception>
-        public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string barName, BarCreateOrUpdateOptions options, BarData data, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string barName, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
-            Argument.AssertNotNull(options, nameof(options));
             Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, options.IfMatch, data, options.Filter, options.Top, cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, data, filter, top, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -91,28 +91,28 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Create a bar with one required header parameter and two optional query parameters.
+        /// Create a bar with two optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/>, <paramref name="options"/> or <paramref name="data"/> is null. </exception>
-        public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, string barName, BarCreateOrUpdateOptions options, BarData data, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, string barName, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
-            Argument.AssertNotNull(options, nameof(options));
             Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, options.IfMatch, data, options.Filter, options.Top, cancellationToken);
+                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, data, filter, top, cancellationToken);
                 var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -130,21 +130,18 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
-        /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="options"/> is null. </exception>
-        public virtual async Task<Response<BarResource>> GetAsync(string barName, BarGetOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual async Task<Response<BarResource>> GetAsync(BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
             try
             {
-                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, options.IfMatch, options.Filter, options.Top, cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -161,21 +158,18 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
-        /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="options"/> is null. </exception>
-        public virtual Response<BarResource> Get(string barName, BarGetOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual Response<BarResource> Get(BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
             try
             {
-                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, options.IfMatch, options.Filter, options.Top, cancellationToken);
+                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -188,17 +182,16 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a list of bar with one required header parameter and two optional query parameters.
+        /// Gets a list of bar with one optional header parameter and two optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
         /// Operation Id: Bars_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<BarResource> GetAllAsync(BarGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<BarResource> GetAllAsync(BarCollectionGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
+            options ??= new BarCollectionGetAllOptions();
 
             async Task<Page<BarResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -219,17 +212,16 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a list of bar with one required header parameter and two optional query parameters.
+        /// Gets a list of bar with one optional header parameter and two optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
         /// Operation Id: Bars_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<BarResource> GetAll(BarGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<BarResource> GetAll(BarCollectionGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
+            options ??= new BarCollectionGetAllOptions();
 
             Page<BarResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -254,21 +246,18 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
-        /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="options"/> is null. </exception>
-        public virtual async Task<Response<bool>> ExistsAsync(string barName, BarGetOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual async Task<Response<bool>> ExistsAsync(BarCollectionExistsOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {
-                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, options.IfMatch, options.Filter, options.Top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -283,21 +272,18 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
-        /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="options"/> is null. </exception>
-        public virtual Response<bool> Exists(string barName, BarGetOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual Response<bool> Exists(BarCollectionExistsOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {
-                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, options.IfMatch, options.Filter, options.Top, cancellationToken: cancellationToken);
+                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)

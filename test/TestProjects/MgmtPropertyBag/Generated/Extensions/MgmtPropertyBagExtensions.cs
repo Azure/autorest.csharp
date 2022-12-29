@@ -111,15 +111,13 @@ namespace MgmtPropertyBag
         /// Operation Id: Foos_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <param name="fooName"> The foo name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
-        public static async Task<Response<FooResource>> GetFooAsync(this ResourceGroupResource resourceGroupResource, string fooName, FooGetOptions options, CancellationToken cancellationToken = default)
+        public static async Task<Response<FooResource>> GetFooAsync(this ResourceGroupResource resourceGroupResource, FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetFoos().GetAsync(fooName, options, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetFoos().GetAsync(options, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -128,15 +126,13 @@ namespace MgmtPropertyBag
         /// Operation Id: Foos_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <param name="fooName"> The foo name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
-        public static Response<FooResource> GetFoo(this ResourceGroupResource resourceGroupResource, string fooName, FooGetOptions options, CancellationToken cancellationToken = default)
+        public static Response<FooResource> GetFoo(this ResourceGroupResource resourceGroupResource, FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetFoos().Get(fooName, options, cancellationToken);
+            return resourceGroupResource.GetFoos().Get(options, cancellationToken);
         }
 
         /// <summary> Gets a collection of BarResources in the ResourceGroupResource. </summary>
@@ -153,15 +149,13 @@ namespace MgmtPropertyBag
         /// Operation Id: Bars_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
-        public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, string barName, BarGetOptions options, CancellationToken cancellationToken = default)
+        public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetBars().GetAsync(barName, options, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetBars().GetAsync(options, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -170,15 +164,13 @@ namespace MgmtPropertyBag
         /// Operation Id: Bars_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <param name="barName"> The bar name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
-        public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, string barName, BarGetOptions options, CancellationToken cancellationToken = default)
+        public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetBars().Get(barName, options, cancellationToken);
+            return resourceGroupResource.GetBars().Get(options, cancellationToken);
         }
 
         #region FooResource

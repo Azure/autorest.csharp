@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-                WriteArguments(_writer, clientOperation.ParameterMappings.Values.First());
+                WriteArguments(_writer, clientOperation.ParameterMappings.Values.First(), isPropertyBagMethod: clientOperation.IsPropertyBagOperation);
                 _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"return Response.FromValue(response.Value != null, response.GetRawResponse());");
             }
@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer
                 .Append($"var {response:D} = {GetAwait(async)} ")
                 .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-            WriteArguments(writer, parameterMappings);
+            WriteArguments(writer, parameterMappings, isPropertyBagMethod: operation.IsPropertyBagOperation);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             writer.Line($"if ({response}.Value == null)");

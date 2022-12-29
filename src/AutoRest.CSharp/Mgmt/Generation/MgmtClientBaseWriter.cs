@@ -170,10 +170,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private string GetEnumerableArgValue()
         {
-            string value = "";
+            string value = string.Empty;
             if (This is ResourceCollection collection)
             {
-                if (collection.GetAllOperation?.OperationMappings.First().Value.Method.IsPropertyBagMethod == true)
+                if (collection.GetAllOperation?.IsPropertyBagOperation == true)
                 {
                     value = "options: null";
                 }
@@ -207,7 +207,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string argValue = GetEnumerableArgValue();
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAllAsync({(argValue == "" ? argValue : argValue + ", ")}{KnownParameters.CancellationTokenParameter.Name}: {KnownParameters.CancellationTokenParameter.Name}).GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Name});");
+                _writer.Line($"return GetAllAsync({(argValue == string.Empty ? string.Empty : argValue + ", ")}{KnownParameters.CancellationTokenParameter.Name}: {KnownParameters.CancellationTokenParameter.Name}).GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Name});");
             }
         }
 
@@ -630,7 +630,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var response = new CodeWriterDeclaration("response");
 
             _writer.Append($"var {response:D} = {GetAwait(isAsync)} {GetRestClientName(operation)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
-            WriteArguments(_writer, parameterMappings);
+            WriteArguments(_writer, parameterMappings, isPropertyBagMethod: operation.IsPropertyBagOperation);
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
             _writer
@@ -717,7 +717,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-                WriteArguments(_writer, parameterMappings);
+                WriteArguments(_writer, parameterMappings, isPropertyBagMethod: operation.IsPropertyBagOperation);
                 _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
                 if (operation.ThrowIfNull)
@@ -806,7 +806,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Append($"var response = {GetAwait(async)} ");
             _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-            WriteArguments(_writer, parameterMapping);
+            WriteArguments(_writer, parameterMapping, isPropertyBagMethod: operation.IsPropertyBagOperation);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
             WriteLROResponse(GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, async);
@@ -849,7 +849,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
 
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
-                WriteArguments(_writer, parameterMapping);
+                WriteArguments(_writer, parameterMapping, isPropertyBagMethod: operation.IsPropertyBagOperation);
                 _writer.RemoveTrailingComma();
                 _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
             }
@@ -863,7 +863,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
         #endregion
 
-        protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
+        protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false, bool isPropertyBagMethod = false)
         {
             foreach (var parameter in mapping)
             {
@@ -889,6 +889,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         if (passNullForOptionalParameters && parameter.Parameter.Validation == ValidationType.None)
                             writer.Append($"null, ");
+                        else if (isPropertyBagMethod)
+                            writer.Append($"{parameter.ValueExpression}, ");
                         else
                             writer.Append($"{parameter.Parameter.Name}, ");
                     }

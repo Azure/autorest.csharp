@@ -5,9 +5,11 @@
 
 #nullable disable
 
+using MgmtPropertyBag;
+
 namespace MgmtPropertyBag.Models
 {
-    /// <summary> A class representing the query and header parameters in Reconnect method. </summary>
+    /// <summary> The FooReconnectTestOptions. </summary>
     public partial class FooReconnectTestOptions
     {
         /// <summary> Initializes a new instance of FooReconnectTestOptions. </summary>
@@ -21,5 +23,7 @@ namespace MgmtPropertyBag.Models
         public int? Top { get; set; }
         /// <summary> Gets or sets the orderby. </summary>
         public string Orderby { get; set; }
+        /// <summary> The parameters supplied to the Reconnect operation. </summary>
+        public FooData Data { get; set; }
     }
 }

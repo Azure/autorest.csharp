@@ -7,11 +7,11 @@
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the query and header parameters in GetAll method. </summary>
-    public partial class BlobContainerGetAllOptions
+    /// <summary> The BlobContainerCollectionGetAllOptions. </summary>
+    public partial class BlobContainerCollectionGetAllOptions
     {
-        /// <summary> Initializes a new instance of BlobContainerGetAllOptions. </summary>
-        public BlobContainerGetAllOptions()
+        /// <summary> Initializes a new instance of BlobContainerCollectionGetAllOptions. </summary>
+        public BlobContainerCollectionGetAllOptions()
         {
         }
 

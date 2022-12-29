@@ -7,14 +7,18 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Output.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -67,11 +71,17 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MethodSignatureModifiers Accessibility => Method.Accessibility;
         public bool IsPagingOperation => Operation.Language.Default.Paging != null || IsListOperation;
 
+        public bool IsPropertyBagOperation => Method.IsPropertyBagMethod;
+
+        private IEnumerable<string>? _propertyBagSelectedParams;
+
+        private Parameter? _propertyBagParameter;
+
+        private bool _isMethodInCollection;
+
         private bool IsListOperation => PagingMethod != null;
 
         public CSharpType? OriginalReturnType { get; }
-
-        public RestClientMethod OriginalMethod { get; }
 
         /// <summary>
         /// The actual operation
@@ -104,7 +114,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Schema? FinalResponseSchema => Operation.IsLongRunning ? Operation.LongRunningFinalResponse.ResponseSchema : null;
 
-        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false, string? resourceName = null)
+        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false)
         {
             var method = MgmtContext.Library.GetRestClientMethod(operation);
             var restClient = MgmtContext.Library.GetRestClient(operation);
@@ -112,9 +122,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             _isLongRunning = isLongRunning;
             ThrowIfNull = throwIfNull;
             Operation = operation;
-            OriginalMethod = method;
-            Method = method.UpdateMgmtRestClientMethod(resourceName, methodName, operation.OperationId!);
-            PagingMethod = GetPagingMethodWrapper(method, Method);
+            Method = method;
+            PagingMethod = GetPagingMethodWrapper(method);
             RestClient = restClient;
             RequestPath = requestPath;
             ContextualPath = contextualPath;
@@ -137,7 +146,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             _isLongRunning = other.IsLongRunningOperation;
             ThrowIfNull = other.ThrowIfNull;
             Operation = other.Operation;
-            OriginalMethod = other.OriginalMethod;
             Method = other.Method;
             PagingMethod = other.PagingMethod;
             RestClient = other.RestClient;
@@ -438,6 +446,76 @@ namespace AutoRest.CSharp.Mgmt.Models
             return ResourceMatchType.None;
         }
 
+        internal Parameter GetPropertyBagParameter(IEnumerable<string> parameterNames)
+        {
+            // considering this method might be invoked several times in the future
+            // we use _propertyBagParameter to cache the last reault
+            // and reutnr it directly if the input parameter is the same as the previous one
+            if (_propertyBagSelectedParams != null && _propertyBagSelectedParams.SequenceEqual(parameterNames))
+            {
+                return _propertyBagParameter!;
+            }
+            else
+            {
+                _propertyBagSelectedParams = parameterNames;
+            }
+            var clientName = Resource is null ?
+                MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" :
+                _isMethodInCollection ? Resource.Type.Name.ReplaceLast("Resource", "Collection") : Resource.Type.Name;
+            //TODO: update the cilent name with Collection suffix
+            var propertyBagName = $"{clientName}{Name}";
+            if (Configuration.MgmtConfiguration.RenamePropertyBag.TryGetValue(OperationId, out string? modelName))
+            {
+                if (modelName.EndsWith("Options"))
+                {
+                    propertyBagName = modelName.ReplaceLast("Options", string.Empty);
+                }
+                else
+                {
+                    throw new InvalidOperationException($"The property bag model name for {OperationId} should end with Options.");
+                }
+            }
+            var propertyBag = ((MgmtPropertyBag)Method.PropertyBag!).WithUpdatedInfo(propertyBagName, parameterNames);
+            var schemaObject = (MgmtObjectType)propertyBag.PackModel;
+            var existingModels = MgmtContext.Library.PropertyBagModels.Where(m => m.Type.Name == schemaObject.Type.Name);
+            if (existingModels != null)
+            {
+                // sometimes we might have two or more property bag models with same name but different porperties
+                // we will throw exception in this case to prompt the user to rename the property bag model
+                if (IsDuplicatedPropertyBag(existingModels, schemaObject))
+                {
+                    throw new InvalidOperationException($"Another property bag model named {schemaObject.Type.Name} already exists, please use configuration `rename-property-bag` to rename the property bag model corresponding to the operation {OperationId}.");
+                }
+            }
+            MgmtContext.Library.PropertyBagModels.Add(schemaObject);
+            return _propertyBagParameter = propertyBag.PackParameter;
+        }
+
+        internal void UpdateMethodLocation()
+        {
+            // by default we assume the method is placed in Resource
+            // use this method to update the location info of this method
+            // so we can know how to determine the name of the property bag model
+            _isMethodInCollection = true;
+        }
+
+        private static bool IsDuplicatedPropertyBag(IEnumerable<TypeProvider> existingModels, MgmtObjectType modelToAdd)
+        {
+            foreach (var model in existingModels)
+            {
+                if (model is not MgmtObjectType mgmtModel)
+                    continue;
+                if (mgmtModel.Properties.Count() != modelToAdd.Properties.Count())
+                    return true;
+                for (int i = 0; i < mgmtModel.Properties.Count(); i++)
+                {
+                    if (mgmtModel.Properties[i].Declaration.Name != modelToAdd.Properties[i].Declaration.Name)
+                        return true;
+                }
+            }
+            return false;
+        }
+
         private static bool AreEqualBackToProvider(RequestPath resourcePath, RequestPath requestPath, int resourceSkips, int requestSkips)
         {
             int resourceStart = resourcePath.Count - 1 - resourceSkips;
@@ -507,13 +585,14 @@ namespace AutoRest.CSharp.Mgmt.Models
                 _ => originalType // we have multiple resource matched, we can only return the original type without wrapping it
             };
         }
-        private static PagingMethodWrapper? GetPagingMethodWrapper(RestClientMethod originalmethod, RestClientMethod updatedMethod)
-        {
-            if (MgmtContext.Library.PagingMethods.TryGetValue(originalmethod, out var pagingMethod))
-                return new PagingMethodWrapper(pagingMethod.UpdateMgmtPagingMethod(originalmethod, updatedMethod));
 
-            if (originalmethod.IsListMethod(out var itemType, out var valuePropertyName))
-                return new PagingMethodWrapper(updatedMethod, itemType, valuePropertyName);
+        private static PagingMethodWrapper? GetPagingMethodWrapper(RestClientMethod method)
+        {
+            if (MgmtContext.Library.PagingMethods.TryGetValue(method, out var pagingMethod))
+                return new PagingMethodWrapper(pagingMethod);
+
+            if (method.IsListMethod(out var itemType, out var valuePropertyName))
+                return new PagingMethodWrapper(method, itemType, valuePropertyName);
 
             return null;
         }

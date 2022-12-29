@@ -55,9 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
-        private IReadOnlyList<Parameter>? _propertyBagParameters;
-        public IReadOnlyList<Parameter> PropertyBagParameters => _propertyBagParameters ??= EnsurePropertyBagParameters();
-
+        public IReadOnlyList<Parameter> PropertyBagUnderlyingParameters => IsPropertyBagOperation ? ParameterMappings.Values.First().GetPassThroughParameters() : Array.Empty<Parameter>();
         public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
             return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter, isConvenientOperation);
@@ -129,6 +127,16 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsPagingOperation => _operations.First().IsPagingOperation;
 
+        public bool IsPropertyBagOperation => _operations.First().IsPropertyBagOperation;
+
+        public void UpdateOperationLocation()
+        {
+            foreach (var operation in _operations)
+            {
+                operation.UpdateMethodLocation();
+            }
+        }
+
         private IReadOnlyDictionary<RequestPath, MgmtRestOperation> EnsureOperationMappings()
         {
             return this.ToDictionary(
@@ -165,16 +173,17 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
             else
             {
-                parameters.AddRange(ParameterMappings.Values.First().GetPassThroughParameters(_operations.First().Method));
+                var passThroughParameters = ParameterMappings.Values.First().GetPassThroughParameters();
+                if (IsPropertyBagOperation)
+                {
+                    parameters.Add(_operations.First().GetPropertyBagParameter(passThroughParameters.Select(p => p.Name)));
+                }
+                else
+                {
+                    parameters.AddRange(passThroughParameters);
+                }
             }
             parameters.Add(KnownParameters.CancellationTokenParameter);
-            return parameters;
-        }
-
-        private IReadOnlyList<Parameter> EnsurePropertyBagParameters()
-        {
-            List<Parameter> parameters = new List<Parameter>();
-            parameters.AddRange(ParameterMappings.Values.First().GetNonPassThroughPropertyBagParameters(_operations.First().Method));
             return parameters;
         }
     }

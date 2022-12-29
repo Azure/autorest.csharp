@@ -93,11 +93,11 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<FooResource>> GetAsync(FooGetOptions options, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FooResource>> GetAsync(FooResourceGetOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new FooGetOptions();
+            options ??= new FooResourceGetOptions();
 
             using var scope = _fooClientDiagnostics.CreateScope("FooResource.Get");
             scope.Start();
@@ -120,11 +120,11 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<FooResource> Get(FooGetOptions options, CancellationToken cancellationToken = default)
+        public virtual Response<FooResource> Get(FooResourceGetOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new FooGetOptions();
+            options ??= new FooResourceGetOptions();
 
             using var scope = _fooClientDiagnostics.CreateScope("FooResource.Get");
             scope.Start();
@@ -143,29 +143,25 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Create foo with three optional query parameters.
+        /// Update foo with two optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Create
+        /// Operation Id: Foos_Update
         /// </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="patch"> The foo parameters supplied to the Update operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public virtual async Task<ArmOperation<FooResource>> UpdateAsync(WaitUntil waitUntil, FooData data, FooCreateOrUpdateOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
+        public virtual async Task<Response<FooResource>> UpdateAsync(FooPatch patch, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
-            options ??= new FooCreateOrUpdateOptions();
+            Argument.AssertNotNull(patch, nameof(patch));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooResource.Update");
             scope.Start();
             try
             {
-                var response = await _fooRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, options.Filter, options.Top, options.Orderby, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response), response.GetRawResponse()));
-                if (waitUntil == WaitUntil.Completed)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                var response = await _fooRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, top, orderby, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -175,54 +171,24 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Create foo with three optional query parameters.
+        /// Update foo with two optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Create
+        /// Operation Id: Foos_Update
         /// </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="patch"> The foo parameters supplied to the Update operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public virtual ArmOperation<FooResource> Update(WaitUntil waitUntil, FooData data, FooCreateOrUpdateOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
+        public virtual Response<FooResource> Update(FooPatch patch, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
-            options ??= new FooCreateOrUpdateOptions();
+            Argument.AssertNotNull(patch, nameof(patch));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooResource.Update");
             scope.Start();
             try
             {
-                var response = _fooRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, options.Filter, options.Top, options.Orderby, cancellationToken);
-                var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response), response.GetRawResponse()));
-                if (waitUntil == WaitUntil.Completed)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Reconnect an existing foo with three optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect
-        /// Operation Id: Foos_Reconnect
-        /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
-        /// <param name="data"> The parameters supplied to the Reconnect operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<FooResource>> ReconnectAsync(FooReconnectTestOptions options, FooData data = null, CancellationToken cancellationToken = default)
-        {
-            options ??= new FooReconnectTestOptions();
-
-            using var scope = _fooClientDiagnostics.CreateScope("FooResource.Reconnect");
-            scope.Start();
-            try
-            {
-                var response = await _fooRestClient.ReconnectAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, options.Filter, options.Top, options.Orderby, cancellationToken).ConfigureAwait(false);
+                var response = _fooRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, top, orderby, cancellationToken);
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -237,10 +203,9 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect
         /// Operation Id: Foos_Reconnect
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
-        /// <param name="data"> The parameters supplied to the Reconnect operation. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<FooResource> Reconnect(FooReconnectTestOptions options, FooData data = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FooResource>> ReconnectAsync(FooReconnectTestOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new FooReconnectTestOptions();
 
@@ -248,7 +213,32 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = _fooRestClient.Reconnect(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, options.Filter, options.Top, options.Orderby, cancellationToken);
+                var response = await _fooRestClient.ReconnectAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Reconnect an existing foo with three optional query parameters.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect
+        /// Operation Id: Foos_Reconnect
+        /// </summary>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<FooResource> Reconnect(FooReconnectTestOptions options, CancellationToken cancellationToken = default)
+        {
+            options ??= new FooReconnectTestOptions();
+
+            using var scope = _fooClientDiagnostics.CreateScope("FooResource.Reconnect");
+            scope.Start();
+            try
+            {
+                var response = _fooRestClient.Reconnect(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, cancellationToken);
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

@@ -270,6 +270,68 @@
                         }
                     }
                 }
+            },
+            "patch": {
+                "tags": [
+                    "Foos"
+                ],
+                "x-ms-odata": "#/definitions/Foo",
+                "operationId": "Foos_Update",
+                "description": "Update foo with two optional query parameters.",
+                "parameters": [
+                    {
+                        "name": "fooName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The foo name."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/FooPatch"
+                        },
+                        "description": "The foo parameters supplied to the Update operation."
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderby",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Foo"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect": {
@@ -400,12 +462,12 @@
                 ],
                 "x-ms-odata": "#/definitions/Bar",
                 "operationId": "Bars_List",
-                "description": "Gets a list of bar with one required header parameter and two optional query parameters.",
+                "description": "Gets a list of bar with one optional header parameter and two optional query parameters.",
                 "parameters": [
                     {
                         "name": "If-Match",
                         "in": "header",
-                        "required": true,
+                        "required": false,
                         "description": "The entity state (Etag) version. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
                         "type": "string",
                         "x-ms-format": "etag"
@@ -521,7 +583,7 @@
                 ],
                 "x-ms-odata": "#/definitions/Bar",
                 "operationId": "Bars_Create",
-                "description": "Create a bar with one required header parameter and two optional query parameters.",
+                "description": "Create a bar with two optional query parameters.",
                 "parameters": [
                     {
                         "name": "barName",
@@ -538,13 +600,6 @@
                             "$ref": "#/definitions/Bar"
                         },
                         "description": "The bar parameters supplied to the CreateOrUpdate operation."
-                    },
-                    {
-                        "name": "If-Match",
-                        "in": "header",
-                        "required": true,
-                        "description": "The entity state (Etag) version. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
-                        "type": "string"
                     },
                     {
                         "name": "$filter",
@@ -613,6 +668,15 @@
                     "$ref": "#/definitions/Resource"
                 }
             ],
+            "properties": {
+                "details": {
+                    "type": "string",
+                    "description": "The details of the resource"
+                }
+            },
+            "description": "Foo instance details."
+        },
+        "FooPatch": {
             "properties": {
                 "details": {
                     "type": "string",

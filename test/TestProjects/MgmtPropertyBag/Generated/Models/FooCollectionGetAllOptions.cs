@@ -5,13 +5,13 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample.Models
+namespace MgmtPropertyBag.Models
 {
-    /// <summary> A class representing the query and header parameters in GetAll method. </summary>
-    public partial class VirtualMachineExtensionImageGetAllOptions
+    /// <summary> The FooCollectionGetAllOptions. </summary>
+    public partial class FooCollectionGetAllOptions
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageGetAllOptions. </summary>
-        public VirtualMachineExtensionImageGetAllOptions()
+        /// <summary> Initializes a new instance of FooCollectionGetAllOptions. </summary>
+        public FooCollectionGetAllOptions()
         {
         }
 

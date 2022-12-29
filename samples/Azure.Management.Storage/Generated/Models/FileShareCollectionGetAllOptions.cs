@@ -7,11 +7,11 @@
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the query and header parameters in GetAll method. </summary>
-    public partial class FileShareGetAllOptions
+    /// <summary> The FileShareCollectionGetAllOptions. </summary>
+    public partial class FileShareCollectionGetAllOptions
     {
-        /// <summary> Initializes a new instance of FileShareGetAllOptions. </summary>
-        public FileShareGetAllOptions()
+        /// <summary> Initializes a new instance of FileShareCollectionGetAllOptions. </summary>
+        public FileShareCollectionGetAllOptions()
         {
         }
 

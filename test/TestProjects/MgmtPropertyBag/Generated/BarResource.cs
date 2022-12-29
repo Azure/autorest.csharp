@@ -93,10 +93,10 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        public virtual async Task<Response<BarResource>> GetAsync(BarGetOptions options, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BarResource>> GetAsync(BarResourceGetOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
 
@@ -121,10 +121,10 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        public virtual Response<BarResource> Get(BarGetOptions options, CancellationToken cancellationToken = default)
+        public virtual Response<BarResource> Get(BarResourceGetOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
 
@@ -145,25 +145,25 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Create a bar with one required header parameter and two optional query parameters.
+        /// Create a bar with two optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> or <paramref name="data"/> is null. </exception>
-        public virtual async Task<ArmOperation<BarResource>> UpdateAsync(WaitUntil waitUntil, BarCreateOrUpdateOptions options, BarData data, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<BarResource>> UpdateAsync(WaitUntil waitUntil, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
             Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _barClientDiagnostics.CreateScope("BarResource.Update");
             scope.Start();
             try
             {
-                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.IfMatch, data, options.Filter, options.Top, cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, filter, top, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -177,25 +177,25 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Create a bar with one required header parameter and two optional query parameters.
+        /// Create a bar with two optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> or <paramref name="data"/> is null. </exception>
-        public virtual ArmOperation<BarResource> Update(WaitUntil waitUntil, BarCreateOrUpdateOptions options, BarData data, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<BarResource> Update(WaitUntil waitUntil, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
             Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _barClientDiagnostics.CreateScope("BarResource.Update");
             scope.Start();
             try
             {
-                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.IfMatch, data, options.Filter, options.Top, cancellationToken);
+                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, filter, top, cancellationToken);
                 var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

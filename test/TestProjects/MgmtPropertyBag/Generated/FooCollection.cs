@@ -61,23 +61,18 @@ namespace MgmtPropertyBag
         /// Operation Id: Foos_Create
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="fooName"> The foo name. </param>
-        /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
-        public virtual async Task<ArmOperation<FooResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string fooName, FooData data, FooCreateOrUpdateOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual async Task<ArmOperation<FooResource>> CreateOrUpdateAsync(WaitUntil waitUntil, FooCollectionCreateOrUpdateOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
-            Argument.AssertNotNull(data, nameof(data));
-            options ??= new FooCreateOrUpdateOptions();
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _fooRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, options.Filter, options.Top, options.Orderby, cancellationToken).ConfigureAwait(false);
+                var response = await _fooRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, options.FooName, options.Data, options.Filter, options.Top, options.Orderby, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -96,23 +91,18 @@ namespace MgmtPropertyBag
         /// Operation Id: Foos_Create
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="fooName"> The foo name. </param>
-        /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
-        public virtual ArmOperation<FooResource> CreateOrUpdate(WaitUntil waitUntil, string fooName, FooData data, FooCreateOrUpdateOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual ArmOperation<FooResource> CreateOrUpdate(WaitUntil waitUntil, FooCollectionCreateOrUpdateOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
-            Argument.AssertNotNull(data, nameof(data));
-            options ??= new FooCreateOrUpdateOptions();
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _fooRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, options.Filter, options.Top, options.Orderby, cancellationToken);
+                var response = _fooRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, options.FooName, options.Data, options.Filter, options.Top, options.Orderby, cancellationToken);
                 var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -130,21 +120,18 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
-        /// <param name="fooName"> The foo name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
-        public virtual async Task<Response<FooResource>> GetAsync(string fooName, FooGetOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual async Task<Response<FooResource>> GetAsync(FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
-            options ??= new FooGetOptions();
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Get");
             scope.Start();
             try
             {
-                var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, options.Filter, options.Top, options.Orderby, cancellationToken).ConfigureAwait(false);
+                var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.FooName, options.Filter, options.Top, options.Orderby, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
@@ -161,21 +148,18 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
-        /// <param name="fooName"> The foo name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
-        public virtual Response<FooResource> Get(string fooName, FooGetOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual Response<FooResource> Get(FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
-            options ??= new FooGetOptions();
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Get");
             scope.Start();
             try
             {
-                var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fooName, options.Filter, options.Top, options.Orderby, cancellationToken);
+                var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.FooName, options.Filter, options.Top, options.Orderby, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
@@ -192,12 +176,12 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos
         /// Operation Id: Foos_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<FooResource> GetAllAsync(FooGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<FooResource> GetAllAsync(FooCollectionGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new FooGetAllOptions();
+            options ??= new FooCollectionGetAllOptions();
 
             async Task<Page<FooResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -222,12 +206,12 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos
         /// Operation Id: Foos_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<FooResource> GetAll(FooGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<FooResource> GetAll(FooCollectionGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new FooGetAllOptions();
+            options ??= new FooCollectionGetAllOptions();
 
             Page<FooResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -252,21 +236,18 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
-        /// <param name="fooName"> The foo name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
-        public virtual async Task<Response<bool>> ExistsAsync(string fooName, FooGetOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual async Task<Response<bool>> ExistsAsync(FooCollectionExistsOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
-            options ??= new FooGetOptions();
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Exists");
             scope.Start();
             try
             {
-                var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, options.Filter, options.Top, options.Orderby, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.FooName, options.Filter, options.Top, options.Orderby, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -281,21 +262,18 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
-        /// <param name="fooName"> The foo name. </param>
-        /// <param name="options"> A property bag which contains all the query and header parameters of this method. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
-        public virtual Response<bool> Exists(string fooName, FooGetOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual Response<bool> Exists(FooCollectionExistsOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
-            options ??= new FooGetOptions();
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Exists");
             scope.Start();
             try
             {
-                var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fooName, options.Filter, options.Top, options.Orderby, cancellationToken: cancellationToken);
+                var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.FooName, options.Filter, options.Top, options.Orderby, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)

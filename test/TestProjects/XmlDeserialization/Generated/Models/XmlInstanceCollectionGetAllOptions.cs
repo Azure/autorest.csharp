@@ -7,11 +7,11 @@
 
 namespace XmlDeserialization.Models
 {
-    /// <summary> A class representing the query and header parameters in GetAll method. </summary>
-    public partial class XmlInstanceGetAllOptions
+    /// <summary> The XmlInstanceCollectionGetAllOptions. </summary>
+    public partial class XmlInstanceCollectionGetAllOptions
     {
-        /// <summary> Initializes a new instance of XmlInstanceGetAllOptions. </summary>
-        public XmlInstanceGetAllOptions()
+        /// <summary> Initializes a new instance of XmlInstanceCollectionGetAllOptions. </summary>
+        public XmlInstanceCollectionGetAllOptions()
         {
         }
 
