@@ -67,6 +67,7 @@
     {
      "$id": "9",
      "Name": "getDogsConvenient",
+     "ResourceName": "dogs",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
@@ -183,6 +184,7 @@
     {
      "$id": "22",
      "Name": "setDogs",
+     "ResourceName": "dogs",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
@@ -290,6 +292,7 @@
     {
      "$id": "31",
      "Name": "getCats",
+     "ResourceName": "cats",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
@@ -350,6 +353,7 @@
     {
      "$id": "36",
      "Name": "setCats",
+     "ResourceName": "cats",
      "Description": "Illustrate grouping operations on subclient.",
      "Parameters": [
       {
