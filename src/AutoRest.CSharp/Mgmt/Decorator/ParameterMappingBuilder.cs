@@ -405,23 +405,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static string GetPropertyBagValueExpression(Parameter parameter)
         {
-            if (PagingMethod.IsPageSizeName(parameter.Name))
-            {
-                // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
-                if (PagingMethod.IsPageSizeType(parameter.Type.FrameworkType))
-                {
-                    return "pageSizeHint";
-                }
-                else
-                {
-                    Console.Error.WriteLine($"WARNING: Parameter '{parameter.Name}' seems to have a page size property, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                    return $"options.{parameter.Name.FirstCharToUpperCase()}";
-                }
-            }
-            else
-            {
-                return $"options.{parameter.Name.FirstCharToUpperCase()}";
-            }
+            return $"options.{parameter.Name.FirstCharToUpperCase()}";
         }
     }
 }

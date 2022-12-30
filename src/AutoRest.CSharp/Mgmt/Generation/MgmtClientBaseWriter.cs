@@ -882,7 +882,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         else
                         {
                             Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                            writer.Append($"{parameter.Parameter.Name}, ");
+                            if (isPropertyBagMethod)
+                                writer.Append($"{parameter.ValueExpression}, ");
+                            else
+                                writer.Append($"{parameter.Parameter.Name}, ");
                         }
                     }
                     else
