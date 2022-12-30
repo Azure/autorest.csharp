@@ -7,6 +7,8 @@ import "@azure-tools/cadl-dpg";
 using Cadl.Http;
 using Azure.DPG;
 using Cadl.Versioning;
+using Azure.Core;
+using OpenAPI;
 
 @serviceTitle("Text authoring")
 @serviceVersion("2022-05-15-preview")
@@ -54,3 +56,42 @@ namespace CustomCore {
   @convenienceAPI
   op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
 }
+
+@route("/lro/pagination")
+interface LROPagination {
+  @summary("Gets projects.")
+  @doc("LRO pagination method.")
+  @convenienceAPI
+  @pollingOperation
+  op ListLroPaginationProjects is Azure.Core.ResourceList<Project>;
+//   @post
+//   op ListLroPaginationProjects is Foundations.Operation<{}, Foundations.CustomPage<Project, {}>>;
+
+}
+
+// @route("/lro/pagination2")
+// interface LROPagination2 {
+//   @summary("Gets projects.")
+//   @doc("LRO pagination method.")
+//   @convenienceAPI
+//   @pollingOperation
+//   @post
+//   op FindLroPaginationProjects is Foundations.Operation<{}, Foundations.CustomPage<Project, {}>>;
+
+//   @summary("Gets projects.")
+//   @doc("LRO pagination method.")
+//   @convenienceAPI
+//   @pollingOperation
+//   op generate is LongRunningResourceCollectionAction<
+//     Project,
+//     {},
+//     Foundations.CustomPage<Project, {}>
+//   >;
+// op generate is Foundations.ResourceCollectionOperation<
+//   Project,
+//   {},
+//   AcceptedResponse &
+//     ResourceOperationStatus<Project, Foundations.CustomPage<Project, {}>, Foundations.Error> &
+//     Foundations.LongRunningStatusLocation
+// >;
+// }

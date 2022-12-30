@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models
 
             ResponseClassifierTypes = RequestMethods.Select(m => m.ResponseClassifierType).ToArray();
 
-            PagingMethods = ClientMethods.Where(m => m.PagingInfo != null && m.ConvenienceMethod != null).Select(m => ClientBuilder.BuildPagingMethod(m.ConvenienceMethod!.Signature.Name, m.PagingInfo!.NextLinkName, m.PagingInfo!.ItemName, m.RequestMethod, m.PagingInfo!.NextPageMethod, Declaration)).ToArray();
+            PagingMethods = ClientMethods.Where(m => m.PagingInfo != null && m.ConvenienceMethod != null && m.LongRunning == null).Select(m => ClientBuilder.BuildPagingMethod(m.ConvenienceMethod!.Signature.Name, m.PagingInfo!.NextLinkName, m.PagingInfo!.ItemName, m.RequestMethod, m.PagingInfo!.NextPageMethod, Declaration)).ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 

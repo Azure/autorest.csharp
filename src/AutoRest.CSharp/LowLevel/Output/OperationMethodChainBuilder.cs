@@ -182,9 +182,16 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(p => (p.Protocol!, p.Convenience))
                 .ToArray();
 
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameters);
+            PagingResponseInfo? pagingResponseInfo = null;
+            if (_protocolMethodPaging != null)
+            {
+                pagingResponseInfo = new PagingResponseInfo(_protocolMethodPaging.NextLinkName, _protocolMethodPaging.ItemName, returnTypeChain.ConvenienceResponseType!);
+            }
+
+            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, pagingResponseInfo != null ? new CSharpType(typeof(Operation<>), new CSharpType(typeof(Pageable<>), pagingResponseInfo.ItemType)) : returnTypeChain.Convenience, null, parameters);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
+            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic, pagingResponseInfo);
+
         }
 
         private void BuildParameters()

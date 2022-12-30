@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -258,6 +260,166 @@ namespace LroBasicCadl
             }
         }
 
+        /// <summary> Gets projects. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> LRO pagination method. </remarks>
+        public virtual async Task<Operation<AsyncPageable<Project>>> GetLroPaginationProjectValuesAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.GetLroPaginationProjectValues");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLroPaginationProjectsRequest(context);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.GetLroPaginationProjectValues", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerableAsync).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+
+            async IAsyncEnumerable<Page<Project>> CreateEnumerableAsync(Response response, string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                if (nextLink == null)
+                {
+                    var result = CustomPage.FromResponse(response);
+                    var page = Page.FromValues(result.Value, result.NextLink, response);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+                while (!string.IsNullOrEmpty(nextLink))
+                {
+                    var message = CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
+                    response = await _pipeline.ProcessMessageAsync(message, context, cancellationToken).ConfigureAwait(false);
+                    var result = CustomPage.FromResponse(response);
+                    var page = Page.FromValues(result.Value, result.NextLink, response);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+            }
+        }
+        /// <summary> Gets projects. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="AsyncPageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='GetLroPaginationProjectsAsync(WaitUntil,RequestContext)']/*" />
+        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetLroPaginationProjectsAsync(WaitUntil waitUntil, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.GetLroPaginationProjects");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLroPaginationProjectsRequest(context);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.GetLroPaginationProjects", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerableAsync).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(Response response, string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                Page<BinaryData> page;
+                if (nextLink == null)
+                {
+                    page = LowLevelPageableHelpers.BuildPageForResponse(response, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+                while (!string.IsNullOrEmpty(nextLink))
+                {
+                    var message = CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
+                    page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+            }
+        }
+
+        /// <summary> Gets projects. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> LRO pagination method. </remarks>
+        public virtual Operation<Pageable<Project>> GetLroPaginationProjectValues(WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.GetLroPaginationProjectValues");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLroPaginationProjectsRequest(context);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.GetLroPaginationProjectValues", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerable);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+
+            IEnumerable<Page<Project>> CreateEnumerable(Response response, string nextLink, int? pageSizeHint)
+            {
+                if (nextLink == null)
+                {
+                    var result = CustomPage.FromResponse(response);
+                    var page = Page.FromValues(result.Value, result.NextLink, response);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+                while (!string.IsNullOrEmpty(nextLink))
+                {
+                    var message = CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
+                    response = _pipeline.ProcessMessage(message, context);
+                    var result = CustomPage.FromResponse(response);
+                    var page = Page.FromValues(result.Value, result.NextLink, response);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+            }
+        }
+        /// <summary> Gets projects. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="Pageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='GetLroPaginationProjects(WaitUntil,RequestContext)']/*" />
+        public virtual Operation<Pageable<BinaryData>> GetLroPaginationProjects(WaitUntil waitUntil, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.GetLroPaginationProjects");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLroPaginationProjectsRequest(context);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.GetLroPaginationProjects", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerable);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+
+            IEnumerable<Page<BinaryData>> CreateEnumerable(Response response, string nextLink, int? pageSizeHint)
+            {
+                Page<BinaryData> page;
+                if (nextLink == null)
+                {
+                    page = LowLevelPageableHelpers.BuildPageForResponse(response, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+                while (!string.IsNullOrEmpty(nextLink))
+                {
+                    var message = CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
+                    page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+            }
+        }
+
         internal HttpMessage CreateCreateProjectRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier201);
@@ -291,6 +453,33 @@ namespace LroBasicCadl
             return message;
         }
 
+        internal HttpMessage CreateGetLroPaginationProjectsRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/pagination/projects", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetLroPaginationProjectsNextPageRequest(string nextLink, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
         private static RequestContext DefaultRequestContext = new RequestContext();
         internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
         {
@@ -306,5 +495,7 @@ namespace LroBasicCadl
         private static ResponseClassifier ResponseClassifier201 => _responseClassifier201 ??= new StatusCodeClassifier(stackalloc ushort[] { 201 });
         private static ResponseClassifier _responseClassifier200201;
         private static ResponseClassifier ResponseClassifier200201 => _responseClassifier200201 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 201 });
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

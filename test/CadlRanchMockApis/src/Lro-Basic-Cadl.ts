@@ -64,4 +64,79 @@ Scenarios.LroBasic_UpdateProject = passOnSuccess([
     };
   })
 ]);
+
+Scenarios.LroBasic_GetLroPaginationProjects = passOnSuccess([
+  mockapi.get("/lro/pagination/projects", (req) => {
+    return {
+      status: 200,
+      headers: { "operation-location": `${req.baseUrl}/lro/pagination/polling`},
+      body: json("On going...")
+    };
+  }),
+//   mockapi.get("/lro/pagination/polling", (req) => {
+//     return {
+//       status: 200,
+//       body: json(pullingSuccessResponse),
+//     };
+//   }),
+//   mockapi.get("/lro/pagination/projects", (req) => {
+//     return {
+//       status: 200,
+//         body: json({
+//             status: "Succeeded",
+//             value: [{
+//                 id: "1",
+//                 name: "name1",
+//                 description: "description1"
+//             },{
+//                 id: "2",
+//                 name: "name2",
+//                 description: "description2"
+//             }],
+//             nextLink: `${req.baseUrl}/lro/pagination/projects/next`
+//         }),
+//     };
+//   }),
+//   mockapi.get("/lro/pagination/projects/next", (req) => {
+//     return {
+//       status: 200,
+//         body: json({
+//             value: [{
+//                 id: "3",
+//                 name: "name3",
+//                 description: "description3"
+//             }]
+//         }),
+//     };
+  mockapi.get("/lro/pagination/polling", (req) => {
+    return {
+      status: 200,
+      body: json({
+            status: "Succeeded",
+            value: [{
+                id: "1",
+                name: "name1",
+                description: "description1"
+            },{
+                id: "2",
+                name: "name2",
+                description: "description2"
+            }],
+            nextLink: `${req.baseUrl}/lro/pagination/polling/next`
+        }),
+    };
+  }),
+  mockapi.get("/lro/pagination/polling/next", (req) => {
+    return {
+      status: 200,
+        body: json({
+            value: [{
+                id: "3",
+                name: "name3",
+                description: "description3"
+            }]
+        }),
+    };
+  })
+]);
 ;

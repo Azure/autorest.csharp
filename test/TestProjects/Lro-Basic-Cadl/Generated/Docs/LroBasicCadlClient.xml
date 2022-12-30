@@ -209,5 +209,77 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
+    <member name="GetLroPaginationProjectsAsync(WaitUntil,RequestContext)">
+<example>
+This sample shows how to call GetLroPaginationProjectsAsync with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new LroBasicCadlClient(endpoint);
+
+var operation = await client.GetLroPaginationProjectsAsync(WaitUntil.Completed);
+
+var response = await operation.WaitForCompletionAsync();
+await foreach (var data in response.Value)
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+LRO pagination method.
+
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  id: string, # Required.
+  description: string, # Optional.
+  name: string, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetLroPaginationProjects(WaitUntil,RequestContext)">
+<example>
+This sample shows how to call GetLroPaginationProjects with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new LroBasicCadlClient(endpoint);
+
+var operation = client.GetLroPaginationProjects(WaitUntil.Completed);
+
+var response = operation.WaitForCompletion();
+foreach (var data in response.Value)
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+LRO pagination method.
+
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  id: string, # Required.
+  description: string, # Optional.
+  name: string, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
   </members>
 </doc>
