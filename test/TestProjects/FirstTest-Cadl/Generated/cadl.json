@@ -1014,7 +1014,7 @@
         "EnumValueType": "String",
         "AllowedValues": [
          {
-          "$id": "99",
+          "$id": "106",
           "Name": "text/plain",
           "Value": "text/plain"
          }
@@ -1024,7 +1024,7 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "106",
+        "$id": "107",
         "Type": {
          "$ref": "105"
         },
@@ -1040,11 +1040,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "107",
+       "$id": "108",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "108",
+        "$id": "109",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1060,7 +1060,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "109",
+       "$id": "110",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -1077,11 +1077,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "110",
+       "$id": "111",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "111",
+        "$id": "112",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1096,9 +1096,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "112",
+        "$id": "113",
         "Type": {
-         "$ref": "111"
+         "$ref": "112"
         },
         "Value": "application/json"
        }
@@ -1109,7 +1109,7 @@
      ],
      "Responses": [
       {
-       "$id": "113",
+       "$id": "114",
        "StatusCodes": [
         200
        ],
@@ -1132,7 +1132,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "114",
+     "$id": "115",
      "Name": "noContentType",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
@@ -1141,11 +1141,11 @@
        "$ref": "37"
       },
       {
-       "$id": "115",
+       "$id": "116",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "116",
+        "$id": "117",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1161,11 +1161,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "117",
+       "$id": "118",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "118",
+        "$id": "119",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1181,7 +1181,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "119",
+       "$id": "120",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -1198,11 +1198,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "120",
+       "$id": "121",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "121",
+        "$id": "122",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1217,19 +1217,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "122",
+        "$id": "123",
         "Type": {
-         "$ref": "121"
+         "$ref": "122"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "123",
+       "$id": "124",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "124",
+        "$id": "125",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1244,9 +1244,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "125",
+        "$id": "126",
         "Type": {
-         "$ref": "124"
+         "$ref": "125"
         },
         "Value": "application/json"
        }
@@ -1257,7 +1257,7 @@
      ],
      "Responses": [
       {
-       "$id": "126",
+       "$id": "127",
        "StatusCodes": [
         200
        ],
@@ -1280,7 +1280,7 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "127",
+     "$id": "128",
      "Name": "helloDemo2",
      "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
@@ -1289,11 +1289,11 @@
        "$ref": "37"
       },
       {
-       "$id": "128",
+       "$id": "129",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "129",
+        "$id": "130",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1308,9 +1308,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "130",
+        "$id": "131",
         "Type": {
-         "$ref": "129"
+         "$ref": "130"
         },
         "Value": "application/json"
        }
@@ -1321,7 +1321,7 @@
      ],
      "Responses": [
       {
-       "$id": "131",
+       "$id": "132",
        "StatusCodes": [
         200
        ],
@@ -1341,7 +1341,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "132",
+     "$id": "133",
      "Name": "getUnknownValue",
      "ResourceName": "EnumTest",
      "Description": "get extensible enum",
@@ -1350,11 +1350,11 @@
        "$ref": "37"
       },
       {
-       "$id": "133",
+       "$id": "134",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "134",
+        "$id": "135",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1369,9 +1369,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "135",
+        "$id": "136",
         "Type": {
-         "$ref": "134"
+         "$ref": "135"
         },
         "Value": "application/json"
        }
@@ -1382,7 +1382,7 @@
      ],
      "Responses": [
       {
-       "$id": "136",
+       "$id": "137",
        "StatusCodes": [
         200
        ],
@@ -1403,19 +1403,19 @@
     }
    ],
    "Protocol": {
-    "$id": "137"
+    "$id": "138"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "138",
+  "$id": "139",
   "ApiKey": {
-   "$id": "139",
+   "$id": "140",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "140",
+   "$id": "141",
    "Scopes": [
     "https://api.example.com/.default"
    ]
