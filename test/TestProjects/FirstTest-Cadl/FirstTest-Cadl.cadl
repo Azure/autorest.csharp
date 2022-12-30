@@ -147,6 +147,8 @@ op anonymousBody( ...Thing ): Thing;
 @convenienceAPI
 op friendlyModel(...NotFriend): NotFriend;
 
+op addTimeHeader(@header("Repeatability-First-Sent") repeatabilityFirstSent?: zonedDateTime): void;
+
 namespace EnumTest {
     @get
     @route("/unknown-value")
