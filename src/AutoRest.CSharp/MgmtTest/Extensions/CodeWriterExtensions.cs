@@ -79,17 +79,14 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
-            if (exampleValue.Elements == null)
-            {
-                writer.AppendRaw("null");
-                return writer;
-            }
+            // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
+            var elements = exampleValue.Elements ?? Enumerable.Empty<ExampleValue>();
             // since this is a list, we take the first generic argument (and it should always has this first argument)
             var elementType = type.Arguments.First();
             var initialization = includeInitialization ? (FormattableString)$"new {elementType}[]" : (FormattableString)$"";
             using (writer.Scope(initialization, newLine: false))
             {
-                foreach (var itemValue in exampleValue.Elements)
+                foreach (var itemValue in elements)
                 {
                     // TODO -- bad formatting will happen in collection initializer because roslyn formatter ignores things in these places: https://github.com/dotnet/roslyn/issues/8269
                     writer.AppendExampleValue(itemValue, elementType);
@@ -106,20 +103,19 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
-            if (exampleValue.Properties == null)
-            {
-                writer.AppendRaw("null");
-                return writer;
-            }
+            // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
+            var keyValues = exampleValue.Properties ?? new Dictionary<string, ExampleValue>();
             // since this is a dictionary, we take the first generic argument as the key type
             // this is important because in our SDK, the key of a dictionary is not always a string. It could be a string-like type, for instance, a ResourceIdentifier
             var keyType = type.Arguments[0];
             // the second as the value type
             var valueType = type.Arguments[1];
-            var initialization = includeInitialization ? (FormattableString)$"new {type}()" : (FormattableString)$"";
+            // the type of dictionary in our generated SDK is usually an interface `IDictionary<>` or `IReadOnlyDictionary<>`, here we just use `Dictionary` as its proper initialization
+            var concreteDictType = new CSharpType(typeof(Dictionary<,>), type.Arguments);
+            var initialization = includeInitialization ? (FormattableString)$"new {concreteDictType}()" : (FormattableString)$"";
             using (writer.Scope(initialization, newLine: false))
             {
-                foreach ((var key, var value) in exampleValue.Properties)
+                foreach ((var key, var value) in keyValues)
                 {
                     // write key
                     writer.AppendRaw("[");
