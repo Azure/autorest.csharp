@@ -190,6 +190,7 @@
     {
      "$id": "22",
      "Name": "postValid",
+     "ResourceName": "Inheritance",
      "Parameters": [
       {
        "$id": "23",
@@ -349,6 +350,7 @@
     {
      "$id": "39",
      "Name": "getValid",
+     "ResourceName": "Inheritance",
      "Parameters": [
       {
        "$ref": "23"
@@ -408,6 +410,7 @@
     {
      "$id": "44",
      "Name": "putValid",
+     "ResourceName": "Inheritance",
      "Parameters": [
       {
        "$ref": "23"
@@ -514,6 +517,7 @@
     {
      "$id": "53",
      "Name": "getModel",
+     "ResourceName": "Discriminated",
      "Parameters": [
       {
        "$ref": "23"
@@ -573,6 +577,7 @@
     {
      "$id": "58",
      "Name": "putModel",
+     "ResourceName": "Discriminated",
      "Parameters": [
       {
        "$ref": "23"
@@ -676,6 +681,7 @@
     {
      "$id": "67",
      "Name": "getRecursiveModel",
+     "ResourceName": "Discriminated",
      "Parameters": [
       {
        "$ref": "23"
@@ -735,6 +741,7 @@
     {
      "$id": "72",
      "Name": "putRecursiveModel",
+     "ResourceName": "Discriminated",
      "Parameters": [
       {
        "$ref": "23"
@@ -838,6 +845,7 @@
     {
      "$id": "81",
      "Name": "getMissingDiscriminator",
+     "ResourceName": "Discriminated",
      "Parameters": [
       {
        "$ref": "23"
@@ -897,6 +905,7 @@
     {
      "$id": "86",
      "Name": "getWrongDiscriminator",
+     "ResourceName": "Discriminated",
      "Parameters": [
       {
        "$ref": "23"
