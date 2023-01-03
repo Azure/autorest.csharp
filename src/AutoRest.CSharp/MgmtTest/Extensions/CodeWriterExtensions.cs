@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Xml;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -263,7 +264,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             => IsType<ResourceIdentifier>(type) || IsType<ResourceType>(type) || IsType<Uri>(type) || IsType<AzureLocation>(type) || IsType<RequestMethod>(type) || IsType<ContentType>(type) || IsType<ETag>(type);
 
         private static bool IsParsableInitializedStringLikeType(Type type)
-            => IsType<DateTimeOffset>(type) || IsType<Guid>(type) || IsType<TimeSpan>(type);
+            => IsType<DateTimeOffset>(type) || IsType<Guid>(type) || IsType<TimeSpan>(type) || IsType<IPAddress>(type);
 
         private static bool IsType<T>(Type type) => type == typeof(T) || (typeof(T).IsValueType && type == typeof(T?));
 
