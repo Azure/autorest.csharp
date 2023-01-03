@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -36,6 +37,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
         public IReadOnlyList<RestClientMethod> RequestMethods { get; }
+        public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes { get; }
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
         public IReadOnlyList<PagingMethod> PagingMethods { get; }
         public LowLevelClient? ParentClient;
@@ -74,6 +76,8 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())
                 .Distinct()
                 .ToArray();
+
+            ResponseClassifierTypes = RequestMethods.Select(m => m.ResponseClassifierType).ToArray();
 
             PagingMethods = ClientMethods.Where(m => m.PagingInfo != null && m.ConvenienceMethod != null).Select(m => ClientBuilder.BuildPagingMethod(m.ConvenienceMethod!.Signature.Name, m.PagingInfo!.NextLinkName, m.PagingInfo!.ItemName, m.RequestMethod, m.PagingInfo!.NextPageMethod, Declaration)).ToArray();
 

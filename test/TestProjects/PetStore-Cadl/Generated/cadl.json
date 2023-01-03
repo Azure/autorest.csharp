@@ -94,6 +94,7 @@
     {
      "$id": "13",
      "Name": "delete",
+     "ResourceName": "Pets",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
@@ -218,6 +219,7 @@
     {
      "$id": "26",
      "Name": "read",
+     "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
@@ -311,6 +313,7 @@
     {
      "$id": "34",
      "Name": "create",
+     "ResourceName": "Pets",
      "Parameters": [
       {
        "$ref": "14"
@@ -417,6 +420,7 @@
     {
      "$id": "43",
      "Name": "getPetByKind",
+     "ResourceName": "Pets",
      "Parameters": [
       {
        "$ref": "14"
@@ -493,6 +497,7 @@
     {
      "$id": "49",
      "Name": "GetFirstPet",
+     "ResourceName": "Pets",
      "Parameters": [
       {
        "$ref": "14"

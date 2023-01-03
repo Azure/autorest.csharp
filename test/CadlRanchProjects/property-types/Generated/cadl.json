@@ -474,6 +474,7 @@
     {
      "$id": "58",
      "Name": "get",
+     "ResourceName": "Boolean",
      "Description": "Get call",
      "Parameters": [
       {
@@ -590,6 +591,7 @@
     {
      "$id": "71",
      "Name": "put",
+     "ResourceName": "Boolean",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -707,6 +709,7 @@
     {
      "$id": "82",
      "Name": "get",
+     "ResourceName": "String",
      "Description": "Get call",
      "Parameters": [
       {
@@ -767,6 +770,7 @@
     {
      "$id": "87",
      "Name": "put",
+     "ResourceName": "String",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -884,6 +888,7 @@
     {
      "$id": "98",
      "Name": "get",
+     "ResourceName": "Bytes",
      "Description": "Get call",
      "Parameters": [
       {
@@ -944,6 +949,7 @@
     {
      "$id": "103",
      "Name": "put",
+     "ResourceName": "Bytes",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -1061,6 +1067,7 @@
     {
      "$id": "114",
      "Name": "get",
+     "ResourceName": "Int",
      "Description": "Get call",
      "Parameters": [
       {
@@ -1121,6 +1128,7 @@
     {
      "$id": "119",
      "Name": "put",
+     "ResourceName": "Int",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -1238,6 +1246,7 @@
     {
      "$id": "130",
      "Name": "get",
+     "ResourceName": "Float",
      "Description": "Get call",
      "Parameters": [
       {
@@ -1298,6 +1307,7 @@
     {
      "$id": "135",
      "Name": "put",
+     "ResourceName": "Float",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -1415,6 +1425,7 @@
     {
      "$id": "146",
      "Name": "get",
+     "ResourceName": "Datetime",
      "Description": "Get call",
      "Parameters": [
       {
@@ -1475,6 +1486,7 @@
     {
      "$id": "151",
      "Name": "put",
+     "ResourceName": "Datetime",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -1592,6 +1604,7 @@
     {
      "$id": "162",
      "Name": "get",
+     "ResourceName": "Duration",
      "Description": "Get call",
      "Parameters": [
       {
@@ -1652,6 +1665,7 @@
     {
      "$id": "167",
      "Name": "put",
+     "ResourceName": "Duration",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -1769,6 +1783,7 @@
     {
      "$id": "178",
      "Name": "get",
+     "ResourceName": "Enum",
      "Description": "Get call",
      "Parameters": [
       {
@@ -1829,6 +1844,7 @@
     {
      "$id": "183",
      "Name": "put",
+     "ResourceName": "Enum",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -1946,6 +1962,7 @@
     {
      "$id": "194",
      "Name": "get",
+     "ResourceName": "ExtensibleEnum",
      "Description": "Get call",
      "Parameters": [
       {
@@ -2006,6 +2023,7 @@
     {
      "$id": "199",
      "Name": "put",
+     "ResourceName": "ExtensibleEnum",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -2123,6 +2141,7 @@
     {
      "$id": "210",
      "Name": "get",
+     "ResourceName": "Model",
      "Description": "Get call",
      "Parameters": [
       {
@@ -2183,6 +2202,7 @@
     {
      "$id": "215",
      "Name": "put",
+     "ResourceName": "Model",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -2300,6 +2320,7 @@
     {
      "$id": "226",
      "Name": "get",
+     "ResourceName": "CollectionsString",
      "Description": "Get call",
      "Parameters": [
       {
@@ -2360,6 +2381,7 @@
     {
      "$id": "231",
      "Name": "put",
+     "ResourceName": "CollectionsString",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -2477,6 +2499,7 @@
     {
      "$id": "242",
      "Name": "get",
+     "ResourceName": "CollectionsInt",
      "Description": "Get call",
      "Parameters": [
       {
@@ -2537,6 +2560,7 @@
     {
      "$id": "247",
      "Name": "put",
+     "ResourceName": "CollectionsInt",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -2654,6 +2678,7 @@
     {
      "$id": "258",
      "Name": "get",
+     "ResourceName": "CollectionsModel",
      "Description": "Get call",
      "Parameters": [
       {
@@ -2714,6 +2739,7 @@
     {
      "$id": "263",
      "Name": "put",
+     "ResourceName": "CollectionsModel",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -2831,6 +2857,7 @@
     {
      "$id": "274",
      "Name": "get",
+     "ResourceName": "DictionaryString",
      "Description": "Get call",
      "Parameters": [
       {
@@ -2891,6 +2918,7 @@
     {
      "$id": "279",
      "Name": "put",
+     "ResourceName": "DictionaryString",
      "Description": "Put operation",
      "Parameters": [
       {
@@ -3008,6 +3036,7 @@
     {
      "$id": "290",
      "Name": "get",
+     "ResourceName": "Never",
      "Description": "Get call",
      "Parameters": [
       {
@@ -3068,6 +3097,7 @@
     {
      "$id": "295",
      "Name": "put",
+     "ResourceName": "Never",
      "Description": "Put operation",
      "Parameters": [
       {
