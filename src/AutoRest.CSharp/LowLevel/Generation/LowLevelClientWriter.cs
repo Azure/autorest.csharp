@@ -705,7 +705,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 var convenienceMethod = clientMethod.ConvenienceMethod!;
                 var diagnostic = (convenienceMethod.Diagnostic != null ? convenienceMethod.Diagnostic : clientMethod.ProtocolMethodDiagnostic);
 
-                var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, null, None, new CSharpType(typeof(IEnumerable<>), new CSharpType(typeof(Page<>), clientMethod.ConvenienceMethod!.PagingResponseInfo!.ItemType)), null, new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
+                var createEnumerableMethodSignature = new MethodSignature(
+                    Name: "CreateEnumerable",
+                    Summary: null,
+                    Description: null,
+                    Modifiers: None,
+                    // IEnumerable<Page<{ItemType}>>
+                    ReturnType: new CSharpType(typeof(IEnumerable<>),
+                        new CSharpType(typeof(Page<>),
+                            clientMethod.ConvenienceMethod!.PagingResponseInfo!.ItemType)),
+                    ReturnDescription: null,
+                    Parameters: new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter }
+                ).WithAsync(async);
                 var createEnumerableMethod = new CodeWriterDeclaration(createEnumerableMethodSignature.Name);
 
                 // using var scope = {ClientDiagnosticsProperty}.CreateScope("{scopeName}");
