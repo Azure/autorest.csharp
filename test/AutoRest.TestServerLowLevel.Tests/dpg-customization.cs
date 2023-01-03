@@ -118,7 +118,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task RawLRO_Response_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task RawLROResponseOperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -136,12 +136,12 @@ namespace AutoRest.TestServer.Tests
 
             JsonData responseBody = JsonData.FromBytes(result.Value.ToMemory());
             Assert.AreEqual("raw", (string)responseBody["received"]);
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task RawLRO_Response_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task RawLROResponseOperation(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -159,12 +159,12 @@ namespace AutoRest.TestServer.Tests
 
             JsonData responseBody = JsonData.FromBytes(result.GetRawResponse().Content.ToMemory());
             Assert.AreEqual("raw", (string)responseBody["received"]);
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task RawLRO_ManualIteration_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task RawLROManualIterationOperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -188,12 +188,12 @@ namespace AutoRest.TestServer.Tests
                     CollectionAssert.IsEmpty(diagnosticListener.Scopes);
                 }
             }
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task RawLRO_ManualIteration_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task RawLROManualIterationOperation(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -217,12 +217,12 @@ namespace AutoRest.TestServer.Tests
                     CollectionAssert.IsEmpty(diagnosticListener.Scopes);
                 }
             }
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task RawLRO_WaitUntilCompleted_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task RawLROWaitUntilCompletedOperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -236,12 +236,12 @@ namespace AutoRest.TestServer.Tests
             }
 
             Assert.AreEqual("raw", result.Value.Received.ToString());
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task RawLRO_WaitUntilCompleted_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task RawLROWaitUntilCompletedOperation(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -256,7 +256,7 @@ namespace AutoRest.TestServer.Tests
 
             JsonData responseBody = JsonData.FromBytes(result.GetRawResponse().Content.ToMemory());
             Assert.AreEqual("raw", (string)responseBody["received"]);
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
@@ -286,7 +286,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task HandwrittenModelLro_Response_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task HandwrittenModelLroResponseOperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -306,12 +306,12 @@ namespace AutoRest.TestServer.Tests
                 CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             }
             Assert.AreEqual("model", $"{lro.Value.Received}");
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task HandwrittenModelLro_Response_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task HandwrittenModelLroResponseOperation(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -333,12 +333,12 @@ namespace AutoRest.TestServer.Tests
 
             JsonData responseBody = JsonData.FromBytes(lro.GetRawResponse().Content.ToMemory());
             Assert.AreEqual("model", (string)responseBody["received"]);
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task HandwrittenModelLro_ManualIteration_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task HandwrittenModelLroManualIterationOperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -360,12 +360,12 @@ namespace AutoRest.TestServer.Tests
                     CollectionAssert.IsEmpty(diagnosticListener.Scopes);
                 }
             }
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task HandwrittenModelLro_ManualIteration_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task HandwrittenModelLroManualIterationOperation(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -387,12 +387,12 @@ namespace AutoRest.TestServer.Tests
                     CollectionAssert.IsEmpty(diagnosticListener.Scopes);
                 }
             }
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task HandwrittenModelLro_WaitUntilCompleted_OperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task HandwrittenModelLroWaitUntilCompletedOperationOfT(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -408,12 +408,12 @@ namespace AutoRest.TestServer.Tests
                 CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             }
             Assert.AreEqual("model", $"{lro.Value.Received}");
-        });
+        }, ignoreScenario: true);
 
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public Task HandwrittenModelLro_WaitUntilCompleted_Operation(bool nestedScopeSuppression) => Test(async (host) =>
+        public Task HandwrittenModelLroWaitUntilCompletedOperation(bool nestedScopeSuppression) => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
@@ -430,7 +430,7 @@ namespace AutoRest.TestServer.Tests
             }
             JsonData responseBody = JsonData.FromBytes(lro.GetRawResponse().Content.ToMemory());
             Assert.AreEqual("model", (string)responseBody["received"]);
-        });
+        }, ignoreScenario: true);
 
         [Test]
         public Task DPGGlassBreaker() => Test(async (host) =>
