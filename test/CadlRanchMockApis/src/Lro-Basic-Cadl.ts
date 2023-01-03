@@ -21,9 +21,9 @@ const projectUpdateResponse = {
   name: "test"
 };
 
-const pullingSuccessResponse = {
+const pollingSuccessResponse = {
   status: "Succeeded"
-}
+};
 
 Scenarios.LroBasic_CreateProject = passOnSuccess([
   mockapi.post("/projects", (req) => {
@@ -37,7 +37,7 @@ Scenarios.LroBasic_CreateProject = passOnSuccess([
   mockapi.get("/lro/post/polling", (req) => {
     return {
       status: 200,
-      body: json(pullingSuccessResponse),
+      body: json(pollingSuccessResponse),
     };
   })
 ]);
@@ -54,7 +54,7 @@ Scenarios.LroBasic_UpdateProject = passOnSuccess([
   mockapi.get("/lro/put/polling", (req) => {
     return {
       status: 200,
-      body: json(pullingSuccessResponse),
+      body: json(pollingSuccessResponse),
     };
   }),
   mockapi.get("/projects/123", (req) => {
@@ -69,74 +69,47 @@ Scenarios.LroBasic_GetLroPaginationProjects = passOnSuccess([
   mockapi.get("/lro/pagination/projects", (req) => {
     return {
       status: 200,
-      headers: { "operation-location": `${req.baseUrl}/lro/pagination/polling`},
+      headers: { "operation-location": `${req.baseUrl}/lro/pagination/polling` },
       body: json("On going...")
     };
   }),
-//   mockapi.get("/lro/pagination/polling", (req) => {
-//     return {
-//       status: 200,
-//       body: json(pullingSuccessResponse),
-//     };
-//   }),
-//   mockapi.get("/lro/pagination/projects", (req) => {
-//     return {
-//       status: 200,
-//         body: json({
-//             status: "Succeeded",
-//             value: [{
-//                 id: "1",
-//                 name: "name1",
-//                 description: "description1"
-//             },{
-//                 id: "2",
-//                 name: "name2",
-//                 description: "description2"
-//             }],
-//             nextLink: `${req.baseUrl}/lro/pagination/projects/next`
-//         }),
-//     };
-//   }),
-//   mockapi.get("/lro/pagination/projects/next", (req) => {
-//     return {
-//       status: 200,
-//         body: json({
-//             value: [{
-//                 id: "3",
-//                 name: "name3",
-//                 description: "description3"
-//             }]
-//         }),
-//     };
   mockapi.get("/lro/pagination/polling", (req) => {
     return {
       status: 200,
       body: json({
-            status: "Succeeded",
-            value: [{
-                id: "1",
-                name: "name1",
-                description: "description1"
-            },{
-                id: "2",
-                name: "name2",
-                description: "description2"
-            }],
-            nextLink: `${req.baseUrl}/lro/pagination/polling/next`
-        }),
+        status: "Succeeded",
+        resourceLocation: `${req.baseUrl}/lro/pagination/results`
+      })
     };
   }),
-  mockapi.get("/lro/pagination/polling/next", (req) => {
+  mockapi.get("/lro/pagination/results", (req) => {
     return {
       status: 200,
-        body: json({
-            value: [{
-                id: "3",
-                name: "name3",
-                description: "description3"
-            }]
-        }),
+      body: json({
+        status: "Succeeded",
+        value: [{
+            id: "1",
+            name: "name1",
+            description: "description1"
+        },{
+            id: "2",
+            name: "name2",
+            description: "description2"
+        }],
+        nextLink: `${req.baseUrl}/lro/pagination/results/next`
+      }),
+    };
+  }),
+  mockapi.get("/lro/pagination/results/next", (req) => {
+    return {
+      status: 200,
+      body: json({
+        value: [{
+          id: "3",
+          name: "name3",
+          description: "description3"
+        }]
+      }),
     };
   })
 ]);
-;
