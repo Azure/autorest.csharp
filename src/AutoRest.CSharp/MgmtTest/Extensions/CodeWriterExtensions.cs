@@ -79,6 +79,11 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
+            if (exampleValue.Elements == null)
+            {
+                writer.AppendRaw("null");
+                return writer;
+            }
             // since this is a list, we take the first generic argument (and it should always has this first argument)
             var elementType = type.Arguments.First();
             var initialization = includeInitialization ? (FormattableString)$"new {elementType}[]" : (FormattableString)$"";
@@ -101,6 +106,11 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
+            if (exampleValue.Properties == null)
+            {
+                writer.AppendRaw("null");
+                return writer;
+            }
             // since this is a dictionary, we take the first generic argument as the key type
             // this is important because in our SDK, the key of a dictionary is not always a string. It could be a string-like type, for instance, a ResourceIdentifier
             var keyType = type.Arguments[0];
@@ -133,6 +143,11 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendComplexFrameworkTypeValue(this CodeWriter writer, ObjectSchema objectSchema, Type type, ExampleValue exampleValue)
         {
+            if (exampleValue.Properties == null)
+            {
+                writer.AppendRaw(type.IsValueType ? "default" : "null");
+                return writer;
+            }
             var propertyMetadataDict = ReferenceClassFinder.GetPropertyMetadata(type);
             // get the first constructor
             var publicCtor = type.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).First();
@@ -184,17 +199,24 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 return writer.AppendRawValue(exampleValue.RawValue, exampleValue.RawValue.GetType());
             }
             // check if this is an array
-            if (exampleValue.Elements.Any())
+            if (exampleValue.Elements != null && exampleValue.Elements.Any())
             {
                 return writer.AppendListValue(typeof(object), exampleValue);
             }
             // fallback to complex object
-            using (writer.Scope($"new {typeof(Dictionary<string, object>)}()"))
+            if (exampleValue.Properties == null)
             {
-                foreach ((var key, var value) in exampleValue.Properties)
+                writer.LineRaw("null");
+            }
+            else
+            {
+                using (writer.Scope($"new {typeof(Dictionary<string, object>)}()"))
                 {
-                    writer.Append($"[{key:L}] = ");
-                    writer.AppendAnonymousObject(value);
+                    foreach ((var key, var value) in exampleValue.Properties)
+                    {
+                        writer.Append($"[{key:L}] = ");
+                        writer.AppendAnonymousObject(value);
+                    }
                 }
             }
 
@@ -315,8 +337,13 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return (ObjectType)implementation.Type.Implementation;
         }
 
-        private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
+        private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue>? valueDict)
         {
+            if (valueDict == null)
+            {
+                writer.AppendRaw("null");
+                return writer;
+            }
             // need to get the actual ObjectType if this type has a discrinimator
             objectType = GetActualImplementation(objectType, valueDict);
             // get all the properties on this type, including the properties from its base type
@@ -421,7 +448,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             foreach (var property in hierarchyStack.Reverse().Skip(1))
             {
                 var schemaProperty = property.SchemaProperty;
-                if (schemaProperty == null || !exampleValue.Properties.TryGetValue(schemaProperty.SerializedName, out var inner))
+                if (schemaProperty == null || exampleValue.Properties == null || !exampleValue.Properties.TryGetValue(schemaProperty.SerializedName, out var inner))
                     return null;
                 // get the value of this layer
                 exampleValue = inner;
