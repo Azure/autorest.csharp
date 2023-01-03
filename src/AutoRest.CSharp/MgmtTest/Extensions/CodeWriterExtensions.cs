@@ -244,29 +244,43 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, AllSchemaTypes? schemaType) => type switch
         {
             _ when schemaType is AllSchemaTypes.Number or AllSchemaTypes.Integer => writer.AppendRaw(value),
-            _ when schemaType == AllSchemaTypes.Duration => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
-            _ when IsPrimitiveType(type) => writer.AppendRaw(value),
-            _ when IsNewInstanceInitializedStringLikeType(type) => writer.Append($"new {type}({value:L})"),
-            _ when IsParsableInitializedStringLikeType(type) => writer.Append($"{type}.Parse({value:L})"),
+            _ when schemaType is AllSchemaTypes.Duration => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
+            _ when _primitiveTypes.Contains(type) => writer.AppendRaw(value),
+            _ when _newInstanceInitializedTypes.Contains(type) => writer.Append($"new {type}({value:L})"),
+            _ when _parsableInitializedTypes.Contains(type) => writer.Append($"{type}.Parse({value:L})"),
             _ when type == typeof(byte[]) => writer.Append($"{typeof(Convert)}.FromBase64String({value:L})"),
             _ => writer.Append($"{value:L}"),
         };
 
-        private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && IsStringLikeType(type.FrameworkType);
+        private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType));
 
-        private static bool IsStringLikeType(Type type)
-            => IsNewInstanceInitializedStringLikeType(type) || IsParsableInitializedStringLikeType(type);
+        private static readonly HashSet<Type> _primitiveTypes = new()
+        {
+            typeof(bool), typeof(bool?),
+            typeof(int), typeof(int?),
+            typeof(long), typeof(long?),
+            typeof(double), typeof(double?),
+            typeof(decimal), typeof(decimal?)
+        };
 
-        private static bool IsPrimitiveType(Type type)
-            => IsType<bool>(type) || IsType<int>(type) || IsType<long>(type) || IsType<double>(type) || IsType<decimal>(type);
+        private static readonly HashSet<Type> _newInstanceInitializedTypes = new()
+        {
+            typeof(ResourceIdentifier),
+            typeof(ResourceType),
+            typeof(Uri),
+            typeof(AzureLocation), typeof(AzureLocation?),
+            typeof(RequestMethod), typeof(RequestMethod?),
+            typeof(ContentType), typeof(ContentType?),
+            typeof(ETag), typeof(ETag?)
+        };
 
-        private static bool IsNewInstanceInitializedStringLikeType(Type type)
-            => IsType<ResourceIdentifier>(type) || IsType<ResourceType>(type) || IsType<Uri>(type) || IsType<AzureLocation>(type) || IsType<RequestMethod>(type) || IsType<ContentType>(type) || IsType<ETag>(type);
-
-        private static bool IsParsableInitializedStringLikeType(Type type)
-            => IsType<DateTimeOffset>(type) || IsType<Guid>(type) || IsType<TimeSpan>(type) || IsType<IPAddress>(type);
-
-        private static bool IsType<T>(Type type) => type == typeof(T) || (typeof(T).IsValueType && type == typeof(T?));
+        private static readonly HashSet<Type> _parsableInitializedTypes = new()
+        {
+            typeof(DateTimeOffset),
+            typeof(Guid), typeof(Guid?),
+            typeof(TimeSpan), typeof(TimeSpan?),
+            typeof(IPAddress)
+        };
 
         private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
         {
