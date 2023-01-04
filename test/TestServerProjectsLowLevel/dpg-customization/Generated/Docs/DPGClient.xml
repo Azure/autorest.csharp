@@ -198,7 +198,7 @@ This sample shows how to call LroAsync with required parameters and parse the re
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-var operation = await client.LroAsync(WaitUntil.Completed, "<mode>");
+var operation = await client.LroAsync(WaitUntil.Started, "<mode>");
 
 BinaryData data = await operation.WaitForCompletionAsync();
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -227,7 +227,7 @@ This sample shows how to call Lro with required parameters and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-var operation = client.Lro(WaitUntil.Completed, "<mode>");
+var operation = client.Lro(WaitUntil.Started, "<mode>");
 
 BinaryData data = operation.WaitForCompletion();
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;

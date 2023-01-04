@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.Input
         public const string IPAddress = "ip-address";
         public const string ContentType = "content-type";
         public const string RequestMethod = "request-method";
-        public const string DataFactoryExpressionOfObject= "dfe-object";
+        public const string DataFactoryExpressionOfObject = "dfe-object";
         public const string DataFactoryExpressionOfString = "dfe-string";
         public const string DataFactoryExpressionOfInt = "dfe-int";
         public const string DataFactoryExpressionOfDouble = "dfe-float";
@@ -757,15 +757,18 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "flattenedNames")]
         public ICollection<string>? FlattenedNames { get; set; }
 
-        /**Use elements if schema.type==Array, use properties if schema.type==Object/Dictionary, otherwise use rawValue */
+        /// <summary>
+        /// Use elements if schema.type==Array, use properties if schema.type==Object/Dictionary, otherwise use rawValue
+        /// We have to make Elements and Properties nullable because we need the ability to distinguish null value and an empty array/dictionary/object
+        /// </summary>
         [YamlMember(Alias = "rawValue")]
         public object? RawValue { get; set; }
 
         [YamlMember(Alias = "elements")]
-        public System.Collections.Generic.ICollection<ExampleValue> Elements { get; set; } = Array.Empty<ExampleValue>();
+        public System.Collections.Generic.ICollection<ExampleValue>? Elements { get; set; }
 
         [YamlMember(Alias = "properties")]
-        public Dictionary<string, ExampleValue> Properties { get; set; } = new();
+        public Dictionary<string, ExampleValue>? Properties { get; set; }
 
         // parent class Name--> value
         [YamlMember(Alias = "parentsValue")]
