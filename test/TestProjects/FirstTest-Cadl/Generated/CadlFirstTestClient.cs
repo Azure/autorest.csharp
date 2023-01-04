@@ -432,6 +432,48 @@ namespace CadlFirstTest
             }
         }
 
+        /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(DateTimeOffset,RequestContext)']/*" />
+        public virtual async Task<Response> AddTimeHeaderAsync(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.AddTimeHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateAddTimeHeaderRequest(repeatabilityFirstSent, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeader(DateTimeOffset,RequestContext)']/*" />
+        public virtual Response AddTimeHeader(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.AddTimeHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateAddTimeHeaderRequest(repeatabilityFirstSent, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Return hi. </summary>
         /// <param name="headParameter"> The String to use. </param>
         /// <param name="queryParameter"> The String to use. </param>
@@ -843,6 +885,24 @@ namespace CadlFirstTest
             return message;
         }
 
+        internal HttpMessage CreateAddTimeHeaderRequest(DateTimeOffset? repeatabilityFirstSent, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            if (repeatabilityFirstSent != null)
+            {
+                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "O");
+            }
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
         internal HttpMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -940,5 +1000,7 @@ namespace CadlFirstTest
 
         private static ResponseClassifier _responseClassifier200;
         private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier _responseClassifier204;
+        private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new StatusCodeClassifier(stackalloc ushort[] { 204 });
     }
 }

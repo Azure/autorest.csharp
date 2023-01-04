@@ -42,6 +42,7 @@ format-by-name-rules:
 
 rename-mapping:
   Type: EncryptionType
+  FirewallPolicyThreatIntelWhitelist.ipAddresses: -|ip-address
 
 directive:
   - from: swagger-document

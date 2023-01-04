@@ -157,11 +157,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private CodeWriterVariableDeclaration WriteGetArmClient()
         {
+            _writer.LineRaw("// get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line");
+            var cred = new CodeWriterVariableDeclaration("cred", typeof(TokenCredential));
+            _writer.UseNamespace("Azure.Identity");
+            _writer.AppendDeclaration(cred)
+                .Line($" = new DefaultAzureCredential();");
             _writer.Line($"// authenticate your client");
             var clientResult = new CodeWriterVariableDeclaration("client", typeof(ArmClient));
-            _writer.UseNamespace("Azure.Identity");
             _writer.AppendDeclaration(clientResult)
-                .Line($" = new {typeof(ArmClient)}(new DefaultAzureCredential());");
+                .Line($" = new {typeof(ArmClient)}({cred.Declaration});");
 
             return clientResult;
         }
