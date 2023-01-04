@@ -10,7 +10,7 @@ var client = new LroBasicCadlClient(endpoint);
 
 var data = new {};
 
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.CreateProjectAsync(WaitUntil.Started, RequestContent.Create(data));
 
 var response = await operation.WaitForCompletionResponseAsync();
 Console.WriteLine(response.Status)
@@ -25,7 +25,7 @@ var data = new {
     name = "<name>",
 };
 
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.CreateProjectAsync(WaitUntil.Started, RequestContent.Create(data));
 
 var response = await operation.WaitForCompletionResponseAsync();
 Console.WriteLine(response.Status)
@@ -55,7 +55,7 @@ var client = new LroBasicCadlClient(endpoint);
 
 var data = new {};
 
-var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.CreateProject(WaitUntil.Started, RequestContent.Create(data));
 
 var response = operation.WaitForCompletionResponse();
 Console.WriteLine(response.Status)
@@ -70,7 +70,7 @@ var data = new {
     name = "<name>",
 };
 
-var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
+var operation = client.CreateProject(WaitUntil.Started, RequestContent.Create(data));
 
 var response = operation.WaitForCompletionResponse();
 Console.WriteLine(response.Status)
@@ -100,7 +100,7 @@ var client = new LroBasicCadlClient(endpoint);
 
 var data = new {};
 
-var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+var operation = await client.UpdateProjectAsync(WaitUntil.Started, "<id>", RequestContent.Create(data));
 
 BinaryData data = await operation.WaitForCompletionAsync();
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -116,7 +116,7 @@ var data = new {
     name = "<name>",
 };
 
-var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+var operation = await client.UpdateProjectAsync(WaitUntil.Started, "<id>", RequestContent.Create(data));
 
 BinaryData data = await operation.WaitForCompletionAsync();
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -159,7 +159,7 @@ var client = new LroBasicCadlClient(endpoint);
 
 var data = new {};
 
-var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+var operation = client.UpdateProject(WaitUntil.Started, "<id>", RequestContent.Create(data));
 
 BinaryData data = operation.WaitForCompletion();
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
@@ -175,7 +175,7 @@ var data = new {
     name = "<name>",
 };
 
-var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+var operation = client.UpdateProject(WaitUntil.Started, "<id>", RequestContent.Create(data));
 
 BinaryData data = operation.WaitForCompletion();
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
