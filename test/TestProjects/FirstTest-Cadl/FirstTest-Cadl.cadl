@@ -7,19 +7,17 @@ import "@azure-tools/cadl-azure-core";
 @serviceVersion("0.1.0")
 @doc("This is a sample cadl project.")
 @server("http://localhost:300","Endpoint Service")
-@useAuth(OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)
-@Cadl.Rest.produces("application/json")
-@Cadl.Rest.consumes("application/json")
-namespace CadlFirstTest;
-
-model AuthFlow {
+@useAuth(OAuth2Auth<[{
     type: OAuth2FlowType.clientCredentials;
     tokenUrl: "https://api.example.com/oauth2/token";
     refreshUrl: "https://api.example.com/oauth2/refresh";
     scopes: [
         "https://api.example.com/.default"
     ]
-}
+}]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)
+@Cadl.Rest.produces("application/json")
+@Cadl.Rest.consumes("application/json")
+namespace CadlFirstTest;
 
 using Cadl.Http;
 using Azure.DPG;

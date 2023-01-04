@@ -261,25 +261,11 @@ export function getInputType(
             program,
             type
         );
-        // return {
-        //     Name: type.kind,
-        //     Kind: builtInKind,
-        //     IsNullable: false
-        // } as InputPrimitiveType;
-        const allowValues: InputEnumTypeValue[] = [];
-        const member = {
-            Name: type.value,
-            Value: type.value,
-            Description: getDoc(program, type)
-        } as InputEnumTypeValue;
-        allowValues.push(member);
         return {
             Name: type.kind,
-            EnumValueType: builtInKind,
-            AllowedValues: allowValues,
-            IsExtensible: false,
+            Kind: builtInKind,
             IsNullable: false
-        } as InputEnumType;
+        } as InputPrimitiveType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
     } else if (type.kind === "EnumMember") {
@@ -316,8 +302,6 @@ export function getInputType(
                     IsNullable: false
                 } as InputPrimitiveType;
         }
-    } else if (type.kind === "Tuple") {
-        return getInputTypeForArray(type.values[0]);
     } else if (type.kind === "Union") {
         throw new Error(`Union is not supported.`);
     } else {

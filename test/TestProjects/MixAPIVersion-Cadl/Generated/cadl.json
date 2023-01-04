@@ -399,20 +399,12 @@
        "Type": {
         "$id": "45",
         "Name": "String",
-        "EnumValueType": "String",
-        "AllowedValues": [
-         {
-          "$id": "46",
-          "Name": "2022-07-09",
-          "Value": "2022-07-09"
-         }
-        ],
-        "IsExtensible": false,
+        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "46",
         "Type": {
          "$ref": "45"
         },
@@ -428,7 +420,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "48",
+       "$id": "47",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -445,11 +437,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "49",
+       "$id": "48",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "50",
+        "$id": "49",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -464,19 +456,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "51",
+        "$id": "50",
         "Type": {
-         "$ref": "50"
+         "$ref": "49"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "52",
+       "$id": "51",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "53",
+        "$id": "52",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -491,9 +483,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "53",
         "Type": {
-         "$ref": "53"
+         "$ref": "52"
         },
         "Value": "application/json"
        }
@@ -501,7 +493,7 @@
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "54",
        "StatusCodes": [
         200
        ],
@@ -524,7 +516,7 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "56",
+     "$id": "55",
      "Name": "listPet",
      "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
@@ -537,11 +529,11 @@
        "$ref": "27"
       },
       {
-       "$id": "57",
+       "$id": "56",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "57",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -556,9 +548,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "58",
         "Type": {
-         "$ref": "58"
+         "$ref": "57"
         },
         "Value": "application/json"
        }
@@ -566,7 +558,7 @@
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "59",
        "StatusCodes": [
         200
        ],
@@ -584,7 +576,7 @@
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
      "Paging": {
-      "$id": "61",
+      "$id": "60",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -592,7 +584,7 @@
     }
    ],
    "Protocol": {
-    "$id": "62"
+    "$id": "61"
    },
    "Creatable": true
   }

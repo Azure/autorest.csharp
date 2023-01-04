@@ -233,20 +233,12 @@
        "Type": {
         "$id": "27",
         "Name": "String",
-        "EnumValueType": "String",
-        "AllowedValues": [
-         {
-          "$id": "28",
-          "Name": "text/plain",
-          "Value": "text/plain"
-         }
-        ],
-        "IsExtensible": false,
+        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "28",
         "Type": {
          "$ref": "27"
         },
@@ -262,7 +254,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "30",
+       "$id": "29",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -279,11 +271,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "31",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "32",
+        "$id": "31",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -298,9 +290,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "33",
+        "$id": "32",
         "Type": {
-         "$ref": "32"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
@@ -311,7 +303,7 @@
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "33",
        "StatusCodes": [
         204
        ],
@@ -332,7 +324,7 @@
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "34"
    },
    "Creatable": true
   }

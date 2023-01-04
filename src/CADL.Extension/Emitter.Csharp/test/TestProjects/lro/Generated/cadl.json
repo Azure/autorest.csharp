@@ -121,20 +121,12 @@
        "Type": {
         "$id": "16",
         "Name": "String",
-        "EnumValueType": "String",
-        "AllowedValues": [
-         {
-          "$id": "17",
-          "Name": "application/merge-patch+json",
-          "Value": "application/merge-patch+json"
-         }
-        ],
-        "IsExtensible": false,
+        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "17",
         "Type": {
          "$ref": "16"
         },
@@ -150,12 +142,12 @@
        "Kind": "Constant"
       },
       {
-       "$id": "19",
+       "$id": "18",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "20",
+        "$id": "19",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -170,9 +162,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "21",
+        "$id": "20",
         "Type": {
-         "$id": "22",
+         "$id": "21",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -181,7 +173,7 @@
        }
       },
       {
-       "$id": "23",
+       "$id": "22",
        "Name": "Pet",
        "NameInRequest": "Pet",
        "Type": {
@@ -198,11 +190,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "23",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "24",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -217,9 +209,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "25",
         "Type": {
-         "$ref": "25"
+         "$ref": "24"
         },
         "Value": "application/json"
        }
@@ -227,7 +219,7 @@
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "26",
        "StatusCodes": [
         200
        ],
@@ -237,12 +229,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "28",
+         "$id": "27",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "29",
+          "$id": "28",
           "Name": "ResourceLocation",
           "Kind": "String",
           "IsNullable": false
@@ -252,7 +244,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "30",
+       "$id": "29",
        "StatusCodes": [
         201
        ],
@@ -262,12 +254,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "31",
+         "$id": "30",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "32",
+          "$id": "31",
           "Name": "ResourceLocation",
           "Kind": "String",
           "IsNullable": false
@@ -289,7 +281,7 @@
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "32"
    },
    "Creatable": true
   }
