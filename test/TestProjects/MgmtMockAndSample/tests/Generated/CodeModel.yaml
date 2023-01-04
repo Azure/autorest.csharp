@@ -19315,7 +19315,7 @@ operationGroups:
               - !Parameter &ref_617
                 schema: *ref_274
                 implementation: Method
-                required: true
+                required: false
                 language: !Languages &ref_1323
                   default:
                     name: parameters
@@ -19567,6 +19567,64 @@ operationGroups:
                               ruleType: NetworkRule
                               sourceAddresses:
                                 - 10.1.25.0/24
+            Create FirewallPolicyRuleCollectionGroup With All Default Values:
+              parameters:
+                api-version: '2021-02-01'
+                firewallPolicyName: firewallPolicy
+                resourceGroupName: rg1
+                ruleCollectionGroupName: ruleCollectionGroup1
+                subscriptionId: e747cc13-97d4-4a79-b463-42d7f4e558f2
+              responses:
+                '200':
+                  body:
+                    name: ruleCollectionGroup1
+                    etag: w/\00000000-0000-0000-0000-000000000000\
+                    id: /subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1
+                    properties:
+                      priority: 110
+                      provisioningState: Succeeded
+                      ruleCollections:
+                        - name: Example-Filter-Rule-Collection
+                          action:
+                            type: Deny
+                          ruleCollectionType: FirewallPolicyFilterRuleCollection
+                          rules:
+                            - name: rule1
+                              description: Deny inbound rule
+                              protocols:
+                                - port: 443
+                                  protocolType: Https
+                              ruleType: ApplicationRule
+                              sourceAddresses:
+                                - 216.58.216.164
+                                - 10.0.0.0/24
+                              webCategories:
+                                - Hacking
+                '201':
+                  body:
+                    name: firewallPolicy
+                    etag: w/\00000000-0000-0000-0000-000000000000\
+                    id: /subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy
+                    properties:
+                      priority: 110
+                      provisioningState: Succeeded
+                      ruleCollections:
+                        - name: Example-Filter-Rule-Collection
+                          action:
+                            type: Deny
+                          ruleCollectionType: FirewallPolicyFilterRuleCollection
+                          rules:
+                            - name: rule1
+                              description: Deny inbound rule
+                              protocols:
+                                - port: 443
+                                  protocolType: Https
+                              ruleType: ApplicationRule
+                              sourceAddresses:
+                                - 216.58.216.164
+                                - 10.0.0.0/24
+                              webCategories:
+                                - Hacking
             Create FirewallPolicyRuleCollectionGroup With IpGroups:
               parameters:
                 api-version: '2021-02-01'
@@ -31850,6 +31908,240 @@ testModel:
                                         - schema: *ref_254
                                           rawValue: 10.1.25.0/24
                                       language: *ref_1307
+                              language: *ref_1305
+                      flattenedNames: *ref_1299
+                      language: *ref_1283
+                  language: *ref_1325
+          - name: Create FirewallPolicyRuleCollectionGroup With All Default Values
+            clientParameters:
+              - exampleValue:
+                  schema: *ref_457
+                  rawValue: e747cc13-97d4-4a79-b463-42d7f4e558f2
+                  language: *ref_660
+                parameter: *ref_461
+            methodParameters:
+              - exampleValue:
+                  schema: *ref_5
+                  rawValue: rg1
+                  language: *ref_1318
+                parameter: *ref_619
+              - exampleValue:
+                  schema: *ref_5
+                  rawValue: firewallPolicy
+                  language: *ref_1319
+                parameter: *ref_620
+              - exampleValue:
+                  schema: *ref_5
+                  rawValue: ruleCollectionGroup1
+                  language: *ref_1320
+                parameter: *ref_621
+              - exampleValue:
+                  schema: *ref_599
+                  rawValue: '2021-02-01'
+                  language: *ref_1322
+                parameter: *ref_1321
+            operation: *ref_1326
+            operationGroup: *ref_1272
+            originalFile: ''
+            responses:
+              '200':
+                body:
+                  schema: *ref_274
+                  parentsValue: {}
+                  properties:
+                    name:
+                      schema: *ref_229
+                      rawValue: ruleCollectionGroup1
+                      language: *ref_1279
+                    etag:
+                      schema: *ref_230
+                      rawValue: w/\00000000-0000-0000-0000-000000000000\
+                      language: *ref_1280
+                    id:
+                      schema: *ref_275
+                      rawValue: /subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1
+                      language: *ref_1193
+                    priority:
+                      schema: *ref_232
+                      flattenedNames: *ref_1282
+                      rawValue: 110
+                      language: *ref_1281
+                    provisioningState:
+                      schema: *ref_183
+                      flattenedNames: *ref_1301
+                      rawValue: Succeeded
+                      language: *ref_1300
+                    ruleCollections:
+                      schema: *ref_424
+                      elements:
+                        - schema: *ref_269
+                          parentsValue: {}
+                          properties:
+                            name:
+                              schema: *ref_272
+                              rawValue: Example-Filter-Rule-Collection
+                              language: *ref_1297
+                            action:
+                              schema: *ref_368
+                              parentsValue: {}
+                              properties:
+                                type:
+                                  schema: *ref_267
+                                  rawValue: Deny
+                                  language: *ref_1304
+                              language: *ref_1303
+                            ruleCollectionType:
+                              schema: *ref_270
+                              rawValue: FirewallPolicyFilterRuleCollection
+                              language: *ref_1296
+                            rules:
+                              schema: *ref_436
+                              elements:
+                                - schema: *ref_260
+                                  parentsValue: {}
+                                  properties:
+                                    name:
+                                      schema: *ref_264
+                                      rawValue: rule1
+                                      language: *ref_1294
+                                    description:
+                                      schema: *ref_265
+                                      rawValue: Deny inbound rule
+                                      language: *ref_1317
+                                    protocols:
+                                      schema: *ref_439
+                                      elements:
+                                        - schema: *ref_369
+                                          parentsValue: {}
+                                          properties:
+                                            port:
+                                              schema: *ref_239
+                                              rawValue: 443
+                                              language: *ref_1315
+                                            protocolType:
+                                              schema: *ref_238
+                                              rawValue: Https
+                                              language: *ref_1314
+                                      language: *ref_1313
+                                    ruleType:
+                                      schema: *ref_263
+                                      rawValue: ApplicationRule
+                                      language: *ref_1295
+                                    sourceAddresses:
+                                      schema: *ref_437
+                                      elements:
+                                        - schema: *ref_236
+                                          rawValue: 216.58.216.164
+                                        - schema: *ref_236
+                                          rawValue: 10.0.0.0/24
+                                      language: *ref_1312
+                                    webCategories:
+                                      schema: *ref_444
+                                      elements:
+                                        - schema: *ref_245
+                                          rawValue: Hacking
+                                      language: *ref_1316
+                              language: *ref_1305
+                      flattenedNames: *ref_1299
+                      language: *ref_1283
+                  language: *ref_1324
+              '201':
+                body:
+                  schema: *ref_274
+                  parentsValue: {}
+                  properties:
+                    name:
+                      schema: *ref_229
+                      rawValue: firewallPolicy
+                      language: *ref_1279
+                    etag:
+                      schema: *ref_230
+                      rawValue: w/\00000000-0000-0000-0000-000000000000\
+                      language: *ref_1280
+                    id:
+                      schema: *ref_275
+                      rawValue: /subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy
+                      language: *ref_1193
+                    priority:
+                      schema: *ref_232
+                      flattenedNames: *ref_1282
+                      rawValue: 110
+                      language: *ref_1281
+                    provisioningState:
+                      schema: *ref_183
+                      flattenedNames: *ref_1301
+                      rawValue: Succeeded
+                      language: *ref_1300
+                    ruleCollections:
+                      schema: *ref_424
+                      elements:
+                        - schema: *ref_269
+                          parentsValue: {}
+                          properties:
+                            name:
+                              schema: *ref_272
+                              rawValue: Example-Filter-Rule-Collection
+                              language: *ref_1297
+                            action:
+                              schema: *ref_368
+                              parentsValue: {}
+                              properties:
+                                type:
+                                  schema: *ref_267
+                                  rawValue: Deny
+                                  language: *ref_1304
+                              language: *ref_1303
+                            ruleCollectionType:
+                              schema: *ref_270
+                              rawValue: FirewallPolicyFilterRuleCollection
+                              language: *ref_1296
+                            rules:
+                              schema: *ref_436
+                              elements:
+                                - schema: *ref_260
+                                  parentsValue: {}
+                                  properties:
+                                    name:
+                                      schema: *ref_264
+                                      rawValue: rule1
+                                      language: *ref_1294
+                                    description:
+                                      schema: *ref_265
+                                      rawValue: Deny inbound rule
+                                      language: *ref_1317
+                                    protocols:
+                                      schema: *ref_439
+                                      elements:
+                                        - schema: *ref_369
+                                          parentsValue: {}
+                                          properties:
+                                            port:
+                                              schema: *ref_239
+                                              rawValue: 443
+                                              language: *ref_1315
+                                            protocolType:
+                                              schema: *ref_238
+                                              rawValue: Https
+                                              language: *ref_1314
+                                      language: *ref_1313
+                                    ruleType:
+                                      schema: *ref_263
+                                      rawValue: ApplicationRule
+                                      language: *ref_1295
+                                    sourceAddresses:
+                                      schema: *ref_437
+                                      elements:
+                                        - schema: *ref_236
+                                          rawValue: 216.58.216.164
+                                        - schema: *ref_236
+                                          rawValue: 10.0.0.0/24
+                                      language: *ref_1312
+                                    webCategories:
+                                      schema: *ref_444
+                                      elements:
+                                        - schema: *ref_245
+                                          rawValue: Hacking
+                                      language: *ref_1316
                               language: *ref_1305
                       flattenedNames: *ref_1299
                       language: *ref_1283

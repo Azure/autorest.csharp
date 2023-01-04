@@ -19315,7 +19315,7 @@ operationGroups:
               - !Parameter &ref_617
                 schema: *ref_274
                 implementation: Method
-                required: true
+                required: false
                 language: !Languages 
                   default:
                     name: parameters
@@ -19567,6 +19567,64 @@ operationGroups:
                               ruleType: NetworkRule
                               sourceAddresses:
                                 - 10.1.25.0/24
+            Create FirewallPolicyRuleCollectionGroup With All Default Values:
+              parameters:
+                api-version: '2021-02-01'
+                firewallPolicyName: firewallPolicy
+                resourceGroupName: rg1
+                ruleCollectionGroupName: ruleCollectionGroup1
+                subscriptionId: e747cc13-97d4-4a79-b463-42d7f4e558f2
+              responses:
+                '200':
+                  body:
+                    name: ruleCollectionGroup1
+                    etag: w/\00000000-0000-0000-0000-000000000000\
+                    id: /subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1
+                    properties:
+                      priority: 110
+                      provisioningState: Succeeded
+                      ruleCollections:
+                        - name: Example-Filter-Rule-Collection
+                          action:
+                            type: Deny
+                          ruleCollectionType: FirewallPolicyFilterRuleCollection
+                          rules:
+                            - name: rule1
+                              description: Deny inbound rule
+                              protocols:
+                                - port: 443
+                                  protocolType: Https
+                              ruleType: ApplicationRule
+                              sourceAddresses:
+                                - 216.58.216.164
+                                - 10.0.0.0/24
+                              webCategories:
+                                - Hacking
+                '201':
+                  body:
+                    name: firewallPolicy
+                    etag: w/\00000000-0000-0000-0000-000000000000\
+                    id: /subscriptions/e747cc13-97d4-4a79-b463-42d7f4e558f2/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy
+                    properties:
+                      priority: 110
+                      provisioningState: Succeeded
+                      ruleCollections:
+                        - name: Example-Filter-Rule-Collection
+                          action:
+                            type: Deny
+                          ruleCollectionType: FirewallPolicyFilterRuleCollection
+                          rules:
+                            - name: rule1
+                              description: Deny inbound rule
+                              protocols:
+                                - port: 443
+                                  protocolType: Https
+                              ruleType: ApplicationRule
+                              sourceAddresses:
+                                - 216.58.216.164
+                                - 10.0.0.0/24
+                              webCategories:
+                                - Hacking
             Create FirewallPolicyRuleCollectionGroup With IpGroups:
               parameters:
                 api-version: '2021-02-01'

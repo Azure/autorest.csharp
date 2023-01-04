@@ -432,7 +432,7 @@
                     {
                         "name": "parameters",
                         "in": "body",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
                         },
@@ -477,6 +477,9 @@
                     },
                     "Create FirewallPolicyRuleCollectionGroup With Web Categories": {
                         "$ref": "./examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json"
+                    },
+                    "Create FirewallPolicyRuleCollectionGroup With All Default Values": {
+                        "$ref": "./examples/network/FirewallPolicyRuleCollectionGroupWithDefaultsPut.json"
                     }
                 },
                 "x-ms-long-running-operation": true,
