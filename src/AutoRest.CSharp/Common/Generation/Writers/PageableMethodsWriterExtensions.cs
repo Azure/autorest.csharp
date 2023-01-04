@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     return $"e => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.GetRawText())";
                 }
 
-                throw new NotSupportedException("Only BinaryData or user-defined models are supported!");
+                throw new NotSupportedException($"{pageItemType.FrameworkType} type is not supported. Only BinaryData or user-defined models are supported!");
             }
 
             if (pageItemType.Implementation is Resource { ResourceData: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } resourceDataType } resource)
@@ -182,7 +182,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             throw new NotSupportedException($"No deserialization logic exists for {pageItemType.Implementation.GetType()}");
-
         }
     }
 }

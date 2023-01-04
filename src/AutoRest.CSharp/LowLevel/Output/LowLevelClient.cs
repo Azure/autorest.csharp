@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Output.Models
                 .ToArray();
 
             ResponseClassifierTypes = RequestMethods.Select(m => m.ResponseClassifierType).ToArray();
-            
+
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 
             SubClients = Array.Empty<LowLevelClient>();
