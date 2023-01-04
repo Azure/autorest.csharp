@@ -37,11 +37,18 @@ namespace MgmtMockAndSample.Tests.Mock
             var collection = resourceGroupResource.GetFirewallPolicies();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "firewallPolicy", new FirewallPolicyData(new AzureLocation("West US"))
             {
+                StartupProbe = null,
+                ReadinessProbe = new Probe(false)
+                {
+                    InitialDelaySeconds = 30,
+                    PeriodSeconds = 10,
+                    FailureThreshold = 3,
+                },
                 ThreatIntelWhitelist = new FirewallPolicyThreatIntelWhitelist()
                 {
                     IpAddresses =
 {
-"20.3.4.5"
+IPAddress.Parse("20.3.4.5")
 },
                     Fqdns =
 {
@@ -69,6 +76,10 @@ WorkspaceIdId = new ResourceIdentifier("/subscriptions/subid/resourcegroups/rg1/
                         DefaultWorkspaceIdId = new ResourceIdentifier("/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"),
                     },
                 },
+                SnatPrivateRanges =
+{
+"IANAPrivateRanges"
+},
                 DnsSettings = new DnsSettings()
                 {
                     Servers =

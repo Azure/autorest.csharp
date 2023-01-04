@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -79,9 +80,14 @@ namespace AutoRest.CSharp.MgmtTest.Models
                     continue;
 
                 var exampleParameter = FindExampleParameterBySerializedName(AllParameters, GetParameterSerializedName(parameter.Name));
+                // if this parameter is a body parameter, we might have changed it to required, and we cannot tell if we have changed it on the codemodel right now. In this case we just fake an empty body.
+                if (parameter.DefaultValue == null && parameter.RequestLocation == RequestLocation.Body)
+                {
+                    exampleParameter ??= new() { ExampleValue = new() { Properties = new() } };
+                }
                 if (exampleParameter == null)
                 {
-                    // we did not find the corresponding parameter in the examples, see if this is a required parameter
+                    // if this is a required parameter and we did not find the corresponding parameter in the examples, we throw an exception.
                     if (parameter.DefaultValue == null)
                         throw new InvalidOperationException($"Cannot find an example value for required parameter `{parameter.Name}` in example {Name}");
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
@@ -24,12 +25,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void WriteClient(CodeWriter writer, DataPlaneRestClient restClient)
         {
-            var responseClassifierTypes = new List<LowLevelClientWriter.ResponseClassifierType>();
-
             using (writer.Namespace(restClient.Type.Namespace))
             {
                 using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}", scopeDeclarations: restClient.Fields.ScopeDeclarations))
                 {
+                    var responseClassifierTypes = new List<ResponseClassifierType>();
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
                     foreach (var method in restClient.Methods)
@@ -40,7 +40,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethod.Operation.Equals(method.Operation));
                         if (protocolMethod != null)
                         {
-                            WriteProtocolMethods(writer, restClient, protocolMethod, responseClassifierTypes);
+                            WriteProtocolMethods(writer, restClient, protocolMethod);
+                            responseClassifierTypes.Add(protocolMethod.RequestMethod.ResponseClassifierType);
                         }
                     }
 
@@ -49,9 +50,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteProtocolMethods(CodeWriter writer, DataPlaneRestClient restClient, LowLevelClientMethod protocolMethod, List<LowLevelClientWriter.ResponseClassifierType> responseClassifierTypes)
+        private static void WriteProtocolMethods(CodeWriter writer, DataPlaneRestClient restClient, LowLevelClientMethod protocolMethod)
         {
-            LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields, responseClassifierTypes);
+            LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields);
 
             var longRunning = protocolMethod.LongRunning;
             var pagingInfo = protocolMethod.PagingInfo;

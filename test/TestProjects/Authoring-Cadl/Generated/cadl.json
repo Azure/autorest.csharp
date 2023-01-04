@@ -9,7 +9,7 @@
    "$id": "2",
    "Name": "ProjectKind",
    "Namespace": "Azure.Language.Authoring",
-   "Description": "The project kind.",
+   "Description": "Represents the project kind.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -39,7 +39,7 @@
    "$id": "6",
    "Name": "JobStatus",
    "Namespace": "Azure.Language.Authoring",
-   "Description": "Represents the job status.",
+   "Description": "Represents the job status values.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -981,6 +981,7 @@
     {
      "$id": "124",
      "Name": "createOrUpdate",
+     "ResourceName": "Project",
      "Description": "Creates a new project or updates an existing one.",
      "Parameters": [
       {
@@ -1192,6 +1193,7 @@
     {
      "$id": "146",
      "Name": "get",
+     "ResourceName": "Project",
      "Description": "Gets the details of a project.",
      "Parameters": [
       {
@@ -1272,6 +1274,7 @@
     {
      "$id": "153",
      "Name": "delete",
+     "ResourceName": "Project",
      "Description": "Deletes a project.",
      "Parameters": [
       {
@@ -1365,6 +1368,7 @@
     {
      "$id": "162",
      "Name": "list",
+     "ResourceName": "Project",
      "Description": "Lists the existing projects.",
      "Parameters": [
       {
@@ -1490,6 +1494,7 @@
     {
      "$id": "174",
      "Name": "export",
+     "ResourceName": "Projects",
      "Description": "Triggers a job to export a project's data.",
      "Parameters": [
       {
@@ -1600,6 +1605,7 @@
     {
      "$id": "185",
      "Name": "importx",
+     "ResourceName": "Projects",
      "Description": "Triggers a job to export a project's data.",
      "Parameters": [
       {
@@ -1690,6 +1696,7 @@
     {
      "$id": "194",
      "Name": "train",
+     "ResourceName": "Projects",
      "Description": "Triggers a training job for a project.",
      "Parameters": [
       {
@@ -1827,6 +1834,7 @@
     {
      "$id": "207",
      "Name": "getDeployment",
+     "ResourceName": "Deployment",
      "Description": "Gets the details of a deployment.",
      "Parameters": [
       {
@@ -1927,6 +1935,7 @@
     {
      "$id": "216",
      "Name": "deployProject",
+     "ResourceName": "Deployment",
      "Description": "Creates a new deployment or replaces an existing one.",
      "Parameters": [
       {
@@ -2065,6 +2074,7 @@
     {
      "$id": "230",
      "Name": "deleteDeployment",
+     "ResourceName": "Deployment",
      "Description": "Deletes a project deployment.",
      "Parameters": [
       {
@@ -2178,6 +2188,7 @@
     {
      "$id": "241",
      "Name": "list",
+     "ResourceName": "Deployment",
      "Description": "Lists the existing deployments.",
      "Parameters": [
       {
@@ -2263,6 +2274,7 @@
     {
      "$id": "249",
      "Name": "swapDeployments",
+     "ResourceName": "Deployments",
      "Description": "Swaps two existing deployments with each other.",
      "Parameters": [
       {
@@ -2391,7 +2403,7 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/language",
-     "Path": "/authoring/analyze-text/projects/{projectName}/deployments/swap",
+     "Path": "/authoring/analyze-text/projects/{projectName}/deployments:swap",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -2401,6 +2413,7 @@
     {
      "$id": "262",
      "Name": "getDeploymentStatus",
+     "ResourceName": "DeploymentJob",
      "Description": "Gets the status of an existing deployment job.",
      "Parameters": [
       {
@@ -2521,6 +2534,7 @@
     {
      "$id": "273",
      "Name": "getSwapDeploymentsStatus",
+     "ResourceName": "SwapDeploymentsJob",
      "Description": "Gets the status of an existing swap deployment job.",
      "Parameters": [
       {
@@ -2641,6 +2655,7 @@
     {
      "$id": "284",
      "Name": "getSupportedLanguages",
+     "ResourceName": "Global",
      "Parameters": [
       {
        "$ref": "125"
@@ -2765,6 +2780,7 @@
     {
      "$id": "296",
      "Name": "listTrainingConfigVersions",
+     "ResourceName": "Global",
      "Parameters": [
       {
        "$ref": "125"

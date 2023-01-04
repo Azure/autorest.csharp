@@ -16,5 +16,5 @@ $CadlEmitterProps = "$SdkRepoRoot\eng\csharp-emitter-package.json"
     "`"@azure-tools/cadl-csharp`": `"$CadlEmitterVersion`"" | `
     Set-Content $CadlEmitterProps -NoNewline
 
-
+dotnet msbuild /restore /t:GenerateCode "$SdkRepoRoot\eng\service.proj"
 dotnet msbuild /restore /t:GenerateTests "$SdkRepoRoot\eng\service.proj"

@@ -238,12 +238,27 @@ if (!($Exclude -contains "Samples"))
     }
 }
 
+# Sample for cadl project
+$cadlSampleProjectName = 
+    'AnomalyDetector'
+
+if (!($Exclude -contains "Samples"))
+{
+    foreach ($projectName in $cadlSampleProjectName)
+    {
+        $projectDirectory = Join-Path $repoRoot 'samples' $projectName
+        $cadlMain = Join-Path $projectDirectory "main.cadl"
+        $cadlClient = Join-Path $projectDirectory "client.cadl"
+        $mainCadlFile = If (Test-Path "$cadlClient") { Resolve-Path "$cadlClient" } Else { Resolve-Path "$cadlMain"}
+        Add-Cadl $projectName $projectDirectory $mainCadlFile "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
+    }
+}
+
 # Cadl projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 $cadlRanchProjectNames =
     'api-key',
     'oauth2',
-    'extensible-enums',
     'property-optional',
     'property-types'
 

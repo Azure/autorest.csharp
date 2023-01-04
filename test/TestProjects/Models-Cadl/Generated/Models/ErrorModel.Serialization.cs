@@ -15,9 +15,15 @@ namespace ModelsInCadl.Models
     {
         internal static ErrorModel DeserializeErrorModel(JsonElement element)
         {
+            string message = default;
             Optional<ErrorModel> innerError = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("message"))
+                {
+                    message = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("innerError"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -29,7 +35,7 @@ namespace ModelsInCadl.Models
                     continue;
                 }
             }
-            return new ErrorModel(innerError);
+            return new ErrorModel(message, innerError);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

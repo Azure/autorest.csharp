@@ -15,6 +15,7 @@
     {
      "$id": "3",
      "Name": "getZonedDateTime",
+     "ResourceName": "stringFormat",
      "Description": "Path parameter is string with zonedDateTime format",
      "Parameters": [
       {
@@ -117,6 +118,7 @@
     {
      "$id": "14",
      "Name": "getUri",
+     "ResourceName": "stringFormat",
      "Description": "path paramter is string with uri format",
      "Parameters": [
       {

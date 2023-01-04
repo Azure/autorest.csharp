@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+import { isFixed } from "@azure-tools/cadl-azure-core";
 import {
     Enum,
     EnumMember,
@@ -8,10 +9,8 @@ import {
     getEffectiveModelType,
     getFormat,
     getFriendlyName,
-    getIntrinsicModelName,
     getKnownValues,
     getVisibility,
-    isIntrinsic,
     Model,
     ModelProperty,
     Namespace,
@@ -25,7 +24,10 @@ import {
     TrackableType,
     getDiscriminator,
     IntrinsicType,
-    isVoidType
+    isVoidType,
+    isArrayModelType,
+    isRecordModelType,
+    Scalar
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -35,7 +37,6 @@ import {
     HttpOperation,
     isStatusCode
 } from "@cadl-lang/rest/http";
-import { toNamespacedPath } from "path";
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
 import { InputModelProperty } from "../type/InputModelProperty.js";
 import {
@@ -105,6 +106,10 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Float64;
         case "string":
             return InputTypeKind.String;
+        case "uri":
+            return InputTypeKind.String;
+        case "url":
+            return InputTypeKind.String;
         case "boolean":
             return InputTypeKind.Boolean;
         case "plainDate":
@@ -115,8 +120,6 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Time;
         case "duration":
             return InputTypeKind.Duration;
-        case "Map":
-            return InputTypeKind.Dictionary;
         default:
             return InputTypeKind.Model;
     }
@@ -130,7 +133,7 @@ export function mapCadlIntrinsicModelToCsharpModel(
     program: Program,
     cadlType: Model
 ): string | undefined {
-    if (!isIntrinsic(program, cadlType)) {
+    if (!program.checker.isStdType(cadlType)) {
         return undefined;
     }
     //const name = getIntrinsicModelName(program, cadlType);
@@ -172,7 +175,7 @@ export function mapCadlIntrinsicModelToCsharpModel(
             return "TimeSpan";
         case "duration":
             return "TimeSpan";
-        case "Map":
+        case "Record":
             // We assert on valType because Map types always have a type
             return "Dictionary";
         default:
@@ -262,55 +265,57 @@ export function getInputType(
         return getInputTypeForEnum(type);
     } else if (type.kind === "Intrinsic") {
         return getInputModelForIntrinsicType(type);
+    } else if (type.kind === "Scalar" /*&& program.checker.isStdType(type)*/) {
+        let effectiveType = type;
+        while (!program.checker.isStdType(effectiveType)) {
+            if (type.baseScalar) {
+                effectiveType = type.baseScalar;
+            } else {
+                break;
+            }
+        }
+        const intrinsicName = effectiveType.name;
+        switch (intrinsicName) {
+            case "string":
+                const values = getKnownValues(program, type);
+                if (values) {
+                    return getInputModelForEnumByKnowValues(type, values);
+                }
+            // if the model is one of the Cadl Intrinsic type.
+            // it's a base Cadl "primitive" that corresponds directly to an c# data type.
+            // In such cases, we don't want to emit a ref and instead just
+            // emit the base type directly.
+            default:
+                return {
+                    Name: type.name,
+                    Kind: getCSharpInputTypeKindByIntrinsicModelName(
+                        intrinsicName
+                    ),
+                    IsNullable: false
+                } as InputPrimitiveType;
+        }
+    } else if (type.kind === "Union") {
+        throw new Error(`Union is not supported.`);
     } else {
-        throw new Error("Unsupported type.");
+        throw new Error(`Unsupported type ${type.kind}`);
     }
 
     function getInputModelType(m: Model): InputType {
-        const intrinsicName = getIntrinsicModelName(program, m);
-        if (intrinsicName) {
-            switch (intrinsicName) {
-                case "string":
-                    const values = getKnownValues(program, m);
-                    if (values) {
-                        return getInputModelForExtensibleEnum(m, values);
-                    }
-                // if the model is one of the Cadl Intrinsic type.
-                // it's a base Cadl "primitive" that corresponds directly to an c# data type.
-                // In such cases, we don't want to emit a ref and instead just
-                // emit the base type directly.
-                default:
-                    return {
-                        Name: m.name,
-                        Kind: getCSharpInputTypeKindByIntrinsicModelName(
-                            intrinsicName
-                        ),
-                        IsNullable: false
-                    } as InputPrimitiveType;
-            }
-        }
-
         /* Array and Map Type. */
-        if (m.indexer) {
-            if (!isNeverType(m.indexer.key)) {
-                const name = getIntrinsicModelName(program, m.indexer.key);
-                if (m.indexer.value) {
-                    if (name === "integer") {
-                        return getInputTypeForArray(m.indexer.value);
-                    } else {
-                        return getInputTypeForMap(
+        if (!isNeverType(m)) {
+            if (isArrayModelType(program, m)) {
+                return getInputTypeForArray(m.indexer.value);
+            } else if (isRecordModelType(program, m)) {
+                return getInputTypeForMap(
                             m.indexer.key,
                             m.indexer.value
                         );
-                    }
-                }
             }
         }
-
         return getInputModelForModel(m);
     }
 
-    function getInputModelForExtensibleEnum(m: Model, e: Enum): InputEnumType {
+    function getInputModelForEnumByKnowValues(m: Model | Scalar, e: Enum): InputEnumType {
         let extensibleEnum = enums.get(m.name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
@@ -326,7 +331,7 @@ export function getInputType(
                 Description: getDoc(program, m),
                 EnumValueType: innerEnum.EnumValueType,
                 AllowedValues: innerEnum.AllowedValues,
-                IsExtensible: true,
+                IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
             enums.set(m.name, extensibleEnum);
@@ -375,7 +380,7 @@ export function getInputType(
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
-                IsExtensible: false,
+                IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
             if (addToCollection) enums.set(e.name, enumType);
@@ -508,8 +513,7 @@ export function getInputType(
         }
 
         // Cadl "primitive" types can't be base types for models
-        const intrinsicName = getIntrinsicModelName(program, m);
-        if (intrinsicName) {
+        if (program.checker.isStdType(m)) {
             return undefined;
         }
 

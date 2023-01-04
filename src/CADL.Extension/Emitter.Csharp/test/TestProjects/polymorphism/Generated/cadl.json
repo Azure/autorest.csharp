@@ -148,6 +148,7 @@
     {
      "$id": "16",
      "Name": "putModel",
+     "ResourceName": "Discriminated",
      "Description": "Generate and receive polymorphic model in multiple levels inheritance with 2 discriminators.",
      "Parameters": [
       {
@@ -297,6 +298,7 @@
     {
      "$id": "31",
      "Name": "getRecursiveModel",
+     "ResourceName": "Discriminated",
      "Description": "Generate and receive polymorphic models has collection and dictionary properties referring to other polymorphic models.",
      "Parameters": [
       {
@@ -357,6 +359,7 @@
     {
      "$id": "36",
      "Name": "putRecursiveModel",
+     "ResourceName": "Discriminated",
      "Description": "Generate and send polymorphic models has collection and dictionary properties referring to other polymorphic models.",
      "Parameters": [
       {
@@ -461,6 +464,7 @@
     {
      "$id": "45",
      "Name": "getMissingDiscriminator",
+     "ResourceName": "Discriminated",
      "Description": "Get a model omitting the discriminator.",
      "Parameters": [
       {
@@ -521,6 +525,7 @@
     {
      "$id": "50",
      "Name": "getWrongDiscriminator",
+     "ResourceName": "Discriminated",
      "Description": "Get a model containing discriminator value never defined.",
      "Parameters": [
       {

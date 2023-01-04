@@ -60,15 +60,10 @@ model PetId {
 }
 
 @doc("Extensible enum Values for pet kind")
-enum PetKindValues {
+enum PetKind {
     Dog: "dog",
     Cat: "cat"
 }
-
-@doc("Extensible enum for pet kind")
-@knownValues(PetKindValues)
-model PetKind is string {}
-
 
 @doc("Manage your pets. You can delete or get the Pet from pet store.")
 @summary("Manage your pets.")

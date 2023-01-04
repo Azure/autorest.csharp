@@ -6,15 +6,17 @@
 #nullable disable
 
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
 
-namespace MgmtMockAndSample
+namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_FirewallPolicyResource
     {
@@ -26,8 +28,10 @@ namespace MgmtMockAndSample
             // Generated from example definition: 
             // this example is just showing the usage of "FirewallPolicies_Delete" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this FirewallPolicyResource created on azure
             // for more information of creating FirewallPolicyResource, please refer to the document of FirewallPolicyResource
@@ -51,8 +55,10 @@ namespace MgmtMockAndSample
             // Generated from example definition: 
             // this example is just showing the usage of "FirewallPolicies_Get" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this FirewallPolicyResource created on azure
             // for more information of creating FirewallPolicyResource, please refer to the document of FirewallPolicyResource
@@ -80,8 +86,10 @@ namespace MgmtMockAndSample
             // Generated from example definition: 
             // this example is just showing the usage of "FirewallPolicies_CreateOrUpdate" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this FirewallPolicyResource created on azure
             // for more information of creating FirewallPolicyResource, please refer to the document of FirewallPolicyResource
@@ -94,11 +102,18 @@ namespace MgmtMockAndSample
             // invoke the operation
             FirewallPolicyData data = new FirewallPolicyData(new AzureLocation("West US"))
             {
+                StartupProbe = null,
+                ReadinessProbe = new Probe(false)
+                {
+                    InitialDelaySeconds = 30,
+                    PeriodSeconds = 10,
+                    FailureThreshold = 3,
+                },
                 ThreatIntelWhitelist = new FirewallPolicyThreatIntelWhitelist()
                 {
                     IpAddresses =
 {
-"20.3.4.5"
+IPAddress.Parse("20.3.4.5")
 },
                     Fqdns =
 {
@@ -126,6 +141,10 @@ WorkspaceIdId = new ResourceIdentifier("/subscriptions/subid/resourcegroups/rg1/
                         DefaultWorkspaceIdId = new ResourceIdentifier("/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"),
                     },
                 },
+                SnatPrivateRanges =
+{
+"IANAPrivateRanges"
+},
                 DnsSettings = new DnsSettings()
                 {
                     Servers =
@@ -200,8 +219,10 @@ DestinationPorts =
             // Generated from example definition: 
             // this example is just showing the usage of "FirewallPolicies_ListAll" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource

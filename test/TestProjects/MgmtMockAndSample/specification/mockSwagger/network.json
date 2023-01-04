@@ -432,7 +432,7 @@
                     {
                         "name": "parameters",
                         "in": "body",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
                         },
@@ -477,6 +477,9 @@
                     },
                     "Create FirewallPolicyRuleCollectionGroup With Web Categories": {
                         "$ref": "./examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json"
+                    },
+                    "Create FirewallPolicyRuleCollectionGroup With All Default Values": {
+                        "$ref": "./examples/network/FirewallPolicyRuleCollectionGroupWithDefaultsPut.json"
                     }
                 },
                 "x-ms-long-running-operation": true,
@@ -568,8 +571,55 @@
             ],
             "description": "FirewallPolicy Resource."
         },
+        "Probe": {
+          "description": "Probe describes a health check to be performed against an App Instance to determine whether it is alive or ready to receive traffic.",
+          "type": "object",
+          "required": [
+            "disableProbe"
+          ],
+          "properties": {
+            "disableProbe": {
+              "description": "Indicate whether the probe is disabled.",
+              "type": "boolean",
+              "default": false
+            },
+            "initialDelaySeconds": {
+              "description": "Number of seconds after the App Instance has started before probes are initiated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes",
+              "format": "int32",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "description": "How often (in seconds) to perform the probe. Minimum value is 1.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "timeoutSeconds": {
+              "description": "Number of seconds after which the probe times out. Minimum value is 1.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "failureThreshold": {
+              "description": "Minimum consecutive failures for the probe to be considered failed after having succeeded. Minimum value is 1.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "successThreshold": {
+              "description": "Minimum consecutive successes for the probe to be considered successful after having failed. Must be 1 for liveness and startup. Minimum value is 1.",
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
         "FirewallPolicyPropertiesFormat": {
             "properties": {
+                "startupProbe": {
+                    "$ref": "#/definitions/Probe",
+                    "description": "StartupProbe indicates that the App Instance has successfully initialized. If specified, no other probes are executed until this completes successfully. If this probe fails, the Pod will be restarted, just as if the livenessProbe failed. This can be used to provide different probe parameters at the beginning of a App Instance's lifecycle, when it might take a long time to load data or warm a cache, than during steady-state operation. This cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
+                },
+                "readinessProbe": {
+                  "$ref": "#/definitions/Probe",
+                  "description": "Periodic probe of App Instance service readiness. App Instance will be removed from service endpoints if the probe fails. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
+                },
                 "ruleCollectionGroups": {
                     "type": "array",
                     "readOnly": true,

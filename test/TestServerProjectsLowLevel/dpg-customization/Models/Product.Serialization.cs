@@ -4,6 +4,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 
 namespace dpg_customization_LowLevel.Models
 {
@@ -21,6 +22,14 @@ namespace dpg_customization_LowLevel.Models
                 }
             }
             return new Product(received);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static Product FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeProduct(document.RootElement);
         }
     }
 }

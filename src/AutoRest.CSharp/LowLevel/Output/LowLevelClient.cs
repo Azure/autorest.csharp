@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -32,6 +33,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
         public IReadOnlyList<RestClientMethod> RequestMethods { get; }
+        public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes { get; }
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
         public LowLevelClient? ParentClient;
         public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
@@ -70,6 +72,8 @@ namespace AutoRest.CSharp.Output.Models
                 .Distinct()
                 .ToArray();
 
+            ResponseClassifierTypes = RequestMethods.Select(m => m.ResponseClassifierType).ToArray();
+            
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 
             SubClients = Array.Empty<LowLevelClient>();

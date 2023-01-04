@@ -64,7 +64,7 @@ namespace Pagination
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        public virtual AsyncPageable<LedgerEntry> GetLedgerEntryValuesAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<LedgerEntry> GetPaginationLedgerEntryValuesAsync(CancellationToken cancellationToken = default)
         {
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
@@ -75,7 +75,7 @@ namespace Pagination
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        public virtual Pageable<LedgerEntry> GetLedgerEntryValues(CancellationToken cancellationToken = default)
+        public virtual Pageable<LedgerEntry> GetPaginationLedgerEntryValues(CancellationToken cancellationToken = default)
         {
             var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
@@ -87,8 +87,8 @@ namespace Pagination
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntriesAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetLedgerEntriesAsync(RequestContext context = null)
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntriesAsync(RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetPaginationLedgerEntriesAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLedgerEntriesNextPageRequest(nextLink, context);
@@ -99,8 +99,8 @@ namespace Pagination
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntries(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetLedgerEntries(RequestContext context = null)
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntries(RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetPaginationLedgerEntries(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLedgerEntriesNextPageRequest(nextLink, context);
@@ -131,8 +131,8 @@ namespace Pagination
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationClientsAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetPaginationClientsAsync(RequestContext context = null)
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntriesAsync(RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetLedgerEntriesAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationClientsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationClientsNextPageRequest(nextLink, context);
@@ -143,15 +143,15 @@ namespace Pagination
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationClients(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetPaginationClients(RequestContext context = null)
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntries(RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetLedgerEntries(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationClientsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationClientsNextPageRequest(nextLink, context);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationClients", "value", "nextLink", context);
         }
 
-        internal HttpMessage CreateGetLedgerEntriesRequest(RequestContext context)
+        internal HttpMessage CreateGetPaginationLedgerEntriesRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -165,7 +165,7 @@ namespace Pagination
             return message;
         }
 
-        internal HttpMessage CreateGetPaginationClientsRequest(RequestContext context)
+        internal HttpMessage CreateGetLedgerEntriesRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -179,7 +179,7 @@ namespace Pagination
             return message;
         }
 
-        internal HttpMessage CreateGetLedgerEntriesNextPageRequest(string nextLink, RequestContext context)
+        internal HttpMessage CreateGetPaginationLedgerEntriesNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -192,7 +192,7 @@ namespace Pagination
             return message;
         }
 
-        internal HttpMessage CreateGetPaginationClientsNextPageRequest(string nextLink, RequestContext context)
+        internal HttpMessage CreateGetLedgerEntriesNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

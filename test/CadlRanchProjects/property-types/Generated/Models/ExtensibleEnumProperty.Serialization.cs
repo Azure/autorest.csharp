@@ -23,12 +23,12 @@ namespace Models.Property.Types.Models
 
         internal static ExtensibleEnumProperty DeserializeExtensibleEnumProperty(JsonElement element)
         {
-            InnerExtensibleEnum property = default;
+            InnerEnum property = default;
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"))
                 {
-                    property = new InnerExtensibleEnum(property0.Value.GetString());
+                    property = new InnerEnum(property0.Value.GetString());
                     continue;
                 }
             }

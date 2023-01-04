@@ -559,7 +559,7 @@
                 },
                 "type14": {
                     "type": "object",
-                    "x-ms-format": "dfe-date-time-rfc1123"
+                    "x-ms-format": "dfe-date-time"
                 },
                 "type15": {
                     "type": "object",
