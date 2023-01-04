@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="HelloAgainAsync(String,String,RequestContent,RequestContext)">
+<example>
+This sample shows how to call HelloAgainAsync with required parameters and request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlGenerateAllModelsClient(credential);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredCollection = new[] {
+        "1"
+    },
+    requiredDictionary = new {
+        key = "1",
+    },
+    requiredModel = new {
+        name = "<name>",
+    },
+};
+
+Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>RoundTripModel</c>:
+<code>{
+  requiredString: string, # Required.
+  requiredInt: number, # Required.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredModel: {
+    name: string, # Required.
+  }, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>RoundTripModel</c>:
+<code>{
+  requiredString: string, # Required.
+  requiredInt: number, # Required.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredModel: {
+    name: string, # Required.
+  }, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="HelloAgain(String,String,RequestContent,RequestContext)">
+<example>
+This sample shows how to call HelloAgain with required parameters and request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlGenerateAllModelsClient(credential);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredCollection = new[] {
+        "1"
+    },
+    requiredDictionary = new {
+        key = "1",
+    },
+    requiredModel = new {
+        name = "<name>",
+    },
+};
+
+Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>RoundTripModel</c>:
+<code>{
+  requiredString: string, # Required.
+  requiredInt: number, # Required.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredModel: {
+    name: string, # Required.
+  }, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>RoundTripModel</c>:
+<code>{
+  requiredString: string, # Required.
+  requiredInt: number, # Required.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredModel: {
+    name: string, # Required.
+  }, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

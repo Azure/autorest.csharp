@@ -1,0 +1,80 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
+import "@azure-tools/cadl-azure-core";
+
+@serviceVersion("0.1.0")
+@service({title: "Generate Models"})
+@server("http://localhost:300","Model Generation Service")
+@useAuth(OAuth2Auth<[{
+    type: OAuth2FlowType.clientCredentials;
+    tokenUrl: "https://api.example.com/oauth2/token";
+    refreshUrl: "https://api.example.com/oauth2/refresh";
+    scopes: [
+        "https://api.example.com/.default"
+    ]
+}]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)
+@Cadl.Rest.produces("application/json")
+@Cadl.Rest.consumes("application/json")
+namespace CadlGenerateAllModels;
+
+using Cadl.Http;
+using Azure.DPG;
+using Azure.Core;
+
+@doc("Simple enum")
+@fixed
+enum SimpleEnum {
+    One: "1",
+    Two: "2",
+    Four: "4"
+}
+
+@doc("Extensible enum")
+enum ExtensibleEnum {
+    One: "1",
+    Two: "2",
+    Four: "4"
+}
+
+model NotReferenceModel {
+  @doc("name of NotReference Model")
+  name: string
+}
+
+@doc("NotReference enum")
+enum NotReferenceEnum {
+  One: "1",
+  Two: "2",
+  Four: "4"
+}
+
+model Thing {
+  @doc("name of the Thing")
+  name: string;
+}
+
+model RoundTripModel {
+  @doc("Required string, illustrating a reference type property.")
+  requiredString: string;
+
+  @doc("Required int, illustrating a value type property.")
+  requiredInt: int32;
+
+  @doc("Required collection of enums")
+  requiredCollection: SimpleEnum[];
+
+  @doc("Required dictionary of enums")
+  requiredDictionary: Record<ExtensibleEnum>;
+
+  @doc("Required model")
+  requiredModel: Thing;
+}
+
+namespace Hello.Demo {
+    @route("/againHi")
+    @doc("Return hi again")
+    @get
+    @convenienceAPI
+    op helloAgain(@header p1: string, @body action: RoundTripModel, @path p2: string): RoundTripModel;
+}
