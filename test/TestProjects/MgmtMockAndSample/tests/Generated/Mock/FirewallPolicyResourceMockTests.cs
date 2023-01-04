@@ -68,11 +68,18 @@ namespace MgmtMockAndSample.Tests.Mock
             FirewallPolicyResource firewallPolicy = GetArmClient().GetFirewallPolicyResource(firewallPolicyResourceId);
             await firewallPolicy.UpdateAsync(WaitUntil.Completed, new FirewallPolicyData(new AzureLocation("West US"))
             {
+                StartupProbe = null,
+                ReadinessProbe = new Probe(false)
+                {
+                    InitialDelaySeconds = 30,
+                    PeriodSeconds = 10,
+                    FailureThreshold = 3,
+                },
                 ThreatIntelWhitelist = new FirewallPolicyThreatIntelWhitelist()
                 {
                     IpAddresses =
 {
-"20.3.4.5"
+IPAddress.Parse("20.3.4.5")
 },
                     Fqdns =
 {
