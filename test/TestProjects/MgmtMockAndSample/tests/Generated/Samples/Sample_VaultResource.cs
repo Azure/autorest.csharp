@@ -27,8 +27,10 @@ namespace MgmtMockAndSample.Samples
             // Generated from example definition: 
             // this example is just showing the usage of "Vaults_Update" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
@@ -86,8 +88,10 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             // Generated from example definition: 
             // this example is just showing the usage of "Vaults_Delete" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
@@ -111,8 +115,10 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             // Generated from example definition: 
             // this example is just showing the usage of "Vaults_Get" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
@@ -140,8 +146,10 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             // Generated from example definition: 
             // this example is just showing the usage of "Vaults_ListKeys" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
@@ -168,8 +176,10 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             // Generated from example definition: 
             // this example is just showing the usage of "Vaults_Validate" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
@@ -193,8 +203,10 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             // Generated from example definition: 
             // this example is just showing the usage of "Vaults_Disable" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
@@ -218,8 +230,10 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             // Generated from example definition: 
             // this example is just showing the usage of "Vaults_UpdateAccessPolicy" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
@@ -262,8 +276,10 @@ CertificatePermission.Get
             // Generated from example definition: 
             // this example is just showing the usage of "Vaults_ListBySubscription" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
@@ -293,8 +309,10 @@ CertificatePermission.Get
             // Generated from example definition: 
             // this example is just showing the usage of "Vaults_CheckNameAvailability" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
@@ -317,8 +335,10 @@ CertificatePermission.Get
             // Generated from example definition: 
             // this example is just showing the usage of "PrivateLinkResources_ListByVault" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this VaultResource created on azure
             // for more information of creating VaultResource, please refer to the document of VaultResource
