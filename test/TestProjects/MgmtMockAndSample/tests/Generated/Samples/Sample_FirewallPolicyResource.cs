@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -95,11 +96,18 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             FirewallPolicyData data = new FirewallPolicyData(new AzureLocation("West US"))
             {
+                StartupProbe = null,
+                ReadinessProbe = new Probe(false)
+                {
+                    InitialDelaySeconds = 30,
+                    PeriodSeconds = 10,
+                    FailureThreshold = 3,
+                },
                 ThreatIntelWhitelist = new FirewallPolicyThreatIntelWhitelist()
                 {
                     IpAddresses =
 {
-"20.3.4.5"
+IPAddress.Parse("20.3.4.5")
 },
                     Fqdns =
 {

@@ -40,6 +40,16 @@ namespace MgmtMockAndSample
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
+            if (Optional.IsDefined(StartupProbe))
+            {
+                writer.WritePropertyName("startupProbe");
+                writer.WriteObjectValue(StartupProbe);
+            }
+            if (Optional.IsDefined(ReadinessProbe))
+            {
+                writer.WritePropertyName("readinessProbe");
+                writer.WriteObjectValue(ReadinessProbe);
+            }
             if (Optional.IsDefined(BasePolicy))
             {
                 writer.WritePropertyName("basePolicy");
@@ -94,6 +104,8 @@ namespace MgmtMockAndSample
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
+            Optional<Probe> startupProbe = default;
+            Optional<Probe> readinessProbe = default;
             Optional<IReadOnlyList<WritableSubResource>> ruleCollectionGroups = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<WritableSubResource> basePolicy = default;
@@ -178,6 +190,26 @@ namespace MgmtMockAndSample
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
+                        if (property0.NameEquals("startupProbe"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            startupProbe = Probe.DeserializeProbe(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("readinessProbe"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            readinessProbe = Probe.DeserializeProbe(property0.Value);
+                            continue;
+                        }
                         if (property0.NameEquals("ruleCollectionGroups"))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
@@ -317,7 +349,7 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, Optional.ToList(ruleCollectionGroups), Optional.ToNullable(provisioningState), basePolicy, Optional.ToList(firewalls), Optional.ToList(childPolicies), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
+            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToList(ruleCollectionGroups), Optional.ToNullable(provisioningState), basePolicy, Optional.ToList(firewalls), Optional.ToList(childPolicies), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
         }
     }
 }
