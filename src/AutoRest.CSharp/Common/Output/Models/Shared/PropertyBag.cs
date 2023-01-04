@@ -39,10 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 TypeFactory.GetInputType(PackModel.Type),
                 null,
                 ShouldValidateParameter ? ValidationType.AssertNotNull : ValidationType.None,
-                ShouldValidateParameter ? (FormattableString?)null : $"new {PackModel.Type.Name}()")
-            {
-                IsPropertyBag = true
-            };
+                ShouldValidateParameter ? (FormattableString?)null : $"new {PackModel.Type.Name}()") with { IsPropertyBag = true };
         }
     }
 }

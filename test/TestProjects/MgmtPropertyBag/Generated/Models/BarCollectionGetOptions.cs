@@ -15,24 +15,29 @@ namespace MgmtPropertyBag.Models
     {
         /// <summary> Initializes a new instance of BarCollectionGetOptions. </summary>
         /// <param name="barName"> The bar name. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="ifMatch"/> is null. </exception>
-        public BarCollectionGetOptions(string barName, string ifMatch)
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
+        public BarCollectionGetOptions(string barName)
         {
             Argument.AssertNotNull(barName, nameof(barName));
-            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             BarName = barName;
-            IfMatch = ifMatch;
         }
 
         /// <summary> The bar name. </summary>
-        public string BarName { get; }
+        public string BarName { get; set; }
         /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
-        public string IfMatch { get; }
+        public string IfMatch { get; set; } = null;
+
         /// <summary> The filter to apply on the operation. </summary>
-        public string Filter { get; set; }
-        /// <summary> Gets or sets the top. </summary>
-        public int? Top { get; set; }
+        public string Filter { get; set; } = null;
+
+        /// <summary> The Integer to use. </summary>
+        public int? Top { get; set; } = null;
+
+        /// <summary> Optional. Specified maximum number of containers that can be included in the list. </summary>
+        public string Maxpagesize { get; set; } = null;
+
+        /// <summary> Optional. Number of records to skip. </summary>
+        public int? Skip { get; set; } = null;
     }
 }

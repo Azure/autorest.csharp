@@ -37,18 +37,13 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 .OrderBy(c => c.Code ?? c.Family * 100);
             ResponseClassifierType = new ResponseClassifierType(statusCodes);
 
-            IsPropertyBagMethod = false;
             PropertyBag = null;
-            // By default, we only enable property bag feature in management plane.
+            // By default, we enable property bag feature in management plane and the real behavior will be determined later.
             if (Configuration.AzureArm)
             {
-                if (parameters.Where(p => p.RequestLocation == RequestLocation.Header || p.RequestLocation == RequestLocation.Query).Count() > 2)
-                {
-                    IsPropertyBagMethod = true;
-                    // At this point we can't finalize the name for the property bag model
-                    // So we pass in the empty string here
-                    PropertyBag = new MgmtPropertyBag(string.Empty, operation);
-                }
+                // At this point we can't finalize the name for the property bag model
+                // So we pass in the empty string here
+                PropertyBag = new MgmtPropertyBag(string.Empty, operation);
             }
         }
 
@@ -79,7 +74,5 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public ResponseClassifierType ResponseClassifierType { get; }
 
         public PropertyBag? PropertyBag { get;  }
-
-        public bool IsPropertyBagMethod { get; }
     }
 }

@@ -14,7 +14,9 @@ using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -35,85 +37,80 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             : base(name)
         {
             _operation = operation;
-            _paramNamesToKeep = Array.Empty<string>();
+            _paramsToKeep = Array.Empty<Parameter>();
         }
 
-        private MgmtPropertyBag(string name, InputOperation operation, IEnumerable<string> paramNamesToKeep)
+        private MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep)
             : this(name, operation)
         {
-            _paramNamesToKeep = paramNamesToKeep;
+            _paramsToKeep = paramsToKeep;
         }
 
-        public MgmtPropertyBag WithUpdatedInfo(string name, IEnumerable<string> paramNamesToKeep) =>
-            new MgmtPropertyBag(name, _operation, paramNamesToKeep);
+        public MgmtPropertyBag WithUpdatedInfo(string name, IEnumerable<Parameter> paramsToKeep) =>
+            new MgmtPropertyBag(name, _operation, paramsToKeep);
 
         private InputOperation _operation;
 
-        private IEnumerable<string> _paramNamesToKeep;
+        private IEnumerable<Parameter> _paramsToKeep;
 
         protected override TypeProvider EnsurePackModel()
         {
             var packModelName = string.IsNullOrEmpty(Name) ?
             throw new InvalidOperationException("Not enough information is provided for constructing management plane property bag, please make sure you first call the WithUpdatedInfo method of MgmtPropertyBag to update the property bag before using it.") :
             $"{Name}Options";
-        var properties = new List<Property>();
-            var parameters = _operation.Parameters.Where(p => _paramNamesToKeep.Contains(p.Name, StringComparer.OrdinalIgnoreCase));
-            foreach (var parameter in parameters)
+            var properties = new List<InputModelProperty>();
+            foreach (var parameter in _paramsToKeep)
             {
-                var propertySchema = parameter.Schema;
-                var format = TypeFactory.GetXMsFormatType(parameter.Type);
-                if (parameter.Schema is StringSchema s && format != null)
-                {
-                    // some parameters might share one string schema, but have different x-ms-format
-                    // therefore we use deep clone here to avoid generating the wrong parameter type
-                    propertySchema = DeepClone(s);
-                    propertySchema.Extensions = new RecordOfStringAndAny { { "x-ms-format", format } };
-                }
-                var property = new Property
-                {
-                    Schema = propertySchema,
-                    Language = new Languages
-                    {
-                        Default = new Language
-                        {
-                            Name = parameter.Name,
-                            Description = parameter.Description
-                        }
-                    },
-                    ReadOnly = false,
-                    Required = parameter.DefaultValue == null
-                };
+                var inputParameter = _operation.Parameters.FirstOrDefault(p => string.Equals(p.Name, parameter.Name, StringComparison.OrdinalIgnoreCase));
+                string? description = parameter.Description;
+                if (description == null)
+                    description = $"The {parameter.Name}";
+                var property = new InputModelProperty(parameter.Name, null, description, inputParameter.Type, parameter.DefaultValue == null, IsReadOnly(parameter), false, GetDefaultValue(parameter));
                 properties.Add(property);
             }
-            var schema = new ObjectSchema
-            {
-                Extensions = new RecordOfStringAndAny { { "x-csharp-usage", "model,input" }, { "x-accessibility", "public" } },
-                ApiVersions = new Collection<ApiVersion> { parameters.FirstOrDefault().Schema.ApiVersions.FirstOrDefault() },
-                Properties = properties,
-                Language = new Languages
-                {
-                    Default = new Language
-                    {
-                        Name = packModelName,
-                        Description = $"The {packModelName}."
-                    }
-                }
-            };
-            return new MgmtObjectType(schema);
+            var defaultNamespace = $"{MgmtContext.Context.DefaultNamespace}.Models";
+            var propertyBagModel = new InputModelType(
+                packModelName,
+                defaultNamespace,
+                "public",
+                $"The {packModelName}.",
+                InputModelTypeUsage.None,
+                properties,
+                null,
+                Array.Empty<InputModelType>(),
+                null,
+                null,
+                false,
+                true);
+            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.TypeFactory);
+            ;
         }
 
         protected override bool EnsureShouldValidateParameter()
         {
-            if (PackModel is MgmtObjectType mgmtPackModel)
+            if (PackModel is ModelTypeProvider mgmtPackModel)
             {
                 return mgmtPackModel.Properties.Any(p => p.IsRequired);
             }
             return false;
         }
 
-        private static T DeepClone<T>(T source)
+        private bool IsReadOnly(Parameter parameter)
         {
-            return BinaryData.FromObjectAsJson<T>(source).ToObjectFromJson<T>();
+            if (TypeFactory.IsCollectionType(parameter.Type))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private FormattableString? GetDefaultValue(Parameter parameter)
+        {
+            if (parameter.DefaultValue != null)
+            {
+                return parameter.DefaultValue?.GetConstantFormattable();
+            }
+            return null;
         }
     }
 }

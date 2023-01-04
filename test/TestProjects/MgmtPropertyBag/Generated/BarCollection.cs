@@ -56,7 +56,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Create a bar with two optional query parameters.
+        /// Create a bar with five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
@@ -65,10 +65,11 @@ namespace MgmtPropertyBag
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
-        public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string barName, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string barName, BarData data, string filter = null, int? top = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             Argument.AssertNotNull(data, nameof(data));
@@ -77,7 +78,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, data, filter, top, cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, data, filter, top, ifMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -91,7 +92,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Create a bar with two optional query parameters.
+        /// Create a bar with five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
@@ -100,10 +101,11 @@ namespace MgmtPropertyBag
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
-        public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, string barName, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, string barName, BarData data, string filter = null, int? top = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             Argument.AssertNotNull(data, nameof(data));
@@ -112,7 +114,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, data, filter, top, cancellationToken);
+                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, data, filter, top, ifMatch, cancellationToken);
                 var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -126,7 +128,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a specific bar with one required header parameter and two optional query parameters.
+        /// Gets a specific bar with one required header parameter and four optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
@@ -141,7 +143,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, options.Maxpagesize, options.Skip, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -154,7 +156,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a specific bar with one required header parameter and two optional query parameters.
+        /// Gets a specific bar with one required header parameter and four optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
@@ -169,7 +171,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, cancellationToken);
+                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, options.Maxpagesize, options.Skip, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -182,7 +184,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a list of bar with one optional header parameter and two optional query parameters.
+        /// Gets a list of bar with one optional header parameter and five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
         /// Operation Id: Bars_List
         /// </summary>
@@ -199,7 +201,7 @@ namespace MgmtPropertyBag
                 scope.Start();
                 try
                 {
-                    var response = await _barRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _barRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, options.IfNoneMatch, options.Maxpagesize, options.Skip, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Select(value => new BarResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -212,7 +214,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a list of bar with one optional header parameter and two optional query parameters.
+        /// Gets a list of bar with one optional header parameter and five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
         /// Operation Id: Bars_List
         /// </summary>
@@ -229,7 +231,7 @@ namespace MgmtPropertyBag
                 scope.Start();
                 try
                 {
-                    var response = _barRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, cancellationToken: cancellationToken);
+                    var response = _barRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, options.IfNoneMatch, options.Maxpagesize, options.Skip, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Select(value => new BarResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -257,7 +259,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, options.Maxpagesize, options.Skip, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -283,7 +285,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, cancellationToken: cancellationToken);
+                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, options.Maxpagesize, options.Skip, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)

@@ -176,10 +176,7 @@ namespace AutoRest.CSharp.Output.Models
                     Explode: requestParameter.Protocol.Http is HttpParameter { Explode: true },
                     SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
                     HeaderCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
-                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null)
-            {
-                Schema = requestParameter.Schema
-            };
+                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null);
         }
 
         private static InputConstant? GetDefaultValue(RequestParameter parameter)

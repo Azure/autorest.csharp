@@ -360,6 +360,8 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.ETag => InputPrimitiveType.ETag,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType => InputPrimitiveType.ResourceType,
             { Type: AllSchemaTypes.String } when format == XMsFormat.RequestMethod => InputPrimitiveType.RequestMethod,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.Object => InputPrimitiveType.Object,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.IPAddress => InputPrimitiveType.IPAddress,
 
             ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format, modelsCache),
 

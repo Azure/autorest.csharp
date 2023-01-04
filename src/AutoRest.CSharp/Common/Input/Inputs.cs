@@ -124,14 +124,6 @@ namespace AutoRest.CSharp.Common.Input
             ArraySerializationDelimiter: null,
             HeaderCollectionPrefix: null)
         { }
-
-        private readonly Schema? _schema;
-
-        public Schema Schema
-        {
-            get => _schema ?? new Schema();
-            init => _schema = value;
-        }
     }
 
     internal record OperationResponseHeader(string Name, string NameInResponse, string Description, InputType Type)
@@ -180,6 +172,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType Guid { get; }               = new(InputTypeKind.Guid);
         public static InputPrimitiveType Int32 { get; }              = new(InputTypeKind.Int32);
         public static InputPrimitiveType Int64 { get; }              = new(InputTypeKind.Int64);
+        public static InputPrimitiveType IPAddress { get; }          = new(InputTypeKind.IPAddress);
         public static InputPrimitiveType Object { get; }             = new(InputTypeKind.Object);
         public static InputPrimitiveType RequestMethod { get; }      = new(InputTypeKind.RequestMethod);
         public static InputPrimitiveType ResourceIdentifier { get; } = new(InputTypeKind.ResourceIdentifier);
@@ -196,7 +189,7 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
-    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
+    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, FormattableString? DefaultValue = null)
     {
     }
 
@@ -254,6 +247,7 @@ namespace AutoRest.CSharp.Common.Input
         Guid,
         Int32,
         Int64,
+        IPAddress,
         Object,
         RequestMethod,
         ResourceIdentifier,

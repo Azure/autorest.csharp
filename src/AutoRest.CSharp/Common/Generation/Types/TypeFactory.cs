@@ -62,6 +62,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Guid => new CSharpType(typeof(Guid), inputType.IsNullable),
                 InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
                 InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
+                InputTypeKind.IPAddress => new CSharpType(typeof(IPAddress), inputType.IsNullable),
                 InputTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod), inputType.IsNullable),
                 InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
                 InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
@@ -280,28 +281,6 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.DataFactoryExpressionOfKeyValuePairs => typeof(DataFactoryExpression<IDictionary<string, string>>),
             _ => null
         };
-
-        internal static string? GetXMsFormatType(InputType inputType)
-        {
-            if (Enum.TryParse<InputTypeKind>(inputType.Name, true, out InputTypeKind type))
-            {
-                return type switch
-                {
-                    InputTypeKind.DateTimeISO8601 => XMsFormat.DateTime,
-                    InputTypeKind.DateTimeRFC1123 => XMsFormat.DateTimeRFC1123,
-                    InputTypeKind.DateTimeUnix => XMsFormat.DateTimeUnix,
-                    InputTypeKind.DurationConstant => XMsFormat.DurationConstant,
-                    InputTypeKind.ResourceIdentifier => XMsFormat.ArmId,
-                    InputTypeKind.AzureLocation => XMsFormat.AzureLocation,
-                    InputTypeKind.ContentType => XMsFormat.ContentType,
-                    InputTypeKind.ETag => XMsFormat.ETag,
-                    InputTypeKind.ResourceType => XMsFormat.ResourceType,
-                    InputTypeKind.RequestMethod => XMsFormat.RequestMethod,
-                    _ => null
-                };
-            }
-            return null;
-        }
 
         private static Type ToFrameworkNumericType(NumberSchema schema) => schema.Type switch
         {

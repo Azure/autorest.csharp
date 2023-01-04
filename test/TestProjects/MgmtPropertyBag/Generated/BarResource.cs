@@ -14,7 +14,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
-using MgmtPropertyBag.Models;
 
 namespace MgmtPropertyBag
 {
@@ -89,22 +88,23 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a specific bar with one required header parameter and two optional query parameters.
+        /// Gets a specific bar with one required header parameter and four optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
-        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
+        /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        public virtual async Task<Response<BarResource>> GetAsync(BarResourceGetOptions options, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BarResource>> GetAsync(string ifMatch = null, string filter = null, int? top = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
-
             using var scope = _barClientDiagnostics.CreateScope("BarResource.Get");
             scope.Start();
             try
             {
-                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.IfMatch, options.Filter, options.Top, cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, filter, top, maxpagesize, skip, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -117,22 +117,23 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a specific bar with one required header parameter and two optional query parameters.
+        /// Gets a specific bar with one required header parameter and four optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
-        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
+        /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        public virtual Response<BarResource> Get(BarResourceGetOptions options, CancellationToken cancellationToken = default)
+        public virtual Response<BarResource> Get(string ifMatch = null, string filter = null, int? top = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
-
             using var scope = _barClientDiagnostics.CreateScope("BarResource.Get");
             scope.Start();
             try
             {
-                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.IfMatch, options.Filter, options.Top, cancellationToken);
+                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, filter, top, maxpagesize, skip, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -145,7 +146,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Create a bar with two optional query parameters.
+        /// Create a bar with five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
@@ -153,9 +154,10 @@ namespace MgmtPropertyBag
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public virtual async Task<ArmOperation<BarResource>> UpdateAsync(WaitUntil waitUntil, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<BarResource>> UpdateAsync(WaitUntil waitUntil, BarData data, string filter = null, int? top = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
 
@@ -163,7 +165,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, filter, top, cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, filter, top, ifMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -177,7 +179,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Create a bar with two optional query parameters.
+        /// Create a bar with five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
@@ -185,9 +187,10 @@ namespace MgmtPropertyBag
         /// <param name="data"> The bar parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public virtual ArmOperation<BarResource> Update(WaitUntil waitUntil, BarData data, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<BarResource> Update(WaitUntil waitUntil, BarData data, string filter = null, int? top = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
 
@@ -195,7 +198,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, filter, top, cancellationToken);
+                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, filter, top, ifMatch, cancellationToken);
                 var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

@@ -185,20 +185,20 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
         /// Operation Id: VirtualMachineScaleSetVMs_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="filter"> The filter to apply to the operation. Allowed values are &apos;startswith(instanceView/statuses/code, &apos;PowerState&apos;) eq true&apos;, &apos;properties/latestModelApplied eq true&apos;, &apos;properties/latestModelApplied eq false&apos;. </param>
+        /// <param name="select"> The list parameters. Allowed values are &apos;instanceView&apos;, &apos;instanceView/statuses&apos;. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetVMResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineScaleSetVMResource> GetAllAsync(VirtualMachineScaleSetVMCollectionGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachineScaleSetVMResource> GetAllAsync(string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
-            options ??= new VirtualMachineScaleSetVMCollectionGetAllOptions();
-
             async Task<Page<VirtualMachineScaleSetVMResource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineScaleSetVMRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Filter, options.Select, options.Expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineScaleSetVMRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -213,7 +213,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineScaleSetVMRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Filter, options.Select, options.Expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineScaleSetVMRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -230,20 +230,20 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
         /// Operation Id: VirtualMachineScaleSetVMs_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="filter"> The filter to apply to the operation. Allowed values are &apos;startswith(instanceView/statuses/code, &apos;PowerState&apos;) eq true&apos;, &apos;properties/latestModelApplied eq true&apos;, &apos;properties/latestModelApplied eq false&apos;. </param>
+        /// <param name="select"> The list parameters. Allowed values are &apos;instanceView&apos;, &apos;instanceView/statuses&apos;. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSetVMResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineScaleSetVMResource> GetAll(VirtualMachineScaleSetVMCollectionGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachineScaleSetVMResource> GetAll(string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
-            options ??= new VirtualMachineScaleSetVMCollectionGetAllOptions();
-
             Page<VirtualMachineScaleSetVMResource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineScaleSetVMRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Filter, options.Select, options.Expand, cancellationToken: cancellationToken);
+                    var response = _virtualMachineScaleSetVMRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -258,7 +258,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineScaleSetVMRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Filter, options.Select, options.Expand, cancellationToken: cancellationToken);
+                    var response = _virtualMachineScaleSetVMRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -328,17 +328,17 @@ namespace Azure.ResourceManager.Sample
 
         IEnumerator<VirtualMachineScaleSetVMResource> IEnumerable<VirtualMachineScaleSetVMResource>.GetEnumerator()
         {
-            return GetAll(options: null).GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll(options: null).GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IAsyncEnumerator<VirtualMachineScaleSetVMResource> IAsyncEnumerable<VirtualMachineScaleSetVMResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
-            return GetAllAsync(options: null, cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
     }
 }

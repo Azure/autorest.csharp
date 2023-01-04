@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 
 namespace Azure.Management.Storage
@@ -189,20 +188,20 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares
         /// Operation Id: FileShares_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="maxpagesize"> Optional. Specified maximum number of shares that can be included in the list. </param>
+        /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: deleted, snapshots. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FileShareResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<FileShareResource> GetAllAsync(FileShareCollectionGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<FileShareResource> GetAllAsync(int? maxpagesize = null, string filter = null, string expand = null, CancellationToken cancellationToken = default)
         {
-            options ??= new FileShareCollectionGetAllOptions();
-
             async Task<Page<FileShareResource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _fileShareRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, options.Filter, options.Expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fileShareRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FileShareResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -217,7 +216,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = await _fileShareRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, options.Filter, options.Expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fileShareRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FileShareResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -234,20 +233,20 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares
         /// Operation Id: FileShares_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="maxpagesize"> Optional. Specified maximum number of shares that can be included in the list. </param>
+        /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: deleted, snapshots. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FileShareResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<FileShareResource> GetAll(FileShareCollectionGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<FileShareResource> GetAll(int? maxpagesize = null, string filter = null, string expand = null, CancellationToken cancellationToken = default)
         {
-            options ??= new FileShareCollectionGetAllOptions();
-
             Page<FileShareResource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _fileShareRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, options.Filter, options.Expand, cancellationToken: cancellationToken);
+                    var response = _fileShareRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FileShareResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -262,7 +261,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = _fileShareRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, options.Filter, options.Expand, cancellationToken: cancellationToken);
+                    var response = _fileShareRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FileShareResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -334,17 +333,17 @@ namespace Azure.Management.Storage
 
         IEnumerator<FileShareResource> IEnumerable<FileShareResource>.GetEnumerator()
         {
-            return GetAll(options: null).GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll(options: null).GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IAsyncEnumerator<FileShareResource> IAsyncEnumerable<FileShareResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
-            return GetAllAsync(options: null, cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
     }
 }

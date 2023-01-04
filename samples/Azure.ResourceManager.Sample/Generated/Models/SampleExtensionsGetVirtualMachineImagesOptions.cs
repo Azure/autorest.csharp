@@ -32,18 +32,20 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> The name of a supported Azure region. </summary>
-        public AzureLocation Location { get; }
+        public AzureLocation Location { get; set; }
         /// <summary> A valid image publisher. </summary>
-        public string PublisherName { get; }
+        public string PublisherName { get; set; }
         /// <summary> A valid image publisher offer. </summary>
-        public string Offer { get; }
+        public string Offer { get; set; }
         /// <summary> A valid image SKU. </summary>
-        public string Skus { get; }
+        public string Skus { get; set; }
         /// <summary> The expand expression to apply on the operation. </summary>
-        public string Expand { get; set; }
-        /// <summary> Gets or sets the top. </summary>
-        public int? Top { get; set; }
-        /// <summary> Gets or sets the orderby. </summary>
-        public string Orderby { get; set; }
+        public string Expand { get; set; } = null;
+
+        /// <summary> The Integer to use. </summary>
+        public int? Top { get; set; } = null;
+
+        /// <summary> The String to use. </summary>
+        public string Orderby { get; set; } = null;
     }
 }

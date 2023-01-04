@@ -38,7 +38,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
         }
@@ -53,7 +53,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscriptionResource).GetFoos(filter, top, cancellationToken);
         }
@@ -68,7 +68,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag ifMatch, int? top = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
         }
@@ -83,7 +83,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag ifMatch, int? top = null, CancellationToken cancellationToken = default)
+        public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
         }
@@ -106,7 +106,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a specific foo with three optional query parameters.
+        /// Gets a specific foo with five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
@@ -121,7 +121,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a specific foo with three optional query parameters.
+        /// Gets a specific foo with five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
@@ -144,7 +144,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a specific bar with one required header parameter and two optional query parameters.
+        /// Gets a specific bar with one required header parameter and four optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
@@ -159,7 +159,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a specific bar with one required header parameter and two optional query parameters.
+        /// Gets a specific bar with one required header parameter and four optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>

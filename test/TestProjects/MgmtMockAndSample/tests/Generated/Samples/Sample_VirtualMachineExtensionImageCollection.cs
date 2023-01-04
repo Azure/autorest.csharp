@@ -11,7 +11,6 @@ using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
-using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
@@ -238,8 +237,11 @@ namespace MgmtMockAndSample
             VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
-            VirtualMachineExtensionImageCollectionGetAllOptions options = new VirtualMachineExtensionImageCollectionGetAllOptions(type: "aaaaaaaaaaaaaaaaaa") { Filter = "aaaaaaaaaaaaaaaaaaaaaaaaa", Top = 22, Orderby = "a" };
-            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(options))
+            string type = "aaaaaaaaaaaaaaaaaa";
+            string filter = "aaaaaaaaaaaaaaaaaaaaaaaaa";
+            int? top = 22;
+            string orderby = "a";
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, filter: filter, top: top, orderby: orderby))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
@@ -274,8 +276,8 @@ namespace MgmtMockAndSample
             VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
-            VirtualMachineExtensionImageCollectionGetAllOptions options = new VirtualMachineExtensionImageCollectionGetAllOptions(type: "aaaa") { };
-            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(options))
+            string type = "aaaa";
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance

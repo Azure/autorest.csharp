@@ -52,6 +52,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
+        public bool IsPropertyBag => _inputModel.IsPropertyBag;
+
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
@@ -352,6 +354,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool EnsureHasJsonSerialization()
         {
+            if (IsPropertyBag)
+                return false;
             return true;
         }
 

@@ -288,16 +288,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var p = UpdateParameterTypeOfByIdMethod(operation.RequestPath, parameter);
                 if (mapping == null)
                 {
-                    if (method.IsPropertyBagMethod)
-                    {
-                        // the IsPassThru of parameter of the property bag method is still set to true
-                        // thus we can distinguish it from contextual parameter
-                        yield return new ParameterMapping(p, true, $"{GetPropertyBagValueExpression(p)}", Enumerable.Empty<string>());
-                    }
-                    else
-                    {
-                        yield return new ParameterMapping(p, true, $"", Enumerable.Empty<string>());
-                    }
+                    yield return new ParameterMapping(p, true, $"", Enumerable.Empty<string>());
                 }
                 else
                 {
@@ -403,7 +394,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
         }
 
-        private static string GetPropertyBagValueExpression(Parameter parameter)
+        public static string GetPropertyBagValueExpression(this Parameter parameter)
         {
             return $"options.{parameter.Name.FirstCharToUpperCase()}";
         }

@@ -71,11 +71,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MethodSignatureModifiers Accessibility => Method.Accessibility;
         public bool IsPagingOperation => Operation.Language.Default.Paging != null || IsListOperation;
 
-        public bool IsPropertyBagOperation => Method.IsPropertyBagMethod;
-
         private string? _propertyBagName;
 
-        private IEnumerable<string>? _propertyBagSelectedParams;
+        private IEnumerable<Parameter>? _propertyBagSelectedParams;
 
         private Parameter? _propertyBagParameter;
 
@@ -448,18 +446,18 @@ namespace AutoRest.CSharp.Mgmt.Models
             return ResourceMatchType.None;
         }
 
-        internal Parameter GetPropertyBagParameter(IEnumerable<string> parameterNames)
+        internal Parameter GetPropertyBagParameter(IEnumerable<Parameter> parameters)
         {
             // considering this method might be invoked several times in the future
             // we use _propertyBagParameter to cache the last reault
             // and return it directly if the input parameter is the same as the previous one
-            if (_propertyBagSelectedParams != null && _propertyBagSelectedParams.SequenceEqual(parameterNames))
+            if (_propertyBagSelectedParams != null && _propertyBagSelectedParams.SequenceEqual(parameters))
             {
                 return _propertyBagParameter!;
             }
             else
             {
-                _propertyBagSelectedParams = parameterNames;
+                _propertyBagSelectedParams = parameters;
             }
             var clientName = _propertyBagName == null ?
                 MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" : _propertyBagName;
@@ -476,14 +474,14 @@ namespace AutoRest.CSharp.Mgmt.Models
                     throw new InvalidOperationException($"The property bag model name for {OperationId} should end with Options.");
                 }
             }
-            var propertyBag = ((MgmtPropertyBag)Method.PropertyBag!).WithUpdatedInfo(propertyBagName, parameterNames);
-            var schemaObject = (MgmtObjectType)propertyBag.PackModel;
+            var propertyBag = ((MgmtPropertyBag)Method.PropertyBag!).WithUpdatedInfo(propertyBagName, parameters);
+            var schemaObject = propertyBag.PackModel;
             var existingModels = MgmtContext.Library.PropertyBagModels.Where(m => m.Type.Name == schemaObject.Type.Name);
             if (existingModels != null)
             {
                 // sometimes we might have two or more property bag models with same name but different porperties
                 // we will throw exception in this case to prompt the user to rename the property bag model
-                if (IsDuplicatedPropertyBag(existingModels, schemaObject))
+                if (IsDuplicatedPropertyBag(existingModels, (ModelTypeProvider)schemaObject))
                 {
                     throw new InvalidOperationException($"Another property bag model named {schemaObject.Type.Name} already exists, please use configuration `rename-property-bag` to rename the property bag model corresponding to the operation {OperationId}.");
                 }
@@ -492,11 +490,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             return _propertyBagParameter = propertyBag.PackParameter;
         }
 
-        private static bool IsDuplicatedPropertyBag(IEnumerable<TypeProvider> existingModels, MgmtObjectType modelToAdd)
+        private static bool IsDuplicatedPropertyBag(IEnumerable<TypeProvider> existingModels, ModelTypeProvider modelToAdd)
         {
             foreach (var model in existingModels)
             {
-                if (model is not MgmtObjectType mgmtModel)
+                if (model is not ModelTypeProvider mgmtModel)
                     continue;
                 if (mgmtModel.Properties.Count() != modelToAdd.Properties.Count())
                     return true;

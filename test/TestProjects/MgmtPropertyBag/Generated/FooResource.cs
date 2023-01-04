@@ -89,21 +89,23 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a specific foo with three optional query parameters.
+        /// Gets a specific foo with five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
-        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<FooResource>> GetAsync(FooResourceGetOptions options, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FooResource>> GetAsync(string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, int? skip = null, CancellationToken cancellationToken = default)
         {
-            options ??= new FooResourceGetOptions();
-
             using var scope = _fooClientDiagnostics.CreateScope("FooResource.Get");
             scope.Start();
             try
             {
-                var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Filter, options.Top, options.Orderby, cancellationToken).ConfigureAwait(false);
+                var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, top, orderby, ifMatch, skip, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
@@ -116,21 +118,23 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Gets a specific foo with three optional query parameters.
+        /// Gets a specific foo with five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
         /// Operation Id: Foos_Get
         /// </summary>
-        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<FooResource> Get(FooResourceGetOptions options, CancellationToken cancellationToken = default)
+        public virtual Response<FooResource> Get(string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, int? skip = null, CancellationToken cancellationToken = default)
         {
-            options ??= new FooResourceGetOptions();
-
             using var scope = _fooClientDiagnostics.CreateScope("FooResource.Get");
             scope.Start();
             try
             {
-                var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Filter, options.Top, options.Orderby, cancellationToken);
+                var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, top, orderby, ifMatch, skip, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
@@ -195,7 +199,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Reconnect an existing foo with three optional query parameters.
+        /// Reconnect an existing foo with five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect
         /// Operation Id: Foos_Reconnect
         /// </summary>
@@ -209,7 +213,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = await _fooRestClient.ReconnectAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, cancellationToken).ConfigureAwait(false);
+                var response = await _fooRestClient.ReconnectAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Skip, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -220,7 +224,7 @@ namespace MgmtPropertyBag
         }
 
         /// <summary>
-        /// Reconnect an existing foo with three optional query parameters.
+        /// Reconnect an existing foo with five optional query parameters.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect
         /// Operation Id: Foos_Reconnect
         /// </summary>
@@ -234,7 +238,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = _fooRestClient.Reconnect(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, cancellationToken);
+                var response = _fooRestClient.Reconnect(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Skip, cancellationToken);
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

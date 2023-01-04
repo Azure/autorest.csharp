@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         public static CodeWriter AppendExamplePropertyBagParamValue(this CodeWriter writer, Parameter parameter, Dictionary<string, ExampleParameterValue> exampleParameterValue)
         {
             writer.Append($"new {parameter.Type}(");
-            var mgmtObject = parameter.Type.Implementation as MgmtObjectType;
+            var mgmtObject = parameter.Type.Implementation as ModelTypeProvider;
             var requiredProperties = mgmtObject!.Properties.Where(p => p.IsRequired);
             var nonRequiredProperties = mgmtObject!.Properties.Where(p => !p.IsRequired);
             foreach (var property in requiredProperties)

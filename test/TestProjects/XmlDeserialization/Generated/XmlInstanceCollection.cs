@@ -17,7 +17,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
-using XmlDeserialization.Models;
 
 namespace XmlDeserialization
 {
@@ -186,20 +185,20 @@ namespace XmlDeserialization
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls
         /// Operation Id: XmlDeserialization_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> Number of records to return. </param>
+        /// <param name="skip"> Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<XmlInstanceResource> GetAllAsync(XmlInstanceCollectionGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<XmlInstanceResource> GetAllAsync(string filter = null, int? top = null, int? skip = null, CancellationToken cancellationToken = default)
         {
-            options ??= new XmlInstanceCollectionGetAllOptions();
-
             async Task<Page<XmlInstanceResource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _xmlInstanceXmlDeserializationRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Skip, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _xmlInstanceXmlDeserializationRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new XmlInstanceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -214,7 +213,7 @@ namespace XmlDeserialization
                 scope.Start();
                 try
                 {
-                    var response = await _xmlInstanceXmlDeserializationRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Skip, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _xmlInstanceXmlDeserializationRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new XmlInstanceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -231,20 +230,20 @@ namespace XmlDeserialization
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls
         /// Operation Id: XmlDeserialization_List
         /// </summary>
-        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> Number of records to return. </param>
+        /// <param name="skip"> Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<XmlInstanceResource> GetAll(XmlInstanceCollectionGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<XmlInstanceResource> GetAll(string filter = null, int? top = null, int? skip = null, CancellationToken cancellationToken = default)
         {
-            options ??= new XmlInstanceCollectionGetAllOptions();
-
             Page<XmlInstanceResource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _xmlInstanceXmlDeserializationRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Skip, cancellationToken: cancellationToken);
+                    var response = _xmlInstanceXmlDeserializationRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new XmlInstanceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -259,7 +258,7 @@ namespace XmlDeserialization
                 scope.Start();
                 try
                 {
-                    var response = _xmlInstanceXmlDeserializationRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Skip, cancellationToken: cancellationToken);
+                    var response = _xmlInstanceXmlDeserializationRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new XmlInstanceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -327,17 +326,17 @@ namespace XmlDeserialization
 
         IEnumerator<XmlInstanceResource> IEnumerable<XmlInstanceResource>.GetEnumerator()
         {
-            return GetAll(options: null).GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll(options: null).GetEnumerator();
+            return GetAll().GetEnumerator();
         }
 
         IAsyncEnumerator<XmlInstanceResource> IAsyncEnumerable<XmlInstanceResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
-            return GetAllAsync(options: null, cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
     }
 }

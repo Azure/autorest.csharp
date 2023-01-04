@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 .Append($"var {originalResponse:D} = {GetAwait(isAsync)} ")
                 .Append($"{GetRestClientName(getOperation)}.{CreateMethodName(getOperation.Method.Name, isAsync)}(");
 
-            WriteArguments(_writer, parameterMappings, true, getOperation.IsPropertyBagOperation);
+            WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
             if (This.ResourceData.ShouldSetResourceIdentifier)

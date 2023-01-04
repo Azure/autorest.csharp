@@ -70,7 +70,7 @@ namespace MgmtPropertyBag
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<IReadOnlyList<FooData>>> ListWithSubscriptionAsync(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<FooData>>> ListWithSubscriptionAsync(string subscriptionId, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
@@ -102,7 +102,7 @@ namespace MgmtPropertyBag
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<IReadOnlyList<FooData>> ListWithSubscription(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<FooData>> ListWithSubscription(string subscriptionId, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
@@ -127,7 +127,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string filter, int? top, string orderby)
+        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string filter, int? top, string orderby, ETag? ifMatch, string maxpagesize, int? skip)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -151,28 +151,43 @@ namespace MgmtPropertyBag
             {
                 uri.AppendQuery("$orderby", orderby, true);
             }
+            if (maxpagesize != null)
+            {
+                uri.AppendQuery("$maxpagesize", maxpagesize, true);
+            }
+            if (skip != null)
+            {
+                uri.AppendQuery("$skip", skip.Value, true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch.Value);
+            }
             request.Headers.Add("Accept", "application/json");
             _userAgent.Apply(message);
             return message;
         }
 
-        /// <summary> Gets a list of foo with three optional query parameters. </summary>
+        /// <summary> Gets a list of foo with six optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
+        /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<IReadOnlyList<FooData>>> ListAsync(string subscriptionId, string resourceGroupName, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<FooData>>> ListAsync(string subscriptionId, string resourceGroupName, string filter = null, int? top = 10, string orderby = null, ETag? ifMatch = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
-            using var message = CreateListRequest(subscriptionId, resourceGroupName, filter, top, orderby);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName, filter, top, orderby, ifMatch, maxpagesize, skip);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -193,21 +208,24 @@ namespace MgmtPropertyBag
             }
         }
 
-        /// <summary> Gets a list of foo with three optional query parameters. </summary>
+        /// <summary> Gets a list of foo with six optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
+        /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<IReadOnlyList<FooData>> List(string subscriptionId, string resourceGroupName, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<FooData>> List(string subscriptionId, string resourceGroupName, string filter = null, int? top = 10, string orderby = null, ETag? ifMatch = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
-            using var message = CreateListRequest(subscriptionId, resourceGroupName, filter, top, orderby);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName, filter, top, orderby, ifMatch, maxpagesize, skip);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -228,7 +246,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string fooName, string filter, int? top, string orderby)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string fooName, string filter, int? top, string orderby, ETag? ifMatch, int? skip)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -253,30 +271,40 @@ namespace MgmtPropertyBag
             {
                 uri.AppendQuery("$orderby", orderby, true);
             }
+            if (skip != null)
+            {
+                uri.AppendQuery("$skip", skip.Value, true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch.Value);
+            }
             request.Headers.Add("Accept", "application/json");
             _userAgent.Apply(message);
             return message;
         }
 
-        /// <summary> Gets a specific foo with three optional query parameters. </summary>
+        /// <summary> Gets a specific foo with five optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The foo name. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FooData>> GetAsync(string subscriptionId, string resourceGroupName, string fooName, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FooData>> GetAsync(string subscriptionId, string resourceGroupName, string fooName, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, fooName, filter, top, orderby);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, fooName, filter, top, orderby, ifMatch, skip);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -294,23 +322,25 @@ namespace MgmtPropertyBag
             }
         }
 
-        /// <summary> Gets a specific foo with three optional query parameters. </summary>
+        /// <summary> Gets a specific foo with five optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The foo name. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FooData> Get(string subscriptionId, string resourceGroupName, string fooName, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public Response<FooData> Get(string subscriptionId, string resourceGroupName, string fooName, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, fooName, filter, top, orderby);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, fooName, filter, top, orderby, ifMatch, skip);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -364,7 +394,7 @@ namespace MgmtPropertyBag
             return message;
         }
 
-        /// <summary> Create foo with three optional query parameters. </summary>
+        /// <summary> Create foo with four optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The foo name. </param>
@@ -398,7 +428,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        /// <summary> Create foo with three optional query parameters. </summary>
+        /// <summary> Create foo with four optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The foo name. </param>
@@ -518,7 +548,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        internal HttpMessage CreateReconnectRequest(string subscriptionId, string resourceGroupName, string fooName, FooData data, string filter, int? top, string orderby)
+        internal HttpMessage CreateReconnectRequest(string subscriptionId, string resourceGroupName, string fooName, FooData data, string filter, int? top, string orderby, ETag? ifMatch, int? skip)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -544,8 +574,16 @@ namespace MgmtPropertyBag
             {
                 uri.AppendQuery("$orderby", orderby, true);
             }
+            if (skip != null)
+            {
+                uri.AppendQuery("$skip", skip.Value, true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            if (ifMatch != null)
+            {
+                request.Headers.Add("If-Match", ifMatch.Value);
+            }
             request.Headers.Add("Accept", "application/json");
             if (data != null)
             {
@@ -558,7 +596,7 @@ namespace MgmtPropertyBag
             return message;
         }
 
-        /// <summary> Reconnect an existing foo with three optional query parameters. </summary>
+        /// <summary> Reconnect an existing foo with five optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The foo name. </param>
@@ -566,16 +604,18 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FooData>> ReconnectAsync(string subscriptionId, string resourceGroupName, string fooName, FooData data = null, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FooData>> ReconnectAsync(string subscriptionId, string resourceGroupName, string fooName, FooData data = null, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var message = CreateReconnectRequest(subscriptionId, resourceGroupName, fooName, data, filter, top, orderby);
+            using var message = CreateReconnectRequest(subscriptionId, resourceGroupName, fooName, data, filter, top, orderby, ifMatch, skip);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -591,7 +631,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        /// <summary> Reconnect an existing foo with three optional query parameters. </summary>
+        /// <summary> Reconnect an existing foo with five optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The foo name. </param>
@@ -599,16 +639,18 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FooData> Reconnect(string subscriptionId, string resourceGroupName, string fooName, FooData data = null, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public Response<FooData> Reconnect(string subscriptionId, string resourceGroupName, string fooName, FooData data = null, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var message = CreateReconnectRequest(subscriptionId, resourceGroupName, fooName, data, filter, top, orderby);
+            using var message = CreateReconnectRequest(subscriptionId, resourceGroupName, fooName, data, filter, top, orderby, ifMatch, skip);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -630,7 +630,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var response = new CodeWriterDeclaration("response");
 
             _writer.Append($"var {response:D} = {GetAwait(isAsync)} {GetRestClientName(operation)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
-            WriteArguments(_writer, parameterMappings, isPropertyBagMethod: operation.IsPropertyBagOperation);
+            WriteArguments(_writer, parameterMappings);
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
             _writer
@@ -717,7 +717,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-                WriteArguments(_writer, parameterMappings, isPropertyBagMethod: operation.IsPropertyBagOperation);
+                WriteArguments(_writer, parameterMappings);
                 _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
                 if (operation.ThrowIfNull)
@@ -806,7 +806,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Append($"var response = {GetAwait(async)} ");
             _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-            WriteArguments(_writer, parameterMapping, isPropertyBagMethod: operation.IsPropertyBagOperation);
+            WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
             WriteLROResponse(GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, async);
@@ -849,7 +849,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
 
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
-                WriteArguments(_writer, parameterMapping, isPropertyBagMethod: operation.IsPropertyBagOperation);
+                WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
                 _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
             }
@@ -863,7 +863,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
         #endregion
 
-        protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false, bool isPropertyBagMethod = false)
+        protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
         {
             foreach (var parameter in mapping)
             {
@@ -882,7 +882,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         else
                         {
                             Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                            if (isPropertyBagMethod)
+                            if (parameter.Parameter.IsPropertyBag)
                                 writer.Append($"{parameter.ValueExpression}, ");
                             else
                                 writer.Append($"{parameter.Parameter.Name}, ");
@@ -892,7 +892,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         if (passNullForOptionalParameters && parameter.Parameter.Validation == ValidationType.None)
                             writer.Append($"null, ");
-                        else if (isPropertyBagMethod)
+                        else if (parameter.Parameter.IsPropertyBag)
                             writer.Append($"{parameter.ValueExpression}, ");
                         else
                             writer.Append($"{parameter.Parameter.Name}, ");

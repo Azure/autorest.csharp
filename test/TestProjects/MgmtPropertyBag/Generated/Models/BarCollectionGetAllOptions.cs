@@ -18,10 +18,21 @@ namespace MgmtPropertyBag.Models
         }
 
         /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
-        public ETag? IfMatch { get; set; }
+        public ETag? IfMatch { get; set; } = null;
+
         /// <summary> The filter to apply on the operation. </summary>
-        public string Filter { get; set; }
-        /// <summary> Gets or sets the top. </summary>
-        public int? Top { get; set; }
+        public string Filter { get; set; } = null;
+
+        /// <summary> The Integer to use. </summary>
+        public int? Top { get; set; } = null;
+
+        /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-None-Match to unconditionally apply the operation. </summary>
+        public ETag? IfNoneMatch { get; set; } = null;
+
+        /// <summary> Optional. Specified maximum number of containers that can be included in the list. </summary>
+        public string Maxpagesize { get; set; } = null;
+
+        /// <summary> Optional. Number of records to skip. </summary>
+        public int? Skip { get; set; } = null;
     }
 }

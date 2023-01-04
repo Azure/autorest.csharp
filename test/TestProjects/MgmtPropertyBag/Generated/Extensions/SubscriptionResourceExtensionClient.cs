@@ -56,7 +56,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<FooResource> GetFoosAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<FooResource> GetFoosAsync(string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
             async Task<Page<FooResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -85,7 +85,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<FooResource> GetFoos(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<FooResource> GetFoos(string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
             Page<FooResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -114,7 +114,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<BarResource> GetBarsAsync(ETag ifMatch, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<BarResource> GetBarsAsync(ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<BarResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -158,7 +158,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<BarResource> GetBars(ETag ifMatch, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<BarResource> GetBars(ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Page<BarResource> FirstPageFunc(int? pageSizeHint)
             {

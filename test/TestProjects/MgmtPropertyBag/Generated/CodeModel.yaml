@@ -176,7 +176,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_45
+    - !ConstantSchema &ref_50
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -504,7 +504,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_14
     - *ref_17
-    - !ObjectSchema &ref_53
+    - !ObjectSchema &ref_58
       type: object
       apiVersions:
         - !ApiVersion 
@@ -528,7 +528,7 @@ schemas: !Schemas
           description: Foo instance details.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_67
+    - !ObjectSchema &ref_74
       type: object
       apiVersions:
         - !ApiVersion 
@@ -588,7 +588,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_20
     - *ref_21
-    - !ArraySchema &ref_39
+    - !ArraySchema &ref_42
       type: array
       apiVersions:
         - !ApiVersion 
@@ -600,7 +600,7 @@ schemas: !Schemas
           description: Array of Foo
       protocol: !Protocols {}
     - *ref_22
-    - !ArraySchema &ref_72
+    - !ArraySchema &ref_82
       type: array
       apiVersions:
         - !ApiVersion 
@@ -679,7 +679,10 @@ operationGroups:
                 in: query
           - !Parameter &ref_31
             schema: *ref_26
+            clientDefaultValue: 10
             implementation: Method
+            extensions:
+              x-ms-client-default: 10
             language: !Languages 
               default:
                 name: top
@@ -774,7 +777,10 @@ operationGroups:
                 in: query
           - !Parameter &ref_36
             schema: *ref_26
+            clientDefaultValue: 10
             implementation: Method
+            extensions:
+              x-ms-client-default: 10
             language: !Languages 
               default:
                 name: top
@@ -794,9 +800,44 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
+          - !Parameter &ref_38
+            schema: *ref_23
+            implementation: Method
+            extensions:
+              x-ms-format: etag
+            language: !Languages 
+              default:
+                name: ifMatch
+                description: The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation.
+                serializedName: If-Match
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+          - !Parameter &ref_39
+            schema: *ref_23
+            implementation: Method
+            language: !Languages 
+              default:
+                name: maxpagesize
+                description: Optional. Specified maximum number of containers that can be included in the list.
+                serializedName: $maxpagesize
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_40
+            schema: *ref_26
+            implementation: Method
+            language: !Languages 
+              default:
+                name: skip
+                description: Optional. Number of records to skip.
+                serializedName: $skip
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
           - *ref_27
           - *ref_28
-          - !Parameter &ref_38
+          - !Parameter &ref_41
             schema: *ref_34
             implementation: Method
             required: true
@@ -839,9 +880,12 @@ operationGroups:
           - *ref_36
           - *ref_37
           - *ref_38
+          - *ref_39
+          - *ref_40
+          - *ref_41
         responses:
           - !SchemaResponse 
-            schema: *ref_39
+            schema: *ref_42
             language: !Languages 
               default:
                 name: ''
@@ -872,7 +916,7 @@ operationGroups:
         language: !Languages 
           default:
             name: List
-            description: Gets a list of foo with three optional query parameters.
+            description: Gets a list of foo with six optional query parameters.
         protocol: !Protocols {}
       - !Operation 
         operationId: Foos_Get
@@ -881,7 +925,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_25
-          - !Parameter &ref_40
+          - !Parameter &ref_43
             schema: *ref_23
             implementation: Method
             required: true
@@ -893,7 +937,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_41
+          - !Parameter &ref_44
             schema: *ref_23
             implementation: Method
             language: !Languages 
@@ -904,7 +948,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_42
+          - !Parameter &ref_45
             schema: *ref_26
             implementation: Method
             language: !Languages 
@@ -915,7 +959,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_43
+          - !Parameter &ref_46
             schema: *ref_23
             implementation: Method
             language: !Languages 
@@ -926,9 +970,33 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
+          - !Parameter &ref_47
+            schema: *ref_23
+            implementation: Method
+            extensions:
+              x-ms-format: etag
+            language: !Languages 
+              default:
+                name: ifMatch
+                description: The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation.
+                serializedName: If-Match
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+          - !Parameter &ref_48
+            schema: *ref_26
+            implementation: Method
+            language: !Languages 
+              default:
+                name: skip
+                description: Optional. Number of records to skip.
+                serializedName: $skip
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
           - *ref_27
           - *ref_28
-          - !Parameter &ref_44
+          - !Parameter &ref_49
             schema: *ref_34
             implementation: Method
             required: true
@@ -967,11 +1035,13 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_40
-          - *ref_41
-          - *ref_42
           - *ref_43
           - *ref_44
+          - *ref_45
+          - *ref_46
+          - *ref_47
+          - *ref_48
+          - *ref_49
         responses:
           - !SchemaResponse 
             schema: *ref_1
@@ -1005,7 +1075,7 @@ operationGroups:
         language: !Languages 
           default:
             name: Get
-            description: Gets a specific foo with three optional query parameters.
+            description: Gets a specific foo with five optional query parameters.
         protocol: !Protocols {}
       - !Operation 
         operationId: Foos_Create
@@ -1014,7 +1084,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_25
-          - !Parameter &ref_48
+          - !Parameter &ref_53
             schema: *ref_23
             implementation: Method
             required: true
@@ -1026,7 +1096,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_49
+          - !Parameter &ref_54
             schema: *ref_23
             implementation: Method
             language: !Languages 
@@ -1037,7 +1107,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_50
+          - !Parameter &ref_55
             schema: *ref_26
             implementation: Method
             language: !Languages 
@@ -1048,7 +1118,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_51
+          - !Parameter &ref_56
             schema: *ref_23
             implementation: Method
             language: !Languages 
@@ -1061,7 +1131,7 @@ operationGroups:
                 in: query
           - *ref_27
           - *ref_28
-          - !Parameter &ref_52
+          - !Parameter &ref_57
             schema: *ref_34
             implementation: Method
             required: true
@@ -1074,10 +1144,10 @@ operationGroups:
               http: !HttpParameter 
                 in: path
         requestMediaTypes:
-          application/json: !Request &ref_47
+          application/json: !Request &ref_52
             parameters:
               - !Parameter 
-                schema: *ref_45
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1089,7 +1159,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_46
+              - !Parameter &ref_51
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -1115,7 +1185,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_46
+              - *ref_51
             language: !Languages 
               default:
                 name: ''
@@ -1129,13 +1199,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_47
-        signatureParameters:
-          - *ref_48
-          - *ref_49
-          - *ref_50
-          - *ref_51
           - *ref_52
+        signatureParameters:
+          - *ref_53
+          - *ref_54
+          - *ref_55
+          - *ref_56
+          - *ref_57
         responses:
           - !SchemaResponse 
             schema: *ref_1
@@ -1169,7 +1239,7 @@ operationGroups:
         language: !Languages 
           default:
             name: Create
-            description: Create foo with three optional query parameters.
+            description: Create foo with four optional query parameters.
         protocol: !Protocols {}
       - !Operation 
         operationId: Foos_Update
@@ -1178,7 +1248,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_25
-          - !Parameter &ref_56
+          - !Parameter &ref_61
             schema: *ref_23
             implementation: Method
             required: true
@@ -1192,7 +1262,7 @@ operationGroups:
                 in: path
           - *ref_27
           - *ref_28
-          - !Parameter &ref_57
+          - !Parameter &ref_62
             schema: *ref_34
             implementation: Method
             required: true
@@ -1205,10 +1275,10 @@ operationGroups:
               http: !HttpParameter 
                 in: path
         requestMediaTypes:
-          application/json: !Request &ref_55
+          application/json: !Request &ref_60
             parameters:
               - !Parameter 
-                schema: *ref_45
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1220,8 +1290,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_54
-                schema: *ref_53
+              - !Parameter &ref_59
+                schema: *ref_58
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1246,7 +1316,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_54
+              - *ref_59
             language: !Languages 
               default:
                 name: ''
@@ -1260,10 +1330,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_55
+          - *ref_60
         signatureParameters:
-          - *ref_56
-          - *ref_57
+          - *ref_61
+          - *ref_62
         responses:
           - !SchemaResponse 
             schema: *ref_1
@@ -1306,7 +1376,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_25
-          - !Parameter &ref_60
+          - !Parameter &ref_65
             schema: *ref_23
             implementation: Method
             required: true
@@ -1318,7 +1388,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_61
+          - !Parameter &ref_66
             schema: *ref_23
             implementation: Method
             language: !Languages 
@@ -1329,7 +1399,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_62
+          - !Parameter &ref_67
             schema: *ref_26
             implementation: Method
             language: !Languages 
@@ -1340,7 +1410,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_63
+          - !Parameter &ref_68
             schema: *ref_23
             implementation: Method
             language: !Languages 
@@ -1351,9 +1421,33 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
+          - !Parameter &ref_69
+            schema: *ref_23
+            implementation: Method
+            extensions:
+              x-ms-format: etag
+            language: !Languages 
+              default:
+                name: ifMatch
+                description: The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation.
+                serializedName: If-Match
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+          - !Parameter &ref_70
+            schema: *ref_26
+            implementation: Method
+            language: !Languages 
+              default:
+                name: skip
+                description: Optional. Number of records to skip.
+                serializedName: $skip
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
           - *ref_27
           - *ref_28
-          - !Parameter &ref_64
+          - !Parameter &ref_71
             schema: *ref_34
             implementation: Method
             required: true
@@ -1366,10 +1460,10 @@ operationGroups:
               http: !HttpParameter 
                 in: path
         requestMediaTypes:
-          application/json: !Request &ref_59
+          application/json: !Request &ref_64
             parameters:
               - !Parameter 
-                schema: *ref_45
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1381,7 +1475,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_58
+              - !Parameter &ref_63
                 schema: *ref_1
                 implementation: Method
                 required: false
@@ -1407,7 +1501,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_58
+              - *ref_63
             language: !Languages 
               default:
                 name: ''
@@ -1421,13 +1515,15 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_59
-        signatureParameters:
-          - *ref_60
-          - *ref_61
-          - *ref_62
-          - *ref_63
           - *ref_64
+        signatureParameters:
+          - *ref_65
+          - *ref_66
+          - *ref_67
+          - *ref_68
+          - *ref_69
+          - *ref_70
+          - *ref_71
         responses:
           - !SchemaResponse 
             schema: *ref_1
@@ -1461,7 +1557,7 @@ operationGroups:
         language: !Languages 
           default:
             name: Reconnect
-            description: Reconnect an existing foo with three optional query parameters.
+            description: Reconnect an existing foo with five optional query parameters.
         protocol: !Protocols {}
     language: !Languages 
       default:
@@ -1478,10 +1574,9 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_25
-          - !Parameter &ref_65
+          - !Parameter &ref_72
             schema: *ref_23
             implementation: Method
-            required: true
             extensions:
               x-ms-format: etag
             language: !Languages 
@@ -1492,7 +1587,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_66
+          - !Parameter &ref_73
             schema: *ref_26
             implementation: Method
             language: !Languages 
@@ -1532,11 +1627,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_65
-          - *ref_66
+          - *ref_72
+          - *ref_73
         responses:
           - !SchemaResponse 
-            schema: *ref_67
+            schema: *ref_74
             language: !Languages 
               default:
                 name: ''
@@ -1580,7 +1675,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_25
-          - !Parameter &ref_68
+          - !Parameter &ref_75
             schema: *ref_23
             implementation: Method
             extensions:
@@ -1593,7 +1688,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_69
+          - !Parameter &ref_76
             schema: *ref_23
             implementation: Method
             language: !Languages 
@@ -1604,7 +1699,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_70
+          - !Parameter &ref_77
             schema: *ref_26
             implementation: Method
             language: !Languages 
@@ -1615,9 +1710,44 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
+          - !Parameter &ref_78
+            schema: *ref_23
+            implementation: Method
+            extensions:
+              x-ms-format: etag
+            language: !Languages 
+              default:
+                name: ifNoneMatch
+                description: The entity state (Etag) version. A value of "*" can be used for If-None-Match to unconditionally apply the operation.
+                serializedName: If-None-Match
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+          - !Parameter &ref_79
+            schema: *ref_23
+            implementation: Method
+            language: !Languages 
+              default:
+                name: maxpagesize
+                description: Optional. Specified maximum number of containers that can be included in the list.
+                serializedName: $maxpagesize
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_80
+            schema: *ref_26
+            implementation: Method
+            language: !Languages 
+              default:
+                name: skip
+                description: Optional. Number of records to skip.
+                serializedName: $skip
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
           - *ref_27
           - *ref_28
-          - !Parameter &ref_71
+          - !Parameter &ref_81
             schema: *ref_34
             implementation: Method
             required: true
@@ -1656,13 +1786,16 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_68
-          - *ref_69
-          - *ref_70
-          - *ref_71
+          - *ref_75
+          - *ref_76
+          - *ref_77
+          - *ref_78
+          - *ref_79
+          - *ref_80
+          - *ref_81
         responses:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_82
             language: !Languages 
               default:
                 name: ''
@@ -1693,7 +1826,7 @@ operationGroups:
         language: !Languages 
           default:
             name: List
-            description: Gets a list of bar with one optional header parameter and two optional query parameters.
+            description: Gets a list of bar with one optional header parameter and five optional query parameters.
         protocol: !Protocols {}
       - !Operation 
         operationId: Bars_Get
@@ -1702,7 +1835,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_25
-          - !Parameter &ref_73
+          - !Parameter &ref_83
             schema: *ref_23
             implementation: Method
             required: true
@@ -1714,10 +1847,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_74
+          - !Parameter &ref_84
             schema: *ref_23
             implementation: Method
-            required: true
             language: !Languages 
               default:
                 name: ifMatch
@@ -1726,7 +1858,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_75
+          - !Parameter &ref_85
             schema: *ref_23
             implementation: Method
             language: !Languages 
@@ -1737,7 +1869,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_76
+          - !Parameter &ref_86
             schema: *ref_26
             implementation: Method
             language: !Languages 
@@ -1748,9 +1880,31 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
+          - !Parameter &ref_87
+            schema: *ref_23
+            implementation: Method
+            language: !Languages 
+              default:
+                name: maxpagesize
+                description: Optional. Specified maximum number of containers that can be included in the list.
+                serializedName: $maxpagesize
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_88
+            schema: *ref_26
+            implementation: Method
+            language: !Languages 
+              default:
+                name: skip
+                description: Optional. Number of records to skip.
+                serializedName: $skip
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
           - *ref_27
           - *ref_28
-          - !Parameter &ref_77
+          - !Parameter &ref_89
             schema: *ref_34
             implementation: Method
             required: true
@@ -1789,11 +1943,13 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_73
-          - *ref_74
-          - *ref_75
-          - *ref_76
-          - *ref_77
+          - *ref_83
+          - *ref_84
+          - *ref_85
+          - *ref_86
+          - *ref_87
+          - *ref_88
+          - *ref_89
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1827,7 +1983,7 @@ operationGroups:
         language: !Languages 
           default:
             name: Get
-            description: Gets a specific bar with one required header parameter and two optional query parameters.
+            description: Gets a specific bar with one required header parameter and four optional query parameters.
         protocol: !Protocols {}
       - !Operation 
         operationId: Bars_Create
@@ -1836,7 +1992,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_25
-          - !Parameter &ref_80
+          - !Parameter &ref_92
             schema: *ref_23
             implementation: Method
             required: true
@@ -1848,7 +2004,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_81
+          - !Parameter &ref_93
             schema: *ref_23
             implementation: Method
             language: !Languages 
@@ -1859,7 +2015,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_82
+          - !Parameter &ref_94
             schema: *ref_26
             implementation: Method
             language: !Languages 
@@ -1870,9 +2026,22 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
+          - !Parameter &ref_95
+            schema: *ref_23
+            implementation: Method
+            extensions:
+              x-ms-format: etag
+            language: !Languages 
+              default:
+                name: ifMatch
+                description: The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation.
+                serializedName: If-Match
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
           - *ref_27
           - *ref_28
-          - !Parameter &ref_83
+          - !Parameter &ref_96
             schema: *ref_34
             implementation: Method
             required: true
@@ -1885,10 +2054,10 @@ operationGroups:
               http: !HttpParameter 
                 in: path
         requestMediaTypes:
-          application/json: !Request &ref_79
+          application/json: !Request &ref_91
             parameters:
               - !Parameter 
-                schema: *ref_45
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1900,7 +2069,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_78
+              - !Parameter &ref_90
                 schema: *ref_5
                 implementation: Method
                 required: true
@@ -1926,7 +2095,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_78
+              - *ref_90
             language: !Languages 
               default:
                 name: ''
@@ -1940,12 +2109,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_79
+          - *ref_91
         signatureParameters:
-          - *ref_80
-          - *ref_81
-          - *ref_82
-          - *ref_83
+          - *ref_92
+          - *ref_93
+          - *ref_94
+          - *ref_95
+          - *ref_96
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1979,7 +2149,7 @@ operationGroups:
         language: !Languages 
           default:
             name: Create
-            description: Create a bar with two optional query parameters.
+            description: Create a bar with five optional query parameters.
         protocol: !Protocols {}
     language: !Languages 
       default:

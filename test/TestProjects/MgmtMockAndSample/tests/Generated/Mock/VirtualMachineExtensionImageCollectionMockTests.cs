@@ -12,7 +12,6 @@ using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
-using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -103,7 +102,7 @@ namespace MgmtMockAndSample.Tests.Mock
             ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetVirtualMachineExtensionImages(new AzureLocation("aaaaaaaaaaaaaaaaaaaaaaaaaa"), "aaaaaaaaaaaaaaaaaaaa");
-            await foreach (var _ in collection.GetAllAsync(new VirtualMachineExtensionImageCollectionGetAllOptions(type: "aaaaaaaaaaaaaaaaaa") { Filter = "aaaaaaaaaaaaaaaaaaaaaaaaa", Top = 22, Orderby = "a" }))
+            await foreach (var _ in collection.GetAllAsync("aaaaaaaaaaaaaaaaaa", filter: "aaaaaaaaaaaaaaaaaaaaaaaaa", top: 22, orderby: "a"))
             {
             }
         }
@@ -116,7 +115,7 @@ namespace MgmtMockAndSample.Tests.Mock
             ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             var collection = subscriptionResource.GetVirtualMachineExtensionImages(new AzureLocation("aaaaaaaaa"), "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            await foreach (var _ in collection.GetAllAsync(new VirtualMachineExtensionImageCollectionGetAllOptions(type: "aaaa") { }))
+            await foreach (var _ in collection.GetAllAsync("aaaa"))
             {
             }
         }

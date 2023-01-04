@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure;
 using MgmtPropertyBag;
 
 namespace MgmtPropertyBag.Models
@@ -17,13 +18,22 @@ namespace MgmtPropertyBag.Models
         {
         }
 
-        /// <summary> The filter to apply on the operation. </summary>
-        public string Filter { get; set; }
-        /// <summary> Gets or sets the top. </summary>
-        public int? Top { get; set; }
-        /// <summary> Gets or sets the orderby. </summary>
-        public string Orderby { get; set; }
         /// <summary> The parameters supplied to the Reconnect operation. </summary>
-        public FooData Data { get; set; }
+        public FooData Data { get; set; } = null;
+
+        /// <summary> The filter to apply on the operation. </summary>
+        public string Filter { get; set; } = null;
+
+        /// <summary> The Integer to use. </summary>
+        public int? Top { get; set; } = null;
+
+        /// <summary> The String to use. </summary>
+        public string Orderby { get; set; } = null;
+
+        /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
+        public ETag? IfMatch { get; set; } = null;
+
+        /// <summary> Optional. Number of records to skip. </summary>
+        public int? Skip { get; set; } = null;
     }
 }

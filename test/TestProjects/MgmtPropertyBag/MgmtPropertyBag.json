@@ -55,7 +55,8 @@
                         "in": "query",
                         "required": false,
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "x-ms-client-default": 10
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -90,7 +91,7 @@
                 ],
                 "x-ms-odata": "#/definitions/Foo",
                 "operationId": "Foos_List",
-                "description": "Gets a list of foo with three optional query parameters.",
+                "description": "Gets a list of foo with six optional query parameters.",
                 "parameters": [
                     {
                         "name": "$filter",
@@ -104,13 +105,37 @@
                         "in": "query",
                         "required": false,
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "x-ms-client-default": 10
                     },
                     {
                         "name": "$orderby",
                         "in": "query",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "If-Match",
+                        "in": "header",
+                        "required": false,
+                        "description": "The entity state (Etag) version. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+                        "type": "string",
+                        "x-ms-format": "etag"
+                    },
+                    {
+                        "name": "$maxpagesize",
+                        "in": "query",
+                        "type": "string",
+                        "required": false,
+                        "description": "Optional. Specified maximum number of containers that can be included in the list."
+                    },
+                    {
+                        "name": "$skip",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Optional. Number of records to skip."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -148,7 +173,7 @@
                 ],
                 "x-ms-odata": "#/definitions/Foo",
                 "operationId": "Foos_Get",
-                "description": "Gets a specific foo with three optional query parameters.",
+                "description": "Gets a specific foo with five optional query parameters.",
                 "parameters": [
                     {
                         "name": "fooName",
@@ -176,6 +201,22 @@
                         "in": "query",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "If-Match",
+                        "in": "header",
+                        "required": false,
+                        "description": "The entity state (Etag) version. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+                        "type": "string",
+                        "x-ms-format": "etag"
+                    },
+                    {
+                        "name": "$skip",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Optional. Number of records to skip."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -208,7 +249,7 @@
                 ],
                 "x-ms-odata": "#/definitions/Foo",
                 "operationId": "Foos_Create",
-                "description": "Create foo with three optional query parameters.",
+                "description": "Create foo with four optional query parameters.",
                 "parameters": [
                     {
                         "name": "fooName",
@@ -328,7 +369,7 @@
                 ],
                 "x-ms-odata": "#/definitions/Foo",
                 "operationId": "Foos_Reconnect",
-                "description": "Reconnect an existing foo with three optional query parameters.",
+                "description": "Reconnect an existing foo with five optional query parameters.",
                 "parameters": [
                     {
                         "name": "fooName",
@@ -365,6 +406,22 @@
                         "in": "query",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "If-Match",
+                        "in": "header",
+                        "required": false,
+                        "description": "The entity state (Etag) version. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+                        "type": "string",
+                        "x-ms-format": "etag"
+                    },
+                    {
+                        "name": "$skip",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Optional. Number of records to skip."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -407,7 +464,7 @@
                     {
                         "name": "If-Match",
                         "in": "header",
-                        "required": true,
+                        "required": false,
                         "description": "The entity state (Etag) version. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
                         "type": "string",
                         "x-ms-format": "etag"
@@ -449,7 +506,7 @@
                 ],
                 "x-ms-odata": "#/definitions/Bar",
                 "operationId": "Bars_List",
-                "description": "Gets a list of bar with one optional header parameter and two optional query parameters.",
+                "description": "Gets a list of bar with one optional header parameter and five optional query parameters.",
                 "parameters": [
                     {
                         "name": "If-Match",
@@ -472,6 +529,29 @@
                         "required": false,
                         "type": "integer",
                         "format": "int32"
+                    },
+                    {
+                        "name": "If-None-Match",
+                        "in": "header",
+                        "required": false,
+                        "description": "The entity state (Etag) version. A value of \"*\" can be used for If-None-Match to unconditionally apply the operation.",
+                        "type": "string",
+                        "x-ms-format": "etag"
+                    },
+                    {
+                        "name": "$maxpagesize",
+                        "in": "query",
+                        "type": "string",
+                        "required": false,
+                        "description": "Optional. Specified maximum number of containers that can be included in the list."
+                    },
+                    {
+                        "name": "$skip",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Optional. Number of records to skip."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -509,7 +589,7 @@
                 ],
                 "x-ms-odata": "#/definitions/Bar",
                 "operationId": "Bars_Get",
-                "description": "Gets a specific bar with one required header parameter and two optional query parameters.",
+                "description": "Gets a specific bar with one required header parameter and four optional query parameters.",
                 "parameters": [
                     {
                         "name": "barName",
@@ -521,7 +601,7 @@
                     {
                         "name": "If-Match",
                         "in": "header",
-                        "required": true,
+                        "required": false,
                         "description": "The entity state (Etag) version. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
                         "type": "string"
                     },
@@ -538,6 +618,21 @@
                         "required": false,
                         "type": "integer",
                         "format": "int32"
+                    },
+                    {
+                        "name": "$maxpagesize",
+                        "in": "query",
+                        "type": "string",
+                        "required": false,
+                        "description": "Optional. Specified maximum number of containers that can be included in the list."
+                    },
+                    {
+                        "name": "$skip",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Optional. Number of records to skip."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -570,7 +665,7 @@
                 ],
                 "x-ms-odata": "#/definitions/Bar",
                 "operationId": "Bars_Create",
-                "description": "Create a bar with two optional query parameters.",
+                "description": "Create a bar with five optional query parameters.",
                 "parameters": [
                     {
                         "name": "barName",
@@ -601,6 +696,14 @@
                         "required": false,
                         "type": "integer",
                         "format": "int32"
+                    },
+                    {
+                        "name": "If-Match",
+                        "in": "header",
+                        "required": false,
+                        "description": "The entity state (Etag) version. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+                        "type": "string",
+                        "x-ms-format": "etag"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
