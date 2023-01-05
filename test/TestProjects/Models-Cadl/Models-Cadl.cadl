@@ -66,6 +66,7 @@ enum FixedStringEnum {
 
 @doc("Fixed int enum")
 @fixed
+@deprecated("deprecated for test")
 enum FixedIntEnum {
     One: 1,
     Two: 2,
@@ -80,6 +81,7 @@ enum FixedIntEnum {
 // }
 
 @doc("Extensible enum")
+@deprecated("deprecated for test")
 enum ExtensibleEnum {
     One: "1",
     Two: "2",
@@ -195,6 +197,7 @@ model OutputModel {
 }
 
 @doc("RoundTrip model with optional properties.")
+@deprecated("deprecated for test")
 model RoundTripOptionalModel {
   @doc("Optional string, illustrating an optional reference type property.")
   optionalString?: string;
@@ -377,6 +380,7 @@ op inputToRoundTripOptional(@body input: RoundTripOptionalModel): RoundTripOptio
 @doc("Input to RoundTripReadOnly")
 @get
 @convenienceAPI
+@deprecated("deprecated for test")
 op inputToRoundTripReadOnly(@body input: InputModel): RoundTripReadOnlyModel;
 
 @route("/roundTripToOutput")

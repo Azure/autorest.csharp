@@ -13,6 +13,7 @@ using Azure.Core;
 namespace ModelsInCadl.Models
 {
     /// <summary> RoundTrip model with optional properties. </summary>
+    [Obsolete("deprecated for test")]
     public partial class RoundTripOptionalModel
     {
         /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>

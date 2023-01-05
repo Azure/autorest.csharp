@@ -272,7 +272,7 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.DataFactoryExpressionOfInt => typeof(DataFactoryExpression<int>),
             XMsFormat.DataFactoryExpressionOfDouble => typeof(DataFactoryExpression<double>),
             XMsFormat.DataFactoryExpressionOfBool => typeof(DataFactoryExpression<bool>),
-            XMsFormat.DataFactoryExpressionOfDateTimeRfc1123 => typeof(DataFactoryExpression<DateTimeOffset>),
+            XMsFormat.DataFactoryExpressionOfDateTime => typeof(DataFactoryExpression<DateTimeOffset>),
             XMsFormat.DataFactoryExpressionOfDuration => typeof(DataFactoryExpression<TimeSpan>),
             XMsFormat.DataFactoryExpressionOfUri => typeof(DataFactoryExpression<Uri>),
             XMsFormat.DataFactoryExpressionOfObject => typeof(DataFactoryExpression<BinaryData>),

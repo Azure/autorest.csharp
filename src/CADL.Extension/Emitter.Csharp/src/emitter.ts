@@ -3,6 +3,7 @@
 
 import {
     createCadlLibrary,
+    getDeprecated,
     getDoc,
     getServiceNamespace,
     getServiceNamespaceString,
@@ -70,7 +71,6 @@ import { OperationLongRunning } from "./type/OperationLongRunning.js";
 import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
 import fs from "fs";
-import fsExtra from "fs-extra";
 import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
 import { dllFilePath } from "@autorest/csharp";
@@ -205,10 +205,7 @@ export async function $onEmit(
             if (!fs.existsSync(generatedFolder)) {
                 fs.mkdirSync(generatedFolder, { recursive: true });
             }
-
-            if (options["clear-output-folder"]) {
-                fsExtra.emptyDirSync(generatedFolder);
-            }
+            
             await program.host.writeFile(
                 resolvePath(generatedFolder, "cadl.json"),
                 prettierOutput(
@@ -238,7 +235,7 @@ export async function $onEmit(
                     : "";
                 const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath ?? dllFilePath
-                )} --project-path ${outputFolder} ${newProjectOption}`;
+                )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${options["clear-output-folder"]}`;
                 console.info(command);
 
                 try {
@@ -768,7 +765,9 @@ function loadOperation(
 
     return {
         Name: op.name,
+        ResourceName: resourceOperation?.resourceType.name ?? getOperationGroupName(program, op),
         Summary: summary,
+        Deprecated: getDeprecated(program, op),
         Description: desc,
         Parameters: parameters,
         Responses: responses,

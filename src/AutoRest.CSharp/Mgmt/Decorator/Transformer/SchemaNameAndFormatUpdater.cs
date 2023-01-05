@@ -66,9 +66,17 @@ internal static class SchemaNameAndFormatUpdater
     private static void ApplyRenameTargets(Operation operation, IReadOnlyDictionary<string, RenameAndReformatTarget> renameTargets)
     {
         // temporarily we only support change name of the parameter
+        // change the path and query parameters
         foreach (var parameter in operation.Parameters)
         {
             ApplyRenameTarget(parameter, renameTargets);
+        }
+
+        // body parameter is not included above
+        var bodyParameter = operation.GetBodyParameter();
+        if (bodyParameter != null)
+        {
+            ApplyRenameTarget(bodyParameter, renameTargets);
         }
     }
 

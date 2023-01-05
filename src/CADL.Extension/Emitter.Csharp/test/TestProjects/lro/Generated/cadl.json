@@ -70,6 +70,7 @@
     {
      "$id": "10",
      "Name": "createOrUpdate",
+     "ResourceName": "Pet",
      "Description": "Creates a new pet or updates an existing one.",
      "Parameters": [
       {

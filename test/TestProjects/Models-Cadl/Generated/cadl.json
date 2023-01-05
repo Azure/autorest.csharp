@@ -37,6 +37,7 @@
    "$id": "6",
    "Name": "FixedIntEnum",
    "Namespace": "ModelsInCadl",
+   "Deprecated": "deprecated for test",
    "Description": "Fixed int enum",
    "EnumValueType": "Int32",
    "AllowedValues": [
@@ -64,6 +65,7 @@
    "$id": "10",
    "Name": "ExtensibleEnum",
    "Namespace": "ModelsInCadl",
+   "Deprecated": "deprecated for test",
    "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -708,6 +710,7 @@
    "$id": "88",
    "Name": "RoundTripOptionalModel",
    "Namespace": "ModelsInCadl",
+   "Deprecated": "deprecated for test",
    "Description": "RoundTrip model with optional properties.",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -1561,6 +1564,7 @@
     {
      "$id": "196",
      "Name": "inputToRoundTrip",
+     "ResourceName": "ModelsInCadl",
      "Description": "Input model that has property of its own type",
      "Parameters": [
       {
@@ -1693,6 +1697,7 @@
     {
      "$id": "209",
      "Name": "inputToRoundTripPrimitive",
+     "ResourceName": "ModelsInCadl",
      "Description": "Input to RoundTripPrimitive",
      "Parameters": [
       {
@@ -1797,6 +1802,7 @@
     {
      "$id": "218",
      "Name": "inputToRoundTripOptional",
+     "ResourceName": "ModelsInCadl",
      "Description": "Input to RoundTripOptional",
      "Parameters": [
       {
@@ -1901,6 +1907,8 @@
     {
      "$id": "227",
      "Name": "inputToRoundTripReadOnly",
+     "ResourceName": "ModelsInCadl",
+     "Deprecated": "deprecated for test",
      "Description": "Input to RoundTripReadOnly",
      "Parameters": [
       {
@@ -2005,6 +2013,7 @@
     {
      "$id": "236",
      "Name": "roundTripToOutput",
+     "ResourceName": "ModelsInCadl",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
@@ -2109,6 +2118,7 @@
     {
      "$id": "245",
      "Name": "InputRecursive",
+     "ResourceName": "ModelsInCadl",
      "Description": "Input recursive model",
      "Parameters": [
       {
@@ -2210,6 +2220,7 @@
     {
      "$id": "254",
      "Name": "roundTripRecursive",
+     "ResourceName": "ModelsInCadl",
      "Description": "RoundTrip recursive model",
      "Parameters": [
       {
@@ -2314,6 +2325,7 @@
     {
      "$id": "263",
      "Name": "selfReference",
+     "ResourceName": "ModelsInCadl",
      "Description": "Returns model that has property of its own type",
      "Parameters": [
       {

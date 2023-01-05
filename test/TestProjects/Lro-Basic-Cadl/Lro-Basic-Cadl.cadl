@@ -11,6 +11,13 @@ using Cadl.Versioning;
 @serviceTitle("Text authoring")
 @serviceVersion("2022-05-15-preview")
 @versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+@server(
+    "{lroBasicUrl}",
+    "Endpoint Service",
+    {
+        lroBasicUrl: string,
+    }
+)
 namespace LroBasicCadl;
 
 
@@ -33,8 +40,7 @@ interface Authoring {
   
   @convenienceAPI
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
-  @convenienceAPI
-  op updateProject is Azure.Core.Foundations.Operation<Project, Project>;
+  op updateProject is Azure.Core.LongRunningResourceCreateOrReplace<Project, Project>;
 }
 
 namespace CustomCore {

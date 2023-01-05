@@ -45,6 +45,7 @@ namespace AutoRest.CSharp.Output.Builders
                 InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
                 InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
                 InputTypeKind.Date => SerializationFormat.Date_ISO8601,
+                InputTypeKind.DateTime => SerializationFormat.DateTime_ISO8601,
                 InputTypeKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
                 InputTypeKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
                 InputTypeKind.DateTimeUnix => SerializationFormat.DateTime_Unix,

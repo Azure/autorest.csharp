@@ -566,6 +566,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     return "Guid.NewGuid()";
                 }
 
+                if (type == typeof(WaitUntil))
+                {
+                    // use `Started`, since we will generate `operation.WaitForCompletion()` afterwards
+                    return $"{nameof(WaitUntil)}.{nameof(WaitUntil.Started)}";
+                }
+
                 if (type.IsEnum)
                 {
                     return $"{type.Name}.{Enum.GetNames(type)[0]}";

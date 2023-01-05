@@ -60,6 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _sourceInputModel = sourceInputModel;
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
+            _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsDefaultDiscriminator ? this : null);
         }

@@ -46,7 +46,9 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputOperation(
         string Name,
+        string? ResourceName,
         string? Summary,
+        string? Deprecated,
         string Description,
         string? Accessibility,
         IReadOnlyList<InputParameter> Parameters,
@@ -64,7 +66,9 @@ namespace AutoRest.CSharp.Common.Input
     {
         public InputOperation() : this(
             Name: string.Empty,
+            ResourceName: null,
             Summary: null,
+            Deprecated: null,
             Description: string.Empty,
             Accessibility: null,
             Parameters: Array.Empty<InputParameter>(),

@@ -126,7 +126,9 @@ namespace AutoRest.CSharp.Output.Models
                 }
                 return new InputOperation(
                     Name: operation.Language.Default.Name,
+                    ResourceName: null,
                     Summary: operation.Language.Default.Summary,
+                    Deprecated: operation.Deprecated?.Reason,
                     Description: operation.Language.Default.Description,
                     Accessibility: operation.Accessibility,
                     Parameters: new List<InputParameter>(),
