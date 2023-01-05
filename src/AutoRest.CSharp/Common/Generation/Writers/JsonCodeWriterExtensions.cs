@@ -169,13 +169,13 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"#if NET6_0_OR_GREATER");
                             writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name:I});");
                             writer.Line($"#else");
-                            writer.Line($"{typeof(JsonSerializer)}.Serialize({writerName}, {typeof(JsonDocument)}.Parse({name:I}.ToString()).RootElement);");
+                            writer.Line($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}({writerName}, {typeof(JsonDocument)}.Parse({name:I}.ToString()).RootElement);");
                             writer.Line($"#endif");
                             return;
                         }
                         else if (IsCustomJsonConverterAdded(frameworkType))
                         {
-                            writer.Line($"{typeof(JsonSerializer)}.Serialize(writer, {name:I});");
+                            writer.Line($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}(writer, {name:I});");
                             return;
                         }
 
@@ -197,12 +197,11 @@ namespace AutoRest.CSharp.Generation.Writers
                             var optionalSerializeOptions = string.Empty;
                             if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                             {
-                                writer.UseNamespace("Azure.ResourceManager.Models");
-                                writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
+                                writer.Line($"var serializeOptions = new {typeof(JsonSerializerOptions)} {{ Converters = {{ new {typeof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
                                 optionalSerializeOptions = ", serializeOptions";
                             }
 
-                            writer.Append($"JsonSerializer.Serialize(writer, {name:I}{optionalSerializeOptions});");
+                            writer.Append($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}(writer, {name:I}{optionalSerializeOptions});");
                             return;
 
                         case ObjectType:
@@ -433,7 +432,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case JsonValueSerialization valueSerialization:
                     if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                     {
-                        writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
+                        writer.Line($"var serializeOptions = new {typeof(JsonSerializerOptions)} {{ Converters = {{ new {typeof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
                     }
 
                     writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
@@ -576,7 +575,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (IsCustomJsonConverterAdded(frameworkType))
             {
-                return $"JsonSerializer.Deserialize<{serializationType}>({element}.GetRawText())";
+                return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{serializationType}>({element}.GetRawText())";
             }
 
             var methodName = string.Empty;
@@ -643,13 +642,13 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
                     var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? ", serializeOptions" : string.Empty;
-                    return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.GetRawText(){optionalSerializeOptions})";
+                    return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{implementation.Type}>({element}.GetRawText(){optionalSerializeOptions})";
 
                 case Resource { ResourceData: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } resourceDataType } resource:
                     return $"new {resource.Type}(Client, {resourceDataType.Type}.Deserialize{resourceDataType.Declaration.Name}({element}))";
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
-                    return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.GetRawText())";
+                    return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{implementation.Type}>({element}.GetRawText())";
 
                 case SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type:
                     return $"{type.Type}.Deserialize{type.Declaration.Name}({element})";
