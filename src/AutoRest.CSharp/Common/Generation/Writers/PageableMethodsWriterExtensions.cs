@@ -3,12 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -136,7 +135,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return true;
         }
 
-
         private static FormattableString? GetCreateRequestCall(Reference? restClientReference, RestClientMethod? method)
         {
             if (method == null)
@@ -160,34 +158,20 @@ namespace AutoRest.CSharp.Generation.Writers
                 throw new NotSupportedException("Type of the element of the page must be specified");
             }
 
-            if (pageItemType.IsFrameworkType)
+            if (pageItemType.Equals(BinaryDataType))
             {
-                if (pageItemType.Equals(BinaryDataType))
-                {
-                    // When `JsonElement` provides access to its UTF8 buffer, change this code to create `BinaryData` from it.
-                    // See also PageableHelpers.ParseResponseForBinaryData
-                    return $"e => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.GetRawText())";
-                }
-
-                if (pageItemType.Equals(typeof(string)))
-                {
-                    return $"e => e.GetString()";
-                }
-
-                throw new NotSupportedException($"{pageItemType.FrameworkType} type is not supported. Only BinaryData, string or user-defined models are supported!");
+                // When `JsonElement` provides access to its UTF8 buffer, change this code to create `BinaryData` from it.
+                // See also PageableHelpers.ParseResponseForBinaryData
+                return $"e => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.{nameof(JsonElement.GetRawText)}())";
             }
 
-            if (pageItemType.Implementation is Resource { ResourceData: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } resourceDataType } resource)
-            {
-                return $"e => new {resource.Type}(Client, {resourceDataType.Type}.Deserialize{resourceDataType.Declaration.Name}(e))";
-            }
-
-            if (pageItemType.Implementation is SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type)
+            if (!pageItemType.IsFrameworkType && pageItemType.Implementation is SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type)
             {
                 return $"{type.Type}.Deserialize{type.Declaration.Name}";
             }
 
-            throw new NotSupportedException($"No deserialization logic exists for {pageItemType.Implementation.GetType()}");
+            var deserializeImplementation = JsonCodeWriterExtensions.GetDeserializeValueFormattable($"e", pageItemType);
+            return $"e => {deserializeImplementation}";
         }
     }
 }

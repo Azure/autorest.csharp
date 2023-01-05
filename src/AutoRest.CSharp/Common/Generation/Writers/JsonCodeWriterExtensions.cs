@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -16,12 +18,10 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 using Configuration = AutoRest.CSharp.Input.Configuration;
-using AutoRest.CSharp.Input;
-using System.Reflection;
-using Azure.Core.Expressions.DataFactory;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -526,30 +526,32 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private static FormattableString GetDeserializeValueFormattable(JsonValueSerialization serialization, FormattableString element)
+            => GetDeserializeValueFormattable(element, serialization.Type, serialization.Format, serialization.Options);
+
+        public static FormattableString GetDeserializeValueFormattable(FormattableString element, CSharpType serializationType, SerializationFormat serializationFormat = SerializationFormat.Default, JsonSerializationOptions serializationOptions = JsonSerializationOptions.None)
         {
-            if (serialization.Type.SerializeAs != null)
+            if (serializationType.SerializeAs != null)
             {
-                return $"({serialization.Type}){GetFrameworkTypeValueFormattable(element, serialization.Type.SerializeAs, serialization)}";
+                return $"({serializationType}){GetFrameworkTypeValueFormattable(serializationType.SerializeAs, element, serializationFormat, serializationType)}";
             }
 
-            if (serialization.Type.IsFrameworkType)
+            if (serializationType.IsFrameworkType)
             {
-                var frameworkType = serialization.Type.FrameworkType;
+                var frameworkType = serializationType.FrameworkType;
                 if (frameworkType == typeof(Nullable<>))
                 {
-                    frameworkType = serialization.Type.Arguments[0].FrameworkType;
+                    frameworkType = serializationType.Arguments[0].FrameworkType;
                 }
 
-                return GetFrameworkTypeValueFormattable(element, frameworkType, serialization);
+                return GetFrameworkTypeValueFormattable(frameworkType, element, serializationFormat, serializationType);
             }
 
-            return GetDeserializeImplementationFormattable(serialization.Type.Implementation, element, serialization.Options);
+            return GetDeserializeImplementationFormattable(serializationType.Implementation, element, serializationOptions);
         }
 
-        private static FormattableString GetFrameworkTypeValueFormattable(FormattableString element, Type frameworkType, JsonValueSerialization? serialization)
+        public static FormattableString GetFrameworkTypeValueFormattable(Type frameworkType, FormattableString element, SerializationFormat format, CSharpType? serializationType)
         {
             bool includeFormat = false;
-            SerializationFormat format = serialization?.Format ?? SerializationFormat.Default;
 
             if (frameworkType == typeof(ETag) ||
                 frameworkType == typeof(Uri) ||
@@ -574,7 +576,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (IsCustomJsonConverterAdded(frameworkType))
             {
-                return $"JsonSerializer.Deserialize<{serialization?.Type}>({element}.GetRawText())";
+                return $"JsonSerializer.Deserialize<{serializationType}>({element}.GetRawText())";
             }
 
             var methodName = string.Empty;
@@ -635,11 +637,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{element}.{methodName}()";
         }
 
-        private static bool IsCustomJsonConverterAdded(Type type)
-        {
-            return type.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
-        }
-
         public static FormattableString GetDeserializeImplementationFormattable(TypeProvider implementation, FormattableString element, JsonSerializationOptions options)
         {
             switch (implementation)
@@ -648,24 +645,29 @@ namespace AutoRest.CSharp.Generation.Writers
                     var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? ", serializeOptions" : string.Empty;
                     return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.GetRawText(){optionalSerializeOptions})";
 
+                case Resource { ResourceData: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } resourceDataType } resource:
+                    return $"new {resource.Type}(Client, {resourceDataType.Type}.Deserialize{resourceDataType.Declaration.Name}({element}))";
+
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
                     return $"JsonSerializer.Deserialize<{implementation.Type}>({element}.GetRawText())";
 
-                case ObjectType objectType:
-                    return $"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})";
-
-                //case ModelTypeProvider model:
-                //    return $"{model.Type}.Deserialize{model.Declaration.Name}({element})";
+                case SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type:
+                    return $"{type.Type}.Deserialize{type.Declaration.Name}({element})";
 
                 case EnumType clientEnum:
-                    var value = GetFrameworkTypeValueFormattable(element, clientEnum.ValueType.FrameworkType, null);
+                    var value = GetFrameworkTypeValueFormattable(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null);
                     return clientEnum.IsExtensible
                         ? $"new {clientEnum.Type}({value})"
                         : (FormattableString)$"{value}.To{clientEnum.Type:D}()";
 
                 default:
-                    throw new NotSupportedException();
+                    throw new NotSupportedException($"No deserialization logic exists for {implementation.Declaration.Name}");
             }
+        }
+
+        private static bool IsCustomJsonConverterAdded(Type type)
+        {
+            return type.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
         }
 
         public static string? ToFormatSpecifier(this SerializationFormat format) => format switch

@@ -330,7 +330,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
             // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, new {typeof(Azure.Core.ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
+            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, new {typeof(ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
         }
 
         protected virtual MethodSignatureModifiers GetMethodModifiers() => Public | Virtual;
@@ -350,7 +350,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
         {
             // TODO: can we cache collection with extra constructor parameters
-            if (resourceCollection.ExtraConstructorParameters.Count() > 0)
+            if (resourceCollection.ExtraConstructorParameters.Any())
             {
                 _writer.Append($"return new {resourceCollection.Type.Name}({ArmClientReference}, Id, ");
                 foreach (var parameter in resourceCollection.ExtraConstructorParameters)
@@ -583,55 +583,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WritePagingMethodBranch(CSharpType itemType, Diagnostic diagnostic, Reference clientDiagnosticsReference, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             var pagingMethod = operation.PagingMethod!;
-            var arguments = GetArguments(_writer, parameterMappings);
+            var firstPageRequestArguments = GetArguments(_writer, parameterMappings);
+            var nextPageRequestArguments = firstPageRequestArguments.IsEmpty() ? $"{KnownParameters.NextLink.Name}" : $"{KnownParameters.NextLink.Name}, {firstPageRequestArguments}";
 
-            FormattableString firstPageRequest = $"{GetRestClientName(operation)}.Create{pagingMethod.Method.Name}Request({arguments})";
-            FormattableString? nextPageRequest = pagingMethod.NextPageMethod != null ? $"{GetRestClientName(operation)}.Create{pagingMethod.NextPageMethod.Name}Request({KnownParameters.NextLink.Name}, {arguments})" : (FormattableString?)null;
+            FormattableString firstPageRequest = $"{GetRestClientName(operation)}.Create{pagingMethod.Method.Name}Request({firstPageRequestArguments})";
+            FormattableString? nextPageRequest = pagingMethod.NextPageMethod != null ? $"{GetRestClientName(operation)}.Create{pagingMethod.NextPageMethod.Name}Request({nextPageRequestArguments})" : (FormattableString?)null;
             var pipelineReference = new Reference("Pipeline", typeof(HttpPipeline));
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
 
             _writer.WritePageableBody(parameterMappings.Select(p => p.Parameter).ToList(), itemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemName, nextLinkName, async);
-        }
-
-        protected void WritePageFunctionBody(CSharpType itemType, PagingMethodWrapper pagingMethod, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync, bool isNextPageFunc)
-        {
-            var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
-            var response = new CodeWriterDeclaration("response");
-
-            _writer.Append($"var {response:D} = {GetAwait(isAsync)} {GetRestClientName(operation)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
-            WriteArguments(_writer, parameterMappings);
-            _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
-
-            _writer
-                .Append($"return {typeof(Page)}.FromValues(response.Value")
-                .AppendIf($".{pagingMethod.ItemName}", !pagingMethod.ItemName.IsNullOrEmpty());
-
-            // itemType is the type of the real operation
-            var value = new CodeWriterDeclaration("value");
-            var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{value}");
-            if (valueConverter != null)
-            {
-                _writer.UseNamespace(typeof(Enumerable).Namespace!);
-                _writer.Append($".Select({value:D} => ");
-                if (itemType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
-                {
-                    using (_writer.Scope())
-                    {
-                        _writer
-                            .Line($"{value}.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{value}")};")
-                            .Line($"return new {resource.Type}({ArmClientReference}, {value});");
-                    }
-                    _writer.AppendRaw(")");
-                }
-                else
-                {
-                    _writer.Append($"{valueConverter})");
-                }
-            }
-
-            _writer.Line($", {continuationTokenText}, {response}.GetRawResponse());");
         }
 
         protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)
@@ -837,7 +799,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
         {
             var arguments = GetArguments(writer, mapping, passNullForOptionalParameters);
-            writer.Append(arguments).AppendRaw(", ");
+            if (!arguments.IsEmpty())
+            {
+                writer.Append(arguments).AppendRaw(", ");
+            }
         }
 
         private static FormattableString GetArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
