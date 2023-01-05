@@ -287,7 +287,6 @@ namespace Azure.Core
                     }
 
                     return message.Response;
-
                 }
                 catch (Exception e)
                 {
@@ -426,7 +425,9 @@ namespace Azure.Core
                 }
 
                 // _responseParser will be null when T is BinaryData
-                (List<T>? items, nextLink) = _responseParser?.Invoke(response) ?? ParseResponseForBinaryData<T>(response, _itemPropertyName, _nextLinkPropertyName);
+                var parsedResponse = _responseParser?.Invoke(response) ?? ParseResponseForBinaryData<T>(response, _itemPropertyName, _nextLinkPropertyName);
+                var items = parsedResponse.Values;
+                nextLink = parsedResponse.NextLink;
                 return items is not null ? new ResponseEnumerator<T>(items.GetEnumerator(), items.Count) : new ResponseEnumerator<T>(default, 0);
             }
         }
