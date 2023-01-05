@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -168,7 +169,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     return $"e => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.GetRawText())";
                 }
 
-                throw new NotSupportedException($"{pageItemType.FrameworkType} type is not supported. Only BinaryData or user-defined models are supported!");
+                if (pageItemType.Equals(typeof(string)))
+                {
+                    return $"e => e.GetString()";
+                }
+
+                throw new NotSupportedException($"{pageItemType.FrameworkType} type is not supported. Only BinaryData, string or user-defined models are supported!");
             }
 
             if (pageItemType.Implementation is Resource { ResourceData: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } resourceDataType } resource)
