@@ -595,5 +595,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
             return scope;
         }
+
+        public static void WriteDeprecatedAttributeIfExists(this CodeWriter writer, string? deprecated)
+        {
+            if (deprecated != null)
+            {
+                writer.Line($"[{typeof(ObsoleteAttribute)}(\"{deprecated}\")]");
+            }
+        }
+
     }
 }
