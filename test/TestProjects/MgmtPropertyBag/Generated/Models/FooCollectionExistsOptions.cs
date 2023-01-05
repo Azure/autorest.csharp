@@ -25,7 +25,7 @@ namespace MgmtPropertyBag.Models
         }
 
         /// <summary> The foo name. </summary>
-        public string FooName { get; set; }
+        public string FooName { get; }
         /// <summary> The filter to apply on the operation. </summary>
         public string Filter { get; set; } = null;
 

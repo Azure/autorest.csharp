@@ -416,12 +416,14 @@
                         "x-ms-format": "etag"
                     },
                     {
-                        "name": "$skip",
+                        "name": "countryOrRegions",
+                        "type": "array",
                         "in": "query",
+                        "collectionFormat": "multi",
                         "required": false,
-                        "type": "integer",
-                        "format": "int32",
-                        "description": "Optional. Number of records to skip."
+                        "items": {
+                          "type": "string"
+                        }
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"

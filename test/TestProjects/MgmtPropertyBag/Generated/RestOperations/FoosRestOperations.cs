@@ -548,7 +548,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        internal HttpMessage CreateReconnectRequest(string subscriptionId, string resourceGroupName, string fooName, FooData data, string filter, int? top, string orderby, ETag? ifMatch, int? skip)
+        internal HttpMessage CreateReconnectRequest(string subscriptionId, string resourceGroupName, string fooName, FooData data, string filter, int? top, string orderby, ETag? ifMatch, IEnumerable<string> countryOrRegions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -574,9 +574,12 @@ namespace MgmtPropertyBag
             {
                 uri.AppendQuery("$orderby", orderby, true);
             }
-            if (skip != null)
+            if (countryOrRegions != null)
             {
-                uri.AppendQuery("$skip", skip.Value, true);
+                foreach (var param in countryOrRegions)
+                {
+                    uri.AppendQuery("countryOrRegions", param, true);
+                }
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -605,17 +608,17 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
-        /// <param name="skip"> Optional. Number of records to skip. </param>
+        /// <param name="countryOrRegions"> The ArrayOfPost5ItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FooData>> ReconnectAsync(string subscriptionId, string resourceGroupName, string fooName, FooData data = null, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, int? skip = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FooData>> ReconnectAsync(string subscriptionId, string resourceGroupName, string fooName, FooData data = null, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, IEnumerable<string> countryOrRegions = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var message = CreateReconnectRequest(subscriptionId, resourceGroupName, fooName, data, filter, top, orderby, ifMatch, skip);
+            using var message = CreateReconnectRequest(subscriptionId, resourceGroupName, fooName, data, filter, top, orderby, ifMatch, countryOrRegions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -640,17 +643,17 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
-        /// <param name="skip"> Optional. Number of records to skip. </param>
+        /// <param name="countryOrRegions"> The ArrayOfPost5ItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FooData> Reconnect(string subscriptionId, string resourceGroupName, string fooName, FooData data = null, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, int? skip = null, CancellationToken cancellationToken = default)
+        public Response<FooData> Reconnect(string subscriptionId, string resourceGroupName, string fooName, FooData data = null, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, IEnumerable<string> countryOrRegions = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var message = CreateReconnectRequest(subscriptionId, resourceGroupName, fooName, data, filter, top, orderby, ifMatch, skip);
+            using var message = CreateReconnectRequest(subscriptionId, resourceGroupName, fooName, data, filter, top, orderby, ifMatch, countryOrRegions);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

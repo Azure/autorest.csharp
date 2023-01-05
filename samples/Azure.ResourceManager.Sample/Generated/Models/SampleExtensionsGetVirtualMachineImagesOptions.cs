@@ -32,13 +32,13 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> The name of a supported Azure region. </summary>
-        public AzureLocation Location { get; set; }
+        public AzureLocation Location { get; }
         /// <summary> A valid image publisher. </summary>
-        public string PublisherName { get; set; }
+        public string PublisherName { get; }
         /// <summary> A valid image publisher offer. </summary>
-        public string Offer { get; set; }
+        public string Offer { get; }
         /// <summary> A valid image SKU. </summary>
-        public string Skus { get; set; }
+        public string Skus { get; }
         /// <summary> The expand expression to apply on the operation. </summary>
         public string Expand { get; set; } = null;
 

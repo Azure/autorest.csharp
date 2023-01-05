@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 string? description = parameter.Description;
                 if (description == null)
                     description = $"The {parameter.Name}";
-                var property = new InputModelProperty(parameter.Name, null, description, inputParameter.Type, parameter.DefaultValue == null, IsReadOnly(parameter), false, GetDefaultValue(parameter));
+                var property = new InputModelProperty(parameter.Name, null, description, inputParameter.Type, parameter.DefaultValue == null, false, false, GetDefaultValue(parameter));
                 properties.Add(property);
             }
             var defaultNamespace = $"{MgmtContext.Context.DefaultNamespace}.Models";
@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 defaultNamespace,
                 "public",
                 $"The {packModelName}.",
-                InputModelTypeUsage.None,
+                InputModelTypeUsage.Input,
                 properties,
                 null,
                 Array.Empty<InputModelType>(),
@@ -91,15 +91,6 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             if (PackModel is ModelTypeProvider mgmtPackModel)
             {
                 return mgmtPackModel.Properties.Any(p => p.IsRequired);
-            }
-            return false;
-        }
-
-        private bool IsReadOnly(Parameter parameter)
-        {
-            if (TypeFactory.IsCollectionType(parameter.Type))
-            {
-                return true;
             }
             return false;
         }

@@ -213,7 +213,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = await _fooRestClient.ReconnectAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Skip, cancellationToken).ConfigureAwait(false);
+                var response = await _fooRestClient.ReconnectAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, options.IfMatch, options.CountryOrRegions, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -238,7 +238,7 @@ namespace MgmtPropertyBag
             scope.Start();
             try
             {
-                var response = _fooRestClient.Reconnect(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Skip, cancellationToken);
+                var response = _fooRestClient.Reconnect(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, options.IfMatch, options.CountryOrRegions, cancellationToken);
                 return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

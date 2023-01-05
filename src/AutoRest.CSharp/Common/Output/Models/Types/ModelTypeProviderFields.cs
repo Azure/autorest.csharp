@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
@@ -89,7 +90,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static FieldDeclaration CreateField(string fieldName, CSharpType fieldType, InputModelType inputModel, InputModelProperty inputModelProperty)
         {
-            var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType;
+            var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType ||
+                // This is a temporary work around as we don't convert collection type to InputListType or InputDictionaryType in MPG for now
+                inputModelProperty.Type is CodeModelType type && (type.Schema is ArraySchema or DictionarySchema);
             var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;

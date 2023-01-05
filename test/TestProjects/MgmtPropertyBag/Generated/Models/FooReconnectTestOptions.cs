@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using Azure;
+using Azure.Core;
 using MgmtPropertyBag;
 
 namespace MgmtPropertyBag.Models
@@ -16,6 +18,7 @@ namespace MgmtPropertyBag.Models
         /// <summary> Initializes a new instance of FooReconnectTestOptions. </summary>
         public FooReconnectTestOptions()
         {
+            CountryOrRegions = new ChangeTrackingList<string>();
         }
 
         /// <summary> The parameters supplied to the Reconnect operation. </summary>
@@ -33,7 +36,7 @@ namespace MgmtPropertyBag.Models
         /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
         public ETag? IfMatch { get; set; } = null;
 
-        /// <summary> Optional. Number of records to skip. </summary>
-        public int? Skip { get; set; } = null;
+        /// <summary> The ArrayOfPost5ItemsItem to use. </summary>
+        public IList<string> CountryOrRegions { get; } = null;
     }
 }

@@ -24,7 +24,7 @@ namespace MgmtPropertyBag.Models
         }
 
         /// <summary> The bar name. </summary>
-        public string BarName { get; set; }
+        public string BarName { get; }
         /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
         public string IfMatch { get; set; } = null;
 
