@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             // otherwise if the discriminator is just a plain string
-            return $"{GetRawEnumValue(value)}";
+            return $"{GetRawEnumValue(value):L}";
         }
 
         private static object? GetRawEnumValue(Constant constant) => constant.Value switch

@@ -43,7 +43,7 @@ namespace MgmtSafeFlatten.Models
         /// <summary> Initializes a new instance of LayerOneBaseType. </summary>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.LayerOneBaseType"/> instance for mocking. </returns>
-        public static LayerOneBaseType LayerOneBaseType(string name = null)
+        public static LayerOneBaseType LayerOneBaseType(string name = "Unknown")
         {
             return new UnknownLayerOneBaseType(name);
         }
@@ -70,7 +70,7 @@ namespace MgmtSafeFlatten.Models
         /// <returns> A new <see cref="Models.LayerOneFooType"/> instance for mocking. </returns>
         public static LayerOneFooType LayerOneFooType(string parameters = null)
         {
-            return new LayerOneFooType("LayerOneFoo", parameters);
+            return new LayerOneFooType(LayerOneTypeName.LayerOneFoo, parameters);
         }
 
         /// <summary> Initializes a new instance of LayerOneBarType. </summary>
@@ -78,7 +78,7 @@ namespace MgmtSafeFlatten.Models
         /// <returns> A new <see cref="Models.LayerOneBarType"/> instance for mocking. </returns>
         public static LayerOneBarType LayerOneBarType(string parameters = null)
         {
-            return new LayerOneBarType("LayerOneBar", parameters);
+            return new LayerOneBarType(LayerOneTypeName.LayerOneBar, parameters);
         }
     }
 }

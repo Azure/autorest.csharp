@@ -206,7 +206,7 @@ namespace Inheritance.Models
         /// <summary> Initializes a new instance of BaseClassWithExtensibleEnumDiscriminator. </summary>
         /// <param name="discriminatorProperty"></param>
         /// <returns> A new <see cref="Models.BaseClassWithExtensibleEnumDiscriminator"/> instance for mocking. </returns>
-        public static BaseClassWithExtensibleEnumDiscriminator BaseClassWithExtensibleEnumDiscriminator(string discriminatorProperty = null)
+        public static BaseClassWithExtensibleEnumDiscriminator BaseClassWithExtensibleEnumDiscriminator(string discriminatorProperty = "Unknown")
         {
             return new UnknownBaseClassWithExtensibleEnumDiscriminator(discriminatorProperty);
         }
@@ -215,7 +215,7 @@ namespace Inheritance.Models
         /// <returns> A new <see cref="Models.DerivedClassWithExtensibleEnumDiscriminator"/> instance for mocking. </returns>
         public static DerivedClassWithExtensibleEnumDiscriminator DerivedClassWithExtensibleEnumDiscriminator()
         {
-            return new DerivedClassWithExtensibleEnumDiscriminator("derived");
+            return new DerivedClassWithExtensibleEnumDiscriminator(BaseClassWithEntensibleEnumDiscriminatorEnum.Derived);
         }
 
         /// <summary> Initializes a new instance of AnotherDerivedClassWithExtensibleEnumDiscriminator. </summary>

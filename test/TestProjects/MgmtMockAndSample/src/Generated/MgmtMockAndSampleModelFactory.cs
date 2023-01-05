@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
@@ -469,6 +470,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="location"> The location. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="identity"> The identity of the firewall policy. </param>
+        /// <param name="startupProbe"> StartupProbe indicates that the App Instance has successfully initialized. If specified, no other probes are executed until this completes successfully. If this probe fails, the Pod will be restarted, just as if the livenessProbe failed. This can be used to provide different probe parameters at the beginning of a App Instance&apos;s lifecycle, when it might take a long time to load data or warm a cache, than during steady-state operation. This cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes. </param>
+        /// <param name="readinessProbe"> Periodic probe of App Instance service readiness. App Instance will be removed from service endpoints if the probe fails. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes. </param>
         /// <param name="ruleCollectionGroups"> List of references to FirewallPolicyRuleCollectionGroups. </param>
         /// <param name="provisioningState"> The provisioning state of the firewall policy resource. </param>
         /// <param name="basePolicyId"> The parent firewall policy from which rules are inherited. </param>
@@ -482,7 +485,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="transportSecurityCertificateAuthority"> TLS Configuration definition. </param>
         /// <param name="skuTier"> The Firewall Policy SKU. </param>
         /// <returns> A new <see cref="MgmtMockAndSample.FirewallPolicyData"/> instance for mocking. </returns>
-        public static FirewallPolicyData FirewallPolicyData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string etag = null, ManagedServiceIdentity identity = null, IEnumerable<WritableSubResource> ruleCollectionGroups = null, ProvisioningState? provisioningState = null, ResourceIdentifier basePolicyId = null, IEnumerable<WritableSubResource> firewalls = null, IEnumerable<WritableSubResource> childPolicies = null, FirewallPolicyThreatIntelWhitelist threatIntelWhitelist = null, FirewallPolicyInsights insights = null, IEnumerable<string> snatPrivateRanges = null, DnsSettings dnsSettings = null, FirewallPolicyIntrusionDetection intrusionDetection = null, FirewallPolicyCertificateAuthority transportSecurityCertificateAuthority = null, FirewallPolicySkuTier? skuTier = null)
+        public static FirewallPolicyData FirewallPolicyData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string etag = null, ManagedServiceIdentity identity = null, Probe startupProbe = null, Probe readinessProbe = null, IEnumerable<WritableSubResource> ruleCollectionGroups = null, ProvisioningState? provisioningState = null, ResourceIdentifier basePolicyId = null, IEnumerable<WritableSubResource> firewalls = null, IEnumerable<WritableSubResource> childPolicies = null, FirewallPolicyThreatIntelWhitelist threatIntelWhitelist = null, FirewallPolicyInsights insights = null, IEnumerable<string> snatPrivateRanges = null, DnsSettings dnsSettings = null, FirewallPolicyIntrusionDetection intrusionDetection = null, FirewallPolicyCertificateAuthority transportSecurityCertificateAuthority = null, FirewallPolicySkuTier? skuTier = null)
         {
             tags ??= new Dictionary<string, string>();
             ruleCollectionGroups ??= new List<WritableSubResource>();
@@ -490,7 +493,20 @@ namespace MgmtMockAndSample.Models
             childPolicies ??= new List<WritableSubResource>();
             snatPrivateRanges ??= new List<string>();
 
-            return new FirewallPolicyData(id, name, resourceType, systemData, tags, location, etag, identity, ruleCollectionGroups?.ToList(), provisioningState, basePolicyId != null ? ResourceManagerModelFactory.WritableSubResource(basePolicyId) : null, firewalls?.ToList(), childPolicies?.ToList(), threatIntelWhitelist, insights, snatPrivateRanges != null ? new FirewallPolicySnat(snatPrivateRanges?.ToList()) : null, dnsSettings, intrusionDetection, transportSecurityCertificateAuthority != null ? new FirewallPolicyTransportSecurity(transportSecurityCertificateAuthority) : null, skuTier != null ? new FirewallPolicySku(skuTier) : null);
+            return new FirewallPolicyData(id, name, resourceType, systemData, tags, location, etag, identity, startupProbe, readinessProbe, ruleCollectionGroups?.ToList(), provisioningState, basePolicyId != null ? ResourceManagerModelFactory.WritableSubResource(basePolicyId) : null, firewalls?.ToList(), childPolicies?.ToList(), threatIntelWhitelist, insights, snatPrivateRanges != null ? new FirewallPolicySnat(snatPrivateRanges?.ToList()) : null, dnsSettings, intrusionDetection, transportSecurityCertificateAuthority != null ? new FirewallPolicyTransportSecurity(transportSecurityCertificateAuthority) : null, skuTier != null ? new FirewallPolicySku(skuTier) : null);
+        }
+
+        /// <summary> Initializes a new instance of Probe. </summary>
+        /// <param name="disableProbe"> Indicate whether the probe is disabled. </param>
+        /// <param name="initialDelaySeconds"> Number of seconds after the App Instance has started before probes are initiated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes. </param>
+        /// <param name="periodSeconds"> How often (in seconds) to perform the probe. Minimum value is 1. </param>
+        /// <param name="timeoutSeconds"> Number of seconds after which the probe times out. Minimum value is 1. </param>
+        /// <param name="failureThreshold"> Minimum consecutive failures for the probe to be considered failed after having succeeded. Minimum value is 1. </param>
+        /// <param name="successThreshold"> Minimum consecutive successes for the probe to be considered successful after having failed. Must be 1 for liveness and startup. Minimum value is 1. </param>
+        /// <returns> A new <see cref="Models.Probe"/> instance for mocking. </returns>
+        public static Probe Probe(bool disableProbe = default, int? initialDelaySeconds = null, int? periodSeconds = null, int? timeoutSeconds = null, int? failureThreshold = null, int? successThreshold = null)
+        {
+            return new Probe(disableProbe, initialDelaySeconds, periodSeconds, timeoutSeconds, failureThreshold, successThreshold);
         }
 
         /// <summary> Initializes a new instance of SubResource. </summary>
@@ -505,9 +521,9 @@ namespace MgmtMockAndSample.Models
         /// <param name="ipAddresses"> List of IP addresses for the ThreatIntel Whitelist. </param>
         /// <param name="fqdns"> List of FQDNs for the ThreatIntel Whitelist. </param>
         /// <returns> A new <see cref="Models.FirewallPolicyThreatIntelWhitelist"/> instance for mocking. </returns>
-        public static FirewallPolicyThreatIntelWhitelist FirewallPolicyThreatIntelWhitelist(IEnumerable<string> ipAddresses = null, IEnumerable<string> fqdns = null)
+        public static FirewallPolicyThreatIntelWhitelist FirewallPolicyThreatIntelWhitelist(IEnumerable<IPAddress> ipAddresses = null, IEnumerable<string> fqdns = null)
         {
-            ipAddresses ??= new List<string>();
+            ipAddresses ??= new List<IPAddress>();
             fqdns ??= new List<string>();
 
             return new FirewallPolicyThreatIntelWhitelist(ipAddresses?.ToList(), fqdns?.ToList());
@@ -640,7 +656,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="name"> The name of the rule collection. </param>
         /// <param name="priority"> Priority of the Firewall Policy Rule Collection resource. </param>
         /// <returns> A new <see cref="Models.FirewallPolicyRuleCollection"/> instance for mocking. </returns>
-        public static FirewallPolicyRuleCollection FirewallPolicyRuleCollection(string ruleCollectionType = null, string name = null, int? priority = null)
+        public static FirewallPolicyRuleCollection FirewallPolicyRuleCollection(string ruleCollectionType = "Unknown", string name = null, int? priority = null)
         {
             return new UnknownFirewallPolicyRuleCollection(ruleCollectionType, name, priority);
         }
@@ -702,7 +718,7 @@ namespace MgmtMockAndSample.Models
         {
             rules ??= new List<FirewallPolicyRule>();
 
-            return new FirewallPolicyNatRuleCollection("FirewallPolicyNatRuleCollection", name, priority, actionType != null ? new FirewallPolicyNatRuleCollectionAction(actionType) : null, rules?.ToList());
+            return new FirewallPolicyNatRuleCollection(FirewallPolicyRuleCollectionType.FirewallPolicyNatRuleCollection, name, priority, actionType != null ? new FirewallPolicyNatRuleCollectionAction(actionType) : null, rules?.ToList());
         }
 
         /// <summary> Initializes a new instance of FirewallPolicyRule. </summary>
@@ -710,7 +726,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
         /// <returns> A new <see cref="Models.FirewallPolicyRule"/> instance for mocking. </returns>
-        public static FirewallPolicyRule FirewallPolicyRule(string name = null, string description = null, string ruleType = null)
+        public static FirewallPolicyRule FirewallPolicyRule(string name = null, string description = null, string ruleType = "Unknown")
         {
             return new UnknownFirewallPolicyRule(name, description, ruleType);
         }
@@ -729,7 +745,7 @@ namespace MgmtMockAndSample.Models
         {
             rules ??= new List<FirewallPolicyRule>();
 
-            return new FirewallPolicyFilterRuleCollection("FirewallPolicyFilterRuleCollection", name, priority, actionType != null ? new FirewallPolicyFilterRuleCollectionAction(actionType) : null, rules?.ToList());
+            return new FirewallPolicyFilterRuleCollection(FirewallPolicyRuleCollectionType.FirewallPolicyFilterRuleCollection, name, priority, actionType != null ? new FirewallPolicyFilterRuleCollectionAction(actionType) : null, rules?.ToList());
         }
 
         /// <summary> Initializes a new instance of ApplicationRule. </summary>
@@ -756,7 +772,7 @@ namespace MgmtMockAndSample.Models
             sourceIpGroups ??= new List<string>();
             webCategories ??= new List<string>();
 
-            return new ApplicationRule(name, description, "ApplicationRule", sourceAddresses?.ToList(), destinationAddresses?.ToList(), protocols?.ToList(), targetFqdns?.ToList(), targetUrls?.ToList(), fqdnTags?.ToList(), sourceIpGroups?.ToList(), terminateTLS, webCategories?.ToList());
+            return new ApplicationRule(name, description, FirewallPolicyRuleType.ApplicationRule, sourceAddresses?.ToList(), destinationAddresses?.ToList(), protocols?.ToList(), targetFqdns?.ToList(), targetUrls?.ToList(), fqdnTags?.ToList(), sourceIpGroups?.ToList(), terminateTLS, webCategories?.ToList());
         }
 
         /// <summary> Initializes a new instance of FirewallPolicyRuleApplicationProtocol. </summary>
@@ -788,7 +804,7 @@ namespace MgmtMockAndSample.Models
             destinationPorts ??= new List<string>();
             sourceIpGroups ??= new List<string>();
 
-            return new NatRule(name, description, "NatRule", ipProtocols?.ToList(), sourceAddresses?.ToList(), destinationAddresses?.ToList(), destinationPorts?.ToList(), translatedAddress, translatedPort, sourceIpGroups?.ToList(), translatedFqdn);
+            return new NatRule(name, description, FirewallPolicyRuleType.NatRule, ipProtocols?.ToList(), sourceAddresses?.ToList(), destinationAddresses?.ToList(), destinationPorts?.ToList(), translatedAddress, translatedPort, sourceIpGroups?.ToList(), translatedFqdn);
         }
 
         /// <summary> Initializes a new instance of NetworkRule. </summary>
@@ -812,7 +828,7 @@ namespace MgmtMockAndSample.Models
             destinationIpGroups ??= new List<string>();
             destinationFqdns ??= new List<string>();
 
-            return new NetworkRule(name, description, "NetworkRule", ipProtocols?.ToList(), sourceAddresses?.ToList(), destinationAddresses?.ToList(), destinationPorts?.ToList(), sourceIpGroups?.ToList(), destinationIpGroups?.ToList(), destinationFqdns?.ToList());
+            return new NetworkRule(name, description, FirewallPolicyRuleType.NetworkRule, ipProtocols?.ToList(), sourceAddresses?.ToList(), destinationAddresses?.ToList(), destinationPorts?.ToList(), sourceIpGroups?.ToList(), destinationIpGroups?.ToList(), destinationFqdns?.ToList());
         }
     }
 }
