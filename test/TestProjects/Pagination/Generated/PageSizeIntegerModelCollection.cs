@@ -184,7 +184,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeIntegerModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeIntegerModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeIntegerModelResource(Client, PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(e)), _pageSizeIntegerModelClientDiagnostics, Pipeline, "PageSizeIntegerModelCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeIntegerModelResource(Client, PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(e)), _pageSizeIntegerModelClientDiagnostics, Pipeline, "PageSizeIntegerModelCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeIntegerModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeIntegerModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeIntegerModelResource(Client, PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(e)), _pageSizeIntegerModelClientDiagnostics, Pipeline, "PageSizeIntegerModelCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeIntegerModelResource(Client, PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(e)), _pageSizeIntegerModelClientDiagnostics, Pipeline, "PageSizeIntegerModelCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

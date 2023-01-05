@@ -197,7 +197,8 @@ namespace AutoRest.CSharp.Generation.Writers
                             var optionalSerializeOptions = string.Empty;
                             if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                             {
-                                writer.Line($"var serializeOptions = new {typeof(JsonSerializerOptions)} {{ Converters = {{ new {typeof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
+                                writer.UseNamespace("Azure.ResourceManager.Models");
+                                writer.Line($"var serializeOptions = new {typeof(JsonSerializerOptions)} {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
                                 optionalSerializeOptions = ", serializeOptions";
                             }
 
@@ -432,7 +433,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 case JsonValueSerialization valueSerialization:
                     if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                     {
-                        writer.Line($"var serializeOptions = new {typeof(JsonSerializerOptions)} {{ Converters = {{ new {typeof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
+                        writer.UseNamespace("Azure.ResourceManager.Models");
+                        writer.Line($"var serializeOptions = new {typeof(JsonSerializerOptions)} {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
                     }
 
                     writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);

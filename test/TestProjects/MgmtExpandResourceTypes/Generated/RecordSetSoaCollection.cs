@@ -190,7 +190,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetSoaRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetSoaRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetSoaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetSoaRecordSetsClientDiagnostics, Pipeline, "RecordSetSoaCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetSoaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetSoaRecordSetsClientDiagnostics, Pipeline, "RecordSetSoaCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetSoaRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetSoaRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SOA".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetSoaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetSoaRecordSetsClientDiagnostics, Pipeline, "RecordSetSoaCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetSoaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetSoaRecordSetsClientDiagnostics, Pipeline, "RecordSetSoaCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

@@ -276,8 +276,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var pipelineReference = new Reference(PipelineField, typeof(HttpPipeline));
             var scopeName = pagingMethod.Diagnostics.ScopeName;
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.SchemaProperty?.SerializedName;
-            var itemName = pagingMethod.PagingResponse.ItemProperty.SchemaProperty?.SerializedName;
+            var nextLinkName = pagingMethod.PagingResponse.NextLinkPropertyName;
+            var itemName = pagingMethod.PagingResponse.ItemPropertyName;
             var signature = new MethodSignature(
                 pagingMethod.Name,
                 pagingMethod.Method.SummaryText,

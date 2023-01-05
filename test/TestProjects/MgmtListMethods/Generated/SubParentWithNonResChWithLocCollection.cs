@@ -188,7 +188,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChWithLocRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subParentWithNonResChWithLocRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SubParentWithNonResChWithLocResource(Client, SubParentWithNonResChWithLocData.DeserializeSubParentWithNonResChWithLocData(e)), _subParentWithNonResChWithLocClientDiagnostics, Pipeline, "SubParentWithNonResChWithLocCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SubParentWithNonResChWithLocResource(Client, SubParentWithNonResChWithLocData.DeserializeSubParentWithNonResChWithLocData(e)), _subParentWithNonResChWithLocClientDiagnostics, Pipeline, "SubParentWithNonResChWithLocCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChWithLocRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subParentWithNonResChWithLocRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SubParentWithNonResChWithLocResource(Client, SubParentWithNonResChWithLocData.DeserializeSubParentWithNonResChWithLocData(e)), _subParentWithNonResChWithLocClientDiagnostics, Pipeline, "SubParentWithNonResChWithLocCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SubParentWithNonResChWithLocResource(Client, SubParentWithNonResChWithLocData.DeserializeSubParentWithNonResChWithLocData(e)), _subParentWithNonResChWithLocClientDiagnostics, Pipeline, "SubParentWithNonResChWithLocCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

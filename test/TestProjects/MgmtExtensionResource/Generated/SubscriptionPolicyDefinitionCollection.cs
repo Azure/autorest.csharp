@@ -190,7 +190,7 @@ namespace MgmtExtensionResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateListRequest(Id.SubscriptionId, filter, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, filter, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SubscriptionPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "SubscriptionPolicyDefinitionCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SubscriptionPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "SubscriptionPolicyDefinitionCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace MgmtExtensionResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateListRequest(Id.SubscriptionId, filter, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, filter, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SubscriptionPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "SubscriptionPolicyDefinitionCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SubscriptionPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "SubscriptionPolicyDefinitionCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

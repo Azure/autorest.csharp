@@ -211,8 +211,8 @@ namespace AutoRest.CSharp.Generation.Writers
             if (pagingResponse != null)
             {
                 var scopeName = operation.Diagnostics.ScopeName;
-                var nextLinkName = pagingResponse.NextLinkProperty?.SchemaProperty?.SerializedName;
-                var itemName = pagingResponse.ItemProperty.SchemaProperty?.SerializedName;
+                var nextLinkName = pagingResponse.NextLinkPropertyName;
+                var itemName = pagingResponse.ItemPropertyName;
                 var requestContext = new CodeWriterDeclaration("requestContext");
                 FormattableString returnValue = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}({responseVariable}, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, {scopeName:L}, {itemName:L}, {nextLinkName:L}, {requestContext:I})";
 

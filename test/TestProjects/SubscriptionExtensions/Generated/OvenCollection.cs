@@ -187,7 +187,7 @@ namespace SubscriptionExtensions
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _ovenRestClient.CreateListAllRequest(Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _ovenRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OvenResource(Client, OvenData.DeserializeOvenData(e)), _ovenClientDiagnostics, Pipeline, "OvenCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OvenResource(Client, OvenData.DeserializeOvenData(e)), _ovenClientDiagnostics, Pipeline, "OvenCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace SubscriptionExtensions
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _ovenRestClient.CreateListAllRequest(Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _ovenRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OvenResource(Client, OvenData.DeserializeOvenData(e)), _ovenClientDiagnostics, Pipeline, "OvenCollection.GetAll", "Value", "NextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OvenResource(Client, OvenData.DeserializeOvenData(e)), _ovenClientDiagnostics, Pipeline, "OvenCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
