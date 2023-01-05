@@ -5,9 +5,12 @@
 
 #nullable disable
 
+using System;
+
 namespace ModelsInCadl.Models
 {
     /// <summary> Fixed int enum. </summary>
+    [Obsolete("deprecated for test")]
     public enum FixedIntEnum
     {
         /// <summary> 1. </summary>

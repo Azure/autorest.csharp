@@ -37,6 +37,7 @@
    "$id": "6",
    "Name": "FixedIntEnum",
    "Namespace": "ModelsInCadl",
+   "Deprecated": "deprecated for test",
    "Description": "Fixed int enum",
    "EnumValueType": "Int32",
    "AllowedValues": [
@@ -64,6 +65,7 @@
    "$id": "10",
    "Name": "ExtensibleEnum",
    "Namespace": "ModelsInCadl",
+   "Deprecated": "deprecated for test",
    "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -708,6 +710,7 @@
    "$id": "88",
    "Name": "RoundTripOptionalModel",
    "Namespace": "ModelsInCadl",
+   "Deprecated": "deprecated for test",
    "Description": "RoundTrip model with optional properties.",
    "IsNullable": false,
    "Usage": "Output",
@@ -1875,6 +1878,7 @@
      "$id": "223",
      "Name": "inputToRoundTripReadOnly",
      "ResourceName": "ModelsInCadl",
+     "Deprecated": "deprecated for test",
      "Description": "Input to RoundTripReadOnly",
      "Parameters": [
       {

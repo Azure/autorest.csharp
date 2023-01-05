@@ -6,6 +6,7 @@ import {
     Enum,
     EnumMember,
     getDoc,
+    getDeprecated,
     getEffectiveModelType,
     getFormat,
     getFriendlyName,
@@ -328,6 +329,7 @@ export function getInputType(
                 Name: m.name,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
+                Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 EnumValueType: innerEnum.EnumValueType,
                 AllowedValues: innerEnum.AllowedValues,
@@ -377,6 +379,7 @@ export function getInputType(
                 Name: e.name,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
+                Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
@@ -423,6 +426,7 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
+                Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
                 DiscriminatorPropertyName: getDiscriminator(program, m)
