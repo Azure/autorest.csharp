@@ -521,7 +521,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        private static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
+        internal static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
         {
             if (TypeFactory.RequiresToList(from, to))
             {

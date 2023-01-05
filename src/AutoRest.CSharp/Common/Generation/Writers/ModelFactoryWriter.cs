@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -87,7 +88,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (discriminator.Value is Constant discriminatorValue)
                 {
                     var property = discriminator.Property;
-                    initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{GetRawEnumValue(discriminatorValue):L}"));
+                    initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, GetDiscriminatorValue(property.Declaration.Type, discriminatorValue)));
                 }
                 else if (model.Declaration.IsAbstract)
                 {
@@ -102,6 +103,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 _writer.WriteParameterNullChecks(method.Parameters);
                 _writer.WriteInitialization(v => _writer.Line($"return {v};"), model, ctor, initializes);
             }
+        }
+
+        private static FormattableString GetDiscriminatorValue(CSharpType type, Constant value)
+        {
+            if (type.TryCast<EnumType>(out var enumType) && value.Value is EnumTypeValue enumValue)
+            {
+                // in this case, the value must be a EnumTypeValue
+                return $"{type}.{enumValue.Declaration.Name}";
+            }
+
+            // otherwise if the discriminator is just a plain string
+            return $"{GetRawEnumValue(value)}";
         }
 
         private static object? GetRawEnumValue(Constant constant) => constant.Value switch

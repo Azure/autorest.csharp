@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     case { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType }:
                         // get the type of the first parameter of its ctor
                         var to = serializableObjectType.SerializationConstructor.Signature.Parameters.First().Type;
-                        result = $"new {parentPropertyType}({result}{GetConversion(writer, from, to)})";
+                        result = $"new {parentPropertyType}({result}{CodeWriterExtensions.GetConversion(writer, from, to)})";
                         break;
                     case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
                         // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it
@@ -113,17 +113,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return (assignmentProperty, result);
-        }
-
-        private static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
-        {
-            if (TypeFactory.RequiresToList(from, to))
-            {
-                writer.UseNamespace(typeof(Enumerable).Namespace!);
-                return from.IsNullable ? "?.ToList()" : ".ToList()";
-            }
-
-            return string.Empty;
         }
 
         private readonly Dictionary<SerializableObjectType, Dictionary<Parameter, Stack<ObjectTypeProperty>>> _parameterPropertyCache = new();
