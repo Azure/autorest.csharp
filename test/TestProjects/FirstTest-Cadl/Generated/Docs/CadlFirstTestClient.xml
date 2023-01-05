@@ -333,6 +333,46 @@ Schema for <c>Friend</c>:
 
 </remarks>
     </member>
+    <member name="AddTimeHeaderAsync(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call AddTimeHeaderAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+Response response = await client.AddTimeHeaderAsync();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call AddTimeHeaderAsync with all parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="AddTimeHeader(DateTimeOffset,RequestContext)">
+<example>
+This sample shows how to call AddTimeHeader.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+Response response = client.AddTimeHeader();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call AddTimeHeader with all parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
     <member name="SayHiAsync(String,String,String,RequestContext)">
 <example>
 This sample shows how to call SayHiAsync with required parameters and parse the result.

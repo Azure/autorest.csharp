@@ -616,7 +616,7 @@ schemas: !Schemas
                   schema: *ref_13
                   serializedName: type14
                   extensions:
-                    x-ms-format: dfe-date-time-rfc1123
+                    x-ms-format: dfe-date-time
                   language: !Languages 
                     default:
                       name: type14

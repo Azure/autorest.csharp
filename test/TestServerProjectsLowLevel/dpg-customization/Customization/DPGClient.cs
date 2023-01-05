@@ -26,7 +26,7 @@ namespace dpg_customization_LowLevel
             {
                 RequestContext requestContext = new RequestContext { CancellationToken = cancellationToken };
                 Response response = await GetModelAsync(mode, requestContext);
-                return Response.FromValue((Product)response, response);
+                return Response.FromValue(Product.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -47,7 +47,7 @@ namespace dpg_customization_LowLevel
             {
                 RequestContext requestContext = new RequestContext { CancellationToken = cancellationToken };
                 Response response = GetModel(mode, requestContext);
-                return Response.FromValue((Product)response, response);
+                return Response.FromValue(Product.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -69,7 +69,7 @@ namespace dpg_customization_LowLevel
             requestContext.CancellationToken = cancellationToken;
 
             Response response = await PostModelAsync("model", Input.ToRequestContent(input), requestContext);
-            return Response.FromValue((Product)response, response);
+            return Response.FromValue(Product.FromResponse(response), response);
         }
 
         /// <summary> Post either raw response as a model and pass in &apos;raw&apos; for mode, or grow up your operation to take a model instead, and put in &apos;model&apos; as mode. </summary>
@@ -85,7 +85,7 @@ namespace dpg_customization_LowLevel
             requestContext.CancellationToken = cancellationToken;
 
             Response result = PostModel("model", Input.ToRequestContent(input), requestContext);
-            return Response.FromValue((Product)result, result);
+            return Response.FromValue(Product.FromResponse(result), result);
         }
 
         /// <summary> Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up. </summary>
@@ -95,13 +95,13 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         public virtual async Task<Operation<Product>> LroValueAsync(WaitUntil waitUntil, string mode, CancellationToken cancellationToken = default)
         {
-            var requestContext = new RequestContext { CancellationToken = cancellationToken };
+            RequestContext context = FromCancellationToken(cancellationToken);
             using var scope = ClientDiagnostics.CreateScope("DPGClient.LroValue");
             scope.Start();
             try
             {
-                var lro = await LroAsync(waitUntil, mode, requestContext).ConfigureAwait(false);
-                return ProtocolOperationHelpers.Convert(lro, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
+                var response = await LroAsync(waitUntil, mode, context).ConfigureAwait(false);
+                return ProtocolOperationHelpers.Convert(response, r => Product.FromResponse(r), ClientDiagnostics, "DPGClient.LroValue");
             }
             catch (Exception e)
             {
@@ -117,13 +117,13 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         public virtual Operation<Product> LroValue(WaitUntil waitUntil, string mode, CancellationToken cancellationToken = default)
         {
-            var requestContext = new RequestContext { CancellationToken = cancellationToken };
+            RequestContext context = FromCancellationToken(cancellationToken);
             using var scope = ClientDiagnostics.CreateScope("DPGClient.LroValue");
             scope.Start();
             try
             {
-                var lro = Lro(waitUntil, mode, requestContext);
-                return ProtocolOperationHelpers.Convert(lro, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
+                var response = Lro(waitUntil, mode, context);
+                return ProtocolOperationHelpers.Convert(response, r => Product.FromResponse(r), ClientDiagnostics, "DPGClient.LroValue");
             }
             catch (Exception e)
             {
@@ -159,6 +159,17 @@ namespace dpg_customization_LowLevel
 
             Pageable<BinaryData> pageableBindaryData = GetPagesImplementation("DPGClient.GetPagesValues", mode, context);
             return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
     }
 }
