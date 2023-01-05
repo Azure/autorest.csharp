@@ -846,9 +846,9 @@ namespace Azure.Language.Authoring
         /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjectsAsync(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetProjectsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAuthoringClientsRequest(maxCount, skip, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAuthoringClientsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetProjectsRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetProjectsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetProjects", "value", "nextLink", context);
         }
 
         /// <summary> Lists the existing projects. </summary>
@@ -861,9 +861,9 @@ namespace Azure.Language.Authoring
         /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjects(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetProjects(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAuthoringClientsRequest(maxCount, skip, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAuthoringClientsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetProjectsRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetProjectsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetProjects", "value", "nextLink", context);
         }
 
         /// <summary> Lists the existing deployments. </summary>
@@ -878,9 +878,9 @@ namespace Azure.Language.Authoring
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAuthoringClientsRequest(projectName, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAuthoringClientsNextPageRequest(nextLink, projectName, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDeploymentsRequest(projectName, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetDeploymentsNextPageRequest(nextLink, projectName, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetDeployments", "value", "nextLink", context);
         }
 
         /// <summary> Lists the existing deployments. </summary>
@@ -895,9 +895,9 @@ namespace Azure.Language.Authoring
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAuthoringClientsRequest(projectName, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAuthoringClientsNextPageRequest(nextLink, projectName, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetAuthoringClients", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDeploymentsRequest(projectName, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetDeploymentsNextPageRequest(nextLink, projectName, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetDeployments", "value", "nextLink", context);
         }
 
         /// <param name="maxCount"> The Int32 to use. </param>
