@@ -567,11 +567,11 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (clientMethod.ConvenienceMethod.Diagnostic != null)
                 {
-                    WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, clientMethod.ConvenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name, async);
+                    WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, clientMethod.ConvenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name, clientMethod.Deprecated, async);
                 }
                 else
                 {
-                    WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty.Name, async);
+                    WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty.Name, clientMethod.Deprecated, async);
                 }
             }
 
@@ -581,9 +581,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteNonPageableLongRunningOperationConvenienceMethod(MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, Diagnostic diagnostic, string clientDiagnosticsPropertyName, bool async)
+        private void WriteNonPageableLongRunningOperationConvenienceMethod(MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, Diagnostic diagnostic, string clientDiagnosticsPropertyName, string? deprecated, bool async)
         {
-            using (WriteConvenienceMethodDeclaration(writer, convenienceMethod.Signature, async))
+            using (WriteConvenienceMethodDeclaration(convenienceMethod.Signature, deprecated, async))
             {
                 WriteNonPageableLongRunningOperationConvenienceMethodBody(writer, protocolMethodSignature, convenienceMethod, clientDiagnosticsPropertyName, diagnostic, async);
             }
