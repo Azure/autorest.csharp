@@ -137,6 +137,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var parameterName = property.Declaration.Name.ToVariableName();
                 var inputType = property.Declaration.Type;
+                Constant? overriddenDefaultValue = null;
                 // check if the property is the discriminator, but skip the check if the configuration is on for HLC only
                 if (!Configuration.ModelFactoryForHlc && discriminator != null && discriminator.Property == property)
                 {
@@ -152,6 +153,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         if (inputType.TryCast<EnumType>(out var enumType))
                         {
                             inputType = enumType.ValueType;
+                            overriddenDefaultValue = new Constant("Unknown", inputType);
                         }
                     }
                 }
@@ -166,7 +168,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     Name = parameterName,
                     Type = inputType,
-                    DefaultValue = Constant.Default(inputType),
+                    DefaultValue = overriddenDefaultValue ?? Constant.Default(inputType),
                     Initializer = inputType.GetParameterInitializer(ctorParameter.DefaultValue)
                 };
 

@@ -60,7 +60,7 @@ namespace MgmtDiscriminator.Models
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCondition"/> instance for mocking. </returns>
-        public static DeliveryRuleCondition DeliveryRuleCondition(string name = null, string foo = null)
+        public static DeliveryRuleCondition DeliveryRuleCondition(string name = "Unknown", string foo = null)
         {
             return new UnknownDeliveryRuleCondition(name, foo);
         }
@@ -69,7 +69,7 @@ namespace MgmtDiscriminator.Models
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleAction"/> instance for mocking. </returns>
-        public static DeliveryRuleAction DeliveryRuleAction(string name = null, string foo = null)
+        public static DeliveryRuleAction DeliveryRuleAction(string name = "Unknown", string foo = null)
         {
             return new DeliveryRuleAction(name, foo);
         }
