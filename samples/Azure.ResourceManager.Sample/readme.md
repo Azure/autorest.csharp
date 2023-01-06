@@ -6,7 +6,6 @@
 
 ``` yaml
 azure-arm: true
-library-name: Sample
 require: $(this-folder)/../../readme.md
 input-file: $(this-folder)/sample.json
 namespace: Azure.ResourceManager.Sample
