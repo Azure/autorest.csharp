@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
         private ProtocolMethodPaging? _protocolMethodPaging;
         private RequestConditionHeaders _conditionHeaderFlag = RequestConditionHeaders.None;
 
-        public InputOperation Operation { get; }
+        private InputOperation Operation { get; }
 
         public OperationMethodChainBuilder(InputOperation operation, string clientName, ClientFields fields, TypeFactory typeFactory)
         {
@@ -194,12 +194,15 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var parameters = _orderedParameters.Select(p => p.Convenience).WhereNotNull().ToArray();
+            var attributes = Operation.Deprecated is { } deprecated
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                : null;
             var protocolToConvenience = _orderedParameters
                 .Where(p => p.Protocol != null)
                 .Select(p => (p.Protocol!, p.Convenience))
                 .ToArray();
 
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameters);
+            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameters, attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }

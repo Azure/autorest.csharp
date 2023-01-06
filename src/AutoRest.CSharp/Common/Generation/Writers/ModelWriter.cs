@@ -287,6 +287,18 @@ Examples:
 
         protected virtual void AddClassAttributes(CodeWriter writer, ObjectType schema)
         {
+            if (schema.Deprecated != null)
+            {
+                writer.Line($"[{typeof(ObsoleteAttribute)}(\"{schema.Deprecated}\")]");
+            }
+        }
+
+        private void AddClassAttributes(CodeWriter writer, EnumType enumType)
+        {
+            if (enumType.Deprecated != null)
+            {
+                writer.Line($"[{typeof(ObsoleteAttribute)}(\"{enumType.Deprecated}\")]");
+            }
         }
 
         protected virtual void AddCtorAttribute(CodeWriter writer, ObjectType schema, ObjectTypeConstructor constructor)
@@ -338,7 +350,7 @@ Examples:
             }
         }
 
-        public static void WriteEnum(CodeWriter writer, EnumType schema)
+        public void WriteEnum(CodeWriter writer, EnumType schema)
         {
             if (schema.Declaration.IsUserDefined)
             {
@@ -348,6 +360,7 @@ Examples:
             using (writer.Namespace(schema.Declaration.Namespace))
             {
                 writer.WriteXmlDocumentationSummary($"{schema.Description}");
+                AddClassAttributes(writer, schema);
 
                 using (writer.Scope($"{schema.Declaration.Accessibility} enum {schema.Declaration.Name}{(schema.IsLongValueType ? " : long" : "")}"))
                 {
@@ -368,7 +381,7 @@ Examples:
             }
         }
 
-        public static void WriteExtendableEnum(CodeWriter writer, EnumType enumType)
+        public void WriteExtendableEnum(CodeWriter writer, EnumType enumType)
         {
             var cs = enumType.Type;
             string name = enumType.Declaration.Name;
@@ -377,6 +390,7 @@ Examples:
             using (writer.Namespace(enumType.Declaration.Namespace))
             {
                 writer.WriteXmlDocumentationSummary($"{enumType.Description}");
+                AddClassAttributes(writer, enumType);
 
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
                 using (writer.Scope($"{enumType.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
