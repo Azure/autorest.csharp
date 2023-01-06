@@ -220,10 +220,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             /* CODE PATTEN
-             * var operation = await client.{methodName}(...);
+             * var operation = await client.{methodName}(WaitUntil.Completed, ...);
              *
-             * var response = await operation.WaitForCompletionAsync();
-             * await foreach (var data in response.Value)
+             * await foreach (var data in operation.Value)
              * {
              *     Console.WriteLine(data.ToString());
              * or
@@ -234,8 +233,7 @@ namespace AutoRest.CSharp.Generation.Writers
              */
             builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
             builder.AppendLine();
-            builder.AppendLine($"var response = {(async ? "await " : "")}operation.WaitForCompletion{(async ? "Async" : "")}();");
-            using (Scope($"{(async ? "await " : "")}foreach (var data in response.Value)", 0, builder, true))
+            using (Scope($"{(async ? "await " : "")}foreach (var data in operation.Value)", 0, builder, true))
             {
                 ComposeParsingPageableResponseCodes(responseModel, clientMethod.PagingInfo!.ItemName, allParameters, builder);
             }
@@ -244,12 +242,11 @@ namespace AutoRest.CSharp.Generation.Writers
         private void ComposeHandleLongRunningResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             /* GENERATED CODE PATTERN
-             * var operation = await client.{methodName}(...);
+             * var operation = await client.{methodName}(WaitUntil.Completed, ...);
              *
-             * var response = await operation.WaitForCompletionResponseAsync();
-             * Console.WriteLine(response.Status);
+             * Console.WriteLine(operation.GetRawResponse().Status);
              * or
-             * BinaryData data = await operation.WaitForCompletionAsync();
+             * BinaryData data = operation.Value;
              * JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
              * Console.WriteLine(result[.GetProperty(...)...].ToString());
              * ...
@@ -259,12 +256,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (clientMethod.ResponseBodyType == null)
             {
-                builder.AppendLine($"var response = {(async ? "await " : "")}operation.WaitForCompletionResponse{(async ? "Async" : "")}();");
-                builder.AppendLine("Console.WriteLine(response.Status)");
+                builder.AppendLine("Console.WriteLine(operation.GetRawResponse().Status)");
             }
             else
             {
-                builder.AppendLine($"BinaryData data = {(async ? "await " : "")}operation.WaitForCompletion{(async ? "Async" : "")}();");
+                builder.AppendLine($"BinaryData data = operation.Value;");
                 ComposeParsingLongRunningResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
             }
         }
@@ -568,8 +564,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(WaitUntil))
                 {
-                    // use `Started`, since we will generate `operation.WaitForCompletion()` afterwards
-                    return $"{nameof(WaitUntil)}.{nameof(WaitUntil.Started)}";
+                    // use `Completed`, since we will not generate `operation.WaitForCompletion()` afterwards
+                    return $"{nameof(WaitUntil)}.{nameof(WaitUntil.Completed)}";
                 }
 
                 if (type.IsEnum)

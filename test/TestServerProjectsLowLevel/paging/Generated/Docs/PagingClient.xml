@@ -1306,10 +1306,9 @@ This sample shows how to call GetMultiplePagesLROAsync with required parameters 
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Started);
+var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed);
 
-var response = await operation.WaitForCompletionAsync();
-await foreach (var data in response.Value)
+await foreach (var data in operation.Value)
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -1320,10 +1319,9 @@ This sample shows how to call GetMultiplePagesLROAsync with all parameters, and 
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Started, "<clientRequestId>", 1234, 1234);
+var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234);
 
-var response = await operation.WaitForCompletionAsync();
-await foreach (var data in response.Value)
+await foreach (var data in operation.Value)
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -1354,10 +1352,9 @@ This sample shows how to call GetMultiplePagesLRO with required parameters and p
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-var operation = client.GetMultiplePagesLRO(WaitUntil.Started);
+var operation = client.GetMultiplePagesLRO(WaitUntil.Completed);
 
-var response = operation.WaitForCompletion();
-foreach (var data in response.Value)
+foreach (var data in operation.Value)
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -1368,10 +1365,9 @@ This sample shows how to call GetMultiplePagesLRO with all parameters, and how t
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-var operation = client.GetMultiplePagesLRO(WaitUntil.Started, "<clientRequestId>", 1234, 1234);
+var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, "<clientRequestId>", 1234, 1234);
 
-var response = operation.WaitForCompletion();
-foreach (var data in response.Value)
+foreach (var data in operation.Value)
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
