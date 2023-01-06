@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 case ObjectType objectType:
                     return writer.AppendObjectTypeValue(objectType, exampleValue.Properties);
                 case EnumType enumType:
-                    return writer.AppendEnumTypeValue(enumType, (string)exampleValue.RawValue!);
+                    return writer.AppendEnumTypeValue(enumType, exampleValue.RawValue!);
             }
             return writer.AppendRaw("default");
         }
@@ -345,8 +345,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // get all the properties on this type, including the properties from its base type
             var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
             var constructor = objectType.InitializationConstructor;
-            writer.UseNamespace(objectType.Type.Namespace);
-            writer.Append($"new {objectType.Type.Name}(");
+            writer.Append($"new {objectType.Type}(");
             // build a map from parameter name to property
             var propertyDict = properties.ToDictionary(
                 property => property.Declaration.Name.ToVariableName(), property => property);
@@ -455,10 +454,10 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
             => property.Declaration.Accessibility == "public" && (TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
 
-        private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, string value)
+        private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, object value)
         {
-            // find value in one of the choices
-            var choice = enumType.Values.FirstOrDefault(c => value.Equals(c.Value.Value));
+            // find value in one of the choices. Here we convert the values to string then compare, because the raw value has the "primitive types are deserialized into strings" issue
+            var choice = enumType.Values.FirstOrDefault(c => StringComparer.Ordinal.Equals(value.ToString(), c.Value.Value?.ToString()));
             writer.UseNamespace(enumType.Type.Namespace);
             if (choice != null)
                 return writer.Append($"{enumType.Type.Name}.{choice.Declaration.Name}");
