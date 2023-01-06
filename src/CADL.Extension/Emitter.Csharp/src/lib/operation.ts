@@ -7,7 +7,7 @@ import { HttpOperation, getHeaderFieldName, HttpOperationParameter, HttpOperatio
 import { OperationFinalStateVia } from "../type/OperationFinalStateVia.js";
 import { OperationLongRunning } from "../type/OperationLongRunning.js";
 import { OperationResponse } from "../type/OperationResponse";
-import { getOperationLink, isPollingLocation } from "@azure-tools/cadl-azure-core";
+import { getOperationLink, isFinalLocation } from "@azure-tools/cadl-azure-core";
 import { getConvenienceAPIName, isApiVersion } from "@azure-tools/cadl-dpg";
 import { BodyMediaType } from "../type/BodyMediaType.js";
 import { HttpResponseHeader } from "../type/HttpResponseHeader.js";
@@ -309,7 +309,7 @@ export function loadOperation(
             for (const content of response.responses) {
                 for (const key in content.headers) {
                     const header = content.headers[key];
-                    if (isPollingLocation(program, header)) {
+                    if (isFinalLocation(program, header)) {
                         const headerFieldName = getHeaderFieldName(program, header);
                         switch (headerFieldName) {
                             case "Operation-Location":

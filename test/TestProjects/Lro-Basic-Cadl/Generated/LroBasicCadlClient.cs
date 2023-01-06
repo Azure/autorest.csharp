@@ -195,7 +195,7 @@ namespace LroBasicCadl
             try
             {
                 using HttpMessage message = CreateUpdateProjectRequest(id, content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.UpdateProject", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.UpdateProject", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -249,7 +249,7 @@ namespace LroBasicCadl
             try
             {
                 using HttpMessage message = CreateUpdateProjectRequest(id, content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.UpdateProject", OperationFinalStateVia.OperationLocation, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.UpdateProject", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {

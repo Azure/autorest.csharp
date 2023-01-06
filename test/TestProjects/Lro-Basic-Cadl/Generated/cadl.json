@@ -420,7 +420,7 @@
      "BufferResponse": true,
      "LongRunning": {
       "$id": "47",
-      "FinalStateVia": 3,
+      "FinalStateVia": 1,
       "FinalResponse": {
        "$id": "48",
        "StatusCodes": [
