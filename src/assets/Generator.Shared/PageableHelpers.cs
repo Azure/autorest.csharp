@@ -154,7 +154,6 @@ namespace Azure.Core
             }
         }
 
-
         private class AsyncPageableWrapper<T> : AsyncPageable<T> where T : notnull
         {
             private readonly PageableImplementation<T> _implementation;
