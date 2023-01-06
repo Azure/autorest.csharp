@@ -64,7 +64,26 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (IsFlattenedProperty && _flattenedProperty == null)
             {
-                _flattenedProperty = FlattenedObjectTypeProperty.CreateFrom(this);
+                var hierarchyStack = FlattenedObjectTypeProperty.GetHierarchyStack(this);
+                // we can only get in this method when the property has a single property type, therefore the hierarchy stack here is guaranteed to have at least two values
+                var innerProperty = hierarchyStack.Pop();
+                var immediateParentProperty = hierarchyStack.Pop();
+
+                var myPropertyName = FlattenedObjectTypeProperty.GetCombinedPropertyName(innerProperty, immediateParentProperty);
+                var childPropertyName = this.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
+
+                var propertyType = innerProperty.Declaration.Type;
+
+                var isOverriddenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
+                if (isOverriddenValueType)
+                    propertyType = propertyType.WithNullable(isOverriddenValueType);
+
+                var declaration = new MemberDeclarationOptions(innerProperty.Declaration.Accessibility, myPropertyName, propertyType);
+
+                // determines whether this property should has a setter
+                var (isReadOnly, includeGetterNullCheck, includeSetterNullCheck) = FlattenedObjectTypeProperty.GetFlags(this, innerProperty);
+
+                _flattenedProperty = new FlattenedObjectTypeProperty(declaration, innerProperty._baseParameterDescription, this, isReadOnly, includeGetterNullCheck, includeSetterNullCheck, childPropertyName, isOverriddenValueType);
             }
 
             return _flattenedProperty;
@@ -102,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
         private string? _parameterDescription;
-        private string _baseParameterDescription;
+        private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
         public string ParameterDescription => _parameterDescription ??= _baseParameterDescription + CreateExtraPropertyDiscriminatorSummary(ValueType);
 
         /// <summary>
