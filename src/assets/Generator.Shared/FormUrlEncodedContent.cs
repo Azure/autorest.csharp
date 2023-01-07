@@ -34,7 +34,7 @@ namespace Azure.Core
         public override async Task WriteToAsync(Stream stream, CancellationToken cancellation)
         {
             BuildIfNeeded ();
-#if NETSTANDARD2_1 || NETCOREAPP2_1_OR_GREATER
+#if NET5_0_OR_GREATER || NETCOREAPP
             await stream.WriteAsync(_bytes.AsMemory(), cancellation).ConfigureAwait(false);
 #else
             await stream.WriteAsync(_bytes, 0, _bytes.Length, cancellation).ConfigureAwait(false);
@@ -44,7 +44,7 @@ namespace Azure.Core
         public override void WriteTo(Stream stream, CancellationToken cancellation)
         {
             BuildIfNeeded ();
-#if NETSTANDARD2_1 || NETCOREAPP2_1_OR_GREATER
+#if NET5_0_OR_GREATER || NETCOREAPP
             stream.Write(_bytes.AsSpan());
 #else
             stream.Write(_bytes, 0, _bytes.Length);
