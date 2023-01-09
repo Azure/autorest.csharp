@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace CustomizationsInCadl.Models
 {
-    /// <summary> Extensible enum that has been fixed enum. </summary>
+    /// <summary> Extensible enum. </summary>
     public readonly partial struct EnumToBeMadeExtensible : IEquatable<EnumToBeMadeExtensible>
     {
         private readonly string _value;

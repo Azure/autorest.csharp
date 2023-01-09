@@ -86,7 +86,9 @@ namespace AutoRest.CSharp.Common.Input
         {
             var inputOperation = new InputOperation(
                 Name: operation.Language.Default.Name,
+                ResourceName: null,
                 Summary: operation.Language.Default.Summary,
+                Deprecated: operation.Deprecated?.Reason,
                 Description: operation.Language.Default.Description,
                 Accessibility: operation.Accessibility,
                 Parameters: CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
@@ -225,6 +227,7 @@ namespace AutoRest.CSharp.Common.Input
                 Name: schema.Language.Default.Name,
                 Namespace: schema.Extensions?.Namespace,
                 Accessibility: schema.Extensions?.Accessibility,
+                Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
                 Usage: (schemaUsages.GetUsage(schema) & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
                 {
@@ -382,6 +385,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: schema.Name,
             Namespace: schema.Extensions?.Namespace,
             Accessibility: schema.Extensions?.Accessibility,
+            Deprecated: schema.Deprecated?.Reason,
             Description: schema.CreateDescription(),
             Usage: InputModelTypeUsage.None,
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),

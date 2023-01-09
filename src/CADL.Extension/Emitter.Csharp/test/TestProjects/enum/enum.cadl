@@ -1,6 +1,8 @@
 import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
 
 using Cadl.Http;
+using Azure.Core;
 
 @serviceTitle("EnumPropertiesBasicClient")
 @serviceVersion("1.0.0")
@@ -11,7 +13,7 @@ namespace Cadl.EnumPropertiesBasic;
 
 @doc("The language to translate the input text into.")
 @knownValues(TranslationLanguageValues)
-model TranslationLanguage is string {};
+scalar TranslationLanguage extends string;
 
 @doc("The supported languages to translate input text into.")
 enum TranslationLanguageValues
@@ -41,12 +43,27 @@ enum DayOfTheWeek {
   Sunday
 }
 
+@doc("Represents the days of the week using a standard, non-string enum.")
+@fixed
+enum FixedDayOfTheWeek {
+  Monday,
+  Tuesday,
+  @doc("Wednesday is documented to test this case.")
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday
+}
+
 @doc("Input model with enum properties.")
 model InputModel {
 
   @doc("Required standard enum value.")
   Day : DayOfTheWeek;
 
+  @doc("Required fixed enum value.")
+  FixedDay : FixedDayOfTheWeek;
   // @doc("Required string enum value.")
   Language: TranslationLanguage;
   Title: EnumWithStringValue;

@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -26,6 +28,12 @@ namespace AutoRest.CSharp.Output.Models.Requests
             BufferResponse = bufferResponse;
             Accessibility = GetAccessibility(accessibility);
             Operation = operation;
+
+            var statusCodes = Responses
+                .SelectMany(r => r.StatusCodes)
+                .Distinct()
+                .OrderBy(c => c.Code ?? c.Family * 100);
+            ResponseClassifierType = new ResponseClassifierType(statusCodes);
         }
 
         private static MethodSignatureModifiers GetAccessibility(string accessibility) =>
@@ -51,5 +59,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public CSharpType? ReturnType { get; }
         public MethodSignatureModifiers Accessibility { get; }
         public InputOperation Operation { get; }
+
+        public ResponseClassifierType ResponseClassifierType { get; }
     }
 }

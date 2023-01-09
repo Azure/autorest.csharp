@@ -15,6 +15,7 @@
     {
      "$id": "3",
      "Name": "genEndPoint",
+     "ResourceName": "endpoint",
      "Description": "Path parameter is string with format",
      "Parameters": [
       {

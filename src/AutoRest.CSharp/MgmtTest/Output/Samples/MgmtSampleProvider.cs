@@ -25,6 +25,8 @@ namespace AutoRest.CSharp.MgmtTest.Output.Samples
         private string? _defaultName;
         protected override string DefaultName => _defaultName ??= $"Sample_{Owner.Type.Name}";
 
+        protected override string DefaultNamespace => $"{Owner.Type.Namespace}.Samples";
+
         // a sample class does not need a description
         public override FormattableString Description => $"";
     }

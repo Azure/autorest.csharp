@@ -24,6 +24,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx\\Generated"
     },
+    "AnomalyDetector": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AnomalyDetector\\Generated"
+    },
     "ApiVersion": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion\\Generated"
@@ -163,10 +167,6 @@
     "cadl-api-key": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\api-key\\Generated"
-    },
-    "cadl-extensible-enums": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\extensible-enums\\Generated"
     },
     "cadl-oauth2": {
       "commandName": "Project",
@@ -519,6 +519,10 @@
     "ReferenceTypes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ReferenceTypes\\Generated"
+    },
+    "RenameGetList-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RenameGetList-Cadl\\Generated"
     },
     "required-optional": {
       "commandName": "Project",

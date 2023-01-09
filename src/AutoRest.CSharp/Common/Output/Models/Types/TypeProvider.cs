@@ -13,6 +13,9 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal abstract class TypeProvider
     {
         private readonly Lazy<INamedTypeSymbol?> _existingType;
+
+        protected string? _deprecated;
+
         private TypeDeclarationOptions? _type;
 
         protected TypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
@@ -29,6 +32,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract string DefaultName { get; }
         protected virtual string DefaultNamespace { get; }
         protected abstract string DefaultAccessibility { get; }
+
+        public string? Deprecated => _deprecated;
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected virtual bool IsAbstract { get; } = false;
         protected INamedTypeSymbol? ExistingType => _existingType.Value;
