@@ -27,6 +27,5 @@ DownloadAll $files $baseUrl $downloadPath
 $files = 'SharedExtensions.cs', 'ManagedServiceIdentityTypeV3Converter.cs'
 $downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Management.Shared')
 Get-ChildItem $downloadPath -Filter *.cs | Remove-Item;
-# TODO: temporary change to target at support_lro_rehydration branch
 $baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/resourcemanager/Azure.ResourceManager/src/Shared/'
 DownloadAll $files $baseUrl $downloadPath
