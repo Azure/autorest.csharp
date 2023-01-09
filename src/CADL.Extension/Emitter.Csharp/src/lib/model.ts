@@ -50,6 +50,7 @@ import {
 } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { Usage } from "../type/Usage.js";
+import { getTemplateModelName } from "./templateHandler.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -239,6 +240,15 @@ export function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
 }
 
+function getModelName(model: Model, program: Program): string {
+    const templateName = getTemplateModelName(model);
+    if (templateName) {
+        return templateName;
+    }
+
+    return getFriendlyName(program, model) ?? model.name;
+}
+
 export function getInputType(
     program: Program,
     type: Type,
@@ -417,7 +427,7 @@ export function getInputType(
 
     function getInputModelForModel(m: Model): InputModelType {
         m = getEffectiveSchemaType(program, m) as Model;
-        const name = getFriendlyName(program, m) ?? m.name;
+        const name = getModelName(m, program);
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
@@ -575,14 +585,14 @@ export function getUsages(
         if ("name" in type) typeName = type.name ?? "";
         if (type.kind === "Model") {
             const effectiveType = getEffectiveModelType(program, type);
-            typeName = getFriendlyName(program, effectiveType) ?? effectiveType.name;
+            typeName = getModelName(effectiveType, program);
         }
         const affectTypes: string[] = [];
         if (typeName !== "") affectTypes.push(typeName);
         if (type.kind === "Model" && type.templateArguments) {
             for (const arg of type.templateArguments) {
                 if (arg.kind === "Model" && "name" in arg && arg.name !== "") {
-                    affectTypes.push(getFriendlyName(program, arg) ?? arg.name);
+                    affectTypes.push(getModelName(arg, program));
                 }
             }
         }

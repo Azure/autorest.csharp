@@ -12,9 +12,9 @@ using Azure.Core;
 
 namespace Pagination.Models
 {
-    internal partial class PagedLedgerEntry
+    internal partial class LedgerEntryListResult
     {
-        internal static PagedLedgerEntry DeserializePagedLedgerEntry(JsonElement element)
+        internal static LedgerEntryListResult DeserializeLedgerEntryListResult(JsonElement element)
         {
             IReadOnlyList<LedgerEntry> value = default;
             Optional<string> nextLink = default;
@@ -36,15 +36,15 @@ namespace Pagination.Models
                     continue;
                 }
             }
-            return new PagedLedgerEntry(value, nextLink);
+            return new LedgerEntryListResult(value, nextLink);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static PagedLedgerEntry FromResponse(Response response)
+        internal static LedgerEntryListResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializePagedLedgerEntry(document.RootElement);
+            return DeserializeLedgerEntryListResult(document.RootElement);
         }
     }
 }

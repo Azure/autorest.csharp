@@ -13,22 +13,22 @@ using Azure.Core;
 namespace Pagination.Models
 {
     /// <summary> Paged collection of LedgerEntry items. </summary>
-    internal partial class CustomPage
+    internal partial class LedgerEntryListResult
     {
-        /// <summary> Initializes a new instance of CustomPage. </summary>
+        /// <summary> Initializes a new instance of LedgerEntryListResult. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal CustomPage(IEnumerable<LedgerEntry> value)
+        internal LedgerEntryListResult(IEnumerable<LedgerEntry> value)
         {
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of CustomPage. </summary>
+        /// <summary> Initializes a new instance of LedgerEntryListResult. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
-        internal CustomPage(IReadOnlyList<LedgerEntry> value, string nextLink)
+        internal LedgerEntryListResult(IReadOnlyList<LedgerEntry> value, string nextLink)
         {
             Value = value.ToList();
             NextLink = nextLink;
