@@ -10,9 +10,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Put200SucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put200SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -31,9 +31,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Put200SucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put200SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -90,9 +90,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Put200Succeeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put200Succeeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -111,9 +111,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Put200Succeeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put200Succeeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -170,9 +170,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -191,9 +191,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -250,9 +250,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -271,9 +271,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -330,9 +330,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -351,9 +351,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -410,9 +410,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -431,9 +431,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -490,9 +490,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -511,9 +511,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -570,9 +570,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -591,9 +591,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -650,9 +650,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Put201SucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put201SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -671,9 +671,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Put201SucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put201SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -730,9 +730,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Put201Succeeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put201Succeeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -751,9 +751,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Put201Succeeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put201Succeeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -808,9 +808,9 @@ This sample shows how to call Post202ListAsync with required parameters and pars
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.Post202ListAsync(WaitUntil.Started);
+var operation = await client.Post202ListAsync(WaitUntil.Completed);
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result[0].GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result[0].GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -849,9 +849,9 @@ This sample shows how to call Post202List with required parameters and parse the
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.Post202List(WaitUntil.Started);
+var operation = client.Post202List(WaitUntil.Completed);
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result[0].GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result[0].GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -892,9 +892,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Put200SucceededNoStateAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -913,9 +913,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Put200SucceededNoStateAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -972,9 +972,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Put200SucceededNoState(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put200SucceededNoState(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -993,9 +993,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Put200SucceededNoState(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put200SucceededNoState(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1052,9 +1052,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Put202Retry200Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1073,9 +1073,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Put202Retry200Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1132,9 +1132,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Put202Retry200(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1153,9 +1153,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Put202Retry200(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1212,9 +1212,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1233,9 +1233,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1292,9 +1292,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Put201CreatingSucceeded200(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1313,9 +1313,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Put201CreatingSucceeded200(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1372,9 +1372,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1393,9 +1393,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1452,9 +1452,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Put200UpdatingSucceeded204(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1473,9 +1473,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Put200UpdatingSucceeded204(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1532,9 +1532,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Put201CreatingFailed200Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1553,9 +1553,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Put201CreatingFailed200Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1612,9 +1612,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Put201CreatingFailed200(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put201CreatingFailed200(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1633,9 +1633,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Put201CreatingFailed200(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put201CreatingFailed200(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1692,9 +1692,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1713,9 +1713,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1772,9 +1772,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Put200Acceptedcanceled200(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1793,9 +1793,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Put200Acceptedcanceled200(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1852,9 +1852,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1873,9 +1873,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -1932,9 +1932,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PutNoHeaderInRetry(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -1953,9 +1953,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PutNoHeaderInRetry(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2012,9 +2012,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2033,9 +2033,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2092,9 +2092,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PutAsyncRetrySucceeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2113,9 +2113,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PutAsyncRetrySucceeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2172,9 +2172,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2193,9 +2193,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2252,9 +2252,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2273,9 +2273,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2332,9 +2332,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2353,9 +2353,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2412,9 +2412,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PutAsyncRetryFailed(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2433,9 +2433,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PutAsyncRetryFailed(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2492,9 +2492,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2513,9 +2513,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2572,9 +2572,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PutAsyncNoRetrycanceled(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2593,9 +2593,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PutAsyncNoRetrycanceled(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2652,9 +2652,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2673,9 +2673,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2732,9 +2732,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2753,9 +2753,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -2812,9 +2812,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PutNonResourceAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2828,9 +2828,9 @@ var data = new {
     id = "<id>",
 };
 
-var operation = await client.PutNonResourceAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -2868,9 +2868,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PutNonResource(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2884,9 +2884,9 @@ var data = new {
     id = "<id>",
 };
 
-var operation = client.PutNonResource(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -2924,9 +2924,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2940,9 +2940,9 @@ var data = new {
     id = "<id>",
 };
 
-var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -2980,9 +2980,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PutAsyncNonResource(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -2996,9 +2996,9 @@ var data = new {
     id = "<id>",
 };
 
-var operation = client.PutAsyncNonResource(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -3036,9 +3036,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PutSubResourceAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -3053,9 +3053,9 @@ var data = new {
     },
 };
 
-var operation = await client.PutSubResourceAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3100,9 +3100,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PutSubResource(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutSubResource(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -3117,9 +3117,9 @@ var data = new {
     },
 };
 
-var operation = client.PutSubResource(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutSubResource(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3164,9 +3164,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PutAsyncSubResourceAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -3181,9 +3181,9 @@ var data = new {
     },
 };
 
-var operation = await client.PutAsyncSubResourceAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3228,9 +3228,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PutAsyncSubResource(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncSubResource(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -3245,9 +3245,9 @@ var data = new {
     },
 };
 
-var operation = client.PutAsyncSubResource(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PutAsyncSubResource(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3290,9 +3290,9 @@ This sample shows how to call DeleteProvisioning202Accepted200SucceededAsync wit
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Started);
+var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3331,9 +3331,9 @@ This sample shows how to call DeleteProvisioning202Accepted200Succeeded with req
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Started);
+var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3372,9 +3372,9 @@ This sample shows how to call DeleteProvisioning202DeletingFailed200Async with r
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Started);
+var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed);
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3413,9 +3413,9 @@ This sample shows how to call DeleteProvisioning202DeletingFailed200 with requir
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Started);
+var operation = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Completed);
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3454,9 +3454,9 @@ This sample shows how to call DeleteProvisioning202Deletingcanceled200Async with
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Started);
+var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed);
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3495,9 +3495,9 @@ This sample shows how to call DeleteProvisioning202Deletingcanceled200 with requ
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Started);
+var operation = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Completed);
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3536,10 +3536,9 @@ This sample shows how to call Delete204SucceededAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.Delete204SucceededAsync(WaitUntil.Started);
+var operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3550,10 +3549,9 @@ This sample shows how to call Delete204Succeeded with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.Delete204Succeeded(WaitUntil.Started);
+var operation = client.Delete204Succeeded(WaitUntil.Completed);
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3564,9 +3562,9 @@ This sample shows how to call Delete202Retry200Async with required parameters an
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.Delete202Retry200Async(WaitUntil.Started);
+var operation = await client.Delete202Retry200Async(WaitUntil.Completed);
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3605,9 +3603,9 @@ This sample shows how to call Delete202Retry200 with required parameters and par
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.Delete202Retry200(WaitUntil.Started);
+var operation = client.Delete202Retry200(WaitUntil.Completed);
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3646,9 +3644,9 @@ This sample shows how to call Delete202NoRetry204Async with required parameters 
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.Delete202NoRetry204Async(WaitUntil.Started);
+var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed);
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3687,9 +3685,9 @@ This sample shows how to call Delete202NoRetry204 with required parameters and p
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.Delete202NoRetry204(WaitUntil.Started);
+var operation = client.Delete202NoRetry204(WaitUntil.Completed);
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -3728,10 +3726,9 @@ This sample shows how to call DeleteNoHeaderInRetryAsync with required parameter
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Started);
+var operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Completed);
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3742,10 +3739,9 @@ This sample shows how to call DeleteNoHeaderInRetry with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.DeleteNoHeaderInRetry(WaitUntil.Started);
+var operation = client.DeleteNoHeaderInRetry(WaitUntil.Completed);
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3756,10 +3752,9 @@ This sample shows how to call DeleteAsyncNoHeaderInRetryAsync with required para
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Started);
+var operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Completed);
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3770,10 +3765,9 @@ This sample shows how to call DeleteAsyncNoHeaderInRetry with required parameter
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.DeleteAsyncNoHeaderInRetry(WaitUntil.Started);
+var operation = client.DeleteAsyncNoHeaderInRetry(WaitUntil.Completed);
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3784,10 +3778,9 @@ This sample shows how to call DeleteAsyncRetrySucceededAsync with required param
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Started);
+var operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Completed);
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3798,10 +3791,9 @@ This sample shows how to call DeleteAsyncRetrySucceeded with required parameters
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.DeleteAsyncRetrySucceeded(WaitUntil.Started);
+var operation = client.DeleteAsyncRetrySucceeded(WaitUntil.Completed);
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3812,10 +3804,9 @@ This sample shows how to call DeleteAsyncNoRetrySucceededAsync with required par
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Started);
+var operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Completed);
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3826,10 +3817,9 @@ This sample shows how to call DeleteAsyncNoRetrySucceeded with required paramete
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.DeleteAsyncNoRetrySucceeded(WaitUntil.Started);
+var operation = client.DeleteAsyncNoRetrySucceeded(WaitUntil.Completed);
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3840,10 +3830,9 @@ This sample shows how to call DeleteAsyncRetryFailedAsync with required paramete
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Started);
+var operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Completed);
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3854,10 +3843,9 @@ This sample shows how to call DeleteAsyncRetryFailed with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.DeleteAsyncRetryFailed(WaitUntil.Started);
+var operation = client.DeleteAsyncRetryFailed(WaitUntil.Completed);
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3868,10 +3856,9 @@ This sample shows how to call DeleteAsyncRetrycanceledAsync with required parame
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Started);
+var operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Completed);
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3882,10 +3869,9 @@ This sample shows how to call DeleteAsyncRetrycanceled with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.DeleteAsyncRetrycanceled(WaitUntil.Started);
+var operation = client.DeleteAsyncRetrycanceled(WaitUntil.Completed);
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
@@ -3896,9 +3882,9 @@ This sample shows how to call Post200WithPayloadAsync with required parameters a
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.Post200WithPayloadAsync(WaitUntil.Started);
+var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed);
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -3925,9 +3911,9 @@ This sample shows how to call Post200WithPayload with required parameters and pa
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.Post200WithPayload(WaitUntil.Started);
+var operation = client.Post200WithPayload(WaitUntil.Completed);
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -3956,10 +3942,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Post202Retry200Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 This sample shows how to call Post202Retry200Async with all parameters and request content.
 <code><![CDATA[
@@ -3976,10 +3961,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Post202Retry200Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
@@ -4012,10 +3996,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Post202Retry200(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 This sample shows how to call Post202Retry200 with all parameters and request content.
 <code><![CDATA[
@@ -4032,10 +4015,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Post202Retry200(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
@@ -4068,9 +4050,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.Post202NoRetry204Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Post202NoRetry204Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -4089,9 +4071,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.Post202NoRetry204Async(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.Post202NoRetry204Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4148,9 +4130,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.Post202NoRetry204(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Post202NoRetry204(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -4169,9 +4151,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.Post202NoRetry204(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.Post202NoRetry204(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4226,9 +4208,9 @@ This sample shows how to call PostDoubleHeadersFinalLocationGetAsync with requir
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Started);
+var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed);
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4267,9 +4249,9 @@ This sample shows how to call PostDoubleHeadersFinalLocationGet with required pa
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Started);
+var operation = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Completed);
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4308,9 +4290,9 @@ This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetAsync with req
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Started);
+var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed);
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4349,9 +4331,9 @@ This sample shows how to call PostDoubleHeadersFinalAzureHeaderGet with required
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Started);
+var operation = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Completed);
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4390,9 +4372,9 @@ This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetDefaultAsync w
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Started);
+var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed);
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4431,9 +4413,9 @@ This sample shows how to call PostDoubleHeadersFinalAzureHeaderGetDefault with r
 var credential = new AzureKeyCredential("<key>");
 var client = new LROsClient(credential);
 
-var operation = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Started);
+var operation = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Completed);
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4474,9 +4456,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -4495,9 +4477,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4554,9 +4536,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PostAsyncRetrySucceeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -4575,9 +4557,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PostAsyncRetrySucceeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4634,9 +4616,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -4655,9 +4637,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4714,9 +4696,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -4735,9 +4717,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -4794,10 +4776,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 This sample shows how to call PostAsyncRetryFailedAsync with all parameters and request content.
 <code><![CDATA[
@@ -4814,10 +4795,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
@@ -4850,10 +4830,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PostAsyncRetryFailed(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PostAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 This sample shows how to call PostAsyncRetryFailed with all parameters and request content.
 <code><![CDATA[
@@ -4870,10 +4849,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PostAsyncRetryFailed(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PostAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
@@ -4906,10 +4884,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 This sample shows how to call PostAsyncRetrycanceledAsync with all parameters and request content.
 <code><![CDATA[
@@ -4926,10 +4903,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Started, RequestContent.Create(data));
+var operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
@@ -4962,10 +4938,9 @@ var client = new LROsClient(credential);
 
 var data = new {};
 
-var operation = client.PostAsyncRetrycanceled(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 This sample shows how to call PostAsyncRetrycanceled with all parameters and request content.
 <code><![CDATA[
@@ -4982,10 +4957,9 @@ var data = new {
     location = "<location>",
 };
 
-var operation = client.PostAsyncRetrycanceled(WaitUntil.Started, RequestContent.Create(data));
+var operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
