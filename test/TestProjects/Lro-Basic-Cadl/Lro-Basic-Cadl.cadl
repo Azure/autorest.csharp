@@ -57,41 +57,15 @@ namespace CustomCore {
   op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
 }
 
-@route("/lro/pagination")
+@route("/lro/pagination/projects")
 interface LROPagination {
   @summary("Gets projects.")
   @doc("LRO pagination method.")
   @convenienceAPI
   @pollingOperation
-  op ListLroPaginationProjects is Azure.Core.ResourceList<Project>;
-//   @post
-//   op ListLroPaginationProjects is Foundations.Operation<{}, Foundations.CustomPage<Project, {}>>;
-
+  @post
+  op ListLroPaginationProjects is Foundations.Operation<
+    Foundations.CollectionKeysOf<Project>,
+    Foundations.CustomPage<Project, {}>
+  >;
 }
-
-// @route("/lro/pagination2")
-// interface LROPagination2 {
-//   @summary("Gets projects.")
-//   @doc("LRO pagination method.")
-//   @convenienceAPI
-//   @pollingOperation
-//   @post
-//   op FindLroPaginationProjects is Foundations.Operation<{}, Foundations.CustomPage<Project, {}>>;
-
-//   @summary("Gets projects.")
-//   @doc("LRO pagination method.")
-//   @convenienceAPI
-//   @pollingOperation
-//   op generate is LongRunningResourceCollectionAction<
-//     Project,
-//     {},
-//     Foundations.CustomPage<Project, {}>
-//   >;
-// op generate is Foundations.ResourceCollectionOperation<
-//   Project,
-//   {},
-//   AcceptedResponse &
-//     ResourceOperationStatus<Project, Foundations.CustomPage<Project, {}>, Foundations.Error> &
-//     Foundations.LongRunningStatusLocation
-// >;
-// }

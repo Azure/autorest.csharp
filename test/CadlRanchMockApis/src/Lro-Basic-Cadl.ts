@@ -66,7 +66,7 @@ Scenarios.LroBasic_UpdateProject = passOnSuccess([
 ]);
 
 Scenarios.LroBasic_GetLroPaginationProjects = passOnSuccess([
-  mockapi.get("/lro/pagination/projects", (req) => {
+  mockapi.post("/lro/pagination/projects", (req) => {
     return {
       status: 200,
       headers: { "operation-location": `${req.baseUrl}/lro/pagination/polling` },
