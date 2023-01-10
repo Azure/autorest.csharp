@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -189,37 +188,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="RecordSetTxtResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetTxtResource> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<RecordSetTxtResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxtCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetTxtRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxtResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<RecordSetTxtResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxtCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetTxtRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxtResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetTxtRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetTxtRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetTxtResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetTxtRecordSetsClientDiagnostics, Pipeline, "RecordSetTxtCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -233,37 +204,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="RecordSetTxtResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetTxtResource> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            Page<RecordSetTxtResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxtCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetTxtRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxtResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<RecordSetTxtResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxtCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetTxtRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetTxtResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetTxtRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetTxtRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "TXT".ToRecordType(), top, recordsetnamesuffix);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetTxtResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetTxtRecordSetsClientDiagnostics, Pipeline, "RecordSetTxtCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -189,37 +188,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="RecordSetSrvResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetSrvResource> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<RecordSetSrvResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetSrvRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSrvResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<RecordSetSrvResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetSrvRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSrvResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetSrvRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetSrvRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetSrvResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetSrvRecordSetsClientDiagnostics, Pipeline, "RecordSetSrvCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -233,37 +204,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="RecordSetSrvResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetSrvResource> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            Page<RecordSetSrvResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetSrvRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSrvResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<RecordSetSrvResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetSrvRecordSetsClientDiagnostics.CreateScope("RecordSetSrvCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetSrvRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetSrvResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetSrvRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetSrvRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetSrvResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetSrvRecordSetsClientDiagnostics, Pipeline, "RecordSetSrvCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
