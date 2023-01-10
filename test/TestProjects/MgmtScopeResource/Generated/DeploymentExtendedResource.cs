@@ -96,8 +96,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DeploymentExtendedResource>> GetAsync(CancellationToken cancellationToken = default)
@@ -120,8 +128,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeploymentExtendedResource> Get(CancellationToken cancellationToken = default)
@@ -144,8 +160,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_DeleteAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_DeleteAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -170,8 +194,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_DeleteAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_DeleteAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -196,8 +228,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// You can provide the template and parameters directly in the request or link to JSON files.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_CreateOrUpdateAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_CreateOrUpdateAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="deployment"> Additional parameters supplied to the operation. </param>
@@ -226,8 +266,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// You can provide the template and parameters directly in the request or link to JSON files.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_CreateOrUpdateAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_CreateOrUpdateAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="deployment"> Additional parameters supplied to the operation. </param>
@@ -256,8 +304,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel
-        /// Operation Id: Deployments_CancelAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_CancelAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> CancelAtScopeAsync(CancellationToken cancellationToken = default)
@@ -278,8 +334,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel
-        /// Operation Id: Deployments_CancelAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_CancelAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response CancelAtScope(CancellationToken cancellationToken = default)
@@ -300,8 +364,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/validate
-        /// Operation Id: Deployments_ValidateAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/validate</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_ValidateAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="deployment"> Parameters to validate. </param>
@@ -330,8 +402,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/validate
-        /// Operation Id: Deployments_ValidateAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/validate</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_ValidateAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="deployment"> Parameters to validate. </param>
@@ -360,8 +440,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Exports the template used for specified deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate
-        /// Operation Id: Deployments_ExportTemplateAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_ExportTemplateAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DeploymentExportResult>> ExportTemplateAtScopeAsync(CancellationToken cancellationToken = default)
@@ -382,8 +470,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Exports the template used for specified deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate
-        /// Operation Id: Deployments_ExportTemplateAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_ExportTemplateAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeploymentExportResult> ExportTemplateAtScope(CancellationToken cancellationToken = default)
@@ -404,14 +500,40 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Returns changes that will be made by the deployment if executed at the scope of the resource group.
-        /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// Operation Id: Deployments_WhatIf
-        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// Operation Id: Deployments_WhatIfAtManagementGroupScope
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// Operation Id: Deployments_WhatIfAtSubscriptionScope
-        /// Request Path: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// Operation Id: Deployments_WhatIfAtTenantScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_WhatIf</description>
+        /// </item>
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_WhatIfAtManagementGroupScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_WhatIfAtSubscriptionScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_WhatIfAtTenantScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="deploymentWhatIf"> Parameters to validate. </param>
@@ -471,14 +593,40 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Returns changes that will be made by the deployment if executed at the scope of the resource group.
-        /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// Operation Id: Deployments_WhatIf
-        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// Operation Id: Deployments_WhatIfAtManagementGroupScope
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// Operation Id: Deployments_WhatIfAtSubscriptionScope
-        /// Request Path: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// Operation Id: Deployments_WhatIfAtTenantScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_WhatIf</description>
+        /// </item>
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_WhatIfAtManagementGroupScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_WhatIfAtSubscriptionScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_WhatIfAtTenantScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="deploymentWhatIf"> Parameters to validate. </param>
@@ -538,8 +686,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployments operation.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}
-        /// Operation Id: DeploymentOperations_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>DeploymentOperations_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -565,8 +721,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployments operation.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}
-        /// Operation Id: DeploymentOperations_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>DeploymentOperations_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -592,8 +756,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets all deployments operations for a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations
-        /// Operation Id: DeploymentOperations_ListAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>DeploymentOperations_ListAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -635,8 +807,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets all deployments operations for a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations
-        /// Operation Id: DeploymentOperations_ListAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>DeploymentOperations_ListAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -678,8 +858,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Checks whether the deployment exists.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_CheckExistenceAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_CheckExistenceAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> CheckExistenceAtScopeAsync(CancellationToken cancellationToken = default)
@@ -700,8 +888,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Checks whether the deployment exists.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_CheckExistenceAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_CheckExistenceAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> CheckExistenceAtScope(CancellationToken cancellationToken = default)
@@ -722,8 +918,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Add a tag to the current resource.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
@@ -768,8 +972,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Add a tag to the current resource.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
@@ -814,8 +1026,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Replace the tags on the resource with the given set.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -855,8 +1075,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Replace the tags on the resource with the given set.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -896,8 +1124,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Removes a tag by key from the resource.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -940,8 +1176,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Removes a tag by key from the resource.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

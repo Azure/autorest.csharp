@@ -52,8 +52,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets all the linked resources for the subscription.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
-        /// Operation Id: ResourceLinks_ListAtSubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Resources/links</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResourceLinks_ListAtSubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -95,8 +103,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets all the linked resources for the subscription.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
-        /// Operation Id: ResourceLinks_ListAtSubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Resources/links</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResourceLinks_ListAtSubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

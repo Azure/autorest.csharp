@@ -55,8 +55,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Gets an agreement by ID.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// Operation Id: Agreements_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Agreements_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
@@ -85,8 +93,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Gets an agreement by ID.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// Operation Id: Agreements_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Agreements_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
@@ -115,8 +131,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Gets an agreement by ID.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements
-        /// Operation Id: Agreements_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Agreements_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -143,8 +167,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Gets an agreement by ID.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements
-        /// Operation Id: Agreements_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Agreements_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -171,8 +203,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// Operation Id: Agreements_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Agreements_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
@@ -199,8 +239,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// Operation Id: Agreements_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Agreements_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>

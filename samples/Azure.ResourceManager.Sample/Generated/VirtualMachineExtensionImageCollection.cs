@@ -64,8 +64,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets a virtual machine extension image.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineExtensionImages_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
@@ -95,8 +103,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets a virtual machine extension image.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineExtensionImages_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
@@ -126,8 +142,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets a list of virtual machine extension image types.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types
-        /// Operation Id: VirtualMachineExtensionImages_ListTypes
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineExtensionImages_ListTypes</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineExtensionImageResource" /> that may take multiple service requests to iterate over. </returns>
@@ -153,8 +177,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets a list of virtual machine extension image types.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types
-        /// Operation Id: VirtualMachineExtensionImages_ListTypes
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineExtensionImages_ListTypes</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineExtensionImageResource" /> that may take multiple service requests to iterate over. </returns>
@@ -180,8 +212,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets a list of virtual machine extension image versions.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
-        /// Operation Id: VirtualMachineExtensionImages_ListVersions
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineExtensionImages_ListVersions</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
@@ -215,8 +255,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets a list of virtual machine extension image versions.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
-        /// Operation Id: VirtualMachineExtensionImages_ListVersions
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineExtensionImages_ListVersions</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
@@ -250,8 +298,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineExtensionImages_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
@@ -279,8 +335,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineExtensionImages_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>

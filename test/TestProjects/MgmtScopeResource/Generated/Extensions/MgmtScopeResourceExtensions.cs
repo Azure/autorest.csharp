@@ -39,8 +39,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -55,8 +63,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -83,8 +99,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a resource link with the specified ID.
-        /// Request Path: /{linkId}
-        /// Operation Id: ResourceLinks_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{linkId}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResourceLinks_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
@@ -98,8 +122,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a resource link with the specified ID.
-        /// Request Path: /{linkId}
-        /// Operation Id: ResourceLinks_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{linkId}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResourceLinks_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
@@ -113,8 +145,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Calculate the hash of the given template.
-        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
-        /// Operation Id: Deployments_CalculateTemplateHash
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Resources/calculateTemplateHash</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_CalculateTemplateHash</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
@@ -129,8 +169,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Calculate the hash of the given template.
-        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
-        /// Operation Id: Deployments_CalculateTemplateHash
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Resources/calculateTemplateHash</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_CalculateTemplateHash</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
@@ -162,8 +210,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -178,8 +234,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -194,8 +258,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets all the linked resources for the subscription.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
-        /// Operation Id: ResourceLinks_ListAtSubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Resources/links</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResourceLinks_ListAtSubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
@@ -208,8 +280,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets all the linked resources for the subscription.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
-        /// Operation Id: ResourceLinks_ListAtSubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Resources/links</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ResourceLinks_ListAtSubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
@@ -239,8 +319,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -255,8 +343,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -288,8 +384,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -304,8 +408,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Gets a deployment.
-        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-        /// Operation Id: Deployments_GetAtScope
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -355,8 +467,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
-        /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// Operation Id: FakePolicyAssignments_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>FakePolicyAssignments_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
@@ -371,8 +491,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
-        /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// Operation Id: FakePolicyAssignments_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>FakePolicyAssignments_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -388,8 +516,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
-        /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// Operation Id: FakePolicyAssignments_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>FakePolicyAssignments_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
@@ -404,8 +540,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
-        /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// Operation Id: FakePolicyAssignments_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>FakePolicyAssignments_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
