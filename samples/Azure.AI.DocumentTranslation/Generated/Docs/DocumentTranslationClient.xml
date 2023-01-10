@@ -1119,10 +1119,9 @@ var data = new {
     },
 };
 
-var operation = await client.StartTranslationAsync(WaitUntil.Started, RequestContent.Create(data), ContentType.ApplicationOctetStream);
+var operation = await client.StartTranslationAsync(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
@@ -1223,10 +1222,9 @@ var data = new {
     },
 };
 
-var operation = client.StartTranslation(WaitUntil.Started, RequestContent.Create(data), ContentType.ApplicationOctetStream);
+var operation = client.StartTranslation(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
