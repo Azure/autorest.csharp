@@ -200,7 +200,7 @@ var client = new DPGClient(credential);
 
 var operation = await client.LroAsync(WaitUntil.Completed, "<mode>");
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("received").ToString());
@@ -229,7 +229,7 @@ var client = new DPGClient(credential);
 
 var operation = client.Lro(WaitUntil.Completed, "<mode>");
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("received").ToString());

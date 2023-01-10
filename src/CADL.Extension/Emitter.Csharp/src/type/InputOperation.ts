@@ -18,6 +18,7 @@ export interface InputOperation {
     Name: string;
     ResourceName?: string;
     Summary?: string;
+    Deprecated?: string;
     Description?: string;
     Accessibility?: string;
     Parameters: InputParameter[];

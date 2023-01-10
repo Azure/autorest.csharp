@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Net;
 using System.Text.Json;
 using Azure.Core;
 
@@ -22,7 +23,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in IpAddresses)
                 {
-                    writer.WriteStringValue(item);
+                    writer.WriteStringValue(item.ToString());
                 }
                 writer.WriteEndArray();
             }
@@ -41,7 +42,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyThreatIntelWhitelist DeserializeFirewallPolicyThreatIntelWhitelist(JsonElement element)
         {
-            Optional<IList<string>> ipAddresses = default;
+            Optional<IList<IPAddress>> ipAddresses = default;
             Optional<IList<string>> fqdns = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -52,10 +53,10 @@ namespace MgmtMockAndSample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<string> array = new List<string>();
+                    List<IPAddress> array = new List<IPAddress>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetString());
+                        array.Add(IPAddress.Parse(item.GetString()));
                     }
                     ipAddresses = array;
                     continue;

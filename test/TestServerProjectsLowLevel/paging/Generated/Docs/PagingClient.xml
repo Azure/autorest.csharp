@@ -1308,8 +1308,7 @@ var client = new PagingClient(credential);
 
 var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed);
 
-var response = await operation.WaitForCompletionAsync();
-await foreach (var data in response.Value)
+await foreach (var data in operation.Value)
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -1322,8 +1321,7 @@ var client = new PagingClient(credential);
 
 var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234);
 
-var response = await operation.WaitForCompletionAsync();
-await foreach (var data in response.Value)
+await foreach (var data in operation.Value)
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -1356,8 +1354,7 @@ var client = new PagingClient(credential);
 
 var operation = client.GetMultiplePagesLRO(WaitUntil.Completed);
 
-var response = operation.WaitForCompletion();
-foreach (var data in response.Value)
+foreach (var data in operation.Value)
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -1370,8 +1367,7 @@ var client = new PagingClient(credential);
 
 var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, "<clientRequestId>", 1234, 1234);
 
-var response = operation.WaitForCompletion();
-foreach (var data in response.Value)
+foreach (var data in operation.Value)
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());

@@ -106,8 +106,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             if (clientMethod.ConvenienceMethod is not null)
                             {
-                                WriteConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, client.Fields, true);
-                                WriteConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, client.Fields, false);
+                                WriteConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, client.Fields, clientMethod.Deprecated, true);
+                                WriteConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, client.Fields, clientMethod.Deprecated, false);
                             }
                             WriteClientMethod(clientMethod, client.Fields, true);
                             WriteClientMethod(clientMethod, client.Fields, false);
@@ -286,9 +286,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteConvenienceMethod(MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
+        private void WriteConvenienceMethod(MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, ClientFields fields, string? deprecated, bool async)
         {
-            using (WriteConvenienceMethodDeclaration(writer, convenienceMethod.Signature, async))
+            using (WriteConvenienceMethodDeclaration(convenienceMethod.Signature, deprecated, async))
             {
                 if (convenienceMethod.Diagnostic != null)
                 {
@@ -569,11 +569,11 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (clientMethod.ConvenienceMethod.Diagnostic != null)
                 {
-                    WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, clientMethod.ConvenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name, async);
+                    WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, clientMethod.ConvenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name, clientMethod.Deprecated, async);
                 }
                 else
                 {
-                    WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty.Name, async);
+                    WriteNonPageableLongRunningOperationConvenienceMethod(clientMethod.ProtocolMethodSignature, clientMethod.ConvenienceMethod, clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty.Name, clientMethod.Deprecated, async);
                 }
             }
 
@@ -583,9 +583,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteNonPageableLongRunningOperationConvenienceMethod(MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, Diagnostic diagnostic, string clientDiagnosticsPropertyName, bool async)
+        private void WriteNonPageableLongRunningOperationConvenienceMethod(MethodSignature protocolMethodSignature, ConvenienceMethod convenienceMethod, Diagnostic diagnostic, string clientDiagnosticsPropertyName, string? deprecated, bool async)
         {
-            using (WriteConvenienceMethodDeclaration(writer, convenienceMethod.Signature, async))
+            using (WriteConvenienceMethodDeclaration(convenienceMethod.Signature, deprecated, async))
             {
                 WriteNonPageableLongRunningOperationConvenienceMethodBody(writer, protocolMethodSignature, convenienceMethod, clientDiagnosticsPropertyName, diagnostic, async);
             }
@@ -894,6 +894,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 WriteDocumentationRemarks(xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
             }
 
+            writer.WriteDeprecatedAttributeIfExists(clientMethod.Deprecated);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
@@ -925,13 +926,14 @@ namespace AutoRest.CSharp.Generation.Writers
             return scope;
         }
 
-        private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, MethodSignature convenienceMethod, bool async)
+        private IDisposable WriteConvenienceMethodDeclaration(MethodSignature convenienceMethod, string? deprecated, bool async)
         {
             var methodSignature = convenienceMethod.WithAsync(async);
             writer
                 .WriteMethodDocumentation(methodSignature)
                 .WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
 
+            writer.WriteDeprecatedAttributeIfExists(deprecated);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
