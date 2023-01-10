@@ -696,7 +696,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WritePageableLongRunningOperationConvenienceMethod(LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, RestClientMethod nextPageMethod, OperationLongRunning longRunning, bool async)
         {
-            using (WriteConvenienceMethodDeclaration(writer, clientMethod.ConvenienceMethod!.Signature, async))
+            using (WriteConvenienceMethodDeclaration(clientMethod.ConvenienceMethod!.Signature, clientMethod.Deprecated, async))
             {
                 // RequestContext context = FromCancellationToken(cancellationToken);
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
