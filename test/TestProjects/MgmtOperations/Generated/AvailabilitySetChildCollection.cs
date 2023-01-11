@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -226,22 +225,8 @@ namespace MgmtOperations
         /// <returns> An async collection of <see cref="AvailabilitySetChildResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<AvailabilitySetChildResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<AvailabilitySetChildResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _availabilitySetChildavailabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _availabilitySetChildavailabilitySetChildRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetChildResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetChildavailabilitySetChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AvailabilitySetChildResource(Client, AvailabilitySetChildData.DeserializeAvailabilitySetChildData(e)), _availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, "AvailabilitySetChildCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -261,22 +246,8 @@ namespace MgmtOperations
         /// <returns> A collection of <see cref="AvailabilitySetChildResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<AvailabilitySetChildResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<AvailabilitySetChildResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _availabilitySetChildavailabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _availabilitySetChildavailabilitySetChildRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetChildResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetChildavailabilitySetChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new AvailabilitySetChildResource(Client, AvailabilitySetChildData.DeserializeAvailabilitySetChildData(e)), _availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, "AvailabilitySetChildCollection.GetAll", "Value", null);
         }
 
         /// <summary>

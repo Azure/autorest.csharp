@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -227,37 +226,9 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="MgmtGroupParentResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<MgmtGroupParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<MgmtGroupParentResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _mgmtGroupParentRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<MgmtGroupParentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _mgmtGroupParentRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtGroupParentRestClient.CreateListRequest(Id.Name);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _mgmtGroupParentRestClient.CreateListNextPageRequest(nextLink, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new MgmtGroupParentResource(Client, MgmtGroupParentData.DeserializeMgmtGroupParentData(e)), _mgmtGroupParentClientDiagnostics, Pipeline, "MgmtGroupParentCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -277,37 +248,9 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="MgmtGroupParentResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<MgmtGroupParentResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<MgmtGroupParentResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _mgmtGroupParentRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<MgmtGroupParentResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _mgmtGroupParentRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtGroupParentRestClient.CreateListRequest(Id.Name);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _mgmtGroupParentRestClient.CreateListNextPageRequest(nextLink, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new MgmtGroupParentResource(Client, MgmtGroupParentData.DeserializeMgmtGroupParentData(e)), _mgmtGroupParentClientDiagnostics, Pipeline, "MgmtGroupParentCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

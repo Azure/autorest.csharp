@@ -246,22 +246,8 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<NonResourceChild>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocResource.GetNonResourceChild");
-                scope.Start();
-                try
-                {
-                    var response = await _subParentWithNonResChWithLocRestClient.ListNonResourceChildAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChWithLocRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _subParentWithNonResChWithLocClientDiagnostics, Pipeline, "SubParentWithNonResChWithLocResource.GetNonResourceChild", "value", null);
         }
 
         /// <summary>
@@ -281,22 +267,8 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NonResourceChild> GetNonResourceChild(CancellationToken cancellationToken = default)
         {
-            Page<NonResourceChild> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocResource.GetNonResourceChild");
-                scope.Start();
-                try
-                {
-                    var response = _subParentWithNonResChWithLocRestClient.ListNonResourceChild(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChWithLocRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _subParentWithNonResChWithLocClientDiagnostics, Pipeline, "SubParentWithNonResChWithLocResource.GetNonResourceChild", "value", null);
         }
 
         /// <summary>

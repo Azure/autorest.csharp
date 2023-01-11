@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -222,22 +221,8 @@ namespace MgmtResourceName
         /// <returns> An async collection of <see cref="Memory" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Memory> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<Memory>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _memoryMemoryResourcesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Memory(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _memoryMemoryResourcesRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new Memory(Client, MemoryData.DeserializeMemoryData(e)), _memoryMemoryResourcesClientDiagnostics, Pipeline, "MemoryCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -256,22 +241,8 @@ namespace MgmtResourceName
         /// <returns> A collection of <see cref="Memory" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Memory> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<Memory> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _memoryMemoryResourcesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Memory(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _memoryMemoryResourcesRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new Memory(Client, MemoryData.DeserializeMemoryData(e)), _memoryMemoryResourcesClientDiagnostics, Pipeline, "MemoryCollection.GetAll", "Value", null);
         }
 
         /// <summary>

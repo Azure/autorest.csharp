@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -227,22 +226,8 @@ namespace MgmtLRO
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<BarResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<BarResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _barRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BarResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -262,22 +247,8 @@ namespace MgmtLRO
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<BarResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<BarResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _barRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BarResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "Value", null);
         }
 
         /// <summary>

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -223,37 +222,9 @@ namespace Pagination
         /// <returns> An async collection of <see cref="PageSizeIntegerModelResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PageSizeIntegerModelResource> GetAllAsync(int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<PageSizeIntegerModelResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _pageSizeIntegerModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<PageSizeIntegerModelResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _pageSizeIntegerModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeIntegerModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeIntegerModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeIntegerModelResource(Client, PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(e)), _pageSizeIntegerModelClientDiagnostics, Pipeline, "PageSizeIntegerModelCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -273,37 +244,9 @@ namespace Pagination
         /// <returns> A collection of <see cref="PageSizeIntegerModelResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PageSizeIntegerModelResource> GetAll(int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            Page<PageSizeIntegerModelResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _pageSizeIntegerModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<PageSizeIntegerModelResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _pageSizeIntegerModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeIntegerModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeIntegerModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeIntegerModelResource(Client, PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(e)), _pageSizeIntegerModelClientDiagnostics, Pipeline, "PageSizeIntegerModelCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -222,22 +221,8 @@ namespace SupersetInheritance
         /// <returns> An async collection of <see cref="SupersetModel4Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SupersetModel4Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<SupersetModel4Resource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _supersetModel4RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel4Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel4RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new SupersetModel4Resource(Client, SupersetModel4Data.DeserializeSupersetModel4Data(e)), _supersetModel4ClientDiagnostics, Pipeline, "SupersetModel4Collection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -256,22 +241,8 @@ namespace SupersetInheritance
         /// <returns> A collection of <see cref="SupersetModel4Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SupersetModel4Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<SupersetModel4Resource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _supersetModel4RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel4Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel4RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new SupersetModel4Resource(Client, SupersetModel4Data.DeserializeSupersetModel4Data(e)), _supersetModel4ClientDiagnostics, Pipeline, "SupersetModel4Collection.GetAll", "Value", null);
         }
 
         /// <summary>

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -230,37 +229,9 @@ namespace MgmtOptionalConstant
         /// <returns> An async collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<OptionalMachineResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<OptionalMachineResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _optionalMachineOptionalsClientDiagnostics.CreateScope("OptionalMachineCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _optionalMachineOptionalsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OptionalMachineResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<OptionalMachineResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _optionalMachineOptionalsClientDiagnostics.CreateScope("OptionalMachineCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _optionalMachineOptionalsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OptionalMachineResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _optionalMachineOptionalsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _optionalMachineOptionalsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -280,37 +251,9 @@ namespace MgmtOptionalConstant
         /// <returns> A collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<OptionalMachineResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<OptionalMachineResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _optionalMachineOptionalsClientDiagnostics.CreateScope("OptionalMachineCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _optionalMachineOptionalsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OptionalMachineResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<OptionalMachineResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _optionalMachineOptionalsClientDiagnostics.CreateScope("OptionalMachineCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _optionalMachineOptionalsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OptionalMachineResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _optionalMachineOptionalsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _optionalMachineOptionalsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -225,22 +224,8 @@ namespace SingletonResource
         /// <returns> An async collection of <see cref="ParentResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<ParentResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _parentResourceRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ParentResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _parentResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -260,22 +245,8 @@ namespace SingletonResource
         /// <returns> A collection of <see cref="ParentResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ParentResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<ParentResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _parentResourceRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ParentResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _parentResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "Value", null);
         }
 
         /// <summary>

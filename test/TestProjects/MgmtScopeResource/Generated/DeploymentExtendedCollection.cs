@@ -8,7 +8,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -221,37 +220,9 @@ namespace MgmtScopeResource
         /// <returns> An async collection of <see cref="DeploymentExtendedResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<DeploymentExtendedResource> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<DeploymentExtendedResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _deploymentExtendedDeploymentsRestClient.ListAtScopeAsync(Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtendedResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<DeploymentExtendedResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _deploymentExtendedDeploymentsRestClient.ListAtScopeNextPageAsync(nextLink, Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtendedResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeRequest(Id, filter, top);
+            Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id, filter, top);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -273,37 +244,9 @@ namespace MgmtScopeResource
         /// <returns> A collection of <see cref="DeploymentExtendedResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<DeploymentExtendedResource> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Page<DeploymentExtendedResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _deploymentExtendedDeploymentsRestClient.ListAtScope(Id, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtendedResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<DeploymentExtendedResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _deploymentExtendedDeploymentsRestClient.ListAtScopeNextPage(nextLink, Id, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtendedResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeRequest(Id, filter, top);
+            Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id, filter, top);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

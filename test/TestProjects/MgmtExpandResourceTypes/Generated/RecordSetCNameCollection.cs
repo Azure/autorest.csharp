@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -229,37 +228,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="RecordSetCNameResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetCNameResource> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<RecordSetCNameResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetCNameRecordSetsClientDiagnostics.CreateScope("RecordSetCNameCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetCNameRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCNameResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<RecordSetCNameResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetCNameRecordSetsClientDiagnostics.CreateScope("RecordSetCNameCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetCNameRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCNameResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetCNameRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetCNameRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetCNameResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCNameRecordSetsClientDiagnostics, Pipeline, "RecordSetCNameCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -281,37 +252,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="RecordSetCNameResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetCNameResource> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            Page<RecordSetCNameResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetCNameRecordSetsClientDiagnostics.CreateScope("RecordSetCNameCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetCNameRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCNameResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<RecordSetCNameResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetCNameRecordSetsClientDiagnostics.CreateScope("RecordSetCNameCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetCNameRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCNameResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetCNameRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetCNameRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetCNameResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCNameRecordSetsClientDiagnostics, Pipeline, "RecordSetCNameCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

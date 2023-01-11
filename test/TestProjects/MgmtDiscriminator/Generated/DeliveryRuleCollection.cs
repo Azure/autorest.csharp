@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -227,22 +226,8 @@ namespace MgmtDiscriminator
         /// <returns> An async collection of <see cref="DeliveryRuleResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<DeliveryRuleResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<DeliveryRuleResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _deliveryRuleRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeliveryRuleResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _deliveryRuleRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new DeliveryRuleResource(Client, DeliveryRuleData.DeserializeDeliveryRuleData(e)), _deliveryRuleClientDiagnostics, Pipeline, "DeliveryRuleCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -262,22 +247,8 @@ namespace MgmtDiscriminator
         /// <returns> A collection of <see cref="DeliveryRuleResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<DeliveryRuleResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<DeliveryRuleResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _deliveryRuleRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeliveryRuleResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _deliveryRuleRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new DeliveryRuleResource(Client, DeliveryRuleData.DeserializeDeliveryRuleData(e)), _deliveryRuleClientDiagnostics, Pipeline, "DeliveryRuleCollection.GetAll", "Value", null);
         }
 
         /// <summary>

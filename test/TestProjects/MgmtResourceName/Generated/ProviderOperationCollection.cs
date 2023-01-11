@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -148,37 +147,9 @@ namespace MgmtResourceName
         /// <returns> An async collection of <see cref="ProviderOperationResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ProviderOperationResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<ProviderOperationResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _providerOperationClientDiagnostics.CreateScope("ProviderOperationCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _providerOperationRestClient.ListAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProviderOperationResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<ProviderOperationResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _providerOperationClientDiagnostics.CreateScope("ProviderOperationCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _providerOperationRestClient.ListNextPageAsync(nextLink, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProviderOperationResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _providerOperationRestClient.CreateListRequest(expand);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _providerOperationRestClient.CreateListNextPageRequest(nextLink, expand);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -199,37 +170,9 @@ namespace MgmtResourceName
         /// <returns> A collection of <see cref="ProviderOperationResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ProviderOperationResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<ProviderOperationResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _providerOperationClientDiagnostics.CreateScope("ProviderOperationCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _providerOperationRestClient.List(expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProviderOperationResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<ProviderOperationResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _providerOperationClientDiagnostics.CreateScope("ProviderOperationCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _providerOperationRestClient.ListNextPage(nextLink, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProviderOperationResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _providerOperationRestClient.CreateListRequest(expand);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _providerOperationRestClient.CreateListNextPageRequest(nextLink, expand);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

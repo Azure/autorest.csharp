@@ -6,9 +6,7 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -61,37 +59,9 @@ namespace MgmtOptionalConstant
         /// <returns> An async collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<OptionalMachineResource> GetOptionalMachinesAsync(string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<OptionalMachineResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = OptionalMachineOptionalsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetOptionalMachines");
-                scope.Start();
-                try
-                {
-                    var response = await OptionalMachineOptionalsRestClient.ListAllAsync(Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OptionalMachineResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<OptionalMachineResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = OptionalMachineOptionalsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetOptionalMachines");
-                scope.Start();
-                try
-                {
-                    var response = await OptionalMachineOptionalsRestClient.ListAllNextPageAsync(nextLink, Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OptionalMachineResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => OptionalMachineOptionalsRestClient.CreateListAllRequest(Id.SubscriptionId, statusOnly);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OptionalMachineOptionalsRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, statusOnly);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOptionalMachines", "value", "nextLink");
         }
 
         /// <summary>
@@ -112,37 +82,9 @@ namespace MgmtOptionalConstant
         /// <returns> A collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<OptionalMachineResource> GetOptionalMachines(string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            Page<OptionalMachineResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = OptionalMachineOptionalsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetOptionalMachines");
-                scope.Start();
-                try
-                {
-                    var response = OptionalMachineOptionalsRestClient.ListAll(Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OptionalMachineResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<OptionalMachineResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = OptionalMachineOptionalsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetOptionalMachines");
-                scope.Start();
-                try
-                {
-                    var response = OptionalMachineOptionalsRestClient.ListAllNextPage(nextLink, Id.SubscriptionId, statusOnly, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OptionalMachineResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => OptionalMachineOptionalsRestClient.CreateListAllRequest(Id.SubscriptionId, statusOnly);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OptionalMachineOptionalsRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, statusOnly);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOptionalMachines", "value", "nextLink");
         }
     }
 }

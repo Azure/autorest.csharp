@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -229,37 +228,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="RecordSetMxResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetMxResource> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<RecordSetMxResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetMxRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetMxResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<RecordSetMxResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetMxRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetMxResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetMxRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetMxRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetMxResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetMxRecordSetsClientDiagnostics, Pipeline, "RecordSetMxCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -281,37 +252,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="RecordSetMxResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetMxResource> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            Page<RecordSetMxResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetMxRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetMxResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<RecordSetMxResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetMxRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetMxResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetMxRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetMxRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetMxResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetMxRecordSetsClientDiagnostics, Pipeline, "RecordSetMxCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

@@ -16,6 +16,5 @@ namespace AutoRest.CSharp.Output.Models
         Diagnostic ProtocolMethodDiagnostic,
         ProtocolMethodPaging? PagingInfo,
         OperationLongRunning? LongRunning,
-        RequestConditionHeaders ConditionHeaderFlag,
-        string? Deprecated);
+        RequestConditionHeaders ConditionHeaderFlag);
 }

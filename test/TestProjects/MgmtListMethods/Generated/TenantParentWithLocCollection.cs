@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -226,37 +225,9 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="TenantParentWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TenantParentWithLocResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TenantParentWithLocResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _tenantParentWithLocRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<TenantParentWithLocResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _tenantParentWithLocRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithLocRestClient.CreateListRequest(Id.Name);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TenantParentWithLocResource(Client, TenantParentWithLocData.DeserializeTenantParentWithLocData(e)), _tenantParentWithLocClientDiagnostics, Pipeline, "TenantParentWithLocCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -276,37 +247,9 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="TenantParentWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TenantParentWithLocResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<TenantParentWithLocResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _tenantParentWithLocRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<TenantParentWithLocResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _tenantParentWithLocRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithLocRestClient.CreateListRequest(Id.Name);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TenantParentWithLocResource(Client, TenantParentWithLocData.DeserializeTenantParentWithLocData(e)), _tenantParentWithLocClientDiagnostics, Pipeline, "TenantParentWithLocCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

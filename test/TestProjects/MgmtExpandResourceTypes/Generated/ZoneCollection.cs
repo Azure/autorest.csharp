@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -232,37 +231,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ZoneResource> GetAllAsync(int? top = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<ZoneResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _zoneRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ZoneResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<ZoneResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _zoneRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ZoneResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _zoneRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, top);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _zoneRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ZoneResource(Client, ZoneData.DeserializeZoneData(e)), _zoneClientDiagnostics, Pipeline, "ZoneCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -283,37 +254,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ZoneResource> GetAll(int? top = null, CancellationToken cancellationToken = default)
         {
-            Page<ZoneResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _zoneRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ZoneResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<ZoneResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _zoneRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ZoneResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _zoneRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, top);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _zoneRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ZoneResource(Client, ZoneData.DeserializeZoneData(e)), _zoneClientDiagnostics, Pipeline, "ZoneCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

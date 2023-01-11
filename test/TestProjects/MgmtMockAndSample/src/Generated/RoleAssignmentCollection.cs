@@ -245,139 +245,27 @@ namespace MgmtMockAndSample
         {
             if (Id.ResourceType == ResourceGroupResource.ResourceType)
             {
-                async Task<Page<RoleAssignmentResource>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _roleAssignmentRestClient.ListForResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                async Task<Page<RoleAssignmentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _roleAssignmentRestClient.ListForResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+                HttpMessage FirstPageRequest(int? pageSizeHint) => _roleAssignmentRestClient.CreateListForResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, filter);
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _roleAssignmentRestClient.CreateListForResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter);
+                return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RoleAssignmentResource(Client, RoleAssignmentData.DeserializeRoleAssignmentData(e)), _roleAssignmentClientDiagnostics, Pipeline, "RoleAssignmentCollection.GetAll", "value", "nextLink");
             }
             else if (Id.ResourceType == SubscriptionResource.ResourceType)
             {
-                async Task<Page<RoleAssignmentResource>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _roleAssignmentRestClient.ListAsync(Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                async Task<Page<RoleAssignmentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _roleAssignmentRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+                HttpMessage FirstPageRequest(int? pageSizeHint) => _roleAssignmentRestClient.CreateListRequest(Id.SubscriptionId, filter);
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _roleAssignmentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, filter);
+                return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RoleAssignmentResource(Client, RoleAssignmentData.DeserializeRoleAssignmentData(e)), _roleAssignmentClientDiagnostics, Pipeline, "RoleAssignmentCollection.GetAll", "value", "nextLink");
             }
             else if (Id.ResourceType == "")
             {
-                async Task<Page<RoleAssignmentResource>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _roleAssignmentRestClient.ListForScopeAsync(Id, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                async Task<Page<RoleAssignmentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _roleAssignmentRestClient.ListForScopeNextPageAsync(nextLink, Id, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+                HttpMessage FirstPageRequest(int? pageSizeHint) => _roleAssignmentRestClient.CreateListForScopeRequest(Id, filter);
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _roleAssignmentRestClient.CreateListForScopeNextPageRequest(nextLink, Id, filter);
+                return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RoleAssignmentResource(Client, RoleAssignmentData.DeserializeRoleAssignmentData(e)), _roleAssignmentClientDiagnostics, Pipeline, "RoleAssignmentCollection.GetAll", "value", "nextLink");
             }
             else
             {
-                async Task<Page<RoleAssignmentResource>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _roleAssignmentRestClient.ListForResourceAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), new ResourceType(Id.ResourceType.GetLastType()), Id.Name, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                async Task<Page<RoleAssignmentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _roleAssignmentRestClient.ListForResourceNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), new ResourceType(Id.ResourceType.GetLastType()), Id.Name, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+                HttpMessage FirstPageRequest(int? pageSizeHint) => _roleAssignmentRestClient.CreateListForResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), new ResourceType(Id.ResourceType.GetLastType()), Id.Name, filter);
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _roleAssignmentRestClient.CreateListForResourceNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), new ResourceType(Id.ResourceType.GetLastType()), Id.Name, filter);
+                return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RoleAssignmentResource(Client, RoleAssignmentData.DeserializeRoleAssignmentData(e)), _roleAssignmentClientDiagnostics, Pipeline, "RoleAssignmentCollection.GetAll", "value", "nextLink");
             }
         }
 
@@ -425,139 +313,27 @@ namespace MgmtMockAndSample
         {
             if (Id.ResourceType == ResourceGroupResource.ResourceType)
             {
-                Page<RoleAssignmentResource> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = _roleAssignmentRestClient.ListForResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, filter, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                Page<RoleAssignmentResource> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = _roleAssignmentRestClient.ListForResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+                HttpMessage FirstPageRequest(int? pageSizeHint) => _roleAssignmentRestClient.CreateListForResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, filter);
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _roleAssignmentRestClient.CreateListForResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter);
+                return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RoleAssignmentResource(Client, RoleAssignmentData.DeserializeRoleAssignmentData(e)), _roleAssignmentClientDiagnostics, Pipeline, "RoleAssignmentCollection.GetAll", "value", "nextLink");
             }
             else if (Id.ResourceType == SubscriptionResource.ResourceType)
             {
-                Page<RoleAssignmentResource> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = _roleAssignmentRestClient.List(Id.SubscriptionId, filter, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                Page<RoleAssignmentResource> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = _roleAssignmentRestClient.ListNextPage(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+                HttpMessage FirstPageRequest(int? pageSizeHint) => _roleAssignmentRestClient.CreateListRequest(Id.SubscriptionId, filter);
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _roleAssignmentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, filter);
+                return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RoleAssignmentResource(Client, RoleAssignmentData.DeserializeRoleAssignmentData(e)), _roleAssignmentClientDiagnostics, Pipeline, "RoleAssignmentCollection.GetAll", "value", "nextLink");
             }
             else if (Id.ResourceType == "")
             {
-                Page<RoleAssignmentResource> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = _roleAssignmentRestClient.ListForScope(Id, filter, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                Page<RoleAssignmentResource> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = _roleAssignmentRestClient.ListForScopeNextPage(nextLink, Id, filter, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+                HttpMessage FirstPageRequest(int? pageSizeHint) => _roleAssignmentRestClient.CreateListForScopeRequest(Id, filter);
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _roleAssignmentRestClient.CreateListForScopeNextPageRequest(nextLink, Id, filter);
+                return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RoleAssignmentResource(Client, RoleAssignmentData.DeserializeRoleAssignmentData(e)), _roleAssignmentClientDiagnostics, Pipeline, "RoleAssignmentCollection.GetAll", "value", "nextLink");
             }
             else
             {
-                Page<RoleAssignmentResource> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = _roleAssignmentRestClient.ListForResource(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), new ResourceType(Id.ResourceType.GetLastType()), Id.Name, filter, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                Page<RoleAssignmentResource> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = _roleAssignmentRestClient.ListForResourceNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), new ResourceType(Id.ResourceType.GetLastType()), Id.Name, filter, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new RoleAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+                HttpMessage FirstPageRequest(int? pageSizeHint) => _roleAssignmentRestClient.CreateListForResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), new ResourceType(Id.ResourceType.GetLastType()), Id.Name, filter);
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _roleAssignmentRestClient.CreateListForResourceNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), new ResourceType(Id.ResourceType.GetLastType()), Id.Name, filter);
+                return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RoleAssignmentResource(Client, RoleAssignmentData.DeserializeRoleAssignmentData(e)), _roleAssignmentClientDiagnostics, Pipeline, "RoleAssignmentCollection.GetAll", "value", "nextLink");
             }
         }
 

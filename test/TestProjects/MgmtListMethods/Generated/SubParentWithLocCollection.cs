@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -227,37 +226,9 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="SubParentWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubParentWithLocResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<SubParentWithLocResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _subParentWithLocRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<SubParentWithLocResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _subParentWithLocRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithLocRestClient.CreateListRequest(Id.SubscriptionId);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SubParentWithLocResource(Client, SubParentWithLocData.DeserializeSubParentWithLocData(e)), _subParentWithLocClientDiagnostics, Pipeline, "SubParentWithLocCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -277,37 +248,9 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="SubParentWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubParentWithLocResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<SubParentWithLocResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _subParentWithLocRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<SubParentWithLocResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _subParentWithLocRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithLocRestClient.CreateListRequest(Id.SubscriptionId);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SubParentWithLocResource(Client, SubParentWithLocData.DeserializeSubParentWithLocData(e)), _subParentWithLocClientDiagnostics, Pipeline, "SubParentWithLocCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

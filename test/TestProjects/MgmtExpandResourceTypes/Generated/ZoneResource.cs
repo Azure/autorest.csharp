@@ -826,37 +826,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetData> GetRecordSetsAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<RecordSetData>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetsClientDiagnostics.CreateScope("ZoneResource.GetRecordSets");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetsRestClient.ListByDnsZoneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<RecordSetData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetsClientDiagnostics.CreateScope("ZoneResource.GetRecordSets");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetsRestClient.ListByDnsZoneNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetRecordSets", "value", "nextLink");
         }
 
         /// <summary>
@@ -878,37 +850,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetData> GetRecordSets(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            Page<RecordSetData> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetsClientDiagnostics.CreateScope("ZoneResource.GetRecordSets");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetsRestClient.ListByDnsZone(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<RecordSetData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetsClientDiagnostics.CreateScope("ZoneResource.GetRecordSets");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetsRestClient.ListByDnsZoneNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetRecordSets", "value", "nextLink");
         }
 
         /// <summary>
@@ -930,37 +874,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetData> GetAllRecordSetsAsync(int? top = null, string recordSetNameSuffix = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<RecordSetData>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetsClientDiagnostics.CreateScope("ZoneResource.GetAllRecordSets");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetsRestClient.ListAllByDnsZoneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<RecordSetData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetsClientDiagnostics.CreateScope("ZoneResource.GetAllRecordSets");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetsRestClient.ListAllByDnsZoneNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListAllByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListAllByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetAllRecordSets", "value", "nextLink");
         }
 
         /// <summary>
@@ -982,37 +898,9 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetData> GetAllRecordSets(int? top = null, string recordSetNameSuffix = null, CancellationToken cancellationToken = default)
         {
-            Page<RecordSetData> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _recordSetsClientDiagnostics.CreateScope("ZoneResource.GetAllRecordSets");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetsRestClient.ListAllByDnsZone(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<RecordSetData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _recordSetsClientDiagnostics.CreateScope("ZoneResource.GetAllRecordSets");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetsRestClient.ListAllByDnsZoneNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListAllByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListAllByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetAllRecordSets", "value", "nextLink");
         }
 
         /// <summary>

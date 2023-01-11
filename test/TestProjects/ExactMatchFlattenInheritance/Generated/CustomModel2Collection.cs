@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -225,22 +224,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="CustomModel2Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CustomModel2Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<CustomModel2Resource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _customModel2RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _customModel2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new CustomModel2Resource(Client, CustomModel2Data.DeserializeCustomModel2Data(e)), _customModel2ClientDiagnostics, Pipeline, "CustomModel2Collection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -260,22 +245,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="CustomModel2Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CustomModel2Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<CustomModel2Resource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _customModel2RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel2Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _customModel2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new CustomModel2Resource(Client, CustomModel2Data.DeserializeCustomModel2Data(e)), _customModel2ClientDiagnostics, Pipeline, "CustomModel2Collection.GetAll", "Value", null);
         }
 
         /// <summary>

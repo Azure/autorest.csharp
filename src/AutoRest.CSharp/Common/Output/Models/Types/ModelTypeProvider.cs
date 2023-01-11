@@ -189,7 +189,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 null,
                 MethodSignatureModifiers.Internal,
                 fullParameterList,
-                new(true, baseInitializers));
+                Initializer: new(true, baseInitializers));
         }
 
         private ConstructorSignature CreatePublicConstructorSignature(string name, InputModelTypeUsage usage, IEnumerable<Parameter> parameters)
@@ -215,7 +215,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 null,
                 accessibility,
                 fullParameterList,
-                new(true, baseInitializers));
+                Initializer: new(true, baseInitializers));
         }
 
         private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)

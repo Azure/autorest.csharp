@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -232,37 +231,9 @@ namespace XmlDeserialization
         /// <returns> An async collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<XmlInstanceResource> GetAllAsync(string filter = null, int? top = null, int? skip = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<XmlInstanceResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _xmlInstanceXmlDeserializationRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstanceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<XmlInstanceResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _xmlInstanceXmlDeserializationRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstanceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _xmlInstanceXmlDeserializationRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _xmlInstanceXmlDeserializationRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new XmlInstanceResource(Client, XmlInstanceData.DeserializeXmlInstanceData(e)), _xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, "XmlInstanceCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -285,37 +256,9 @@ namespace XmlDeserialization
         /// <returns> A collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<XmlInstanceResource> GetAll(string filter = null, int? top = null, int? skip = null, CancellationToken cancellationToken = default)
         {
-            Page<XmlInstanceResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _xmlInstanceXmlDeserializationRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstanceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<XmlInstanceResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _xmlInstanceXmlDeserializationRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new XmlInstanceResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _xmlInstanceXmlDeserializationRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _xmlInstanceXmlDeserializationRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new XmlInstanceResource(Client, XmlInstanceData.DeserializeXmlInstanceData(e)), _xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, "XmlInstanceCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

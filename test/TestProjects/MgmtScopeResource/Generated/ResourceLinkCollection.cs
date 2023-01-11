@@ -7,7 +7,6 @@
 
 using System;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -215,37 +214,9 @@ namespace MgmtScopeResource
         /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceLinkResource> GetAllAsync(Filter? filter = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<ResourceLinkResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _resourceLinkRestClient.ListAtSourceScopeAsync(_scope, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<ResourceLinkResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _resourceLinkRestClient.ListAtSourceScopeNextPageAsync(nextLink, _scope, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceLinkRestClient.CreateListAtSourceScopeRequest(_scope, filter);
+            Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _resourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, _scope, filter);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -266,37 +237,9 @@ namespace MgmtScopeResource
         /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceLinkResource> GetAll(Filter? filter = null, CancellationToken cancellationToken = default)
         {
-            Page<ResourceLinkResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _resourceLinkRestClient.ListAtSourceScope(_scope, filter, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<ResourceLinkResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _resourceLinkRestClient.ListAtSourceScopeNextPage(nextLink, _scope, filter, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceLinkRestClient.CreateListAtSourceScopeRequest(_scope, filter);
+            Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _resourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, _scope, filter);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

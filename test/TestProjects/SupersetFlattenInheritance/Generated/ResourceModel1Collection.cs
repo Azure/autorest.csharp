@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -222,22 +221,8 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of <see cref="ResourceModel1Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<ResourceModel1Resource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _resourceModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ResourceModel1Resource(Client, ResourceModel1Data.DeserializeResourceModel1Data(e)), _resourceModel1ClientDiagnostics, Pipeline, "ResourceModel1Collection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -256,22 +241,8 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of <see cref="ResourceModel1Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<ResourceModel1Resource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _resourceModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ResourceModel1Resource(Client, ResourceModel1Data.DeserializeResourceModel1Data(e)), _resourceModel1ClientDiagnostics, Pipeline, "ResourceModel1Collection.GetAll", "Value", null);
         }
 
         /// <summary>

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -226,37 +225,9 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="TenantParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TenantParentWithNonResChResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TenantParentWithNonResChResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _tenantParentWithNonResChRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<TenantParentWithNonResChResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _tenantParentWithNonResChRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithNonResChRestClient.CreateListRequest(Id.Name);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TenantParentWithNonResChResource(Client, TenantParentWithNonResChData.DeserializeTenantParentWithNonResChData(e)), _tenantParentWithNonResChClientDiagnostics, Pipeline, "TenantParentWithNonResChCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -276,37 +247,9 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="TenantParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TenantParentWithNonResChResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<TenantParentWithNonResChResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _tenantParentWithNonResChRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<TenantParentWithNonResChResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _tenantParentWithNonResChRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithNonResChRestClient.CreateListRequest(Id.Name);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TenantParentWithNonResChResource(Client, TenantParentWithNonResChData.DeserializeTenantParentWithNonResChData(e)), _tenantParentWithNonResChClientDiagnostics, Pipeline, "TenantParentWithNonResChCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

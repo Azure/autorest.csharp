@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -230,37 +229,9 @@ namespace MgmtMultipleParentResource
         /// <returns> An async collection of <see cref="AnotherParentResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<AnotherParentResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<AnotherParentResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _anotherParentClientDiagnostics.CreateScope("AnotherParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _anotherParentRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<AnotherParentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _anotherParentClientDiagnostics.CreateScope("AnotherParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _anotherParentRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _anotherParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _anotherParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new AnotherParentResource(Client, AnotherParentData.DeserializeAnotherParentData(e)), _anotherParentClientDiagnostics, Pipeline, "AnotherParentCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -281,37 +252,9 @@ namespace MgmtMultipleParentResource
         /// <returns> A collection of <see cref="AnotherParentResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<AnotherParentResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<AnotherParentResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _anotherParentClientDiagnostics.CreateScope("AnotherParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _anotherParentRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<AnotherParentResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _anotherParentClientDiagnostics.CreateScope("AnotherParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _anotherParentRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _anotherParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _anotherParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new AnotherParentResource(Client, AnotherParentData.DeserializeAnotherParentData(e)), _anotherParentClientDiagnostics, Pipeline, "AnotherParentCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

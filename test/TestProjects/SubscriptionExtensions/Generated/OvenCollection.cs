@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -226,37 +225,9 @@ namespace SubscriptionExtensions
         /// <returns> An async collection of <see cref="OvenResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<OvenResource> GetAllAsync(string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<OvenResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _ovenClientDiagnostics.CreateScope("OvenCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _ovenRestClient.ListAllAsync(Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OvenResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<OvenResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _ovenClientDiagnostics.CreateScope("OvenCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _ovenRestClient.ListAllNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OvenResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _ovenRestClient.CreateListAllRequest(Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _ovenRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OvenResource(Client, OvenData.DeserializeOvenData(e)), _ovenClientDiagnostics, Pipeline, "OvenCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -277,37 +248,9 @@ namespace SubscriptionExtensions
         /// <returns> A collection of <see cref="OvenResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<OvenResource> GetAll(string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            Page<OvenResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _ovenClientDiagnostics.CreateScope("OvenCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _ovenRestClient.ListAll(Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OvenResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<OvenResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _ovenClientDiagnostics.CreateScope("OvenCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _ovenRestClient.ListAllNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OvenResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _ovenRestClient.CreateListAllRequest(Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _ovenRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, statusOnly);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OvenResource(Client, OvenData.DeserializeOvenData(e)), _ovenClientDiagnostics, Pipeline, "OvenCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

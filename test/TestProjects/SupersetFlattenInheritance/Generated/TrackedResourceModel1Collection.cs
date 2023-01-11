@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -222,22 +221,8 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of <see cref="TrackedResourceModel1Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TrackedResourceModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TrackedResourceModel1Resource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _trackedResourceModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _trackedResourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -256,22 +241,8 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of <see cref="TrackedResourceModel1Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TrackedResourceModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<TrackedResourceModel1Resource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _trackedResourceModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _trackedResourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new TrackedResourceModel1Resource(Client, TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(e)), _trackedResourceModel1ClientDiagnostics, Pipeline, "TrackedResourceModel1Collection.GetAll", "Value", null);
         }
 
         /// <summary>
