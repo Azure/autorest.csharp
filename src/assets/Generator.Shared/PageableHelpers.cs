@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
@@ -25,14 +24,19 @@ namespace Azure.Core
             return new AsyncPageableWrapper<T>(new PageableImplementation<T>(createFirstPageRequest, createNextPageRequest, responseParser, pipeline, clientDiagnostics, scopeName, null, requestContext));
         }
 
-        public static AsyncPageable<T> CreateAsyncPageable<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
+        public static AsyncPageable<T> CreateAsyncPageable<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, CancellationToken cancellationToken) where T : notnull
         {
-            return new AsyncPageableWrapper<T>(new PageableImplementation<T>(createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext));
+            return new AsyncPageableWrapper<T>(new PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
 
-        public static AsyncPageable<T> CreateAsyncPageable<T>(Response initialResponse, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
+        public static AsyncPageable<T> CreateAsyncPageable<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
         {
-            return new AsyncPageableWrapper<T>(new PageableImplementation<T>(initialResponse, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext));
+            return new AsyncPageableWrapper<T>(new PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext?.CancellationToken, requestContext?.ErrorOptions));
+        }
+
+        public static AsyncPageable<T> CreateAsyncPageable<T>(Response initialResponse, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, CancellationToken cancellationToken) where T : notnull
+        {
+            return new AsyncPageableWrapper<T>(new PageableImplementation<T>(initialResponse, null, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
 
         public static Pageable<T> CreatePageable<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageRequest, Func<Response, (List<T>? Values, string? NextLink)> responseParser, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, RequestContext? requestContext = null) where T : notnull
@@ -40,19 +44,24 @@ namespace Azure.Core
             return new PageableWrapper<T>(new PageableImplementation<T>(createFirstPageRequest, createNextPageRequest, responseParser, pipeline, clientDiagnostics, scopeName, null, requestContext));
         }
 
-        public static Pageable<T> CreatePageable<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
+        public static Pageable<T> CreatePageable<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, CancellationToken cancellationToken) where T : notnull
         {
-            return new PageableWrapper<T>(new PageableImplementation<T>(createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext));
+            return new PageableWrapper<T>(new PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
 
-        public static Pageable<T> CreatePageable<T>(Response initialResponse, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
+        public static Pageable<T> CreatePageable<T>(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
         {
-            return new PageableWrapper<T>(new PageableImplementation<T>(initialResponse, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext));
+            return new PageableWrapper<T>(new PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext?.CancellationToken, requestContext?.ErrorOptions));
+        }
+
+        public static Pageable<T> CreatePageable<T>(Response initialResponse, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, CancellationToken cancellationToken) where T : notnull
+        {
+            return new PageableWrapper<T>(new PageableImplementation<T>(initialResponse, null, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
 
         public static async ValueTask<Operation<AsyncPageable<T>>> CreateAsyncPageable<T>(WaitUntil waitUntil, HttpMessage message, Func<int?, string, HttpMessage>? createNextPageMethod, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, OperationFinalStateVia finalStateVia, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
         {
-            AsyncPageable<T> ResultSelector(Response r) => new AsyncPageableWrapper<T>(new PageableImplementation<T>(r, createNextPageMethod, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext));
+            AsyncPageable<T> ResultSelector(Response r) => new AsyncPageableWrapper<T>(new PageableImplementation<T>(r, null, createNextPageMethod, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext?.CancellationToken, requestContext?.ErrorOptions));
 
             var response = await pipeline.ProcessMessageAsync(message, requestContext).ConfigureAwait(false);
             var operation = new ProtocolOperation<AsyncPageable<T>>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, ResultSelector);
@@ -65,7 +74,7 @@ namespace Azure.Core
 
         public static Operation<Pageable<T>> CreatePageable<T>(WaitUntil waitUntil, HttpMessage message, Func<int?, string, HttpMessage>? createNextPageMethod, Func<JsonElement, T> valueFactory, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, OperationFinalStateVia finalStateVia, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, RequestContext? requestContext = null) where T : notnull
         {
-            Pageable<T> ResultSelector(Response r) => new PageableWrapper<T>(new PageableImplementation<T>(r, createNextPageMethod, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext));
+            Pageable<T> ResultSelector(Response r) => new PageableWrapper<T>(new PageableImplementation<T>(r, null, createNextPageMethod, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext?.CancellationToken, requestContext?.ErrorOptions));
 
             var response = pipeline.ProcessMessage(message, requestContext);
             var operation = new ProtocolOperation<Pageable<T>>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, ResultSelector);
@@ -196,8 +205,21 @@ namespace Azure.Core
             private readonly CancellationToken _cancellationToken;
             private readonly ErrorOptions? _errorOptions;
 
-            public PageableImplementation(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, int? defaultPageSize, RequestContext? requestContext)
+            public PageableImplementation(
+                Response? initialResponse,
+                Func<int?, HttpMessage>? createFirstPageRequest,
+                Func<int?, string, HttpMessage>? createNextPageRequest,
+                Func<JsonElement, T> valueFactory,
+                HttpPipeline pipeline,
+                ClientDiagnostics clientDiagnostics,
+                string scopeName,
+                string? itemPropertyName,
+                string? nextLinkPropertyName,
+                int? defaultPageSize,
+                CancellationToken? cancellationToken,
+                ErrorOptions? errorOptions)
             {
+                _initialResponse = initialResponse;
                 _createFirstPageRequest = createFirstPageRequest;
                 _createNextPageRequest = createNextPageRequest;
                 _valueFactory = typeof(T) == typeof(BinaryData) ? null : valueFactory;
@@ -208,24 +230,8 @@ namespace Azure.Core
                 _itemPropertyName = itemPropertyName != null ? Encoding.UTF8.GetBytes(itemPropertyName) : DefaultItemPropertyName;
                 _nextLinkPropertyName = nextLinkPropertyName != null ? Encoding.UTF8.GetBytes(nextLinkPropertyName) : DefaultNextLinkPropertyName;
                 _defaultPageSize = defaultPageSize;
-                _cancellationToken = requestContext?.CancellationToken ?? default;
-                _errorOptions = requestContext?.ErrorOptions ?? ErrorOptions.Default;
-            }
-
-            public PageableImplementation(Response? initialResponse, Func<int?, string, HttpMessage>? createNextPageRequest, Func<JsonElement, T> valueFactory, HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, int? defaultPageSize, RequestContext? requestContext)
-            {
-                _initialResponse = initialResponse;
-                _createNextPageRequest = createNextPageRequest;
-                _valueFactory = typeof(T) == typeof(BinaryData) ? null : valueFactory;
-                _responseParser = null;
-                _pipeline = pipeline;
-                _clientDiagnostics = clientDiagnostics;
-                _scopeName = scopeName;
-                _itemPropertyName = itemPropertyName != null ? Encoding.UTF8.GetBytes(itemPropertyName) : DefaultItemPropertyName;
-                _nextLinkPropertyName = nextLinkPropertyName != null ? Encoding.UTF8.GetBytes(nextLinkPropertyName) : DefaultNextLinkPropertyName;
-                _defaultPageSize = defaultPageSize;
-                _cancellationToken = requestContext?.CancellationToken ?? default;
-                _errorOptions = requestContext?.ErrorOptions ?? ErrorOptions.Default;
+                _cancellationToken = cancellationToken ?? default;
+                _errorOptions = errorOptions ?? ErrorOptions.Default;
             }
 
             public PageableImplementation(Func<int?, HttpMessage>? createFirstPageRequest, Func<int?, string, HttpMessage>? createNextPageRequest, Func<Response, (List<T>? Values, string? NextLink)> responseParser, HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, string scopeName, int? defaultPageSize, RequestContext? requestContext)

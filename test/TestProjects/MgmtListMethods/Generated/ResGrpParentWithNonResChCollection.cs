@@ -188,7 +188,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentWithNonResChRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _resGrpParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithNonResChResource(Client, ResGrpParentWithNonResChData.DeserializeResGrpParentWithNonResChData(e)), _resGrpParentWithNonResChClientDiagnostics, Pipeline, "ResGrpParentWithNonResChCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithNonResChResource(Client, ResGrpParentWithNonResChData.DeserializeResGrpParentWithNonResChData(e)), _resGrpParentWithNonResChClientDiagnostics, Pipeline, "ResGrpParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentWithNonResChRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _resGrpParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithNonResChResource(Client, ResGrpParentWithNonResChData.DeserializeResGrpParentWithNonResChData(e)), _resGrpParentWithNonResChClientDiagnostics, Pipeline, "ResGrpParentWithNonResChCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ResGrpParentWithNonResChResource(Client, ResGrpParentWithNonResChData.DeserializeResGrpParentWithNonResChData(e)), _resGrpParentWithNonResChClientDiagnostics, Pipeline, "ResGrpParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

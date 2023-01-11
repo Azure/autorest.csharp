@@ -184,7 +184,7 @@ namespace SubscriptionExtensions
         public virtual AsyncPageable<ToasterResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _toasterRestClient.CreateListRequest(Id.SubscriptionId);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ToasterResource(Client, ToasterData.DeserializeToasterData(e)), _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ToasterResource(Client, ToasterData.DeserializeToasterData(e)), _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace SubscriptionExtensions
         public virtual Pageable<ToasterResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _toasterRestClient.CreateListRequest(Id.SubscriptionId);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ToasterResource(Client, ToasterData.DeserializeToasterData(e)), _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ToasterResource(Client, ToasterData.DeserializeToasterData(e)), _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

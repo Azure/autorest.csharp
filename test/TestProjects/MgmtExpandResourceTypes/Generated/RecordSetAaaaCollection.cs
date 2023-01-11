@@ -190,7 +190,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetAaaaRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetAaaaRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetAaaaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetAaaaRecordSetsClientDiagnostics, Pipeline, "RecordSetAaaaCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetAaaaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetAaaaRecordSetsClientDiagnostics, Pipeline, "RecordSetAaaaCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetAaaaRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetAaaaRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetAaaaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetAaaaRecordSetsClientDiagnostics, Pipeline, "RecordSetAaaaCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetAaaaResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetAaaaRecordSetsClientDiagnostics, Pipeline, "RecordSetAaaaCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
