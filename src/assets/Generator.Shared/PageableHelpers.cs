@@ -432,6 +432,13 @@ namespace Azure.Core
                 {
                     items = default;
                     var document = response.ContentStream != null ? JsonDocument.Parse(response.ContentStream) : JsonDocument.Parse(response.Content);
+                    if (_createNextPageRequest is null && _itemPropertyName.Length == 0) // Pageable is a simple collection of elements
+                    {
+                        nextLink = null;
+                        jsonArrayEnumerator = document.RootElement.EnumerateArray();
+                        return true;
+                    }
+
                     nextLink = document.RootElement.TryGetProperty(_nextLinkPropertyName, out var nextLinkValue) ? nextLinkValue.GetString() : null;
                     if (document.RootElement.TryGetProperty(_itemPropertyName, out var itemsValue))
                     {
