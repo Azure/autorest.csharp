@@ -187,7 +187,7 @@ namespace Azure.Management.Storage
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _encryptionScopeRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _encryptionScopeRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new EncryptionScopeResource(Client, EncryptionScopeData.DeserializeEncryptionScopeData(e)), _encryptionScopeClientDiagnostics, Pipeline, "EncryptionScopeCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new EncryptionScopeResource(Client, EncryptionScopeData.DeserializeEncryptionScopeData(e)), _encryptionScopeClientDiagnostics, Pipeline, "EncryptionScopeCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace Azure.Management.Storage
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _encryptionScopeRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _encryptionScopeRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new EncryptionScopeResource(Client, EncryptionScopeData.DeserializeEncryptionScopeData(e)), _encryptionScopeClientDiagnostics, Pipeline, "EncryptionScopeCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new EncryptionScopeResource(Client, EncryptionScopeData.DeserializeEncryptionScopeData(e)), _encryptionScopeClientDiagnostics, Pipeline, "EncryptionScopeCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

@@ -125,7 +125,7 @@ namespace MgmtResourceName
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _providerOperationRestClient.CreateListRequest(expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _providerOperationRestClient.CreateListNextPageRequest(nextLink, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace MgmtResourceName
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _providerOperationRestClient.CreateListRequest(expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _providerOperationRestClient.CreateListNextPageRequest(nextLink, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
