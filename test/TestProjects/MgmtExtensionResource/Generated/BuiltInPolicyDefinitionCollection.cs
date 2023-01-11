@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -123,37 +122,9 @@ namespace MgmtExtensionResource
         /// <returns> An async collection of <see cref="BuiltInPolicyDefinitionResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<BuiltInPolicyDefinitionResource> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<BuiltInPolicyDefinitionResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltInAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<BuiltInPolicyDefinitionResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltInNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInRequest(filter, top);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInNextPageRequest(nextLink, filter, top);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new BuiltInPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "BuiltInPolicyDefinitionCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -167,37 +138,9 @@ namespace MgmtExtensionResource
         /// <returns> A collection of <see cref="BuiltInPolicyDefinitionResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<BuiltInPolicyDefinitionResource> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Page<BuiltInPolicyDefinitionResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltIn(filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<BuiltInPolicyDefinitionResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltInNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInRequest(filter, top);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInNextPageRequest(nextLink, filter, top);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new BuiltInPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "BuiltInPolicyDefinitionCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

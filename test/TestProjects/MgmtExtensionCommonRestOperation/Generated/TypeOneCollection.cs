@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -187,22 +186,8 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TypeOneResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TypeOneResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _typeOneCommonRestClient.ListTypeOnesAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOneResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _typeOneCommonRestClient.CreateListTypeOnesRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -214,22 +199,8 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TypeOneResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<TypeOneResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _typeOneCommonRestClient.ListTypeOnes(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOneResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _typeOneCommonRestClient.CreateListTypeOnesRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "Value", null);
         }
 
         /// <summary>
