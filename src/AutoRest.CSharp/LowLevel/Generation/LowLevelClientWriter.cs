@@ -841,13 +841,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteCancellationTokenToRequestContextMethod()
         {
-            writer.Line($"private static {typeof(RequestContext)} {DefaultRequestContext:D} = new {typeof(RequestContext)}();");
+            var requestContext = new CodeWriterDeclaration("DefaultRequestContext");
+            writer.Line($"private static {typeof(RequestContext)} {requestContext:D} = new {typeof(RequestContext)}();");
 
             using (writer.WriteMethodDeclaration(FromCancellationTokenMethodSignature))
             {
                 using (writer.Scope($"if (!{KnownParameters.CancellationTokenParameter.Name}.{nameof(CancellationToken.CanBeCanceled)})"))
                 {
-                    writer.Line($"return {DefaultRequestContext:I};");
+                    writer.Line($"return {requestContext:I};");
                 }
 
                 writer.Line().Line($"return new {typeof(RequestContext)}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
