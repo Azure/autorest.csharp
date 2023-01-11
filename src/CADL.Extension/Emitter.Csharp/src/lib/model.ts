@@ -28,7 +28,8 @@ import {
     isVoidType,
     isArrayModelType,
     isRecordModelType,
-    Scalar
+    Scalar,
+    Union
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -44,9 +45,11 @@ import {
     InputDictionaryType,
     InputEnumType,
     InputListType,
+    InputLiteralType,
     InputModelType,
     InputPrimitiveType,
-    InputType
+    InputType,
+    InputUnionType
 } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { Usage } from "../type/Usage.js";
@@ -257,13 +260,22 @@ export function getInputType(
             program,
             type
         );
-        return {
+        const valueType =  {
             Name: type.kind,
             Kind: builtInKind,
             IsNullable: false
         } as InputPrimitiveType;
+
+        return {
+            Name: "Literal",
+            LiteralValueType: valueType,
+            Value : getDefaultValue(type),
+            IsNullable: false,
+        } as InputLiteralType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
+    } else if (type.kind === "EnumMember") {
+        return getInputTypeForEnum(type.enum);
     } else if (type.kind === "Intrinsic") {
         return getInputModelForIntrinsicType(type);
     } else if (type.kind === "Scalar" /*&& program.checker.isStdType(type)*/) {
@@ -296,7 +308,7 @@ export function getInputType(
                 } as InputPrimitiveType;
         }
     } else if (type.kind === "Union") {
-        throw new Error(`Union is not supported.`);
+        return getInputTypeForUnion(type);
     } else {
         throw new Error(`Unsupported type ${type.kind}`);
     }
@@ -551,6 +563,19 @@ export function getInputType(
             default:
                 throw new Error(`Unsupported type ${type.name}`);
         }
+    }
+
+    function getInputTypeForUnion(union: Union): InputUnionType {
+        const ItemTypes: InputType[] = [];
+        const variants = Array.from(union.variants.values());
+        for( const variant of variants) {
+            ItemTypes.push(getInputType(program, variant.type, models, enums));
+        }
+        return {
+            Name: "Union",
+            UnionItemTypes: ItemTypes,
+            IsNullable: false
+        } as InputUnionType;
     }
 }
 
