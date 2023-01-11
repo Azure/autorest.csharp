@@ -59,7 +59,7 @@ namespace OmitOperationGroups
         public virtual AsyncPageable<Model5> GetModel5sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => Model5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetModel5s", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetModel5s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace OmitOperationGroups
         public virtual Pageable<Model5> GetModel5s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => Model5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetModel5s", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetModel5s", "value", null, cancellationToken);
         }
 
         /// <summary>
