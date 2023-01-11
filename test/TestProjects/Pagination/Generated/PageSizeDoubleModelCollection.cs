@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -183,37 +182,9 @@ namespace Pagination
         /// <returns> An async collection of <see cref="PageSizeDoubleModelResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PageSizeDoubleModelResource> GetAllAsync(double? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<PageSizeDoubleModelResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _pageSizeDoubleModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDoubleModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<PageSizeDoubleModelResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _pageSizeDoubleModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDoubleModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDoubleModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDoubleModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeDoubleModelResource(Client, PageSizeDoubleModelData.DeserializePageSizeDoubleModelData(e)), _pageSizeDoubleModelClientDiagnostics, Pipeline, "PageSizeDoubleModelCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -225,37 +196,9 @@ namespace Pagination
         /// <returns> A collection of <see cref="PageSizeDoubleModelResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PageSizeDoubleModelResource> GetAll(double? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            Page<PageSizeDoubleModelResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _pageSizeDoubleModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDoubleModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<PageSizeDoubleModelResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _pageSizeDoubleModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDoubleModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDoubleModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDoubleModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeDoubleModelResource(Client, PageSizeDoubleModelData.DeserializePageSizeDoubleModelData(e)), _pageSizeDoubleModelClientDiagnostics, Pipeline, "PageSizeDoubleModelCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

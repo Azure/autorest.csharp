@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -190,22 +189,8 @@ namespace MgmtLRO
         /// <returns> An async collection of <see cref="FakeResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeResource> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<FakeResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _fakeRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, optionalParam);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -218,22 +203,8 @@ namespace MgmtLRO
         /// <returns> A collection of <see cref="FakeResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeResource> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            Page<FakeResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _fakeRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, optionalParam);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "Value", null);
         }
 
         /// <summary>

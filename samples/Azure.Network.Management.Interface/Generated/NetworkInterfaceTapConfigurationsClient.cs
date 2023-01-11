@@ -113,46 +113,13 @@ namespace Azure.Network.Management.Interface
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="networkInterfaceName"/> is null. </exception>
         public virtual AsyncPageable<NetworkInterfaceTapConfiguration> ListAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (networkInterfaceName == null)
-            {
-                throw new ArgumentNullException(nameof(networkInterfaceName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(networkInterfaceName, nameof(networkInterfaceName));
 
-            async Task<Page<NetworkInterfaceTapConfiguration>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.ListAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<NetworkInterfaceTapConfiguration>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName, networkInterfaceName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration, _clientDiagnostics, _pipeline, "NetworkInterfaceTapConfigurationsClient.List", "value", "nextLink", context);
         }
 
         /// <summary> Get all Tap configurations in a network interface. </summary>
@@ -162,46 +129,13 @@ namespace Azure.Network.Management.Interface
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="networkInterfaceName"/> is null. </exception>
         public virtual Pageable<NetworkInterfaceTapConfiguration> List(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (networkInterfaceName == null)
-            {
-                throw new ArgumentNullException(nameof(networkInterfaceName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(networkInterfaceName, nameof(networkInterfaceName));
 
-            Page<NetworkInterfaceTapConfiguration> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.List(resourceGroupName, networkInterfaceName, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<NetworkInterfaceTapConfiguration> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceTapConfigurationsClient.List");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.ListNextPage(nextLink, resourceGroupName, networkInterfaceName, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName, networkInterfaceName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration, _clientDiagnostics, _pipeline, "NetworkInterfaceTapConfigurationsClient.List", "value", "nextLink", context);
         }
 
         /// <summary> Deletes the specified tap configuration from the NetworkInterface. </summary>

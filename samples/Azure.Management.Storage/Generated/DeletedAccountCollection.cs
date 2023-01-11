@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -123,37 +122,9 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="DeletedAccountResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<DeletedAccountResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<DeletedAccountResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _deletedAccountRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<DeletedAccountResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _deletedAccountRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _deletedAccountRestClient.CreateListRequest(Id.SubscriptionId);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deletedAccountRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new DeletedAccountResource(Client, DeletedAccountData.DeserializeDeletedAccountData(e)), _deletedAccountClientDiagnostics, Pipeline, "DeletedAccountCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -165,37 +136,9 @@ namespace Azure.Management.Storage
         /// <returns> A collection of <see cref="DeletedAccountResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<DeletedAccountResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<DeletedAccountResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _deletedAccountRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<DeletedAccountResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _deletedAccountRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _deletedAccountRestClient.CreateListRequest(Id.SubscriptionId);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deletedAccountRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new DeletedAccountResource(Client, DeletedAccountData.DeserializeDeletedAccountData(e)), _deletedAccountClientDiagnostics, Pipeline, "DeletedAccountCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -182,22 +181,8 @@ namespace MgmtResourceName
         /// <returns> An async collection of <see cref="NetworkResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NetworkResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<NetworkResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _networkNetworkResourcesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new NetworkResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _networkNetworkResourcesRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new NetworkResource(Client, NetworkData.DeserializeNetworkData(e)), _networkNetworkResourcesClientDiagnostics, Pipeline, "NetworkCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -208,22 +193,8 @@ namespace MgmtResourceName
         /// <returns> A collection of <see cref="NetworkResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NetworkResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<NetworkResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _networkNetworkResourcesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new NetworkResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _networkNetworkResourcesRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new NetworkResource(Client, NetworkData.DeserializeNetworkData(e)), _networkNetworkResourcesClientDiagnostics, Pipeline, "NetworkCollection.GetAll", "Value", null);
         }
 
         /// <summary>

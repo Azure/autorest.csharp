@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -123,22 +122,8 @@ namespace TenantOnly
         /// <returns> An async collection of <see cref="AgreementResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<AgreementResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<AgreementResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _agreementRestClient.ListAsync(Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AgreementResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _agreementRestClient.CreateListRequest(Id.Name, expand);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AgreementResource(Client, AgreementData.DeserializeAgreementData(e)), _agreementClientDiagnostics, Pipeline, "AgreementCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -151,22 +136,8 @@ namespace TenantOnly
         /// <returns> A collection of <see cref="AgreementResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<AgreementResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<AgreementResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _agreementRestClient.List(Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AgreementResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _agreementRestClient.CreateListRequest(Id.Name, expand);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new AgreementResource(Client, AgreementData.DeserializeAgreementData(e)), _agreementClientDiagnostics, Pipeline, "AgreementCollection.GetAll", "Value", null);
         }
 
         /// <summary>
