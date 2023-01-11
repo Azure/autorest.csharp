@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -190,22 +189,8 @@ namespace MgmtOperations
         /// <returns> An async collection of <see cref="UnpatchableResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<UnpatchableResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<UnpatchableResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _unpatchableResourceClientDiagnostics.CreateScope("UnpatchableResourceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _unpatchableResourceRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new UnpatchableResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _unpatchableResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new UnpatchableResource(Client, UnpatchableResourceData.DeserializeUnpatchableResourceData(e)), _unpatchableResourceClientDiagnostics, Pipeline, "UnpatchableResourceCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -218,22 +203,8 @@ namespace MgmtOperations
         /// <returns> A collection of <see cref="UnpatchableResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<UnpatchableResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<UnpatchableResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _unpatchableResourceClientDiagnostics.CreateScope("UnpatchableResourceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _unpatchableResourceRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new UnpatchableResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _unpatchableResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new UnpatchableResource(Client, UnpatchableResourceData.DeserializeUnpatchableResourceData(e)), _unpatchableResourceClientDiagnostics, Pipeline, "UnpatchableResourceCollection.GetAll", "Value", null);
         }
 
         /// <summary>

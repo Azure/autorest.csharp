@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -183,37 +182,9 @@ namespace Pagination
         /// <returns> An async collection of <see cref="PageSizeFloatModelResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PageSizeFloatModelResource> GetAllAsync(float? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<PageSizeFloatModelResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _pageSizeFloatModelClientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _pageSizeFloatModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<PageSizeFloatModelResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _pageSizeFloatModelClientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _pageSizeFloatModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeFloatModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeFloatModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeFloatModelResource(Client, PageSizeFloatModelData.DeserializePageSizeFloatModelData(e)), _pageSizeFloatModelClientDiagnostics, Pipeline, "PageSizeFloatModelCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>
@@ -225,37 +196,9 @@ namespace Pagination
         /// <returns> A collection of <see cref="PageSizeFloatModelResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PageSizeFloatModelResource> GetAll(float? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            Page<PageSizeFloatModelResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _pageSizeFloatModelClientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _pageSizeFloatModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<PageSizeFloatModelResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _pageSizeFloatModelClientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _pageSizeFloatModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeFloatModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeFloatModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeFloatModelResource(Client, PageSizeFloatModelData.DeserializePageSizeFloatModelData(e)), _pageSizeFloatModelClientDiagnostics, Pipeline, "PageSizeFloatModelCollection.GetAll", "value", "nextLink");
         }
 
         /// <summary>

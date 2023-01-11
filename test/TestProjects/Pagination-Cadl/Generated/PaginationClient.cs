@@ -6,10 +6,7 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading;
-using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -69,37 +66,10 @@ namespace Pagination
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
         public virtual AsyncPageable<LedgerEntry> GetPaginationLedgerEntryValuesAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<LedgerEntry>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetPaginationLedgerEntryValues");
-                scope.Start();
-                try
-                {
-                    var response = await GetPaginationLedgerEntriesFirstPageAsync(cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<LedgerEntry>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetPaginationLedgerEntryValues");
-                scope.Start();
-                try
-                {
-                    var response = await GetPaginationLedgerEntriesNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "value", "nextLink", context);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
@@ -107,223 +77,10 @@ namespace Pagination
         /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
         public virtual Pageable<LedgerEntry> GetPaginationLedgerEntryValues(CancellationToken cancellationToken = default)
         {
-            Page<LedgerEntry> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetPaginationLedgerEntryValues");
-                scope.Start();
-                try
-                {
-                    var response = GetPaginationLedgerEntriesFirstPage(cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<LedgerEntry> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetPaginationLedgerEntryValues");
-                scope.Start();
-                try
-                {
-                    var response = GetPaginationLedgerEntriesNextPage(nextLink, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        private async Task<Response<CustomPage>> GetPaginationLedgerEntriesFirstPageAsync(CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var message = CreateGetPaginationLedgerEntriesRequest(context);
-            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            return Response.FromValue(CustomPage.FromResponse(response), response);
-        }
-
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        private Response<CustomPage> GetPaginationLedgerEntriesFirstPage(CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var message = CreateGetPaginationLedgerEntriesRequest(context);
-            Response response = _pipeline.ProcessMessage(message, context);
-            return Response.FromValue(CustomPage.FromResponse(response), response);
-        }
-
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        private async Task<Response<CustomPage>> GetPaginationLedgerEntriesNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var message = CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, context);
-            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            return Response.FromValue(CustomPage.FromResponse(response), response);
-        }
-
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        private Response<CustomPage> GetPaginationLedgerEntriesNextPage(string nextLink, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var message = CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, context);
-            Response response = _pipeline.ProcessMessage(message, context);
-            return Response.FromValue(CustomPage.FromResponse(response), response);
-        }
-
-        /// <summary> List upload detail for the discovery resource. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<LedgerEntry> GetLedgerEntryValuesAsync(CancellationToken cancellationToken = default)
-        {
-            async Task<Page<LedgerEntry>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetLedgerEntryValues");
-                scope.Start();
-                try
-                {
-                    var response = await GetLedgerEntriesFirstPageAsync(cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<LedgerEntry>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetLedgerEntryValues");
-                scope.Start();
-                try
-                {
-                    var response = await GetLedgerEntriesNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> List upload detail for the discovery resource. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<LedgerEntry> GetLedgerEntryValues(CancellationToken cancellationToken = default)
-        {
-            Page<LedgerEntry> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetLedgerEntryValues");
-                scope.Start();
-                try
-                {
-                    var response = GetLedgerEntriesFirstPage(cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<LedgerEntry> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetLedgerEntryValues");
-                scope.Start();
-                try
-                {
-                    var response = GetLedgerEntriesNextPage(nextLink, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> List upload detail for the discovery resource. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private async Task<Response<PagedLedgerEntry>> GetLedgerEntriesFirstPageAsync(CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var message = CreateGetLedgerEntriesRequest(context);
-            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            return Response.FromValue(PagedLedgerEntry.FromResponse(response), response);
-        }
-
-        /// <summary> List upload detail for the discovery resource. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private Response<PagedLedgerEntry> GetLedgerEntriesFirstPage(CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var message = CreateGetLedgerEntriesRequest(context);
-            Response response = _pipeline.ProcessMessage(message, context);
-            return Response.FromValue(PagedLedgerEntry.FromResponse(response), response);
-        }
-
-        /// <summary> List upload detail for the discovery resource. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        private async Task<Response<PagedLedgerEntry>> GetLedgerEntriesNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var message = CreateGetLedgerEntriesNextPageRequest(nextLink, context);
-            Response response = await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            return Response.FromValue(PagedLedgerEntry.FromResponse(response), response);
-        }
-
-        /// <summary> List upload detail for the discovery resource. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        private Response<PagedLedgerEntry> GetLedgerEntriesNextPage(string nextLink, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var message = CreateGetLedgerEntriesNextPageRequest(nextLink, context);
-            Response response = _pipeline.ProcessMessage(message, context);
-            return Response.FromValue(PagedLedgerEntry.FromResponse(response), response);
+            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "value", "nextLink", context);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
@@ -333,24 +90,9 @@ namespace Pagination
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntriesAsync(RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPaginationLedgerEntriesAsync(RequestContext context = null)
         {
-            return GetPaginationLedgerEntriesImplementationAsync("PaginationClient.GetPaginationLedgerEntries", context);
-        }
-
-        private AsyncPageable<BinaryData> GetPaginationLedgerEntriesImplementationAsync(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPaginationLedgerEntriesRequest(context)
-                        : CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "value", "nextLink", context);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
@@ -360,24 +102,29 @@ namespace Pagination
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntries(RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPaginationLedgerEntries(RequestContext context = null)
         {
-            return GetPaginationLedgerEntriesImplementation("PaginationClient.GetPaginationLedgerEntries", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "value", "nextLink", context);
         }
 
-        private Pageable<BinaryData> GetPaginationLedgerEntriesImplementation(string diagnosticsScopeName, RequestContext context)
+        /// <summary> List upload detail for the discovery resource. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<LedgerEntry> GetLedgerEntryValuesAsync(CancellationToken cancellationToken = default)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPaginationLedgerEntriesRequest(context)
-                        : CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLedgerEntriesNextPageRequest(nextLink, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetLedgerEntries", "value", "nextLink", context);
+        }
+
+        /// <summary> List upload detail for the discovery resource. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<LedgerEntry> GetLedgerEntryValues(CancellationToken cancellationToken = default)
+        {
+            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLedgerEntriesNextPageRequest(nextLink, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetLedgerEntries", "value", "nextLink", context);
         }
 
         /// <summary> List upload detail for the discovery resource. </summary>
@@ -387,24 +134,9 @@ namespace Pagination
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntriesAsync(RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetLedgerEntriesAsync(RequestContext context = null)
         {
-            return GetLedgerEntriesImplementationAsync("PaginationClient.GetLedgerEntries", context);
-        }
-
-        private AsyncPageable<BinaryData> GetLedgerEntriesImplementationAsync(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetLedgerEntriesRequest(context)
-                        : CreateGetLedgerEntriesNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLedgerEntriesNextPageRequest(nextLink, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetLedgerEntries", "value", "nextLink", context);
         }
 
         /// <summary> List upload detail for the discovery resource. </summary>
@@ -414,24 +146,9 @@ namespace Pagination
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntries(RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetLedgerEntries(RequestContext context = null)
         {
-            return GetLedgerEntriesImplementation("PaginationClient.GetLedgerEntries", context);
-        }
-
-        private Pageable<BinaryData> GetLedgerEntriesImplementation(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetLedgerEntriesRequest(context)
-                        : CreateGetLedgerEntriesNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLedgerEntriesNextPageRequest(nextLink, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetLedgerEntries", "value", "nextLink", context);
         }
 
         internal HttpMessage CreateGetPaginationLedgerEntriesRequest(RequestContext context)

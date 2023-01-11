@@ -97,22 +97,8 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CustomModel1> GetCustomModel1sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<CustomModel1>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetCustomModel1s");
-                scope.Start();
-                try
-                {
-                    var response = await CustomModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, CustomModel1.DeserializeCustomModel1, CustomModel1sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetCustomModel1s", "Value", null);
         }
 
         /// <summary>
@@ -123,22 +109,8 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CustomModel1> GetCustomModel1s(CancellationToken cancellationToken = default)
         {
-            Page<CustomModel1> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetCustomModel1s");
-                scope.Start();
-                try
-                {
-                    var response = CustomModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, CustomModel1.DeserializeCustomModel1, CustomModel1sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetCustomModel1s", "Value", null);
         }
 
         /// <summary>
@@ -239,22 +211,8 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CustomModel2> GetCustomModel2sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<CustomModel2>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetCustomModel2s");
-                scope.Start();
-                try
-                {
-                    var response = await CustomModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, CustomModel2.DeserializeCustomModel2, CustomModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetCustomModel2s", "Value", null);
         }
 
         /// <summary>
@@ -265,22 +223,8 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CustomModel2> GetCustomModel2s(CancellationToken cancellationToken = default)
         {
-            Page<CustomModel2> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetCustomModel2s");
-                scope.Start();
-                try
-                {
-                    var response = CustomModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, CustomModel2.DeserializeCustomModel2, CustomModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetCustomModel2s", "Value", null);
         }
 
         /// <summary>
@@ -381,22 +325,8 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<SubResourceModel1>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetSubResourceModel1s");
-                scope.Start();
-                try
-                {
-                    var response = await SubResourceModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, SubResourceModel1.DeserializeSubResourceModel1, SubResourceModel1sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetSubResourceModel1s", "Value", null);
         }
 
         /// <summary>
@@ -407,22 +337,8 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubResourceModel1> GetSubResourceModel1s(CancellationToken cancellationToken = default)
         {
-            Page<SubResourceModel1> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetSubResourceModel1s");
-                scope.Start();
-                try
-                {
-                    var response = SubResourceModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, SubResourceModel1.DeserializeSubResourceModel1, SubResourceModel1sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetSubResourceModel1s", "Value", null);
         }
 
         /// <summary>
@@ -523,22 +439,8 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<SubResourceModel2>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetSubResourceModel2s");
-                scope.Start();
-                try
-                {
-                    var response = await SubResourceModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, SubResourceModel2.DeserializeSubResourceModel2, SubResourceModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetSubResourceModel2s", "Value", null);
         }
 
         /// <summary>
@@ -549,22 +451,8 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubResourceModel2> GetSubResourceModel2s(CancellationToken cancellationToken = default)
         {
-            Page<SubResourceModel2> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetSubResourceModel2s");
-                scope.Start();
-                try
-                {
-                    var response = SubResourceModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, SubResourceModel2.DeserializeSubResourceModel2, SubResourceModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetSubResourceModel2s", "Value", null);
         }
 
         /// <summary>
@@ -665,22 +553,8 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<WritableSubResourceModel1>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetWritableSubResourceModel1s");
-                scope.Start();
-                try
-                {
-                    var response = await WritableSubResourceModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, WritableSubResourceModel1.DeserializeWritableSubResourceModel1, WritableSubResourceModel1sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetWritableSubResourceModel1s", "Value", null);
         }
 
         /// <summary>
@@ -691,22 +565,8 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(CancellationToken cancellationToken = default)
         {
-            Page<WritableSubResourceModel1> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetWritableSubResourceModel1s");
-                scope.Start();
-                try
-                {
-                    var response = WritableSubResourceModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, WritableSubResourceModel1.DeserializeWritableSubResourceModel1, WritableSubResourceModel1sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetWritableSubResourceModel1s", "Value", null);
         }
 
         /// <summary>
@@ -807,22 +667,8 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<WritableSubResourceModel2>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetWritableSubResourceModel2s");
-                scope.Start();
-                try
-                {
-                    var response = await WritableSubResourceModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, WritableSubResourceModel2.DeserializeWritableSubResourceModel2, WritableSubResourceModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetWritableSubResourceModel2s", "Value", null);
         }
 
         /// <summary>
@@ -833,22 +679,8 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(CancellationToken cancellationToken = default)
         {
-            Page<WritableSubResourceModel2> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetWritableSubResourceModel2s");
-                scope.Start();
-                try
-                {
-                    var response = WritableSubResourceModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, WritableSubResourceModel2.DeserializeWritableSubResourceModel2, WritableSubResourceModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetWritableSubResourceModel2s", "Value", null);
         }
 
         /// <summary>
@@ -949,22 +781,8 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceModel2> GetResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<ResourceModel2>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetResourceModel2s");
-                scope.Start();
-                try
-                {
-                    var response = await ResourceModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, ResourceModel2.DeserializeResourceModel2, ResourceModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetResourceModel2s", "Value", null);
         }
 
         /// <summary>
@@ -975,22 +793,8 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceModel2> GetResourceModel2s(CancellationToken cancellationToken = default)
         {
-            Page<ResourceModel2> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetResourceModel2s");
-                scope.Start();
-                try
-                {
-                    var response = ResourceModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, ResourceModel2.DeserializeResourceModel2, ResourceModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetResourceModel2s", "Value", null);
         }
 
         /// <summary>
@@ -1091,22 +895,8 @@ namespace SupersetFlattenInheritance
         /// <returns> An async collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TrackedResourceModel2>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetTrackedResourceModel2s");
-                scope.Start();
-                try
-                {
-                    var response = await TrackedResourceModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => TrackedResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, TrackedResourceModel2.DeserializeTrackedResourceModel2, TrackedResourceModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetTrackedResourceModel2s", "Value", null);
         }
 
         /// <summary>
@@ -1117,22 +907,8 @@ namespace SupersetFlattenInheritance
         /// <returns> A collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(CancellationToken cancellationToken = default)
         {
-            Page<TrackedResourceModel2> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetTrackedResourceModel2s");
-                scope.Start();
-                try
-                {
-                    var response = TrackedResourceModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => TrackedResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, TrackedResourceModel2.DeserializeTrackedResourceModel2, TrackedResourceModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetTrackedResourceModel2s", "Value", null);
         }
 
         /// <summary>

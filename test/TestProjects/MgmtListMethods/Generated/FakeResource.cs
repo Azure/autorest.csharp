@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -472,22 +471,8 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            async Task<Page<FakeConfigurationResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.UpdateConfigurations");
-                scope.Start();
-                try
-                {
-                    var response = await _fakeRestClient.UpdateConfigurationsAsync(Id.SubscriptionId, Id.Name, value, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value0 => new FakeConfigurationResource(Client, value0)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateUpdateConfigurationsRequest(Id.SubscriptionId, Id.Name, value);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeClientDiagnostics, Pipeline, "FakeResource.UpdateConfigurations", "Value", null);
         }
 
         /// <summary>
@@ -503,22 +488,8 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            Page<FakeConfigurationResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.UpdateConfigurations");
-                scope.Start();
-                try
-                {
-                    var response = _fakeRestClient.UpdateConfigurations(Id.SubscriptionId, Id.Name, value, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value0 => new FakeConfigurationResource(Client, value0)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateUpdateConfigurationsRequest(Id.SubscriptionId, Id.Name, value);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeClientDiagnostics, Pipeline, "FakeResource.UpdateConfigurations", "Value", null);
         }
 
         /// <summary>

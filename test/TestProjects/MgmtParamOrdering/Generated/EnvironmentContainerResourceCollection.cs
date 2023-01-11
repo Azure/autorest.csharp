@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -186,22 +185,8 @@ namespace MgmtParamOrdering
         /// <returns> An async collection of <see cref="EnvironmentContainerResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<EnvironmentContainerResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<EnvironmentContainerResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _environmentContainerResourceEnvironmentContainersClientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _environmentContainerResourceEnvironmentContainersRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new EnvironmentContainerResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _environmentContainerResourceEnvironmentContainersRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new EnvironmentContainerResource(Client, EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(e)), _environmentContainerResourceEnvironmentContainersClientDiagnostics, Pipeline, "EnvironmentContainerResourceCollection.GetAll", "Value", null);
         }
 
         /// <summary>
@@ -213,22 +198,8 @@ namespace MgmtParamOrdering
         /// <returns> A collection of <see cref="EnvironmentContainerResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<EnvironmentContainerResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<EnvironmentContainerResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _environmentContainerResourceEnvironmentContainersClientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _environmentContainerResourceEnvironmentContainersRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new EnvironmentContainerResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _environmentContainerResourceEnvironmentContainersRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new EnvironmentContainerResource(Client, EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(e)), _environmentContainerResourceEnvironmentContainersClientDiagnostics, Pipeline, "EnvironmentContainerResourceCollection.GetAll", "Value", null);
         }
 
         /// <summary>

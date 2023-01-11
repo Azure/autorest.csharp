@@ -6,9 +6,7 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -56,22 +54,8 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TypeOneResource> GetTypeOnesAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TypeOneResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = TypeOneCommonClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetTypeOnes");
-                scope.Start();
-                try
-                {
-                    var response = await TypeOneCommonRestClient.ListTypeOnesBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOneResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => TypeOneCommonRestClient.CreateListTypeOnesBySubscriptionRequest(Id.SubscriptionId);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), TypeOneCommonClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetTypeOnes", "Value", null);
         }
 
         /// <summary>
@@ -83,22 +67,8 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TypeOneResource> GetTypeOnes(CancellationToken cancellationToken = default)
         {
-            Page<TypeOneResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = TypeOneCommonClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetTypeOnes");
-                scope.Start();
-                try
-                {
-                    var response = TypeOneCommonRestClient.ListTypeOnesBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOneResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => TypeOneCommonRestClient.CreateListTypeOnesBySubscriptionRequest(Id.SubscriptionId);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), TypeOneCommonClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetTypeOnes", "Value", null);
         }
 
         /// <summary>
@@ -110,22 +80,8 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TypeTwoResource> GetTypeTwosAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TypeTwoResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = TypeTwoCommonClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetTypeTwos");
-                scope.Start();
-                try
-                {
-                    var response = await TypeTwoCommonRestClient.ListTypeTwosBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwoResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => TypeTwoCommonRestClient.CreateListTypeTwosBySubscriptionRequest(Id.SubscriptionId);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), TypeTwoCommonClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetTypeTwos", "Value", null);
         }
 
         /// <summary>
@@ -137,22 +93,8 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TypeTwoResource> GetTypeTwos(CancellationToken cancellationToken = default)
         {
-            Page<TypeTwoResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = TypeTwoCommonClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetTypeTwos");
-                scope.Start();
-                try
-                {
-                    var response = TypeTwoCommonRestClient.ListTypeTwosBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwoResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => TypeTwoCommonRestClient.CreateListTypeTwosBySubscriptionRequest(Id.SubscriptionId);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), TypeTwoCommonClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetTypeTwos", "Value", null);
         }
     }
 }

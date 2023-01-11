@@ -6,9 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -208,24 +205,9 @@ namespace MixApiVersion
         /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='GetPetsAsync(RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPetsAsync(RequestContext context = null)
         {
-            return GetPetsImplementationAsync("MixApiVersionClient.GetPets", context);
-        }
-
-        private AsyncPageable<BinaryData> GetPetsImplementationAsync(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPetsRequest(context)
-                        : CreateGetPetsNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPetsRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPetsNextPageRequest(nextLink, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "MixApiVersionClient.GetPets", "value", "nextLink", context);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
@@ -235,24 +217,9 @@ namespace MixApiVersion
         /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='GetPets(RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPets(RequestContext context = null)
         {
-            return GetPetsImplementation("MixApiVersionClient.GetPets", context);
-        }
-
-        private Pageable<BinaryData> GetPetsImplementation(string diagnosticsScopeName, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPetsRequest(context)
-                        : CreateGetPetsNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPetsRequest(context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPetsNextPageRequest(nextLink, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "MixApiVersionClient.GetPets", "value", "nextLink", context);
         }
 
         internal HttpMessage CreateDeleteRequest(string name, RequestContext context)
