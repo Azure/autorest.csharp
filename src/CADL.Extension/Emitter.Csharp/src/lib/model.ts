@@ -117,7 +117,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "boolean":
             return InputTypeKind.Boolean;
         case "plainDate":
-            return InputTypeKind.DateTime;
+            return InputTypeKind.Date;
         case "zonedDateTime":
             return InputTypeKind.DateTime;
         case "plainTime":

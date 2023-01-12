@@ -207,7 +207,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChResource.GetNonResourceChild", "value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChResource.GetNonResourceChild", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace MgmtListMethods
         public virtual Pageable<NonResourceChild> GetNonResourceChild(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChResource.GetNonResourceChild", "value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChResource.GetNonResourceChild", "value", null, cancellationToken);
         }
 
         /// <summary>
