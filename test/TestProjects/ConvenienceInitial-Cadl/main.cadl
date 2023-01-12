@@ -1,0 +1,45 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
+
+@serviceTitle("Convenience method in CADL")
+@serviceVersion("0.1.0")
+@doc("CADL project to test convenience method.")
+namespace ConvenienceInCadl;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.DPG;
+
+@doc("A model.")
+model Model {
+    id: string;
+}
+
+@route("/protocol")
+@doc("Operation only has protocol method.")
+@get
+op protocol(): Model;
+
+@route("/convenienceWithOptional")
+@doc("Operation has protocol method with optional RequestContext and convenience method.")
+@get
+@convenienceAPI
+op convenienceWithOptional(): Model;
+
+@route("/convenienceWithRequired")
+@doc("Operation has protocol method with required RequestContext and convenience method.")
+@get
+@convenienceAPI
+op convenienceWithRequired(): Model;
+
+@route("/convenienceShouldNotGenerate")
+@doc("Operation has protocol method marked with convenience method, but the convenience method should not be generated.")
+@get
+@convenienceAPI
+op convenienceShouldNotGenerate(): Response<200>;
+
+@route("/protocolShouldNotGenerateConvenience")
+@doc("Operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.")
+@get
+op protocolShouldNotGenerateConvenience(): Response<200>;

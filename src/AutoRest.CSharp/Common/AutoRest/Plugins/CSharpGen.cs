@@ -57,8 +57,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
-            var existingProject = GeneratedCodeWorkspace.CreateExistingCodeProject(Configuration.ExistingProjectFolder);
-            var existingCompilation = new ProtocolCompilationInput(await existingProject.GetCompilationAsync());
+            var existingCompilation = Configuration.ExistingProjectFolder != null ?
+                new ProtocolCompilationInput(await GeneratedCodeWorkspace.CreateExistingCodeProject(Configuration.ExistingProjectFolder).GetCompilationAsync()) : null;
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), existingCompilation);
             await LowLevelTarget.ExecuteAsync(project, rootNamespace, sourceInputModel, true);
             return project;

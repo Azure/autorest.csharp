@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace ConvenienceInitialInCadl
+namespace ConvenienceInCadl
 {
-    /// <summary> Client options for ConvenienceInitialInCadlClient. </summary>
-    public partial class ConvenienceInitialInCadlClientOptions : ClientOptions
+    /// <summary> Client options for ConvenienceInCadlClient. </summary>
+    public partial class ConvenienceInCadlClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;
 
@@ -24,8 +24,8 @@ namespace ConvenienceInitialInCadl
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of ConvenienceInitialInCadlClientOptions. </summary>
-        public ConvenienceInitialInCadlClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of ConvenienceInCadlClientOptions. </summary>
+        public ConvenienceInCadlClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

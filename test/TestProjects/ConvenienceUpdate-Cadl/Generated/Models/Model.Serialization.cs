@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace ConvenienceUpdateInCadl.Models
+namespace ConvenienceInCadl.Models
 {
     public partial class Model
     {

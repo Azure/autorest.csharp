@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using ConvenienceInitialInCadl.Models;
+using ConvenienceInCadl.Models;
 
-namespace ConvenienceInitialInCadl
+namespace ConvenienceInCadl
 {
     // Data plane generated client.
     /// <summary> CADL project to test convenience method. </summary>
-    public partial class ConvenienceInitialInCadlClient
+    public partial class ConvenienceInCadlClient
     {
         private readonly HttpPipeline _pipeline;
         private readonly string _apiVersion;
@@ -28,34 +28,34 @@ namespace ConvenienceInitialInCadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ConvenienceInitialInCadlClient. </summary>
-        public ConvenienceInitialInCadlClient() : this(new ConvenienceInitialInCadlClientOptions())
+        /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
+        public ConvenienceInCadlClient() : this(new ConvenienceInCadlClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of ConvenienceInitialInCadlClient. </summary>
+        /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
         /// <param name="options"> The options for configuring the client. </param>
-        public ConvenienceInitialInCadlClient(ConvenienceInitialInCadlClientOptions options)
+        public ConvenienceInCadlClient(ConvenienceInCadlClientOptions options)
         {
-            options ??= new ConvenienceInitialInCadlClientOptions();
+            options ??= new ConvenienceInCadlClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _apiVersion = options.Version;
         }
 
-        /// <summary> Initial operation only has protocol method. </summary>
+        /// <summary> Operation only has protocol method. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInitialInCadlClient.xml" path="doc/members/member[@name='InitialProtocolAsync(RequestContext)']/*" />
-        public virtual async Task<Response> InitialProtocolAsync(RequestContext context = null)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolAsync(RequestContext)']/*" />
+        public virtual async Task<Response> ProtocolAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialProtocol");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.Protocol");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInitialProtocolRequest(context);
+                using HttpMessage message = CreateProtocolRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -65,18 +65,18 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method. </summary>
+        /// <summary> Operation only has protocol method. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInitialInCadlClient.xml" path="doc/members/member[@name='InitialProtocol(RequestContext)']/*" />
-        public virtual Response InitialProtocol(RequestContext context = null)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='Protocol(RequestContext)']/*" />
+        public virtual Response Protocol(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialProtocol");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.Protocol");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInitialProtocolRequest(context);
+                using HttpMessage message = CreateProtocolRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -86,16 +86,16 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation has protocol method with optional RequestContext and convenience method. </summary>
+        /// <summary> Operation has protocol method with optional RequestContext and convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Model>> InitialConvenienceWithOptionalValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Model>> ConvenienceWithOptionalValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialConvenienceWithOptionalValue");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithOptionalValue");
             scope.Start();
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await InitialConvenienceWithOptionalAsync(context).ConfigureAwait(false);
+                Response response = await ConvenienceWithOptionalAsync(context).ConfigureAwait(false);
                 return Response.FromValue(Model.FromResponse(response), response);
             }
             catch (Exception e)
@@ -105,16 +105,16 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation has protocol method with optional RequestContext and convenience method. </summary>
+        /// <summary> Operation has protocol method with optional RequestContext and convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Model> InitialConvenienceWithOptionalValue(CancellationToken cancellationToken = default)
+        public virtual Response<Model> ConvenienceWithOptionalValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialConvenienceWithOptionalValue");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithOptionalValue");
             scope.Start();
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = InitialConvenienceWithOptional(context);
+                Response response = ConvenienceWithOptional(context);
                 return Response.FromValue(Model.FromResponse(response), response);
             }
             catch (Exception e)
@@ -124,18 +124,18 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation has protocol method with optional RequestContext and convenience method. </summary>
+        /// <summary> Operation has protocol method with optional RequestContext and convenience method. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInitialInCadlClient.xml" path="doc/members/member[@name='InitialConvenienceWithOptionalAsync(RequestContext)']/*" />
-        public virtual async Task<Response> InitialConvenienceWithOptionalAsync(RequestContext context = null)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptionalAsync(RequestContext)']/*" />
+        public virtual async Task<Response> ConvenienceWithOptionalAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialConvenienceWithOptional");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithOptional");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInitialConvenienceWithOptionalRequest(context);
+                using HttpMessage message = CreateConvenienceWithOptionalRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -145,18 +145,18 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation has protocol method with optional RequestContext and convenience method. </summary>
+        /// <summary> Operation has protocol method with optional RequestContext and convenience method. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInitialInCadlClient.xml" path="doc/members/member[@name='InitialConvenienceWithOptional(RequestContext)']/*" />
-        public virtual Response InitialConvenienceWithOptional(RequestContext context = null)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptional(RequestContext)']/*" />
+        public virtual Response ConvenienceWithOptional(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialConvenienceWithOptional");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithOptional");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInitialConvenienceWithOptionalRequest(context);
+                using HttpMessage message = CreateConvenienceWithOptionalRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -166,39 +166,39 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation has protocol method with required RequestContext and convenience method. </summary>
+        /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Model>> InitialConvenienceWithRequiredAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Model>> ConvenienceWithRequiredAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InitialConvenienceWithRequiredAsync(context).ConfigureAwait(false);
+            Response response = await ConvenienceWithRequiredAsync(context).ConfigureAwait(false);
             return Response.FromValue(Model.FromResponse(response), response);
         }
 
-        /// <summary> Initial operation has protocol method with required RequestContext and convenience method. </summary>
+        /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Model> InitialConvenienceWithRequired(CancellationToken cancellationToken = default)
+        public virtual Response<Model> ConvenienceWithRequired(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InitialConvenienceWithRequired(context);
+            Response response = ConvenienceWithRequired(context);
             return Response.FromValue(Model.FromResponse(response), response);
         }
 
-        /// <summary> Initial operation has protocol method with required RequestContext and convenience method. </summary>
+        /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInitialInCadlClient.xml" path="doc/members/member[@name='InitialConvenienceWithRequiredAsync(RequestContext)']/*" />
-        public virtual async Task<Response> InitialConvenienceWithRequiredAsync(RequestContext context)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequiredAsync(RequestContext)']/*" />
+        public virtual async Task<Response> ConvenienceWithRequiredAsync(RequestContext context)
         {
             Argument.AssertNotNull(context, nameof(context));
 
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialConvenienceWithRequired");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithRequired");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInitialConvenienceWithRequiredRequest(context);
+                using HttpMessage message = CreateConvenienceWithRequiredRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -208,21 +208,21 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation has protocol method with required RequestContext and convenience method. </summary>
+        /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInitialInCadlClient.xml" path="doc/members/member[@name='InitialConvenienceWithRequired(RequestContext)']/*" />
-        public virtual Response InitialConvenienceWithRequired(RequestContext context)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequired(RequestContext)']/*" />
+        public virtual Response ConvenienceWithRequired(RequestContext context)
         {
             Argument.AssertNotNull(context, nameof(context));
 
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialConvenienceWithRequired");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithRequired");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInitialConvenienceWithRequiredRequest(context);
+                using HttpMessage message = CreateConvenienceWithRequiredRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -232,18 +232,18 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation has protocol method marked with convenience method, but the convenience method should not be generated. </summary>
+        /// <summary> Operation has protocol method marked with convenience method, but the convenience method should not be generated. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInitialInCadlClient.xml" path="doc/members/member[@name='InitialConvenienceShouldNotGenerateAsync(RequestContext)']/*" />
-        public virtual async Task<Response> InitialConvenienceShouldNotGenerateAsync(RequestContext context = null)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceShouldNotGenerateAsync(RequestContext)']/*" />
+        public virtual async Task<Response> ConvenienceShouldNotGenerateAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialConvenienceShouldNotGenerate");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceShouldNotGenerate");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInitialConvenienceShouldNotGenerateRequest(context);
+                using HttpMessage message = CreateConvenienceShouldNotGenerateRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -253,18 +253,18 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation has protocol method marked with convenience method, but the convenience method should not be generated. </summary>
+        /// <summary> Operation has protocol method marked with convenience method, but the convenience method should not be generated. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInitialInCadlClient.xml" path="doc/members/member[@name='InitialConvenienceShouldNotGenerate(RequestContext)']/*" />
-        public virtual Response InitialConvenienceShouldNotGenerate(RequestContext context = null)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceShouldNotGenerate(RequestContext)']/*" />
+        public virtual Response ConvenienceShouldNotGenerate(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialConvenienceShouldNotGenerate");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceShouldNotGenerate");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInitialConvenienceShouldNotGenerateRequest(context);
+                using HttpMessage message = CreateConvenienceShouldNotGenerateRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -274,18 +274,18 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator. </summary>
+        /// <summary> Operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInitialInCadlClient.xml" path="doc/members/member[@name='InitialProtocolShouldNotGenerateConvenienceAsync(RequestContext)']/*" />
-        public virtual async Task<Response> InitialProtocolShouldNotGenerateConvenienceAsync(RequestContext context = null)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolShouldNotGenerateConvenienceAsync(RequestContext)']/*" />
+        public virtual async Task<Response> ProtocolShouldNotGenerateConvenienceAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialProtocolShouldNotGenerateConvenience");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolShouldNotGenerateConvenience");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInitialProtocolShouldNotGenerateConvenienceRequest(context);
+                using HttpMessage message = CreateProtocolShouldNotGenerateConvenienceRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -295,18 +295,18 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator. </summary>
+        /// <summary> Operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInitialInCadlClient.xml" path="doc/members/member[@name='InitialProtocolShouldNotGenerateConvenience(RequestContext)']/*" />
-        public virtual Response InitialProtocolShouldNotGenerateConvenience(RequestContext context = null)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolShouldNotGenerateConvenience(RequestContext)']/*" />
+        public virtual Response ProtocolShouldNotGenerateConvenience(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInitialInCadlClient.InitialProtocolShouldNotGenerateConvenience");
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolShouldNotGenerateConvenience");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInitialProtocolShouldNotGenerateConvenienceRequest(context);
+                using HttpMessage message = CreateProtocolShouldNotGenerateConvenienceRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -316,65 +316,65 @@ namespace ConvenienceInitialInCadl
             }
         }
 
-        internal HttpMessage CreateInitialProtocolRequest(RequestContext context)
+        internal HttpMessage CreateProtocolRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/initialProtocol", false);
+            uri.AppendPath("/protocol", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateInitialConvenienceWithOptionalRequest(RequestContext context)
+        internal HttpMessage CreateConvenienceWithOptionalRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/initialConvenienceWithOptional", false);
+            uri.AppendPath("/convenienceWithOptional", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateInitialConvenienceWithRequiredRequest(RequestContext context)
+        internal HttpMessage CreateConvenienceWithRequiredRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/initialConvenienceWithRequired", false);
+            uri.AppendPath("/convenienceWithRequired", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateInitialConvenienceShouldNotGenerateRequest(RequestContext context)
+        internal HttpMessage CreateConvenienceShouldNotGenerateRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/initialConvenienceShouldNotGenerate", false);
+            uri.AppendPath("/convenienceShouldNotGenerate", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateInitialProtocolShouldNotGenerateConvenienceRequest(RequestContext context)
+        internal HttpMessage CreateProtocolShouldNotGenerateConvenienceRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendPath("/initialProtocolShouldNotGenerateConvenience", false);
+            uri.AppendPath("/protocolShouldNotGenerateConvenience", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

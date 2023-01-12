@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace ConvenienceUpdateInCadl.Models
+namespace ConvenienceInCadl.Models
 {
     /// <summary> A model. </summary>
     public partial class Model

@@ -1,6 +1,6 @@
 {
     "name": "@azure-tools/cadl-csharp",
-    "version": "0.1.10",
+    "version": "0.1.11",
     "author": "Microsoft Corporation",
     "description": "Cadl library for emitting csharp model from the Cadl REST protocol binding",
     "homepage": "https://github.com/Microsoft/cadl",

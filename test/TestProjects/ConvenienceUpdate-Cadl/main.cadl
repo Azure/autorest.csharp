@@ -5,7 +5,7 @@ import "@azure-tools/cadl-dpg";
 @serviceTitle("Convenience method in CADL")
 @serviceVersion("0.2.0")
 @doc("CADL project to test convenience method.")
-namespace ConvenienceUpdateInCadl;
+namespace ConvenienceInCadl;
 
 using Cadl.Http;
 using Cadl.Rest;
@@ -16,35 +16,35 @@ model Model {
     id: string;
 }
 
-@route("/initialProtocol")
+@route("/protocol")
 @doc("Initial operation only has protocol method. In the updated version, we add the convenience method.")
 @get
 @convenienceAPI
-op initialProtocol(): Model;
+op protocol(): Model;
 
-@route("/initialConvenienceWithOptional")
+@route("/convenienceWithOptional")
 @doc("Initial operation has protocol method with optional RequestContext and convenience method. In the updated version, the method signature should not change.")
 @get
 @convenienceAPI
-op initialConvenienceWithOptional(): Model;
+op convenienceWithOptional(): Model;
 
-@route("/initialConvenienceWithRequired")
+@route("/convenienceWithRequired")
 @doc("Initial operation has protocol method with required RequestContext and convenience method. In the updated version, the method signature should not change.")
 @get
 @convenienceAPI
-op initialConvenienceWithRequired(): Model;
+op convenienceWithRequired(): Model;
 
-@route("/initialConvenienceShouldNotGenerate")
+@route("/convenienceShouldNotGenerate")
 @doc("Initial operation has protocol method marked with convenience method, but the convenience method should not be generated. In the updated version, the method signature should not change.")
 @get
 @convenienceAPI
-op initialConvenienceShouldNotGenerate(): Response<200>;
+op convenienceShouldNotGenerate(): Response<200>;
 
-@route("/initialProtocolShouldNotGenerateConvenience")
+@route("/protocolShouldNotGenerateConvenience")
 @doc("Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.")
 @get
 @convenienceAPI
-op initialProtocolShouldNotGenerateConvenience(): Response<200>;
+op protocolShouldNotGenerateConvenience(): Response<200>;
 
 @route("/updateConvenience")
 @doc("No initial operation methods. In the updated version, we add the protocol method and convenience method.")

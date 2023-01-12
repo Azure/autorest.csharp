@@ -19,7 +19,7 @@ $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http'
-$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true'
+$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option @azure-tools/cadl-csharp.clear-output-folder=true'
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -61,6 +61,21 @@ function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$
         $cadlMain = Join-Path $cadlFolder "main.cadl"
         Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
     }
+}
+
+function Get-Cadl-Entry([string]$directory) {
+    $clientPath = Join-Path $directory "client.cadl"
+    if (Test-Path $clientPath) {
+        return $clientPath
+    }
+
+    $mainPath = Join-Path $directory "main.cadl"
+    if (Test-Path $mainPath) {
+        return $mainPath
+    }
+
+    $projectNamePath = Join-Path $directory "$projectName.cadl"
+    return $projectNamePath
 }
 
 $testNames =
@@ -198,11 +213,11 @@ if (!($Exclude -contains "TestProjects"))
             continue
         }
         if ($testName.EndsWith("Cadl")) {
-            if ($testName -eq "ConvenienceUpdate-Cadl") {
-                Add-Cadl $testName $directory "" "--option @azure-tools/cadl-csharp.clear-output-folder=true --option @azure-tools/cadl-csharp.existing-project-folder=$(Convert-Path $(Join-Path $directory ".." "ConvenienceInitial-Cadl" "Generated"))"
+            if ($testName -eq "ConvenienceUpdate-Cadl" -or $testName -eq "ConvenienceInitial-Cadl") {
+                Add-Cadl $testName $directory (Get-Cadl-Entry $directory) "--option @azure-tools/cadl-csharp.existing-project-folder=$(Convert-Path $(Join-Path $directory ".." "ConvenienceInitial-Cadl" "Generated"))"
             }
             else {
-                Add-Cadl $testName $directory
+                Add-Cadl $testName $directory (Get-Cadl-Entry $directory)
             }
         } else {
             if (Test-Path $readmeConfigurationPath)
@@ -324,7 +339,7 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     {
         $outputPath = Join-Path $definition.output "SomeFolder" "Generated"
     }
-    elseif ($key -eq "ConvenienceUpdate-Cadl")
+    elseif ($key -eq "ConvenienceUpdate-Cadl" -or $key -eq "ConvenienceInitial-Cadl")
     {
         $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." "ConvenienceInitial-Cadl" "Generated"))"
     }

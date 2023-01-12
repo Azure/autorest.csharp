@@ -14,16 +14,17 @@ namespace AutoRest.CSharp.Input.Source
     public class SourceInputModel
     {
         private readonly Compilation _compilation;
+        private readonly CompilationInput? _existingCompilation;
         private readonly INamedTypeSymbol _typeAttribute;
         private readonly INamedTypeSymbol _modelAttribute;
         private readonly INamedTypeSymbol _clientAttribute;
         private readonly INamedTypeSymbol _schemaMemberNameAttribute;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
-        private readonly List<IMethodSymbol> _methodSet = new List<IMethodSymbol>();
 
         public SourceInputModel(Compilation compilation, CompilationInput? existingCompilation = null)
         {
             _compilation = compilation;
+            _existingCompilation = existingCompilation;
 
             _schemaMemberNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberAttribute).FullName!)!;
             _typeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenTypeAttribute).FullName!)!;
@@ -34,7 +35,7 @@ namespace AutoRest.CSharp.Input.Source
 
             foreach (IModuleSymbol module in assembly.Modules)
             {
-                foreach (var type in GetSymbols(module.GlobalNamespace))
+                foreach (var type in SourceInputHelper.GetSymbols(module.GlobalNamespace))
                 {
                     if (type is INamedTypeSymbol namedTypeSymbol && TryGetName(type, out var schemaName))
                     {
@@ -45,22 +46,7 @@ namespace AutoRest.CSharp.Input.Source
 
             if (existingCompilation != null)
             {
-                foreach (IModuleSymbol module in existingCompilation.Compilation.Assembly.Modules)
-                {
-                    foreach (var type in GetSymbols(module.GlobalNamespace))
-                    {
-                        if (type is INamedTypeSymbol typeSymbol && existingCompilation.FilterType(typeSymbol))
-                        {
-                            foreach (var member in typeSymbol.GetMembers())
-                            {
-                                if (member is IMethodSymbol methodSymbol && existingCompilation.FilterMethod(methodSymbol))
-                                {
-                                    _methodSet.Add(methodSymbol);
-                                }
-                            }
-                        }
-                    }
-                }
+                existingCompilation.FilterSymbols();
             }
         }
 
@@ -78,46 +64,13 @@ namespace AutoRest.CSharp.Input.Source
             return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, symbol);
         }
 
-        public IMethodSymbol? FindForMethod(string name, IEnumerable<string> parameters)
+        public IMethodSymbol? FindProtocolMethod(string namespaceName, string clientName, string methodName, IEnumerable<string> parameters)
         {
-            var methods = _methodSet.Where(m => m.Name == name).ToArray();
-            if (methods.Length == 0)
+            if (_existingCompilation is ProtocolCompilationInput protocolCompilation)
             {
-                return null;
+                return protocolCompilation.FindSymbol(namespaceName, clientName, methodName, parameters);
             }
-            else if (methods.Length == 1)
-            {
-                return methods.First();
-            }
-            else
-            {
-                foreach (var method in methods)
-                {
-                    var existingParameters = method.Parameters;
-                    var parametersCount = parameters.Count();
-                    if (existingParameters.Length - 1 != parametersCount)
-                    {
-                        continue;
-                    }
-
-                    int index = 0;
-                    foreach (var parameter in parameters)
-                    {
-                        // It would be better to compare the types.
-                        if (parameter != existingParameters[index].Name)
-                        {
-                            break;
-                        }
-                        ++index;
-                    }
-
-                    if (index == parametersCount)
-                    {
-                        return method;
-                    }
-                }
-                return null;
-            }
+            return null;
         }
 
         public INamedTypeSymbol? FindForType(string ns, string name, bool includeArmCore = false)
@@ -199,22 +152,6 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return name != null;
-        }
-
-        private IEnumerable<ITypeSymbol> GetSymbols(INamespaceSymbol namespaceSymbol)
-        {
-            foreach (var childNamespaceSymbol in namespaceSymbol.GetNamespaceMembers())
-            {
-                foreach (var symbol in GetSymbols(childNamespaceSymbol))
-                {
-                    yield return symbol;
-                }
-            }
-
-            foreach (INamedTypeSymbol symbol in namespaceSymbol.GetTypeMembers())
-            {
-                yield return symbol;
-            }
         }
     }
 }

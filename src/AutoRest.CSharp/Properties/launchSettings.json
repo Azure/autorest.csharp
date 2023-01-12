@@ -202,7 +202,7 @@
     },
     "ConvenienceInitial-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConvenienceInitial-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConvenienceInitial-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\ConvenienceInitial-Cadl\\Generated"
     },
     "ConvenienceUpdate-Cadl": {
       "commandName": "Project",

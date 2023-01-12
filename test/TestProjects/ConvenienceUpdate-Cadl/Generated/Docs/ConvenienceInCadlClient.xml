@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="InitialProtocolAsync(RequestContext)">
+    <member name="ProtocolAsync(RequestContext)">
 <example>
-This sample shows how to call InitialProtocolAsync and parse the result.
+This sample shows how to call ProtocolAsync and parse the result.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
-Response response = await client.InitialProtocolAsync();
+Response response = await client.ProtocolAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -26,13 +26,13 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="InitialProtocol(RequestContext)">
+    <member name="Protocol(RequestContext)">
 <example>
-This sample shows how to call InitialProtocol and parse the result.
+This sample shows how to call Protocol and parse the result.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
-Response response = client.InitialProtocol();
+Response response = client.Protocol();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -51,13 +51,13 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="InitialConvenienceWithOptionalAsync(RequestContext)">
+    <member name="ConvenienceWithOptionalAsync(RequestContext)">
 <example>
-This sample shows how to call InitialConvenienceWithOptionalAsync and parse the result.
+This sample shows how to call ConvenienceWithOptionalAsync and parse the result.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
-Response response = await client.InitialConvenienceWithOptionalAsync();
+Response response = await client.ConvenienceWithOptionalAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -76,13 +76,13 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="InitialConvenienceWithOptional(RequestContext)">
+    <member name="ConvenienceWithOptional(RequestContext)">
 <example>
-This sample shows how to call InitialConvenienceWithOptional and parse the result.
+This sample shows how to call ConvenienceWithOptional and parse the result.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
-Response response = client.InitialConvenienceWithOptional();
+Response response = client.ConvenienceWithOptional();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -101,13 +101,13 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="InitialConvenienceWithRequiredAsync(RequestContext)">
+    <member name="ConvenienceWithRequiredAsync(RequestContext)">
 <example>
-This sample shows how to call InitialConvenienceWithRequiredAsync with required parameters and parse the result.
+This sample shows how to call ConvenienceWithRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
-Response response = await client.InitialConvenienceWithRequiredAsync();
+Response response = await client.ConvenienceWithRequiredAsync();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -126,13 +126,13 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="InitialConvenienceWithRequired(RequestContext)">
+    <member name="ConvenienceWithRequired(RequestContext)">
 <example>
-This sample shows how to call InitialConvenienceWithRequired with required parameters and parse the result.
+This sample shows how to call ConvenienceWithRequired with required parameters and parse the result.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
-Response response = client.InitialConvenienceWithRequired();
+Response response = client.ConvenienceWithRequired();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -151,46 +151,46 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="InitialConvenienceShouldNotGenerateAsync(RequestContext)">
+    <member name="ConvenienceShouldNotGenerateAsync(RequestContext)">
 <example>
-This sample shows how to call InitialConvenienceShouldNotGenerateAsync.
+This sample shows how to call ConvenienceShouldNotGenerateAsync.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
-Response response = await client.InitialConvenienceShouldNotGenerateAsync();
+Response response = await client.ConvenienceShouldNotGenerateAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="InitialConvenienceShouldNotGenerate(RequestContext)">
+    <member name="ConvenienceShouldNotGenerate(RequestContext)">
 <example>
-This sample shows how to call InitialConvenienceShouldNotGenerate.
+This sample shows how to call ConvenienceShouldNotGenerate.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
-Response response = client.InitialConvenienceShouldNotGenerate();
+Response response = client.ConvenienceShouldNotGenerate();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="InitialProtocolShouldNotGenerateConvenienceAsync(RequestContext)">
+    <member name="ProtocolShouldNotGenerateConvenienceAsync(RequestContext)">
 <example>
-This sample shows how to call InitialProtocolShouldNotGenerateConvenienceAsync.
+This sample shows how to call ProtocolShouldNotGenerateConvenienceAsync.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
-Response response = await client.InitialProtocolShouldNotGenerateConvenienceAsync();
+Response response = await client.ProtocolShouldNotGenerateConvenienceAsync();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="InitialProtocolShouldNotGenerateConvenience(RequestContext)">
+    <member name="ProtocolShouldNotGenerateConvenience(RequestContext)">
 <example>
-This sample shows how to call InitialProtocolShouldNotGenerateConvenience.
+This sample shows how to call ProtocolShouldNotGenerateConvenience.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
-Response response = client.InitialProtocolShouldNotGenerateConvenience();
+Response response = client.ProtocolShouldNotGenerateConvenience();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -199,7 +199,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call UpdateConvenienceAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
 Response response = await client.UpdateConvenienceAsync();
 
@@ -224,7 +224,7 @@ Schema for <c>Model</c>:
 <example>
 This sample shows how to call UpdateConvenience with required parameters and parse the result.
 <code><![CDATA[
-var client = new ConvenienceUpdateInCadlClient();
+var client = new ConvenienceInCadlClient();
 
 Response response = client.UpdateConvenience();
 

@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Input
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
             UnreferencedTypesHandling = unreferencedTypesHandling;
-            _existingProjectFolder = existingProjectFolder ?? _outputFolder;
+            ExistingProjectFolder = existingProjectFolder;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
             {
@@ -100,8 +100,7 @@ namespace AutoRest.CSharp.Input
 
         private static string? _outputFolder;
         public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
-        private static string? _existingProjectFolder;
-        public static string ExistingProjectFolder => _existingProjectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
+        public static string? ExistingProjectFolder { get; private set; }
         public static string? Namespace { get; private set; }
         public static string? LibraryName { get; private set; }
 

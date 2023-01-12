@@ -32,6 +32,7 @@ namespace AutoRest.CSharp.Output.Models
             ["If-Unmodified-Since"] = RequestConditionHeaders.IfUnmodifiedSince
         };
 
+        private readonly string _namespaceName;
         private readonly string _clientName;
         private readonly ClientFields _fields;
         private readonly TypeFactory _typeFactory;
@@ -47,8 +48,9 @@ namespace AutoRest.CSharp.Output.Models
 
         public InputOperation Operation { get; }
 
-        public OperationMethodChainBuilder(InputOperation operation, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        public OperationMethodChainBuilder(InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
+            _namespaceName = namespaceName;
             _clientName = clientName;
             _fields = fields;
             _typeFactory = typeFactory;
@@ -108,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return false;
             }
-            var existingMethod = _sourceInputModel.FindForMethod(Operation.CleanName, _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p.Name));
+            var existingMethod = _sourceInputModel.FindProtocolMethod(_namespaceName, _clientName, Operation.CleanName, _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p.Name));
             // If there is no existing protocol method with optional RequestContext
             if (existingMethod == null || existingMethod.Parameters.Length < 1 || existingMethod.Parameters.Last().IsOptional == false)
             {

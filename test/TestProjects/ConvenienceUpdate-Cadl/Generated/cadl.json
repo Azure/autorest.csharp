@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "ConvenienceUpdateInCadl",
+ "Name": "ConvenienceInCadl",
  "Description": "CADL project to test convenience method.",
  "ApiVersions": [
   "0.2.0"
@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Model",
-   "Namespace": "ConvenienceUpdateInCadl",
+   "Namespace": "ConvenienceInCadl",
    "Description": "A model.",
    "IsNullable": false,
    "Usage": "Output",
@@ -36,12 +36,12 @@
  "Clients": [
   {
    "$id": "5",
-   "Name": "ConvenienceUpdateInCadlClient",
+   "Name": "ConvenienceInCadlClient",
    "Description": "CADL project to test convenience method.",
    "Operations": [
     {
      "$id": "6",
-     "Name": "initialProtocol",
+     "Name": "protocol",
      "Description": "Initial operation only has protocol method. In the updated version, we add the convenience method.",
      "Parameters": [
       {
@@ -120,13 +120,13 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
-     "Path": "/initialProtocol",
+     "Path": "/protocol",
      "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "15",
-     "Name": "initialConvenienceWithOptional",
+     "Name": "convenienceWithOptional",
      "Description": "Initial operation has protocol method with optional RequestContext and convenience method. In the updated version, the method signature should not change.",
      "Parameters": [
       {
@@ -177,13 +177,13 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
-     "Path": "/initialConvenienceWithOptional",
+     "Path": "/convenienceWithOptional",
      "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "20",
-     "Name": "initialConvenienceWithRequired",
+     "Name": "convenienceWithRequired",
      "Description": "Initial operation has protocol method with required RequestContext and convenience method. In the updated version, the method signature should not change.",
      "Parameters": [
       {
@@ -234,13 +234,13 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
-     "Path": "/initialConvenienceWithRequired",
+     "Path": "/convenienceWithRequired",
      "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "25",
-     "Name": "initialConvenienceShouldNotGenerate",
+     "Name": "convenienceShouldNotGenerate",
      "Description": "Initial operation has protocol method marked with convenience method, but the convenience method should not be generated. In the updated version, the method signature should not change.",
      "Parameters": [
       {
@@ -288,13 +288,13 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
-     "Path": "/initialConvenienceShouldNotGenerate",
+     "Path": "/convenienceShouldNotGenerate",
      "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "30",
-     "Name": "initialProtocolShouldNotGenerateConvenience",
+     "Name": "protocolShouldNotGenerateConvenience",
      "Description": "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.",
      "Parameters": [
       {
@@ -342,7 +342,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
-     "Path": "/initialProtocolShouldNotGenerateConvenience",
+     "Path": "/protocolShouldNotGenerateConvenience",
      "BufferResponse": true,
      "GenerateConvenienceMethod": true
     },
