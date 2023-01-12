@@ -50,6 +50,11 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("readinessProbe");
                 writer.WriteObjectValue(ReadinessProbe);
             }
+            if (Optional.IsDefined(DesiredStatusCode))
+            {
+                writer.WritePropertyName("desiredStatusCode");
+                writer.WriteStringValue(DesiredStatusCode.Value.ToString());
+            }
             if (Optional.IsDefined(BasePolicy))
             {
                 writer.WritePropertyName("basePolicy");
@@ -106,6 +111,7 @@ namespace MgmtMockAndSample
             Optional<SystemData> systemData = default;
             Optional<Probe> startupProbe = default;
             Optional<Probe> readinessProbe = default;
+            Optional<DesiredStatusCode> desiredStatusCode = default;
             Optional<IReadOnlyList<WritableSubResource>> ruleCollectionGroups = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<WritableSubResource> basePolicy = default;
@@ -208,6 +214,16 @@ namespace MgmtMockAndSample
                                 continue;
                             }
                             readinessProbe = Probe.DeserializeProbe(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("desiredStatusCode"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            desiredStatusCode = new DesiredStatusCode(property0.Value.GetInt32());
                             continue;
                         }
                         if (property0.NameEquals("ruleCollectionGroups"))
@@ -349,7 +365,7 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToList(ruleCollectionGroups), Optional.ToNullable(provisioningState), basePolicy, Optional.ToList(firewalls), Optional.ToList(childPolicies), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
+            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), Optional.ToList(ruleCollectionGroups), Optional.ToNullable(provisioningState), basePolicy, Optional.ToList(firewalls), Optional.ToList(childPolicies), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
         }
     }
 }

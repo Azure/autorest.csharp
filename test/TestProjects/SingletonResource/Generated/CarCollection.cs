@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -182,22 +181,8 @@ namespace SingletonResource
         /// <returns> An async collection of <see cref="CarResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CarResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<CarResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _carRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new CarResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _carRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new CarResource(Client, CarData.DeserializeCarData(e)), _carClientDiagnostics, Pipeline, "CarCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -208,22 +193,8 @@ namespace SingletonResource
         /// <returns> A collection of <see cref="CarResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CarResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<CarResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _carRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new CarResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _carRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new CarResource(Client, CarData.DeserializeCarData(e)), _carClientDiagnostics, Pipeline, "CarCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

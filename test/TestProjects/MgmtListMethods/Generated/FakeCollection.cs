@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -190,37 +189,9 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeResource> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<FakeResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _fakeRestClient.ListAsync(Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<FakeResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _fakeRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, optionalParam);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, optionalParam);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -233,37 +204,9 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeResource> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            Page<FakeResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _fakeRestClient.List(Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<FakeResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _fakeRestClient.ListNextPage(nextLink, Id.SubscriptionId, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, optionalParam);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, optionalParam);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

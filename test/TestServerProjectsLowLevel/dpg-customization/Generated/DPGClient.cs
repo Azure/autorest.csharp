@@ -6,9 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -175,24 +172,9 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            return GetPagesImplementationAsync("DPGClient.GetPages", mode, context);
-        }
-
-        private AsyncPageable<BinaryData> GetPagesImplementationAsync(string diagnosticsScopeName, string mode, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPagesRequest(mode, context)
-                        : CreateGetPagesNextPageRequest(nextLink, mode, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesRequest(mode, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
         }
 
         /// <summary> Get pages that you will either return to users in pages of raw bodies, or pages of models following growup. </summary>
@@ -206,24 +188,9 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            return GetPagesImplementation("DPGClient.GetPages", mode, context);
-        }
-
-        private Pageable<BinaryData> GetPagesImplementation(string diagnosticsScopeName, string mode, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPagesRequest(mode, context)
-                        : CreateGetPagesNextPageRequest(nextLink, mode, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesRequest(mode, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
         }
 
         /// <summary> Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up. </summary>

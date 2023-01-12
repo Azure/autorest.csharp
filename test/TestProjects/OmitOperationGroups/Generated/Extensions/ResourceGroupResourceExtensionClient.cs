@@ -58,22 +58,8 @@ namespace OmitOperationGroups
         /// <returns> An async collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Model5> GetModel5sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<Model5>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetModel5s");
-                scope.Start();
-                try
-                {
-                    var response = await Model5sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => Model5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetModel5s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -84,22 +70,8 @@ namespace OmitOperationGroups
         /// <returns> A collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Model5> GetModel5s(CancellationToken cancellationToken = default)
         {
-            Page<Model5> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetModel5s");
-                scope.Start();
-                try
-                {
-                    var response = Model5sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => Model5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetModel5s", "value", null, cancellationToken);
         }
 
         /// <summary>

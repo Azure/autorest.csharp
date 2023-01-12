@@ -8,5 +8,5 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<(Parameter Protocol, Parameter? Convenience)> ProtocolToConvenienceParameters, CSharpType? ResponseType, Diagnostic? Diagnostic, PagingResponseInfo? PagingResponseInfo);
+    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<(Parameter Protocol, Parameter? Convenience)> ProtocolToConvenienceParameters, CSharpType? ResponseType, Diagnostic? Diagnostic);
 }

@@ -9,16 +9,12 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using Diagnostic = AutoRest.CSharp.Output.Models.Requests.Diagnostic;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -39,7 +35,6 @@ namespace AutoRest.CSharp.Output.Models
         public IReadOnlyList<RestClientMethod> RequestMethods { get; }
         public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes { get; }
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
-        public IReadOnlyList<PagingMethod> PagingMethods { get; }
         public LowLevelClient? ParentClient;
         public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
 
@@ -78,8 +73,6 @@ namespace AutoRest.CSharp.Output.Models
                 .ToArray();
 
             ResponseClassifierTypes = RequestMethods.Select(m => m.ResponseClassifierType).ToArray();
-
-            PagingMethods = ClientMethods.Where(m => m.PagingInfo != null && m.ConvenienceMethod != null && m.LongRunning == null).Select(m => ClientBuilder.BuildPagingMethod(m.ConvenienceMethod!.Signature.Name, m.PagingInfo!.NextLinkName, m.PagingInfo!.ItemName, m.RequestMethod, m.PagingInfo!.NextPageMethod, Declaration)).ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 
@@ -176,7 +169,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select<Parameter, FormattableString>(p => $"{p.Name}")
                 .Concat(optionalParametersArguments)
                 .ToArray();
-            return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, new ConstructorInitializer(false, arguments));
+            return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
         }
 
         private Parameter CreateCredentialParameter(CSharpType type)

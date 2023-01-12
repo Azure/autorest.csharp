@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -67,17 +65,19 @@ namespace LroBasicCadl
             Argument.AssertNotNull(project, nameof(project));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.CreateProject");
-            scope.Start();
-            try
-            {
-                return await CreateProjectAsync(waitUntil, project.ToRequestContent(), context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return await CreateProjectAsync(waitUntil, project.ToRequestContent(), context).ConfigureAwait(false);
+        }
+
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="project"> The Project to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="project"/> is null. </exception>
+        public virtual Operation CreateProject(WaitUntil waitUntil, Project project, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(project, nameof(project));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            return CreateProject(waitUntil, project.ToRequestContent(), context);
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -97,28 +97,6 @@ namespace LroBasicCadl
             {
                 using HttpMessage message = CreateCreateProjectRequest(content, context);
                 return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.CreateProject", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="project"> The Project to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="project"/> is null. </exception>
-        public virtual Operation CreateProject(WaitUntil waitUntil, Project project, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(project, nameof(project));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.CreateProject");
-            scope.Start();
-            try
-            {
-                return CreateProject(waitUntil, project.ToRequestContent(), context);
             }
             catch (Exception e)
             {
@@ -164,18 +142,24 @@ namespace LroBasicCadl
             Argument.AssertNotNull(project, nameof(project));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.UpdateProject");
-            scope.Start();
-            try
-            {
-                Operation<BinaryData> response = await UpdateProjectAsync(waitUntil, id, project.ToRequestContent(), context).ConfigureAwait(false);
-                return ProtocolOperationHelpers.Convert(response, r => Project.FromResponse(r), ClientDiagnostics, "LroBasicCadlClient.UpdateProject");
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            Operation<BinaryData> response = await UpdateProjectAsync(waitUntil, id, project.ToRequestContent(), context).ConfigureAwait(false);
+            return ProtocolOperationHelpers.Convert(response, Project.FromResponse, ClientDiagnostics, "LroBasicCadlClient.UpdateProject");
+        }
+
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="id"> The String to use. </param>
+        /// <param name="project"> The Project to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="project"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Operation<Project> UpdateProject(WaitUntil waitUntil, string id, Project project, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(project, nameof(project));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Operation<BinaryData> response = UpdateProject(waitUntil, id, project.ToRequestContent(), context);
+            return ProtocolOperationHelpers.Convert(response, Project.FromResponse, ClientDiagnostics, "LroBasicCadlClient.UpdateProject");
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -198,32 +182,6 @@ namespace LroBasicCadl
             {
                 using HttpMessage message = CreateUpdateProjectRequest(id, content, context);
                 return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.UpdateProject", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="project"> The Project to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="project"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Operation<Project> UpdateProject(WaitUntil waitUntil, string id, Project project, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(project, nameof(project));
-
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.UpdateProject");
-            scope.Start();
-            try
-            {
-                Operation<BinaryData> response = UpdateProject(waitUntil, id, project.ToRequestContent(), context);
-                return ProtocolOperationHelpers.Convert(response, r => Project.FromResponse(r), ClientDiagnostics, "LroBasicCadlClient.UpdateProject");
             }
             catch (Exception e)
             {
@@ -266,40 +224,44 @@ namespace LroBasicCadl
         /// <remarks> LRO pagination method. </remarks>
         public virtual async Task<Operation<AsyncPageable<Project>>> GetLroPaginationProjectValuesAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.GetLroPaginationProjectValues");
+            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.GetLroPaginationProjects");
             scope.Start();
             try
             {
+                RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
                 using HttpMessage message = CreateGetLroPaginationProjectsRequest(context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.GetLroPaginationProjectValues", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerableAsync).ConfigureAwait(false);
+                return await PageableHelpers.CreateAsyncPageable(waitUntil, message, NextPageRequest, Project.DeserializeProject, ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "LroBasicCadlClient.GetLroPaginationProjects", "value", "nextLink", context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
+        }
 
-            async IAsyncEnumerable<Page<Project>> CreateEnumerableAsync(Response response, string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+        /// <summary> Gets projects. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> LRO pagination method. </remarks>
+        public virtual Operation<Pageable<Project>> GetLroPaginationProjectValues(WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.GetLroPaginationProjects");
+            scope.Start();
+            try
             {
-                if (nextLink == null)
-                {
-                    var result = CustomPage.FromResponse(response);
-                    var page = Page.FromValues(result.Value, result.NextLink, response);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                }
-                while (!string.IsNullOrEmpty(nextLink))
-                {
-                    var message = CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
-                    response = await _pipeline.ProcessMessageAsync(message, context, cancellationToken).ConfigureAwait(false);
-                    var result = CustomPage.FromResponse(response);
-                    var page = Page.FromValues(result.Value, result.NextLink, response);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                }
+                RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
+                using HttpMessage message = CreateGetLroPaginationProjectsRequest(context);
+                return PageableHelpers.CreatePageable(waitUntil, message, NextPageRequest, Project.DeserializeProject, ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "LroBasicCadlClient.GetLroPaginationProjects", "value", "nextLink", context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
             }
         }
+
         /// <summary> Gets projects. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -312,74 +274,17 @@ namespace LroBasicCadl
             scope.Start();
             try
             {
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
                 using HttpMessage message = CreateGetLroPaginationProjectsRequest(context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.GetLroPaginationProjects", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerableAsync).ConfigureAwait(false);
+                return await PageableHelpers.CreateAsyncPageable(waitUntil, message, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "LroBasicCadlClient.GetLroPaginationProjects", "value", "nextLink", context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
-
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(Response response, string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                Page<BinaryData> page;
-                if (nextLink == null)
-                {
-                    page = LowLevelPageableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                }
-                while (!string.IsNullOrEmpty(nextLink))
-                {
-                    var message = CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
-                    page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                }
-            }
         }
 
-        /// <summary> Gets projects. </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> LRO pagination method. </remarks>
-        public virtual Operation<Pageable<Project>> GetLroPaginationProjectValues(WaitUntil waitUntil, CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            using var scope = ClientDiagnostics.CreateScope("LroBasicCadlClient.GetLroPaginationProjectValues");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateGetLroPaginationProjectsRequest(context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.GetLroPaginationProjectValues", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerable);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-
-            IEnumerable<Page<Project>> CreateEnumerable(Response response, string nextLink, int? pageSizeHint)
-            {
-                if (nextLink == null)
-                {
-                    var result = CustomPage.FromResponse(response);
-                    var page = Page.FromValues(result.Value, result.NextLink, response);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                }
-                while (!string.IsNullOrEmpty(nextLink))
-                {
-                    var message = CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
-                    response = _pipeline.ProcessMessage(message, context);
-                    var result = CustomPage.FromResponse(response);
-                    var page = Page.FromValues(result.Value, result.NextLink, response);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                }
-            }
-        }
         /// <summary> Gets projects. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -392,31 +297,14 @@ namespace LroBasicCadl
             scope.Start();
             try
             {
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
                 using HttpMessage message = CreateGetLroPaginationProjectsRequest(context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LroBasicCadlClient.GetLroPaginationProjects", OperationFinalStateVia.Location, context, waitUntil, CreateEnumerable);
+                return PageableHelpers.CreatePageable(waitUntil, message, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "LroBasicCadlClient.GetLroPaginationProjects", "value", "nextLink", context);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
-            }
-
-            IEnumerable<Page<BinaryData>> CreateEnumerable(Response response, string nextLink, int? pageSizeHint)
-            {
-                Page<BinaryData> page;
-                if (nextLink == null)
-                {
-                    page = LowLevelPageableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                }
-                while (!string.IsNullOrEmpty(nextLink))
-                {
-                    var message = CreateGetLroPaginationProjectsNextPageRequest(nextLink, context);
-                    page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                }
             }
         }
 

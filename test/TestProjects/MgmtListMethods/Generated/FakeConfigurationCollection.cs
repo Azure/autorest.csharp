@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -186,22 +185,8 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeConfigurationResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeConfigurationResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<FakeConfigurationResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fakeConfigurationConfigurationsClientDiagnostics.CreateScope("FakeConfigurationCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _fakeConfigurationConfigurationsRestClient.ListAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeConfigurationResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeConfigurationConfigurationsRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -213,22 +198,8 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeConfigurationResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeConfigurationResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<FakeConfigurationResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fakeConfigurationConfigurationsClientDiagnostics.CreateScope("FakeConfigurationCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _fakeConfigurationConfigurationsRestClient.List(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeConfigurationResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeConfigurationConfigurationsRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

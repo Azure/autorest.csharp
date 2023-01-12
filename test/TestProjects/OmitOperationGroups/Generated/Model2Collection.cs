@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -182,22 +181,8 @@ namespace OmitOperationGroups
         /// <returns> An async collection of <see cref="Model2Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Model2Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<Model2Resource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _model2RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Model2Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _model2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new Model2Resource(Client, Model2Data.DeserializeModel2Data(e)), _model2ClientDiagnostics, Pipeline, "Model2Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -208,22 +193,8 @@ namespace OmitOperationGroups
         /// <returns> A collection of <see cref="Model2Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Model2Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<Model2Resource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _model2RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Model2Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _model2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new Model2Resource(Client, Model2Data.DeserializeModel2Data(e)), _model2ClientDiagnostics, Pipeline, "Model2Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
