@@ -634,6 +634,20 @@ export function getUsages(
                 usagesMap.set(resourceName, value);
             }
         }
+
+        /* handle spread. */
+        if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+            const effectiveBodyType = getEffectiveSchemaType(
+                program,
+                op.parameters.bodyType
+            );
+            if (effectiveBodyType.kind === "Model" && effectiveBodyType.name !== "") {
+                let value = usagesMap.get(effectiveBodyType.name);
+                if (!value) value = UsageFlags.Input;
+                else value = value | UsageFlags.Input;
+                usagesMap.set(effectiveBodyType.name, value);
+            }
+        }
     }
     for (const [key, value] of usagesMap) {
         if (value === (UsageFlags.Input | UsageFlags.Output)) {
