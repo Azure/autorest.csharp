@@ -197,10 +197,10 @@ namespace ModelsInCadl
         }
 
         /// <summary> Input to RoundTripOptional. </summary>
-        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="input"> The RoundTripOptionalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(InputModel input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -210,10 +210,10 @@ namespace ModelsInCadl
         }
 
         /// <summary> Input to RoundTripOptional. </summary>
-        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="input"> The RoundTripOptionalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(InputModel input, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
