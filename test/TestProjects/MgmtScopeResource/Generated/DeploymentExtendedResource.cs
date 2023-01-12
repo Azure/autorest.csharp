@@ -602,7 +602,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentOperationsRestClient.CreateListAtScopeRequest(Id.Parent, Id.Name, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentOperationsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id.Parent, Id.Name, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, DeploymentOperation.DeserializeDeploymentOperation, _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, DeploymentOperation.DeserializeDeploymentOperation, _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -617,7 +617,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentOperationsRestClient.CreateListAtScopeRequest(Id.Parent, Id.Name, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentOperationsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id.Parent, Id.Name, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, DeploymentOperation.DeserializeDeploymentOperation, _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, DeploymentOperation.DeserializeDeploymentOperation, _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

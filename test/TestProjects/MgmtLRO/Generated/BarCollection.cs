@@ -187,7 +187,7 @@ namespace MgmtLRO
         public virtual AsyncPageable<BarResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace MgmtLRO
         public virtual Pageable<BarResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

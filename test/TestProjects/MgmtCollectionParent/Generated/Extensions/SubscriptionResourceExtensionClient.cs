@@ -53,7 +53,7 @@ namespace MgmtCollectionParent
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelRequest(Id.SubscriptionId, skipToken);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelNextPageRequest(nextLink, Id.SubscriptionId, skipToken);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), OrderResourceClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOrderResources", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), OrderResourceClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOrderResources", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace MgmtCollectionParent
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelRequest(Id.SubscriptionId, skipToken);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelNextPageRequest(nextLink, Id.SubscriptionId, skipToken);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), OrderResourceClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOrderResources", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), OrderResourceClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOrderResources", "value", "nextLink", cancellationToken);
         }
     }
 }

@@ -213,10 +213,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var scopeName = operation.Diagnostics.ScopeName;
                 var nextLinkName = pagingResponse.NextLinkPropertyName;
                 var itemName = pagingResponse.ItemPropertyName;
-                var requestContext = new CodeWriterDeclaration("requestContext");
-                FormattableString returnValue = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}({responseVariable}, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, {scopeName:L}, {itemName:L}, {nextLinkName:L}, {requestContext:I})";
-
-                writer.Line($"var {requestContext:D} = cancellationToken.{nameof(CancellationToken.CanBeCanceled)} ? new {typeof(RequestContext)} {{ {nameof(RequestContext.CancellationToken)} = cancellationToken }} : null;");
+                FormattableString returnValue = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}({responseVariable}, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, {scopeName:L}, {itemName:L}, {nextLinkName:L}, cancellationToken)";
                 WriteCreateResultReturnValue(writer, resultType, returnValue, async);
             }
             else if (operation.ResultSerialization != null)
