@@ -30,5 +30,8 @@ namespace AutoRest.CSharp
 
         [Option(longName: "server", Required = false, Default = null, HelpText = "Server argument.")]
         public string? Server { get; set; }
+
+        [Option('c', "clear-output-folder", Required = false, Default = false, HelpText = "Clear the output folder before generating code.")]
+        public bool ClearOutputFolder { get; set; }
     }
 }

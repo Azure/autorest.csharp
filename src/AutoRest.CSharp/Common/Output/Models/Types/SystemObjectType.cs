@@ -93,19 +93,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => null,
         };
 
-        internal IEnumerable<PropertyInfo> GetAllProperties()
-        {
-            var type = _type;
-            while (type != null)
-            {
-                foreach (var property in type.GetProperties())
-                {
-                    yield return property;
-                }
-                type = type.BaseType;
-            }
-        }
-
         private static string GetNameWithoutGeneric(Type t)
         {
             if (!t.IsGenericType)

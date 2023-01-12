@@ -28,6 +28,9 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter TokenAuth = new("tokenCredential", "The token credential to copy", new CSharpType(typeof(TokenCredential)), null, ValidationType.None, null);
         public static readonly Parameter Endpoint = new("endpoint", "Service endpoint", new CSharpType(typeof(Uri)), null, ValidationType.None, null, RequestLocation: RequestLocation.Uri);
 
+        public static readonly Parameter PageSizeHint = new("pageSizeHint", "The number of items per <see cref=\"Page{T}\"/> that should be requested (from service operations that support it). It's not guaranteed that the value will be respected.", typeof(int?), null, ValidationType.None, null);
+        public static readonly Parameter NextLink = new("nextLink", "Continuation token", typeof(string), null, ValidationType.None, null);
+
         public static readonly Parameter RequestContent = new("content", "The content to send as the body of the request. Details of the request body schema are in the Remarks section below.", RequestContentType, null, ValidationType.AssertNotNull, null, RequestLocation: RequestLocation.Body);
         public static readonly Parameter RequestContentNullable = new("content", "The content to send as the body of the request. Details of the request body schema are in the Remarks section below.", RequestContentNullableType, /*Constant.Default(RequestContentNullableType)*/null, ValidationType.None, null, RequestLocation: RequestLocation.Body);
 

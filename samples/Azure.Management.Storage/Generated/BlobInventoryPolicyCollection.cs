@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -175,22 +174,8 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="BlobInventoryPolicyResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<BlobInventoryPolicyResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<BlobInventoryPolicyResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicyCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _blobInventoryPolicyRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BlobInventoryPolicyResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _blobInventoryPolicyRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BlobInventoryPolicyResource(Client, BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(e)), _blobInventoryPolicyClientDiagnostics, Pipeline, "BlobInventoryPolicyCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -202,22 +187,8 @@ namespace Azure.Management.Storage
         /// <returns> A collection of <see cref="BlobInventoryPolicyResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<BlobInventoryPolicyResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<BlobInventoryPolicyResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicyCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _blobInventoryPolicyRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BlobInventoryPolicyResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _blobInventoryPolicyRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BlobInventoryPolicyResource(Client, BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(e)), _blobInventoryPolicyClientDiagnostics, Pipeline, "BlobInventoryPolicyCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

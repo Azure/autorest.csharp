@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -46,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models
         private ProtocolMethodPaging? _protocolMethodPaging;
         private RequestConditionHeaders _conditionHeaderFlag = RequestConditionHeaders.None;
 
-        public InputOperation Operation { get; }
+        private InputOperation Operation { get; }
 
         public OperationMethodChainBuilder(InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
@@ -86,8 +87,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public LowLevelClientMethod BuildOperationMethodChain()
         {
+            var protocolMethodAttributes = Operation.Deprecated is { } deprecated
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                : Array.Empty<CSharpAttribute>();
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
-            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, _returnType.Protocol, null, protocolMethodParameters);
+            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod() : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
@@ -140,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
             CSharpType? responseType = null;
-            if (operationBodyTypes != null && operationBodyTypes.Length != 0)
+            if (operationBodyTypes.Length != 0)
             {
                 var firstBodyType = operationBodyTypes[0];
                 if (firstBodyType != null)
@@ -154,6 +158,22 @@ namespace AutoRest.CSharp.Output.Models
                 if (responseType == null)
                 {
                     throw new InvalidOperationException($"Method {Operation.Name} has to have a return value");
+                }
+
+                if (!responseType.IsFrameworkType && responseType.Implementation is ModelTypeProvider modelType)
+                {
+                    var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
+                    var propertyType = property.ValueType.WithNullable(false);
+                    if (!TypeFactory.IsList(propertyType))
+                    {
+                        throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
+                    }
+
+                    responseType = TypeFactory.GetElementType(property.ValueType);
+                }
+                else if (TypeFactory.IsList(responseType))
+                {
+                    responseType = TypeFactory.GetElementType(responseType);
                 }
 
                 if (Operation.LongRunning != null)
@@ -199,12 +219,15 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var parameters = _orderedParameters.Select(p => p.Convenience).WhereNotNull().ToArray();
+            var attributes = Operation.Deprecated is { } deprecated
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                : null;
             var protocolToConvenience = _orderedParameters
                 .Where(p => p.Protocol != null)
                 .Select(p => (p.Protocol!, p.Convenience))
                 .ToArray();
 
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, _returnType.Convenience, null, parameters);
+            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, _returnType.Convenience, null, parameters, attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, diagnostic);
         }

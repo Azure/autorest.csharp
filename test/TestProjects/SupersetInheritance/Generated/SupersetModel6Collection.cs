@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -182,22 +181,8 @@ namespace SupersetInheritance
         /// <returns> An async collection of <see cref="SupersetModel6Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SupersetModel6Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<SupersetModel6Resource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _supersetModel6ClientDiagnostics.CreateScope("SupersetModel6Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _supersetModel6RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel6Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel6RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new SupersetModel6Resource(Client, SupersetModel6Data.DeserializeSupersetModel6Data(e)), _supersetModel6ClientDiagnostics, Pipeline, "SupersetModel6Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -208,22 +193,8 @@ namespace SupersetInheritance
         /// <returns> A collection of <see cref="SupersetModel6Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SupersetModel6Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<SupersetModel6Resource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _supersetModel6ClientDiagnostics.CreateScope("SupersetModel6Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _supersetModel6RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel6Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel6RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new SupersetModel6Resource(Client, SupersetModel6Data.DeserializeSupersetModel6Data(e)), _supersetModel6ClientDiagnostics, Pipeline, "SupersetModel6Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

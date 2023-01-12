@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -182,22 +181,8 @@ namespace ExactMatchInheritance
         /// <returns> An async collection of <see cref="ExactMatchModel5Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ExactMatchModel5Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<ExactMatchModel5Resource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _exactMatchModel5RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _exactMatchModel5RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ExactMatchModel5Resource(Client, ExactMatchModel5Data.DeserializeExactMatchModel5Data(e)), _exactMatchModel5ClientDiagnostics, Pipeline, "ExactMatchModel5Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -208,22 +193,8 @@ namespace ExactMatchInheritance
         /// <returns> A collection of <see cref="ExactMatchModel5Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ExactMatchModel5Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<ExactMatchModel5Resource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _exactMatchModel5RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel5Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _exactMatchModel5RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ExactMatchModel5Resource(Client, ExactMatchModel5Data.DeserializeExactMatchModel5Data(e)), _exactMatchModel5ClientDiagnostics, Pipeline, "ExactMatchModel5Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

@@ -153,7 +153,8 @@
    "Operations": [
     {
      "$id": "20",
-     "Name": "ListLedgerEntries",
+     "Name": "ListPaginationLedgerEntries",
+     "ResourceName": "LedgerEntry",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
      "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
      "Parameters": [
@@ -265,6 +266,7 @@
     {
      "$id": "32",
      "Name": "list",
+     "ResourceName": "LedgerEntry",
      "Description": "List upload detail for the discovery resource.",
      "Parameters": [
       {

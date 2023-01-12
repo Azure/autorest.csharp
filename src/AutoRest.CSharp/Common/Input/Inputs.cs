@@ -47,7 +47,9 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputOperation(
         string Name,
+        string? ResourceName,
         string? Summary,
+        string? Deprecated,
         string Description,
         string? Accessibility,
         IReadOnlyList<InputParameter> Parameters,
@@ -65,7 +67,9 @@ namespace AutoRest.CSharp.Common.Input
     {
         public InputOperation() : this(
             Name: string.Empty,
+            ResourceName: null,
             Summary: null,
+            Deprecated: null,
             Description: string.Empty,
             Accessibility: null,
             Parameters: Array.Empty<InputParameter>(),
@@ -197,6 +201,8 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsNumber => Kind is InputTypeKind.Int32 or InputTypeKind.Int64 or InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128;
     }
 
+    internal record InputLiteralType(string Name, InputType LiteralValueType, object Value, bool IsNullable = false) : InputType(Name, IsNullable);
+
     internal record InputListType(string Name, InputType ElementType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
@@ -204,6 +210,8 @@ namespace AutoRest.CSharp.Common.Input
     internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
     {
     }
+
+    internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTypes, bool IsNullable = false) : InputType(Name, IsNullable);
 
     internal record InputConstant(object Value, InputType Type);
 

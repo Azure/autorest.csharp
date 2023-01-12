@@ -34,6 +34,8 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
+            InputLiteralType literalType       => CreateType(literalType.LiteralValueType), //TODO -- need to support literal type with the value.
+            InputUnionType unionType           => CreateType(unionType.UnionItemTypes[0]), //TODO -- need to support multiple union types.
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -272,7 +274,7 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.DataFactoryExpressionOfInt => typeof(DataFactoryExpression<int>),
             XMsFormat.DataFactoryExpressionOfDouble => typeof(DataFactoryExpression<double>),
             XMsFormat.DataFactoryExpressionOfBool => typeof(DataFactoryExpression<bool>),
-            XMsFormat.DataFactoryExpressionOfDateTimeRfc1123 => typeof(DataFactoryExpression<DateTimeOffset>),
+            XMsFormat.DataFactoryExpressionOfDateTime => typeof(DataFactoryExpression<DateTimeOffset>),
             XMsFormat.DataFactoryExpressionOfDuration => typeof(DataFactoryExpression<TimeSpan>),
             XMsFormat.DataFactoryExpressionOfUri => typeof(DataFactoryExpression<Uri>),
             XMsFormat.DataFactoryExpressionOfObject => typeof(DataFactoryExpression<BinaryData>),

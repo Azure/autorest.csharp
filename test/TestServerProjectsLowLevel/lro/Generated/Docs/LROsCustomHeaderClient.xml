@@ -12,7 +12,7 @@ var data = new {};
 
 var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -33,7 +33,7 @@ var data = new {
 
 var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -92,7 +92,7 @@ var data = new {};
 
 var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -113,7 +113,7 @@ var data = new {
 
 var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -172,7 +172,7 @@ var data = new {};
 
 var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -193,7 +193,7 @@ var data = new {
 
 var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = await operation.WaitForCompletionAsync();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -252,7 +252,7 @@ var data = new {};
 
 var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
@@ -273,7 +273,7 @@ var data = new {
 
 var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
 
-BinaryData data = operation.WaitForCompletion();
+BinaryData data = operation.Value;
 JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
@@ -332,8 +332,7 @@ var data = new {};
 
 var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 This sample shows how to call Post202Retry200Async with all parameters and request content.
 <code><![CDATA[
@@ -352,8 +351,7 @@ var data = new {
 
 var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
@@ -388,8 +386,7 @@ var data = new {};
 
 var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 This sample shows how to call Post202Retry200 with all parameters and request content.
 <code><![CDATA[
@@ -408,8 +405,7 @@ var data = new {
 
 var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
@@ -444,8 +440,7 @@ var data = new {};
 
 var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 This sample shows how to call PostAsyncRetrySucceededAsync with all parameters and request content.
 <code><![CDATA[
@@ -464,8 +459,7 @@ var data = new {
 
 var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = await operation.WaitForCompletionResponseAsync();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>
@@ -500,8 +494,7 @@ var data = new {};
 
 var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 This sample shows how to call PostAsyncRetrySucceeded with all parameters and request content.
 <code><![CDATA[
@@ -520,8 +513,7 @@ var data = new {
 
 var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
-var response = operation.WaitForCompletionResponse();
-Console.WriteLine(response.Status)
+Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
 <remarks>

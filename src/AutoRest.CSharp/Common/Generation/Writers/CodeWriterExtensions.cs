@@ -131,6 +131,27 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
+            if (methodBase.Attributes is {} attributes)
+            {
+                foreach (var attribute in attributes)
+                {
+                    if (attribute.Arguments.Any())
+                    {
+                        writer.Append($"[{attribute.Type}(");
+                        foreach (var argument in attribute.Arguments)
+                        {
+                            writer.Append($"{argument:L}, ");
+                        }
+                        writer.RemoveTrailingComma();
+                        writer.LineRaw(")]");
+                    }
+                    else
+                    {
+                        writer.Line($"[{attribute.Type}]");
+                    }
+                }
+            }
+
             foreach (var disabledWarning in disabledWarnings)
             {
                 writer.Line($"#pragma warning disable {disabledWarning}");
@@ -563,7 +584,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Scope($"if ({propertyName} != null)");
         }
 
-        public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType, IEnumerable<Attribute>? attributes = default)
+        public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)
         {
             writer.WriteXmlDocumentationSummary(signature.FormattableDescription);
             writer.WriteXmlDocumentationParameters(signature.Parameters);
@@ -577,13 +598,6 @@ namespace AutoRest.CSharp.Generation.Writers
             if (returnDesc is not null)
                 writer.WriteXmlDocumentationReturns(returnDesc);
 
-            if (attributes is not null)
-            {
-                foreach (var attribute in attributes)
-                {
-                    writer.Line($"[{attribute.GetType()}]");
-                }
-            }
             return writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
         }
 

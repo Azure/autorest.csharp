@@ -117,13 +117,13 @@ namespace CadlRanchProjects.Tests
         public Task Models_Property_Types_Enum_get() => Test(async (host) =>
         {
             Response response = await new TypesClient(host, null).GetEnumClient().GetEnumAsync();
-            Assert.AreEqual(InnerEnum.ValueOne, EnumProperty.FromResponse(response).Property);
+            Assert.AreEqual(FixedInnerEnum.ValueOne, EnumProperty.FromResponse(response).Property);
         });
 
         [Test]
         public Task Models_Property_Types_Enum_put() => Test(async (host) =>
         {
-            Response response = await new TypesClient(host, null).GetEnumClient().PutAsync(new EnumProperty(InnerEnum.ValueOne).ToRequestContent());
+            Response response = await new TypesClient(host, null).GetEnumClient().PutAsync(new EnumProperty(FixedInnerEnum.ValueOne).ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -131,13 +131,13 @@ namespace CadlRanchProjects.Tests
         public Task Models_Property_Types_ExtensibleEnum_get() => Test(async (host) =>
         {
             Response response = await new TypesClient(host, null).GetExtensibleEnumClient().GetExtensibleEnumAsync();
-            Assert.AreEqual(new InnerExtensibleEnum("UnknownValue"), ExtensibleEnumProperty.FromResponse(response).Property);
+            Assert.AreEqual(new InnerEnum("UnknownValue"), ExtensibleEnumProperty.FromResponse(response).Property);
         });
 
         [Test]
         public Task Models_Property_Types_ExtensibleEnum_put() => Test(async (host) =>
         {
-            Response response = await new TypesClient(host, null).GetExtensibleEnumClient().PutAsync(new ExtensibleEnumProperty(new InnerExtensibleEnum("UnknownValue")).ToRequestContent());
+            Response response = await new TypesClient(host, null).GetExtensibleEnumClient().PutAsync(new ExtensibleEnumProperty(new InnerEnum("UnknownValue")).ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
 

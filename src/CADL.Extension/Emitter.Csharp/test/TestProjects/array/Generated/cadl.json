@@ -71,6 +71,7 @@
     {
      "$id": "10",
      "Name": "list",
+     "ResourceName": "ArrayBasic",
      "Summary": "Manage your pets.",
      "Description": "Manage your pets. You can delete or get the Pet from pet store.",
      "Parameters": [

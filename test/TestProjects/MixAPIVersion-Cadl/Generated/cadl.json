@@ -168,6 +168,7 @@
     {
      "$id": "22",
      "Name": "delete",
+     "ResourceName": "Pet",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
@@ -292,6 +293,7 @@
     {
      "$id": "35",
      "Name": "read",
+     "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
@@ -385,6 +387,7 @@
     {
      "$id": "43",
      "Name": "create",
+     "ResourceName": "Pets",
      "Parameters": [
       {
        "$ref": "23"
@@ -395,13 +398,19 @@
        "NameInRequest": "apiVersion",
        "Type": {
         "$id": "45",
-        "Name": "String",
-        "Kind": "String",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "46",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-07-09",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "46",
+        "$id": "47",
         "Type": {
          "$ref": "45"
         },
@@ -417,7 +426,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "47",
+       "$id": "48",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -434,11 +443,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "48",
+       "$id": "49",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "49",
+        "$id": "50",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -453,19 +462,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "51",
         "Type": {
-         "$ref": "49"
+         "$ref": "50"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "51",
+       "$id": "52",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "52",
+        "$id": "53",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -480,9 +489,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "53",
+        "$id": "54",
         "Type": {
-         "$ref": "52"
+         "$ref": "53"
         },
         "Value": "application/json"
        }
@@ -490,7 +499,7 @@
      ],
      "Responses": [
       {
-       "$id": "54",
+       "$id": "55",
        "StatusCodes": [
         200
        ],
@@ -513,8 +522,9 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "55",
+     "$id": "56",
      "Name": "listPet",
+     "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
      "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
      "Parameters": [
@@ -525,11 +535,11 @@
        "$ref": "27"
       },
       {
-       "$id": "56",
+       "$id": "57",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "57",
+        "$id": "58",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -544,9 +554,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "58",
+        "$id": "59",
         "Type": {
-         "$ref": "57"
+         "$ref": "58"
         },
         "Value": "application/json"
        }
@@ -554,7 +564,7 @@
      ],
      "Responses": [
       {
-       "$id": "59",
+       "$id": "60",
        "StatusCodes": [
         200
        ],
@@ -572,7 +582,7 @@
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
      "Paging": {
-      "$id": "60",
+      "$id": "61",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -580,7 +590,7 @@
     }
    ],
    "Protocol": {
-    "$id": "61"
+    "$id": "62"
    },
    "Creatable": true
   }

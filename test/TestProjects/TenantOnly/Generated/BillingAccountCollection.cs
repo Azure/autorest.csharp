@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -190,22 +189,8 @@ namespace TenantOnly
         /// <returns> An async collection of <see cref="BillingAccountResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<BillingAccountResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<BillingAccountResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _billingAccountRestClient.ListAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccountResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _billingAccountRestClient.CreateListRequest(expand);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BillingAccountResource(Client, BillingAccountData.DeserializeBillingAccountData(e)), _billingAccountClientDiagnostics, Pipeline, "BillingAccountCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -218,22 +203,8 @@ namespace TenantOnly
         /// <returns> A collection of <see cref="BillingAccountResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<BillingAccountResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<BillingAccountResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _billingAccountRestClient.List(expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccountResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _billingAccountRestClient.CreateListRequest(expand);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BillingAccountResource(Client, BillingAccountData.DeserializeBillingAccountData(e)), _billingAccountClientDiagnostics, Pipeline, "BillingAccountCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
