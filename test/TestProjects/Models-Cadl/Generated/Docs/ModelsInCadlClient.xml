@@ -355,21 +355,31 @@ Schema for <c>RoundTripPrimitiveModel</c>:
     </member>
     <member name="InputToRoundTripOptionalAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripOptionalAsync with required request content and parse the result.
+This sample shows how to call InputToRoundTripOptionalAsync and parse the result.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {};
+
+Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call InputToRoundTripOptionalAsync with all request content, and how to parse the result.
 <code><![CDATA[
 var client = new ModelsInCadlClient();
 
 var data = new {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new {},
-    requiredIntCollection = new[] {
-        1234
-    },
-    requiredStringCollection = new[] {
+    optionalString = "<optionalString>",
+    optionalInt = 1234,
+    optionalStringList = new[] {
         "<String>"
     },
-    requiredModelCollection = new[] {
+    optionalIntList = new[] {
+        1234
+    },
+    optionalModelCollection = new[] {
         new {
             requiredModelRecord = new {
                 key = new {
@@ -378,7 +388,26 @@ var data = new {
             },
         }
     },
-    requiredModelRecord = new {
+    optionalModel = new {
+        requiredCollection = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {
+                        requiredCollection = new[] {},
+                    },
+                },
+            }
+        },
+    },
+    optionalFixedStringEnum = "1",
+    optionalExtensibleEnum = "1",
+    optionalIntRecord = new {
+        key = 1234,
+    },
+    optionalStringRecord = new {
+        key = "<String>",
+    },
+    optionalModelRecord = new {
         key = new {
             requiredCollection = new[] {
                 new {
@@ -387,6 +416,8 @@ var data = new {
             },
         },
     },
+    optionalPlainDate = "2022-05-10",
+    optionalPlainTime = 01:23:45,
 };
 
 Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
@@ -400,6 +431,8 @@ Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
+Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -407,16 +440,23 @@ Below is the JSON schema for the request and response payloads.
 
 Request Body:
 
-Schema for <c>InputModel</c>:
+Schema for <c>RoundTripOptionalModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredModel: {
-  }, # Required.
-  requiredIntCollection: [number], # Required.
-  requiredStringCollection: [string], # Required.
-  requiredModelCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  optionalString: string, # Optional.
+  optionalInt: number, # Optional.
+  optionalStringList: [string], # Optional.
+  optionalIntList: [number], # Optional.
+  optionalModelCollection: [CollectionItem], # Optional.
+  optionalModel: {
+    requiredCollection: [CollectionItem], # Required.
+  }, # Optional.
+  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional.
+  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional.
+  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional.
+  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional.
+  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+  optionalPlainDate: string (date), # Optional.
+  optionalPlainTime: string (time), # Optional.
 }
 </code>
 
@@ -428,15 +468,17 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalInt: number, # Optional.
   optionalStringList: [string], # Optional.
   optionalIntList: [number], # Optional.
-  optionalModelCollection: [CollectionItem], # Required.
+  optionalModelCollection: [CollectionItem], # Optional.
   optionalModel: {
     requiredCollection: [CollectionItem], # Required.
   }, # Optional.
-  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional.
+  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional.
   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional.
   optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional.
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+  optionalPlainDate: string (date), # Optional.
+  optionalPlainTime: string (time), # Optional.
 }
 </code>
 
@@ -444,21 +486,31 @@ Schema for <c>RoundTripOptionalModel</c>:
     </member>
     <member name="InputToRoundTripOptional(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripOptional with required request content and parse the result.
+This sample shows how to call InputToRoundTripOptional and parse the result.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {};
+
+Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call InputToRoundTripOptional with all request content, and how to parse the result.
 <code><![CDATA[
 var client = new ModelsInCadlClient();
 
 var data = new {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new {},
-    requiredIntCollection = new[] {
-        1234
-    },
-    requiredStringCollection = new[] {
+    optionalString = "<optionalString>",
+    optionalInt = 1234,
+    optionalStringList = new[] {
         "<String>"
     },
-    requiredModelCollection = new[] {
+    optionalIntList = new[] {
+        1234
+    },
+    optionalModelCollection = new[] {
         new {
             requiredModelRecord = new {
                 key = new {
@@ -467,7 +519,26 @@ var data = new {
             },
         }
     },
-    requiredModelRecord = new {
+    optionalModel = new {
+        requiredCollection = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {
+                        requiredCollection = new[] {},
+                    },
+                },
+            }
+        },
+    },
+    optionalFixedStringEnum = "1",
+    optionalExtensibleEnum = "1",
+    optionalIntRecord = new {
+        key = 1234,
+    },
+    optionalStringRecord = new {
+        key = "<String>",
+    },
+    optionalModelRecord = new {
         key = new {
             requiredCollection = new[] {
                 new {
@@ -476,6 +547,8 @@ var data = new {
             },
         },
     },
+    optionalPlainDate = "2022-05-10",
+    optionalPlainTime = 01:23:45,
 };
 
 Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
@@ -489,6 +562,8 @@ Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
+Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -496,16 +571,23 @@ Below is the JSON schema for the request and response payloads.
 
 Request Body:
 
-Schema for <c>InputModel</c>:
+Schema for <c>RoundTripOptionalModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredModel: {
-  }, # Required.
-  requiredIntCollection: [number], # Required.
-  requiredStringCollection: [string], # Required.
-  requiredModelCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  optionalString: string, # Optional.
+  optionalInt: number, # Optional.
+  optionalStringList: [string], # Optional.
+  optionalIntList: [number], # Optional.
+  optionalModelCollection: [CollectionItem], # Optional.
+  optionalModel: {
+    requiredCollection: [CollectionItem], # Required.
+  }, # Optional.
+  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional.
+  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional.
+  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional.
+  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional.
+  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+  optionalPlainDate: string (date), # Optional.
+  optionalPlainTime: string (time), # Optional.
 }
 </code>
 
@@ -517,15 +599,17 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalInt: number, # Optional.
   optionalStringList: [string], # Optional.
   optionalIntList: [number], # Optional.
-  optionalModelCollection: [CollectionItem], # Required.
+  optionalModelCollection: [CollectionItem], # Optional.
   optionalModel: {
     requiredCollection: [CollectionItem], # Required.
   }, # Optional.
-  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional.
+  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional.
   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional.
   optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional.
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+  optionalPlainDate: string (date), # Optional.
+  optionalPlainTime: string (time), # Optional.
 }
 </code>
 
