@@ -10,8 +10,11 @@ import {
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    getVisibility,
     ignoreDiagnostics,
     isErrorModel,
+    isNeverType,
+    isVoidType,
     JSONSchemaType,
     Model,
     ModelProperty,
@@ -708,7 +711,15 @@ function loadOperation(
                 cadlParameters.bodyType
             );
             if (effectiveBodyType.kind === "Model") {
-                parameters.push(loadBodyParameter(program, effectiveBodyType));
+                if (effectiveBodyType.name !== "") {
+                    parameters.push(loadBodyParameter(program, effectiveBodyType));
+                } else {
+                    /* flatten alias model. */
+                    const flattenedParameters = flattenParameter(effectiveBodyType, RequestLocation.Body);
+                    for (const param of flattenedParameters) {
+                        parameters.push(param);
+                    }
+                }
             }
         }
     }
@@ -977,6 +988,84 @@ function loadOperation(
 
     function isLroOperation(program: Program, op: Operation) {
         return getOperationLink(program, op, "polling") !== undefined;
+    }
+
+    function flattenParameter(body: ModelProperty | Model, requestLocation: RequestLocation): InputParameter[] {
+
+        const type = body.kind === "Model" ? body : body.type;
+        // const requestLocation = RequestLocation.Body;
+        const kind: InputOperationParameterKind =
+            InputOperationParameterKind.Flattened;
+        const flattenParameters: InputParameter[] = [];
+        if (type.kind === "Model") {
+            type.properties.forEach((value: ModelProperty, key: string) => {
+                const vis = getVisibility(program, value);
+                let isReadOnly: boolean = false;
+                if (vis && vis.includes("read") && vis.length === 1) {
+                    isReadOnly = true;
+                }
+                if (isNeverType(value.type) || isVoidType(value.type)) return;
+                const inputParam = {
+                    Name: value.name,
+                    NameInRequest: value.name,
+                    Description: getDoc(program, value),
+                    Type: getInputType(program, value.type, models, enums),
+                    Location: requestLocation,
+                    IsRequired: !value.optional,
+                    IsApiVersion: false,
+                    IsResourceParameter: false,
+                    IsContentType: false,
+                    IsEndpoint: false,
+                    SkipUrlEncoding: false,
+                    Explode: false,
+                    Kind: kind
+                } as InputParameter;
+                flattenParameters.push(inputParam);
+            //     if (
+            //         value.name !== discriminatorPropertyName /*&&
+            //         isSchemaProperty(program, value)*/
+            //     ) {
+            //         const vis = getVisibility(program, value);
+            //         let isReadOnly: boolean = false;
+            //         if (vis && vis.includes("read") && vis.length === 1) {
+            //             isReadOnly = true;
+            //         }
+            //         if (isNeverType(value.type) || isVoidType(value.type)) return;
+            //         const inputProp = {
+            //             Name: value.name,
+            //             SerializedName: value.name,
+            //             Description: "",
+            //             Type: getInputType(program, value.type, models, enums),
+            //             IsRequired: !value.optional,
+            //             IsReadOnly: isReadOnly,
+            //             IsDiscriminator: false
+            //         };
+            //         outputProperties.push(inputProp);
+            //     }
+            });
+        }
+        return flattenParameters;
+        
+        // const inputType: InputType = getInputType(program, type, models, enums);
+        // const requestLocation = RequestLocation.Body;
+        // const kind: InputOperationParameterKind =
+        //     InputOperationParameterKind.Method;
+        // return {
+        //     Name: body.name,
+        //     NameInRequest: body.name,
+        //     Description: getDoc(program, body),
+        //     Type: inputType,
+        //     Location: requestLocation,
+        //     IsRequired: body.kind === "Model" ? true : !body.optional,
+        //     IsApiVersion: false,
+        //     IsResourceParameter: false,
+        //     IsContentType: false,
+        //     IsEndpoint: false,
+        //     SkipUrlEncoding: false,
+        //     Explode: false,
+        //     Kind: kind
+        // } as InputParameter;
+
     }
 }
 

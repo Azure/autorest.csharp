@@ -10,4 +10,5 @@ export interface InputModelProperty {
     Type: InputType;
     IsRequired: boolean;
     IsReadOnly: boolean;
+    SpreadSource?: string;
 }
