@@ -26,7 +26,7 @@
     },
     "AnomalyDetector": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AnomalyDetector\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AnomalyDetector\\Generated --existing-project-folder $(SolutionDir)\\samples\\AnomalyDetector\\Generated"
     },
     "ApiVersion": {
       "commandName": "Project",

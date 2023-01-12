@@ -63,7 +63,7 @@ function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$
     }
 }
 
-function Get-Cadl-Entry([string]$directory) {
+function Get-Cadl-Entry([System.IO.DirectoryInfo]$directory) {
     $clientPath = Join-Path $directory "client.cadl"
     if (Test-Path $clientPath) {
         return $clientPath
@@ -74,7 +74,7 @@ function Get-Cadl-Entry([string]$directory) {
         return $mainPath
     }
 
-    $projectNamePath = Join-Path $directory "$projectName.cadl"
+    $projectNamePath = Join-Path $directory "$($directory.Name).cadl"
     return $projectNamePath
 }
 
@@ -270,7 +270,7 @@ if (!($Exclude -contains "Samples"))
         $cadlMain = Join-Path $projectDirectory "main.cadl"
         $cadlClient = Join-Path $projectDirectory "client.cadl"
         $mainCadlFile = If (Test-Path "$cadlClient") { Resolve-Path "$cadlClient" } Else { Resolve-Path "$cadlMain"}
-        Add-Cadl $projectName $projectDirectory $mainCadlFile "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
+        Add-Cadl $projectName $projectDirectory $mainCadlFile "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll --option @azure-tools/cadl-csharp.existing-project-folder=$(Convert-Path $(Join-Path $projectDirectory "Generated"))"
     }
 }
 
@@ -357,6 +357,10 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     elseif ($key -eq "ConvenienceUpdate-Cadl" -or $key -eq "ConvenienceInitial-Cadl")
     {
         $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." "ConvenienceInitial-Cadl" "Generated"))"
+    }
+    elseif ($key -in $cadlSampleProjectName)
+    {
+        $outputPath = "$outputPath --existing-project-folder $outputPath"
     }
     $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 

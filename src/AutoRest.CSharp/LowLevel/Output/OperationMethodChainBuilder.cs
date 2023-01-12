@@ -90,9 +90,11 @@ namespace AutoRest.CSharp.Output.Models
             var protocolMethodAttributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : Array.Empty<CSharpAttribute>();
-            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
+
+            var shouldOverloadConvenienceMethod = ShouldOverloadConvenienceMethod();
+            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => shouldOverloadConvenienceMethod ? p.ToRequired() : p).ToArray();
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
-            var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod() : null;
+            var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod(shouldOverloadConvenienceMethod) : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
@@ -209,9 +211,9 @@ namespace AutoRest.CSharp.Output.Models
             return new ReturnTypeChain(typeof(Response), typeof(Response), null);
         }
 
-        private ConvenienceMethod BuildConvenienceMethod()
+        private ConvenienceMethod BuildConvenienceMethod(bool shouldOverloadConvenienceMethod)
         {
-            bool needNameChange = !ShouldOverloadConvenienceMethod() && _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));
+            bool needNameChange = !shouldOverloadConvenienceMethod && _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));
             string name = _restClientMethod.Name;
             if (needNameChange)
             {

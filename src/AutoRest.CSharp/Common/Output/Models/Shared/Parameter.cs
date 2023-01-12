@@ -19,6 +19,11 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
+        public Parameter ToRequired()
+        {
+            return this with { DefaultValue = null };
+        }
+
         public static Parameter FromModelProperty(in InputModelProperty property, string name, CSharpType propertyType)
         {
             var validation = propertyType.IsValueType || property.IsReadOnly ? ValidationType.None : ValidationType.AssertNotNull;
