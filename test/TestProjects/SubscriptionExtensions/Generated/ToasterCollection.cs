@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -184,22 +183,8 @@ namespace SubscriptionExtensions
         /// <returns> An async collection of <see cref="ToasterResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ToasterResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<ToasterResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _toasterRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ToasterResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _toasterRestClient.CreateListRequest(Id.SubscriptionId);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ToasterResource(Client, ToasterData.DeserializeToasterData(e)), _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -210,22 +195,8 @@ namespace SubscriptionExtensions
         /// <returns> A collection of <see cref="ToasterResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ToasterResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<ToasterResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _toasterRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ToasterResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _toasterRestClient.CreateListRequest(Id.SubscriptionId);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ToasterResource(Client, ToasterData.DeserializeToasterData(e)), _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

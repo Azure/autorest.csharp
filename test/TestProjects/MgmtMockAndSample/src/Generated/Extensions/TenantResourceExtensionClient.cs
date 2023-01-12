@@ -58,37 +58,9 @@ namespace MgmtMockAndSample
         /// <returns> An async collection of <see cref="EventData" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<EventData> GetTenantActivityLogsAsync(string filter = null, string select = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<EventData>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = TenantActivityLogsClientDiagnostics.CreateScope("TenantResourceExtensionClient.GetTenantActivityLogs");
-                scope.Start();
-                try
-                {
-                    var response = await TenantActivityLogsRestClient.ListAsync(filter, select, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<EventData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = TenantActivityLogsClientDiagnostics.CreateScope("TenantResourceExtensionClient.GetTenantActivityLogs");
-                scope.Start();
-                try
-                {
-                    var response = await TenantActivityLogsRestClient.ListNextPageAsync(nextLink, filter, select, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => TenantActivityLogsRestClient.CreateListRequest(filter, select);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => TenantActivityLogsRestClient.CreateListNextPageRequest(nextLink, filter, select);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, EventData.DeserializeEventData, TenantActivityLogsClientDiagnostics, Pipeline, "TenantResourceExtensionClient.GetTenantActivityLogs", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -102,37 +74,9 @@ namespace MgmtMockAndSample
         /// <returns> A collection of <see cref="EventData" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<EventData> GetTenantActivityLogs(string filter = null, string select = null, CancellationToken cancellationToken = default)
         {
-            Page<EventData> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = TenantActivityLogsClientDiagnostics.CreateScope("TenantResourceExtensionClient.GetTenantActivityLogs");
-                scope.Start();
-                try
-                {
-                    var response = TenantActivityLogsRestClient.List(filter, select, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<EventData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = TenantActivityLogsClientDiagnostics.CreateScope("TenantResourceExtensionClient.GetTenantActivityLogs");
-                scope.Start();
-                try
-                {
-                    var response = TenantActivityLogsRestClient.ListNextPage(nextLink, filter, select, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => TenantActivityLogsRestClient.CreateListRequest(filter, select);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => TenantActivityLogsRestClient.CreateListNextPageRequest(nextLink, filter, select);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, EventData.DeserializeEventData, TenantActivityLogsClientDiagnostics, Pipeline, "TenantResourceExtensionClient.GetTenantActivityLogs", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

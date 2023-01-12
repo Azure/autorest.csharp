@@ -140,10 +140,19 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            var context = new RequestContext { CancellationToken = cancellationToken };
-
-            AsyncPageable<BinaryData> pageableBindaryData = GetPagesImplementationAsync("DPGClient.GetPagesValues", mode, context);
-            return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
+            var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : default;
+            return PageableHelpers.CreateAsyncPageable
+            (
+                _ => CreateGetPagesRequest(mode, requestContext),
+                (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),
+                Product.DeserializeProduct,
+                ClientDiagnostics,
+                Pipeline,
+                "DPGClient.GetPagesValues",
+                "values",
+                "nextLink",
+                requestContext
+            );
         }
 
         /// <summary> Get pages that you will either return to users in pages of raw bodies, or pages of models following growup. </summary>
@@ -154,11 +163,19 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            RequestContext context = new RequestContext();
-            context.CancellationToken = cancellationToken;
-
-            Pageable<BinaryData> pageableBindaryData = GetPagesImplementation("DPGClient.GetPagesValues", mode, context);
-            return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
+            var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : default;
+            return PageableHelpers.CreatePageable
+            (
+                _ => CreateGetPagesRequest(mode, requestContext),
+                (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),
+                Product.DeserializeProduct,
+                ClientDiagnostics,
+                Pipeline,
+                "DPGClient.GetPagesValues",
+                "values",
+                "nextLink",
+                requestContext
+            );
         }
 
         private static RequestContext DefaultRequestContext = new RequestContext();

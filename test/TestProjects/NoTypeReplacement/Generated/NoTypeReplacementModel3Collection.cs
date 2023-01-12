@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -182,22 +181,8 @@ namespace NoTypeReplacement
         /// <returns> An async collection of <see cref="NoTypeReplacementModel3Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NoTypeReplacementModel3Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<NoTypeReplacementModel3Resource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _noTypeReplacementModel3RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel3Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel3RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new NoTypeReplacementModel3Resource(Client, NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(e)), _noTypeReplacementModel3ClientDiagnostics, Pipeline, "NoTypeReplacementModel3Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -208,22 +193,8 @@ namespace NoTypeReplacement
         /// <returns> A collection of <see cref="NoTypeReplacementModel3Resource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NoTypeReplacementModel3Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<NoTypeReplacementModel3Resource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _noTypeReplacementModel3RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel3Resource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel3RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new NoTypeReplacementModel3Resource(Client, NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(e)), _noTypeReplacementModel3ClientDiagnostics, Pipeline, "NoTypeReplacementModel3Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
