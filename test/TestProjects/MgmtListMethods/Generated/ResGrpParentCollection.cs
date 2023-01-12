@@ -187,7 +187,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<ResGrpParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ResGrpParentResource(Client, ResGrpParentData.DeserializeResGrpParentData(e)), _resGrpParentClientDiagnostics, Pipeline, "ResGrpParentCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ResGrpParentResource(Client, ResGrpParentData.DeserializeResGrpParentData(e)), _resGrpParentClientDiagnostics, Pipeline, "ResGrpParentCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace MgmtListMethods
         public virtual Pageable<ResGrpParentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ResGrpParentResource(Client, ResGrpParentData.DeserializeResGrpParentData(e)), _resGrpParentClientDiagnostics, Pipeline, "ResGrpParentCollection.GetAll", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ResGrpParentResource(Client, ResGrpParentData.DeserializeResGrpParentData(e)), _resGrpParentClientDiagnostics, Pipeline, "ResGrpParentCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

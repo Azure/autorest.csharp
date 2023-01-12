@@ -182,7 +182,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<DisplayResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _displayResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new DisplayResource(Client, DisplayResourceData.DeserializeDisplayResourceData(e)), _displayResourceClientDiagnostics, Pipeline, "DisplayResourceCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new DisplayResource(Client, DisplayResourceData.DeserializeDisplayResourceData(e)), _displayResourceClientDiagnostics, Pipeline, "DisplayResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace MgmtResourceName
         public virtual Pageable<DisplayResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _displayResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new DisplayResource(Client, DisplayResourceData.DeserializeDisplayResourceData(e)), _displayResourceClientDiagnostics, Pipeline, "DisplayResourceCollection.GetAll", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new DisplayResource(Client, DisplayResourceData.DeserializeDisplayResourceData(e)), _displayResourceClientDiagnostics, Pipeline, "DisplayResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

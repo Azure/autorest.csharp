@@ -188,7 +188,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtGrpParentWithLocRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _mgmtGrpParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new MgmtGrpParentWithLocResource(Client, MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(e)), _mgmtGrpParentWithLocClientDiagnostics, Pipeline, "MgmtGrpParentWithLocCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new MgmtGrpParentWithLocResource(Client, MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(e)), _mgmtGrpParentWithLocClientDiagnostics, Pipeline, "MgmtGrpParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtGrpParentWithLocRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _mgmtGrpParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new MgmtGrpParentWithLocResource(Client, MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(e)), _mgmtGrpParentWithLocClientDiagnostics, Pipeline, "MgmtGrpParentWithLocCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new MgmtGrpParentWithLocResource(Client, MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(e)), _mgmtGrpParentWithLocClientDiagnostics, Pipeline, "MgmtGrpParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

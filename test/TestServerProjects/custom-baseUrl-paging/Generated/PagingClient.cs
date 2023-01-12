@@ -46,10 +46,9 @@ namespace custom_baseUrl_paging
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlRequest(accountName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", cancellationToken);
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
@@ -60,10 +59,9 @@ namespace custom_baseUrl_paging
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlRequest(accountName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", cancellationToken);
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
@@ -74,10 +72,9 @@ namespace custom_baseUrl_paging
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlOperationRequest(accountName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", cancellationToken);
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
@@ -88,10 +85,9 @@ namespace custom_baseUrl_paging
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlOperationRequest(accountName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", cancellationToken);
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
@@ -104,10 +100,9 @@ namespace custom_baseUrl_paging
             Argument.AssertNotNull(accountName, nameof(accountName));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
 
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", cancellationToken);
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
@@ -120,10 +115,9 @@ namespace custom_baseUrl_paging
             Argument.AssertNotNull(accountName, nameof(accountName));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
 
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", cancellationToken);
         }
     }
 }
