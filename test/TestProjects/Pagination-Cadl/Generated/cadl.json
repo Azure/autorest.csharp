@@ -328,101 +328,18 @@
       "ItemName": "value"
      },
      "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "38",
-     "Name": "ListLroPaginationLedgerEntries",
-     "ResourceName": "LedgerEntry",
-     "Summary": "Gets ledger entries from a collection corresponding to a range.",
-     "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
-     "Parameters": [
-      {
-       "$ref": "21"
-      },
-      {
-       "$ref": "23"
-      },
-      {
-       "$id": "39",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "40",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "41",
-        "Type": {
-         "$ref": "40"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "42",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{pagnationUri}",
-     "Path": "/app/lro/transactions",
-     "BufferResponse": true,
-     "LongRunning": {
-      "$id": "43",
-      "FinalStateVia": 1,
-      "FinalResponse": {
-       "$id": "44",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     },
-     "Paging": {
-      "$id": "45",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
-     },
-     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "46"
+    "$id": "38"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "47",
+  "$id": "39",
   "OAuth2": {
-   "$id": "48",
+   "$id": "40",
    "Scopes": [
     "https://pagination.azure.com/.default"
    ]

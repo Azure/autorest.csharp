@@ -166,12 +166,3 @@ interface UseFoundationsResourceList {
   @convenienceAPI
   list is CustomResourceList<LedgerEntry>;  
 }
-
-@route("/lro")
-interface LROPagination {
-  @summary("Gets ledger entries from a collection corresponding to a range.")
-  @doc("A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.")
-  @convenienceAPI
-  @pollingOperation
-  op ListLroPaginationLedgerEntries is Azure.Core.ResourceList<LedgerEntry>;
-}

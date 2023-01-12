@@ -7,7 +7,6 @@
 
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -152,96 +151,6 @@ namespace Pagination
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetLedgerEntries", "value", "nextLink", context);
         }
 
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        public virtual async Task<Operation<AsyncPageable<LedgerEntry>>> GetLroPaginationLedgerEntryValuesAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetLroPaginationLedgerEntries");
-            scope.Start();
-            try
-            {
-                RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLroPaginationLedgerEntriesNextPageRequest(nextLink, context);
-                using HttpMessage message = CreateGetLroPaginationLedgerEntriesRequest(context);
-                return await PageableHelpers.CreateAsyncPageable(waitUntil, message, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "PaginationClient.GetLroPaginationLedgerEntries", "value", "nextLink", context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        public virtual Operation<Pageable<LedgerEntry>> GetLroPaginationLedgerEntryValues(WaitUntil waitUntil, CancellationToken cancellationToken = default)
-        {
-            using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetLroPaginationLedgerEntries");
-            scope.Start();
-            try
-            {
-                RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLroPaginationLedgerEntriesNextPageRequest(nextLink, context);
-                using HttpMessage message = CreateGetLroPaginationLedgerEntriesRequest(context);
-                return PageableHelpers.CreatePageable(waitUntil, message, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "PaginationClient.GetLroPaginationLedgerEntries", "value", "nextLink", context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="AsyncPageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLroPaginationLedgerEntriesAsync(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetLroPaginationLedgerEntriesAsync(WaitUntil waitUntil, RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetLroPaginationLedgerEntries");
-            scope.Start();
-            try
-            {
-                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLroPaginationLedgerEntriesNextPageRequest(nextLink, context);
-                using HttpMessage message = CreateGetLroPaginationLedgerEntriesRequest(context);
-                return await PageableHelpers.CreateAsyncPageable(waitUntil, message, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "PaginationClient.GetLroPaginationLedgerEntries", "value", "nextLink", context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
-        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="Pageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLroPaginationLedgerEntries(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<Pageable<BinaryData>> GetLroPaginationLedgerEntries(WaitUntil waitUntil, RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("PaginationClient.GetLroPaginationLedgerEntries");
-            scope.Start();
-            try
-            {
-                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetLroPaginationLedgerEntriesNextPageRequest(nextLink, context);
-                using HttpMessage message = CreateGetLroPaginationLedgerEntriesRequest(context);
-                return PageableHelpers.CreatePageable(waitUntil, message, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "PaginationClient.GetLroPaginationLedgerEntries", "value", "nextLink", context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         internal HttpMessage CreateGetPaginationLedgerEntriesRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -270,20 +179,6 @@ namespace Pagination
             return message;
         }
 
-        internal HttpMessage CreateGetLroPaginationLedgerEntriesRequest(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/app/lro/transactions", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         internal HttpMessage CreateGetPaginationLedgerEntriesNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -298,19 +193,6 @@ namespace Pagination
         }
 
         internal HttpMessage CreateGetLedgerEntriesNextPageRequest(string nextLink, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateGetLroPaginationLedgerEntriesNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
