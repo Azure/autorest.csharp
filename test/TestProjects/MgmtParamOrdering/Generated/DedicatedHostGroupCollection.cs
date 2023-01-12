@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -191,22 +190,8 @@ namespace MgmtParamOrdering
         /// <returns> An async collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<DedicatedHostGroupResource> GetAllAsync(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<DedicatedHostGroupResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _dedicatedHostGroupRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroupResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _dedicatedHostGroupRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new DedicatedHostGroupResource(Client, DedicatedHostGroupData.DeserializeDedicatedHostGroupData(e)), _dedicatedHostGroupClientDiagnostics, Pipeline, "DedicatedHostGroupCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -219,22 +204,8 @@ namespace MgmtParamOrdering
         /// <returns> A collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<DedicatedHostGroupResource> GetAll(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            Page<DedicatedHostGroupResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _dedicatedHostGroupRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroupResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _dedicatedHostGroupRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new DedicatedHostGroupResource(Client, DedicatedHostGroupData.DeserializeDedicatedHostGroupData(e)), _dedicatedHostGroupClientDiagnostics, Pipeline, "DedicatedHostGroupCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -186,37 +185,9 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeParentWithAncestorResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<FakeParentWithAncestorResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _fakeParentWithAncestorRestClient.ListAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<FakeParentWithAncestorResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _fakeParentWithAncestorRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithAncestorRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeParentWithAncestorRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorResource(Client, FakeParentWithAncestorData.DeserializeFakeParentWithAncestorData(e)), _fakeParentWithAncestorClientDiagnostics, Pipeline, "FakeParentWithAncestorCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -228,37 +199,9 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeParentWithAncestorResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<FakeParentWithAncestorResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _fakeParentWithAncestorRestClient.List(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<FakeParentWithAncestorResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _fakeParentWithAncestorRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithAncestorRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeParentWithAncestorRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakeParentWithAncestorResource(Client, FakeParentWithAncestorData.DeserializeFakeParentWithAncestorData(e)), _fakeParentWithAncestorClientDiagnostics, Pipeline, "FakeParentWithAncestorCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

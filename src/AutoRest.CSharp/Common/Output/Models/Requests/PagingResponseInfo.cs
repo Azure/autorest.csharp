@@ -14,30 +14,20 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public PagingResponseInfo(string? nextLinkName, string? itemName, CSharpType type)
         {
             ResponseType = type;
-            itemName ??= "value";
+            NextLinkPropertyName = nextLinkName;
+            ItemPropertyName = itemName ?? "value";
 
-            ObjectTypeProperty itemProperty = GetPropertyBySerializedName(type, itemName);
-
-            ObjectTypeProperty? nextLinkProperty = null;
-            if (!string.IsNullOrWhiteSpace(nextLinkName))
-            {
-                nextLinkProperty = GetPropertyBySerializedName(type, nextLinkName);
-            }
-
+            ObjectTypeProperty itemProperty = GetPropertyBySerializedName(type, ItemPropertyName);
             if (!TypeFactory.IsList(itemProperty.Declaration.Type))
             {
                 throw new InvalidOperationException($"'{itemName}' property must be be an array schema instead of '{itemProperty.SchemaProperty?.Schema}'");
             }
-
-            CSharpType itemType = TypeFactory.GetElementType(itemProperty.Declaration.Type);
-            NextLinkProperty = nextLinkProperty;
-            ItemProperty = itemProperty;
-            ItemType = itemType;
+            ItemType = TypeFactory.GetElementType(itemProperty.Declaration.Type);
         }
 
         public CSharpType ResponseType { get; }
-        public ObjectTypeProperty? NextLinkProperty { get; }
-        public ObjectTypeProperty ItemProperty { get; }
+        public string? NextLinkPropertyName { get; }
+        public string ItemPropertyName { get; }
         public CSharpType PageType => new CSharpType(typeof(Page<>), ItemType);
         public CSharpType ItemType { get; }
 

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -186,22 +185,8 @@ namespace MgmtOperations
         /// <returns> An async collection of <see cref="AvailabilitySetGrandChildResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<AvailabilitySetGrandChildResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<AvailabilitySetGrandChildResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _availabilitySetGrandChildavailabilitySetGrandChildRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetGrandChildResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AvailabilitySetGrandChildResource(Client, AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e)), _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -213,22 +198,8 @@ namespace MgmtOperations
         /// <returns> A collection of <see cref="AvailabilitySetGrandChildResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<AvailabilitySetGrandChildResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<AvailabilitySetGrandChildResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _availabilitySetGrandChildavailabilitySetGrandChildRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetGrandChildResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new AvailabilitySetGrandChildResource(Client, AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e)), _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

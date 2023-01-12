@@ -662,20 +662,24 @@ namespace AutoRest.TestServer.Tests
             Assert.IsNull(resultPage.ContinuationToken);
 
             var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetNullNextLinkNamePagesAsync();
+            var pagesCount = 0;
             await foreach (var page in pageableAsync.AsPages())
             {
                 Assert.AreEqual(1, page.Values.First().Properties.Id);
                 Assert.AreEqual("Product", page.Values.First().Properties.Name);
-                Assert.IsNull(page.ContinuationToken);
+                pagesCount++;
             }
+            Assert.AreEqual(1, pagesCount);
 
             var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetNullNextLinkNamePages();
+            pagesCount = 0;
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(1, page.Values.First().Properties.Id);
                 Assert.AreEqual("Product", page.Values.First().Properties.Name);
-                Assert.IsNull(page.ContinuationToken);
+                pagesCount++;
             }
+            Assert.AreEqual(1, pagesCount);
         });
 
         [Test]

@@ -212,16 +212,16 @@ model RoundTripOptionalModel {
   optionalIntList?: int32[];
 
   @doc("Optional model collection")
-  optionalModelCollection: CollectionItem[];
+  optionalModelCollection?: CollectionItem[];
 
   @doc("Optional model.")
   optionalModel?: DerivedModel;
 
   @doc("Optional fixed string enum")
-  optionalFixedStringEnum: FixedStringEnum;
+  optionalFixedStringEnum?: FixedStringEnum;
 
   @doc("Optional extensible enum")
-  optionalExtensibleEnum: ExtensibleEnum;
+  optionalExtensibleEnum?: ExtensibleEnum;
 
   @doc("Optional int record")
   optionalIntRecord?: Record<int32>;
@@ -231,6 +231,12 @@ model RoundTripOptionalModel {
 
   @doc("Optional model record")
   optionalModelRecord?: Record<RecordItem>;
+
+  @doc("Optional plainDate")
+  optionalPlainDate?: plainDate;
+
+  @doc("Optional plainTime")
+  optionalPlainTime?: plainTime;
 }
 
 @doc("Output model with readonly properties.")
@@ -368,7 +374,7 @@ op inputToRoundTripPrimitive(@body input: InputModel): RoundTripPrimitiveModel;
 @doc("Input to RoundTripOptional")
 @get
 @convenienceAPI
-op inputToRoundTripOptional(@body input: InputModel): RoundTripOptionalModel;
+op inputToRoundTripOptional(@body input: RoundTripOptionalModel): RoundTripOptionalModel;
 
 @route("/inputToRoundTripReadOnly")
 @doc("Input to RoundTripReadOnly")

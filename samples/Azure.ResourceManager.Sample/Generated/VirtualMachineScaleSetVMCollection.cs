@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -192,37 +191,9 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetVMResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineScaleSetVMResource> GetAllAsync(string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<VirtualMachineScaleSetVMResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _virtualMachineScaleSetVMRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<VirtualMachineScaleSetVMResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _virtualMachineScaleSetVMRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineScaleSetVMRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _virtualMachineScaleSetVMRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new VirtualMachineScaleSetVMResource(Client, VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(e)), _virtualMachineScaleSetVMClientDiagnostics, Pipeline, "VirtualMachineScaleSetVMCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -237,37 +208,9 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineScaleSetVMResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineScaleSetVMResource> GetAll(string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<VirtualMachineScaleSetVMResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _virtualMachineScaleSetVMRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<VirtualMachineScaleSetVMResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _virtualMachineScaleSetVMRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineScaleSetVMRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _virtualMachineScaleSetVMRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new VirtualMachineScaleSetVMResource(Client, VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(e)), _virtualMachineScaleSetVMClientDiagnostics, Pipeline, "VirtualMachineScaleSetVMCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

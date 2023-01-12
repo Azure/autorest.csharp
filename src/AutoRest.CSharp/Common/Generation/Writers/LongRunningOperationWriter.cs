@@ -14,7 +14,7 @@ using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class LongRunningOperationWriter
+    internal sealed class LongRunningOperationWriter
     {
         public void Write(CodeWriter writer, LongRunningOperation operation)
         {
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 using (writer.Scope())
                 {
-                    WriteFields(writer, operation, pagingResponse, helperType);
+                    WriteFields(writer, pagingResponse, helperType);
 
                     writer.Line();
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name} for mocking.");
@@ -86,78 +86,58 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteWaitForCompletionVariants(writer, operation);
                     writer.Line();
 
-                    writer.WriteCreateResult(operation, responseVariable, pagingResponse, interfaceType);
-
-                    if (pagingResponse != null)
+                    if (operation.ResultType != null)
                     {
-                        writer.Line();
-
-                        Debug.Assert(operation.ResultSerialization != null);
-
-                        var funcType = new CSharpType(typeof(Task<>), pagingResponse.PageType);
-                        var itemPropertyName = pagingResponse.ItemProperty.Declaration.Name;
-                        var nextLinkPropertyName = pagingResponse.NextLinkProperty?.Declaration.Name;
-
-                        using (writer.Scope($"private async {funcType} GetNextPage({typeof(string)} nextLink, {typeof(CancellationToken)} cancellationToken)"))
-                        {
-                            writer.Line($"{typeof(Response)} {responseVariable} = await _nextPageFunc(nextLink).ConfigureAwait(false);");
-                            writer.Line($"{pagingResponse.ResponseType} nextPageResult;");
-                            writer.WriteDeserializationForMethods(
-                                operation.ResultSerialization,
-                                async: true,
-                                v => writer.Line($"nextPageResult = {v};"),
-                                responseVariable,
-                                pagingResponse.ResponseType);
-
-                            writer.Line($"return {typeof(Page)}.FromValues(nextPageResult.{itemPropertyName}, nextPageResult.{nextLinkPropertyName}, {responseVariable});");
-                        }
+                        WriteCreateResult(writer, operation, responseVariable, pagingResponse, operation.ResultType, interfaceType!);
                     }
                 }
             }
         }
 
-        protected virtual CSharpType? GetInterfaceType(LongRunningOperation operation)
+        private CSharpType? GetInterfaceType(LongRunningOperation operation)
         {
             return operation.ResultType != null ? new CSharpType(typeof(IOperationSource<>), operation.ResultType) : null;
         }
 
-        protected virtual CSharpType GetNextLinkOperationType(LongRunningOperation operation)
+        private CSharpType GetNextLinkOperationType(LongRunningOperation operation)
         {
             return operation.ResultType != null ? new CSharpType(typeof(IOperation<>), operation.ResultType) : typeof(IOperation);
         }
 
-        protected virtual CSharpType GetBaseType(LongRunningOperation operation)
+        private CSharpType GetBaseType(LongRunningOperation operation)
         {
             return operation.ResultType != null ? new CSharpType(typeof(Operation<>), operation.ResultType) : new CSharpType(typeof(Operation));
         }
 
-        protected virtual CSharpType GetValueTaskType(LongRunningOperation operation)
+        private CSharpType GetValueTaskType(LongRunningOperation operation)
         {
             return operation.ResultType != null ? new CSharpType(typeof(Response<>), operation.ResultType) : new CSharpType(typeof(Response));
         }
 
-        protected virtual CSharpType GetHelperType(LongRunningOperation operation)
+        private CSharpType GetHelperType(LongRunningOperation operation)
         {
             return operation.ResultType != null ? new CSharpType(typeof(OperationInternal<>), operation.ResultType) : new CSharpType(typeof(OperationInternal));
         }
 
-        protected virtual void WriteFields(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType helperType)
+        private void WriteFields(CodeWriter writer, PagingResponseInfo? pagingResponse, CSharpType helperType)
         {
             writer.Line($"private readonly {helperType} _operation;");
 
             if (pagingResponse != null)
             {
-                writer.Line($"private readonly {typeof(Func<string, Task<Response>>)} _nextPageFunc;");
+                writer.Line($"private readonly {typeof(Func<int?, string, HttpMessage>)} _nextPageFunc;");
+                writer.Line($"private readonly {typeof(ClientDiagnostics)} _clientDiagnostics;");
+                writer.Line($"private readonly {typeof(HttpPipeline)} _pipeline;");
             }
         }
 
-        protected virtual void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType lroType, CSharpType helperType)
+        private void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType lroType, CSharpType helperType)
         {
             writer.Append($"internal {lroType.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
 
             if (pagingResponse != null)
             {
-                writer.Append($", {typeof(Func<string, Task<Response>>)} nextPageFunc");
+                writer.Append($", {typeof(Func<int?, string, HttpMessage>)} nextPageFunc");
             }
             writer.Line($")");
 
@@ -173,11 +153,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (pagingResponse != null)
                 {
                     writer.Line($"_nextPageFunc = nextPageFunc;");
+                    writer.Line($"_clientDiagnostics = clientDiagnostics;");
+                    writer.Line($"_pipeline = pipeline;");
                 }
             }
         }
 
-        protected virtual void WriteValueProperty(CodeWriter writer, LongRunningOperation operation)
+        private void WriteValueProperty(CodeWriter writer, LongRunningOperation operation)
         {
             if (operation.ResultType != null)
             {
@@ -187,7 +169,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        protected virtual void WriteWaitForCompletionVariants(CodeWriter writer, LongRunningOperation operation)
+        private void WriteWaitForCompletionVariants(CodeWriter writer, LongRunningOperation operation)
         {
             var valueTaskType = GetValueTaskType(operation);
             var waitForCompletionMethodName = operation.ResultType != null ? "WaitForCompletion" : "WaitForCompletionResponse";
@@ -207,6 +189,53 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationInheritDoc();
             writer.Line($"public override {waitForCompletionType} {waitForCompletionMethodName}{(async ? "Async" : string.Empty)}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompletionMethodName}{(async ? "Async" : string.Empty)}(pollingInterval, cancellationToken);");
             writer.Line();
+        }
+
+        private static void WriteCreateResult(CodeWriter writer, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)
+        {
+            using (writer.Scope($"{resultType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+            {
+                WriteCreateResultBody(writer, operation, responseVariable, pagingResponse, resultType, false);
+            }
+            writer.Line();
+
+            var asyncKeyword = pagingResponse == null && operation.ResultSerialization != null ? "async " : "";
+            using (writer.Scope($"{asyncKeyword}{new CSharpType(typeof(ValueTask<>), resultType)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+            {
+                WriteCreateResultBody(writer, operation, responseVariable, pagingResponse, resultType, true);
+            }
+        }
+
+        private static void WriteCreateResultBody(CodeWriter writer, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse, CSharpType resultType, bool async)
+        {
+            if (pagingResponse != null)
+            {
+                var scopeName = operation.Diagnostics.ScopeName;
+                var nextLinkName = pagingResponse.NextLinkPropertyName;
+                var itemName = pagingResponse.ItemPropertyName;
+                FormattableString returnValue = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}({responseVariable}, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, {scopeName:L}, {itemName:L}, {nextLinkName:L}, cancellationToken)";
+                WriteCreateResultReturnValue(writer, resultType, returnValue, async);
+            }
+            else if (operation.ResultSerialization != null)
+            {
+                writer.WriteDeserializationForMethods(operation.ResultSerialization, async, fs => writer.Line($"return {fs};"), responseVariable, resultType);
+            }
+            else
+            {
+                WriteCreateResultReturnValue(writer, resultType, $"{responseVariable}", async);
+            }
+        }
+
+        private static void WriteCreateResultReturnValue(CodeWriter writer, CSharpType resultType, FormattableString returnValue, bool async)
+        {
+            if (async)
+            {
+                writer.Line($"return new {new CSharpType(typeof(ValueTask<>), resultType)}({returnValue});");
+            }
+            else
+            {
+                writer.Line($"return {returnValue};");
+            }
         }
     }
 }

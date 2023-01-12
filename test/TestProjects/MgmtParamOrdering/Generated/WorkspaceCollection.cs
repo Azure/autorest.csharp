@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -187,22 +186,8 @@ namespace MgmtParamOrdering
         /// <returns> An async collection of <see cref="WorkspaceResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<WorkspaceResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<WorkspaceResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _workspaceRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new WorkspaceResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _workspaceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new WorkspaceResource(Client, WorkspaceData.DeserializeWorkspaceData(e)), _workspaceClientDiagnostics, Pipeline, "WorkspaceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -214,22 +199,8 @@ namespace MgmtParamOrdering
         /// <returns> A collection of <see cref="WorkspaceResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<WorkspaceResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<WorkspaceResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _workspaceRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new WorkspaceResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _workspaceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new WorkspaceResource(Client, WorkspaceData.DeserializeWorkspaceData(e)), _workspaceClientDiagnostics, Pipeline, "WorkspaceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

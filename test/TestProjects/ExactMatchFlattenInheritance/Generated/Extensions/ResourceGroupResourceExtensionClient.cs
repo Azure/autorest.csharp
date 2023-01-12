@@ -85,22 +85,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<AzureResourceFlattenModel2>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel2s");
-                scope.Start();
-                try
-                {
-                    var response = await AzureResourceFlattenModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureResourceFlattenModel2.DeserializeAzureResourceFlattenModel2, AzureResourceFlattenModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -112,22 +98,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2s(CancellationToken cancellationToken = default)
         {
-            Page<AzureResourceFlattenModel2> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel2s");
-                scope.Start();
-                try
-                {
-                    var response = AzureResourceFlattenModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, AzureResourceFlattenModel2.DeserializeAzureResourceFlattenModel2, AzureResourceFlattenModel2sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -233,22 +205,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel3" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<AzureResourceFlattenModel3>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel3s");
-                scope.Start();
-                try
-                {
-                    var response = await AzureResourceFlattenModel3sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel3sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureResourceFlattenModel3.DeserializeAzureResourceFlattenModel3, AzureResourceFlattenModel3sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel3s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -260,22 +218,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel3" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3s(CancellationToken cancellationToken = default)
         {
-            Page<AzureResourceFlattenModel3> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel3s");
-                scope.Start();
-                try
-                {
-                    var response = AzureResourceFlattenModel3sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel3sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, AzureResourceFlattenModel3.DeserializeAzureResourceFlattenModel3, AzureResourceFlattenModel3sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel3s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -381,22 +325,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel4" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<AzureResourceFlattenModel4>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel4s");
-                scope.Start();
-                try
-                {
-                    var response = await AzureResourceFlattenModel4sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel4sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4, AzureResourceFlattenModel4sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel4s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -408,22 +338,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel4" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4s(CancellationToken cancellationToken = default)
         {
-            Page<AzureResourceFlattenModel4> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel4s");
-                scope.Start();
-                try
-                {
-                    var response = AzureResourceFlattenModel4sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel4sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4, AzureResourceFlattenModel4sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel4s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -529,22 +445,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel5" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5sAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<AzureResourceFlattenModel5>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel5s");
-                scope.Start();
-                try
-                {
-                    var response = await AzureResourceFlattenModel5sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureResourceFlattenModel5.DeserializeAzureResourceFlattenModel5, AzureResourceFlattenModel5sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel5s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -556,22 +458,8 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel5" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5s(CancellationToken cancellationToken = default)
         {
-            Page<AzureResourceFlattenModel5> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel5s");
-                scope.Start();
-                try
-                {
-                    var response = AzureResourceFlattenModel5sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => AzureResourceFlattenModel5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, AzureResourceFlattenModel5.DeserializeAzureResourceFlattenModel5, AzureResourceFlattenModel5sClientDiagnostics, Pipeline, "ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel5s", "value", null, cancellationToken);
         }
 
         /// <summary>
