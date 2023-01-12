@@ -42,6 +42,7 @@
     {
      "$id": "6",
      "Name": "protocol",
+     "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method. In the updated version, we add the convenience method.",
      "Parameters": [
       {
@@ -127,6 +128,7 @@
     {
      "$id": "15",
      "Name": "convenienceWithOptional",
+     "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation has protocol method with optional RequestContext and convenience method. In the updated version, the method signature should not change.",
      "Parameters": [
       {
@@ -184,6 +186,7 @@
     {
      "$id": "20",
      "Name": "convenienceWithRequired",
+     "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation has protocol method with required RequestContext and convenience method. In the updated version, the method signature should not change.",
      "Parameters": [
       {
@@ -241,6 +244,7 @@
     {
      "$id": "25",
      "Name": "convenienceShouldNotGenerate",
+     "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation has protocol method marked with convenience method, but the convenience method should not be generated. In the updated version, the method signature should not change.",
      "Parameters": [
       {
@@ -295,6 +299,7 @@
     {
      "$id": "30",
      "Name": "protocolShouldNotGenerateConvenience",
+     "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.",
      "Parameters": [
       {
@@ -349,6 +354,7 @@
     {
      "$id": "35",
      "Name": "updateConvenience",
+     "ResourceName": "ConvenienceInCadl",
      "Description": "No initial operation methods. In the updated version, we add the protocol method and convenience method.",
      "Parameters": [
       {
