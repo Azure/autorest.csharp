@@ -642,10 +642,11 @@ export function getUsages(
                 op.parameters.bodyType
             );
             if (effectiveBodyType.kind === "Model" && effectiveBodyType.name !== "") {
-                let value = usagesMap.get(effectiveBodyType.name);
+                const modelName = getFriendlyName(program, effectiveBodyType) ?? effectiveBodyType.name;
+                let value = usagesMap.get(modelName);
                 if (!value) value = UsageFlags.Input;
                 else value = value | UsageFlags.Input;
-                usagesMap.set(effectiveBodyType.name, value);
+                usagesMap.set(modelName, value);
             }
         }
     }
