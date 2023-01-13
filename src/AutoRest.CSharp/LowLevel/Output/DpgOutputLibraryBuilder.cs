@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -71,15 +72,120 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (inputEnum.Usage != InputModelTypeUsage.None)
                 {
-                    dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null,_defaultNamespace), "public", typeFactory, _sourceInputModel));
+                    dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
                 }
             }
         }
 
+        private Dictionary<InputModelType, ExpandedInputModelType> ExpandUnionTypes()
+        {
+            var expandedModels = new Dictionary<InputModelType, ExpandedInputModelType>();
+            foreach (var model in _rootNamespace.Models)
+            {
+                var result = ExpandUnionType(model);
+                if (result != null)
+                {
+                    expandedModels.Add(model, result);
+                }
+            }
+
+            return expandedModels;
+        }
+
+        private record ExpandedInputModelType(InputModelType BaseModel, IEnumerable<InputModelType> ExpandedModels);
+
+        private ExpandedInputModelType? ExpandUnionType(InputModelType model)
+        {
+            var propertiesWithUnionType = model.Properties.Where(property => property.Type is InputUnionType);
+            if (!propertiesWithUnionType.Any())
+                return null;
+
+            // now we need to create a new model as the base model by removing those properties with union types
+            // TODO -- do we really need the fake discriminator? what if it already has one
+            var propertiesOnBase = model.Properties.Except(propertiesWithUnionType).ToArray();
+            var baseModel = model with
+            {
+                Properties = propertiesOnBase,
+            };
+            // then we create new models using the above one as base model
+            // first we need to get all possible combinations from the union type properties
+            var candidates = propertiesWithUnionType.Select(property => ExpandProperty(property));
+            var combinations = GetCombinations(candidates);
+
+            // each combination is a derived model
+            var derivedModels = new List<InputModelType>();
+            foreach (var combination in combinations)
+            {
+                var derivedModelName = string.Join("", combination.Select(p => p.Type.Name)) + model.Name;
+                var properties = combination.Select(t => t.Property with
+                {
+                    Type = t.Type
+                }).ToArray();
+                derivedModels.Add(model with
+                {
+                    Name = derivedModelName,
+                    BaseModel = baseModel,
+                    Properties = properties,
+                });
+            }
+
+            return new ExpandedInputModelType(baseModel, derivedModels);
+        }
+
+        private static IEnumerable<(InputModelProperty Property, InputType Type)> ExpandProperty(InputModelProperty property)
+            => ((InputUnionType)property.Type).UnionItemTypes.Select(type => (property, type));
+
+        /// <summary>
+        /// This method get all possible combinations from a given list of arrays, by getting one element from each array
+        /// For instance, if we have two arrays [1, 2] and [3, 4, 5], we should get the result of
+        /// [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5] total 2x3=6 combinations
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        internal static IEnumerable<IEnumerable<T>> GetCombinations<T>(IEnumerable<IEnumerable<T>> source) where T : notnull
+        {
+            var queue = new Queue<List<T>>();
+            queue.Enqueue(new List<T>());
+            foreach (var level in source)
+            {
+                // get every element in queue out, and push the new results back
+                int count = queue.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    var list = queue.Dequeue();
+                    foreach (var item in level)
+                    {
+                        // push the results back with a new element on it
+                        queue.Enqueue(new List<T>(list) { item });
+                    }
+                }
+            }
+
+            return queue;
+        }
+
         private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
         {
-            Dictionary<InputModelType, List<InputModelType>> derivedTypesLookup = new Dictionary<InputModelType, List<InputModelType>>();
+            // we expand the models with union types
+            var expandedTypes = ExpandUnionTypes();
+            // modify the model list with the expanded models
+            //var inputModels = _rootNamespace.Models.ToList();
+            var inputModels = new List<InputModelType>();
             foreach (var model in _rootNamespace.Models)
+            {
+                if (expandedTypes.TryGetValue(model, out var expandedModelType))
+                {
+                    inputModels.Add(expandedModelType.BaseModel);
+                    inputModels.AddRange(expandedModelType.ExpandedModels);
+                }
+                else
+                {
+                    inputModels.Add(model);
+                }
+            }
+            Dictionary<InputModelType, List<InputModelType>> derivedTypesLookup = new Dictionary<InputModelType, List<InputModelType>>();
+            foreach (var model in inputModels)
             {
                 if (model.BaseModel is null)
                     continue;
@@ -94,7 +200,7 @@ namespace AutoRest.CSharp.Output.Models
 
             Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
 
-            foreach (var model in _rootNamespace.Models)
+            foreach (var model in inputModels)
             {
                 if (model.Usage != InputModelTypeUsage.None)
                 {

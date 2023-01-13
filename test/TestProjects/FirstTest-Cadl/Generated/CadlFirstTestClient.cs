@@ -360,12 +360,12 @@ namespace CadlFirstTest
         /// <param name="aliasBodyRequest"> The AliasBodyRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="aliasBodyRequest"/> is null. </exception>
-        public virtual async Task<Response<Thing>> AliasBodyAsync(AliasBodyRequest aliasBodyRequest, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> AliasBodyAsync(object aliasBodyRequest, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(aliasBodyRequest, nameof(aliasBodyRequest));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await AliasBodyAsync(aliasBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await AliasBodyAsync(aliasBodyRequest, context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
@@ -373,12 +373,12 @@ namespace CadlFirstTest
         /// <param name="aliasBodyRequest"> The AliasBodyRequest to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="aliasBodyRequest"/> is null. </exception>
-        public virtual Response<Thing> AliasBody(AliasBodyRequest aliasBodyRequest, CancellationToken cancellationToken = default)
+        public virtual Response<Thing> AliasBody(object aliasBodyRequest, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(aliasBodyRequest, nameof(aliasBodyRequest));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = AliasBody(aliasBodyRequest.ToRequestContent(), context);
+            Response response = AliasBody(aliasBodyRequest, context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 

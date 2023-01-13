@@ -15,24 +15,19 @@ namespace CadlFirstTest.Models
     {
         /// <summary> Initializes a new instance of AliasBodyRequest. </summary>
         /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
         /// <param name="requiredLiteral"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public AliasBodyRequest(string name, object requiredUnion, string requiredLiteral)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredLiteral"/> is null. </exception>
+        public AliasBodyRequest(string name, string requiredLiteral)
         {
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
 
             Name = name;
-            RequiredUnion = requiredUnion;
             RequiredLiteral = requiredLiteral;
         }
 
         /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary> Gets the required union. </summary>
-        public object RequiredUnion { get; }
         /// <summary> Gets the required literal. </summary>
         public string RequiredLiteral { get; }
     }
