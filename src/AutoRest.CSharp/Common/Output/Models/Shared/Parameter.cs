@@ -13,16 +13,16 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None)
+    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, InputOperationParameterKind Kind = InputOperationParameterKind.Method)
     {
         public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
-        public static Parameter FromModelProperty(in InputModelProperty property, string name, CSharpType propertyType)
+        public static Parameter FromModelProperty(in InputModelProperty property, string name, CSharpType propertyType, InputOperationParameterKind kind = InputOperationParameterKind.Method)
         {
             var validation = propertyType.IsValueType || property.IsReadOnly ? ValidationType.None : ValidationType.AssertNotNull;
-            return new Parameter(name, property.Description, propertyType, null, validation, null);
+            return new Parameter(name, property.Description, propertyType, null, validation, null, false, false, false, RequestLocation.None, kind);
         }
 
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)
@@ -65,7 +65,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 IsApiVersionParameter: operationParameter.IsApiVersion,
                 IsResourceIdentifier: operationParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
-                RequestLocation: requestLocation);
+                RequestLocation: requestLocation,
+                Kind: operationParameter.Kind);
         }
 
         public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values)
