@@ -34,7 +34,7 @@
     },
     "ApiVersion-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\ApiVersion-Cadl\\Generated"
     },
     "AppConfiguration": {
       "commandName": "Project",
@@ -42,7 +42,7 @@
     },
     "Authoring-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Authoring-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Authoring-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\Authoring-Cadl\\Generated"
     },
     "azure-parameter-grouping": {
       "commandName": "Project",
@@ -182,7 +182,7 @@
     },
     "ClientAndOperationGroup-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ClientAndOperationGroup-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ClientAndOperationGroup-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\ClientAndOperationGroup-Cadl\\Generated"
     },
     "CognitiveSearch": {
       "commandName": "Project",
@@ -234,7 +234,7 @@
     },
     "Customizations-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Customizations-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Customizations-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\Customizations-Cadl\\Generated"
     },
     "dpg-customization-LowLevel": {
       "commandName": "Project",
@@ -266,7 +266,7 @@
     },
     "FirstTest-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FirstTest-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FirstTest-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\FirstTest-Cadl\\Generated"
     },
     "FlattenedParameters": {
       "commandName": "Project",
@@ -322,7 +322,7 @@
     },
     "Lro-Basic-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Lro-Basic-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Lro-Basic-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\Lro-Basic-Cadl\\Generated"
     },
     "lro-LowLevel": {
       "commandName": "Project",
@@ -430,7 +430,7 @@
     },
     "MixAPIVersion-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MixAPIVersion-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MixAPIVersion-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\MixAPIVersion-Cadl\\Generated"
     },
     "model-flattening": {
       "commandName": "Project",
@@ -442,7 +442,7 @@
     },
     "Models-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Models-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Models-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\Models-Cadl\\Generated"
     },
     "ModelShapes": {
       "commandName": "Project",
@@ -486,7 +486,7 @@
     },
     "Pagination-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\Pagination-Cadl\\Generated"
     },
     "PaginationParams-LowLevel": {
       "commandName": "Project",
@@ -502,7 +502,7 @@
     },
     "Parameters-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Parameters-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Parameters-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\Parameters-Cadl\\Generated"
     },
     "Parameters-LowLevel": {
       "commandName": "Project",
@@ -514,7 +514,7 @@
     },
     "PetStore-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\PetStore-Cadl\\Generated"
     },
     "ProtocolMethodsInRestClient": {
       "commandName": "Project",
@@ -530,7 +530,7 @@
     },
     "RenameGetList-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RenameGetList-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RenameGetList-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\RenameGetList-Cadl\\Generated"
     },
     "required-optional": {
       "commandName": "Project",

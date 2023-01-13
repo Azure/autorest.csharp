@@ -194,10 +194,12 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     }
 }
 
+$cadlTestProjectNames = ""
 if (!($Exclude -contains "TestProjects"))
 {
     # Local test projects
     $testSwaggerPath = Join-Path $repoRoot 'test' 'TestProjects'
+    $cadlTestProjectNames = Get-ChildItem $testSwaggerPath -Directory -Filter "*-Cadl" | ForEach-Object {$_.Name}
 
     foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
     {
@@ -217,7 +219,7 @@ if (!($Exclude -contains "TestProjects"))
                 Add-Cadl $testName $directory (Get-Cadl-Entry $directory) "--option @azure-tools/cadl-csharp.existing-project-folder=$(Convert-Path $(Join-Path $directory ".." "ConvenienceInitial-Cadl" "Generated"))"
             }
             else {
-                Add-Cadl $testName $directory (Get-Cadl-Entry $directory)
+                Add-Cadl $testName $directory (Get-Cadl-Entry $directory) "--option @azure-tools/cadl-csharp.existing-project-folder=$(Convert-Path $(Join-Path $directory "Generated"))"
             }
         } else {
             if (Test-Path $readmeConfigurationPath)
@@ -358,7 +360,7 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     {
         $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." "ConvenienceInitial-Cadl" "Generated"))"
     }
-    elseif ($key -in $cadlSampleProjectName)
+    elseif ($key -in $cadlSampleProjectName -or $key -in $cadlTestProjectNames)
     {
         $outputPath = "$outputPath --existing-project-folder $outputPath"
     }

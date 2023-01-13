@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Input.Source
         public IMethodSymbol? FindSymbol(string namespaceName, string clientName, string methodName, IEnumerable<string> parameters)
         {
             var methods = _methodSet.Where(m =>
-                m.ContainingNamespace.Name == namespaceName &&
+                m.ContainingNamespace.ToString() == namespaceName &&
                 m.ContainingType.Name == clientName &&
                 m.Name == methodName).ToArray();
             if (methods.Length == 0)
