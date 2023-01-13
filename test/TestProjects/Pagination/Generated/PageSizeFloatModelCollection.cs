@@ -224,7 +224,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeFloatModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeFloatModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeFloatModelResource(Client, PageSizeFloatModelData.DeserializePageSizeFloatModelData(e)), _pageSizeFloatModelClientDiagnostics, Pipeline, "PageSizeFloatModelCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeFloatModelResource(Client, PageSizeFloatModelData.DeserializePageSizeFloatModelData(e)), _pageSizeFloatModelClientDiagnostics, Pipeline, "PageSizeFloatModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeFloatModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeFloatModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeFloatModelResource(Client, PageSizeFloatModelData.DeserializePageSizeFloatModelData(e)), _pageSizeFloatModelClientDiagnostics, Pipeline, "PageSizeFloatModelCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeFloatModelResource(Client, PageSizeFloatModelData.DeserializePageSizeFloatModelData(e)), _pageSizeFloatModelClientDiagnostics, Pipeline, "PageSizeFloatModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

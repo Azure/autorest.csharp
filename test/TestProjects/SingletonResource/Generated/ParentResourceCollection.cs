@@ -225,7 +225,7 @@ namespace SingletonResource
         public virtual AsyncPageable<ParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _parentResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace SingletonResource
         public virtual Pageable<ParentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _parentResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

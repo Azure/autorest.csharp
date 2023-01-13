@@ -372,7 +372,7 @@ namespace MgmtMockAndSample
         public virtual AsyncPageable<MhsmPrivateLinkResource> GetMHSMPrivateLinkResourcesByMhsmResourceAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mhsmPrivateLinkResourcesRestClient.CreateListByMhsmResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, MhsmPrivateLinkResource.DeserializeMhsmPrivateLinkResource, _mhsmPrivateLinkResourcesClientDiagnostics, Pipeline, "ManagedHsmResource.GetMHSMPrivateLinkResourcesByMhsmResource", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, MhsmPrivateLinkResource.DeserializeMhsmPrivateLinkResource, _mhsmPrivateLinkResourcesClientDiagnostics, Pipeline, "ManagedHsmResource.GetMHSMPrivateLinkResourcesByMhsmResource", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -393,7 +393,7 @@ namespace MgmtMockAndSample
         public virtual Pageable<MhsmPrivateLinkResource> GetMHSMPrivateLinkResourcesByMhsmResource(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mhsmPrivateLinkResourcesRestClient.CreateListByMhsmResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, MhsmPrivateLinkResource.DeserializeMhsmPrivateLinkResource, _mhsmPrivateLinkResourcesClientDiagnostics, Pipeline, "ManagedHsmResource.GetMHSMPrivateLinkResourcesByMhsmResource", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, MhsmPrivateLinkResource.DeserializeMhsmPrivateLinkResource, _mhsmPrivateLinkResourcesClientDiagnostics, Pipeline, "ManagedHsmResource.GetMHSMPrivateLinkResourcesByMhsmResource", "value", null, cancellationToken);
         }
 
         /// <summary>

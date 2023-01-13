@@ -584,7 +584,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
 
-            _writer.WritePageableBody(parameterMappings.Select(p => p.Parameter).ToList(), itemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemName, nextLinkName, async);
+            _writer.WritePageableBody(parameterMappings.Select(p => p.Parameter).Append(KnownParameters.CancellationTokenParameter).ToList(), itemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemName, nextLinkName, async);
         }
 
         protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)

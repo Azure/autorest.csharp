@@ -479,10 +479,9 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Key> GetKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetKeysRequest(name, after, acceptDatetime);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Key.DeserializeKey, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeys", "items", "@nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Key.DeserializeKey, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeys", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of keys. </summary>
@@ -492,10 +491,9 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Key> GetKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetKeysRequest(name, after, acceptDatetime);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Key.DeserializeKey, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeys", "items", "@nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Key.DeserializeKey, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeys", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of key-values. </summary>
@@ -507,10 +505,9 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<KeyValue> GetKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeyValues", "items", "@nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeyValues", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of key-values. </summary>
@@ -522,10 +519,9 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<KeyValue> GetKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeyValues", "items", "@nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeyValues", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of labels. </summary>
@@ -536,10 +532,9 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Label> GetLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<Get5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetLabelsRequest(name, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Label.DeserializeLabel, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetLabels", "items", "@nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Label.DeserializeLabel, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetLabels", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of labels. </summary>
@@ -550,10 +545,9 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Label> GetLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<Get5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetLabelsRequest(name, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Label.DeserializeLabel, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetLabels", "items", "@nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Label.DeserializeLabel, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetLabels", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of key-value revisions. </summary>
@@ -565,10 +559,9 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<KeyValue> GetRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum6> select = null, CancellationToken cancellationToken = default)
         {
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetRevisions", "items", "@nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetRevisions", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of key-value revisions. </summary>
@@ -580,10 +573,9 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<KeyValue> GetRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum6> select = null, CancellationToken cancellationToken = default)
         {
-            var context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetRevisions", "items", "@nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetRevisions", "items", "@nextLink", cancellationToken);
         }
     }
 }

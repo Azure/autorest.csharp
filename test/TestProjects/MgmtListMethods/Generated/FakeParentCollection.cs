@@ -227,7 +227,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentResource(Client, FakeParentData.DeserializeFakeParentData(e)), _fakeParentClientDiagnostics, Pipeline, "FakeParentCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeParentResource(Client, FakeParentData.DeserializeFakeParentData(e)), _fakeParentClientDiagnostics, Pipeline, "FakeParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakeParentResource(Client, FakeParentData.DeserializeFakeParentData(e)), _fakeParentClientDiagnostics, Pipeline, "FakeParentCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakeParentResource(Client, FakeParentData.DeserializeFakeParentData(e)), _fakeParentClientDiagnostics, Pipeline, "FakeParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

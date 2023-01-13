@@ -227,7 +227,7 @@ namespace MgmtDiscriminator
         public virtual AsyncPageable<DeliveryRuleResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _deliveryRuleRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new DeliveryRuleResource(Client, DeliveryRuleData.DeserializeDeliveryRuleData(e)), _deliveryRuleClientDiagnostics, Pipeline, "DeliveryRuleCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new DeliveryRuleResource(Client, DeliveryRuleData.DeserializeDeliveryRuleData(e)), _deliveryRuleClientDiagnostics, Pipeline, "DeliveryRuleCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace MgmtDiscriminator
         public virtual Pageable<DeliveryRuleResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _deliveryRuleRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new DeliveryRuleResource(Client, DeliveryRuleData.DeserializeDeliveryRuleData(e)), _deliveryRuleClientDiagnostics, Pipeline, "DeliveryRuleCollection.GetAll", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new DeliveryRuleResource(Client, DeliveryRuleData.DeserializeDeliveryRuleData(e)), _deliveryRuleClientDiagnostics, Pipeline, "DeliveryRuleCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

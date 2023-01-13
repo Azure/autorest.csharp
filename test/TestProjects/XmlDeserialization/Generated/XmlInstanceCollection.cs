@@ -233,7 +233,7 @@ namespace XmlDeserialization
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _xmlInstanceXmlDeserializationRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _xmlInstanceXmlDeserializationRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new XmlInstanceResource(Client, XmlInstanceData.DeserializeXmlInstanceData(e)), _xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, "XmlInstanceCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new XmlInstanceResource(Client, XmlInstanceData.DeserializeXmlInstanceData(e)), _xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, "XmlInstanceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace XmlDeserialization
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _xmlInstanceXmlDeserializationRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _xmlInstanceXmlDeserializationRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new XmlInstanceResource(Client, XmlInstanceData.DeserializeXmlInstanceData(e)), _xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, "XmlInstanceCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new XmlInstanceResource(Client, XmlInstanceData.DeserializeXmlInstanceData(e)), _xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, "XmlInstanceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

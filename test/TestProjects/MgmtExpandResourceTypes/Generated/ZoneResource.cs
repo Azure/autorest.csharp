@@ -828,7 +828,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetRecordSets", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetRecordSets", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -852,7 +852,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetRecordSets", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetRecordSets", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -876,7 +876,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListAllByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListAllByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetAllRecordSets", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetAllRecordSets", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -900,7 +900,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListAllByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetsRestClient.CreateListAllByDnsZoneNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetAllRecordSets", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, RecordSetData.DeserializeRecordSetData, _recordSetsClientDiagnostics, Pipeline, "ZoneResource.GetAllRecordSets", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

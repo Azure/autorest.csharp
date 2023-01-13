@@ -222,7 +222,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeRequest(Id, filter, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id, filter, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeRequest(Id, filter, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id, filter, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

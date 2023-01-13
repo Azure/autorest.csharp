@@ -231,7 +231,7 @@ namespace MgmtMultipleParentResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _anotherParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _anotherParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new AnotherParentResource(Client, AnotherParentData.DeserializeAnotherParentData(e)), _anotherParentClientDiagnostics, Pipeline, "AnotherParentCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new AnotherParentResource(Client, AnotherParentData.DeserializeAnotherParentData(e)), _anotherParentClientDiagnostics, Pipeline, "AnotherParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace MgmtMultipleParentResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _anotherParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _anotherParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new AnotherParentResource(Client, AnotherParentData.DeserializeAnotherParentData(e)), _anotherParentClientDiagnostics, Pipeline, "AnotherParentCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new AnotherParentResource(Client, AnotherParentData.DeserializeAnotherParentData(e)), _anotherParentClientDiagnostics, Pipeline, "AnotherParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

@@ -624,7 +624,7 @@ namespace MgmtListMethods
             Argument.AssertNotNull(value, nameof(value));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateUpdateConfigurationsRequest(Id.SubscriptionId, Id.Name, value);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeClientDiagnostics, Pipeline, "FakeResource.UpdateConfigurations", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeClientDiagnostics, Pipeline, "FakeResource.UpdateConfigurations", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -649,7 +649,7 @@ namespace MgmtListMethods
             Argument.AssertNotNull(value, nameof(value));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateUpdateConfigurationsRequest(Id.SubscriptionId, Id.Name, value);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeClientDiagnostics, Pipeline, "FakeResource.UpdateConfigurations", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeClientDiagnostics, Pipeline, "FakeResource.UpdateConfigurations", "value", null, cancellationToken);
         }
 
         /// <summary>

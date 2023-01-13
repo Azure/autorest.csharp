@@ -222,7 +222,7 @@ namespace NoTypeReplacement
         public virtual AsyncPageable<NoTypeReplacementModel2Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new NoTypeReplacementModel2Resource(Client, NoTypeReplacementModel2Data.DeserializeNoTypeReplacementModel2Data(e)), _noTypeReplacementModel2ClientDiagnostics, Pipeline, "NoTypeReplacementModel2Collection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new NoTypeReplacementModel2Resource(Client, NoTypeReplacementModel2Data.DeserializeNoTypeReplacementModel2Data(e)), _noTypeReplacementModel2ClientDiagnostics, Pipeline, "NoTypeReplacementModel2Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace NoTypeReplacement
         public virtual Pageable<NoTypeReplacementModel2Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new NoTypeReplacementModel2Resource(Client, NoTypeReplacementModel2Data.DeserializeNoTypeReplacementModel2Data(e)), _noTypeReplacementModel2ClientDiagnostics, Pipeline, "NoTypeReplacementModel2Collection.GetAll", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new NoTypeReplacementModel2Resource(Client, NoTypeReplacementModel2Data.DeserializeNoTypeReplacementModel2Data(e)), _noTypeReplacementModel2ClientDiagnostics, Pipeline, "NoTypeReplacementModel2Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

@@ -228,7 +228,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SubParentWithNonResChResource(Client, SubParentWithNonResChData.DeserializeSubParentWithNonResChData(e)), _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SubParentWithNonResChResource(Client, SubParentWithNonResChData.DeserializeSubParentWithNonResChData(e)), _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SubParentWithNonResChResource(Client, SubParentWithNonResChData.DeserializeSubParentWithNonResChData(e)), _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SubParentWithNonResChResource(Client, SubParentWithNonResChData.DeserializeSubParentWithNonResChData(e)), _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

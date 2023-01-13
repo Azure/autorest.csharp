@@ -74,14 +74,12 @@ namespace paging
 
         AsyncPageable<Product> IOperationSource<AsyncPageable<Product>>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            return PageableHelpers.CreateAsyncPageable(response, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingGetMultiplePagesLROOperation", "values", "nextLink", requestContext);
+            return PageableHelpers.CreateAsyncPageable(response, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingGetMultiplePagesLROOperation", "values", "nextLink", cancellationToken);
         }
 
         ValueTask<AsyncPageable<Product>> IOperationSource<AsyncPageable<Product>>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            return new ValueTask<AsyncPageable<Product>>(PageableHelpers.CreateAsyncPageable(response, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingGetMultiplePagesLROOperation", "values", "nextLink", requestContext));
+            return new ValueTask<AsyncPageable<Product>>(PageableHelpers.CreateAsyncPageable(response, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingGetMultiplePagesLROOperation", "values", "nextLink", cancellationToken));
         }
     }
 }

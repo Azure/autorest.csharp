@@ -109,10 +109,13 @@ namespace AutoRest.CSharp.Common.Input
                             throw new JsonException($"Unsupported enum value type: {enumType.EnumValueType.Kind}");
                     }
                     break;
+                case InputLiteralType literalType:
+                    value = literalType.Value;
+                    break;
                 case InputModelType model:
-                    throw new JsonException("Not supported type.");
+                    throw new JsonException($"Not supported type: InputModelType");
                 default:
-                    throw new JsonException("Not supported type.");
+                    throw new JsonException($"Not supported type: {type.Name}");
             }
             reader.Read();
             return value;

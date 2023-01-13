@@ -30,7 +30,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     var messageVariable = new CodeWriterDeclaration("message");
                     var nextPageRequest = GetCreateRequestCall(restClientReference, createNextPageRequestMethod);
                     var nextPageRequestVariable = nextPageRequest != null ? new CodeWriterDeclaration("NextPageRequest") : null;
-                    var createPageableParameters = new List<FormattableString>()
+                    var parameters = methodSignature.Parameters;
+                    if (writer.EnsureRequestContextVariable(methodSignature, null, createNextPageRequestMethod))
+                    {
+                        parameters = parameters.Append(KnownParameters.RequestContext).ToList();
+                    }
+
+                    var createPageableParameters = new List<FormattableString>
                     {
                         $"{KnownParameters.WaitForCompletion.Name}",
                         $"{messageVariable:I}",
@@ -38,16 +44,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         GetValueFactory(pageItemType),
                         clientDiagnosticsReference.GetReferenceFormattable(),
                         pipelineReference.GetReferenceFormattable(),
-                        $"{typeof(OperationFinalStateVia)}.{finalStateVia}",
-                        $"{diagnostic.ScopeName:L}",
-                        $"{itemPropertyName:L}",
-                        $"{nextLinkPropertyName:L}"
+                        $"{typeof(OperationFinalStateVia)}.{finalStateVia}"
                     };
 
-                    if (writer.EnsureRequestContextVariable(methodSignature.Parameters))
-                    {
-                        createPageableParameters.Add(((Reference)KnownParameters.RequestContext).GetReferenceFormattable());
-                    }
+                    createPageableParameters.AddTrailingPageableParameters(parameters, diagnostic.ScopeName, itemPropertyName, nextLinkPropertyName);
 
                     if (nextPageRequestVariable != null)
                     {
@@ -76,9 +76,15 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 var firstPageRequest = GetCreateRequestCall(restClientReference, createFirstPageRequestMethod);
                 var nextPageRequest = GetCreateRequestCall(restClientReference, createNextPageRequestMethod);
-                writer
-                    .WriteParametersValidation(methodSignature.Parameters)
-                    .WritePageableBody(methodSignature.Parameters, pageItemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemPropertyName, nextLinkPropertyName, async);
+                writer.WriteParametersValidation(methodSignature.Parameters);
+
+                var parameters = methodSignature.Parameters;
+                if (writer.EnsureRequestContextVariable(methodSignature, createFirstPageRequestMethod, createNextPageRequestMethod))
+                {
+                    parameters = parameters.Append(KnownParameters.RequestContext).ToList();
+                }
+
+                writer.WritePageableBody(parameters, pageItemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemPropertyName, nextLinkPropertyName, async);
             }
 
             return writer.Line();
@@ -94,16 +100,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 nextPageRequest != null ? $"{nextPageRequestVariable:I}" : (FormattableString)$"null",
                 GetValueFactory(pageItemType),
                 clientDiagnosticsReference.GetReferenceFormattable(),
-                pipelineReference.GetReferenceFormattable(),
-                $"{scopeName:L}",
-                $"{itemPropertyName:L}",
-                $"{nextLinkPropertyName:L}"
+                pipelineReference.GetReferenceFormattable()
             };
 
-            if (writer.EnsureRequestContextVariable(methodParameters))
-            {
-                createPageableParameters.Add(((Reference)KnownParameters.RequestContext).GetReferenceFormattable());
-            }
+            createPageableParameters.AddTrailingPageableParameters(methodParameters, scopeName, itemPropertyName, nextLinkPropertyName);
 
             if (firstPageRequestVariable != null)
             {
@@ -118,22 +118,50 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line($"return {typeof(PageableHelpers)}.{(async ? nameof(PageableHelpers.CreateAsyncPageable) : nameof(PageableHelpers.CreatePageable))}({createPageableParameters.Join(", ")});");
         }
 
-        private static bool EnsureRequestContextVariable(this CodeWriter writer, IReadOnlyList<Parameter> parameters)
+        private static void AddTrailingPageableParameters(this List<FormattableString> createPageableParameters, IReadOnlyCollection<Parameter> methodParameters, string scopeName, string? itemPropertyName, string? nextLinkPropertyName)
         {
-            if (parameters.Contains(KnownParameters.RequestContext))
-            {
-                return true;
-            }
+            createPageableParameters.Add($"{scopeName:L}");
+            createPageableParameters.Add($"{itemPropertyName:L}");
+            createPageableParameters.Add($"{nextLinkPropertyName:L}");
 
-            var requestContextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-            if (!parameters.Contains(KnownParameters.CancellationTokenParameter))
+            if (ContainsRequestContext(methodParameters))
+            {
+                createPageableParameters.Add($"{KnownParameters.RequestContext.Name:I}");
+            }
+            else if (methodParameters.Contains(KnownParameters.CancellationTokenParameter))
+            {
+                createPageableParameters.Add($"{KnownParameters.CancellationTokenParameter.Name:I}");
+            }
+        }
+
+        private static bool EnsureRequestContextVariable(this CodeWriter writer, MethodSignature methodSignature, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod)
+        {
+            if (ContainsRequestContext(methodSignature.Parameters))
             {
                 return false;
             }
 
-            writer.Line($"var {requestContextVariable:D} = {KnownParameters.CancellationTokenParameter.Name:I}.{nameof(CancellationToken.CanBeCanceled)} ? new {KnownParameters.RequestContext.Type} {{ {nameof(RequestContext.CancellationToken)} = {KnownParameters.CancellationTokenParameter.Name:I} }} : null;");
+            if (!ContainsRequestContext(createFirstPageRequestMethod?.Parameters) && !ContainsRequestContext(createNextPageRequestMethod?.Parameters))
+            {
+                return false;
+            }
+
+            var requestContextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
+            if (methodSignature.Parameters.Contains(KnownParameters.CancellationTokenParameter))
+            {
+                writer.Line($"{KnownParameters.RequestContext.Type} {requestContextVariable:D} = {KnownParameters.CancellationTokenParameter.Name:I}.{nameof(CancellationToken.CanBeCanceled)} ? new {KnownParameters.RequestContext.Type} {{ {nameof(RequestContext.CancellationToken)} = {KnownParameters.CancellationTokenParameter.Name:I} }} : null;");
+            }
+            else
+            {
+                writer.Line($"{KnownParameters.RequestContext.Type} {requestContextVariable:D} = null;");
+            }
+
             return true;
+
         }
+
+        private static bool ContainsRequestContext(IReadOnlyCollection<Parameter>? parameters) =>
+            parameters != null && parameters.Contains(KnownParameters.RequestContext);
 
         private static FormattableString? GetCreateRequestCall(Reference? restClientReference, RestClientMethod? method)
         {

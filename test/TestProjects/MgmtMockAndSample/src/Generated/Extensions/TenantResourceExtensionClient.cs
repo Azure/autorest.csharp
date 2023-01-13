@@ -68,7 +68,7 @@ namespace MgmtMockAndSample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TenantActivityLogsRestClient.CreateListRequest(filter, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => TenantActivityLogsRestClient.CreateListNextPageRequest(nextLink, filter, select);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, EventData.DeserializeEventData, TenantActivityLogsClientDiagnostics, Pipeline, "TenantResourceExtensionClient.GetTenantActivityLogs", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, EventData.DeserializeEventData, TenantActivityLogsClientDiagnostics, Pipeline, "TenantResourceExtensionClient.GetTenantActivityLogs", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace MgmtMockAndSample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TenantActivityLogsRestClient.CreateListRequest(filter, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => TenantActivityLogsRestClient.CreateListNextPageRequest(nextLink, filter, select);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, EventData.DeserializeEventData, TenantActivityLogsClientDiagnostics, Pipeline, "TenantResourceExtensionClient.GetTenantActivityLogs", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, EventData.DeserializeEventData, TenantActivityLogsClientDiagnostics, Pipeline, "TenantResourceExtensionClient.GetTenantActivityLogs", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

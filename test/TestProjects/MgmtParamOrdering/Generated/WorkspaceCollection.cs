@@ -227,7 +227,7 @@ namespace MgmtParamOrdering
         public virtual AsyncPageable<WorkspaceResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _workspaceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new WorkspaceResource(Client, WorkspaceData.DeserializeWorkspaceData(e)), _workspaceClientDiagnostics, Pipeline, "WorkspaceCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new WorkspaceResource(Client, WorkspaceData.DeserializeWorkspaceData(e)), _workspaceClientDiagnostics, Pipeline, "WorkspaceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace MgmtParamOrdering
         public virtual Pageable<WorkspaceResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _workspaceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new WorkspaceResource(Client, WorkspaceData.DeserializeWorkspaceData(e)), _workspaceClientDiagnostics, Pipeline, "WorkspaceCollection.GetAll", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new WorkspaceResource(Client, WorkspaceData.DeserializeWorkspaceData(e)), _workspaceClientDiagnostics, Pipeline, "WorkspaceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

@@ -226,7 +226,7 @@ namespace MgmtParamOrdering
         public virtual AsyncPageable<EnvironmentContainerResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _environmentContainerResourceEnvironmentContainersRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new EnvironmentContainerResource(Client, EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(e)), _environmentContainerResourceEnvironmentContainersClientDiagnostics, Pipeline, "EnvironmentContainerResourceCollection.GetAll", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new EnvironmentContainerResource(Client, EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(e)), _environmentContainerResourceEnvironmentContainersClientDiagnostics, Pipeline, "EnvironmentContainerResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MgmtParamOrdering
         public virtual Pageable<EnvironmentContainerResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _environmentContainerResourceEnvironmentContainersRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new EnvironmentContainerResource(Client, EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(e)), _environmentContainerResourceEnvironmentContainersClientDiagnostics, Pipeline, "EnvironmentContainerResourceCollection.GetAll", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new EnvironmentContainerResource(Client, EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(e)), _environmentContainerResourceEnvironmentContainersClientDiagnostics, Pipeline, "EnvironmentContainerResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

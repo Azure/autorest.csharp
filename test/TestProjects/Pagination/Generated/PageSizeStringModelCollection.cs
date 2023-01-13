@@ -224,7 +224,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeStringModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeStringModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeStringModelResource(Client, PageSizeStringModelData.DeserializePageSizeStringModelData(e)), _pageSizeStringModelClientDiagnostics, Pipeline, "PageSizeStringModelCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeStringModelResource(Client, PageSizeStringModelData.DeserializePageSizeStringModelData(e)), _pageSizeStringModelClientDiagnostics, Pipeline, "PageSizeStringModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace Pagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeStringModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeStringModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeStringModelResource(Client, PageSizeStringModelData.DeserializePageSizeStringModelData(e)), _pageSizeStringModelClientDiagnostics, Pipeline, "PageSizeStringModelCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeStringModelResource(Client, PageSizeStringModelData.DeserializePageSizeStringModelData(e)), _pageSizeStringModelClientDiagnostics, Pipeline, "PageSizeStringModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

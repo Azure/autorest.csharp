@@ -231,7 +231,7 @@ namespace MgmtOptionalConstant
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _optionalMachineOptionalsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _optionalMachineOptionalsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace MgmtOptionalConstant
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _optionalMachineOptionalsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _optionalMachineOptionalsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink");
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

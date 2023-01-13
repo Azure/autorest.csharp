@@ -1156,7 +1156,7 @@ namespace Azure.Management.Storage
         public virtual AsyncPageable<StoragePrivateLinkResource> GetPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _privateLinkResourcesRestClient.CreateListByStorageAccountRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, StoragePrivateLinkResource.DeserializeStoragePrivateLinkResource, _privateLinkResourcesClientDiagnostics, Pipeline, "StorageAccountResource.GetPrivateLinkResources", "Value", null);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, StoragePrivateLinkResource.DeserializeStoragePrivateLinkResource, _privateLinkResourcesClientDiagnostics, Pipeline, "StorageAccountResource.GetPrivateLinkResources", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -1177,7 +1177,7 @@ namespace Azure.Management.Storage
         public virtual Pageable<StoragePrivateLinkResource> GetPrivateLinkResources(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _privateLinkResourcesRestClient.CreateListByStorageAccountRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, StoragePrivateLinkResource.DeserializeStoragePrivateLinkResource, _privateLinkResourcesClientDiagnostics, Pipeline, "StorageAccountResource.GetPrivateLinkResources", "Value", null);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, StoragePrivateLinkResource.DeserializeStoragePrivateLinkResource, _privateLinkResourcesClientDiagnostics, Pipeline, "StorageAccountResource.GetPrivateLinkResources", "value", null, cancellationToken);
         }
 
         /// <summary>
