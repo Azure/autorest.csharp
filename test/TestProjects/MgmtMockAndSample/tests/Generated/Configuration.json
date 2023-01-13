@@ -32,7 +32,7 @@
     "Type": "EncryptionType",
     "FirewallPolicyThreatIntelWhitelist.ipAddresses": "-|ip-address"
   },
-  "TestGen": {
+  "testgen": {
     "Mock": true,
     "Sample": true
   }

@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         {
             _writer.Line($"[RecordedTest]");
 
-            string? ignoreReason = Configuration.MgmtConfiguration.TestGen?.IgnoreReason;
+            string? ignoreReason = Configuration.MgmtTestConfiguration?.IgnoreReason;
             if (ignoreReason is not null)
             {
                 _writer.UseNamespace("NUnit.Framework");
