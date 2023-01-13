@@ -6,5 +6,6 @@ export enum InputOperationParameterKind {
     Client = "Client",
     Constant = "Constant",
     Flattened = "Flattened",
+    Flatten = "Flatten",
     Grouped = "Grouped"
 }
