@@ -103,8 +103,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// The operation to get the extension.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}
-        /// Operation Id: VirtualMachineScaleSetExtensions_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSetExtensions_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
@@ -119,8 +127,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// The operation to get the extension.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}
-        /// Operation Id: VirtualMachineScaleSetExtensions_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSetExtensions_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
@@ -149,8 +165,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets a virtual machine from a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
-        /// Operation Id: VirtualMachineScaleSetVMs_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSetVMs_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
@@ -165,8 +189,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets a virtual machine from a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
-        /// Operation Id: VirtualMachineScaleSetVMs_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSetVMs_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
@@ -181,8 +213,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Display information about a virtual machine scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VirtualMachineScaleSetResource>> GetAsync(CancellationToken cancellationToken = default)
@@ -205,8 +245,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Display information about a virtual machine scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineScaleSetResource> Get(CancellationToken cancellationToken = default)
@@ -229,8 +277,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Deletes a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Delete
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Delete</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -255,8 +311,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Deletes a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Delete
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Delete</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -281,8 +345,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Update a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Update
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Update</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="patch"> The scale set object. </param>
@@ -311,8 +383,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Update a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Update
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Update</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="patch"> The scale set object. </param>
@@ -341,8 +421,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate
-        /// Operation Id: VirtualMachineScaleSets_Deallocate
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Deallocate</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -368,8 +456,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate
-        /// Operation Id: VirtualMachineScaleSets_Deallocate
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Deallocate</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -395,8 +491,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Deletes virtual machines in a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete
-        /// Operation Id: VirtualMachineScaleSets_DeleteInstances
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_DeleteInstances</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -425,8 +529,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Deletes virtual machines in a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete
-        /// Operation Id: VirtualMachineScaleSets_DeleteInstances
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_DeleteInstances</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -455,8 +567,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets the status of a VM scale set instance.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView
-        /// Operation Id: VirtualMachineScaleSets_GetInstanceView
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_GetInstanceView</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VirtualMachineScaleSetInstanceView>> GetInstanceViewAsync(CancellationToken cancellationToken = default)
@@ -477,8 +597,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets the status of a VM scale set instance.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView
-        /// Operation Id: VirtualMachineScaleSets_GetInstanceView
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_GetInstanceView</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineScaleSetInstanceView> GetInstanceView(CancellationToken cancellationToken = default)
@@ -499,8 +627,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus
-        /// Operation Id: VirtualMachineScaleSets_ListSkus
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_ListSkus</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetSku" /> that may take multiple service requests to iterate over. </returns>
@@ -513,8 +649,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus
-        /// Operation Id: VirtualMachineScaleSets_ListSkus
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_ListSkus</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSetSku" /> that may take multiple service requests to iterate over. </returns>
@@ -527,8 +671,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets list of OS upgrades on a VM scale set instance.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory
-        /// Operation Id: VirtualMachineScaleSets_GetOSUpgradeHistory
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_GetOSUpgradeHistory</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="UpgradeOperationHistoricalStatusInfo" /> that may take multiple service requests to iterate over. </returns>
@@ -541,8 +693,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Gets list of OS upgrades on a VM scale set instance.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory
-        /// Operation Id: VirtualMachineScaleSets_GetOSUpgradeHistory
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_GetOSUpgradeHistory</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="UpgradeOperationHistoricalStatusInfo" /> that may take multiple service requests to iterate over. </returns>
@@ -555,8 +715,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff
-        /// Operation Id: VirtualMachineScaleSets_PowerOff
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_PowerOff</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -583,8 +751,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff
-        /// Operation Id: VirtualMachineScaleSets_PowerOff
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_PowerOff</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -611,8 +787,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Restarts one or more virtual machines in a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart
-        /// Operation Id: VirtualMachineScaleSets_Restart
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Restart</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -638,8 +822,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Restarts one or more virtual machines in a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart
-        /// Operation Id: VirtualMachineScaleSets_Restart
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Restart</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -665,8 +857,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Starts one or more virtual machines in a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start
-        /// Operation Id: VirtualMachineScaleSets_Start
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Start</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -692,8 +892,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Starts one or more virtual machines in a VM scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start
-        /// Operation Id: VirtualMachineScaleSets_Start
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Start</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -719,8 +927,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy
-        /// Operation Id: VirtualMachineScaleSets_Redeploy
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Redeploy</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -746,8 +962,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy
-        /// Operation Id: VirtualMachineScaleSets_Redeploy
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Redeploy</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -773,8 +997,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance
-        /// Operation Id: VirtualMachineScaleSets_PerformMaintenance
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_PerformMaintenance</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -800,8 +1032,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance
-        /// Operation Id: VirtualMachineScaleSets_PerformMaintenance
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_PerformMaintenance</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -827,8 +1067,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade
-        /// Operation Id: VirtualMachineScaleSets_UpdateInstances
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_UpdateInstances</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -857,8 +1105,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade
-        /// Operation Id: VirtualMachineScaleSets_UpdateInstances
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_UpdateInstances</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -887,8 +1143,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don&apos;t have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage
-        /// Operation Id: VirtualMachineScaleSets_Reimage
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Reimage</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> Parameters for Reimaging VM ScaleSet. </param>
@@ -914,8 +1178,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don&apos;t have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage
-        /// Operation Id: VirtualMachineScaleSets_Reimage
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Reimage</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> Parameters for Reimaging VM ScaleSet. </param>
@@ -941,8 +1213,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall
-        /// Operation Id: VirtualMachineScaleSets_ReimageAll
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_ReimageAll</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -968,8 +1248,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall
-        /// Operation Id: VirtualMachineScaleSets_ReimageAll
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_ReimageAll</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
@@ -995,8 +1283,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Manual platform update domain walk to update virtual machines in a service fabric virtual machine scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/forceRecoveryServiceFabricPlatformUpdateDomainWalk
-        /// Operation Id: VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/forceRecoveryServiceFabricPlatformUpdateDomainWalk</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="platformUpdateDomain"> The platform update domain for which a manual recovery walk is requested. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1018,8 +1314,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Manual platform update domain walk to update virtual machines in a service fabric virtual machine scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/forceRecoveryServiceFabricPlatformUpdateDomainWalk
-        /// Operation Id: VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/forceRecoveryServiceFabricPlatformUpdateDomainWalk</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="platformUpdateDomain"> The platform update domain for which a manual recovery walk is requested. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1041,8 +1345,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Converts SinglePlacementGroup property to false for a existing virtual machine scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup
-        /// Operation Id: VirtualMachineScaleSets_ConvertToSinglePlacementGroup
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_ConvertToSinglePlacementGroup</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="content"> The input object for ConvertToSinglePlacementGroup API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1067,8 +1379,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Converts SinglePlacementGroup property to false for a existing virtual machine scale set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup
-        /// Operation Id: VirtualMachineScaleSets_ConvertToSinglePlacementGroup
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_ConvertToSinglePlacementGroup</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="content"> The input object for ConvertToSinglePlacementGroup API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1093,8 +1413,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Changes ServiceState property for a given service
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState
-        /// Operation Id: VirtualMachineScaleSets_SetOrchestrationServiceState
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_SetOrchestrationServiceState</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The input object for SetOrchestrationServiceState API. </param>
@@ -1123,8 +1451,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Changes ServiceState property for a given service
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState
-        /// Operation Id: VirtualMachineScaleSets_SetOrchestrationServiceState
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_SetOrchestrationServiceState</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The input object for SetOrchestrationServiceState API. </param>
@@ -1153,8 +1489,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Cancels the current virtual machine scale set rolling upgrade.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel
-        /// Operation Id: VirtualMachineScaleSetRollingUpgrades_Cancel
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSetRollingUpgrades_Cancel</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1179,8 +1523,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Cancels the current virtual machine scale set rolling upgrade.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel
-        /// Operation Id: VirtualMachineScaleSetRollingUpgrades_Cancel
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSetRollingUpgrades_Cancel</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1205,8 +1557,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade
-        /// Operation Id: VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1231,8 +1591,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade
-        /// Operation Id: VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1257,8 +1625,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade
-        /// Operation Id: VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1283,8 +1659,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade
-        /// Operation Id: VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1309,8 +1693,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Add a tag to the current resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
@@ -1355,8 +1747,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Add a tag to the current resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
@@ -1401,8 +1801,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Replace the tags on the resource with the given set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1442,8 +1850,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Replace the tags on the resource with the given set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1483,8 +1899,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Removes a tag by key from the resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1527,8 +1951,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary>
         /// Removes a tag by key from the resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

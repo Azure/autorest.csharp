@@ -102,8 +102,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -116,8 +124,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -137,8 +153,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -151,8 +175,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -172,8 +204,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -186,8 +226,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -207,8 +255,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -221,8 +277,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -242,8 +306,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -256,8 +328,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -277,8 +357,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -291,8 +379,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -312,8 +408,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -326,8 +430,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -347,8 +459,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -361,8 +481,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -382,8 +510,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -396,8 +532,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -417,8 +561,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -431,8 +583,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a record set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// Operation Id: RecordSets_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -445,8 +605,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ZoneResource>> GetAsync(CancellationToken cancellationToken = default)
@@ -469,8 +637,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ZoneResource> Get(CancellationToken cancellationToken = default)
@@ -493,8 +669,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Delete
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Delete</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
@@ -520,8 +704,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Delete
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Delete</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
@@ -547,8 +739,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Updates a DNS zone. Does not modify DNS records within the zone.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Update
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Update</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="patch"> Parameters supplied to the Update operation. </param>
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
@@ -574,8 +774,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Updates a DNS zone. Does not modify DNS records within the zone.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Update
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Update</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="patch"> Parameters supplied to the Update operation. </param>
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
@@ -601,8 +809,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Lists all record sets in a DNS zone.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets
-        /// Operation Id: RecordSets_ListByDnsZone
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_ListByDnsZone</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
@@ -617,8 +833,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Lists all record sets in a DNS zone.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets
-        /// Operation Id: RecordSets_ListByDnsZone
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/recordsets</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_ListByDnsZone</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
@@ -633,8 +857,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Lists all record sets in a DNS zone.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/all
-        /// Operation Id: RecordSets_ListAllByDnsZone
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/all</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_ListAllByDnsZone</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordSetNameSuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
@@ -649,8 +881,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Lists all record sets in a DNS zone.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/all
-        /// Operation Id: RecordSets_ListAllByDnsZone
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/all</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RecordSets_ListAllByDnsZone</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordSetNameSuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
@@ -665,8 +905,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Add a tag to the current resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
@@ -711,8 +959,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Add a tag to the current resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
@@ -757,8 +1013,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Replace the tags on the resource with the given set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -798,8 +1062,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Replace the tags on the resource with the given set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -839,8 +1111,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Removes a tag by key from the resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -883,8 +1163,16 @@ namespace MgmtExpandResourceTypes
 
         /// <summary>
         /// Removes a tag by key from the resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

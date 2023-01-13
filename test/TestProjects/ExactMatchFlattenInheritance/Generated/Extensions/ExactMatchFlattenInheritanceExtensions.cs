@@ -38,8 +38,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel1.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
-        /// Operation Id: AzureResourceFlattenModel1s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel1s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -54,8 +62,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel1.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
-        /// Operation Id: AzureResourceFlattenModel1s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel1s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -78,8 +94,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an CustomModel2.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
-        /// Operation Id: CustomModel2s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>CustomModel2s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -94,8 +118,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an CustomModel2.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
-        /// Operation Id: CustomModel2s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>CustomModel2s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -118,8 +150,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an CustomModel3.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s/{name}
-        /// Operation Id: CustomModel3s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>CustomModel3s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -134,8 +174,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an CustomModel3.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s/{name}
-        /// Operation Id: CustomModel3s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>CustomModel3s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -150,8 +198,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel2.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s
-        /// Operation Id: AzureResourceFlattenModel2s_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel2s_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -163,8 +219,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel2.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s
-        /// Operation Id: AzureResourceFlattenModel2s_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel2s_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -176,8 +240,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Create or update an AzureResourceFlattenModel2.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
-        /// Operation Id: AzureResourceFlattenModel2s_Put
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel2s_Put</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -195,8 +267,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Create or update an AzureResourceFlattenModel2.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
-        /// Operation Id: AzureResourceFlattenModel2s_Put
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel2s_Put</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -214,8 +294,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel2.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
-        /// Operation Id: AzureResourceFlattenModel2s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel2s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -231,8 +319,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel2.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}
-        /// Operation Id: AzureResourceFlattenModel2s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel2s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -248,8 +344,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel3.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s
-        /// Operation Id: AzureResourceFlattenModel3s_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel3s_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -261,8 +365,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel3.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s
-        /// Operation Id: AzureResourceFlattenModel3s_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel3s_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -274,8 +386,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Create or update an AzureResourceFlattenModel3.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s/{name}
-        /// Operation Id: AzureResourceFlattenModel3s_Put
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel3s_Put</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -293,8 +413,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Create or update an AzureResourceFlattenModel3.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s/{name}
-        /// Operation Id: AzureResourceFlattenModel3s_Put
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel3s_Put</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -312,8 +440,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel3.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s/{name}
-        /// Operation Id: AzureResourceFlattenModel3s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel3s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -329,8 +465,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel3.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s/{name}
-        /// Operation Id: AzureResourceFlattenModel3s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel3s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -346,8 +490,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel4.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s
-        /// Operation Id: AzureResourceFlattenModel4s_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel4s_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -359,8 +511,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel4.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s
-        /// Operation Id: AzureResourceFlattenModel4s_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel4s_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -372,8 +532,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Create or update an AzureResourceFlattenModel4.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s/{name}
-        /// Operation Id: AzureResourceFlattenModel4s_Put
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel4s_Put</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -391,8 +559,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Create or update an AzureResourceFlattenModel4.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s/{name}
-        /// Operation Id: AzureResourceFlattenModel4s_Put
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel4s_Put</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -410,8 +586,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel4.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s/{name}
-        /// Operation Id: AzureResourceFlattenModel4s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel4s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -427,8 +611,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel4.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s/{name}
-        /// Operation Id: AzureResourceFlattenModel4s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel4s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -444,8 +636,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel5.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s
-        /// Operation Id: AzureResourceFlattenModel5s_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel5s_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -457,8 +657,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel5.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s
-        /// Operation Id: AzureResourceFlattenModel5s_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel5s_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -470,8 +678,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Create or update an AzureResourceFlattenModel5.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s/{name}
-        /// Operation Id: AzureResourceFlattenModel5s_Put
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel5s_Put</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -488,8 +704,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Create or update an AzureResourceFlattenModel5.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s/{name}
-        /// Operation Id: AzureResourceFlattenModel5s_Put
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel5s_Put</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -506,8 +730,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel5.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s/{name}
-        /// Operation Id: AzureResourceFlattenModel5s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel5s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>
@@ -523,8 +755,16 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary>
         /// Get an AzureResourceFlattenModel5.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s/{name}
-        /// Operation Id: AzureResourceFlattenModel5s_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel5s/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AzureResourceFlattenModel5s_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The String to use. </param>

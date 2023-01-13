@@ -55,8 +55,16 @@ namespace MgmtLRO
 
         /// <summary>
         /// Retrieves information about an fake.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Create
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Create</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The name of the fake. </param>
@@ -88,8 +96,16 @@ namespace MgmtLRO
 
         /// <summary>
         /// Retrieves information about an fake.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Create
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Create</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The name of the fake. </param>
@@ -121,8 +137,16 @@ namespace MgmtLRO
 
         /// <summary>
         /// Retrieves information about an fake.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -150,8 +174,16 @@ namespace MgmtLRO
 
         /// <summary>
         /// Retrieves information about an fake.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -179,8 +211,16 @@ namespace MgmtLRO
 
         /// <summary>
         /// Retrieves information about an fake.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
-        /// Operation Id: Bars_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
@@ -192,8 +232,16 @@ namespace MgmtLRO
 
         /// <summary>
         /// Retrieves information about an fake.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
-        /// Operation Id: Bars_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
@@ -205,8 +253,16 @@ namespace MgmtLRO
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -232,8 +288,16 @@ namespace MgmtLRO
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

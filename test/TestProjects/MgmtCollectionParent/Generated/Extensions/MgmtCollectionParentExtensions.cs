@@ -29,8 +29,16 @@ namespace MgmtCollectionParent
 
         /// <summary>
         /// Lists order at subscription level.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
-        /// Operation Id: ListOrderAtSubscriptionLevel
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ListOrderAtSubscriptionLevel</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
@@ -43,8 +51,16 @@ namespace MgmtCollectionParent
 
         /// <summary>
         /// Lists order at subscription level.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
-        /// Operation Id: ListOrderAtSubscriptionLevel
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ListOrderAtSubscriptionLevel</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
@@ -74,8 +90,16 @@ namespace MgmtCollectionParent
 
         /// <summary>
         /// Gets an order.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}
-        /// Operation Id: GetOrderByName
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>GetOrderByName</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of Azure region. </param>
@@ -91,8 +115,16 @@ namespace MgmtCollectionParent
 
         /// <summary>
         /// Gets an order.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}
-        /// Operation Id: GetOrderByName
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>GetOrderByName</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of Azure region. </param>

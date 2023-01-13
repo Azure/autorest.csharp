@@ -47,8 +47,16 @@ namespace MgmtSafeFlatten
 
         /// <summary>
         /// Description for Validate information for a certificate order.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
-        /// Operation Id: Common_ListTypeOnesBySubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_ListTypeOnesBySubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
@@ -60,8 +68,16 @@ namespace MgmtSafeFlatten
 
         /// <summary>
         /// Description for Validate information for a certificate order.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
-        /// Operation Id: Common_ListTypeOnesBySubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_ListTypeOnesBySubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
@@ -73,8 +89,16 @@ namespace MgmtSafeFlatten
 
         /// <summary>
         /// Description for Validate information for a certificate order.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
-        /// Operation Id: Common_ListTypeTwosBySubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_ListTypeTwosBySubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
@@ -86,8 +110,16 @@ namespace MgmtSafeFlatten
 
         /// <summary>
         /// Description for Validate information for a certificate order.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
-        /// Operation Id: Common_ListTypeTwosBySubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_ListTypeTwosBySubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
