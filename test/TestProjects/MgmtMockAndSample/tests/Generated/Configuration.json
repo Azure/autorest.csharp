@@ -33,6 +33,10 @@
     "FirewallPolicyThreatIntelWhitelist.ipAddresses": "-|ip-address"
   },
   "testgen": {
+    "SkippedOperations": [
+      "Vaults_GetDeleted",
+      "Vaults_Update"
+    ],
     "Mock": true,
     "Sample": true
   }
