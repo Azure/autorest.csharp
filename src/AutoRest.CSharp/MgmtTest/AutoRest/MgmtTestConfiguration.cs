@@ -12,18 +12,15 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         private const string TestGenOptionsRoot = "testgen";
         private const string TestGenOptionsFormat = $"{TestGenOptionsRoot}.{{0}}";
 
-        public string? IgnoreReason { get; }
         public string? SourceCodePath { get; }
         public bool Mock { get; }
         public bool Sample { get; }
 
         public MgmtTestConfiguration(
-            JsonElement? ignoreReason = default,
             JsonElement? sourceCodePath = default,
             JsonElement? mock = default,
             JsonElement? sample = default)
         {
-            IgnoreReason = !Configuration.IsValidJsonElement(ignoreReason) ? null : ignoreReason.ToString();
             SourceCodePath = !Configuration.IsValidJsonElement(sourceCodePath) ? null : sourceCodePath.ToString();
             Mock = Configuration.DeserializeBoolean(mock, false);
             Sample = Configuration.DeserializeBoolean(sample, false);
@@ -36,13 +33,11 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             if (testGenRoot.ValueKind != JsonValueKind.Object)
                 return null;
 
-            testGenRoot.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
             testGenRoot.TryGetProperty(nameof(SourceCodePath), out var sourceCodePath);
             testGenRoot.TryGetProperty(nameof(Mock), out var mock);
             testGenRoot.TryGetProperty(nameof(Sample), out var sample);
 
             return new MgmtTestConfiguration(
-                ignoreReason: ignoreReason,
                 sourceCodePath: sourceCodePath,
                 mock: mock,
                 sample: sample);
@@ -56,7 +51,6 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                 return null;
             }
             return new MgmtTestConfiguration(
-                ignoreReason: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "ignore-reason")).GetAwaiter().GetResult(),
                 sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "source-path")).GetAwaiter().GetResult(),
                 mock: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "mock")).GetAwaiter().GetResult(),
                 sample: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "sample")).GetAwaiter().GetResult());
@@ -65,9 +59,6 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         internal void SaveConfiguration(Utf8JsonWriter writer)
         {
             writer.WriteStartObject(TestGenOptionsRoot);
-
-            if (IgnoreReason is not null)
-                writer.WriteString(nameof(IgnoreReason), IgnoreReason);
 
             if (SourceCodePath is not null)
                 writer.WriteString(nameof(SourceCodePath), SourceCodePath);
