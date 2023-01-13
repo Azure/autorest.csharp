@@ -19,7 +19,7 @@ namespace CadlFirstTest.Models
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
             writer.WritePropertyName("requiredUnion");
-            writer.WriteStringValue(RequiredUnion);
+            writer.WriteObjectValue(RequiredUnion);
             writer.WritePropertyName("requiredLiteral");
             writer.WriteStringValue(RequiredLiteral);
             writer.WriteEndObject();
@@ -28,7 +28,7 @@ namespace CadlFirstTest.Models
         internal static Thing DeserializeThing(JsonElement element)
         {
             string name = default;
-            string requiredUnion = default;
+            object requiredUnion = default;
             string requiredLiteral = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -39,7 +39,7 @@ namespace CadlFirstTest.Models
                 }
                 if (property.NameEquals("requiredUnion"))
                 {
-                    requiredUnion = property.Value.GetString();
+                    requiredUnion = property.Value.GetObject();
                     continue;
                 }
                 if (property.NameEquals("requiredLiteral"))

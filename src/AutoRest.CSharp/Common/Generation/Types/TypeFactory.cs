@@ -35,7 +35,8 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType       => CreateType(literalType.LiteralValueType), //TODO -- need to support literal type with the value.
-            InputUnionType unionType           => CreateType(unionType.UnionItemTypes[0]), //TODO -- need to support multiple union types.
+            //InputUnionType unionType           => throw new InvalidOperationException("Union is unexpected here"), // TODO -- eventually all the union types should be disassembled into its constructing types when constructing the types for convenience methods, therefore this line should never be invoked
+            InputUnionType unionType => new CSharpType(typeof(object), inputType.IsNullable), //TODO -- we temporarily let the type to return `object?`, this is a workaround since the feature around union types are not finished yet
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),

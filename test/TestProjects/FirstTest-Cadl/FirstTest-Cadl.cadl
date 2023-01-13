@@ -49,6 +49,15 @@ model Thing {
   requiredLiteral: "accept";
 }
 
+alias ThingAlias = {
+  @doc("name of the Thing")
+  name: string;
+  @doc("required Union")
+  requiredUnion: string | string[]|int32;
+  @doc("required literal type")
+  requiredLiteral: "accept";
+};
+
 @friendlyName("Friend")
 model NotFriend {
   @doc("name of the NotFriend")
@@ -132,6 +141,12 @@ op patchAction(@body body: Thing): Thing;
 @post
 @convenienceAPI
 op anonymousBody( ...Thing ): Thing;
+
+@route("/aliasBody")
+@doc("body parameter without body decorator")
+@post
+@convenienceAPI
+op aliasBody( ...ThingAlias ): Thing;
 
 @route("/friendlyName")
 @doc("Model can have its friendly name")

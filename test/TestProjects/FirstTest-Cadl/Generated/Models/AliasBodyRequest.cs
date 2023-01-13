@@ -10,15 +10,15 @@ using Azure.Core;
 
 namespace CadlFirstTest.Models
 {
-    /// <summary> The Thing. </summary>
-    public partial class Thing
+    /// <summary> The AliasBodyRequest. </summary>
+    public partial class AliasBodyRequest
     {
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of AliasBodyRequest. </summary>
         /// <param name="name"></param>
         /// <param name="requiredUnion"></param>
         /// <param name="requiredLiteral"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public Thing(string name, object requiredUnion, string requiredLiteral)
+        public AliasBodyRequest(string name, object requiredUnion, string requiredLiteral)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
@@ -29,11 +29,11 @@ namespace CadlFirstTest.Models
             RequiredLiteral = requiredLiteral;
         }
 
-        /// <summary> Gets or sets the name. </summary>
-        public string Name { get; set; }
-        /// <summary> Gets or sets the required union. </summary>
-        public object RequiredUnion { get; set; }
-        /// <summary> Gets or sets the required literal. </summary>
-        public string RequiredLiteral { get; set; }
+        /// <summary> Gets the name. </summary>
+        public string Name { get; }
+        /// <summary> Gets the required union. </summary>
+        public object RequiredUnion { get; }
+        /// <summary> Gets the required literal. </summary>
+        public string RequiredLiteral { get; }
     }
 }

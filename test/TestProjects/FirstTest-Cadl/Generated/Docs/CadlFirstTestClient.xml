@@ -305,6 +305,98 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
+    <member name="AliasBodyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call AliasBodyAsync with required request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteral = new {},
+};
+
+Response response = await client.AliasBodyAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>AliasBodyRequest</c>:
+<code>{
+  name: string, # Required.
+  requiredUnion: Union, # Required.
+  requiredLiteral: Literal, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredUnion: Union, # Required.
+  requiredLiteral: Literal, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="AliasBody(RequestContent,RequestContext)">
+<example>
+This sample shows how to call AliasBody with required request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteral = new {},
+};
+
+Response response = client.AliasBody(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>AliasBodyRequest</c>:
+<code>{
+  name: string, # Required.
+  requiredUnion: Union, # Required.
+  requiredLiteral: Literal, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredUnion: Union, # Required.
+  requiredLiteral: Literal, # Required.
+}
+</code>
+
+</remarks>
+    </member>
     <member name="FriendlyModelAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call FriendlyModelAsync with required request content and parse the result.
