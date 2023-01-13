@@ -9,7 +9,7 @@ using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
 
-namespace AutoRest.CSharp.MgmtTest.AutoRest
+namespace AutoRest.CSharp.Input
 {
     internal class MgmtTestConfiguration
     {

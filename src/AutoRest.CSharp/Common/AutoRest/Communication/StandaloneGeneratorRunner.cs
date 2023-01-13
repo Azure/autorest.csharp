@@ -7,13 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.MgmtTest.AutoRest;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 

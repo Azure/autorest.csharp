@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.MgmtTest.AutoRest;
 
 namespace AutoRest.CSharp.Input
 {
