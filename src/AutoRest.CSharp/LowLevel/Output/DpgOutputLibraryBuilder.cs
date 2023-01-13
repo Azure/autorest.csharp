@@ -29,12 +29,18 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string _defaultNamespace;
         private readonly string _libraryName;
 
+        private readonly Dictionary<InputModelType, ExpandedInputModelType> _expandedModelTypes;
+
         public DpgOutputLibraryBuilder(InputNamespace rootNamespace, SourceInputModel? sourceInputModel)
         {
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;
             _defaultNamespace = Configuration.Namespace ?? rootNamespace.Name;
             _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
+            // we expand the models with union types
+            _expandedModelTypes = ExpandUnionTypes(_rootNamespace);
+            // we need to update the operations for those using union types as parameters
+            // TODO -- this should solve the object parameter in the method
         }
 
         public DpgOutputLibrary Build(bool isCadlInput)
@@ -77,10 +83,10 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private Dictionary<InputModelType, ExpandedInputModelType> ExpandUnionTypes()
+        private static Dictionary<InputModelType, ExpandedInputModelType> ExpandUnionTypes(InputNamespace rootNamespace)
         {
             var expandedModels = new Dictionary<InputModelType, ExpandedInputModelType>();
-            foreach (var model in _rootNamespace.Models)
+            foreach (var model in rootNamespace.Models)
             {
                 var result = ExpandUnionType(model);
                 if (result != null)
@@ -94,7 +100,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private record ExpandedInputModelType(InputModelType BaseModel, IEnumerable<InputModelType> ExpandedModels);
 
-        private ExpandedInputModelType? ExpandUnionType(InputModelType model)
+        private static ExpandedInputModelType? ExpandUnionType(InputModelType model)
         {
             var propertiesWithUnionType = model.Properties.Where(property => property.Type is InputUnionType);
             if (!propertiesWithUnionType.Any())
@@ -167,14 +173,11 @@ namespace AutoRest.CSharp.Output.Models
 
         private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
         {
-            // we expand the models with union types
-            var expandedTypes = ExpandUnionTypes();
             // modify the model list with the expanded models
-            //var inputModels = _rootNamespace.Models.ToList();
             var inputModels = new List<InputModelType>();
             foreach (var model in _rootNamespace.Models)
             {
-                if (expandedTypes.TryGetValue(model, out var expandedModelType))
+                if (_expandedModelTypes.TryGetValue(model, out var expandedModelType))
                 {
                     inputModels.Add(expandedModelType.BaseModel);
                     inputModels.AddRange(expandedModelType.ExpandedModels);
