@@ -45,7 +45,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         public override bool IncludeConverter => false;
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
+
+        // the model is abstract when
+        // 1. it is a base model with a discriminator, and it is not marked as suppress-abstract-base in the configuration
+        // 2. it is a base model with a union type property. This is true when _modelPropertiesOverride is not null
+        protected override bool IsAbstract => IsAbstractDiscriminatorBaseModel || IsAbstractBaseModelWithUnionTypes;
+
+        private bool IsAbstractBaseModelWithUnionTypes => _modelPropertiesOverride is not null;
+        private bool IsAbstractDiscriminatorBaseModel => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
         public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
