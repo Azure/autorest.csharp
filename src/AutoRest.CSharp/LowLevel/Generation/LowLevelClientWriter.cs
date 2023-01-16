@@ -266,10 +266,10 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var parameterChain in convenienceMethod.ProtocolToConvenienceParameters)
             {
-                if (parameterChain.Convenience?.Kind == InputOperationParameterKind.Flatten)
+                if (parameterChain.Input?.Kind == InputOperationParameterKind.Flatten)
                 {
-                    var typename = parameterChain.Convenience.Type.Name;
-                    var paraName = parameterChain.Convenience.Name;
+                    var typename = parameterChain.Convenience?.Type.Name;
+                    var paraName = parameterChain.Convenience?.Name;
                     writer.Append($"{typename} {paraName:D} = ");
                     writer.Append($"new {typename}(");
                     InputType? type = parameterChain.Input?.Type?? null;

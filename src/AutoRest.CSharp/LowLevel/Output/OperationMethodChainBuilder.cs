@@ -41,7 +41,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly RestClientMethod _restClientMethod;
 
         private Parameter? _protocolBodyParameter;
-        private InputParameter? _inputBodyParameter;
         private ProtocolMethodPaging? _protocolMethodPaging;
         private RequestConditionHeaders _conditionHeaderFlag = RequestConditionHeaders.None;
 
@@ -54,7 +53,6 @@ namespace AutoRest.CSharp.Output.Models
             _typeFactory = typeFactory;
             _orderedParameters = new List<ParameterChain>();
             _requestParts = new List<RequestPartSource>();
-            _inputBodyParameter = operation.Parameters.First(p => p.Location == RequestLocation.Body);
 
             Operation = operation;
             BuildParameters();
@@ -199,8 +197,6 @@ namespace AutoRest.CSharp.Output.Models
                 name = _restClientMethod.Name.IsLastWordSingular() ? $"{_restClientMethod.Name}Value" : $"{_restClientMethod.Name.LastWordToSingular()}Values";
             }
 
-            //var parameters = _orderedParameters.Select(p => p.Convenience).WhereNotNull().ToArray();
-            //var parametersList = _orderedParameters.Select(p => p.Convenience).WhereNotNull().ToList<Parameter>();
             var parameterList = new List<Parameter>();
             foreach (var parameterChain in _orderedParameters)
             {
@@ -228,22 +224,8 @@ namespace AutoRest.CSharp.Output.Models
                 .Where(p => p.Protocol != null)
                 .Select(p => (p.Protocol!, p.Convenience, p.Input))
                 .ToArray();
-            /*
-            if (_inputBodyParameter != null && _inputBodyParameter.Kind == InputOperationParameterKind.Flatten)
-            {
-                InputType type = _inputBodyParameter.Type;
-                if ( type is InputModelType modelType)
-                {
-                    foreach ( var prop in modelType.Properties)
-                    {
-                        var parameter = Parameter.FromModelProperty(prop, prop.Name.ToVariableName(), _typeFactory.CreateType(prop.Type), _inputBodyParameter.Kind);
-                        parametersList.Add(parameter);
-                    }
-                }
-            }
-            */
-            var parameters = parameterList.ToArray();
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameters, attributes);
+            //var parameters = parameterList.ToArray();
+            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList.ToArray(), attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }
