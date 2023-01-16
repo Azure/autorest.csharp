@@ -60,8 +60,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Calculate the hash of the given template.
-        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
-        /// Operation Id: Deployments_CalculateTemplateHash
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Resources/calculateTemplateHash</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_CalculateTemplateHash</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -83,8 +91,16 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Calculate the hash of the given template.
-        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
-        /// Operation Id: Deployments_CalculateTemplateHash
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Resources/calculateTemplateHash</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Deployments_CalculateTemplateHash</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

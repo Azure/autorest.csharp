@@ -454,16 +454,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return isNextPageFunc ? "nextLink, " : string.Empty;
         }
 
-        protected void WriteRequestPathAndOperationId(MgmtClientOperation clientOperation)
-        {
-            foreach (var operation in clientOperation)
-            {
-                _writer.Line($"/// RequestPath: {operation.RequestPath}");
-                _writer.Line($"/// ContextualPath: {operation.ContextualPath}");
-                _writer.Line($"/// OperationId: {operation.OperationId}");
-            }
-        }
-
         protected FormattableString GetResourceTypeExpression(ResourceTypeSegment resourceType)
         {
             if (resourceType == ResourceTypeSegment.ResourceGroup)
