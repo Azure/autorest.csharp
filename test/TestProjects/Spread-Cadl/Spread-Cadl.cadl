@@ -56,6 +56,12 @@ alias ThingMultiTargetAlias = {
   @header top: int32;
 };
 
+alias ThingAliasWithSpreadAlias = {
+  @path id: string;
+  ...ThingAlias;
+  @header top: int32;
+};
+
 @route("/spreadModel")
 @doc("body parameter without body decorator")
 @post
@@ -79,3 +85,9 @@ op spreadMultiTargetAlias( ...ThingMultiTargetAlias ): void;
 @post
 @convenienceAPI
 op spreadAliasWithModel( ...ThingAliasWithModel ): void;
+
+@route("/spreadAliasWithSpreadAlias")
+@doc("body parameter without body decorator")
+@post
+@convenienceAPI
+op spreadAliasWithSpreadAlias( ...ThingAliasWithSpreadAlias ): void;
