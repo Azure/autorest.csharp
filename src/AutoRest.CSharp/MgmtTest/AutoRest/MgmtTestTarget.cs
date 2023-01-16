@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel)
         {
             Debug.Assert(codeModel.TestModel is not null);
-            Debug.Assert(Configuration.MgmtConfiguration.TestGen is not null);
+            Debug.Assert(Configuration.MgmtTestConfiguration is not null);
 
             var sourceCodePath = GetSourceCodePath();
             var sourceCodeProject = new SourceCodeProject(sourceCodePath, Configuration.SharedSourceFolders);
@@ -32,12 +32,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // add the files in the source code project into the GeneratedCodeWorkspace so that our Roslyn could know how to simplify them
             project.AddDirectory(sourceCodePath);
 
-            if (Configuration.MgmtConfiguration.TestGen.Mock)
+            if (Configuration.MgmtTestConfiguration.Mock)
             {
                 WriteMockTests(project, library);
             }
 
-            if (Configuration.MgmtConfiguration.TestGen.Sample)
+            if (Configuration.MgmtTestConfiguration.Sample)
             {
                 WriteSamples(project, library);
             }
@@ -99,8 +99,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static string GetSourceCodePath()
         {
-            if (Configuration.MgmtConfiguration.TestGen?.SourceCodePath != null)
-                return Configuration.MgmtConfiguration.TestGen.SourceCodePath;
+            if (Configuration.MgmtTestConfiguration?.SourceCodePath != null)
+                return Configuration.MgmtTestConfiguration.SourceCodePath;
 
             return Path.Combine(Configuration.OutputFolder, "../../src");
         }
