@@ -244,6 +244,102 @@ namespace Spread
             }
         }
 
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="id"> The String to use. </param>
+        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual async Task<Response> SpreadMultiTargetAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(name, nameof(name));
+
+            SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadMultiTargetAliasAsync(id, top, spreadMultiTargetAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="id"> The String to use. </param>
+        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Response SpreadMultiTargetAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(name, nameof(name));
+
+            SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadMultiTargetAlias(id, top, spreadMultiTargetAliasRequest.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="id"> The String to use. </param>
+        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(String,Int32,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadMultiTargetAliasAsync(string id, int top, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadMultiTargetAlias");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadMultiTargetAliasRequest(id, top, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="id"> The String to use. </param>
+        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(String,Int32,RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadMultiTargetAlias(string id, int top, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadMultiTargetAlias");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadMultiTargetAliasRequest(id, top, content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateSpreadModelRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -270,6 +366,24 @@ namespace Spread
             uri.AppendPath("/spreadAlias", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadMultiTargetAliasRequest(string id, int top, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/ThingMultiTargetAlias/", false);
+            uri.AppendPath(id, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("top", top);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;

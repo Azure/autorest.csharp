@@ -84,27 +84,66 @@
      "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$id": "12",
+   "Name": "SpreadMultiTargetAliasRequest",
+   "Namespace": "",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "13",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "14",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "15",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "16",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "12",
+   "$id": "17",
    "Name": "SpreadClient",
    "Description": "This is a spread model or alias service.",
    "Operations": [
     {
-     "$id": "13",
+     "$id": "18",
      "Name": "spreadModel",
      "ResourceName": "Spread",
      "Description": "body parameter without body decorator",
      "Parameters": [
       {
-       "$id": "14",
+       "$id": "19",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "Endpoint Service",
        "Type": {
-        "$id": "15",
+        "$id": "20",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -119,9 +158,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "16",
+        "$id": "21",
         "Type": {
-         "$id": "17",
+         "$id": "22",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -130,7 +169,7 @@
        }
       },
       {
-       "$id": "18",
+       "$id": "23",
        "Name": "Thing",
        "NameInRequest": "Thing",
        "Type": {
@@ -147,11 +186,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "19",
+       "$id": "24",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "20",
+        "$id": "25",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -166,19 +205,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "21",
+        "$id": "26",
         "Type": {
-         "$ref": "20"
+         "$ref": "25"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "22",
+       "$id": "27",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "23",
+        "$id": "28",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -193,20 +232,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "24",
+        "$id": "29",
         "Type": {
-         "$ref": "23"
+         "$ref": "28"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "25",
+       "$id": "30",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "26",
+        "$id": "31",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -221,9 +260,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "27",
+        "$id": "32",
         "Type": {
-         "$id": "28",
+         "$id": "33",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -234,7 +273,7 @@
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "34",
        "StatusCodes": [
         204
        ],
@@ -254,16 +293,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "30",
+     "$id": "35",
      "Name": "spreadAlias",
      "ResourceName": "Spread",
      "Description": "body parameter without body decorator",
      "Parameters": [
       {
-       "$ref": "14"
+       "$ref": "19"
       },
       {
-       "$id": "31",
+       "$id": "36",
        "Name": "SpreadAliasRequest",
        "NameInRequest": "SpreadAliasRequest",
        "Type": {
@@ -280,11 +319,11 @@
        "Kind": "Flatten"
       },
       {
-       "$id": "32",
+       "$id": "37",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "33",
+        "$id": "38",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -299,19 +338,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "39",
         "Type": {
-         "$ref": "33"
+         "$ref": "38"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "35",
+       "$id": "40",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "36",
+        "$id": "41",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -326,20 +365,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "42",
         "Type": {
-         "$ref": "36"
+         "$ref": "41"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "25"
+       "$ref": "30"
       }
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "43",
        "StatusCodes": [
         204
        ],
@@ -357,22 +396,167 @@
      ],
      "BufferResponse": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "44",
+     "Name": "spreadMultiTargetAlias",
+     "ResourceName": "Spread",
+     "Description": "body parameter without body decorator",
+     "Parameters": [
+      {
+       "$ref": "19"
+      },
+      {
+       "$id": "45",
+       "Name": "id",
+       "NameInRequest": "id",
+       "Type": {
+        "$id": "46",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "47",
+       "Name": "top",
+       "NameInRequest": "top",
+       "Type": {
+        "$id": "48",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "49",
+       "Name": "SpreadMultiTargetAliasRequest",
+       "NameInRequest": "SpreadMultiTargetAliasRequest",
+       "Type": {
+        "$ref": "12"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Flatten"
+      },
+      {
+       "$id": "50",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "51",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "52",
+        "Type": {
+         "$ref": "51"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "53",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "54",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "55",
+        "Type": {
+         "$ref": "54"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "30"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "56",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/ThingMultiTargetAlias/{id}",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "39"
+    "$id": "57"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "40",
+  "$id": "58",
   "ApiKey": {
-   "$id": "41",
+   "$id": "59",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "42",
+   "$id": "60",
    "Scopes": [
     "https://api.example.com/.default"
    ]

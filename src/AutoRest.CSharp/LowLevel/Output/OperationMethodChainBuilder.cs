@@ -19,7 +19,6 @@ using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Input.Configuration;
-using static System.Net.WebRequestMethods;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -224,8 +223,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Where(p => p.Protocol != null)
                 .Select(p => (p.Protocol!, p.Convenience, p.Input))
                 .ToArray();
-            //var parameters = parameterList.ToArray();
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList.ToArray(), attributes);
+            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }

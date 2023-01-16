@@ -268,10 +268,10 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (parameterChain.Input?.Kind == InputOperationParameterKind.Flatten)
                 {
-                    var typename = parameterChain.Convenience?.Type.Name;
+                    var typeName = parameterChain.Convenience?.Type.Name;
                     var paraName = parameterChain.Convenience?.Name;
-                    writer.Append($"{typename} {paraName:D} = ");
-                    writer.Append($"new {typename}(");
+                    writer.Append($"{typeName} {paraName:D} = ");
+                    writer.Append($"new {typeName}(");
                     InputType? type = parameterChain.Input?.Type?? null;
                     if (type is InputModelType modelType)
                     {
