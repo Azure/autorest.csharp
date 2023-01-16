@@ -7,12 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 
@@ -181,6 +179,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
                     Configuration.MgmtConfiguration.SaveConfiguration(writer);
 
+                    if (Configuration.MgmtTestConfiguration != null)
+                    {
+                        Configuration.MgmtTestConfiguration.SaveConfiguration(writer);
+                    }
+
                     writer.WriteEndObject();
                 }
 
@@ -257,7 +260,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 existingProjectFolder,
                 protocolMethods,
                 suppressAbstractBaseClasses,
-                MgmtConfiguration.LoadConfiguration(root)
+                MgmtConfiguration.LoadConfiguration(root),
+                MgmtTestConfiguration.LoadConfiguration(root)
             );
         }
     }

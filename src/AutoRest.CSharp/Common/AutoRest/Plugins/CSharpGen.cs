@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else if (Configuration.AzureArm)
             {
-                if (Configuration.MgmtConfiguration.TestGen is not null)
+                if (Configuration.MgmtTestConfiguration is not null)
                 {
                     // we currently do not need this sourceInputModel when generating the test code because it only has information about the "non-generated" test code.
                     await MgmtTestTarget.ExecuteAsync(project, codeModel);
