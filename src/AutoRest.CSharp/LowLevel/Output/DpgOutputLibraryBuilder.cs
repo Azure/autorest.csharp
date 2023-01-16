@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Output.Models
             var derivedModels = new List<InputModelType>();
             foreach (var combination in combinations)
             {
-                var derivedModelName = string.Join("", combination.Select(p => p.Type.Name)) + model.Name;
+                var derivedModelName = $"{CreateExpandTypeName(combination.Select(t => t.Type))}{model.Name}";
                 var properties = combination.Select(t => t.Property with
                 {
                     Type = t.Type
@@ -134,6 +134,17 @@ namespace AutoRest.CSharp.Output.Models
 
             return new ExpandedInputModelType(model, derivedModels, propertiesOnBase);
         }
+
+        private static string CreateExpandTypeName(IEnumerable<InputType> inputTypes)
+            => string.Join("", inputTypes.Select(type => CreateTypeName(type)));
+
+        private static string CreateTypeName(InputType inputType) => inputType switch
+        {
+            InputPrimitiveType primitiveType => primitiveType.Name,
+            InputListType listType => $"{CreateTypeName(listType.ElementType)}List",
+            InputDictionaryType dictionaryType => $"{CreateTypeName(dictionaryType.ValueType)}Dictionary", // the key type of our dictionary should always be string
+            _ => inputType.Name
+        };
 
         private static IEnumerable<(InputModelProperty Property, InputType Type)> ExpandProperty(InputModelProperty property)
             => ((InputUnionType)property.Type).UnionItemTypes.Select(type => (property, type));

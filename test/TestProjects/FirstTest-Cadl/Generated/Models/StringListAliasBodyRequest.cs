@@ -12,15 +12,15 @@ using Azure.Core;
 
 namespace CadlFirstTest.Models
 {
-    /// <summary> The ArrayAliasBodyRequest. </summary>
-    public partial class ArrayAliasBodyRequest : AliasBodyRequest
+    /// <summary> The StringListAliasBodyRequest. </summary>
+    public partial class StringListAliasBodyRequest : AliasBodyRequest
     {
-        /// <summary> Initializes a new instance of ArrayAliasBodyRequest. </summary>
+        /// <summary> Initializes a new instance of StringListAliasBodyRequest. </summary>
         /// <param name="name"></param>
         /// <param name="requiredLiteral"></param>
         /// <param name="requiredUnion"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredLiteral"/> or <paramref name="requiredUnion"/> is null. </exception>
-        public ArrayAliasBodyRequest(string name, string requiredLiteral, IEnumerable<string> requiredUnion) : base(name, requiredLiteral)
+        public StringListAliasBodyRequest(string name, string requiredLiteral, IEnumerable<string> requiredUnion) : base(name, requiredLiteral)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));

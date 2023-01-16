@@ -13,7 +13,7 @@ namespace CadlFirstTest.Models
     /// <summary>
     /// The AliasBodyRequest.
     /// Please note <see cref="AliasBodyRequest"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-    /// The available derived classes include <see cref="StringAliasBodyRequest"/>, <see cref="ArrayAliasBodyRequest"/> and <see cref="Int32AliasBodyRequest"/>.
+    /// The available derived classes include <see cref="StringAliasBodyRequest"/>, <see cref="StringListAliasBodyRequest"/> and <see cref="Int32AliasBodyRequest"/>.
     /// </summary>
     public abstract partial class AliasBodyRequest
     {
