@@ -164,6 +164,86 @@ namespace Spread
             }
         }
 
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response> SpreadAliasAsync(string name, int age, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadAliasAsync(spreadAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response SpreadAlias(string name, int age, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadAlias(spreadAliasRequest.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadAliasAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAlias");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAlias(RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadAlias(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAlias");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateSpreadModelRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -172,6 +252,22 @@ namespace Spread
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadModel", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadAliasRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/spreadAlias", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

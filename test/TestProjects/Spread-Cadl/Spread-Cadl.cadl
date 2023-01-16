@@ -34,8 +34,21 @@ model Thing {
   age: int32;
 }
 
+alias ThingAlias = {
+  @doc("name of the Thing")
+  name: string;
+  @doc("age of the Thing")
+  age: int32;
+};
+
 @route("/spreadModel")
 @doc("body parameter without body decorator")
 @post
 @convenienceAPI
 op spreadModel( ...Thing ): void;
+
+@route("/spreadAlias")
+@doc("body parameter without body decorator")
+@post
+@convenienceAPI
+op spreadAlias( ...ThingAlias ): void;
