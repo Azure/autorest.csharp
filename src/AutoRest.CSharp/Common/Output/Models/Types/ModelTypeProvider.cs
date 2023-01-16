@@ -106,7 +106,24 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override string CreateDescription()
         {
-            return _inputModel.Description ?? $"The {_inputModel.Name}.";
+            // TODO -- this is temporary
+            return (_inputModel.Description ?? $"The {_inputModel.Name}.") + CreateExtraDescriptionWithUnion();
+        }
+
+        private string CreateExtraDescriptionWithUnion()
+        {
+            if (_modelPropertiesOverride is not null)
+            {
+                List<FormattableString> childrenList = new List<FormattableString>();
+                var implementations = _derivedTypes.Select(child => _typeFactory.CreateType(child));
+                foreach (var implementation in implementations)
+                {
+                    childrenList.Add($"<see cref=\"{implementation.Name}\"/>");
+                }
+                return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}" +
+                    $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
+            }
+            return string.Empty;
         }
 
         private ModelTypeProviderFields EnsureFields()
