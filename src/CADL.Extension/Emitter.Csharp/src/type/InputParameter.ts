@@ -27,5 +27,4 @@ export interface InputParameter {
     Explode: boolean;
     ArraySerializationDelimiter?: string;
     HeaderCollectionPrefix?: string;
-    SpreadSource?: string;
 }
