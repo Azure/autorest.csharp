@@ -40,6 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private SourceInputModel? _sourceInputModel;
         private InputModelType[]? _derivedTypes;
         private ObjectType? _defaultDerivedType;
+        private readonly IEnumerable<InputModelProperty>? _modelPropertiesOverride;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -52,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null, IEnumerable<InputModelProperty>? modelPropertiesOverride = null)
             : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory!;
@@ -63,7 +64,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsDefaultDiscriminator ? this : null);
+            _modelPropertiesOverride = modelPropertiesOverride;
         }
+
         private MethodSignatureModifiers GetFromResponseModifiers()
         {
             var signatures = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static;
@@ -101,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
+            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType), _modelPropertiesOverride);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()

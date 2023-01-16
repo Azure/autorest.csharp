@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<Parameter> SerializationParameters { get; }
         public int Count => _fields.Count;
 
-        public ModelTypeProviderFields(InputModelType inputModel, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
+        public ModelTypeProviderFields(InputModelType inputModel, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, IEnumerable<InputModelProperty>? modelPropertiesOverride = null)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -50,7 +50,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 publicParameters.Add(parameter);
             }
 
-            foreach (var inputModelProperty in inputModel.Properties)
+            var properties = modelPropertiesOverride ?? inputModel.Properties;
+            foreach (var inputModelProperty in properties)
             {
                 var originalFieldName = inputModelProperty.Name.FirstCharToUpperCase();
                 var originalFieldType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);

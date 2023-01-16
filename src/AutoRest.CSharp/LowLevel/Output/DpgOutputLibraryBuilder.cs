@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string _defaultNamespace;
         private readonly string _libraryName;
 
+        private readonly IReadOnlyList<InputModelType> _inputModels;
         private readonly Dictionary<InputModelType, ExpandedInputModelType> _expandedModelTypes;
 
         public DpgOutputLibraryBuilder(InputNamespace rootNamespace, SourceInputModel? sourceInputModel)
@@ -37,10 +38,10 @@ namespace AutoRest.CSharp.Output.Models
             _sourceInputModel = sourceInputModel;
             _defaultNamespace = Configuration.Namespace ?? rootNamespace.Name;
             _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
-            // we expand the models with union types
+            // we expand the models with union types, these models will be added into the models list
             _expandedModelTypes = ExpandUnionTypes(_rootNamespace);
-            // we need to update the operations for those using union types as parameters
-            // TODO -- this should solve the object parameter in the method
+            // get a full list of input models
+            _inputModels = GetInputModels(_rootNamespace, _expandedModelTypes);
         }
 
         public DpgOutputLibrary Build(bool isCadlInput)
@@ -98,7 +99,7 @@ namespace AutoRest.CSharp.Output.Models
             return expandedModels;
         }
 
-        private record ExpandedInputModelType(InputModelType BaseModel, IEnumerable<InputModelType> ExpandedModels);
+        private record ExpandedInputModelType(InputModelType BaseModel, IEnumerable<InputModelType> ExpandedModels, IEnumerable<InputModelProperty> PropertiesOnBaseModel);
 
         private static ExpandedInputModelType? ExpandUnionType(InputModelType model)
         {
@@ -109,10 +110,6 @@ namespace AutoRest.CSharp.Output.Models
             // now we need to create a new model as the base model by removing those properties with union types
             // TODO -- do we really need the fake discriminator? what if it already has one
             var propertiesOnBase = model.Properties.Except(propertiesWithUnionType).ToArray();
-            var baseModel = model with
-            {
-                Properties = propertiesOnBase,
-            };
             // then we create new models using the above one as base model
             // first we need to get all possible combinations from the union type properties
             var candidates = propertiesWithUnionType.Select(property => ExpandProperty(property));
@@ -130,12 +127,12 @@ namespace AutoRest.CSharp.Output.Models
                 derivedModels.Add(model with
                 {
                     Name = derivedModelName,
-                    BaseModel = baseModel,
+                    BaseModel = model,
                     Properties = properties,
                 });
             }
 
-            return new ExpandedInputModelType(baseModel, derivedModels);
+            return new ExpandedInputModelType(model, derivedModels, propertiesOnBase);
         }
 
         private static IEnumerable<(InputModelProperty Property, InputType Type)> ExpandProperty(InputModelProperty property)
@@ -171,24 +168,26 @@ namespace AutoRest.CSharp.Output.Models
             return queue;
         }
 
-        private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
+        private static IReadOnlyList<InputModelType> GetInputModels(InputNamespace rootNamespace, Dictionary<InputModelType, ExpandedInputModelType> expandedModels)
         {
             // modify the model list with the expanded models
             var inputModels = new List<InputModelType>();
-            foreach (var model in _rootNamespace.Models)
+            foreach (var model in rootNamespace.Models)
             {
-                if (_expandedModelTypes.TryGetValue(model, out var expandedModelType))
+                inputModels.Add(model);
+                if (expandedModels.TryGetValue(model, out var expandedModelType))
                 {
-                    inputModels.Add(expandedModelType.BaseModel);
                     inputModels.AddRange(expandedModelType.ExpandedModels);
                 }
-                else
-                {
-                    inputModels.Add(model);
-                }
             }
+
+            return inputModels;
+        }
+
+        private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
+        {
             Dictionary<InputModelType, List<InputModelType>> derivedTypesLookup = new Dictionary<InputModelType, List<InputModelType>>();
-            foreach (var model in inputModels)
+            foreach (var model in _inputModels)
             {
                 if (model.BaseModel is null)
                     continue;
@@ -203,14 +202,20 @@ namespace AutoRest.CSharp.Output.Models
 
             Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
 
-            foreach (var model in inputModels)
+            foreach (var model in _inputModels)
             {
                 if (model.Usage != InputModelTypeUsage.None)
                 {
                     derivedTypesLookup.TryGetValue(model, out var children);
                     InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
                     ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
-                    models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
+                    IEnumerable<InputModelProperty>? modelPropertiesOverride = null;
+                    if (_expandedModelTypes.TryGetValue(model, out var expandedModelType))
+                    {
+                        modelPropertiesOverride = expandedModelType.PropertiesOnBaseModel;
+                    }
+                    var modelProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType, modelPropertiesOverride);
+                    models.Add(model, modelProvider);
                 }
             }
         }
