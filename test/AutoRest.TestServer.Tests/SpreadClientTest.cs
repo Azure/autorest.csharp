@@ -104,5 +104,38 @@ namespace AutoRest.TestServer.Tests
                 Assert.AreEqual("age", parameters[3].Name);
             }
         }
+
+        [Test]
+        public void SpreadAliasWithModelMethod()
+        {
+            var methods = typeof(SpreadClient).GetMethods();
+            var spreadMethods = methods.Where(m => m.Name.Equals("SpreadAliasWithModel"));
+            foreach (var method in spreadMethods)
+            {
+                var parameters = method.GetParameters();
+                Assert.AreEqual(parameters.Length, 4);
+                if (parameters[2].ParameterType.Name.Equals("RequestContent"))
+                    continue;
+                Assert.AreEqual("String", parameters[0].ParameterType.Name);
+                Assert.AreEqual("id", parameters[0].Name);
+                Assert.AreEqual("Int32", parameters[1].ParameterType.Name);
+                Assert.AreEqual("top", parameters[1].Name);
+                Assert.AreEqual("Thing", parameters[2].ParameterType.Name);
+            }
+
+            var spreadAsyncMethods = methods.Where(m => m.Name.Equals("SpreadAliasWithModelAsync"));
+            foreach (var method in spreadAsyncMethods)
+            {
+                var parameters = method.GetParameters();
+                Assert.GreaterOrEqual(parameters.Length, 4);
+                if (parameters[2].ParameterType.Name.Equals("RequestContent"))
+                    continue;
+                Assert.AreEqual("String", parameters[0].ParameterType.Name);
+                Assert.AreEqual("id", parameters[0].Name);
+                Assert.AreEqual("Int32", parameters[1].ParameterType.Name);
+                Assert.AreEqual("top", parameters[1].Name);
+                Assert.AreEqual("Thing", parameters[2].ParameterType.Name);
+            }
+        }
     }
 }
