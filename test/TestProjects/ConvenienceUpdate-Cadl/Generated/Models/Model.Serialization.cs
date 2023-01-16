@@ -11,8 +11,16 @@ using Azure.Core;
 
 namespace ConvenienceInCadl.Models
 {
-    public partial class Model
+    public partial class Model : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
+            writer.WriteEndObject();
+        }
+
         internal static Model DeserializeModel(JsonElement element)
         {
             string id = default;
@@ -33,6 +41,14 @@ namespace ConvenienceInCadl.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

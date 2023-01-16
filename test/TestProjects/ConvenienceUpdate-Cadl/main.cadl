@@ -1,53 +1,26 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi";
-import "@azure-tools/cadl-dpg";
+import "../ConvenienceInitial-Cadl/main.cadl";
 
-@serviceTitle("Convenience method in CADL")
-@serviceVersion("0.2.0")
-@doc("CADL project to test convenience method.")
 namespace ConvenienceInCadl;
 
 using Cadl.Http;
 using Cadl.Rest;
 using Azure.DPG;
 
-@doc("A model.")
-model Model {
-    id: string;
-}
-
-@route("/protocol")
-@doc("Initial operation only has protocol method. In the updated version, we add the convenience method.")
-@get
-@convenienceAPI
-op protocol(): Model;
-
-@route("/convenienceWithOptional")
-@doc("Initial operation has protocol method with optional RequestContext and convenience method. In the updated version, the method signature should not change.")
-@get
-@convenienceAPI
-op convenienceWithOptional(): Model;
-
-@route("/convenienceWithRequired")
-@doc("Initial operation has protocol method with required RequestContext and convenience method. In the updated version, the method signature should not change.")
-@get
-@convenienceAPI
-op convenienceWithRequired(): Model;
-
-@route("/convenienceShouldNotGenerate")
-@doc("Initial operation has protocol method marked with convenience method, but the convenience method should not be generated. In the updated version, the method signature should not change.")
-@get
-@convenienceAPI
-op convenienceShouldNotGenerate(): Response<200>;
-
-@route("/protocolShouldNotGenerateConvenience")
-@doc("Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.")
-@get
-@convenienceAPI
-op protocolShouldNotGenerateConvenience(): Response<200>;
+@@convenienceAPI(protocol)
+@@doc(protocol, "Initial operation only has protocol method. In the updated version, we add the convenience method.")
+@@convenienceAPI(protocolShouldNotGenerateConvenience)
+@@doc(protocolShouldNotGenerateConvenience, "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.")
+@@convenienceAPI(protocolOptionalQuery)
+@@doc(protocolOptionalQuery, "Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.")
+@@convenienceAPI(protocolRequiredQuery)
+@@doc(protocolRequiredQuery, "Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.")
+@@convenienceAPI(protocolOptionalModel)
+@@doc(protocolOptionalModel, "Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.")
+@@convenienceAPI(protocolRequiredModel)
+@@doc(protocolRequiredModel, "Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.")
 
 @route("/updateConvenience")
 @doc("No initial operation methods. In the updated version, we add the protocol method and convenience method.")
 @get
-@convenienceAPI
+@convenienceAPI()
 op updateConvenience(): Model;

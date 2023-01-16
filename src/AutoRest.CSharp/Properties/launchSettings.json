@@ -574,7 +574,7 @@
     },
     "Spread-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Spread-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Spread-Cadl\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\Spread-Cadl\\Generated"
     },
     "SubClients-LowLevel": {
       "commandName": "Project",

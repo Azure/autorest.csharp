@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="UpdateConvenienceAsync(RequestContext)">
+<example>
+This sample shows how to call UpdateConvenienceAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.UpdateConvenienceAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="UpdateConvenience(RequestContext)">
+<example>
+This sample shows how to call UpdateConvenience with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.UpdateConvenience();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
     <member name="ProtocolAsync(RequestContext)">
 <example>
 This sample shows how to call ProtocolAsync and parse the result.
@@ -195,13 +245,22 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="UpdateConvenienceAsync(RequestContext)">
+    <member name="ProtocolOptionalQueryAsync(Int32,RequestContext)">
 <example>
-This sample shows how to call UpdateConvenienceAsync with required parameters and parse the result.
+This sample shows how to call ProtocolOptionalQueryAsync and parse the result.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-Response response = await client.UpdateConvenienceAsync();
+Response response = await client.ProtocolOptionalQueryAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+This sample shows how to call ProtocolOptionalQueryAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.ProtocolOptionalQueryAsync(1234);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -220,13 +279,22 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="UpdateConvenience(RequestContext)">
+    <member name="ProtocolOptionalQuery(Int32,RequestContext)">
 <example>
-This sample shows how to call UpdateConvenience with required parameters and parse the result.
+This sample shows how to call ProtocolOptionalQuery and parse the result.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
-Response response = client.UpdateConvenience();
+Response response = client.ProtocolOptionalQuery();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+This sample shows how to call ProtocolOptionalQuery with all parameters, and how to parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.ProtocolOptionalQuery(1234);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -236,6 +304,598 @@ Console.WriteLine(result.GetProperty("id").ToString());
 Below is the JSON schema for the response payload.
 
 Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ProtocolRequiredQueryAsync(Int32,RequestContext)">
+<example>
+This sample shows how to call ProtocolRequiredQueryAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.ProtocolRequiredQueryAsync(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ProtocolRequiredQuery(Int32,RequestContext)">
+<example>
+This sample shows how to call ProtocolRequiredQuery with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.ProtocolRequiredQuery(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ProtocolOptionalModelAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ProtocolOptionalModelAsync with required request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ProtocolOptionalModelAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ProtocolOptionalModel(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ProtocolOptionalModel with required request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ProtocolOptionalModel(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ProtocolRequiredModelAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ProtocolRequiredModelAsync with required request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ProtocolRequiredModelAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ProtocolRequiredModel(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ProtocolRequiredModel with required request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ProtocolRequiredModel(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceOptionalQueryWithOptionalAsync(Int32,RequestContext)">
+<example>
+This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.ConvenienceOptionalQueryWithOptionalAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.ConvenienceOptionalQueryWithOptionalAsync(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceOptionalQueryWithOptional(Int32,RequestContext)">
+<example>
+This sample shows how to call ConvenienceOptionalQueryWithOptional and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.ConvenienceOptionalQueryWithOptional();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+This sample shows how to call ConvenienceOptionalQueryWithOptional with all parameters, and how to parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.ConvenienceOptionalQueryWithOptional(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceRequiredQueryWithOptionalAsync(Int32,RequestContext)">
+<example>
+This sample shows how to call ConvenienceRequiredQueryWithOptionalAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceRequiredQueryWithOptional(Int32,RequestContext)">
+<example>
+This sample shows how to call ConvenienceRequiredQueryWithOptional with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.ConvenienceRequiredQueryWithOptional(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceOptionalQueryWithRequiredAsync(Int32,RequestContext)">
+<example>
+This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceOptionalQueryWithRequired(Int32,RequestContext)">
+<example>
+This sample shows how to call ConvenienceOptionalQueryWithRequired with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.ConvenienceOptionalQueryWithRequired(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceRequiredQueryWithRequiredAsync(Int32,RequestContext)">
+<example>
+This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceRequiredQueryWithRequired(Int32,RequestContext)">
+<example>
+This sample shows how to call ConvenienceRequiredQueryWithRequired with required parameters and parse the result.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+Response response = client.ConvenienceRequiredQueryWithRequired(1234);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceOptionalModelWithOptionalAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with required request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ConvenienceOptionalModelWithOptionalAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceOptionalModelWithOptional(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ConvenienceOptionalModelWithOptional with required request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ConvenienceOptionalModelWithOptional(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceRequiredModelWithOptionalAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ConvenienceRequiredModelWithOptionalAsync with required request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ConvenienceRequiredModelWithOptionalAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceRequiredModelWithOptional(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ConvenienceRequiredModelWithOptional with required request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ConvenienceRequiredModelWithOptional(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ConvenienceOptionalModelWithRequiredAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ConvenienceOptionalModelWithRequired with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ConvenienceOptionalModelWithRequired(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceRequiredModelWithRequiredAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ConvenienceRequiredModelWithRequiredAsync with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ConvenienceRequiredModelWithRequiredAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceRequiredModelWithRequired(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ConvenienceRequiredModelWithRequired with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ConvenienceRequiredModelWithRequired(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
 
 Schema for <c>Model</c>:
 <code>{

@@ -1,3 +1,0 @@
-emitters:
-  "@azure-tools/cadl-csharp":
-    existing-project-folder: ../ConvenienceInitial-Cadl/Generated/

@@ -16,14 +16,14 @@ namespace ConvenienceInCadl.Models
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="id"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
-        internal Model(string id)
+        public Model(string id)
         {
             Argument.AssertNotNull(id, nameof(id));
 
             Id = id;
         }
 
-        /// <summary> Gets the id. </summary>
-        public string Id { get; }
+        /// <summary> Gets or sets the id. </summary>
+        public string Id { get; set; }
     }
 }

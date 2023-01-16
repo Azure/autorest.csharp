@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <Compile Include="../CadlRanchProjects/**/*.cs" LinkBase="CadlRanchProjects" />
-    <Compile Include="../TestProjects/*-Cadl/**/*.cs" LinkBase="TestProjects" />
+    <Compile Include="../TestProjects/*-Cadl/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-Cadl/**/*.cs" LinkBase="TestProjects" />
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
     <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
   </ItemGroup>

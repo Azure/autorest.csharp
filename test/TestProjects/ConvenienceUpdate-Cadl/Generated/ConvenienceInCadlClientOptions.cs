@@ -13,13 +13,13 @@ namespace ConvenienceInCadl
     /// <summary> Client options for ConvenienceInCadlClient. </summary>
     public partial class ConvenienceInCadlClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V0_2_0;
+        private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;
 
         /// <summary> The version of the service to use. </summary>
         public enum ServiceVersion
         {
-            /// <summary> Service version "0.2.0". </summary>
-            V0_2_0 = 1,
+            /// <summary> Service version "0.1.0". </summary>
+            V0_1_0 = 1,
         }
 
         internal string Version { get; }
@@ -29,7 +29,7 @@ namespace ConvenienceInCadl
         {
             Version = version switch
             {
-                ServiceVersion.V0_2_0 => "0.2.0",
+                ServiceVersion.V0_1_0 => "0.1.0",
                 _ => throw new NotSupportedException()
             };
         }

@@ -4,7 +4,9 @@
 using System.Linq;
 using System.Threading;
 using Azure;
+using Azure.Core;
 using ConvenienceInCadl;
+using ConvenienceInCadl.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -67,6 +69,138 @@ namespace AutoRest.TestServer.Tests
             var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("UpdateConvenience", new[] { typeof(CancellationToken) });
             Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
             Assert.IsNotNull(convenienceInUpdate);
+        }
+
+        [Test]
+        public void ProtocolOptionalQueryScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolOptionalQuery");
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolOptionalQueryValue");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(true, convenienceInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(typeof(RequestContext), protocolInUpdate.GetParameters().Last().ParameterType);
+            Assert.AreEqual(typeof(CancellationToken), convenienceInUpdate.GetParameters().Last().ParameterType);
+        }
+
+        [Test]
+        public void ProtocolRequiredQueryScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolRequiredQuery");
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolRequiredQueryValue");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(false, convenienceInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(typeof(RequestContext), protocolInUpdate.GetParameters().Last().ParameterType);
+            Assert.AreEqual(typeof(CancellationToken), convenienceInUpdate.GetParameters().Last().ParameterType);
+        }
+
+        [Test]
+        public void ProtocolOptionalModelScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolOptionalModel");
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolOptionalModelValue");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional); // This is RequestContent, which is actually optional.
+            Assert.AreEqual(true, convenienceInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(typeof(RequestContext), protocolInUpdate.GetParameters().Last().ParameterType);
+            Assert.AreEqual(typeof(CancellationToken), convenienceInUpdate.GetParameters().Last().ParameterType);
+        }
+
+        [Test]
+        public void ProtocolRequiredModelScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolRequiredModel", new[] { typeof(RequestContent), typeof(RequestContext) });
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolRequiredModel", new[] { typeof(Model), typeof(CancellationToken) });
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(false, convenienceInUpdate.GetParameters().First().IsOptional);
+        }
+
+        [Test]
+        public void ConvenienceOptionalQueryWithOptionalScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalQueryWithOptional");
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalQueryWithOptionalValue");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(true, convenienceInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(typeof(RequestContext), protocolInUpdate.GetParameters().Last().ParameterType);
+            Assert.AreEqual(typeof(CancellationToken), convenienceInUpdate.GetParameters().Last().ParameterType);
+        }
+
+        [Test]
+        public void ConvenienceRequiredQueryWithOptionalScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceRequiredQueryWithOptional");
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceRequiredQueryWithOptionalValue");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(false, convenienceInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(typeof(RequestContext), protocolInUpdate.GetParameters().Last().ParameterType);
+            Assert.AreEqual(typeof(CancellationToken), convenienceInUpdate.GetParameters().Last().ParameterType);
+        }
+
+        [Test]
+        public void ConvenienceOptionalQueryWithRequiredScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalQueryWithRequired", new[] { typeof(int), typeof(RequestContext) });
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalQueryWithRequired", new[] { typeof(int), typeof(CancellationToken) });
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(true, convenienceInUpdate.GetParameters().First().IsOptional);
+        }
+
+        [Test]
+        public void ConvenienceRequiredQueryWithRequiredScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceRequiredQueryWithRequired", new[] { typeof(int), typeof(RequestContext) });
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceRequiredQueryWithRequired", new[] { typeof(int), typeof(CancellationToken) });
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(false, convenienceInUpdate.GetParameters().First().IsOptional);
+        }
+
+        [Test]
+        public void ConvenienceOptionalModelWithOptionalScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalModelWithOptional");
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalModelWithOptionalValue");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional); // This is RequestContent, which is actually optional.
+            Assert.AreEqual(true, convenienceInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(typeof(RequestContext), protocolInUpdate.GetParameters().Last().ParameterType);
+            Assert.AreEqual(typeof(CancellationToken), convenienceInUpdate.GetParameters().Last().ParameterType);
+        }
+
+        [Test]
+        public void ConvenienceRequiredModelWithOptionalScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceRequiredModelWithOptional", new[] { typeof(RequestContent), typeof(RequestContext) });
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceRequiredModelWithOptional", new[] { typeof(Model), typeof(CancellationToken) });
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(false, convenienceInUpdate.GetParameters().First().IsOptional);
+        }
+
+        [Test]
+        public void ConvenienceOptionalModelWithRequiredScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalModelWithRequired", new[] { typeof(RequestContent), typeof(RequestContext) });
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalModelWithRequired", new[] { typeof(Model), typeof(CancellationToken) });
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional); // This is RequestContent, which is actually optional.
+            Assert.AreEqual(true, convenienceInUpdate.GetParameters().First().IsOptional);
+        }
+
+        [Test]
+        public void ConvenienceRequiredModelWithRequired()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceRequiredModelWithRequired", new[] { typeof(RequestContent), typeof(RequestContext) });
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceRequiredModelWithRequired", new[] { typeof(Model), typeof(CancellationToken) });
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional);
+            Assert.AreEqual(false, convenienceInUpdate.GetParameters().First().IsOptional);
         }
     }
 }

@@ -142,6 +142,21 @@ namespace AutoRest.CSharp.Output.Models
             return first!.Type.Equals(second!.Type);
         }
 
+        private bool IsParameterTypeHasValueOverlap(Parameter? first, Parameter? second)
+        {
+            if (IsParameterTypeSame(first, second))
+            {
+                return true;
+            }
+
+            if (first != null && second != null && first.Type.IsNullable && second.Type.IsNullable)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private ReturnTypeChain BuildReturnTypes()
         {
             var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
@@ -213,7 +228,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private ConvenienceMethod BuildConvenienceMethod(bool shouldOverloadConvenienceMethod)
         {
-            bool needNameChange = !shouldOverloadConvenienceMethod && _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));
+            bool needNameChange = !shouldOverloadConvenienceMethod && _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeHasValueOverlap(parameter.Convenience, parameter.Protocol));
             string name = _restClientMethod.Name;
             if (needNameChange)
             {
