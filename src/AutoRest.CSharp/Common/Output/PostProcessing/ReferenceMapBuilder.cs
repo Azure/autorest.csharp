@@ -57,13 +57,15 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             // process myself, adding base and generic arguments
             AddTypeSymbol(symbol, symbol, referenceMap);
 
+            var derivedSymbols = await SymbolFinder.FindDerivedClassesAsync(symbol, _project.Solution);
             // add my sibling classes
             foreach (var declaration in cache[symbol])
             {
+                // if this type has a discriminator, we add all its implementations
                 if (_hasDiscriminatorFunc(declaration, out var identifierCandidates))
                 {
                     // first find all the derived types from this type
-                    foreach (var derivedTypeSymbol in await SymbolFinder.FindDerivedClassesAsync(symbol, _project.Solution))
+                    foreach (var derivedTypeSymbol in derivedSymbols)
                     {
                         if (identifierCandidates.Contains(derivedTypeSymbol.Name))
                         {
