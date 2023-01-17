@@ -174,7 +174,7 @@
      "$id": "23",
      "Name": "spreadModel",
      "ResourceName": "Spread",
-     "Description": "body parameter without body decorator",
+     "Description": "spread a model as body.",
      "Parameters": [
       {
        "$id": "24",
@@ -335,7 +335,7 @@
      "$id": "40",
      "Name": "spreadAlias",
      "ResourceName": "Spread",
-     "Description": "body parameter without body decorator",
+     "Description": "spread an alias as body.",
      "Parameters": [
       {
        "$ref": "24"
@@ -440,7 +440,7 @@
      "$id": "49",
      "Name": "spreadMultiTargetAlias",
      "ResourceName": "Spread",
-     "Description": "body parameter without body decorator",
+     "Description": "spread an alias which has multiple target property as body.",
      "Parameters": [
       {
        "$ref": "24"
@@ -585,7 +585,7 @@
      "$id": "62",
      "Name": "spreadAliasWithModel",
      "ResourceName": "Spread",
-     "Description": "body parameter without body decorator",
+     "Description": "spread an alias which contains a complex model property as body.",
      "Parameters": [
       {
        "$ref": "24"
@@ -730,7 +730,7 @@
      "$id": "75",
      "Name": "spreadAliasWithSpreadAlias",
      "ResourceName": "Spread",
-     "Description": "body parameter without body decorator",
+     "Description": "spread an alias with contains another alias property as body.",
      "Parameters": [
       {
        "$ref": "24"

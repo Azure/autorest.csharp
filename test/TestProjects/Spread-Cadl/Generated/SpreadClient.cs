@@ -88,7 +88,7 @@ namespace Spread
             _apiVersion = options.Version;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread a model as body. </summary>
         /// <param name="thing"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
@@ -101,7 +101,7 @@ namespace Spread
             return response;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread a model as body. </summary>
         /// <param name="thing"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
@@ -114,7 +114,7 @@ namespace Spread
             return response;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread a model as body. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -139,7 +139,7 @@ namespace Spread
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread a model as body. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -164,7 +164,7 @@ namespace Spread
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias as body. </summary>
         /// <param name="name"></param>
         /// <param name="age"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -179,7 +179,7 @@ namespace Spread
             return response;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias as body. </summary>
         /// <param name="name"></param>
         /// <param name="age"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -194,7 +194,7 @@ namespace Spread
             return response;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias as body. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -219,7 +219,7 @@ namespace Spread
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias as body. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -244,7 +244,7 @@ namespace Spread
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias which has multiple target property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="name"></param>
@@ -263,7 +263,7 @@ namespace Spread
             return response;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias which has multiple target property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="name"></param>
@@ -282,7 +282,7 @@ namespace Spread
             return response;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias which has multiple target property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -311,7 +311,7 @@ namespace Spread
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias which has multiple target property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -340,7 +340,7 @@ namespace Spread
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias which contains a complex model property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="thing"> The Thing to use. </param>
@@ -357,7 +357,7 @@ namespace Spread
             return response;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias which contains a complex model property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="thing"> The Thing to use. </param>
@@ -374,7 +374,7 @@ namespace Spread
             return response;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias which contains a complex model property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -403,7 +403,7 @@ namespace Spread
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias which contains a complex model property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -432,7 +432,7 @@ namespace Spread
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias with contains another alias property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="name"></param>
@@ -451,7 +451,7 @@ namespace Spread
             return response;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias with contains another alias property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="name"></param>
@@ -470,7 +470,7 @@ namespace Spread
             return response;
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias with contains another alias property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -499,7 +499,7 @@ namespace Spread
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> spread an alias with contains another alias property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
