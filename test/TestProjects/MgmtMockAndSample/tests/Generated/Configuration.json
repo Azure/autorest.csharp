@@ -34,8 +34,8 @@
   },
   "testgen": {
     "SkippedOperations": [
-      "Vaults_GetDeleted",
-      "Vaults_Update"
+      "Vaults_Update",
+      "Vaults_GetDeleted"
     ],
     "Mock": true,
     "Sample": true
