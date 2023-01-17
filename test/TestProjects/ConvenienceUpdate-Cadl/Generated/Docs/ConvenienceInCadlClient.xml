@@ -51,6 +51,60 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
+    <member name="ConvenienceOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)">
+<example>
+This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ConvenienceOptionalBeforeRequiredAsync(RequestContent.Create(data), 1234);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ConvenienceOptionalBeforeRequired(RequestContent,Int32,RequestContext)">
+<example>
+This sample shows how to call ConvenienceOptionalBeforeRequired with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ConvenienceOptionalBeforeRequired(RequestContent.Create(data), 1234);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
     <member name="ProtocolAsync(RequestContext)">
 <example>
 This sample shows how to call ProtocolAsync and parse the result.
@@ -889,6 +943,82 @@ var data = new {
 };
 
 Response response = client.ConvenienceRequiredModelWithRequired(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ProtocolOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)">
+<example>
+This sample shows how to call ProtocolOptionalBeforeRequiredAsync with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ProtocolOptionalBeforeRequiredAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ProtocolOptionalBeforeRequiredAsync with all parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ProtocolOptionalBeforeRequiredAsync(RequestContent.Create(data), 1234);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ProtocolOptionalBeforeRequired(RequestContent,Int32,RequestContext)">
+<example>
+This sample shows how to call ProtocolOptionalBeforeRequired with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ProtocolOptionalBeforeRequired(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ProtocolOptionalBeforeRequired with all parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ProtocolOptionalBeforeRequired(RequestContent.Create(data), 1234);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

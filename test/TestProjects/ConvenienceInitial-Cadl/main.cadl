@@ -111,3 +111,8 @@ op convenienceOptionalModelWithRequired(@body optional?: Model): Response<200>;
 @post
 @convenienceAPI
 op convenienceRequiredModelWithRequired(@body required: Model): Response<200>;
+
+@route("/protocolOptionalBeforeRequired")
+@doc("Operation has protocol method with optioanl parameter before required parameter and convenience method.")
+@post
+op protocolOptionalBeforeRequired(@query optional?: int32, @body required: Model): Response<200>;

@@ -855,5 +855,81 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
+    <member name="ProtocolOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)">
+<example>
+This sample shows how to call ProtocolOptionalBeforeRequiredAsync with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ProtocolOptionalBeforeRequiredAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ProtocolOptionalBeforeRequiredAsync with all parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = await client.ProtocolOptionalBeforeRequiredAsync(RequestContent.Create(data), 1234);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ProtocolOptionalBeforeRequired(RequestContent,Int32,RequestContext)">
+<example>
+This sample shows how to call ProtocolOptionalBeforeRequired with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ProtocolOptionalBeforeRequired(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ProtocolOptionalBeforeRequired with all parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ProtocolOptionalBeforeRequired(RequestContent.Create(data), 1234);
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>Model</c>:
+<code>{
+  id: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
   </members>
 </doc>

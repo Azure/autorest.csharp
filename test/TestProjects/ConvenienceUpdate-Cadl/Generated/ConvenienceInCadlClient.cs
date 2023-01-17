@@ -110,6 +110,88 @@ namespace ConvenienceInCadl
             }
         }
 
+        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
+        /// <param name="required"> The Model to use. </param>
+        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
+        public virtual async Task<Response> ConvenienceOptionalBeforeRequiredAsync(Model required, int? optional = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(required, nameof(required));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ConvenienceOptionalBeforeRequiredAsync(required.ToRequestContent(), optional, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
+        /// <param name="required"> The Model to use. </param>
+        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
+        public virtual Response ConvenienceOptionalBeforeRequired(Model required, int? optional = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(required, nameof(required));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ConvenienceOptionalBeforeRequired(required.ToRequestContent(), optional, context);
+            return response;
+        }
+
+        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)']/*" />
+        public virtual async Task<Response> ConvenienceOptionalBeforeRequiredAsync(RequestContent content, int? optional, RequestContext context)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(context, nameof(context));
+
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalBeforeRequired");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateConvenienceOptionalBeforeRequiredRequest(content, optional, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequired(RequestContent,Int32,RequestContext)']/*" />
+        public virtual Response ConvenienceOptionalBeforeRequired(RequestContent content, int? optional, RequestContext context)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(context, nameof(context));
+
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalBeforeRequired");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateConvenienceOptionalBeforeRequiredRequest(content, optional, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Operation only has protocol method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Model>> ProtocolValueAsync(CancellationToken cancellationToken = default)
@@ -1364,6 +1446,86 @@ namespace ConvenienceInCadl
             }
         }
 
+        /// <summary> Operation has protocol method with optioanl parameter before required parameter and convenience method. </summary>
+        /// <param name="required"> The Model to use. </param>
+        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
+        public virtual async Task<Response> ProtocolOptionalBeforeRequiredAsync(Model required, int? optional = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(required, nameof(required));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ProtocolOptionalBeforeRequiredAsync(required.ToRequestContent(), optional, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Operation has protocol method with optioanl parameter before required parameter and convenience method. </summary>
+        /// <param name="required"> The Model to use. </param>
+        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
+        public virtual Response ProtocolOptionalBeforeRequired(Model required, int? optional = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(required, nameof(required));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ProtocolOptionalBeforeRequired(required.ToRequestContent(), optional, context);
+            return response;
+        }
+
+        /// <summary> Operation has protocol method with optioanl parameter before required parameter and convenience method. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)']/*" />
+        public virtual async Task<Response> ProtocolOptionalBeforeRequiredAsync(RequestContent content, int? optional = null, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalBeforeRequired");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateProtocolOptionalBeforeRequiredRequest(content, optional, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Operation has protocol method with optioanl parameter before required parameter and convenience method. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequired(RequestContent,Int32,RequestContext)']/*" />
+        public virtual Response ProtocolOptionalBeforeRequired(RequestContent content, int? optional = null, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalBeforeRequired");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateProtocolOptionalBeforeRequiredRequest(content, optional, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateUpdateConvenienceRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1374,6 +1536,25 @@ namespace ConvenienceInCadl
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateConvenienceOptionalBeforeRequiredRequest(RequestContent content, int? optional, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/convenienceOptionalBeforeRequired", false);
+            if (optional != null)
+            {
+                uri.AppendQuery("optional", optional.Value, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 
@@ -1617,6 +1798,25 @@ namespace ConvenienceInCadl
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/convenienceRequiredModelWithRequired", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateProtocolOptionalBeforeRequiredRequest(RequestContent content, int? optional, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/protocolOptionalBeforeRequired", false);
+            if (optional != null)
+            {
+                uri.AppendQuery("optional", optional.Value, true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

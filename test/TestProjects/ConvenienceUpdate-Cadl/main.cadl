@@ -18,9 +18,17 @@ using Azure.DPG;
 @@doc(protocolOptionalModel, "Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.")
 @@convenienceAPI(protocolRequiredModel)
 @@doc(protocolRequiredModel, "Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.")
+@@convenienceAPI(protocolOptionalBeforeRequired)
+@@doc(protocolOptionalBeforeRequired, "Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.")
 
 @route("/updateConvenience")
 @doc("No initial operation methods. In the updated version, we add the protocol method and convenience method.")
 @get
 @convenienceAPI()
 op updateConvenience(): Model;
+
+@route("/convenienceOptionalBeforeRequired")
+@doc("No initial operation methods. In the updated version, we add the protocol method and convenience method.")
+@post
+@convenienceAPI()
+op convenienceOptionalBeforeRequired(@query optional?: int32, @body required: Model): Response<200>;
