@@ -199,7 +199,7 @@ namespace AutoRest.CSharp.Output.Models
             var parameterList = new List<Parameter>();
             foreach (var parameterChain in _orderedParameters)
             {
-                if (parameterChain.Input?.Kind == InputOperationParameterKind.Flatten)
+                if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
                 {
                     InputType type = parameterChain.Input.Type;
                     if (type is InputModelType modelType)

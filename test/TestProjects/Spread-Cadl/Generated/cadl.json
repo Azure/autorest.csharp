@@ -344,7 +344,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Flatten"
+       "Kind": "Spread"
       },
       {
        "$id": "40",
@@ -489,7 +489,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Flatten"
+       "Kind": "Spread"
       },
       {
        "$id": "53",
@@ -779,7 +779,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Flatten"
+       "Kind": "Spread"
       },
       {
        "$id": "79",

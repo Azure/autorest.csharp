@@ -266,7 +266,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var parameterChain in convenienceMethod.ProtocolToConvenienceParameters)
             {
-                if (parameterChain.Input?.Kind == InputOperationParameterKind.Flatten)
+                if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
                 {
                     var type = parameterChain.Convenience?.Type;
                     var paraName = parameterChain.Convenience?.Name;

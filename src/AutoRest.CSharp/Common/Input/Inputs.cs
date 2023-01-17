@@ -216,7 +216,7 @@ namespace AutoRest.CSharp.Common.Input
         Client = 1,
         Constant = 2,
         Flattened = 3,
-        Flatten = 4,
+        Spread = 4,
         Grouped = 5,
     }
 
