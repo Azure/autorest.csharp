@@ -5,8 +5,8 @@
 <example>
 This sample shows how to call SpreadModelAsync with required request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new SpreadClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -35,8 +35,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call SpreadModel with required request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new SpreadClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -65,8 +65,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call SpreadAliasAsync with required request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new SpreadClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -95,8 +95,8 @@ Schema for <c>SpreadAliasRequest</c>:
 <example>
 This sample shows how to call SpreadAlias with required request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new SpreadClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -125,8 +125,8 @@ Schema for <c>SpreadAliasRequest</c>:
 <example>
 This sample shows how to call SpreadMultiTargetAliasAsync with required parameters and request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new SpreadClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -155,8 +155,8 @@ Schema for <c>SpreadMultiTargetAliasRequest</c>:
 <example>
 This sample shows how to call SpreadMultiTargetAlias with required parameters and request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new SpreadClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -185,8 +185,8 @@ Schema for <c>SpreadMultiTargetAliasRequest</c>:
 <example>
 This sample shows how to call SpreadAliasWithModelAsync with required parameters and request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new SpreadClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -215,8 +215,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call SpreadAliasWithModel with required parameters and request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new SpreadClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -245,8 +245,8 @@ Schema for <c>Thing</c>:
 <example>
 This sample shows how to call SpreadAliasWithSpreadAliasAsync with required parameters and request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new SpreadClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
 
 var data = new {
     name = "<name>",
@@ -275,8 +275,8 @@ Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 <example>
 This sample shows how to call SpreadAliasWithSpreadAlias with required parameters and request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new SpreadClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
 
 var data = new {
     name = "<name>",
