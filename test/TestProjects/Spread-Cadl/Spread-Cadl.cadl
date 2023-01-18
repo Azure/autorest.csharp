@@ -1,0 +1,91 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Versioning;
+using Cadl.Http;
+using Azure.DPG;
+using Azure.Core;
+
+@service({title: "Spread"})
+@versioned(QueryApiVersion)
+@doc("This is a spread model or alias service.")
+@server(
+    "{spreadUrl}",
+    "Endpoint Service",
+    {
+        spreadUrl: string,
+    }
+)
+
+namespace Spread;
+
+enum QueryApiVersion {
+  v2022_01_01_preview: "2022-01-01-preview"
+}
+
+model Thing {
+  @doc("name of the Thing")
+  name: string;
+  @doc("age of the Thing")
+  age: int32;
+}
+
+alias ThingAlias = {
+  @doc("name of the Thing")
+  name: string;
+  @doc("age of the Thing")
+  age: int32;
+};
+
+alias ThingAliasWithModel = {
+  @path id: string;
+  ...Thing;
+  @header top: int32;
+};
+
+alias ThingMultiTargetAlias = {
+  @path id: string;
+  @doc("name of the Thing")
+  name: string;
+  @doc("age of the Thing")
+  age: int32;
+  @header top: int32;
+};
+
+alias ThingAliasWithSpreadAlias = {
+  @path id: string;
+  ...ThingAlias;
+  @header top: int32;
+};
+
+@route("/spreadModel")
+@doc("spread a model as body.")
+@post
+@convenienceAPI
+op spreadModel( ...Thing ): void;
+
+@route("/spreadAlias")
+@doc("spread an alias as body.")
+@post
+@convenienceAPI
+op spreadAlias( ...ThingAlias ): void;
+
+@route("/spreadMultiTargetAlias")
+@doc("spread an alias which has multiple target property as body.")
+@post
+@convenienceAPI
+op spreadMultiTargetAlias( ...ThingMultiTargetAlias ): void;
+
+@route("/spreadAliasWithModel")
+@doc("spread an alias which contains a complex model property as body.")
+@post
+@convenienceAPI
+op spreadAliasWithModel( ...ThingAliasWithModel ): void;
+
+@route("/spreadAliasWithSpreadAlias")
+@doc("spread an alias with contains another alias property as body.")
+@post
+@convenienceAPI
+op spreadAliasWithSpreadAlias( ...ThingAliasWithSpreadAlias ): void;

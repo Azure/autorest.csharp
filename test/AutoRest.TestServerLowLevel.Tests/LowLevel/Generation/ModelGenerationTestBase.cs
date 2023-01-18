@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         [OneTimeSetUp]
         public void init()
         {
-            Configuration.Initialize("Generated", "", "", new string[] { }, false, false, true, false, false, false, false, false, false, false, false, Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize, ".", new string[] { }, new List<string>(), null);
+            Configuration.Initialize("Generated", "", "", new string[] { }, false, false, true, false, false, false, false, false, false, false, false, Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize, ".", new string[] { }, new List<string>(), null, null);
         }
 
 

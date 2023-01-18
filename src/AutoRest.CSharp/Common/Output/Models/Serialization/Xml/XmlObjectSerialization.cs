@@ -6,7 +6,7 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Xml
 {
-    internal class XmlObjectSerialization: XmlElementSerialization
+    internal class XmlObjectSerialization
     {
         public XmlObjectSerialization(string name,
             CSharpType type,
@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
             ContentSerialization = contentSerialization;
         }
 
-        public override string Name { get; }
+        public string Name { get; }
         public XmlObjectElementSerialization[] Elements { get; }
         public XmlObjectAttributeSerialization[] Attributes { get; }
         public XmlObjectArraySerialization[] EmbeddedArrays { get; }

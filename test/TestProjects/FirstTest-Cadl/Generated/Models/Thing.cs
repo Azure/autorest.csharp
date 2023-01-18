@@ -15,15 +15,25 @@ namespace CadlFirstTest.Models
     {
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Thing(string name)
+        /// <param name="requiredUnion"></param>
+        /// <param name="requiredLiteral"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredLiteral"/> is null. </exception>
+        public Thing(string name, string requiredUnion, string requiredLiteral)
         {
             Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
 
             Name = name;
+            RequiredUnion = requiredUnion;
+            RequiredLiteral = requiredLiteral;
         }
 
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
+        /// <summary> Gets or sets the required union. </summary>
+        public string RequiredUnion { get; set; }
+        /// <summary> Gets or sets the required literal. </summary>
+        public string RequiredLiteral { get; set; }
     }
 }

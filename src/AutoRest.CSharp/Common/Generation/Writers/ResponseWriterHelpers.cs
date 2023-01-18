@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public static void WriteStatusCodeSwitch(CodeWriter writer, string messageVariableName, RestClientMethod operation, bool async, FieldDeclaration? clientDiagnosticsField)
         {
-            string responseVariable = $"{messageVariableName}.Response";
+            FormattableString responseVariable = $"{messageVariableName}.Response";
 
             var returnType = operation.ReturnType;
             var headersModelType = operation.HeaderModel?.Type;
@@ -74,12 +74,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             case ObjectResponseBody objectResponseBody:
                                 writer.Line($"{responseBody.Type} {valueVariable:D} = default;");
-                                writer.WriteDeserializationForMethods(
-                                    objectResponseBody.Serialization,
-                                    async,
-                                    v => writer.Line($"{valueVariable} = {v};"),
-                                    responseVariable,
-                                    objectResponseBody.Type);
+                                writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async, valueVariable, responseVariable, objectResponseBody.Type);
                                 value = new Reference(valueVariable.ActualName, responseBody.Type);
                                 break;
                             case StreamResponseBody _:

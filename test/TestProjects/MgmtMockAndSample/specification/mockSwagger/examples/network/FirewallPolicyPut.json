@@ -17,6 +17,7 @@
           "periodSeconds": 10,
           "failureThreshold": 3
         },
+        "desiredStatusCode": 202,
         "threatIntelMode": "Alert",
         "threatIntelWhitelist": {
           "ipAddresses": [

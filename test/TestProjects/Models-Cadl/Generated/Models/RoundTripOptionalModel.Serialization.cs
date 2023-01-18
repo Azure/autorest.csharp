@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,21 +13,162 @@ using Azure.Core;
 
 namespace ModelsInCadl.Models
 {
-    public partial class RoundTripOptionalModel
+    public partial class RoundTripOptionalModel : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(OptionalString))
+            {
+                writer.WritePropertyName("optionalString");
+                writer.WriteStringValue(OptionalString);
+            }
+            if (Optional.IsDefined(OptionalInt))
+            {
+                if (OptionalInt != null)
+                {
+                    writer.WritePropertyName("optionalInt");
+                    writer.WriteNumberValue(OptionalInt.Value);
+                }
+                else
+                {
+                    writer.WriteNull("optionalInt");
+                }
+            }
+            if (Optional.IsCollectionDefined(OptionalStringList))
+            {
+                writer.WritePropertyName("optionalStringList");
+                writer.WriteStartArray();
+                foreach (var item in OptionalStringList)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(OptionalIntList))
+            {
+                writer.WritePropertyName("optionalIntList");
+                writer.WriteStartArray();
+                foreach (var item in OptionalIntList)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(OptionalModelCollection))
+            {
+                writer.WritePropertyName("optionalModelCollection");
+                writer.WriteStartArray();
+                foreach (var item in OptionalModelCollection)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(OptionalModel))
+            {
+                writer.WritePropertyName("optionalModel");
+                writer.WriteObjectValue(OptionalModel);
+            }
+            if (Optional.IsDefined(OptionalFixedStringEnum))
+            {
+                if (OptionalFixedStringEnum != null)
+                {
+                    writer.WritePropertyName("optionalFixedStringEnum");
+                    writer.WriteStringValue(OptionalFixedStringEnum.Value.ToSerialString());
+                }
+                else
+                {
+                    writer.WriteNull("optionalFixedStringEnum");
+                }
+            }
+            if (Optional.IsDefined(OptionalExtensibleEnum))
+            {
+                if (OptionalExtensibleEnum != null)
+                {
+                    writer.WritePropertyName("optionalExtensibleEnum");
+                    writer.WriteStringValue(OptionalExtensibleEnum.Value.ToString());
+                }
+                else
+                {
+                    writer.WriteNull("optionalExtensibleEnum");
+                }
+            }
+            if (Optional.IsCollectionDefined(OptionalIntRecord))
+            {
+                writer.WritePropertyName("optionalIntRecord");
+                writer.WriteStartObject();
+                foreach (var item in OptionalIntRecord)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteNumberValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (Optional.IsCollectionDefined(OptionalStringRecord))
+            {
+                writer.WritePropertyName("optionalStringRecord");
+                writer.WriteStartObject();
+                foreach (var item in OptionalStringRecord)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (Optional.IsCollectionDefined(OptionalModelRecord))
+            {
+                writer.WritePropertyName("optionalModelRecord");
+                writer.WriteStartObject();
+                foreach (var item in OptionalModelRecord)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (Optional.IsDefined(OptionalPlainDate))
+            {
+                if (OptionalPlainDate != null)
+                {
+                    writer.WritePropertyName("optionalPlainDate");
+                    writer.WriteStringValue(OptionalPlainDate.Value, "D");
+                }
+                else
+                {
+                    writer.WriteNull("optionalPlainDate");
+                }
+            }
+            if (Optional.IsDefined(OptionalPlainTime))
+            {
+                if (OptionalPlainTime != null)
+                {
+                    writer.WritePropertyName("optionalPlainTime");
+                    writer.WriteStringValue(OptionalPlainTime.Value, "T");
+                }
+                else
+                {
+                    writer.WriteNull("optionalPlainTime");
+                }
+            }
+            writer.WriteEndObject();
+        }
+
         internal static RoundTripOptionalModel DeserializeRoundTripOptionalModel(JsonElement element)
         {
             Optional<string> optionalString = default;
             Optional<int?> optionalInt = default;
-            Optional<IReadOnlyList<string>> optionalStringList = default;
-            Optional<IReadOnlyList<int>> optionalIntList = default;
-            IReadOnlyList<CollectionItem> optionalModelCollection = default;
+            Optional<IList<string>> optionalStringList = default;
+            Optional<IList<int>> optionalIntList = default;
+            Optional<IList<CollectionItem>> optionalModelCollection = default;
             Optional<DerivedModel> optionalModel = default;
-            FixedStringEnum optionalFixedStringEnum = default;
-            ExtensibleEnum optionalExtensibleEnum = default;
-            Optional<IReadOnlyDictionary<string, int>> optionalIntRecord = default;
-            Optional<IReadOnlyDictionary<string, string>> optionalStringRecord = default;
-            Optional<IReadOnlyDictionary<string, RecordItem>> optionalModelRecord = default;
+            Optional<FixedStringEnum?> optionalFixedStringEnum = default;
+            Optional<ExtensibleEnum?> optionalExtensibleEnum = default;
+            Optional<IDictionary<string, int>> optionalIntRecord = default;
+            Optional<IDictionary<string, string>> optionalStringRecord = default;
+            Optional<IDictionary<string, RecordItem>> optionalModelRecord = default;
+            Optional<DateTimeOffset?> optionalPlainDate = default;
+            Optional<TimeSpan?> optionalPlainTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("optionalString"))
@@ -76,6 +218,11 @@ namespace ModelsInCadl.Models
                 }
                 if (property.NameEquals("optionalModelCollection"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -96,11 +243,21 @@ namespace ModelsInCadl.Models
                 }
                 if (property.NameEquals("optionalFixedStringEnum"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        optionalFixedStringEnum = null;
+                        continue;
+                    }
                     optionalFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
                     continue;
                 }
                 if (property.NameEquals("optionalExtensibleEnum"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        optionalExtensibleEnum = null;
+                        continue;
+                    }
                     optionalExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
                     continue;
                 }
@@ -149,8 +306,28 @@ namespace ModelsInCadl.Models
                     optionalModelRecord = dictionary;
                     continue;
                 }
+                if (property.NameEquals("optionalPlainDate"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        optionalPlainDate = null;
+                        continue;
+                    }
+                    optionalPlainDate = property.Value.GetDateTimeOffset("D");
+                    continue;
+                }
+                if (property.NameEquals("optionalPlainTime"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        optionalPlainTime = null;
+                        continue;
+                    }
+                    optionalPlainTime = property.Value.GetTimeSpan("T");
+                    continue;
+                }
             }
-            return new RoundTripOptionalModel(optionalString, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), optionalModelCollection, optionalModel, optionalFixedStringEnum, optionalExtensibleEnum, Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord));
+            return new RoundTripOptionalModel(optionalString, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelCollection), optionalModel, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
@@ -159,6 +336,14 @@ namespace ModelsInCadl.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeRoundTripOptionalModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

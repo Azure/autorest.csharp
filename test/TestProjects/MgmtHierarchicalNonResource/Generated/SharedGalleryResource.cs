@@ -98,8 +98,16 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary>
         /// Get a shared gallery by subscription id or tenant id.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// Operation Id: SharedGalleries_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SharedGalleries_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SharedGalleryResource>> GetAsync(CancellationToken cancellationToken = default)
@@ -123,8 +131,16 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary>
         /// Get a shared gallery by subscription id or tenant id.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// Operation Id: SharedGalleries_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SharedGalleries_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SharedGalleryResource> Get(CancellationToken cancellationToken = default)
@@ -148,94 +164,62 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary>
         /// List shared gallery images by subscription id or tenant id.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images
-        /// Operation Id: SharedGalleryImages_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SharedGalleryImages_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SharedGalleryImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SharedGalleryImage> GetSharedGalleryImagesAsync(SharedToValue? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<SharedGalleryImage>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _sharedGalleryImagesClientDiagnostics.CreateScope("SharedGalleryResource.GetSharedGalleryImages");
-                scope.Start();
-                try
-                {
-                    var response = await _sharedGalleryImagesRestClient.ListAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<SharedGalleryImage>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _sharedGalleryImagesClientDiagnostics.CreateScope("SharedGalleryResource.GetSharedGalleryImages");
-                scope.Start();
-                try
-                {
-                    var response = await _sharedGalleryImagesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImagesRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImagesRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, SharedGalleryImage.DeserializeSharedGalleryImage, _sharedGalleryImagesClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImages", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
         /// List shared gallery images by subscription id or tenant id.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images
-        /// Operation Id: SharedGalleryImages_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SharedGalleryImages_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SharedGalleryImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SharedGalleryImage> GetSharedGalleryImages(SharedToValue? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            Page<SharedGalleryImage> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _sharedGalleryImagesClientDiagnostics.CreateScope("SharedGalleryResource.GetSharedGalleryImages");
-                scope.Start();
-                try
-                {
-                    var response = _sharedGalleryImagesRestClient.List(Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<SharedGalleryImage> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _sharedGalleryImagesClientDiagnostics.CreateScope("SharedGalleryResource.GetSharedGalleryImages");
-                scope.Start();
-                try
-                {
-                    var response = _sharedGalleryImagesRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImagesRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImagesRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, SharedGalleryImage.DeserializeSharedGalleryImage, _sharedGalleryImagesClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImages", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
         /// Get a shared gallery image by subscription id or tenant id.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}
-        /// Operation Id: SharedGalleryImages_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SharedGalleryImages_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -261,8 +245,16 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary>
         /// Get a shared gallery image by subscription id or tenant id.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}
-        /// Operation Id: SharedGalleryImages_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SharedGalleryImages_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -288,8 +280,16 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary>
         /// List shared gallery image versions by subscription id or tenant id.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions
-        /// Operation Id: SharedGalleryImageVersions_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SharedGalleryImageVersions_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
@@ -301,43 +301,23 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
-            async Task<Page<SharedGalleryImageVersion>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _sharedGalleryImageVersionsClientDiagnostics.CreateScope("SharedGalleryResource.GetSharedGalleryImageVersions");
-                scope.Start();
-                try
-                {
-                    var response = await _sharedGalleryImageVersionsRestClient.ListAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<SharedGalleryImageVersion>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _sharedGalleryImageVersionsClientDiagnostics.CreateScope("SharedGalleryResource.GetSharedGalleryImageVersions");
-                scope.Start();
-                try
-                {
-                    var response = await _sharedGalleryImageVersionsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImageVersionsRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImageVersionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion, _sharedGalleryImageVersionsClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImageVersions", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
         /// List shared gallery image versions by subscription id or tenant id.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions
-        /// Operation Id: SharedGalleryImageVersions_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SharedGalleryImageVersions_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
@@ -349,43 +329,23 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
-            Page<SharedGalleryImageVersion> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _sharedGalleryImageVersionsClientDiagnostics.CreateScope("SharedGalleryResource.GetSharedGalleryImageVersions");
-                scope.Start();
-                try
-                {
-                    var response = _sharedGalleryImageVersionsRestClient.List(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<SharedGalleryImageVersion> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _sharedGalleryImageVersionsClientDiagnostics.CreateScope("SharedGalleryResource.GetSharedGalleryImageVersions");
-                scope.Start();
-                try
-                {
-                    var response = _sharedGalleryImageVersionsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImageVersionsRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImageVersionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion, _sharedGalleryImageVersionsClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImageVersions", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
         /// Get a shared gallery image version by subscription id or tenant id.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}
-        /// Operation Id: SharedGalleryImageVersions_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SharedGalleryImageVersions_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="galleryImageVersionName"> The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: &lt;MajorVersion&gt;.&lt;MinorVersion&gt;.&lt;Patch&gt;. </param>
@@ -413,8 +373,16 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary>
         /// Get a shared gallery image version by subscription id or tenant id.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}
-        /// Operation Id: SharedGalleryImageVersions_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SharedGalleryImageVersions_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="galleryImageVersionName"> The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: &lt;MajorVersion&gt;.&lt;MinorVersion&gt;.&lt;Patch&gt;. </param>

@@ -150,74 +150,18 @@ namespace Azure.Network.Management.Interface
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<NetworkInterface> ListAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<NetworkInterface>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.ListAllAsync(cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<NetworkInterface>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.ListAllNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListAllRequest();
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListAllNextPageRequest(nextLink);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, NetworkInterface.DeserializeNetworkInterface, _clientDiagnostics, _pipeline, "NetworkInterfacesClient.ListAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary> Gets all network interfaces in a subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<NetworkInterface> ListAll(CancellationToken cancellationToken = default)
         {
-            Page<NetworkInterface> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.ListAll(cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<NetworkInterface> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.ListAllNextPage(nextLink, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListAllRequest();
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListAllNextPageRequest(nextLink);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, NetworkInterface.DeserializeNetworkInterface, _clientDiagnostics, _pipeline, "NetworkInterfacesClient.ListAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary> Gets all network interfaces in a resource group. </summary>
@@ -226,42 +170,11 @@ namespace Azure.Network.Management.Interface
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public virtual AsyncPageable<NetworkInterface> ListAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
-            async Task<Page<NetworkInterface>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.List");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.ListAsync(resourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<NetworkInterface>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.List");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, NetworkInterface.DeserializeNetworkInterface, _clientDiagnostics, _pipeline, "NetworkInterfacesClient.List", "value", "nextLink", cancellationToken);
         }
 
         /// <summary> Gets all network interfaces in a resource group. </summary>
@@ -270,42 +183,11 @@ namespace Azure.Network.Management.Interface
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public virtual Pageable<NetworkInterface> List(string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
-            Page<NetworkInterface> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.List");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.List(resourceGroupName, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<NetworkInterface> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.List");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.ListNextPage(nextLink, resourceGroupName, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, NetworkInterface.DeserializeNetworkInterface, _clientDiagnostics, _pipeline, "NetworkInterfacesClient.List", "value", "nextLink", cancellationToken);
         }
 
         /// <summary> Deletes the specified network interface. </summary>

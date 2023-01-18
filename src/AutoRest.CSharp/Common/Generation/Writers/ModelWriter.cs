@@ -278,12 +278,18 @@ Examples:
 
         protected virtual void AddClassAttributes(CodeWriter writer, ObjectType schema)
         {
-            writer.WriteDeprecatedAttributeIfExists(schema.Deprecated);
+            if (schema.Deprecated != null)
+            {
+                writer.Line($"[{typeof(ObsoleteAttribute)}(\"{schema.Deprecated}\")]");
+            }
         }
 
         private void AddClassAttributes(CodeWriter writer, EnumType enumType)
         {
-            writer.WriteDeprecatedAttributeIfExists(enumType.Deprecated);
+            if (enumType.Deprecated != null)
+            {
+                writer.Line($"[{typeof(ObsoleteAttribute)}(\"{enumType.Deprecated}\")]");
+            }
         }
 
         protected virtual void AddCtorAttribute(CodeWriter writer, ObjectType schema, ObjectTypeConstructor constructor)

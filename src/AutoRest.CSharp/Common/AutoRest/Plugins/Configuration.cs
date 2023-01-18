@@ -65,7 +65,8 @@ namespace AutoRest.CSharp.Input
             string? projectFolder,
             string[] protocolMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
-            MgmtConfiguration mgmtConfiguration)
+            MgmtConfiguration mgmtConfiguration,
+            MgmtTestConfiguration? mgmtTestConfiguration)
         {
             _outputFolder = outputFolder;
             Namespace = ns;
@@ -96,6 +97,7 @@ namespace AutoRest.CSharp.Input
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
             ModelFactoryForHlc = modelFactoryForHlc;
             _mgmtConfiguration = mgmtConfiguration;
+            MgmtTestConfiguration = mgmtTestConfiguration;
             _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
         }
 
@@ -127,6 +129,8 @@ namespace AutoRest.CSharp.Input
         private static MgmtConfiguration? _mgmtConfiguration;
         public static MgmtConfiguration MgmtConfiguration => _mgmtConfiguration ?? throw new InvalidOperationException("Configuration has not been initialized");
 
+        public static MgmtTestConfiguration? MgmtTestConfiguration { get; private set; }
+
         private static string? _relativeProjectFolder;
         public static string RelativeProjectFolder => _relativeProjectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
         private static string? _absoluteProjectFolder;
@@ -154,7 +158,8 @@ namespace AutoRest.CSharp.Input
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
+                mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
+                mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest)
             );
         }
 
@@ -230,6 +235,15 @@ namespace AutoRest.CSharp.Input
 
             return path;
         }
+
+        internal static bool IsValidJsonElement(JsonElement? element)
+        {
+            return element != null && element?.ValueKind != JsonValueKind.Null && element?.ValueKind != JsonValueKind.Undefined;
+        }
+
+        public static bool DeserializeBoolean(JsonElement? jsonElement, bool defaultValue = false)
+            => jsonElement == null || !Configuration.IsValidJsonElement(jsonElement) ? defaultValue : Convert.ToBoolean(jsonElement.ToString());
+
         public static IReadOnlyList<string> DeserializeArray(JsonElement jsonElement)
             => jsonElement.ValueKind != JsonValueKind.Array ? Array.Empty<string>() : jsonElement.EnumerateArray().Select(t => t.ToString()).ToArray();
     }
