@@ -262,10 +262,34 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
+        private void DeclareMethodParameter(CodeWriter writer, ConvenienceMethod convenienceMethod)
+        {
+            foreach (var parameterChain in convenienceMethod.ProtocolToConvenienceParameters)
+            {
+                if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
+                {
+                    var type = parameterChain.Convenience?.Type;
+                    var paraName = parameterChain.Convenience?.Name;
+                    writer.Append($"{type} {paraName:D} = ");
+                    writer.Append($"new {type}(");
+                    InputType? inputType = parameterChain.Input?.Type ?? null;
+                    if (inputType is InputModelType modelType)
+                    {
+                        foreach (var prop in modelType.Properties)
+                        {
+                            writer.Append($"{prop.Name},");
+                        }
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.Line($");");
+                }
+            }
+        }
         private void WriteConvenienceMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
         {
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
+                DeclareMethodParameter(_writer, convenienceMethod);
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
                 WriteCancellationTokenToRequestContext(_writer, contextVariable);
 
@@ -294,6 +318,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
+                DeclareMethodParameter(_writer, convenienceMethod);
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
                 WriteCancellationTokenToRequestContext(_writer, contextVariable);
 
@@ -332,7 +357,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static IReadOnlyList<FormattableString> PrepareConvenienceMethodParameters(ConvenienceMethod convenienceMethod, CodeWriterDeclaration contextVariable)
         {
             var parameters = new List<FormattableString>();
-            foreach (var (protocolParameter, convenienceParameter) in convenienceMethod.ProtocolToConvenienceParameters)
+            foreach (var (protocolParameter, convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameters)
             {
                 if (convenienceParameter == KnownParameters.CancellationTokenParameter)
                 {

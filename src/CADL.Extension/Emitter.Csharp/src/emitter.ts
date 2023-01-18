@@ -714,7 +714,7 @@ function loadOperation(
                 } else {
                     effectiveBodyType.name = `${capitalize(op.name)}Request`;
                     let bodyParameter = loadBodyParameter(program, effectiveBodyType);
-                    bodyParameter.Kind = InputOperationParameterKind.Flatten;
+                    bodyParameter.Kind = InputOperationParameterKind.Spread;
                     parameters.push(bodyParameter);
                 }
             }
