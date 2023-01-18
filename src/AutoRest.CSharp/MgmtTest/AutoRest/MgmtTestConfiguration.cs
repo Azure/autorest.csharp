@@ -3,11 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Input
 {
@@ -19,7 +17,7 @@ namespace AutoRest.CSharp.Input
         public string? SourceCodePath { get; }
         public bool Mock { get; }
         public bool Sample { get; }
-        public ImmutableHashSet<string> SkippedOperations { get; }
+        public IReadOnlyList<string> SkippedOperations { get; }
 
         public MgmtTestConfiguration(
             IReadOnlyList<string> skippedOperations,
@@ -27,7 +25,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? mock = default,
             JsonElement? sample = default)
         {
-            SkippedOperations = skippedOperations.ToImmutableHashSet();
+            SkippedOperations = skippedOperations;
             SourceCodePath = !Configuration.IsValidJsonElement(sourceCodePath) ? null : sourceCodePath.ToString();
             Mock = Configuration.DeserializeBoolean(mock, false);
             Sample = Configuration.DeserializeBoolean(sample, false);
@@ -72,7 +70,7 @@ namespace AutoRest.CSharp.Input
         {
             writer.WriteStartObject(TestGenOptionsRoot);
 
-            WriteNonEmptySettings(writer, nameof(SkippedOperations), SkippedOperations.ToArray());
+            WriteNonEmptySettings(writer, nameof(SkippedOperations), SkippedOperations);
 
             if (SourceCodePath is not null)
                 writer.WriteString(nameof(SourceCodePath), SourceCodePath);
