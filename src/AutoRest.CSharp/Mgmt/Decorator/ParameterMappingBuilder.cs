@@ -3,17 +3,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -388,6 +392,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
         {
             return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
+        }
+
+        public static string GetPropertyBagValueExpression(this Parameter parameter)
+        {
+            return $"options.{parameter.Name.FirstCharToUpperCase()}";
         }
     }
 }

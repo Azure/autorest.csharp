@@ -129,6 +129,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                     _writer.AppendExampleParameterValue(parameter, parameterValue);
                     _writer.AppendRaw(",");
                 }
+                else if (parameter.IsPropertyBag)
+                {
+                    _writer.AppendExamplePropertyBagParamValue(parameter, testCase.PropertyBagParamValueMapping);
+                    _writer.AppendRaw(",");
+                }
             }
             _writer.RemoveTrailingComma();
             _writer.AppendRaw(")");
