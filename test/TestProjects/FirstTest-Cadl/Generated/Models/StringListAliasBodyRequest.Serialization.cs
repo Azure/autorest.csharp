@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace CadlFirstTest.Models
 {
-    public partial class StringListAliasBodyRequest : IUtf8JsonSerializable
+    internal partial class StringListAliasBodyRequest : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

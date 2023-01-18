@@ -777,7 +777,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Flatten"
+       "Kind": "Spread"
       },
       {
        "$id": "88",

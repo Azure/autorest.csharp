@@ -11,7 +11,7 @@ using Azure.Core;
 namespace CadlFirstTest.Models
 {
     /// <summary> The Int32AliasBodyRequest. </summary>
-    public partial class Int32AliasBodyRequest : AliasBodyRequest
+    internal partial class Int32AliasBodyRequest : AliasBodyRequest
     {
         /// <summary> Initializes a new instance of Int32AliasBodyRequest. </summary>
         /// <param name="name"></param>

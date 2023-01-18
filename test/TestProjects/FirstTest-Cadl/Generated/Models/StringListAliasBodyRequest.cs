@@ -13,7 +13,7 @@ using Azure.Core;
 namespace CadlFirstTest.Models
 {
     /// <summary> The StringListAliasBodyRequest. </summary>
-    public partial class StringListAliasBodyRequest : AliasBodyRequest
+    internal partial class StringListAliasBodyRequest : AliasBodyRequest
     {
         /// <summary> Initializes a new instance of StringListAliasBodyRequest. </summary>
         /// <param name="name"></param>
