@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
@@ -18,6 +16,7 @@ namespace AutoRest.CSharp.Input.Source
             _compilation= compilation;
         }
 
-        public abstract void FilterSymbols();
+        private protected abstract void FilterSymbols();
+        internal abstract IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters);
     }
 }

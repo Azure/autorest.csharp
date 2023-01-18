@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 
@@ -43,11 +43,6 @@ namespace AutoRest.CSharp.Input.Source
                     }
                 }
             }
-
-            if (existingCompilation != null)
-            {
-                existingCompilation.FilterSymbols();
-            }
         }
 
         public IReadOnlyList<string>? GetServiceVersionOverrides()
@@ -64,13 +59,9 @@ namespace AutoRest.CSharp.Input.Source
             return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, symbol);
         }
 
-        public IMethodSymbol? FindProtocolMethod(string namespaceName, string clientName, string methodName, IEnumerable<string> parameters)
+        internal IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters)
         {
-            if (_existingCompilation is ProtocolCompilationInput protocolCompilation)
-            {
-                return protocolCompilation.FindSymbol(namespaceName, clientName, methodName, parameters);
-            }
-            return null;
+            return _existingCompilation != null ? _existingCompilation.FindMethod(namespaceName, typeName, methodName, parameters) : null;
         }
 
         public INamedTypeSymbol? FindForType(string ns, string name, bool includeArmCore = false)

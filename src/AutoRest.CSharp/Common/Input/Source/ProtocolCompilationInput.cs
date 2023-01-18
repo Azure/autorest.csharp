@@ -1,33 +1,40 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
+using System.Threading.Tasks;
+using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Generation.Types;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
 {
-    public class ProtocolCompilationInput: CompilationInput
+    public class ProtocolCompilationInput : CompilationInput
     {
-        private readonly List<IMethodSymbol> _methodSet = new List<IMethodSymbol>();
+        private List<IMethodSymbol>? _methodSet;
 
-        public ProtocolCompilationInput(Compilation compilation)
-            : base(compilation) { }//, type => type.Name.EndsWith("Client"), method => method.Parameters.Length > 0 && method.Parameters.Last().Name == "context") { }
-
-        public override void FilterSymbols()
+        public static async Task<CompilationInput?> TryCreate(string? existingProjectFolder)
         {
+            return Configuration.ExistingProjectFolder != null ?
+                new ProtocolCompilationInput(await GeneratedCodeWorkspace.CreateExistingCodeProject(Configuration.ExistingProjectFolder).GetCompilationAsync()) : null;
+        }
+
+        private ProtocolCompilationInput(Compilation compilation)
+            : base(compilation) { }
+
+        private protected override void FilterSymbols()
+        {
+            _methodSet = new List<IMethodSymbol>();
             foreach (IModuleSymbol module in _compilation.Assembly.Modules)
             {
                 foreach (var type in SourceInputHelper.GetSymbols(module.GlobalNamespace))
                 {
-                    if (type is INamedTypeSymbol typeSymbol && isClient(typeSymbol))
+                    if (type is INamedTypeSymbol typeSymbol && IsClient(typeSymbol))
                     {
                         foreach (var member in typeSymbol.GetMembers())
                         {
-                            if (member is IMethodSymbol methodSymbol && isProtocolMethod(methodSymbol))
+                            if (member is IMethodSymbol methodSymbol && IsProtocolMethod(methodSymbol))
                             {
                                 _methodSet.Add(methodSymbol);
                             }
@@ -37,11 +44,16 @@ namespace AutoRest.CSharp.Input.Source
             }
         }
 
-        public IMethodSymbol? FindSymbol(string namespaceName, string clientName, string methodName, IEnumerable<string> parameters)
+        internal override IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters)
         {
+            if (_methodSet == null)
+            {
+                FilterSymbols();
+            }
+
             var methods = _methodSet.Where(m =>
                 m.ContainingNamespace.ToString() == namespaceName &&
-                m.ContainingType.Name == clientName &&
+                m.ContainingType.Name == typeName &&
                 m.Name == methodName).ToArray();
             if (methods.Length == 0)
             {
@@ -65,8 +77,7 @@ namespace AutoRest.CSharp.Input.Source
                     int index = 0;
                     foreach (var parameter in parameters)
                     {
-                        // It would be better to compare the types.
-                        if (parameter != existingParameters[index].Name)
+                        if (SourceInputHelper.IsEqualType((INamedTypeSymbol)existingParameters[index].Type, parameter))
                         {
                             break;
                         }
@@ -82,7 +93,7 @@ namespace AutoRest.CSharp.Input.Source
             }
         }
 
-        private bool isClient(INamedTypeSymbol type) => type.Name.EndsWith("Client");
-        private bool isProtocolMethod(IMethodSymbol method) => method.Parameters.Length > 0 && method.Parameters.Last().Name == "context";
+        private bool IsClient(INamedTypeSymbol type) => type.Name.EndsWith("Client");
+        private bool IsProtocolMethod(IMethodSymbol method) => method.Parameters.Length > 0 && method.Parameters.Last().Name == "context";
     }
 }

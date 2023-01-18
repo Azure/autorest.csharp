@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.Generation.Types
             if (!IsNullable)
                 return this;
 
-            return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
+            return IsFrameworkType ? new CSharpType(_type!, false, Arguments) : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
         }
     }
 }

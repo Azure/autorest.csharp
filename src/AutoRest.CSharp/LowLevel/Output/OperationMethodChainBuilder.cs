@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return false;
             }
-            var existingMethod = _sourceInputModel.FindProtocolMethod(_namespaceName, _clientName, Operation.CleanName, _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p.Name));
+            var existingMethod = _sourceInputModel.FindMethod(_namespaceName, _clientName, Operation.CleanName, _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p.Type));
             // If there is no existing protocol method with optional RequestContext
             if (existingMethod == null || existingMethod.Parameters.Length < 1 || existingMethod.Parameters.Last().IsOptional == false)
             {
