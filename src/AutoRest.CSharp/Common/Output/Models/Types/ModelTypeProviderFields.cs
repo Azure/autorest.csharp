@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
@@ -57,7 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
                 var field = existingMember is not null
-                    ? CreateFieldFromExisting(existingMember, originalFieldType, inputModelProperty.IsRequired, typeFactory)
+                    ? CreateFieldFromExisting(existingMember, originalFieldType, inputModelProperty, typeFactory)
                     : CreateField(originalFieldName, originalFieldType, inputModel, inputModelProperty);
 
                 fields.Add(field);
@@ -89,7 +90,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static FieldDeclaration CreateField(string fieldName, CSharpType fieldType, InputModelType inputModel, InputModelProperty inputModelProperty)
         {
-            var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType;
+            var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType ||
+                // This is a temporary work around as we don't convert collection type to InputListType or InputDictionaryType in MPG for now
+                inputModelProperty.Type is CodeModelType type && (type.Schema is ArraySchema or DictionarySchema);
             var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
@@ -98,10 +101,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
             declaration.SetActualName(fieldName);
-            return new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(fieldType, inputModelProperty.IsRequired), inputModelProperty.IsRequired, false, true);
+            return new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(fieldType, inputModelProperty), inputModelProperty.IsRequired, false, true);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, bool isRequired, TypeFactory typeFactory)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, InputModelProperty inputModelProperty, TypeFactory typeFactory)
         {
             var existingMemberTypeSymbol = existingMember switch
             {
@@ -125,7 +128,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
             declaration.SetActualName(existingMember.Name);
 
-            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(originalType, isRequired), isRequired, existingMember is IFieldSymbol, writeAsProperty);
+            return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, existingMember is IFieldSymbol, writeAsProperty);
         }
 
         private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
@@ -146,8 +149,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             return valueType;
         }
 
-        private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, bool isRequired)
+        private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, InputModelProperty inputModelProperty)
         {
+            if (inputModelProperty.DefaultValue != null)
+            {
+                return inputModelProperty.DefaultValue;
+            }
             if (TypeFactory.IsCollectionType(propertyType))
             {
                 if (TypeFactory.IsReadOnlyList(propertyType))
@@ -158,7 +165,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     return $"new {new CSharpType(typeof(ReadOnlyDictionary<,>), propertyType.Arguments)}(new {new CSharpType(typeof(Dictionary<,>), propertyType.Arguments)}(0))";
                 }
-                if (!isRequired)
+                if (!inputModelProperty.IsRequired)
                 {
                     return Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType)).GetConstantFormattable();
                 }

@@ -271,7 +271,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 _writer.Append($"{parentVar}.{getResourceCollectionMethodName}(");
             }
 
-            var parameterValues = sample.ParameterValueMapping;
             // iterate over the parameter list and put them into the invocation
             foreach ((var parameter, var declaration) in parameters)
             {
@@ -402,6 +401,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     var declaration = new CodeWriterVariableDeclaration(parameter.Name, parameter.Type);
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")
                         .AppendExampleParameterValue(parameterValue).LineRaw(";");
+                    result.Add(parameter.Name, declaration);
+                }
+
+                else if (parameter.IsPropertyBag)
+                {
+                    var declaration = new CodeWriterVariableDeclaration(parameter.Name, parameter.Type);
+                    _writer.AppendDeclaration(declaration).AppendRaw(" = ")
+                        .AppendExamplePropertyBagParamValue(parameter, sample.PropertyBagParamValueMapping).LineRaw(";");
                     result.Add(parameter.Name, declaration);
                 }
             }
