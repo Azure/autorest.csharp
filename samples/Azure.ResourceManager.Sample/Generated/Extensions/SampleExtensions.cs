@@ -344,24 +344,15 @@ namespace Azure.ResourceManager.Sample
         /// </list>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> A valid image publisher. </param>
-        /// <param name="offer"> A valid image publisher offer. </param>
-        /// <param name="skus"> A valid image SKU. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="publisherName"/>, <paramref name="offer"/> or <paramref name="skus"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="offer"/> or <paramref name="skus"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, SampleExtensionsGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
-            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
-            Argument.AssertNotNullOrEmpty(skus, nameof(skus));
+            Argument.AssertNotNull(options, nameof(options));
 
-            return GetExtensionClient(subscriptionResource).GetVirtualMachineImagesAsync(location, publisherName, offer, skus, expand, top, orderby, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetVirtualMachineImagesAsync(options, cancellationToken);
         }
 
         /// <summary>
@@ -378,24 +369,15 @@ namespace Azure.ResourceManager.Sample
         /// </list>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> A valid image publisher. </param>
-        /// <param name="offer"> A valid image publisher offer. </param>
-        /// <param name="skus"> A valid image SKU. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="publisherName"/>, <paramref name="offer"/> or <paramref name="skus"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="offer"/> or <paramref name="skus"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<VirtualMachineImageResource> GetVirtualMachineImages(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public static Pageable<VirtualMachineImageResource> GetVirtualMachineImages(this SubscriptionResource subscriptionResource, SampleExtensionsGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
-            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
-            Argument.AssertNotNullOrEmpty(skus, nameof(skus));
+            Argument.AssertNotNull(options, nameof(options));
 
-            return GetExtensionClient(subscriptionResource).GetVirtualMachineImages(location, publisherName, offer, skus, expand, top, orderby, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetVirtualMachineImages(options, cancellationToken);
         }
 
         /// <summary>
