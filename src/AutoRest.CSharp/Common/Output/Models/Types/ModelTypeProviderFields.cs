@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var inputModelProperty in inputModel.Properties)
             {
-                var originalFieldName = inputModelProperty.Name.FirstCharToUpperCase();
+                var originalFieldName = inputModelProperty.Name.ToCleanName();
                 var originalFieldType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
