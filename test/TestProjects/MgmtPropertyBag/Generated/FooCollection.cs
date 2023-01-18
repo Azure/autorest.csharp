@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -57,8 +56,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Create foo with four optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Create
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Create</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="fooName"> The foo name. </param>
@@ -93,8 +100,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Create foo with four optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Create
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Create</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="fooName"> The foo name. </param>
@@ -129,8 +144,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Gets a specific foo with five optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -157,8 +180,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Gets a specific foo with five optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -185,8 +216,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Gets a list of foo with six optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos
-        /// Operation Id: Foos_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -195,28 +234,22 @@ namespace MgmtPropertyBag
         {
             options ??= new FooCollectionGetAllOptions();
 
-            async Task<Page<FooResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fooClientDiagnostics.CreateScope("FooCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _fooRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Maxpagesize, options.Skip, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Select(value => new FooResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fooRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Maxpagesize, options.Skip);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
         /// Gets a list of foo with six optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos
-        /// Operation Id: Foos_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -225,28 +258,22 @@ namespace MgmtPropertyBag
         {
             options ??= new FooCollectionGetAllOptions();
 
-            Page<FooResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _fooClientDiagnostics.CreateScope("FooCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _fooRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Maxpagesize, options.Skip, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Select(value => new FooResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _fooRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Maxpagesize, options.Skip);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -271,8 +298,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

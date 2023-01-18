@@ -90,8 +90,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Gets a specific foo with five optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
@@ -119,8 +127,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Gets a specific foo with five optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
@@ -148,8 +164,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Update foo.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Update
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Update</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="patch"> The foo parameters supplied to the Update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -174,8 +198,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Update foo.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}
-        /// Operation Id: Foos_Update
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Update</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="patch"> The foo parameters supplied to the Update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -200,8 +232,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Reconnect an existing foo with five optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect
-        /// Operation Id: Foos_Reconnect
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Reconnect</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -225,8 +265,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Reconnect an existing foo with five optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect
-        /// Operation Id: Foos_Reconnect
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}/reconnect</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Reconnect</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

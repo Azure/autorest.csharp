@@ -3,31 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Data.Common;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output.Models
 {
@@ -73,6 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 packModelName,
                 defaultNamespace,
                 "public",
+                null,
                 $"The {packModelName}.",
                 InputModelTypeUsage.Input,
                 properties,

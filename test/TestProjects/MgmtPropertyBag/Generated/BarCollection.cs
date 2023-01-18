@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -57,8 +56,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Create a bar with five optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Create
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Create</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The bar name. </param>
@@ -93,8 +100,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Create a bar with five optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Create
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Create</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The bar name. </param>
@@ -129,8 +144,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Gets a specific bar with one required header parameter and four optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -157,8 +180,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Gets a specific bar with one required header parameter and four optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -185,8 +216,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Gets a list of bar with one optional header parameter and five optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
-        /// Operation Id: Bars_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -195,28 +234,22 @@ namespace MgmtPropertyBag
         {
             options ??= new BarCollectionGetAllOptions();
 
-            async Task<Page<BarResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _barRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, options.IfNoneMatch, options.Maxpagesize, options.Skip, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Select(value => new BarResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, options.IfNoneMatch, options.Maxpagesize, options.Skip);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
         /// Gets a list of bar with one optional header parameter and five optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars
-        /// Operation Id: Bars_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -225,28 +258,22 @@ namespace MgmtPropertyBag
         {
             options ??= new BarCollectionGetAllOptions();
 
-            Page<BarResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _barRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, options.IfNoneMatch, options.Maxpagesize, options.Skip, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Select(value => new BarResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, options.IfNoneMatch, options.Maxpagesize, options.Skip);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -271,8 +298,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// Operation Id: Bars_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

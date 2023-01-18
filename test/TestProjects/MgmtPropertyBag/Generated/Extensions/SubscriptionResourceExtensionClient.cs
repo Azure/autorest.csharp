@@ -6,9 +6,7 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -49,8 +47,16 @@ namespace MgmtPropertyBag
 
         /// <summary>
         /// Gets a list of foo with two optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/foos
-        /// Operation Id: Foos_ListWithSubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/foos</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_ListWithSubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
@@ -58,28 +64,22 @@ namespace MgmtPropertyBag
         /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FooResource> GetFoosAsync(string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
-            async Task<Page<FooResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = FooClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetFoos");
-                scope.Start();
-                try
-                {
-                    var response = await FooRestClient.ListWithSubscriptionAsync(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Select(value => new FooResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => FooRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, filter, top);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFoos", "", null, cancellationToken);
         }
 
         /// <summary>
         /// Gets a list of foo with two optional query parameters.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/foos
-        /// Operation Id: Foos_ListWithSubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/foos</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_ListWithSubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
@@ -87,28 +87,22 @@ namespace MgmtPropertyBag
         /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FooResource> GetFoos(string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
-            Page<FooResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = FooClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetFoos");
-                scope.Start();
-                try
-                {
-                    var response = FooRestClient.ListWithSubscription(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Select(value => new FooResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => FooRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, filter, top);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFoos", "", null, cancellationToken);
         }
 
         /// <summary>
         /// Gets a list of bar with one required header parameter and one optional query parameter.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/bars
-        /// Operation Id: Bars_ListWithSubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/bars</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_ListWithSubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
@@ -116,43 +110,23 @@ namespace MgmtPropertyBag
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<BarResource> GetBarsAsync(ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<BarResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = BarClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetBars");
-                scope.Start();
-                try
-                {
-                    var response = await BarRestClient.ListWithSubscriptionAsync(Id.SubscriptionId, ifMatch, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BarResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<BarResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = BarClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetBars");
-                scope.Start();
-                try
-                {
-                    var response = await BarRestClient.ListWithSubscriptionNextPageAsync(nextLink, Id.SubscriptionId, ifMatch, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BarResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => BarRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, ifMatch, top);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => BarRestClient.CreateListWithSubscriptionNextPageRequest(nextLink, Id.SubscriptionId, ifMatch, top);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new BarResource(Client, BarData.DeserializeBarData(e)), BarClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetBars", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
         /// Gets a list of bar with one required header parameter and one optional query parameter.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/bars
-        /// Operation Id: Bars_ListWithSubscription
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/bars</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_ListWithSubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
@@ -160,37 +134,9 @@ namespace MgmtPropertyBag
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<BarResource> GetBars(ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Page<BarResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = BarClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetBars");
-                scope.Start();
-                try
-                {
-                    var response = BarRestClient.ListWithSubscription(Id.SubscriptionId, ifMatch, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BarResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<BarResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = BarClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetBars");
-                scope.Start();
-                try
-                {
-                    var response = BarRestClient.ListWithSubscriptionNextPage(nextLink, Id.SubscriptionId, ifMatch, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BarResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => BarRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, ifMatch, top);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => BarRestClient.CreateListWithSubscriptionNextPageRequest(nextLink, Id.SubscriptionId, ifMatch, top);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new BarResource(Client, BarData.DeserializeBarData(e)), BarClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetBars", "value", "nextLink", cancellationToken);
         }
     }
 }
