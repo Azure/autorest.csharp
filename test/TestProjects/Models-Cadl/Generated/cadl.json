@@ -646,8 +646,8 @@
     },
     {
      "$id": "80",
-     "Name": "requiredDouble",
-     "SerializedName": "requiredDouble",
+     "Name": "required_Double",
+     "SerializedName": "required_Double",
      "Description": "",
      "Type": {
       "$id": "81",
