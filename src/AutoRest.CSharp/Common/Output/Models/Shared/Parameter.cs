@@ -13,7 +13,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None)
+    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
     {
         public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();

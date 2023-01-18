@@ -88,6 +88,7 @@ import {
 import { ClientKind } from "./type/ClientKind.js";
 import { getVersions } from "@cadl-lang/versioning";
 import { EmitContext } from "@cadl-lang/compiler/*";
+import { capitalize } from "./lib/utils.js";
 
 export interface NetEmitterOptions {
     outputFile?: string;
@@ -714,7 +715,14 @@ function loadOperation(
                 cadlParameters.bodyType
             );
             if (effectiveBodyType.kind === "Model") {
-                parameters.push(loadBodyParameter(program, effectiveBodyType));
+                if (effectiveBodyType.name !== "") {
+                    parameters.push(loadBodyParameter(program, effectiveBodyType));
+                } else {
+                    effectiveBodyType.name = `${capitalize(op.name)}Request`;
+                    let bodyParameter = loadBodyParameter(program, effectiveBodyType);
+                    bodyParameter.Kind = InputOperationParameterKind.Spread;
+                    parameters.push(bodyParameter);
+                }
             }
         }
     }

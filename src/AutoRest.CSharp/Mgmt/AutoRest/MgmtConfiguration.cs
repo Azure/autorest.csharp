@@ -106,6 +106,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? overrideOperationName = default,
             JsonElement? operationPositions = default,
             JsonElement? renameRules = default,
+            JsonElement? renamePropertyBag = default,
             JsonElement? formatByNameRules = default,
             JsonElement? renameMapping = default,
             JsonElement? parameterRenameMapping = default,
@@ -127,6 +128,7 @@ namespace AutoRest.CSharp.Input
             RequestPathToSingletonResource = DeserializeDictionary<string, string>(requestPathToSingletonResource);
             OverrideOperationName = DeserializeDictionary<string, string>(overrideOperationName);
             RawRenameRules = DeserializeDictionary<string, string>(renameRules);
+            RenamePropertyBag = DeserializeDictionary<string, string>(renamePropertyBag);
             FormatByNameRules = DeserializeDictionary<string, string>(formatByNameRules);
             RenameMapping = DeserializeDictionary<string, string>(renameMapping);
             ParameterRenameMapping = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(parameterRenameMapping);
@@ -198,6 +200,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string> RequestPathToResourceType { get; }
         public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
         public IReadOnlyDictionary<string, string> OverrideOperationName { get; }
+        public IReadOnlyDictionary<string, string> RenamePropertyBag { get; }
         private IReadOnlyDictionary<string, string> RawRenameRules { get; }
         private IReadOnlyDictionary<string, RenameRuleTarget>? _renameRules;
         public IReadOnlyDictionary<string, RenameRuleTarget> RenameRules => _renameRules ??= ParseRenameRules(RawRenameRules);
@@ -252,6 +255,7 @@ namespace AutoRest.CSharp.Input
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 overrideOperationName: autoRest.GetValue<JsonElement?>("override-operation-name").GetAwaiter().GetResult(),
                 renameRules: autoRest.GetValue<JsonElement?>("rename-rules").GetAwaiter().GetResult(),
+                renamePropertyBag: autoRest.GetValue<JsonElement?>("rename-property-bag").GetAwaiter().GetResult(),
                 formatByNameRules: autoRest.GetValue<JsonElement?>("format-by-name-rules").GetAwaiter().GetResult(),
                 renameMapping: autoRest.GetValue<JsonElement?>("rename-mapping").GetAwaiter().GetResult(),
                 parameterRenameMapping: autoRest.GetValue<JsonElement?>("parameter-rename-mapping").GetAwaiter().GetResult(),
@@ -287,6 +291,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(RequestPathToScopeResourceTypes), RequestPathToScopeResourceTypes);
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
             WriteNonEmptySettings(writer, nameof(RawRenameRules), RawRenameRules);
+            WriteNonEmptySettings(writer, nameof(RenamePropertyBag), RenamePropertyBag);
             WriteNonEmptySettings(writer, nameof(FormatByNameRules), FormatByNameRules);
             WriteNonEmptySettings(writer, nameof(RenameMapping), RenameMapping);
             WriteNonEmptySettings(writer, nameof(ParameterRenameMapping), ParameterRenameMapping);
@@ -328,6 +333,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OperationPositions), out var operationPositions);
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
             root.TryGetProperty(nameof(RawRenameRules), out var renameRules);
+            root.TryGetProperty(nameof(RenamePropertyBag), out var renamePropertyBag);
             root.TryGetProperty(nameof(FormatByNameRules), out var formatByNameRules);
             root.TryGetProperty(nameof(RenameMapping), out var renameMapping);
             root.TryGetProperty(nameof(ParameterRenameMapping), out var parameterRenameMapping);
@@ -381,6 +387,7 @@ namespace AutoRest.CSharp.Input
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 overrideOperationName: operationIdToName,
                 renameRules: renameRules,
+                renamePropertyBag: renamePropertyBag,
                 formatByNameRules: formatByNameRules,
                 renameMapping: renameMapping,
                 parameterRenameMapping: parameterRenameMapping,
