@@ -88,6 +88,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var task in documents)
             {
                 var processed = await task;
+
+                processed = await Simplifier.ReduceAsync(processed);
+                processed = await Formatter.FormatAsync(processed);
                 var text = await processed.GetSyntaxTreeAsync();
                 yield return (processed.Name, text!.ToString());
             }
@@ -108,8 +111,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 document = document.WithSyntaxRoot(rewriter.Visit(await syntaxTree.GetRootAsync()));
             }
 
-            document = await Simplifier.ReduceAsync(document);
-            document = await Formatter.FormatAsync(document);
             return document;
         }
 
