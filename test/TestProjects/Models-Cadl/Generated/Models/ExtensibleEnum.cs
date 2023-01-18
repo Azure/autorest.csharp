@@ -11,6 +11,7 @@ using System.ComponentModel;
 namespace ModelsInCadl.Models
 {
     /// <summary> Extensible enum. </summary>
+    [Obsolete("deprecated for test")]
     public readonly partial struct ExtensibleEnum : IEquatable<ExtensibleEnum>
     {
         private readonly string _value;

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -56,8 +55,16 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Create or update.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
-        /// Operation Id: SubParentWithNonResChes_CreateOrUpdate
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SubParentWithNonResChes_CreateOrUpdate</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="subParentWithNonResChName"> Name. </param>
@@ -89,8 +96,16 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Create or update.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
-        /// Operation Id: SubParentWithNonResChes_CreateOrUpdate
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SubParentWithNonResChes_CreateOrUpdate</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="subParentWithNonResChName"> Name. </param>
@@ -122,8 +137,16 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Retrieves information.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
-        /// Operation Id: SubParentWithNonResChes_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SubParentWithNonResChes_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -151,8 +174,16 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Retrieves information.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
-        /// Operation Id: SubParentWithNonResChes_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SubParentWithNonResChes_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -180,92 +211,60 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Lists all in a resource group.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes
-        /// Operation Id: SubParentWithNonResChes_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SubParentWithNonResChes_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SubParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubParentWithNonResChResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<SubParentWithNonResChResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _subParentWithNonResChClientDiagnostics.CreateScope("SubParentWithNonResChCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _subParentWithNonResChRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<SubParentWithNonResChResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _subParentWithNonResChClientDiagnostics.CreateScope("SubParentWithNonResChCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _subParentWithNonResChRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChRestClient.CreateListRequest(Id.SubscriptionId);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SubParentWithNonResChResource(Client, SubParentWithNonResChData.DeserializeSubParentWithNonResChData(e)), _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
         /// Lists all in a resource group.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes
-        /// Operation Id: SubParentWithNonResChes_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SubParentWithNonResChes_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SubParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubParentWithNonResChResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<SubParentWithNonResChResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _subParentWithNonResChClientDiagnostics.CreateScope("SubParentWithNonResChCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _subParentWithNonResChRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<SubParentWithNonResChResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _subParentWithNonResChClientDiagnostics.CreateScope("SubParentWithNonResChCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _subParentWithNonResChRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChRestClient.CreateListRequest(Id.SubscriptionId);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SubParentWithNonResChResource(Client, SubParentWithNonResChData.DeserializeSubParentWithNonResChData(e)), _subParentWithNonResChClientDiagnostics, Pipeline, "SubParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
-        /// Operation Id: SubParentWithNonResChes_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SubParentWithNonResChes_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -291,8 +290,16 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
-        /// Operation Id: SubParentWithNonResChes_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SubParentWithNonResChes_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

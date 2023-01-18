@@ -128,6 +128,7 @@ namespace AutoRest.CSharp.Output.Models
                     Name: operation.Language.Default.Name,
                     ResourceName: null,
                     Summary: operation.Language.Default.Summary,
+                    Deprecated: operation.Deprecated?.Reason,
                     Description: operation.Language.Default.Description,
                     Accessibility: operation.Accessibility,
                     Parameters: CreateInputParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),

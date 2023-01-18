@@ -310,6 +310,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             typeof(bool), typeof(bool?),
             typeof(int), typeof(int?),
             typeof(long), typeof(long?),
+            typeof(float), typeof(float?),
             typeof(double), typeof(double?),
             typeof(decimal), typeof(decimal?)
         };
@@ -340,7 +341,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 case ObjectType objectType:
                     return writer.AppendObjectTypeValue(objectType, exampleValue.Properties);
                 case EnumType enumType:
-                    return writer.AppendEnumTypeValue(enumType, (string)exampleValue.RawValue!);
+                    return writer.AppendEnumTypeValue(enumType, exampleValue.RawValue!);
             }
             return writer.AppendRaw("default");
         }
@@ -349,7 +350,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         {
             var discriminator = objectType.Discriminator;
             // check if this has a discriminator
-            if (discriminator == null)
+            if (discriminator == null || !discriminator.HasDescendants)
                 return objectType;
             var discriminatorPropertyName = discriminator.SerializedName;
             // get value of this in the valueDict and we should always has a discriminator value in the example
@@ -378,8 +379,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // get all the properties on this type, including the properties from its base type
             var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
             var constructor = objectType.InitializationConstructor;
-            writer.UseNamespace(objectType.Type.Namespace);
-            writer.Append($"new {objectType.Type.Name}(");
+            writer.Append($"new {objectType.Type}(");
             // build a map from parameter name to property
             var propertyDict = properties.ToDictionary(
                 property => property.Declaration.Name.ToVariableName(), property => property);
@@ -488,17 +488,21 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
             => property.Declaration.Accessibility == "public" && (TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
 
-        private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, string value)
+        private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, object value)
         {
-            // find value in one of the choices
-            var choice = enumType.Values.FirstOrDefault(c => value.Equals(c.Value.Value));
+            // find value in one of the choices.
+            // Here we convert the values to string then compare, because the raw value has the "primitive types are deserialized into strings" issue
+            var choice = enumType.Values.FirstOrDefault(c => StringComparer.Ordinal.Equals(value.ToString(), c.Value.Value?.ToString()));
             writer.UseNamespace(enumType.Type.Namespace);
             if (choice != null)
                 return writer.Append($"{enumType.Type.Name}.{choice.Declaration.Name}");
             // if we did not find a match, check if this is a SealedChoice, if so, we throw exceptions
             if (!enumType.IsExtensible)
                 throw new InvalidOperationException($"Enum value `{value}` in example does not find in type {enumType.Type.Name}");
-            return writer.Append($"new {enumType.Type.Name}({value:L})");
+            var underlyingType = enumType.ValueType.FrameworkType; // the underlying type of an extensible enum should always be a primitive type which is a framework type
+            return writer.Append($"new {enumType.Type}(")
+                .AppendRawValue(value, underlyingType)
+                .AppendRaw(")");
         }
 
         public static CodeWriter AppendDeclaration(this CodeWriter writer, CodeWriterVariableDeclaration declaration)

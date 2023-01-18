@@ -197,10 +197,10 @@ namespace ModelsInCadl
         }
 
         /// <summary> Input to RoundTripOptional. </summary>
-        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="input"> The RoundTripOptionalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(InputModel input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -210,10 +210,10 @@ namespace ModelsInCadl
         }
 
         /// <summary> Input to RoundTripOptional. </summary>
-        /// <param name="input"> The InputModel to use. </param>
+        /// <param name="input"> The RoundTripOptionalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(InputModel input, CancellationToken cancellationToken = default)
+        public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -276,6 +276,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        [Obsolete("deprecated for test")]
         public virtual async Task<Response<RoundTripReadOnlyModel>> InputToRoundTripReadOnlyAsync(InputModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -289,6 +290,7 @@ namespace ModelsInCadl
         /// <param name="input"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        [Obsolete("deprecated for test")]
         public virtual Response<RoundTripReadOnlyModel> InputToRoundTripReadOnly(InputModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -305,6 +307,7 @@ namespace ModelsInCadl
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnlyAsync(RequestContent,RequestContext)']/*" />
+        [Obsolete("deprecated for test")]
         public virtual async Task<Response> InputToRoundTripReadOnlyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -330,6 +333,7 @@ namespace ModelsInCadl
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ModelsInCadlClient.xml" path="doc/members/member[@name='InputToRoundTripReadOnly(RequestContent,RequestContext)']/*" />
+        [Obsolete("deprecated for test")]
         public virtual Response InputToRoundTripReadOnly(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

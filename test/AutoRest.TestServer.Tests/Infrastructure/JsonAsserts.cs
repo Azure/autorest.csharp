@@ -33,5 +33,8 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             return JsonDocument.Parse(memoryStream.ToArray()).RootElement;
         }
+
+        public static JsonElement Parse(string content)
+            => JsonDocument.Parse(content).RootElement;
     }
 }

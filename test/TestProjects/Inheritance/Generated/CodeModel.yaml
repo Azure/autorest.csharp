@@ -557,7 +557,7 @@ schemas: !Schemas
           schema: *ref_17
           serializedName: DfeDateTime
           extensions:
-            x-ms-format: dfe-date-time-rfc1123
+            x-ms-format: dfe-date-time
           language: !Languages 
             default:
               name: dfeDateTime

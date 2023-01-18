@@ -5,6 +5,7 @@ export enum InputTypeKind {
     AzureLocation = "AzureLocation",
     BinaryData = "BinaryData",
     Boolean = "Boolean",
+    Date = "Date",
     DateTime = "DateTime",
     Dictionary = "Dictionary",
     Duration = "DurationISO8601",

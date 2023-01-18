@@ -3,6 +3,7 @@
 
 import {
     createCadlLibrary,
+    getDeprecated,
     getDoc,
     getServiceNamespace,
     getServiceNamespaceString,
@@ -87,6 +88,7 @@ import {
 import { ClientKind } from "./type/ClientKind.js";
 import { getVersions } from "@cadl-lang/versioning";
 import { EmitContext } from "@cadl-lang/compiler/*";
+import { capitalize } from "./lib/utils.js";
 
 export interface NetEmitterOptions {
     outputFile?: string;
@@ -707,7 +709,14 @@ function loadOperation(
                 cadlParameters.bodyType
             );
             if (effectiveBodyType.kind === "Model") {
-                parameters.push(loadBodyParameter(program, effectiveBodyType));
+                if (effectiveBodyType.name !== "") {
+                    parameters.push(loadBodyParameter(program, effectiveBodyType));
+                } else {
+                    effectiveBodyType.name = `${capitalize(op.name)}Request`;
+                    let bodyParameter = loadBodyParameter(program, effectiveBodyType);
+                    bodyParameter.Kind = InputOperationParameterKind.Spread;
+                    parameters.push(bodyParameter);
+                }
             }
         }
     }
@@ -766,6 +775,7 @@ function loadOperation(
         Name: op.name,
         ResourceName: resourceOperation?.resourceType.name ?? getOperationGroupName(program, op),
         Summary: summary,
+        Deprecated: getDeprecated(program, op),
         Description: desc,
         Parameters: parameters,
         Responses: responses,

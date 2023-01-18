@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -55,8 +54,16 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Create or update.
-        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
-        /// Operation Id: TenantParents_CreateOrUpdate
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantParents_CreateOrUpdate</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="tenantParentName"> Name. </param>
@@ -88,8 +95,16 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Create or update.
-        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
-        /// Operation Id: TenantParents_CreateOrUpdate
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantParents_CreateOrUpdate</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="tenantParentName"> Name. </param>
@@ -121,8 +136,16 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Retrieves information.
-        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
-        /// Operation Id: TenantParents_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantParents_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -150,8 +173,16 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Retrieves information.
-        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
-        /// Operation Id: TenantParents_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantParents_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -179,92 +210,60 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Lists all in a resource group.
-        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents
-        /// Operation Id: TenantParents_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantParents_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TenantParentResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TenantParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TenantParentResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _tenantParentClientDiagnostics.CreateScope("TenantParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _tenantParentRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<TenantParentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _tenantParentClientDiagnostics.CreateScope("TenantParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _tenantParentRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentRestClient.CreateListRequest(Id.Name);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentRestClient.CreateListNextPageRequest(nextLink, Id.Name);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TenantParentResource(Client, TenantParentData.DeserializeTenantParentData(e)), _tenantParentClientDiagnostics, Pipeline, "TenantParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
         /// Lists all in a resource group.
-        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents
-        /// Operation Id: TenantParents_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantParents_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TenantParentResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TenantParentResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<TenantParentResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _tenantParentClientDiagnostics.CreateScope("TenantParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _tenantParentRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<TenantParentResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _tenantParentClientDiagnostics.CreateScope("TenantParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _tenantParentRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentRestClient.CreateListRequest(Id.Name);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentRestClient.CreateListNextPageRequest(nextLink, Id.Name);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TenantParentResource(Client, TenantParentData.DeserializeTenantParentData(e)), _tenantParentClientDiagnostics, Pipeline, "TenantParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
-        /// Operation Id: TenantParents_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantParents_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -290,8 +289,16 @@ namespace MgmtListMethods
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
-        /// Operation Id: TenantParents_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>TenantParents_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

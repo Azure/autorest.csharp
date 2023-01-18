@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -55,8 +54,16 @@ namespace Pagination
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}
-        /// Operation Id: PageSizeDecimalModels_Put
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PageSizeDecimalModels_Put</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="name"> The String to use. </param>
@@ -87,8 +94,16 @@ namespace Pagination
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}
-        /// Operation Id: PageSizeDecimalModels_Put
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PageSizeDecimalModels_Put</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="name"> The String to use. </param>
@@ -119,8 +134,16 @@ namespace Pagination
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}
-        /// Operation Id: PageSizeDecimalModels_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PageSizeDecimalModels_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -147,8 +170,16 @@ namespace Pagination
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}
-        /// Operation Id: PageSizeDecimalModels_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PageSizeDecimalModels_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -175,93 +206,61 @@ namespace Pagination
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel
-        /// Operation Id: PageSizeDecimalModels_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PageSizeDecimalModels_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PageSizeDecimalModelResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PageSizeDecimalModelResource> GetAllAsync(decimal? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<PageSizeDecimalModelResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _pageSizeDecimalModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<PageSizeDecimalModelResource>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _pageSizeDecimalModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDecimalModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel
-        /// Operation Id: PageSizeDecimalModels_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PageSizeDecimalModels_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PageSizeDecimalModelResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PageSizeDecimalModelResource> GetAll(decimal? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            Page<PageSizeDecimalModelResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _pageSizeDecimalModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<PageSizeDecimalModelResource> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModelCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _pageSizeDecimalModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDecimalModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}
-        /// Operation Id: PageSizeDecimalModels_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PageSizeDecimalModels_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -287,8 +286,16 @@ namespace Pagination
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}
-        /// Operation Id: PageSizeDecimalModels_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PageSizeDecimalModels_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

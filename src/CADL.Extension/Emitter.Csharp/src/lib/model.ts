@@ -6,6 +6,7 @@ import {
     Enum,
     EnumMember,
     getDoc,
+    getDeprecated,
     getEffectiveModelType,
     getFormat,
     getFriendlyName,
@@ -27,7 +28,8 @@ import {
     isVoidType,
     isArrayModelType,
     isRecordModelType,
-    Scalar
+    Scalar,
+    Union
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -43,9 +45,11 @@ import {
     InputDictionaryType,
     InputEnumType,
     InputListType,
+    InputLiteralType,
     InputModelType,
     InputPrimitiveType,
-    InputType
+    InputType,
+    InputUnionType
 } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { Usage } from "../type/Usage.js";
@@ -113,7 +117,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "boolean":
             return InputTypeKind.Boolean;
         case "plainDate":
-            return InputTypeKind.DateTime;
+            return InputTypeKind.Date;
         case "zonedDateTime":
             return InputTypeKind.DateTime;
         case "plainTime":
@@ -256,13 +260,22 @@ export function getInputType(
             program,
             type
         );
-        return {
+        const valueType =  {
             Name: type.kind,
             Kind: builtInKind,
             IsNullable: false
         } as InputPrimitiveType;
+
+        return {
+            Name: "Literal",
+            LiteralValueType: valueType,
+            Value : getDefaultValue(type),
+            IsNullable: false,
+        } as InputLiteralType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
+    } else if (type.kind === "EnumMember") {
+        return getInputTypeForEnum(type.enum);
     } else if (type.kind === "Intrinsic") {
         return getInputModelForIntrinsicType(type);
     } else if (type.kind === "Scalar" /*&& program.checker.isStdType(type)*/) {
@@ -295,7 +308,7 @@ export function getInputType(
                 } as InputPrimitiveType;
         }
     } else if (type.kind === "Union") {
-        throw new Error(`Union is not supported.`);
+        return getInputTypeForUnion(type);
     } else {
         throw new Error(`Unsupported type ${type.kind}`);
     }
@@ -328,6 +341,7 @@ export function getInputType(
                 Name: m.name,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
+                Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 EnumValueType: innerEnum.EnumValueType,
                 AllowedValues: innerEnum.AllowedValues,
@@ -377,6 +391,7 @@ export function getInputType(
                 Name: e.name,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
+                Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
@@ -423,6 +438,7 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
+                Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
                 DiscriminatorPropertyName: getDiscriminator(program, m)
@@ -548,6 +564,19 @@ export function getInputType(
                 throw new Error(`Unsupported type ${type.name}`);
         }
     }
+
+    function getInputTypeForUnion(union: Union): InputUnionType {
+        const ItemTypes: InputType[] = [];
+        const variants = Array.from(union.variants.values());
+        for( const variant of variants) {
+            ItemTypes.push(getInputType(program, variant.type, models, enums));
+        }
+        return {
+            Name: "Union",
+            UnionItemTypes: ItemTypes,
+            IsNullable: false
+        } as InputUnionType;
+    }
 }
 
 export function getUsages(
@@ -603,6 +632,21 @@ export function getUsages(
                 if (!value) value = UsageFlags.Input;
                 else value = value | UsageFlags.Input;
                 usagesMap.set(resourceName, value);
+            }
+        }
+
+        /* handle spread. */
+        if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+            const effectiveBodyType = getEffectiveSchemaType(
+                program,
+                op.parameters.bodyType
+            );
+            if (effectiveBodyType.kind === "Model" && effectiveBodyType.name !== "") {
+                const modelName = getFriendlyName(program, effectiveBodyType) ?? effectiveBodyType.name;
+                let value = usagesMap.get(modelName);
+                if (!value) value = UsageFlags.Input;
+                else value = value | UsageFlags.Input;
+                usagesMap.set(modelName, value);
             }
         }
     }

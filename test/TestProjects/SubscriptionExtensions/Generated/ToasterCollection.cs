@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -56,8 +55,16 @@ namespace SubscriptionExtensions
 
         /// <summary>
         /// Create or update an availability set.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
-        /// Operation Id: Toasters_CreateOrUpdate
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Toasters_CreateOrUpdate</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="toasterName"> The name of the availability set. </param>
@@ -89,8 +96,16 @@ namespace SubscriptionExtensions
 
         /// <summary>
         /// Create or update an availability set.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
-        /// Operation Id: Toasters_CreateOrUpdate
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Toasters_CreateOrUpdate</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="toasterName"> The name of the availability set. </param>
@@ -121,8 +136,16 @@ namespace SubscriptionExtensions
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
-        /// Operation Id: Toasters_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Toasters_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -149,8 +172,16 @@ namespace SubscriptionExtensions
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
-        /// Operation Id: Toasters_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Toasters_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -177,61 +208,57 @@ namespace SubscriptionExtensions
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters
-        /// Operation Id: Toasters_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Toasters_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ToasterResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ToasterResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<ToasterResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _toasterRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ToasterResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _toasterRestClient.CreateListRequest(Id.SubscriptionId);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ToasterResource(Client, ToasterData.DeserializeToasterData(e)), _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters
-        /// Operation Id: Toasters_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Toasters_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ToasterResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ToasterResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<ToasterResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _toasterClientDiagnostics.CreateScope("ToasterCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _toasterRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ToasterResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _toasterRestClient.CreateListRequest(Id.SubscriptionId);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ToasterResource(Client, ToasterData.DeserializeToasterData(e)), _toasterClientDiagnostics, Pipeline, "ToasterCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
-        /// Operation Id: Toasters_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Toasters_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -257,8 +284,16 @@ namespace SubscriptionExtensions
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
-        /// Operation Id: Toasters_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Toasters_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
