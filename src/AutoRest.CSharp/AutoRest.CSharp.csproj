@@ -4,7 +4,7 @@
     <PackageId>Microsoft.Azure.AutoRest.CSharp</PackageId>
     <OutputType>Exe</OutputType>
     <Version>3.0.0</Version>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>

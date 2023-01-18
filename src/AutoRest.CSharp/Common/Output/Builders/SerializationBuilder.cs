@@ -314,7 +314,7 @@ namespace AutoRest.CSharp.Output.Builders
                     continue;
                 }
 
-                string name = property!.FlattenedNames.ElementAt(depthIndex);
+                string name = property!.FlattenedNames!.ElementAt(depthIndex);
                 if (!propertyBag.Bag.TryGetValue(name, out PropertyBag? namedBag))
                 {
                     namedBag = new PropertyBag();
