@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         foreach (var prop in modelType.Properties)
                         {
-                            writer.Append($"{prop.Name},");
+                            writer.Append($"{prop.Name.ToVariableName()},");
                         }
                     }
                     writer.RemoveTrailingComma();
