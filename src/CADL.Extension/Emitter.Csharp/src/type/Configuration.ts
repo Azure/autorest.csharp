@@ -7,6 +7,9 @@ export interface Configuration {
     LibraryName: string | null;
     SharedSourceFolders: string[];
     SingleTopLevelClient?: boolean;
-    "unreferenced-types-handling"?: "removeOrInternalize" | "internalize" | "keepAll";
+    "unreferenced-types-handling"?:
+        | "removeOrInternalize"
+        | "internalize"
+        | "keepAll";
     "model-namespace"?: boolean;
 }
