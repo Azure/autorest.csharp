@@ -262,38 +262,34 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
-        private void DeclareMethodParameter(CodeWriter writer, ConvenienceMethod convenienceMethod)
+        private void WriteSpreadBodyConverter(CodeWriter writer, ConvenienceMethod convenienceMethod, FormattableString? spreadVariable)
         {
-            foreach (var parameterChain in convenienceMethod.ProtocolToConvenienceParameters)
+            var convenienceSpread = convenienceMethod.ProtocolToConvenienceParameters.Select(converter => converter.ConvenienceSpread).WhereNotNull().SingleOrDefault();
+            if (convenienceSpread != null)
             {
-                if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
+                var ctor = convenienceSpread.BackingModel.SerializationConstructor;
+                var initializers = new List<PropertyInitializer>();
+                foreach (var parameter in convenienceSpread.SpreadedParameters)
                 {
-                    var type = parameterChain.Convenience?.Type;
-                    var paraName = parameterChain.Convenience?.Name;
-                    writer.Append($"{type} {paraName:D} = ");
-                    writer.Append($"new {type}(");
-                    InputType? inputType = parameterChain.Input?.Type ?? null;
-                    if (inputType is InputModelType modelType)
-                    {
-                        foreach (var prop in modelType.Properties)
-                        {
-                            writer.Append($"{prop.Name.ToVariableName()},");
-                        }
-                    }
-                    writer.RemoveTrailingComma();
-                    writer.Line($");");
+                    var property = ctor.FindPropertyInitializedByParameter(parameter);
+                    if (property == null)
+                        continue;
+                    initializers.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.Name:I}", parameter.Type));
                 }
+
+                writer.WriteInitialization(v => writer.Line($"{convenienceSpread.BackingModel.Type} {spreadVariable} = {v};"), convenienceSpread.BackingModel, ctor, initializers);
             }
         }
+
         private void WriteConvenienceMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
         {
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
-                DeclareMethodParameter(_writer, convenienceMethod);
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-                WriteCancellationTokenToRequestContext(_writer, contextVariable);
+                var (parameters, spreadVariable) = PrepareConvenienceMethodParameters(convenienceMethod, contextVariable);
 
-                IReadOnlyList<FormattableString> parameters = PrepareConvenienceMethodParameters(convenienceMethod, contextVariable);
+                WriteSpreadBodyConverter(_writer, convenienceMethod, spreadVariable);
+                WriteCancellationTokenToRequestContext(_writer, contextVariable);
 
                 var responseVariable = new CodeWriterDeclaration("response");
                 _writer
@@ -318,11 +314,13 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
-                DeclareMethodParameter(_writer, convenienceMethod);
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
+
+                var (parameters, spreadVariable) = PrepareConvenienceMethodParameters(convenienceMethod, contextVariable);
+
+                WriteSpreadBodyConverter(_writer, convenienceMethod, spreadVariable);
                 WriteCancellationTokenToRequestContext(_writer, contextVariable);
 
-                IReadOnlyList<FormattableString> parameters = PrepareConvenienceMethodParameters(convenienceMethod, contextVariable);
                 var responseType = convenienceMethod.ResponseType;
                 if (responseType == null)
                 {
@@ -354,11 +352,14 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
         }
 
-        private static IReadOnlyList<FormattableString> PrepareConvenienceMethodParameters(ConvenienceMethod convenienceMethod, CodeWriterDeclaration contextVariable)
+        private static (IReadOnlyList<FormattableString> Parameters, FormattableString? SpreadBodyVariable) PrepareConvenienceMethodParameters(ConvenienceMethod convenienceMethod, CodeWriterDeclaration contextVariable)
         {
+            FormattableString? spreadBodyVariable = null;
             var parameters = new List<FormattableString>();
-            foreach (var (protocolParameter, convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameters)
+            foreach (var converter in convenienceMethod.ProtocolToConvenienceParameters)
             {
+                var protocolParameter = converter.Protocol;
+                var convenienceParameter = converter.Convenience;
                 if (convenienceParameter == KnownParameters.CancellationTokenParameter)
                 {
                     parameters.Add($"{contextVariable:I}");
@@ -371,9 +372,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     throw new InvalidOperationException($"{protocolParameter.Name} protocol method parameter doesn't have matching field or parameter in convenience method {convenienceMethod.Signature.Name}");
                 }
+
+                if (converter.ConvenienceSpread != null)
+                {
+                    spreadBodyVariable = $"{convenienceParameter.Name:I}";
+                }
             }
 
-            return parameters;
+            return (parameters, spreadBodyVariable);
         }
 
         private void WriteConveniencePageableMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ProtocolMethodPaging pagingInfo, ClientFields fields, bool async)

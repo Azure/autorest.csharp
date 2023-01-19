@@ -9,6 +9,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared

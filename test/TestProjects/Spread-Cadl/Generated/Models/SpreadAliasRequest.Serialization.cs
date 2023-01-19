@@ -17,8 +17,25 @@ namespace Spread.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("age");
-            writer.WriteNumberValue(Age);
+            if (Optional.IsDefined(Age))
+            {
+                if (Age != null)
+                {
+                    writer.WritePropertyName("age");
+                    writer.WriteNumberValue(Age.Value);
+                }
+                else
+                {
+                    writer.WriteNull("age");
+                }
+            }
+            writer.WritePropertyName("array");
+            writer.WriteStartArray();
+            foreach (var item in Array)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
 
