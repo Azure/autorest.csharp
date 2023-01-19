@@ -21,6 +21,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using YamlDotNet.Core.Tokens;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
 using Response = Azure.Response;
@@ -270,18 +271,46 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var type = parameterChain.Convenience?.Type;
                     var paraName = parameterChain.Convenience?.Name;
+                    /*
                     writer.Append($"{type} {paraName:D} = ");
                     writer.Append($"new {type}(");
+                    */
                     InputType? inputType = parameterChain.Input?.Type ?? null;
                     if (inputType is InputModelType modelType)
                     {
-                        foreach (var prop in modelType.Properties)
+                        writer.Append($"{type} {paraName:D} = ");
+                        writer.Append($"new {type}(");
+                        IReadOnlyList<InputModelProperty> required = modelType.Properties.Where(p=>p.IsRequired).ToList();
+                        IReadOnlyList<InputModelProperty> optional = modelType.Properties.Where(p => !p.IsRequired).ToList();
+                        foreach (var prop in required)
                         {
                             writer.Append($"{prop.Name.ToVariableName()},");
                         }
+                        writer.RemoveTrailingComma();
+                        writer.Line($");");
+                        if (optional.Count > 0)
+                        {
+                            foreach (var prop in optional)
+                            {
+                                using (writer.Append($"if ({prop.Name.ToVariableName()} != null) ").Scope())
+                                {
+                                    //writer.Append($"if ({prop.Name.ToVariableName()} != null) ").Scope();
+                                    writer.Append($"{paraName:D}.{prop.Name.ToCleanName()} = {prop.Name.ToVariableName()};");
+                                    writer.Line();
+                                }
+
+                                /*
+                                writer.Append($"if ({prop.Name.ToVariableName()} != null) ").Scope();
+                                writer.Append($"{paraName:D}.{prop.Name.ToCleanName()} = {prop.Name.ToVariableName()};");
+                                writer.Line();
+                                */
+                            }
+                        }
                     }
+                    /*
                     writer.RemoveTrailingComma();
                     writer.Line($");");
+                    */
                 }
             }
         }

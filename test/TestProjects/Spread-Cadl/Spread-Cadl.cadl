@@ -60,6 +60,17 @@ alias ThingAliasWithSpreadAlias = {
   @header top: int32;
 };
 
+alias ThingAliasWithOptionalProps = {
+  @path id: string;
+  @doc("name of the Thing")
+  name: string;
+  @doc("optional property of the Thing")
+  color?: string;
+  @doc("age of the Thing")
+  age?: int32;
+  @header top: int32;
+};
+
 @route("/spreadModel")
 @doc("spread a model as body.")
 @post
@@ -89,3 +100,9 @@ op spreadAliasWithModel( ...ThingAliasWithModel ): void;
 @post
 @convenienceAPI
 op spreadAliasWithSpreadAlias( ...ThingAliasWithSpreadAlias ): void;
+
+@route("/spreadAliasWithOptionalProps")
+@doc("spread an alias with contains optional properties as body.")
+@post
+@convenienceAPI
+op spreadAliasWithOptionalProps( ...ThingAliasWithOptionalProps ): void;

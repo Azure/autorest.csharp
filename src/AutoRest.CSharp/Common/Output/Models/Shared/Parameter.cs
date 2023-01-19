@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static Parameter FromModelProperty(in InputModelProperty property, string name, CSharpType propertyType)
         {
-            var validation = propertyType.IsValueType || property.IsReadOnly ? ValidationType.None : ValidationType.AssertNotNull;
+            var validation = propertyType.IsValueType || property.IsReadOnly || !property.IsRequired ? ValidationType.None : ValidationType.AssertNotNull;
             return new Parameter(name, property.Description, propertyType, null, validation, null);
         }
 

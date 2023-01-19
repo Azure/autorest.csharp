@@ -10,6 +10,7 @@ using Spread;
 using Azure.Core;
 using Azure.Identity;
 using Spread.Models;
+using System;
 
 namespace CadlRanchProjects.Tests
 {
@@ -49,6 +50,20 @@ namespace CadlRanchProjects.Tests
         public Task Spread_spreadAliasWithSpreadAlias() => Test(async (host) =>
         {
             Response response = await new SpreadClient(host).SpreadAliasWithSpreadAliasAsync("1", 1, "dog", 3);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Spread_spreadAliasWithoutOptionalProps() => Test(async (host) =>
+        {
+            Response response = await new SpreadClient(host).SpreadAliasWithOptionalPropsAsync("1", 1, "dog", null, null);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Spread_spreadAliasWithOptionalProps() => Test(async (host) =>
+        {
+            Response response = await new SpreadClient(host).SpreadAliasWithOptionalPropsAsync("2", 1, "dog", "red", 3);
             Assert.AreEqual(204, response.Status);
         });
     }

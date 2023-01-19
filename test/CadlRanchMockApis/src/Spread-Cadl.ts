@@ -27,6 +27,16 @@ const spreadAliasWithSpreadAliasRequest = {
     age: 3
 };
 
+const spreadAliasWithoutOptionalPropRequest = {
+    name: "dog"
+}
+
+const spreadAliasWithOptionalPropRequest = {
+    name: "dog",
+    color: "red",
+    age: 3
+}
+
 Scenarios.Spread_spreadModel = passOnSuccess(
     mockapi.post("/spreadModel", (req) => {
         req.expect.bodyEquals(spreadModelRequest);
@@ -68,6 +78,26 @@ Scenarios.Spread_spreadAliasWithModel = passOnSuccess(
 Scenarios.Spread_spreadAliasWithSpreadAlias = passOnSuccess(
     mockapi.post("/spreadAliasWithSpreadAlias/1", (req) => {
         req.expect.bodyEquals(spreadAliasWithSpreadAliasRequest);
+        req.expect.containsHeader("top", "1");
+        return {
+            status: 204
+          };
+    }),
+);
+
+Scenarios.Spread_spreadAliasWithoutOptionalProps = passOnSuccess(
+    mockapi.post("/spreadAliasWithOptionalProps/1", (req) => {
+        req.expect.bodyEquals(spreadAliasWithoutOptionalPropRequest);
+        req.expect.containsHeader("top", "1");
+        return {
+            status: 204
+          };
+    }),
+);
+
+Scenarios.Spread_spreadAliasWithOptionalProps = passOnSuccess(
+    mockapi.post("/spreadAliasWithOptionalProps/2", (req) => {
+        req.expect.bodyEquals(spreadAliasWithOptionalPropRequest);
         req.expect.containsHeader("top", "1");
         return {
             status: 204
