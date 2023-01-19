@@ -225,7 +225,7 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredInt64").ToString());
 Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
 Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredDouble").ToString());
+Console.WriteLine(result.GetProperty("required_Double").ToString());
 Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
 Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
 Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
@@ -258,7 +258,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
   requiredInt64: number, # Required.
   requiredSafeInt: number, # Required.
   requiredFloat: number, # Required.
-  requiredDouble: number, # Required.
+  required_Double: number, # Required.
   requiredBoolean: boolean, # Required.
   requiredDateTimeOffset: string (date &amp; time), # Required.
   requiredTimeSpan: string (duration ISO 8601 Format), # Required.
@@ -311,7 +311,7 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredInt64").ToString());
 Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
 Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredDouble").ToString());
+Console.WriteLine(result.GetProperty("required_Double").ToString());
 Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
 Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
 Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
@@ -344,7 +344,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
   requiredInt64: number, # Required.
   requiredSafeInt: number, # Required.
   requiredFloat: number, # Required.
-  requiredDouble: number, # Required.
+  required_Double: number, # Required.
   requiredBoolean: boolean, # Required.
   requiredDateTimeOffset: string (date &amp; time), # Required.
   requiredTimeSpan: string (duration ISO 8601 Format), # Required.

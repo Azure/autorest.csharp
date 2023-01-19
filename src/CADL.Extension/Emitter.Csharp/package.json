@@ -28,8 +28,8 @@
         "test-official": "c8 mocha --forbid-only",
         "lint": "eslint . --ext .ts --max-warnings=0",
         "lint:fix": "eslint . --fix --ext .ts",
-        "prettier:fix": "prettier --write ./src/**/*.ts",
-        "prettier": "prettier --check ./src/**/*.ts"
+        "prettier:fix": "prettier --write --config .prettierrc.json ./src/**/*.ts",
+        "prettier": "prettier --check --config .prettierrc.json ./src/**/*.ts"
     },
     "files": [
         "dist/**"
