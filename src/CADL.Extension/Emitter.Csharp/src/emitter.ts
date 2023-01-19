@@ -145,7 +145,7 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "clear-output-folder": { type: "boolean", nullable: true },
         "save-inputs": { type: "boolean", nullable: true },
         "model-namespace": { type: "boolean", nullable: true },
-        "existing-project-folder": {type: "string", nullable: true},
+        "existing-project-folder": { type: "string", nullable: true }
     },
     required: []
 };
@@ -180,7 +180,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         "clear-output-folder": resolvedOptions["clear-output-folder"],
         "save-inputs": resolvedOptions["save-inputs"],
         "model-namespace": resolvedOptions["model-namespace"],
-        "existing-project-folder": resolvedOptions["existing-project-folder"],
+        "existing-project-folder": resolvedOptions["existing-project-folder"]
     };
     const version: string = "";
     if (!program.compilerOptions.noEmit && !program.hasError()) {
