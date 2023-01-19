@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -139,12 +140,12 @@ namespace Spread
         /// <param name="array"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="array"/> is null. </exception>
-        public virtual async Task<Response> SpreadAliasAsync(string name, int? age, IList<int> array, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SpreadAliasAsync(string name, int? age, IEnumerable<int> array, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(array, nameof(array));
 
-            var spreadAliasRequest = new SpreadAliasRequest(name, array)
+            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, array.ToList())
             {
                 Age = age
             };
@@ -159,12 +160,12 @@ namespace Spread
         /// <param name="array"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="array"/> is null. </exception>
-        public virtual Response SpreadAlias(string name, int? age, IList<int> array, CancellationToken cancellationToken = default)
+        public virtual Response SpreadAlias(string name, int? age, IEnumerable<int> array, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(array, nameof(array));
 
-            var spreadAliasRequest = new SpreadAliasRequest(name, array)
+            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, array.ToList())
             {
                 Age = age
             };
@@ -236,7 +237,7 @@ namespace Spread
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
 
-            var spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
+            SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadMultiTargetAliasAsync(id, top, spreadMultiTargetAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
@@ -255,7 +256,7 @@ namespace Spread
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
 
-            var spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
+            SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadMultiTargetAlias(id, top, spreadMultiTargetAliasRequest.ToRequestContent(), context);
             return response;
@@ -420,13 +421,13 @@ namespace Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="array"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, string name, int? age, IList<int> array, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, string name, int? age, IEnumerable<int> array, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(array, nameof(array));
 
-            var spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, array)
+            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, array.ToList())
             {
                 Age = age
             };
@@ -444,13 +445,13 @@ namespace Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="array"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response SpreadAliasWithSpreadAlias(string id, int top, string name, int? age, IList<int> array, CancellationToken cancellationToken = default)
+        public virtual Response SpreadAliasWithSpreadAlias(string id, int top, string name, int? age, IEnumerable<int> array, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(array, nameof(array));
 
-            var spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, array)
+            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, array.ToList())
             {
                 Age = age
             };

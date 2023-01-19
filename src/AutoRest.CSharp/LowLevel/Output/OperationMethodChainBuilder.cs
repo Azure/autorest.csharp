@@ -209,8 +209,14 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         if (convenienceParameter.Type.TryCast<ModelTypeProvider>(out var model))
                         {
-                            parameterList.AddRange(model.Fields.SerializationParameters);
-                            protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, model.Fields.SerializationParameters)));
+                            var parameters = model.Fields.SerializationParameters
+                                .Select(parameter => parameter with
+                                {
+                                    Type = TypeFactory.GetInputType(parameter.Type)
+                                });
+
+                            parameterList.AddRange(parameters);
+                            protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, parameters)));
                         }
                         else
                         {
