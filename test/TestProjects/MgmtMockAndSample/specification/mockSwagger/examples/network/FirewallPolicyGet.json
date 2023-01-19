@@ -17,6 +17,13 @@
           "key1": "value1"
         },
         "properties": {
+          "startupProbe": null,
+          "readinessProbe": {
+            "disableProbe": false,
+            "initialDelaySeconds": 30,
+            "periodSeconds": 10,
+            "failureThreshold": 3
+          },
           "provisioningState": "Succeeded",
           "threatIntelMode": "Alert",
           "threatIntelWhitelist": {

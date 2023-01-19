@@ -5,5 +5,5 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record CSharpAttribute(CSharpType Type);
+    internal record CSharpAttribute(CSharpType Type, params string[] Arguments);
 }

@@ -447,7 +447,7 @@ operationGroups:
             language: !Languages 
               default:
                 name: filter
-                description: '|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>'
+                description: The filter to apply on the operation.
                 serializedName: $filter
             protocol: !Protocols 
               http: !HttpParameter 

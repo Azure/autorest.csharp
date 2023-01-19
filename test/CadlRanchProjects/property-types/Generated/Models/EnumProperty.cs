@@ -12,12 +12,12 @@ namespace Models.Property.Types.Models
     {
         /// <summary> Initializes a new instance of EnumProperty. </summary>
         /// <param name="property"></param>
-        public EnumProperty(InnerEnum property)
+        public EnumProperty(FixedInnerEnum property)
         {
             Property = property;
         }
 
         /// <summary> Gets or sets the property. </summary>
-        public InnerEnum Property { get; set; }
+        public FixedInnerEnum Property { get; set; }
     }
 }

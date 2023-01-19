@@ -26,16 +26,6 @@ namespace MgmtMockAndSample.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
-        {
-            // Example: Retrieve a deleted vault
-
-            ResourceIdentifier deletedVaultResourceId = DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", new AzureLocation("westus"), "sample-vault");
-            DeletedVaultResource deletedVault = GetArmClient().GetDeletedVaultResource(deletedVaultResourceId);
-            await deletedVault.GetAsync();
-        }
-
-        [RecordedTest]
         public async Task PurgeDeleted()
         {
             // Example: Purge a deleted vault

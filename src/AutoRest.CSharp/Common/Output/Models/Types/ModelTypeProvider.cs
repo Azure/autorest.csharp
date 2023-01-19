@@ -52,6 +52,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
+        public bool IsPropertyBag => _inputModel.IsPropertyBag;
+
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
@@ -60,6 +62,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _sourceInputModel = sourceInputModel;
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
+            _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsDefaultDiscriminator ? this : null);
         }
@@ -188,7 +191,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 null,
                 MethodSignatureModifiers.Internal,
                 fullParameterList,
-                new(true, baseInitializers));
+                Initializer: new(true, baseInitializers));
         }
 
         private ConstructorSignature CreatePublicConstructorSignature(string name, InputModelTypeUsage usage, IEnumerable<Parameter> parameters)
@@ -214,7 +217,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 null,
                 accessibility,
                 fullParameterList,
-                new(true, baseInitializers));
+                Initializer: new(true, baseInitializers));
         }
 
         private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)
@@ -352,6 +355,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool EnsureHasJsonSerialization()
         {
+            if (IsPropertyBag)
+                return false;
             return true;
         }
 

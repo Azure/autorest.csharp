@@ -64,7 +64,7 @@
    "$id": "10",
    "Name": "EnumToBeMadeExtensible",
    "Namespace": "CustomizationsInCadl",
-   "Description": "Extensible enum that has been fixed enum",
+   "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -398,6 +398,7 @@
     {
      "$id": "49",
      "Name": "roundTrip",
+     "ResourceName": "CustomizationsInCadl",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {

@@ -201,14 +201,14 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="GetAuthoringClientAsync(String,RequestContext)">
+    <member name="GetProjectAsync(String,RequestContext)">
 <example>
-This sample shows how to call GetAuthoringClientAsync with required parameters and parse the result.
+This sample shows how to call GetProjectAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = await client.GetAuthoringClientAsync("<projectName>");
+Response response = await client.GetProjectAsync("<projectName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -247,14 +247,14 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="GetAuthoringClient(String,RequestContext)">
+    <member name="GetProject(String,RequestContext)">
 <example>
-This sample shows how to call GetAuthoringClient with required parameters and parse the result.
+This sample shows how to call GetProject with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = client.GetAuthoringClient("<projectName>");
+Response response = client.GetProject("<projectName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -937,14 +937,14 @@ Schema for <c>SwapDeploymentsJob</c>:
 
 </remarks>
     </member>
-    <member name="GetAuthoringClientsAsync(Int32,Int32,Int32,RequestContext)">
+    <member name="GetProjectsAsync(Int32,Int32,Int32,RequestContext)">
 <example>
-This sample shows how to call GetAuthoringClientsAsync and parse the result.
+This sample shows how to call GetProjectsAsync and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var data in client.GetAuthoringClientsAsync())
+await foreach (var data in client.GetProjectsAsync())
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -957,12 +957,12 @@ await foreach (var data in client.GetAuthoringClientsAsync())
     Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 }
 ]]></code>
-This sample shows how to call GetAuthoringClientsAsync with all parameters, and how to parse the result.
+This sample shows how to call GetProjectsAsync with all parameters, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-await foreach (var data in client.GetAuthoringClientsAsync(1234, 1234, 1234))
+await foreach (var data in client.GetProjectsAsync(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -1002,14 +1002,14 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetAuthoringClients(Int32,Int32,Int32,RequestContext)">
+    <member name="GetProjects(Int32,Int32,Int32,RequestContext)">
 <example>
-This sample shows how to call GetAuthoringClients and parse the result.
+This sample shows how to call GetProjects and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var data in client.GetAuthoringClients())
+foreach (var data in client.GetProjects())
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -1022,59 +1022,12 @@ foreach (var data in client.GetAuthoringClients())
     Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 }
 ]]></code>
-This sample shows how to call GetAuthoringClients with all parameters, and how to parse the result.
+This sample shows how to call GetProjects with all parameters, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var data in client.GetAuthoringClients(1234, 1234, 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-    Console.WriteLine(result.GetProperty("multilingual").ToString());
-    Console.WriteLine(result.GetProperty("description").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-}
-]]></code>
-</example>
-<remarks>
-Below is the JSON schema for one item in the pageable response.
-
-Response Body:
-
-Schema for <c>Array</c>:
-<code>{
-  projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
-}
-</code>
-
-</remarks>
-    </member>
-    <member name="GetAuthoringClientsAsync(String,RequestContext)">
-<example>
-This sample shows how to call GetAuthoringClientsAsync with required parameters and parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringClient(endpoint);
-
-await foreach (var data in client.GetAuthoringClientsAsync("<projectName>"))
+foreach (var data in client.GetProjects(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -1114,14 +1067,61 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetAuthoringClients(String,RequestContext)">
+    <member name="GetDeploymentsAsync(String,RequestContext)">
 <example>
-This sample shows how to call GetAuthoringClients with required parameters and parse the result.
+This sample shows how to call GetDeploymentsAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-foreach (var data in client.GetAuthoringClients("<projectName>"))
+await foreach (var data in client.GetDeploymentsAsync("<projectName>"))
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("projectName").ToString());
+    Console.WriteLine(result.GetProperty("projectKind").ToString());
+    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+    Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+    Console.WriteLine(result.GetProperty("multilingual").ToString());
+    Console.WriteLine(result.GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  projectName: string, # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
+  storageInputContainerName: string, # Required.
+  settings: Dictionary&lt;string, string&gt;, # Optional.
+  multilingual: boolean, # Optional.
+  description: string, # Optional.
+  language: string, # Required.
+  createdDateTime: string (date &amp; time), # Required.
+  lastModifiedDateTime: string (date &amp; time), # Required.
+  lastTrainedDateTime: string (date &amp; time), # Required.
+  lastDeployedDateTime: string (date &amp; time), # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetDeployments(String,RequestContext)">
+<example>
+This sample shows how to call GetDeployments with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new AuthoringClient(endpoint);
+
+foreach (var data in client.GetDeployments("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -1278,7 +1278,7 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   trainingConfigVersionStr: string, # Required.
-  modelExpirationDate: string (date &amp; time), # Required.
+  modelExpirationDate: string (date), # Required.
 }
 </code>
 
@@ -1319,7 +1319,7 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   trainingConfigVersionStr: string, # Required.
-  modelExpirationDate: string (date &amp; time), # Required.
+  modelExpirationDate: string (date), # Required.
 }
 </code>
 

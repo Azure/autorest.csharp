@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -56,8 +55,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// Operation Id: BillingAccounts_Create
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>BillingAccounts_Create</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
@@ -89,8 +96,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// Operation Id: BillingAccounts_Create
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>BillingAccounts_Create</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
@@ -122,8 +137,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Gets a billing account by its ID.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// Operation Id: BillingAccounts_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>BillingAccounts_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
@@ -152,8 +175,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Gets a billing account by its ID.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// Operation Id: BillingAccounts_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>BillingAccounts_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
@@ -182,64 +213,60 @@ namespace TenantOnly
 
         /// <summary>
         /// Gets a billing account by its ID.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts
-        /// Operation Id: BillingAccounts_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>BillingAccounts_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BillingAccountResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<BillingAccountResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<BillingAccountResource>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _billingAccountRestClient.ListAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccountResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _billingAccountRestClient.CreateListRequest(expand);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BillingAccountResource(Client, BillingAccountData.DeserializeBillingAccountData(e)), _billingAccountClientDiagnostics, Pipeline, "BillingAccountCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
         /// Gets a billing account by its ID.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts
-        /// Operation Id: BillingAccounts_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>BillingAccounts_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BillingAccountResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<BillingAccountResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<BillingAccountResource> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _billingAccountRestClient.List(expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new BillingAccountResource(Client, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _billingAccountRestClient.CreateListRequest(expand);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BillingAccountResource(Client, BillingAccountData.DeserializeBillingAccountData(e)), _billingAccountClientDiagnostics, Pipeline, "BillingAccountCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// Operation Id: BillingAccounts_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>BillingAccounts_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
@@ -266,8 +293,16 @@ namespace TenantOnly
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// Operation Id: BillingAccounts_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Billing/billingAccounts/{billingAccountName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>BillingAccounts_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>

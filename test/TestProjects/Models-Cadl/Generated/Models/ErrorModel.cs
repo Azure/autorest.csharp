@@ -7,7 +7,7 @@
 
 namespace ModelsInCadl.Models
 {
-    /// <summary> Model that has property of its own type. </summary>
+    /// <summary> Output model that has property of its own type. </summary>
     public partial class ErrorModel
     {
         /// <summary> Initializes a new instance of ErrorModel. </summary>
@@ -16,12 +16,16 @@ namespace ModelsInCadl.Models
         }
 
         /// <summary> Initializes a new instance of ErrorModel. </summary>
+        /// <param name="message"></param>
         /// <param name="innerError"></param>
-        internal ErrorModel(ErrorModel innerError)
+        internal ErrorModel(string message, ErrorModel innerError)
         {
+            Message = message;
             InnerError = innerError;
         }
 
+        /// <summary> Gets the message. </summary>
+        public string Message { get; }
         /// <summary> Gets the inner error. </summary>
         public ErrorModel InnerError { get; }
     }

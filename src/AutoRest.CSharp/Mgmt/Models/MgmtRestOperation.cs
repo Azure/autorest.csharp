@@ -5,16 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Output.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -67,6 +69,12 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MethodSignatureModifiers Accessibility => Method.Accessibility;
         public bool IsPagingOperation => Operation.Language.Default.Paging != null || IsListOperation;
 
+        private string? _propertyBagName;
+
+        private IEnumerable<Parameter>? _propertyBagSelectedParams;
+
+        private Parameter? _propertyBagParameter;
+
         private bool IsListOperation => PagingMethod != null;
 
         public CSharpType? OriginalReturnType { get; }
@@ -102,11 +110,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Schema? FinalResponseSchema => Operation.IsLongRunning ? Operation.LongRunningFinalResponse.ResponseSchema : null;
 
-        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false)
+        public MgmtRestOperation(Operation operation, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false, string? propertyBagName = null)
         {
             var method = MgmtContext.Library.GetRestClientMethod(operation);
             var restClient = MgmtContext.Library.GetRestClient(operation);
 
+            _propertyBagName = propertyBagName;
             _isLongRunning = isLongRunning;
             ThrowIfNull = throwIfNull;
             Operation = operation;
@@ -131,6 +140,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, RequestPath contextualPath, params Parameter[] overrideParameters)
         {
             //copy values from other method
+            _propertyBagName = other._propertyBagName;
             _isLongRunning = other.IsLongRunningOperation;
             ThrowIfNull = other.ThrowIfNull;
             Operation = other.Operation;
@@ -436,6 +446,67 @@ namespace AutoRest.CSharp.Mgmt.Models
             return ResourceMatchType.None;
         }
 
+        internal Parameter GetPropertyBagParameter(IEnumerable<Parameter> parameters)
+        {
+            // considering this method might be invoked several times in the future
+            // we use _propertyBagParameter to cache the last reault
+            // and return it directly if the input parameter is the same as the previous one
+            if (_propertyBagSelectedParams != null && _propertyBagSelectedParams.SequenceEqual(parameters))
+            {
+                return _propertyBagParameter!;
+            }
+            else
+            {
+                _propertyBagSelectedParams = parameters;
+            }
+            var clientName = _propertyBagName == null ?
+                MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" : _propertyBagName;
+
+            var propertyBagName = $"{clientName}{Name}";
+            if (Configuration.MgmtConfiguration.RenamePropertyBag.TryGetValue(OperationId, out string? modelName))
+            {
+                if (modelName.EndsWith("Options"))
+                {
+                    propertyBagName = modelName.ReplaceLast("Options", string.Empty);
+                }
+                else
+                {
+                    throw new InvalidOperationException($"The property bag model name for {OperationId} should end with Options.");
+                }
+            }
+            var propertyBag = ((MgmtPropertyBag)Method.PropertyBag!).WithUpdatedInfo(propertyBagName, parameters);
+            var schemaObject = propertyBag.PackModel;
+            var existingModels = MgmtContext.Library.PropertyBagModels.Where(m => m.Type.Name == schemaObject.Type.Name);
+            if (existingModels != null)
+            {
+                // sometimes we might have two or more property bag models with same name but different porperties
+                // we will throw exception in this case to prompt the user to rename the property bag model
+                if (IsDuplicatedPropertyBag(existingModels, (ModelTypeProvider)schemaObject))
+                {
+                    throw new InvalidOperationException($"Another property bag model named {schemaObject.Type.Name} already exists, please use configuration `rename-property-bag` to rename the property bag model corresponding to the operation {OperationId}.");
+                }
+            }
+            MgmtContext.Library.PropertyBagModels.Add(schemaObject);
+            return _propertyBagParameter = propertyBag.PackParameter;
+        }
+
+        private static bool IsDuplicatedPropertyBag(IEnumerable<TypeProvider> existingModels, ModelTypeProvider modelToAdd)
+        {
+            foreach (var model in existingModels)
+            {
+                if (model is not ModelTypeProvider mgmtModel)
+                    continue;
+                if (mgmtModel.Properties.Count() != modelToAdd.Properties.Count())
+                    return true;
+                for (int i = 0; i < mgmtModel.Properties.Count(); i++)
+                {
+                    if (mgmtModel.Properties[i].Declaration.Name != modelToAdd.Properties[i].Declaration.Name)
+                        return true;
+                }
+            }
+            return false;
+        }
+
         private static bool AreEqualBackToProvider(RequestPath resourcePath, RequestPath requestPath, int resourceSkips, int requestSkips)
         {
             int resourceStart = resourcePath.Count - 1 - resourceSkips;
@@ -505,6 +576,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 _ => originalType // we have multiple resource matched, we can only return the original type without wrapping it
             };
         }
+
         private static PagingMethodWrapper? GetPagingMethodWrapper(RestClientMethod method)
         {
             if (MgmtContext.Library.PagingMethods.TryGetValue(method, out var pagingMethod))

@@ -29,9 +29,14 @@
     "*Uris": "Uri"
   },
   "RenameMapping": {
-    "Type": "EncryptionType"
+    "Type": "EncryptionType",
+    "FirewallPolicyThreatIntelWhitelist.ipAddresses": "-|ip-address"
   },
-  "TestGen": {
+  "testgen": {
+    "SkippedOperations": [
+      "Vaults_GetDeleted",
+      "Vaults_Update"
+    ],
     "Mock": true,
     "Sample": true
   }

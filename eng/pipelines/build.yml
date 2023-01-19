@@ -27,7 +27,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20221212.1
+      ref: refs/tags/azure-sdk-build-tools_20230112.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -55,6 +55,10 @@ stages:
               npm ci
             displayName: "Install packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm run prettier
+            displayName: "Emitter format check"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
           - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
             name: Package
             displayName: 'Package'
@@ -124,10 +128,10 @@ stages:
             displayName: 'Upload to Cadl Ranch Coverage Report'
             condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
             inputs:
-              azureSubscription: "Azure SDK Playground"
+              azureSubscription: "Cadl Ranch Storage"
               scriptType: "bash"
               scriptLocation: "inlineScript"
-              inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName cadlranchcoverage --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
+              inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: smoke-test.yml
         parameters:

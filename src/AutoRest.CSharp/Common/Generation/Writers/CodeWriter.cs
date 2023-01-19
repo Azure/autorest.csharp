@@ -142,9 +142,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     case FormattableString fs:
                         Append(fs);
                         break;
-                    case CodeWriterDelegate d:
-                        Append(d);
-                        break;
                     case Type t:
                         AppendType(new CSharpType(t));
                         break;
@@ -538,12 +535,6 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             declaration.SetActualName(GetTemporaryVariable(declaration.RequestedName));
             return Declaration(declaration.ActualName);
-        }
-
-        public CodeWriter Append(CodeWriterDelegate writerDelegate)
-        {
-            writerDelegate(this);
-            return this;
         }
 
         public override string ToString()

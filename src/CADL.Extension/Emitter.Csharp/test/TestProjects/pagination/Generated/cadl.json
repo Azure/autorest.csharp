@@ -112,6 +112,7 @@
     {
      "$id": "15",
      "Name": "ListLedgerEntries",
+     "ResourceName": "LedgerEntry",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
      "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
      "Parameters": [

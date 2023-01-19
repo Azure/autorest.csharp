@@ -7,12 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 
@@ -70,6 +68,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 throw new InvalidOperationException($"Neither CodeModel.yaml nor cadl.json exist in {outputPath} folder.");
             }
 
+            if (options.ClearOutputFolder)
+            {
+                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "cadl.json" };
+                DeleteDirectory(outputPath, keepFiles);
+            }
 
             await foreach (var file in workspace.GetGeneratedFilesAsync())
             {
@@ -81,6 +84,29 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 Console.WriteLine($"Writing {filename}");
                 Directory.CreateDirectory(Path.GetDirectoryName(filename)!);
                 await File.WriteAllTextAsync(filename, file.Text);
+            }
+        }
+
+        private static void DeleteDirectory(string path, string[] keepFiles)
+        {
+            var directoryInfo = new DirectoryInfo(path);
+            foreach (FileInfo file in directoryInfo.GetFiles())
+            {
+                if (keepFiles.Contains(file.Name))
+                {
+                    continue;
+                }
+                file.Delete();
+            }
+
+            foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
+            {
+                DeleteDirectory(directory.FullName, keepFiles);
+            }
+
+            if (!directoryInfo.EnumerateFileSystemInfos().Any())
+            {
+                directoryInfo.Delete();
             }
         }
 
@@ -152,6 +178,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
 
                     Configuration.MgmtConfiguration.SaveConfiguration(writer);
+
+                    if (Configuration.MgmtTestConfiguration != null)
+                    {
+                        Configuration.MgmtTestConfiguration.SaveConfiguration(writer);
+                    }
 
                     writer.WriteEndObject();
                 }
@@ -228,7 +259,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
                 protocolMethods,
                 suppressAbstractBaseClasses,
-                MgmtConfiguration.LoadConfiguration(root)
+                MgmtConfiguration.LoadConfiguration(root),
+                MgmtTestConfiguration.LoadConfiguration(root)
             );
         }
     }

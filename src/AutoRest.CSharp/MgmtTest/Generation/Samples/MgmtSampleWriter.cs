@@ -157,11 +157,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private CodeWriterVariableDeclaration WriteGetArmClient()
         {
+            _writer.LineRaw("// get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line");
+            var cred = new CodeWriterVariableDeclaration("cred", typeof(TokenCredential));
+            _writer.UseNamespace("Azure.Identity");
+            _writer.AppendDeclaration(cred)
+                .Line($" = new DefaultAzureCredential();");
             _writer.Line($"// authenticate your client");
             var clientResult = new CodeWriterVariableDeclaration("client", typeof(ArmClient));
-            _writer.UseNamespace("Azure.Identity");
             _writer.AppendDeclaration(clientResult)
-                .Line($" = new {typeof(ArmClient)}(new DefaultAzureCredential());");
+                .Line($" = new {typeof(ArmClient)}({cred.Declaration});");
 
             return clientResult;
         }
@@ -267,7 +271,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 _writer.Append($"{parentVar}.{getResourceCollectionMethodName}(");
             }
 
-            var parameterValues = sample.ParameterValueMapping;
             // iterate over the parameter list and put them into the invocation
             foreach ((var parameter, var declaration) in parameters)
             {
@@ -333,11 +336,27 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             if (returnType.IsGenericType)
             {
                 // an operation with a response
-                var valueResult = new CodeWriterVariableDeclaration("result", returnType.Arguments.First());
-                _writer.AppendDeclaration(valueResult).AppendRaw(" = ");
-                // write the method invocation
-                WriteOperationInvocation(instanceVar, parameters, sample);
-                return valueResult;
+                var unwrappedReturnType = returnType.Arguments.First();
+                if (unwrappedReturnType.IsGenericType) // if the type inside Response<T> is a generic type, somehow the implicit convert Response<T> => T does not work, we have to explicitly unwrap it
+                {
+                    var valueResponse = new CodeWriterVariableDeclaration("response", returnType);
+                    _writer.AppendDeclaration(valueResponse).AppendRaw(" = ");
+                    // write the method invocation
+                    WriteOperationInvocation(instanceVar, parameters, sample);
+                    // unwrap the response
+                    var valueResult = new CodeWriterVariableDeclaration("result", unwrappedReturnType);
+                    _writer.AppendDeclaration(valueResult).AppendRaw(" = ")
+                        .Line($"{valueResponse.Declaration}.Value;");
+                    return valueResult;
+                }
+                else // if it is a type provider type, we could rely on the implicit convert Response<T> => T
+                {
+                    var valueResult = new CodeWriterVariableDeclaration("result", unwrappedReturnType);
+                    _writer.AppendDeclaration(valueResult).AppendRaw(" = ");
+                    // write the method invocation
+                    WriteOperationInvocation(instanceVar, parameters, sample);
+                    return valueResult;
+                }
             }
             else
             {
@@ -382,6 +401,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     var declaration = new CodeWriterVariableDeclaration(parameter.Name, parameter.Type);
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")
                         .AppendExampleParameterValue(parameterValue).LineRaw(";");
+                    result.Add(parameter.Name, declaration);
+                }
+
+                else if (parameter.IsPropertyBag)
+                {
+                    var declaration = new CodeWriterVariableDeclaration(parameter.Name, parameter.Type);
+                    _writer.AppendDeclaration(declaration).AppendRaw(" = ")
+                        .AppendExamplePropertyBagParamValue(parameter, sample.PropertyBagParamValueMapping).LineRaw(";");
                     result.Add(parameter.Name, declaration);
                 }
             }

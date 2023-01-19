@@ -1,6 +1,7 @@
 import "@cadl-lang/rest";
 import "@cadl-lang/openapi";
 import "@azure-tools/cadl-dpg";
+import "@azure-tools/cadl-azure-core";
 
 @serviceTitle("Hello world")
 @serviceVersion("0.1.0")
@@ -22,28 +23,30 @@ model AuthFlow {
 
 using Cadl.Http;
 using Azure.DPG;
+using Azure.Core;
 
 @doc("Simple enum")
+@fixed
 enum SimpleEnum {
     One: "1",
     Two: "2",
     Four: "4"
 }
 
-@doc("Extensible enum Values")
-enum ExtensibleEnumValues {
+@doc("Extensible enum")
+enum ExtensibleEnum {
     One: "1",
     Two: "2",
     Four: "4"
 }
 
-@doc("Extensible enum")
-@knownValues(ExtensibleEnumValues)
-model ExtensibleEnum is string {}
-
 model Thing {
   @doc("name of the Thing")
   name: string;
+  @doc("required Union")
+  requiredUnion: string | string[]|int32;
+  @doc("required literal type")
+  requiredLiteral: "accept";
 }
 
 @friendlyName("Friend")
@@ -69,7 +72,7 @@ model RoundTripModel {
   requiredModel: Thing;
 }
 
-enum DaysOfWeekExtensibleEnumValues {
+enum DaysOfWeekExtensibleEnum {
   "Monday",
   "Tuesday",
   "Wednesday",
@@ -78,8 +81,6 @@ enum DaysOfWeekExtensibleEnumValues {
   "Saturday",
   "Sunday",
 }
-@knownValues(DaysOfWeekExtensibleEnumValues)
-model DaysOfWeekExtensibleEnum is string;
 
 @doc("Hello world service")
 @route("/hello")
@@ -137,6 +138,8 @@ op anonymousBody( ...Thing ): Thing;
 @post
 @convenienceAPI
 op friendlyModel(...NotFriend): NotFriend;
+
+op addTimeHeader(@header("Repeatability-First-Sent") repeatabilityFirstSent?: zonedDateTime): void;
 
 namespace EnumTest {
     @get

@@ -17,6 +17,9 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class FormattableStringHelpers
     {
+        public static bool IsEmpty(this FormattableString fs) =>
+            string.IsNullOrEmpty(fs.Format) && fs.ArgumentCount == 0;
+
         public static FormattableString Join(this ICollection<FormattableString> fss, string separator, string? lastSeparator = null)
             => fss.Count switch
             {

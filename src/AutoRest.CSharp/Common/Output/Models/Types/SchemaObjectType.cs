@@ -132,6 +132,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
+                // skip the flattened properties, we should never include them in serialization
+                if (property is FlattenedObjectTypeProperty)
+                    continue;
+
                 var type = property.Declaration.Type;
 
                 var deserializationParameter = new Parameter(
@@ -206,7 +210,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var property in Properties)
             {
                 // Only required properties that are not discriminators go into default ctor
-                if (property == Discriminator?.Property)
+                // skip the flattened properties, we should never include them in the constructors
+                if (property == Discriminator?.Property || property is FlattenedObjectTypeProperty)
                 {
                     continue;
                 }
@@ -496,7 +501,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
-        protected IEnumerable<ObjectSchema> GetCombinedSchemas()
+        protected internal IEnumerable<ObjectSchema> GetCombinedSchemas()
         {
             yield return ObjectSchema;
 

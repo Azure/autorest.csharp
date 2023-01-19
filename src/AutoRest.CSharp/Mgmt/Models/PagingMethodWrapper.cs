@@ -12,8 +12,8 @@ internal class PagingMethodWrapper
     {
         Method = pagingMethod.Method;
         NextPageMethod = pagingMethod.NextPageMethod;
-        NextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-        ItemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
+        NextLinkName = pagingMethod.PagingResponse.NextLinkPropertyName;
+        ItemName = pagingMethod.PagingResponse.ItemPropertyName;
         ItemType = pagingMethod.PagingResponse.ItemType;
     }
 
