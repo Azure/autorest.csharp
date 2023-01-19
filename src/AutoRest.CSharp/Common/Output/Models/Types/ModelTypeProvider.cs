@@ -251,7 +251,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => TypeFactory.IsList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
+            => p with { Type = TypeFactory.GetInputType(p.Type) };
 
         private static Parameter CreateSerializationConstructorParameter(Parameter p) // we don't validate parameters for serialization constructor
             => p with { Validation = ValidationType.None };
