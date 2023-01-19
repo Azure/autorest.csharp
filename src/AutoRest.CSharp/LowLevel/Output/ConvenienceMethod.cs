@@ -6,8 +6,9 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<(Parameter Protocol, Parameter? Convenience, InputParameter? Input)> ProtocolToConvenienceParameters, CSharpType? ResponseType, Diagnostic? Diagnostic);
+    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<(Parameter Protocol, Parameter? Convenience)> ProtocolToConvenienceParameters, CSharpType? ResponseType, Diagnostic? Diagnostic, ModelTypeProvider? BackingBodyModel = null);
 }

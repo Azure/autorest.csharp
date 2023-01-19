@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var longRunning = clientMethod.LongRunning;
                         var pagingInfo = clientMethod.PagingInfo;
 
-                        if (clientMethod.ConvenienceMethod is { } convenienceMethod)
+                        foreach (var convenienceMethod in clientMethod.ConvenienceMethods)
                         {
                             WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, true);
                             WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, false);
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteRequestCreationMethod(_writer, method, _client.Fields);
                     }
 
-                    if (_client.ClientMethods.Any(cm => cm.ConvenienceMethod is not null))
+                    if (_client.ClientMethods.Any(cm => cm.ConvenienceMethods.Any()))
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
@@ -264,26 +264,39 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void DeclareMethodParameter(CodeWriter writer, ConvenienceMethod convenienceMethod)
         {
-            foreach (var parameterChain in convenienceMethod.ProtocolToConvenienceParameters)
+            var modelType = convenienceMethod.BackingBodyModel;
+            if (modelType != null)
             {
-                if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
+                var ctor = modelType.SerializationConstructor;
+                var initializes = new List<PropertyInitializer>();
+                foreach (var parameter in convenienceMethod.Signature.Parameters)
                 {
-                    var type = parameterChain.Convenience?.Type;
-                    var paraName = parameterChain.Convenience?.Name;
-                    writer.Append($"{type} {paraName:D} = ");
-                    writer.Append($"new {type}(");
-                    InputType? inputType = parameterChain.Input?.Type ?? null;
-                    if (inputType is InputModelType modelType)
-                    {
-                        foreach (var prop in modelType.Properties)
-                        {
-                            writer.Append($"{prop.Name},");
-                        }
-                    }
-                    writer.RemoveTrailingComma();
-                    writer.Line($");");
+                    var property = ctor.FindPropertyInitializedByParameter(parameter)!;
+                    initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.Name:I}", parameter.Type));
                 }
+
+                writer.WriteInitialization(v => writer.Append($"var p = {v};"), modelType, ctor, initializes);
             }
+            //foreach (var parameterChain in convenienceMethod.ProtocolToConvenienceParameters)
+            //{
+            //    if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
+            //    {
+            //        var type = parameterChain.Convenience?.Type;
+            //        var paraName = parameterChain.Convenience?.Name;
+            //        writer.Append($"{type} {paraName:D} = ");
+            //        writer.Append($"new {type}(");
+            //        InputType? inputType = parameterChain.Input?.Type ?? null;
+            //        if (inputType is InputModelType modelType)
+            //        {
+            //            foreach (var prop in modelType.Properties)
+            //            {
+            //                writer.Append($"{prop.Name},");
+            //            }
+            //        }
+            //        writer.RemoveTrailingComma();
+            //        writer.Line($");");
+            //    }
+            //}
         }
         private void WriteConvenienceMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
         {
@@ -357,7 +370,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static IReadOnlyList<FormattableString> PrepareConvenienceMethodParameters(ConvenienceMethod convenienceMethod, CodeWriterDeclaration contextVariable)
         {
             var parameters = new List<FormattableString>();
-            foreach (var (protocolParameter, convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameters)
+            foreach (var (protocolParameter, convenienceParameter) in convenienceMethod.ProtocolToConvenienceParameters)
             {
                 if (convenienceParameter == KnownParameters.CancellationTokenParameter)
                 {

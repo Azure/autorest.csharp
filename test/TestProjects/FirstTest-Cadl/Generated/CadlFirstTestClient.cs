@@ -357,36 +357,22 @@ namespace CadlFirstTest
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
-        /// <param name="requiredLiteral"></param>
+        /// <param name="name"> Gets the name. </param>
+        /// <param name="requiredLiteral"> Gets the required literal. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public virtual async Task<Response<Thing>> AliasBodyAsync(string name, object requiredUnion, string requiredLiteral, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> AliasBodyAsync(string name, string requiredLiteral, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
-
-            AliasBodyRequest aliasBodyRequest = new Models.AliasBodyRequest(name, requiredUnion, requiredLiteral);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AliasBodyAsync(aliasBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
-        /// <param name="requiredLiteral"></param>
+        /// <param name="name"> Gets the name. </param>
+        /// <param name="requiredLiteral"> Gets the required literal. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public virtual Response<Thing> AliasBody(string name, object requiredUnion, string requiredLiteral, CancellationToken cancellationToken = default)
+        public virtual Response<Thing> AliasBody(string name, string requiredLiteral, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
-
-            AliasBodyRequest aliasBodyRequest = new Models.AliasBodyRequest(name, requiredUnion, requiredLiteral);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AliasBody(aliasBodyRequest.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
