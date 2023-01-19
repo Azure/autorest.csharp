@@ -14,13 +14,13 @@ export interface InputPrimitiveType extends InputType {
     Kind: InputTypeKind;
 }
 
-export interface InputLiteralType extends InputType{
+export interface InputLiteralType extends InputType {
     Name: "Literal";
     LiteralValueType: InputType;
-    Value : any;
+    Value: any;
 }
 
-export interface InputUnionType extends InputType{
+export interface InputUnionType extends InputType {
     Name: "Union";
     UnionItemTypes: InputType[];
 }
