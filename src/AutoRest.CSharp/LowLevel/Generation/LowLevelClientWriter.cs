@@ -271,10 +271,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var type = parameterChain.Convenience?.Type;
                     var paraName = parameterChain.Convenience?.Name;
-                    /*
-                    writer.Append($"{type} {paraName:D} = ");
-                    writer.Append($"new {type}(");
-                    */
                     InputType? inputType = parameterChain.Input?.Type ?? null;
                     if (inputType is InputModelType modelType)
                     {
@@ -294,23 +290,12 @@ namespace AutoRest.CSharp.Generation.Writers
                             {
                                 using (writer.Append($"if ({prop.Name.ToVariableName()} != null) ").Scope())
                                 {
-                                    //writer.Append($"if ({prop.Name.ToVariableName()} != null) ").Scope();
                                     writer.Append($"{paraName:D}.{prop.Name.ToCleanName()} = {prop.Name.ToVariableName()};");
                                     writer.Line();
                                 }
-
-                                /*
-                                writer.Append($"if ({prop.Name.ToVariableName()} != null) ").Scope();
-                                writer.Append($"{paraName:D}.{prop.Name.ToCleanName()} = {prop.Name.ToVariableName()};");
-                                writer.Line();
-                                */
                             }
                         }
                     }
-                    /*
-                    writer.RemoveTrailingComma();
-                    writer.Line($");");
-                    */
                 }
             }
         }

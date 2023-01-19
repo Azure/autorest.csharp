@@ -206,7 +206,6 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         foreach (var prop in modelType.Properties)
                         {
-                            //var parameter = Parameter.FromModelProperty(prop, prop.Name.ToVariableName(), _typeFactory.CreateType(prop.Type));
                             var parameter = Parameter.FromModelProperty(prop, prop.Name.ToVariableName(), _typeFactory.CreateType(prop.Type).WithNullable(!prop.IsRequired));
                             parameterList.Add(parameter);
                         }
