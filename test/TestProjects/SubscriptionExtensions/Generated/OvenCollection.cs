@@ -55,8 +55,16 @@ namespace SubscriptionExtensions
 
         /// <summary>
         /// The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
-        /// Operation Id: Ovens_CreateOrUpdate
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Ovens_CreateOrUpdate</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
@@ -88,8 +96,16 @@ namespace SubscriptionExtensions
 
         /// <summary>
         /// The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
-        /// Operation Id: Ovens_CreateOrUpdate
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Ovens_CreateOrUpdate</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
@@ -120,8 +136,16 @@ namespace SubscriptionExtensions
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
-        /// Operation Id: Ovens_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Ovens_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -148,8 +172,16 @@ namespace SubscriptionExtensions
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
-        /// Operation Id: Ovens_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Ovens_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -177,8 +209,16 @@ namespace SubscriptionExtensions
 
         /// <summary>
         /// Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens
-        /// Operation Id: Ovens_ListAll
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Ovens_ListAll</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -192,8 +232,16 @@ namespace SubscriptionExtensions
 
         /// <summary>
         /// Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens
-        /// Operation Id: Ovens_ListAll
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Ovens_ListAll</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -207,8 +255,16 @@ namespace SubscriptionExtensions
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
-        /// Operation Id: Ovens_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Ovens_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -234,8 +290,16 @@ namespace SubscriptionExtensions
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
-        /// Operation Id: Ovens_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Ovens_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

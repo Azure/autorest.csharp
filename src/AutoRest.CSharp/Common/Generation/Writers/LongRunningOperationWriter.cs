@@ -19,7 +19,6 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public void Write(CodeWriter writer, LongRunningOperation operation)
         {
-            var responseVariable = "response";
             var pagingResponse = operation.PagingResponse;
 
             var cs = operation.Type;
@@ -89,7 +88,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (operation.ResultType != null)
                     {
-                        WriteCreateResult(writer, operation, responseVariable, pagingResponse, operation.ResultType, interfaceType!);
+                        WriteCreateResult(writer, operation, pagingResponse, operation.ResultType, interfaceType!);
+                        writer.Line();
+                        WriteCreateResultAsync(writer, operation, pagingResponse, operation.ResultType, interfaceType!);
                     }
                 }
             }
@@ -192,14 +193,18 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteCreateResult(CodeWriter writer, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)
+        private static void WriteCreateResult(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)
         {
+            var responseVariable = new CodeWriterDeclaration("response");
             using (writer.Scope($"{resultType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
                 WriteCreateResultBody(writer, operation, responseVariable, pagingResponse, resultType, false);
             }
-            writer.Line();
+        }
 
+        private static void WriteCreateResultAsync(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)
+        {
+            var responseVariable = new CodeWriterDeclaration("response");
             var asyncKeyword = pagingResponse == null && operation.ResultSerialization != null ? "async " : "";
             using (writer.Scope($"{asyncKeyword}{new CSharpType(typeof(ValueTask<>), resultType)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
@@ -207,7 +212,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteCreateResultBody(CodeWriter writer, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse, CSharpType resultType, bool async)
+        private static void WriteCreateResultBody(CodeWriter writer, LongRunningOperation operation, CodeWriterDeclaration responseVariable, PagingResponseInfo? pagingResponse, CSharpType resultType, bool async)
         {
             if (pagingResponse != null)
             {
@@ -219,7 +224,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (operation.ResultSerialization != null)
             {
-                writer.WriteDeserializationForMethods(operation.ResultSerialization, async, fs => writer.Line($"return {fs};"), responseVariable, resultType);
+                writer.WriteDeserializationForMethods(operation.ResultSerialization, async, null, $"{responseVariable}", resultType);
             }
             else
             {

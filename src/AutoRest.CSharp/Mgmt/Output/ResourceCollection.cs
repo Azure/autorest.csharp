@@ -33,7 +33,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         public override CSharpType? BaseType => typeof(ArmCollection);
         protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
-            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature))
+            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature &&
+            (!p.IsPropertyBag || p.Validation != ValidationType.None)))
                 return base.EnsureGetInterfaces();
 
             var getRestOperation = GetAllOperation.OperationMappings.Values.First();

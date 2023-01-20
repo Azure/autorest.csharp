@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetPaginationLedgerEntriesAsync(RequestContext)">
+    <member name="GetPaginationLedgerEntriesAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call GetPaginationLedgerEntriesAsync and parse the result.
+This sample shows how to call GetPaginationLedgerEntriesAsync with required request content and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PaginationClient(endpoint, credential);
 
-await foreach (var data in client.GetPaginationLedgerEntriesAsync())
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+};
+
+await foreach (var data in client.GetPaginationLedgerEntriesAsync(RequestContent.Create(data)))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("contents").ToString());
@@ -21,7 +26,16 @@ await foreach (var data in client.GetPaginationLedgerEntriesAsync())
 <remarks>
 A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
 
-Below is the JSON schema for one item in the pageable response.
+Below is the JSON schema for the request payload and one item in the pageable response.
+
+Request Body:
+
+Schema for <c>ListLedgerEntryInputBody</c>:
+<code>{
+  requiredString: string, # Required.
+  requiredInt: number, # Required.
+}
+</code>
 
 Response Body:
 
@@ -35,15 +49,20 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetPaginationLedgerEntries(RequestContext)">
+    <member name="GetPaginationLedgerEntries(RequestContent,RequestContext)">
 <example>
-This sample shows how to call GetPaginationLedgerEntries and parse the result.
+This sample shows how to call GetPaginationLedgerEntries with required request content and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PaginationClient(endpoint, credential);
 
-foreach (var data in client.GetPaginationLedgerEntries())
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+};
+
+foreach (var data in client.GetPaginationLedgerEntries(RequestContent.Create(data)))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("contents").ToString());
@@ -55,7 +74,16 @@ foreach (var data in client.GetPaginationLedgerEntries())
 <remarks>
 A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
 
-Below is the JSON schema for one item in the pageable response.
+Below is the JSON schema for the request payload and one item in the pageable response.
+
+Request Body:
+
+Schema for <c>ListLedgerEntryInputBody</c>:
+<code>{
+  requiredString: string, # Required.
+  requiredInt: number, # Required.
+}
+</code>
 
 Response Body:
 

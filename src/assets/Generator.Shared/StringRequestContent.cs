@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -19,14 +20,20 @@ namespace Azure.Core
 
         public override async Task WriteToAsync(Stream stream, CancellationToken cancellation)
         {
-#pragma warning disable CA1835
+#if NET6_0_OR_GREATER
+            await stream.WriteAsync(_bytes.AsMemory(), cancellation).ConfigureAwait(false);
+#else
             await stream.WriteAsync(_bytes, 0, _bytes.Length, cancellation).ConfigureAwait(false);
-#pragma warning restore CA1835
+#endif
         }
 
         public override void WriteTo(Stream stream, CancellationToken cancellation)
         {
+#if NET6_0_OR_GREATER
+            stream.Write(_bytes.AsSpan());
+#else
             stream.Write(_bytes, 0, _bytes.Length);
+#endif
         }
 
         public override bool TryComputeLength(out long length)

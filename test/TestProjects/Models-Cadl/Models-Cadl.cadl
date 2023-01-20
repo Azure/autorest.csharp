@@ -142,7 +142,7 @@ model RoundTripPrimitiveModel extends BaseModel {
   requiredFloat: float32;
 
   @doc("Required double, illustrating a value type property.")
-  requiredDouble: float64;
+  required_Double: float64;
 
   @doc("Required bolean, illustrating a value type property.")
   requiredBoolean: boolean;
