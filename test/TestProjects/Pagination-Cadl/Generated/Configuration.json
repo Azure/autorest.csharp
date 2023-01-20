@@ -3,7 +3,7 @@
   "Namespace": "Pagination",
   "LibraryName": null,
   "SharedSourceFolders": [
-    "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Generator.Shared",
-    "../../../../artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/Azure.Core.Shared"
+    "../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
+    "../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ]
 }
