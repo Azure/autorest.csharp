@@ -44,10 +44,9 @@ stages:
               useGlobalJson: true
               performMultiLevelLookup: true
           - task: NodeTool@0
-            displayName: "Install Node 16.x"
+            displayName: "Install Node 18.x"
             inputs:
-              # https://github.com/nodejs/node/issues/40468
-              versionSpec: '16.6.2'
+              versionSpec: '18.x'
           - script: |
               npm ci
             displayName: "Install packages"
