@@ -317,11 +317,10 @@ namespace AutoRest.CSharp.Generation.Writers
                              property.ValueType?.Equals(typeof(string)) !=
                              true) //https://github.com/Azure/autorest.csharp/issues/922
                     {
-                        if (Configuration.AzureArm && property.ValueType?.Equals(typeof(Uri)) == true)
+                        if (!property.IsClientFlattenedProperty) // if flatten property, then we should not try to assign null/default to parent property
                         {
                             using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
                             {
-                                writer.Line($"{propertyVariables[property].Declaration} = null;");
                                 writer.Append($"continue;");
                             }
                         }
@@ -342,13 +341,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         var variableOrExpression = writer.DeserializeValue(property.ValueSerialization, $"{itemVariable}.Value");
                         writer.Line($"{propertyVariables[property].Declaration} = {variableOrExpression};");
                     }
-                    else if (property.PropertySerializations is not null)
+                    else if (property.IsClientFlattenedProperty)
                     {
                         // Reading a nested object
                         var nestedItemVariable = new CodeWriterDeclaration("property");
                         using (writer.Scope($"foreach (var {nestedItemVariable:D} in {itemVariable:I}.Value.EnumerateObject())"))
                         {
-                            writer.DeserializeIntoObjectProperties(property.PropertySerializations, $"{nestedItemVariable:I}", propertyVariables);
+                            writer.DeserializeIntoObjectProperties(property.PropertySerializations!, $"{nestedItemVariable:I}", propertyVariables);
                         }
                     }
                     else
@@ -360,6 +359,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
         }
+
+        private static FormattableString GetNewCollectionExpression(JsonSerialization serialization) => serialization switch
+        {
+            JsonArraySerialization array => $"new {array.ImplementationType}()",
+            JsonDictionarySerialization dictionary => $"new {dictionary.Type}()",
+            _ => throw new InvalidOperationException($"{serialization.GetType()} is not supported."),
+        };
 
         private static FormattableString GetOptionalFormattable(JsonPropertySerialization target, ObjectPropertyVariable variable)
         {
