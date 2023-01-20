@@ -77,6 +77,18 @@ model LedgerEntry {
   transactionId: string;
 }
 
+@doc("Paginated ledger entries")
+@pagedResult
+model PagedLedgerEntries {
+  @doc("Array of ledger entries")
+  @items
+  entries: LedgerEntry[];
+
+  @doc("Path to retrieve next page of ledger entries")
+  @nextLink
+  customNextLink?: ResourceLocation<LedgerEntry>;
+}
+
 @doc("List {name} resources", TResource)
 op CustomResourceList<
   TResource extends object,
@@ -92,11 +104,12 @@ op CustomResourceList<
 // @knownValues(LedgerUserRoleKV)
 // model LedgerUserRole is string {};
 
-// enum LedgerUserRoleKV {
-//   Administrator,
-//   Contributor,
-//   Reader,
-// }
+@doc("User roles")
+enum LedgerUserRoleKV {
+  Administrator,
+  Contributor,
+  Reader,
+}
 
 // @resource("users")
 // @doc("Details about a Confidential ledger user.")
@@ -147,6 +160,22 @@ op CustomResourceList<
 //   transactionId: string;
 // }
 
+
+@doc("Type for input model body")
+model ListLedgerEntryInputBody {
+  @doc("Required string")
+  requiredString: string;
+
+  @doc("Required int")
+  requiredInt: int32;
+}
+
+@doc("Input model for the ListPaginationLedgerEntries")
+model ListLedgerEntryInput {
+  @doc("Body parameter")
+  @body bodyInput: ListLedgerEntryInputBody;
+}
+
 //
 // ** Operations **
 //
@@ -157,7 +186,7 @@ namespace Pagination {
   @summary("Gets ledger entries from a collection corresponding to a range.")
   @doc("A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.")
   @convenienceAPI
-  op ListPaginationLedgerEntries is Azure.Core.ResourceList<LedgerEntry>;
+  op ListPaginationLedgerEntries is Azure.Core.Foundations.ResourceList<LedgerEntry, ListLedgerEntryInput, PagedLedgerEntries>;
 }
 
 @route("/adp")
