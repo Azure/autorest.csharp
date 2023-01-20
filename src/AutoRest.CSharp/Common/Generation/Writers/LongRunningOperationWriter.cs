@@ -10,6 +10,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Generation.Writers

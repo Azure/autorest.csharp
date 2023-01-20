@@ -4,9 +4,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Azure.Core
+namespace Azure.ResourceManager
 {
-    internal interface IOperationSource<T>
+    public interface IOperationSource<T>
     {
         T CreateResult(Response response, CancellationToken cancellationToken);
         ValueTask<T> CreateResultAsync(Response response, CancellationToken cancellationToken);
