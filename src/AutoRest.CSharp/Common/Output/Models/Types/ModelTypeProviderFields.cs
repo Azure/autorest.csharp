@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var inputModelProperty in inputModel.Properties)
             {
                 var originalFieldName = inputModelProperty.Name.ToCleanName();
-                var originalFieldType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
+                var originalFieldType = GetPropertyDefaultValueType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
                 var field = existingMember is not null
@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new FieldDeclaration($"Must be removed by post-generation processing,", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(originalType, inputModelProperty), inputModelProperty.IsRequired, existingMember is IFieldSymbol, writeAsProperty);
         }
 
-        private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
+        private static CSharpType GetPropertyDefaultValueType(in InputModelTypeUsage modelUsage, in InputModelProperty property, TypeFactory typeFactory)
         {
             var valueType = typeFactory.CreateType(property.Type);
 
@@ -140,8 +140,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 valueType = TypeFactory.GetOutputType(valueType);
             }
-
-            if (valueType.IsValueType && !property.IsRequired)
+            if (!property.IsRequired)
             {
                 valueType = valueType.WithNullable(true);
             }
