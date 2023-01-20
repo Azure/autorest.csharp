@@ -440,16 +440,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 discriminatorPropertyName = parent.Discriminator.SerializedName;
                 property = parent.Discriminator.Property;
             }
-            else if (_derivedTypes != null)
-            {
-                //only load implementations for the base type
-                implementations = _derivedTypes.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
-                property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
-            }
             else
             {
-                //no discriminators so bail
-                return null;
+                //only load implementations for the base type
+                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
+                property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
             }
 
             if (_inputModel.DiscriminatorValue != null)
