@@ -235,11 +235,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 sharedSourceFolders.Add(Path.Combine(outputPath, sharedSourceFolder.GetString()!));
             }
 
-            root.TryGetProperty(nameof(Configuration.Options.ProtocolMethodList), out var protocolMethodList);
+            root.TryGetProperty(Configuration.Options.ProtocolMethodList, out var protocolMethodList);
             var protocolMethods = protocolMethodList.ValueKind == JsonValueKind.Array
                 ? protocolMethodList.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : Array.Empty<string>();
-            root.TryGetProperty(nameof(Configuration.Options.SuppressAbstractBaseClasses), out var suppressAbstractBaseClassesElement);
+            root.TryGetProperty(Configuration.Options.SuppressAbstractBaseClasses, out var suppressAbstractBaseClassesElement);
             var suppressAbstractBaseClasses = Configuration.DeserializeArray(suppressAbstractBaseClassesElement);
 
             Configuration.Initialize(

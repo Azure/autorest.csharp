@@ -59,9 +59,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            var protocolMethodPaging = Operation.Paging is { } paging && _createNextPageMessageMethod is not null
-                ? new ProtocolMethodPaging(_createNextPageMessageMethod, paging.NextLinkName, paging.ItemName ?? "value")
-                : null;
+            var protocolMethodPaging = Operation.Paging is { } paging ? new ProtocolMethodPaging(_createNextPageMessageMethod, paging.NextLinkName, paging.ItemName ?? "value") : null;
 
             return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _createMessageMethod, requestBodyType, responseBodyType, diagnostic, protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
         }
@@ -140,15 +138,18 @@ namespace AutoRest.CSharp.Output.Models
 
         private ConvenienceMethod BuildConvenienceMethod(ReturnTypeChain returnTypeChain)
         {
-            bool needNameChange = !Operation.Parameters.Any(p => p.Type is InputModelType or InputEnumType);
+            bool needNameChange = !_outputToInputParameterMap.Values.WhereNotNull().Any(p => p.Type is InputModelType or InputEnumType);
             string name = _createMessageMethod.Name;
             if (needNameChange)
             {
                 name = _createMessageMethod.Name.IsLastWordSingular() ? $"{_createMessageMethod.Name}Value" : $"{_createMessageMethod.Name.LastWordToSingular()}Values";
             }
-            var orderedParameters = _createMessageMethod.Parameters
-                .Select(CreateConvenienceParameter)
-                .ToList();
+
+            var orderedParameters = _createMessageMethod.Parameters.Select(CreateConvenienceParameter).ToList();
+            if (Operation.LongRunning != null)
+            {
+                orderedParameters.Insert(0, new ParameterChain(null, KnownParameters.WaitForCompletion, KnownParameters.WaitForCompletion, null));
+            }
 
             var parameterList = new List<Parameter>();
             foreach (var parameterChain in orderedParameters)

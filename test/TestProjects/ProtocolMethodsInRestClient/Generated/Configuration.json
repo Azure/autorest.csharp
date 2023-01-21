@@ -9,7 +9,7 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true,
-  "ProtocolMethodList": [
+  "protocol-method-list": [
     "Create",
     "Delete",
     "firstTemplate_Create",
