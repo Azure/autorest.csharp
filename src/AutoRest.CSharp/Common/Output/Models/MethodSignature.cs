@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -102,4 +103,21 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
     }
+
+    internal record MethodBody(IReadOnlyList<MethodBodyBlock> Blocks);
+    internal record MethodBodyBlock;
+    internal record ArgumentValidationBlock : MethodBodyBlock;
+    internal record TryCatchFinallyBlock(MethodBodyBlock Try, MethodBodyBlock? Catch, MethodBodyBlock? Finally) : MethodBodyBlock;
+    internal record MethodBodySingleLine;
+    internal record DeclareVariableLine(CSharpType Type, CodeWriterDeclaration Name, InlineableExpression Value);
+
+    internal record InlineableExpression;
+
+    internal record DefaultValueExpression(CSharpType Type) : InlineableExpression;
+
+    internal record ParameterReference(Parameter Parameter) : InlineableExpression;
+    internal record VariableReference(CodeWriterDeclaration Name) : InlineableExpression;
+    internal record MethodCallExpression(CSharpType OwningType, string Name, IReadOnlyList<InlineableExpression> Arguments, bool CallAsExtension) : InlineableExpression;
+
+    internal record OneLineLocalFunction(MethodSignature Signature, InlineableExpression Value);
 }

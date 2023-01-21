@@ -171,11 +171,13 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.HeadAsBoolean, Configuration.HeadAsBoolean);
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
+                    WriteIfNotDefault(writer, Configuration.Options.SkipSerializationFormatXml, Configuration.SkipSerializationFormatXml);
+                    WriteIfNotDefault(writer, Configuration.Options.DisablePaginationTopRenaming, Configuration.DisablePaginationTopRenaming);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
                     WriteIfNotDefault(writer, Configuration.Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
-                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), Configuration.ProtocolMethodList);
-                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ProtocolMethodList, Configuration.ProtocolMethodList);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.SuppressAbstractBaseClasses, Configuration.SuppressAbstractBaseClasses);
 
                     Configuration.MgmtConfiguration.SaveConfiguration(writer);
 

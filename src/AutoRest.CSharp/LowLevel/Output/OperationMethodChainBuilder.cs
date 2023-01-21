@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
@@ -24,58 +22,25 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class OperationMethodChainBuilder
     {
-        private static readonly Dictionary<string, RequestConditionHeaders> ConditionRequestHeader = new(StringComparer.OrdinalIgnoreCase)
-        {
-            ["If-Match"] = RequestConditionHeaders.IfMatch,
-            ["If-None-Match"] = RequestConditionHeaders.IfNoneMatch,
-            ["If-Modified-Since"] = RequestConditionHeaders.IfModifiedSince,
-            ["If-Unmodified-Since"] = RequestConditionHeaders.IfUnmodifiedSince
-        };
-
         private readonly string _clientName;
-        private readonly ClientFields _fields;
         private readonly TypeFactory _typeFactory;
-        private readonly List<ParameterChain> _orderedParameters;
-        private readonly List<RequestPartSource> _requestParts;
-        private readonly RestClientMethod _restClientMethod;
-
-        private Parameter? _protocolBodyParameter;
-        private ProtocolMethodPaging? _protocolMethodPaging;
-        private RequestConditionHeaders _conditionHeaderFlag = RequestConditionHeaders.None;
+        private readonly RestClientMethod _createMessageMethod;
+        private readonly RestClientMethod? _createNextPageMessageMethod;
+        private readonly IReadOnlyDictionary<Parameter, InputParameter?> _outputToInputParameterMap;
+        private readonly RequestConditionHeaders _conditionHeaderFlag;
 
         private InputOperation Operation { get; }
 
-        public OperationMethodChainBuilder(InputOperation operation, string clientName, ClientFields fields, TypeFactory typeFactory)
+        public OperationMethodChainBuilder(InputOperation operation, string clientName, TypeFactory typeFactory, RestClientMethod createMessageMethod, RestClientMethod? createNextPageMessageMethod, IReadOnlyDictionary<Parameter, InputParameter?> outputToInputParameterMap, RequestConditionHeaders conditionHeaderFlag)
         {
             _clientName = clientName;
-            _fields = fields;
             _typeFactory = typeFactory;
-            _orderedParameters = new List<ParameterChain>();
-            _requestParts = new List<RequestPartSource>();
 
             Operation = operation;
-            BuildParameters();
-            _restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, _orderedParameters.Select(p => p.CreateMessage).WhereNotNull().ToArray(), _requestParts, _protocolBodyParameter, _typeFactory);
-        }
-
-        public void BuildNextPageMethod(IReadOnlyDictionary<InputOperation, OperationMethodChainBuilder> builders)
-        {
-            var paging = Operation.Paging;
-            if (paging == null)
-            {
-                return;
-            }
-
-            var nextLinkOperation = paging.NextLinkOperation;
-            var nextLinkName = paging.NextLinkName;
-
-            RestClientMethod? nextPageMethod = nextLinkOperation != null
-                ? builders[nextLinkOperation]._restClientMethod
-                : nextLinkName != null
-                    ? RestClientBuilder.BuildNextPageMethod(_restClientMethod)
-                    : null;
-
-            _protocolMethodPaging = new ProtocolMethodPaging(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
+            _createMessageMethod = createMessageMethod;
+            _createNextPageMessageMethod = createNextPageMessageMethod;
+            _outputToInputParameterMap = outputToInputParameterMap;
+            _conditionHeaderFlag = conditionHeaderFlag;
         }
 
         public LowLevelClientMethod BuildOperationMethodChain()
@@ -84,39 +49,25 @@ namespace AutoRest.CSharp.Output.Models
             var protocolMethodAttributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : Array.Empty<CSharpAttribute>();
-            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
-            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
+
+            var protocolMethodParameters = _createMessageMethod.Parameters.ToList();
+            AddWaitForCompletion(protocolMethodParameters);
+            var protocolMethodSignature = new MethodSignature(_createMessageMethod.Name, _createMessageMethod.Summary, _createMessageMethod.Description, _createMessageMethod.Accessibility | Virtual, returnTypeChain.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethod = ShouldConvenienceMethodGenerated(returnTypeChain) ? BuildConvenienceMethod(returnTypeChain) : null;
 
-            var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
+            var diagnostic = new Diagnostic($"{_clientName}.{_createMessageMethod.Name}");
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
+            var protocolMethodPaging = Operation.Paging is { } paging && _createNextPageMessageMethod is not null
+                ? new ProtocolMethodPaging(_createNextPageMessageMethod, paging.NextLinkName, paging.ItemName ?? "value")
+                : null;
+
+            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _createMessageMethod, requestBodyType, responseBodyType, diagnostic, protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
         }
 
         private bool ShouldConvenienceMethodGenerated(ReturnTypeChain returnTypeChain)
-        {
-            return Operation.GenerateConvenienceMethod
-                && (_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
-                || !returnTypeChain.Convenience.Equals(returnTypeChain.Protocol));
-        }
-
-        private bool IsParameterTypeSame(Parameter? first, Parameter? second)
-        {
-            if ((first == null && second != null)
-                || (first != null && second == null))
-            {
-                return true;
-            }
-
-            if (first == null && second == null)
-            {
-                return true;
-            }
-
-            return first!.Type.Equals(second!.Type);
-        }
+            => Operation.GenerateConvenienceMethod && (Operation.Parameters.Any(p => p.Type is InputEnumType or InputModelType) || !returnTypeChain.Convenience.Equals(returnTypeChain.Protocol));
 
         private ReturnTypeChain BuildReturnTypes()
         {
@@ -189,15 +140,18 @@ namespace AutoRest.CSharp.Output.Models
 
         private ConvenienceMethod BuildConvenienceMethod(ReturnTypeChain returnTypeChain)
         {
-            bool needNameChange = _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));
-            string name = _restClientMethod.Name;
+            bool needNameChange = !Operation.Parameters.Any(p => p.Type is InputModelType or InputEnumType);
+            string name = _createMessageMethod.Name;
             if (needNameChange)
             {
-                name = _restClientMethod.Name.IsLastWordSingular() ? $"{_restClientMethod.Name}Value" : $"{_restClientMethod.Name.LastWordToSingular()}Values";
+                name = _createMessageMethod.Name.IsLastWordSingular() ? $"{_createMessageMethod.Name}Value" : $"{_createMessageMethod.Name.LastWordToSingular()}Values";
             }
+            var orderedParameters = _createMessageMethod.Parameters
+                .Select(CreateConvenienceParameter)
+                .ToList();
 
             var parameterList = new List<Parameter>();
-            foreach (var parameterChain in _orderedParameters)
+            foreach (var parameterChain in orderedParameters)
             {
                 if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
                 {
@@ -219,248 +173,52 @@ namespace AutoRest.CSharp.Output.Models
             var attributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : null;
-            var protocolToConvenience = _orderedParameters
+            var protocolToConvenience = orderedParameters
                 .Where(p => p.Protocol != null)
                 .Select(p => (p.Protocol!, p.Convenience, p.Input))
                 .ToArray();
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
-            var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
+            var convenienceSignature = new MethodSignature(name, _createMessageMethod.Summary, _createMessageMethod.Description, _createMessageMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
+            var diagnostic = name != _createMessageMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }
 
-        private void BuildParameters()
-        {
-            var operationParameters = Operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
-
-            var requiredPathParameters = new Dictionary<string, InputParameter>();
-            var optionalPathParameters = new Dictionary<string, InputParameter>();
-            var requiredRequestParameters = new List<InputParameter>();
-            var optionalRequestParameters = new List<InputParameter>();
-
-            var requestConditionHeaders = RequestConditionHeaders.None;
-            var requestConditionSerializationFormat = SerializationFormat.Default;
-            InputParameter? bodyParameter = null;
-            InputParameter? contentTypeRequestParameter = null;
-            InputParameter? requestConditionRequestParameter = null;
-
-            foreach (var operationParameter in operationParameters)
-            {
-                switch (operationParameter)
-                {
-                    case { Location: RequestLocation.Body }:
-                        bodyParameter = operationParameter;
-                        break;
-                    case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
-                        contentTypeRequestParameter = operationParameter;
-                        break;
-                    case { Location: RequestLocation.Header } when ConditionRequestHeader.TryGetValue(operationParameter.NameInRequest, out var header):
-                        if (operationParameter.IsRequired)
-                        {
-                            throw new NotSupportedException("Required conditional request headers are not supported.");
-                        }
-
-                        requestConditionHeaders |= header;
-                        requestConditionRequestParameter ??= operationParameter;
-                        requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                            ? SerializationBuilder.GetSerializationFormat(operationParameter.Type)
-                            : requestConditionSerializationFormat;
-
-                        break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: null }:
-                        requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
-                        break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: not null }:
-                        optionalPathParameters.Add(operationParameter.NameInRequest, operationParameter);
-                        break;
-                    case { IsRequired: true, DefaultValue: null }:
-                        requiredRequestParameters.Add(operationParameter);
-                        break;
-                    default:
-                        optionalRequestParameters.Add(operationParameter);
-                        break;
-                }
-            }
-
-            AddWaitForCompletion();
-            AddUriOrPathParameters(Operation.Uri, requiredPathParameters);
-            AddUriOrPathParameters(Operation.Path, requiredPathParameters);
-            AddQueryOrHeaderParameters(requiredRequestParameters);
-            AddBody(bodyParameter, contentTypeRequestParameter);
-            AddUriOrPathParameters(Operation.Uri, optionalPathParameters);
-            AddUriOrPathParameters(Operation.Path, optionalPathParameters);
-            AddQueryOrHeaderParameters(optionalRequestParameters);
-            AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
-            AddRequestContext();
-        }
-
-        private void AddWaitForCompletion()
+        private void AddWaitForCompletion(IList<Parameter> parameters)
         {
             if (Operation.LongRunning != null)
             {
-                _orderedParameters.Add(new ParameterChain(null, KnownParameters.WaitForCompletion, KnownParameters.WaitForCompletion, null));
+                parameters.Insert(0, KnownParameters.WaitForCompletion);
             }
         }
 
-        private void AddUriOrPathParameters(string uriPart, IReadOnlyDictionary<string, InputParameter> requestParameters)
+        private ParameterChain CreateConvenienceParameter(Parameter protocolMethodParameter)
         {
-            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uriPart))
+            if (!_outputToInputParameterMap.TryGetValue(protocolMethodParameter, out var inputParameter))
             {
-                if (isLiteral)
-                {
-                    continue;
-                }
-
-                var text = span.ToString();
-                if (requestParameters.TryGetValue(text, out var requestParameter))
-                {
-                    AddParameter(text, requestParameter);
-                }
-            }
-        }
-
-        private void AddQueryOrHeaderParameters(IEnumerable<InputParameter> inputParameters)
-        {
-            foreach (var inputParameter in inputParameters)
-            {
-                AddParameter(inputParameter.NameInRequest, inputParameter);
-            }
-        }
-
-        private void AddBody(InputParameter? bodyParameter, InputParameter? contentTypeRequestParameter)
-        {
-            if (bodyParameter == null)
-            {
-                return;
+                return new ParameterChain(null, null, protocolMethodParameter, protocolMethodParameter);
             }
 
-            _protocolBodyParameter = bodyParameter.IsRequired
-                ? KnownParameters.RequestContent
-                : KnownParameters.RequestContentNullable;
-            _orderedParameters.Add(new ParameterChain(bodyParameter, BuildParameter(bodyParameter), _protocolBodyParameter, _protocolBodyParameter));
-
-            if (contentTypeRequestParameter != null)
+            if (inputParameter is null)
             {
-                if (Operation.RequestMediaTypes?.Count > 1)
-                {
-                    AddContentTypeRequestParameter(contentTypeRequestParameter, Operation.RequestMediaTypes);
-                }
-                else
-                {
-                    AddParameter(contentTypeRequestParameter, typeof(ContentType));
-                }
-            }
-        }
+                var convenienceParameter = protocolMethodParameter == KnownParameters.RequestContext
+                    ? KnownParameters.CancellationTokenParameter
+                    : null;
 
-        public void AddRequestConditionHeaders(RequestConditionHeaders conditionHeaderFlag, InputParameter? requestConditionRequestParameter, SerializationFormat serializationFormat)
-        {
-            if (conditionHeaderFlag == RequestConditionHeaders.None || requestConditionRequestParameter == null)
-            {
-                return;
-            }
-
-            _conditionHeaderFlag = conditionHeaderFlag;
-
-            switch (conditionHeaderFlag)
-            {
-                case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch:
-                    _orderedParameters.Add(new ParameterChain(null, KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter));
-                    AddReference(KnownParameters.MatchConditionsParameter.Name, null, KnownParameters.MatchConditionsParameter, serializationFormat);
-                    break;
-                case RequestConditionHeaders.IfMatch:
-                case RequestConditionHeaders.IfNoneMatch:
-                    AddParameter(requestConditionRequestParameter, typeof(ETag));
-                    break;
-                default:
-                    _orderedParameters.Add(new ParameterChain(null, KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter));
-                    AddReference(KnownParameters.RequestConditionsParameter.Name, null, KnownParameters.RequestConditionsParameter, serializationFormat);
-                    break;
-            }
-        }
-
-        public void AddRequestContext()
-        {
-            _orderedParameters.Add(new ParameterChain(null, KnownParameters.CancellationTokenParameter, KnownParameters.RequestContext, KnownParameters.RequestContext));
-        }
-
-        private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
-        {
-            var name = operationParameter.Name.ToVariableName();
-            var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
-            var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
-            _orderedParameters.Add(new ParameterChain(null, null, parameter, parameter));
-
-            AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
-        }
-
-        private void AddParameter(InputParameter operationParameter, CSharpType? frameworkParameterType = null)
-            => AddParameter(operationParameter.NameInRequest, operationParameter, frameworkParameterType);
-
-        private void AddParameter(string name, InputParameter inputParameter, CSharpType? frameworkParameterType = null)
-        {
-            var protocolMethodParameter = BuildParameter(inputParameter, frameworkParameterType ?? ChangeTypeForProtocolMethod(inputParameter.Type));
-
-            AddReference(name, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
-            if (inputParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
-            {
-                return;
+                return new ParameterChain(null, convenienceParameter, protocolMethodParameter, protocolMethodParameter);
             }
 
             if (inputParameter.Kind == InputOperationParameterKind.Grouped)
             {
-                _orderedParameters.Add(new ParameterChain(inputParameter, null, protocolMethodParameter, protocolMethodParameter));
-                return;
+                return new ParameterChain(inputParameter, null, protocolMethodParameter, protocolMethodParameter);
             }
 
             var convenienceMethodParameter = BuildParameter(inputParameter);
-            var parameterChain = inputParameter.Location == RequestLocation.None
+            return inputParameter.Location == RequestLocation.None
                 ? new ParameterChain(inputParameter, convenienceMethodParameter, null, null)
                 : new ParameterChain(inputParameter, convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
-
-            _orderedParameters.Add(parameterChain);
         }
 
-        private Parameter BuildParameter(in InputParameter operationParameter, CSharpType? typeOverride = null)
-        {
-            var type = typeOverride != null
-                ? typeOverride.WithNullable(operationParameter.Type.IsNullable)
-                : _typeFactory.CreateType(operationParameter.Type);
-
-            return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
-        }
-
-        private void AddReference(string nameInRequest, InputParameter? operationParameter, Parameter parameter, SerializationFormat serializationFormat)
-        {
-            var reference = operationParameter != null ? CreateReference(operationParameter, parameter) : parameter;
-            _requestParts.Add(new RequestPartSource(nameInRequest, operationParameter, reference, serializationFormat));
-        }
-
-        private ReferenceOrConstant CreateReference(InputParameter? operationParameter, Parameter parameter)
-        {
-            if (operationParameter?.Kind == InputOperationParameterKind.Client)
-            {
-                var field = operationParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(parameter);
-                if (field == null)
-                {
-                    throw new InvalidOperationException($"Parameter {parameter.Name} should have matching field");
-                }
-
-                return new Reference(field.Name, field.Type);
-            }
-
-            if (operationParameter?.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
-            {
-                return (ReferenceOrConstant)parameter.DefaultValue;
-            }
-
-            return parameter;
-        }
-
-        private CSharpType? ChangeTypeForProtocolMethod(InputType type) => type switch
-        {
-            InputEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType).WithNullable(enumType.IsNullable),
-            InputModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
-            _ => null
-        };
+        private Parameter BuildParameter(InputParameter operationParameter)
+            => Parameter.FromInputParameter(operationParameter, _typeFactory.CreateType(operationParameter.Type), _typeFactory);
 
         private record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
 

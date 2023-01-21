@@ -9,7 +9,7 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true,
-  "SuppressAbstractBaseClasses": [
+  "suppress-abstract-base-class": [
     "Analyzer",
     "CharFilter",
     "CognitiveServicesAccount",

@@ -81,16 +81,9 @@ namespace AutoRest.CSharp.Output.Models
 
         public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
         {
-            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, clientName, fields, typeFactory));
-            foreach (var (_, builder) in builders)
-            {
-                builder.BuildNextPageMethod(builders);
-            }
-
-            foreach (var (_, builder) in builders)
-            {
-                yield return builder.BuildOperationMethodChain();
-            }
+            return CreateMessageMethodsBuilder
+                .BuildMethods(typeFactory, operations, fields, clientName)
+                .Select(b => b.BuildOperationMethodChain());
         }
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
