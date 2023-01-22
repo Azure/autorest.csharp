@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private bool ShouldConvenienceMethodGenerated(ReturnTypeChain returnTypeChain)
-            => Operation.GenerateConvenienceMethod && (Operation.Parameters.Any(p => p.Type is InputEnumType or InputModelType) || !returnTypeChain.Convenience.Equals(returnTypeChain.Protocol));
+            => Operation.GenerateConvenienceMethod && (_outputToInputParameterMap.Values.WhereNotNull().Any(p => p.Type is InputEnumType or InputModelType) || !returnTypeChain.Convenience.Equals(returnTypeChain.Protocol));
 
         private ReturnTypeChain BuildReturnTypes()
         {
