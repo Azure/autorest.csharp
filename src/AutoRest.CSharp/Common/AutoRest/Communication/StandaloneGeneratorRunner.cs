@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 }
                 var filename = Path.Combine(outputPath, file.Name);
                 Console.WriteLine($"Writing {filename}");
-                Directory.CreateDirectory(Path.GetDirectoryName(filename));
+                Directory.CreateDirectory(Path.GetDirectoryName(filename)!);
                 await File.WriteAllTextAsync(filename, file.Text);
             }
         }

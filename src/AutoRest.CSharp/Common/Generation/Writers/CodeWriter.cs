@@ -553,7 +553,7 @@ namespace AutoRest.CSharp.Generation.Writers
             string[] namespaces = _usingNamespaces
                     .Distinct()
                     .OrderByDescending(ns => ns.StartsWith("System"))
-                    .ThenBy(ns => ns)
+                    .ThenBy(ns => ns,StringComparer.Ordinal)
                     .ToArray();
             if (header)
             {

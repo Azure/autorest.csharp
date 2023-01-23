@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var extraDescription = string.Empty;
             var originalObjSchema = SchemaProperty?.Schema as ObjectSchema;
-            var identityTypeSchema = originalObjSchema?.GetAllProperties().FirstOrDefault(p => p.SerializedName == "type").Schema;
+            var identityTypeSchema = originalObjSchema?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Schema;
             if (identityTypeSchema != null)
             {
                 var supportedTypesToShow = new List<string>();
