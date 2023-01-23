@@ -9,8 +9,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
-using azure_special_properties.Models;
 using Azure.Core.Pipeline;
+using azure_special_properties.Models;
 
 namespace azure_special_properties
 {
