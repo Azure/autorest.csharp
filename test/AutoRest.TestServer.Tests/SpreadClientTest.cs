@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         {
             var expected = new[]
             {
-                (typeof(Thing), "thing")
+                (typeof(Thing), "thing", true)
             };
             ValidateConvenienceMethod(typeof(SpreadClient), "SpreadModel", expected);
         }
@@ -30,8 +30,8 @@ namespace AutoRest.TestServer.Tests
         {
             var expected = new[]
             {
-                (typeof(string), "name"),
-                (typeof(int), "age")
+                (typeof(string), "name", true),
+                (typeof(int), "age", true)
             };
             ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAlias", expected);
         }
@@ -41,10 +41,10 @@ namespace AutoRest.TestServer.Tests
         {
             var expected = new[]
             {
-                (typeof(string), "id"),
-                (typeof(int), "top"),
-                (typeof(string), "name"),
-                (typeof(int), "age")
+                (typeof(string), "id", true),
+                (typeof(int), "top", true),
+                (typeof(string), "name", true),
+                (typeof(int), "age", true)
             };
             ValidateConvenienceMethod(typeof(SpreadClient), "SpreadMultiTargetAlias", expected);
         }
@@ -54,9 +54,9 @@ namespace AutoRest.TestServer.Tests
         {
             var expected = new[]
             {
-                (typeof(string), "id"),
-                (typeof(int), "top"),
-                (typeof(Thing), "thing")
+                (typeof(string), "id", true),
+                (typeof(int), "top", true),
+                (typeof(Thing), "thing", true)
             };
             ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithModel", expected);
         }
@@ -66,10 +66,10 @@ namespace AutoRest.TestServer.Tests
         {
             var expected = new[]
             {
-                (typeof(string), "id"),
-                (typeof(int), "top"),
-                (typeof(string), "name"),
-                (typeof(int), "age")
+                (typeof(string), "id", true),
+                (typeof(int), "top", true),
+                (typeof(string), "name", true),
+                (typeof(int), "age", true)
             };
             ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithSpreadAlias", expected);
         }
@@ -79,18 +79,18 @@ namespace AutoRest.TestServer.Tests
         {
             var expected = new[]
             {
-                (typeof(string), "id"),
-                (typeof(int), "top"),
-                (typeof(string), "name"),
-                (typeof(string), "color"),
-                (typeof(int?), "age"),
-                (typeof(IEnumerable<int>), "items"),
-                (typeof(IEnumerable<string>), "elements")
+                (typeof(string), "id", true),
+                (typeof(int), "top", true),
+                (typeof(string), "name", true),
+                (typeof(IEnumerable < int >), "items", true),
+                (typeof(string), "color", false),
+                (typeof(int?), "age", false),
+                (typeof(IEnumerable<string>), "elements", false)
             };
             ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithOptionalProps", expected);
         }
 
-        private static void ValidateConvenienceMethod(Type clientType, string methodName, IEnumerable<(Type ParameterType, string Name)> expected)
+        private static void ValidateConvenienceMethod(Type clientType, string methodName, IEnumerable<(Type ParameterType, string Name, bool IsRequired)> expected)
         {
             var methods = FindMethods(clientType, methodName);
 
@@ -108,18 +108,21 @@ namespace AutoRest.TestServer.Tests
             return methods.Where(m => m.Name.Equals(methodName) || m.Name.Equals(asyncMethodName));
         }
 
-        private static void ValidateConvenienceMethodParameters(MethodInfo method, IEnumerable<(Type ParameterType, string Name)> expected)
+        private static void ValidateConvenienceMethodParameters(MethodInfo method, IEnumerable<(Type ParameterType, string Name, bool IsRequired)> expected)
         {
             if (IsProtocolMethod(method))
                 return;
             var parameters = method.GetParameters().Where(p => !p.ParameterType.Equals(typeof(CancellationToken)));
             var parameterTypes = parameters.Select(p => p.ParameterType);
             var parameterNames = parameters.Select(p => p.Name);
+            var parameterRequiredness = parameters.Select(p => !p.IsOptional);
             var expectedTypes = expected.Select(p => p.ParameterType);
             var expectedNames = expected.Select(p => p.Name);
+            var expectedRequiredness = expected.Select(p => p.IsRequired);
 
-            CollectionAssert.AreEquivalent(expectedTypes, parameterTypes);
-            CollectionAssert.AreEquivalent(expectedNames, parameterNames);
+            CollectionAssert.AreEqual(expectedTypes, parameterTypes);
+            CollectionAssert.AreEqual(expectedNames, parameterNames);
+            CollectionAssert.AreEqual(expectedRequiredness, parameterRequiredness);
         }
 
         private static bool IsProtocolMethod(MethodInfo method)

@@ -502,14 +502,14 @@ namespace Spread
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="name"></param>
+        /// <param name="items"></param>
         /// <param name="color"></param>
         /// <param name="age"></param>
-        /// <param name="items"></param>
         /// <param name="elements"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, string name, string color, int? age, IEnumerable<int> items, IEnumerable<string> elements, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
@@ -537,14 +537,14 @@ namespace Spread
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
         /// <param name="name"></param>
+        /// <param name="items"></param>
         /// <param name="color"></param>
         /// <param name="age"></param>
-        /// <param name="items"></param>
         /// <param name="elements"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response SpreadAliasWithOptionalProps(string id, int top, string name, string color, int? age, IEnumerable<int> items, IEnumerable<string> elements, CancellationToken cancellationToken = default)
+        public virtual Response SpreadAliasWithOptionalProps(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
