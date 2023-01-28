@@ -18,12 +18,15 @@ namespace CadlFirstTest.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
+            writer.WritePropertyName("requiredLiteral");
+            writer.WriteStringValue(RequiredLiteral);
             writer.WriteEndObject();
         }
 
         internal static Thing DeserializeThing(JsonElement element)
         {
             string name = default;
+            string requiredLiteral = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -31,8 +34,13 @@ namespace CadlFirstTest.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("requiredLiteral"))
+                {
+                    requiredLiteral = property.Value.GetString();
+                    continue;
+                }
             }
-            return new Thing(name);
+            return new Thing(name, requiredLiteral);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

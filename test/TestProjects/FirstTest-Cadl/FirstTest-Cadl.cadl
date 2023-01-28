@@ -43,15 +43,15 @@ enum ExtensibleEnum {
 model Thing {
   @doc("name of the Thing")
   name: string;
+  @doc("required literal type")
+  requiredLiteral: "accept";
 }
 
 alias ThingAlias = {
   @doc("name of the Thing")
   name: string;
   @doc("required Union")
-  requiredUnion: string | string[]|int32;
-  @doc("required literal type")
-  requiredLiteral: "accept";
+  requiredUnion: string | string[] | int32;
 };
 
 @friendlyName("Friend")

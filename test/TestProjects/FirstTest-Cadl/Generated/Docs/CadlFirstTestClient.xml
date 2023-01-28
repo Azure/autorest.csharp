@@ -12,6 +12,7 @@ Response response = await client.TopActionAsync("<action>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -22,6 +23,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -38,6 +40,7 @@ Response response = client.TopAction("<action>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -48,6 +51,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -64,6 +68,7 @@ Response response = await client.TopAction2Async();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -74,6 +79,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -90,6 +96,7 @@ Response response = client.TopAction2();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -100,6 +107,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -114,12 +122,14 @@ var client = new CadlFirstTestClient(credential);
 
 var data = new {
     name = "<name>",
+    requiredLiteral = new {},
 };
 
 Response response = await client.PatchActionAsync(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -130,6 +140,7 @@ Request Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -138,6 +149,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -152,12 +164,14 @@ var client = new CadlFirstTestClient(credential);
 
 var data = new {
     name = "<name>",
+    requiredLiteral = new {},
 };
 
 Response response = client.PatchAction(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -168,6 +182,7 @@ Request Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -176,6 +191,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -190,12 +206,14 @@ var client = new CadlFirstTestClient(credential);
 
 var data = new {
     name = "<name>",
+    requiredLiteral = new {},
 };
 
 Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -206,6 +224,7 @@ Request Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -214,6 +233,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -228,12 +248,14 @@ var client = new CadlFirstTestClient(credential);
 
 var data = new {
     name = "<name>",
+    requiredLiteral = new {},
 };
 
 Response response = client.AnonymousBody(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -244,6 +266,7 @@ Request Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -252,6 +275,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -267,13 +291,13 @@ var client = new CadlFirstTestClient(credential);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteral = new {},
 };
 
 Response response = await client.AliasBodyAsync(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -285,7 +309,6 @@ Schema for <c>AliasBodyRequest</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -294,6 +317,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -309,13 +333,13 @@ var client = new CadlFirstTestClient(credential);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteral = new {},
 };
 
 Response response = client.AliasBody(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -327,7 +351,6 @@ Schema for <c>AliasBodyRequest</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -336,6 +359,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -468,6 +492,7 @@ Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
 <code><![CDATA[
@@ -478,6 +503,7 @@ Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -488,6 +514,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -504,6 +531,7 @@ Response response = client.SayHi("<headParameter>", "<queryParameter>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 This sample shows how to call SayHi with all parameters, and how to parse the result.
 <code><![CDATA[
@@ -514,6 +542,7 @@ Response response = client.SayHi("<headParameter>", "<queryParameter>", "<option
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -524,6 +553,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -547,6 +577,7 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
+        requiredLiteral = new {},
     },
 };
 
@@ -554,6 +585,7 @@ Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -569,6 +601,7 @@ Schema for <c>RoundTripModel</c>:
   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
   requiredModel: {
     name: string, # Required.
+    requiredLiteral: Literal, # Required.
   }, # Required.
 }
 </code>
@@ -578,6 +611,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -601,6 +635,7 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
+        requiredLiteral = new {},
     },
 };
 
@@ -608,6 +643,7 @@ Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -623,6 +659,7 @@ Schema for <c>RoundTripModel</c>:
   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
   requiredModel: {
     name: string, # Required.
+    requiredLiteral: Literal, # Required.
   }, # Required.
 }
 </code>
@@ -632,6 +669,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -655,6 +693,7 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
+        requiredLiteral = new {},
     },
 };
 
@@ -662,6 +701,7 @@ Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestConte
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -677,6 +717,7 @@ Schema for <c>RoundTripModel</c>:
   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
   requiredModel: {
     name: string, # Required.
+    requiredLiteral: Literal, # Required.
   }, # Required.
 }
 </code>
@@ -686,6 +727,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -709,6 +751,7 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
+        requiredLiteral = new {},
     },
 };
 
@@ -716,6 +759,7 @@ Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(d
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -731,6 +775,7 @@ Schema for <c>RoundTripModel</c>:
   requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
   requiredModel: {
     name: string, # Required.
+    requiredLiteral: Literal, # Required.
   }, # Required.
 }
 </code>
@@ -740,6 +785,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -756,6 +802,7 @@ Response response = await client.HelloDemo2Async();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -766,6 +813,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
@@ -782,6 +830,7 @@ Response response = client.HelloDemo2();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -792,6 +841,7 @@ Response Body:
 Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 

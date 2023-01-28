@@ -19,8 +19,6 @@ namespace CadlFirstTest.Models
             writer.WriteNumberValue(RequiredUnion);
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("requiredLiteral");
-            writer.WriteStringValue(RequiredLiteral);
             writer.WriteEndObject();
         }
 

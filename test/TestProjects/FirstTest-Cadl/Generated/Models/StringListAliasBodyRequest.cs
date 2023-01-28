@@ -17,13 +17,11 @@ namespace CadlFirstTest.Models
     {
         /// <summary> Initializes a new instance of StringListAliasBodyRequest. </summary>
         /// <param name="name"></param>
-        /// <param name="requiredLiteral"></param>
         /// <param name="requiredUnion"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredLiteral"/> or <paramref name="requiredUnion"/> is null. </exception>
-        public StringListAliasBodyRequest(string name, string requiredLiteral, IEnumerable<string> requiredUnion) : base(name, requiredLiteral)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredUnion"/> is null. </exception>
+        public StringListAliasBodyRequest(string name, IEnumerable<string> requiredUnion) : base(name)
         {
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
 
             RequiredUnion = requiredUnion.ToList();

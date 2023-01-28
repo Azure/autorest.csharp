@@ -130,23 +130,44 @@
      "IsRequired": true,
      "IsReadOnly": false,
      "IsDiscriminator": false
+    },
+    {
+     "$id": "21",
+     "Name": "requiredLiteral",
+     "SerializedName": "requiredLiteral",
+     "Description": "",
+     "Type": {
+      "$id": "22",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$id": "23",
+       "Name": "String",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "Value": "accept",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
   {
-   "$id": "21",
+   "$id": "24",
    "Name": "AliasBodyRequest",
    "Namespace": "CadlFirstTest",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "22",
+     "$id": "25",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "23",
+      "$id": "26",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -156,25 +177,25 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "24",
+     "$id": "27",
      "Name": "requiredUnion",
      "SerializedName": "requiredUnion",
      "Description": "",
      "Type": {
-      "$id": "25",
+      "$id": "28",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "26",
+        "$id": "29",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        {
-        "$id": "27",
+        "$id": "30",
         "Name": "Array",
         "ElementType": {
-         "$id": "28",
+         "$id": "31",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -182,33 +203,12 @@
         "IsNullable": false
        },
        {
-        "$id": "29",
+        "$id": "32",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        }
       ],
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "30",
-     "Name": "requiredLiteral",
-     "SerializedName": "requiredLiteral",
-     "Description": "",
-     "Type": {
-      "$id": "31",
-      "Name": "Literal",
-      "LiteralValueType": {
-       "$id": "32",
-       "Name": "String",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "Value": "accept",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -767,7 +767,7 @@
        "Name": "AliasBodyRequest",
        "NameInRequest": "AliasBodyRequest",
        "Type": {
-        "$ref": "21"
+        "$ref": "24"
        },
        "Location": "Body",
        "IsRequired": true,

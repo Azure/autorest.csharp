@@ -15,13 +15,11 @@ namespace CadlFirstTest.Models
     {
         /// <summary> Initializes a new instance of Int32AliasBodyRequest. </summary>
         /// <param name="name"></param>
-        /// <param name="requiredLiteral"></param>
         /// <param name="requiredUnion"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public Int32AliasBodyRequest(string name, string requiredLiteral, int requiredUnion) : base(name, requiredLiteral)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public Int32AliasBodyRequest(string name, int requiredUnion) : base(name)
         {
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
 
             RequiredUnion = requiredUnion;
         }

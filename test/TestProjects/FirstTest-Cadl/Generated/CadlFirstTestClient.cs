@@ -361,16 +361,14 @@ namespace CadlFirstTest
         /// <summary> body parameter without body decorator. </summary>
         /// <param name="requiredUnion"></param>
         /// <param name="name"></param>
-        /// <param name="requiredLiteral"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/>, <paramref name="name"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public virtual async Task<Response<Thing>> AliasBodyAsync(string requiredUnion, string name, string requiredLiteral, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/> or <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<Thing>> AliasBodyAsync(string requiredUnion, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
 
-            StringAliasBodyRequest aliasBodyRequest = new StringAliasBodyRequest(name, requiredLiteral, requiredUnion);
+            StringAliasBodyRequest aliasBodyRequest = new StringAliasBodyRequest(name, requiredUnion);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AliasBodyAsync(aliasBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
@@ -379,16 +377,14 @@ namespace CadlFirstTest
         /// <summary> body parameter without body decorator. </summary>
         /// <param name="requiredUnion"></param>
         /// <param name="name"></param>
-        /// <param name="requiredLiteral"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/>, <paramref name="name"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public virtual Response<Thing> AliasBody(string requiredUnion, string name, string requiredLiteral, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/> or <paramref name="name"/> is null. </exception>
+        public virtual Response<Thing> AliasBody(string requiredUnion, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
 
-            StringAliasBodyRequest aliasBodyRequest = new StringAliasBodyRequest(name, requiredLiteral, requiredUnion);
+            StringAliasBodyRequest aliasBodyRequest = new StringAliasBodyRequest(name, requiredUnion);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AliasBody(aliasBodyRequest.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
@@ -397,16 +393,14 @@ namespace CadlFirstTest
         /// <summary> body parameter without body decorator. </summary>
         /// <param name="requiredUnion"></param>
         /// <param name="name"></param>
-        /// <param name="requiredLiteral"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/>, <paramref name="name"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public virtual async Task<Response<Thing>> AliasBodyAsync(IEnumerable<string> requiredUnion, string name, string requiredLiteral, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/> or <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<Thing>> AliasBodyAsync(IEnumerable<string> requiredUnion, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
 
-            StringListAliasBodyRequest aliasBodyRequest = new StringListAliasBodyRequest(name, requiredLiteral, requiredUnion.ToList());
+            StringListAliasBodyRequest aliasBodyRequest = new StringListAliasBodyRequest(name, requiredUnion.ToList());
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AliasBodyAsync(aliasBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
@@ -415,16 +409,14 @@ namespace CadlFirstTest
         /// <summary> body parameter without body decorator. </summary>
         /// <param name="requiredUnion"></param>
         /// <param name="name"></param>
-        /// <param name="requiredLiteral"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/>, <paramref name="name"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public virtual Response<Thing> AliasBody(IEnumerable<string> requiredUnion, string name, string requiredLiteral, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/> or <paramref name="name"/> is null. </exception>
+        public virtual Response<Thing> AliasBody(IEnumerable<string> requiredUnion, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
 
-            StringListAliasBodyRequest aliasBodyRequest = new StringListAliasBodyRequest(name, requiredLiteral, requiredUnion.ToList());
+            StringListAliasBodyRequest aliasBodyRequest = new StringListAliasBodyRequest(name, requiredUnion.ToList());
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AliasBody(aliasBodyRequest.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
@@ -433,15 +425,13 @@ namespace CadlFirstTest
         /// <summary> body parameter without body decorator. </summary>
         /// <param name="requiredUnion"></param>
         /// <param name="name"></param>
-        /// <param name="requiredLiteral"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public virtual async Task<Response<Thing>> AliasBodyAsync(int requiredUnion, string name, string requiredLiteral, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<Thing>> AliasBodyAsync(int requiredUnion, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
 
-            Int32AliasBodyRequest aliasBodyRequest = new Int32AliasBodyRequest(name, requiredLiteral, requiredUnion);
+            Int32AliasBodyRequest aliasBodyRequest = new Int32AliasBodyRequest(name, requiredUnion);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AliasBodyAsync(aliasBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
@@ -450,15 +440,13 @@ namespace CadlFirstTest
         /// <summary> body parameter without body decorator. </summary>
         /// <param name="requiredUnion"></param>
         /// <param name="name"></param>
-        /// <param name="requiredLiteral"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public virtual Response<Thing> AliasBody(int requiredUnion, string name, string requiredLiteral, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<Thing> AliasBody(int requiredUnion, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
 
-            Int32AliasBodyRequest aliasBodyRequest = new Int32AliasBodyRequest(name, requiredLiteral, requiredUnion);
+            Int32AliasBodyRequest aliasBodyRequest = new Int32AliasBodyRequest(name, requiredUnion);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AliasBody(aliasBodyRequest.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
