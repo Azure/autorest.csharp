@@ -78,6 +78,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         internal CachedDictionary<Schema, TypeProvider> SchemaMap { get; }
 
+        private CachedDictionary<InputEnumType, EnumType> AllEnumMap { get; }
+
         private CachedDictionary<string, HashSet<Operation>> ChildOperations { get; }
 
         private Dictionary<string, string> _mergedOperations;
@@ -88,6 +90,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// This is a map from <see cref="OperationGroup"/> to the list of raw request path of its operations
         /// </summary>
         private readonly Dictionary<OperationGroup, IEnumerable<string>> _operationGroupToRequestPaths = new();
+
+        /// <summary>
+        /// This is a collection that contains all the models from property bag, we use HashSet here to avoid potential duplicates
+        /// </summary>
+        public HashSet<TypeProvider> PropertyBagModels { get; }
 
         public MgmtOutputLibrary()
         {
@@ -109,7 +116,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             AllSchemaMap = new CachedDictionary<Schema, TypeProvider>(InitializeModels);
             ResourceSchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureSchemaMap);
+            AllEnumMap = new CachedDictionary<InputEnumType, EnumType>(EnsureAllEnumMap);
             ChildOperations = new CachedDictionary<string, HashSet<Operation>>(EnsureResourceChildOperations);
+
+            // initialize the property bag collection
+            // TODO -- considering provide a customized comparer
+            PropertyBagModels = new HashSet<TypeProvider>();
 
             // TODO -- remove this since this is never used
             _mergedOperations = Configuration.MgmtConfiguration.MergeOperations
@@ -428,6 +440,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return AllSchemaMap.Where(kv => !(kv.Value is ResourceData)).ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
+        public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
+        {
+            var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
+            foreach (var (schema, typeProvider) in AllSchemaMap)
+            {
+                switch (schema)
+                {
+                    case SealedChoiceSchema sealedChoiceSchema:
+                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema, sealedChoiceSchema.ChoiceType, sealedChoiceSchema.Choices, false), (EnumType)typeProvider);
+                        break;
+                    case ChoiceSchema choiceSchema:
+                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true), (EnumType)typeProvider);
+                        break;
+                }
+            }
+
+            return dictionary;
+        }
+
         public IEnumerable<TypeProvider> Models => GetModels();
 
         private IEnumerable<TypeProvider> GetModels()
@@ -736,7 +767,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return rawRequestPathToResourceData;
         }
 
-        public override CSharpType ResolveEnum(InputEnumType enumType) => throw new NotImplementedException($"{nameof(ResolveEnum)} is not implemented for MPG yet.");
+        public override CSharpType ResolveEnum(InputEnumType enumType) => AllEnumMap[enumType].Type;
         public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for MPG yet.");
 
         public override CSharpType FindTypeForSchema(Schema schema) => FindTypeProviderForSchema(schema).Type;

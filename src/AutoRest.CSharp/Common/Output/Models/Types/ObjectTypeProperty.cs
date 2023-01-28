@@ -19,6 +19,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty, ObjectType enclosingType)
             : this(new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type), field.Description?.ToString() ?? String.Empty, field.Modifiers.HasFlag(FieldModifiers.ReadOnly), null, field.IsRequired, inputModelProperty: inputModelProperty)
         {
+            // now the default value will be set only when the model is generated from property bag
+            if (enclosingType is ModelTypeProvider model && model.IsPropertyBag)
+            {
+                DefaultValue = field.DefaultValue;
+            }
         }
 
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
@@ -54,6 +59,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 optionalViaNullability: OptionalViaNullability,
                 inputModelProperty: InputModelProperty, true);
         }
+
+        public FormattableString? DefaultValue { get; }
 
         private bool IsFlattenedProperty { get; }
 
@@ -141,7 +148,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var extraDescription = string.Empty;
             var originalObjSchema = SchemaProperty?.Schema as ObjectSchema;
-            var identityTypeSchema = originalObjSchema?.GetAllProperties().FirstOrDefault(p => p.SerializedName == "type").Schema;
+            var identityTypeSchema = originalObjSchema?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Schema;
             if (identityTypeSchema != null)
             {
                 var supportedTypesToShow = new List<string>();

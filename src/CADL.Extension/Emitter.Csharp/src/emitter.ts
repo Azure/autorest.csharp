@@ -98,7 +98,10 @@ export interface NetEmitterOptions {
     "single-top-level-client"?: boolean;
     skipSDKGeneration?: boolean;
     generateConvenienceAPI?: boolean; //workaround for cadl-ranch project
-    "unreferenced-types-handling"?: "removeOrInternalize" | "internalize" | "keepAll";
+    "unreferenced-types-handling"?:
+        | "removeOrInternalize"
+        | "internalize"
+        | "keepAll";
     "new-project"?: boolean;
     csharpGeneratorPath?: string;
     "clear-output-folder"?: boolean;
@@ -127,9 +130,17 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", default: false, nullable: true },
         generateConvenienceAPI: { type: "boolean", nullable: true },
-        "unreferenced-types-handling": { type: "string", enum: ["removeOrInternalize", "internalize", "keepAll"], nullable: true },
+        "unreferenced-types-handling": {
+            type: "string",
+            enum: ["removeOrInternalize", "internalize", "keepAll"],
+            nullable: true
+        },
         "new-project": { type: "boolean", nullable: true },
-        csharpGeneratorPath: { type: "string", default: dllFilePath, nullable: true },
+        csharpGeneratorPath: {
+            type: "string",
+            default: dllFilePath,
+            nullable: true
+        },
         "clear-output-folder": { type: "boolean", nullable: true },
         "save-inputs": { type: "boolean", nullable: true },
         "model-namespace": { type: "boolean", nullable: true }
@@ -145,17 +156,13 @@ export const $lib = createCadlLibrary({
     }
 });
 
-export async function $onEmit(
-    context: EmitContext<NetEmitterOptions>
-) {
+export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
     const emitterOptions = context.options;
     const emitterOutputDir = context.emitterOutputDir;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
     const resolvedSharedFolders: string[] = [];
-    const outputFolder = resolvePath(
-        emitterOutputDir ?? "./cadl-output"
-    );
+    const outputFolder = resolvePath(emitterOutputDir ?? "./cadl-output");
     const options: NetEmitterOptions = {
         outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
         logFile: resolvePath(
@@ -164,7 +171,8 @@ export async function $onEmit(
         ),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
         generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
-        "unreferenced-types-handling": resolvedOptions["unreferenced-types-handling"],
+        "unreferenced-types-handling":
+            resolvedOptions["unreferenced-types-handling"],
         "new-project": resolvedOptions["new-project"],
         csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
         "clear-output-folder": resolvedOptions["clear-output-folder"],
@@ -206,7 +214,7 @@ export async function $onEmit(
             if (!fs.existsSync(generatedFolder)) {
                 fs.mkdirSync(generatedFolder, { recursive: true });
             }
-            
+
             await program.host.writeFile(
                 resolvePath(generatedFolder, "cadl.json"),
                 prettierOutput(
@@ -220,8 +228,10 @@ export async function $onEmit(
                 Namespace: resolvedOptions.namespace ?? namespace,
                 LibraryName: resolvedOptions["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient: resolvedOptions["single-top-level-client"],
-                "unreferenced-types-handling": options["unreferenced-types-handling"],
+                SingleTopLevelClient:
+                    resolvedOptions["single-top-level-client"],
+                "unreferenced-types-handling":
+                    options["unreferenced-types-handling"],
                 "model-namespace": resolvedOptions["model-namespace"]
             } as Configuration;
 
@@ -236,7 +246,9 @@ export async function $onEmit(
                     : "";
                 const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath ?? dllFilePath
-                )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${options["clear-output-folder"]}`;
+                )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
+                    options["clear-output-folder"]
+                }`;
                 console.info(command);
 
                 try {
@@ -710,10 +722,15 @@ function loadOperation(
             );
             if (effectiveBodyType.kind === "Model") {
                 if (effectiveBodyType.name !== "") {
-                    parameters.push(loadBodyParameter(program, effectiveBodyType));
+                    parameters.push(
+                        loadBodyParameter(program, effectiveBodyType)
+                    );
                 } else {
                     effectiveBodyType.name = `${capitalize(op.name)}Request`;
-                    let bodyParameter = loadBodyParameter(program, effectiveBodyType);
+                    let bodyParameter = loadBodyParameter(
+                        program,
+                        effectiveBodyType
+                    );
                     bodyParameter.Kind = InputOperationParameterKind.Spread;
                     parameters.push(bodyParameter);
                 }
@@ -773,7 +790,9 @@ function loadOperation(
 
     return {
         Name: op.name,
-        ResourceName: resourceOperation?.resourceType.name ?? getOperationGroupName(program, op),
+        ResourceName:
+            resourceOperation?.resourceType.name ??
+            getOperationGroupName(program, op),
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,

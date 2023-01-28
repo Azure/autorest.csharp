@@ -214,7 +214,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 VerifyMethodReturnType(collection, resource, "Get");
 
                 if (!ListExceptionCollections.Contains(collection))
-                    VerifyMethodReturnType(collection, resource, collection.GetMethods().First(m => m.Name == "GetAll" && !m.GetParameters().Any(p => !p.IsOptional)));
+                    VerifyMethodReturnType(collection, resource, collection.GetMethods().First(m => m.Name == "GetAll" && !m.GetParameters().Any(p => !p.IsOptional && !p.ParameterType.Name.EndsWith("GetAllOptions"))));
 
                 if (collection.GetMethod("CreateOrUpdate") is not null)
                     VerifyMethodReturnType(collection, resource, "CreateOrUpdate");

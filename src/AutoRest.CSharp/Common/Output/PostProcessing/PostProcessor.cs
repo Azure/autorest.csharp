@@ -361,9 +361,14 @@ internal class PostProcessor
 
     private static IEnumerable<SyntaxNode> FilterTriviaWithDiscriminator(List<SyntaxNode>? nodes)
     {
+        if (nodes is null)
+        {
+            return Enumerable.Empty<SyntaxNode>();
+        }
+
         // If the base class has discriminator, we will add a description at the end of the original description to add the known derived types
         // Here we use the added description to filter the syntax nodes coming from xml comment to get all the derived types exactly
-        var targetIndex = nodes?.FindLastIndex(node => node.ToFullString().Contains(DiscriminatorDescFixedPart.Last()));
+        var targetIndex = nodes.FindLastIndex(node => node.ToFullString().Contains(DiscriminatorDescFixedPart.Last()));
         return nodes.Where((val, index) => index >= targetIndex);
     }
 
