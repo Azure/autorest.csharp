@@ -9,7 +9,6 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
@@ -20,14 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
-        public static Parameter FromModelProperty(in ObjectTypeProperty property)
-        {
-            var propertyType = property.ValueType;
-            var validation = propertyType.IsValueType || property.IsReadOnly ? ValidationType.None : ValidationType.AssertNotNull;
-            return new Parameter(property.Declaration.Name.ToVariableName(), property.Description, propertyType, null, validation, null);
-        }
-
-        public static Parameter FromInputModelProperty(in InputModelProperty property, string name, CSharpType propertyType)
+        public static Parameter FromModelProperty(in InputModelProperty property, string name, CSharpType propertyType)
         {
             // we do not validate a parameter when it is a value type (struct or int, etc), or it is readonly, or it is optional
             var validation = propertyType.IsValueType || property.IsReadOnly || !property.IsRequired ? ValidationType.None : ValidationType.AssertNotNull;
