@@ -507,15 +507,13 @@ namespace Spread
         /// <param name="items"></param>
         /// <param name="elements"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/>, <paramref name="color"/>, <paramref name="items"/> or <paramref name="elements"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, string name, string color, int? age, IEnumerable<int> items, IEnumerable<string> elements, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(color, nameof(color));
             Argument.AssertNotNull(items, nameof(items));
-            Argument.AssertNotNull(elements, nameof(elements));
 
             SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
             {
@@ -544,15 +542,13 @@ namespace Spread
         /// <param name="items"></param>
         /// <param name="elements"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/>, <paramref name="color"/>, <paramref name="items"/> or <paramref name="elements"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response SpreadAliasWithOptionalProps(string id, int top, string name, string color, int? age, IEnumerable<int> items, IEnumerable<string> elements, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(color, nameof(color));
             Argument.AssertNotNull(items, nameof(items));
-            Argument.AssertNotNull(elements, nameof(elements));
 
             SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
             {
