@@ -375,7 +375,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (converter.ConvenienceSpread != null)
                 {
-                    spreadBodyVariable = $"{convenienceParameter.Name:I}";
+                    // we put a declaration here to avoid possible local variable naming collisions
+                    var declaration = new CodeWriterDeclaration(convenienceParameter.Name);
+                    spreadBodyVariable = $"{declaration:D}";
                 }
             }
 

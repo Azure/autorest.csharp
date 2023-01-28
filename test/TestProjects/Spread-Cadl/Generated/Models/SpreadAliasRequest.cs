@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace Spread.Models
@@ -17,22 +15,19 @@ namespace Spread.Models
     {
         /// <summary> Initializes a new instance of SpreadAliasRequest. </summary>
         /// <param name="name"></param>
-        /// <param name="array"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="array"/> is null. </exception>
-        public SpreadAliasRequest(string name, IEnumerable<int> array)
+        /// <param name="age"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public SpreadAliasRequest(string name, int age)
         {
             Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(array, nameof(array));
 
             Name = name;
-            Array = array.ToList();
+            Age = age;
         }
 
         /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary> Gets or sets the age. </summary>
-        public int? Age { get; set; }
-        /// <summary> Gets the array. </summary>
-        public IList<int> Array { get; }
+        /// <summary> Gets the age. </summary>
+        public int Age { get; }
     }
 }
