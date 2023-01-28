@@ -20,8 +20,12 @@ namespace CadlFirstTest.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("requiredUnion");
             writer.WriteStringValue(RequiredUnion);
-            writer.WritePropertyName("requiredLiteral");
-            writer.WriteStringValue(RequiredLiteral);
+            writer.WritePropertyName("requiredLiteralString");
+            writer.WriteStringValue(RequiredLiteralString);
+            writer.WritePropertyName("requiredLiteralInt");
+            writer.WriteNumberValue(RequiredLiteralInt);
+            writer.WritePropertyName("requiredLiteralBool");
+            writer.WriteBooleanValue(RequiredLiteralBool);
             writer.WriteEndObject();
         }
 
@@ -29,7 +33,9 @@ namespace CadlFirstTest.Models
         {
             string name = default;
             string requiredUnion = default;
-            string requiredLiteral = default;
+            string requiredLiteralString = default;
+            int requiredLiteralInt = default;
+            bool requiredLiteralBool = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -42,13 +48,23 @@ namespace CadlFirstTest.Models
                     requiredUnion = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredLiteral"))
+                if (property.NameEquals("requiredLiteralString"))
                 {
-                    requiredLiteral = property.Value.GetString();
+                    requiredLiteralString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("requiredLiteralInt"))
+                {
+                    requiredLiteralInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("requiredLiteralBool"))
+                {
+                    requiredLiteralBool = property.Value.GetBoolean();
                     continue;
                 }
             }
-            return new Thing(name, requiredUnion, requiredLiteral);
+            return new Thing(name, requiredUnion);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

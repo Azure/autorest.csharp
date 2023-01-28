@@ -71,6 +71,8 @@ export function mapCadlTypeToCSharpInputTypeKind(
             return InputTypeKind.Enum;
         case "Number":
             return InputTypeKind.Int32;
+        case "Boolean":
+            return InputTypeKind.Boolean;
         case "String":
             if (format === "date") return InputTypeKind.DateTime;
             if (format === "uri") return InputTypeKind.Uri;

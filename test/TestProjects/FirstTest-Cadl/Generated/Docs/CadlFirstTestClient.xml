@@ -13,7 +13,9 @@ Response response = await client.TopActionAsync("<action>");
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -25,7 +27,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -43,7 +47,9 @@ Response response = client.TopAction("<action>");
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -55,7 +61,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -73,7 +81,9 @@ Response response = await client.TopAction2Async();
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -85,7 +95,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -103,7 +115,9 @@ Response response = client.TopAction2();
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -115,7 +129,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -131,7 +147,9 @@ var client = new CadlFirstTestClient(credential);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteral = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralBool = new {},
 };
 
 Response response = await client.PatchActionAsync(RequestContent.Create(data));
@@ -139,7 +157,9 @@ Response response = await client.PatchActionAsync(RequestContent.Create(data));
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -151,7 +171,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -161,7 +183,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -177,7 +201,9 @@ var client = new CadlFirstTestClient(credential);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteral = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralBool = new {},
 };
 
 Response response = client.PatchAction(RequestContent.Create(data));
@@ -185,7 +211,9 @@ Response response = client.PatchAction(RequestContent.Create(data));
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -197,7 +225,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -207,7 +237,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -223,7 +255,9 @@ var client = new CadlFirstTestClient(credential);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteral = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralBool = new {},
 };
 
 Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
@@ -231,7 +265,9 @@ Response response = await client.AnonymousBodyAsync(RequestContent.Create(data))
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -243,7 +279,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -253,7 +291,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -269,7 +309,9 @@ var client = new CadlFirstTestClient(credential);
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteral = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralBool = new {},
 };
 
 Response response = client.AnonymousBody(RequestContent.Create(data));
@@ -277,7 +319,9 @@ Response response = client.AnonymousBody(RequestContent.Create(data));
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -289,7 +333,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -299,7 +345,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -433,7 +481,9 @@ Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
 <code><![CDATA[
@@ -445,7 +495,9 @@ Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -457,7 +509,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -475,7 +529,9 @@ Response response = client.SayHi("<headParameter>", "<queryParameter>");
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 This sample shows how to call SayHi with all parameters, and how to parse the result.
 <code><![CDATA[
@@ -487,7 +543,9 @@ Response response = client.SayHi("<headParameter>", "<queryParameter>", "<option
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -499,7 +557,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -524,7 +584,9 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteral = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralBool = new {},
     },
 };
 
@@ -533,7 +595,9 @@ Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -550,7 +614,9 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
     name: string, # Required.
     requiredUnion: Union, # Required.
-    requiredLiteral: Literal, # Required.
+    requiredLiteralString: Literal, # Required.
+    requiredLiteralInt: Literal, # Required.
+    requiredLiteralBool: Literal, # Required.
   }, # Required.
 }
 </code>
@@ -561,7 +627,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -586,7 +654,9 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteral = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralBool = new {},
     },
 };
 
@@ -595,7 +665,9 @@ Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -612,7 +684,9 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
     name: string, # Required.
     requiredUnion: Union, # Required.
-    requiredLiteral: Literal, # Required.
+    requiredLiteralString: Literal, # Required.
+    requiredLiteralInt: Literal, # Required.
+    requiredLiteralBool: Literal, # Required.
   }, # Required.
 }
 </code>
@@ -623,7 +697,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -648,7 +724,9 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteral = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralBool = new {},
     },
 };
 
@@ -657,7 +735,9 @@ Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestConte
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -674,7 +754,9 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
     name: string, # Required.
     requiredUnion: Union, # Required.
-    requiredLiteral: Literal, # Required.
+    requiredLiteralString: Literal, # Required.
+    requiredLiteralInt: Literal, # Required.
+    requiredLiteralBool: Literal, # Required.
   }, # Required.
 }
 </code>
@@ -685,7 +767,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -710,7 +794,9 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteral = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralBool = new {},
     },
 };
 
@@ -719,7 +805,9 @@ Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(d
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -736,7 +824,9 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
     name: string, # Required.
     requiredUnion: Union, # Required.
-    requiredLiteral: Literal, # Required.
+    requiredLiteralString: Literal, # Required.
+    requiredLiteralInt: Literal, # Required.
+    requiredLiteralBool: Literal, # Required.
   }, # Required.
 }
 </code>
@@ -747,7 +837,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -765,7 +857,9 @@ Response response = await client.HelloDemo2Async();
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -777,7 +871,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 
@@ -795,7 +891,9 @@ Response response = client.HelloDemo2();
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -807,7 +905,9 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required.
   requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
 }
 </code>
 

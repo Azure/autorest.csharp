@@ -16,24 +16,27 @@ namespace CadlFirstTest.Models
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"></param>
         /// <param name="requiredUnion"></param>
-        /// <param name="requiredLiteral"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public Thing(string name, string requiredUnion, string requiredLiteral)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredUnion"/> is null. </exception>
+        public Thing(string name, string requiredUnion)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
 
             Name = name;
             RequiredUnion = requiredUnion;
-            RequiredLiteral = requiredLiteral;
         }
 
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
         /// <summary> Gets or sets the required union. </summary>
         public string RequiredUnion { get; set; }
-        /// <summary> Gets or sets the required literal. </summary>
-        public string RequiredLiteral { get; set; }
+        /// <summary> Gets the required literal string. </summary>
+        internal string RequiredLiteralString { get; } = "accept";
+
+        /// <summary> Gets the required literal int. </summary>
+        internal int RequiredLiteralInt { get; } = 123;
+
+        /// <summary> Gets the required literal bool. </summary>
+        internal bool RequiredLiteralBool { get; } = false;
     }
 }

@@ -160,6 +160,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
+            if (property.InputModelProperty.Type is InputLiteralType)
+            {
+                return false;
+            }
+
             if (property.InputModelProperty!.IsReadOnly)
             {
                 return true;

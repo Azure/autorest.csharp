@@ -43,10 +43,22 @@ enum ExtensibleEnum {
 model Thing {
   @doc("name of the Thing")
   name: string;
+
   @doc("required Union")
   requiredUnion: string | string[]|int32;
-  @doc("required literal type")
-  requiredLiteral: "accept";
+
+  @doc("required literal string")
+  requiredLiteralString: "accept";
+
+  @doc("required literal int")
+  requiredLiteralInt: 123;
+
+  // TODO: how do we identify if the number literal is a float or double?
+//   @doc("required literal float")
+//   requiredLiteralFloat: 1.23;
+
+  @doc("required literal bool")
+  requiredLiteralBool: false;
 }
 
 @friendlyName("Friend")
