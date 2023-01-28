@@ -264,7 +264,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSpreadBodyConverter(CodeWriter writer, ConvenienceMethod convenienceMethod, FormattableString? spreadVariable)
         {
-            var convenienceSpread = convenienceMethod.ProtocolToConvenienceParameters.Select(converter => converter.ConvenienceSpread).WhereNotNull().SingleOrDefault();
+            var convenienceSpread = convenienceMethod.ProtocolToConvenienceParameterConverters.Select(converter => converter.ConvenienceSpread).WhereNotNull().SingleOrDefault();
             if (convenienceSpread != null)
             {
                 var ctor = convenienceSpread.BackingModel.SerializationConstructor;
@@ -356,7 +356,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             FormattableString? spreadBodyVariable = null;
             var parameters = new List<FormattableString>();
-            foreach (var converter in convenienceMethod.ProtocolToConvenienceParameters)
+            foreach (var converter in convenienceMethod.ProtocolToConvenienceParameterConverters)
             {
                 var protocolParameter = converter.Protocol;
                 var convenienceParameter = converter.Convenience;
