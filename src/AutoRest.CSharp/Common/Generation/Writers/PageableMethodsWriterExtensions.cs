@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
@@ -11,6 +12,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 
@@ -30,11 +32,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     var messageVariable = new CodeWriterDeclaration("message");
                     var nextPageRequest = GetCreateRequestCall(restClientReference, createNextPageRequestMethod);
                     var nextPageRequestVariable = nextPageRequest != null ? new CodeWriterDeclaration("NextPageRequest") : null;
-                    var parameters = methodSignature.Parameters;
-                    if (writer.EnsureRequestContextVariable(methodSignature, null, createNextPageRequestMethod))
-                    {
-                        parameters = parameters.Append(KnownParameters.RequestContext).ToList();
-                    }
+                    var parameters = methodSignature.Parameters.ToList();
+                    writer.EnsureRequestContextVariable(parameters, null, createNextPageRequestMethod);
 
                     var createPageableParameters = new List<FormattableString>
                     {
@@ -70,20 +69,49 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line();
         }
 
+        public static CodeWriter WritePageable(this CodeWriter writer, ConvenienceMethod convenienceMethod, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)
+        {
+            using (writer.WriteMethodDeclaration(convenienceMethod.Signature.WithAsync(async)))
+            {
+                writer.WriteParametersValidation(convenienceMethod.Signature.Parameters);
+
+                var firstPageRequest = GetCreateRequestCall(null, createFirstPageRequestMethod);
+                var nextPageRequest = GetCreateRequestCall(null, createNextPageRequestMethod);
+                var parameters = new List<Parameter>();
+
+                foreach ((Parameter protocolParameter, Parameter? convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameterConverters)
+                {
+                    if (protocolParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)) &&
+                        convenienceParameter is { Name: var fromName, Type: { IsFrameworkType: false, Implementation: ModelTypeProvider }, IsOptionalInSignature: var isOptional })
+                    {
+                        writer
+                            .Append($"{protocolParameter.Type} {protocolParameter.Name:D} = {fromName:I}")
+                            .AppendRawIf(".", isOptional)
+                            .Line($".ToRequestContent();");
+                    }
+                    else if (convenienceParameter is not null)
+                    {
+                        parameters.Add(convenienceParameter);
+                    }
+                }
+
+                writer.EnsureRequestContextVariable(parameters, createFirstPageRequestMethod, createNextPageRequestMethod);
+                writer.WritePageableBody(parameters, convenienceMethod.ResponseType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemPropertyName, nextLinkPropertyName, async);
+            }
+
+            return writer.Line();
+        }
+
         public static CodeWriter WritePageable(this CodeWriter writer, MethodSignature methodSignature, CSharpType? pageItemType, Reference? restClientReference, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)
         {
             using (writer.WriteMethodDeclaration(methodSignature.WithAsync(async)))
             {
+                writer.WriteParametersValidation(methodSignature.Parameters);
+                var parameters = methodSignature.Parameters.ToList();
                 var firstPageRequest = GetCreateRequestCall(restClientReference, createFirstPageRequestMethod);
                 var nextPageRequest = GetCreateRequestCall(restClientReference, createNextPageRequestMethod);
-                writer.WriteParametersValidation(methodSignature.Parameters);
 
-                var parameters = methodSignature.Parameters;
-                if (writer.EnsureRequestContextVariable(methodSignature, createFirstPageRequestMethod, createNextPageRequestMethod))
-                {
-                    parameters = parameters.Append(KnownParameters.RequestContext).ToList();
-                }
-
+                writer.EnsureRequestContextVariable(parameters, createFirstPageRequestMethod, createNextPageRequestMethod);
                 writer.WritePageableBody(parameters, pageItemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemPropertyName, nextLinkPropertyName, async);
             }
 
@@ -134,20 +162,20 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static bool EnsureRequestContextVariable(this CodeWriter writer, MethodSignature methodSignature, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod)
+        private static void EnsureRequestContextVariable(this CodeWriter writer, List<Parameter> parameters, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod)
         {
-            if (ContainsRequestContext(methodSignature.Parameters))
+            if (ContainsRequestContext(parameters))
             {
-                return false;
+                return;
             }
 
             if (!ContainsRequestContext(createFirstPageRequestMethod?.Parameters) && !ContainsRequestContext(createNextPageRequestMethod?.Parameters))
             {
-                return false;
+                return;
             }
 
             var requestContextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-            if (methodSignature.Parameters.Contains(KnownParameters.CancellationTokenParameter))
+            if (parameters.Contains(KnownParameters.CancellationTokenParameter))
             {
                 writer.Line($"{KnownParameters.RequestContext.Type} {requestContextVariable:D} = {KnownParameters.CancellationTokenParameter.Name:I}.{nameof(CancellationToken.CanBeCanceled)} ? new {KnownParameters.RequestContext.Type} {{ {nameof(RequestContext.CancellationToken)} = {KnownParameters.CancellationTokenParameter.Name:I} }} : null;");
             }
@@ -156,27 +184,27 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"{KnownParameters.RequestContext.Type} {requestContextVariable:D} = null;");
             }
 
-            return true;
+            parameters.Add(KnownParameters.RequestContext);
 
         }
 
         private static bool ContainsRequestContext(IReadOnlyCollection<Parameter>? parameters) =>
             parameters != null && parameters.Contains(KnownParameters.RequestContext);
 
-        private static FormattableString? GetCreateRequestCall(Reference? restClientReference, RestClientMethod? method)
+        private static FormattableString? GetCreateRequestCall(Reference? restClientReference, RestClientMethod? createRequestMethod)
         {
-            if (method == null)
+            if (createRequestMethod == null)
             {
                 return null;
             }
 
-            var methodName = RequestWriterHelpers.CreateRequestMethodName(method);
+            var methodName = RequestWriterHelpers.CreateRequestMethodName(createRequestMethod);
             if (restClientReference != null)
             {
-                return $"{restClientReference.Value.GetReferenceFormattable()}.{methodName}({method.Parameters.GetIdentifiersFormattable()})";
+                return $"{restClientReference.Value.GetReferenceFormattable()}.{methodName}({createRequestMethod.Parameters.GetIdentifiersFormattable()})";
             }
 
-            return $"{methodName}({method.Parameters.GetIdentifiersFormattable()})";
+            return $"{methodName}({createRequestMethod.Parameters.GetIdentifiersFormattable()})";
         }
 
         private static FormattableString GetValueFactory(CSharpType? pageItemType)

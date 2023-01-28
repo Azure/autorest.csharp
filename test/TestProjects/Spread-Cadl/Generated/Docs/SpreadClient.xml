@@ -301,5 +301,115 @@ Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 
 </remarks>
     </member>
+    <member name="SpreadAliasWithOptionalPropsAsync(String,Int32,RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync with required parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
+
+var data = new {
+    name = "<name>",
+    items = new[] {
+        1234
+    },
+};
+
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync with all parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
+
+var data = new {
+    name = "<name>",
+    color = "<color>",
+    age = 1234,
+    items = new[] {
+        1234
+    },
+    elements = new[] {
+        "<String>"
+    },
+};
+
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>SpreadAliasWithOptionalPropsRequest</c>:
+<code>{
+  name: string, # Required.
+  color: string, # Optional.
+  age: number, # Optional.
+  items: [number], # Required.
+  elements: [string], # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SpreadAliasWithOptionalProps(String,Int32,RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadAliasWithOptionalProps with required parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
+
+var data = new {
+    name = "<name>",
+    items = new[] {
+        1234
+    },
+};
+
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalProps with all parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
+
+var data = new {
+    name = "<name>",
+    color = "<color>",
+    age = 1234,
+    items = new[] {
+        1234
+    },
+    elements = new[] {
+        "<String>"
+    },
+};
+
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>SpreadAliasWithOptionalPropsRequest</c>:
+<code>{
+  name: string, # Required.
+  color: string, # Optional.
+  age: number, # Optional.
+  items: [number], # Required.
+  elements: [string], # Optional.
+}
+</code>
+
+</remarks>
+    </member>
   </members>
 </doc>

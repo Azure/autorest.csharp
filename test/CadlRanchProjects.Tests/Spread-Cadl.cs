@@ -51,5 +51,19 @@ namespace CadlRanchProjects.Tests
             Response response = await new SpreadClient(host).SpreadAliasWithSpreadAliasAsync("1", 1, "dog", 3);
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public Task Spread_spreadAliasWithoutOptionalProps() => Test(async (host) =>
+        {
+            Response response = await new SpreadClient(host).SpreadAliasWithOptionalPropsAsync("1", 1, "dog", null, null, new[] { 1, 2, 3 }, null);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Spread_spreadAliasWithOptionalProps() => Test(async (host) =>
+        {
+            Response response = await new SpreadClient(host).SpreadAliasWithOptionalPropsAsync("2", 1, "dog", "red", 3, new[] { 1, 2, 3, 4 }, new[] { "a", "b" });
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }

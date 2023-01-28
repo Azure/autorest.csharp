@@ -357,22 +357,32 @@ namespace CadlFirstTest
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="name"> Gets the name. </param>
-        /// <param name="requiredLiteral"> Gets the required literal. </param>
+        /// <param name="name"></param>
+        /// <param name="requiredLiteral"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredLiteral"/> is null. </exception>
         public virtual async Task<Response<Thing>> AliasBodyAsync(string name, string requiredLiteral, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
+
+            AliasBodyRequest aliasBodyRequest = new Models.AliasBodyRequest(name, requiredLiteral);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AliasBodyAsync(aliasBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="name"> Gets the name. </param>
-        /// <param name="requiredLiteral"> Gets the required literal. </param>
+        /// <param name="name"></param>
+        /// <param name="requiredLiteral"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredLiteral"/> is null. </exception>
         public virtual Response<Thing> AliasBody(string name, string requiredLiteral, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
+
+            AliasBodyRequest aliasBodyRequest = new Models.AliasBodyRequest(name, requiredLiteral);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AliasBody(aliasBodyRequest.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);

@@ -60,6 +60,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
+        public bool IsPropertyBag => _inputModel.IsPropertyBag;
+
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null, IEnumerable<InputModelProperty>? modelPropertiesOverride = null)
             : base(defaultNamespace, sourceInputModel)
         {
@@ -115,7 +117,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (_modelPropertiesOverride is not null)
             {
                 List<FormattableString> childrenList = new List<FormattableString>();
-                var implementations = _derivedTypes.Select(child => _typeFactory.CreateType(child));
+                var implementations = _derivedTypes!.Select(child => _typeFactory.CreateType(child));
                 foreach (var implementation in implementations)
                 {
                     childrenList.Add($"<see cref=\"{implementation.Name}\"/>");
@@ -276,7 +278,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => TypeFactory.IsList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
+            => p with { Type = TypeFactory.GetInputType(p.Type) };
 
         private static Parameter CreateSerializationConstructorParameter(Parameter p) // we don't validate parameters for serialization constructor
             => p with { Validation = ValidationType.None };
@@ -380,6 +382,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool EnsureHasJsonSerialization()
         {
+            if (IsPropertyBag)
+                return false;
             return true;
         }
 
@@ -466,7 +470,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedTypes.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
+                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
                 property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
             }
 

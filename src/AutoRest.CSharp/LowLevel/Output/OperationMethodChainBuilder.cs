@@ -196,18 +196,14 @@ namespace AutoRest.CSharp.Output.Models
             var attributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : null;
-            var protocolToConvenience = _orderedParameters
-                .Where(p => p.Protocol != null)
-                .Select(p => (p.Protocol!, p.Convenience))
-                .ToArray();
 
-            var parameters = SpreadMethodParameters(_orderedParameters.Where(chain => chain.Convenience != null));
+            var infoList = SpreadMethodParameters(returnTypeChain);
 
-            foreach (var parameterList in parameters)
+            foreach (var (parameters, converters) in infoList)
             {
-                var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
+                var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameters, attributes);
                 var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-                yield return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
+                yield return new ConvenienceMethod(convenienceSignature, converters, returnTypeChain.ConvenienceResponseType, diagnostic);
             }
             //var parameterList = new List<Parameter>();
             //foreach (var parameterChain in _orderedParameters)
@@ -239,9 +235,47 @@ namespace AutoRest.CSharp.Output.Models
             //yield return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }
 
-        private IEnumerable<IReadOnlyList<Parameter>> SpreadMethodParameters(IEnumerable<ParameterChain> parameters)
+        private IEnumerable<(IReadOnlyList<Parameter> Parameters, IReadOnlyList<ProtocolToConvenienceParameterConverter> Converters)> SpreadMethodParameters(ReturnTypeChain returnTypeChain)
         {
+            var protocolToConvenience = new List<ProtocolToConvenienceParameterConverter>();
+            var parameterList = new List<Parameter>();
+            foreach (var parameterChain in _orderedParameters)
+            {
+                var protocolParameter = parameterChain.Protocol;
+                var convenienceParameter = parameterChain.Convenience;
+                if (convenienceParameter != null)
+                {
+                    if (parameterChain.IsSpreadParameter)
+                    {
+                        if (convenienceParameter.Type.TryCast<ModelTypeProvider>(out var model))
+                        {
+                            var parameters = model.Fields.SerializationParameters
+                                .Select(parameter => parameter with
+                                {
+                                    Type = TypeFactory.GetInputType(parameter.Type)
+                                });
 
+                            parameterList.AddRange(parameters);
+                            protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, parameters)));
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException($"The parameter {convenienceParameter.Name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
+                        }
+                    }
+                    else
+                    {
+                        parameterList.Add(convenienceParameter);
+                        if (protocolParameter != null)
+                            protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
+                    }
+                }
+            }
+
+            yield return (parameterList, protocolToConvenience);
+            //var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
+            //var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
+            //return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }
 
         private void BuildParameters()

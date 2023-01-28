@@ -3,5 +3,5 @@
 
 export enum ClientKind {
     DpgClient = "DpgClient",
-    DpgOperationGroup = "DpgOperationGroup",
+    DpgOperationGroup = "DpgOperationGroup"
 }
