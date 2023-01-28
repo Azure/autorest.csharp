@@ -300,7 +300,7 @@ namespace AutoRest.CSharp.Output.Models
             var pathParameters = GetPathSegments(httpRequest.Path, pathParametersMap, isRaw: false);
 
             var body = buildContext.BodyParameter != null
-                ? new RequestContentRequestBody(buildContext.BodyParameter)
+                ? new RequestContentRequestBody(buildContext.BodyParameter.Name)
                 : httpRequest is HttpWithBodyRequest httpWithBodyRequest
                     ? BuildRequestBody(buildContext.References, httpWithBodyRequest.KnownMediaType)
                     : null;

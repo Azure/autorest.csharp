@@ -65,10 +65,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         var longRunning = clientMethod.LongRunning;
                         var pagingInfo = clientMethod.PagingInfo;
 
-                        if (clientMethod.ConvenienceMethod is { } convenienceMethod)
+                        foreach (var method in clientMethod.Methods)
                         {
-                            WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, true);
-                            WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, false);
+                            WriteConvenienceMethod(method);
                         }
 
                         WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, true);
@@ -84,7 +83,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteRequestCreationMethod(_writer, method, _client.Fields);
                     }
 
-                    if (_client.ClientMethods.Any(cm => cm.ConvenienceMethod is not null))
+                    if (_client.ClientMethods.Any(cm => cm.Methods.Any()))
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
@@ -124,23 +123,14 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteConvenienceMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, OperationLongRunning? longRunning, ProtocolMethodPaging? pagingInfo, bool async)
+        private void WriteConvenienceMethod(Method convenienceMethod)
         {
-            switch (longRunning, pagingInfo)
+            WriteConvenienceMethodDocumentation(_writer, convenienceMethod.Signature);
+            using (_writer.WriteMethodDeclaration(convenienceMethod.Signature))
             {
-                case { longRunning: not null, pagingInfo: not null }:
-                    // Not supported yet
-                    break;
-                case { longRunning: null, pagingInfo: not null }:
-                    WriteConveniencePageableMethod(clientMethod, convenienceMethod, pagingInfo, _client.Fields, async);
-                    break;
-                case { longRunning: not null, pagingInfo: null }:
-                    WriteConvenienceLroMethod(clientMethod, convenienceMethod, _client.Fields, async);
-                    break;
-                default:
-                    WriteConvenienceMethod(clientMethod, convenienceMethod, _client.Fields, async);
-                    break;
+                WriteBody(convenienceMethod.Body);
             }
+            _writer.Line();
         }
 
         private void WriteDPGIdentificationComment() => _writer.Line($"// Data plane generated {(_client.IsSubClient ? "sub-client" : "client")}.");
@@ -262,124 +252,167 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
-        private void DeclareMethodParameter(CodeWriter writer, ConvenienceMethod convenienceMethod)
+        private void WriteBody(MethodBody methodBody)
         {
-            foreach (var parameterChain in convenienceMethod.ProtocolToConvenienceParameters)
+            foreach (var block in methodBody.Blocks)
             {
-                if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
-                {
-                    var type = parameterChain.Convenience?.Type;
-                    var paraName = parameterChain.Convenience?.Name;
-                    writer.Append($"{type} {paraName:D} = ");
-                    writer.Append($"new {type}(");
-                    InputType? inputType = parameterChain.Input?.Type ?? null;
-                    if (inputType is InputModelType modelType)
+                WriteBodyBlock(block);
+            }
+        }
+
+        private void WriteBodyBlock(MethodBodyBlock bodyBlock)
+        {
+            switch (bodyBlock)
+            {
+                case ParameterValidationBlock parameterValidation:
+                    _writer.WriteParametersValidation(parameterValidation.Parameters);
+                    break;
+                case DiagnosticScopeMethodBodyBlock diagnosticScope:
+                    using (_writer.WriteDiagnosticScope(diagnosticScope.Diagnostic, diagnosticScope.ClientDiagnosticsReference))
                     {
-                        foreach (var prop in modelType.Properties)
-                        {
-                            writer.Append($"{prop.Name.ToVariableName()},");
-                        }
+                        WriteBodyBlock(diagnosticScope.InnerBlock);
+                    }
+                    break;
+                case MethodBodyLines lines:
+                    foreach (var line in lines.MethodBodySingleLine)
+                    {
+                        WriteLine(line);
+                    }
+                    break;
+            }
+        }
+
+        private void WriteLine(MethodBodySingleLine line)
+        {
+            switch (line)
+            {
+                case DeclareVariableLine declareVariable:
+                    _writer.Append($"{declareVariable.Type} {declareVariable.Name:D} = ");
+                    WriteInlineable(_writer, declareVariable.Value);
+                    break;
+                case OneLineLocalFunction localFunction:
+                    _writer.Append($"{localFunction.ReturnType} {localFunction.Name:D}(");
+                    foreach (var parameter in localFunction.Parameters)
+                    {
+                        _writer.Append($"{parameter.Type} {parameter.Name}, ");
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.AppendRaw(") => ");
+                    WriteInlineable(_writer, localFunction.Body);
+                    break;
+                case ReturnValueLine returnValue:
+                    _writer.AppendRaw("return ");
+                    WriteInlineable(_writer, returnValue.Value);
+                    break;
+            }
+
+            _writer.LineRaw(";");
+        }
+
+        private static void WriteInlineable(CodeWriter writer, InlineableExpression expression)
+        {
+            switch (expression)
+            {
+                case MemberReference memberReference:
+                    WriteInlineable(writer, memberReference.Inner);
+                    writer.Append($".{memberReference.MemberName}");
+                    break;
+                case StaticMethodCallExpression { CallAsExtension: true } methodCall:
+                    if (methodCall.MethodType != null)
+                    {
+                        writer.UseNamespace(methodCall.MethodType.Namespace);
+                    }
+                    WriteInlineable(writer, methodCall.Arguments[0]);
+                    writer.AppendRaw(".");
+                    writer.AppendRaw(methodCall.MethodName);
+                    WriteArguments(writer, methodCall.Arguments.Skip(1));
+                    break;
+                case StaticMethodCallExpression { CallAsExtension: false } methodCall:
+                    if (methodCall.MethodType != null)
+                    {
+                        writer.Append($"{methodCall.MethodType}.");
+                    }
+                    writer.AppendRaw(methodCall.MethodName);
+                    WriteArguments(writer, methodCall.Arguments);
+                    break;
+                case InstanceMethodCallExpression methodCall:
+                    if (methodCall.CallAsAsync)
+                    {
+                        writer.AppendRaw("await ");
+                    }
+                    if (methodCall.InstanceReference != null)
+                    {
+                        WriteInlineable(writer, methodCall.InstanceReference);
+                        writer.AppendRaw(".");
+                    }
+                    writer.AppendRaw(methodCall.MethodName);
+                    WriteArguments(writer, methodCall.Arguments);
+                    if (methodCall.CallAsAsync)
+                    {
+                        writer.AppendRaw(".ConfigureAwait(false)");
+                    }
+                    break;
+                case NewInstanceExpression newInstance:
+                    WriteNewInstance(writer, newInstance);
+                    break;
+                case NullConditionalExpression nullConditional:
+                    WriteInlineable(writer, nullConditional.Inner);
+                    writer.AppendRaw("?");
+                    break;
+                case TernaryConditionalOperator ternary:
+                    WriteInlineable(writer, ternary.Condition);
+                    writer.AppendRaw(" ? ");
+                    WriteInlineable(writer, ternary.Consequent);
+                    writer.AppendRaw(" : ");
+                    WriteInlineable(writer, ternary.Alternative);
+                    break;
+                case ParameterReference parameterReference:
+                    writer.Append($"{parameterReference.Parameter.Name}");
+                    break;
+                case ExpressionAsFormattableString formattableString:
+                    writer.Append(formattableString.Value);
+                    break;
+                case TypeReference typeReference:
+                    writer.Append($"{typeReference.Type}");
+                    break;
+                case VariableReference variable:
+                    writer.Append($"{variable.Name:I}");
+                    break;
+            }
+
+            static void WriteNewInstance(CodeWriter writer, NewInstanceExpression newInstanceExpression)
+            {
+                writer.Append($"new {newInstanceExpression.Type}");
+                if (newInstanceExpression.Arguments.Count > 0 || newInstanceExpression.Properties.Count == 0)
+                {
+                    WriteArguments(writer, newInstanceExpression.Arguments);
+                }
+
+                if (newInstanceExpression.Properties.Count > 0)
+                {
+                    writer.AppendRaw(" { ");
+                    foreach (var (name, value) in newInstanceExpression.Properties)
+                    {
+                        writer.Append($"{name} = ");
+                        WriteInlineable(writer, value);
+                        writer.AppendRaw(", ");
                     }
                     writer.RemoveTrailingComma();
-                    writer.Line($");");
+                    writer.AppendRaw(" }");
                 }
             }
-        }
-        private void WriteConvenienceMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
-        {
-            using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
+
+            static void WriteArguments(CodeWriter writer, IEnumerable<InlineableExpression> arguments)
             {
-                DeclareMethodParameter(_writer, convenienceMethod);
-                var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-                WriteCancellationTokenToRequestContext(_writer, contextVariable);
-
-                IReadOnlyList<FormattableString> parameters = PrepareConvenienceMethodParameters(convenienceMethod, contextVariable);
-
-                var responseVariable = new CodeWriterDeclaration("response");
-                _writer
-                    .Append($"{typeof(Response)} {responseVariable:D} = ")
-                    .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameters, async)
-                    .LineRaw(";");
-
-                var responseType = convenienceMethod.ResponseType;
-                if (responseType == null)
+                writer.AppendRaw("(");
+                foreach (var argument in arguments)
                 {
-                    _writer.Line($"return {responseVariable:I};");
+                    WriteInlineable(writer, argument);
+                    writer.AppendRaw(", ");
                 }
-                else
-                {
-                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
-                }
+                writer.RemoveTrailingComma();
+                writer.AppendRaw(")");
             }
-            _writer.Line();
-        }
-
-        private void WriteConvenienceLroMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
-        {
-            using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
-            {
-                DeclareMethodParameter(_writer, convenienceMethod);
-                var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-                WriteCancellationTokenToRequestContext(_writer, contextVariable);
-
-                IReadOnlyList<FormattableString> parameters = PrepareConvenienceMethodParameters(convenienceMethod, contextVariable);
-                var responseType = convenienceMethod.ResponseType;
-                if (responseType == null)
-                {
-                    // return [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
-                    _writer
-                        .Append($"return ")
-                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameters, async)
-                        .LineRaw(";");
-                }
-                else
-                {
-                    // Operation<BinaryData> response = [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
-                    var responseVariable = new CodeWriterDeclaration("response");
-                    _writer
-                        .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
-                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameters, async)
-                        .LineRaw(";");
-                    // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
-                    var diagnostic = convenienceMethod.Diagnostic ?? clientMethod.ProtocolMethodDiagnostic;
-                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, {responseType}.FromResponse, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
-                }
-            }
-            _writer.Line();
-        }
-
-        // RequestContext context = FromCancellationToken(cancellationToken);
-        private static void WriteCancellationTokenToRequestContext(CodeWriter writer, CodeWriterDeclaration contextVariable)
-        {
-            writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
-        }
-
-        private static IReadOnlyList<FormattableString> PrepareConvenienceMethodParameters(ConvenienceMethod convenienceMethod, CodeWriterDeclaration contextVariable)
-        {
-            var parameters = new List<FormattableString>();
-            foreach (var (protocolParameter, convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameters)
-            {
-                if (convenienceParameter == KnownParameters.CancellationTokenParameter)
-                {
-                    parameters.Add($"{contextVariable:I}");
-                }
-                else if (convenienceParameter != null)
-                {
-                    parameters.Add(convenienceParameter.GetConversionFormattable(protocolParameter.Type));
-                }
-                else
-                {
-                    throw new InvalidOperationException($"{protocolParameter.Name} protocol method parameter doesn't have matching field or parameter in convenience method {convenienceMethod.Signature.Name}");
-                }
-            }
-
-            return parameters;
-        }
-
-        private void WriteConveniencePageableMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ProtocolMethodPaging pagingInfo, ClientFields fields, bool async)
-        {
-            WriteConvenienceMethodDocumentation(_writer, convenienceMethod.Signature);
-            _writer.WritePageable(convenienceMethod, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
         }
 
         private static void WriteProtocolPageableMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, bool async)
@@ -578,24 +611,10 @@ namespace AutoRest.CSharp.Generation.Writers
             WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
         }
 
-        private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
+        private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, ConvenienceMethod convenienceMethod)
         {
-            WriteConvenienceMethodDocumentation(writer, convenienceMethod.Signature);
-
-            var methodSignature = convenienceMethod.Signature.WithAsync(async);
-            var scope = writer.WriteMethodDeclaration(methodSignature);
-            writer.WriteParametersValidation(methodSignature.Parameters);
-
-            if (convenienceMethod.Diagnostic != null)
-            {
-                var diagnosticScope = writer.WriteDiagnosticScope(convenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty);
-                return Disposable.Create(() =>
-                {
-                    diagnosticScope.Dispose();
-                    scope.Dispose();
-                });
-            }
-
+            var scope = writer.WriteMethodDeclaration(convenienceMethod.Signature);
+            writer.WriteParametersValidation(convenienceMethod.Signature.Parameters);
             return scope;
         }
 

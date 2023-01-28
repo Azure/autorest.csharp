@@ -83,20 +83,20 @@ namespace AutoRest.CSharp.Generation.Writers
             return conversion == null ? constantFormattable : $"{constantFormattable}{conversion}";
         }
 
-        public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
+        public static FormattableString GetConversionFormattable(this Reference reference, CSharpType toType)
         {
-            var conversionMethod = GetConversionMethod(parameter.Type, toType);
+            var conversionMethod = GetConversionMethod(reference.Type, toType);
             if (conversionMethod == null)
             {
-                return $"{parameter.Name:I}";
+                return $"{reference.Name:I}";
             }
 
-            if (parameter.IsOptionalInSignature)
+            if (reference.Type.IsNullable)
             {
-                return $"{parameter.Name:I}?{conversionMethod}";
+                return $"{reference.Name:I}?{conversionMethod}";
             }
 
-            return $"{parameter.Name:I}{conversionMethod}";
+            return $"{reference.Name:I}{conversionMethod}";
         }
 
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)

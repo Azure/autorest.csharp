@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     case RequestContentRequestBody body:
                         WriteHeaders(writer, clientMethod, request, content: true, fields);
-                        writer.Line($"{request}.Content = {body.Parameter.Name};");
+                        writer.Line($"{request}.Content = {body.ParameterName};");
                         break;
                     case SchemaRequestBody body:
                         using (WriteValueNullCheck(writer, body.Value))

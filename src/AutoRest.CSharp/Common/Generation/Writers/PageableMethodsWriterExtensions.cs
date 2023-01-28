@@ -69,39 +69,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line();
         }
 
-        public static CodeWriter WritePageable(this CodeWriter writer, ConvenienceMethod convenienceMethod, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)
-        {
-            using (writer.WriteMethodDeclaration(convenienceMethod.Signature.WithAsync(async)))
-            {
-                writer.WriteParametersValidation(convenienceMethod.Signature.Parameters);
-
-                var firstPageRequest = GetCreateRequestCall(null, createFirstPageRequestMethod);
-                var nextPageRequest = GetCreateRequestCall(null, createNextPageRequestMethod);
-                var parameters = new List<Parameter>();
-
-                foreach ((Parameter protocolParameter, Parameter? convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameters)
-                {
-                    if (protocolParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)) &&
-                        convenienceParameter is { Name: var fromName, Type: { IsFrameworkType: false, Implementation: ModelTypeProvider }, IsOptionalInSignature: var isOptional })
-                    {
-                        writer
-                            .Append($"{protocolParameter.Type} {protocolParameter.Name:D} = {fromName:I}")
-                            .AppendRawIf(".", isOptional)
-                            .Line($".ToRequestContent();");
-                    }
-                    else if (convenienceParameter is not null)
-                    {
-                        parameters.Add(convenienceParameter);
-                    }
-                }
-
-                writer.EnsureRequestContextVariable(parameters, createFirstPageRequestMethod, createNextPageRequestMethod);
-                writer.WritePageableBody(parameters, convenienceMethod.ResponseType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemPropertyName, nextLinkPropertyName, async);
-            }
-
-            return writer.Line();
-        }
-
         public static CodeWriter WritePageable(this CodeWriter writer, MethodSignature methodSignature, CSharpType? pageItemType, Reference? restClientReference, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)
         {
             using (writer.WriteMethodDeclaration(methodSignature.WithAsync(async)))
@@ -207,7 +174,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{methodName}({createRequestMethod.Parameters.GetIdentifiersFormattable()})";
         }
 
-        private static FormattableString GetValueFactory(CSharpType? pageItemType)
+        public static FormattableString GetValueFactory(CSharpType? pageItemType)
         {
             if (pageItemType is null)
             {
