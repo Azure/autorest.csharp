@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
@@ -197,7 +198,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : null;
 
-            var infoList = SpreadMethodParameters(returnTypeChain);
+            var infoList = SpreadMethodParameters();
 
             foreach (var (parameters, converters) in infoList)
             {
@@ -205,92 +206,117 @@ namespace AutoRest.CSharp.Output.Models
                 var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
                 yield return new ConvenienceMethod(convenienceSignature, converters, returnTypeChain.ConvenienceResponseType, diagnostic);
             }
-            //var parameterList = new List<Parameter>();
-            //foreach (var parameterChain in _orderedParameters)
-            //{
-            //    var convenienceParameter = parameterChain.Convenience;
-            //    if (convenienceParameter == null)
-            //        continue;
-            //    if (parameterChain.IsSpreadParameter)
-            //    {
-            //        var type = convenienceParameter.Type;
-            //        if (type.TryCast<ModelTypeProvider>(out var model))
-            //        {
-            //            // model.Properties only contains the properties defined by this model, the properties inherits from its base type is not included.
-            //            // but considering that the spread case only happen to alias in cadl which could never have a base type, this is good enough
-            //            foreach (var prop in model.Properties)
-            //            {
-            //                var parameter = Parameter.FromModelProperty(prop);
-            //                parameterList.Add(parameter);
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        parameterList.Add(convenienceParameter);
-            //    }
-            //}
-            //var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
-            //var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-            //yield return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }
 
-        private IEnumerable<(IReadOnlyList<Parameter> Parameters, IReadOnlyList<ProtocolToConvenienceParameterConverter> Converters)> SpreadMethodParameters(ReturnTypeChain returnTypeChain)
+        private IEnumerable<(List<Parameter> Parameters, List<ProtocolToConvenienceParameterConverter> Converters)> SpreadMethodParameters()
         {
-            var protocolToConvenience = new List<ProtocolToConvenienceParameterConverter>();
-            var parameterList = new List<Parameter>();
+            int numOfOverloads = 1;
+            var dict = new Dictionary<ParameterChain, List<ConvenienceParameterSpread>?>();
             foreach (var parameterChain in _orderedParameters)
             {
-                var protocolParameter = parameterChain.Protocol;
-                var convenienceParameter = parameterChain.Convenience;
-                if (convenienceParameter != null)
-                {
-                    if (parameterChain.IsSpreadParameter)
-                    {
-                        if (convenienceParameter.Type.TryCast<ModelTypeProvider>(out var model))
-                        {
-                            var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
+                if (parameterChain.Convenience == null)
+                    continue;
 
-                            parameterList.AddRange(parameters);
-                            protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, parameters)));
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException($"The parameter {convenienceParameter.Name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
-                        }
-                    }
-                    else
+                if (TrySpreadBodyParameter(parameterChain, out var spreads))
+                {
+                    numOfOverloads = spreads.Count();
+                    dict.Add(parameterChain, spreads);
+                }
+                else
+                {
+                    dict.Add(parameterChain, null);
+                }
+            }
+
+            var results = new List<(List<Parameter> Parameters, List<ProtocolToConvenienceParameterConverter> Converters)>();
+            for (int i = 0; i < numOfOverloads; i++)
+            {
+                results.Add((new List<Parameter>(), new List<ProtocolToConvenienceParameterConverter>()));
+            }
+            foreach (var parameterChain in _orderedParameters)
+            {
+                if (parameterChain.Convenience == null)
+                    continue;
+
+                var spreads = dict[parameterChain];
+                if (spreads == null)
+                {
+                    // usual parameter
+                    foreach (var result in results)
                     {
-                        parameterList.Add(convenienceParameter);
-                        if (protocolParameter != null)
-                            protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
+                        result.Parameters.Add(parameterChain.Convenience);
+                        if (parameterChain.Protocol != null)
+                            result.Converters.Add(new ProtocolToConvenienceParameterConverter(parameterChain.Protocol, parameterChain.Convenience, null));
+                    }
+                }
+                else
+                {
+                    // spread parameter. It might have `numOfOverloads` overloads
+                    for (int i = 0; i < numOfOverloads; i++)
+                    {
+                        var spread = spreads[i];
+                        results[i].Parameters.AddRange(spread.SpreadedParameters);
+                        results[i].Converters.Add(new ProtocolToConvenienceParameterConverter(parameterChain.Protocol!, parameterChain.Convenience, spread));
                     }
                 }
             }
 
-            yield return (parameterList, protocolToConvenience);
-            //var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
-            //var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-            //return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
+            return results;
         }
 
-        private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider model)
+        private bool TrySpreadBodyParameter(ParameterChain chain, [MaybeNullWhen(false)] out List<ConvenienceParameterSpread> convenienceParameterSpreads)
         {
-            var fields = model.Fields;
-            foreach (var parameter in fields.SerializationParameters)
-            {
-                var field = fields.GetFieldByParameter(parameter);
-                var inputProperty = fields.GetInputByField(field);
-                var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
-                Constant? defaultValue = null;
-                if (!inputProperty.IsRequired)
-                    defaultValue = Constant.Default(inputType);
+            convenienceParameterSpreads = null;
+            if (!chain.IsSpreadParameter || chain.Convenience == null)
+                return false;
 
-                yield return parameter with
+            if (!chain.Convenience.Type.TryCast<ModelTypeProvider>(out var model))
+                return false;
+
+            var backingModels = model.IsAbstractBaseModelWithUnionTypes ?
+                model.UnionImplementations.Select(type => (ModelTypeProvider)type.Implementation) :
+                new[] { model };
+
+            var spreads = new List<ConvenienceParameterSpread>();
+            foreach (var backingModel in backingModels)
+            {
+                var parameters = BuildSpreadParameters(backingModel).OrderBy(p => p.DefaultValue == null ? 0 : 1);
+                spreads.Add(new ConvenienceParameterSpread(backingModel, parameters));
+            }
+
+            convenienceParameterSpreads = spreads;
+            return true;
+        }
+
+        private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider? model)
+        {
+            while (model != null)
+            {
+                var fields = model.Fields;
+                foreach (var parameter in fields.SerializationParameters)
                 {
-                    Type = inputType,
-                    DefaultValue = defaultValue,
-                };
+                    var field = fields.GetFieldByParameter(parameter);
+                    var inputProperty = fields.GetInputByField(field);
+                    var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
+                    Constant? defaultValue = null;
+                    if (!inputProperty.IsRequired)
+                        defaultValue = Constant.Default(inputType);
+
+                    yield return parameter with
+                    {
+                        Type = inputType,
+                        DefaultValue = defaultValue,
+                    };
+                }
+
+                if (model.Inherits != null && model.Inherits.TryCast<ModelTypeProvider>(out var parent))
+                {
+                    model = parent;
+                }
+                else
+                {
+                    model = null;
+                }
             }
         }
 

@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.LowLevel.Helpers;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
@@ -113,7 +114,7 @@ namespace AutoRest.CSharp.Output.Models
             // then we create new models using the above one as base model
             // first we need to get all possible combinations from the union type properties
             var candidates = propertiesWithUnionType.Select(property => ExpandProperty(property));
-            var combinations = GetCombinations(candidates);
+            var combinations = CollectionHelpers.GetCombinations(candidates);
 
             // each combination is a derived model
             var derivedModels = new List<InputModelType>();
@@ -148,36 +149,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private static IEnumerable<(InputModelProperty Property, InputType Type)> ExpandProperty(InputModelProperty property)
             => ((InputUnionType)property.Type).UnionItemTypes.Select(type => (property, type));
-
-        /// <summary>
-        /// This method get all possible combinations from a given list of arrays, by getting one element from each array
-        /// For instance, if we have two arrays [1, 2] and [3, 4, 5], we should get the result of
-        /// [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5] total 2x3=6 combinations
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        internal static IEnumerable<IEnumerable<T>> GetCombinations<T>(IEnumerable<IEnumerable<T>> source) where T : notnull
-        {
-            var queue = new Queue<List<T>>();
-            queue.Enqueue(new List<T>());
-            foreach (var level in source)
-            {
-                // get every element in queue out, and push the new results back
-                int count = queue.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    var list = queue.Dequeue();
-                    foreach (var item in level)
-                    {
-                        // push the results back with a new element on it
-                        queue.Enqueue(new List<T>(list) { item });
-                    }
-                }
-            }
-
-            return queue;
-        }
 
         private static IReadOnlyList<InputModelType> GetInputModels(InputNamespace rootNamespace, Dictionary<InputModelType, ExpandedInputModelType> expandedModels)
         {

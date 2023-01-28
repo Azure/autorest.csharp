@@ -51,8 +51,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         // 2. it is a base model with a union type property. This is true when _modelPropertiesOverride is not null
         protected override bool IsAbstract => IsAbstractDiscriminatorBaseModel || IsAbstractBaseModelWithUnionTypes;
 
-        private bool IsAbstractBaseModelWithUnionTypes => _modelPropertiesOverride is not null;
+        internal bool IsAbstractBaseModelWithUnionTypes => _modelPropertiesOverride is not null;
         private bool IsAbstractDiscriminatorBaseModel => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
+
+        private IEnumerable<CSharpType>? _unionImplementations;
+        internal IEnumerable<CSharpType> UnionImplementations => _unionImplementations ??= _derivedTypes!.Select(child => _typeFactory.CreateType(child));
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
         public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
@@ -117,8 +120,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (_modelPropertiesOverride is not null)
             {
                 List<FormattableString> childrenList = new List<FormattableString>();
-                var implementations = _derivedTypes!.Select(child => _typeFactory.CreateType(child));
-                foreach (var implementation in implementations)
+                foreach (var implementation in UnionImplementations)
                 {
                     childrenList.Add($"<see cref=\"{implementation.Name}\"/>");
                 }
