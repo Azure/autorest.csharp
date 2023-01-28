@@ -249,11 +249,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         if (convenienceParameter.Type.TryCast<ModelTypeProvider>(out var model))
                         {
-                            var parameters = model.Fields.SerializationParameters
-                                .Select(parameter => parameter with
-                                {
-                                    Type = TypeFactory.GetInputType(parameter.Type)
-                                });
+                            var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
 
                             parameterList.AddRange(parameters);
                             protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, parameters)));
@@ -276,6 +272,26 @@ namespace AutoRest.CSharp.Output.Models
             //var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
             //var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             //return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
+        }
+
+        private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider model)
+        {
+            var fields = model.Fields;
+            foreach (var parameter in fields.SerializationParameters)
+            {
+                var field = fields.GetFieldByParameter(parameter);
+                var inputProperty = fields.GetInputByField(field);
+                var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
+                Constant? defaultValue = null;
+                if (!inputProperty.IsRequired)
+                    defaultValue = Constant.Default(inputType);
+
+                yield return parameter with
+                {
+                    Type = inputType,
+                    DefaultValue = defaultValue,
+                };
+            }
         }
 
         private void BuildParameters()
