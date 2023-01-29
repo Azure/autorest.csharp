@@ -37,6 +37,11 @@ internal static class ScopeDetection
     /// <returns></returns>
     public static bool IsParameterizedScope(this RequestPath scopePath)
     {
+        // if this path could be found inside the configuration, we just return true for that.
+        if (Configuration.MgmtConfiguration.ParameterizedScopes.Contains(scopePath))
+            return true;
+
+        // if the path is not in the configuration, we go through the default logic to check if it is parameterized scope
         // if a request is an implicit scope, it must only have one segment
         if (scopePath.Count != 1)
             return false;
