@@ -559,9 +559,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             //try for list method
             originalType = PagingMethod?.ItemType ?? originalType;
 
-            if (Configuration.MgmtConfiguration.PreventWrappingReturnType.Contains(OperationId))
-                return originalType;
-
             if (originalType == null || !originalType.TryCastResourceData(out var data))
                 return originalType;
 
