@@ -13,24 +13,14 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Output.Models.InlineableExpressions;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal static class ClientMethodLines
     {
-        public static void DeclareCreateFirstPageRequestLocalFunction(this IList<MethodBodySingleLine> lines, InlineableExpression? restClient, string methodName, IReadOnlyList<InlineableExpression> arguments, out CodeWriterDeclaration localFunctionName)
-        {
-            var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments, false);
-            localFunctionName = new CodeWriterDeclaration("FirstPageRequest");
-            lines.Add(new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint}, typeof(HttpMessage), requestMethodCall));
-        }
-
-        public static void DeclareCreateNextPageRequestLocalFunction(this IList<MethodBodySingleLine> lines, InlineableExpression? restClient, string methodName, IReadOnlyList<InlineableExpression> arguments, out CodeWriterDeclaration localFunctionName)
-        {
-            var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments.Prepend(new ParameterReference(KnownParameters.NextLink)).ToList(), false);
-            localFunctionName = new CodeWriterDeclaration("NextPageRequest");
-            lines.Add(new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint, KnownParameters.NextLink}, typeof(HttpMessage), requestMethodCall));
-        }
+        public static MethodBodySingleLine Return(CodeWriterDeclaration name) => new ReturnValueLine(new VariableReference(name));
+        public static MethodBodySingleLine Return(InlineableExpression value) => new ReturnValueLine(value);
 
         public static void CreatePageableMethodArguments(this IList<MethodBodySingleLine> lines, IReadOnlyList<CreateMessageMethodsBuilder.ParameterLink> parameters, out IReadOnlyList<InlineableExpression> createRequestArguments, out InlineableExpression? requestContextVariable)
         {
@@ -46,16 +36,9 @@ namespace AutoRest.CSharp.Output.Models
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters: [var convenienceParameter], IntermediateModel: null }:
                         if (protocolParameter == KnownParameters.RequestContext && convenienceParameter == KnownParameters.CancellationTokenParameter)
                         {
-                            var requestContext = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-                            var cancellationToken = new ParameterReference(convenienceParameter);
-                            var canBeCanceled = new TernaryConditionalOperator(
-                                new MemberReference(cancellationToken, nameof(CancellationToken.CanBeCanceled)),
-                                new NewInstanceExpression(typeof(RequestContext), new Dictionary<string, InlineableExpression>{ [nameof(RequestContext.CancellationToken)] = cancellationToken }),
-                                new ExpressionAsFormattableString($"null"));
-
+                            lines.Add(Declare.RequestContext(Instantiate.IfCancellationTokenCanBeCanceled(), out var requestContext));
                             requestContextVariable = new VariableReference(requestContext);
-                            lines.Add(new DeclareVariableLine(KnownParameters.RequestContext.Type, requestContext, canBeCanceled));
-                            arguments.Add(requestContextVariable);
+                            arguments.Add(new VariableReference(requestContext));
                         }
                         else if (convenienceParameter != protocolParameter)
                         {
@@ -64,23 +47,22 @@ namespace AutoRest.CSharp.Output.Models
                             lines.Add(new DeclareVariableLine(protocolParameter.Type, argument, conversion));
                             arguments.Add(new VariableReference(argument));
                         }
+                        else if (protocolParameter == KnownParameters.RequestContext)
+                        {
+                            requestContextVariable = new ParameterReference(protocolParameter);
+                            arguments.Add(requestContextVariable);
+                        }
                         else
                         {
-                            if (protocolParameter == KnownParameters.RequestContext)
-                            {
-                                requestContextVariable = new ParameterReference(protocolParameter);
-                            }
                             arguments.Add(new ParameterReference(protocolParameter));
                         }
                         break;
+                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateModel: {} model }:
+                        lines.Add(Declare.NewModelInstance(model, parameterLink.ConvenienceParameters, out var variable));
+                        arguments.Add(CreateConversion(new VariableReference(variable), model.Type, protocolParameter.Type));
+                        break;
                     case { ProtocolParameters.Count: > 1, ConvenienceParameters.Count: 1, IntermediateModel: {} model }:
                         // Grouping is not supported yet
-                        break;
-                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateModel: {} model }:
-                        var variable = new CodeWriterDeclaration(model.Type.Name.ToVariableName());
-                        var newInstance = new NewInstanceExpression(model.Type, parameterLink.ConvenienceParameters.Select(p => new ParameterReference(p)).ToList());
-                        lines.Add(new DeclareVariableLine(model.Type, variable, newInstance));
-                        arguments.Add(CreateConversion(new VariableReference(variable), model.Type, protocolParameter.Type));
                         break;
                 }
             }
@@ -101,7 +83,8 @@ namespace AutoRest.CSharp.Output.Models
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters: [var convenienceParameter], IntermediateModel: null }:
                         if (protocolParameter == KnownParameters.RequestContext && convenienceParameter == KnownParameters.CancellationTokenParameter)
                         {
-                            DeclareRequestContext(lines, arguments);
+                            lines.Add(Declare.RequestContext(Call.FromCancellationToken(), out var requestContext));
+                            arguments.Add(new VariableReference(requestContext));
                         }
                         else if (convenienceParameter != protocolParameter)
                         {
@@ -112,14 +95,12 @@ namespace AutoRest.CSharp.Output.Models
                             arguments.Add(new ParameterReference(protocolParameter));
                         }
                         break;
+                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateModel: {} model }:
+                        lines.Add(Declare.NewModelInstance(model, parameterLink.ConvenienceParameters, out var variable));
+                        arguments.Add(CreateConversion(new VariableReference(variable), model.Type, protocolParameter.Type));
+                        break;
                     case { ProtocolParameters.Count: > 1, ConvenienceParameters.Count: 1, IntermediateModel: {} model }:
                         // Grouping is not supported yet
-                        break;
-                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateModel: {} model }:
-                        var variable = new CodeWriterDeclaration(model.Type.Name.ToVariableName());
-                        var newInstance = new NewInstanceExpression(model.Type, parameterLink.ConvenienceParameters.Select(p => new ParameterReference(p)).ToList());
-                        lines.Add(new DeclareVariableLine(model.Type, variable, newInstance));
-                        arguments.Add(CreateConversion(new VariableReference(variable), model.Type, protocolParameter.Type));
                         break;
                 }
             }
@@ -127,84 +108,16 @@ namespace AutoRest.CSharp.Output.Models
             protocolMethodArguments = arguments;
         }
 
-        public static void CallPageableHelpersCreatePageableAndReturn(this IList<MethodBodySingleLine> lines,
-            CodeWriterDeclaration createFirstPageRequest,
-            CodeWriterDeclaration? createNextPageRequest,
-            CodeWriterDeclaration clientDiagnostics,
-            CodeWriterDeclaration pipeline,
-            CSharpType? pageItemType,
-            string scopeName,
-            string itemPropertyName,
-            string? nextLinkPropertyName,
-            InlineableExpression? requestContextVariable,
-            bool async)
-        {
-            var arguments = new List<InlineableExpression>
-            {
-                new VariableReference(createFirstPageRequest),
-                createNextPageRequest != null ? new VariableReference(createNextPageRequest) : new ExpressionAsFormattableString($"null"),
-                new ExpressionAsFormattableString(PageableMethodsWriterExtensions.GetValueFactory(pageItemType)),
-                new VariableReference(clientDiagnostics),
-                new VariableReference(pipeline),
-                new ExpressionAsFormattableString($"{scopeName:L}"),
-                new ExpressionAsFormattableString($"{itemPropertyName:L}"),
-                new ExpressionAsFormattableString($"{nextLinkPropertyName:L}")
-            };
-
-            if (requestContextVariable is not null)
-            {
-                arguments.Add(requestContextVariable);
-            }
-
-            var methodName = async ? nameof(PageableHelpers.CreateAsyncPageable) : nameof(PageableHelpers.CreatePageable);
-            var convertMethodCall = new StaticMethodCallExpression(typeof(PageableHelpers), methodName, arguments, false);
-            lines.Add(new ReturnValueLine(convertMethodCall));
-        }
-
-        public static void CallProtocolMethod(this IList<MethodBodySingleLine> lines, string methodName, IReadOnlyList<InlineableExpression> arguments, CSharpType responseType, bool async, out CodeWriterDeclaration response)
-        {
-            var protocolMethodName = async ? methodName + "Async" : methodName;
-            var protocolMethodCall = new InstanceMethodCallExpression(null, protocolMethodName, arguments, async);
-            response = new CodeWriterDeclaration("response");
-            lines.Add(new DeclareVariableLine(responseType, response, protocolMethodCall));
-        }
-
-        public static void CallProtocolMethodAndReturn(this IList<MethodBodySingleLine> lines, string methodName, IReadOnlyList<InlineableExpression> arguments, bool async)
-        {
-            var protocolMethodName = async ? methodName + "Async" : methodName;
-            var protocolMethodCall = new InstanceMethodCallExpression(null, protocolMethodName, arguments, async);
-            lines.Add(new ReturnValueLine(protocolMethodCall));
-        }
-
-        public static void CallResponseFromValueAndReturn(this IList<MethodBodySingleLine> lines, CSharpType responseType, CodeWriterDeclaration response)
-        {
-            var responseVariable = new VariableReference(response);
-            var fromResponseCall = new StaticMethodCallExpression(responseType, "FromResponse", new[]{responseVariable}, false);
-            var fromValueCall = new StaticMethodCallExpression(typeof(Response), nameof(Response.FromValue), new InlineableExpression[]{fromResponseCall, responseVariable}, false);
-            lines.Add(new ReturnValueLine(fromValueCall));
-        }
-
-        public static void CallProtocolOperationHelpersConvertAndReturn(this IList<MethodBodySingleLine> lines, CSharpType responseType, CodeWriterDeclaration response, CodeWriterDeclaration clientDiagnostics, string scopeName)
-        {
-            var responseVariable = new VariableReference(response);
-            var fromResponseReference = new MemberReference(new TypeReference(responseType), "FromResponse");
-            var diagnosticsReference = new VariableReference(clientDiagnostics);
-            var arguments = new InlineableExpression[] { responseVariable, fromResponseReference, diagnosticsReference, new ExpressionAsFormattableString($"{scopeName:L}") };
-            var convertMethodCall = new StaticMethodCallExpression(typeof(ProtocolOperationHelpers), nameof(ProtocolOperationHelpers.Convert), arguments, false);
-            lines.Add(new ReturnValueLine(convertMethodCall));
-        }
-
-        private static void DeclareRequestContext(ICollection<MethodBodySingleLine> lines, ICollection<InlineableExpression> arguments)
-        {
-            var variable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-            arguments.Add(new VariableReference(variable));
-
-            var callFromCancellationToken = new StaticMethodCallExpression(null, "FromCancellationToken", new[]{ new ParameterReference(KnownParameters.CancellationTokenParameter) }, false);
-            lines.Add(new DeclareVariableLine(KnownParameters.RequestContext.Type, variable, callFromCancellationToken));
-        }
-
         private static InlineableExpression CreateConversion(Parameter fromParameter, CSharpType toType)
-            => CreateConversion(new ParameterReference(fromParameter), fromParameter.Type, toType);
+        {
+            return fromParameter.Type switch
+            {
+                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } }  when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToString(fromParameter),
+                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToSerialString(fromParameter),
+                { IsFrameworkType: false, Implementation: ModelTypeProvider }                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => Call.ToRequestContent(fromParameter),
+                _ => new ParameterReference(fromParameter)
+            };
+        }
 
         private static InlineableExpression CreateConversion(InlineableExpression fromExpression, CSharpType fromType, CSharpType toType)
         {
@@ -215,11 +128,50 @@ namespace AutoRest.CSharp.Output.Models
 
             return fromType switch
             {
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } }  when toType.EqualsIgnoreNullable(typeof(string)) => new InstanceMethodCallExpression(fromExpression, "ToString", Array.Empty<InlineableExpression>(), false),
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => new StaticMethodCallExpression(fromType, "ToSerialString", new[]{ fromExpression }, true),
-                { IsFrameworkType: false, Implementation: ModelTypeProvider }                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => new InstanceMethodCallExpression(fromExpression, "ToRequestContent", Array.Empty<InlineableExpression>(), false),
+                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } }  when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToString(fromExpression),
+                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToSerialString(fromType, fromExpression),
+                { IsFrameworkType: false, Implementation: ModelTypeProvider }                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => Call.ToRequestContent(fromExpression),
                 _ => fromExpression
             };
+        }
+
+        public static class Declare
+        {
+            public static MethodBodySingleLine FirstPageRequest(InlineableExpression? restClient, string methodName, IReadOnlyList<InlineableExpression> arguments, out CodeWriterDeclaration localFunctionName)
+            {
+                var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments, false);
+                localFunctionName = new CodeWriterDeclaration("FirstPageRequest");
+                return new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint}, typeof(HttpMessage), requestMethodCall);
+            }
+
+            public static MethodBodySingleLine NextPageRequest(InlineableExpression? restClient, string methodName, IReadOnlyList<InlineableExpression> arguments, out CodeWriterDeclaration localFunctionName)
+            {
+                var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments.Prepend(new ParameterReference(KnownParameters.NextLink)).ToList(), false);
+                localFunctionName = new CodeWriterDeclaration("NextPageRequest");
+                return new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint, KnownParameters.NextLink}, typeof(HttpMessage), requestMethodCall);
+            }
+
+            public static MethodBodySingleLine Response(CSharpType responseType, InlineableExpression value, out CodeWriterDeclaration response)
+            {
+                response = new CodeWriterDeclaration("response");
+                return new DeclareVariableLine(responseType, response, value);
+            }
+
+            public static MethodBodySingleLine RequestContext(InlineableExpression value, out CodeWriterDeclaration requestContext)
+            {
+                requestContext = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
+                return new DeclareVariableLine(KnownParameters.RequestContext.Type, requestContext, value);
+            }
+
+            public static MethodBodySingleLine NewModelInstance(ModelTypeProvider model, IEnumerable<Parameter> arguments, out CodeWriterDeclaration variable)
+                => NewModelInstance(model, arguments.Select(p => new ParameterReference(p)).ToList(), out variable);
+
+            public static MethodBodySingleLine NewModelInstance(ModelTypeProvider model, IReadOnlyList<InlineableExpression> arguments, out CodeWriterDeclaration variable)
+            {
+                variable = new CodeWriterDeclaration(model.Type.Name.ToVariableName());
+                var newInstance = new NewInstanceExpression(model.Type, arguments);
+                return new DeclareVariableLine(model.Type, variable, newInstance);
+            }
         }
     }
 
@@ -261,7 +213,7 @@ namespace AutoRest.CSharp.Output.Models
 
     internal record NullConditionalExpression(InlineableExpression Inner) : InlineableExpression;
 
-    internal record StaticMethodCallExpression(CSharpType? MethodType, string MethodName, IReadOnlyList<InlineableExpression> Arguments, bool CallAsExtension) : InlineableExpression;
+    internal record StaticMethodCallExpression(CSharpType? MethodType, string MethodName, IReadOnlyList<InlineableExpression> Arguments, bool CallAsExtension, bool CallAsAsync) : InlineableExpression;
 
     internal record InstanceMethodCallExpression(InlineableExpression? InstanceReference, string MethodName, IReadOnlyList<InlineableExpression> Arguments, bool CallAsAsync) : InlineableExpression;
 }

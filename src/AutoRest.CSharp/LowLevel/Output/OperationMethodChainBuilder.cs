@@ -14,6 +14,8 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Output.Models.ClientMethodLines;
+using static AutoRest.CSharp.Output.Models.InlineableExpressions;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Input.Configuration;
 
@@ -23,13 +25,16 @@ namespace AutoRest.CSharp.Output.Models
     {
         private readonly ClientFields _fields;
         private readonly string _clientName;
-        private readonly TypeFactory _typeFactory;
+        private readonly bool _headAsBoolean;
         private readonly RestClientMethod _createMessageMethod;
         private readonly RestClientMethod? _createNextPageMessageMethod;
         private readonly IReadOnlyList<CreateMessageMethodsBuilder.ParameterLink> _parameterLinks;
         private readonly RequestConditionHeaders _conditionHeaderFlag;
         private readonly IReadOnlyList<Parameter> _protocolMethodParameters;
         private readonly IReadOnlyList<Parameter> _convenienceMethodParameters;
+        private readonly CSharpType? _responseType;
+        private readonly CSharpType _protocolMethodReturnType;
+        private readonly CSharpType _convenienceMethodReturnType;
 
         private InputOperation Operation { get; }
 
@@ -37,24 +42,25 @@ namespace AutoRest.CSharp.Output.Models
         {
             _fields = fields;
             _clientName = clientName;
-            _typeFactory = typeFactory;
 
             Operation = operation;
+            _headAsBoolean = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             _createMessageMethod = createMessageMethod;
             _createNextPageMessageMethod = createNextPageMessageMethod;
             _parameterLinks = parameterLinks;
             _protocolMethodParameters = parameterLinks.SelectMany(p => p.ProtocolParameters).ToList();
             _convenienceMethodParameters = parameterLinks.SelectMany(p => p.ConvenienceParameters).ToList();
             _conditionHeaderFlag = conditionHeaderFlag;
+            _responseType = _headAsBoolean ? null : GetResponseType(operation, typeFactory);
+            _protocolMethodReturnType = _headAsBoolean ? typeof(Response<bool>) : GetProtocolMethodReturnType(operation, _responseType);
+            _convenienceMethodReturnType = _responseType is not null ? GetConvenienceMethodReturnType(operation, _responseType) : _protocolMethodReturnType;
         }
 
         public LowLevelClientMethod BuildOperationMethodChain()
         {
-            var returnTypeChain = BuildReturnTypes();
-
-            var protocolMethodSignature = BuildProtocolMethod(returnTypeChain, false).Signature;
-            var methods = ShouldConvenienceMethodGenerated(returnTypeChain)
-                ? new[]{ BuildConvenienceMethod(returnTypeChain, true), BuildConvenienceMethod(returnTypeChain, false) }
+            var protocolMethodSignature = BuildProtocolMethod(false).Signature;
+            var methods = ShouldConvenienceMethodGenerated()
+                ? new[]{ BuildConvenienceMethod(true), BuildConvenienceMethod(false) }
                 : Array.Empty<Method>();
 
             var diagnostic = new Diagnostic($"{_clientName}.{_createMessageMethod.Name}");
@@ -65,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models
             return new LowLevelClientMethod(methods, protocolMethodSignature, _createMessageMethod, requestBodyType, responseBodyType, diagnostic, protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
         }
 
-        private bool ShouldConvenienceMethodGenerated(ReturnTypeChain returnTypeChain)
+        private bool ShouldConvenienceMethodGenerated()
         {
             if (!Operation.GenerateConvenienceMethod)
             {
@@ -78,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models
                 return false;
             }
 
-            if (!returnTypeChain.Convenience.Equals(returnTypeChain.Protocol))
+            if (_responseType is not null)
             {
                 return true;
             }
@@ -86,85 +92,64 @@ namespace AutoRest.CSharp.Output.Models
             return !_convenienceMethodParameters.Where(p => p != KnownParameters.CancellationTokenParameter)
                 .SequenceEqual(_protocolMethodParameters.Where(p => p != KnownParameters.RequestContext));
         }
-
-        private ReturnTypeChain BuildReturnTypes()
+        
+        private static CSharpType? GetResponseType(InputOperation operation, TypeFactory typeFactory)
         {
-            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
-            CSharpType? responseType = null;
-            if (operationBodyTypes.Length != 0)
+            var firstResponseBodyType = operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().FirstOrDefault();
+            var responseType = firstResponseBodyType is not null ? typeFactory.CreateType(firstResponseBodyType) : null;
+            if (operation.Paging is not { } paging)
             {
-                var firstBodyType = operationBodyTypes[0];
-                if (firstBodyType != null)
-                {
-                    responseType = _typeFactory.CreateType(firstBodyType);
-                }
-            };
-
-            if (Operation.Paging != null)
-            {
-                if (responseType == null)
-                {
-                    throw new InvalidOperationException($"Method {Operation.Name} has to have a return value");
-                }
-
-                if (!responseType.IsFrameworkType && responseType.Implementation is ModelTypeProvider modelType)
-                {
-                    var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
-                    var propertyType = property.ValueType.WithNullable(false);
-                    if (!TypeFactory.IsList(propertyType))
-                    {
-                        throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
-                    }
-
-                    responseType = TypeFactory.GetElementType(property.ValueType);
-                }
-                else if (TypeFactory.IsList(responseType))
-                {
-                    responseType = TypeFactory.GetElementType(responseType);
-                }
-
-                if (Operation.LongRunning != null)
-                {
-                    var convenienceMethodReturnType = new CSharpType(typeof(Operation<>), new CSharpType(typeof(Pageable<>), responseType));
-                    return new ReturnTypeChain(convenienceMethodReturnType, typeof(Operation<Pageable<BinaryData>>), responseType);
-                }
-
-                return new ReturnTypeChain(new CSharpType(typeof(Pageable<>), responseType), typeof(Pageable<BinaryData>), responseType);
+                return responseType;
             }
 
-            if (Operation.LongRunning != null)
+            if (responseType is null)
             {
-                if (responseType != null)
-                {
-                    return new ReturnTypeChain(new CSharpType(typeof(Operation<>), responseType), typeof(Operation<BinaryData>), responseType);
-                }
-
-                return new ReturnTypeChain(typeof(Operation), typeof(Operation), null);
+                throw new InvalidOperationException($"Method {operation.Name} is pageable and has to have a return value");
             }
 
-            var headAsBoolean = Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
-            if (headAsBoolean)
+            if (responseType.IsFrameworkType || responseType.Implementation is not ModelTypeProvider modelType)
             {
-                return new ReturnTypeChain(typeof(Response<bool>), typeof(Response<bool>), null);
+                return TypeFactory.IsList(responseType) ? TypeFactory.GetElementType(responseType) : responseType;
             }
 
-            if (responseType != null)
+            var property = modelType.GetPropertyBySerializedName(paging.ItemName ?? "value");
+            var propertyType = property.ValueType.WithNullable(false);
+            if (!TypeFactory.IsList(propertyType))
             {
-                return new ReturnTypeChain(new CSharpType(typeof(Response<>), responseType), typeof(Response), responseType);
+                throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
             }
 
-            return new ReturnTypeChain(typeof(Response), typeof(Response), null);
+            return TypeFactory.GetElementType(property.ValueType);
         }
 
-        private Method BuildProtocolMethod(ReturnTypeChain returnTypeChain, bool async)
+        private static CSharpType GetProtocolMethodReturnType(InputOperation operation, CSharpType? responseType)
+            => (operation.Paging, operation.LongRunning, responseType) switch
+            {
+                { Paging: not null, LongRunning: not null }       => typeof(Operation<Pageable<BinaryData>>),
+                { Paging: not null, LongRunning: null }           => typeof(Pageable<BinaryData>),
+                { LongRunning: not null, responseType: not null } => typeof(Operation<BinaryData>),
+                { LongRunning: not null, responseType: null }     => typeof(Operation),
+                _                                                 => typeof(Response)
+            };
+
+        private static CSharpType GetConvenienceMethodReturnType(InputOperation operation, CSharpType responseType)
+            => (operation.Paging, operation.LongRunning) switch
+            {
+                { Paging: not null, LongRunning: not null } => new CSharpType(typeof(Operation<>), new CSharpType(typeof(Pageable<>), responseType)),
+                { Paging: not null, LongRunning: null }     => new CSharpType(typeof(Pageable<>), responseType),
+                { LongRunning: not null }                   => new CSharpType(typeof(Operation<>), responseType),
+                _                                           => new CSharpType(typeof(Response<>), responseType)
+            };
+
+        private Method BuildProtocolMethod(bool async)
         {
             var methodName = _createMessageMethod.Name;
-            var signature = CreateProtocolMethodSignature(methodName, returnTypeChain, async);
+            var signature = CreateProtocolMethodSignature(methodName, async);
             var body = new MethodBody(Array.Empty<MethodBodyBlock>());
             return new Method(signature, body);
         }
 
-        private Method BuildConvenienceMethod(ReturnTypeChain returnTypeChain, bool async)
+        private Method BuildConvenienceMethod(bool async)
         {
             var needNameChange = _protocolMethodParameters.Where(p => !p.IsOptionalInSignature)
                 .SequenceEqual(_convenienceMethodParameters.Where(p => !p.IsOptionalInSignature));
@@ -177,87 +162,112 @@ namespace AutoRest.CSharp.Output.Models
                     : $"{methodName.LastWordToSingular()}Values";
             }
 
-            var signature = CreateConvenienceMethodSignature(methodName, returnTypeChain, async);
-            var body = CreateConvenienceMethodBody(methodName, returnTypeChain, async);
+            var signature = CreateConvenienceMethodSignature(methodName, async);
+            var body = CreateConvenienceMethodBody(methodName, async);
             return new Method(signature, body);
         }
 
-        private MethodSignature CreateProtocolMethodSignature(string name, ReturnTypeChain returnTypeChain, bool async)
+        private MethodSignature CreateProtocolMethodSignature(string name, bool async)
         {
             var attributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : null;
 
-            return new MethodSignature(_createMessageMethod.Name, _createMessageMethod.Summary, _createMessageMethod.Description, _createMessageMethod.Accessibility | Virtual, returnTypeChain.Protocol, null, _protocolMethodParameters, attributes).WithAsync(async);
+            return new MethodSignature(name, _createMessageMethod.Summary, _createMessageMethod.Description, _createMessageMethod.Accessibility | Virtual, _protocolMethodReturnType, null, _protocolMethodParameters, attributes).WithAsync(async);
         }
 
-        private MethodSignature CreateConvenienceMethodSignature(string name, ReturnTypeChain returnTypeChain, bool async)
+        private MethodSignature CreateConvenienceMethodSignature(string name, bool async)
         {
             var attributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : null;
 
-            return new MethodSignature(name, _createMessageMethod.Summary, _createMessageMethod.Description, _createMessageMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, _convenienceMethodParameters, attributes).WithAsync(async);
+            return new MethodSignature(name, _createMessageMethod.Summary, _createMessageMethod.Description, _createMessageMethod.Accessibility | Virtual, _convenienceMethodReturnType, null, _convenienceMethodParameters, attributes).WithAsync(async);
         }
 
-        private MethodBody CreateConvenienceMethodBody(string methodName, ReturnTypeChain returnTypeChain, bool async)
+        private MethodBody CreateConvenienceMethodBody(string methodName, bool async)
         {
-            var lines = new List<MethodBodySingleLine>();
-            var scopeName = $"{_clientName}.{methodName}";
-            if (Operation.Paging is {} paging)
+            switch (Operation.Paging, Operation.LongRunning)
             {
-                CodeWriterDeclaration? createNextPageRequest = null;
-
-                lines.CreatePageableMethodArguments(_parameterLinks, out var createRequestArguments, out var requestContextVariable);
-                lines.DeclareCreateFirstPageRequestLocalFunction(null, _createMessageMethod.Name, createRequestArguments, out var createFirstPageRequest);
-                if (_createNextPageMessageMethod is not null)
-                {
-                    lines.DeclareCreateNextPageRequestLocalFunction(null, _createNextPageMessageMethod!.Name, createRequestArguments, out createNextPageRequest);
-                }
-
-                var clientDiagnostics = _fields.ClientDiagnosticsProperty.Declaration;
-                var pipeline = _fields.PipelineField.Declaration;
-                lines.CallPageableHelpersCreatePageableAndReturn(createFirstPageRequest, createNextPageRequest, clientDiagnostics, pipeline, returnTypeChain.ConvenienceResponseType, scopeName, paging.ItemName ?? "value", paging.NextLinkName, requestContextVariable, async);
-                return new MethodBody(new MethodBodyBlock[] { new ParameterValidationBlock(_convenienceMethodParameters), new MethodBodyLines(lines) });
+                case { Paging: {} paging, LongRunning: null }:
+                    return CreateConvenienceMethodBody(methodName, CreatePagingConvenienceMethodLines(methodName, paging, async), false);
+                case { Paging: null, LongRunning: not null }:
+                    return CreateConvenienceMethodBody(methodName, CreateLroConvenienceMethodLines(methodName, async), true);
+                default:
+                    return CreateConvenienceMethodBody(methodName, CreateConvenienceMethodLines(async), true);
             }
+        }
 
-            if (Operation.LongRunning != null)
+        private MethodBody CreateConvenienceMethodBody(string methodName, IEnumerable<MethodBodySingleLine> mainBlockLines, bool checkForMethodName)
+        {
+            MethodBodyBlock mainBodyBlock = new MethodBodyLines(mainBlockLines.ToList());
+            if (checkForMethodName && methodName != _createMessageMethod.Name)
             {
-                lines.CreateProtocolMethodArguments(_parameterLinks, out var protocolMethodArguments);
-                if (returnTypeChain.ConvenienceResponseType != null)
-                {
-                    lines.CallProtocolMethod(_createMessageMethod.Name, protocolMethodArguments, returnTypeChain.Protocol, async, out var response);
-                    lines.CallProtocolOperationHelpersConvertAndReturn(returnTypeChain.ConvenienceResponseType, response, _fields.ClientDiagnosticsProperty.Declaration, scopeName);
-                }
-                else
-                {
-                    lines.CallProtocolMethodAndReturn(_createMessageMethod.Name, protocolMethodArguments, async);
-                }
+                mainBodyBlock = new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), _fields.ClientDiagnosticsProperty, mainBodyBlock);
             }
-            else
-            {
-                lines.CreateProtocolMethodArguments(_parameterLinks, out var protocolMethodArguments);
-                if (returnTypeChain.ConvenienceResponseType != null)
-                {
-                    lines.CallProtocolMethod(_createMessageMethod.Name, protocolMethodArguments, returnTypeChain.Protocol, async, out var response);
-                    lines.CallResponseFromValueAndReturn(returnTypeChain.ConvenienceResponseType, response);
-                }
-                else
-                {
-                    lines.CallProtocolMethod(_createMessageMethod.Name, protocolMethodArguments, returnTypeChain.Protocol, async, out var response);
-                    lines.Add(new ReturnValueLine(new VariableReference(response)));
-                }
-            }
-
-            MethodBodyBlock mainBodyBlock = new MethodBodyLines(lines);
-            if (methodName != _createMessageMethod.Name)
-            {
-                mainBodyBlock = new DiagnosticScopeMethodBodyBlock(new Diagnostic(scopeName), _fields.ClientDiagnosticsProperty, mainBodyBlock);
-            }
-
             return new MethodBody(new[] { new ParameterValidationBlock(_convenienceMethodParameters), mainBodyBlock });
         }
 
-        private record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
+        private IEnumerable<MethodBodySingleLine> CreateConvenienceMethodLines(bool async)
+        {
+            var lines = new List<MethodBodySingleLine>();
+            var protocolMethodName = _createMessageMethod.Name;
+
+            lines.CreateProtocolMethodArguments(_parameterLinks, out var protocolMethodArguments);
+            lines.Add(Declare.Response(_protocolMethodReturnType, Call.ProtocolMethod(protocolMethodName, protocolMethodArguments, async), out var response));
+            if (_responseType is not null)
+            {
+                lines.Add(Return(Call.Response.FromValue(_responseType, response)));
+            }
+            else
+            {
+                lines.Add(Return(response));
+            }
+
+            return lines;
+        }
+
+        private IEnumerable<MethodBodySingleLine> CreateLroConvenienceMethodLines(string methodName, bool async)
+        {
+            var lines = new List<MethodBodySingleLine>();
+            var protocolMethodName = _createMessageMethod.Name;
+
+            lines.CreateProtocolMethodArguments(_parameterLinks, out var protocolMethodArguments);
+            if (_responseType != null)
+            {
+                lines.Add(Declare.Response(_protocolMethodReturnType, Call.ProtocolMethod(protocolMethodName, protocolMethodArguments, async), out var response));
+                lines.Add(Return(Call.ProtocolOperationHelpers.Convert(_responseType, response, _fields.ClientDiagnosticsProperty.Declaration, $"{_clientName}.{methodName}")));
+            }
+            else
+            {
+                lines.Add(Return(Call.ProtocolMethod(protocolMethodName, protocolMethodArguments, async)));
+            }
+
+            return lines;
+        }
+
+        private IEnumerable<MethodBodySingleLine> CreatePagingConvenienceMethodLines(string methodName, OperationPaging paging, bool async)
+        {
+            var clientDiagnostics = _fields.ClientDiagnosticsProperty.Declaration;
+            var pipeline = _fields.PipelineField.Declaration;
+            var scopeName = $"{_clientName}.{methodName}";
+            var itemPropertyName = paging.ItemName ?? "value";
+            var nextLinkName = paging.NextLinkName;
+
+            var lines = new List<MethodBodySingleLine>();
+            CodeWriterDeclaration? createNextPageRequest = null;
+
+            lines.CreatePageableMethodArguments(_parameterLinks, out var createRequestArguments, out var requestContextVariable);
+
+            lines.Add(Declare.FirstPageRequest(null, _createMessageMethod.Name, createRequestArguments, out var createFirstPageRequest));
+            if (_createNextPageMessageMethod is not null)
+            {
+                lines.Add(Declare.NextPageRequest(null, _createNextPageMessageMethod!.Name, createRequestArguments, out createNextPageRequest));
+            }
+
+            lines.Add(Return(Call.PageableHelpers.CreatePageable(createFirstPageRequest, createNextPageRequest, clientDiagnostics, pipeline, _responseType, scopeName, itemPropertyName, nextLinkName, requestContextVariable, async)));
+
+            return lines;
+        }
     }
 }
