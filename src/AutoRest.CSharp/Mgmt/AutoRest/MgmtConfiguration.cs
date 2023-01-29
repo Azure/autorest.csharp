@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Input
 {
@@ -164,7 +166,7 @@ namespace AutoRest.CSharp.Input
             NoResourceSuffix = noResourceSuffix;
             PrependRPPrefix = schemasToPrependRPPrefix;
             GenerateArmResourceExtensions = generateArmResourceExtensions;
-            ParameterizedScopes = parameterizedScopes;
+            RawParameterizedScopes = parameterizedScopes;
             IsArmCore = Configuration.DeserializeBoolean(armCore, false);
             DoesResourceModelRequireType = Configuration.DeserializeBoolean(resourceModelRequiresType, true);
             DoesResourceModelRequireName = Configuration.DeserializeBoolean(resourceModelRequiresName, true);
@@ -207,7 +209,10 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> OperationPositions { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
-        public IReadOnlyList<string> ParameterizedScopes { get; }
+        public IReadOnlyList<string> RawParameterizedScopes { get; }
+        private ImmutableHashSet<RequestPath>? _parameterizedScopes;
+        internal ImmutableHashSet<RequestPath> ParameterizedScopes
+            => _parameterizedScopes ??= RawParameterizedScopes.Select(scope => RequestPath.FromString(scope)).ToImmutableHashSet();
         public IReadOnlyList<string> OperationGroupsToOmit { get; }
         public IReadOnlyList<string> RequestPathIsNonResource { get; }
         public IReadOnlyList<string> NoPropertyTypeReplacement { get; }
@@ -335,7 +340,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
             root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValuesElement);
-            root.TryGetProperty(nameof(ParameterizedScopes), out var parameterizedScopesElement);
+            root.TryGetProperty(nameof(RawParameterizedScopes), out var parameterizedScopesElement);
 
             var operationGroupToOmit = Configuration.DeserializeArray(operationGroupsToOmitElement);
             var requestPathIsNonResource = Configuration.DeserializeArray(requestPathIsNonResourceElement);

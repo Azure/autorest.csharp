@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -86,7 +88,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 GetParametersForSingletonEntry());
             using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
             {
-                WriteMethodBodyWrapper(signature, false, false);
+                WriteMethodBodyWrapper(signature, false, false, resource.RequestPath.GetParameterizedScopeResourceTypes());
             }
         }
 
@@ -109,7 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 GetParametersForCollectionEntry(resourceCollection));
             using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
             {
-                WriteMethodBodyWrapper(signature, false, false);
+                WriteMethodBodyWrapper(signature, false, false, resource.RequestPath.GetParameterizedScopeResourceTypes());
             }
         }
 
@@ -148,6 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
+                WriteScopeResourceTypesValidation(_scopeParameter.Name, resourceCollection.RequestPath.GetParameterizedScopeResourceTypes());
                 var operation = resourceCollection.GetOperation;
                 string awaitText = isAsync & !operation.IsPagingOperation ? " await" : string.Empty;
                 string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
@@ -163,8 +166,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
+        private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging, IEnumerable<ResourceTypeSegment>? scopeTypes)
         {
+            WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
+
             _writer.AppendRaw("return ")
                 .AppendRawIf("await ", isAsync && !isPaging)
                 .Append($"GetExtensionClient({_armClientParameter.Name}, {_scopeParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
@@ -178,6 +183,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.AppendRaw(")")
                 .AppendRawIf(".ConfigureAwait(false)", isAsync && !isPaging)
                 .LineRaw(";");
+        }
+
+        private void WriteScopeResourceTypesValidation(string parameterName, IEnumerable<ResourceTypeSegment>? scopeTypes)
+        {
+            // validate the scope types
+            if (scopeTypes != null && !scopeTypes.Contains(ResourceTypeSegment.Any))
+            {
+                var typeStrings = scopeTypes.Select(type => (FormattableString)$"{type.SerializedType}").ToArray();
+                var typeAssertions = scopeTypes.Select(type => (FormattableString)$"!{parameterName:I}.ResourceType.Equals(\"{type.SerializedType}\")").ToArray();
+                var assertion = typeAssertions.Join(" || ");
+                using (_writer.Scope($"if ({assertion})"))
+                {
+                    _writer.Line($"throw new {typeof(ArgumentException)}({typeof(string)}.{nameof(string.Format)}(\"Invalid resource type {{0}} expected {typeStrings.Join(", ", " or ")}\", {parameterName:I}.ResourceType));");
+                }
+            }
         }
 
         private new string GetResourceCollectionMethodArgumentList(ResourceCollection resourceCollection)

@@ -396,7 +396,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             SeparateScope(resourcePath, out var resourceScopePath, out var trimmedResourcePath);
             SeparateScope(operationPath, out var operationScopePath, out var trimmedOperationPath);
 
-            if (trimmedResourcePath.Count > 0 && trimmedOperationPath.Equals(new RequestPath(trimmedResourcePath.SkipLast(1))) && DoesScopeCover(operationScopePath, resourceScopePath, operationPath, resourcePath))
+            if (trimmedResourcePath.Count > 0 && trimmedOperationPath.Equals(RequestPath.FromSegments(trimmedResourcePath.SkipLast(1))) && DoesScopeCover(operationScopePath, resourceScopePath, operationPath, resourcePath))
             {
                 matchType = (resourceScopePath.IsParameterizedScope(), operationScopePath.IsParameterizedScope()) switch
                 {

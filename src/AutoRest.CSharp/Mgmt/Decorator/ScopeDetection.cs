@@ -32,6 +32,7 @@ internal static class ScopeDetection
 
     /// <summary>
     /// Returns true if this request path is a parameterized scope, like the "/{scope}" in "/{scope}/providers/M.C/virtualMachines/{vmName}"
+    /// Also returns true when this scope is explicitly set as a parameterized scope in the configuration
     /// </summary>
     /// <param name="scopePath"></param>
     /// <returns></returns>
@@ -42,6 +43,11 @@ internal static class ScopeDetection
             return true;
 
         // if the path is not in the configuration, we go through the default logic to check if it is parameterized scope
+        return IsRawParameterizedScope(scopePath);
+    }
+
+    public static bool IsRawParameterizedScope(this RequestPath scopePath)
+    {
         // if a request is an implicit scope, it must only have one segment
         if (scopePath.Count != 1)
             return false;
@@ -63,7 +69,7 @@ internal static class ScopeDetection
         {
             if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith(RequestPath.ManagementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                 return RequestPath.ManagementGroup;
-            return new RequestPath(requestPath.Take(indexOfProvider));
+            return RequestPath.FromSegments(requestPath.Take(indexOfProvider));
         }
         if (requestPath.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
             return RequestPath.ResourceGroup;
@@ -86,10 +92,20 @@ internal static class ScopeDetection
 
     private static ResourceTypeSegment[]? CalculateScopeResourceTypes(this RequestPath requestPath)
     {
-        if (!requestPath.GetScopePath().IsParameterizedScope())
+        var scope = requestPath.GetScopePath();
+        if (!scope.IsParameterizedScope())
             return null;
         if (Configuration.MgmtConfiguration.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
             return resourceTypes.Select(v => BuildResourceType(v)).ToArray();
+
+        if (Configuration.MgmtConfiguration.ParameterizedScopes.Contains(scope))
+        {
+            // if this configuration has this scope configured
+            // here we use this static method instead of scope.GetResourceType() to skip another check of IsParameterizedScope
+            var resourceType = ResourceTypeSegment.ParseRequestPath(scope);
+            return new[] { resourceType };
+        }
+
         // otherwise we just assume this is scope and this scope could be anything
         return new[] { ResourceTypeSegment.Subscription, ResourceTypeSegment.ResourceGroup, ResourceTypeSegment.ManagementGroup, ResourceTypeSegment.Tenant, ResourceTypeSegment.Any };
     }
