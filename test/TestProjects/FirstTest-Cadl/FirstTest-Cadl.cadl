@@ -47,11 +47,22 @@ model Thing {
   requiredLiteral: "accept";
 }
 
-alias ThingAlias = {
+alias AliasWithRequiredUnion = {
   @doc("name of the Thing")
   name: string;
+  @doc("color of the Thing")
+  color?: string;
   @doc("required Union")
   requiredUnion: string | string[] | int32;
+};
+
+alias AliasWithOptionalUnion = {
+  @doc("name of the Thing")
+  name: string;
+  @doc("color of the Thing")
+  color?: string;
+  @doc("optional union")
+  optionalUnion?: string | int32 | int32[];
 };
 
 @friendlyName("Friend")
@@ -138,17 +149,23 @@ op patchAction(@body body: Thing): Thing;
 @convenienceAPI
 op anonymousBody( ...Thing ): Thing;
 
-@route("/aliasBody")
-@doc("body parameter without body decorator")
-@post
-@convenienceAPI
-op aliasBody( ...ThingAlias ): Thing;
-
 @route("/friendlyName")
 @doc("Model can have its friendly name")
 @post
 @convenienceAPI
 op friendlyModel(...NotFriend): NotFriend;
+
+@route("/doWithRequiredUnion")
+@doc("body parameter without body decorator")
+@post
+@convenienceAPI
+op doWithRequiredUnion( ...AliasWithRequiredUnion ): Thing;
+
+@route("/doWithOptionalUnion")
+@doc("body parameter without body decorator")
+@post
+@convenienceAPI
+op doWithOptionalUnion( ...AliasWithOptionalUnion ): Thing;
 
 op addTimeHeader(@header("Repeatability-First-Sent") repeatabilityFirstSent?: zonedDateTime): void;
 

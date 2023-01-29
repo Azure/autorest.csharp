@@ -269,7 +269,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 var ctor = convenienceSpread.BackingModel.SerializationConstructor;
                 var initializers = new List<PropertyInitializer>();
-                foreach (var parameter in convenienceSpread.SpreadedParameters)
+                foreach (var parameter in convenienceSpread.SpreadParameters)
                 {
                     var property = ctor.FindPropertyInitializedByParameter(parameter);
                     if (property == null)

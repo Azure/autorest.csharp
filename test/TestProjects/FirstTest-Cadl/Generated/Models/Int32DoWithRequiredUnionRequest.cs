@@ -10,14 +10,14 @@ using Azure.Core;
 
 namespace CadlFirstTest.Models
 {
-    /// <summary> The Int32AliasBodyRequest. </summary>
-    internal partial class Int32AliasBodyRequest : AliasBodyRequest
+    /// <summary> The Int32DoWithRequiredUnionRequest. </summary>
+    internal partial class Int32DoWithRequiredUnionRequest : DoWithRequiredUnionRequest
     {
-        /// <summary> Initializes a new instance of Int32AliasBodyRequest. </summary>
+        /// <summary> Initializes a new instance of Int32DoWithRequiredUnionRequest. </summary>
         /// <param name="name"></param>
         /// <param name="requiredUnion"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Int32AliasBodyRequest(string name, int requiredUnion) : base(name)
+        public Int32DoWithRequiredUnionRequest(string name, int requiredUnion) : base(name)
         {
             Argument.AssertNotNull(name, nameof(name));
 

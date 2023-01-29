@@ -10,18 +10,33 @@ using Azure.Core;
 
 namespace CadlFirstTest.Models
 {
-    internal partial class AliasBodyRequest : IUtf8JsonSerializable
+    internal partial class Int32ListDoWithOptionalUnionRequest : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(OptionalUnion))
+            {
+                writer.WritePropertyName("optionalUnion");
+                writer.WriteStartArray();
+                foreach (var item in OptionalUnion)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color");
+                writer.WriteStringValue(Color);
+            }
             writer.WriteEndObject();
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

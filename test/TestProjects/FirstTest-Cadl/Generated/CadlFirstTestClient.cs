@@ -358,150 +358,6 @@ namespace CadlFirstTest
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="requiredUnion"></param>
-        /// <param name="name"></param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/> or <paramref name="name"/> is null. </exception>
-        public virtual async Task<Response<Thing>> AliasBodyAsync(string requiredUnion, string name, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            Argument.AssertNotNull(name, nameof(name));
-
-            StringAliasBodyRequest aliasBodyRequest = new StringAliasBodyRequest(name, requiredUnion);
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await AliasBodyAsync(aliasBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="requiredUnion"></param>
-        /// <param name="name"></param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/> or <paramref name="name"/> is null. </exception>
-        public virtual Response<Thing> AliasBody(string requiredUnion, string name, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            Argument.AssertNotNull(name, nameof(name));
-
-            StringAliasBodyRequest aliasBodyRequest = new StringAliasBodyRequest(name, requiredUnion);
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = AliasBody(aliasBodyRequest.ToRequestContent(), context);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="requiredUnion"></param>
-        /// <param name="name"></param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/> or <paramref name="name"/> is null. </exception>
-        public virtual async Task<Response<Thing>> AliasBodyAsync(IEnumerable<string> requiredUnion, string name, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            Argument.AssertNotNull(name, nameof(name));
-
-            StringListAliasBodyRequest aliasBodyRequest = new StringListAliasBodyRequest(name, requiredUnion.ToList());
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await AliasBodyAsync(aliasBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="requiredUnion"></param>
-        /// <param name="name"></param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredUnion"/> or <paramref name="name"/> is null. </exception>
-        public virtual Response<Thing> AliasBody(IEnumerable<string> requiredUnion, string name, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            Argument.AssertNotNull(name, nameof(name));
-
-            StringListAliasBodyRequest aliasBodyRequest = new StringListAliasBodyRequest(name, requiredUnion.ToList());
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = AliasBody(aliasBodyRequest.ToRequestContent(), context);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="requiredUnion"></param>
-        /// <param name="name"></param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual async Task<Response<Thing>> AliasBodyAsync(int requiredUnion, string name, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            Int32AliasBodyRequest aliasBodyRequest = new Int32AliasBodyRequest(name, requiredUnion);
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await AliasBodyAsync(aliasBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="requiredUnion"></param>
-        /// <param name="name"></param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<Thing> AliasBody(int requiredUnion, string name, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            Int32AliasBodyRequest aliasBodyRequest = new Int32AliasBodyRequest(name, requiredUnion);
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = AliasBody(aliasBodyRequest.ToRequestContent(), context);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='AliasBodyAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> AliasBodyAsync(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.AliasBody");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateAliasBodyRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='AliasBody(RequestContent,RequestContext)']/*" />
-        public virtual Response AliasBody(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.AliasBody");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateAliasBodyRequest(content, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> Model can have its friendly name. </summary>
         /// <param name="notFriend"> The Friend to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -569,6 +425,358 @@ namespace CadlFirstTest
             try
             {
                 using HttpMessage message = CreateFriendlyModelRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredUnion"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithRequiredUnionAsync(string name, string requiredUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+
+            StringDoWithRequiredUnionRequest doWithRequiredUnionRequest = new StringDoWithRequiredUnionRequest(name, requiredUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithRequiredUnionAsync(doWithRequiredUnionRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredUnion"/> is null. </exception>
+        public virtual Response<Thing> DoWithRequiredUnion(string name, string requiredUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+
+            StringDoWithRequiredUnionRequest doWithRequiredUnionRequest = new StringDoWithRequiredUnionRequest(name, requiredUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithRequiredUnion(doWithRequiredUnionRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredUnion"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithRequiredUnionAsync(string name, IEnumerable<string> requiredUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+
+            StringListDoWithRequiredUnionRequest doWithRequiredUnionRequest = new StringListDoWithRequiredUnionRequest(name, requiredUnion.ToList())
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithRequiredUnionAsync(doWithRequiredUnionRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredUnion"/> is null. </exception>
+        public virtual Response<Thing> DoWithRequiredUnion(string name, IEnumerable<string> requiredUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+
+            StringListDoWithRequiredUnionRequest doWithRequiredUnionRequest = new StringListDoWithRequiredUnionRequest(name, requiredUnion.ToList())
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithRequiredUnion(doWithRequiredUnionRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithRequiredUnionAsync(string name, int requiredUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            Int32DoWithRequiredUnionRequest doWithRequiredUnionRequest = new Int32DoWithRequiredUnionRequest(name, requiredUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithRequiredUnionAsync(doWithRequiredUnionRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<Thing> DoWithRequiredUnion(string name, int requiredUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            Int32DoWithRequiredUnionRequest doWithRequiredUnionRequest = new Int32DoWithRequiredUnionRequest(name, requiredUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithRequiredUnion(doWithRequiredUnionRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='DoWithRequiredUnionAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> DoWithRequiredUnionAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.DoWithRequiredUnion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoWithRequiredUnionRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='DoWithRequiredUnion(RequestContent,RequestContext)']/*" />
+        public virtual Response DoWithRequiredUnion(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.DoWithRequiredUnion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoWithRequiredUnionRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="color"></param>
+        /// <param name="optionalUnion"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithOptionalUnionAsync(string name, string color = null, string optionalUnion = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            StringDoWithOptionalUnionRequest doWithOptionalUnionRequest = new StringDoWithOptionalUnionRequest(name)
+            {
+                Color = color,
+                OptionalUnion = optionalUnion
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithOptionalUnionAsync(doWithOptionalUnionRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="color"></param>
+        /// <param name="optionalUnion"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<Thing> DoWithOptionalUnion(string name, string color = null, string optionalUnion = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            StringDoWithOptionalUnionRequest doWithOptionalUnionRequest = new StringDoWithOptionalUnionRequest(name)
+            {
+                Color = color,
+                OptionalUnion = optionalUnion
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithOptionalUnion(doWithOptionalUnionRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="color"></param>
+        /// <param name="optionalUnion"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithOptionalUnionAsync(string name, string color = null, int? optionalUnion = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            Int32DoWithOptionalUnionRequest doWithOptionalUnionRequest = new Int32DoWithOptionalUnionRequest(name)
+            {
+                Color = color,
+                OptionalUnion = optionalUnion
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithOptionalUnionAsync(doWithOptionalUnionRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="color"></param>
+        /// <param name="optionalUnion"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<Thing> DoWithOptionalUnion(string name, string color = null, int? optionalUnion = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            Int32DoWithOptionalUnionRequest doWithOptionalUnionRequest = new Int32DoWithOptionalUnionRequest(name)
+            {
+                Color = color,
+                OptionalUnion = optionalUnion
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithOptionalUnion(doWithOptionalUnionRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="color"></param>
+        /// <param name="optionalUnion"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithOptionalUnionAsync(string name, string color = null, IEnumerable<int> optionalUnion = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            Int32ListDoWithOptionalUnionRequest int32ListDoWithOptionalUnionRequest = new Int32ListDoWithOptionalUnionRequest(name)
+            {
+                Color = color
+            };
+            if (optionalUnion != null)
+            {
+                foreach (var value in optionalUnion)
+                {
+                    int32ListDoWithOptionalUnionRequest.OptionalUnion.Add(value);
+                }
+            }
+            Int32ListDoWithOptionalUnionRequest doWithOptionalUnionRequest = int32ListDoWithOptionalUnionRequest;
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithOptionalUnionAsync(doWithOptionalUnionRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"></param>
+        /// <param name="color"></param>
+        /// <param name="optionalUnion"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<Thing> DoWithOptionalUnion(string name, string color = null, IEnumerable<int> optionalUnion = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            Int32ListDoWithOptionalUnionRequest int32ListDoWithOptionalUnionRequest = new Int32ListDoWithOptionalUnionRequest(name)
+            {
+                Color = color
+            };
+            if (optionalUnion != null)
+            {
+                foreach (var value in optionalUnion)
+                {
+                    int32ListDoWithOptionalUnionRequest.OptionalUnion.Add(value);
+                }
+            }
+            Int32ListDoWithOptionalUnionRequest doWithOptionalUnionRequest = int32ListDoWithOptionalUnionRequest;
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithOptionalUnion(doWithOptionalUnionRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='DoWithOptionalUnionAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> DoWithOptionalUnionAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.DoWithOptionalUnion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoWithOptionalUnionRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='DoWithOptionalUnion(RequestContent,RequestContext)']/*" />
+        public virtual Response DoWithOptionalUnion(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.DoWithOptionalUnion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoWithOptionalUnionRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1015,22 +1223,6 @@ namespace CadlFirstTest
             return message;
         }
 
-        internal HttpMessage CreateAliasBodyRequest(RequestContent content, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/aliasBody", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
         internal HttpMessage CreateFriendlyModelRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1039,6 +1231,38 @@ namespace CadlFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/friendlyName", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateDoWithRequiredUnionRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/doWithRequiredUnion", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateDoWithOptionalUnionRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/doWithOptionalUnion", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

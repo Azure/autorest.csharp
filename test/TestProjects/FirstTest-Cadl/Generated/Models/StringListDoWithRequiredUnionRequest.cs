@@ -6,26 +6,28 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Azure.Core;
 
 namespace CadlFirstTest.Models
 {
-    /// <summary> The StringAliasBodyRequest. </summary>
-    internal partial class StringAliasBodyRequest : AliasBodyRequest
+    /// <summary> The StringListDoWithRequiredUnionRequest. </summary>
+    internal partial class StringListDoWithRequiredUnionRequest : DoWithRequiredUnionRequest
     {
-        /// <summary> Initializes a new instance of StringAliasBodyRequest. </summary>
+        /// <summary> Initializes a new instance of StringListDoWithRequiredUnionRequest. </summary>
         /// <param name="name"></param>
         /// <param name="requiredUnion"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredUnion"/> is null. </exception>
-        public StringAliasBodyRequest(string name, string requiredUnion) : base(name)
+        public StringListDoWithRequiredUnionRequest(string name, IEnumerable<string> requiredUnion) : base(name)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
 
-            RequiredUnion = requiredUnion;
+            RequiredUnion = requiredUnion.ToList();
         }
 
         /// <summary> Gets the required union. </summary>
-        public string RequiredUnion { get; }
+        public IList<string> RequiredUnion { get; }
     }
 }

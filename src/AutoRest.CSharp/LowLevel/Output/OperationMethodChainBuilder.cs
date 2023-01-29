@@ -211,7 +211,7 @@ namespace AutoRest.CSharp.Output.Models
         private IEnumerable<(List<Parameter> Parameters, List<ProtocolToConvenienceParameterConverter> Converters)> SpreadMethodParameters()
         {
             int numOfOverloads = 1;
-            var dict = new Dictionary<ParameterChain, List<ConvenienceParameterSpread>?>();
+            var dict = new Dictionary<ParameterChain, List<ConvenienceParameterSpread>>();
             foreach (var parameterChain in _orderedParameters)
             {
                 if (parameterChain.Convenience == null)
@@ -221,10 +221,6 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     numOfOverloads = spreads.Count();
                     dict.Add(parameterChain, spreads);
-                }
-                else
-                {
-                    dict.Add(parameterChain, null);
                 }
             }
 
@@ -238,8 +234,17 @@ namespace AutoRest.CSharp.Output.Models
                 if (parameterChain.Convenience == null)
                     continue;
 
-                var spreads = dict[parameterChain];
-                if (spreads == null)
+                if (dict.TryGetValue(parameterChain, out var spreads))
+                {
+                    // spread parameter. It might have `numOfOverloads` overloads
+                    for (int i = 0; i < numOfOverloads; i++)
+                    {
+                        var spread = spreads[i];
+                        results[i].Parameters.AddRange(spread.SpreadParameters);
+                        results[i].Converters.Add(new ProtocolToConvenienceParameterConverter(parameterChain.Protocol!, parameterChain.Convenience, spread));
+                    }
+                }
+                else
                 {
                     // usual parameter
                     foreach (var result in results)
@@ -247,16 +252,6 @@ namespace AutoRest.CSharp.Output.Models
                         result.Parameters.Add(parameterChain.Convenience);
                         if (parameterChain.Protocol != null)
                             result.Converters.Add(new ProtocolToConvenienceParameterConverter(parameterChain.Protocol, parameterChain.Convenience, null));
-                    }
-                }
-                else
-                {
-                    // spread parameter. It might have `numOfOverloads` overloads
-                    for (int i = 0; i < numOfOverloads; i++)
-                    {
-                        var spread = spreads[i];
-                        results[i].Parameters.AddRange(spread.SpreadedParameters);
-                        results[i].Converters.Add(new ProtocolToConvenienceParameterConverter(parameterChain.Protocol!, parameterChain.Convenience, spread));
                     }
                 }
             }
@@ -288,11 +283,13 @@ namespace AutoRest.CSharp.Output.Models
             return true;
         }
 
-        private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider? model)
+        private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider model)
         {
-            while (model != null)
+            // here we assume that every layer of the inheritance hierarchy of a ModelTypeProvider is of type ModelTypeProvider
+            // here we enumerate the layers from the ancestor to current, so that the union types will be appended to the end of the list
+            foreach (var layer in model.EnumerateHierarchy().Reverse().Cast<ModelTypeProvider>())
             {
-                var fields = model.Fields;
+                var fields = layer.Fields;
                 foreach (var parameter in fields.SerializationParameters)
                 {
                     var field = fields.GetFieldByParameter(parameter);
@@ -307,15 +304,6 @@ namespace AutoRest.CSharp.Output.Models
                         Type = inputType,
                         DefaultValue = defaultValue,
                     };
-                }
-
-                if (model.Inherits != null && model.Inherits.TryCast<ModelTypeProvider>(out var parent))
-                {
-                    model = parent;
-                }
-                else
-                {
-                    model = null;
                 }
             }
         }

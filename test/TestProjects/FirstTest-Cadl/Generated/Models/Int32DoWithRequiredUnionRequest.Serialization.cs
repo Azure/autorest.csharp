@@ -10,15 +10,20 @@ using Azure.Core;
 
 namespace CadlFirstTest.Models
 {
-    internal partial class StringAliasBodyRequest : IUtf8JsonSerializable
+    internal partial class Int32DoWithRequiredUnionRequest : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredUnion");
-            writer.WriteStringValue(RequiredUnion);
+            writer.WriteNumberValue(RequiredUnion);
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
+            if (Optional.IsDefined(Color))
+            {
+                writer.WritePropertyName("color");
+                writer.WriteStringValue(Color);
+            }
             writer.WriteEndObject();
         }
 

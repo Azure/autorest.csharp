@@ -281,90 +281,6 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="AliasBodyAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call AliasBodyAsync with required request content and parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
-
-var data = new {
-    name = "<name>",
-    requiredUnion = new {},
-};
-
-Response response = await client.AliasBodyAsync(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
-]]></code>
-</example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>AliasBodyRequest</c>:
-<code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required.
-  requiredLiteral: Literal, # Required.
-}
-</code>
-
-</remarks>
-    </member>
-    <member name="AliasBody(RequestContent,RequestContext)">
-<example>
-This sample shows how to call AliasBody with required request content and parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
-
-var data = new {
-    name = "<name>",
-    requiredUnion = new {},
-};
-
-Response response = client.AliasBody(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
-]]></code>
-</example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>AliasBodyRequest</c>:
-<code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required.
-  requiredLiteral: Literal, # Required.
-}
-</code>
-
-</remarks>
-    </member>
     <member name="FriendlyModelAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call FriendlyModelAsync with required request content and parse the result.
@@ -436,6 +352,244 @@ Response Body:
 Schema for <c>Friend</c>:
 <code>{
   name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="DoWithRequiredUnionAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call DoWithRequiredUnionAsync with required request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+};
+
+Response response = await client.DoWithRequiredUnionAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+]]></code>
+This sample shows how to call DoWithRequiredUnionAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+    color = "<color>",
+    requiredUnion = new {},
+};
+
+Response response = await client.DoWithRequiredUnionAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>DoWithRequiredUnionRequest</c>:
+<code>{
+  name: string, # Required.
+  color: string, # Optional.
+  requiredUnion: Union, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredLiteral: Literal, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="DoWithRequiredUnion(RequestContent,RequestContext)">
+<example>
+This sample shows how to call DoWithRequiredUnion with required request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+};
+
+Response response = client.DoWithRequiredUnion(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+]]></code>
+This sample shows how to call DoWithRequiredUnion with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+    color = "<color>",
+    requiredUnion = new {},
+};
+
+Response response = client.DoWithRequiredUnion(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>DoWithRequiredUnionRequest</c>:
+<code>{
+  name: string, # Required.
+  color: string, # Optional.
+  requiredUnion: Union, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredLiteral: Literal, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="DoWithOptionalUnionAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call DoWithOptionalUnionAsync with required request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.DoWithOptionalUnionAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+]]></code>
+This sample shows how to call DoWithOptionalUnionAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+    color = "<color>",
+    optionalUnion = new {},
+};
+
+Response response = await client.DoWithOptionalUnionAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>DoWithOptionalUnionRequest</c>:
+<code>{
+  name: string, # Required.
+  color: string, # Optional.
+  optionalUnion: Union, # Optional.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredLiteral: Literal, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="DoWithOptionalUnion(RequestContent,RequestContext)">
+<example>
+This sample shows how to call DoWithOptionalUnion with required request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.DoWithOptionalUnion(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+]]></code>
+This sample shows how to call DoWithOptionalUnion with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+    color = "<color>",
+    optionalUnion = new {},
+};
+
+Response response = client.DoWithOptionalUnion(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>DoWithOptionalUnionRequest</c>:
+<code>{
+  name: string, # Required.
+  color: string, # Optional.
+  optionalUnion: Union, # Optional.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredLiteral: Literal, # Required.
 }
 </code>
 
