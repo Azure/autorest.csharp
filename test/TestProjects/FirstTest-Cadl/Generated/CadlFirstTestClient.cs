@@ -434,7 +434,7 @@ namespace CadlFirstTest
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with a required union. </summary>
         /// <param name="name"></param>
         /// <param name="requiredUnion"></param>
         /// <param name="color"></param>
@@ -454,7 +454,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with a required union. </summary>
         /// <param name="name"></param>
         /// <param name="requiredUnion"></param>
         /// <param name="color"></param>
@@ -474,7 +474,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with a required union. </summary>
         /// <param name="name"></param>
         /// <param name="requiredUnion"></param>
         /// <param name="color"></param>
@@ -494,7 +494,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with a required union. </summary>
         /// <param name="name"></param>
         /// <param name="requiredUnion"></param>
         /// <param name="color"></param>
@@ -514,7 +514,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with a required union. </summary>
         /// <param name="name"></param>
         /// <param name="requiredUnion"></param>
         /// <param name="color"></param>
@@ -533,7 +533,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with a required union. </summary>
         /// <param name="name"></param>
         /// <param name="requiredUnion"></param>
         /// <param name="color"></param>
@@ -552,7 +552,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with a required union. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -577,7 +577,7 @@ namespace CadlFirstTest
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with a required union. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -602,7 +602,7 @@ namespace CadlFirstTest
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with an optional union. </summary>
         /// <param name="name"></param>
         /// <param name="color"></param>
         /// <param name="optionalUnion"></param>
@@ -622,7 +622,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with an optional union. </summary>
         /// <param name="name"></param>
         /// <param name="color"></param>
         /// <param name="optionalUnion"></param>
@@ -642,7 +642,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with an optional union. </summary>
         /// <param name="name"></param>
         /// <param name="color"></param>
         /// <param name="optionalUnion"></param>
@@ -662,7 +662,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with an optional union. </summary>
         /// <param name="name"></param>
         /// <param name="color"></param>
         /// <param name="optionalUnion"></param>
@@ -682,7 +682,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with an optional union. </summary>
         /// <param name="name"></param>
         /// <param name="color"></param>
         /// <param name="optionalUnion"></param>
@@ -709,7 +709,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with an optional union. </summary>
         /// <param name="name"></param>
         /// <param name="color"></param>
         /// <param name="optionalUnion"></param>
@@ -736,7 +736,7 @@ namespace CadlFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with an optional union. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -761,7 +761,7 @@ namespace CadlFirstTest
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary> operation with a spread alias with an optional union. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -777,6 +777,440 @@ namespace CadlFirstTest
             try
             {
                 using HttpMessage message = CreateDoWithOptionalUnionRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="firstUnion"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithMultipleUnionsAsync(string name, string firstUnion, string secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            StringStringDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringStringDoWithMultipleUnionsRequest(name, firstUnion, secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithMultipleUnionsAsync(doWithMultipleUnionsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="firstUnion"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual Response<Thing> DoWithMultipleUnions(string name, string firstUnion, string secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            StringStringDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringStringDoWithMultipleUnionsRequest(name, firstUnion, secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithMultipleUnions(doWithMultipleUnionsRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="firstUnion"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithMultipleUnionsAsync(string name, string firstUnion, int secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+
+            StringInt32DoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringInt32DoWithMultipleUnionsRequest(name, firstUnion, secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithMultipleUnionsAsync(doWithMultipleUnionsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="firstUnion"/> is null. </exception>
+        public virtual Response<Thing> DoWithMultipleUnions(string name, string firstUnion, int secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+
+            StringInt32DoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringInt32DoWithMultipleUnionsRequest(name, firstUnion, secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithMultipleUnions(doWithMultipleUnionsRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="firstUnion"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithMultipleUnionsAsync(string name, string firstUnion, IEnumerable<int> secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            StringInt32ListDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringInt32ListDoWithMultipleUnionsRequest(name, firstUnion, secondUnion.ToList())
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithMultipleUnionsAsync(doWithMultipleUnionsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="firstUnion"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual Response<Thing> DoWithMultipleUnions(string name, string firstUnion, IEnumerable<int> secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            StringInt32ListDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringInt32ListDoWithMultipleUnionsRequest(name, firstUnion, secondUnion.ToList())
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithMultipleUnions(doWithMultipleUnionsRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="firstUnion"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithMultipleUnionsAsync(string name, IEnumerable<string> firstUnion, string secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            StringListStringDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringListStringDoWithMultipleUnionsRequest(name, firstUnion.ToList(), secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithMultipleUnionsAsync(doWithMultipleUnionsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="firstUnion"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual Response<Thing> DoWithMultipleUnions(string name, IEnumerable<string> firstUnion, string secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            StringListStringDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringListStringDoWithMultipleUnionsRequest(name, firstUnion.ToList(), secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithMultipleUnions(doWithMultipleUnionsRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="firstUnion"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithMultipleUnionsAsync(string name, IEnumerable<string> firstUnion, int secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+
+            StringListInt32DoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringListInt32DoWithMultipleUnionsRequest(name, firstUnion.ToList(), secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithMultipleUnionsAsync(doWithMultipleUnionsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="firstUnion"/> is null. </exception>
+        public virtual Response<Thing> DoWithMultipleUnions(string name, IEnumerable<string> firstUnion, int secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+
+            StringListInt32DoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringListInt32DoWithMultipleUnionsRequest(name, firstUnion.ToList(), secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithMultipleUnions(doWithMultipleUnionsRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="firstUnion"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithMultipleUnionsAsync(string name, IEnumerable<string> firstUnion, IEnumerable<int> secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            StringListInt32ListDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringListInt32ListDoWithMultipleUnionsRequest(name, firstUnion.ToList(), secondUnion.ToList())
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithMultipleUnionsAsync(doWithMultipleUnionsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="firstUnion"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual Response<Thing> DoWithMultipleUnions(string name, IEnumerable<string> firstUnion, IEnumerable<int> secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(firstUnion, nameof(firstUnion));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            StringListInt32ListDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new StringListInt32ListDoWithMultipleUnionsRequest(name, firstUnion.ToList(), secondUnion.ToList())
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithMultipleUnions(doWithMultipleUnionsRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithMultipleUnionsAsync(string name, int firstUnion, string secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            Int32StringDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new Int32StringDoWithMultipleUnionsRequest(name, firstUnion, secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithMultipleUnionsAsync(doWithMultipleUnionsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual Response<Thing> DoWithMultipleUnions(string name, int firstUnion, string secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            Int32StringDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new Int32StringDoWithMultipleUnionsRequest(name, firstUnion, secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithMultipleUnions(doWithMultipleUnionsRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithMultipleUnionsAsync(string name, int firstUnion, int secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            Int32Int32DoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new Int32Int32DoWithMultipleUnionsRequest(name, firstUnion, secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithMultipleUnionsAsync(doWithMultipleUnionsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<Thing> DoWithMultipleUnions(string name, int firstUnion, int secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            Int32Int32DoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new Int32Int32DoWithMultipleUnionsRequest(name, firstUnion, secondUnion)
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithMultipleUnions(doWithMultipleUnionsRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual async Task<Response<Thing>> DoWithMultipleUnionsAsync(string name, int firstUnion, IEnumerable<int> secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            Int32Int32ListDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new Int32Int32ListDoWithMultipleUnionsRequest(name, firstUnion, secondUnion.ToList())
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoWithMultipleUnionsAsync(doWithMultipleUnionsRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="name"></param>
+        /// <param name="firstUnion"></param>
+        /// <param name="secondUnion"></param>
+        /// <param name="color"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="secondUnion"/> is null. </exception>
+        public virtual Response<Thing> DoWithMultipleUnions(string name, int firstUnion, IEnumerable<int> secondUnion, string color = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(secondUnion, nameof(secondUnion));
+
+            Int32Int32ListDoWithMultipleUnionsRequest doWithMultipleUnionsRequest = new Int32Int32ListDoWithMultipleUnionsRequest(name, firstUnion, secondUnion.ToList())
+            {
+                Color = color
+            };
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoWithMultipleUnions(doWithMultipleUnionsRequest.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='DoWithMultipleUnionsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> DoWithMultipleUnionsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.DoWithMultipleUnions");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoWithMultipleUnionsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> operation with a spread alias with multiple unions. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='DoWithMultipleUnions(RequestContent,RequestContext)']/*" />
+        public virtual Response DoWithMultipleUnions(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.DoWithMultipleUnions");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoWithMultipleUnionsRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1263,6 +1697,22 @@ namespace CadlFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/doWithOptionalUnion", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateDoWithMultipleUnionsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/doWithMultipleUnions", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

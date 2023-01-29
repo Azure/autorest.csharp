@@ -65,6 +65,17 @@ alias AliasWithOptionalUnion = {
   optionalUnion?: string | int32 | int32[];
 };
 
+alias AliasWithMultipleUnions = {
+  @doc("name of the Thing")
+  name: string;
+  @doc("color of the Thing")
+  color?: string;
+  @doc("first Union")
+  firstUnion: string | string[] | int32;
+  @doc("second union")
+  secondUnion: string | int32 | int32[];
+};
+
 @friendlyName("Friend")
 model NotFriend {
   @doc("name of the NotFriend")
@@ -156,16 +167,22 @@ op anonymousBody( ...Thing ): Thing;
 op friendlyModel(...NotFriend): NotFriend;
 
 @route("/doWithRequiredUnion")
-@doc("body parameter without body decorator")
+@doc("operation with a spread alias with a required union")
 @post
 @convenienceAPI
 op doWithRequiredUnion( ...AliasWithRequiredUnion ): Thing;
 
 @route("/doWithOptionalUnion")
-@doc("body parameter without body decorator")
+@doc("operation with a spread alias with an optional union")
 @post
 @convenienceAPI
 op doWithOptionalUnion( ...AliasWithOptionalUnion ): Thing;
+
+@route("/doWithMultipleUnions")
+@doc("operation with a spread alias with multiple unions")
+@post
+@convenienceAPI
+op doWithMultipleUnions( ...AliasWithMultipleUnions ): Thing;
 
 op addTimeHeader(@header("Repeatability-First-Sent") repeatabilityFirstSent?: zonedDateTime): void;
 
