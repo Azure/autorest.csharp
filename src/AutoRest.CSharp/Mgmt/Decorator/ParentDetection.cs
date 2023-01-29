@@ -48,7 +48,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return Enumerable.Empty<MgmtTypeProvider>();
             }
             // if the scope of this request path is parameterized, and the direct parent path we get from the resource list is parent of the scope, we return the scope as its parent since the scope here is a child
-            if (scope.IsParameterizedScope() && parentRequestPath.IsAncestorOf(scope))
+            // here is an exception for generic resource, therefore we have to disable this feature for resourcemanager
+            // because here we do not want to escape here for generic resource
+            if (!Configuration.MgmtConfiguration.IsArmCore && scope.IsParameterizedScope() && parentRequestPath.IsAncestorOf(scope))
             {
                 // we already verified that the scope is parameterized, therefore we assert the type can never be null
                 var types = resource.RequestPath.GetParameterizedScopeResourceTypes()!;
@@ -67,6 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (parentRequestPath.Equals(RequestPath.Subscription))
                 return MgmtContext.Library.SubscriptionExtensions.AsIEnumerable();
             // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
+            scope = parentRequestPath.GetScopePath(); // we do this because some request path its scope is the same as itself
             if (scope.IsParameterizedScope())
             {
                 // we already verified that the scope is parameterized, therefore we assert the type can never be null
