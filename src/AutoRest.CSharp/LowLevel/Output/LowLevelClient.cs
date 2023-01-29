@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var optionalToRequired = optionalParameters
                 .Select(parameter => ClientOptions.Type.EqualsIgnoreNullable(parameter.Type)
-                ? parameter with { DefaultValue = null, Validation = ValidationType.None }
+                ? parameter with { DefaultValue = null, Validation = Validation.None }
                 : parameter with
                 {
                     DefaultValue = null,
@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.Output.Models
                 "A credential used to authenticate to an Azure Service.",
                 type,
                 null,
-                ValidationType.AssertNotNull,
+                Validation.AssertNotNull,
                 null);
         }
 
@@ -182,13 +182,13 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateOptionsParameter()
         {
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
+            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), Validation.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
         }
 
         private ConstructorSignature BuildSubClientInternalConstructor()
         {
             var constructorParameters = GetSubClientFactoryMethodParameters()
-                .Select(p => p with { DefaultValue = null, Validation = ValidationType.None, Initializer = null })
+                .Select(p => p with { DefaultValue = null, Validation = Validation.None, Initializer = null })
                 .ToArray();
 
             return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Internal, constructorParameters);

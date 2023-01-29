@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -41,6 +42,12 @@ namespace AutoRest.CSharp.Output.Models
             public static InlineableExpression ToString(InlineableExpression reference) => new InstanceMethodCallExpression(reference , "ToString", Array.Empty<InlineableExpression>(), false);
             public static InlineableExpression ToRequestContent(InlineableExpression reference) => new InstanceMethodCallExpression(reference, "ToRequestContent", Array.Empty<InlineableExpression>(), false);
             public static InlineableExpression ToSerialString(CSharpType type, InlineableExpression reference) => new StaticMethodCallExpression(type, "ToSerialString", new[] { reference }, true, false);
+
+            public static InlineableExpression CreateRequestMethod(string methodName, IEnumerable<Parameter> parameters)
+            {
+                var createRequestMethodName = RequestWriterHelpers.CreateRequestMethodName(methodName);
+                return new InstanceMethodCallExpression(null, createRequestMethodName, parameters.Select(p => new ParameterReference(p)).ToList(), false);
+            }
 
             public static InlineableExpression ProtocolMethod(string methodName, IReadOnlyList<InlineableExpression> arguments, bool async)
             {

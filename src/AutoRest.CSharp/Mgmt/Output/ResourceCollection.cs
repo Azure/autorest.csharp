@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
             if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature &&
-            (!p.IsPropertyBag || p.Validation != ValidationType.None)))
+            (!p.IsPropertyBag || p.Validation != Validation.None)))
                 return base.EnsureGetInterfaces();
 
             var getRestOperation = GetAllOperation.OperationMappings.Values.First();

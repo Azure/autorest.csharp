@@ -591,7 +591,7 @@ namespace AutoRest.CSharp.Output.Models
             var location = parameter.RequestLocation;
 
             return defaultValue != null
-                ? new Parameter(name, description, type, Constant.Default(type.WithNullable(true)), ValidationType.None, $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})", RequestLocation: location)
+                ? new Parameter(name, description, type, Constant.Default(type.WithNullable(true)), Validation.None, $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})", RequestLocation: location)
                 : new Parameter(name, description, type, null, parameter.Validation, null, RequestLocation: location);
         }
 
@@ -632,7 +632,7 @@ namespace AutoRest.CSharp.Output.Models
                 "The URL to the next page of results.",
                 typeof(string),
                 DefaultValue: null,
-                ValidationType.AssertNotNull,
+                Validation.AssertNotNull,
                 null);
 
             PathSegment[] pathSegments = method.Request.PathSegments
@@ -695,7 +695,7 @@ namespace AutoRest.CSharp.Output.Models
                     "A credential used to authenticate to an Azure Service.",
                     credentialType,
                     null,
-                    ValidationType.AssertNotNull,
+                    Validation.AssertNotNull,
                     null);
                 constructorParameters.Add(credentialParam);
             }

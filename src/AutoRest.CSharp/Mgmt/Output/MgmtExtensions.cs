@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
                 ArmCoreType,
                 null,
-                ValidationType.None,
+                Validation.None,
                 null);
         }
 

@@ -41,7 +41,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly List<Parameter> _createRequestParameters;
         private readonly List<ParameterLink> _parameterLinks;
 
-        private RequestConditionHeaders ConditionHeaderFlag { get; set; } = RequestConditionHeaders.None;
         private RestClientMethod? Method { get; set; }
 
         public static IEnumerable<OperationMethodChainBuilder> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
@@ -68,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models
 
                 }
 
-                yield return new OperationMethodChainBuilder(operation, fields, clientName, typeFactory, builder.Method!, nextPageMethod, builder._parameterLinks, builder.ConditionHeaderFlag);
+                yield return new OperationMethodChainBuilder(operation, fields, clientName, typeFactory, builder.Method!, nextPageMethod, builder._parameterLinks);
             }
         }
 
@@ -218,8 +217,6 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            ConditionHeaderFlag = conditionHeaderFlag;
-
             switch (conditionHeaderFlag)
             {
                 case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch:
@@ -232,9 +229,10 @@ namespace AutoRest.CSharp.Output.Models
                     AddReferenceAndParameter(requestConditionRequestParameter, typeof(ETag));
                     break;
                 default:
-                    _createRequestParameters.Add(KnownParameters.RequestConditionsParameter);
-                    _parameterLinks.Add(new ParameterLink(KnownParameters.RequestConditionsParameter));
-                    AddReference(KnownParameters.RequestConditionsParameter.Name, null, KnownParameters.RequestConditionsParameter, serializationFormat);
+                    var parameter = KnownParameters.RequestConditionsParameter with { Validation = new Validation(ValidationType.AssertNull, conditionHeaderFlag) };
+                    _createRequestParameters.Add(parameter);
+                    _parameterLinks.Add(new ParameterLink(parameter));
+                    AddReference(parameter.Name, null, parameter, serializationFormat);
                     break;
             }
         }
@@ -305,7 +303,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var name = inputParameter.Name.ToVariableName();
             var description = Parameter.CreateDescription(inputParameter, typeof(ContentType), requestMediaTypes);
-            var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
+            var parameter = new Parameter(name, description, typeof(ContentType), null, Validation.None, null, RequestLocation: RequestLocation.Header);
 
             _createRequestParameters.Add(parameter);
             _parameterLinks.Add(new ParameterLink(Array.Empty<Parameter>(), new[]{ parameter }, null));

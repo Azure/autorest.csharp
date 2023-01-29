@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             "The key for the tag.",
             typeof(string),
             null,
-            ValidationType.AssertNotNull,
+            Validation.AssertNotNull,
             null);
 
         private static readonly Parameter TagValueParameter = new Parameter(
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             "The value for the tag.",
             typeof(string),
             null,
-            ValidationType.AssertNotNull,
+            Validation.AssertNotNull,
             null);
 
         private static readonly Parameter TagSetParameter = new Parameter(
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             "The set of tags to use as replacement.",
             typeof(IDictionary<string, string>),
             null,
-            ValidationType.AssertNotNull,
+            Validation.AssertNotNull,
             null);
 
         /// <summary>
@@ -447,7 +447,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private Parameter CreateResourceIdentifierParameter(Segment segment)
         {
             CSharpType ctype = ToFormatTypeByName(segment.Reference.Name) is Type type ? new CSharpType(type, false) : segment.Reference.Type;
-            return new Parameter(segment.Reference.Name, null, ctype, null, ValidationType.AssertNotNull, null);
+            return new Parameter(segment.Reference.Name, null, ctype, null, Validation.AssertNotNull, null);
         }
 
         private MethodSignature? _createResourceIdentifierMethodSignature;
@@ -478,7 +478,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, ValidationType.None, null);
-        public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);
+        public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, Validation.None, null);
+        public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, Validation.None, null);
     }
 }

@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Mock
 {
     internal class MgmtMockTestProvider<T> : MgmtTestProvider where T : MgmtTypeProvider
     {
-        protected Parameter IsAsyncParameter => new(Name: "isAsync", Description: null, Type: typeof(bool), DefaultValue: null, ValidationType.None, null);
+        protected Parameter IsAsyncParameter => new(Name: "isAsync", Description: null, Type: typeof(bool), DefaultValue: null, Validation.None, null);
 
         public T Target { get; }
         public MgmtMockTestProvider(T provider, IEnumerable<MockTestCase> testCases) : base()

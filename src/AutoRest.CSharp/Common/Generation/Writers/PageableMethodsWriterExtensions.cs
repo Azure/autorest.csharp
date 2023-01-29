@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteLongRunningPageable(this CodeWriter writer, MethodSignature methodSignature, CSharpType? pageItemType, Reference? restClientReference, RestClientMethod createLroRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, Diagnostic diagnostic, OperationFinalStateVia finalStateVia, string? itemPropertyName, string? nextLinkPropertyName, bool async)
         {
-            using (writer.WriteMethodDeclaration(methodSignature.WithAsync(async)))
+            using (writer.WriteMethodDeclaration(methodSignature))
             {
                 writer.WriteParametersValidation(methodSignature.Parameters);
                 using (writer.WriteDiagnosticScope(diagnostic, clientDiagnosticsReference))
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WritePageable(this CodeWriter writer, MethodSignature methodSignature, CSharpType? pageItemType, Reference? restClientReference, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)
         {
-            using (writer.WriteMethodDeclaration(methodSignature.WithAsync(async)))
+            using (writer.WriteMethodDeclaration(methodSignature))
             {
                 writer.WriteParametersValidation(methodSignature.Parameters);
                 var parameters = methodSignature.Parameters.ToList();

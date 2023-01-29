@@ -151,6 +151,12 @@ namespace AutoRest.CSharp.Output.Models
                 return new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint, KnownParameters.NextLink}, typeof(HttpMessage), requestMethodCall);
             }
 
+            public static MethodBodySingleLine Message(InlineableExpression value, out CodeWriterDeclaration message)
+            {
+                message = new CodeWriterDeclaration("message");
+                return new UsingDeclareVariableLine(typeof(HttpMessage), message, value);
+            }
+
             public static MethodBodySingleLine Response(CSharpType responseType, InlineableExpression value, out CodeWriterDeclaration response)
             {
                 response = new CodeWriterDeclaration("response");
@@ -190,6 +196,7 @@ namespace AutoRest.CSharp.Output.Models
     internal record MethodBodyLines(IReadOnlyList<MethodBodySingleLine> MethodBodySingleLine) : MethodBodyBlock;
     internal record MethodBodySingleLine;
 
+    internal record UsingDeclareVariableLine(CSharpType Type, CodeWriterDeclaration Name, InlineableExpression Value) : MethodBodySingleLine;
     internal record DeclareVariableLine(CSharpType Type, CodeWriterDeclaration Name, InlineableExpression Value) : MethodBodySingleLine;
     internal record ReturnValueLine(InlineableExpression Value) : MethodBodySingleLine;
     internal record OneLineLocalFunction(CodeWriterDeclaration Name, IReadOnlyList<Parameter> Parameters, CSharpType ReturnType, InlineableExpression Body) : MethodBodySingleLine;

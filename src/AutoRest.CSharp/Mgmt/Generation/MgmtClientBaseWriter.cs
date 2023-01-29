@@ -836,7 +836,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        if (passNullForOptionalParameters && parameter.Parameter.Validation == ValidationType.None)
+                        if (passNullForOptionalParameters && parameter.Parameter.Validation == Validation.None)
                             args.Add($"null");
                         else if (parameter.Parameter.IsPropertyBag)
                             args.Add($"{parameter.ValueExpression}");

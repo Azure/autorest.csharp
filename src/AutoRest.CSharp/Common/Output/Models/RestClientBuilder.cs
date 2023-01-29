@@ -489,7 +489,7 @@ namespace AutoRest.CSharp.Output.Models
                 "The URL to the next page of results.",
                 typeof(string),
                 DefaultValue: null,
-                ValidationType.AssertNotNull,
+                Validation.AssertNotNull,
                 null);
 
             PathSegment[] pathSegments = method.Request.PathSegments
@@ -552,7 +552,7 @@ namespace AutoRest.CSharp.Output.Models
                     "A credential used to authenticate to an Azure Service.",
                     credentialType,
                     null,
-                    ValidationType.AssertNotNull,
+                    Validation.AssertNotNull,
                     null);
                 constructorParameters.Add(credentialParam);
             }

@@ -302,12 +302,26 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static CodeWriter WriteParameterValidation(this CodeWriter writer, Parameter parameter)
         {
-            if (parameter.Validation == ValidationType.None && parameter.Initializer != null)
+            if (parameter.Validation == Validation.None && parameter.Initializer != null)
             {
                 return writer.Line($"{parameter.Name:I} ??= {parameter.Initializer};");
             }
 
-            return parameter.Validation switch
+            if (parameter.Validation.Type == ValidationType.AssertNull && parameter.Validation.Data is RequestConditionHeaders requestConditionFlag)
+            {
+                foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)).Cast<RequestConditionHeaders>())
+                {
+                    if (val == RequestConditionHeaders.None || requestConditionFlag.HasFlag(val))
+                    {
+                        continue;
+                    }
+
+                    var message = $"Service does not support the {requestConditionHeaderNames[val]} header for this operation.";
+                    writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNull)}({parameter.Name:I}.{requestConditionFieldNames[val]}, nameof({parameter.Name:I}), {message:L});");
+                }
+            }
+
+            return parameter.Validation.Type switch
             {
                 ValidationType.AssertNotNullOrEmpty => writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNullOrEmpty)}({parameter.Name:I}, nameof({parameter.Name:I}));"),
                 ValidationType.AssertNotNull => writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}({parameter.Name:I}, nameof({parameter.Name:I}));"),
@@ -341,23 +355,6 @@ namespace AutoRest.CSharp.Generation.Writers
             {RequestConditionHeaders.IfModifiedSince, "IfModifiedSince" },
             {RequestConditionHeaders.IfUnmodifiedSince, "IfUnmodifiedSince" }
         };
-        public static CodeWriter WriteRequestConditionParameterChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters, RequestConditionHeaders requestConditionFlag)
-        {
-            foreach (Parameter parameter in parameters)
-            {
-                if (parameter.Type.Equals(typeof(RequestConditions)))
-                {
-                    foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)).Cast<RequestConditionHeaders>())
-                    {
-                        if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
-                        {
-                            writer.Line($"Argument.AssertNull({parameter.Name:I}.{requestConditionFieldNames[val]}, nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
-                        }
-                    }
-                }
-            }
-            return writer;
-        }
 
         public static CodeWriter.CodeWriterScope WriteUsingStatement(this CodeWriter writer, string variableName, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters, out CodeWriterDeclaration variable)
         {
@@ -400,7 +397,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{variableName:I} = {parameter.Name:I} ?? {parameter.Initializer};");
                 }
             }
-            else if (parameter.Validation != ValidationType.None)
+            else if (parameter.Validation != Validation.None)
             {
                 // Temporary check to minimize amount of changes in existing generated code
                 if (assignToSelf)

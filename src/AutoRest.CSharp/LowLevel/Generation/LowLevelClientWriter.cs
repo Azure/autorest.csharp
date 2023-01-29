@@ -62,18 +62,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var clientMethod in _client.ClientMethods)
                     {
-                        var longRunning = clientMethod.LongRunning;
-                        var pagingInfo = clientMethod.PagingInfo;
-
-                        foreach (var method in clientMethod.Methods)
+                        foreach (var method in clientMethod.ConvenienceMethods)
                         {
-                            WriteConvenienceMethod(method);
+                            WriteConvenienceMethodDocumentation(_writer, method.Signature);
+                            WriteMethod(method);
                         }
 
-                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, true);
-                        WriteProtocolMethod(_writer, clientMethod, _client.Fields, longRunning, pagingInfo, true);
-                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, false);
-                        WriteProtocolMethod(_writer, clientMethod, _client.Fields, longRunning, pagingInfo, false);
+                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, clientMethod.ProtocolMethods[0].Signature, true);
+                        WriteProtocolMethod(_writer, clientMethod, clientMethod.ProtocolMethods[0], _client.Fields, true);
+                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, clientMethod.ProtocolMethods[1].Signature, false);
+                        WriteProtocolMethod(_writer, clientMethod, clientMethod.ProtocolMethods[1], _client.Fields, false);
                     }
 
                     WriteSubClientFactoryMethod();
@@ -83,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteRequestCreationMethod(_writer, method, _client.Fields);
                     }
 
-                    if (_client.ClientMethods.Any(cm => cm.Methods.Any()))
+                    if (_client.ClientMethods.Any(cm => cm.ConvenienceMethods.Any()))
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
@@ -96,39 +94,36 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             WriteRequestCreationMethod(writer, clientMethod.RequestMethod, fields);
 
-            var longRunning = clientMethod.LongRunning;
-            var pagingInfo = clientMethod.PagingInfo;
-            WriteProtocolMethodDocumentation(writer, clientMethod);
-            WriteProtocolMethod(writer, clientMethod, fields, longRunning, pagingInfo, true);
-            WriteProtocolMethodDocumentation(writer, clientMethod);
-            WriteProtocolMethod(writer, clientMethod, fields, longRunning, pagingInfo, false);
+            WriteProtocolMethodDocumentation(writer, clientMethod, clientMethod.ProtocolMethods[0].Signature);
+            WriteProtocolMethod(writer, clientMethod, clientMethod.ProtocolMethods[0], fields, true);
+            WriteProtocolMethodDocumentation(writer, clientMethod, clientMethod.ProtocolMethods[1].Signature);
+            WriteProtocolMethod(writer, clientMethod, clientMethod.ProtocolMethods[1], fields, false);
         }
 
-        private static void WriteProtocolMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning? longRunning, ProtocolMethodPaging? pagingInfo, bool async)
+        private static void WriteProtocolMethod(CodeWriter writer, LowLevelClientMethod clientMethod, Method method, ClientFields fields, bool async)
         {
-            switch (longRunning, pagingInfo)
+            switch (clientMethod.LongRunning, clientMethod.PagingInfo)
             {
-                case { longRunning: not null, pagingInfo: not null }:
-                    WriteProtocolPageableLroMethod(writer, clientMethod, fields, pagingInfo, longRunning, async);
+                case { LongRunning: not null, PagingInfo: not null }:
+                    WriteProtocolPageableLroMethod(writer, clientMethod, method.Signature, fields, clientMethod.PagingInfo, clientMethod.LongRunning, async);
                     break;
-                case { longRunning: null, pagingInfo: not null }:
-                    WriteProtocolPageableMethod(writer, clientMethod, fields, pagingInfo, async);
+                case { LongRunning: null, PagingInfo: not null }:
+                    WriteProtocolPageableMethod(writer, clientMethod, method.Signature, fields, clientMethod.PagingInfo, async);
                     break;
-                case { longRunning: not null, pagingInfo: null }:
-                    WriteProtocolLroMethod(writer, clientMethod, fields, longRunning, async);
+                case { LongRunning: not null, PagingInfo: null }:
+                    WriteProtocolLroMethod(writer, clientMethod, method.Signature, fields, clientMethod.LongRunning, async);
                     break;
                 default:
-                    WriteProtocolMethod(writer, clientMethod, fields, async);
+                    WriteProtocolMethod(writer, clientMethod, method.Signature, fields, async);
                     break;
             }
         }
 
-        private void WriteConvenienceMethod(Method convenienceMethod)
+        private void WriteMethod(Method method)
         {
-            WriteConvenienceMethodDocumentation(_writer, convenienceMethod.Signature);
-            using (_writer.WriteMethodDeclaration(convenienceMethod.Signature))
+            using (_writer.WriteMethodDeclaration(method.Signature))
             {
-                WriteBody(convenienceMethod.Body);
+                WriteBody(method.Body);
             }
             _writer.Line();
         }
@@ -290,6 +285,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.Append($"{declareVariable.Type} {declareVariable.Name:D} = ");
                     WriteInlineable(_writer, declareVariable.Value);
                     break;
+                case UsingDeclareVariableLine declareVariable:
+                    _writer.Append($"using {declareVariable.Type} {declareVariable.Name:D} = ");
+                    WriteInlineable(_writer, declareVariable.Value);
+                    break;
                 case OneLineLocalFunction localFunction:
                     _writer.Append($"{localFunction.ReturnType} {localFunction.Name:D}(");
                     foreach (var parameter in localFunction.Parameters)
@@ -415,21 +414,21 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteProtocolPageableMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, bool async)
+        private static void WriteProtocolPageableMethod(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature signature, ClientFields fields, ProtocolMethodPaging pagingInfo, bool async)
         {
-            writer.WritePageable(clientMethod.ProtocolMethodSignature, typeof(BinaryData), null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
+            writer.WritePageable(signature, typeof(BinaryData), null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
         }
 
-        private static void WriteProtocolPageableLroMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, OperationLongRunning longRunning, bool async)
+        private static void WriteProtocolPageableLroMethod(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature signature, ClientFields fields, ProtocolMethodPaging pagingInfo, OperationLongRunning longRunning, bool async)
         {
-            writer.WriteLongRunningPageable(clientMethod.ProtocolMethodSignature, typeof(BinaryData), null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic, longRunning.FinalStateVia, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
+            writer.WriteLongRunningPageable(signature, typeof(BinaryData), null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic, longRunning.FinalStateVia, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
         }
 
-        private static void WriteProtocolLroMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, bool async)
+        private static void WriteProtocolLroMethod(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature signature, ClientFields fields, OperationLongRunning longRunning, bool async)
         {
-            using (writer.WriteMethodDeclaration(clientMethod.ProtocolMethodSignature.WithAsync(async)))
+            using (writer.WriteMethodDeclaration(signature))
             {
-                writer.WriteParametersValidation(clientMethod.ProtocolMethodSignature.Parameters);
+                writer.WriteParametersValidation(signature.Parameters);
                 var startMethod = clientMethod.RequestMethod;
                 var finalStateVia = longRunning.FinalStateVia;
                 var scopeName = clientMethod.ProtocolMethodDiagnostic.ScopeName;
@@ -448,19 +447,13 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WriteProtocolMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
+        public static void WriteProtocolMethod(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature signature, ClientFields fields, bool async)
         {
-            using (writer.WriteMethodDeclaration(clientMethod.ProtocolMethodSignature.WithAsync(async)))
+            using (writer.WriteMethodDeclaration(signature))
             {
-                writer.WriteParametersValidation(clientMethod.ProtocolMethodSignature.Parameters);
+                writer.WriteParametersValidation(signature.Parameters);
                 var restMethod = clientMethod.RequestMethod;
                 var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
-
-                if (clientMethod.ConditionHeaderFlag != RequestConditionHeaders.None && clientMethod.ConditionHeaderFlag != (RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch | RequestConditionHeaders.IfModifiedSince | RequestConditionHeaders.IfUnmodifiedSince))
-                {
-                    writer.WriteRequestConditionParameterChecks(restMethod.Parameters, clientMethod.ConditionHeaderFlag);
-                    writer.Line();
-                }
 
                 using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
                 {
@@ -579,17 +572,15 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteProtocolMethodDocumentationWithExternalXmlDoc(LowLevelClientMethod clientMethod, bool async)
+        private void WriteProtocolMethodDocumentationWithExternalXmlDoc(LowLevelClientMethod clientMethod, MethodSignature methodSignature, bool async)
         {
-            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
-
             var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
             WriteMethodDocumentation(_writer, methodSignature, clientMethod, hasResponseRemarks);
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
             using (_xmlDocWriter.CreateMember(docRef))
             {
-                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
+                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, methodSignature, async));
                 WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
             }
         }
@@ -603,19 +594,11 @@ namespace AutoRest.CSharp.Generation.Writers
             return builder.ToString();
         }
 
-        private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod)
+        private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature methodSignature)
         {
-            var methodSignature = clientMethod.ProtocolMethodSignature;
             var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
             WriteMethodDocumentation(writer, methodSignature, clientMethod, hasResponseRemarks);
             WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
-        }
-
-        private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, ConvenienceMethod convenienceMethod)
-        {
-            var scope = writer.WriteMethodDeclaration(convenienceMethod.Signature);
-            writer.WriteParametersValidation(convenienceMethod.Signature.Parameters);
-            return scope;
         }
 
         private static void WriteConvenienceMethodDocumentation(CodeWriter writer, MethodSignature convenienceMethod)

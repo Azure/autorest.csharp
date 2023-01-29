@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     property.ParameterDescription,
                     type,
                     null,
-                    ValidationType.None,
+                    Validation.None,
                     null
                 );
 
@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
+                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? Validation.AssertNotNull : Validation.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.ParameterDescription,

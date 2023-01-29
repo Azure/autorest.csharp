@@ -13,7 +13,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
+    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, Validation Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false)
     {
         public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static Parameter FromModelProperty(in InputModelProperty property, string name, CSharpType propertyType)
         {
-            var validation = propertyType.IsValueType || property.IsReadOnly ? ValidationType.None : ValidationType.AssertNotNull;
+            var validation = propertyType.IsValueType || property.IsReadOnly ? Validation.None : Validation.AssertNotNull;
             return new Parameter(name, property.Description, propertyType, null, validation, null);
         }
 
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             var validation = operationParameter.IsRequired && initializer == null
                 ? GetValidation(type, requestLocation, skipUrlEncoding)
-                : ValidationType.None;
+                : Validation.None;
 
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
@@ -83,19 +83,19 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
         }
 
-        public static ValidationType GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
+        public static Validation GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
         {
             if (requestLocation is RequestLocation.Uri or RequestLocation.Path or RequestLocation.Body && type.EqualsIgnoreNullable(typeof(string)) && !skipUrlEncoding)
             {
-                return ValidationType.AssertNotNullOrEmpty;
+                return Validation.AssertNotNullOrEmpty;
             }
 
             if (!type.IsValueType)
             {
-                return ValidationType.AssertNotNull;
+                return Validation.AssertNotNull;
             }
 
-            return ValidationType.None;
+            return Validation.None;
         }
 
         public static Parameter FromRequestParameter(in RequestParameter requestParameter, CSharpType type, TypeFactory typeFactory)
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             var validation = requestParameter.IsRequired && initializer == null
                 ? GetValidation(type, requestLocation, skipUrlEncoding)
-                : ValidationType.None;
+                : Validation.None;
 
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
@@ -193,9 +193,17 @@ namespace AutoRest.CSharp.Output.Models.Shared
         }
     }
 
+    internal record Validation(ValidationType Type, object? Data)
+    {
+        public static Validation None { get; } = new(ValidationType.None, null);
+        public static Validation AssertNotNull { get; } = new(ValidationType.AssertNotNull, null);
+        public static Validation AssertNotNullOrEmpty { get; } = new(ValidationType.AssertNotNullOrEmpty, null);
+    }
+
     internal enum ValidationType
     {
         None,
+        AssertNull,
         AssertNotNull,
         AssertNotNullOrEmpty
     }
