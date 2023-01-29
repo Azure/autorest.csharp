@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (TrySpreadBodyParameter(parameterChain, out var spreads))
                 {
-                    numOfOverloads = spreads.Count();
+                    numOfOverloads = spreads.Count;
                     dict.Add(parameterChain, spreads);
                 }
             }
@@ -236,7 +236,7 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (dict.TryGetValue(parameterChain, out var spreads))
                 {
-                    // spread parameter. It might have `numOfOverloads` overloads
+                    // spread parameter. It should have `numOfOverloads` overloads
                     for (int i = 0; i < numOfOverloads; i++)
                     {
                         var spread = spreads[i];
