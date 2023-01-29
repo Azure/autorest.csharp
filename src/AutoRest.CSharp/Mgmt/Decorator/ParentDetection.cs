@@ -38,15 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource)
         {
-            // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             var scope = resource.RequestPath.GetScopePath();
-            // if the scope of this request path is parameterized, we return the scope as its parent
-            if (scope.IsParameterizedScope())
-            {
-                // we already verified that the scope is parameterized, therefore we assert the type can never be null
-                var types = resource.RequestPath.GetParameterizedScopeResourceTypes()!;
-                return FindScopeParents(types).Distinct();
-            }
             var resourceOperationSet = resource.OperationSet;
             var parentRequestPath = resourceOperationSet.ParentRequestPath(resource.ResourceType);
 
@@ -55,6 +47,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // my parent is myself? Only tenant has this attribute, return empty
                 return Enumerable.Empty<MgmtTypeProvider>();
             }
+            // if the scope of this request path is parameterized, and the direct parent path we get from the resource list is parent of the scope, we return the scope as its parent since the scope here is a child
+            if (scope.IsParameterizedScope() && parentRequestPath.IsAncestorOf(scope))
+            {
+                // we already verified that the scope is parameterized, therefore we assert the type can never be null
+                var types = resource.RequestPath.GetParameterizedScopeResourceTypes()!;
+                return FindScopeParents(types).Distinct();
+            }
+
             if (MgmtContext.Library.TryGetArmResource(parentRequestPath, out var parent))
             {
                 return parent.AsIEnumerable();
@@ -66,6 +66,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return MgmtContext.Library.ResourceGroupExtensions.AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.Subscription))
                 return MgmtContext.Library.SubscriptionExtensions.AsIEnumerable();
+            // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
+            if (scope.IsParameterizedScope())
+            {
+                // we already verified that the scope is parameterized, therefore we assert the type can never be null
+                var types = resource.RequestPath.GetParameterizedScopeResourceTypes()!;
+                return FindScopeParents(types).Distinct();
+            }
             // otherwise we use the tenant as a fallback
             return MgmtContext.Library.TenantExtensions.AsIEnumerable();
         }
