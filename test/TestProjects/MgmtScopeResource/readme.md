@@ -13,7 +13,11 @@ input-file:
   - $(this-folder)/Deployments.json
   - $(this-folder)/Links.json
   - $(this-folder)/vmInsightsOnboarding_API.json
+  - $(this-folder)/guestconfiguration.json
 namespace: MgmtScopeResource
+
+parameterized-scopes:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
 
 list-exception:
   - /{linkId}
