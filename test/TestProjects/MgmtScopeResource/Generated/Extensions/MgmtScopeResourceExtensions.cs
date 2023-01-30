@@ -581,6 +581,14 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
+        public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmResource armResource)
+        {
+            return GetExtensionClient(armResource).GetGuestConfigurationAssignments();
+        }
+
+        /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
@@ -591,6 +599,30 @@ namespace MgmtScopeResource
                 throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
             }
             return GetExtensionClient(client, scope).GetGuestConfigurationAssignments();
+        }
+
+        /// <summary>
+        /// Get information about a guest configuration assignment
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>GuestConfigurationAssignments_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
+        {
+            return await armResource.GetGuestConfigurationAssignments().GetAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -620,6 +652,30 @@ namespace MgmtScopeResource
                 throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
             }
             return await client.GetGuestConfigurationAssignments(scope).GetAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get information about a guest configuration assignment
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>GuestConfigurationAssignments_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
+        {
+            return armResource.GetGuestConfigurationAssignments().Get(guestConfigurationAssignmentName, cancellationToken);
         }
 
         /// <summary>

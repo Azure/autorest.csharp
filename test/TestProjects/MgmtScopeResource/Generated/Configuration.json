@@ -15,7 +15,8 @@
   ],
   "GenerateArmResourceExtensions": [
     "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}",
-    "/{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default"
+    "/{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}"
   ],
   "RequestPathToParent": {
     "/{scope}/providers/Microsoft.Resources/links": "/{linkId}",
