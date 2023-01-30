@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -34,6 +33,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly CSharpType? _responseType;
         private readonly CSharpType _protocolMethodReturnType;
         private readonly CSharpType _convenienceMethodReturnType;
+        private readonly string _protocolMethodName;
 
         private InputOperation Operation { get; }
 
@@ -41,6 +41,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _fields = fields;
             _clientName = clientName;
+            _protocolMethodName = createMessageMethod.Name;
 
             Operation = operation;
             _headAsBoolean = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
@@ -140,10 +141,10 @@ namespace AutoRest.CSharp.Output.Models
 
         private Method BuildProtocolMethod(bool async)
         {
-            var methodName = _createMessageMethod.Name;
-            var signature = CreateProtocolMethodSignature(methodName, async);
-            var body = CreateProtocolMethodBody(methodName, async);
-            return new Method(signature, body);
+            var isPageable = Operation.Paging is not null && Operation.LongRunning is null;
+            var signature = CreateMethodSignature(_protocolMethodName, _protocolMethodParameters, _protocolMethodReturnType);
+            var body = CreateMethodBody(CreateProtocolMethodBody(async), signature, !isPageable);
+            return new Method(signature.WithAsync(async), body);
         }
 
         private Method BuildConvenienceMethod(bool async)
@@ -151,7 +152,7 @@ namespace AutoRest.CSharp.Output.Models
             var needNameChange = _protocolMethodParameters.Where(p => !p.IsOptionalInSignature)
                 .SequenceEqual(_convenienceMethodParameters.Where(p => !p.IsOptionalInSignature));
 
-            string methodName = _createMessageMethod.Name;
+            var methodName = _createMessageMethod.Name;
             if (needNameChange)
             {
                 methodName = methodName.IsLastWordSingular()
@@ -159,85 +160,114 @@ namespace AutoRest.CSharp.Output.Models
                     : $"{methodName.LastWordToSingular()}Values";
             }
 
-            var signature = CreateConvenienceMethodSignature(methodName, async);
-            var body = CreateConvenienceMethodBody(methodName, async);
-            return new Method(signature, body);
+            var isPageable = Operation.Paging is not null;
+
+            var signature = CreateMethodSignature(methodName, _convenienceMethodParameters, _convenienceMethodReturnType);
+            var body = CreateMethodBody(CreateConvenienceMethodMainBodyBlock(methodName, async), signature, !isPageable && needNameChange);
+            return new Method(signature.WithAsync(async), body);
         }
 
-        private MethodSignature CreateProtocolMethodSignature(string methodName, bool async)
+        private MethodSignature CreateMethodSignature(string name, IReadOnlyList<Parameter> parameters, CSharpType returnType)
         {
             var attributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : null;
 
-            return new MethodSignature(methodName, _createMessageMethod.Summary, _createMessageMethod.Description, _createMessageMethod.Accessibility | Virtual, _protocolMethodReturnType, null, _protocolMethodParameters, attributes).WithAsync(async);
+            return new MethodSignature(name, _createMessageMethod.Summary, _createMessageMethod.Description, _createMessageMethod.Accessibility | Virtual, returnType, null, parameters, attributes);
         }
 
-        private MethodSignature CreateConvenienceMethodSignature(string name, bool async)
-        {
-            var attributes = Operation.Deprecated is { } deprecated
-                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
-                : null;
-
-            return new MethodSignature(name, _createMessageMethod.Summary, _createMessageMethod.Description, _createMessageMethod.Accessibility | Virtual, _convenienceMethodReturnType, null, _convenienceMethodParameters, attributes).WithAsync(async);
-        }
-
-        private MethodBody CreateProtocolMethodBody(string methodName, bool async)
-            => (Operation.Paging, Operation.LongRunning) switch
-            {
-                { Paging: { } paging, LongRunning: { } longRunning } => CreateProtocolMethodBody(methodName, CreatePagingLroProtocolMethodLines(methodName, paging, longRunning, async), true),
-                { Paging: { } paging, LongRunning: null }            => CreateProtocolMethodBody(methodName, CreatePagingProtocolMethodLines(methodName, paging, async), false),
-                { Paging: null, LongRunning: { } longRunning }       => CreateProtocolMethodBody(methodName, CreateLroProtocolMethodLines(methodName, longRunning, async), true),
-                _                                                    => CreateProtocolMethodBody(methodName, CreateProtocolMethodLines(methodName, async), true)
-            };
-
-        private MethodBody CreateProtocolMethodBody(string methodName, IEnumerable<MethodBodySingleLine> mainBlockLines, bool addDiagnosticScope)
+        private MethodBody CreateMethodBody(IEnumerable<MethodBodySingleLine> mainBlockLines, MethodSignature signature, bool addDiagnosticScope)
         {
             MethodBodyBlock mainBodyBlock = new MethodBodyLines(mainBlockLines.ToList());
-            if (addDiagnosticScope && methodName != _createMessageMethod.Name)
+            if (addDiagnosticScope)
             {
-                mainBodyBlock = new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), _fields.ClientDiagnosticsProperty, mainBodyBlock);
+                mainBodyBlock = new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{signature.Name}"), _fields.ClientDiagnosticsProperty, mainBodyBlock);
             }
-            return new MethodBody(new[] { new ParameterValidationBlock(_convenienceMethodParameters), mainBodyBlock });
+            return new MethodBody(new[] { new ParameterValidationBlock(signature.Parameters), mainBodyBlock });
         }
 
-        private IEnumerable<MethodBodySingleLine> CreateProtocolMethodLines(string methodName, bool async)
-        {
-            return Array.Empty<MethodBodySingleLine>();
-        }
-
-        private IEnumerable<MethodBodySingleLine> CreateLroProtocolMethodLines(string methodName, OperationLongRunning longRunning, bool async)
-        {
-            return Array.Empty<MethodBodySingleLine>();
-        }
-
-        private IEnumerable<MethodBodySingleLine> CreatePagingProtocolMethodLines(string methodName, OperationPaging paging, bool async)
-        {
-            return Array.Empty<MethodBodySingleLine>();
-        }
-
-        private IEnumerable<MethodBodySingleLine> CreatePagingLroProtocolMethodLines(string methodName, OperationPaging paging, OperationLongRunning longRunning, bool async)
-        {
-            return Array.Empty<MethodBodySingleLine>();
-        }
-
-        private MethodBody CreateConvenienceMethodBody(string methodName, bool async)
+        private IEnumerable<MethodBodySingleLine> CreateProtocolMethodBody(bool async)
             => (Operation.Paging, Operation.LongRunning) switch
             {
-                { Paging: { } paging, LongRunning: null } => CreateConvenienceMethodBody(methodName, CreatePagingConvenienceMethodLines(methodName, paging, async), false),
-                { Paging: null, LongRunning: not null }   => CreateConvenienceMethodBody(methodName, CreateLroConvenienceMethodLines(methodName, async), true),
-                _                                         => CreateConvenienceMethodBody(methodName, CreateConvenienceMethodLines(async), true)
+                { Paging: { } paging, LongRunning: { } longRunning } => CreatePagingLroProtocolMethodLines(paging, longRunning, async),
+                { Paging: { } paging, LongRunning: null }            => CreatePagingProtocolMethodLines(paging, async),
+                { Paging: null, LongRunning: { } longRunning }       => CreateLroProtocolMethodLines(longRunning, async),
+                _                                                    => CreateProtocolMethodLines(async)
             };
 
-        private MethodBody CreateConvenienceMethodBody(string methodName, IEnumerable<MethodBodySingleLine> mainBlockLines, bool checkForMethodName)
+        private IEnumerable<MethodBodySingleLine> CreateProtocolMethodLines(bool async)
         {
-            MethodBodyBlock mainBodyBlock = new MethodBodyLines(mainBlockLines.ToList());
-            if (checkForMethodName && methodName != _createMessageMethod.Name)
-            {
-                mainBodyBlock = new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), _fields.ClientDiagnosticsProperty, mainBodyBlock);
-            }
-            return new MethodBody(new[] { new ParameterValidationBlock(_convenienceMethodParameters), mainBodyBlock });
+            var pipeline = _fields.PipelineField.Declaration;
+            var clientDiagnostics = _fields.ClientDiagnosticsProperty.Declaration;
+            var requestContext = _createMessageMethod.Parameters.FirstOrDefault(p => p.Type.EqualsIgnoreNullable(typeof(RequestContext)));
+
+            yield return Declare.Message(Call.CreateRequestMethod(_protocolMethodName, _createMessageMethod.Parameters), out var message);
+            yield return _headAsBoolean
+                ? Return(Call.HttpPipelineExtensions.ProcessHeadAsBoolMessage(pipeline, message, clientDiagnostics, requestContext, async))
+                : Return(Call.HttpPipelineExtensions.ProcessMessage(pipeline, message, requestContext, null, async));
         }
+
+        private IEnumerable<MethodBodySingleLine> CreateLroProtocolMethodLines(OperationLongRunning longRunning, bool async)
+        {
+            var pipeline = _fields.PipelineField.Declaration;
+            var clientDiagnostics = _fields.ClientDiagnosticsProperty.Declaration;
+            var scopeName = $"{_clientName}.{_protocolMethodName}";
+
+            yield return Declare.Message(Call.CreateRequestMethod(_protocolMethodName, _createMessageMethod.Parameters), out var message);
+            yield return _responseType is not null
+                ? Return(Call.ProtocolOperationHelpers.ProcessMessage(pipeline, message, clientDiagnostics, scopeName, longRunning.FinalStateVia, async))
+                : Return(Call.ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(pipeline, message, clientDiagnostics, scopeName, longRunning.FinalStateVia, async));
+        }
+
+        private IEnumerable<MethodBodySingleLine> CreatePagingProtocolMethodLines(OperationPaging paging, bool async)
+        {
+            var clientDiagnostics = _fields.ClientDiagnosticsProperty.Declaration;
+            var pipeline = _fields.PipelineField.Declaration;
+            var scopeName = $"{_clientName}.{_protocolMethodName}";
+            var itemPropertyName = paging.ItemName ?? "value";
+            var nextLinkName = paging.NextLinkName;
+            var requestContext = _protocolMethodParameters.Contains(KnownParameters.RequestContext) ? new ParameterReference(KnownParameters.RequestContext) : null;
+
+            var createRequestArguments = _createMessageMethod.Parameters.Select(p => new ParameterReference(p));
+            yield return Declare.FirstPageRequest(null, _createMessageMethod.Name, createRequestArguments, out var createFirstPageRequest);
+
+            CodeWriterDeclaration? createNextPageRequest = null;
+            if (_createNextPageMessageMethod is not null)
+            {
+                var nextPageArguments = _createNextPageMessageMethod.Parameters.Select(p => new ParameterReference(p));
+                yield return Declare.NextPageRequest(null, _createNextPageMessageMethod.Name, nextPageArguments, out createNextPageRequest);
+            }
+
+            yield return Return(Call.PageableHelpers.CreatePageable(createFirstPageRequest, createNextPageRequest, clientDiagnostics, pipeline, typeof(BinaryData), scopeName, itemPropertyName, nextLinkName, requestContext, async));
+        }
+
+        private IEnumerable<MethodBodySingleLine> CreatePagingLroProtocolMethodLines(OperationPaging paging, OperationLongRunning longRunning, bool async)
+        {
+            var clientDiagnostics = _fields.ClientDiagnosticsProperty.Declaration;
+            var pipeline = _fields.PipelineField.Declaration;
+            var scopeName = $"{_clientName}.{_protocolMethodName}";
+            var itemPropertyName = paging.ItemName ?? "value";
+            var nextLinkName = paging.NextLinkName;
+            var requestContext = _protocolMethodParameters.Contains(KnownParameters.RequestContext) ? new ParameterReference(KnownParameters.RequestContext) : null;
+
+            CodeWriterDeclaration? createNextPageRequest = null;
+            if (_createNextPageMessageMethod is not null)
+            {
+                var nextPageArguments = _createNextPageMessageMethod.Parameters.Select(p => new ParameterReference(p));
+                yield return Declare.NextPageRequest(null, _createNextPageMessageMethod.Name, nextPageArguments, out createNextPageRequest);
+            }
+
+            yield return Declare.Message(Call.CreateRequestMethod(_protocolMethodName, _createMessageMethod.Parameters), out var message);
+            yield return Return(Call.PageableHelpers.CreatePageable(message, createNextPageRequest, clientDiagnostics, pipeline, typeof(BinaryData), longRunning.FinalStateVia, scopeName, itemPropertyName, nextLinkName, requestContext, async));
+        }
+
+        private IEnumerable<MethodBodySingleLine> CreateConvenienceMethodMainBodyBlock(string methodName, bool async)
+            => (Operation.Paging, Operation.LongRunning) switch
+            {
+                { Paging: { } paging, LongRunning: null } => CreatePagingConvenienceMethodLines(methodName, paging, async),
+                { Paging: null, LongRunning: not null }   => CreateLroConvenienceMethodLines(methodName, async),
+                _                                         => CreateConvenienceMethodLines(async)
+            };
 
         private IEnumerable<MethodBodySingleLine> CreateConvenienceMethodLines(bool async)
         {
@@ -293,7 +323,7 @@ namespace AutoRest.CSharp.Output.Models
             lines.Add(Declare.FirstPageRequest(null, _createMessageMethod.Name, createRequestArguments, out var createFirstPageRequest));
             if (_createNextPageMessageMethod is not null)
             {
-                lines.Add(Declare.NextPageRequest(null, _createNextPageMessageMethod!.Name, createRequestArguments, out createNextPageRequest));
+                lines.Add(Declare.NextPageRequest(null, _createNextPageMessageMethod!.Name, createRequestArguments.Prepend(new ParameterReference(KnownParameters.NextLink)), out createNextPageRequest));
             }
 
             lines.Add(Return(Call.PageableHelpers.CreatePageable(createFirstPageRequest, createNextPageRequest, clientDiagnostics, pipeline, _responseType, scopeName, itemPropertyName, nextLinkName, requestContextVariable, async)));

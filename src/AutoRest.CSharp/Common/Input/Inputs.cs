@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using Azure.Core;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input

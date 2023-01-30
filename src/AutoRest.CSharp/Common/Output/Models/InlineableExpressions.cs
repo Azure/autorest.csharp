@@ -9,11 +9,14 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal static class InlineableExpressions
     {
+        private static InlineableExpression Null { get; } = new ExpressionAsFormattableString($"null");
+
         private static InlineableExpression CheckNull(this Parameter parameter)
             => parameter.Type.IsNullable
                 ? new NullConditionalExpression(new ParameterReference(parameter))
@@ -27,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models
                 return new TernaryConditionalOperator(
                     new MemberReference(cancellationToken, nameof(CancellationToken.CanBeCanceled)),
                     new NewInstanceExpression(typeof(RequestContext), new Dictionary<string, InlineableExpression>{ [nameof(RequestContext.CancellationToken)] = cancellationToken }),
-                    new ExpressionAsFormattableString($"null"));
+                    Null);
             }
         }
 
@@ -59,16 +62,19 @@ namespace AutoRest.CSharp.Output.Models
             {
                 private static readonly CSharpType HttpPipelineExtensionsType = typeof(Azure.Core.HttpPipelineExtensions);
 
-                public static InlineableExpression ProcessMessage(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, CodeWriterDeclaration clientDiagnostics, Parameter? requestContext, Parameter? cancellationToken, bool async)
+                public static InlineableExpression ProcessMessage(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, Parameter? requestContext, Parameter? cancellationToken, bool async)
                 {
                     var arguments = new List<InlineableExpression>
                     {
                         new VariableReference(pipeline),
                         new VariableReference(message),
-                        new VariableReference(clientDiagnostics),
-                        requestContext != null ? new ParameterReference(requestContext) : new ExpressionAsFormattableString($"null"),
-                        cancellationToken != null ? new ParameterReference(cancellationToken) : new ExpressionAsFormattableString($"null")
+                        requestContext != null ? new ParameterReference(requestContext) : Null,
                     };
+
+                    if (cancellationToken != null)
+                    {
+                        arguments.Add(new ParameterReference(cancellationToken));
+                    }
 
                     var methodName = async ? nameof(Azure.Core.HttpPipelineExtensions.ProcessMessageAsync) : nameof(Azure.Core.HttpPipelineExtensions.ProcessMessage);
                     return new StaticMethodCallExpression(HttpPipelineExtensionsType, methodName, arguments, true, async);
@@ -81,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models
                         new VariableReference(pipeline),
                         new VariableReference(message),
                         new VariableReference(clientDiagnostics),
-                        requestContext != null ? new ParameterReference(requestContext) : new ExpressionAsFormattableString($"null")
+                        requestContext != null ? new ParameterReference(requestContext) : Null
                     };
 
                     var methodName = async ? nameof(Azure.Core.HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(Azure.Core.HttpPipelineExtensions.ProcessHeadAsBoolMessage);
@@ -108,7 +114,7 @@ namespace AutoRest.CSharp.Output.Models
                     var arguments = new List<InlineableExpression>
                     {
                         new VariableReference(createFirstPageRequest),
-                        createNextPageRequest != null ? new VariableReference(createNextPageRequest) : new ExpressionAsFormattableString($"null"),
+                        createNextPageRequest != null ? new VariableReference(createNextPageRequest) : Null,
                         new ExpressionAsFormattableString(PageableMethodsWriterExtensions.GetValueFactory(pageItemType)),
                         new VariableReference(clientDiagnostics),
                         new VariableReference(pipeline),
@@ -125,10 +131,73 @@ namespace AutoRest.CSharp.Output.Models
                     var methodName = async ? nameof(Azure.Core.PageableHelpers.CreateAsyncPageable) : nameof(Azure.Core.PageableHelpers.CreatePageable);
                     return new StaticMethodCallExpression(PageableHelpersType, methodName, arguments, false, false);
                 }
+
+                public static InlineableExpression CreatePageable(
+                    CodeWriterDeclaration message,
+                    CodeWriterDeclaration? createNextPageRequest,
+                    CodeWriterDeclaration clientDiagnostics,
+                    CodeWriterDeclaration pipeline,
+                    CSharpType? pageItemType,
+                    OperationFinalStateVia finalStateVia,
+                    string scopeName,
+                    string itemPropertyName,
+                    string? nextLinkPropertyName,
+                    InlineableExpression? requestContext,
+                    bool async)
+                {
+                    var arguments = new List<InlineableExpression>
+                    {
+                        new ParameterReference(KnownParameters.WaitForCompletion),
+                        new VariableReference(message),
+                        createNextPageRequest is not null ? new VariableReference(createNextPageRequest) : Null,
+                        new ExpressionAsFormattableString(PageableMethodsWriterExtensions.GetValueFactory(pageItemType)),
+                        new VariableReference(clientDiagnostics),
+                        new VariableReference(pipeline),
+                        new ExpressionAsFormattableString($"{typeof(OperationFinalStateVia)}.{finalStateVia}"),
+                        new ExpressionAsFormattableString($"{scopeName:L}"),
+                        new ExpressionAsFormattableString($"{itemPropertyName:L}"),
+                        new ExpressionAsFormattableString($"{nextLinkPropertyName:L}")
+                    };
+
+                    if (requestContext is not null)
+                    {
+                        arguments.Add(requestContext);
+                    }
+
+                    var methodName = async ? nameof(Azure.Core.PageableHelpers.CreateAsyncPageable) : nameof(Azure.Core.PageableHelpers.CreatePageable);
+                    return new StaticMethodCallExpression(PageableHelpersType, methodName, arguments, false, async);
+                }
             }
 
             public static class ProtocolOperationHelpers
             {
+                public static InlineableExpression ProcessMessage(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, CodeWriterDeclaration clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, bool async)
+                {
+                    var methodName = async ? nameof(Azure.Core.ProtocolOperationHelpers.ProcessMessageAsync) : nameof(Azure.Core.ProtocolOperationHelpers.ProcessMessage);
+                    return ProcessMessage(pipeline, message, clientDiagnostics, scopeName, finalStateVia, async, methodName);
+                }
+
+                public static InlineableExpression ProcessMessageWithoutResponseValue(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, CodeWriterDeclaration clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, bool async)
+                {
+                    var methodName = async ? nameof(Azure.Core.ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync) : nameof(Azure.Core.ProtocolOperationHelpers.ProcessMessageWithoutResponseValue);
+                    return ProcessMessage(pipeline, message, clientDiagnostics, scopeName, finalStateVia, async, methodName);
+                }
+
+                private static InlineableExpression ProcessMessage(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, CodeWriterDeclaration clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, bool async, string methodName)
+                {
+                    var arguments = new List<InlineableExpression> {
+                        new VariableReference(pipeline),
+                        new VariableReference(message),
+                        new VariableReference(clientDiagnostics),
+                        new ExpressionAsFormattableString($"{scopeName:L}"),
+                        new ExpressionAsFormattableString($"{typeof(OperationFinalStateVia)}.{finalStateVia}"),
+                        new ParameterReference(KnownParameters.RequestContext),
+                        new ParameterReference(KnownParameters.WaitForCompletion)
+                    };
+
+                    return new StaticMethodCallExpression(typeof(Azure.Core.ProtocolOperationHelpers), methodName, arguments, false, async);
+                }
+
                 public static InlineableExpression Convert(CSharpType responseType, CodeWriterDeclaration response, CodeWriterDeclaration clientDiagnostics, string scopeName)
                 {
                     var responseVariable = new VariableReference(response);

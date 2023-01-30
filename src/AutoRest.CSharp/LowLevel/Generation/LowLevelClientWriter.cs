@@ -30,11 +30,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter : ClientWriter
     {
-        private static readonly FormattableString LroProcessMessageMethodName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessage)}";
-        private static readonly FormattableString LroProcessMessageMethodAsyncName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessageAsync)}";
-        private static readonly FormattableString LroProcessMessageWithoutResponseValueMethodName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessageWithoutResponseValue)}";
-        private static readonly FormattableString LroProcessMessageWithoutResponseValueMethodAsyncName = $"{typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync)}";
-
         private readonly CodeWriter _writer;
         private readonly XmlDocWriter _xmlDocWriter;
         private readonly LowLevelClient _client;
@@ -65,13 +60,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         foreach (var method in clientMethod.ConvenienceMethods)
                         {
                             WriteConvenienceMethodDocumentation(_writer, method.Signature);
-                            WriteMethod(method);
+                            WriteMethod(_writer, method);
                         }
 
                         WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, clientMethod.ProtocolMethods[0].Signature, true);
-                        WriteProtocolMethod(_writer, clientMethod, clientMethod.ProtocolMethods[0], _client.Fields, true);
+                        WriteMethod(_writer, clientMethod.ProtocolMethods[0]);
                         WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, clientMethod.ProtocolMethods[1].Signature, false);
-                        WriteProtocolMethod(_writer, clientMethod, clientMethod.ProtocolMethods[1], _client.Fields, false);
+                        WriteMethod(_writer, clientMethod.ProtocolMethods[1]);
                     }
 
                     WriteSubClientFactoryMethod();
@@ -95,37 +90,18 @@ namespace AutoRest.CSharp.Generation.Writers
             WriteRequestCreationMethod(writer, clientMethod.RequestMethod, fields);
 
             WriteProtocolMethodDocumentation(writer, clientMethod, clientMethod.ProtocolMethods[0].Signature);
-            WriteProtocolMethod(writer, clientMethod, clientMethod.ProtocolMethods[0], fields, true);
+            WriteMethod(writer, clientMethod.ProtocolMethods[0]);
             WriteProtocolMethodDocumentation(writer, clientMethod, clientMethod.ProtocolMethods[1].Signature);
-            WriteProtocolMethod(writer, clientMethod, clientMethod.ProtocolMethods[1], fields, false);
+            WriteMethod(writer, clientMethod.ProtocolMethods[1]);
         }
 
-        private static void WriteProtocolMethod(CodeWriter writer, LowLevelClientMethod clientMethod, Method method, ClientFields fields, bool async)
+        private static void WriteMethod(CodeWriter writer, Method method)
         {
-            switch (clientMethod.LongRunning, clientMethod.PagingInfo)
+            using (writer.WriteMethodDeclaration(method.Signature))
             {
-                case { LongRunning: not null, PagingInfo: not null }:
-                    WriteProtocolPageableLroMethod(writer, clientMethod, method.Signature, fields, clientMethod.PagingInfo, clientMethod.LongRunning, async);
-                    break;
-                case { LongRunning: null, PagingInfo: not null }:
-                    WriteProtocolPageableMethod(writer, clientMethod, method.Signature, fields, clientMethod.PagingInfo, async);
-                    break;
-                case { LongRunning: not null, PagingInfo: null }:
-                    WriteProtocolLroMethod(writer, clientMethod, method.Signature, fields, clientMethod.LongRunning, async);
-                    break;
-                default:
-                    WriteProtocolMethod(writer, clientMethod, method.Signature, fields, async);
-                    break;
+                WriteBody(writer, method.Body);
             }
-        }
-
-        private void WriteMethod(Method method)
-        {
-            using (_writer.WriteMethodDeclaration(method.Signature))
-            {
-                WriteBody(method.Body);
-            }
-            _writer.Line();
+            writer.Line();
         }
 
         private void WriteDPGIdentificationComment() => _writer.Line($"// Data plane generated {(_client.IsSubClient ? "sub-client" : "client")}.");
@@ -247,65 +223,65 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
-        private void WriteBody(MethodBody methodBody)
+        private static void WriteBody(CodeWriter writer, MethodBody methodBody)
         {
             foreach (var block in methodBody.Blocks)
             {
-                WriteBodyBlock(block);
+                WriteBodyBlock(writer, block);
             }
         }
 
-        private void WriteBodyBlock(MethodBodyBlock bodyBlock)
+        private static void WriteBodyBlock(CodeWriter writer, MethodBodyBlock bodyBlock)
         {
             switch (bodyBlock)
             {
                 case ParameterValidationBlock parameterValidation:
-                    _writer.WriteParametersValidation(parameterValidation.Parameters);
+                    writer.WriteParametersValidation(parameterValidation.Parameters);
                     break;
                 case DiagnosticScopeMethodBodyBlock diagnosticScope:
-                    using (_writer.WriteDiagnosticScope(diagnosticScope.Diagnostic, diagnosticScope.ClientDiagnosticsReference))
+                    using (writer.WriteDiagnosticScope(diagnosticScope.Diagnostic, diagnosticScope.ClientDiagnosticsReference))
                     {
-                        WriteBodyBlock(diagnosticScope.InnerBlock);
+                        WriteBodyBlock(writer, diagnosticScope.InnerBlock);
                     }
                     break;
                 case MethodBodyLines lines:
                     foreach (var line in lines.MethodBodySingleLine)
                     {
-                        WriteLine(line);
+                        WriteLine(writer, line);
                     }
                     break;
             }
         }
 
-        private void WriteLine(MethodBodySingleLine line)
+        private static void WriteLine(CodeWriter writer, MethodBodySingleLine line)
         {
             switch (line)
             {
                 case DeclareVariableLine declareVariable:
-                    _writer.Append($"{declareVariable.Type} {declareVariable.Name:D} = ");
-                    WriteInlineable(_writer, declareVariable.Value);
+                    writer.Append($"{declareVariable.Type} {declareVariable.Name:D} = ");
+                    WriteInlineable(writer, declareVariable.Value);
                     break;
                 case UsingDeclareVariableLine declareVariable:
-                    _writer.Append($"using {declareVariable.Type} {declareVariable.Name:D} = ");
-                    WriteInlineable(_writer, declareVariable.Value);
+                    writer.Append($"using {declareVariable.Type} {declareVariable.Name:D} = ");
+                    WriteInlineable(writer, declareVariable.Value);
                     break;
                 case OneLineLocalFunction localFunction:
-                    _writer.Append($"{localFunction.ReturnType} {localFunction.Name:D}(");
+                    writer.Append($"{localFunction.ReturnType} {localFunction.Name:D}(");
                     foreach (var parameter in localFunction.Parameters)
                     {
-                        _writer.Append($"{parameter.Type} {parameter.Name}, ");
+                        writer.Append($"{parameter.Type} {parameter.Name}, ");
                     }
-                    _writer.RemoveTrailingComma();
-                    _writer.AppendRaw(") => ");
-                    WriteInlineable(_writer, localFunction.Body);
+                    writer.RemoveTrailingComma();
+                    writer.AppendRaw(") => ");
+                    WriteInlineable(writer, localFunction.Body);
                     break;
                 case ReturnValueLine returnValue:
-                    _writer.AppendRaw("return ");
-                    WriteInlineable(_writer, returnValue.Value);
+                    writer.AppendRaw("return ");
+                    WriteInlineable(writer, returnValue.Value);
                     break;
             }
 
-            _writer.LineRaw(";");
+            writer.LineRaw(";");
         }
 
         private static void WriteInlineable(CodeWriter writer, InlineableExpression expression)
@@ -317,6 +293,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($".{memberReference.MemberName}");
                     break;
                 case StaticMethodCallExpression { CallAsExtension: true } methodCall:
+                    writer.AppendRawIf("await ", methodCall.CallAsAsync);
                     if (methodCall.MethodType != null)
                     {
                         writer.UseNamespace(methodCall.MethodType.Namespace);
@@ -325,20 +302,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(".");
                     writer.AppendRaw(methodCall.MethodName);
                     WriteArguments(writer, methodCall.Arguments.Skip(1));
+                    writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
                     break;
                 case StaticMethodCallExpression { CallAsExtension: false } methodCall:
+                    writer.AppendRawIf("await ", methodCall.CallAsAsync);
                     if (methodCall.MethodType != null)
                     {
                         writer.Append($"{methodCall.MethodType}.");
                     }
                     writer.AppendRaw(methodCall.MethodName);
                     WriteArguments(writer, methodCall.Arguments);
+                    writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
                     break;
                 case InstanceMethodCallExpression methodCall:
-                    if (methodCall.CallAsAsync)
-                    {
-                        writer.AppendRaw("await ");
-                    }
+                    writer.AppendRawIf("await ", methodCall.CallAsAsync);
                     if (methodCall.InstanceReference != null)
                     {
                         WriteInlineable(writer, methodCall.InstanceReference);
@@ -346,10 +323,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     writer.AppendRaw(methodCall.MethodName);
                     WriteArguments(writer, methodCall.Arguments);
-                    if (methodCall.CallAsAsync)
-                    {
-                        writer.AppendRaw(".ConfigureAwait(false)");
-                    }
+                    writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
                     break;
                 case NewInstanceExpression newInstance:
                     WriteNewInstance(writer, newInstance);
@@ -412,66 +386,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.RemoveTrailingComma();
                 writer.AppendRaw(")");
             }
-        }
-
-        private static void WriteProtocolPageableMethod(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature signature, ClientFields fields, ProtocolMethodPaging pagingInfo, bool async)
-        {
-            writer.WritePageable(signature, typeof(BinaryData), null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
-        }
-
-        private static void WriteProtocolPageableLroMethod(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature signature, ClientFields fields, ProtocolMethodPaging pagingInfo, OperationLongRunning longRunning, bool async)
-        {
-            writer.WriteLongRunningPageable(signature, typeof(BinaryData), null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic, longRunning.FinalStateVia, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
-        }
-
-        private static void WriteProtocolLroMethod(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature signature, ClientFields fields, OperationLongRunning longRunning, bool async)
-        {
-            using (writer.WriteMethodDeclaration(signature))
-            {
-                writer.WriteParametersValidation(signature.Parameters);
-                var startMethod = clientMethod.RequestMethod;
-                var finalStateVia = longRunning.FinalStateVia;
-                var scopeName = clientMethod.ProtocolMethodDiagnostic.ScopeName;
-
-                using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
-                {
-                    var messageVariable = new CodeWriterDeclaration("message");
-                    var processMessageParameters = (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}";
-
-                    writer
-                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
-                        .AppendRaw("return ")
-                        .WriteMethodCall(async, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
-                }
-            }
-            writer.Line();
-        }
-
-        public static void WriteProtocolMethod(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature signature, ClientFields fields, bool async)
-        {
-            using (writer.WriteMethodDeclaration(signature))
-            {
-                writer.WriteParametersValidation(signature.Parameters);
-                var restMethod = clientMethod.RequestMethod;
-                var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
-
-                using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
-                {
-                    var messageVariable = new CodeWriterDeclaration("message");
-                    writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});");
-
-                    var methodName = async
-                        ? headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessageAsync)
-                        : headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage) : nameof(HttpPipelineExtensions.ProcessMessage);
-
-                    FormattableString paramString = headAsBoolean
-                        ? (FormattableString)$"{messageVariable}, {fields.ClientDiagnosticsProperty.Name}, {KnownParameters.RequestContext.Name:I}"
-                        : (FormattableString)$"{messageVariable}, {KnownParameters.RequestContext.Name:I}";
-
-                    writer.AppendRaw("return ").WriteMethodCall(async, $"{fields.PipelineField.Name:I}.{methodName}", paramString);
-                }
-            }
-            writer.Line();
         }
 
         private void WriteSubClientFactoryMethod()

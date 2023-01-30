@@ -12,7 +12,6 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 
@@ -21,53 +20,6 @@ namespace AutoRest.CSharp.Generation.Writers
     internal static class PageableMethodsWriterExtensions
     {
         private static readonly CSharpType BinaryDataType = typeof(BinaryData);
-
-        public static CodeWriter WriteLongRunningPageable(this CodeWriter writer, MethodSignature methodSignature, CSharpType? pageItemType, Reference? restClientReference, RestClientMethod createLroRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, Diagnostic diagnostic, OperationFinalStateVia finalStateVia, string? itemPropertyName, string? nextLinkPropertyName, bool async)
-        {
-            using (writer.WriteMethodDeclaration(methodSignature))
-            {
-                writer.WriteParametersValidation(methodSignature.Parameters);
-                using (writer.WriteDiagnosticScope(diagnostic, clientDiagnosticsReference))
-                {
-                    var messageVariable = new CodeWriterDeclaration("message");
-                    var nextPageRequest = GetCreateRequestCall(restClientReference, createNextPageRequestMethod);
-                    var nextPageRequestVariable = nextPageRequest != null ? new CodeWriterDeclaration("NextPageRequest") : null;
-                    var parameters = methodSignature.Parameters.ToList();
-                    writer.EnsureRequestContextVariable(parameters, null, createNextPageRequestMethod);
-
-                    var createPageableParameters = new List<FormattableString>
-                    {
-                        $"{KnownParameters.WaitForCompletion.Name}",
-                        $"{messageVariable:I}",
-                        nextPageRequest != null ? $"{nextPageRequestVariable:I}" : (FormattableString)$"null",
-                        GetValueFactory(pageItemType),
-                        clientDiagnosticsReference.GetReferenceFormattable(),
-                        pipelineReference.GetReferenceFormattable(),
-                        $"{typeof(OperationFinalStateVia)}.{finalStateVia}"
-                    };
-
-                    createPageableParameters.AddTrailingPageableParameters(parameters, diagnostic.ScopeName, itemPropertyName, nextLinkPropertyName);
-
-                    if (nextPageRequestVariable != null)
-                    {
-                        writer.Line($"{typeof(HttpMessage)} {nextPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}, {KnownParameters.NextLink.Type} {KnownParameters.NextLink.Name}) => {nextPageRequest};");
-                    }
-
-                    writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(createLroRequestMethod.Name)}({createLroRequestMethod.Parameters.GetIdentifiersFormattable()});");
-
-                    if (async)
-                    {
-                        writer.Line($"return await {typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}({createPageableParameters.Join(", ")}).ConfigureAwait(false);");
-                    }
-                    else
-                    {
-                        writer.Line($"return {typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageable)}({createPageableParameters.Join(", ")});");
-                    }
-                }
-            }
-
-            return writer.Line();
-        }
 
         public static CodeWriter WritePageable(this CodeWriter writer, MethodSignature methodSignature, CSharpType? pageItemType, Reference? restClientReference, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)
         {

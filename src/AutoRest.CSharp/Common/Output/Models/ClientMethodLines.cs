@@ -137,16 +137,16 @@ namespace AutoRest.CSharp.Output.Models
 
         public static class Declare
         {
-            public static MethodBodySingleLine FirstPageRequest(InlineableExpression? restClient, string methodName, IReadOnlyList<InlineableExpression> arguments, out CodeWriterDeclaration localFunctionName)
+            public static MethodBodySingleLine FirstPageRequest(InlineableExpression? restClient, string methodName, IEnumerable<InlineableExpression> arguments, out CodeWriterDeclaration localFunctionName)
             {
-                var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments, false);
+                var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments.ToList(), false);
                 localFunctionName = new CodeWriterDeclaration("FirstPageRequest");
                 return new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint}, typeof(HttpMessage), requestMethodCall);
             }
 
-            public static MethodBodySingleLine NextPageRequest(InlineableExpression? restClient, string methodName, IReadOnlyList<InlineableExpression> arguments, out CodeWriterDeclaration localFunctionName)
+            public static MethodBodySingleLine NextPageRequest(InlineableExpression? restClient, string methodName, IEnumerable<InlineableExpression> arguments, out CodeWriterDeclaration localFunctionName)
             {
-                var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments.Prepend(new ParameterReference(KnownParameters.NextLink)).ToList(), false);
+                var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments.ToList(), false);
                 localFunctionName = new CodeWriterDeclaration("NextPageRequest");
                 return new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint, KnownParameters.NextLink}, typeof(HttpMessage), requestMethodCall);
             }
