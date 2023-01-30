@@ -30,6 +30,8 @@ namespace MgmtMockAndSample.Models
         private const string ActivatedValue = "Activated";
         private const string SecurityDomainRestoreValue = "SecurityDomainRestore";
         private const string RestoringValue = "Restoring";
+        private const string CanceledValue = "Canceled";
+        private const string CreatedValue = "Created";
 
         /// <summary> Succeeded. </summary>
         public static ProvisioningState Succeeded { get; } = new ProvisioningState(SucceededValue);
@@ -47,6 +49,10 @@ namespace MgmtMockAndSample.Models
         public static ProvisioningState SecurityDomainRestore { get; } = new ProvisioningState(SecurityDomainRestoreValue);
         /// <summary> Restoring. </summary>
         public static ProvisioningState Restoring { get; } = new ProvisioningState(RestoringValue);
+        /// <summary> Canceled. </summary>
+        public static ProvisioningState Canceled { get; } = new ProvisioningState(CanceledValue);
+        /// <summary> Created. </summary>
+        public static ProvisioningState Created { get; } = new ProvisioningState(CreatedValue);
         /// <summary> Determines if two <see cref="ProvisioningState"/> values are the same. </summary>
         public static bool operator ==(ProvisioningState left, ProvisioningState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ProvisioningState"/> values are not the same. </summary>

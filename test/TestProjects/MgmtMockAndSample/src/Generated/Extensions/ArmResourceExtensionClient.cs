@@ -37,5 +37,12 @@ namespace MgmtMockAndSample
         {
             return GetCachedClient(Client => new RoleAssignmentCollection(Client, Id));
         }
+
+        /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
+        /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
+        public virtual GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments()
+        {
+            return GetCachedClient(Client => new GuestConfigurationAssignmentCollection(Client, Id));
+        }
     }
 }
