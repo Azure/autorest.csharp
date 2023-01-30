@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             // if the scope of this request path is parameterized, and the direct parent path we get from the resource list is parent of the scope, we return the scope as its parent since the scope here is a child
             // if the request path is a "by id" path, its scope is the same as itself, therefore this condition here is nullified and should be skipped
-            if (!resource.RequestPath.IsById && scope.IsParameterizedScope() && parentRequestPath.IsAncestorOf(scope))
+            if (!resource.RequestPath.IsById && scope.IsParameterizedScope() && (parentRequestPath.IsAncestorOf(scope) || parentRequestPath == scope))
             {
                 // we already verified that the scope is parameterized, therefore we assert the type can never be null
                 var types = resource.RequestPath.GetParameterizedScopeResourceTypes()!;
