@@ -234,90 +234,6 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> List. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPathsAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateGetBodyAndPathsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPaths(RequestContext)']/*" />
-        public virtual Response GetBodyAndPaths(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateGetBodyAndPathsRequest(context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List products. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItemsAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetItemsAsync(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateGetItemsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List products. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItems(RequestContext)']/*" />
-        public virtual Response GetItems(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateGetItemsRequest(context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <param name="item3"> Expected to be the first parameter because of its position in the path. </param>
         /// <param name="item2"> Expected to be the second parameter because of its position in the path. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="item4"> Expected to be the third parameter because it is a required query parameter. &apos;item4&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
@@ -382,6 +298,50 @@ namespace BodyAndPath_LowLevel
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> List. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPathsAsync(RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetBodyAndPathsAsync(RequestContext context = null)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetBodyAndPathsRequest(context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BodyAndPathClient.GetBodyAndPaths", "value", null, context);
+        }
+
+        /// <summary> List. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPaths(RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetBodyAndPaths(RequestContext context = null)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetBodyAndPathsRequest(context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BodyAndPathClient.GetBodyAndPaths", "value", null, context);
+        }
+
+        /// <summary> List products. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItemsAsync(RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context = null)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BodyAndPathClient.GetItems", "value", null, context);
+        }
+
+        /// <summary> List products. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItems(RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetItems(RequestContext context = null)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BodyAndPathClient.GetItems", "value", null, context);
         }
 
         internal HttpMessage CreateCreateRequest(string itemName, RequestContent content, RequestContext context)
