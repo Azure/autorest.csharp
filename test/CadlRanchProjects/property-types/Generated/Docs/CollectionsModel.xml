@@ -22,9 +22,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Required.
+      property: string, # Required. Required string property
     }
-  ], # Required.
+  ], # Required. Property
 }
 </code>
 
@@ -51,9 +51,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Required.
+      property: string, # Required. Required string property
     }
-  ], # Required.
+  ], # Required. Property
 }
 </code>
 
@@ -86,9 +86,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Required.
+      property: string, # Required. Required string property
     }
-  ], # Required.
+  ], # Required. Property
 }
 </code>
 
@@ -121,9 +121,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Required.
+      property: string, # Required. Required string property
     }
-  ], # Required.
+  ], # Required. Property
 }
 </code>
 

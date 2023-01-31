@@ -16,16 +16,16 @@ namespace ModelsInCadl.Models
     public partial class RoundTripModel : BaseModel
     {
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredModel"></param>
-        /// <param name="requiredFixedStringEnum"></param>
-        /// <param name="requiredFixedIntEnum"></param>
-        /// <param name="requiredExtensibleEnum"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredIntRecord"></param>
-        /// <param name="requiredStringRecord"></param>
-        /// <param name="requiredModelRecord"></param>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredModel"> Required model with discriminator. </param>
+        /// <param name="requiredFixedStringEnum"> Required fixed string enum. </param>
+        /// <param name="requiredFixedIntEnum"> Required fixed int enum. </param>
+        /// <param name="requiredExtensibleEnum"> Required extensible enum. </param>
+        /// <param name="requiredCollection"> Required collection. </param>
+        /// <param name="requiredIntRecord"> Required int record. </param>
+        /// <param name="requiredStringRecord"> Required string record. </param>
+        /// <param name="requiredModelRecord"> Required Model Record. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/>, <paramref name="requiredIntRecord"/>, <paramref name="requiredStringRecord"/> or <paramref name="requiredModelRecord"/> is null. </exception>
         public RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
         {
@@ -49,16 +49,16 @@ namespace ModelsInCadl.Models
         }
 
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredModel"></param>
-        /// <param name="requiredFixedStringEnum"></param>
-        /// <param name="requiredFixedIntEnum"></param>
-        /// <param name="requiredExtensibleEnum"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredIntRecord"></param>
-        /// <param name="requiredStringRecord"></param>
-        /// <param name="requiredModelRecord"></param>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredModel"> Required model with discriminator. </param>
+        /// <param name="requiredFixedStringEnum"> Required fixed string enum. </param>
+        /// <param name="requiredFixedIntEnum"> Required fixed int enum. </param>
+        /// <param name="requiredExtensibleEnum"> Required extensible enum. </param>
+        /// <param name="requiredCollection"> Required collection. </param>
+        /// <param name="requiredIntRecord"> Required int record. </param>
+        /// <param name="requiredStringRecord"> Required string record. </param>
+        /// <param name="requiredModelRecord"> Required Model Record. </param>
         internal RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord)
         {
             RequiredString = requiredString;
@@ -73,29 +73,29 @@ namespace ModelsInCadl.Models
             RequiredModelRecord = requiredModelRecord;
         }
 
-        /// <summary> Gets or sets the required string. </summary>
+        /// <summary> Required string, illustrating a reference type property. </summary>
         public string RequiredString { get; set; }
-        /// <summary> Gets or sets the required int. </summary>
+        /// <summary> Required int, illustrating a value type property. </summary>
         public int RequiredInt { get; set; }
         /// <summary>
-        /// Gets or sets the required model
+        /// Required model with discriminator
         /// Please note <see cref="BaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="DerivedModelWithDiscriminatorA"/> and <see cref="DerivedModelWithDiscriminatorB"/>.
         /// </summary>
         public BaseModelWithDiscriminator RequiredModel { get; set; }
-        /// <summary> Gets or sets the required fixed string enum. </summary>
+        /// <summary> Required fixed string enum. </summary>
         public FixedStringEnum RequiredFixedStringEnum { get; set; }
-        /// <summary> Gets or sets the required fixed int enum. </summary>
+        /// <summary> Required fixed int enum. </summary>
         public FixedIntEnum RequiredFixedIntEnum { get; set; }
-        /// <summary> Gets or sets the required extensible enum. </summary>
+        /// <summary> Required extensible enum. </summary>
         public ExtensibleEnum RequiredExtensibleEnum { get; set; }
-        /// <summary> Gets the required collection. </summary>
+        /// <summary> Required collection. </summary>
         public IList<CollectionItem> RequiredCollection { get; }
-        /// <summary> Gets the required int record. </summary>
+        /// <summary> Required int record. </summary>
         public IDictionary<string, int> RequiredIntRecord { get; }
-        /// <summary> Gets the required string record. </summary>
+        /// <summary> Required string record. </summary>
         public IDictionary<string, string> RequiredStringRecord { get; }
-        /// <summary> Gets the required model record. </summary>
+        /// <summary> Required Model Record. </summary>
         public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }

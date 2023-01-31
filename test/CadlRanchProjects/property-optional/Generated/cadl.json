@@ -19,7 +19,7 @@
      "$id": "3",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "4",
       "Name": "string",
@@ -44,7 +44,7 @@
      "$id": "6",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "7",
       "Name": "bytes",
@@ -69,7 +69,7 @@
      "$id": "9",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "10",
       "Name": "zonedDateTime",
@@ -94,7 +94,7 @@
      "$id": "12",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "13",
       "Name": "duration",
@@ -119,7 +119,7 @@
      "$id": "15",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "16",
       "Name": "Array",
@@ -149,7 +149,7 @@
      "$id": "19",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "20",
       "Name": "Array",
@@ -176,7 +176,7 @@
      "$id": "22",
      "Name": "optionalProperty",
      "SerializedName": "optionalProperty",
-     "Description": "",
+     "Description": "optional string property",
      "Type": {
       "$id": "23",
       "Name": "string",
@@ -191,7 +191,7 @@
      "$id": "24",
      "Name": "requiredProperty",
      "SerializedName": "requiredProperty",
-     "Description": "",
+     "Description": "required int property",
      "Type": {
       "$id": "25",
       "Name": "int32",

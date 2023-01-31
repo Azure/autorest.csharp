@@ -20,7 +20,7 @@ Response Body:
 
 Schema for <c>DurationProperty</c>:
 <code>{
-  property: string (duration ISO 8601 Format), # Optional.
+  property: string (duration ISO 8601 Format), # Optional. Property
 }
 </code>
 
@@ -45,7 +45,7 @@ Response Body:
 
 Schema for <c>DurationProperty</c>:
 <code>{
-  property: string (duration ISO 8601 Format), # Optional.
+  property: string (duration ISO 8601 Format), # Optional. Property
 }
 </code>
 
@@ -70,7 +70,7 @@ Response Body:
 
 Schema for <c>DurationProperty</c>:
 <code>{
-  property: string (duration ISO 8601 Format), # Optional.
+  property: string (duration ISO 8601 Format), # Optional. Property
 }
 </code>
 
@@ -95,7 +95,7 @@ Response Body:
 
 Schema for <c>DurationProperty</c>:
 <code>{
-  property: string (duration ISO 8601 Format), # Optional.
+  property: string (duration ISO 8601 Format), # Optional. Property
 }
 </code>
 
@@ -131,7 +131,7 @@ Request Body:
 
 Schema for <c>DurationProperty</c>:
 <code>{
-  property: string (duration ISO 8601 Format), # Optional.
+  property: string (duration ISO 8601 Format), # Optional. Property
 }
 </code>
 
@@ -167,7 +167,7 @@ Request Body:
 
 Schema for <c>DurationProperty</c>:
 <code>{
-  property: string (duration ISO 8601 Format), # Optional.
+  property: string (duration ISO 8601 Format), # Optional. Property
 }
 </code>
 
@@ -203,7 +203,7 @@ Request Body:
 
 Schema for <c>DurationProperty</c>:
 <code>{
-  property: string (duration ISO 8601 Format), # Optional.
+  property: string (duration ISO 8601 Format), # Optional. Property
 }
 </code>
 
@@ -239,7 +239,7 @@ Request Body:
 
 Schema for <c>DurationProperty</c>:
 <code>{
-  property: string (duration ISO 8601 Format), # Optional.
+  property: string (duration ISO 8601 Format), # Optional. Property
 }
 </code>
 

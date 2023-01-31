@@ -18,13 +18,13 @@ namespace Models.Property.Optional.Models
         }
 
         /// <summary> Initializes a new instance of DatetimeProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         internal DatetimeProperty(DateTimeOffset? property)
         {
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public DateTimeOffset? Property { get; set; }
     }
 }

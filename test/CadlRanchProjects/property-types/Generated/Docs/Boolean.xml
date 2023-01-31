@@ -20,7 +20,7 @@ Response Body:
 
 Schema for <c>BooleanProperty</c>:
 <code>{
-  property: boolean, # Required.
+  property: boolean, # Required. Property
 }
 </code>
 
@@ -45,7 +45,7 @@ Response Body:
 
 Schema for <c>BooleanProperty</c>:
 <code>{
-  property: boolean, # Required.
+  property: boolean, # Required. Property
 }
 </code>
 
@@ -72,7 +72,7 @@ Request Body:
 
 Schema for <c>BooleanProperty</c>:
 <code>{
-  property: boolean, # Required.
+  property: boolean, # Required. Property
 }
 </code>
 
@@ -99,7 +99,7 @@ Request Body:
 
 Schema for <c>BooleanProperty</c>:
 <code>{
-  property: boolean, # Required.
+  property: boolean, # Required. Property
 }
 </code>
 

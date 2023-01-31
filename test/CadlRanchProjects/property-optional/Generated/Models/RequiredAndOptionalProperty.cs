@@ -11,24 +11,24 @@ namespace Models.Property.Optional.Models
     public partial class RequiredAndOptionalProperty
     {
         /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
-        /// <param name="requiredProperty"></param>
+        /// <param name="requiredProperty"> required int property. </param>
         public RequiredAndOptionalProperty(int requiredProperty)
         {
             RequiredProperty = requiredProperty;
         }
 
         /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
-        /// <param name="optionalProperty"></param>
-        /// <param name="requiredProperty"></param>
+        /// <param name="optionalProperty"> optional string property. </param>
+        /// <param name="requiredProperty"> required int property. </param>
         internal RequiredAndOptionalProperty(string optionalProperty, int requiredProperty)
         {
             OptionalProperty = optionalProperty;
             RequiredProperty = requiredProperty;
         }
 
-        /// <summary> Gets or sets the optional property. </summary>
+        /// <summary> optional string property. </summary>
         public string OptionalProperty { get; set; }
-        /// <summary> Gets or sets the required property. </summary>
+        /// <summary> required int property. </summary>
         public int RequiredProperty { get; set; }
     }
 }

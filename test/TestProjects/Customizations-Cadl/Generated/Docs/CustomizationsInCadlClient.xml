@@ -70,27 +70,27 @@ Request Body:
 Schema for <c>RootModel</c>:
 <code>{
   propertyModelToMakeInternal: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToMakeInternal
   propertyModelToRename: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToRename
   propertyModelToChangeNamespace: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToChangeNamespace
   propertyModelWithCustomizedProperties: {
-    propertyToMakeInternal: number, # Required.
-    propertyToRename: number, # Required.
-    propertyToMakeFloat: number, # Required.
-    propertyToMakeInt: number, # Required.
-    propertyToMakeDuration: string, # Required.
-    propertyToMakeString: string (duration ISO 8601 Format), # Required.
-    propertyToMakeJsonElement: string, # Required.
-    propertyToField: string, # Required.
-  }, # Optional.
-  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
+    propertyToMakeInternal: number, # Required. Public property made internal
+    propertyToRename: number, # Required. Renamed property (original name: PropertyToRename)
+    propertyToMakeFloat: number, # Required. Property with type changed to float (original type: int)
+    propertyToMakeInt: number, # Required. Property with type changed to int (original type: float)
+    propertyToMakeDuration: string, # Required. Property with type changed to duration (original type: string)
+    propertyToMakeString: string (duration ISO 8601 Format), # Required. Property with type changed to string (original type: duration)
+    propertyToMakeJsonElement: string, # Required. Property with type changed to JsonElement (original type: string)
+    propertyToField: string, # Required. Field that replaces property (original name: PropertyToField)
+  }, # Optional. ModelWithCustomizedProperties
+  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToRename
+  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumWithValueToRename
+  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToBeMadeExtensible
 }
 </code>
 
@@ -99,27 +99,27 @@ Response Body:
 Schema for <c>RootModel</c>:
 <code>{
   propertyModelToMakeInternal: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToMakeInternal
   propertyModelToRename: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToRename
   propertyModelToChangeNamespace: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToChangeNamespace
   propertyModelWithCustomizedProperties: {
-    propertyToMakeInternal: number, # Required.
-    propertyToRename: number, # Required.
-    propertyToMakeFloat: number, # Required.
-    propertyToMakeInt: number, # Required.
-    propertyToMakeDuration: string, # Required.
-    propertyToMakeString: string (duration ISO 8601 Format), # Required.
-    propertyToMakeJsonElement: string, # Required.
-    propertyToField: string, # Required.
-  }, # Optional.
-  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
+    propertyToMakeInternal: number, # Required. Public property made internal
+    propertyToRename: number, # Required. Renamed property (original name: PropertyToRename)
+    propertyToMakeFloat: number, # Required. Property with type changed to float (original type: int)
+    propertyToMakeInt: number, # Required. Property with type changed to int (original type: float)
+    propertyToMakeDuration: string, # Required. Property with type changed to duration (original type: string)
+    propertyToMakeString: string (duration ISO 8601 Format), # Required. Property with type changed to string (original type: duration)
+    propertyToMakeJsonElement: string, # Required. Property with type changed to JsonElement (original type: string)
+    propertyToField: string, # Required. Field that replaces property (original name: PropertyToField)
+  }, # Optional. ModelWithCustomizedProperties
+  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToRename
+  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumWithValueToRename
+  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToBeMadeExtensible
 }
 </code>
 
@@ -194,27 +194,27 @@ Request Body:
 Schema for <c>RootModel</c>:
 <code>{
   propertyModelToMakeInternal: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToMakeInternal
   propertyModelToRename: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToRename
   propertyModelToChangeNamespace: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToChangeNamespace
   propertyModelWithCustomizedProperties: {
-    propertyToMakeInternal: number, # Required.
-    propertyToRename: number, # Required.
-    propertyToMakeFloat: number, # Required.
-    propertyToMakeInt: number, # Required.
-    propertyToMakeDuration: string, # Required.
-    propertyToMakeString: string (duration ISO 8601 Format), # Required.
-    propertyToMakeJsonElement: string, # Required.
-    propertyToField: string, # Required.
-  }, # Optional.
-  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
+    propertyToMakeInternal: number, # Required. Public property made internal
+    propertyToRename: number, # Required. Renamed property (original name: PropertyToRename)
+    propertyToMakeFloat: number, # Required. Property with type changed to float (original type: int)
+    propertyToMakeInt: number, # Required. Property with type changed to int (original type: float)
+    propertyToMakeDuration: string, # Required. Property with type changed to duration (original type: string)
+    propertyToMakeString: string (duration ISO 8601 Format), # Required. Property with type changed to string (original type: duration)
+    propertyToMakeJsonElement: string, # Required. Property with type changed to JsonElement (original type: string)
+    propertyToField: string, # Required. Field that replaces property (original name: PropertyToField)
+  }, # Optional. ModelWithCustomizedProperties
+  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToRename
+  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumWithValueToRename
+  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToBeMadeExtensible
 }
 </code>
 
@@ -223,27 +223,27 @@ Response Body:
 Schema for <c>RootModel</c>:
 <code>{
   propertyModelToMakeInternal: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToMakeInternal
   propertyModelToRename: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToRename
   propertyModelToChangeNamespace: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToChangeNamespace
   propertyModelWithCustomizedProperties: {
-    propertyToMakeInternal: number, # Required.
-    propertyToRename: number, # Required.
-    propertyToMakeFloat: number, # Required.
-    propertyToMakeInt: number, # Required.
-    propertyToMakeDuration: string, # Required.
-    propertyToMakeString: string (duration ISO 8601 Format), # Required.
-    propertyToMakeJsonElement: string, # Required.
-    propertyToField: string, # Required.
-  }, # Optional.
-  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
+    propertyToMakeInternal: number, # Required. Public property made internal
+    propertyToRename: number, # Required. Renamed property (original name: PropertyToRename)
+    propertyToMakeFloat: number, # Required. Property with type changed to float (original type: int)
+    propertyToMakeInt: number, # Required. Property with type changed to int (original type: float)
+    propertyToMakeDuration: string, # Required. Property with type changed to duration (original type: string)
+    propertyToMakeString: string (duration ISO 8601 Format), # Required. Property with type changed to string (original type: duration)
+    propertyToMakeJsonElement: string, # Required. Property with type changed to JsonElement (original type: string)
+    propertyToField: string, # Required. Field that replaces property (original name: PropertyToField)
+  }, # Optional. ModelWithCustomizedProperties
+  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToRename
+  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumWithValueToRename
+  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToBeMadeExtensible
 }
 </code>
 

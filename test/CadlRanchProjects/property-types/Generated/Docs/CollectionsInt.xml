@@ -20,7 +20,7 @@ Response Body:
 
 Schema for <c>CollectionsIntProperty</c>:
 <code>{
-  property: [number], # Required.
+  property: [number], # Required. Property
 }
 </code>
 
@@ -45,7 +45,7 @@ Response Body:
 
 Schema for <c>CollectionsIntProperty</c>:
 <code>{
-  property: [number], # Required.
+  property: [number], # Required. Property
 }
 </code>
 
@@ -74,7 +74,7 @@ Request Body:
 
 Schema for <c>CollectionsIntProperty</c>:
 <code>{
-  property: [number], # Required.
+  property: [number], # Required. Property
 }
 </code>
 
@@ -103,7 +103,7 @@ Request Body:
 
 Schema for <c>CollectionsIntProperty</c>:
 <code>{
-  property: [number], # Required.
+  property: [number], # Required. Property
 }
 </code>
 

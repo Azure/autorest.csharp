@@ -17,10 +17,10 @@ namespace Azure.Language.Authoring.Models
     public partial class SwapDeploymentsJob
     {
         /// <summary> Initializes a new instance of SwapDeploymentsJob. </summary>
-        /// <param name="jobId"></param>
-        /// <param name="status"></param>
-        /// <param name="warnings"></param>
-        /// <param name="errors"></param>
+        /// <param name="jobId"> The job ID. </param>
+        /// <param name="status"> The job status. </param>
+        /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
+        /// <param name="errors"> The errors encountered while executing the job. </param>
         /// <param name="id"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="jobId"/>, <paramref name="warnings"/>, <paramref name="errors"/> or <paramref name="id"/> is null. </exception>
         internal SwapDeploymentsJob(string jobId, JobStatus status, IEnumerable<JobWarning> warnings, ResponseError errors, string id)
@@ -38,13 +38,13 @@ namespace Azure.Language.Authoring.Models
         }
 
         /// <summary> Initializes a new instance of SwapDeploymentsJob. </summary>
-        /// <param name="jobId"></param>
-        /// <param name="createdDateTime"></param>
-        /// <param name="lastUpdatedDateTime"></param>
-        /// <param name="expirationDateTime"></param>
-        /// <param name="status"></param>
-        /// <param name="warnings"></param>
-        /// <param name="errors"></param>
+        /// <param name="jobId"> The job ID. </param>
+        /// <param name="createdDateTime"> The creation date time of the job. </param>
+        /// <param name="lastUpdatedDateTime"> The the last date time the job was updated. </param>
+        /// <param name="expirationDateTime"> The expiration date time of the job. </param>
+        /// <param name="status"> The job status. </param>
+        /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
+        /// <param name="errors"> The errors encountered while executing the job. </param>
         /// <param name="id"></param>
         internal SwapDeploymentsJob(string jobId, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, DateTimeOffset expirationDateTime, JobStatus status, IReadOnlyList<JobWarning> warnings, ResponseError errors, string id)
         {
@@ -58,19 +58,19 @@ namespace Azure.Language.Authoring.Models
             Id = id;
         }
 
-        /// <summary> Gets the job id. </summary>
+        /// <summary> The job ID. </summary>
         public string JobId { get; }
-        /// <summary> Gets the created date time. </summary>
+        /// <summary> The creation date time of the job. </summary>
         public DateTimeOffset CreatedDateTime { get; }
-        /// <summary> Gets the last updated date time. </summary>
+        /// <summary> The the last date time the job was updated. </summary>
         public DateTimeOffset LastUpdatedDateTime { get; }
-        /// <summary> Gets the expiration date time. </summary>
+        /// <summary> The expiration date time of the job. </summary>
         public DateTimeOffset ExpirationDateTime { get; }
-        /// <summary> Gets the status. </summary>
+        /// <summary> The job status. </summary>
         public JobStatus Status { get; }
-        /// <summary> Gets the warnings. </summary>
+        /// <summary> The warnings that were encountered while executing the job. </summary>
         public IReadOnlyList<JobWarning> Warnings { get; }
-        /// <summary> Gets the errors. </summary>
+        /// <summary> The errors encountered while executing the job. </summary>
         public ResponseError Errors { get; }
         /// <summary> Gets the id. </summary>
         public string Id { get; }
