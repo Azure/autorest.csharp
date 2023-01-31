@@ -60,13 +60,9 @@ namespace AutoRest.CSharp.Output.Models
 
         private InputOperation InitializeOperation(InputOperation operation)
         {
-            if (operation.Paging == null)
+            if (operation.Paging == null && GetFirstBodyType(operation) is InputListType)
             {
-                var operationBodyTypes = operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
-                if (operationBodyTypes.Length != 0 && operationBodyTypes[0] is InputListType)
-                {
-                    operation = operation with { Paging = new OperationPaging() };
-                }
+                operation = operation with { Paging = new OperationPaging() };
             }
             return operation;
         }
@@ -131,18 +127,20 @@ namespace AutoRest.CSharp.Output.Models
             return first!.Type.Equals(second!.Type);
         }
 
+        private InputType? GetFirstBodyType(InputOperation operation)
+        {
+            var operationBodyTypes = operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
+            return operationBodyTypes.Length != 0 ? operationBodyTypes[0] : null;
+        }
+
         private ReturnTypeChain BuildReturnTypes()
         {
-            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
             CSharpType? responseType = null;
-            if (operationBodyTypes.Length != 0)
+            var firstBodyType = GetFirstBodyType(Operation);
+            if (firstBodyType != null)
             {
-                var firstBodyType = operationBodyTypes[0];
-                if (firstBodyType != null)
-                {
-                    responseType = _typeFactory.CreateType(firstBodyType);
-                }
-            };
+                responseType = _typeFactory.CreateType(firstBodyType);
+            }
 
             if (Operation.Paging != null)
             {
