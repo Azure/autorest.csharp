@@ -25,7 +25,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
+     "IsReadOnly": true,
      "IsDiscriminator": false
     },
     {
@@ -95,10 +95,41 @@
       },
       {
        "$id": "13",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "14",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "15",
+        "Type": {
+         "$id": "16",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-05-15-preview"
+       }
+      },
+      {
+       "$id": "17",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "14",
+        "$id": "18",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -114,15 +145,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "15",
+       "$id": "19",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "This request has a JSON Merge Patch body.",
        "Type": {
-        "$id": "16",
+        "$id": "20",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "17",
+         "$id": "21",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -132,9 +163,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "22",
         "Type": {
-         "$ref": "16"
+         "$ref": "20"
         },
         "Value": "application/merge-patch+json"
        },
@@ -148,40 +179,10 @@
        "Kind": "Constant"
       },
       {
-       "$id": "19",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "20",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "21",
-        "Type": {
-         "$id": "22",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "2022-05-15-preview"
-       }
-      },
-      {
        "$id": "23",
-       "Name": "Pet",
-       "NameInRequest": "Pet",
+       "Name": "resource",
+       "NameInRequest": "resource",
+       "Description": "The resource instance.",
        "Type": {
         "$ref": "2"
        },

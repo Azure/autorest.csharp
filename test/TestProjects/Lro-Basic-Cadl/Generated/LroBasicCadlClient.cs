@@ -57,27 +57,27 @@ namespace LroBasicCadl
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="project"> The Project to use. </param>
+        /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="project"/> is null. </exception>
-        public virtual async Task<Operation> CreateProjectAsync(WaitUntil waitUntil, Project project, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
+        public virtual async Task<Operation> CreateProjectAsync(WaitUntil waitUntil, Project resource, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(project, nameof(project));
+            Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            return await CreateProjectAsync(waitUntil, project.ToRequestContent(), context).ConfigureAwait(false);
+            return await CreateProjectAsync(waitUntil, resource.ToRequestContent(), context).ConfigureAwait(false);
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="project"> The Project to use. </param>
+        /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="project"/> is null. </exception>
-        public virtual Operation CreateProject(WaitUntil waitUntil, Project project, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
+        public virtual Operation CreateProject(WaitUntil waitUntil, Project resource, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(project, nameof(project));
+            Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            return CreateProject(waitUntil, project.ToRequestContent(), context);
+            return CreateProject(waitUntil, resource.ToRequestContent(), context);
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -132,33 +132,33 @@ namespace LroBasicCadl
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="id"> The String to use. </param>
-        /// <param name="project"> The Project to use. </param>
+        /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="project"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="resource"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Operation<Project>> UpdateProjectAsync(WaitUntil waitUntil, string id, Project project, CancellationToken cancellationToken = default)
+        public virtual async Task<Operation<Project>> UpdateProjectAsync(WaitUntil waitUntil, string id, Project resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(project, nameof(project));
+            Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = await UpdateProjectAsync(waitUntil, id, project.ToRequestContent(), context).ConfigureAwait(false);
+            Operation<BinaryData> response = await UpdateProjectAsync(waitUntil, id, resource.ToRequestContent(), context).ConfigureAwait(false);
             return ProtocolOperationHelpers.Convert(response, Project.FromResponse, ClientDiagnostics, "LroBasicCadlClient.UpdateProject");
         }
 
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="id"> The String to use. </param>
-        /// <param name="project"> The Project to use. </param>
+        /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="project"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="resource"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Operation<Project> UpdateProject(WaitUntil waitUntil, string id, Project project, CancellationToken cancellationToken = default)
+        public virtual Operation<Project> UpdateProject(WaitUntil waitUntil, string id, Project resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(project, nameof(project));
+            Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = UpdateProject(waitUntil, id, project.ToRequestContent(), context);
+            Operation<BinaryData> response = UpdateProject(waitUntil, id, resource.ToRequestContent(), context);
             return ProtocolOperationHelpers.Convert(response, Project.FromResponse, ClientDiagnostics, "LroBasicCadlClient.UpdateProject");
         }
 
