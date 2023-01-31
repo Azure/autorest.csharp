@@ -67,12 +67,12 @@ namespace AutoRest.CSharp.Output.Models
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
                 .ToArray();
 
-            RequestMethods = clientMethods.Select(m => m.RequestMethod)
-                .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())
-                .Distinct()
-                .ToArray();
+            RequestMethods = clientMethods
+                .Select(m => m.RequestMethods[0])
+                .Concat(clientMethods.Where(m => m.RequestMethods.Count == 2).Select(m => m.RequestMethods[1]))
+                .Distinct().ToArray();
 
-            ResponseClassifierTypes = RequestMethods.Select(m => m.ResponseClassifierType).ToArray();
+            ResponseClassifierTypes = RequestMethods.Select(m => m.ResponseClassifierType).Distinct().ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 

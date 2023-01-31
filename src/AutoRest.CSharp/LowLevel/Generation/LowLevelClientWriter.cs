@@ -87,12 +87,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteProtocolMethods(CodeWriter writer, ClientFields fields, LowLevelClientMethod clientMethod)
         {
-            WriteRequestCreationMethod(writer, clientMethod.RequestMethod, fields);
+            foreach (var requestMethod in clientMethod.RequestMethods)
+            {
+                WriteRequestCreationMethod(writer, requestMethod, fields);
+            }
 
-            WriteProtocolMethodDocumentation(writer, clientMethod, clientMethod.ProtocolMethods[0].Signature);
-            WriteMethod(writer, clientMethod.ProtocolMethods[0]);
-            WriteProtocolMethodDocumentation(writer, clientMethod, clientMethod.ProtocolMethods[1].Signature);
-            WriteMethod(writer, clientMethod.ProtocolMethods[1]);
+            foreach (var protocolMethod in clientMethod.ProtocolMethods)
+            {
+                WriteProtocolMethodDocumentation(writer, clientMethod, protocolMethod.Signature);
+                WriteMethod(writer, protocolMethod);
+            }
         }
 
         private static void WriteMethod(CodeWriter writer, Method method)
@@ -300,7 +304,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteResponseClassifierMethod(CodeWriter writer, IEnumerable<ResponseClassifierType> responseClassifierTypes)
         {
-            foreach ((string name, StatusCodes[] statusCodes) in responseClassifierTypes.Distinct())
+            foreach ((string name, StatusCodes[] statusCodes) in responseClassifierTypes)
             {
                 WriteResponseClassifier(writer, name, statusCodes);
             }
@@ -546,8 +550,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            var docInfo = clientMethod.RequestMethod.Operation.ExternalDocsUrl != null
-                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.RequestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
+            var docInfo = clientMethod.RequestMethods[0].Operation.ExternalDocsUrl != null
+                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{clientMethod.RequestMethods[0].Operation.ExternalDocsUrl}{Environment.NewLine}"
                 : (FormattableString)$"";
 
             var schemaDesription = "";

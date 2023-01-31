@@ -1,14 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -20,9 +16,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class RestClientWriter
     {
-        internal delegate void WriteFuncBody(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, string pipelineName, bool async);
-        internal delegate void WriteStatusCodeImplementation(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, bool async, FieldDeclaration fieldDeclaration);
-
         public void WriteClient(CodeWriter writer, DataPlaneRestClient restClient)
         {
             using (writer.Namespace(restClient.Type.Namespace))
@@ -35,17 +28,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     foreach (var method in restClient.Methods)
                     {
                         RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, false, restClient.Parameters);
-                        WriteOperation(writer, method, restClient.Fields.PipelineField.Name, true, WriteFuncBodyWithSend, null, MethodSignatureModifiers.Public, WriteStatusCodeSwitch, restClient.Fields.GetFieldByParameter(KnownParameters.ClientDiagnostics));
-                        WriteOperation(writer, method, restClient.Fields.PipelineField.Name, false, WriteFuncBodyWithSend, null, MethodSignatureModifiers.Public, WriteStatusCodeSwitch, restClient.Fields.GetFieldByParameter(KnownParameters.ClientDiagnostics));
-                        var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethod.Operation.Equals(method.Operation));
+                        WriteOperation(writer, method, restClient.Fields, true);
+                        WriteOperation(writer, method, restClient.Fields, false);
+                        var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethods[0].Operation.Equals(method.Operation));
                         if (protocolMethod != null)
                         {
                             LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
-                            responseClassifierTypes.Add(protocolMethod.RequestMethod.ResponseClassifierType);
+                            responseClassifierTypes.Add(protocolMethod.RequestMethods[0].ResponseClassifierType);
                         }
                     }
 
-                    LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes);
+                    LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes.Distinct());
                 }
             }
         }
@@ -68,7 +61,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WriteOperation(CodeWriter writer, RestClientMethod operation, string pipelineName, bool async, WriteFuncBody writeFuncBody, string? methodName = null, MethodSignatureModifiers modifiers = MethodSignatureModifiers.Public, WriteStatusCodeImplementation? writeStatusCodeImplementation = null, FieldDeclaration? fieldDeclaration = null)
+        private static void WriteOperation(CodeWriter writer, RestClientMethod operation, ClientFields fields, bool async)
         {
             using var methodScope = writer.AmbientScope();
 
@@ -83,7 +76,7 @@ namespace AutoRest.CSharp.Generation.Writers
             };
 
             var parameters = operation.Parameters.Where(p => p.Name != KnownParameters.RequestContext.Name).Append(KnownParameters.CancellationTokenParameter).ToArray();
-            var method = new MethodSignature($"{methodName ?? operation.Name}", operation.Summary, operation.Description, modifiers, returnType, null, parameters).WithAsync(async);
+            var method = new MethodSignature(operation.Name, operation.Summary, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
 
             writer.WriteXmlDocumentationSummary($"{method.SummaryText}")
                 .WriteXmlDocumentationParameters(method.Parameters)
@@ -98,17 +91,13 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteParameterNullChecks(parameters);
                 var messageVariable = new CodeWriterDeclaration("message");
-                writeFuncBody(writer, messageVariable, operation, pipelineName, async);
-
-                if (writeStatusCodeImplementation != null && fieldDeclaration != null)
-                {
-                    writeStatusCodeImplementation(writer, messageVariable, operation, async, fieldDeclaration);
-                }
+                WriteFuncBodyWithSend(writer, messageVariable, operation, fields.PipelineField.Name, async);
+                WriteStatusCodeSwitch(writer, messageVariable, operation, async, fields.ClientDiagnosticsProperty);
             }
             writer.Line();
         }
 
-        private void WriteFuncBodyWithSend(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, string pipelineName, bool async)
+        private static void WriteFuncBodyWithSend(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, string pipelineName, bool async)
         {
             var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
 
@@ -117,7 +106,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .WriteMethodCall(async, $"{pipelineName}.SendAsync", $"{pipelineName}.Send", $"{messageVariable}, {KnownParameters.CancellationTokenParameter.Name}");
         }
 
-        private void WriteStatusCodeSwitch(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, bool async, FieldDeclaration clientDiagnosticsField)
+        private static void WriteStatusCodeSwitch(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, bool async, FieldDeclaration clientDiagnosticsField)
         {
             ResponseWriterHelpers.WriteStatusCodeSwitch(writer, $"{messageVariable.ActualName}", operation, async, clientDiagnosticsField);
         }

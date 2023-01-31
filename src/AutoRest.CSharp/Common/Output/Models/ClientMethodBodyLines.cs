@@ -147,14 +147,14 @@ namespace AutoRest.CSharp.Output.Models
         {
             public static MethodBodyLine FirstPageRequest(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
             {
-                var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments.ToList(), false);
+                var requestMethodCall = new InstanceMethodCallExpression(restClient, methodName, arguments.ToList(), false);
                 localFunctionName = new CodeWriterDeclaration("FirstPageRequest");
                 return new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint}, typeof(HttpMessage), requestMethodCall);
             }
 
             public static MethodBodyLine NextPageRequest(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
             {
-                var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments.ToList(), false);
+                var requestMethodCall = new InstanceMethodCallExpression(restClient, methodName, arguments.ToList(), false);
                 localFunctionName = new CodeWriterDeclaration("NextPageRequest");
                 return new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint, KnownParameters.NextLink}, typeof(HttpMessage), requestMethodCall);
             }

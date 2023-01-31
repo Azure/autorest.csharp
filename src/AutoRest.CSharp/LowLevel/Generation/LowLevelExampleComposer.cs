@@ -188,9 +188,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 builder.AppendLine();
             }
 
-            if (clientMethod.LongRunning != null)
+            if (clientMethod.LongRunning is not null)
             {
-                if (clientMethod.PagingInfo is { NextPageMethod: { } })
+                if (clientMethod.PagingInfo is not null)
                 {
                     ComposeHandleLongRunningPageableResponseCode(clientMethod, signature, async, allParameters, builder);
                 }
@@ -199,7 +199,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     ComposeHandleLongRunningResponseCode(clientMethod, signature, async, allParameters, builder);
                 }
             }
-            else if (clientMethod.PagingInfo != null)
+            else if (clientMethod.PagingInfo is not null)
             {
                 ComposeHandlePageableResponseCode(clientMethod, signature, async, allParameters, builder);
             }

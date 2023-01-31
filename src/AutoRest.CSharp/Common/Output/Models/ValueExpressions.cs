@@ -62,8 +62,7 @@ namespace AutoRest.CSharp.Output.Models
 
             public static ValueExpression CreateRequestMethod(string methodName, IEnumerable<Parameter> parameters)
             {
-                var createRequestMethodName = RequestWriterHelpers.CreateRequestMethodName(methodName);
-                return new InstanceMethodCallExpression(null, createRequestMethodName, parameters.Select(p => new ParameterReference(p)).ToList(), false);
+                return new InstanceMethodCallExpression(null, methodName, parameters.Select(p => new ParameterReference(p)).ToList(), false);
             }
 
             public static ValueExpression ProtocolMethod(string methodName, IReadOnlyList<ValueExpression> arguments, bool async)

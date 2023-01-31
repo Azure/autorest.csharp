@@ -10,10 +10,9 @@ namespace AutoRest.CSharp.Output.Models
     internal record LowLevelClientMethod(
         IReadOnlyList<Method> ConvenienceMethods,
         IReadOnlyList<Method> ProtocolMethods,
-        RestClientMethod RequestMethod,
+        IReadOnlyList<RestClientMethod> RequestMethods,
         InputType? RequestBodyType,
         InputType? ResponseBodyType,
-        Diagnostic ProtocolMethodDiagnostic,
         ProtocolMethodPaging? PagingInfo,
         OperationLongRunning? LongRunning);
 }

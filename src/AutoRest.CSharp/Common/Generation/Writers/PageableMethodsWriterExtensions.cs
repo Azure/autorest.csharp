@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             return writer.Line();
         }
-        
+
         private static void EnsureRequestContextVariable(this CodeWriter writer, List<Parameter> parameters, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod)
         {
             if (ContainsRequestContext(parameters))
