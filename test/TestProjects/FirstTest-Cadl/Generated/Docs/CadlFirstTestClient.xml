@@ -6,7 +6,8 @@
 This sample shows how to call TopActionAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.TopActionAsync("<action>");
 
@@ -42,7 +43,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call TopAction with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.TopAction("<action>");
 
@@ -78,7 +80,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.TopAction2Async();
 
@@ -114,7 +117,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.TopAction2();
 
@@ -150,7 +154,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call PatchActionAsync with required request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -208,7 +213,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call PatchAction with required request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -266,7 +272,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call AnonymousBodyAsync with required request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -324,7 +331,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call AnonymousBody with required request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -382,7 +390,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call FriendlyModelAsync with required request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -420,7 +429,8 @@ Schema for <c>Friend</c>:
 This sample shows how to call FriendlyModel with required request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -458,7 +468,8 @@ Schema for <c>Friend</c>:
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.AddTimeHeaderAsync();
 Console.WriteLine(response.Status);
@@ -466,7 +477,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AddTimeHeaderAsync with all parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
@@ -478,7 +490,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.AddTimeHeader();
 Console.WriteLine(response.Status);
@@ -486,7 +499,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AddTimeHeader with all parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
@@ -498,7 +512,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call SayHiAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
 
@@ -513,7 +528,8 @@ Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>");
 
@@ -549,7 +565,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call SayHi with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>");
 
@@ -564,7 +581,8 @@ Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 This sample shows how to call SayHi with all parameters, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>");
 
@@ -600,7 +618,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call HelloAgainAsync with required parameters and request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -674,7 +693,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call HelloAgain with required parameters and request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -748,7 +768,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call NoContentTypeAsync with required parameters and request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -822,7 +843,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call NoContentType with required parameters and request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -896,7 +918,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call HelloDemo2Async and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.HelloDemo2Async();
 
@@ -932,7 +955,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call HelloDemo2 and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.HelloDemo2();
 
@@ -963,14 +987,149 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloLiteralAsync(RequestContext)">
+    <member name="CreateLiteralAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateLiteralAsync with required request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+};
+
+Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredUnion: Union, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredUnion: Union, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="CreateLiteral(RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateLiteral with required request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+};
+
+Response response = client.CreateLiteral(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredUnion: Union, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredUnion: Union, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="HelloLiteralAsync(Int32,String,Boolean,RequestContext)">
 <example>
 This sample shows how to call HelloLiteralAsync and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.HelloLiteralAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+]]></code>
+This sample shows how to call HelloLiteralAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+Response response = await client.HelloLiteralAsync(123, <test>, true);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -999,14 +1158,31 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloLiteral(RequestContext)">
+    <member name="HelloLiteral(Int32,String,Boolean,RequestContext)">
 <example>
 This sample shows how to call HelloLiteral and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.HelloLiteral();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+]]></code>
+This sample shows how to call HelloLiteral with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+Response response = client.HelloLiteral(123, <test>, true);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1040,7 +1216,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call GetUnknownValueAsync and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.GetUnknownValueAsync();
 
@@ -1054,7 +1231,8 @@ Console.WriteLine(result.ToString());
 This sample shows how to call GetUnknownValue and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.GetUnknownValue();
 

@@ -39,28 +39,30 @@ namespace CadlFirstTest
         }
 
         /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public CadlFirstTestClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlFirstTestClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public CadlFirstTestClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new CadlFirstTestClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public CadlFirstTestClient(TokenCredential credential) : this(credential, new Uri("http://localhost:300"), new CadlFirstTestClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public CadlFirstTestClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new CadlFirstTestClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public CadlFirstTestClient(AzureKeyCredential credential, Uri endpoint, CadlFirstTestClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public CadlFirstTestClient(Uri endpoint, AzureKeyCredential credential, CadlFirstTestClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new CadlFirstTestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -71,14 +73,14 @@ namespace CadlFirstTest
         }
 
         /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="endpoint"> Endpoint Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public CadlFirstTestClient(TokenCredential credential, Uri endpoint, CadlFirstTestClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public CadlFirstTestClient(Uri endpoint, TokenCredential credential, CadlFirstTestClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new CadlFirstTestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -766,56 +768,150 @@ namespace CadlFirstTest
             }
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> Create with literal value. </summary>
+        /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> HelloLiteralValueAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<Response<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteralValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await HelloLiteralAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await CreateLiteralAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> Create with literal value. </summary>
+        /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> HelloLiteralValue(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual Response<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteralValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = HelloLiteral(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = CreateLiteral(body.ToRequestContent(), context);
+            return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> Create with literal value. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
-        public virtual async Task<Response> HelloLiteralAsync(RequestContext context = null)
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> CreateLiteralAsync(RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.CreateLiteral");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateCreateLiteralRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create with literal value. </summary>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
+        public virtual Response CreateLiteral(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.CreateLiteral");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateCreateLiteralRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Send literal parameters. </summary>
+        /// <param name="p2"> The Literal to use. </param>
+        /// <param name="p1"> The Literal to use. </param>
+        /// <param name="p3"> The Literal to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
+        public virtual async Task<Response<Thing>> HelloLiteralValueAsync(int p2 = 123, string p1 = "test", bool p3 = true, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(p1, nameof(p1));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteralValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await HelloLiteralAsync(p2, p1, p3, context).ConfigureAwait(false);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Send literal parameters. </summary>
+        /// <param name="p2"> The Literal to use. </param>
+        /// <param name="p1"> The Literal to use. </param>
+        /// <param name="p3"> The Literal to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
+        public virtual Response<Thing> HelloLiteralValue(int p2 = 123, string p1 = "test", bool p3 = true, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(p1, nameof(p1));
+
+            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteralValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = HelloLiteral(p2, p1, p3, context);
+                return Response.FromValue(Thing.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Send literal parameters. </summary>
+        /// <param name="p2"> The Literal to use. </param>
+        /// <param name="p1"> The Literal to use. </param>
+        /// <param name="p3"> The Literal to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(Int32,String,Boolean,RequestContext)']/*" />
+        public virtual async Task<Response> HelloLiteralAsync(int p2 = 123, string p1 = "test", bool p3 = true, RequestContext context = null)
+        {
+            Argument.AssertNotNull(p1, nameof(p1));
+
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteral");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloLiteralRequest(context);
+                using HttpMessage message = CreateHelloLiteralRequest(p2, p1, p3, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -826,17 +922,23 @@ namespace CadlFirstTest
         }
 
         /// <summary> Send literal parameters. </summary>
+        /// <param name="p2"> The Literal to use. </param>
+        /// <param name="p1"> The Literal to use. </param>
+        /// <param name="p3"> The Literal to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
-        public virtual Response HelloLiteral(RequestContext context = null)
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(Int32,String,Boolean,RequestContext)']/*" />
+        public virtual Response HelloLiteral(int p2 = 123, string p1 = "test", bool p3 = true, RequestContext context = null)
         {
+            Argument.AssertNotNull(p1, nameof(p1));
+
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteral");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloLiteralRequest(context);
+                using HttpMessage message = CreateHelloLiteralRequest(p2, p1, p3, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1053,7 +1155,23 @@ namespace CadlFirstTest
             return message;
         }
 
-        internal HttpMessage CreateHelloLiteralRequest(RequestContext context)
+        internal HttpMessage CreateCreateLiteralRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/literal", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateHelloLiteralRequest(int p2, string p1, bool p3, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1061,11 +1179,11 @@ namespace CadlFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/helloLiteral/", false);
-            uri.AppendPath(123, true);
-            uri.AppendQuery("p3", true, true);
+            uri.AppendPath(p2, true);
+            uri.AppendQuery("p3", p3, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("p1", "test");
+            request.Headers.Add("p1", p1);
             request.Headers.Add("Accept", "application/json");
             return message;
         }

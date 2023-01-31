@@ -3,10 +3,20 @@ import "@cadl-lang/openapi";
 import "@azure-tools/cadl-dpg";
 import "@azure-tools/cadl-azure-core";
 
-@serviceTitle("Hello world")
-@serviceVersion("0.1.0")
+@service(
+    {
+        title: "hello world",
+        version: "0.1.0"
+    }
+)
 @doc("This is a sample cadl project.")
-@server("http://localhost:300","Endpoint Service")
+@server(
+    "{firstTestCadlUrl}",
+    "Endpoint Service",
+    {
+        firstTestCadlUrl: string,
+    }
+)
 @useAuth(OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)
 @Cadl.Rest.produces("application/json")
 @Cadl.Rest.consumes("application/json")
@@ -118,6 +128,12 @@ namespace Hello.Demo2 {
     @doc("Return hi in demo2")
     @get
     op helloDemo2(): Thing;
+
+    @route("/literal")
+    @convenienceAPI
+    @doc("Create with literal value")
+    @post
+    op createLiteral(@body body: Thing): Thing;
 
     @route("/helloLiteral")
     @convenienceAPI
