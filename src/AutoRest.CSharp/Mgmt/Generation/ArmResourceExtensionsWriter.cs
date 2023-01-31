@@ -78,6 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line();
             }
 
+            var scopeTypes = GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
             var signature = new MethodSignature(
                 $"Get{resource.ResourceName}",
                 null,
@@ -85,10 +86,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 GetMethodModifiers(),
                 resource.Type,
                 $"Returns a <see cref=\"{resource.Type}\" /> object.",
-                GetParametersForSingletonEntry());
+                GetParametersForSingletonEntry(scopeTypes));
             using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
             {
-                WriteMethodBodyWrapper(signature, false, false, resource.RequestPath.GetParameterizedScopeResourceTypes());
+                WriteMethodBodyWrapper(signature, false, false, scopeTypes);
             }
         }
 
@@ -100,6 +101,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line();
             }
 
+            var scopeTypes = GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
             var resourceCollection = resource.ResourceCollection!;
             var signature = new MethodSignature(
                 $"{GetResourceCollectionMethodName(resourceCollection)}",
@@ -108,10 +110,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 GetMethodModifiers(),
                 resourceCollection.Type,
                 $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
-                GetParametersForCollectionEntry(resourceCollection));
+                GetParametersForCollectionEntry(resourceCollection, scopeTypes));
             using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
             {
-                WriteMethodBodyWrapper(signature, false, false, resource.RequestPath.GetParameterizedScopeResourceTypes());
+                WriteMethodBodyWrapper(signature, false, false, scopeTypes);
             }
         }
 
@@ -123,6 +125,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line();
             }
 
+            var scopeTypes = GetScopeTypeStrings(resourceCollection.RequestPath.GetParameterizedScopeResourceTypes());
             var getOperation = resourceCollection.GetOperation;
             // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
             var methodSignature = getOperation.MethodSignature with
@@ -131,18 +134,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.ResourceName}",
                 Modifiers = GetMethodModifiers(),
                 // There could be parameters to get resource collection
-                Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
+                Parameters = GetParametersForCollectionEntry(resourceCollection, scopeTypes).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
                 Attributes = new[] { new CSharpAttribute(typeof(ForwardsClientCallsAttribute)) }
             };
 
             _writer.Line();
             using (_writer.WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, This.Accessibility == "public"))
             {
-                WriteResourceEntry(resourceCollection, isAsync);
+                WriteResourceEntry(resourceCollection, isAsync, scopeTypes);
             }
         }
 
-        private new void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync)
+        private void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync, ICollection<FormattableString>? types)
         {
             if (IsArmCore)
             {
@@ -150,23 +153,32 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                WriteScopeResourceTypesValidation(_scopeParameter.Name, resourceCollection.RequestPath.GetParameterizedScopeResourceTypes());
+                WriteScopeResourceTypesValidation(_scopeParameter.Name, types);
                 var operation = resourceCollection.GetOperation;
-                string awaitText = isAsync & !operation.IsPagingOperation ? " await" : string.Empty;
                 string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
-                _writer.Append($"return{awaitText} {GetResourceCollectionMethodName(resourceCollection)}({GetResourceCollectionMethodArgumentList(resourceCollection)}).{operation.MethodSignature.WithAsync(isAsync).Name}(");
 
+                _writer.AppendRaw("return ")
+                    .AppendRawIf("await ", isAsync && !operation.IsPagingOperation)
+                    .Append($"{GetResourceCollectionMethodName(resourceCollection)}(");
+                foreach (var parameter in GetParametersForCollectionEntry(resourceCollection, types))
+                {
+                    _writer.Append($"{parameter.Name:I},");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.Append($").{operation.MethodSignature.WithAsync(isAsync).Name}(");
                 foreach (var parameter in operation.MethodSignature.Parameters)
                 {
                     _writer.Append($"{parameter.Name},");
                 }
 
                 _writer.RemoveTrailingComma();
-                _writer.Line($"){configureAwait};");
+                _writer.AppendRaw(")")
+                    .AppendRawIf(".ConfigureAwait(false)", isAsync && !operation.IsPagingOperation)
+                    .LineRaw(";");
             }
         }
 
-        private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging, IEnumerable<ResourceTypeSegment>? scopeTypes)
+        private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging, ICollection<FormattableString>? scopeTypes)
         {
             WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
 
@@ -185,29 +197,49 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 .LineRaw(";");
         }
 
-        private void WriteScopeResourceTypesValidation(string parameterName, IEnumerable<ResourceTypeSegment>? scopeTypes)
+        private ICollection<FormattableString>? GetScopeTypeStrings(IEnumerable<ResourceTypeSegment>? scopeTypes)
         {
+            if (scopeTypes == null || scopeTypes.Contains(ResourceTypeSegment.Any))
+                return null;
+
+            return scopeTypes.Select(type => (FormattableString)$"{type}").ToArray();
+        }
+
+        private void WriteScopeResourceTypesValidation(string parameterName, ICollection<FormattableString>? types)
+        {
+            if (types == null)
+                return;
             // validate the scope types
-            if (scopeTypes != null && !scopeTypes.Contains(ResourceTypeSegment.Any))
+            var typeAssertions = types.Select(type => (FormattableString)$"!{parameterName:I}.ResourceType.Equals(\"{type}\")").ToArray();
+            var assertion = typeAssertions.Join(" || ");
+            using (_writer.Scope($"if ({assertion})"))
             {
-                var typeStrings = scopeTypes.Select(type => (FormattableString)$"{type.SerializedType}").ToArray();
-                var typeAssertions = scopeTypes.Select(type => (FormattableString)$"!{parameterName:I}.ResourceType.Equals(\"{type.SerializedType}\")").ToArray();
-                var assertion = typeAssertions.Join(" || ");
-                using (_writer.Scope($"if ({assertion})"))
-                {
-                    _writer.Line($"throw new {typeof(ArgumentException)}({typeof(string)}.{nameof(string.Format)}(\"Invalid resource type {{0}} expected {typeStrings.Join(", ", " or ")}\", {parameterName:I}.ResourceType));");
-                }
+                _writer.Line($"throw new {typeof(ArgumentException)}({typeof(string)}.{nameof(string.Format)}(\"Invalid resource type {{0}} expected {types.Join(", ", " or ")}\", {parameterName:I}.ResourceType));");
             }
         }
 
-        private new string GetResourceCollectionMethodArgumentList(ResourceCollection resourceCollection)
+        private Parameter[] GetParametersForSingletonEntry(ICollection<FormattableString>? types)
+            => IsArmCore
+                ? base.GetParametersForSingletonEntry()
+                : new[] {
+                    _armClientParameter,
+                    GetScopeParameter(types)
+                };
+
+        private Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection, ICollection<FormattableString>? types)
+            => IsArmCore
+                ? base.GetParametersForCollectionEntry(resourceCollection)
+                : resourceCollection.ExtraConstructorParameters.Prepend(GetScopeParameter(types)).Prepend(_armClientParameter).ToArray();
+
+        private Parameter GetScopeParameter(ICollection<FormattableString>? types)
         {
-            return string.Join(", ", GetParametersForCollectionEntry(resourceCollection).Select(p => p.Name));
+            if (types == null)
+                return _scopeParameter;
+
+            return _scopeParameter with
+            {
+                Description = _scopeParameter.Description + $" Expected resource type includes the following: {types.Join(", ", " or ")}"
+            };
         }
-
-        private new Parameter[] GetParametersForSingletonEntry() => IsArmCore ? base.GetParametersForSingletonEntry() : new[] { _armClientParameter, _scopeParameter };
-
-        private new Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
-            => IsArmCore ? base.GetParametersForCollectionEntry(resourceCollection) : resourceCollection.ExtraConstructorParameters.Prepend(_scopeParameter).Prepend(_armClientParameter).ToArray();
     }
 }

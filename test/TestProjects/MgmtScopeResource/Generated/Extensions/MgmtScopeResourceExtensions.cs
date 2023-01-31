@@ -590,7 +590,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmClient client, ResourceIdentifier scope)
         {
@@ -639,7 +639,7 @@ namespace MgmtScopeResource
         /// </list>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -692,7 +692,7 @@ namespace MgmtScopeResource
         /// </list>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
