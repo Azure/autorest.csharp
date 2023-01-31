@@ -406,3 +406,20 @@ op roundTripRecursive(@body input: RoundTripRecursiveModel): RoundTripRecursiveM
 @get
 @convenienceAPI
 op selfReference(): ErrorModel;
+
+@doc("Base model")
+model NoUseBase {
+  @doc("base model property")
+  baseModelProp: string;
+}
+
+@doc("Derived model")
+model RoundTripOnNoUse extends NoUseBase {
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+}
+
+@doc("Returns RoundTripOnNoUse")
+@get
+@convenienceAPI
+op roundTripToOutputWithNoUseBase(@body input: RoundTripOnNoUse): RoundTripOnNoUse;
