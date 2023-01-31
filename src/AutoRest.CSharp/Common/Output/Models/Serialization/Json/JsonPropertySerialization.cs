@@ -8,8 +8,8 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal class JsonPropertySerialization : PropertySerialization
     {
-        public JsonPropertySerialization(string parameterName, string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, JsonSerialization valueSerialization, bool isRequired, bool shouldSkipSerialization, bool optionalViaNullability)
-            : base(propertyName, serializedName, propertyType, valueType, isRequired, shouldSkipSerialization)
+        public JsonPropertySerialization(string parameterName, string propertyName, string serializedName, CSharpType propertyType, CSharpType? valueType, JsonSerialization valueSerialization, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization, bool optionalViaNullability)
+            : base(propertyName, serializedName, propertyType, valueType, isRequired, shouldSkipSerialization, shouldSkipDeserialization)
         {
             ParameterName = parameterName;
             OptionalViaNullability = optionalViaNullability;

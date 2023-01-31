@@ -147,6 +147,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         shouldSkipSerialization,
+                        property.ShouldSkipDeserialization,
                         optionalViaNullability));
                 }
             }

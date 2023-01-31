@@ -73,7 +73,7 @@ export function mapCadlTypeToCSharpInputTypeKind(
             let nubmerValue = cadlType.value;
             if (nubmerValue % 1 === 0) {
                 return InputTypeKind.Int32;
-            };
+            }
             return InputTypeKind.Float64;
         case "Boolean":
             return InputTypeKind.Boolean;

@@ -288,6 +288,11 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (JsonPropertySerialization property in propertySerializations)
             {
+                if (property.ShouldSkipDeserialization)
+                {
+                    continue;
+                }
+
                 writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}))");
                 using (writer.Scope())
                 {
@@ -379,9 +384,9 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         /// Collects a list of properties being read from all level of object hierarchy
-        private static void CollectProperties(Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, IEnumerable<JsonPropertySerialization> jsonProperties)
+        private static void CollectPropertiesForDeserialization(Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, IEnumerable<JsonPropertySerialization> jsonProperties)
         {
-            foreach (JsonPropertySerialization jsonProperty in jsonProperties)
+            foreach (JsonPropertySerialization jsonProperty in jsonProperties.Where(p => !p.ShouldSkipDeserialization))
             {
                 if (jsonProperty.ValueType != null)
                 {
@@ -399,7 +404,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else if (jsonProperty.PropertySerializations != null)
                 {
-                    CollectProperties(propertyVariables, jsonProperty.PropertySerializations);
+                    CollectPropertiesForDeserialization(propertyVariables, jsonProperty.PropertySerializations);
                 }
             }
         }
@@ -492,7 +497,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // collect all properties and initialize the dictionary
             var propertyVariables = new Dictionary<JsonPropertySerialization, ObjectPropertyVariable>();
 
-            CollectProperties(propertyVariables, serialization.Properties);
+            CollectPropertiesForDeserialization(propertyVariables, serialization.Properties);
 
             var additionalProperties = serialization.AdditionalProperties;
             if (additionalProperties != null)

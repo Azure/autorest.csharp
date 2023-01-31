@@ -68,6 +68,18 @@ model Thing {
 
   @doc("required literal bool")
   requiredLiteralBool: false;
+
+  @doc("optional literal string")
+  optionalLiteralString: "reject";
+
+  @doc("optional literal int")
+  optionalLiteralInt: 456;
+
+  @doc("optional literal double")
+  optionalLiteralDouble: 4.56;
+
+  @doc("optional literal bool")
+  optionalLiteralBool: true;
 }
 
 @friendlyName("Friend")

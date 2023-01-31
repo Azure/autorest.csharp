@@ -41,5 +41,17 @@ namespace CadlFirstTest.Models
 
         /// <summary> Gets the required literal bool. </summary>
         internal bool RequiredLiteralBool { get; } = false;
+
+        /// <summary> Gets the optional literal string. </summary>
+        internal string OptionalLiteralString { get; } = "reject";
+
+        /// <summary> Gets the optional literal int. </summary>
+        internal int OptionalLiteralInt { get; } = 456;
+
+        /// <summary> Gets the optional literal double. </summary>
+        internal double OptionalLiteralDouble { get; } = 4.56;
+
+        /// <summary> Gets the optional literal bool. </summary>
+        internal bool OptionalLiteralBool { get; } = true;
     }
 }

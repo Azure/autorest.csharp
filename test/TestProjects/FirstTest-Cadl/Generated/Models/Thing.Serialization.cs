@@ -28,6 +28,14 @@ namespace CadlFirstTest.Models
             writer.WriteNumberValue(RequiredLiteralDouble);
             writer.WritePropertyName("requiredLiteralBool");
             writer.WriteBooleanValue(RequiredLiteralBool);
+            writer.WritePropertyName("optionalLiteralString");
+            writer.WriteStringValue(OptionalLiteralString);
+            writer.WritePropertyName("optionalLiteralInt");
+            writer.WriteNumberValue(OptionalLiteralInt);
+            writer.WritePropertyName("optionalLiteralDouble");
+            writer.WriteNumberValue(OptionalLiteralDouble);
+            writer.WritePropertyName("optionalLiteralBool");
+            writer.WriteBooleanValue(OptionalLiteralBool);
             writer.WriteEndObject();
         }
 
@@ -35,10 +43,6 @@ namespace CadlFirstTest.Models
         {
             string name = default;
             string requiredUnion = default;
-            string requiredLiteralString = default;
-            int requiredLiteralInt = default;
-            double requiredLiteralDouble = default;
-            bool requiredLiteralBool = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -49,26 +53,6 @@ namespace CadlFirstTest.Models
                 if (property.NameEquals("requiredUnion"))
                 {
                     requiredUnion = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralString"))
-                {
-                    requiredLiteralString = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralInt"))
-                {
-                    requiredLiteralInt = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralDouble"))
-                {
-                    requiredLiteralDouble = property.Value.GetDouble();
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteralBool"))
-                {
-                    requiredLiteralBool = property.Value.GetBoolean();
                     continue;
                 }
             }
