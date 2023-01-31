@@ -5,50 +5,9 @@
 
 #nullable disable
 
-using System.Text.Json;
-using Azure;
-using Azure.Core;
-
 namespace ModelsInCadl.Models
 {
-    public partial class NoUseBase : IUtf8JsonSerializable
+    public partial class NoUseBase
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("baseModelProp");
-            writer.WriteStringValue(BaseModelProp);
-            writer.WriteEndObject();
-        }
-
-        internal static NoUseBase DeserializeNoUseBase(JsonElement element)
-        {
-            string baseModelProp = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("baseModelProp"))
-                {
-                    baseModelProp = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new NoUseBase(baseModelProp);
-        }
-
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static NoUseBase FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNoUseBase(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
-        }
     }
 }

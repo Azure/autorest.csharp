@@ -16,17 +16,14 @@ namespace AnomalyDetector.Models
     public partial class MultivariateDetectionResult
     {
         /// <summary> Initializes a new instance of MultivariateDetectionResult. </summary>
-        /// <param name="resultId"></param>
         /// <param name="summary"></param>
         /// <param name="results"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/>, <paramref name="summary"/> or <paramref name="results"/> is null. </exception>
-        internal MultivariateDetectionResult(string resultId, MultivariateBatchDetectionResultSummary summary, IEnumerable<AnomalyState> results)
+        /// <exception cref="ArgumentNullException"> <paramref name="summary"/> or <paramref name="results"/> is null. </exception>
+        internal MultivariateDetectionResult(MultivariateBatchDetectionResultSummary summary, IEnumerable<AnomalyState> results)
         {
-            Argument.AssertNotNull(resultId, nameof(resultId));
             Argument.AssertNotNull(summary, nameof(summary));
             Argument.AssertNotNull(results, nameof(results));
 
-            ResultId = resultId;
             Summary = summary;
             Results = results.ToList();
         }

@@ -1560,7 +1560,7 @@
    "Namespace": "ModelsInCadl",
    "Description": "Base model",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": "None",
    "Properties": [
     {
      "$id": "196",

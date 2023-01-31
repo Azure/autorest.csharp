@@ -51,6 +51,7 @@ enum ModelStatus {
 model MultivariateDetectionResult {
   @doc("Result identifier, which is used to fetch the results of an inference call.")
   @key
+  @visibility("read")
   @format("uuid")
   resultId: string;
 
@@ -309,6 +310,7 @@ epoch.
 model AnomalyDetectionModel {
   @doc("Model identifier.")
   @key
+  @visibility("read")
   @format("uuid")
   modelId: string;
 
