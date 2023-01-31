@@ -32,6 +32,10 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(result.RequiredLiteralInt, 123);
             Assert.AreEqual(result.RequiredLiteralDouble, 1.23);
             Assert.AreEqual(result.RequiredLiteralBool, false);
+            Assert.AreEqual(result.OptionalLiteralString, "reject");
+            Assert.AreEqual(result.OptionalLiteralInt, 456);
+            Assert.AreEqual(result.OptionalLiteralDouble, 4.56);
+            Assert.AreEqual(result.OptionalLiteralBool, true);
         });
 
     }

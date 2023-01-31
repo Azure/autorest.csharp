@@ -14,17 +14,25 @@ Scenarios.FirstTestCadl_CreateLiteral = passOnSuccess([
         requiredLiteralInt: 123,
         requiredLiteralDouble: 1.23,
         requiredLiteralBool: false,
+        optionalLiteralString: "reject",
+        optionalLiteralInt: 456,
+        optionalLiteralDouble: 4.56,
+        optionalLiteralBool: true,
     });
     return {
       status: 200,
       body: json({
         name: "literal",
         requiredUnion: "union",
-        requiredLiteralString: "accept",
         // below are useless
+        requiredLiteralString: "reject",
         requiredLiteralInt: 12345,
         requiredLiteralDouble: 123.45,
         requiredLiteralBool: true,
+        optionalLiteralString: "accept",
+        optionalLiteralInt: 12345,
+        optionalLiteralDouble: 123.45,
+        optionalLiteralBool: false,
       })
     };
   }),
