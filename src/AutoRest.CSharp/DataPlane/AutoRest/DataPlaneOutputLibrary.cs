@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Security;
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -13,10 +12,8 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -29,24 +26,28 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType> _headerModels;
         private CachedDictionary<InputEnumType, EnumType> _enums;
         private CachedDictionary<Schema, TypeProvider> _models;
-        private BuildContext<DataPlaneOutputLibrary> _context;
-        public CachedDictionary<string, List<string>> _protocolMethodsDictionary;
+        private CachedDictionary<string, List<string>> _protocolMethodsDictionary;
 
         private readonly InputNamespace _input;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly Lazy<ModelFactoryTypeProvider?> _modelFactory;
+        private readonly string _defaultName;
         private readonly string _defaultNamespace;
         private readonly string _libraryName;
+        private readonly TypeFactory _typeFactory;
+        private readonly SchemaUsageProvider _schemaUsageProvider;
 
-        public DataPlaneOutputLibrary(CodeModel codeModel, BuildContext<DataPlaneOutputLibrary> context)
+        public DataPlaneOutputLibrary(CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
-            _context = context;
-            _sourceInputModel = context.SourceInputModel;
+            _typeFactory = new TypeFactory(this);
+            _schemaUsageProvider = new SchemaUsageProvider(codeModel);
+            _sourceInputModel = sourceInputModel;
             // // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
             DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
-            _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
+            _input = new CodeModelConverter().CreateNamespace(codeModel, _schemaUsageProvider);
 
+            _defaultName = _input.Name;
             _defaultNamespace = Configuration.Namespace ?? _input.Name;
             _libraryName = Configuration.LibraryName ?? _input.Name;
 
@@ -54,7 +55,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _clients = new CachedDictionary<InputClient, DataPlaneClient>(EnsureClients);
             _operations = new CachedDictionary<InputOperation, LongRunningOperation>(EnsureLongRunningOperations);
             _headerModels = new CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
-            _enums = new CachedDictionary<InputEnumType, EnumType>(BuildEnums);
+            _enums = new CachedDictionary<InputEnumType, EnumType>(() => BuildEnums(codeModel));
             _models = new CachedDictionary<Schema, TypeProvider>(() => BuildModels(codeModel));
             _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(_input, Models, _sourceInputModel));
             _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
@@ -102,18 +103,21 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        private Dictionary<InputEnumType, EnumType> BuildEnums()
+        private Dictionary<InputEnumType, EnumType> BuildEnums(CodeModel codeModel)
         {
             var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
-            foreach (var (schema, typeProvider) in _models)
+            foreach (var schema in codeModel.AllSchemas)
             {
+                var defaultNamespace = TypeProvider.GetDefaultModelNamespace(schema.Extensions?.Namespace, _defaultNamespace);
                 switch (schema)
                 {
                     case SealedChoiceSchema sealedChoiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema, sealedChoiceSchema.ChoiceType, sealedChoiceSchema.Choices, false), (EnumType)typeProvider);
+                        var inputEnum = CodeModelConverter.CreateEnumType(sealedChoiceSchema);
+                        dictionary.Add(inputEnum, new EnumType(inputEnum, defaultNamespace, EnumType.GetAccessibility(schema, _schemaUsageProvider), _typeFactory, _sourceInputModel));
                         break;
                     case ChoiceSchema choiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true), (EnumType)typeProvider);
+                        var inputExtensibleEnum = CodeModelConverter.CreateEnumType(choiceSchema);
+                        dictionary.Add(inputExtensibleEnum, new EnumType(inputExtensibleEnum, defaultNamespace, EnumType.GetAccessibility(schema, _schemaUsageProvider), _typeFactory, _sourceInputModel));
                         break;
                 }
             }
@@ -126,9 +130,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => new EnumType(sealedChoiceSchema, _context),
-            ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => new SchemaObjectType(objectSchema, _context),
+            SealedChoiceSchema sealedChoiceSchema => _enums[CodeModelConverter.CreateEnumType(sealedChoiceSchema)],
+            ChoiceSchema choiceSchema => _enums[CodeModelConverter.CreateEnumType(choiceSchema)],
+            ObjectSchema objectSchema => new SchemaObjectType(objectSchema, this, _typeFactory, _schemaUsageProvider, _defaultNamespace, _sourceInputModel),
             _ => throw new NotImplementedException()
         };
 
@@ -179,9 +183,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             var headerModels = new Dictionary<InputOperation, DataPlaneResponseHeaderGroupType>();
             foreach (var inputClient in _input.Clients)
             {
+                var clientName = GetClientName(inputClient);
+                var clientPrefix = ClientBuilder.GetClientPrefix(clientName, _defaultName);
                 foreach (var operation in inputClient.Operations)
                 {
-                    var headers = DataPlaneResponseHeaderGroupType.TryCreate(inputClient, operation, _context);
+                    var headers = DataPlaneResponseHeaderGroupType.TryCreate(operation, _typeFactory, clientPrefix, _defaultNamespace, _sourceInputModel);
                     if (headers != null)
                     {
                         headerModels.Add(operation, headers);
@@ -204,7 +210,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         if (operation.LongRunning != null)
                         {
-                            operations.Add(operation, new LongRunningOperation(operation, _context, FindLongRunningOperationInfo(client, operation)));
+                            operations.Add(operation, new LongRunningOperation(operation, _typeFactory, FindLongRunningOperationInfo(client, operation), _defaultNamespace, _sourceInputModel));
                         }
                     }
                 }
@@ -219,9 +225,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (Configuration.PublicClients)
             {
-                foreach (var client in _input.Clients)
+                foreach (var inputClient in _input.Clients)
                 {
-                    clients.Add(client, new DataPlaneClient(client, _context));
+                    clients.Add(inputClient, new DataPlaneClient(inputClient, FindRestClient(inputClient), this, _defaultName, _defaultNamespace, _sourceInputModel));
                 }
             }
 
@@ -231,11 +237,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<InputClient, DataPlaneRestClient> EnsureRestClients()
         {
             var restClients = new Dictionary<InputClient, DataPlaneRestClient>();
-            foreach (var client in _input.Clients)
+            foreach (var inputClient in _input.Clients)
             {
-                var clientParameters = RestClientBuilder.GetParametersFromOperations(client.Operations).ToList();
-                var restClient = new RestClientBuilder(clientParameters, _context);
-                restClients.Add(client, new DataPlaneRestClient(client, restClient, _context));
+                var clientParameters = RestClientBuilder.GetParametersFromOperations(inputClient.Operations).ToList();
+                var restClient = new RestClientBuilder(clientParameters, _typeFactory);
+                var clientName = GetClientName(inputClient);
+                restClients.Add(inputClient, new DataPlaneRestClient(inputClient, restClient, _typeFactory, this, clientName, _defaultNamespace, _sourceInputModel));
             }
 
             return restClients;
@@ -279,6 +286,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var methodList = protocolMethodsDictionary[operationGroupKey];
                 methodList.Add(methodName);
             }
+        }
+
+        private string GetClientName(InputClient inputClient)
+        {
+            var clientPrefix = ClientBuilder.GetClientPrefix(inputClient.Name, _defaultName);
+            var clientSuffix = ClientBuilder.GetClientSuffix();
+            var clientName = clientPrefix + clientSuffix;
+            var existingType = _sourceInputModel?.FindForType(_defaultNamespace, clientName);
+            return existingType?.Name ?? clientName;
         }
     }
 }

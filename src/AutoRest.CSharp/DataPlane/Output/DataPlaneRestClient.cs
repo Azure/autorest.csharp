@@ -5,74 +5,145 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using static AutoRest.CSharp.Common.Output.Builders.ClientBuilder;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class DataPlaneRestClient : RestClient
+    internal class DataPlaneRestClient : TypeProvider
     {
-        private readonly BuildContext<DataPlaneOutputLibrary> _context;
-        // postpone the calculation, since it depends on the initialization of context
-        private readonly Lazy<IReadOnlyList<LowLevelClientMethod>> _protocolMethods;
+        private readonly string _clientName;
+        private readonly IReadOnlyDictionary<InputOperation, RestClientMethod> _requestMethods;
+        private readonly IReadOnlyDictionary<InputOperation, RestClientMethod> _nextPageRequestMethods;
 
-        public IReadOnlyList<LowLevelClientMethod> ProtocolMethods => _protocolMethods.Value;
+        public IReadOnlyList<LowLevelClientMethod> ProtocolMethods { get; }
         public RestClientBuilder ClientBuilder { get; }
         public ClientFields Fields { get; }
+        public IReadOnlyList<Parameter> Parameters { get; }
+        public IReadOnlyList<RestClientMethod> Methods { get; }
+        public ConstructorSignature Constructor { get; }
 
-        public DataPlaneRestClient(InputClient inputClient, RestClientBuilder clientBuilder, BuildContext<DataPlaneOutputLibrary> context)
-            : base(inputClient, context, GetClientName(inputClient, context), GetOrderedParameters(clientBuilder))
+        public string ClientPrefix { get; }
+        protected override string DefaultName { get; }
+        protected override string DefaultAccessibility => "internal";
+
+        public DataPlaneRestClient(InputClient inputClient, RestClientBuilder clientBuilder, TypeFactory typeFactory, DataPlaneOutputLibrary library, string clientName, string defaultNamespace, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
-            _context = context;
+            _clientName = clientName;
+            var clientPrefix = GetClientPrefix(clientName, defaultNamespace);
+            ClientPrefix = clientPrefix;
+            DefaultName = clientPrefix + "Rest" + GetClientSuffix();
+
+            Parameters = GetOrderedParameters(clientBuilder);
+
+            _requestMethods = EnsureNormalMethods(inputClient, clientBuilder, library);
+            _nextPageRequestMethods = EnsureGetNextPageMethods(inputClient, _requestMethods);
+
+            Constructor = new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
+            Methods = BuildAllMethods(inputClient, _requestMethods, _nextPageRequestMethods).ToArray();
+
             ClientBuilder = clientBuilder;
             Fields = ClientFields.CreateForRestClient(Parameters);
-            _protocolMethods = new Lazy<IReadOnlyList<LowLevelClientMethod>>(() => GetProtocolMethods(inputClient, context).ToList());
+            ProtocolMethods = GetProtocolMethods(Methods, Fields, inputClient, typeFactory, library).ToList();
         }
 
-        protected override Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods()
+        private static Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods(InputClient inputClient, RestClientBuilder clientBuilder, DataPlaneOutputLibrary library)
         {
             var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
 
-            foreach (var operation in InputClient.Operations)
+            foreach (var operation in inputClient.Operations)
             {
-                var headerModel = _context.Library.FindHeaderModel(operation);
-                requestMethods.Add(operation, ClientBuilder.BuildMethod(operation, headerModel));
+                var headerModel = library.FindHeaderModel(operation);
+                requestMethods.Add(operation, clientBuilder.BuildMethod(operation, headerModel, library));
             }
 
             return requestMethods;
         }
 
+        private static Dictionary<InputOperation, RestClientMethod> EnsureGetNextPageMethods(InputClient inputClient, IReadOnlyDictionary<InputOperation, RestClientMethod> normalMethods)
+        {
+            var nextPageMethods = new Dictionary<InputOperation, RestClientMethod>();
+            foreach (var operation in inputClient.Operations)
+            {
+                var paging = operation.Paging;
+                if (paging == null)
+                {
+                    continue;
+                }
+
+                RestClientMethod? nextMethod = null;
+                if (paging.NextLinkOperation != null)
+                {
+                    nextMethod = normalMethods[paging.NextLinkOperation];
+                }
+                else if (paging.NextLinkName != null)
+                {
+                    var method = normalMethods[operation];
+                    nextMethod = RestClientBuilder.BuildNextPageMethod(method);
+                }
+
+                if (nextMethod != null)
+                {
+                    nextPageMethods.Add(operation, nextMethod);
+                }
+            }
+
+            return nextPageMethods;
+        }
+
+        private static IEnumerable<RestClientMethod> BuildAllMethods(InputClient inputClient, IReadOnlyDictionary<InputOperation, RestClientMethod> requestMethods, IReadOnlyDictionary<InputOperation, RestClientMethod> nextPageRequestMethods)
+        {
+            foreach (var operation in inputClient.Operations)
+            {
+                yield return requestMethods[operation];
+            }
+
+            foreach (var operation in inputClient.Operations)
+            {
+                // remove duplicates when GetNextPage method is not autogenerated
+                if (nextPageRequestMethods.TryGetValue(operation, out RestClientMethod? nextOperationMethod) && operation.Paging?.NextLinkOperation == null)
+                {
+                    yield return nextOperationMethod;
+                }
+            }
+        }
+
         private static IReadOnlyList<Parameter> GetOrderedParameters(RestClientBuilder clientBuilder)
         {
-            var parameters = new List<Parameter>();
-            parameters.Add(KnownParameters.ClientDiagnostics);
-            parameters.Add(KnownParameters.Pipeline);
+            var parameters = new List<Parameter> { KnownParameters.ClientDiagnostics, KnownParameters.Pipeline };
             parameters.AddRange(clientBuilder.GetOrderedParametersByRequired());
             return parameters;
         }
 
-        private IEnumerable<LowLevelClientMethod> GetProtocolMethods(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context)
+        private IEnumerable<LowLevelClientMethod> GetProtocolMethods(IEnumerable<RestClientMethod> methods, ClientFields fields, InputClient inputClient, TypeFactory typeFactory, DataPlaneOutputLibrary library)
         {
             // At least one protocol method is found in the config for this operationGroup
-            if (!inputClient.Operations.Any(operation => IsProtocolMethodExists(operation, inputClient, context)))
+            if (!inputClient.Operations.Any(operation => IsProtocolMethodExists(operation, inputClient, library)))
             {
                 return Enumerable.Empty<LowLevelClientMethod>();
             }
 
             // Filter protocol method requests for this operationGroup based on the config
-            var operations = Methods
-                .Select(m => m.Operation)
-                .Where(operation => IsProtocolMethodExists(operation, inputClient, context));
-
-            return LowLevelClient.BuildMethods(_context.TypeFactory, operations, Fields, GetClientName(inputClient, context));
+            var operations = methods.Select(m => m.Operation).Where(operation => IsProtocolMethodExists(operation, inputClient, library));
+            return LowLevelClient.BuildMethods(typeFactory, operations, fields, _clientName);
         }
 
-        private static string GetClientName(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context)
-            => context.Library.FindClient(inputClient)?.Declaration.Name ?? inputClient.Name;
+        public RestClientMethod? GetNextOperationMethod(InputOperation request)
+        {
+            _nextPageRequestMethods.TryGetValue(request, out RestClientMethod? value);
+            return value;
+        }
 
-        private static bool IsProtocolMethodExists(InputOperation operation, InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context)
-            => context.Library.ProtocolMethodsDictionary.TryGetValue(inputClient.Key, out var protocolMethods) &&
-                protocolMethods.Any(m => m.Equals(operation.Name, StringComparison.OrdinalIgnoreCase));
+        public RestClientMethod GetOperationMethod(InputOperation request)
+            => _requestMethods[request];
+
+        private static bool IsProtocolMethodExists(InputOperation operation, InputClient inputClient, DataPlaneOutputLibrary library)
+            => library.ProtocolMethodsDictionary.TryGetValue(inputClient.Key, out var protocolMethods) &&
+               protocolMethods.Any(m => m.Equals(operation.Name, StringComparison.OrdinalIgnoreCase));
     }
 }

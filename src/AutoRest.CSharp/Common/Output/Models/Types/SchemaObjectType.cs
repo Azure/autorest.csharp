@@ -11,22 +11,21 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class SchemaObjectType : SerializableObjectType
     {
+        private readonly BuildContext? _context;
+        private readonly OutputLibrary? _library;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly SchemaTypeUsage _usage;
@@ -37,24 +36,28 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        private BuildContext _context;
-
-        public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
-            : base(context)
+        protected SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
+            : this(objectSchema, null, context.TypeFactory, context.SchemaUsageProvider, context.DefaultNamespace, context.SourceInputModel)
         {
             _context = context;
+        }
+
+        public SchemaObjectType(ObjectSchema objectSchema, OutputLibrary? library, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, string defaultNamespace, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
+        {
             DefaultName = objectSchema.CSharpName();
-            DefaultNamespace = GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
+            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, defaultNamespace);
             ObjectSchema = objectSchema;
-            _typeFactory = context.TypeFactory;
+            _library = library;
+            _typeFactory = typeFactory;
             _serializationBuilder = new SerializationBuilder();
-            _usage = context.SchemaUsageProvider.GetUsage(ObjectSchema);
+            _usage = schemaUsageProvider.GetUsage(ObjectSchema);
 
             var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
 
-            _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
+            _sourceTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
 
             // Update usage from code attribute
             if (_sourceTypeMapping?.Usage != null)
@@ -83,7 +86,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ObjectType? _defaultDerivedType;
         private bool _hasCalculatedDefaultDerivedType;
-        public ObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerviedType();
+
+        public ObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerivedType();
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
 
@@ -649,20 +653,22 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this);
         }
 
-        private ObjectType? BuildDefaultDerviedType()
+        private ObjectType? BuildDefaultDerivedType()
         {
             if (_hasCalculatedDefaultDerivedType)
                 return _defaultDerivedType;
 
             _hasCalculatedDefaultDerivedType = true;
-            if (_context.BaseLibrary is null)
+            var library = _library ?? _context?.BaseLibrary;
+
+            if (library is null)
                 return null;
 
             var defaultDerivedSchema = ObjectSchema.GetDefaultDerivedSchema();
             if (defaultDerivedSchema is null)
                 return null;
 
-            return _context.BaseLibrary.FindTypeProviderForSchema(defaultDerivedSchema) as ObjectType;
+            return library.FindTypeProviderForSchema(defaultDerivedSchema) as ObjectType;
         }
     }
 }

@@ -35,7 +35,6 @@ namespace AutoRest.CSharp.Output.Models
             "traceparent"
         };
 
-        private readonly OutputLibrary? _library;
         private readonly TypeFactory _typeFactory;
         private readonly Dictionary<string, Parameter> _parameters;
 
@@ -43,13 +42,6 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
             _typeFactory = typeFactory;
-            _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
-        }
-
-        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
-        {
-            _typeFactory = context.TypeFactory;
-            _library = context.BaseLibrary;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
@@ -100,8 +92,9 @@ namespace AutoRest.CSharp.Output.Models
         /// </summary>
         /// <param name="operation"></param>
         /// <param name="responseHeaderModel"></param>
+        /// <param name="library"></param>
         /// <returns></returns>
-        public RestClientMethod BuildMethod(InputOperation operation, DataPlaneResponseHeaderGroupType? responseHeaderModel)
+        public RestClientMethod BuildMethod(InputOperation operation, DataPlaneResponseHeaderGroupType? responseHeaderModel, OutputLibrary library)
         {
             var allParameters = GetOperationAllParameters(operation);
             var methodParameters = BuildMethodParameters(allParameters);
@@ -109,7 +102,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
                 .ToList();
 
-            var request = BuildRequest(operation, requestParts, _library);
+            var request = BuildRequest(operation, requestParts, library);
             Response[] responses = BuildResponses(operation, _typeFactory, out var responseType);
 
             return new RestClientMethod(

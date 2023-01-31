@@ -437,10 +437,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 switch (schema)
                 {
                     case SealedChoiceSchema sealedChoiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema, sealedChoiceSchema.ChoiceType, sealedChoiceSchema.Choices, false), (EnumType)typeProvider);
+                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema), (EnumType)typeProvider);
                         break;
                     case ChoiceSchema choiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true), (EnumType)typeProvider);
+                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema), (EnumType)typeProvider);
                         break;
                 }
             }
@@ -798,8 +798,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, MgmtContext.Context),
-            ChoiceSchema choiceSchema => new EnumType(choiceSchema, MgmtContext.Context),
+            SealedChoiceSchema sealedChoiceSchema => new EnumType(CodeModelConverter.CreateEnumType(sealedChoiceSchema), schema, MgmtContext.Context),
+            ChoiceSchema choiceSchema => new EnumType(CodeModelConverter.CreateEnumType(choiceSchema), schema, MgmtContext.Context),
             ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
                 ? new MgmtReferenceType(objectSchema)
                 : new MgmtObjectType(objectSchema),

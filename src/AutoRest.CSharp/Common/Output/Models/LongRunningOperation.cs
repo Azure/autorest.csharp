@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
@@ -19,11 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class LongRunningOperation : TypeProvider
     {
-        public LongRunningOperation(InputOperation operation, BuildContext context, LongRunningOperationInfo lroInfo) : this(operation, context, lroInfo, lroInfo.ClientPrefix + operation.Name.ToCleanName() + "Operation")
-        {
-        }
-
-        protected LongRunningOperation(InputOperation operation, BuildContext context, LongRunningOperationInfo lroInfo, string defaultName) : base(context)
+        public LongRunningOperation(InputOperation operation, TypeFactory typeFactory, LongRunningOperationInfo lroInfo, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             Debug.Assert(operation.LongRunning != null);
 
@@ -34,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
             if (finalResponseType != null)
             {
-                ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(finalResponseType with {IsNullable = false}));
+                ResultType = TypeFactory.GetOutputType(typeFactory.CreateType(finalResponseType with {IsNullable = false}));
                 ResultSerialization = SerializationBuilder.Build(finalResponse.BodyMediaType, finalResponseType, ResultType);
 
                 var paging = operation.Paging;
@@ -46,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 }
             }
 
-            DefaultName = defaultName;
+            DefaultName = lroInfo.ClientPrefix + operation.Name.ToCleanName() + "Operation";
             Description = BuilderHelpers.EscapeXmlDescription(operation.Description);
             DefaultAccessibility = lroInfo.Accessibility;
         }

@@ -19,13 +19,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
-        public EnumType(ChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, true), GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
-        {
-        }
-
-        public EnumType(SealedChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, false), GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
+        public EnumType(InputEnumType enumType, Schema schema, BuildContext context)
+            : this(enumType, GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context.SchemaUsageProvider), context.TypeFactory, context.SourceInputModel)
         {
         }
 
@@ -95,9 +90,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return BuilderHelpers.EscapeXmlDescription(description);
         }
 
-        public static string GetAccessibility(Schema schema, BuildContext context)
+        public static string GetAccessibility(Schema schema, SchemaUsageProvider schemaUsageProvider)
         {
-            var usage = context.SchemaUsageProvider.GetUsage(schema);
+            var usage = schemaUsageProvider.GetUsage(schema);
             var hasUsage = usage.HasFlag(SchemaTypeUsage.Model);
             return schema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
         }
