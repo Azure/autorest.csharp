@@ -142,9 +142,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     case FormattableString fs:
                         Append(fs);
                         break;
-                    case CodeWriterDelegate d:
-                        Append(d);
-                        break;
                     case Type t:
                         AppendType(new CSharpType(t));
                         break;
@@ -540,12 +537,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return Declaration(declaration.ActualName);
         }
 
-        public CodeWriter Append(CodeWriterDelegate writerDelegate)
-        {
-            writerDelegate(this);
-            return this;
-        }
-
         public override string ToString()
         {
             return ToString(true);
@@ -562,7 +553,7 @@ namespace AutoRest.CSharp.Generation.Writers
             string[] namespaces = _usingNamespaces
                     .Distinct()
                     .OrderByDescending(ns => ns.StartsWith("System"))
-                    .ThenBy(ns => ns)
+                    .ThenBy(ns => ns,StringComparer.Ordinal)
                     .ToArray();
             if (header)
             {

@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Azure.Core.Tests
 {
-    public class ClientDiagnosticListener : IObserver<KeyValuePair<string, object>>, IObserver<DiagnosticListener>, IDisposable
+    public class ClientDiagnosticListener : IObserver<KeyValuePair<string, object?>>, IObserver<DiagnosticListener>, IDisposable
     {
         private readonly Func<string, bool> _sourceNameFilter;
         private readonly AsyncLocal<bool>? _collectThisStack;
@@ -44,7 +44,7 @@ namespace Azure.Core.Tests
         {
         }
 
-        public void OnNext(KeyValuePair<string, object> value)
+        public void OnNext(KeyValuePair<string, object?> value)
         {
             if (_collectThisStack?.Value == false) return;
 
@@ -60,10 +60,10 @@ namespace Azure.Core.Tests
                 if (value.Key.EndsWith(startSuffix))
                 {
                     var name = value.Key.Substring(0, value.Key.Length - startSuffix.Length);
-                    PropertyInfo? propertyInfo = value.Value.GetType().GetTypeInfo().GetDeclaredProperty("Links");
+                    PropertyInfo? propertyInfo = value.Value!.GetType().GetTypeInfo().GetDeclaredProperty("Links");
                     var links = propertyInfo?.GetValue(value.Value) is IEnumerable<Activity> activities ? activities.ToArray() : Array.Empty<Activity>();
 
-                    var scope = new ProducedDiagnosticScope(name, Activity.Current, links.Select(a => new ProducedLink(a.ParentId, a.TraceStateString)).ToArray(), links);
+                    var scope = new ProducedDiagnosticScope(name, Activity.Current!, links.Select(a => new ProducedLink(a.ParentId!, a.TraceStateString)).ToArray(), links);
                     Scopes.Add(scope);
                     _scopeStartCallback?.Invoke(scope);
                 }
@@ -72,7 +72,7 @@ namespace Azure.Core.Tests
                     var name = value.Key.Substring(0, value.Key.Length - stopSuffix.Length);
                     foreach (ProducedDiagnosticScope producedDiagnosticScope in Scopes)
                     {
-                        if (producedDiagnosticScope.Activity.Id == Activity.Current.Id)
+                        if (producedDiagnosticScope.Activity.Id == Activity.Current!.Id)
                         {
                             producedDiagnosticScope.IsCompleted = true;
                             return;
@@ -85,14 +85,14 @@ namespace Azure.Core.Tests
                     var name = value.Key.Substring(0, value.Key.Length - exceptionSuffix.Length);
                     foreach (ProducedDiagnosticScope producedDiagnosticScope in Scopes)
                     {
-                        if (producedDiagnosticScope.Activity.Id == Activity.Current.Id)
+                        if (producedDiagnosticScope.Activity.Id == Activity.Current!.Id)
                         {
                             if (producedDiagnosticScope.IsCompleted)
                             {
                                 throw new InvalidOperationException("Scope should not be stopped when calling Failed");
                             }
 
-                            producedDiagnosticScope.Exception = (Exception)value.Value;
+                            producedDiagnosticScope.Exception = (Exception)value.Value!;
                         }
                     }
                 }
@@ -170,7 +170,7 @@ namespace Azure.Core.Tests
                     {
                         foreach (KeyValuePair<string, string> expectedAttribute in expectedAttributes)
                         {
-                            if (!producedDiagnosticScope.Activity.Tags.Contains(expectedAttribute))
+                            if (!producedDiagnosticScope.Activity.Tags!.Contains(expectedAttribute))
                             {
                                 throw new InvalidOperationException($"Attribute {expectedAttribute} not found, existing attributes: {string.Join(",", producedDiagnosticScope.Activity.Tags)}");
                             }
@@ -252,7 +252,7 @@ namespace Azure.Core.Tests
                 Tracestate = null;
             }
 
-            public ProducedLink(string traceparent, string tracestate)
+            public ProducedLink(string traceparent, string? tracestate)
             {
                 Traceparent = traceparent;
                 Tracestate = tracestate;

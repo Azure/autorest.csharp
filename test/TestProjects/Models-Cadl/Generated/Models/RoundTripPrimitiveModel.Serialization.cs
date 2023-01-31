@@ -27,7 +27,7 @@ namespace ModelsInCadl.Models
             writer.WriteNumberValue(RequiredSafeInt);
             writer.WritePropertyName("requiredFloat");
             writer.WriteNumberValue(RequiredFloat);
-            writer.WritePropertyName("requiredDouble");
+            writer.WritePropertyName("required_Double");
             writer.WriteNumberValue(RequiredDouble);
             writer.WritePropertyName("requiredBoolean");
             writer.WriteBooleanValue(RequiredBoolean);
@@ -76,7 +76,7 @@ namespace ModelsInCadl.Models
                     requiredFloat = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("requiredDouble"))
+                if (property.NameEquals("required_Double"))
                 {
                     requiredDouble = property.Value.GetDouble();
                     continue;

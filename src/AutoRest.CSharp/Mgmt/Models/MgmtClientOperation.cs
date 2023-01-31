@@ -5,18 +5,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -32,6 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
+        private const int PropertyBagThreshold = 5;
         private const string IdVariableName = "Id";
         private readonly Parameter? _extensionParameter;
         public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
@@ -55,6 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
+        public IReadOnlyList<Parameter> PropertyBagUnderlyingParameters => IsPropertyBagOperation ? _passThroughParams : Array.Empty<Parameter>();
         public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
             return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter, isConvenientOperation);
@@ -137,6 +132,10 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsPagingOperation => _operations.First().IsPagingOperation;
 
+        public bool IsPropertyBagOperation => _passThroughParams.Count() > PropertyBagThreshold && _passThroughParams.All(p => p.IsPropertyBag);
+
+        private IReadOnlyList<Parameter> _passThroughParams => ParameterMappings.Values.First().GetPassThroughParameters();
+
         private IReadOnlyDictionary<RequestPath, MgmtRestOperation> EnsureOperationMappings()
         {
             return this.ToDictionary(
@@ -154,9 +153,24 @@ namespace AutoRest.CSharp.Mgmt.Models
                 var adjustedPath = Resource is not null ? contextualPath.ApplyHint(Resource.ResourceType) : contextualPath;
                 contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariableName).Concat(contextParams));
             }
-            return OperationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+
+            var parameterMappings = new Dictionary<RequestPath, IEnumerable<ParameterMapping>>();
+            foreach (var operationMappings in OperationMappings)
+            {
+                var parameterMapping = operationMappings.Value.BuildParameterMapping(contextualParameterMappings[operationMappings.Key]).ToList();
+                if (parameterMapping.Where(p => p.IsPassThru).Count() > PropertyBagThreshold)
+                {
+                    for (int i = 0; i < parameterMapping.Count; ++i)
+                    {
+                        if (parameterMapping[i].IsPassThru)
+                        {
+                            parameterMapping[i] = new ParameterMapping(parameterMapping[i].Parameter with { IsPropertyBag = true }, true, $"{parameterMapping[i].Parameter.GetPropertyBagValueExpression()}", Enumerable.Empty<string>());
+                        }
+                    }
+                }
+                parameterMappings.Add(operationMappings.Key, parameterMapping);
+            }
+            return parameterMappings;
         }
 
         private IReadOnlyList<Parameter> EnsureMethodParameters()
@@ -173,7 +187,14 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
             else
             {
-                parameters.AddRange(ParameterMappings.Values.First().GetPassThroughParameters());
+                if (IsPropertyBagOperation)
+                {
+                    parameters.Add(_operations.First().GetPropertyBagParameter(_passThroughParams));
+                }
+                else
+                {
+                    parameters.AddRange(_passThroughParams);
+                }
             }
             parameters.Add(KnownParameters.CancellationTokenParameter);
             return parameters;
