@@ -656,7 +656,7 @@ public static partial class ResourcesExtension
     }
 }
 ```
-If you would like to generate an extension method for this scope resource, you need to add this configuration `generate-arm-resource-extensions` by adding the request path of this scope resource:
+If you would like to generate an extension method of the `ArmResource` class for this scope resource, you need to add this configuration `generate-arm-resource-extensions` by adding the request path of this scope resource:
 ```yaml
 generate-arm-resource-extensions:
 - /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
@@ -676,6 +676,7 @@ public static partial class ResourcesExtension
 +   }
 }
 ```
+Please note this extension methods have a huge side effect: because all `Resource` class would inherit from `ArmResource`, once the user import the namespace of this SDK, they would see this `GetDeployments` method on any `Resource` instance, while in the real life, this scope resource might not be that general to be applied onto any resource coming from any RP. Please only use this configuration when it could be confirmed to support plenty of resources and has the plan to support more.
 
 To assign specific resource types to this scope, you can use the following configuration:
 
@@ -767,6 +768,7 @@ public static partial class GuestConfigurationExtensions
 +   }
 }
 ```
+Please note this `ArmResource` extension method has the same side effect as explained above: this extension is only meant to be got or created under the virtual machine resource, but the extension method will let you see this method on any resource instance because they all inherit from `ArmResource`.
 
 ### SDK polishing configurations
 
