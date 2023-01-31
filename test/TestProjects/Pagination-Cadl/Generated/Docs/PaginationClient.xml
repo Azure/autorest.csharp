@@ -161,5 +161,27 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
+    <member name="GetIntArrayAsync(RequestContext)">
+<example>
+This sample shows how to call GetIntArrayAsync and parse the result.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+]]></code>
+</example>
+    </member>
+    <member name="GetIntArray(RequestContext)">
+<example>
+This sample shows how to call GetIntArray and parse the result.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+]]></code>
+</example>
+    </member>
   </members>
 </doc>

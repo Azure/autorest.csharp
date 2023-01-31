@@ -195,3 +195,11 @@ interface UseFoundationsResourceList {
   @convenienceAPI
   list is CustomResourceList<LedgerEntry>;  
 }  
+
+@route("/rawArray")
+interface UseRawArrayAsResponse {
+  @doc("Response is int array.")
+  @get
+  @convenienceAPI
+  op getIntArray(): int32[];
+}

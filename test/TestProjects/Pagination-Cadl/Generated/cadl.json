@@ -416,18 +416,87 @@
       "ItemName": "value"
      },
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "47",
+     "Name": "getIntArray",
+     "ResourceName": "UseRawArrayAsResponse",
+     "Description": "Response is int array.",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$id": "48",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "49",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "50",
+        "Type": {
+         "$ref": "49"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "28"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "51",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "52",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "53",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{pagnationUri}",
+     "Path": "/app/rawArray",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "47"
+    "$id": "54"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "48",
+  "$id": "55",
   "OAuth2": {
-   "$id": "49",
+   "$id": "56",
    "Scopes": [
     "https://pagination.azure.com/.default"
    ]
