@@ -158,13 +158,13 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var operationMappings in OperationMappings)
             {
                 var parameterMapping = operationMappings.Value.BuildParameterMapping(contextualParameterMappings[operationMappings.Key]).ToList();
-                if (parameterMapping.Where(p => p.IsPassThru).Count() > PropertyBagThreshold)
+                if (parameterMapping.Count(p => p.IsPassThru) > PropertyBagThreshold)
                 {
                     for (int i = 0; i < parameterMapping.Count; ++i)
                     {
                         if (parameterMapping[i].IsPassThru)
                         {
-                            parameterMapping[i] = new ParameterMapping(parameterMapping[i].Parameter with { IsPropertyBag = true }, true, $"{parameterMapping[i].Parameter.GetPropertyBagValueExpression()}", Enumerable.Empty<string>());
+                            parameterMapping[i] = new ParameterMapping(parameterMapping[i].Parameter with { IsPropertyBag = true }, true, parameterMapping[i].Parameter.GetPropertyBagValueExpression(), Enumerable.Empty<string>());
                         }
                     }
                 }

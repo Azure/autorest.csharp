@@ -17,6 +17,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using static AutoRest.CSharp.Output.Models.ClientMethodBodyLines;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -289,7 +290,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
-                _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, getOperation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
+                _writer.Line(Set.ResponseValueId(originalResponse, CallCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, originalResponse)));
             }
 
             var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);

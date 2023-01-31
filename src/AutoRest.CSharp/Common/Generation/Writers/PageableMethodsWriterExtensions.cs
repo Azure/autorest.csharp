@@ -31,56 +31,45 @@ namespace AutoRest.CSharp.Generation.Writers
                 var nextPageRequest = GetCreateRequestCall(restClientReference, createNextPageRequestMethod);
 
                 writer.EnsureRequestContextVariable(parameters, createFirstPageRequestMethod, createNextPageRequestMethod);
-                writer.WritePageableBody(parameters, pageItemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemPropertyName, nextLinkPropertyName, async);
+                var firstPageRequestVariable = firstPageRequest != null ? new CodeWriterDeclaration("FirstPageRequest") : null;
+                var nextPageRequestVariable = nextPageRequest != null ? new CodeWriterDeclaration("NextPageRequest") : null;
+                List<FormattableString> createPageableParameters = new()
+                {
+                    firstPageRequest != null ? $"{firstPageRequestVariable:I}" : (FormattableString)$"null",
+                    nextPageRequest != null ? $"{nextPageRequestVariable:I}" : (FormattableString)$"null",
+                    GetValueFactory(pageItemType),
+                    clientDiagnosticsReference.GetReferenceFormattable(),
+                    pipelineReference.GetReferenceFormattable(),
+                    $"{scopeName:L}",
+                    $"{itemPropertyName:L}",
+                    $"{nextLinkPropertyName:L}"
+                };
+
+                if (ContainsRequestContext(methodSignature.Parameters))
+                {
+                    createPageableParameters.Add($"{KnownParameters.RequestContext.Name:I}");
+                }
+                else if (methodSignature.Parameters.Contains(KnownParameters.CancellationTokenParameter))
+                {
+                    createPageableParameters.Add($"{KnownParameters.CancellationTokenParameter.Name:I}");
+                }
+
+                if (firstPageRequestVariable != null)
+                {
+                    writer.Line($"{typeof(HttpMessage)} {firstPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}) => {firstPageRequest};");
+                }
+
+                if (nextPageRequestVariable != null)
+                {
+                    writer.Line($"{typeof(HttpMessage)} {nextPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}, {KnownParameters.NextLink.Type} {KnownParameters.NextLink.Name}) => {nextPageRequest};");
+                }
+
+                writer.Line($"return {typeof(PageableHelpers)}.{(async ? nameof(PageableHelpers.CreateAsyncPageable) : nameof(PageableHelpers.CreatePageable))}({createPageableParameters.Join(", ")});");
             }
 
             return writer.Line();
         }
-
-        public static CodeWriter WritePageableBody(this CodeWriter writer, IReadOnlyList<Parameter> methodParameters, CSharpType? pageItemType, FormattableString? firstPageRequest, FormattableString? nextPageRequest, Reference clientDiagnosticsReference, Reference pipelineReference, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool async)
-        {
-            var firstPageRequestVariable = firstPageRequest != null ? new CodeWriterDeclaration("FirstPageRequest") : null;
-            var nextPageRequestVariable = nextPageRequest != null ? new CodeWriterDeclaration("NextPageRequest") : null;
-            List<FormattableString> createPageableParameters = new()
-            {
-                firstPageRequest != null ? $"{firstPageRequestVariable:I}" : (FormattableString)$"null",
-                nextPageRequest != null ? $"{nextPageRequestVariable:I}" : (FormattableString)$"null",
-                GetValueFactory(pageItemType),
-                clientDiagnosticsReference.GetReferenceFormattable(),
-                pipelineReference.GetReferenceFormattable()
-            };
-
-            createPageableParameters.AddTrailingPageableParameters(methodParameters, scopeName, itemPropertyName, nextLinkPropertyName);
-
-            if (firstPageRequestVariable != null)
-            {
-                writer.Line($"{typeof(HttpMessage)} {firstPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}) => {firstPageRequest};");
-            }
-
-            if (nextPageRequestVariable != null)
-            {
-                writer.Line($"{typeof(HttpMessage)} {nextPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}, {KnownParameters.NextLink.Type} {KnownParameters.NextLink.Name}) => {nextPageRequest};");
-            }
-
-            return writer.Line($"return {typeof(PageableHelpers)}.{(async ? nameof(PageableHelpers.CreateAsyncPageable) : nameof(PageableHelpers.CreatePageable))}({createPageableParameters.Join(", ")});");
-        }
-
-        private static void AddTrailingPageableParameters(this List<FormattableString> createPageableParameters, IReadOnlyCollection<Parameter> methodParameters, string scopeName, string? itemPropertyName, string? nextLinkPropertyName)
-        {
-            createPageableParameters.Add($"{scopeName:L}");
-            createPageableParameters.Add($"{itemPropertyName:L}");
-            createPageableParameters.Add($"{nextLinkPropertyName:L}");
-
-            if (ContainsRequestContext(methodParameters))
-            {
-                createPageableParameters.Add($"{KnownParameters.RequestContext.Name:I}");
-            }
-            else if (methodParameters.Contains(KnownParameters.CancellationTokenParameter))
-            {
-                createPageableParameters.Add($"{KnownParameters.CancellationTokenParameter.Name:I}");
-            }
-        }
-
+        
         private static void EnsureRequestContextVariable(this CodeWriter writer, List<Parameter> parameters, RestClientMethod? createFirstPageRequestMethod, RestClientMethod? createNextPageRequestMethod)
         {
             if (ContainsRequestContext(parameters))

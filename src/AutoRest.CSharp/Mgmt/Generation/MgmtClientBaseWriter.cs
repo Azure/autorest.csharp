@@ -22,11 +22,12 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using static AutoRest.CSharp.Output.Models.ClientMethodBodyLines;
+using static AutoRest.CSharp.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -590,36 +591,42 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var pagingMethod = operation.PagingMethod!;
             var firstPageRequestArguments = GetArguments(_writer, parameterMappings);
-            var nextPageRequestArguments = firstPageRequestArguments.IsEmpty() ? $"{KnownParameters.NextLink.Name}" : $"{KnownParameters.NextLink.Name}, {firstPageRequestArguments}";
+            var restClient = new FormattableStringToExpression($"{GetRestClientName(operation)}");
 
-            FormattableString firstPageRequest = $"{GetRestClientName(operation)}.Create{pagingMethod.Method.Name}Request({firstPageRequestArguments})";
-            FormattableString? nextPageRequest = pagingMethod.NextPageMethod != null ? $"{GetRestClientName(operation)}.Create{pagingMethod.NextPageMethod.Name}Request({nextPageRequestArguments})" : (FormattableString?)null;
-            var pipelineReference = new Reference("Pipeline", typeof(HttpPipeline));
+            _writer.Line(Declare.FirstPageRequest(restClient, pagingMethod.Method.Name, firstPageRequestArguments, out var firstPageRequest));
+            CodeWriterDeclaration? nextPageRequest = null;
+            if (pagingMethod.NextPageMethod is {} nextPageMethod)
+            {
+                var nextPageRequestArguments = firstPageRequestArguments.Prepend(KnownParameters.NextLink);
+                _writer.Line(Declare.NextPageRequest(restClient, nextPageMethod.Name, nextPageRequestArguments, out nextPageRequest));
+            }
+
+            var clientDiagnostics = new FormattableStringToExpression($"{clientDiagnosticsReference.Name}");
+            var pipeline = new FormattableStringToExpression($"Pipeline");
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
-
-            _writer.WritePageableBody(parameterMappings.Select(p => p.Parameter).Append(KnownParameters.CancellationTokenParameter).ToList(), itemType, firstPageRequest, nextPageRequest, clientDiagnosticsReference, pipelineReference, scopeName, itemName, nextLinkName, async);
+            _writer.Line(Return(Call.PageableHelpers.CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
         }
 
-        protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)
+        protected ValueExpression CallCreateResourceIdentifier(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, CodeWriterDeclaration response)
         {
             var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature;
             var cache = new List<ParameterMapping>(parameterMappings);
 
-            var parameterInvocations = new List<FormattableString>();
+            var parameterInvocations = new List<ValueExpression>();
             foreach (var reference in requestPath.Where(s => s.IsReference).Select(s => s.Reference))
             {
                 var match = cache.First(p => reference.Name.Equals(p.Parameter.Name, StringComparison.InvariantCultureIgnoreCase) && reference.Type.Equals(p.Parameter.Type));
                 cache.Remove(match);
-                parameterInvocations.Add(match.IsPassThru ? $"{match.Parameter.Name}" : match.ValueExpression);
+                parameterInvocations.Add(match.IsPassThru ? match.Parameter : match.ValueExpression);
             }
 
             if (parameterInvocations.Count < methodWithLeastParameters.Parameters.Count)
             {
                 if (resource.ResourceData.GetTypeOfName() != null)
                 {
-                    parameterInvocations.Add($"{dataExpression}.Name");
+                    parameterInvocations.Add(GetResponseValueName(response));
                 }
                 else
                 {
@@ -627,7 +634,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
 
-            return $"{resource.Type.Name}.CreateResourceIdentifier({parameterInvocations.Join(", ")})";
+            return new StaticMethodCallExpression(resource.Type, "CreateResourceIdentifier", parameterInvocations);
         }
         #endregion
 
@@ -668,7 +675,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
+                    _writer.Line(Set.ResponseValueId(response, CallCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, response)));
                 }
 
                 // the case that we did not need to wrap the result
@@ -805,15 +812,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
         {
             var arguments = GetArguments(writer, mapping, passNullForOptionalParameters);
-            if (!arguments.IsEmpty())
+            if (arguments.Any())
             {
-                writer.Append(arguments).AppendRaw(", ");
+                foreach (var argument in arguments)
+                {
+                    writer.WriteValueExpression(argument);
+                    writer.AppendRaw(", ");
+                }
             }
         }
 
-        private static FormattableString GetArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
+        private static List<ValueExpression> GetArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
         {
-            var args = new List<FormattableString>();
+            var args = new List<ValueExpression>();
             foreach (var parameter in mapping)
             {
                 if (parameter.IsPassThru)
@@ -823,25 +834,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // always use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
                         if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
                         {
-                            args.Add($"pageSizeHint");
+                            args.Add(new FormattableStringToExpression($"pageSizeHint"));
                         }
                         else
                         {
                             Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
                             if (parameter.Parameter.IsPropertyBag)
-                                args.Add($"{parameter.ValueExpression}");
+                                args.Add(parameter.ValueExpression);
                             else
-                                args.Add($"{parameter.Parameter.Name}");
+                                args.Add(parameter.Parameter);
                         }
                     }
                     else
                     {
                         if (passNullForOptionalParameters && parameter.Parameter.Validation == Validation.None)
-                            args.Add($"null");
+                            args.Add(ValueExpressions.Null);
                         else if (parameter.Parameter.IsPropertyBag)
-                            args.Add($"{parameter.ValueExpression}");
+                            args.Add(parameter.ValueExpression);
                         else
-                            args.Add($"{parameter.Parameter.Name}");
+                            args.Add(parameter.Parameter);
                     }
                 }
                 else
@@ -856,11 +867,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.UseNamespace(@namespace);
                     }
 
-                    args.Add($"{parameter.ValueExpression}");
+                    args.Add(parameter.ValueExpression);
                 }
             }
 
-            return args.Join(", ");
+            return args;
         }
 
         public override string ToString()

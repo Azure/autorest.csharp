@@ -13,18 +13,18 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using static AutoRest.CSharp.Output.Models.InlineableExpressions;
+using static AutoRest.CSharp.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal static class ClientMethodLines
+    internal static class ClientMethodBodyLines
     {
-        public static MethodBodySingleLine Return(CodeWriterDeclaration name) => new ReturnValueLine(new VariableReference(name));
-        public static MethodBodySingleLine Return(InlineableExpression value) => new ReturnValueLine(value);
+        public static MethodBodyLine Return(CodeWriterDeclaration name) => new ReturnValueLine(new VariableReference(name));
+        public static MethodBodyLine Return(ValueExpression value) => new ReturnValueLine(value);
 
-        public static void CreatePageableMethodArguments(this IList<MethodBodySingleLine> lines, IReadOnlyList<CreateMessageMethodsBuilder.ParameterLink> parameters, out IReadOnlyList<InlineableExpression> createRequestArguments, out InlineableExpression? requestContextVariable)
+        public static void CreatePageableMethodArguments(this IList<MethodBodyLine> lines, IReadOnlyList<CreateMessageMethodsBuilder.ParameterLink> parameters, out IReadOnlyList<ValueExpression> createRequestArguments, out ValueExpression? requestContextVariable)
         {
-            var arguments = new List<InlineableExpression>();
+            var arguments = new List<ValueExpression>();
             requestContextVariable = null;
             foreach (var parameterLink in parameters)
             {
@@ -70,9 +70,9 @@ namespace AutoRest.CSharp.Output.Models
             createRequestArguments = arguments;
         }
 
-        public static void CreateProtocolMethodArguments(this IList<MethodBodySingleLine> lines, IReadOnlyList<CreateMessageMethodsBuilder.ParameterLink> parameters, out IReadOnlyList<InlineableExpression> protocolMethodArguments)
+        public static void CreateProtocolMethodArguments(this IList<MethodBodyLine> lines, IReadOnlyList<CreateMessageMethodsBuilder.ParameterLink> parameters, out IReadOnlyList<ValueExpression> protocolMethodArguments)
         {
-            var arguments = new List<InlineableExpression>();
+            var arguments = new List<ValueExpression>();
             foreach (var parameterLink in parameters)
             {
                 switch (parameterLink)
@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Output.Models
             protocolMethodArguments = arguments;
         }
 
-        private static InlineableExpression CreateConversion(Parameter fromParameter, CSharpType toType)
+        private static ValueExpression CreateConversion(Parameter fromParameter, CSharpType toType)
         {
             return fromParameter.Type switch
             {
@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        private static InlineableExpression CreateConversion(InlineableExpression fromExpression, CSharpType fromType, CSharpType toType)
+        private static ValueExpression CreateConversion(ValueExpression fromExpression, CSharpType fromType, CSharpType toType)
         {
             if (fromType.IsNullable && toType.IsNullable)
             {
@@ -135,44 +135,52 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
+        public static class Set
+        {
+            public static MethodBodyLine ResponseValueId(CodeWriterDeclaration response, ValueExpression from)
+            {
+                return new SetValueLine(GetResponseValueId(response), from);
+            }
+        }
+
         public static class Declare
         {
-            public static MethodBodySingleLine FirstPageRequest(InlineableExpression? restClient, string methodName, IEnumerable<InlineableExpression> arguments, out CodeWriterDeclaration localFunctionName)
+            public static MethodBodyLine FirstPageRequest(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
             {
                 var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments.ToList(), false);
                 localFunctionName = new CodeWriterDeclaration("FirstPageRequest");
                 return new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint}, typeof(HttpMessage), requestMethodCall);
             }
 
-            public static MethodBodySingleLine NextPageRequest(InlineableExpression? restClient, string methodName, IEnumerable<InlineableExpression> arguments, out CodeWriterDeclaration localFunctionName)
+            public static MethodBodyLine NextPageRequest(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
             {
                 var requestMethodCall = new InstanceMethodCallExpression(restClient, RequestWriterHelpers.CreateRequestMethodName(methodName), arguments.ToList(), false);
                 localFunctionName = new CodeWriterDeclaration("NextPageRequest");
                 return new OneLineLocalFunction(localFunctionName, new[]{KnownParameters.PageSizeHint, KnownParameters.NextLink}, typeof(HttpMessage), requestMethodCall);
             }
 
-            public static MethodBodySingleLine Message(InlineableExpression value, out CodeWriterDeclaration message)
+            public static MethodBodyLine Message(ValueExpression value, out CodeWriterDeclaration message)
             {
                 message = new CodeWriterDeclaration("message");
                 return new UsingDeclareVariableLine(typeof(HttpMessage), message, value);
             }
 
-            public static MethodBodySingleLine Response(CSharpType responseType, InlineableExpression value, out CodeWriterDeclaration response)
+            public static MethodBodyLine Response(CSharpType responseType, ValueExpression value, out CodeWriterDeclaration response)
             {
                 response = new CodeWriterDeclaration("response");
                 return new DeclareVariableLine(responseType, response, value);
             }
 
-            public static MethodBodySingleLine RequestContext(InlineableExpression value, out CodeWriterDeclaration requestContext)
+            public static MethodBodyLine RequestContext(ValueExpression value, out CodeWriterDeclaration requestContext)
             {
                 requestContext = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
                 return new DeclareVariableLine(KnownParameters.RequestContext.Type, requestContext, value);
             }
 
-            public static MethodBodySingleLine NewModelInstance(ModelTypeProvider model, IEnumerable<Parameter> arguments, out CodeWriterDeclaration variable)
+            public static MethodBodyLine NewModelInstance(ModelTypeProvider model, IEnumerable<Parameter> arguments, out CodeWriterDeclaration variable)
                 => NewModelInstance(model, arguments.Select(p => new ParameterReference(p)).ToList(), out variable);
 
-            public static MethodBodySingleLine NewModelInstance(ModelTypeProvider model, IReadOnlyList<InlineableExpression> arguments, out CodeWriterDeclaration variable)
+            public static MethodBodyLine NewModelInstance(ModelTypeProvider model, IReadOnlyList<ValueExpression> arguments, out CodeWriterDeclaration variable)
             {
                 variable = new CodeWriterDeclaration(model.Type.Name.ToVariableName());
                 var newInstance = new NewInstanceExpression(model.Type, arguments);
@@ -186,41 +194,19 @@ namespace AutoRest.CSharp.Output.Models
 
     internal record MethodBodyBlock
     {
-        public static MethodBodyBlock Create(params MethodBodySingleLine[] lines) => new MethodBodyLines(lines);
+        public static MethodBodyBlock Create(params MethodBodyLine[] lines) => new MethodBodyLines(lines);
     }
 
     internal record ParameterValidationBlock(IReadOnlyList<Parameter> Parameters) : MethodBodyBlock;
     internal record DiagnosticScopeMethodBodyBlock(Diagnostic Diagnostic, Reference ClientDiagnosticsReference, MethodBodyBlock InnerBlock) : MethodBodyBlock;
     internal record TryCatchFinallyBlock(MethodBodyBlock Try, MethodBodyBlock? Catch, MethodBodyBlock? Finally) : MethodBodyBlock;
 
-    internal record MethodBodyLines(IReadOnlyList<MethodBodySingleLine> MethodBodySingleLine) : MethodBodyBlock;
-    internal record MethodBodySingleLine;
+    internal record MethodBodyLines(IReadOnlyList<MethodBodyLine> MethodBodySingleLine) : MethodBodyBlock;
+    internal record MethodBodyLine;
 
-    internal record UsingDeclareVariableLine(CSharpType Type, CodeWriterDeclaration Name, InlineableExpression Value) : MethodBodySingleLine;
-    internal record DeclareVariableLine(CSharpType Type, CodeWriterDeclaration Name, InlineableExpression Value) : MethodBodySingleLine;
-    internal record ReturnValueLine(InlineableExpression Value) : MethodBodySingleLine;
-    internal record OneLineLocalFunction(CodeWriterDeclaration Name, IReadOnlyList<Parameter> Parameters, CSharpType ReturnType, InlineableExpression Body) : MethodBodySingleLine;
-
-    internal record InlineableExpression;
-
-    internal record DefaultValueExpression(CSharpType Type) : InlineableExpression;
-    internal record NewInstanceExpression(CSharpType Type, IReadOnlyList<InlineableExpression> Arguments, IReadOnlyDictionary<string, InlineableExpression> Properties) : InlineableExpression
-    {
-        public NewInstanceExpression(CSharpType type) : this(type, Array.Empty<InlineableExpression>(), new Dictionary<string, InlineableExpression>()){}
-        public NewInstanceExpression(CSharpType type, IReadOnlyList<InlineableExpression> arguments) : this(type, arguments, new Dictionary<string, InlineableExpression>()){}
-        public NewInstanceExpression(CSharpType type, IReadOnlyDictionary<string, InlineableExpression> properties) : this(type, Array.Empty<InlineableExpression>(), properties){}
-    }
-
-    internal record TernaryConditionalOperator(InlineableExpression Condition, InlineableExpression Consequent, InlineableExpression Alternative) : InlineableExpression;
-    internal record TypeReference(CSharpType Type) : InlineableExpression;
-    internal record MemberReference(InlineableExpression Inner, string MemberName) : InlineableExpression;
-    internal record ParameterReference(Parameter Parameter) : InlineableExpression;
-    internal record VariableReference(CodeWriterDeclaration Name) : InlineableExpression;
-    internal record ExpressionAsFormattableString(FormattableString Value) : InlineableExpression; // Shim between formattable strings and expressions
-
-    internal record NullConditionalExpression(InlineableExpression Inner) : InlineableExpression;
-
-    internal record StaticMethodCallExpression(CSharpType? MethodType, string MethodName, IReadOnlyList<InlineableExpression> Arguments, bool CallAsExtension, bool CallAsAsync) : InlineableExpression;
-
-    internal record InstanceMethodCallExpression(InlineableExpression? InstanceReference, string MethodName, IReadOnlyList<InlineableExpression> Arguments, bool CallAsAsync) : InlineableExpression;
+    internal record UsingDeclareVariableLine(CSharpType Type, CodeWriterDeclaration Name, ValueExpression Value) : MethodBodyLine;
+    internal record DeclareVariableLine(CSharpType Type, CodeWriterDeclaration Name, ValueExpression Value) : MethodBodyLine;
+    internal record ReturnValueLine(ValueExpression Value) : MethodBodyLine;
+    internal record SetValueLine(ValueExpression To, ValueExpression From) : MethodBodyLine;
+    internal record OneLineLocalFunction(CodeWriterDeclaration Name, IReadOnlyList<Parameter> Parameters, CSharpType ReturnType, ValueExpression Body) : MethodBodyLine;
 }

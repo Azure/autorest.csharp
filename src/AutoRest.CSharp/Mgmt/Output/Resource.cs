@@ -321,9 +321,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             return branch.ParentRequestPath().GetResourceType();
         }
 
-        private IEnumerable<ContextualParameterMapping>? _extraContextualParameterMapping;
-        public IEnumerable<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping ??= EnsureExtraContextualParameterMapping();
-        protected virtual IEnumerable<ContextualParameterMapping> EnsureExtraContextualParameterMapping() => Enumerable.Empty<ContextualParameterMapping>();
+        private IReadOnlyList<ContextualParameterMapping>? _extraContextualParameterMapping;
+        public IReadOnlyList<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping ??= EnsureExtraContextualParameterMapping();
+        protected virtual IReadOnlyList<ContextualParameterMapping> EnsureExtraContextualParameterMapping() => Array.Empty<ContextualParameterMapping>();
 
         /// <summary>
         /// A collection of ClientOperations.

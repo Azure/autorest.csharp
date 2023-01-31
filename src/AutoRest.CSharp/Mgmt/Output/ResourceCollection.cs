@@ -17,6 +17,7 @@ using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using static AutoRest.CSharp.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -77,7 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
         protected override ConstructorSignature? EnsureResourceDataCtor() => null;
 
-        protected override IEnumerable<ContextualParameterMapping> EnsureExtraContextualParameterMapping()
+        protected override IReadOnlyList<ContextualParameterMapping> EnsureExtraContextualParameterMapping()
         {
             var result = new List<ContextualParameterMapping>();
             Operation? op = null;
@@ -111,7 +112,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     _extraConstructorParameters.Add(parameter, $"_{segment.ReferenceName}");
                     // there is a key for this parameter, get the key and add this one to contextual parameter mapping
                     var key = ParameterMappingBuilder.FindKeyOfParameter(parameter, opRequestPath);
-                    result.Add(new ContextualParameterMapping(key, segment, GetFieldName(parameter)));
+                    result.Add(new ContextualParameterMapping(key, segment, new FormattableStringToExpression(GetFieldName(parameter))));
                 }
                 else
                 {
@@ -119,7 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var value = ResourceType[candidate.index];
                     try
                     {
-                        result.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
+                        result.Add(new ContextualParameterMapping("", segment, Literal(value.ConstantValue)));
                     }
                     catch (InvalidOperationException)
                     {
