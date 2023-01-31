@@ -15,6 +15,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -29,6 +30,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -49,6 +51,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -63,6 +66,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -83,6 +87,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -97,6 +102,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -117,6 +123,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -131,6 +138,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -149,6 +157,7 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = new {},
     requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
 };
 
@@ -159,6 +168,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -173,6 +183,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -185,6 +196,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -203,6 +215,7 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = new {},
     requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
 };
 
@@ -213,6 +226,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -227,6 +241,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -239,6 +254,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -257,6 +273,7 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = new {},
     requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
 };
 
@@ -267,6 +284,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -281,6 +299,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -293,6 +312,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -311,6 +331,7 @@ var data = new {
     requiredUnion = new {},
     requiredLiteralString = new {},
     requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
 };
 
@@ -321,6 +342,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -335,6 +357,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -347,6 +370,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -483,6 +507,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
@@ -497,6 +522,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -511,6 +537,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -531,6 +558,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 This sample shows how to call SayHi with all parameters, and how to parse the result.
@@ -545,6 +573,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -559,6 +588,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -586,6 +616,7 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = new {},
         requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
     },
 };
@@ -597,6 +628,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -616,6 +648,7 @@ Schema for <c>RoundTripModel</c>:
     requiredUnion: Union, # Required.
     requiredLiteralString: Literal, # Required.
     requiredLiteralInt: Literal, # Required.
+    requiredLiteralDouble: Literal, # Required.
     requiredLiteralBool: Literal, # Required.
   }, # Required.
 }
@@ -629,6 +662,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -656,6 +690,7 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = new {},
         requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
     },
 };
@@ -667,6 +702,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -686,6 +722,7 @@ Schema for <c>RoundTripModel</c>:
     requiredUnion: Union, # Required.
     requiredLiteralString: Literal, # Required.
     requiredLiteralInt: Literal, # Required.
+    requiredLiteralDouble: Literal, # Required.
     requiredLiteralBool: Literal, # Required.
   }, # Required.
 }
@@ -699,6 +736,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -726,6 +764,7 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = new {},
         requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
     },
 };
@@ -737,6 +776,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -756,6 +796,7 @@ Schema for <c>RoundTripModel</c>:
     requiredUnion: Union, # Required.
     requiredLiteralString: Literal, # Required.
     requiredLiteralInt: Literal, # Required.
+    requiredLiteralDouble: Literal, # Required.
     requiredLiteralBool: Literal, # Required.
   }, # Required.
 }
@@ -769,6 +810,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -796,6 +838,7 @@ var data = new {
         requiredUnion = new {},
         requiredLiteralString = new {},
         requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
     },
 };
@@ -807,6 +850,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -826,6 +870,7 @@ Schema for <c>RoundTripModel</c>:
     requiredUnion: Union, # Required.
     requiredLiteralString: Literal, # Required.
     requiredLiteralInt: Literal, # Required.
+    requiredLiteralDouble: Literal, # Required.
     requiredLiteralBool: Literal, # Required.
   }, # Required.
 }
@@ -839,6 +884,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -859,6 +905,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -873,6 +920,7 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>
@@ -893,6 +941,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 ]]></code>
 </example>
@@ -907,6 +956,79 @@ Schema for <c>Thing</c>:
   requiredUnion: Union, # Required.
   requiredLiteralString: Literal, # Required.
   requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="HelloLiteralAsync(RequestContext)">
+<example>
+This sample shows how to call HelloLiteralAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+Response response = await client.HelloLiteralAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredUnion: Union, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
+  requiredLiteralBool: Literal, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="HelloLiteral(RequestContext)">
+<example>
+This sample shows how to call HelloLiteral and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+Response response = client.HelloLiteral();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+  requiredUnion: Union, # Required.
+  requiredLiteralString: Literal, # Required.
+  requiredLiteralInt: Literal, # Required.
+  requiredLiteralDouble: Literal, # Required.
   requiredLiteralBool: Literal, # Required.
 }
 </code>

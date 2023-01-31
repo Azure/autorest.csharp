@@ -24,6 +24,8 @@ namespace CadlFirstTest.Models
             writer.WriteStringValue(RequiredLiteralString);
             writer.WritePropertyName("requiredLiteralInt");
             writer.WriteNumberValue(RequiredLiteralInt);
+            writer.WritePropertyName("requiredLiteralDouble");
+            writer.WriteNumberValue(RequiredLiteralDouble);
             writer.WritePropertyName("requiredLiteralBool");
             writer.WriteBooleanValue(RequiredLiteralBool);
             writer.WriteEndObject();
@@ -35,6 +37,7 @@ namespace CadlFirstTest.Models
             string requiredUnion = default;
             string requiredLiteralString = default;
             int requiredLiteralInt = default;
+            double requiredLiteralDouble = default;
             bool requiredLiteralBool = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -56,6 +59,11 @@ namespace CadlFirstTest.Models
                 if (property.NameEquals("requiredLiteralInt"))
                 {
                     requiredLiteralInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("requiredLiteralDouble"))
+                {
+                    requiredLiteralDouble = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralBool"))

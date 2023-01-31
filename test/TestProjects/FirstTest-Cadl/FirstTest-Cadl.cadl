@@ -53,9 +53,8 @@ model Thing {
   @doc("required literal int")
   requiredLiteralInt: 123;
 
-  // TODO: how do we identify if the number literal is a float or double?
-//   @doc("required literal float")
-//   requiredLiteralFloat: 1.23;
+  @doc("required literal double")
+  requiredLiteralDouble: 1.23;
 
   @doc("required literal bool")
   requiredLiteralBool: false;
@@ -119,6 +118,12 @@ namespace Hello.Demo2 {
     @doc("Return hi in demo2")
     @get
     op helloDemo2(): Thing;
+
+    @route("/helloLiteral")
+    @convenienceAPI
+    @doc("Send literal parameters")
+    @get
+    op helloLiteral(@header p1: "test", @path p2: 123, @query p3: true): Thing;
 }
 
 @route("/top")

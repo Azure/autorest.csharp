@@ -36,6 +36,9 @@ namespace CadlFirstTest.Models
         /// <summary> Gets the required literal int. </summary>
         internal int RequiredLiteralInt { get; } = 123;
 
+        /// <summary> Gets the required literal double. </summary>
+        internal double RequiredLiteralDouble { get; } = 1.23;
+
         /// <summary> Gets the required literal bool. </summary>
         internal bool RequiredLiteralBool { get; } = false;
     }

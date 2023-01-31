@@ -214,14 +214,35 @@
     },
     {
      "$id": "33",
-     "Name": "requiredLiteralBool",
-     "SerializedName": "requiredLiteralBool",
+     "Name": "requiredLiteralDouble",
+     "SerializedName": "requiredLiteralDouble",
      "Description": "",
      "Type": {
       "$id": "34",
       "Name": "Literal",
       "LiteralValueType": {
        "$id": "35",
+       "Name": "Number",
+       "Kind": "Float64",
+       "IsNullable": false
+      },
+      "Value": 1.23,
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "36",
+     "Name": "requiredLiteralBool",
+     "SerializedName": "requiredLiteralBool",
+     "Description": "",
+     "Type": {
+      "$id": "37",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$id": "38",
        "Name": "Boolean",
        "Kind": "Boolean",
        "IsNullable": false
@@ -236,19 +257,19 @@
    ]
   },
   {
-   "$id": "36",
+   "$id": "39",
    "Name": "Friend",
    "Namespace": "CadlFirstTest",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "37",
+     "$id": "40",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "38",
+      "$id": "41",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -260,19 +281,19 @@
    ]
   },
   {
-   "$id": "39",
+   "$id": "42",
    "Name": "RoundTripModel",
    "Namespace": "CadlFirstTest",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "40",
+     "$id": "43",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "",
      "Type": {
-      "$id": "41",
+      "$id": "44",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -282,12 +303,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "42",
+     "$id": "45",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "",
      "Type": {
-      "$id": "43",
+      "$id": "46",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -297,12 +318,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "44",
+     "$id": "47",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
      "Description": "",
      "Type": {
-      "$id": "45",
+      "$id": "48",
       "Name": "Array",
       "ElementType": {
        "$ref": "2"
@@ -314,15 +335,15 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "46",
+     "$id": "49",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
      "Description": "",
      "Type": {
-      "$id": "47",
+      "$id": "50",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "48",
+       "$id": "51",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -337,7 +358,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "49",
+     "$id": "52",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "",
@@ -353,23 +374,23 @@
  ],
  "Clients": [
   {
-   "$id": "50",
+   "$id": "53",
    "Name": "CadlFirstTestClient",
    "Description": "This is a sample cadl project.",
    "Operations": [
     {
-     "$id": "51",
+     "$id": "54",
      "Name": "topAction",
      "ResourceName": "CadlFirstTest",
      "Description": "top level method",
      "Parameters": [
       {
-       "$id": "52",
+       "$id": "55",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "Endpoint Service",
        "Type": {
-        "$id": "53",
+        "$id": "56",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -384,9 +405,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "57",
         "Type": {
-         "$id": "55",
+         "$id": "58",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -395,11 +416,11 @@
        }
       },
       {
-       "$id": "56",
+       "$id": "59",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "57",
+        "$id": "60",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -415,11 +436,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "58",
+       "$id": "61",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "59",
+        "$id": "62",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -434,20 +455,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "60",
+        "$id": "63",
         "Type": {
-         "$ref": "59"
+         "$ref": "62"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "61",
+       "$id": "64",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "62",
+        "$id": "65",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -462,9 +483,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "63",
+        "$id": "66",
         "Type": {
-         "$id": "64",
+         "$id": "67",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -475,7 +496,7 @@
      ],
      "Responses": [
       {
-       "$id": "65",
+       "$id": "68",
        "StatusCodes": [
         200
        ],
@@ -495,20 +516,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "66",
+     "$id": "69",
      "Name": "topAction2",
      "ResourceName": "CadlFirstTest",
      "Description": "top level method2",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "55"
       },
       {
-       "$id": "67",
+       "$id": "70",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "68",
+        "$id": "71",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -523,20 +544,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "72",
         "Type": {
-         "$ref": "68"
+         "$ref": "71"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "61"
+       "$ref": "64"
       }
      ],
      "Responses": [
       {
-       "$id": "70",
+       "$id": "73",
        "StatusCodes": [
         200
        ],
@@ -556,16 +577,16 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "71",
+     "$id": "74",
      "Name": "patchAction",
      "ResourceName": "CadlFirstTest",
      "Description": "top level patch",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "55"
       },
       {
-       "$id": "72",
+       "$id": "75",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -582,11 +603,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "73",
+       "$id": "76",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "74",
+        "$id": "77",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -601,19 +622,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "78",
         "Type": {
-         "$ref": "74"
+         "$ref": "77"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "76",
+       "$id": "79",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "77",
+        "$id": "80",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -628,20 +649,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "81",
         "Type": {
-         "$ref": "77"
+         "$ref": "80"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "61"
+       "$ref": "64"
       }
      ],
      "Responses": [
       {
-       "$id": "79",
+       "$id": "82",
        "StatusCodes": [
         200
        ],
@@ -664,16 +685,16 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "80",
+     "$id": "83",
      "Name": "anonymousBody",
      "ResourceName": "CadlFirstTest",
      "Description": "body parameter without body decorator",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "55"
       },
       {
-       "$id": "81",
+       "$id": "84",
        "Name": "Thing",
        "NameInRequest": "Thing",
        "Type": {
@@ -690,11 +711,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "82",
+       "$id": "85",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "83",
+        "$id": "86",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -709,19 +730,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "84",
+        "$id": "87",
         "Type": {
-         "$ref": "83"
+         "$ref": "86"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "85",
+       "$id": "88",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "86",
+        "$id": "89",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -736,20 +757,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "87",
+        "$id": "90",
         "Type": {
-         "$ref": "86"
+         "$ref": "89"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "61"
+       "$ref": "64"
       }
      ],
      "Responses": [
       {
-       "$id": "88",
+       "$id": "91",
        "StatusCodes": [
         200
        ],
@@ -772,20 +793,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "89",
+     "$id": "92",
      "Name": "friendlyModel",
      "ResourceName": "CadlFirstTest",
      "Description": "Model can have its friendly name",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "55"
       },
       {
-       "$id": "90",
+       "$id": "93",
        "Name": "NotFriend",
        "NameInRequest": "NotFriend",
        "Type": {
-        "$ref": "36"
+        "$ref": "39"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -798,11 +819,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "91",
+       "$id": "94",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "92",
+        "$id": "95",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -817,19 +838,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "93",
+        "$id": "96",
         "Type": {
-         "$ref": "92"
+         "$ref": "95"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "94",
+       "$id": "97",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "95",
+        "$id": "98",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -844,25 +865,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "96",
+        "$id": "99",
         "Type": {
-         "$ref": "95"
+         "$ref": "98"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "61"
+       "$ref": "64"
       }
      ],
      "Responses": [
       {
-       "$id": "97",
+       "$id": "100",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "36"
+        "$ref": "39"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -880,19 +901,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "98",
+     "$id": "101",
      "Name": "addTimeHeader",
      "ResourceName": "CadlFirstTest",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "55"
       },
       {
-       "$id": "99",
+       "$id": "102",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Type": {
-        "$id": "100",
+        "$id": "103",
         "Name": "zonedDateTime",
         "Kind": "DateTime",
         "IsNullable": false
@@ -908,11 +929,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "101",
+       "$id": "104",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "102",
+        "$id": "105",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -927,20 +948,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "103",
+        "$id": "106",
         "Type": {
-         "$ref": "102"
+         "$ref": "105"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "61"
+       "$ref": "64"
       }
      ],
      "Responses": [
       {
-       "$id": "104",
+       "$id": "107",
        "StatusCodes": [
         204
        ],
@@ -957,20 +978,20 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "105",
+     "$id": "108",
      "Name": "sayHi",
      "ResourceName": "Demo",
      "Description": "Return hi",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "55"
       },
       {
-       "$id": "106",
+       "$id": "109",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "107",
+        "$id": "110",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -986,11 +1007,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "108",
+       "$id": "111",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "109",
+        "$id": "112",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1006,11 +1027,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "110",
+       "$id": "113",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "111",
+        "$id": "114",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1026,11 +1047,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "112",
+       "$id": "115",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "113",
+        "$id": "116",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1045,20 +1066,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "114",
+        "$id": "117",
         "Type": {
-         "$ref": "113"
+         "$ref": "116"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "61"
+       "$ref": "64"
       }
      ],
      "Responses": [
       {
-       "$id": "115",
+       "$id": "118",
        "StatusCodes": [
         200
        ],
@@ -1078,20 +1099,20 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "116",
+     "$id": "119",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "55"
       },
       {
-       "$id": "117",
+       "$id": "120",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "118",
+        "$id": "121",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1107,14 +1128,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "119",
+       "$id": "122",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "120",
+        "$id": "123",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "121",
+         "$id": "124",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -1124,9 +1145,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "122",
+        "$id": "125",
         "Type": {
-         "$ref": "120"
+         "$ref": "123"
         },
         "Value": "text/plain"
        },
@@ -1140,11 +1161,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "123",
+       "$id": "126",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "124",
+        "$id": "127",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1160,11 +1181,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "125",
+       "$id": "128",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "39"
+        "$ref": "42"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1177,11 +1198,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "126",
+       "$id": "129",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "127",
+        "$id": "130",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1196,20 +1217,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "128",
+        "$id": "131",
         "Type": {
-         "$ref": "127"
+         "$ref": "130"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "61"
+       "$ref": "64"
       }
      ],
      "Responses": [
       {
-       "$id": "129",
+       "$id": "132",
        "StatusCodes": [
         200
        ],
@@ -1232,20 +1253,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "130",
+     "$id": "133",
      "Name": "noContentType",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "55"
       },
       {
-       "$id": "131",
+       "$id": "134",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "132",
+        "$id": "135",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1261,11 +1282,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "133",
+       "$id": "136",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "134",
+        "$id": "137",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1281,11 +1302,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "135",
+       "$id": "138",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "39"
+        "$ref": "42"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1298,11 +1319,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "136",
+       "$id": "139",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "137",
+        "$id": "140",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1317,19 +1338,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "138",
+        "$id": "141",
         "Type": {
-         "$ref": "137"
+         "$ref": "140"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "139",
+       "$id": "142",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "140",
+        "$id": "143",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1344,20 +1365,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "141",
+        "$id": "144",
         "Type": {
-         "$ref": "140"
+         "$ref": "143"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "61"
+       "$ref": "64"
       }
      ],
      "Responses": [
       {
-       "$id": "142",
+       "$id": "145",
        "StatusCodes": [
         200
        ],
@@ -1380,20 +1401,20 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "143",
+     "$id": "146",
      "Name": "helloDemo2",
      "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "55"
       },
       {
-       "$id": "144",
+       "$id": "147",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "145",
+        "$id": "148",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1408,20 +1429,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "146",
+        "$id": "149",
         "Type": {
-         "$ref": "145"
+         "$ref": "148"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "61"
+       "$ref": "64"
       }
      ],
      "Responses": [
       {
-       "$id": "147",
+       "$id": "150",
        "StatusCodes": [
         200
        ],
@@ -1441,20 +1462,119 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "148",
-     "Name": "getUnknownValue",
-     "ResourceName": "EnumTest",
-     "Description": "get extensible enum",
+     "$id": "151",
+     "Name": "helloLiteral",
+     "ResourceName": "Demo2",
+     "Description": "Send literal parameters",
      "Parameters": [
       {
-       "$ref": "52"
+       "$ref": "55"
       },
       {
-       "$id": "149",
+       "$id": "152",
+       "Name": "p1",
+       "NameInRequest": "p1",
+       "Type": {
+        "$id": "153",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "154",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "test",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "155",
+        "Type": {
+         "$ref": "153"
+        },
+        "Value": "test"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "156",
+       "Name": "p2",
+       "NameInRequest": "p2",
+       "Type": {
+        "$id": "157",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "158",
+         "Name": "Number",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "Value": 123,
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "DefaultValue": {
+        "$id": "159",
+        "Type": {
+         "$ref": "157"
+        },
+        "Value": 123
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "160",
+       "Name": "p3",
+       "NameInRequest": "p3",
+       "Type": {
+        "$id": "161",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "162",
+         "Name": "Boolean",
+         "Kind": "Boolean",
+         "IsNullable": false
+        },
+        "Value": true,
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$id": "163",
+        "Type": {
+         "$ref": "161"
+        },
+        "Value": true
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "164",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "150",
+        "$id": "165",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1469,20 +1589,81 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "151",
+        "$id": "166",
         "Type": {
-         "$ref": "150"
+         "$ref": "165"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "61"
+       "$ref": "64"
       }
      ],
      "Responses": [
       {
-       "$id": "152",
+       "$id": "167",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "18"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/helloLiteral/{p2}",
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "168",
+     "Name": "getUnknownValue",
+     "ResourceName": "EnumTest",
+     "Description": "get extensible enum",
+     "Parameters": [
+      {
+       "$ref": "55"
+      },
+      {
+       "$id": "169",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "170",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "171",
+        "Type": {
+         "$ref": "170"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "64"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "172",
        "StatusCodes": [
         200
        ],
@@ -1503,19 +1684,19 @@
     }
    ],
    "Protocol": {
-    "$id": "153"
+    "$id": "173"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "154",
+  "$id": "174",
   "ApiKey": {
-   "$id": "155",
+   "$id": "175",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "156",
+   "$id": "176",
    "Scopes": [
     "https://api.example.com/.default"
    ]
