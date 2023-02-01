@@ -15,14 +15,14 @@ namespace CustomizationsInCadl.Models
     public partial class ModelWithCustomizedProperties
     {
         /// <summary> Initializes a new instance of ModelWithCustomizedProperties. </summary>
-        /// <param name="propertyToMakeInternal"></param>
-        /// <param name="renamedProperty"></param>
-        /// <param name="propertyToMakeFloat"></param>
-        /// <param name="propertyToMakeInt"></param>
-        /// <param name="propertyToMakeDuration"></param>
-        /// <param name="propertyToMakeString"></param>
-        /// <param name="propertyToMakeJsonElement"></param>
-        /// <param name="propertyToField"></param>
+        /// <param name="propertyToMakeInternal"> Public property made internal. </param>
+        /// <param name="renamedProperty"> Renamed property (original name: PropertyToRename). </param>
+        /// <param name="propertyToMakeFloat"> Property with type changed to float (original type: int). </param>
+        /// <param name="propertyToMakeInt"> Property with type changed to int (original type: float). </param>
+        /// <param name="propertyToMakeDuration"> Property with type changed to duration (original type: string). </param>
+        /// <param name="propertyToMakeString"> Property with type changed to string (original type: duration). </param>
+        /// <param name="propertyToMakeJsonElement"> Property with type changed to JsonElement (original type: string). </param>
+        /// <param name="propertyToField"> Field that replaces property (original name: PropertyToField). </param>
         /// <exception cref="ArgumentNullException"> <paramref name="propertyToMakeString"/> or <paramref name="propertyToField"/> is null. </exception>
         public ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField)
         {

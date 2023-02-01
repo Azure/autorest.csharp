@@ -19,7 +19,7 @@
      "$id": "3",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "pet name",
      "Type": {
       "$id": "4",
       "Name": "string",
@@ -74,7 +74,7 @@
      "$id": "10",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "",
+     "Description": "The Toy items on this page",
      "Type": {
       "$id": "11",
       "Name": "Array",
@@ -142,7 +142,7 @@
      "$id": "19",
      "Name": "nextLink",
      "SerializedName": "nextLink",
-     "Description": "",
+     "Description": "The link to the next page of items",
      "Type": {
       "$id": "20",
       "Name": "ResourceLocation",

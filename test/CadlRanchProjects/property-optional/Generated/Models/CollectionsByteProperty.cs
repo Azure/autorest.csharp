@@ -22,14 +22,14 @@ namespace Models.Property.Optional.Models
         }
 
         /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         internal CollectionsByteProperty(IList<BinaryData> property)
         {
             Property = property.ToList();
         }
 
         /// <summary>
-        /// Gets the property
+        /// Property
         /// <para>
         /// To assign an object to the element of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

@@ -14,8 +14,8 @@ namespace Spread.Models
     internal partial class SpreadMultiTargetAliasRequest
     {
         /// <summary> Initializes a new instance of SpreadMultiTargetAliasRequest. </summary>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public SpreadMultiTargetAliasRequest(string name, int age)
         {
@@ -25,9 +25,9 @@ namespace Spread.Models
             Age = age;
         }
 
-        /// <summary> Gets the name. </summary>
+        /// <summary> name of the Thing. </summary>
         public string Name { get; }
-        /// <summary> Gets the age. </summary>
+        /// <summary> age of the Thing. </summary>
         public int Age { get; }
     }
 }

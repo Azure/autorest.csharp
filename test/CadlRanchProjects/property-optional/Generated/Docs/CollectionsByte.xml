@@ -20,7 +20,7 @@ Response Body:
 
 Schema for <c>CollectionsByteProperty</c>:
 <code>{
-  property: [BinaryData], # Optional.
+  property: [BinaryData], # Optional. Property
 }
 </code>
 
@@ -45,7 +45,7 @@ Response Body:
 
 Schema for <c>CollectionsByteProperty</c>:
 <code>{
-  property: [BinaryData], # Optional.
+  property: [BinaryData], # Optional. Property
 }
 </code>
 
@@ -70,7 +70,7 @@ Response Body:
 
 Schema for <c>CollectionsByteProperty</c>:
 <code>{
-  property: [BinaryData], # Optional.
+  property: [BinaryData], # Optional. Property
 }
 </code>
 
@@ -95,7 +95,7 @@ Response Body:
 
 Schema for <c>CollectionsByteProperty</c>:
 <code>{
-  property: [BinaryData], # Optional.
+  property: [BinaryData], # Optional. Property
 }
 </code>
 
@@ -133,7 +133,7 @@ Request Body:
 
 Schema for <c>CollectionsByteProperty</c>:
 <code>{
-  property: [BinaryData], # Optional.
+  property: [BinaryData], # Optional. Property
 }
 </code>
 
@@ -171,7 +171,7 @@ Request Body:
 
 Schema for <c>CollectionsByteProperty</c>:
 <code>{
-  property: [BinaryData], # Optional.
+  property: [BinaryData], # Optional. Property
 }
 </code>
 
@@ -209,7 +209,7 @@ Request Body:
 
 Schema for <c>CollectionsByteProperty</c>:
 <code>{
-  property: [BinaryData], # Optional.
+  property: [BinaryData], # Optional. Property
 }
 </code>
 
@@ -247,7 +247,7 @@ Request Body:
 
 Schema for <c>CollectionsByteProperty</c>:
 <code>{
-  property: [BinaryData], # Optional.
+  property: [BinaryData], # Optional. Property
 }
 </code>
 

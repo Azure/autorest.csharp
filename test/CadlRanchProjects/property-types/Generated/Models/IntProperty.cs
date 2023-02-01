@@ -11,13 +11,13 @@ namespace Models.Property.Types.Models
     public partial class IntProperty
     {
         /// <summary> Initializes a new instance of IntProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         public IntProperty(int property)
         {
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public int Property { get; set; }
     }
 }

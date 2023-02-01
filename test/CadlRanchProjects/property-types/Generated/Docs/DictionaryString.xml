@@ -20,7 +20,7 @@ Response Body:
 
 Schema for <c>DictionaryStringProperty</c>:
 <code>{
-  property: Dictionary&lt;string, string&gt;, # Required.
+  property: Dictionary&lt;string, string&gt;, # Required. Property
 }
 </code>
 
@@ -45,7 +45,7 @@ Response Body:
 
 Schema for <c>DictionaryStringProperty</c>:
 <code>{
-  property: Dictionary&lt;string, string&gt;, # Required.
+  property: Dictionary&lt;string, string&gt;, # Required. Property
 }
 </code>
 
@@ -74,7 +74,7 @@ Request Body:
 
 Schema for <c>DictionaryStringProperty</c>:
 <code>{
-  property: Dictionary&lt;string, string&gt;, # Required.
+  property: Dictionary&lt;string, string&gt;, # Required. Property
 }
 </code>
 
@@ -103,7 +103,7 @@ Request Body:
 
 Schema for <c>DictionaryStringProperty</c>:
 <code>{
-  property: Dictionary&lt;string, string&gt;, # Required.
+  property: Dictionary&lt;string, string&gt;, # Required. Property
 }
 </code>
 

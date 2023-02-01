@@ -15,7 +15,7 @@ namespace Models.Property.Types.Models
     public partial class DictionaryStringProperty
     {
         /// <summary> Initializes a new instance of DictionaryStringProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public DictionaryStringProperty(IDictionary<string, string> property)
         {
@@ -24,7 +24,7 @@ namespace Models.Property.Types.Models
             Property = property;
         }
 
-        /// <summary> Gets the property. </summary>
+        /// <summary> Property. </summary>
         public IDictionary<string, string> Property { get; }
     }
 }

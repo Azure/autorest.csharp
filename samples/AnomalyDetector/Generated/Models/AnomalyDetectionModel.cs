@@ -13,8 +13,8 @@ namespace AnomalyDetector.Models
     public partial class AnomalyDetectionModel
     {
         /// <summary> Initializes a new instance of AnomalyDetectionModel. </summary>
-        /// <param name="createdTime"></param>
-        /// <param name="lastUpdatedTime"></param>
+        /// <param name="createdTime"> Date and time (UTC) when the model was created. </param>
+        /// <param name="lastUpdatedTime"> Date and time (UTC) when the model was last updated. </param>
         internal AnomalyDetectionModel(DateTimeOffset createdTime, DateTimeOffset lastUpdatedTime)
         {
             CreatedTime = createdTime;
@@ -22,10 +22,13 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of AnomalyDetectionModel. </summary>
-        /// <param name="modelId"></param>
-        /// <param name="createdTime"></param>
-        /// <param name="lastUpdatedTime"></param>
-        /// <param name="modelInfo"></param>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="createdTime"> Date and time (UTC) when the model was created. </param>
+        /// <param name="lastUpdatedTime"> Date and time (UTC) when the model was last updated. </param>
+        /// <param name="modelInfo">
+        /// Training result of a model including its status, errors and diagnostics
+        /// information.
+        /// </param>
         internal AnomalyDetectionModel(string modelId, DateTimeOffset createdTime, DateTimeOffset lastUpdatedTime, ModelInfo modelInfo)
         {
             ModelId = modelId;
@@ -34,13 +37,16 @@ namespace AnomalyDetector.Models
             ModelInfo = modelInfo;
         }
 
-        /// <summary> Gets the model id. </summary>
+        /// <summary> Model identifier. </summary>
         public string ModelId { get; }
-        /// <summary> Gets the created time. </summary>
+        /// <summary> Date and time (UTC) when the model was created. </summary>
         public DateTimeOffset CreatedTime { get; }
-        /// <summary> Gets the last updated time. </summary>
+        /// <summary> Date and time (UTC) when the model was last updated. </summary>
         public DateTimeOffset LastUpdatedTime { get; }
-        /// <summary> Gets the model info. </summary>
+        /// <summary>
+        /// Training result of a model including its status, errors and diagnostics
+        /// information.
+        /// </summary>
         public ModelInfo ModelInfo { get; }
     }
 }

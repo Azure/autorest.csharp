@@ -103,7 +103,7 @@
      "$id": "15",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string",
      "Type": {
       "$id": "16",
       "Name": "string",
@@ -118,7 +118,7 @@
      "$id": "17",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int",
      "Type": {
       "$id": "18",
       "Name": "int32",
@@ -133,7 +133,7 @@
      "$id": "19",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
-     "Description": "",
+     "Description": "Required model",
      "Type": {
       "$id": "20",
       "Name": "BaseModel",
@@ -151,7 +151,7 @@
      "$id": "21",
      "Name": "requiredIntCollection",
      "SerializedName": "requiredIntCollection",
-     "Description": "",
+     "Description": "Required primitive value type collection",
      "Type": {
       "$id": "22",
       "Name": "Array",
@@ -171,7 +171,7 @@
      "$id": "24",
      "Name": "requiredStringCollection",
      "SerializedName": "requiredStringCollection",
-     "Description": "",
+     "Description": "Required primitive reference type collection",
      "Type": {
       "$id": "25",
       "Name": "Array",
@@ -191,7 +191,7 @@
      "$id": "27",
      "Name": "requiredModelCollection",
      "SerializedName": "requiredModelCollection",
-     "Description": "",
+     "Description": "Required model collection",
      "Type": {
       "$id": "28",
       "Name": "Array",
@@ -207,7 +207,7 @@
          "$id": "30",
          "Name": "requiredModelRecord",
          "SerializedName": "requiredModelRecord",
-         "Description": "",
+         "Description": "Required model record",
          "Type": {
           "$id": "31",
           "Name": "Dictionary",
@@ -238,7 +238,7 @@
               "$id": "35",
               "Name": "requiredCollection",
               "SerializedName": "requiredCollection",
-              "Description": "",
+              "Description": "Required collection",
               "Type": {
                "$id": "36",
                "Name": "Array",
@@ -274,7 +274,7 @@
      "$id": "37",
      "Name": "requiredModelRecord",
      "SerializedName": "requiredModelRecord",
-     "Description": "",
+     "Description": "Required model record",
      "Type": {
       "$id": "38",
       "Name": "Dictionary",
@@ -322,7 +322,7 @@
      "$id": "41",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "42",
       "Name": "string",
@@ -337,7 +337,7 @@
      "$id": "43",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "44",
       "Name": "int32",
@@ -352,7 +352,7 @@
      "$id": "45",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
-     "Description": "",
+     "Description": "Required model with discriminator",
      "Type": {
       "$id": "46",
       "Name": "BaseModelWithDiscriminator",
@@ -371,7 +371,7 @@
      "$id": "47",
      "Name": "requiredFixedStringEnum",
      "SerializedName": "requiredFixedStringEnum",
-     "Description": "",
+     "Description": "Required fixed string enum",
      "Type": {
       "$ref": "2"
      },
@@ -383,7 +383,7 @@
      "$id": "48",
      "Name": "requiredFixedIntEnum",
      "SerializedName": "requiredFixedIntEnum",
-     "Description": "",
+     "Description": "Required fixed int enum",
      "Type": {
       "$ref": "6"
      },
@@ -395,7 +395,7 @@
      "$id": "49",
      "Name": "requiredExtensibleEnum",
      "SerializedName": "requiredExtensibleEnum",
-     "Description": "",
+     "Description": "Required extensible enum",
      "Type": {
       "$ref": "10"
      },
@@ -407,7 +407,7 @@
      "$id": "50",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
-     "Description": "",
+     "Description": "Required collection",
      "Type": {
       "$id": "51",
       "Name": "Array",
@@ -424,7 +424,7 @@
      "$id": "52",
      "Name": "requiredIntRecord",
      "SerializedName": "requiredIntRecord",
-     "Description": "",
+     "Description": "Required int record",
      "Type": {
       "$id": "53",
       "Name": "Dictionary",
@@ -450,7 +450,7 @@
      "$id": "56",
      "Name": "requiredStringRecord",
      "SerializedName": "requiredStringRecord",
-     "Description": "",
+     "Description": "Required string record",
      "Type": {
       "$id": "57",
       "Name": "Dictionary",
@@ -476,7 +476,7 @@
      "$id": "60",
      "Name": "requiredModelRecord",
      "SerializedName": "requiredModelRecord",
-     "Description": "",
+     "Description": "Required Model Record",
      "Type": {
       "$id": "61",
       "Name": "Dictionary",
@@ -516,7 +516,7 @@
      "$id": "64",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string.",
      "Type": {
       "$id": "65",
       "Name": "string",
@@ -545,7 +545,7 @@
      "$id": "67",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int.",
      "Type": {
       "$id": "68",
       "Name": "int32",
@@ -573,7 +573,7 @@
      "$id": "70",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "71",
       "Name": "string",
@@ -588,7 +588,7 @@
      "$id": "72",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "73",
       "Name": "int32",
@@ -603,7 +603,7 @@
      "$id": "74",
      "Name": "requiredInt64",
      "SerializedName": "requiredInt64",
-     "Description": "",
+     "Description": "Required int64, illustrating a value type property.",
      "Type": {
       "$id": "75",
       "Name": "int64",
@@ -618,7 +618,7 @@
      "$id": "76",
      "Name": "requiredSafeInt",
      "SerializedName": "requiredSafeInt",
-     "Description": "",
+     "Description": "Required safeint, illustrating a value type property.",
      "Type": {
       "$id": "77",
       "Name": "safeint",
@@ -633,7 +633,7 @@
      "$id": "78",
      "Name": "requiredFloat",
      "SerializedName": "requiredFloat",
-     "Description": "",
+     "Description": "Required float, illustrating a value type property.",
      "Type": {
       "$id": "79",
       "Name": "float32",
@@ -648,7 +648,7 @@
      "$id": "80",
      "Name": "required_Double",
      "SerializedName": "required_Double",
-     "Description": "",
+     "Description": "Required double, illustrating a value type property.",
      "Type": {
       "$id": "81",
       "Name": "float64",
@@ -663,7 +663,7 @@
      "$id": "82",
      "Name": "requiredBoolean",
      "SerializedName": "requiredBoolean",
-     "Description": "",
+     "Description": "Required bolean, illustrating a value type property.",
      "Type": {
       "$id": "83",
       "Name": "boolean",
@@ -678,7 +678,7 @@
      "$id": "84",
      "Name": "requiredDateTimeOffset",
      "SerializedName": "requiredDateTimeOffset",
-     "Description": "",
+     "Description": "Required date time offset, illustrating a reference type property.",
      "Type": {
       "$id": "85",
       "Name": "zonedDateTime",
@@ -693,7 +693,7 @@
      "$id": "86",
      "Name": "requiredTimeSpan",
      "SerializedName": "requiredTimeSpan",
-     "Description": "",
+     "Description": "Required time span, illustrating a value type property.",
      "Type": {
       "$id": "87",
       "Name": "duration",
@@ -719,7 +719,7 @@
      "$id": "89",
      "Name": "optionalString",
      "SerializedName": "optionalString",
-     "Description": "",
+     "Description": "Optional string, illustrating an optional reference type property.",
      "Type": {
       "$id": "90",
       "Name": "string",
@@ -734,7 +734,7 @@
      "$id": "91",
      "Name": "optionalInt",
      "SerializedName": "optionalInt",
-     "Description": "",
+     "Description": "Optional int, illustrating an optional value type property.",
      "Type": {
       "$id": "92",
       "Name": "int32",
@@ -749,7 +749,7 @@
      "$id": "93",
      "Name": "optionalStringList",
      "SerializedName": "optionalStringList",
-     "Description": "",
+     "Description": "Optional string collection.",
      "Type": {
       "$id": "94",
       "Name": "Array",
@@ -769,7 +769,7 @@
      "$id": "96",
      "Name": "optionalIntList",
      "SerializedName": "optionalIntList",
-     "Description": "",
+     "Description": "Optional int collection.",
      "Type": {
       "$id": "97",
       "Name": "Array",
@@ -789,7 +789,7 @@
      "$id": "99",
      "Name": "optionalModelCollection",
      "SerializedName": "optionalModelCollection",
-     "Description": "",
+     "Description": "Optional model collection",
      "Type": {
       "$id": "100",
       "Name": "Array",
@@ -806,7 +806,7 @@
      "$id": "101",
      "Name": "optionalModel",
      "SerializedName": "optionalModel",
-     "Description": "",
+     "Description": "Optional model.",
      "Type": {
       "$ref": "34"
      },
@@ -818,7 +818,7 @@
      "$id": "102",
      "Name": "optionalFixedStringEnum",
      "SerializedName": "optionalFixedStringEnum",
-     "Description": "",
+     "Description": "Optional fixed string enum",
      "Type": {
       "$ref": "2"
      },
@@ -830,7 +830,7 @@
      "$id": "103",
      "Name": "optionalExtensibleEnum",
      "SerializedName": "optionalExtensibleEnum",
-     "Description": "",
+     "Description": "Optional extensible enum",
      "Type": {
       "$ref": "10"
      },
@@ -842,7 +842,7 @@
      "$id": "104",
      "Name": "optionalIntRecord",
      "SerializedName": "optionalIntRecord",
-     "Description": "",
+     "Description": "Optional int record",
      "Type": {
       "$id": "105",
       "Name": "Dictionary",
@@ -868,7 +868,7 @@
      "$id": "108",
      "Name": "optionalStringRecord",
      "SerializedName": "optionalStringRecord",
-     "Description": "",
+     "Description": "Optional string record",
      "Type": {
       "$id": "109",
       "Name": "Dictionary",
@@ -894,7 +894,7 @@
      "$id": "112",
      "Name": "optionalModelRecord",
      "SerializedName": "optionalModelRecord",
-     "Description": "",
+     "Description": "Optional model record",
      "Type": {
       "$id": "113",
       "Name": "Dictionary",
@@ -917,7 +917,7 @@
      "$id": "115",
      "Name": "optionalPlainDate",
      "SerializedName": "optionalPlainDate",
-     "Description": "",
+     "Description": "Optional plainDate",
      "Type": {
       "$id": "116",
       "Name": "plainDate",
@@ -932,7 +932,7 @@
      "$id": "117",
      "Name": "optionalPlainTime",
      "SerializedName": "optionalPlainTime",
-     "Description": "",
+     "Description": "Optional plainTime",
      "Type": {
       "$id": "118",
       "Name": "plainTime",
@@ -957,7 +957,7 @@
      "$id": "120",
      "Name": "requiredReadonlyString",
      "SerializedName": "requiredReadonlyString",
-     "Description": "",
+     "Description": "Required string, illustrating a readonly reference type property.",
      "Type": {
       "$id": "121",
       "Name": "string",
@@ -972,7 +972,7 @@
      "$id": "122",
      "Name": "requiredReadonlyInt",
      "SerializedName": "requiredReadonlyInt",
-     "Description": "",
+     "Description": "Required int, illustrating a readonly value type property.",
      "Type": {
       "$id": "123",
       "Name": "int32",
@@ -987,7 +987,7 @@
      "$id": "124",
      "Name": "optionalReadonlyString",
      "SerializedName": "optionalReadonlyString",
-     "Description": "",
+     "Description": "Optional string, illustrating a readonly reference type property.",
      "Type": {
       "$id": "125",
       "Name": "string",
@@ -1002,7 +1002,7 @@
      "$id": "126",
      "Name": "optionalReadonlyInt",
      "SerializedName": "optionalReadonlyInt",
-     "Description": "",
+     "Description": "Optional int, illustrating a readonly value type property.",
      "Type": {
       "$id": "127",
       "Name": "int32",
@@ -1017,7 +1017,7 @@
      "$id": "128",
      "Name": "requiredReadonlyModel",
      "SerializedName": "requiredReadonlyModel",
-     "Description": "",
+     "Description": "Required readonly model.",
      "Type": {
       "$ref": "34"
      },
@@ -1029,7 +1029,7 @@
      "$id": "129",
      "Name": "optionalReadonlyModel",
      "SerializedName": "optionalReadonlyModel",
-     "Description": "",
+     "Description": "Optional readonly model.",
      "Type": {
       "$ref": "34"
      },
@@ -1041,7 +1041,7 @@
      "$id": "130",
      "Name": "requiredReadonlyFixedStringEnum",
      "SerializedName": "requiredReadonlyFixedStringEnum",
-     "Description": "",
+     "Description": "Required readonly fixed string enum",
      "Type": {
       "$ref": "2"
      },
@@ -1053,7 +1053,7 @@
      "$id": "131",
      "Name": "requiredReadonlyExtensibleEnum",
      "SerializedName": "requiredReadonlyExtensibleEnum",
-     "Description": "",
+     "Description": "Required readonly extensible enum",
      "Type": {
       "$ref": "10"
      },
@@ -1065,7 +1065,7 @@
      "$id": "132",
      "Name": "optionalReadonlyFixedStringEnum",
      "SerializedName": "optionalReadonlyFixedStringEnum",
-     "Description": "",
+     "Description": "Optional readonly fixed string enum",
      "Type": {
       "$ref": "2"
      },
@@ -1077,7 +1077,7 @@
      "$id": "133",
      "Name": "optionalReadonlyExtensibleEnum",
      "SerializedName": "optionalReadonlyExtensibleEnum",
-     "Description": "",
+     "Description": "Optional readonly extensible enum",
      "Type": {
       "$ref": "10"
      },
@@ -1089,7 +1089,7 @@
      "$id": "134",
      "Name": "requiredReadonlyStringList",
      "SerializedName": "requiredReadonlyStringList",
-     "Description": "",
+     "Description": "Required readonly string collection.",
      "Type": {
       "$id": "135",
       "Name": "Array",
@@ -1109,7 +1109,7 @@
      "$id": "137",
      "Name": "requiredReadonlyIntList",
      "SerializedName": "requiredReadonlyIntList",
-     "Description": "",
+     "Description": "Required readonly int collection.",
      "Type": {
       "$id": "138",
       "Name": "Array",
@@ -1129,7 +1129,7 @@
      "$id": "140",
      "Name": "requiredReadOnlyModelCollection",
      "SerializedName": "requiredReadOnlyModelCollection",
-     "Description": "",
+     "Description": "Required model collection",
      "Type": {
       "$id": "141",
       "Name": "Array",
@@ -1146,7 +1146,7 @@
      "$id": "142",
      "Name": "requiredReadOnlyIntRecord",
      "SerializedName": "requiredReadOnlyIntRecord",
-     "Description": "",
+     "Description": "Required int record",
      "Type": {
       "$id": "143",
       "Name": "Dictionary",
@@ -1172,7 +1172,7 @@
      "$id": "146",
      "Name": "requiredStringRecord",
      "SerializedName": "requiredStringRecord",
-     "Description": "",
+     "Description": "Required string record",
      "Type": {
       "$id": "147",
       "Name": "Dictionary",
@@ -1198,7 +1198,7 @@
      "$id": "150",
      "Name": "requiredReadOnlyModelRecord",
      "SerializedName": "requiredReadOnlyModelRecord",
-     "Description": "",
+     "Description": "Required model record",
      "Type": {
       "$id": "151",
       "Name": "Dictionary",
@@ -1221,7 +1221,7 @@
      "$id": "153",
      "Name": "optionalReadonlyStringList",
      "SerializedName": "optionalReadonlyStringList",
-     "Description": "",
+     "Description": "Optional readonly string collection.",
      "Type": {
       "$id": "154",
       "Name": "Array",
@@ -1241,7 +1241,7 @@
      "$id": "156",
      "Name": "optionalReadonlyIntList",
      "SerializedName": "optionalReadonlyIntList",
-     "Description": "",
+     "Description": "Optional readonly int collection.",
      "Type": {
       "$id": "157",
       "Name": "Array",
@@ -1261,7 +1261,7 @@
      "$id": "159",
      "Name": "optionalReadOnlyModelCollection",
      "SerializedName": "optionalReadOnlyModelCollection",
-     "Description": "",
+     "Description": "Optional model collection",
      "Type": {
       "$id": "160",
       "Name": "Array",
@@ -1278,7 +1278,7 @@
      "$id": "161",
      "Name": "optionalReadOnlyIntRecord",
      "SerializedName": "optionalReadOnlyIntRecord",
-     "Description": "",
+     "Description": "Optional int record",
      "Type": {
       "$id": "162",
       "Name": "Dictionary",
@@ -1304,7 +1304,7 @@
      "$id": "165",
      "Name": "optionalReadOnlyStringRecord",
      "SerializedName": "optionalReadOnlyStringRecord",
-     "Description": "",
+     "Description": "Optional string record",
      "Type": {
       "$id": "166",
       "Name": "Dictionary",
@@ -1330,7 +1330,7 @@
      "$id": "169",
      "Name": "optionalModelRecord",
      "SerializedName": "optionalModelRecord",
-     "Description": "",
+     "Description": "Optional model record",
      "Type": {
       "$id": "170",
       "Name": "Dictionary",
@@ -1363,7 +1363,7 @@
      "$id": "173",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string",
      "Type": {
       "$id": "174",
       "Name": "string",
@@ -1378,7 +1378,7 @@
      "$id": "175",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int",
      "Type": {
       "$id": "176",
       "Name": "int32",
@@ -1393,7 +1393,7 @@
      "$id": "177",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
-     "Description": "",
+     "Description": "Required model",
      "Type": {
       "$ref": "34"
      },
@@ -1405,7 +1405,7 @@
      "$id": "178",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
-     "Description": "",
+     "Description": "Required collection",
      "Type": {
       "$id": "179",
       "Name": "Array",
@@ -1422,7 +1422,7 @@
      "$id": "180",
      "Name": "requiredModelRecord",
      "SerializedName": "requiredModelRecord",
-     "Description": "",
+     "Description": "Required model record",
      "Type": {
       "$id": "181",
       "Name": "Dictionary",
@@ -1455,7 +1455,7 @@
      "$id": "184",
      "Name": "message",
      "SerializedName": "message",
-     "Description": "",
+     "Description": "Message",
      "Type": {
       "$id": "185",
       "Name": "string",
@@ -1470,7 +1470,7 @@
      "$id": "186",
      "Name": "inner",
      "SerializedName": "inner",
-     "Description": "",
+     "Description": "Required Record",
      "Type": {
       "$ref": "183"
      },
@@ -1492,7 +1492,7 @@
      "$id": "188",
      "Name": "message",
      "SerializedName": "message",
-     "Description": "",
+     "Description": "Message",
      "Type": {
       "$id": "189",
       "Name": "string",
@@ -1507,7 +1507,7 @@
      "$id": "190",
      "Name": "inner",
      "SerializedName": "inner",
-     "Description": "",
+     "Description": "Required Record",
      "Type": {
       "$ref": "187"
      },
@@ -1529,7 +1529,7 @@
      "$id": "192",
      "Name": "message",
      "SerializedName": "message",
-     "Description": "",
+     "Description": "Error message",
      "Type": {
       "$id": "193",
       "Name": "string",
@@ -1544,7 +1544,7 @@
      "$id": "194",
      "Name": "innerError",
      "SerializedName": "innerError",
-     "Description": "",
+     "Description": "Required Record",
      "Type": {
       "$ref": "191"
      },

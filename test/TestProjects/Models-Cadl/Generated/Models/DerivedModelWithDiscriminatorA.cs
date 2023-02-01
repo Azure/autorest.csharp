@@ -14,7 +14,7 @@ namespace ModelsInCadl.Models
     public partial class DerivedModelWithDiscriminatorA : BaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
-        /// <param name="requiredString"></param>
+        /// <param name="requiredString"> Required string. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
         public DerivedModelWithDiscriminatorA(string requiredString) : base("A")
         {
@@ -23,7 +23,7 @@ namespace ModelsInCadl.Models
             RequiredString = requiredString;
         }
 
-        /// <summary> Gets or sets the required string. </summary>
+        /// <summary> Required string. </summary>
         public string RequiredString { get; set; }
     }
 }

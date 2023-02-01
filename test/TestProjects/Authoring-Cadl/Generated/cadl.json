@@ -110,7 +110,7 @@
      "$id": "17",
      "Name": "projectKind",
      "SerializedName": "projectKind",
-     "Description": "",
+     "Description": "The project kind.",
      "Type": {
       "$ref": "2"
      },
@@ -122,7 +122,7 @@
      "$id": "18",
      "Name": "storageInputContainerName",
      "SerializedName": "storageInputContainerName",
-     "Description": "",
+     "Description": "The storage container name.",
      "Type": {
       "$id": "19",
       "Name": "string",
@@ -137,7 +137,7 @@
      "$id": "20",
      "Name": "settings",
      "SerializedName": "settings",
-     "Description": "",
+     "Description": "The project settings.",
      "Type": {
       "$id": "21",
       "Name": "Dictionary",
@@ -163,7 +163,7 @@
      "$id": "24",
      "Name": "multilingual",
      "SerializedName": "multilingual",
-     "Description": "",
+     "Description": "Whether the project would be used for multiple languages or not.",
      "Type": {
       "$id": "25",
       "Name": "boolean",
@@ -178,7 +178,7 @@
      "$id": "26",
      "Name": "description",
      "SerializedName": "description",
-     "Description": "",
+     "Description": "The project description.",
      "Type": {
       "$id": "27",
       "Name": "string",
@@ -193,7 +193,7 @@
      "$id": "28",
      "Name": "language",
      "SerializedName": "language",
-     "Description": "",
+     "Description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
      "Type": {
       "$id": "29",
       "Name": "string",
@@ -208,7 +208,7 @@
      "$id": "30",
      "Name": "createdDateTime",
      "SerializedName": "createdDateTime",
-     "Description": "",
+     "Description": "Represents the project creation datetime.",
      "Type": {
       "$id": "31",
       "Name": "zonedDateTime",
@@ -223,7 +223,7 @@
      "$id": "32",
      "Name": "lastModifiedDateTime",
      "SerializedName": "lastModifiedDateTime",
-     "Description": "",
+     "Description": "Represents the project last modification datetime.",
      "Type": {
       "$id": "33",
       "Name": "zonedDateTime",
@@ -238,7 +238,7 @@
      "$id": "34",
      "Name": "lastTrainedDateTime",
      "SerializedName": "lastTrainedDateTime",
-     "Description": "",
+     "Description": "Represents the project last training datetime.",
      "Type": {
       "$id": "35",
       "Name": "zonedDateTime",
@@ -253,7 +253,7 @@
      "$id": "36",
      "Name": "lastDeployedDateTime",
      "SerializedName": "lastDeployedDateTime",
-     "Description": "",
+     "Description": "Represents the project last deployment datetime.",
      "Type": {
       "$id": "37",
       "Name": "zonedDateTime",
@@ -278,7 +278,7 @@
      "$id": "39",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "",
+     "Description": "The Project items on this page",
      "Type": {
       "$id": "40",
       "Name": "Array",
@@ -295,7 +295,7 @@
      "$id": "41",
      "Name": "nextLink",
      "SerializedName": "nextLink",
-     "Description": "",
+     "Description": "The link to the next page of items",
      "Type": {
       "$id": "42",
       "Name": "ResourceLocation",
@@ -368,7 +368,7 @@
      "$id": "50",
      "Name": "firstDeploymentName",
      "SerializedName": "firstDeploymentName",
-     "Description": "",
+     "Description": "Represents the first deployment name.",
      "Type": {
       "$id": "51",
       "Name": "string",
@@ -383,7 +383,7 @@
      "$id": "52",
      "Name": "secondDeploymentName",
      "SerializedName": "secondDeploymentName",
-     "Description": "",
+     "Description": "Represents the second deployment name.",
      "Type": {
       "$id": "53",
       "Name": "string",
@@ -407,7 +407,7 @@
      "$id": "55",
      "Name": "jobId",
      "SerializedName": "jobId",
-     "Description": "",
+     "Description": "The job ID.",
      "Type": {
       "$id": "56",
       "Name": "string",
@@ -422,7 +422,7 @@
      "$id": "57",
      "Name": "createdDateTime",
      "SerializedName": "createdDateTime",
-     "Description": "",
+     "Description": "The creation date time of the job.",
      "Type": {
       "$id": "58",
       "Name": "zonedDateTime",
@@ -437,7 +437,7 @@
      "$id": "59",
      "Name": "lastUpdatedDateTime",
      "SerializedName": "lastUpdatedDateTime",
-     "Description": "",
+     "Description": "The the last date time the job was updated.",
      "Type": {
       "$id": "60",
       "Name": "zonedDateTime",
@@ -452,7 +452,7 @@
      "$id": "61",
      "Name": "expirationDateTime",
      "SerializedName": "expirationDateTime",
-     "Description": "",
+     "Description": "The expiration date time of the job.",
      "Type": {
       "$id": "62",
       "Name": "zonedDateTime",
@@ -467,7 +467,7 @@
      "$id": "63",
      "Name": "status",
      "SerializedName": "status",
-     "Description": "",
+     "Description": "The job status.",
      "Type": {
       "$ref": "6"
      },
@@ -479,7 +479,7 @@
      "$id": "64",
      "Name": "warnings",
      "SerializedName": "warnings",
-     "Description": "",
+     "Description": "The warnings that were encountered while executing the job.",
      "Type": {
       "$id": "65",
       "Name": "Array",
@@ -495,7 +495,7 @@
          "$id": "67",
          "Name": "code",
          "SerializedName": "code",
-         "Description": "",
+         "Description": "The warning code.",
          "Type": {
           "$id": "68",
           "Name": "string",
@@ -510,7 +510,7 @@
          "$id": "69",
          "Name": "message",
          "SerializedName": "message",
-         "Description": "",
+         "Description": "The warning message.",
          "Type": {
           "$id": "70",
           "Name": "string",
@@ -533,7 +533,7 @@
      "$id": "71",
      "Name": "errors",
      "SerializedName": "errors",
-     "Description": "",
+     "Description": "The errors encountered while executing the job.",
      "Type": {
       "$id": "72",
       "Name": "Error",
@@ -546,7 +546,7 @@
         "$id": "73",
         "Name": "code",
         "SerializedName": "code",
-        "Description": "",
+        "Description": "One of a server-defined set of error codes.",
         "Type": {
          "$id": "74",
          "Name": "string",
@@ -561,7 +561,7 @@
         "$id": "75",
         "Name": "message",
         "SerializedName": "message",
-        "Description": "",
+        "Description": "A human-readable representation of the error.",
         "Type": {
          "$id": "76",
          "Name": "string",
@@ -576,7 +576,7 @@
         "$id": "77",
         "Name": "target",
         "SerializedName": "target",
-        "Description": "",
+        "Description": "The target of the error.",
         "Type": {
          "$id": "78",
          "Name": "string",
@@ -591,7 +591,7 @@
         "$id": "79",
         "Name": "details",
         "SerializedName": "details",
-        "Description": "",
+        "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
          "$id": "80",
          "Name": "Array",
@@ -608,7 +608,7 @@
         "$id": "81",
         "Name": "innererror",
         "SerializedName": "innererror",
-        "Description": "",
+        "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
          "$id": "82",
          "Name": "InnerError",
@@ -621,7 +621,7 @@
            "$id": "83",
            "Name": "code",
            "SerializedName": "code",
-           "Description": "",
+           "Description": "One of a server-defined set of error codes.",
            "Type": {
             "$id": "84",
             "Name": "string",
@@ -636,7 +636,7 @@
            "$id": "85",
            "Name": "innererror",
            "SerializedName": "innererror",
-           "Description": "",
+           "Description": "Inner error.",
            "Type": {
             "$ref": "82"
            },
@@ -693,7 +693,7 @@
      "$id": "89",
      "Name": "jobId",
      "SerializedName": "jobId",
-     "Description": "",
+     "Description": "The job ID.",
      "Type": {
       "$id": "90",
       "Name": "string",
@@ -708,7 +708,7 @@
      "$id": "91",
      "Name": "createdDateTime",
      "SerializedName": "createdDateTime",
-     "Description": "",
+     "Description": "The creation date time of the job.",
      "Type": {
       "$id": "92",
       "Name": "zonedDateTime",
@@ -723,7 +723,7 @@
      "$id": "93",
      "Name": "lastUpdatedDateTime",
      "SerializedName": "lastUpdatedDateTime",
-     "Description": "",
+     "Description": "The the last date time the job was updated.",
      "Type": {
       "$id": "94",
       "Name": "zonedDateTime",
@@ -738,7 +738,7 @@
      "$id": "95",
      "Name": "expirationDateTime",
      "SerializedName": "expirationDateTime",
-     "Description": "",
+     "Description": "The expiration date time of the job.",
      "Type": {
       "$id": "96",
       "Name": "zonedDateTime",
@@ -753,7 +753,7 @@
      "$id": "97",
      "Name": "status",
      "SerializedName": "status",
-     "Description": "",
+     "Description": "The job status.",
      "Type": {
       "$ref": "6"
      },
@@ -765,7 +765,7 @@
      "$id": "98",
      "Name": "warnings",
      "SerializedName": "warnings",
-     "Description": "",
+     "Description": "The warnings that were encountered while executing the job.",
      "Type": {
       "$id": "99",
       "Name": "Array",
@@ -782,7 +782,7 @@
      "$id": "100",
      "Name": "errors",
      "SerializedName": "errors",
-     "Description": "",
+     "Description": "The errors encountered while executing the job.",
      "Type": {
       "$ref": "72"
      },
@@ -819,7 +819,7 @@
      "$id": "104",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "",
+     "Description": "The SupportedLanguage items on this page",
      "Type": {
       "$id": "105",
       "Name": "Array",
@@ -835,7 +835,7 @@
          "$id": "107",
          "Name": "languageName",
          "SerializedName": "languageName",
-         "Description": "",
+         "Description": "The language name.",
          "Type": {
           "$id": "108",
           "Name": "string",
@@ -850,7 +850,7 @@
          "$id": "109",
          "Name": "languageCode",
          "SerializedName": "languageCode",
-         "Description": "",
+         "Description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
          "Type": {
           "$id": "110",
           "Name": "string",
@@ -873,7 +873,7 @@
      "$id": "111",
      "Name": "nextLink",
      "SerializedName": "nextLink",
-     "Description": "",
+     "Description": "The link to the next page of items",
      "Type": {
       "$id": "112",
       "Name": "ResourceLocation",
@@ -901,7 +901,7 @@
      "$id": "114",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "",
+     "Description": "The TrainingConfigVersion items on this page",
      "Type": {
       "$id": "115",
       "Name": "Array",
@@ -917,7 +917,7 @@
          "$id": "117",
          "Name": "trainingConfigVersionStr",
          "SerializedName": "trainingConfigVersionStr",
-         "Description": "",
+         "Description": "Represents the version of the config.",
          "Type": {
           "$id": "118",
           "Name": "string",
@@ -932,7 +932,7 @@
          "$id": "119",
          "Name": "modelExpirationDate",
          "SerializedName": "modelExpirationDate",
-         "Description": "",
+         "Description": "Represents the training config version expiration date.",
          "Type": {
           "$id": "120",
           "Name": "plainDate",
@@ -955,7 +955,7 @@
      "$id": "121",
      "Name": "nextLink",
      "SerializedName": "nextLink",
-     "Description": "",
+     "Description": "The link to the next page of items",
      "Type": {
       "$id": "122",
       "Name": "ResourceLocation",

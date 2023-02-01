@@ -18,14 +18,14 @@ namespace Models.Property.Optional.Models
         }
 
         /// <summary> Initializes a new instance of BytesProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         internal BytesProperty(BinaryData property)
         {
             Property = property;
         }
 
         /// <summary>
-        /// Gets or sets the property
+        /// Property
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

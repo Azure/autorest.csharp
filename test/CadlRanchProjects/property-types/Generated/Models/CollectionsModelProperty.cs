@@ -16,7 +16,7 @@ namespace Models.Property.Types.Models
     public partial class CollectionsModelProperty
     {
         /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public CollectionsModelProperty(IEnumerable<InnerModel> property)
         {
@@ -26,13 +26,13 @@ namespace Models.Property.Types.Models
         }
 
         /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         internal CollectionsModelProperty(IList<InnerModel> property)
         {
             Property = property.ToList();
         }
 
-        /// <summary> Gets the property. </summary>
+        /// <summary> Property. </summary>
         public IList<InnerModel> Property { get; }
     }
 }
