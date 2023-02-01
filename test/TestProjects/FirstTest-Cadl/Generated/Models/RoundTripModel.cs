@@ -16,11 +16,11 @@ namespace CadlFirstTest.Models
     public partial class RoundTripModel
     {
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredDictionary"></param>
-        /// <param name="requiredModel"></param>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredCollection"> Required collection of enums. </param>
+        /// <param name="requiredDictionary"> Required dictionary of enums. </param>
+        /// <param name="requiredModel"> Required model. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/> or <paramref name="requiredModel"/> is null. </exception>
         public RoundTripModel(string requiredString, int requiredInt, IEnumerable<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary, Thing requiredModel)
         {
@@ -36,15 +36,15 @@ namespace CadlFirstTest.Models
             RequiredModel = requiredModel;
         }
 
-        /// <summary> Gets the required string. </summary>
+        /// <summary> Required string, illustrating a reference type property. </summary>
         public string RequiredString { get; }
-        /// <summary> Gets the required int. </summary>
+        /// <summary> Required int, illustrating a value type property. </summary>
         public int RequiredInt { get; }
-        /// <summary> Gets the required collection. </summary>
+        /// <summary> Required collection of enums. </summary>
         public IList<SimpleEnum> RequiredCollection { get; }
-        /// <summary> Gets the required dictionary. </summary>
+        /// <summary> Required dictionary of enums. </summary>
         public IDictionary<string, ExtensibleEnum> RequiredDictionary { get; }
-        /// <summary> Gets the required model. </summary>
+        /// <summary> Required model. </summary>
         public Thing RequiredModel { get; }
     }
 }

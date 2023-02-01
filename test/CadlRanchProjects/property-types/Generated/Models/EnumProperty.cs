@@ -11,13 +11,13 @@ namespace Models.Property.Types.Models
     public partial class EnumProperty
     {
         /// <summary> Initializes a new instance of EnumProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         public EnumProperty(FixedInnerEnum property)
         {
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public FixedInnerEnum Property { get; set; }
     }
 }

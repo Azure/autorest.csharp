@@ -16,17 +16,17 @@ namespace ModelsInCadl.Models
         }
 
         /// <summary> Initializes a new instance of ErrorModel. </summary>
-        /// <param name="message"></param>
-        /// <param name="innerError"></param>
+        /// <param name="message"> Error message. </param>
+        /// <param name="innerError"> Required Record. </param>
         internal ErrorModel(string message, ErrorModel innerError)
         {
             Message = message;
             InnerError = innerError;
         }
 
-        /// <summary> Gets the message. </summary>
+        /// <summary> Error message. </summary>
         public string Message { get; }
-        /// <summary> Gets the inner error. </summary>
+        /// <summary> Required Record. </summary>
         public ErrorModel InnerError { get; }
     }
 }

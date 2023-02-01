@@ -14,8 +14,8 @@ namespace Pagination.Models
     public partial class ListLedgerEntryInputBody
     {
         /// <summary> Initializes a new instance of ListLedgerEntryInputBody. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
+        /// <param name="requiredString"> Required string. </param>
+        /// <param name="requiredInt"> Required int. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
         public ListLedgerEntryInputBody(string requiredString, int requiredInt)
         {
@@ -25,9 +25,9 @@ namespace Pagination.Models
             RequiredInt = requiredInt;
         }
 
-        /// <summary> Gets the required string. </summary>
+        /// <summary> Required string. </summary>
         public string RequiredString { get; }
-        /// <summary> Gets the required int. </summary>
+        /// <summary> Required int. </summary>
         public int RequiredInt { get; }
     }
 }

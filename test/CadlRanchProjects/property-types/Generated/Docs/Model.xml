@@ -21,8 +21,8 @@ Response Body:
 Schema for <c>ModelProperty</c>:
 <code>{
   property: {
-    property: string, # Required.
-  }, # Required.
+    property: string, # Required. Required string property
+  }, # Required. Property
 }
 </code>
 
@@ -48,8 +48,8 @@ Response Body:
 Schema for <c>ModelProperty</c>:
 <code>{
   property: {
-    property: string, # Required.
-  }, # Required.
+    property: string, # Required. Required string property
+  }, # Required. Property
 }
 </code>
 
@@ -79,8 +79,8 @@ Request Body:
 Schema for <c>ModelProperty</c>:
 <code>{
   property: {
-    property: string, # Required.
-  }, # Required.
+    property: string, # Required. Required string property
+  }, # Required. Property
 }
 </code>
 
@@ -110,8 +110,8 @@ Request Body:
 Schema for <c>ModelProperty</c>:
 <code>{
   property: {
-    property: string, # Required.
-  }, # Required.
+    property: string, # Required. Required string property
+  }, # Required. Property
 }
 </code>
 

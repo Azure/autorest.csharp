@@ -14,7 +14,7 @@ namespace Models.Property.Types.Models
     public partial class ModelProperty
     {
         /// <summary> Initializes a new instance of ModelProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public ModelProperty(InnerModel property)
         {
@@ -23,7 +23,7 @@ namespace Models.Property.Types.Models
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public InnerModel Property { get; set; }
     }
 }

@@ -22,9 +22,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Optional.
+      property: string, # Optional. Property
     }
-  ], # Optional.
+  ], # Optional. Property
 }
 </code>
 
@@ -51,9 +51,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Optional.
+      property: string, # Optional. Property
     }
-  ], # Optional.
+  ], # Optional. Property
 }
 </code>
 
@@ -80,9 +80,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Optional.
+      property: string, # Optional. Property
     }
-  ], # Optional.
+  ], # Optional. Property
 }
 </code>
 
@@ -109,9 +109,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Optional.
+      property: string, # Optional. Property
     }
-  ], # Optional.
+  ], # Optional. Property
 }
 </code>
 
@@ -153,9 +153,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Optional.
+      property: string, # Optional. Property
     }
-  ], # Optional.
+  ], # Optional. Property
 }
 </code>
 
@@ -197,9 +197,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Optional.
+      property: string, # Optional. Property
     }
-  ], # Optional.
+  ], # Optional. Property
 }
 </code>
 
@@ -241,9 +241,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Optional.
+      property: string, # Optional. Property
     }
-  ], # Optional.
+  ], # Optional. Property
 }
 </code>
 
@@ -285,9 +285,9 @@ Schema for <c>CollectionsModelProperty</c>:
 <code>{
   property: [
     {
-      property: string, # Optional.
+      property: string, # Optional. Property
     }
-  ], # Optional.
+  ], # Optional. Property
 }
 </code>
 
