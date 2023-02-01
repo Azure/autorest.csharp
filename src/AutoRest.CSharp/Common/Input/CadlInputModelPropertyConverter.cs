@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Common.Input
 
             name = name ?? throw new JsonException($"{nameof(InputModelProperty)} must have a name.");
             description = description ?? throw new JsonException($"{nameof(InputModelProperty)} must have a description.");
-            description = BuilderHelpers.EscapeXmlDescription(description);
+            description = BuilderHelpers.EscapeXmlDocDescription(description);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
             var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator);
