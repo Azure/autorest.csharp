@@ -11,13 +11,13 @@ namespace Models.Property.Types.Models
     public partial class BooleanProperty
     {
         /// <summary> Initializes a new instance of BooleanProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         public BooleanProperty(bool property)
         {
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public bool Property { get; set; }
     }
 }

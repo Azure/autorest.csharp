@@ -19,7 +19,7 @@
      "$id": "3",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "Name",
      "Type": {
       "$id": "4",
       "Name": "string",
@@ -44,7 +44,7 @@
      "$id": "6",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "Name",
      "Type": {
       "$id": "7",
       "Name": "string",

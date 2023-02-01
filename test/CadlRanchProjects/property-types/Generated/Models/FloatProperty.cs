@@ -11,13 +11,13 @@ namespace Models.Property.Types.Models
     public partial class FloatProperty
     {
         /// <summary> Initializes a new instance of FloatProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         public FloatProperty(float property)
         {
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public float Property { get; set; }
     }
 }

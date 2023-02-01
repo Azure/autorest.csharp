@@ -68,7 +68,7 @@
      "$id": "9",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "10",
       "Name": "boolean",
@@ -93,7 +93,7 @@
      "$id": "12",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "13",
       "Name": "string",
@@ -118,7 +118,7 @@
      "$id": "15",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "16",
       "Name": "bytes",
@@ -143,7 +143,7 @@
      "$id": "18",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "19",
       "Name": "int32",
@@ -168,7 +168,7 @@
      "$id": "21",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "22",
       "Name": "float32",
@@ -193,7 +193,7 @@
      "$id": "24",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "25",
       "Name": "zonedDateTime",
@@ -218,7 +218,7 @@
      "$id": "27",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "28",
       "Name": "duration",
@@ -243,7 +243,7 @@
      "$id": "30",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$ref": "2"
      },
@@ -265,7 +265,7 @@
      "$id": "32",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$ref": "5"
      },
@@ -287,7 +287,7 @@
      "$id": "34",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "35",
       "Name": "InnerModel",
@@ -300,7 +300,7 @@
         "$id": "36",
         "Name": "property",
         "SerializedName": "property",
-        "Description": "",
+        "Description": "Required string property",
         "Type": {
          "$id": "37",
          "Name": "string",
@@ -334,7 +334,7 @@
      "$id": "39",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "40",
       "Name": "Array",
@@ -364,7 +364,7 @@
      "$id": "43",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "44",
       "Name": "Array",
@@ -394,7 +394,7 @@
      "$id": "47",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "48",
       "Name": "Array",
@@ -421,7 +421,7 @@
      "$id": "50",
      "Name": "property",
      "SerializedName": "property",
-     "Description": "",
+     "Description": "Property",
      "Type": {
       "$id": "51",
       "Name": "Dictionary",

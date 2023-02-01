@@ -21,8 +21,8 @@ Response Body:
 
 Schema for <c>RequiredAndOptionalProperty</c>:
 <code>{
-  optionalProperty: string, # Optional.
-  requiredProperty: number, # Required.
+  optionalProperty: string, # Optional. optional string property
+  requiredProperty: number, # Required. required int property
 }
 </code>
 
@@ -48,8 +48,8 @@ Response Body:
 
 Schema for <c>RequiredAndOptionalProperty</c>:
 <code>{
-  optionalProperty: string, # Optional.
-  requiredProperty: number, # Required.
+  optionalProperty: string, # Optional. optional string property
+  requiredProperty: number, # Required. required int property
 }
 </code>
 
@@ -75,8 +75,8 @@ Response Body:
 
 Schema for <c>RequiredAndOptionalProperty</c>:
 <code>{
-  optionalProperty: string, # Optional.
-  requiredProperty: number, # Required.
+  optionalProperty: string, # Optional. optional string property
+  requiredProperty: number, # Required. required int property
 }
 </code>
 
@@ -102,8 +102,8 @@ Response Body:
 
 Schema for <c>RequiredAndOptionalProperty</c>:
 <code>{
-  optionalProperty: string, # Optional.
-  requiredProperty: number, # Required.
+  optionalProperty: string, # Optional. optional string property
+  requiredProperty: number, # Required. required int property
 }
 </code>
 
@@ -142,8 +142,8 @@ Request Body:
 
 Schema for <c>RequiredAndOptionalProperty</c>:
 <code>{
-  optionalProperty: string, # Optional.
-  requiredProperty: number, # Required.
+  optionalProperty: string, # Optional. optional string property
+  requiredProperty: number, # Required. required int property
 }
 </code>
 
@@ -182,8 +182,8 @@ Request Body:
 
 Schema for <c>RequiredAndOptionalProperty</c>:
 <code>{
-  optionalProperty: string, # Optional.
-  requiredProperty: number, # Required.
+  optionalProperty: string, # Optional. optional string property
+  requiredProperty: number, # Required. required int property
 }
 </code>
 
@@ -222,8 +222,8 @@ Request Body:
 
 Schema for <c>RequiredAndOptionalProperty</c>:
 <code>{
-  optionalProperty: string, # Optional.
-  requiredProperty: number, # Required.
+  optionalProperty: string, # Optional. optional string property
+  requiredProperty: number, # Required. required int property
 }
 </code>
 
@@ -262,8 +262,8 @@ Request Body:
 
 Schema for <c>RequiredAndOptionalProperty</c>:
 <code>{
-  optionalProperty: string, # Optional.
-  requiredProperty: number, # Required.
+  optionalProperty: string, # Optional. optional string property
+  requiredProperty: number, # Required. required int property
 }
 </code>
 

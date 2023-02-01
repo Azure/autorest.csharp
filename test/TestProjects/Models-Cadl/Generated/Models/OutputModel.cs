@@ -16,11 +16,11 @@ namespace ModelsInCadl.Models
     public partial class OutputModel
     {
         /// <summary> Initializes a new instance of OutputModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredModel"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredModelRecord"></param>
+        /// <param name="requiredString"> Required string. </param>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="requiredModel"> Required model. </param>
+        /// <param name="requiredCollection"> Required collection. </param>
+        /// <param name="requiredModelRecord"> Required model record. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/> or <paramref name="requiredModelRecord"/> is null. </exception>
         internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IEnumerable<CollectionItem> requiredCollection, IReadOnlyDictionary<string, RecordItem> requiredModelRecord)
         {
@@ -37,11 +37,11 @@ namespace ModelsInCadl.Models
         }
 
         /// <summary> Initializes a new instance of OutputModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredModel"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredModelRecord"></param>
+        /// <param name="requiredString"> Required string. </param>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="requiredModel"> Required model. </param>
+        /// <param name="requiredCollection"> Required collection. </param>
+        /// <param name="requiredModelRecord"> Required model record. </param>
         internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IReadOnlyList<CollectionItem> requiredCollection, IReadOnlyDictionary<string, RecordItem> requiredModelRecord)
         {
             RequiredString = requiredString;
@@ -51,15 +51,15 @@ namespace ModelsInCadl.Models
             RequiredModelRecord = requiredModelRecord;
         }
 
-        /// <summary> Gets the required string. </summary>
+        /// <summary> Required string. </summary>
         public string RequiredString { get; }
-        /// <summary> Gets the required int. </summary>
+        /// <summary> Required int. </summary>
         public int RequiredInt { get; }
-        /// <summary> Gets the required model. </summary>
+        /// <summary> Required model. </summary>
         public DerivedModel RequiredModel { get; }
-        /// <summary> Gets the required collection. </summary>
+        /// <summary> Required collection. </summary>
         public IReadOnlyList<CollectionItem> RequiredCollection { get; }
-        /// <summary> Gets the required model record. </summary>
+        /// <summary> Required model record. </summary>
         public IReadOnlyDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }

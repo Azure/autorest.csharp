@@ -23,9 +23,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -53,9 +53,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -83,9 +83,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -113,9 +113,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -149,9 +149,9 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -159,9 +159,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -195,9 +195,9 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -205,9 +205,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -241,9 +241,9 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -251,9 +251,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -287,9 +287,9 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -297,9 +297,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -329,7 +329,7 @@ Request Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -337,7 +337,7 @@ Response Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -367,7 +367,7 @@ Request Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -375,7 +375,7 @@ Response Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -455,9 +455,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -497,9 +497,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -543,15 +543,15 @@ Request Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
   requiredModel: {
-    name: string, # Required.
-    requiredUnion: Union, # Required.
-    requiredLiteral: Literal, # Required.
-  }, # Required.
+    name: string, # Required. name of the Thing
+    requiredUnion: Union, # Required. required Union
+    requiredLiteral: Literal, # Required. required literal type
+  }, # Required. Required model
 }
 </code>
 
@@ -559,9 +559,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -605,15 +605,15 @@ Request Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
   requiredModel: {
-    name: string, # Required.
-    requiredUnion: Union, # Required.
-    requiredLiteral: Literal, # Required.
-  }, # Required.
+    name: string, # Required. name of the Thing
+    requiredUnion: Union, # Required. required Union
+    requiredLiteral: Literal, # Required. required literal type
+  }, # Required. Required model
 }
 </code>
 
@@ -621,9 +621,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -667,15 +667,15 @@ Request Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
   requiredModel: {
-    name: string, # Required.
-    requiredUnion: Union, # Required.
-    requiredLiteral: Literal, # Required.
-  }, # Required.
+    name: string, # Required. name of the Thing
+    requiredUnion: Union, # Required. required Union
+    requiredLiteral: Literal, # Required. required literal type
+  }, # Required. Required model
 }
 </code>
 
@@ -683,9 +683,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -729,15 +729,15 @@ Request Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
   requiredModel: {
-    name: string, # Required.
-    requiredUnion: Union, # Required.
-    requiredLiteral: Literal, # Required.
-  }, # Required.
+    name: string, # Required. name of the Thing
+    requiredUnion: Union, # Required. required Union
+    requiredLiteral: Literal, # Required. required literal type
+  }, # Required. Required model
 }
 </code>
 
@@ -745,9 +745,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -775,9 +775,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 
@@ -805,9 +805,9 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteral: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
 }
 </code>
 

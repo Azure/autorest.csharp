@@ -68,16 +68,16 @@ Request Body:
 Schema for <c>Project</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -86,16 +86,16 @@ Response Body:
 Schema for <c>Project</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -168,16 +168,16 @@ Request Body:
 Schema for <c>Project</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -186,16 +186,16 @@ Response Body:
 Schema for <c>Project</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -232,16 +232,16 @@ Response Body:
 Schema for <c>Project</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -278,16 +278,16 @@ Response Body:
 Schema for <c>Project</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -324,16 +324,16 @@ Response Body:
 Schema for <c>Project</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -370,16 +370,16 @@ Response Body:
 Schema for <c>Project</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -668,8 +668,8 @@ Request Body:
 
 Schema for <c>SwapDeploymentsOptions</c>:
 <code>{
-  firstDeploymentName: string, # Required.
-  secondDeploymentName: string, # Required.
+  firstDeploymentName: string, # Required. Represents the first deployment name.
+  secondDeploymentName: string, # Required. Represents the second deployment name.
 }
 </code>
 
@@ -698,8 +698,8 @@ Request Body:
 
 Schema for <c>SwapDeploymentsOptions</c>:
 <code>{
-  firstDeploymentName: string, # Required.
-  secondDeploymentName: string, # Required.
+  firstDeploymentName: string, # Required. Represents the first deployment name.
+  secondDeploymentName: string, # Required. Represents the second deployment name.
 }
 </code>
 
@@ -736,27 +736,27 @@ Response Body:
 
 Schema for <c>DeploymentJob</c>:
 <code>{
-  jobId: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastUpdatedDateTime: string (date &amp; time), # Required.
-  expirationDateTime: string (date &amp; time), # Required.
-  status: &quot;notStarted&quot; | &quot;running&quot; | &quot;succeeded&quot; | &quot;failed&quot; | &quot;cancelled&quot; | &quot;cancelling&quot; | &quot;partiallyCompleted&quot;, # Required.
+  jobId: string, # Required. The job ID.
+  createdDateTime: string (date &amp; time), # Required. The creation date time of the job.
+  lastUpdatedDateTime: string (date &amp; time), # Required. The the last date time the job was updated.
+  expirationDateTime: string (date &amp; time), # Required. The expiration date time of the job.
+  status: &quot;notStarted&quot; | &quot;running&quot; | &quot;succeeded&quot; | &quot;failed&quot; | &quot;cancelled&quot; | &quot;cancelling&quot; | &quot;partiallyCompleted&quot;, # Required. The job status.
   warnings: [
     {
-      code: string, # Required.
-      message: string, # Required.
+      code: string, # Required. The warning code.
+      message: string, # Required. The warning message.
     }
-  ], # Required.
+  ], # Required. The warnings that were encountered while executing the job.
   errors: {
-    code: string, # Required.
-    message: string, # Required.
-    target: string, # Optional.
-    details: [Error], # Required.
+    code: string, # Required. One of a server-defined set of error codes.
+    message: string, # Required. A human-readable representation of the error.
+    target: string, # Optional. The target of the error.
+    details: [Error], # Required. An array of details about specific errors that led to this reported error.
     innererror: {
-      code: string, # Required.
-      innererror: InnerError, # Optional.
-    }, # Optional.
-  }, # Required.
+      code: string, # Required. One of a server-defined set of error codes.
+      innererror: InnerError, # Optional. Inner error.
+    }, # Optional. An object containing more specific information than the current object about the error.
+  }, # Required. The errors encountered while executing the job.
   id: string, # Required.
 }
 </code>
@@ -794,27 +794,27 @@ Response Body:
 
 Schema for <c>DeploymentJob</c>:
 <code>{
-  jobId: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastUpdatedDateTime: string (date &amp; time), # Required.
-  expirationDateTime: string (date &amp; time), # Required.
-  status: &quot;notStarted&quot; | &quot;running&quot; | &quot;succeeded&quot; | &quot;failed&quot; | &quot;cancelled&quot; | &quot;cancelling&quot; | &quot;partiallyCompleted&quot;, # Required.
+  jobId: string, # Required. The job ID.
+  createdDateTime: string (date &amp; time), # Required. The creation date time of the job.
+  lastUpdatedDateTime: string (date &amp; time), # Required. The the last date time the job was updated.
+  expirationDateTime: string (date &amp; time), # Required. The expiration date time of the job.
+  status: &quot;notStarted&quot; | &quot;running&quot; | &quot;succeeded&quot; | &quot;failed&quot; | &quot;cancelled&quot; | &quot;cancelling&quot; | &quot;partiallyCompleted&quot;, # Required. The job status.
   warnings: [
     {
-      code: string, # Required.
-      message: string, # Required.
+      code: string, # Required. The warning code.
+      message: string, # Required. The warning message.
     }
-  ], # Required.
+  ], # Required. The warnings that were encountered while executing the job.
   errors: {
-    code: string, # Required.
-    message: string, # Required.
-    target: string, # Optional.
-    details: [Error], # Required.
+    code: string, # Required. One of a server-defined set of error codes.
+    message: string, # Required. A human-readable representation of the error.
+    target: string, # Optional. The target of the error.
+    details: [Error], # Required. An array of details about specific errors that led to this reported error.
     innererror: {
-      code: string, # Required.
-      innererror: InnerError, # Optional.
-    }, # Optional.
-  }, # Required.
+      code: string, # Required. One of a server-defined set of error codes.
+      innererror: InnerError, # Optional. Inner error.
+    }, # Optional. An object containing more specific information than the current object about the error.
+  }, # Required. The errors encountered while executing the job.
   id: string, # Required.
 }
 </code>
@@ -852,27 +852,27 @@ Response Body:
 
 Schema for <c>SwapDeploymentsJob</c>:
 <code>{
-  jobId: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastUpdatedDateTime: string (date &amp; time), # Required.
-  expirationDateTime: string (date &amp; time), # Required.
-  status: &quot;notStarted&quot; | &quot;running&quot; | &quot;succeeded&quot; | &quot;failed&quot; | &quot;cancelled&quot; | &quot;cancelling&quot; | &quot;partiallyCompleted&quot;, # Required.
+  jobId: string, # Required. The job ID.
+  createdDateTime: string (date &amp; time), # Required. The creation date time of the job.
+  lastUpdatedDateTime: string (date &amp; time), # Required. The the last date time the job was updated.
+  expirationDateTime: string (date &amp; time), # Required. The expiration date time of the job.
+  status: &quot;notStarted&quot; | &quot;running&quot; | &quot;succeeded&quot; | &quot;failed&quot; | &quot;cancelled&quot; | &quot;cancelling&quot; | &quot;partiallyCompleted&quot;, # Required. The job status.
   warnings: [
     {
-      code: string, # Required.
-      message: string, # Required.
+      code: string, # Required. The warning code.
+      message: string, # Required. The warning message.
     }
-  ], # Required.
+  ], # Required. The warnings that were encountered while executing the job.
   errors: {
-    code: string, # Required.
-    message: string, # Required.
-    target: string, # Optional.
-    details: [Error], # Required.
+    code: string, # Required. One of a server-defined set of error codes.
+    message: string, # Required. A human-readable representation of the error.
+    target: string, # Optional. The target of the error.
+    details: [Error], # Required. An array of details about specific errors that led to this reported error.
     innererror: {
-      code: string, # Required.
-      innererror: InnerError, # Optional.
-    }, # Optional.
-  }, # Required.
+      code: string, # Required. One of a server-defined set of error codes.
+      innererror: InnerError, # Optional. Inner error.
+    }, # Optional. An object containing more specific information than the current object about the error.
+  }, # Required. The errors encountered while executing the job.
   id: string, # Required.
 }
 </code>
@@ -910,27 +910,27 @@ Response Body:
 
 Schema for <c>SwapDeploymentsJob</c>:
 <code>{
-  jobId: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastUpdatedDateTime: string (date &amp; time), # Required.
-  expirationDateTime: string (date &amp; time), # Required.
-  status: &quot;notStarted&quot; | &quot;running&quot; | &quot;succeeded&quot; | &quot;failed&quot; | &quot;cancelled&quot; | &quot;cancelling&quot; | &quot;partiallyCompleted&quot;, # Required.
+  jobId: string, # Required. The job ID.
+  createdDateTime: string (date &amp; time), # Required. The creation date time of the job.
+  lastUpdatedDateTime: string (date &amp; time), # Required. The the last date time the job was updated.
+  expirationDateTime: string (date &amp; time), # Required. The expiration date time of the job.
+  status: &quot;notStarted&quot; | &quot;running&quot; | &quot;succeeded&quot; | &quot;failed&quot; | &quot;cancelled&quot; | &quot;cancelling&quot; | &quot;partiallyCompleted&quot;, # Required. The job status.
   warnings: [
     {
-      code: string, # Required.
-      message: string, # Required.
+      code: string, # Required. The warning code.
+      message: string, # Required. The warning message.
     }
-  ], # Required.
+  ], # Required. The warnings that were encountered while executing the job.
   errors: {
-    code: string, # Required.
-    message: string, # Required.
-    target: string, # Optional.
-    details: [Error], # Required.
+    code: string, # Required. One of a server-defined set of error codes.
+    message: string, # Required. A human-readable representation of the error.
+    target: string, # Optional. The target of the error.
+    details: [Error], # Required. An array of details about specific errors that led to this reported error.
     innererror: {
-      code: string, # Required.
-      innererror: InnerError, # Optional.
-    }, # Optional.
-  }, # Required.
+      code: string, # Required. One of a server-defined set of error codes.
+      innererror: InnerError, # Optional. Inner error.
+    }, # Optional. An object containing more specific information than the current object about the error.
+  }, # Required. The errors encountered while executing the job.
   id: string, # Required.
 }
 </code>
@@ -987,16 +987,16 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -1052,16 +1052,16 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -1099,16 +1099,16 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -1146,16 +1146,16 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -1195,8 +1195,8 @@ Response Body:
 
 Schema for <c>Array</c>:
 <code>{
-  languageName: string, # Required.
-  languageCode: string, # Required.
+  languageName: string, # Required. The language name.
+  languageCode: string, # Required. The language code. This is BCP-47 representation of a language. For example, &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
 }
 </code>
 
@@ -1236,8 +1236,8 @@ Response Body:
 
 Schema for <c>Array</c>:
 <code>{
-  languageName: string, # Required.
-  languageCode: string, # Required.
+  languageName: string, # Required. The language name.
+  languageCode: string, # Required. The language code. This is BCP-47 representation of a language. For example, &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
 }
 </code>
 
@@ -1277,8 +1277,8 @@ Response Body:
 
 Schema for <c>Array</c>:
 <code>{
-  trainingConfigVersionStr: string, # Required.
-  modelExpirationDate: string (date), # Required.
+  trainingConfigVersionStr: string, # Required. Represents the version of the config.
+  modelExpirationDate: string (date), # Required. Represents the training config version expiration date.
 }
 </code>
 
@@ -1318,8 +1318,8 @@ Response Body:
 
 Schema for <c>Array</c>:
 <code>{
-  trainingConfigVersionStr: string, # Required.
-  modelExpirationDate: string (date), # Required.
+  trainingConfigVersionStr: string, # Required. Represents the version of the config.
+  modelExpirationDate: string (date), # Required. Represents the training config version expiration date.
 }
 </code>
 
