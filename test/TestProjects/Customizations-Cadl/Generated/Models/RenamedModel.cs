@@ -11,13 +11,13 @@ namespace CustomizationsInCadl.Models
     public partial class RenamedModel
     {
         /// <summary> Initializes a new instance of RenamedModel. </summary>
-        /// <param name="requiredInt"></param>
+        /// <param name="requiredInt"> Required int. </param>
         public RenamedModel(int requiredInt)
         {
             RequiredInt = requiredInt;
         }
 
-        /// <summary> Gets or sets the required int. </summary>
+        /// <summary> Required int. </summary>
         public int RequiredInt { get; set; }
     }
 }

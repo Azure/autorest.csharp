@@ -14,15 +14,15 @@ namespace ModelsInCadl.Models
     public partial class RoundTripPrimitiveModel : BaseModel
     {
         /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredInt64"></param>
-        /// <param name="requiredSafeInt"></param>
-        /// <param name="requiredFloat"></param>
-        /// <param name="requiredDouble"></param>
-        /// <param name="requiredBoolean"></param>
-        /// <param name="requiredDateTimeOffset"></param>
-        /// <param name="requiredTimeSpan"></param>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredInt64"> Required int64, illustrating a value type property. </param>
+        /// <param name="requiredSafeInt"> Required safeint, illustrating a value type property. </param>
+        /// <param name="requiredFloat"> Required float, illustrating a value type property. </param>
+        /// <param name="requiredDouble"> Required double, illustrating a value type property. </param>
+        /// <param name="requiredBoolean"> Required bolean, illustrating a value type property. </param>
+        /// <param name="requiredDateTimeOffset"> Required date time offset, illustrating a reference type property. </param>
+        /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
         public RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan)
         {
@@ -39,23 +39,23 @@ namespace ModelsInCadl.Models
             RequiredTimeSpan = requiredTimeSpan;
         }
 
-        /// <summary> Gets or sets the required string. </summary>
+        /// <summary> Required string, illustrating a reference type property. </summary>
         public string RequiredString { get; set; }
-        /// <summary> Gets or sets the required int. </summary>
+        /// <summary> Required int, illustrating a value type property. </summary>
         public int RequiredInt { get; set; }
-        /// <summary> Gets or sets the required int 64. </summary>
+        /// <summary> Required int64, illustrating a value type property. </summary>
         public long RequiredInt64 { get; set; }
-        /// <summary> Gets or sets the required safe int. </summary>
+        /// <summary> Required safeint, illustrating a value type property. </summary>
         public long RequiredSafeInt { get; set; }
-        /// <summary> Gets or sets the required float. </summary>
+        /// <summary> Required float, illustrating a value type property. </summary>
         public float RequiredFloat { get; set; }
-        /// <summary> Gets or sets the required double. </summary>
+        /// <summary> Required double, illustrating a value type property. </summary>
         public double RequiredDouble { get; set; }
-        /// <summary> Gets or sets the required boolean. </summary>
+        /// <summary> Required bolean, illustrating a value type property. </summary>
         public bool RequiredBoolean { get; set; }
-        /// <summary> Gets or sets the required date time offset. </summary>
+        /// <summary> Required date time offset, illustrating a reference type property. </summary>
         public DateTimeOffset RequiredDateTimeOffset { get; set; }
-        /// <summary> Gets or sets the required time span. </summary>
+        /// <summary> Required time span, illustrating a value type property. </summary>
         public TimeSpan RequiredTimeSpan { get; set; }
     }
 }

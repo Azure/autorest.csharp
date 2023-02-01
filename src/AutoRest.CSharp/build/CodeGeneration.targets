@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <PowerShellExe Condition="'$(PowerShellExe)' == ''">pwsh</PowerShellExe>
-    <CadlProjectSyncScriptPath Condition="'$(CadlProjectSyncScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/scripts/Cadl-Project-Sync.ps1</CadlProjectSyncScriptPath>
-    <CadlProjectGenerateScriptPath Condition="'$(CadlProjectGenerateScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/scripts/Cadl-Project-Generate.ps1</CadlProjectGenerateScriptPath>
+    <CadlProjectSyncScriptPath Condition="'$(CadlProjectSyncScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/common/scripts/Cadl-Project-Sync.ps1</CadlProjectSyncScriptPath>
+    <CadlProjectGenerateScriptPath Condition="'$(CadlProjectGenerateScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/common/scripts/Cadl-Project-Generate.ps1</CadlProjectGenerateScriptPath>
     <_DefaultInputName Condition="Exists('$(MSBuildProjectDirectory)/autorest.md')">$(MSBuildProjectDirectory)/autorest.md</_DefaultInputName>
-    <CadlInput Condition="Exists('$(MSBuildProjectDirectory)/cadl-location.yaml')">$(MSBuildProjectDirectory)/cadl-location.yaml</CadlInput>
+    <CadlInput Condition="Exists('$(MSBuildProjectDirectory)/../cadl-location.yaml') and $(MSBuildProjectDirectory.EndsWith('src'))">$(MSBuildProjectDirectory)/../cadl-location.yaml</CadlInput>
     <AutoRestInput Condition="'$(AutoRestInput)' == ''">$(_DefaultInputName)</AutoRestInput>
     <AutoRestTestsInput Condition="Exists('$(MSBuildProjectDirectory)/autorest.tests.md')">$(MSBuildProjectDirectory)/autorest.tests.md</AutoRestTestsInput>
     <AutoRestEntryPoint Condition="'$(AutoRestEntryPoint)' == ''">$(MSBuildThisFileDirectory)../tools/autorest/entrypoints/app.js</AutoRestEntryPoint>

@@ -25,7 +25,7 @@ Response Body:
 
 Schema for <c>DetectionResult</c>:
 <code>{
-  resultId: string, # Required.
+  resultId: string, # Required. Result identifier, which is used to fetch the results of an inference call.
 }
 </code>
 
@@ -55,7 +55,7 @@ Response Body:
 
 Schema for <c>DetectionResult</c>:
 <code>{
-  resultId: string, # Required.
+  resultId: string, # Required. Result identifier, which is used to fetch the results of an inference call.
 }
 </code>
 

@@ -16,9 +16,9 @@ namespace AnomalyDetector.Models
     public partial class ModelList
     {
         /// <summary> Initializes a new instance of ModelList. </summary>
-        /// <param name="models"></param>
-        /// <param name="currentCount"></param>
-        /// <param name="maxCount"></param>
+        /// <param name="models"> List of models. </param>
+        /// <param name="currentCount"> Number of trained multivariate models. </param>
+        /// <param name="maxCount"> Maximum number of models that can be trained for this Anomaly Detector resource. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="models"/> is null. </exception>
         internal ModelList(IEnumerable<AnomalyDetectionModel> models, int currentCount, int maxCount)
         {
@@ -30,10 +30,10 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of ModelList. </summary>
-        /// <param name="models"></param>
-        /// <param name="currentCount"></param>
-        /// <param name="maxCount"></param>
-        /// <param name="nextLink"></param>
+        /// <param name="models"> List of models. </param>
+        /// <param name="currentCount"> Number of trained multivariate models. </param>
+        /// <param name="maxCount"> Maximum number of models that can be trained for this Anomaly Detector resource. </param>
+        /// <param name="nextLink"> The link to fetch more models. </param>
         internal ModelList(IReadOnlyList<AnomalyDetectionModel> models, int currentCount, int maxCount, string nextLink)
         {
             Models = models.ToList();
@@ -42,13 +42,13 @@ namespace AnomalyDetector.Models
             NextLink = nextLink;
         }
 
-        /// <summary> Gets the models. </summary>
+        /// <summary> List of models. </summary>
         public IReadOnlyList<AnomalyDetectionModel> Models { get; }
-        /// <summary> Gets the current count. </summary>
+        /// <summary> Number of trained multivariate models. </summary>
         public int CurrentCount { get; }
-        /// <summary> Gets the max count. </summary>
+        /// <summary> Maximum number of models that can be trained for this Anomaly Detector resource. </summary>
         public int MaxCount { get; }
-        /// <summary> Gets the next link. </summary>
+        /// <summary> The link to fetch more models. </summary>
         public string NextLink { get; }
     }
 }
