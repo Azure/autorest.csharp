@@ -250,7 +250,7 @@ if (!($Exclude -contains "Samples"))
         $cadlMain = Join-Path $projectDirectory "main.cadl"
         $cadlClient = Join-Path $projectDirectory "client.cadl"
         $mainCadlFile = If (Test-Path "$cadlClient") { Resolve-Path "$cadlClient" } Else { Resolve-Path "$cadlMain"}
-        Add-Cadl $projectName $projectDirectory $mainCadlFile "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
+        Add-Cadl $projectName $projectDirectory $mainCadlFile "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true"
     }
 }
 

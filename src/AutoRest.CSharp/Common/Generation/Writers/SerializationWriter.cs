@@ -29,7 +29,10 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (schema)
             {
                 case SerializableObjectType objectSchema:
-                    WriteObjectSerialization(writer, objectSchema);
+                    if (objectSchema.IncludeSerializer || objectSchema.IncludeDeserializer)
+                    {
+                        WriteObjectSerialization(writer, objectSchema);
+                    }
                     break;
                 case EnumType { IsExtensible: false } sealedChoiceSchema:
                     WriteEnumSerialization(writer, sealedChoiceSchema);

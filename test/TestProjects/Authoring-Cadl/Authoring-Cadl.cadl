@@ -35,6 +35,7 @@ scalar Endpoint extends string;
 
 model Project {
   @key
+  @visibility("read")
   @segment("projects")
   projectName: string;
 
@@ -91,6 +92,7 @@ model ProjectSettings is Record<string>;
 @parentResource(Project)
 model Deployment {
   @key("deploymentName")
+  @visibility("read")
   @segment("deployments")
   name: string;
 }
@@ -147,6 +149,7 @@ model DeploymentJob {
   ...Job;
 
   @key("jobId")
+  @visibility("read")
   @segment("jobs")
   id: string;
 }
@@ -156,6 +159,7 @@ model SwapDeploymentsJob {
   ...Job;
 
   @key("jobId")
+  @visibility("read")
   @segment("swap/jobs")
   id: string;
 }

@@ -140,7 +140,7 @@
       "Namespace": "ModelsInCadl",
       "Description": "Base model",
       "IsNullable": false,
-      "Usage": "RoundTrip",
+      "Usage": "Input",
       "Properties": []
      },
      "IsRequired": true,
@@ -1553,22 +1553,77 @@
      "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$id": "195",
+   "Name": "NoUseBase",
+   "Namespace": "ModelsInCadl",
+   "Description": "Base model",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "196",
+     "Name": "baseModelProp",
+     "SerializedName": "baseModelProp",
+     "Description": "base model property",
+     "Type": {
+      "$id": "197",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "198",
+   "Name": "RoundTripOnNoUse",
+   "Namespace": "ModelsInCadl",
+   "Description": "Derived model",
+   "IsNullable": false,
+   "BaseModel": {
+    "$ref": "195"
+   },
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "199",
+     "Name": "requiredCollection",
+     "SerializedName": "requiredCollection",
+     "Description": "Required collection",
+     "Type": {
+      "$id": "200",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "29"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "195",
+   "$id": "201",
    "Name": "ModelsInCadlClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "196",
+     "$id": "202",
      "Name": "inputToRoundTrip",
      "ResourceName": "ModelsInCadl",
      "Description": "Input model that has property of its own type",
      "Parameters": [
       {
-       "$id": "197",
+       "$id": "203",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1585,11 +1640,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "198",
+       "$id": "204",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "199",
+        "$id": "205",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1604,19 +1659,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "200",
+        "$id": "206",
         "Type": {
-         "$ref": "199"
+         "$ref": "205"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "201",
+       "$id": "207",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "202",
+        "$id": "208",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1631,20 +1686,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "203",
+        "$id": "209",
         "Type": {
-         "$ref": "202"
+         "$ref": "208"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "204",
+       "$id": "210",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "205",
+        "$id": "211",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1659,9 +1714,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "206",
+        "$id": "212",
         "Type": {
-         "$id": "207",
+         "$id": "213",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -1672,7 +1727,7 @@
      ],
      "Responses": [
       {
-       "$id": "208",
+       "$id": "214",
        "StatusCodes": [
         200
        ],
@@ -1695,13 +1750,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "209",
+     "$id": "215",
      "Name": "inputToRoundTripPrimitive",
      "ResourceName": "ModelsInCadl",
      "Description": "Input to RoundTripPrimitive",
      "Parameters": [
       {
-       "$id": "210",
+       "$id": "216",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1718,11 +1773,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "211",
+       "$id": "217",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "212",
+        "$id": "218",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1737,19 +1792,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "213",
+        "$id": "219",
         "Type": {
-         "$ref": "212"
+         "$ref": "218"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "214",
+       "$id": "220",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "215",
+        "$id": "221",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1764,20 +1819,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "216",
+        "$id": "222",
         "Type": {
-         "$ref": "215"
+         "$ref": "221"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "204"
+       "$ref": "210"
       }
      ],
      "Responses": [
       {
-       "$id": "217",
+       "$id": "223",
        "StatusCodes": [
         200
        ],
@@ -1800,13 +1855,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "218",
+     "$id": "224",
      "Name": "inputToRoundTripOptional",
      "ResourceName": "ModelsInCadl",
      "Description": "Input to RoundTripOptional",
      "Parameters": [
       {
-       "$id": "219",
+       "$id": "225",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1823,11 +1878,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "220",
+       "$id": "226",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "221",
+        "$id": "227",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1842,19 +1897,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "222",
+        "$id": "228",
         "Type": {
-         "$ref": "221"
+         "$ref": "227"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "223",
+       "$id": "229",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "224",
+        "$id": "230",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1869,20 +1924,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "225",
+        "$id": "231",
         "Type": {
-         "$ref": "224"
+         "$ref": "230"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "204"
+       "$ref": "210"
       }
      ],
      "Responses": [
       {
-       "$id": "226",
+       "$id": "232",
        "StatusCodes": [
         200
        ],
@@ -1905,14 +1960,14 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "227",
+     "$id": "233",
      "Name": "inputToRoundTripReadOnly",
      "ResourceName": "ModelsInCadl",
      "Deprecated": "deprecated for test",
      "Description": "Input to RoundTripReadOnly",
      "Parameters": [
       {
-       "$id": "228",
+       "$id": "234",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1929,11 +1984,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "229",
+       "$id": "235",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "230",
+        "$id": "236",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1948,19 +2003,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "231",
+        "$id": "237",
         "Type": {
-         "$ref": "230"
+         "$ref": "236"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "232",
+       "$id": "238",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "233",
+        "$id": "239",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1975,20 +2030,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "234",
+        "$id": "240",
         "Type": {
-         "$ref": "233"
+         "$ref": "239"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "204"
+       "$ref": "210"
       }
      ],
      "Responses": [
       {
-       "$id": "235",
+       "$id": "241",
        "StatusCodes": [
         200
        ],
@@ -2011,13 +2066,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "236",
+     "$id": "242",
      "Name": "roundTripToOutput",
      "ResourceName": "ModelsInCadl",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
-       "$id": "237",
+       "$id": "243",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -2034,11 +2089,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "238",
+       "$id": "244",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "239",
+        "$id": "245",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2053,19 +2108,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "240",
+        "$id": "246",
         "Type": {
-         "$ref": "239"
+         "$ref": "245"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "241",
+       "$id": "247",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "242",
+        "$id": "248",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2080,20 +2135,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "243",
+        "$id": "249",
         "Type": {
-         "$ref": "242"
+         "$ref": "248"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "204"
+       "$ref": "210"
       }
      ],
      "Responses": [
       {
-       "$id": "244",
+       "$id": "250",
        "StatusCodes": [
         200
        ],
@@ -2116,13 +2171,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "245",
+     "$id": "251",
      "Name": "InputRecursive",
      "ResourceName": "ModelsInCadl",
      "Description": "Input recursive model",
      "Parameters": [
       {
-       "$id": "246",
+       "$id": "252",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -2139,11 +2194,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "247",
+       "$id": "253",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "248",
+        "$id": "254",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2158,19 +2213,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "249",
+        "$id": "255",
         "Type": {
-         "$ref": "248"
+         "$ref": "254"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "250",
+       "$id": "256",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "251",
+        "$id": "257",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2185,20 +2240,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "252",
+        "$id": "258",
         "Type": {
-         "$ref": "251"
+         "$ref": "257"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "204"
+       "$ref": "210"
       }
      ],
      "Responses": [
       {
-       "$id": "253",
+       "$id": "259",
        "StatusCodes": [
         200
        ],
@@ -2218,13 +2273,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "254",
+     "$id": "260",
      "Name": "roundTripRecursive",
      "ResourceName": "ModelsInCadl",
      "Description": "RoundTrip recursive model",
      "Parameters": [
       {
-       "$id": "255",
+       "$id": "261",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -2241,11 +2296,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "256",
+       "$id": "262",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "257",
+        "$id": "263",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2260,19 +2315,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "258",
+        "$id": "264",
         "Type": {
-         "$ref": "257"
+         "$ref": "263"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "259",
+       "$id": "265",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "260",
+        "$id": "266",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2287,20 +2342,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "261",
+        "$id": "267",
         "Type": {
-         "$ref": "260"
+         "$ref": "266"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "204"
+       "$ref": "210"
       }
      ],
      "Responses": [
       {
-       "$id": "262",
+       "$id": "268",
        "StatusCodes": [
         200
        ],
@@ -2323,17 +2378,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "263",
+     "$id": "269",
      "Name": "selfReference",
      "ResourceName": "ModelsInCadl",
      "Description": "Returns model that has property of its own type",
      "Parameters": [
       {
-       "$id": "264",
+       "$id": "270",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "265",
+        "$id": "271",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2348,20 +2403,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "266",
+        "$id": "272",
         "Type": {
-         "$ref": "265"
+         "$ref": "271"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "204"
+       "$ref": "210"
       }
      ],
      "Responses": [
       {
-       "$id": "267",
+       "$id": "273",
        "StatusCodes": [
         200
        ],
@@ -2379,10 +2434,115 @@
      "Path": "/selfReference",
      "BufferResponse": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "274",
+     "Name": "roundTripToOutputWithNoUseBase",
+     "ResourceName": "ModelsInCadl",
+     "Description": "Returns RoundTripOnNoUse",
+     "Parameters": [
+      {
+       "$id": "275",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "198"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "276",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "277",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "278",
+        "Type": {
+         "$ref": "277"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "279",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "280",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "281",
+        "Type": {
+         "$ref": "280"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "210"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "282",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "198"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "268"
+    "$id": "283"
    },
    "Creatable": true
   }
