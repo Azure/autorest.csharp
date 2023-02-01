@@ -14,6 +14,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -26,6 +27,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -44,6 +46,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -56,6 +59,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -74,6 +78,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -86,6 +91,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -104,6 +110,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -116,6 +123,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -132,6 +140,7 @@ var data = new {
     name = "<name>",
     requiredUnion = new {},
     requiredLiteral = new {},
+    requiredBadDescription = "<requiredBadDescription>",
 };
 
 Response response = await client.PatchActionAsync(RequestContent.Create(data));
@@ -140,6 +149,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -152,6 +162,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -162,6 +173,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -178,6 +190,7 @@ var data = new {
     name = "<name>",
     requiredUnion = new {},
     requiredLiteral = new {},
+    requiredBadDescription = "<requiredBadDescription>",
 };
 
 Response response = client.PatchAction(RequestContent.Create(data));
@@ -186,6 +199,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -198,6 +212,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -208,6 +223,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -224,6 +240,7 @@ var data = new {
     name = "<name>",
     requiredUnion = new {},
     requiredLiteral = new {},
+    requiredBadDescription = "<requiredBadDescription>",
 };
 
 Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
@@ -232,6 +249,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -244,6 +262,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -254,6 +273,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -270,6 +290,7 @@ var data = new {
     name = "<name>",
     requiredUnion = new {},
     requiredLiteral = new {},
+    requiredBadDescription = "<requiredBadDescription>",
 };
 
 Response response = client.AnonymousBody(RequestContent.Create(data));
@@ -278,6 +299,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -290,6 +312,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -300,6 +323,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -434,6 +458,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
 <code><![CDATA[
@@ -446,6 +471,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -458,6 +484,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -476,6 +503,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call SayHi with all parameters, and how to parse the result.
 <code><![CDATA[
@@ -488,6 +516,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -500,6 +529,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -525,6 +555,7 @@ var data = new {
         name = "<name>",
         requiredUnion = new {},
         requiredLiteral = new {},
+        requiredBadDescription = "<requiredBadDescription>",
     },
 };
 
@@ -534,6 +565,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -551,6 +583,7 @@ Schema for <c>RoundTripModel</c>:
     name: string, # Required. name of the Thing
     requiredUnion: Union, # Required. required Union
     requiredLiteral: Literal, # Required. required literal type
+    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
 </code>
@@ -562,6 +595,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -587,6 +621,7 @@ var data = new {
         name = "<name>",
         requiredUnion = new {},
         requiredLiteral = new {},
+        requiredBadDescription = "<requiredBadDescription>",
     },
 };
 
@@ -596,6 +631,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -613,6 +649,7 @@ Schema for <c>RoundTripModel</c>:
     name: string, # Required. name of the Thing
     requiredUnion: Union, # Required. required Union
     requiredLiteral: Literal, # Required. required literal type
+    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
 </code>
@@ -624,6 +661,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -649,6 +687,7 @@ var data = new {
         name = "<name>",
         requiredUnion = new {},
         requiredLiteral = new {},
+        requiredBadDescription = "<requiredBadDescription>",
     },
 };
 
@@ -658,6 +697,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -675,6 +715,7 @@ Schema for <c>RoundTripModel</c>:
     name: string, # Required. name of the Thing
     requiredUnion: Union, # Required. required Union
     requiredLiteral: Literal, # Required. required literal type
+    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
 </code>
@@ -686,6 +727,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -711,6 +753,7 @@ var data = new {
         name = "<name>",
         requiredUnion = new {},
         requiredLiteral = new {},
+        requiredBadDescription = "<requiredBadDescription>",
     },
 };
 
@@ -720,6 +763,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -737,6 +781,7 @@ Schema for <c>RoundTripModel</c>:
     name: string, # Required. name of the Thing
     requiredUnion: Union, # Required. required Union
     requiredLiteral: Literal, # Required. required literal type
+    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
 </code>
@@ -748,6 +793,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -766,6 +812,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -778,6 +825,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -796,6 +844,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -808,6 +857,7 @@ Schema for <c>Thing</c>:
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
   requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
