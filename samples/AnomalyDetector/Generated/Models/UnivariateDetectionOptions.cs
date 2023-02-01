@@ -46,8 +46,8 @@ namespace AnomalyDetector.Models
         public TimeGranularity? Granularity { get; set; }
         /// <summary>
         /// Custom Interval is used to set non-standard time interval, for example, if the
-        /// series is 5 minutes, request can be set as {&quot;granularity&quot;:&quot;minutely&quot;,
-        /// &quot;customInterval&quot;:5}.
+        /// series is 5 minutes, request can be set as {"granularity":"minutely",
+        /// "customInterval":5}.
         /// </summary>
         public int? CustomInterval { get; set; }
         /// <summary>
@@ -64,13 +64,13 @@ namespace AnomalyDetector.Models
         /// </summary>
         public int? Sensitivity { get; set; }
         /// <summary>
-        /// Used to specify how to deal with missing values in the input series, it&apos;s used
-        /// when granularity is not &quot;none&quot;.
+        /// Used to specify how to deal with missing values in the input series, it's used
+        /// when granularity is not "none".
         /// </summary>
         public ImputeMode? ImputeMode { get; set; }
         /// <summary>
-        /// Used to specify the value to fill, it&apos;s used when granularity is not &quot;none&quot;
-        /// and imputeMode is &quot;fixed&quot;.
+        /// Used to specify the value to fill, it's used when granularity is not "none"
+        /// and imputeMode is "fixed".
         /// </summary>
         public float? ImputeFixedValue { get; set; }
     }

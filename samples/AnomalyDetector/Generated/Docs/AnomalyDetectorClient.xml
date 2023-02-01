@@ -89,18 +89,18 @@ minutely, secondly, microsecond or none. If granularity is not present, it will
 be none by default. If granularity is none, the timestamp property in time
 series point can be absent.
   customInterval: number, # Optional. Custom Interval is used to set non-standard time interval, for example, if the
-series is 5 minutes, request can be set as {&amp;quot;granularity&amp;quot;:&amp;quot;minutely&amp;quot;,
-&amp;quot;customInterval&amp;quot;:5}.
+series is 5 minutes, request can be set as {&quot;granularity&quot;:&quot;minutely&quot;,
+&quot;customInterval&quot;:5}.
   period: number, # Optional. Optional argument, periodic value of a time series. If the value is null or
 does not present, the API will determine the period automatically.
   maxAnomalyRatio: number, # Optional. Optional argument, advanced model parameter, max anomaly ratio in a time series.
   sensitivity: number, # Optional. Optional argument, advanced model parameter, between 0-99, the lower the value
 is, the larger the margin value will be which means less anomalies will be
 accepted.
-  imputeMode: &quot;auto&quot; | &quot;previous&quot; | &quot;linear&quot; | &quot;fixed&quot; | &quot;zero&quot; | &quot;notFill&quot;, # Optional. Used to specify how to deal with missing values in the input series, it&amp;apos;s used
-when granularity is not &amp;quot;none&amp;quot;.
-  imputeFixedValue: number, # Optional. Used to specify the value to fill, it&amp;apos;s used when granularity is not &amp;quot;none&amp;quot;
-and imputeMode is &amp;quot;fixed&amp;quot;.
+  imputeMode: &quot;auto&quot; | &quot;previous&quot; | &quot;linear&quot; | &quot;fixed&quot; | &quot;zero&quot; | &quot;notFill&quot;, # Optional. Used to specify how to deal with missing values in the input series, it&apos;s used
+when granularity is not &quot;none&quot;.
+  imputeFixedValue: number, # Optional. Used to specify the value to fill, it&apos;s used when granularity is not &quot;none&quot;
+and imputeMode is &quot;fixed&quot;.
 }
 </code>
 
@@ -135,7 +135,7 @@ point. True means a positive anomaly has been detected. A positive anomaly
 means the point is detected as an anomaly and its real value is larger than the
 expected one. The index of the array is consistent with the input series.
   severity: [number], # Optional. The severity score for each input point. The larger the value is, the more
-sever the anomaly is. For normal points, the &amp;quot;severity&amp;quot; is always 0.
+sever the anomaly is. For normal points, the &quot;severity&quot; is always 0.
 }
 </code>
 
@@ -229,18 +229,18 @@ minutely, secondly, microsecond or none. If granularity is not present, it will
 be none by default. If granularity is none, the timestamp property in time
 series point can be absent.
   customInterval: number, # Optional. Custom Interval is used to set non-standard time interval, for example, if the
-series is 5 minutes, request can be set as {&amp;quot;granularity&amp;quot;:&amp;quot;minutely&amp;quot;,
-&amp;quot;customInterval&amp;quot;:5}.
+series is 5 minutes, request can be set as {&quot;granularity&quot;:&quot;minutely&quot;,
+&quot;customInterval&quot;:5}.
   period: number, # Optional. Optional argument, periodic value of a time series. If the value is null or
 does not present, the API will determine the period automatically.
   maxAnomalyRatio: number, # Optional. Optional argument, advanced model parameter, max anomaly ratio in a time series.
   sensitivity: number, # Optional. Optional argument, advanced model parameter, between 0-99, the lower the value
 is, the larger the margin value will be which means less anomalies will be
 accepted.
-  imputeMode: &quot;auto&quot; | &quot;previous&quot; | &quot;linear&quot; | &quot;fixed&quot; | &quot;zero&quot; | &quot;notFill&quot;, # Optional. Used to specify how to deal with missing values in the input series, it&amp;apos;s used
-when granularity is not &amp;quot;none&amp;quot;.
-  imputeFixedValue: number, # Optional. Used to specify the value to fill, it&amp;apos;s used when granularity is not &amp;quot;none&amp;quot;
-and imputeMode is &amp;quot;fixed&amp;quot;.
+  imputeMode: &quot;auto&quot; | &quot;previous&quot; | &quot;linear&quot; | &quot;fixed&quot; | &quot;zero&quot; | &quot;notFill&quot;, # Optional. Used to specify how to deal with missing values in the input series, it&apos;s used
+when granularity is not &quot;none&quot;.
+  imputeFixedValue: number, # Optional. Used to specify the value to fill, it&apos;s used when granularity is not &quot;none&quot;
+and imputeMode is &quot;fixed&quot;.
 }
 </code>
 
@@ -275,7 +275,7 @@ point. True means a positive anomaly has been detected. A positive anomaly
 means the point is detected as an anomaly and its real value is larger than the
 expected one. The index of the array is consistent with the input series.
   severity: [number], # Optional. The severity score for each input point. The larger the value is, the more
-sever the anomaly is. For normal points, the &amp;quot;severity&amp;quot; is always 0.
+sever the anomaly is. For normal points, the &quot;severity&quot; is always 0.
 }
 </code>
 
@@ -369,18 +369,18 @@ minutely, secondly, microsecond or none. If granularity is not present, it will
 be none by default. If granularity is none, the timestamp property in time
 series point can be absent.
   customInterval: number, # Optional. Custom Interval is used to set non-standard time interval, for example, if the
-series is 5 minutes, request can be set as {&amp;quot;granularity&amp;quot;:&amp;quot;minutely&amp;quot;,
-&amp;quot;customInterval&amp;quot;:5}.
+series is 5 minutes, request can be set as {&quot;granularity&quot;:&quot;minutely&quot;,
+&quot;customInterval&quot;:5}.
   period: number, # Optional. Optional argument, periodic value of a time series. If the value is null or
 does not present, the API will determine the period automatically.
   maxAnomalyRatio: number, # Optional. Optional argument, advanced model parameter, max anomaly ratio in a time series.
   sensitivity: number, # Optional. Optional argument, advanced model parameter, between 0-99, the lower the value
 is, the larger the margin value will be which means less anomalies will be
 accepted.
-  imputeMode: &quot;auto&quot; | &quot;previous&quot; | &quot;linear&quot; | &quot;fixed&quot; | &quot;zero&quot; | &quot;notFill&quot;, # Optional. Used to specify how to deal with missing values in the input series, it&amp;apos;s used
-when granularity is not &amp;quot;none&amp;quot;.
-  imputeFixedValue: number, # Optional. Used to specify the value to fill, it&amp;apos;s used when granularity is not &amp;quot;none&amp;quot;
-and imputeMode is &amp;quot;fixed&amp;quot;.
+  imputeMode: &quot;auto&quot; | &quot;previous&quot; | &quot;linear&quot; | &quot;fixed&quot; | &quot;zero&quot; | &quot;notFill&quot;, # Optional. Used to specify how to deal with missing values in the input series, it&apos;s used
+when granularity is not &quot;none&quot;.
+  imputeFixedValue: number, # Optional. Used to specify the value to fill, it&apos;s used when granularity is not &quot;none&quot;
+and imputeMode is &quot;fixed&quot;.
 }
 </code>
 
@@ -407,7 +407,7 @@ point is an anomaly and its real value is smaller than the expected one.
   isPositiveAnomaly: boolean, # Required. Anomaly status in positive direction of the latest point. True means the latest
 point is an anomaly and its real value is larger than the expected one.
   severity: number, # Optional. The severity score for the last input point. The larger the value is, the more
-sever the anomaly is. For normal points, the &amp;quot;severity&amp;quot; is always 0.
+sever the anomaly is. For normal points, the &quot;severity&quot; is always 0.
 }
 </code>
 
@@ -501,18 +501,18 @@ minutely, secondly, microsecond or none. If granularity is not present, it will
 be none by default. If granularity is none, the timestamp property in time
 series point can be absent.
   customInterval: number, # Optional. Custom Interval is used to set non-standard time interval, for example, if the
-series is 5 minutes, request can be set as {&amp;quot;granularity&amp;quot;:&amp;quot;minutely&amp;quot;,
-&amp;quot;customInterval&amp;quot;:5}.
+series is 5 minutes, request can be set as {&quot;granularity&quot;:&quot;minutely&quot;,
+&quot;customInterval&quot;:5}.
   period: number, # Optional. Optional argument, periodic value of a time series. If the value is null or
 does not present, the API will determine the period automatically.
   maxAnomalyRatio: number, # Optional. Optional argument, advanced model parameter, max anomaly ratio in a time series.
   sensitivity: number, # Optional. Optional argument, advanced model parameter, between 0-99, the lower the value
 is, the larger the margin value will be which means less anomalies will be
 accepted.
-  imputeMode: &quot;auto&quot; | &quot;previous&quot; | &quot;linear&quot; | &quot;fixed&quot; | &quot;zero&quot; | &quot;notFill&quot;, # Optional. Used to specify how to deal with missing values in the input series, it&amp;apos;s used
-when granularity is not &amp;quot;none&amp;quot;.
-  imputeFixedValue: number, # Optional. Used to specify the value to fill, it&amp;apos;s used when granularity is not &amp;quot;none&amp;quot;
-and imputeMode is &amp;quot;fixed&amp;quot;.
+  imputeMode: &quot;auto&quot; | &quot;previous&quot; | &quot;linear&quot; | &quot;fixed&quot; | &quot;zero&quot; | &quot;notFill&quot;, # Optional. Used to specify how to deal with missing values in the input series, it&apos;s used
+when granularity is not &quot;none&quot;.
+  imputeFixedValue: number, # Optional. Used to specify the value to fill, it&apos;s used when granularity is not &quot;none&quot;
+and imputeMode is &quot;fixed&quot;.
 }
 </code>
 
@@ -539,7 +539,7 @@ point is an anomaly and its real value is smaller than the expected one.
   isPositiveAnomaly: boolean, # Required. Anomaly status in positive direction of the latest point. True means the latest
 point is an anomaly and its real value is larger than the expected one.
   severity: number, # Optional. The severity score for the last input point. The larger the value is, the more
-sever the anomaly is. For normal points, the &amp;quot;severity&amp;quot; is always 0.
+sever the anomaly is. For normal points, the &quot;severity&quot; is always 0.
 }
 </code>
 
@@ -614,8 +614,8 @@ order to match the change point detection result.
   granularity: &quot;yearly&quot; | &quot;monthly&quot; | &quot;weekly&quot; | &quot;daily&quot; | &quot;hourly&quot; | &quot;minutely&quot; | &quot;secondly&quot; | &quot;microsecond&quot; | &quot;none&quot;, # Required. Can only be one of yearly, monthly, weekly, daily, hourly, minutely or
 secondly. Granularity is used for verify whether input series is valid.
   customInterval: number, # Optional. Custom Interval is used to set non-standard time interval, for example, if the
-series is 5 minutes, request can be set as {&amp;quot;granularity&amp;quot;:&amp;quot;minutely&amp;quot;,
-&amp;quot;customInterval&amp;quot;:5}.
+series is 5 minutes, request can be set as {&quot;granularity&quot;:&quot;minutely&quot;,
+&quot;customInterval&quot;:5}.
   period: number, # Optional. Optional argument, periodic value of a time series. If the value is null or
 does not present, the API will determine the period automatically.
   stableTrendWindow: number, # Optional. Optional argument, advanced model parameter, a default stableTrendWindow will
@@ -710,8 +710,8 @@ order to match the change point detection result.
   granularity: &quot;yearly&quot; | &quot;monthly&quot; | &quot;weekly&quot; | &quot;daily&quot; | &quot;hourly&quot; | &quot;minutely&quot; | &quot;secondly&quot; | &quot;microsecond&quot; | &quot;none&quot;, # Required. Can only be one of yearly, monthly, weekly, daily, hourly, minutely or
 secondly. Granularity is used for verify whether input series is valid.
   customInterval: number, # Optional. Custom Interval is used to set non-standard time interval, for example, if the
-series is 5 minutes, request can be set as {&amp;quot;granularity&amp;quot;:&amp;quot;minutely&amp;quot;,
-&amp;quot;customInterval&amp;quot;:5}.
+series is 5 minutes, request can be set as {&quot;granularity&quot;:&quot;minutely&quot;,
+&quot;customInterval&quot;:5}.
   period: number, # Optional. Optional argument, periodic value of a time series. If the value is null or
 does not present, the API will determine the period automatically.
   stableTrendWindow: number, # Optional. Optional argument, advanced model parameter, a default stableTrendWindow will

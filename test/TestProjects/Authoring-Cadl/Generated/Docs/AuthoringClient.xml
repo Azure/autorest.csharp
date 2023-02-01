@@ -73,7 +73,7 @@ Schema for <c>Project</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -91,7 +91,7 @@ Schema for <c>Project</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -173,7 +173,7 @@ Schema for <c>Project</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -191,7 +191,7 @@ Schema for <c>Project</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -237,7 +237,7 @@ Schema for <c>Project</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -283,7 +283,7 @@ Schema for <c>Project</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -329,7 +329,7 @@ Schema for <c>Project</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -375,7 +375,7 @@ Schema for <c>Project</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -992,7 +992,7 @@ Schema for <c>Array</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -1057,7 +1057,7 @@ Schema for <c>Array</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -1104,7 +1104,7 @@ Schema for <c>Array</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -1151,7 +1151,7 @@ Schema for <c>Array</c>:
   settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
   multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
   description: string, # Optional. The project description.
-  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
   createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
   lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
   lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
@@ -1196,7 +1196,7 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   languageName: string, # Required. The language name.
-  languageCode: string, # Required. The language code. This is BCP-47 representation of a language. For example, &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  languageCode: string, # Required. The language code. This is BCP-47 representation of a language. For example, &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
 }
 </code>
 
@@ -1237,7 +1237,7 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   languageName: string, # Required. The language name.
-  languageCode: string, # Required. The language code. This is BCP-47 representation of a language. For example, &amp;quot;en&amp;quot; for English, &amp;quot;en-gb&amp;quot; for English (UK), &amp;quot;es&amp;quot; for Spanish etc.
+  languageCode: string, # Required. The language code. This is BCP-47 representation of a language. For example, &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
 }
 </code>
 

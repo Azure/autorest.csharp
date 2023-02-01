@@ -119,7 +119,7 @@ namespace AnomalyDetector.Models
         /// </param>
         /// <param name="severity">
         /// The severity score for each input point. The larger the value is, the more
-        /// sever the anomaly is. For normal points, the &quot;severity&quot; is always 0.
+        /// sever the anomaly is. For normal points, the "severity" is always 0.
         /// </param>
         internal UnivariateEntireDetectionResult(int period, IReadOnlyList<float> expectedValues, IReadOnlyList<float> upperMargins, IReadOnlyList<float> lowerMargins, IReadOnlyList<bool> isAnomaly, IReadOnlyList<bool> isNegativeAnomaly, IReadOnlyList<bool> isPositiveAnomaly, IReadOnlyList<float> severity)
         {
@@ -182,7 +182,7 @@ namespace AnomalyDetector.Models
         public IReadOnlyList<bool> IsPositiveAnomaly { get; }
         /// <summary>
         /// The severity score for each input point. The larger the value is, the more
-        /// sever the anomaly is. For normal points, the &quot;severity&quot; is always 0.
+        /// sever the anomaly is. For normal points, the "severity" is always 0.
         /// </summary>
         public IReadOnlyList<float> Severity { get; }
     }
