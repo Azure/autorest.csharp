@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Output.Builders
                 }
         };
 
-        public static string EscapeXmlDescription(string s) => SecurityElement.Escape(s) ?? s;
+        public static string EscapeXmlDescription(string s) => SecurityElement.IsValidText(s) ? s : SecurityElement.Escape(s) ?? s;
 
         public static string CSharpName(this RequestParameter parameter) => parameter.Language.Default.Name.ToVariableName();
 
