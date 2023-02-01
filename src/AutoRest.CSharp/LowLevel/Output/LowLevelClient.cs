@@ -61,16 +61,17 @@ namespace AutoRest.CSharp.Output.Models
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var clientMethods = BuildMethods(typeFactory, operations, Fields, Declaration.Name).ToArray();
+            var methods = BuildMethods(typeFactory, operations, Fields, Declaration.Name);
 
-            ClientMethods = clientMethods
-                .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
+            // Temporary sorting to minimize amount of changes.
+            ClientMethods = methods
+                .OrderBy(b => b.LongRunning != null ? 2 : b.PagingInfo != null ? 1 : 0)
                 .ToArray();
 
-            RequestMethods = clientMethods
-                .Select(m => m.RequestMethods[0])
-                .Concat(clientMethods.Where(m => m.RequestMethods.Count == 2).Select(m => m.RequestMethods[1]))
-                .Distinct().ToArray();
+            // Temporary sorting to minimize amount of changes.
+            RequestMethods = methods.Select(m => m.RequestMethods[0])
+                .Concat(ClientMethods.Where(m => m.RequestMethods.Count == 2).Select(m => m.RequestMethods[1]))
+                .ToArray();
 
             ResponseClassifierTypes = RequestMethods.Select(m => m.ResponseClassifierType).Distinct().ToArray();
 
@@ -79,11 +80,30 @@ namespace AutoRest.CSharp.Output.Models
             SubClients = Array.Empty<LowLevelClient>();
         }
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
+        public static IReadOnlyList<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
         {
-            return CreateMessageMethodsBuilder
-                .BuildMethods(typeFactory, operations, fields, clientName)
-                .Select(b => b.BuildOperationMethodChain());
+            var operationParameters = new Dictionary<InputOperation, MethodParametersBuilder>();
+            foreach (var inputOperation in operations)
+            {
+                var builder = new MethodParametersBuilder(typeFactory, inputOperation, fields);
+                builder.BuildParameters();
+                operationParameters[inputOperation] = builder;
+            }
+
+            var methods = new List<LowLevelClientMethod>();
+            foreach (var (operation, parametersBuilder) in operationParameters)
+            {
+                var createNextPageMessageMethodParameters = operation.Paging is { NextLinkOperation: { } nextLinkOperation }
+                    ? operationParameters[nextLinkOperation].CreateMessageParameters
+                    : operation.Paging is { NextLinkName: {} }
+                        ? parametersBuilder.CreateMessageParameters.Prepend(KnownParameters.NextLink).ToArray()
+                        : Array.Empty<Parameter>();
+
+                var methodBuilder = new OperationMethodsBuilder(operation, fields, clientName, typeFactory, parametersBuilder.RequestParts, parametersBuilder.CreateMessageParameters, createNextPageMessageMethodParameters, parametersBuilder.ParameterLinks);
+                methods.Add(methodBuilder.BuildDpg());
+            }
+
+            return methods;
         }
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)

@@ -67,9 +67,9 @@ namespace AutoRest.CSharp.Output.Models
             return language.SerializedName ?? language.Name;
         }
 
-        public static RestClientMethod BuildRequestMethod(InputOperation operation, Parameter[] parameters, IReadOnlyCollection<RequestPartSource> requestParts, TypeFactory typeFactory)
+        public static RestClientMethod BuildRequestMethod(InputOperation operation, IReadOnlyList<Parameter> parameters, IReadOnlyCollection<RequestPartSource> requestParts, DataPlaneResponseHeaderGroupType? responseHeaderModel, TypeFactory typeFactory)
         {
-            Request request = BuildRequest(operation, requestParts);
+            Request request = BuildRequest(operation, requestParts, typeFactory);
             Response[] responses = BuildResponses(operation, typeFactory, out var responseType);
 
             return new RestClientMethod(
@@ -80,51 +80,11 @@ namespace AutoRest.CSharp.Output.Models
                 request,
                 parameters,
                 responses,
-                null,
-                operation.BufferResponse,
-                accessibility: operation.Accessibility ?? "public",
-                operation
-            );
-        }
-
-        /// <summary>
-        /// Build RestClientMethod for HLC
-        /// </summary>
-        /// <param name="operation"></param>
-        /// <param name="responseHeaderModel"></param>
-        /// <param name="library"></param>
-        /// <returns></returns>
-        public RestClientMethod BuildMethod(InputOperation operation, DataPlaneResponseHeaderGroupType? responseHeaderModel, OutputLibrary library)
-        {
-            var allParameters = GetOperationAllParameters(operation);
-            var methodParameters = BuildMethodParameters(allParameters);
-            var requestParts = allParameters
-                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
-                .ToList();
-
-            var request = BuildRequest(operation, requestParts, library);
-            Response[] responses = BuildResponses(operation, _typeFactory, out var responseType);
-
-            return new RestClientMethod(
-                operation.Name.ToCleanName(),
-                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
-                BuilderHelpers.EscapeXmlDescription(operation.Description),
-                responseType,
-                request,
-                methodParameters,
-                responses,
                 responseHeaderModel,
                 operation.BufferResponse,
                 accessibility: operation.Accessibility ?? "public",
                 operation
             );
-        }
-
-        private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation)
-        {
-            return operation.Parameters
-                .Where(rp => !IsIgnoredHeaderParameter(rp))
-                .ToDictionary(p => p, parameter => BuildParameter(parameter));
         }
 
         public static Response[] BuildResponses(InputOperation operation, TypeFactory typeFactory, out CSharpType? responseType)
@@ -160,7 +120,7 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private static Request BuildRequest(InputOperation operation, IReadOnlyCollection<RequestPartSource> requestParts, OutputLibrary? library = null)
+        private static Request BuildRequest(InputOperation operation, IReadOnlyCollection<RequestPartSource> requestParts, TypeFactory factory)
         {
             var uriParametersMap = new Dictionary<string, PathSegment>();
             var pathParametersMap = new Dictionary<string, PathSegment>();
@@ -198,7 +158,7 @@ namespace AutoRest.CSharp.Output.Models
                         body = new RequestContentRequestBody(reference.Reference.Name);
                         break;
                     case RequestLocation.Body when operation.RequestBodyMediaType != BodyMediaType.None:
-                        body = BuildRequestBody(requestParts, operation.RequestBodyMediaType, library);
+                        body = BuildRequestBody(requestParts, operation.RequestBodyMediaType, factory);
                         break;
                 }
             }
@@ -215,22 +175,7 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        protected virtual Parameter[] BuildMethodParameters(IReadOnlyDictionary<InputParameter, Parameter> allParameters)
-        {
-            List<Parameter> methodParameters = new();
-            foreach (var (operationParameter, parameter) in allParameters)
-            {
-                // Grouped and flattened parameters shouldn't be added to methods
-                if (operationParameter.Kind == InputOperationParameterKind.Method)
-                {
-                    methodParameters.Add(parameter);
-                }
-            }
-
-            return OrderParametersByRequired(methodParameters);
-        }
-
-        private static RequestBody? BuildRequestBody(IReadOnlyCollection<RequestPartSource> allParameters, BodyMediaType bodyMediaType, OutputLibrary? library)
+        private static RequestBody? BuildRequestBody(IReadOnlyCollection<RequestPartSource> allParameters, BodyMediaType bodyMediaType, TypeFactory factory)
         {
             RequestBody? body = null;
 
@@ -313,9 +258,9 @@ namespace AutoRest.CSharp.Output.Models
                             bodyParameterValue.Type);
 
                         // This method has a flattened body
-                        if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
+                        if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened)
                         {
-                            var objectType = (SchemaObjectType)library.FindTypeForSchema(((CodeModelType)bodyRequestParameter.Type).Schema).Implementation;
+                            var objectType = (SchemaObjectType)factory.CreateType(bodyRequestParameter.Type).Implementation;
 
                             var initializationMap = new List<ObjectPropertyInitializer>();
                             foreach ((_, InputParameter? inputParameter, _, _) in allParameters)
@@ -337,30 +282,6 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             return body;
-        }
-
-        private ReferenceOrConstant CreateReference(InputParameter operationParameter, Parameter parameter)
-        {
-            if (operationParameter.Kind == InputOperationParameterKind.Client)
-            {
-                return (ReferenceOrConstant)_parameters[operationParameter.Name];
-            }
-
-            if (operationParameter.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
-            {
-                return (ReferenceOrConstant)parameter.DefaultValue;
-            }
-
-            var groupedByParameter = operationParameter.GroupedBy;
-            if (groupedByParameter == null)
-            {
-                return parameter;
-            }
-
-            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
-            var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
-
-            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
         }
 
         private static ResponseBody? BuildResponseBody(OperationResponse response, TypeFactory typeFactory)
@@ -419,7 +340,7 @@ namespace AutoRest.CSharp.Output.Models
         /// </summary>
         /// <param name="parameters">Parameters to sort</param>
         /// <returns></returns>
-        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.IsOptionalInSignature).ToArray();
+        public static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.IsOptionalInSignature).ToArray();
 
         // Merges operations without response types types together
         private static CSharpType? ReduceResponses(List<Response> responses)
@@ -451,7 +372,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public virtual Parameter BuildConstructorParameter(InputParameter operationParameter)
         {
-            var parameter = BuildParameter(operationParameter);
+            var parameter = Parameter.FromInputParameter(operationParameter, _typeFactory.CreateType(operationParameter.Type), _typeFactory);
             if (!operationParameter.IsEndpoint)
             {
                 return parameter;
@@ -468,12 +389,6 @@ namespace AutoRest.CSharp.Output.Models
 
         public static bool IsIgnoredHeaderParameter(InputParameter operationParameter)
             => operationParameter.Location == RequestLocation.Header && IgnoredRequestHeader.Contains(operationParameter.NameInRequest);
-
-        private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
-        {
-            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : _typeFactory.CreateType(operationParameter.Type);
-            return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
-        }
 
         public static RestClientMethod BuildNextPageMethod(RestClientMethod method)
         {

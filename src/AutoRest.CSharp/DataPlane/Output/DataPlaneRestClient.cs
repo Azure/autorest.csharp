@@ -10,6 +10,8 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization;
 using static AutoRest.CSharp.Common.Output.Builders.ClientBuilder;
 
 namespace AutoRest.CSharp.Output.Models
@@ -40,26 +42,43 @@ namespace AutoRest.CSharp.Output.Models
             DefaultName = clientPrefix + "Rest" + GetClientSuffix();
 
             Parameters = GetOrderedParameters(clientBuilder);
+            ClientBuilder = clientBuilder;
+            Fields = ClientFields.CreateForRestClient(Parameters);
 
-            _requestMethods = EnsureNormalMethods(inputClient, clientBuilder, library);
+            _requestMethods = EnsureNormalMethods(inputClient, Fields, typeFactory, library);
             _nextPageRequestMethods = EnsureGetNextPageMethods(inputClient, _requestMethods);
 
             Constructor = new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
             Methods = BuildAllMethods(inputClient, _requestMethods, _nextPageRequestMethods).ToArray();
-
-            ClientBuilder = clientBuilder;
-            Fields = ClientFields.CreateForRestClient(Parameters);
             ProtocolMethods = GetProtocolMethods(Methods, Fields, inputClient, typeFactory, library).ToList();
         }
 
-        private static Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods(InputClient inputClient, RestClientBuilder clientBuilder, DataPlaneOutputLibrary library)
+        private static Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods(InputClient inputClient, ClientFields fields, TypeFactory typeFactory, DataPlaneOutputLibrary library)
         {
             var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
 
             foreach (var operation in inputClient.Operations)
             {
                 var headerModel = library.FindHeaderModel(operation);
-                requestMethods.Add(operation, clientBuilder.BuildMethod(operation, headerModel, library));
+                var parameters = new List<Parameter>();
+                var requestParts = new List<RequestPartSource>();
+
+                foreach (var inputParameter in operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp)))
+                {
+                    var parameter = Parameter.FromInputParameter(inputParameter, typeFactory.CreateType(inputParameter.Type), typeFactory);
+                    // Grouped and flattened parameters shouldn't be added to methods
+                    if (inputParameter.Kind == InputOperationParameterKind.Method)
+                    {
+                        parameters.Add(parameter);
+                    }
+
+                    var reference = MethodParametersBuilder.CreateReference(inputParameter, parameter, fields, typeFactory);
+                    var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
+                    requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, reference, serializationFormat));
+                }
+
+                var method = RestClientBuilder.BuildRequestMethod(operation, RestClientBuilder.OrderParametersByRequired(parameters), requestParts, headerModel, typeFactory);
+                requestMethods.Add(operation, method);
             }
 
             return requestMethods;

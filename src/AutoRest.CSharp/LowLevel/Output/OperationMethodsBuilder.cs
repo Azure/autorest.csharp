@@ -21,12 +21,14 @@ using Configuration = AutoRest.CSharp.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class OperationMethodChainBuilder
+    internal class OperationMethodsBuilder
     {
         private readonly ClientFields _fields;
         private readonly string _clientName;
+        private readonly TypeFactory _typeFactory;
+        private readonly IReadOnlyList<RequestPartSource> _requestParts;
         private readonly bool _headAsBoolean;
-        private readonly IReadOnlyList<CreateMessageMethodsBuilder.ParameterLink> _parameterLinks;
+        private readonly IReadOnlyList<MethodParametersBuilder.ParameterLink> _parameterLinks;
         private readonly IReadOnlyList<Parameter> _protocolMethodParameters;
         private readonly IReadOnlyList<Parameter> _convenienceMethodParameters;
         private readonly IReadOnlyList<Parameter> _createMessageMethodParameters;
@@ -41,45 +43,53 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string? _description;
         private readonly MethodSignatureModifiers _accessibility;
 
-        private readonly RestClientMethod _createMessageMethod;
-        private readonly RestClientMethod? _createNextPageMessageMethod;
+        public InputOperation Operation { get; }
 
-        private InputOperation Operation { get; }
-
-        public OperationMethodChainBuilder(InputOperation operation, ClientFields fields, string clientName, TypeFactory typeFactory, RestClientMethod createMessageMethod, RestClientMethod? createNextPageMessageMethod, IReadOnlyList<CreateMessageMethodsBuilder.ParameterLink> parameterLinks)
+        public OperationMethodsBuilder(
+            InputOperation operation,
+            ClientFields fields,
+            string clientName,
+            TypeFactory typeFactory,
+            IReadOnlyList<RequestPartSource> requestParts,
+            IReadOnlyList<Parameter> createMessageMethodParameters,
+            IReadOnlyList<Parameter> createNextPageMessageMethodParameters,
+            IReadOnlyList<MethodParametersBuilder.ParameterLink> parameterLinks)
         {
             Operation = operation;
 
             _fields = fields;
             _clientName = clientName;
+            _typeFactory = typeFactory;
+            _requestParts = requestParts;
             _summary = operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null;
             _description = BuilderHelpers.EscapeXmlDescription(operation.Description);
             _accessibility = GetAccessibility(operation.Accessibility);
-
-            _protocolMethodName = operation.Name.ToCleanName();
-            _createMessageMethodName = RequestWriterHelpers.CreateRequestMethodName(_protocolMethodName);
-            _createNextPageMessageMethodName = createNextPageMessageMethod != null ? RequestWriterHelpers.CreateRequestMethodName(createNextPageMessageMethod.Name) : null;
             _headAsBoolean = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
 
+            _protocolMethodName = operation.Name.ToCleanName();
+            _createMessageMethodName = $"Create{_protocolMethodName}Request";
+            _createNextPageMessageMethodName = operation.Paging is { NextLinkOperation: { } nextLinkOperation }
+                ? $"Create{nextLinkOperation.Name.ToCleanName()}Request"
+                : operation.Paging is { NextLinkName: { }} ? $"Create{_protocolMethodName}NextPageRequest" : null;
+
             _parameterLinks = parameterLinks;
-            _createMessageMethodParameters = createMessageMethod.Parameters;
-            _createNextPageMessageMethodParameters = createNextPageMessageMethod?.Parameters ?? Array.Empty<Parameter>();
+            _createMessageMethodParameters = createMessageMethodParameters;
+            _createNextPageMessageMethodParameters = createNextPageMessageMethodParameters;
             _protocolMethodParameters = parameterLinks.SelectMany(p => p.ProtocolParameters).ToList();
             _convenienceMethodParameters = parameterLinks.SelectMany(p => p.ConvenienceParameters).ToList();
             _responseType = _headAsBoolean ? null : GetResponseType(operation, typeFactory);
             _protocolMethodReturnType = _headAsBoolean ? typeof(Response<bool>) : GetProtocolMethodReturnType(operation, _responseType);
             _convenienceMethodReturnType = _responseType is not null ? GetConvenienceMethodReturnType(operation, _responseType) : _protocolMethodReturnType;
-
-            _createMessageMethod = createMessageMethod;
-            _createNextPageMessageMethod = createNextPageMessageMethod;
         }
 
-        public LowLevelClientMethod BuildOperationMethodChain()
+        public LowLevelClientMethod BuildDpg()
         {
-            var createRequestMethods = _createNextPageMessageMethod is not null
-                ? new[]{ _createMessageMethod, _createNextPageMessageMethod }
-                : new[]{ _createMessageMethod };
+            var createMessageMethod = RestClientBuilder.BuildRequestMethod(Operation, _createMessageMethodParameters, _requestParts, null, _typeFactory);
+            var createRequestMethods = _createNextPageMessageMethodName is not null && Operation.Paging is { NextLinkOperation: null }
+                ? new[]{ createMessageMethod, RestClientBuilder.BuildNextPageMethod(createMessageMethod) }
+                : new[]{ createMessageMethod };
             var protocolMethods = new[]{ BuildProtocolMethod(true), BuildProtocolMethod(false) };
+
             var convenienceMethods = ShouldConvenienceMethodGenerated()
                 ? new[]{ BuildConvenienceMethod(true), BuildConvenienceMethod(false) }
                 : Array.Empty<Method>();

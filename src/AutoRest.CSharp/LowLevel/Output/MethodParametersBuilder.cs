@@ -18,7 +18,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class CreateMessageMethodsBuilder
+    internal class MethodParametersBuilder
     {
         internal sealed record ParameterLink(IReadOnlyList<Parameter> ConvenienceParameters, IReadOnlyList<Parameter> ProtocolParameters, ModelTypeProvider? IntermediateModel)
         {
@@ -38,51 +38,25 @@ namespace AutoRest.CSharp.Output.Models
         private readonly InputOperation _operation;
         private readonly ClientFields _fields;
         private readonly List<RequestPartSource> _requestParts;
-        private readonly List<Parameter> _createRequestParameters;
+        private readonly List<Parameter> _createMessageParameters;
         private readonly List<ParameterLink> _parameterLinks;
 
-        private RestClientMethod? Method { get; set; }
-
-        public static IEnumerable<OperationMethodChainBuilder> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
-        {
-            var createMessageMethod = new Dictionary<InputOperation, CreateMessageMethodsBuilder>();
-            foreach (var inputOperation in operations)
-            {
-                var builder = new CreateMessageMethodsBuilder(typeFactory, inputOperation, fields);
-                builder.BuildParameters();
-                builder.BuildMethod();
-                createMessageMethod[inputOperation] = builder;
-            }
-
-            foreach (var (operation, builder) in createMessageMethod)
-            {
-                RestClientMethod? nextPageMethod = default;
-                if (operation.Paging is { NextLinkOperation: var nextLinkOperation, NextLinkName: var nextLinkName })
-                {
-                    nextPageMethod = nextLinkOperation != null
-                        ? createMessageMethod[nextLinkOperation].Method
-                        : nextLinkName != null
-                            ? RestClientBuilder.BuildNextPageMethod(builder.Method!)
-                            : null;
-
-                }
-
-                yield return new OperationMethodChainBuilder(operation, fields, clientName, typeFactory, builder.Method!, nextPageMethod, builder._parameterLinks);
-            }
-        }
-
-        private CreateMessageMethodsBuilder(TypeFactory typeFactory, InputOperation operation, ClientFields fields)
+        public MethodParametersBuilder(TypeFactory typeFactory, InputOperation operation, ClientFields fields)
         {
             _typeFactory = typeFactory;
             _operation = operation;
             _fields = fields;
 
             _requestParts = new List<RequestPartSource>();
-            _createRequestParameters = new List<Parameter>();
+            _createMessageParameters = new List<Parameter>();
             _parameterLinks = new List<ParameterLink>();
         }
 
-        private void BuildParameters()
+        public IReadOnlyList<RequestPartSource> RequestParts => _requestParts;
+        public IReadOnlyList<Parameter> CreateMessageParameters => _createMessageParameters;
+        public IReadOnlyList<ParameterLink> ParameterLinks => _parameterLinks;
+
+        public void BuildParameters()
         {
             var operationParameters = _operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
 
@@ -146,11 +120,6 @@ namespace AutoRest.CSharp.Output.Models
             AddQueryOrHeaderParameters(optionalRequestParameters);
             AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
             AddRequestContext();
-        }
-
-        private void BuildMethod()
-        {
-            Method = RestClientBuilder.BuildRequestMethod(_operation, _createRequestParameters.ToArray(), _requestParts, _typeFactory);
         }
 
         private void AddWaitForCompletion()
@@ -220,7 +189,7 @@ namespace AutoRest.CSharp.Output.Models
             switch (conditionHeaderFlag)
             {
                 case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch:
-                    _createRequestParameters.Add(KnownParameters.MatchConditionsParameter);
+                    _createMessageParameters.Add(KnownParameters.MatchConditionsParameter);
                     _parameterLinks.Add(new ParameterLink(KnownParameters.MatchConditionsParameter));
                     AddReference(KnownParameters.MatchConditionsParameter.Name, null, KnownParameters.MatchConditionsParameter, serializationFormat);
                     break;
@@ -230,7 +199,7 @@ namespace AutoRest.CSharp.Output.Models
                     break;
                 default:
                     var parameter = KnownParameters.RequestConditionsParameter with { Validation = new Validation(ValidationType.AssertNull, conditionHeaderFlag) };
-                    _createRequestParameters.Add(parameter);
+                    _createMessageParameters.Add(parameter);
                     _parameterLinks.Add(new ParameterLink(parameter));
                     AddReference(parameter.Name, null, parameter, serializationFormat);
                     break;
@@ -239,7 +208,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private void AddRequestContext()
         {
-            _createRequestParameters.Add(KnownParameters.RequestContext);
+            _createMessageParameters.Add(KnownParameters.RequestContext);
             _parameterLinks.Add(new ParameterLink(KnownParameters.CancellationTokenParameter, KnownParameters.RequestContext));
         }
 
@@ -275,7 +244,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (inputParameter.Kind == InputOperationParameterKind.Grouped)
             {
-                _createRequestParameters.Add(protocolMethodParameter);
+                _createMessageParameters.Add(protocolMethodParameter);
                 _parameterLinks.Add(new ParameterLink(Array.Empty<Parameter>(), new[]{ protocolMethodParameter }, null));
                 return;
             }
@@ -286,7 +255,7 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            _createRequestParameters.Add(protocolMethodParameter);
+            _createMessageParameters.Add(protocolMethodParameter);
             if (inputParameter.Kind == InputOperationParameterKind.Spread && inputParameter.Type is InputModelType)
             {
                 var model = (ModelTypeProvider)_typeFactory.CreateType(inputParameter.Type).Implementation;
@@ -305,24 +274,22 @@ namespace AutoRest.CSharp.Output.Models
             var description = Parameter.CreateDescription(inputParameter, typeof(ContentType), requestMediaTypes);
             var parameter = new Parameter(name, description, typeof(ContentType), null, Validation.None, null, RequestLocation: RequestLocation.Header);
 
-            _createRequestParameters.Add(parameter);
+            _createMessageParameters.Add(parameter);
             _parameterLinks.Add(new ParameterLink(Array.Empty<Parameter>(), new[]{ parameter }, null));
             AddReference(inputParameter.NameInRequest, inputParameter, parameter, SerializationFormat.Default);
         }
 
         private void AddReference(string nameInRequest, InputParameter? inputParameter, Parameter parameter, SerializationFormat serializationFormat)
         {
-            var reference = inputParameter != null ? CreateReference(inputParameter, parameter) : parameter;
+            var reference = inputParameter != null ? CreateReference(inputParameter with { GroupedBy = null }, parameter, _fields, _typeFactory) : parameter;
             _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, reference, serializationFormat));
         }
 
-        private ReferenceOrConstant CreateReference(InputParameter operationParameter, Parameter parameter)
+        public static ReferenceOrConstant CreateReference(InputParameter operationParameter, Parameter parameter, ClientFields fields, TypeFactory typeFactory)
         {
             if (operationParameter.Kind == InputOperationParameterKind.Client)
             {
-                var field = operationParameter.IsEndpoint
-                    ? _fields.EndpointField
-                    : _fields.GetFieldByParameter(parameter);
+                var field = operationParameter.IsEndpoint ? fields.EndpointField : fields.GetFieldByParameter(parameter);
                 if (field == null)
                 {
                     throw new InvalidOperationException($"Parameter {parameter.Name} should have matching field");
@@ -336,7 +303,16 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }
 
-            return parameter;
+            var groupedByParameter = operationParameter.GroupedBy;
+            if (groupedByParameter == null)
+            {
+                return parameter;
+            }
+
+            var groupModel = (SchemaObjectType)typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
+            var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
+
+            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
         }
 
         private CSharpType ChangeTypeForProtocolMethod(InputType type) => type switch

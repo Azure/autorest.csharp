@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models
         public static MethodBodyLine Return(CodeWriterDeclaration name) => new ReturnValueLine(new VariableReference(name));
         public static MethodBodyLine Return(ValueExpression value) => new ReturnValueLine(value);
 
-        public static void CreatePageableMethodArguments(this IList<MethodBodyLine> lines, IReadOnlyList<CreateMessageMethodsBuilder.ParameterLink> parameters, out IReadOnlyList<ValueExpression> createRequestArguments, out ValueExpression? requestContextVariable)
+        public static void CreatePageableMethodArguments(this IList<MethodBodyLine> lines, IReadOnlyList<MethodParametersBuilder.ParameterLink> parameters, out IReadOnlyList<ValueExpression> createRequestArguments, out ValueExpression? requestContextVariable)
         {
             var arguments = new List<ValueExpression>();
             requestContextVariable = null;
@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models
             createRequestArguments = arguments;
         }
 
-        public static void CreateProtocolMethodArguments(this IList<MethodBodyLine> lines, IReadOnlyList<CreateMessageMethodsBuilder.ParameterLink> parameters, out IReadOnlyList<ValueExpression> protocolMethodArguments)
+        public static void CreateProtocolMethodArguments(this IList<MethodBodyLine> lines, IReadOnlyList<MethodParametersBuilder.ParameterLink> parameters, out IReadOnlyList<ValueExpression> protocolMethodArguments)
         {
             var arguments = new List<ValueExpression>();
             foreach (var parameterLink in parameters)
