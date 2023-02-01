@@ -14,7 +14,7 @@ namespace ModelsInCadl.Models
     public partial class NoUseBase
     {
         /// <summary> Initializes a new instance of NoUseBase. </summary>
-        /// <param name="baseModelProp"></param>
+        /// <param name="baseModelProp"> base model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> is null. </exception>
         public NoUseBase(string baseModelProp)
         {
@@ -23,7 +23,7 @@ namespace ModelsInCadl.Models
             BaseModelProp = baseModelProp;
         }
 
-        /// <summary> Gets or sets the base model prop. </summary>
+        /// <summary> base model property. </summary>
         public string BaseModelProp { get; set; }
     }
 }

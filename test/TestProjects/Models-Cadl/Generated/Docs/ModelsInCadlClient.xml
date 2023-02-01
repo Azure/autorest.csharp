@@ -1285,10 +1285,10 @@ Schema for <c>RoundTripOnNoUse</c>:
 <code>{
   requiredCollection: [
     {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
     }
-  ], # Required.
-  baseModelProp: string, # Required.
+  ], # Required. Required collection
+  baseModelProp: string, # Required. base model property
 }
 </code>
 
@@ -1298,10 +1298,10 @@ Schema for <c>RoundTripOnNoUse</c>:
 <code>{
   requiredCollection: [
     {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
     }
-  ], # Required.
-  baseModelProp: string, # Required.
+  ], # Required. Required collection
+  baseModelProp: string, # Required. base model property
 }
 </code>
 
@@ -1341,10 +1341,10 @@ Schema for <c>RoundTripOnNoUse</c>:
 <code>{
   requiredCollection: [
     {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
     }
-  ], # Required.
-  baseModelProp: string, # Required.
+  ], # Required. Required collection
+  baseModelProp: string, # Required. base model property
 }
 </code>
 
@@ -1354,10 +1354,10 @@ Schema for <c>RoundTripOnNoUse</c>:
 <code>{
   requiredCollection: [
     {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
     }
-  ], # Required.
-  baseModelProp: string, # Required.
+  ], # Required. Required collection
+  baseModelProp: string, # Required. base model property
 }
 </code>
 

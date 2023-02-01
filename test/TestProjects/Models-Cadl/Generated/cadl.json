@@ -1566,7 +1566,7 @@
      "$id": "196",
      "Name": "baseModelProp",
      "SerializedName": "baseModelProp",
-     "Description": "",
+     "Description": "base model property",
      "Type": {
       "$id": "197",
       "Name": "string",
@@ -1594,7 +1594,7 @@
      "$id": "199",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
-     "Description": "",
+     "Description": "Required collection",
      "Type": {
       "$id": "200",
       "Name": "Array",
