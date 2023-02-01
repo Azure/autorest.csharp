@@ -101,7 +101,7 @@
      "$id": "15",
      "Name": "propertyModelToMakeInternal",
      "SerializedName": "propertyModelToMakeInternal",
-     "Description": "",
+     "Description": "ModelToMakeInternal",
      "Type": {
       "$id": "16",
       "Name": "ModelToMakeInternal",
@@ -114,7 +114,7 @@
         "$id": "17",
         "Name": "requiredInt",
         "SerializedName": "requiredInt",
-        "Description": "",
+        "Description": "Required int",
         "Type": {
          "$id": "18",
          "Name": "int32",
@@ -135,7 +135,7 @@
      "$id": "19",
      "Name": "propertyModelToRename",
      "SerializedName": "propertyModelToRename",
-     "Description": "",
+     "Description": "ModelToRename",
      "Type": {
       "$id": "20",
       "Name": "ModelToRename",
@@ -148,7 +148,7 @@
         "$id": "21",
         "Name": "requiredInt",
         "SerializedName": "requiredInt",
-        "Description": "",
+        "Description": "Required int",
         "Type": {
          "$id": "22",
          "Name": "int32",
@@ -169,7 +169,7 @@
      "$id": "23",
      "Name": "propertyModelToChangeNamespace",
      "SerializedName": "propertyModelToChangeNamespace",
-     "Description": "",
+     "Description": "ModelToChangeNamespace",
      "Type": {
       "$id": "24",
       "Name": "ModelToChangeNamespace",
@@ -182,7 +182,7 @@
         "$id": "25",
         "Name": "requiredInt",
         "SerializedName": "requiredInt",
-        "Description": "",
+        "Description": "Required int",
         "Type": {
          "$id": "26",
          "Name": "int32",
@@ -203,7 +203,7 @@
      "$id": "27",
      "Name": "propertyModelWithCustomizedProperties",
      "SerializedName": "propertyModelWithCustomizedProperties",
-     "Description": "",
+     "Description": "ModelWithCustomizedProperties",
      "Type": {
       "$id": "28",
       "Name": "ModelWithCustomizedProperties",
@@ -216,7 +216,7 @@
         "$id": "29",
         "Name": "propertyToMakeInternal",
         "SerializedName": "propertyToMakeInternal",
-        "Description": "",
+        "Description": "Public property made internal",
         "Type": {
          "$id": "30",
          "Name": "int32",
@@ -231,7 +231,7 @@
         "$id": "31",
         "Name": "propertyToRename",
         "SerializedName": "propertyToRename",
-        "Description": "",
+        "Description": "Renamed property (original name: PropertyToRename)",
         "Type": {
          "$id": "32",
          "Name": "int32",
@@ -246,7 +246,7 @@
         "$id": "33",
         "Name": "propertyToMakeFloat",
         "SerializedName": "propertyToMakeFloat",
-        "Description": "",
+        "Description": "Property with type changed to float (original type: int)",
         "Type": {
          "$id": "34",
          "Name": "int32",
@@ -261,7 +261,7 @@
         "$id": "35",
         "Name": "propertyToMakeInt",
         "SerializedName": "propertyToMakeInt",
-        "Description": "",
+        "Description": "Property with type changed to int (original type: float)",
         "Type": {
          "$id": "36",
          "Name": "float32",
@@ -276,7 +276,7 @@
         "$id": "37",
         "Name": "propertyToMakeDuration",
         "SerializedName": "propertyToMakeDuration",
-        "Description": "",
+        "Description": "Property with type changed to duration (original type: string)",
         "Type": {
          "$id": "38",
          "Name": "string",
@@ -291,7 +291,7 @@
         "$id": "39",
         "Name": "propertyToMakeString",
         "SerializedName": "propertyToMakeString",
-        "Description": "",
+        "Description": "Property with type changed to string (original type: duration)",
         "Type": {
          "$id": "40",
          "Name": "duration",
@@ -306,7 +306,7 @@
         "$id": "41",
         "Name": "propertyToMakeJsonElement",
         "SerializedName": "propertyToMakeJsonElement",
-        "Description": "",
+        "Description": "Property with type changed to JsonElement (original type: string)",
         "Type": {
          "$id": "42",
          "Name": "string",
@@ -321,7 +321,7 @@
         "$id": "43",
         "Name": "propertyToField",
         "SerializedName": "propertyToField",
-        "Description": "",
+        "Description": "Field that replaces property (original name: PropertyToField)",
         "Type": {
          "$id": "44",
          "Name": "string",
@@ -342,7 +342,7 @@
      "$id": "45",
      "Name": "propertyEnumToRename",
      "SerializedName": "propertyEnumToRename",
-     "Description": "",
+     "Description": "EnumToRename",
      "Type": {
       "$ref": "2"
      },
@@ -354,7 +354,7 @@
      "$id": "46",
      "Name": "propertyEnumWithValueToRename",
      "SerializedName": "propertyEnumWithValueToRename",
-     "Description": "",
+     "Description": "EnumWithValueToRename",
      "Type": {
       "$ref": "6"
      },
@@ -366,7 +366,7 @@
      "$id": "47",
      "Name": "propertyEnumToBeMadeExtensible",
      "SerializedName": "propertyEnumToBeMadeExtensible",
-     "Description": "",
+     "Description": "EnumToBeMadeExtensible",
      "Type": {
       "$ref": "10"
      },

@@ -513,7 +513,7 @@ export function getInputType(
                 const inputProp = {
                     Name: value.name,
                     SerializedName: value.name,
-                    Description: "",
+                    Description: getDoc(program, value) ?? "",
                     Type: getInputType(program, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,

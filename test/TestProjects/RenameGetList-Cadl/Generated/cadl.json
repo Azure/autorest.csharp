@@ -63,7 +63,7 @@
      "$id": "9",
      "Name": "projectKind",
      "SerializedName": "projectKind",
-     "Description": "",
+     "Description": "The project kind.",
      "Type": {
       "$ref": "2"
      },
@@ -75,7 +75,7 @@
      "$id": "10",
      "Name": "storageInputContainerName",
      "SerializedName": "storageInputContainerName",
-     "Description": "",
+     "Description": "The storage container name.",
      "Type": {
       "$id": "11",
       "Name": "string",
@@ -90,7 +90,7 @@
      "$id": "12",
      "Name": "settings",
      "SerializedName": "settings",
-     "Description": "",
+     "Description": "The project settings.",
      "Type": {
       "$id": "13",
       "Name": "Dictionary",
@@ -116,7 +116,7 @@
      "$id": "16",
      "Name": "multilingual",
      "SerializedName": "multilingual",
-     "Description": "",
+     "Description": "Whether the project would be used for multiple languages or not.",
      "Type": {
       "$id": "17",
       "Name": "boolean",
@@ -131,7 +131,7 @@
      "$id": "18",
      "Name": "description",
      "SerializedName": "description",
-     "Description": "",
+     "Description": "The project description.",
      "Type": {
       "$id": "19",
       "Name": "string",
@@ -146,7 +146,7 @@
      "$id": "20",
      "Name": "language",
      "SerializedName": "language",
-     "Description": "",
+     "Description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
      "Type": {
       "$id": "21",
       "Name": "string",
@@ -161,7 +161,7 @@
      "$id": "22",
      "Name": "createdDateTime",
      "SerializedName": "createdDateTime",
-     "Description": "",
+     "Description": "Represents the project creation datetime.",
      "Type": {
       "$id": "23",
       "Name": "zonedDateTime",
@@ -176,7 +176,7 @@
      "$id": "24",
      "Name": "lastModifiedDateTime",
      "SerializedName": "lastModifiedDateTime",
-     "Description": "",
+     "Description": "Represents the project last modification datetime.",
      "Type": {
       "$id": "25",
       "Name": "zonedDateTime",
@@ -191,7 +191,7 @@
      "$id": "26",
      "Name": "lastTrainedDateTime",
      "SerializedName": "lastTrainedDateTime",
-     "Description": "",
+     "Description": "Represents the project last training datetime.",
      "Type": {
       "$id": "27",
       "Name": "zonedDateTime",
@@ -206,7 +206,7 @@
      "$id": "28",
      "Name": "lastDeployedDateTime",
      "SerializedName": "lastDeployedDateTime",
-     "Description": "",
+     "Description": "Represents the project last deployment datetime.",
      "Type": {
       "$id": "29",
       "Name": "zonedDateTime",
@@ -231,7 +231,7 @@
      "$id": "31",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "",
+     "Description": "The Project items on this page",
      "Type": {
       "$id": "32",
       "Name": "Array",
@@ -248,7 +248,7 @@
      "$id": "33",
      "Name": "nextLink",
      "SerializedName": "nextLink",
-     "Description": "",
+     "Description": "The link to the next page of items",
      "Type": {
       "$id": "34",
       "Name": "ResourceLocation",

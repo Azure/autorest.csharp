@@ -14,7 +14,7 @@ namespace Models.Property.Types.Models
     public partial class InnerModel
     {
         /// <summary> Initializes a new instance of InnerModel. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Required string property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public InnerModel(string property)
         {
@@ -23,7 +23,7 @@ namespace Models.Property.Types.Models
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Required string property. </summary>
         public string Property { get; set; }
     }
 }

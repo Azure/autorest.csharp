@@ -11,13 +11,13 @@ namespace ModelsInCadl.Models
     public partial class DerivedModelWithDiscriminatorB : BaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorB. </summary>
-        /// <param name="requiredInt"></param>
+        /// <param name="requiredInt"> Required int. </param>
         public DerivedModelWithDiscriminatorB(int requiredInt) : base("B")
         {
             RequiredInt = requiredInt;
         }
 
-        /// <summary> Gets or sets the required int. </summary>
+        /// <summary> Required int. </summary>
         public int RequiredInt { get; set; }
     }
 }

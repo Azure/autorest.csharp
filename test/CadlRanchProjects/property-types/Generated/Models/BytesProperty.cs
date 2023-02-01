@@ -14,7 +14,7 @@ namespace Models.Property.Types.Models
     public partial class BytesProperty
     {
         /// <summary> Initializes a new instance of BytesProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public BytesProperty(BinaryData property)
         {
@@ -24,7 +24,7 @@ namespace Models.Property.Types.Models
         }
 
         /// <summary>
-        /// Gets or sets the property
+        /// Property
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

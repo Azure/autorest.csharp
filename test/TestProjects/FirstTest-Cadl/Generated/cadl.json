@@ -120,7 +120,7 @@
      "$id": "19",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "20",
       "Name": "string",
@@ -135,7 +135,7 @@
      "$id": "21",
      "Name": "requiredUnion",
      "SerializedName": "requiredUnion",
-     "Description": "",
+     "Description": "required Union",
      "Type": {
       "$id": "22",
       "Name": "Union",
@@ -174,7 +174,7 @@
      "$id": "27",
      "Name": "requiredLiteralString",
      "SerializedName": "requiredLiteralString",
-     "Description": "",
+     "Description": "required literal string",
      "Type": {
       "$id": "28",
       "Name": "Literal",
@@ -195,7 +195,7 @@
      "$id": "30",
      "Name": "requiredLiteralInt",
      "SerializedName": "requiredLiteralInt",
-     "Description": "",
+     "Description": "required literal int",
      "Type": {
       "$id": "31",
       "Name": "Literal",
@@ -216,7 +216,7 @@
      "$id": "33",
      "Name": "requiredLiteralDouble",
      "SerializedName": "requiredLiteralDouble",
-     "Description": "",
+     "Description": "required literal double",
      "Type": {
       "$id": "34",
       "Name": "Literal",
@@ -237,7 +237,7 @@
      "$id": "36",
      "Name": "requiredLiteralBool",
      "SerializedName": "requiredLiteralBool",
-     "Description": "",
+     "Description": "required literal bool",
      "Type": {
       "$id": "37",
       "Name": "Literal",
@@ -258,7 +258,7 @@
      "$id": "39",
      "Name": "optionalLiteralString",
      "SerializedName": "optionalLiteralString",
-     "Description": "",
+     "Description": "optional literal string",
      "Type": {
       "$id": "40",
       "Name": "Literal",
@@ -279,7 +279,7 @@
      "$id": "42",
      "Name": "optionalLiteralInt",
      "SerializedName": "optionalLiteralInt",
-     "Description": "",
+     "Description": "optional literal int",
      "Type": {
       "$id": "43",
       "Name": "Literal",
@@ -300,7 +300,7 @@
      "$id": "45",
      "Name": "optionalLiteralDouble",
      "SerializedName": "optionalLiteralDouble",
-     "Description": "",
+     "Description": "optional literal double",
      "Type": {
       "$id": "46",
       "Name": "Literal",
@@ -321,7 +321,7 @@
      "$id": "48",
      "Name": "optionalLiteralBool",
      "SerializedName": "optionalLiteralBool",
-     "Description": "",
+     "Description": "optional literal bool",
      "Type": {
       "$id": "49",
       "Name": "Literal",
@@ -351,7 +351,7 @@
      "$id": "52",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the NotFriend",
      "Type": {
       "$id": "53",
       "Name": "string",
@@ -375,7 +375,7 @@
      "$id": "55",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "56",
       "Name": "string",
@@ -390,7 +390,7 @@
      "$id": "57",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "58",
       "Name": "int32",
@@ -405,7 +405,7 @@
      "$id": "59",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
-     "Description": "",
+     "Description": "Required collection of enums",
      "Type": {
       "$id": "60",
       "Name": "Array",
@@ -422,7 +422,7 @@
      "$id": "61",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
-     "Description": "",
+     "Description": "Required dictionary of enums",
      "Type": {
       "$id": "62",
       "Name": "Dictionary",
@@ -445,7 +445,7 @@
      "$id": "64",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
-     "Description": "",
+     "Description": "Required model",
      "Type": {
       "$ref": "18"
      },

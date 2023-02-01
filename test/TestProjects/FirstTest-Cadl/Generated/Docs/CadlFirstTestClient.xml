@@ -31,16 +31,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -76,16 +76,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -121,16 +121,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -166,16 +166,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -224,16 +224,16 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -241,16 +241,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -299,16 +299,16 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -316,16 +316,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -374,16 +374,16 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -391,16 +391,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -449,16 +449,16 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -466,16 +466,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -506,7 +506,7 @@ Request Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -514,7 +514,7 @@ Response Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -545,7 +545,7 @@ Request Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -553,7 +553,7 @@ Response Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -653,16 +653,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -718,16 +718,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -786,22 +786,22 @@ Request Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
   requiredModel: {
-    name: string, # Required.
-    requiredUnion: Union, # Required.
-    requiredLiteralString: Literal, # Required.
-    requiredLiteralInt: Literal, # Required.
-    requiredLiteralDouble: Literal, # Required.
-    requiredLiteralBool: Literal, # Required.
-    optionalLiteralString: Literal, # Required.
-    optionalLiteralInt: Literal, # Required.
-    optionalLiteralDouble: Literal, # Required.
-    optionalLiteralBool: Literal, # Required.
-  }, # Required.
+    name: string, # Required. name of the Thing
+    requiredUnion: Union, # Required. required Union
+    requiredLiteralString: Literal, # Required. required literal string
+    requiredLiteralInt: Literal, # Required. required literal int
+    requiredLiteralDouble: Literal, # Required. required literal double
+    requiredLiteralBool: Literal, # Required. required literal bool
+    optionalLiteralString: Literal, # Required. optional literal string
+    optionalLiteralInt: Literal, # Required. optional literal int
+    optionalLiteralDouble: Literal, # Required. optional literal double
+    optionalLiteralBool: Literal, # Required. optional literal bool
+  }, # Required. Required model
 }
 </code>
 
@@ -809,16 +809,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -877,22 +877,22 @@ Request Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
   requiredModel: {
-    name: string, # Required.
-    requiredUnion: Union, # Required.
-    requiredLiteralString: Literal, # Required.
-    requiredLiteralInt: Literal, # Required.
-    requiredLiteralDouble: Literal, # Required.
-    requiredLiteralBool: Literal, # Required.
-    optionalLiteralString: Literal, # Required.
-    optionalLiteralInt: Literal, # Required.
-    optionalLiteralDouble: Literal, # Required.
-    optionalLiteralBool: Literal, # Required.
-  }, # Required.
+    name: string, # Required. name of the Thing
+    requiredUnion: Union, # Required. required Union
+    requiredLiteralString: Literal, # Required. required literal string
+    requiredLiteralInt: Literal, # Required. required literal int
+    requiredLiteralDouble: Literal, # Required. required literal double
+    requiredLiteralBool: Literal, # Required. required literal bool
+    optionalLiteralString: Literal, # Required. optional literal string
+    optionalLiteralInt: Literal, # Required. optional literal int
+    optionalLiteralDouble: Literal, # Required. optional literal double
+    optionalLiteralBool: Literal, # Required. optional literal bool
+  }, # Required. Required model
 }
 </code>
 
@@ -900,16 +900,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -968,22 +968,22 @@ Request Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
   requiredModel: {
-    name: string, # Required.
-    requiredUnion: Union, # Required.
-    requiredLiteralString: Literal, # Required.
-    requiredLiteralInt: Literal, # Required.
-    requiredLiteralDouble: Literal, # Required.
-    requiredLiteralBool: Literal, # Required.
-    optionalLiteralString: Literal, # Required.
-    optionalLiteralInt: Literal, # Required.
-    optionalLiteralDouble: Literal, # Required.
-    optionalLiteralBool: Literal, # Required.
-  }, # Required.
+    name: string, # Required. name of the Thing
+    requiredUnion: Union, # Required. required Union
+    requiredLiteralString: Literal, # Required. required literal string
+    requiredLiteralInt: Literal, # Required. required literal int
+    requiredLiteralDouble: Literal, # Required. required literal double
+    requiredLiteralBool: Literal, # Required. required literal bool
+    optionalLiteralString: Literal, # Required. optional literal string
+    optionalLiteralInt: Literal, # Required. optional literal int
+    optionalLiteralDouble: Literal, # Required. optional literal double
+    optionalLiteralBool: Literal, # Required. optional literal bool
+  }, # Required. Required model
 }
 </code>
 
@@ -991,16 +991,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -1059,22 +1059,22 @@ Request Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required.
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
   requiredModel: {
-    name: string, # Required.
-    requiredUnion: Union, # Required.
-    requiredLiteralString: Literal, # Required.
-    requiredLiteralInt: Literal, # Required.
-    requiredLiteralDouble: Literal, # Required.
-    requiredLiteralBool: Literal, # Required.
-    optionalLiteralString: Literal, # Required.
-    optionalLiteralInt: Literal, # Required.
-    optionalLiteralDouble: Literal, # Required.
-    optionalLiteralBool: Literal, # Required.
-  }, # Required.
+    name: string, # Required. name of the Thing
+    requiredUnion: Union, # Required. required Union
+    requiredLiteralString: Literal, # Required. required literal string
+    requiredLiteralInt: Literal, # Required. required literal int
+    requiredLiteralDouble: Literal, # Required. required literal double
+    requiredLiteralBool: Literal, # Required. required literal bool
+    optionalLiteralString: Literal, # Required. optional literal string
+    optionalLiteralInt: Literal, # Required. optional literal int
+    optionalLiteralDouble: Literal, # Required. optional literal double
+    optionalLiteralBool: Literal, # Required. optional literal bool
+  }, # Required. Required model
 }
 </code>
 
@@ -1082,16 +1082,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -1127,16 +1127,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -1172,16 +1172,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -1230,16 +1230,16 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -1247,16 +1247,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -1305,16 +1305,16 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -1322,16 +1322,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -1387,16 +1387,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 
@@ -1452,16 +1452,16 @@ Response Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  requiredUnion: Union, # Required.
-  requiredLiteralString: Literal, # Required.
-  requiredLiteralInt: Literal, # Required.
-  requiredLiteralDouble: Literal, # Required.
-  requiredLiteralBool: Literal, # Required.
-  optionalLiteralString: Literal, # Required.
-  optionalLiteralInt: Literal, # Required.
-  optionalLiteralDouble: Literal, # Required.
-  optionalLiteralBool: Literal, # Required.
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Required. optional literal string
+  optionalLiteralInt: Literal, # Required. optional literal int
+  optionalLiteralDouble: Literal, # Required. optional literal double
+  optionalLiteralBool: Literal, # Required. optional literal bool
 }
 </code>
 

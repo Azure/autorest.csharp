@@ -178,7 +178,7 @@
      "$id": "28",
      "Name": "Day",
      "SerializedName": "Day",
-     "Description": "",
+     "Description": "Required standard enum value.",
      "Type": {
       "$ref": "2"
      },
@@ -190,7 +190,7 @@
      "$id": "29",
      "Name": "FixedDay",
      "SerializedName": "FixedDay",
-     "Description": "",
+     "Description": "Required fixed enum value.",
      "Type": {
       "$ref": "10"
      },

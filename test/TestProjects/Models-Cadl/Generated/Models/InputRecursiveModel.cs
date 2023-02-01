@@ -14,7 +14,7 @@ namespace ModelsInCadl.Models
     public partial class InputRecursiveModel
     {
         /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
-        /// <param name="message"></param>
+        /// <param name="message"> Message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public InputRecursiveModel(string message)
         {
@@ -23,9 +23,9 @@ namespace ModelsInCadl.Models
             Message = message;
         }
 
-        /// <summary> Gets the message. </summary>
+        /// <summary> Message. </summary>
         public string Message { get; }
-        /// <summary> Gets or sets the inner. </summary>
+        /// <summary> Required Record. </summary>
         public InputRecursiveModel Inner { get; set; }
     }
 }

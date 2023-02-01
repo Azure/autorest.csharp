@@ -11,13 +11,13 @@ namespace Models.Property.Types.Models
     public partial class ExtensibleEnumProperty
     {
         /// <summary> Initializes a new instance of ExtensibleEnumProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         public ExtensibleEnumProperty(InnerEnum property)
         {
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public InnerEnum Property { get; set; }
     }
 }

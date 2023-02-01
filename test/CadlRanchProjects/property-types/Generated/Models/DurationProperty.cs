@@ -13,13 +13,13 @@ namespace Models.Property.Types.Models
     public partial class DurationProperty
     {
         /// <summary> Initializes a new instance of DurationProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         public DurationProperty(TimeSpan property)
         {
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public TimeSpan Property { get; set; }
     }
 }

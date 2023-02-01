@@ -16,13 +16,13 @@ namespace Models.Property.Optional.Models
         }
 
         /// <summary> Initializes a new instance of StringProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         internal StringProperty(string property)
         {
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public string Property { get; set; }
     }
 }

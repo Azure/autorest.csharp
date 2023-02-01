@@ -14,7 +14,7 @@ namespace ApiVersionInCadl.Models
     public partial class DetectionResult
     {
         /// <summary> Initializes a new instance of DetectionResult. </summary>
-        /// <param name="resultId"></param>
+        /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
         internal DetectionResult(string resultId)
         {
@@ -23,7 +23,7 @@ namespace ApiVersionInCadl.Models
             ResultId = resultId;
         }
 
-        /// <summary> Gets the result id. </summary>
+        /// <summary> Result identifier, which is used to fetch the results of an inference call. </summary>
         public string ResultId { get; }
     }
 }

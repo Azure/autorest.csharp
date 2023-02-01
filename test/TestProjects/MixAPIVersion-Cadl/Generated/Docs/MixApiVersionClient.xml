@@ -53,7 +53,7 @@ Response Body:
 
 Schema for <c>Pet</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. pet name
   tag: string, # Optional.
   age: number, # Required.
 }
@@ -83,7 +83,7 @@ Response Body:
 
 Schema for <c>Pet</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. pet name
   tag: string, # Optional.
   age: number, # Required.
 }
@@ -135,7 +135,7 @@ Request Body:
 
 Schema for <c>Pet</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. pet name
   tag: string, # Optional.
   age: number, # Required.
 }
@@ -145,7 +145,7 @@ Response Body:
 
 Schema for <c>Pet</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. pet name
   tag: string, # Optional.
   age: number, # Required.
 }
@@ -197,7 +197,7 @@ Request Body:
 
 Schema for <c>Pet</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. pet name
   tag: string, # Optional.
   age: number, # Required.
 }
@@ -207,7 +207,7 @@ Response Body:
 
 Schema for <c>Pet</c>:
 <code>{
-  name: string, # Required.
+  name: string, # Required. pet name
   tag: string, # Optional.
   age: number, # Required.
 }

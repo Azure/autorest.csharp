@@ -14,8 +14,8 @@ namespace CadlFirstTest.Models
     public partial class Thing
     {
         /// <summary> Initializes a new instance of Thing. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredUnion"/> is null. </exception>
         public Thing(string name, string requiredUnion)
         {
@@ -26,32 +26,32 @@ namespace CadlFirstTest.Models
             RequiredUnion = requiredUnion;
         }
 
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> name of the Thing. </summary>
         public string Name { get; set; }
-        /// <summary> Gets or sets the required union. </summary>
+        /// <summary> required Union. </summary>
         public string RequiredUnion { get; set; }
-        /// <summary> Gets the required literal string. </summary>
+        /// <summary> required literal string. </summary>
         internal string RequiredLiteralString { get; } = "accept";
 
-        /// <summary> Gets the required literal int. </summary>
+        /// <summary> required literal int. </summary>
         internal int RequiredLiteralInt { get; } = 123;
 
-        /// <summary> Gets the required literal double. </summary>
+        /// <summary> required literal double. </summary>
         internal double RequiredLiteralDouble { get; } = 1.23;
 
-        /// <summary> Gets the required literal bool. </summary>
+        /// <summary> required literal bool. </summary>
         internal bool RequiredLiteralBool { get; } = false;
 
-        /// <summary> Gets the optional literal string. </summary>
+        /// <summary> optional literal string. </summary>
         internal string OptionalLiteralString { get; } = "reject";
 
-        /// <summary> Gets the optional literal int. </summary>
+        /// <summary> optional literal int. </summary>
         internal int OptionalLiteralInt { get; } = 456;
 
-        /// <summary> Gets the optional literal double. </summary>
+        /// <summary> optional literal double. </summary>
         internal double OptionalLiteralDouble { get; } = 4.56;
 
-        /// <summary> Gets the optional literal bool. </summary>
+        /// <summary> optional literal bool. </summary>
         internal bool OptionalLiteralBool { get; } = true;
     }
 }

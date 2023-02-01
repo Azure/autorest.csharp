@@ -14,7 +14,7 @@ namespace Models.Property.Types.Models
     public partial class StringProperty
     {
         /// <summary> Initializes a new instance of StringProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public StringProperty(string property)
         {
@@ -23,7 +23,7 @@ namespace Models.Property.Types.Models
             Property = property;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public string Property { get; set; }
     }
 }
