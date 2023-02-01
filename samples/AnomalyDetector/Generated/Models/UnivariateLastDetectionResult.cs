@@ -86,7 +86,7 @@ namespace AnomalyDetector.Models
         /// </param>
         /// <param name="severity">
         /// The severity score for the last input point. The larger the value is, the more
-        /// sever the anomaly is. For normal points, the "severity" is always 0.
+        /// sever the anomaly is. For normal points, the &quot;severity&quot; is always 0.
         /// </param>
         internal UnivariateLastDetectionResult(int period, int suggestedWindow, float expectedValue, float upperMargin, float lowerMargin, bool isAnomaly, bool isNegativeAnomaly, bool isPositiveAnomaly, float? severity)
         {
@@ -141,7 +141,7 @@ namespace AnomalyDetector.Models
         public bool IsPositiveAnomaly { get; }
         /// <summary>
         /// The severity score for the last input point. The larger the value is, the more
-        /// sever the anomaly is. For normal points, the "severity" is always 0.
+        /// sever the anomaly is. For normal points, the &quot;severity&quot; is always 0.
         /// </summary>
         public float? Severity { get; }
     }

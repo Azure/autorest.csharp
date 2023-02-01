@@ -45,8 +45,8 @@ namespace AnomalyDetector.Models
         public TimeGranularity Granularity { get; }
         /// <summary>
         /// Custom Interval is used to set non-standard time interval, for example, if the
-        /// series is 5 minutes, request can be set as {"granularity":"minutely",
-        /// "customInterval":5}.
+        /// series is 5 minutes, request can be set as {&quot;granularity&quot;:&quot;minutely&quot;,
+        /// &quot;customInterval&quot;:5}.
         /// </summary>
         public int? CustomInterval { get; set; }
         /// <summary>
