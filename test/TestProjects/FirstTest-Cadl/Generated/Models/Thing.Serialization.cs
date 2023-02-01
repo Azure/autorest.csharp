@@ -22,6 +22,8 @@ namespace CadlFirstTest.Models
             writer.WriteStringValue(RequiredUnion);
             writer.WritePropertyName("requiredLiteral");
             writer.WriteStringValue(RequiredLiteral);
+            writer.WritePropertyName("requiredBadDescription");
+            writer.WriteStringValue(RequiredBadDescription);
             writer.WriteEndObject();
         }
 
@@ -30,6 +32,7 @@ namespace CadlFirstTest.Models
             string name = default;
             string requiredUnion = default;
             string requiredLiteral = default;
+            string requiredBadDescription = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -47,8 +50,13 @@ namespace CadlFirstTest.Models
                     requiredLiteral = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("requiredBadDescription"))
+                {
+                    requiredBadDescription = property.Value.GetString();
+                    continue;
+                }
             }
-            return new Thing(name, requiredUnion, requiredLiteral);
+            return new Thing(name, requiredUnion, requiredLiteral, requiredBadDescription);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
