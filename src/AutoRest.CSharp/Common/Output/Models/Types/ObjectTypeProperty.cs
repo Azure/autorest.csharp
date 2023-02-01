@@ -168,7 +168,5 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             return updatedDescription;
         }
-
-        public bool ShouldSkipDeserialization => InputModelProperty?.Type is InputLiteralType;
     }
 }
