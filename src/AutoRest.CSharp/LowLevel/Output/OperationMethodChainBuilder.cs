@@ -400,7 +400,7 @@ namespace AutoRest.CSharp.Output.Models
             var protocolMethodParameter = BuildParameter(inputParameter, frameworkParameterType ?? ChangeTypeForProtocolMethod(inputParameter.Type));
 
             AddReference(name, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
-            if (inputParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
+            if (inputParameter is { Kind: InputOperationParameterKind.Client or InputOperationParameterKind.Constant } or { Type: InputLiteralType })
             {
                 return;
             }
@@ -434,9 +434,9 @@ namespace AutoRest.CSharp.Output.Models
             _requestParts.Add(new RequestPartSource(nameInRequest, operationParameter, reference, serializationFormat));
         }
 
-        private ReferenceOrConstant CreateReference(InputParameter? operationParameter, Parameter parameter)
+        private ReferenceOrConstant CreateReference(InputParameter operationParameter, Parameter parameter)
         {
-            if (operationParameter?.Kind == InputOperationParameterKind.Client)
+            if (operationParameter.Kind == InputOperationParameterKind.Client)
             {
                 var field = operationParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(parameter);
                 if (field == null)
@@ -447,7 +447,7 @@ namespace AutoRest.CSharp.Output.Models
                 return new Reference(field.Name, field.Type);
             }
 
-            if (operationParameter?.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
+            if ((operationParameter is { Kind: InputOperationParameterKind.Constant } or { Type: InputLiteralType }) && parameter.DefaultValue is not null)
             {
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }

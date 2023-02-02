@@ -845,21 +845,15 @@ namespace CadlFirstTest
         }
 
         /// <summary> Send literal parameters. </summary>
-        /// <param name="p2"> The Literal to use. </param>
-        /// <param name="p1"> The Literal to use. </param>
-        /// <param name="p3"> The Literal to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
-        public virtual async Task<Response<Thing>> HelloLiteralValueAsync(int p2 = 123, string p1 = "test", bool p3 = true, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> HelloLiteralValueAsync(CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(p1, nameof(p1));
-
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteralValue");
             scope.Start();
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await HelloLiteralAsync(p2, p1, p3, context).ConfigureAwait(false);
+                Response response = await HelloLiteralAsync(context).ConfigureAwait(false);
                 return Response.FromValue(Thing.FromResponse(response), response);
             }
             catch (Exception e)
@@ -870,21 +864,15 @@ namespace CadlFirstTest
         }
 
         /// <summary> Send literal parameters. </summary>
-        /// <param name="p2"> The Literal to use. </param>
-        /// <param name="p1"> The Literal to use. </param>
-        /// <param name="p3"> The Literal to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
-        public virtual Response<Thing> HelloLiteralValue(int p2 = 123, string p1 = "test", bool p3 = true, CancellationToken cancellationToken = default)
+        public virtual Response<Thing> HelloLiteralValue(CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(p1, nameof(p1));
-
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteralValue");
             scope.Start();
             try
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = HelloLiteral(p2, p1, p3, context);
+                Response response = HelloLiteral(context);
                 return Response.FromValue(Thing.FromResponse(response), response);
             }
             catch (Exception e)
@@ -895,23 +883,17 @@ namespace CadlFirstTest
         }
 
         /// <summary> Send literal parameters. </summary>
-        /// <param name="p2"> The Literal to use. </param>
-        /// <param name="p1"> The Literal to use. </param>
-        /// <param name="p3"> The Literal to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(Int32,String,Boolean,RequestContext)']/*" />
-        public virtual async Task<Response> HelloLiteralAsync(int p2 = 123, string p1 = "test", bool p3 = true, RequestContext context = null)
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
+        public virtual async Task<Response> HelloLiteralAsync(RequestContext context = null)
         {
-            Argument.AssertNotNull(p1, nameof(p1));
-
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteral");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloLiteralRequest(p2, p1, p3, context);
+                using HttpMessage message = CreateHelloLiteralRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -922,23 +904,17 @@ namespace CadlFirstTest
         }
 
         /// <summary> Send literal parameters. </summary>
-        /// <param name="p2"> The Literal to use. </param>
-        /// <param name="p1"> The Literal to use. </param>
-        /// <param name="p3"> The Literal to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(Int32,String,Boolean,RequestContext)']/*" />
-        public virtual Response HelloLiteral(int p2 = 123, string p1 = "test", bool p3 = true, RequestContext context = null)
+        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
+        public virtual Response HelloLiteral(RequestContext context = null)
         {
-            Argument.AssertNotNull(p1, nameof(p1));
-
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteral");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHelloLiteralRequest(p2, p1, p3, context);
+                using HttpMessage message = CreateHelloLiteralRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1171,7 +1147,7 @@ namespace CadlFirstTest
             return message;
         }
 
-        internal HttpMessage CreateHelloLiteralRequest(int p2, string p1, bool p3, RequestContext context)
+        internal HttpMessage CreateHelloLiteralRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1179,11 +1155,11 @@ namespace CadlFirstTest
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/helloLiteral/", false);
-            uri.AppendPath(p2, true);
-            uri.AppendQuery("p3", p3, true);
+            uri.AppendPath(123, true);
+            uri.AppendQuery("p3", true, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("p1", p1);
+            request.Headers.Add("p1", "test");
             request.Headers.Add("Accept", "application/json");
             return message;
         }

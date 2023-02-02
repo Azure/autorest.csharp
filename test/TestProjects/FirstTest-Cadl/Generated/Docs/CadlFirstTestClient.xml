@@ -1337,7 +1337,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloLiteralAsync(Int32,String,Boolean,RequestContext)">
+    <member name="HelloLiteralAsync(RequestContext)">
 <example>
 This sample shows how to call HelloLiteralAsync and parse the result.
 <code><![CDATA[
@@ -1346,26 +1346,6 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.HelloLiteralAsync();
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-]]></code>
-This sample shows how to call HelloLiteralAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
-
-Response response = await client.HelloLiteralAsync(123, <test>, true);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1402,7 +1382,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloLiteral(Int32,String,Boolean,RequestContext)">
+    <member name="HelloLiteral(RequestContext)">
 <example>
 This sample shows how to call HelloLiteral and parse the result.
 <code><![CDATA[
@@ -1411,26 +1391,6 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.HelloLiteral();
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
-Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-]]></code>
-This sample shows how to call HelloLiteral with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
-
-Response response = client.HelloLiteral(123, <test>, true);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
